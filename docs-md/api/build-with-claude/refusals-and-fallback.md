@@ -770,17 +770,9 @@ The SDK includes a refusal-fallback middleware. You configure it once on the cli
 
 Pass `BetaRefusalFallbackMiddleware` (typescript: `betaRefusalFallbackMiddleware`; go: `betafallback.BetaRefusalFallbackMiddleware`; csharp: `BetaRefusalFallbackHandler`; java: `BetaRefusalFallbackInterceptor`; php: `RefusalFallbackMiddleware`) to the client constructor, and share one `BetaFallbackState` instance across the requests of a conversation.
 
-```bash cURL
-# The refusal-fallback middleware is an SDK feature. See the
-# server-side fallback section for the equivalent single-request approach,
-# or the fallback credit page for the raw HTTP retry pattern.
-```
+The refusal-fallback middleware is part of the Claude SDK, so a cURL request can't use it. To fall back within a single request, use [server-side fallback](refusals-and-fallback.md#server-side-fallback). To write the retry yourself, see [Fallback credit](fallback-credit.md).
 
-```bash CLI
-# The refusal-fallback middleware is an SDK feature. See the
-# server-side fallback section for the equivalent single-request approach,
-# or the fallback credit page for the raw HTTP retry pattern.
-```
+The `ant` CLI doesn't include the refusal-fallback middleware. To fall back within a single request, use [server-side fallback](refusals-and-fallback.md#server-side-fallback). To write the retry yourself, see [Fallback credit](fallback-credit.md).
 
 ```python Python
 from anthropic import Anthropic, BetaFallbackState, BetaRefusalFallbackMiddleware

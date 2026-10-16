@@ -1103,6 +1103,16 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `StandardOnly("standard_only")`
 
+  - `Speed? speed`
+
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+    Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
+
+    - `Standard("standard")`
+
+    - `Fast("fast")`
+
   - `IReadOnlyList<string> stopSequences`
 
     Custom text sequences that will cause the model to stop generating.
@@ -3840,6 +3850,14 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Batch("batch")`
 
+    - `required Speed? Speed`
+
+      The inference speed mode used for this request.
+
+      - `Standard("standard")`
+
+      - `Fast("fast")`
+
 - `class RawMessageStreamEvent: union`
 
   - `class RawMessageStartEvent`
@@ -4101,7 +4119,8 @@ Console.WriteLine(message);
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
@@ -5163,6 +5182,16 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
   - `OutputConfig outputConfig`
 
     Configuration options for the model's output, such as the output format.
+
+  - `Speed? speed`
+
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+    Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
+
+    - `Standard("standard")`
+
+    - `Fast("fast")`
 
   - `System system`
 
@@ -19905,6 +19934,14 @@ Console.WriteLine(messageTokensCount);
 
       - `Batch("batch")`
 
+    - `required Speed? Speed`
+
+      The inference speed mode used for this request.
+
+      - `Standard("standard")`
+
+      - `Fast("fast")`
+
 ### Message Count Tokens Tool
 
 - `class MessageCountTokensTool: union`
@@ -24797,6 +24834,14 @@ Console.WriteLine(messageTokensCount);
 
         - `Batch("batch")`
 
+      - `required Speed? Speed`
+
+        The inference speed mode used for this request.
+
+        - `Standard("standard")`
+
+        - `Fast("fast")`
+
 ### Raw Message Stop Event
 
 - `class RawMessageStopEvent`
@@ -25817,6 +25862,14 @@ Console.WriteLine(messageTokensCount);
           - `Priority("priority")`
 
           - `Batch("batch")`
+
+        - `required Speed? Speed`
+
+          The inference speed mode used for this request.
+
+          - `Standard("standard")`
+
+          - `Fast("fast")`
 
   - `class RawMessageDeltaEvent`
 
@@ -32060,6 +32113,14 @@ Console.WriteLine(messageTokensCount);
 
     - `Batch("batch")`
 
+  - `required Speed? Speed`
+
+    The inference speed mode used for this request.
+
+    - `Standard("standard")`
+
+    - `Fast("fast")`
+
 ### User Location
 
 - `class UserLocation`
@@ -35652,6 +35713,16 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `StandardOnly("standard_only")`
 
+      - `Speed? Speed`
+
+        The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+        Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
+
+        - `Standard("standard")`
+
+        - `Fast("fast")`
+
       - `IReadOnlyList<string> StopSequences`
 
         Custom text sequences that will cause the model to stop generating.
@@ -37629,6 +37700,7 @@ BatchCreateParams parameters = new()
                     },
                 },
                 ServiceTier = ServiceTier.Auto,
+                Speed = Speed.Standard,
                 StopSequences =
                 [
                     "string"
@@ -39336,6 +39408,14 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
             - `Priority("priority")`
 
             - `Batch("batch")`
+
+          - `required Speed? Speed`
+
+            The inference speed mode used for this request.
+
+            - `Standard("standard")`
+
+            - `Fast("fast")`
 
     - `class MessageBatchErroredResult`
 

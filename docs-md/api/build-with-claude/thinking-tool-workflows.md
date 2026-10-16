@@ -34,25 +34,23 @@ curl https://api.anthropic.com/v1/messages \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -d @- <<'EOF'
-{
-  "model": "claude-opus-5-5",
-  "max_tokens": 16000,
-  "thinking": {"type": "adaptive"},
-  "tools": [{
-    "name": "get_weather",
-    "description": "Get current weather for a location",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "location": {"type": "string", "description": "City name"}
-      },
-      "required": ["location"]
-    }
-  }],
-  "messages": [{"role": "user", "content": "What's the weather in Paris?"}]
-}
-EOF
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 16000,
+    "thinking": {"type": "adaptive"},
+    "tools": [{
+      "name": "get_weather",
+      "description": "Get current weather for a location",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "location": {"type": "string", "description": "City name"}
+        },
+        "required": ["location"]
+      }
+    }],
+    "messages": [{"role": "user", "content": "What is the weather in Paris?"}]
+  }'
 ```
 
 ```bash CLI
@@ -311,10 +309,7 @@ Run the tool on your side, then send a second request that appends two messages 
 
 Each sample is a self-contained script: it repeats the first request, then immediately sends the follow-up using the response it just received.
 
-```bash cURL
-# This workflow does not translate well to a one-off shell command.
-# Use one of the SDK examples in this code group instead.
-```
+This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
 
 ```bash CLI
 # First turn: write the assistant content array (thinking and tool_use

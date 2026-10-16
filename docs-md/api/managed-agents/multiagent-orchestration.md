@@ -117,28 +117,26 @@ lead_agent=$(curl -fsS https://api.anthropic.com/v1/agents \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "name": "Engineering Lead",
-  "model": "claude-opus-5-5",
-  "system": "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
-  "tools": [
-    {
-      "type": "agent_toolset_20260401"
+  -d '{
+    "name": "Engineering Lead",
+    "model": "claude-opus-5-5",
+    "system": "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
+    "tools": [
+      {
+        "type": "agent_toolset_20260401"
+      }
+    ],
+    "multiagent": {
+      "type": "multiagent_20261001",
+      "subagents": {
+        "type": "enabled",
+        "predefined_agents": [
+          {"type": "agent", "id": "'"$REVIEWER_AGENT_ID"'"},
+          {"type": "agent", "id": "'"$TEST_WRITER_AGENT_ID"'"}
+        ]
+      }
     }
-  ],
-  "multiagent": {
-    "type": "multiagent_20261001",
-    "subagents": {
-      "type": "enabled",
-      "predefined_agents": [
-        {"type": "agent", "id": "$REVIEWER_AGENT_ID"},
-        {"type": "agent", "id": "$TEST_WRITER_AGENT_ID"}
-      ]
-    }
-  }
-}
-EOF
+  }'
 )
 ```
 
@@ -376,12 +374,10 @@ session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$LEAD_AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID"
-}
-EOF
+  -d '{
+    "agent": "'"$LEAD_AGENT_ID"'",
+    "environment_id": "'"$ENVIRONMENT_ID"'"
+  }'
 )
 SESSION_ID=$(jq -r '.id' <<< "$session")
 ```
@@ -461,18 +457,15 @@ With a `limited` [environment](environments.md#networking), session creation fai
 Create the researcher, which declares the GitHub MCP server, and the agent that delegates to the researcher:
 
 ```bash cURL
-research_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data @- <<'EOF' | jq -er '.id'
-{
+research_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data '{
   "name": "researcher",
   "model": "claude-haiku-5-5",
   "mcp_servers": [{"type": "url", "name": "github", "url": "https://api.githubcopilot.com/mcp/"}],
   "tools": [{"type": "mcp_toolset", "mcp_server_name": "github"}]
-}
-EOF
+}' | jq -er '.id'
 )
 
-lead_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data @- <<EOF | jq -er '.id'
-{
+lead_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data '{
   "name": "lead",
   "model": "claude-opus-5-5",
   "tools": [{"type": "agent_toolset_20260401"}],
@@ -480,11 +473,10 @@ lead_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data @- 
     "type": "multiagent_20261001",
     "subagents": {
       "type": "enabled",
-      "predefined_agents": [{"type": "agent", "id": "$research_agent_id"}]
+      "predefined_agents": [{"type": "agent", "id": "'"$research_agent_id"'"}]
     }
   }
-}
-EOF
+}' | jq -er '.id'
 )
 ```
 
@@ -775,13 +767,11 @@ lead_agent = client.beta.agents.create(
 Then create the session with the vault that holds the GitHub credential:
 
 ```bash cURL
-session_id=$(curl --fail-with-body -sS "$BASE/v1/sessions" "${H[@]}" --data @- <<EOF | jq -er '.id'
-{
-  "agent": "$lead_agent_id",
-  "environment_id": "$environment_id",
-  "vault_ids": ["$vault_id"]
-}
-EOF
+session_id=$(curl --fail-with-body -sS "$BASE/v1/sessions" "${H[@]}" --data '{
+  "agent": "'"$lead_agent_id"'",
+  "environment_id": "'"$environment_id"'",
+  "vault_ids": ["'"$vault_id"'"]
+}' | jq -er '.id'
 )
 echo "$session_id"
 ```
@@ -892,15 +882,13 @@ curl -fsS https://api.anthropic.com/v1/agents \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "name": "Contract Reviewer",
-  "model": "claude-opus-5-5",
-  "system": "You review contracts. When you're asked to review more than a few contracts, start a workflow run that reads them in parallel and combines the findings. Review one or two contracts yourself, without a run.",
-  "tools": [{"type": "agent_toolset_20260401"}],
-  "multiagent": {"type": "multiagent_20261001", "workflows": {"type": "enabled"}}
-}
-EOF
+  -d '{
+    "name": "Contract Reviewer",
+    "model": "claude-opus-5-5",
+    "system": "You review contracts. When you are asked to review more than a few contracts, start a workflow run that reads them in parallel and combines the findings. Review one or two contracts yourself, without a run.",
+    "tools": [{"type": "agent_toolset_20260401"}],
+    "multiagent": {"type": "multiagent_20261001", "workflows": {"type": "enabled"}}
+  }'
 ```
 
 ```bash CLI
@@ -1093,8 +1081,9 @@ You review contracts. When you're asked to review more than a few contracts, sta
 To adapt it, name the tasks in your agent's domain that call for a run, and the small tasks the agent should do itself. You can also guide how a run does the work, as in these examples:
 
 * **How to split the work:** "In a run, use one agent per contract. Then have a second agent review every contract, not only the ones where the first agent found something, and look for what the first agent missed. Anything that fails the review gets redone and reviewed again."
-* **What to do when an agent fails:** "One agent failing must not fail the run. If an agent fails to read a contract, list that contract as not covered."
+* **What to do when an agent fails:** "One agent failing must not fail the run. If an agent fails to read a contract, list that contract as not covered. When the run ends, tell me which contracts weren't covered."
 * **A time limit:** "Give the run a one-hour time limit."
+* **Plan first:** "Before you start a run, describe its phases and how many agents each one runs. Then wait for my go-ahead." There's no approval step before a run starts, so nothing enforces this.
 
 Keep runs to the tasks that need them, because every agent in a run uses tokens.
 

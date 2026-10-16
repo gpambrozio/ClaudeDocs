@@ -1277,6 +1277,16 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `const MessageBatchNewParamsRequestParamsServiceTierStandardOnly MessageBatchNewParamsRequestParamsServiceTier = "standard_only"`
 
+      - `Speed string Optional`
+
+        The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+        Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../../build-with-claude/fast-mode.md) for which models.
+
+        - `const MessageBatchNewParamsRequestParamsSpeedStandard MessageBatchNewParamsRequestParamsSpeed = "standard"`
+
+        - `const MessageBatchNewParamsRequestParamsSpeedFast MessageBatchNewParamsRequestParamsSpeed = "fast"`
+
       - `StopSequences []string Optional`
 
         Custom text sequences that will cause the model to stop generating.
@@ -5085,6 +5095,14 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `const UsageServiceTierBatch UsageServiceTier = "batch"`
 
+          - `Speed UsageSpeed`
+
+            The inference speed mode used for this request.
+
+            - `const UsageSpeedStandard UsageSpeed = "standard"`
+
+            - `const UsageSpeedFast UsageSpeed = "fast"`
+
     - `type MessageBatchErroredResult`
 
       - `Type Errored`
@@ -6620,6 +6638,14 @@ func main() {
 
             - `const UsageServiceTierBatch UsageServiceTier = "batch"`
 
+          - `Speed UsageSpeed`
+
+            The inference speed mode used for this request.
+
+            - `const UsageSpeedStandard UsageSpeed = "standard"`
+
+            - `const UsageSpeedFast UsageSpeed = "fast"`
+
     - `type MessageBatchErroredResult`
 
       - `Type Errored`
@@ -7903,6 +7929,14 @@ func main() {
 
           - `const UsageServiceTierBatch UsageServiceTier = "batch"`
 
+        - `Speed UsageSpeed`
+
+          The inference speed mode used for this request.
+
+          - `const UsageSpeedStandard UsageSpeed = "standard"`
+
+          - `const UsageSpeedFast UsageSpeed = "fast"`
+
   - `type MessageBatchErroredResult`
 
     - `Type Errored`
@@ -9137,6 +9171,14 @@ func main() {
         - `const UsageServiceTierPriority UsageServiceTier = "priority"`
 
         - `const UsageServiceTierBatch UsageServiceTier = "batch"`
+
+      - `Speed UsageSpeed`
+
+        The inference speed mode used for this request.
+
+        - `const UsageSpeedStandard UsageSpeed = "standard"`
+
+        - `const UsageSpeedFast UsageSpeed = "fast"`
 
 ---
 

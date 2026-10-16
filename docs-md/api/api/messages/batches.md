@@ -1297,6 +1297,16 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `"standard_only"`
 
+    - `speed: optional "standard" or "fast" or null`
+
+      The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+      Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
+
+      - `"standard"`
+
+      - `"fast"`
+
     - `stop_sequences: optional array of string`
 
       Custom text sequences that will cause the model to stop generating.
@@ -5038,6 +5048,14 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `"batch"`
 
+          - `speed: "standard" or "fast" or null`
+
+            The inference speed mode used for this request.
+
+            - `"standard"`
+
+            - `"fast"`
+
     - `MessageBatchErroredResult object`
 
       - `type: "errored"`
@@ -6551,6 +6569,14 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `"batch"`
 
+          - `speed: "standard" or "fast" or null`
+
+            The inference speed mode used for this request.
+
+            - `"standard"`
+
+            - `"fast"`
+
     - `MessageBatchErroredResult object`
 
       - `type: "errored"`
@@ -7836,6 +7862,14 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `"batch"`
 
+        - `speed: "standard" or "fast" or null`
+
+          The inference speed mode used for this request.
+
+          - `"standard"`
+
+          - `"fast"`
+
   - `MessageBatchErroredResult object`
 
     - `type: "errored"`
@@ -9072,6 +9106,14 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
         - `"priority"`
 
         - `"batch"`
+
+      - `speed: "standard" or "fast" or null`
+
+        The inference speed mode used for this request.
+
+        - `"standard"`
+
+        - `"fast"`
 
 ---
 

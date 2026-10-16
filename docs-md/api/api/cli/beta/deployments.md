@@ -65,7 +65,7 @@ Create Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -717,7 +717,7 @@ List Deployments
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -1348,7 +1348,7 @@ Get Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -2013,7 +2013,7 @@ Update Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -2632,7 +2632,7 @@ Archive Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -3251,7 +3251,7 @@ Run Deployment Now
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -3532,7 +3532,7 @@ Pause Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -4151,7 +4151,7 @@ Unpause Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 

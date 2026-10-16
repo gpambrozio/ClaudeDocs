@@ -1060,6 +1060,14 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Batch("batch")`
 
+          - `required Speed? Speed`
+
+            The inference speed mode used for this request.
+
+            - `Standard("standard")`
+
+            - `Fast("fast")`
+
     - `class MessageBatchErroredResult`
 
       - `JsonElement Type = "errored"`

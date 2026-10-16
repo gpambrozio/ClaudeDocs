@@ -1,4 +1,4 @@
-# EnvironmentWorker is not currently available in the Ruby SDK.
+# Self Hosted Sandboxes Memory
 
 ---
 title: Memory stores in self-hosted sandboxes
@@ -113,9 +113,7 @@ const worker = new EnvironmentWorker({
 });
 ```
 
-```csharp C#
-// EnvironmentWorker is not currently available in the C# SDK.
-```
+The C# SDK does not have `EnvironmentWorker`.
 
 ```go Go
 worker := environments.NewEnvironmentWorker(client, environments.EnvironmentWorkerOptions{
@@ -127,17 +125,11 @@ worker := environments.NewEnvironmentWorker(client, environments.EnvironmentWork
 })
 ```
 
-```java Java
-// EnvironmentWorker is not currently available in the Java SDK.
-```
+The Java SDK does not have `EnvironmentWorker`.
 
-```php PHP
-// EnvironmentWorker is not currently available in the PHP SDK.
-```
+The PHP SDK does not have `EnvironmentWorker`.
 
-```ruby Ruby
-# EnvironmentWorker is not currently available in the Ruby SDK.
-```
+The Ruby SDK does not have `EnvironmentWorker`.
 
 ## Read-only stores and conflicts
 

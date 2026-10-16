@@ -47,16 +47,14 @@ curl --fail-with-body -sS \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- >/dev/null <<'EOF'
-{
-  "events": [
-    {
-      "type": "user.message",
-      "content": [{"type": "text", "text": "Summarize the repo README"}]
-    }
-  ]
-}
-EOF
+  -d '{
+    "events": [
+      {
+        "type": "user.message",
+        "content": [{"type": "text", "text": "Summarize the repo README"}]
+      }
+    ]
+  }' >/dev/null
 
 while IFS= read -r -u "$stream" event_line; do
   [[ $event_line == data:* ]] || continue
@@ -77,10 +75,7 @@ done
 exec {stream}<&-
 ```
 
-```bash CLI
-# This workflow does not translate well to a one-off shell command.
-# Use one of the SDK examples in this code group instead.
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 # Open the stream first, then send the user message
@@ -376,10 +371,7 @@ done
 exec {stream}<&-
 ```
 
-```bash CLI
-# This workflow does not translate well to a one-off shell command.
-# Use one of the SDK examples in this code group instead.
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 with client.beta.sessions.events.stream(session.id) as stream:
@@ -594,18 +586,16 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/eve
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "events": [
-    {
-      "type": "user.message",
-      "content": [
-        {"type": "text", "text": "Analyze the performance of the sort function in utils.py"}
-      ]
-    }
-  ]
-}
-EOF
+  -d '{
+    "events": [
+      {
+        "type": "user.message",
+        "content": [
+          {"type": "text", "text": "Analyze the performance of the sort function in utils.py"}
+        ]
+      }
+    ]
+  }'
 ```
 
 ```bash CLI
@@ -806,10 +796,7 @@ done
 exec {stream_fd}<&-
 ```
 
-```bash CLI
-# This workflow does not translate well to a one-off shell command.
-# Use one of the SDK examples in this code group instead.
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 with client.beta.sessions.events.stream(session.id) as stream:
@@ -1068,10 +1055,7 @@ done
 exec {stream_fd}<&-
 ```
 
-```bash CLI
-# This workflow does not translate well to a one-off shell command.
-# Use one of the SDK examples in this code group instead.
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 with client.beta.sessions.events.stream(session.id) as stream:
@@ -1275,18 +1259,16 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/eve
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "events": [
-    {
-      "type": "user.message",
-      "content": [
-        {"type": "text", "text": "Now run the tests against the changes you made earlier."}
-      ]
-    }
-  ]
-}
-EOF
+  -d '{
+    "events": [
+      {
+        "type": "user.message",
+        "content": [
+          {"type": "text", "text": "Now run the tests against the changes you made earlier."}
+        ]
+      }
+    ]
+  }'
 ```
 
 ```bash CLI
@@ -1444,19 +1426,17 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/eve
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "events": [
-    {"type": "user.interrupt"},
-    {
-      "type": "user.message",
-      "content": [
-        {"type": "text", "text": "Instead, focus on fixing the bug in line 42."}
-      ]
-    }
-  ]
-}
-EOF
+  -d '{
+    "events": [
+      {"type": "user.interrupt"},
+      {
+        "type": "user.message",
+        "content": [
+          {"type": "text", "text": "Instead, focus on fixing the bug in line 42."}
+        ]
+      }
+    ]
+  }'
 ```
 
 ```bash CLI
@@ -1801,18 +1781,16 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/eve
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "events": [
-    {
-      "type": "system.message",
-      "content": [
-        {"type": "text", "text": "The user's current timezone is America/New_York."}
-      ]
-    }
-  ]
-}
-EOF
+  -d '{
+    "events": [
+      {
+        "type": "system.message",
+        "content": [
+          {"type": "text", "text": "The current timezone of the user is America/New_York."}
+        ]
+      }
+    ]
+  }'
 ```
 
 ```bash CLI

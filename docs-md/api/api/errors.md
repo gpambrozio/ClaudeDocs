@@ -265,10 +265,7 @@ The [SDKs](../cli-sdks-libraries/overview.md) validate that your non-streaming M
 
 If you don't need to process events incrementally, the SDK can consume the stream for you and return the complete `Message` object, identical to what a non-streaming call returns:
 
-```bash cURL
-# Raw SSE output requires handling events; there is no single-command way
-# to accumulate the final message with curl. Use the SDK examples instead.
-```
+A curl request prints the raw stream events and can't combine them into the final message. To get the complete `Message` object from a stream, use the [Claude SDK](../cli-sdks-libraries/overview.md).
 
 ```bash CLI
 # The CLI streams events; --format jsonl emits one event per line

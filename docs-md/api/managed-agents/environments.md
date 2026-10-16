@@ -14,7 +14,7 @@ featureMetadata:
 
 Environments define the sandbox configuration where your agent runs. You create an environment once, then reference its ID each time you start a session. Multiple sessions can share the same environment, but each session gets its own isolated sandbox (a fresh Linux container).
 
-This page covers `type: cloud` environments. To run sandboxes on your own infrastructure, see [Self-hosted sandboxes](self-hosted-sandboxes.md).
+This page covers `type: cloud` environments. To run sandboxes on your own infrastructure, see [Self-hosted sandboxes](self-hosted-sandboxes.md). To choose between the two, see [Choosing an agent environment](choosing-an-environment.md).
 
 ## Create an environment
 
@@ -24,15 +24,13 @@ curl -fsS https://api.anthropic.com/v1/environments \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<'EOF'
-{
-  "name": "python-dev",
-  "config": {
-    "type": "cloud",
-    "networking": {"type": "limited", "allow_package_managers": true}
-  }
-}
-EOF
+  --data '{
+    "name": "python-dev",
+    "config": {
+      "type": "cloud",
+      "networking": {"type": "limited", "allow_package_managers": true}
+    }
+  }'
 ```
 
 ```bash CLI
@@ -158,12 +156,10 @@ curl -fsS https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID"
-}
-EOF
+  --data '{
+    "agent": "'"$AGENT_ID"'",
+    "environment_id": "'"$ENVIRONMENT_ID"'"
+  }'
 ```
 
 ```bash CLI
@@ -237,19 +233,17 @@ curl -fsS https://api.anthropic.com/v1/environments \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<'EOF'
-{
-  "name": "data-analysis",
-  "config": {
-    "type": "cloud",
-    "packages": {
-      "pip": ["pandas", "numpy", "scikit-learn"],
-      "npm": ["express"]
-    },
-    "networking": {"type": "limited", "allow_package_managers": true}
-  }
-}
-EOF
+  --data '{
+    "name": "data-analysis",
+    "config": {
+      "type": "cloud",
+      "packages": {
+        "pip": ["pandas", "numpy", "scikit-learn"],
+        "npm": ["express"]
+      },
+      "networking": {"type": "limited", "allow_package_managers": true}
+    }
+  }'
 ```
 
 ```bash CLI

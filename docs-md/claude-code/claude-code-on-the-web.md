@@ -51,7 +51,7 @@ In Anthropic-hosted environments, your GitHub credentials stay encrypted on Anth
 
 See [Connect from your terminal](web-quickstart.md#connect-from-your-terminal) for the `/web-setup` walkthrough, including what `/web-setup` stores and how to remove it.
 
-Organizations with [Zero Data Retention](zero-data-retention.md) enabled, or with the [HIPAA configuration](hipaa-setup.md) applied, can't use `/web-setup` or other cloud session features.
+Organizations with [Zero Data Retention](zero-data-retention.md) enabled, or with the [HIPAA configuration](hipaa-setup.md) applied, can't use `/web-setup` or other cloud session features. Organizations that use [customer-managed encryption keys](../api/manage-claude/cmek.md) (CMEK) can't start cloud sessions either.
 
 ### Quick setup for Team and Enterprise
 

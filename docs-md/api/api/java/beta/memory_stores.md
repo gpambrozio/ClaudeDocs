@@ -21,7 +21,7 @@ Create a memory store
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -270,7 +270,7 @@ List memory stores
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -481,7 +481,7 @@ Retrieve a memory store
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -689,7 +689,7 @@ Update a memory store
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -913,7 +913,7 @@ Delete a memory store
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -1083,7 +1083,7 @@ Archive a memory store
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -1353,7 +1353,7 @@ Create a memory
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -1608,7 +1608,7 @@ List memories
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -1851,7 +1851,7 @@ Retrieve a memory
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -2079,7 +2079,7 @@ Update a memory
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -2323,7 +2323,7 @@ Delete a memory
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -2547,7 +2547,7 @@ List memory versions
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -2857,7 +2857,7 @@ Retrieve a memory version
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -3162,7 +3162,7 @@ Redact a memory version
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 

@@ -264,6 +264,7 @@ console.log(finalText?.text ?? "");
 using System.Text.Json;
 using Anthropic;
 using Anthropic.Models.Beta.Messages;
+using Model = Anthropic.Models.Messages.Model;
 
 AnthropicClient client = new();
 
@@ -314,7 +315,7 @@ while (true)
 {
     response = await client.Beta.Messages.Create(new MessageCreateParams
     {
-        Model = "claude-fable-5-1",
+        Model = Model.ClaudeFable5_1,
         MaxTokens = 16000,
         Betas = ["mid-conversation-system-clear-at-2026-08-21"],
         Tools = tools,
@@ -428,7 +429,7 @@ func main() {
 	for {
 		var err error
 		response, err = client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
-			Model:     "claude-fable-5-1",
+			Model:     anthropic.ModelClaudeFable5_1,
 			MaxTokens: 16000,
 			Betas:     []anthropic.AnthropicBeta{"mid-conversation-system-clear-at-2026-08-21"},
 			Tools:     tools,
@@ -494,6 +495,7 @@ import com.anthropic.models.beta.messages.BetaTool.InputSchema;
 import com.anthropic.models.beta.messages.BetaToolResultBlockParam;
 import com.anthropic.models.beta.messages.BetaToolUseBlock;
 import com.anthropic.models.beta.messages.MessageCreateParams;
+import com.anthropic.models.messages.Model;
 
 static final String BATCH_NUDGE =
     "First privately list what you need next; then request every item "
@@ -533,7 +535,7 @@ void main() {
     BetaMessage response;
     while (true) {
         response = client.beta().messages().create(MessageCreateParams.builder()
-            .model("claude-fable-5-1")
+            .model(Model.CLAUDE_FABLE_5_1)
             .maxTokens(16000)
             .addBeta("mid-conversation-system-clear-at-2026-08-21")
             .addTool(readFileTool)

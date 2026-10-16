@@ -3725,6 +3725,8 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
   The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../../build-with-claude/fast-mode.md) for which models.
+
   - `"standard"`
 
   - `"fast"`

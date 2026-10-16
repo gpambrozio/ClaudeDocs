@@ -214,20 +214,18 @@ curl -s https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<EOF
-{
-  "agent": "$agent_id",
-  "environment_id": "$environment_id",
-  "resources": [
-    {
-      "type": "memory_store",
-      "memory_store_id": "$store_id",
-      "access": "read_write",
-      "instructions": "User preferences and project context. Check before starting any task."
-    }
-  ]
-}
-EOF
+  --data '{
+    "agent": "'"$agent_id"'",
+    "environment_id": "'"$environment_id"'",
+    "resources": [
+      {
+        "type": "memory_store",
+        "memory_store_id": "'"$store_id"'",
+        "access": "read_write",
+        "instructions": "User preferences and project context. Check before starting any task."
+      }
+    ]
+  }'
 ```
 
 ```bash CLI
@@ -724,12 +722,10 @@ curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: agent-memory-2026-07-22" \
   -H "content-type: application/json" \
-  --data @- > /dev/null <<EOF
-{
-  "content": "CORRECTED: Always use 2-space indentation.",
-  "precondition": {"type": "content_sha256", "content_sha256": "$mem_sha"}
-}
-EOF
+  --data '{
+    "content": "CORRECTED: Always use 2-space indentation.",
+    "precondition": {"type": "content_sha256", "content_sha256": "'"$mem_sha"'"}
+  }' > /dev/null
 ```
 
 ```bash CLI

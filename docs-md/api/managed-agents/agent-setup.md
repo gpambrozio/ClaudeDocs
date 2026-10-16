@@ -348,12 +348,10 @@ updated_agent=$(curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "version": $AGENT_VERSION,
-  "system": "You are a helpful coding agent. Always write tests."
-}
-EOF
+  -d '{
+    "version": '"$AGENT_VERSION"',
+    "system": "You are a helpful coding agent. Always write tests."
+  }'
 )
 
 echo "New version: $(jq -r '.version' <<< "$updated_agent")"

@@ -33,23 +33,21 @@ agent_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "name": "GitHub Assistant",
-  "model": "claude-opus-5-5",
-  "mcp_servers": [
-    {
-      "type": "url",
-      "name": "github",
-      "url": "https://api.githubcopilot.com/mcp/"
-    }
-  ],
-  "tools": [
-    {"type": "agent_toolset_20260401"},
-    {"type": "mcp_toolset", "mcp_server_name": "github"}
-  ]
-}
-EOF
+  -d '{
+    "name": "GitHub Assistant",
+    "model": "claude-opus-5-5",
+    "mcp_servers": [
+      {
+        "type": "url",
+        "name": "github",
+        "url": "https://api.githubcopilot.com/mcp/"
+      }
+    ],
+    "tools": [
+      {"type": "agent_toolset_20260401"},
+      {"type": "mcp_toolset", "mcp_server_name": "github"}
+    ]
+  }'
 )
 agent_id=$(jq -r '.id' <<<"$agent_response")
 ```
@@ -293,13 +291,11 @@ session_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessio
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$agent_id",
-  "environment_id": "$environment_id",
-  "vault_ids": ["$vault_id"]
-}
-EOF
+  -d '{
+    "agent": "'"$agent_id"'",
+    "environment_id": "'"$environment_id"'",
+    "vault_ids": ["'"$vault_id"'"]
+  }'
 )
 session_id=$(jq -r '.id' <<<"$session_response")
 ```

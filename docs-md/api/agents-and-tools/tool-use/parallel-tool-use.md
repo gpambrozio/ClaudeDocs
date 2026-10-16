@@ -1,4 +1,4 @@
-# This end-to-end test flow doesn't translate well to a one-off shell command.
+# Define tools
 
 ---
 title: Parallel tool use
@@ -33,16 +33,9 @@ The [computer use tool](computer-use-tool.md#batch-actions) and the [browser use
 
 The following script sends a request that should trigger parallel tool calls, verifies the response contains them, and formats the tool results so parallelism keeps working. Run it with `ANTHROPIC_API_KEY` set in your environment:
 
-```bash cURL
-# This end-to-end test flow doesn't translate well to a one-off shell command.
-# See the SDK tabs for the full flow. The underlying HTTP request is a standard
-# tool use request with multiple tools defined.
-```
+This end-to-end test needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it. The request it sends is a standard tool use request with two tools defined.
 
-```bash CLI
-# This end-to-end test flow doesn't translate well to a one-off shell command.
-# See the SDK tabs for the full flow.
-```
+This end-to-end test needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = Anthropic()
@@ -1438,15 +1431,9 @@ Default prompting might not be sufficient. Use the stronger system prompt from [
 
 To verify parallel tool calls are working:
 
-```bash cURL
-# Measuring parallel tool use is client-side analysis of responses you've already
-# collected, so it doesn't translate to a one-off shell command. See the SDK tabs.
-```
+To measure parallel tool use, your code analyzes the responses that it already collected. This needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this.
 
-```bash CLI
-# Measuring parallel tool use is client-side analysis of responses you've already
-# collected, so it doesn't translate to a one-off shell command. See the SDK tabs.
-```
+To measure parallel tool use, your code analyzes the responses that it already collected. This needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this.
 
 ```python Python
 messages = []  # Message objects returned by client.messages.create across your run

@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/php/messages
 
 ## Create a Message
 
-`$client->messages->create(int maxTokens, list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?MessageCreateParamsContainer container, ?DiagnosticsParam diagnostics, ?string inferenceGeo, ?Metadata metadata, ?OutputConfig outputConfig, ?ServiceTier serviceTier, ?list<string> stopSequences, ?System system, ?float temperature, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<ToolUnion> tools, ?int topK, ?float topP, ?string userProfileID, ?string workspaceID): Message`
+`$client->messages->create(int maxTokens, list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?MessageCreateParamsContainer container, ?DiagnosticsParam diagnostics, ?string inferenceGeo, ?Metadata metadata, ?OutputConfig outputConfig, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<ToolUnion> tools, ?int topK, ?float topP, ?string userProfileID, ?string workspaceID): Message`
 
 **POST** `/v1/messages`
 
@@ -117,6 +117,12 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
   Determines whether to use priority capacity (if available) or standard capacity for this request.
 
   Anthropic offers different levels of service for your API requests. See [service-tiers](../service-tiers.md) for details.
+
+- `speed?:optional Speed`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
 
 - `stopSequences?:optional list<string>`
 
@@ -441,6 +447,7 @@ $message = $client->messages->create(
     'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
   ],
   serviceTier: 'auto',
+  speed: 'standard',
   stopSequences: ['string'],
   system: [
     [
@@ -555,14 +562,15 @@ var_dump($message);
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
 
 ## Count tokens in a Message
 
-`$client->messages->countTokens(list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?OutputConfig outputConfig, ?System system, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<MessageCountTokensTool> tools, ?string userProfileID, ?string workspaceID): MessageTokensCount`
+`$client->messages->countTokens(list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?OutputConfig outputConfig, ?Speed speed, ?System system, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<MessageCountTokensTool> tools, ?string userProfileID, ?string workspaceID): MessageTokensCount`
 
 **POST** `/v1/messages/count_tokens`
 
@@ -638,6 +646,12 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 - `outputConfig?:optional OutputConfig`
 
   Configuration options for the model's output, such as the output format.
+
+- `speed?:optional Speed`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
 
 - `system?:optional System`
 
@@ -756,6 +770,7 @@ $messageTokensCount = $client->messages->countTokens(
     'effort' => 'low',
     'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
   ],
+  speed: 'standard',
   system: [
     [
       'text' => 'Today\'s date is 2024-06-01.',
@@ -9641,6 +9656,10 @@ var_dump($messageTokensCount);
 
     If the request used the priority, standard, or batch tier.
 
+  - `?Speed speed`
+
+    The inference speed mode used for this request.
+
 ### User Location
 
 - `class UserLocation`
@@ -10405,6 +10424,7 @@ $messageBatch = $client->messages->batches->create(
           'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
         ],
         'serviceTier' => 'auto',
+        'speed' => 'standard',
         'stopSequences' => ['string'],
         'stream' => false,
         'system' => [

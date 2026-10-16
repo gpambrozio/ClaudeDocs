@@ -12,7 +12,9 @@ This guide covers migrating [Messages API](../../build-with-claude/working-with-
 
 **Automate your migration with the Claude API skill.** In Claude Code, run `/claude-api migrate` to invoke the bundled [Claude API skill](../../agents-and-tools/agent-skills/claude-api-skill.md#migrating-to-a-newer-claude-model). It works for any current Claude model as the target:
 
-```text wrap
+Let Claude Code migrate your code for you
+
+```text
 /claude-api migrate this project to claude-sonnet-5-5
 ```
 
@@ -960,7 +962,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = "claude-sonnet-4-6",
+    Model = Model.ClaudeSonnet4_6,
     MaxTokens = 16000,
     Thinking = new ThinkingConfigEnabled(budgetTokens: 10000),
     Messages = [new() { Role = Role.User, Content = "..." }]
@@ -974,7 +976,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-sonnet-4-6",
+	Model:     anthropic.ModelClaudeSonnet4_6,
 	MaxTokens: 16000,
 	Thinking:  anthropic.ThinkingConfigParamOfEnabled(10000),
 	Messages: []anthropic.MessageParam{
@@ -991,7 +993,7 @@ fmt.Println(response)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model("claude-sonnet-4-6")
+    .model(Model.CLAUDE_SONNET_4_6)
     .maxTokens(16000L)
     .enabledThinking(10000L)
     .addUserMessage("...")
@@ -1095,7 +1097,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = "claude-sonnet-5-5",
+    Model = Model.ClaudeSonnet5_5,
     MaxTokens = 16000,
     Thinking = new ThinkingConfigAdaptive(),
     OutputConfig = new OutputConfig { Effort = Effort.High }, // or Max, Xhigh, Medium, Low
@@ -1110,7 +1112,7 @@ Console.WriteLine(response);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-sonnet-5-5",
+	Model:     anthropic.ModelClaudeSonnet5_5,
 	MaxTokens: 16000,
 	Thinking: anthropic.ThinkingConfigParamUnion{
 		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
@@ -1132,7 +1134,7 @@ fmt.Println(response)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-    .model("claude-sonnet-5-5")
+    .model(Model.CLAUDE_SONNET_5_5)
     .maxTokens(16000L)
     .thinking(ThinkingConfigAdaptive.builder().build())
     .outputConfig(OutputConfig.builder()

@@ -1267,6 +1267,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
+
 - `--stop-sequence: optional array of string`
 
   Custom text sequences that will cause the model to stop generating.
@@ -7082,6 +7084,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
+
 - `--system: optional string or array of BetaTextBlockParam`
 
   System prompt.
@@ -12713,7 +12717,7 @@ Create Agent
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -13684,7 +13688,7 @@ List Agents
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -14650,7 +14654,7 @@ Get Agent
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -15650,7 +15654,7 @@ Update Agent
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -16598,7 +16602,7 @@ Archive Agent
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -17558,7 +17562,7 @@ List Agent Versions
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -20743,7 +20747,7 @@ Create Session
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -22238,7 +22242,7 @@ List Sessions
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -23687,7 +23691,7 @@ Get Session
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -25141,7 +25145,7 @@ Update Session
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -26573,7 +26577,7 @@ Delete Session
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -26622,7 +26626,7 @@ Archive Session
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -28096,7 +28100,7 @@ List Events
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -31238,7 +31242,7 @@ Send Events
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -31739,7 +31743,7 @@ Stream Events
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -34927,7 +34931,7 @@ Add Session Resource
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -35006,7 +35010,7 @@ List Session Resources
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -35184,7 +35188,7 @@ Get Session Resource
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -35348,7 +35352,7 @@ Update Session Resource
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -35507,7 +35511,7 @@ Delete Session Resource
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -35575,7 +35579,7 @@ List Session Threads
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -36595,7 +36599,7 @@ Get Session Thread
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -37603,7 +37607,7 @@ Archive Session Thread
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -38619,7 +38623,7 @@ List Session Thread Events
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -41764,7 +41768,7 @@ Stream Session Thread Events
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -44983,7 +44987,7 @@ Create Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -45635,7 +45639,7 @@ List Deployments
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -46266,7 +46270,7 @@ Get Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -46931,7 +46935,7 @@ Update Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -47550,7 +47554,7 @@ Archive Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -48169,7 +48173,7 @@ Run Deployment Now
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -48450,7 +48454,7 @@ Pause Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -49069,7 +49073,7 @@ Unpause Deployment
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -49732,7 +49736,7 @@ List Deployment Runs
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -50025,7 +50029,7 @@ Get Deployment Run
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -50314,7 +50318,7 @@ Create Vault
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -50410,7 +50414,7 @@ List Vaults
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -50508,7 +50512,7 @@ Get Vault
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -50604,7 +50608,7 @@ Update Vault
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -50690,7 +50694,7 @@ Delete Vault
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -50743,7 +50747,7 @@ Archive Vault
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -50845,7 +50849,7 @@ Create Credential
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -51067,7 +51071,7 @@ List Credentials
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -51291,7 +51295,7 @@ Get Credential
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -51517,7 +51521,7 @@ Update Credential
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -51729,7 +51733,7 @@ Delete Credential
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -51787,7 +51791,7 @@ Archive Credential
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -51999,7 +52003,7 @@ Validate Credential
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -52195,7 +52199,7 @@ Create a memory store
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -52308,7 +52312,7 @@ List memory stores
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -52409,7 +52413,7 @@ Retrieve a memory store
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -52516,7 +52520,7 @@ Update a memory store
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -52607,7 +52611,7 @@ Delete a memory store
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -52660,7 +52664,7 @@ Archive a memory store
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -52767,7 +52771,7 @@ Create a memory
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -52892,7 +52896,7 @@ List memories
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -53026,7 +53030,7 @@ Retrieve a memory
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -53148,7 +53152,7 @@ Update a memory
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -53258,7 +53262,7 @@ Delete a memory
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -53362,7 +53366,7 @@ List memory versions
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -53579,7 +53583,7 @@ Retrieve a memory version
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -53780,7 +53784,7 @@ Redact a memory version
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -55339,7 +55343,7 @@ Create User Profile
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -55542,7 +55546,7 @@ List User Profiles
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -55740,7 +55744,7 @@ Get User Profile
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -55958,7 +55962,7 @@ Update User Profile
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -56146,7 +56150,7 @@ Create Enrollment URL
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -56234,7 +56238,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `dreaming-2026-04-21` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -56569,7 +56573,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `dreaming-2026-04-21` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -56881,7 +56885,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `dreaming-2026-04-21` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -57185,7 +57189,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `dreaming-2026-04-21` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -57489,7 +57493,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `dreaming-2026-04-21` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -57795,7 +57799,7 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -57873,7 +57877,7 @@ Fetches a tunnel by ID.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -57962,7 +57966,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -58053,7 +58057,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -58132,7 +58136,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -58198,7 +58202,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -58266,7 +58270,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -58357,7 +58361,7 @@ Fetches a tunnel certificate by ID.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -58458,7 +58462,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -58561,7 +58565,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this header.
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -69712,7 +69716,7 @@ Anthropic account team.
 
     - `"weekly"`
 
-  - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+  - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
     What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -69761,6 +69765,18 @@ Anthropic account team.
       - `workspace_id: string`
 
         Tagged ID of the workspace the spend limit applies to.
+
+    - `beta_spend_limit_usage_tier_scope: object`
+
+      Scope of the monthly spend cap Anthropic sets for a Claude Console
+      organization from its usage tier, or a higher cap Anthropic granted the
+      organization. Read-only; its `created_at` and `updated_at` are the
+      organization's creation time, so `amount` can change while `updated_at` stays
+      the same.
+
+      - `type: "usage_tier"`
+
+        Scope type. Always `usage_tier` for this scope.
 
   - `updated_at: string`
 
@@ -69852,7 +69868,7 @@ Retrieve a spend limit by ID.
 
     - `"weekly"`
 
-  - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+  - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
     What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -69902,6 +69918,18 @@ Retrieve a spend limit by ID.
 
         Tagged ID of the workspace the spend limit applies to.
 
+    - `beta_spend_limit_usage_tier_scope: object`
+
+      Scope of the monthly spend cap Anthropic sets for a Claude Console
+      organization from its usage tier, or a higher cap Anthropic granted the
+      organization. Read-only; its `created_at` and `updated_at` are the
+      organization's creation time, so `amount` can change while `updated_at` stays
+      the same.
+
+      - `type: "usage_tier"`
+
+        Scope type. Always `usage_tier` for this scope.
+
   - `updated_at: string`
 
     RFC 3339 datetime at which the spend limit was last modified.
@@ -69947,7 +69975,8 @@ For a Claude Enterprise organization, this deletes a per-user override, and
 the member falls back to any inherited spend limit at that period. Its
 seat-tier, group, and organization-level rows cannot be deleted via this
 endpoint. A Claude Console organization deletes its organization and
-workspace limits. Deleting them through the API is in an early access preview.
+workspace limits, but not its `usage_tier` limit. Deleting organization and
+workspace limits through the API is in an early access preview.
 
 #### Parameters
 
@@ -70057,7 +70086,7 @@ organizations only, not for Claude Console organizations.
 
       - `"weekly"`
 
-    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
       What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -70106,6 +70135,18 @@ organizations only, not for Claude Console organizations.
         - `workspace_id: string`
 
           Tagged ID of the workspace the spend limit applies to.
+
+      - `beta_spend_limit_usage_tier_scope: object`
+
+        Scope of the monthly spend cap Anthropic sets for a Claude Console
+        organization from its usage tier, or a higher cap Anthropic granted the
+        organization. Read-only; its `created_at` and `updated_at` are the
+        organization's creation time, so `amount` can change while `updated_at` stays
+        the same.
+
+        - `type: "usage_tier"`
+
+          Scope type. Always `usage_tier` for this scope.
 
     - `updated_at: string`
 
@@ -70250,7 +70291,7 @@ organizations.
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
       - `beta_spend_limit_user_scope: object`
 
@@ -70298,7 +70339,19 @@ organizations.
 
           Tagged ID of the workspace the spend limit applies to.
 
-    - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+      - `beta_spend_limit_usage_tier_scope: object`
+
+        Scope of the monthly spend cap Anthropic sets for a Claude Console
+        organization from its usage tier, or a higher cap Anthropic granted the
+        organization. Read-only; its `created_at` and `updated_at` are the
+        organization's creation time, so `amount` can change while `updated_at` stays
+        the same.
+
+        - `type: "usage_tier"`
+
+          Scope type. Always `usage_tier` for this scope.
+
+    - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
       - `beta_spend_limit_user_scope: object`
 
@@ -70315,6 +70368,14 @@ organizations.
       - `beta_spend_limit_workspace_scope: object`
 
         Scope selecting one workspace of a Claude Console organization.
+
+      - `beta_spend_limit_usage_tier_scope: object`
+
+        Scope of the monthly spend cap Anthropic sets for a Claude Console
+        organization from its usage tier, or a higher cap Anthropic granted the
+        organization. Read-only; its `created_at` and `updated_at` are the
+        organization's creation time, so `amount` can change while `updated_at` stays
+        the same.
 
     - `spend_limit_id: string`
 
@@ -70502,7 +70563,7 @@ Requests whose requester is no longer a member are excluded.
 
         The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-      - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+      - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
         - `beta_spend_limit_user_scope: object`
 
@@ -70550,7 +70611,19 @@ Requests whose requester is no longer a member are excluded.
 
             Tagged ID of the workspace the spend limit applies to.
 
-      - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+        - `beta_spend_limit_usage_tier_scope: object`
+
+          Scope of the monthly spend cap Anthropic sets for a Claude Console
+          organization from its usage tier, or a higher cap Anthropic granted the
+          organization. Read-only; its `created_at` and `updated_at` are the
+          organization's creation time, so `amount` can change while `updated_at` stays
+          the same.
+
+          - `type: "usage_tier"`
+
+            Scope type. Always `usage_tier` for this scope.
+
+      - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
         - `beta_spend_limit_user_scope: object`
 
@@ -70567,6 +70640,14 @@ Requests whose requester is no longer a member are excluded.
         - `beta_spend_limit_workspace_scope: object`
 
           Scope selecting one workspace of a Claude Console organization.
+
+        - `beta_spend_limit_usage_tier_scope: object`
+
+          Scope of the monthly spend cap Anthropic sets for a Claude Console
+          organization from its usage tier, or a higher cap Anthropic granted the
+          organization. Read-only; its `created_at` and `updated_at` are the
+          organization's creation time, so `amount` can change while `updated_at` stays
+          the same.
 
       - `spend_limit_id: string`
 
@@ -70768,7 +70849,7 @@ requester at the request's period.
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
       - `beta_spend_limit_user_scope: object`
 
@@ -70816,7 +70897,19 @@ requester at the request's period.
 
           Tagged ID of the workspace the spend limit applies to.
 
-    - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+      - `beta_spend_limit_usage_tier_scope: object`
+
+        Scope of the monthly spend cap Anthropic sets for a Claude Console
+        organization from its usage tier, or a higher cap Anthropic granted the
+        organization. Read-only; its `created_at` and `updated_at` are the
+        organization's creation time, so `amount` can change while `updated_at` stays
+        the same.
+
+        - `type: "usage_tier"`
+
+          Scope type. Always `usage_tier` for this scope.
+
+    - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
       - `beta_spend_limit_user_scope: object`
 
@@ -70833,6 +70926,14 @@ requester at the request's period.
       - `beta_spend_limit_workspace_scope: object`
 
         Scope selecting one workspace of a Claude Console organization.
+
+      - `beta_spend_limit_usage_tier_scope: object`
+
+        Scope of the monthly spend cap Anthropic sets for a Claude Console
+        organization from its usage tier, or a higher cap Anthropic granted the
+        organization. Read-only; its `created_at` and `updated_at` are the
+        organization's creation time, so `amount` can change while `updated_at` stays
+        the same.
 
     - `spend_limit_id: string`
 
@@ -71040,7 +71141,7 @@ the member was blocked on. Anthropic emails the requester unless
 
       - `"weekly"`
 
-    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
       What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -71090,6 +71191,18 @@ the member was blocked on. Anthropic emails the requester unless
 
           Tagged ID of the workspace the spend limit applies to.
 
+      - `beta_spend_limit_usage_tier_scope: object`
+
+        Scope of the monthly spend cap Anthropic sets for a Claude Console
+        organization from its usage tier, or a higher cap Anthropic granted the
+        organization. Read-only; its `created_at` and `updated_at` are the
+        organization's creation time, so `amount` can change while `updated_at` stays
+        the same.
+
+        - `type: "usage_tier"`
+
+          Scope type. Always `usage_tier` for this scope.
+
     - `updated_at: string`
 
       RFC 3339 datetime at which the spend limit was last modified.
@@ -71134,7 +71247,7 @@ the member was blocked on. Anthropic emails the requester unless
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
       - `beta_spend_limit_user_scope: object`
 
@@ -71152,7 +71265,15 @@ the member was blocked on. Anthropic emails the requester unless
 
         Scope selecting one workspace of a Claude Console organization.
 
-    - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+      - `beta_spend_limit_usage_tier_scope: object`
+
+        Scope of the monthly spend cap Anthropic sets for a Claude Console
+        organization from its usage tier, or a higher cap Anthropic granted the
+        organization. Read-only; its `created_at` and `updated_at` are the
+        organization's creation time, so `amount` can change while `updated_at` stays
+        the same.
+
+    - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
       - `beta_spend_limit_user_scope: object`
 
@@ -71169,6 +71290,14 @@ the member was blocked on. Anthropic emails the requester unless
       - `beta_spend_limit_workspace_scope: object`
 
         Scope selecting one workspace of a Claude Console organization.
+
+      - `beta_spend_limit_usage_tier_scope: object`
+
+        Scope of the monthly spend cap Anthropic sets for a Claude Console
+        organization from its usage tier, or a higher cap Anthropic granted the
+        organization. Read-only; its `created_at` and `updated_at` are the
+        organization's creation time, so `amount` can change while `updated_at` stays
+        the same.
 
     - `spend_limit_id: string`
 
@@ -71381,7 +71510,7 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+    - `scope: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
       - `beta_spend_limit_user_scope: object`
 
@@ -71429,7 +71558,19 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
           Tagged ID of the workspace the spend limit applies to.
 
-    - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 3 more`
+      - `beta_spend_limit_usage_tier_scope: object`
+
+        Scope of the monthly spend cap Anthropic sets for a Claude Console
+        organization from its usage tier, or a higher cap Anthropic granted the
+        organization. Read-only; its `created_at` and `updated_at` are the
+        organization's creation time, so `amount` can change while `updated_at` stays
+        the same.
+
+        - `type: "usage_tier"`
+
+          Scope type. Always `usage_tier` for this scope.
+
+    - `source: BetaSpendLimitUserScope or BetaSpendLimitSeatTierScope or BetaSpendLimitRBACGroupScope or 4 more`
 
       - `beta_spend_limit_user_scope: object`
 
@@ -71446,6 +71587,14 @@ Idempotent on `denied`; denying an already-`approved` request returns
       - `beta_spend_limit_workspace_scope: object`
 
         Scope selecting one workspace of a Claude Console organization.
+
+      - `beta_spend_limit_usage_tier_scope: object`
+
+        Scope of the monthly spend cap Anthropic sets for a Claude Console
+        organization from its usage tier, or a higher cap Anthropic granted the
+        organization. Read-only; its `created_at` and `updated_at` are the
+        organization's creation time, so `amount` can change while `updated_at` stays
+        the same.
 
     - `spend_limit_id: string`
 
@@ -75822,7 +75971,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11` in this header.
 
 #### Returns
 
@@ -76066,7 +76215,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11` in this header.
 
 #### Returns
 
@@ -76309,7 +76458,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11` in this header.
 
 #### Returns
 
@@ -76582,7 +76731,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11` in this header.
 
 #### Returns
 
@@ -76815,7 +76964,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11` in this header.
 
 #### Returns
 
@@ -76862,7 +77011,7 @@ Send one test span, named `anthropic.test`, to the destination with its register
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11` in this header.
 
 #### Returns
 
@@ -76943,7 +77092,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11` in this header.
 
 #### Returns
 
@@ -77025,7 +77174,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11` in this header.
 
 #### Returns
 
@@ -77097,7 +77246,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `telemetry-destinations-2026-08-11` in this header.
 
 #### Returns
 

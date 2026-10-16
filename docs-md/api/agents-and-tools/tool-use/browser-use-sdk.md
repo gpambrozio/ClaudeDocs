@@ -971,7 +971,10 @@ import type {
 } from "@anthropic-ai/sdk/resources/beta";
 
 class MyDesktop extends BetaAbstractComputerToolset20260801 {
-  constructor(private display: Display, options: BetaComputerToolsetOptions = {}) {
+  constructor(
+    private display: Display,
+    options: BetaComputerToolsetOptions = {}
+  ) {
     super(options);
   }
 

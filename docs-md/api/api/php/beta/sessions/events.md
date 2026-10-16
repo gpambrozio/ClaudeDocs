@@ -51,7 +51,7 @@ List Events
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -1021,7 +1021,7 @@ Send Events
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -1099,7 +1099,7 @@ Stream Events
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
-  Optional header to specify the beta version(s) you want to use.
+  This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
 - `workspaceID?:optional string` (header parameter)
 

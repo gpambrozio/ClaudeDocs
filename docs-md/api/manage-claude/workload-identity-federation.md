@@ -109,20 +109,32 @@ JSON
 )
 
 ACCESS_TOKEN=$(jq -r .access_token <<<"$RESPONSE")
-EXPIRES_IN=$(jq -r .expires_in <<<"$RESPONSE")  # seconds; re-exchange before this elapses
+# The response's expires_in is the token's lifetime in seconds; re-exchange before it elapses.
 
 # 3. Call the API with the access token in the Authorization: Bearer header.
 curl -sS https://api.anthropic.com/v1/messages \
   -H "authorization: Bearer $ACCESS_TOKEN" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
-  -d @- <<'JSON' | jq -r '.content[] | select(.type == "text") | .text'
-{
-  "model": "claude-opus-5-5",
-  "max_tokens": 1024,
-  "messages": [{"role": "user", "content": "Hello, Claude"}]
-}
-JSON
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 1024,
+    "messages": [{"role": "user", "content": "Hello, Claude"}]
+  }'
+```
+
+```bash CLI
+# The CLI exchanges the identity token for an access token itself.
+export ANTHROPIC_IDENTITY_TOKEN_FILE=/var/run/secrets/anthropic.com/token
+export ANTHROPIC_FEDERATION_RULE_ID=fdrl_...
+export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
+export ANTHROPIC_SERVICE_ACCOUNT_ID=svac_...
+export ANTHROPIC_WORKSPACE_ID=wrkspc_...
+
+ant messages create \
+  --model claude-opus-5-5 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello, Claude"}'
 ```
 
 ```python Python

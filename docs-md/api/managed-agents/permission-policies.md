@@ -125,7 +125,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Coding Assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: "claude-opus-5-5",
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -339,7 +339,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Dev Assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: "claude-opus-5-5",
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
 		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
@@ -835,7 +835,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Ops Agent",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: "claude-opus-5-5",
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
 		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,

@@ -694,10 +694,7 @@ while IFS= read -r event_id; do
 done < <(jq -r '.stop_reason.event_ids[]' <<<"$data")
 ```
 
-```bash CLI
-# This workflow does not translate well to a one-off shell command.
-# Use one of the SDK examples in this code group instead.
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 for event_id in stop.event_ids:

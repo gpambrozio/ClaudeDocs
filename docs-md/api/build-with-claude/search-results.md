@@ -1,4 +1,4 @@
-# The tool-calling flow needs application-side search logic that doesn't
+# Define a knowledge base search tool
 
 ---
 title: Search results
@@ -73,19 +73,9 @@ Returning search results from your custom tools enables dynamic RAG applications
 
 ### Example: Knowledge base tool
 
-```bash cURL
-# The tool-calling flow needs application-side search logic that doesn't
-# translate to a one-off shell command. See the SDK tabs for the full flow.
-# The raw shape of a tool conversation with search results is shown in the
-# Combining both methods cURL tab; Method 2 shows the top-level shape.
-```
+The tool-calling flow needs search logic in your application, which needs more than a single shell command. Use the Claude SDK for the full flow. For the raw request shape of a tool conversation with search results, see [Combining both methods](search-results.md#combining-both-methods). For search results as top-level content, see [Method 2](search-results.md#method-2-search-results-as-top-level-content).
 
-```bash CLI
-# The tool-calling flow needs application-side search logic that doesn't
-# translate to a one-off shell command. See the SDK tabs for the full flow.
-# The raw shape of a tool conversation with search results is shown in the
-# Combining both methods cURL tab; Method 2 shows the top-level shape.
-```
+The tool-calling flow needs search logic in your application, which needs more than a single shell command. Use the Claude SDK for the full flow. For the raw request shape of a tool conversation with search results, see [Combining both methods](search-results.md#combining-both-methods). For search results as top-level content, see [Method 2](search-results.md#method-2-search-results-as-top-level-content).
 
 ```python Python
 from anthropic.types import (

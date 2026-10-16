@@ -1,4 +1,4 @@
-# This reference implementation is local math that makes no API request, so
+# The A4 example from "How Claude resizes and pads images":
 
 ---
 title: Coordinates and bounding boxes
@@ -39,15 +39,9 @@ The most reliable approach is to resize your image yourself before uploading, so
 
 First check which resolution tier your model is on (see [Resolution and token cost](vision.md#evaluate-image-size)) and pass the matching edge and token limits. The following reference implementation computes the exact size Claude resizes an image to:
 
-```bash cURL
-# This reference implementation is local math that makes no API request, so
-# there's nothing to show for cURL. See the SDK tabs.
-```
+Compute this size in code.
 
-```bash CLI
-# This reference implementation is local math that makes no API request, so
-# there's nothing to show for the CLI. See the SDK tabs.
-```
+Compute this size in code.
 
 ```python Python
 import math
@@ -473,15 +467,9 @@ If you cannot pre-resize (for example, when the image comes from an upstream sys
 
 Screenshots and zoom images that you return to the [computer use](../agents-and-tools/tool-use/computer-use-tool.md#handle-coordinate-scaling-for-higher-resolutions) and [browser use](../agents-and-tools/tool-use/browser-use-tool.md#targets-and-coordinates) toolsets are an exception to automatic resizing. The API rejects a `tool_result` image that exceeds the model's limits with a validation error instead of resizing it. Resize those images in your application before returning them, then scale the coordinates Claude returns back to your screen's dimensions.
 
-```bash cURL
-# This local coordinate conversion makes no API request, so there's nothing
-# to show for cURL. See the SDK tabs.
-```
+Convert the coordinates in code.
 
-```bash CLI
-# This local coordinate conversion makes no API request, so there's nothing
-# to show for the CLI. See the SDK tabs.
-```
+Convert the coordinates in code.
 
 ```python Python
 # This helper calls resized_size from the resize example on this page.

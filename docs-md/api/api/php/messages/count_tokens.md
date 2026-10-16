@@ -7,7 +7,7 @@ url: https://platform.claude.com/docs/en/api/php/messages/count_tokens
 
 # Count tokens in a Message
 
-`$client->messages->countTokens(list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?OutputConfig outputConfig, ?System system, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<MessageCountTokensTool> tools, ?string userProfileID, ?string workspaceID): MessageTokensCount`
+`$client->messages->countTokens(list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?OutputConfig outputConfig, ?Speed speed, ?System system, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<MessageCountTokensTool> tools, ?string userProfileID, ?string workspaceID): MessageTokensCount`
 
 **POST** `/v1/messages/count_tokens`
 
@@ -83,6 +83,12 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 - `outputConfig?:optional OutputConfig`
 
   Configuration options for the model's output, such as the output format.
+
+- `speed?:optional Speed`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../../build-with-claude/fast-mode.md) for which models.
 
 - `system?:optional System`
 
@@ -201,6 +207,7 @@ $messageTokensCount = $client->messages->countTokens(
     'effort' => 'low',
     'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
   ],
+  speed: 'standard',
   system: [
     [
       'text' => 'Today\'s date is 2024-06-01.',

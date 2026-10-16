@@ -1,4 +1,4 @@
-# EnvironmentWorker is not currently available in the Ruby SDK.
+# Self Hosted Sandboxes Reference
 
 ---
 title: Self-hosted worker reference
@@ -102,10 +102,7 @@ new EnvironmentWorker({
 });
 ```
 
-```csharp C#
-// EnvironmentWorker is not currently available in the C# SDK.
-// To answer custom tool calls directly, see the session event stream.
-```
+The C# SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
 
 ```go Go
 worker := environments.NewEnvironmentWorker(client, environments.EnvironmentWorkerOptions{
@@ -117,20 +114,11 @@ worker := environments.NewEnvironmentWorker(client, environments.EnvironmentWork
 })
 ```
 
-```java Java
-// EnvironmentWorker is not currently available in the Java SDK.
-// To answer custom tool calls directly, see the session event stream.
-```
+The Java SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
 
-```php PHP
-// EnvironmentWorker is not currently available in the PHP SDK.
-// To answer custom tool calls directly, see the session event stream.
-```
+The PHP SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
 
-```ruby Ruby
-# EnvironmentWorker is not currently available in the Ruby SDK.
-# To answer custom tool calls directly, see the session event stream.
-```
+The Ruby SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
 
 ### Work poller
 
@@ -171,9 +159,7 @@ await setupSkills(ctx);
 const tools = betaAgentToolset20260401(ctx);
 ```
 
-```csharp C#
-// AgentToolContext is not currently available in the C# SDK.
-```
+The C# SDK does not have `AgentToolContext`.
 
 ```go Go
 env := &agenttoolset.AgentToolContext{Workdir: "/workspace"}
@@ -184,17 +170,11 @@ if err := env.SetupSkills(ctx, client, work.Data.ID); err != nil {
 tools := agenttoolset.BetaAgentToolset20260401(env)
 ```
 
-```java Java
-// AgentToolContext is not currently available in the Java SDK.
-```
+The Java SDK does not have `AgentToolContext`.
 
-```php PHP
-// AgentToolContext is not currently available in the PHP SDK.
-```
+The PHP SDK does not have `AgentToolContext`.
 
-```ruby Ruby
-# AgentToolContext is not currently available in the Ruby SDK.
-```
+The Ruby SDK does not have `AgentToolContext`.
 
 ### AgentToolContext and the agent toolset
 

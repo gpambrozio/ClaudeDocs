@@ -115,7 +115,7 @@ Create User Profile
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
     - `(string & {})`
 
@@ -447,7 +447,7 @@ List User Profiles
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
     - `(string & {})`
 
@@ -753,7 +753,7 @@ Get User Profile
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
     - `(string & {})`
 
@@ -1149,7 +1149,7 @@ Update User Profile
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
     - `(string & {})`
 
@@ -1451,7 +1451,7 @@ Create Enrollment URL
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
     - `(string & {})`
 

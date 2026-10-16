@@ -47,20 +47,18 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "name": "Coding Assistant",
-  "model": "claude-opus-5-5",
-  "tools": [
-    {
-      "type": "agent_toolset_20260401",
-      "configs": [
-        {"name": "web_fetch", "enabled": false}
-      ]
-    }
-  ]
-}
-EOF
+  -d '{
+    "name": "Coding Assistant",
+    "model": "claude-opus-5-5",
+    "tools": [
+      {
+        "type": "agent_toolset_20260401",
+        "configs": [
+          {"name": "web_fetch", "enabled": false}
+        ]
+      }
+    ]
+  }'
 )
 ```
 
@@ -114,7 +112,7 @@ using Anthropic.Models.Beta.Agents;
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Coding Assistant",
-    Model = new("claude-opus-5-5"),
+    Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     Tools =
     [
         new BetaManagedAgentsAgentToolset20260401Params
@@ -133,7 +131,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Coding Assistant",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: "claude-opus-5-5",
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -256,29 +254,27 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "name": "Weather Agent",
-  "model": "claude-opus-5-5",
-  "tools": [
-    {
-      "type": "agent_toolset_20260401"
-    },
-    {
-      "type": "custom",
-      "name": "get_weather",
-      "description": "Get current weather for a location",
-      "input_schema": {
-        "type": "object",
-        "properties": {
-          "location": {"type": "string", "description": "City name"}
-        },
-        "required": ["location"]
+  -d '{
+    "name": "Weather Agent",
+    "model": "claude-opus-5-5",
+    "tools": [
+      {
+        "type": "agent_toolset_20260401"
+      },
+      {
+        "type": "custom",
+        "name": "get_weather",
+        "description": "Get current weather for a location",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "location": {"type": "string", "description": "City name"}
+          },
+          "required": ["location"]
+        }
       }
-    }
-  ]
-}
-EOF
+    ]
+  }'
 )
 ```
 
@@ -357,7 +353,7 @@ using Anthropic.Models.Beta.Agents;
 var agent = await client.Beta.Agents.Create(new()
 {
     Name = "Weather Agent",
-    Model = new("claude-opus-5-5"),
+    Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     Tools =
     [
         new BetaManagedAgentsAgentToolset20260401Params
@@ -388,7 +384,7 @@ var agent = await client.Beta.Agents.Create(new()
 agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Name: "Weather Agent",
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
-		ID: "claude-opus-5-5",
+		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{

@@ -21,7 +21,7 @@ Create Session
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -2704,7 +2704,7 @@ List Sessions
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -4197,7 +4197,7 @@ Get Session
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -5684,7 +5684,7 @@ Update Session
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -7193,7 +7193,7 @@ Delete Session
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -7359,7 +7359,7 @@ Archive Session
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -19136,7 +19136,7 @@ List Events
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -22239,7 +22239,7 @@ Send Events
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -23232,7 +23232,7 @@ Stream Events
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -26372,7 +26372,7 @@ Add Session Resource
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -26578,7 +26578,7 @@ List Session Resources
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -26863,7 +26863,7 @@ Get Session Resource
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -27141,7 +27141,7 @@ Update Session Resource
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -27426,7 +27426,7 @@ Delete Session Resource
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -27622,7 +27622,7 @@ List Session Threads
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -28705,7 +28705,7 @@ Get Session Thread
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -29787,7 +29787,7 @@ Archive Session Thread
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -30877,7 +30877,7 @@ List Session Thread Events
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 
@@ -33994,7 +33994,7 @@ Stream Session Thread Events
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
 

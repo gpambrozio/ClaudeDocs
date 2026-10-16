@@ -110,7 +110,7 @@ How adaptive thinking works and how thinking blocks are preserved.
 
 **Fast mode**
 
-Lower-latency Claude Opus 5.5 on the Claude API (research preview), priced separately.
+Lower-latency Claude Opus 5.5 on the Claude API, priced separately.
 
 ## Reference
 

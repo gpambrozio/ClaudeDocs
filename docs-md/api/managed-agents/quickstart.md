@@ -43,7 +43,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=1.41.0
+VERSION=1.42.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -92,7 +92,7 @@ npm install @anthropic-ai/sdk
 **Java**
 
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java:2.72.0")
+implementation("com.anthropic:anthropic-java:2.73.0")
 ```
 
 **Go**
@@ -140,16 +140,14 @@ agent=$(
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- <<'EOF'
-{
-  "name": "Coding Assistant",
-  "model": "claude-opus-5-5",
-  "system": "You are a helpful coding assistant. Write clean, well-documented code.",
-  "tools": [
-    {"type": "agent_toolset_20260401"}
-  ]
-}
-EOF
+    -d '{
+      "name": "Coding Assistant",
+      "model": "claude-opus-5-5",
+      "system": "You are a helpful coding assistant. Write clean, well-documented code.",
+      "tools": [
+        {"type": "agent_toolset_20260401"}
+      ]
+    }'
 )
 
 AGENT_ID=$(jq -er '.id' <<<"$agent")
@@ -357,15 +355,13 @@ environment=$(
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- <<'EOF'
-{
-  "name": "quickstart-env",
-  "config": {
-    "type": "cloud",
-    "networking": {"type": "limited", "allow_package_managers": true}
-  }
-}
-EOF
+    -d '{
+      "name": "quickstart-env",
+      "config": {
+        "type": "cloud",
+        "networking": {"type": "limited", "allow_package_managers": true}
+      }
+    }'
 )
 
 ENVIRONMENT_ID=$(jq -er '.id' <<<"$environment")
@@ -496,9 +492,13 @@ puts "Environment ID: #{environment.id}"
 
 Save the returned `environment.id` too.
 
-To run the sandbox on your own infrastructure instead of a cloud sandbox, see 
+This quickstart uses a cloud environment. To decide whether to run tools on your own infrastructure with a 
 
-[Self-hosted sandboxes](self-hosted-sandboxes.md)
+[self-hosted sandbox](self-hosted-sandboxes.md)
+
+ instead, see 
+
+[Choosing an agent environment](choosing-an-environment.md)
 
 .
 
@@ -513,13 +513,11 @@ session=$(
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID",
-  "title": "Quickstart session"
-}
-EOF
+    -d '{
+      "agent": "'"$AGENT_ID"'",
+      "environment_id": "'"$ENVIRONMENT_ID"'",
+      "title": "Quickstart session"
+    }'
 )
 
 SESSION_ID=$(jq -er '.id' <<<"$session")
@@ -615,15 +613,9 @@ puts "Session ID: #{session.id}"
 
 Open a stream, send a user event, then process events as they arrive:
 
-```bash cURL
-# This workflow does not translate well to a one-off shell command.
-# Use one of the SDK examples in this code group instead.
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
-```bash CLI
-# This workflow does not translate well to a one-off shell command.
-# Use one of the SDK examples in this code group instead.
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 with client.beta.sessions.events.stream(session.id) as stream:

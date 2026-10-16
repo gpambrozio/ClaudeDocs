@@ -31,7 +31,7 @@ Before you begin, ensure you have:
 
 * An active Azure subscription
 * Access to the [Foundry portal](https://ai.azure.com/)
-* The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed (required for the Entra ID cURL example, optional otherwise)
+* The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed (required for the Entra ID cURL and CLI examples, optional otherwise)
 * An Azure RBAC role that allows you to use the resource, such as **Foundry User** (formerly Azure AI User) or **Cognitive Services User**
 
 ## Install an SDK
@@ -78,8 +78,8 @@ go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:2.72.0")
-implementation("com.anthropic:anthropic-java-foundry:2.72.0")
+implementation("com.anthropic:anthropic-java:2.73.0")
+implementation("com.anthropic:anthropic-java-foundry:2.73.0")
 
 // For Entra ID authentication, also add the Azure Identity library
 implementation("com.azure:azure-identity:1.18.3")
@@ -91,12 +91,12 @@ implementation("com.azure:azure-identity:1.18.3")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.72.0</version>
+    <version>2.73.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-foundry</artifactId>
-    <version>2.72.0</version>
+    <version>2.73.0</version>
 </dependency>
 <!-- For Entra ID authentication, also add the Azure Identity library -->
 <dependency>
@@ -404,11 +404,16 @@ curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
 ```
 
 ```bash CLI
-# The ant CLI can send a bearer token with --auth-token, but a set
-# ANTHROPIC_API_KEY environment variable takes precedence over it (the CLI
-# prints only a console notice), so your request could authenticate with
-# the wrong credential. For the Entra ID flow, use the cURL example or one
-# of the SDK examples instead.
+# Get Microsoft Entra ID token
+ACCESS_TOKEN=$(az account get-access-token --resource https://ai.azure.com --query accessToken -o tsv)
+
+# Make request with token. Replace {resource} with your resource name
+# env -u unsets ANTHROPIC_API_KEY, which the CLI would send instead of the token
+env -u ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN="$ACCESS_TOKEN" ant messages create \
+  --base-url https://{resource}.services.ai.azure.com/anthropic \
+  --model claude-opus-5-5 \
+  --max-tokens 1024 \
+  --message '{role: user, content: "Hello!"}'
 ```
 
 ```python Python

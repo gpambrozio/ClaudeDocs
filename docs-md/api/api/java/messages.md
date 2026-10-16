@@ -1113,6 +1113,16 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `STANDARD_ONLY("standard_only")`
 
+  - `Optional<Speed> speed`
+
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+    Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
+
+    - `STANDARD("standard")`
+
+    - `FAST("fast")`
+
   - `Optional<List<String>> stopSequences`
 
     Custom text sequences that will cause the model to stop generating.
@@ -3840,6 +3850,14 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `BATCH("batch")`
 
+    - `Optional<Speed> speed`
+
+      The inference speed mode used for this request.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
 - `class RawMessageStreamEvent: union`
 
   - `class RawMessageStartEvent`
@@ -4106,7 +4124,8 @@ public final class Main {
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
@@ -5178,6 +5197,16 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
   - `Optional<OutputConfig> outputConfig`
 
     Configuration options for the model's output, such as the output format.
+
+  - `Optional<Speed> speed`
+
+    The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+    Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
+
+    - `STANDARD("standard")`
+
+    - `FAST("fast")`
 
   - `Optional<System> system`
 
@@ -19915,6 +19944,14 @@ public final class Main {
 
       - `BATCH("batch")`
 
+    - `Optional<Speed> speed`
+
+      The inference speed mode used for this request.
+
+      - `STANDARD("standard")`
+
+      - `FAST("fast")`
+
 ### Message Count Tokens Tool
 
 - `class MessageCountTokensTool: union`
@@ -24897,6 +24934,14 @@ public final class Main {
 
         - `BATCH("batch")`
 
+      - `Optional<Speed> speed`
+
+        The inference speed mode used for this request.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
 ### Raw Message Stop Event
 
 - `class RawMessageStopEvent`
@@ -25917,6 +25962,14 @@ public final class Main {
           - `PRIORITY("priority")`
 
           - `BATCH("batch")`
+
+        - `Optional<Speed> speed`
+
+          The inference speed mode used for this request.
+
+          - `STANDARD("standard")`
+
+          - `FAST("fast")`
 
   - `class RawMessageDeltaEvent`
 
@@ -32160,6 +32213,14 @@ public final class Main {
 
     - `BATCH("batch")`
 
+  - `Optional<Speed> speed`
+
+    The inference speed mode used for this request.
+
+    - `STANDARD("standard")`
+
+    - `FAST("fast")`
+
 ### User Location
 
 - `class UserLocation`
@@ -35761,6 +35822,16 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
         - `AUTO("auto")`
 
         - `STANDARD_ONLY("standard_only")`
+
+      - `Optional<Speed> speed`
+
+        The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+        Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
 
       - `Optional<List<String>> stopSequences`
 
@@ -39370,6 +39441,14 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
             - `PRIORITY("priority")`
 
             - `BATCH("batch")`
+
+          - `Optional<Speed> speed`
+
+            The inference speed mode used for this request.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
 
     - `class MessageBatchErroredResult`
 

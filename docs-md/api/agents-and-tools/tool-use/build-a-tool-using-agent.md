@@ -4005,26 +4005,9 @@ Rings 2 through 4 wrote the same loop by hand: call the API, check `stop_reason`
 
 Each SDK provides a helper that turns an ordinary function into a runnable tool and derives the input schema from its signature; the tabs below show the idiomatic form for each language.
 
-```bash cURL
-#!/bin/bash
-# Ring 5: The Tool Runner SDK abstraction.
+The Tool Runner is a helper in the Claude SDK. Raw HTTP requests have no equivalent. To keep using curl, use the loop from [Ring 4](build-a-tool-using-agent.md#ring-4-error-handling).
 
-# The Tool Runner SDK abstraction is available in all seven SDKs: Python,
-# TypeScript, C#, Go, Java, PHP, and Ruby. There is no equivalent for raw
-# curl requests. Switch to any SDK tab to see Ring 5, or keep the Ring 4
-# loop as your shell implementation.
-```
-
-```bash CLI
-#!/usr/bin/env bash
-# Ring 5: The Tool Runner SDK abstraction.
-set -euo pipefail
-
-# The Tool Runner SDK abstraction is available in all seven SDKs: Python,
-# TypeScript, C#, Go, Java, PHP, and Ruby. The ant CLI exposes the Messages
-# API directly and has no equivalent helper. Switch to any SDK tab to see
-# Ring 5, or keep the Ring 4 loop as your CLI implementation.
-```
+The Tool Runner is a helper in the Claude SDK. The `ant` CLI has no equivalent. To keep using the CLI, use the loop from [Ring 4](build-a-tool-using-agent.md#ring-4-error-handling).
 
 ```python Python
 # Ring 5: The Tool Runner SDK abstraction.

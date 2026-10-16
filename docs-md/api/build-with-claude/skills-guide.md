@@ -163,7 +163,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-5-5",
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -189,7 +189,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -474,7 +474,7 @@ AnthropicClient client = new();
 // Step 1: Use a Skill to create a file
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-5-5",
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -526,7 +526,7 @@ func main() {
 
 	// Step 1: Use a Skill to create a file
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     "claude-opus-5-5",
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 4096,
 		Container: anthropic.MessageCreateParamsContainerUnion{
 			OfContainers: &anthropic.ContainerParams{
@@ -920,12 +920,7 @@ For complete details, see [Files API](files.md).
 
 The response's `container` object carries the container's `id` and `expires_at` timestamp (see [Container reuse](../agents-and-tools/tool-use/code-execution-tool.md#container-reuse) for lifetime details). Reuse the same container across multiple messages by specifying the container ID:
 
-```bash cURL
-# Multi-turn container reuse doesn't translate well to a one-off shell
-# command; one of the SDK options would be a better fit. Capture
-# container.id from the first response, then pass it in the next request as
-# "container": {"id": "...", "skills": [...]} with the conversation history.
-```
+Multi-turn container reuse needs more logic than a single shell command, so use the Claude SDK for it. To build the requests yourself, capture `container.id` from the first response. Then pass it in the next request as `"container": {"id": "...", "skills": [...]}`, together with the conversation history.
 
 ```bash CLI
 # First request creates container
@@ -1052,7 +1047,7 @@ AnthropicClient client = new();
 // First request with a Skill
 var parameters1 = new MessageCreateParams
 {
-    Model = "claude-opus-5-5",
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -1081,7 +1076,7 @@ var assistantText = string.Join(
 
 var parameters2 = new MessageCreateParams
 {
-    Model = "claude-opus-5-5",
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -1113,7 +1108,7 @@ Console.WriteLine(response2);
 client := anthropic.NewClient()
 
 response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -1147,7 +1142,7 @@ for _, block := range response1.Content {
 assistantText := strings.Join(textParts, "\n")
 
 response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -1531,7 +1526,7 @@ for (var i = 0; i < maxRetries; i++)
 {
     var parameters = new MessageCreateParams
     {
-        Model = "claude-opus-5-5",
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 4096,
         Container = containerId is null
             ? new ContainerParams
@@ -1588,7 +1583,7 @@ messages := []anthropic.MessageParam{
 maxRetries := 10
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -1618,7 +1613,7 @@ for i := 0; i < maxRetries; i++ {
 	messages = append(messages, response.ToParam())
 
 	response, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:     "claude-opus-5-5",
+		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 4096,
 		Container: anthropic.MessageCreateParamsContainerUnion{
 			OfContainers: &anthropic.ContainerParams{
@@ -1940,7 +1935,7 @@ AnthropicClient client = new();
 
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-5-5",
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -1978,7 +1973,7 @@ Console.WriteLine(message);
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -2967,7 +2962,7 @@ var newVersion = await client.Skills.Versions.Create("skill_01AbCdEfGhIjKlMnOpQr
 // Use specific version
 var specificVersionParams = new MessageCreateParams
 {
-    Model = "claude-opus-5-5",
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -2991,7 +2986,7 @@ Console.WriteLine(response);
 // Use latest version
 var latestVersionParams = new MessageCreateParams
 {
-    Model = "claude-opus-5-5",
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -3044,7 +3039,7 @@ if err != nil {
 
 // Use specific version
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -3071,7 +3066,7 @@ fmt.Println(response)
 
 // Use latest version
 latestResponse, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -3541,7 +3536,7 @@ var dcfSkillId = "skill_01AbCdEfGhIjKlMnOpQrStUv";
 // Use with Excel to create financial model
 var parameters = new MessageCreateParams
 {
-    Model = "claude-opus-5-5",
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -3577,7 +3572,7 @@ dcfSkillID := "skill_01AbCdEfGhIjKlMnOpQrStUv"
 
 // Use with Excel to create financial model
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -4169,7 +4164,7 @@ AnthropicClient client = new();
 // Skills render into the system prompt in a fixed, cache-friendly order
 var parameters1 = new MessageCreateParams
 {
-    Model = "claude-opus-5-5",
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -4193,7 +4188,7 @@ Console.WriteLine(response1);
 // Different Skill set ([xlsx] vs [xlsx, pptx]) = a different prefix: a cache miss (an identical set is a cache hit)
 var parameters2 = new MessageCreateParams
 {
-    Model = "claude-opus-5-5",
+    Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Container = new ContainerParams
     {
@@ -4226,7 +4221,7 @@ client := anthropic.NewClient()
 
 // Skills render into the system prompt in a fixed, cache-friendly order
 response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -4253,7 +4248,7 @@ fmt.Println(response1)
 
 // Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
 response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{
@@ -4417,12 +4412,7 @@ For best caching performance, keep your Skills list, including its order, consis
 
 Handle Skill-related errors gracefully:
 
-```bash cURL
-# This error-handling flow doesn't translate well to a one-off shell
-# command; one of the SDK options would be a better fit. A failing request
-# returns HTTP 400 with an error JSON whose .error.message names the
-# Skill problem.
-```
+This error-handling flow needs more logic than a single shell command, so use the Claude SDK for it. A request that fails because of a Skill problem returns HTTP 400. The `error.message` field in the JSON response body describes the problem.
 
 ```bash CLI
 if ! RESULT=$(ant messages create \
@@ -4518,7 +4508,7 @@ try
 {
     var parameters = new MessageCreateParams
     {
-        Model = "claude-opus-5-5",
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 4096,
         Container = new ContainerParams
         {
@@ -4549,7 +4539,7 @@ catch (AnthropicBadRequestException e) when (e.Message.Contains("skill"))
 client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-	Model:     "claude-opus-5-5",
+	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
 	Container: anthropic.MessageCreateParamsContainerUnion{
 		OfContainers: &anthropic.ContainerParams{

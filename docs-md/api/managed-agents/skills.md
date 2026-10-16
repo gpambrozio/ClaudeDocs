@@ -215,17 +215,15 @@ agent=$(curl -sS https://api.anthropic.com/v1/agents \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
-  --json @- <<'EOF'
-{
-  "name": "Financial Analyst",
-  "model": "claude-opus-5-5",
-  "system": "You are a financial analysis agent.",
-  "skills": [
-    {"type": "anthropic", "skill_id": "xlsx"},
-    {"type": "custom", "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv", "version": "latest"}
-  ]
-}
-EOF
+  --json '{
+    "name": "Financial Analyst",
+    "model": "claude-opus-5-5",
+    "system": "You are a financial analysis agent.",
+    "skills": [
+      {"type": "anthropic", "skill_id": "xlsx"},
+      {"type": "custom", "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv", "version": "latest"}
+    ]
+  }'
 )
 ```
 

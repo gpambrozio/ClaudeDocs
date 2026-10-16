@@ -24,12 +24,10 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID"
-}
-EOF
+  -d '{
+    "agent": "'"$AGENT_ID"'",
+    "environment_id": "'"$ENVIRONMENT_ID"'"
+  }'
 ```
 
 ```bash CLI
@@ -101,12 +99,10 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": {"type": "agent", "id": "$AGENT_ID", "version": 1},
-  "environment_id": "$ENVIRONMENT_ID"
-}
-EOF
+  -d '{
+    "agent": {"type": "agent", "id": "'"$AGENT_ID"'", "version": 1},
+    "environment_id": "'"$ENVIRONMENT_ID"'"
+  }'
 ```
 
 ```bash CLI
@@ -199,18 +195,16 @@ seeded_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID",
-  "initial_events": [
-    {
-      "type": "user.message",
-      "content": [{"type": "text", "text": "List the files in the working directory."}]
-    }
-  ]
-}
-EOF
+  -d '{
+    "agent": "'"$AGENT_ID"'",
+    "environment_id": "'"$ENVIRONMENT_ID"'",
+    "initial_events": [
+      {
+        "type": "user.message",
+        "content": [{"type": "text", "text": "List the files in the working directory."}]
+      }
+    ]
+  }'
 )
 SEEDED_SESSION_ID=$(jq -r '.id' <<< "$seeded_session")
 
@@ -480,17 +474,15 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": {
-    "type": "agent_with_overrides",
-    "id": "$AGENT_ID",
-    "model": {"id": "claude-sonnet-5-5"},
-    "system": null
-  },
-  "environment_id": "$ENVIRONMENT_ID"
-}
-EOF
+  -d '{
+    "agent": {
+      "type": "agent_with_overrides",
+      "id": "'"$AGENT_ID"'",
+      "model": {"id": "claude-sonnet-5-5"},
+      "system": null
+    },
+    "environment_id": "'"$ENVIRONMENT_ID"'"
+  }'
 ```
 
 ```bash CLI
@@ -646,16 +638,14 @@ session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": {
-    "type": "agent_with_overrides",
-    "id": "$AGENT_ID",
-    "model": {"id": "claude-opus-5-5", "inference_geo": "us"}
-  },
-  "environment_id": "$ENVIRONMENT_ID"
-}
-EOF
+  -d '{
+    "agent": {
+      "type": "agent_with_overrides",
+      "id": "'"$AGENT_ID"'",
+      "model": {"id": "claude-opus-5-5", "inference_geo": "us"}
+    },
+    "environment_id": "'"$ENVIRONMENT_ID"'"
+  }'
 )
 echo "Inference geo: $(jq -r '.agent.model.inference_geo' <<< "$session")"
 ```
@@ -800,16 +790,14 @@ curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID",
-  "budget": {
-    "type": "limit",
-    "max_list_cost": {"amount": "125", "currency": "USD"}
-  }
-}
-EOF
+  -d '{
+    "agent": "'"$AGENT_ID"'",
+    "environment_id": "'"$ENVIRONMENT_ID"'",
+    "budget": {
+      "type": "limit",
+      "max_list_cost": {"amount": "125", "currency": "USD"}
+    }
+  }'
 ```
 
 ```bash CLI
@@ -929,13 +917,11 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID",
-  "vault_ids": ["$VAULT_ID"]
-}
-EOF
+  -d '{
+    "agent": "'"$AGENT_ID"'",
+    "environment_id": "'"$ENVIRONMENT_ID"'",
+    "vault_ids": ["'"$VAULT_ID"'"]
+  }'
 ```
 
 ```bash CLI
@@ -1019,16 +1005,14 @@ curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "events": [
-    {
-      "type": "user.message",
-      "content": [{"type": "text", "text": "List the files in the working directory."}]
-    }
-  ]
-}
-EOF
+  -d '{
+    "events": [
+      {
+        "type": "user.message",
+        "content": [{"type": "text", "text": "List the files in the working directory."}]
+      }
+    ]
+  }'
 ```
 
 ```bash CLI

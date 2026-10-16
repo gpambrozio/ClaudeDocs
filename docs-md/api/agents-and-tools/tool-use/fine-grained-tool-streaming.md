@@ -1,4 +1,4 @@
-# Accumulating per-block input deltas needs a programming language; the first
+# Fine Grained Tool Streaming
 
 ---
 title: Fine-grained tool streaming
@@ -492,15 +492,9 @@ Guard the parse, as the following SDK examples do. A response can also stop at `
 
 The type mismatch between the initial `input: {}` (object) and `partial_json` (string) is by design. The empty object marks the slot in the content array. The delta strings build the real value.
 
-```bash cURL
-# Accumulating per-block input deltas needs a programming language; the first
-# example's CLI tab shows the raw fragments with jq. See the SDK tabs.
-```
+Accumulating the input fragments of each `tool_use` block needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this. To see the raw fragments as they stream, run the request in [How to use fine-grained tool streaming](fine-grained-tool-streaming.md#how-to-use-fine-grained-tool-streaming).
 
-```bash CLI
-# Accumulating per-block input deltas needs a programming language; the first
-# example's CLI tab shows the raw fragments with jq. See the SDK tabs.
-```
+Accumulating the input fragments of each `tool_use` block needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this. To see the raw fragments as they stream, run the request in [How to use fine-grained tool streaming](fine-grained-tool-streaming.md#how-to-use-fine-grained-tool-streaming).
 
 ```python Python
 client = anthropic.Anthropic()

@@ -28,12 +28,10 @@ curl --fail-with-body -sS https://api.anthropic.com/v1/vaults \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<'EOF'
-{
-  "display_name": "Alice",
-  "metadata": {"external_user_id": "usr_abc123"}
-}
-EOF
+  --data '{
+    "display_name": "Alice",
+    "metadata": {"external_user_id": "usr_abc123"}
+  }'
 ```
 
 ```bash CLI
@@ -133,6 +131,8 @@ Two credential categories are supported:
 The actual credential values you supply (`token` (csharp, go: `Token`), `access_token` (java, php: `accessToken`; csharp, go: `AccessToken`), `refresh_token` (java, php: `refreshToken`; csharp, go: `RefreshToken`), `client_secret` (java, php: `clientSecret`; csharp, go: `ClientSecret`), `secret_value` (java, php: `secretValue`; csharp, go: `SecretValue`)) are treated as sensitive, write-only fields and never returned in API responses.
 
 Environment variable credentials (`environment_variable`) are not yet supported with [self-hosted sandboxes](self-hosted-sandboxes.md).
+
+To get the same behavior with a self-hosted sandbox, you can run your own proxy that replaces placeholder values with the real secrets at egress.
 
 **MCP OAuth**
 
@@ -722,14 +722,12 @@ curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID",
-  "vault_ids": ["$VAULT_ID"],
-  "title": "Alice's Slack digest"
-}
-EOF
+  --data '{
+    "agent": "'"$AGENT_ID"'",
+    "environment_id": "'"$ENVIRONMENT_ID"'",
+    "vault_ids": ["'"$VAULT_ID"'"],
+    "title": "Slack digest for Alice"
+  }'
 ```
 
 ```bash CLI

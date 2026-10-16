@@ -150,12 +150,7 @@ public class QuickStart {
 }
 ```
 
-```php PHP
-<?php
-// There is no official OpenAI PHP SDK, so no example is shown here.
-// To use Claude from PHP, use the native Claude API instead:
-// https://platform.claude.com/docs/en/cli-sdks-libraries/overview
-```
+OpenAI has no official PHP SDK. To use Claude from PHP, use the [Claude SDK for PHP](../sdks/php.md) instead.
 
 ```ruby Ruby
 require "openai"
@@ -258,12 +253,7 @@ ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
 ChatCompletion completion = client.chat().completions().create(params);
 ```
 
-```php PHP
-<?php
-// There is no official OpenAI PHP SDK, so no example is shown here.
-// To use Claude from PHP, use the native Claude API instead:
-// https://platform.claude.com/docs/en/cli-sdks-libraries/overview
-```
+OpenAI has no official PHP SDK. To use Claude from PHP, use the [Claude SDK for PHP](../sdks/php.md) instead.
 
 ```ruby Ruby
 response = openai.chat.completions.create(

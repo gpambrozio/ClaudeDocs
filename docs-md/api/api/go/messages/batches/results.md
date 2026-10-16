@@ -1164,6 +1164,14 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `const UsageServiceTierBatch UsageServiceTier = "batch"`
 
+          - `Speed UsageSpeed`
+
+            The inference speed mode used for this request.
+
+            - `const UsageSpeedStandard UsageSpeed = "standard"`
+
+            - `const UsageSpeedFast UsageSpeed = "fast"`
+
     - `type MessageBatchErroredResult`
 
       - `Type Errored`

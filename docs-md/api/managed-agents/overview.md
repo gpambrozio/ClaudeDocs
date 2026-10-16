@@ -54,7 +54,7 @@ Define the model, system prompt, tools, MCP servers, and skills. Create the agen
 
 **Create an environment**
 
-Configure where the agent runs: a cloud sandbox, or a [self-hosted sandbox](self-hosted-sandboxes.md) on your own infrastructure.
+[Configure where the agent runs](choosing-an-environment.md): a cloud sandbox, or a [self-hosted sandbox](self-hosted-sandboxes.md) on your own infrastructure.
 
 **Start a session**
 

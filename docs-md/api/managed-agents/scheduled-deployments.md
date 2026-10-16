@@ -36,21 +36,19 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "name": "Weekly compliance scan",
-  "agent": "$AGENT_ID",
-  "environment_id": "$ENVIRONMENT_ID",
-  "initial_events": [
-    {"type": "user.message", "content": [{"type": "text", "text": "Run the weekly compliance scan."}]}
-  ],
-  "schedule": {
-    "type": "cron",
-    "expression": "0 20 * * 5",
-    "timezone": "America/New_York"
-  }
-}
-EOF
+  -d '{
+    "name": "Weekly compliance scan",
+    "agent": "'"$AGENT_ID"'",
+    "environment_id": "'"$ENVIRONMENT_ID"'",
+    "initial_events": [
+      {"type": "user.message", "content": [{"type": "text", "text": "Run the weekly compliance scan."}]}
+    ],
+    "schedule": {
+      "type": "cron",
+      "expression": "0 20 * * 5",
+      "timezone": "America/New_York"
+    }
+  }'
 ```
 
 ```bash CLI
@@ -278,14 +276,12 @@ curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<'EOF'
-{
-  "budget": {
-    "type": "limit",
-    "max_list_cost": {"amount": "2000", "currency": "USD"}
-  }
-}
-EOF
+  -d '{
+    "budget": {
+      "type": "limit",
+      "max_list_cost": {"amount": "2000", "currency": "USD"}
+    }
+  }'
 ```
 
 ```bash CLI

@@ -46,20 +46,20 @@ go get github.com/anthropics/anthropic-sdk-go
 **Java**
 
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java:2.72.0")
-implementation("com.anthropic:anthropic-java-vertex:2.72.0")
+implementation("com.anthropic:anthropic-java:2.73.0")
+implementation("com.anthropic:anthropic-java-vertex:2.73.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.72.0</version>
+    <version>2.73.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-vertex</artifactId>
-    <version>2.72.0</version>
+    <version>2.73.0</version>
 </dependency>
 ```
 
@@ -165,9 +165,7 @@ curl https://aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/globa
   }'
 ```
 
-```bash CLI
-# The ant CLI does not support Agent Platform.
-```
+The `ant` CLI doesn't support Agent Platform.
 
 ```python Python
 from anthropic import AnthropicVertex
@@ -435,9 +433,7 @@ curl https://aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/globa
   }'
 ```
 
-```bash CLI
-# The ant CLI does not support Agent Platform.
-```
+The `ant` CLI doesn't support Agent Platform.
 
 ```python Python
 from anthropic import AnthropicVertex
@@ -622,9 +618,7 @@ curl https://aiplatform.${LOCATION}.rep.googleapis.com/v1/projects/${PROJECT_ID}
   }'
 ```
 
-```bash CLI
-# The ant CLI does not support Agent Platform.
-```
+The `ant` CLI doesn't support Agent Platform.
 
 ```python Python
 from anthropic import AnthropicVertex
@@ -810,9 +804,7 @@ curl https://${LOCATION}-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/loc
   }'
 ```
 
-```bash CLI
-# The ant CLI does not support Agent Platform.
-```
+The `ant` CLI doesn't support Agent Platform.
 
 ```python Python
 from anthropic import AnthropicVertex

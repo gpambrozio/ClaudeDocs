@@ -1291,6 +1291,16 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `STANDARD_ONLY("standard_only")`
 
+      - `Optional<Speed> speed`
+
+        The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+        Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../../build-with-claude/fast-mode.md) for which models.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
+
       - `Optional<List<String>> stopSequences`
 
         Custom text sequences that will cause the model to stop generating.
@@ -4900,6 +4910,14 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `BATCH("batch")`
 
+          - `Optional<Speed> speed`
+
+            The inference speed mode used for this request.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
+
     - `class MessageBatchErroredResult`
 
       - `JsonValue type = "errored"`
@@ -6219,6 +6237,14 @@ public final class Main {
 
             - `BATCH("batch")`
 
+          - `Optional<Speed> speed`
+
+            The inference speed mode used for this request.
+
+            - `STANDARD("standard")`
+
+            - `FAST("fast")`
+
     - `class MessageBatchErroredResult`
 
       - `JsonValue type = "errored"`
@@ -7344,6 +7370,14 @@ public final class Main {
 
           - `BATCH("batch")`
 
+        - `Optional<Speed> speed`
+
+          The inference speed mode used for this request.
+
+          - `STANDARD("standard")`
+
+          - `FAST("fast")`
+
   - `class MessageBatchErroredResult`
 
     - `JsonValue type = "errored"`
@@ -8430,6 +8464,14 @@ public final class Main {
         - `PRIORITY("priority")`
 
         - `BATCH("batch")`
+
+      - `Optional<Speed> speed`
+
+        The inference speed mode used for this request.
+
+        - `STANDARD("standard")`
+
+        - `FAST("fast")`
 
 ---
 

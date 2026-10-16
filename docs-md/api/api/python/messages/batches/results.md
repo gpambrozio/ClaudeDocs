@@ -1164,6 +1164,14 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `"batch"`
 
+          - `speed: Optional[Literal["standard", "fast"]]`
+
+            The inference speed mode used for this request.
+
+            - `"standard"`
+
+            - `"fast"`
+
     - `class MessageBatchErroredResult`
 
       - `type: Literal["errored"]`

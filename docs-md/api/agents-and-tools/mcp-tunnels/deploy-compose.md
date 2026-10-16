@@ -282,7 +282,7 @@ On the tunnel detail page, scroll to the **Certificates** section and click **Ad
 cat data/ca.crt
 ```
 
-The tunnel's status flips to **Active** once a certificate is registered. See [Add a CA certificate](console.md#add-a-ca-certificate).
+The **Needs certificate** badge next to the tunnel's name goes away once a certificate is registered. See [Add a CA certificate](console.md#add-a-ca-certificate).
 
 **Write the proxy config**
 

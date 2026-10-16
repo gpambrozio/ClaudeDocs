@@ -1259,6 +1259,16 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
   - `:standard_only`
 
+- `speed: :standard | :fast`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../../build-with-claude/fast-mode.md) for which models.
+
+  - `:standard`
+
+  - `:fast`
+
 - `stop_sequences: Array[String]`
 
   Custom text sequences that will cause the model to stop generating.
@@ -4092,6 +4102,14 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `:batch`
 
+    - `speed: :standard | :fast`
+
+      The inference speed mode used for this request.
+
+      - `:standard`
+
+      - `:fast`
+
 - `type RawMessageStreamEvent = RawMessageStartEvent | RawMessageDeltaEvent | RawMessageStopEvent | 3 more`
 
   - `class RawMessageStartEvent`
@@ -4347,7 +4365,8 @@ puts(message)
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```

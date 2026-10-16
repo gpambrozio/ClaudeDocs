@@ -103,7 +103,7 @@ openssl x509 -req -in data/server.csr `
   -out data/tls.crt -days 90 -extfile data/tls.ext
 ```
 
-Back in the Console, on the tunnel detail page, click **Add certificate** and upload `data/ca.crt` (or paste its contents). The tunnel status flips to **Active**.
+Back in the Console, on the tunnel detail page, click **Add certificate** and upload `data/ca.crt` (or paste its contents). The **Needs certificate** badge next to the tunnel's name goes away.
 
 **Write the sample MCP server**
 

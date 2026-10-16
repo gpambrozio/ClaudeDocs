@@ -421,7 +421,7 @@ Create Deployment
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `(string & {})`
 
@@ -1197,7 +1197,7 @@ List Deployments
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `(string & {})`
 
@@ -1934,7 +1934,7 @@ Get Deployment
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `(string & {})`
 
@@ -3067,7 +3067,7 @@ Update Deployment
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `(string & {})`
 
@@ -3800,7 +3800,7 @@ Archive Deployment
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `(string & {})`
 
@@ -4533,7 +4533,7 @@ Run Deployment Now
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `(string & {})`
 
@@ -4928,7 +4928,7 @@ Pause Deployment
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `(string & {})`
 
@@ -5661,7 +5661,7 @@ Unpause Deployment
 
   - `betas?: Array<AnthropicBeta>` (header parameter)
 
-    Optional header to specify the beta version(s) you want to use.
+    This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
     - `(string & {})`
 

@@ -148,7 +148,7 @@ client = anthropic.Anthropic()
 def get_completion(prompt: str):
     message = client.messages.create(
         model="claude-opus-5-5",
-        max_tokens=50,
+        max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )
     return next(block.text for block in message.content if block.type == "text")
@@ -158,7 +158,7 @@ def evaluate_exact_match(model_output, correct_answer):
 
 outputs = [
     get_completion(
-        f"Classify this as 'positive', 'negative', 'neutral', or 'mixed': {tweet['text']}"
+        f"Classify this as 'positive', 'negative', 'neutral', or 'mixed'. Output only the label: {tweet['text']}"
     )
     for tweet in tweets
 ]
@@ -189,7 +189,7 @@ const client = new Anthropic();
 async function getCompletion(prompt: string): Promise<string> {
   const message = await client.messages.create({
     model: "claude-opus-5-5",
-    max_tokens: 50,
+    max_tokens: 1024,
     messages: [{ role: "user", content: prompt }]
   });
   const textBlock = message.content.find((block) => block.type === "text");
@@ -203,7 +203,7 @@ function evaluateExactMatch(modelOutput: string, correctAnswer: string): boolean
 let correctCount = 0;
 for (const tweet of tweets) {
   const output = await getCompletion(
-    `Classify this as 'positive', 'negative', 'neutral', or 'mixed': ${tweet.text}`
+    `Classify this as 'positive', 'negative', 'neutral', or 'mixed'. Output only the label: ${tweet.text}`
   );
   if (evaluateExactMatch(output, tweet.sentiment)) {
     correctCount++;
@@ -231,7 +231,7 @@ async Task<string> GetCompletion(string prompt)
     var message = await client.Messages.Create(new MessageCreateParams
     {
         Model = Model.ClaudeOpus5_5,
-        MaxTokens = 50,
+        MaxTokens = 1024,
         Messages = [new() { Role = Role.User, Content = prompt }],
     });
     return ContentText(message);
@@ -259,7 +259,7 @@ var correct = 0;
 foreach (var tweet in tweets)
 {
     var output = await GetCompletion(
-        $"Classify this as 'positive', 'negative', 'neutral', or 'mixed': {tweet.Text}");
+        $"Classify this as 'positive', 'negative', 'neutral', or 'mixed'. Output only the label: {tweet.Text}");
     if (EvaluateExactMatch(output, tweet.Sentiment))
     {
         correct++;
@@ -301,7 +301,7 @@ var tweets = []tweet{
 func getCompletion(prompt string) string {
 	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeOpus5_5,
-		MaxTokens: 50,
+		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
 		},
@@ -319,7 +319,7 @@ func evaluateExactMatch(modelOutput, correctAnswer string) bool {
 func main() {
 	correct := 0
 	for _, item := range tweets {
-		output := getCompletion("Classify this as 'positive', 'negative', 'neutral', or 'mixed': " + item.Text)
+		output := getCompletion("Classify this as 'positive', 'negative', 'neutral', or 'mixed'. Output only the label: " + item.Text)
 		if evaluateExactMatch(output, item.Sentiment) {
 			correct++
 		}
@@ -354,7 +354,7 @@ String contentText(Message message) {
 String getCompletion(String prompt) {
     var params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
-        .maxTokens(50L)
+        .maxTokens(1024L)
         .addUserMessage(prompt)
         .build();
     return contentText(client.messages().create(params));
@@ -368,7 +368,7 @@ void main() {
     int correct = 0;
     for (var tweet : tweets) {
         var output = getCompletion(
-            "Classify this as 'positive', 'negative', 'neutral', or 'mixed': " + tweet.text());
+            "Classify this as 'positive', 'negative', 'neutral', or 'mixed'. Output only the label: " + tweet.text());
         if (evaluateExactMatch(output, tweet.sentiment())) {
             correct++;
         }
@@ -394,7 +394,7 @@ function getCompletion(Client $client, string $prompt): string
 {
     $message = $client->messages->create(
         model: Model::CLAUDE_OPUS_5_5,
-        maxTokens: 50,
+        maxTokens: 1024,
         messages: [
             [
                 'role' => 'user',
@@ -425,7 +425,7 @@ $correct = 0;
 foreach ($tweets as $tweet) {
     $output = getCompletion(
         $client,
-        "Classify this as 'positive', 'negative', 'neutral', or 'mixed': {$tweet['text']}",
+        "Classify this as 'positive', 'negative', 'neutral', or 'mixed'. Output only the label: {$tweet['text']}",
     );
     if (evaluateExactMatch($output, $tweet['sentiment'])) {
         $correct++;
@@ -454,7 +454,7 @@ end
 def get_completion(client, prompt)
   message = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
-    max_tokens: 50,
+    max_tokens: 1024,
     messages: [
       {
         role: "user",
@@ -472,7 +472,7 @@ end
 correct = tweets.count do |tweet|
   output = get_completion(
     client,
-    "Classify this as 'positive', 'negative', 'neutral', or 'mixed': #{tweet[:text]}"
+    "Classify this as 'positive', 'negative', 'neutral', or 'mixed'. Output only the label: #{tweet[:text]}"
   )
   evaluate_exact_match(output, tweet[:sentiment])
 end
@@ -608,23 +608,416 @@ for (const faq of faqVariations) {
 ```
 
 ```csharp C#
-// Sentence-embedding models are not available as a native C# library. See the Python or TypeScript tab for this eval recipe.
+using System.Numerics.Tensors;
+// ...
+using Microsoft.Extensions.AI;
+using Microsoft.SemanticKernel;
+
+Faq[] faqVariations =
+[
+    new(
+        [
+            "What's your return policy?",
+            "How can I return an item?",
+            "Wut's yur retrn polcy?",
+        ],
+        "Our return policy allows..."), // Edge case: Typos
+    new(
+        [
+            "I bought something last week, and it's not really what I expected, so I was wondering if maybe I could possibly return it?",
+            "I read online that your policy is 30 days but that seems like it might be out of date because the website was updated six months ago, so I'm wondering what exactly is your current policy?",
+        ],
+        "Our return policy allows..."), // Edge case: Long, rambling question
+    new(
+        [
+            "I'm Jane's cousin, and she said you guys have great customer service. Can I return this?",
+            "Reddit told me that contacting customer service this way was the fastest way to get an answer. I hope they're right! What is the return window for a jacket?",
+        ],
+        "Our return policy allows..."), // Edge case: Irrelevant info
+    // ... 47 more FAQs
+];
+
+var client = new AnthropicClient();
+
+// Download onnx/model.onnx and vocab.txt from https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
+#pragma warning disable SKEXP0070
+var kernel = Kernel.CreateBuilder()
+    .AddBertOnnxEmbeddingGenerator("model.onnx", "vocab.txt")
+    .Build();
+#pragma warning restore SKEXP0070
+var embeddingGenerator = kernel.GetRequiredService<IEmbeddingGenerator<string, Embedding<float>>>();
+
+async Task<string> GetCompletion(string prompt)
+{
+    var message = await client.Messages.Create(new MessageCreateParams
+    {
+        Model = Model.ClaudeOpus5_5,
+        MaxTokens = 2048,
+        Messages = [new() { Role = Role.User, Content = prompt }],
+    });
+    foreach (var block in message.Content)
+    {
+        if (block.TryPickText(out var textBlock))
+        {
+            return textBlock.Text;
+        }
+    }
+    return "";
+}
+
+async Task<double> EvaluateCosineSimilarity(List<string> outputs)
+{
+    var embeddings = await embeddingGenerator.GenerateAsync(outputs);
+
+    double total = 0;
+    foreach (var embeddingA in embeddings)
+    {
+        foreach (var embeddingB in embeddings)
+        {
+            total += TensorPrimitives.CosineSimilarity(embeddingA.Vector.Span, embeddingB.Vector.Span);
+        }
+    }
+    return total / (embeddings.Count * embeddings.Count);
+}
+
+foreach (var faq in faqVariations)
+{
+    var outputs = new List<string>();
+    foreach (var question in faq.Questions)
+    {
+        outputs.Add(await GetCompletion(question));
+    }
+    var similarityScore = await EvaluateCosineSimilarity(outputs);
+    Console.WriteLine($"FAQ Consistency Score: {similarityScore * 100}%");
+}
+
+record Faq(string[] Questions, string Answer);
 ```
 
 ```go Go
-// Sentence-embedding models are not available as a native Go library. See the Python or TypeScript tab for this eval recipe.
+import (
+	"context"
+	"fmt"
+	"log"
+	"math"
+
+// ...
+	"github.com/knights-analytics/hugot"
+	"github.com/knights-analytics/hugot/pipelines"
+)
+
+var client = anthropic.NewClient()
+
+type faq struct {
+	Questions []string
+	Answer    string
+}
+
+var faqVariations = []faq{
+	{
+		[]string{
+			"What's your return policy?",
+			"How can I return an item?",
+			"Wut's yur retrn polcy?",
+		},
+		"Our return policy allows...",
+	}, // Edge case: Typos
+	{
+		[]string{
+			"I bought something last week, and it's not really what I expected, so I was wondering if maybe I could possibly return it?",
+			"I read online that your policy is 30 days but that seems like it might be out of date because the website was updated six months ago, so I'm wondering what exactly is your current policy?",
+		},
+		"Our return policy allows...",
+	}, // Edge case: Long, rambling question
+	{
+		[]string{
+			"I'm Jane's cousin, and she said you guys have great customer service. Can I return this?",
+			"Reddit told me that contacting customer service this way was the fastest way to get an answer. I hope they're right! What is the return window for a jacket?",
+		},
+		"Our return policy allows...",
+	}, // Edge case: Irrelevant info
+	// ... 47 more FAQs
+}
+
+func getCompletion(prompt string) string {
+	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+		Model:     anthropic.ModelClaudeOpus5_5,
+		MaxTokens: 2048,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock(prompt)),
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, block := range message.Content {
+		if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+			return textBlock.Text
+		}
+	}
+	return ""
+}
+
+func cosineSimilarity(embeddingA, embeddingB []float32) float64 {
+	var dot, normA, normB float64
+	for i := range embeddingA {
+		dot += float64(embeddingA[i] * embeddingB[i])
+		normA += float64(embeddingA[i] * embeddingA[i])
+		normB += float64(embeddingB[i] * embeddingB[i])
+	}
+	return dot / (math.Sqrt(normA) * math.Sqrt(normB))
+}
+
+func evaluateCosineSimilarity(embeddingPipeline *pipelines.FeatureExtractionPipeline, outputs []string) float64 {
+	result, err := embeddingPipeline.RunPipeline(context.Background(), outputs)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	total := 0.0
+	for _, embeddingA := range result.Embeddings {
+		for _, embeddingB := range result.Embeddings {
+			total += cosineSimilarity(embeddingA, embeddingB)
+		}
+	}
+	return total / float64(len(result.Embeddings)*len(result.Embeddings))
+}
+
+func main() {
+	ctx := context.Background()
+	session, err := hugot.NewGoSession(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer session.Destroy()
+
+	downloadOptions := hugot.NewDownloadOptions()
+	downloadOptions.OnnxFilePath = "onnx/model.onnx"
+	modelPath, err := hugot.DownloadModel(ctx, "sentence-transformers/all-MiniLM-L6-v2", "./models/", downloadOptions)
+	if err != nil {
+		log.Fatal(err)
+	}
+	embeddingPipeline, err := hugot.NewPipeline(session, hugot.FeatureExtractionConfig{
+		ModelPath: modelPath,
+		Name:      "embeddingPipeline",
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, item := range faqVariations {
+		var outputs []string
+		for _, question := range item.Questions {
+			outputs = append(outputs, getCompletion(question))
+		}
+		similarityScore := evaluateCosineSimilarity(embeddingPipeline, outputs)
+		fmt.Printf("FAQ Consistency Score: %v%%\n", similarityScore*100)
+	}
+}
 ```
 
 ```java Java
-// Sentence-embedding models are not available as a native Java library. See the Python or TypeScript tab for this eval recipe.
+import dev.langchain4j.data.segment.TextSegment;
+import dev.langchain4j.model.embedding.onnx.allminilml6v2.AllMiniLmL6V2EmbeddingModel;
+import dev.langchain4j.store.embedding.CosineSimilarity;
+// ...
+
+record Faq(List<String> questions, String answer) {}
+
+List<Faq> faqVariations = List.of(
+    new Faq(
+        List.of(
+            "What's your return policy?",
+            "How can I return an item?",
+            "Wut's yur retrn polcy?"),
+        "Our return policy allows..."), // Edge case: Typos
+    new Faq(
+        List.of(
+            "I bought something last week, and it's not really what I expected, so I was wondering if maybe I could possibly return it?",
+            "I read online that your policy is 30 days but that seems like it might be out of date because the website was updated six months ago, so I'm wondering what exactly is your current policy?"),
+        "Our return policy allows..."), // Edge case: Long, rambling question
+    new Faq(
+        List.of(
+            "I'm Jane's cousin, and she said you guys have great customer service. Can I return this?",
+            "Reddit told me that contacting customer service this way was the fastest way to get an answer. I hope they're right! What is the return window for a jacket?"),
+        "Our return policy allows...") // Edge case: Irrelevant info
+    // ... 47 more FAQs
+);
+
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+String getCompletion(String prompt) {
+    var params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_5_5)
+        .maxTokens(2048L)
+        .addUserMessage(prompt)
+        .build();
+    Message message = client.messages().create(params);
+    return message.content().stream()
+        .flatMap(block -> block.text().stream())
+        .map(textBlock -> textBlock.text())
+        .findFirst()
+        .orElse("");
+}
+
+double evaluateCosineSimilarity(List<String> outputs) {
+    var embeddingModel = new AllMiniLmL6V2EmbeddingModel();
+    var segments = outputs.stream().map(TextSegment::from).toList();
+    var embeddings = embeddingModel.embedAll(segments).content();
+
+    double total = 0;
+    for (var embeddingA : embeddings) {
+        for (var embeddingB : embeddings) {
+            total += CosineSimilarity.between(embeddingA, embeddingB);
+        }
+    }
+    return total / (embeddings.size() * embeddings.size());
+}
+
+void main() {
+    for (var faq : faqVariations) {
+        var outputs = faq.questions().stream().map(this::getCompletion).toList();
+        double similarityScore = evaluateCosineSimilarity(outputs);
+        IO.println("FAQ Consistency Score: " + similarityScore * 100 + "%");
+    }
+}
 ```
 
 ```php PHP
-// Sentence-embedding models are not available as a native PHP library. See the Python or TypeScript tab for this eval recipe.
+use function Codewithkyrian\Transformers\Pipelines\pipeline;
+
+$client = new Client();
+
+$faqVariations = [
+    [
+        'questions' => [
+            "What's your return policy?",
+            'How can I return an item?',
+            "Wut's yur retrn polcy?",
+        ],
+        'answer' => 'Our return policy allows...',
+    ], // Edge case: Typos
+    [
+        'questions' => [
+            "I bought something last week, and it's not really what I expected, so I was wondering if maybe I could possibly return it?",
+            "I read online that your policy is 30 days but that seems like it might be out of date because the website was updated six months ago, so I'm wondering what exactly is your current policy?",
+        ],
+        'answer' => 'Our return policy allows...',
+    ], // Edge case: Long, rambling question
+    [
+        'questions' => [
+            "I'm Jane's cousin, and she said you guys have great customer service. Can I return this?",
+            "Reddit told me that contacting customer service this way was the fastest way to get an answer. I hope they're right! What is the return window for a jacket?",
+        ],
+        'answer' => 'Our return policy allows...',
+    ], // Edge case: Irrelevant info
+    // ... 47 more FAQs
+];
+
+function getCompletion(Client $client, string $prompt): string
+{
+    $message = $client->messages->create(
+        model: Model::CLAUDE_OPUS_5_5,
+        maxTokens: 2048,
+        messages: [
+            [
+                'role' => 'user',
+                'content' => $prompt,
+            ],
+        ],
+    );
+    foreach ($message->content as $block) {
+        if ($block instanceof \Anthropic\Messages\TextBlock) {
+            return $block->text;
+        }
+    }
+    return '';
+}
+
+function evaluateCosineSimilarity(array $outputs): float
+{
+    $extractor = pipeline('embeddings', 'Xenova/all-MiniLM-L6-v2');
+    $embeddings = $extractor($outputs, normalize: true, pooling: 'mean');
+
+    $total = 0.0;
+    foreach ($embeddings as $embeddingA) {
+        foreach ($embeddings as $embeddingB) {
+            // Vectors are normalized, so cosine similarity is the dot product
+            $total += array_sum(array_map(fn ($valueA, $valueB) => $valueA * $valueB, $embeddingA, $embeddingB));
+        }
+    }
+    return $total / count($embeddings) ** 2;
+}
+
+foreach ($faqVariations as $faq) {
+    $outputs = array_map(fn ($question) => getCompletion($client, $question), $faq['questions']);
+    $similarityScore = evaluateCosineSimilarity($outputs);
+    echo 'FAQ Consistency Score: ' . ($similarityScore * 100) . '%' . PHP_EOL;
+}
 ```
 
 ```ruby Ruby
-# Sentence-embedding models are not available as a native Ruby library. See the Python or TypeScript tab for this eval recipe.
+require "informers"
+
+client = Anthropic::Client.new
+
+faq_variations = [
+  {
+    questions: [
+      "What's your return policy?",
+      "How can I return an item?",
+      "Wut's yur retrn polcy?"
+    ],
+    answer: "Our return policy allows..."
+  }, # Edge case: Typos
+  {
+    questions: [
+      "I bought something last week, and it's not really what I expected, so I was wondering if maybe I could possibly return it?",
+      "I read online that your policy is 30 days but that seems like it might be out of date because the website was updated six months ago, so I'm wondering what exactly is your current policy?"
+    ],
+    answer: "Our return policy allows..."
+  }, # Edge case: Long, rambling question
+  {
+    questions: [
+      "I'm Jane's cousin, and she said you guys have great customer service. Can I return this?",
+      "Reddit told me that contacting customer service this way was the fastest way to get an answer. I hope they're right! What is the return window for a jacket?"
+    ],
+    answer: "Our return policy allows..."
+  } # Edge case: Irrelevant info
+  # ... 47 more FAQs
+]
+
+def get_completion(client, prompt)
+  message = client.messages.create(
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
+    max_tokens: 2048,
+    messages: [
+      {
+        role: "user",
+        content: prompt
+      }
+    ]
+  )
+  text_block = message.content.find { |block| block.is_a?(Anthropic::Models::TextBlock) }
+  text_block ? text_block.text : ""
+end
+
+def evaluate_cosine_similarity(outputs)
+  model = Informers.pipeline("embedding", "sentence-transformers/all-MiniLM-L6-v2")
+  embeddings = model.(outputs)
+
+  # Vectors are normalized, so cosine similarity is the dot product
+  total = embeddings.sum do |embedding_a|
+    embeddings.sum { |embedding_b| embedding_a.zip(embedding_b).sum { |value_a, value_b| value_a * value_b } }
+  end
+  total / embeddings.length**2
+end
+
+faq_variations.each do |faq|
+  outputs = faq[:questions].map { |question| get_completion(client, question) }
+  similarity_score = evaluate_cosine_similarity(outputs)
+  puts "FAQ Consistency Score: #{similarity_score * 100}%"
+end
 ```
 
 **Relevance and coherence (summarization) - ROUGE-L evaluation**
@@ -1192,7 +1585,7 @@ def evaluate_likert(model_output, target_tone):
     # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     response = client.messages.create(
         model="claude-opus-5-5",
-        max_tokens=50,
+        max_tokens=1024,
         messages=[{"role": "user", "content": tone_prompt}],
     )
     return int(
@@ -1249,7 +1642,7 @@ Output only the number.`;
   // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   const response = await client.messages.create({
     model: "claude-opus-5-5",
-    max_tokens: 50,
+    max_tokens: 1024,
     messages: [{ role: "user", content: tonePrompt }]
   });
   const textBlock = response.content.find((block) => block.type === "text");
@@ -1311,7 +1704,7 @@ async Task<int> EvaluateLikert(string modelOutput, string targetTone)
     var response = await client.Messages.Create(new MessageCreateParams
     {
         Model = Model.ClaudeOpus5_5,
-        MaxTokens = 50,
+        MaxTokens = 1024,
         Messages = [new() { Role = Role.User, Content = tonePrompt }],
     });
     return int.Parse(ContentText(response).Trim());
@@ -1393,7 +1786,7 @@ Output only the number.`, targetTone, modelOutput)
 	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
 	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeOpus5_5,
-		MaxTokens: 50,
+		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(tonePrompt)),
 		},
@@ -1462,7 +1855,7 @@ int evaluateLikert(String modelOutput, String targetTone) {
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     var params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
-        .maxTokens(50L)
+        .maxTokens(1024L)
         .addUserMessage(tonePrompt)
         .build();
     var judgment = contentText(client.messages().create(params));
@@ -1520,7 +1913,7 @@ function evaluateLikert(Client $client, string $modelOutput, string $targetTone)
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     $response = $client->messages->create(
         model: Model::CLAUDE_OPUS_5_5,
-        maxTokens: 50,
+        maxTokens: 1024,
         messages: [
             [
                 'role' => 'user',
@@ -1597,7 +1990,7 @@ def evaluate_likert(client, model_output, target_tone)
   # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   response = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
-    max_tokens: 50,
+    max_tokens: 1024,
     messages: [
       {
         role: "user",
@@ -1667,7 +2060,7 @@ def evaluate_binary(model_output, query_contains_phi):
     # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     response = client.messages.create(
         model="claude-opus-5-5",
-        max_tokens=50,
+        max_tokens=1024,
         messages=[{"role": "user", "content": binary_prompt}],
     )
     return (
@@ -1743,7 +2136,7 @@ Output only 'yes' or 'no'.`;
   // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   const response = await client.messages.create({
     model: "claude-opus-5-5",
-    max_tokens: 50,
+    max_tokens: 1024,
     messages: [{ role: "user", content: binaryPrompt }]
   });
   const textBlock = response.content.find((block) => block.type === "text");
@@ -1812,7 +2205,7 @@ async Task<bool> EvaluateBinary(string modelOutput, bool queryContainsPhi)
     var response = await client.Messages.Create(new MessageCreateParams
     {
         Model = Model.ClaudeOpus5_5,
-        MaxTokens = 50,
+        MaxTokens = 1024,
         Messages = [new() { Role = Role.User, Content = binaryPrompt }],
     });
     return ContentText(response).Trim().ToLowerInvariant() == "no";
@@ -1908,7 +2301,7 @@ Output only 'yes' or 'no'.`, modelOutput)
 	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
 	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeOpus5_5,
-		MaxTokens: 50,
+		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(binaryPrompt)),
 		},
@@ -1985,7 +2378,7 @@ boolean evaluateBinary(String modelOutput, boolean queryContainsPhi) {
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     var params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
-        .maxTokens(50L)
+        .maxTokens(1024L)
         .addUserMessage(binaryPrompt)
         .build();
     var judgment = contentText(client.messages().create(params));
@@ -2056,7 +2449,7 @@ function evaluateBinary(Client $client, string $modelOutput, bool $queryContains
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     $response = $client->messages->create(
         model: Model::CLAUDE_OPUS_5_5,
-        maxTokens: 50,
+        maxTokens: 1024,
         messages: [
             [
                 'role' => 'user',
@@ -2142,7 +2535,7 @@ def evaluate_binary(client, model_output, query_contains_phi)
   # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   response = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
-    max_tokens: 50,
+    max_tokens: 1024,
     messages: [
       {
         role: "user",
@@ -2236,7 +2629,7 @@ def evaluate_ordinal(model_output, conversation):
     # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     response = client.messages.create(
         model="claude-opus-5-5",
-        max_tokens=50,
+        max_tokens=1024,
         messages=[{"role": "user", "content": ordinal_prompt}],
     )
     return int(
@@ -2327,7 +2720,7 @@ Output only the number and nothing else.`;
   // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   const response = await client.messages.create({
     model: "claude-opus-5-5",
-    max_tokens: 50,
+    max_tokens: 1024,
     messages: [{ role: "user", content: ordinalPrompt }]
   });
   const textBlock = response.content.find((block) => block.type === "text");
@@ -2410,7 +2803,7 @@ async Task<int> EvaluateOrdinal(string modelOutput, Turn[] conversation)
     var response = await client.Messages.Create(new MessageCreateParams
     {
         Model = Model.ClaudeOpus5_5,
-        MaxTokens = 50,
+        MaxTokens = 1024,
         Messages = [new() { Role = Role.User, Content = ordinalPrompt }],
     });
     return int.Parse(ContentText(response).Trim());
@@ -2520,7 +2913,7 @@ Output only the number and nothing else.`, conversationText.String(), modelOutpu
 	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
 	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeOpus5_5,
-		MaxTokens: 50,
+		MaxTokens: 1024,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(ordinalPrompt)),
 		},
@@ -2609,7 +3002,7 @@ int evaluateOrdinal(String modelOutput, List<Turn> conversation) {
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     var params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
-        .maxTokens(50L)
+        .maxTokens(1024L)
         .addUserMessage(ordinalPrompt)
         .build();
     var judgment = contentText(client.messages().create(params));
@@ -2680,7 +3073,7 @@ function evaluateOrdinal(Client $client, string $modelOutput, array $conversatio
     // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
     $response = $client->messages->create(
         model: Model::CLAUDE_OPUS_5_5,
-        maxTokens: 50,
+        maxTokens: 1024,
         messages: [
             [
                 'role' => 'user',
@@ -2767,7 +3160,7 @@ def evaluate_ordinal(client, model_output, conversation)
   # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
   response = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
-    max_tokens: 50,
+    max_tokens: 1024,
     messages: [
       {
         role: "user",

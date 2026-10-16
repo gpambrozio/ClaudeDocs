@@ -1281,6 +1281,16 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
       - `"standard_only"`
 
+    - `speed: Optional[Literal["standard", "fast"]]`
+
+      The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+      Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../../build-with-claude/fast-mode.md) for which models.
+
+      - `"standard"`
+
+      - `"fast"`
+
     - `stop_sequences: Optional[Sequence[str]]`
 
       Custom text sequences that will cause the model to stop generating.
@@ -4992,6 +5002,14 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `"batch"`
 
+          - `speed: Optional[Literal["standard", "fast"]]`
+
+            The inference speed mode used for this request.
+
+            - `"standard"`
+
+            - `"fast"`
+
     - `class MessageBatchErroredResult`
 
       - `type: Literal["errored"]`
@@ -6514,6 +6532,14 @@ for batch in client.messages.batches.results(
 
             - `"batch"`
 
+          - `speed: Optional[Literal["standard", "fast"]]`
+
+            The inference speed mode used for this request.
+
+            - `"standard"`
+
+            - `"fast"`
+
     - `class MessageBatchErroredResult`
 
       - `type: Literal["errored"]`
@@ -7799,6 +7825,14 @@ for batch in client.messages.batches.results(
 
           - `"batch"`
 
+        - `speed: Optional[Literal["standard", "fast"]]`
+
+          The inference speed mode used for this request.
+
+          - `"standard"`
+
+          - `"fast"`
+
   - `class MessageBatchErroredResult`
 
     - `type: Literal["errored"]`
@@ -9035,6 +9069,14 @@ for batch in client.messages.batches.results(
         - `"priority"`
 
         - `"batch"`
+
+      - `speed: Optional[Literal["standard", "fast"]]`
+
+        The inference speed mode used for this request.
+
+        - `"standard"`
+
+        - `"fast"`
 
 ---
 

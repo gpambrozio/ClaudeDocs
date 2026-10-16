@@ -1,4 +1,4 @@
-# EnvironmentWorker is not currently available in the Ruby SDK. Use the ant CLI worker instead.
+# Cancelled by shutdown() so an in-flight work item can upload changed memory files and
 
 ---
 title: Deploy self-hosted workers
@@ -42,15 +42,11 @@ See [Self-hosted worker reference](self-hosted-sandboxes-reference.md) for every
 
 ## Run an always-on worker
 
-Both workers authenticate with the [environment key](self-hosted-sandboxes.md#run-your-first-session) from the quickstart.
+Start a worker that polls the queue continuously. It authenticates with the [environment key](self-hosted-sandboxes.md#run-your-first-session) from the quickstart:
 
-With the `ant` CLI:
-
-```bash
+```bash CLI
 ant beta:worker poll --workdir /workspace
 ```
-
-With the SDK, `EnvironmentWorker` does the same work:
 
 ```python Python
 import asyncio
@@ -104,9 +100,7 @@ await new EnvironmentWorker({
 }).run();
 ```
 
-```csharp C#
-// EnvironmentWorker is not currently available in the C# SDK. Use the ant CLI worker instead.
-```
+The C# SDK does not have `EnvironmentWorker`. Run the `ant` CLI worker instead: `ant beta:worker poll --workdir /workspace`.
 
 ```go Go
 package main
@@ -144,17 +138,11 @@ func main() {
 
 ```
 
-```java Java
-// EnvironmentWorker is not currently available in the Java SDK. Use the ant CLI worker instead.
-```
+The Java SDK does not have `EnvironmentWorker`. Run the `ant` CLI worker instead: `ant beta:worker poll --workdir /workspace`.
 
-```php PHP
-// EnvironmentWorker is not currently available in the PHP SDK. Use the ant CLI worker instead.
-```
+The PHP SDK does not have `EnvironmentWorker`. Run the `ant` CLI worker instead: `ant beta:worker poll --workdir /workspace`.
 
-```ruby Ruby
-# EnvironmentWorker is not currently available in the Ruby SDK. Use the ant CLI worker instead.
-```
+The Ruby SDK does not have `EnvironmentWorker`. Run the `ant` CLI worker instead: `ant beta:worker poll --workdir /workspace`.
 
 ## Trigger workers from webhooks
 
@@ -291,10 +279,7 @@ export async function handle(req: Request): Promise<Response> {
 }
 ```
 
-```csharp C#
-// EnvironmentWorker is not currently available in the C# SDK.
-// To handle work items directly, see the Environments Work endpoints.
-```
+The C# SDK does not have `EnvironmentWorker`. To handle work items from your own code, call the [Environments Work endpoints](../api/beta/environments/work.md).
 
 ```go Go
 package main
@@ -407,20 +392,11 @@ func main() {
 
 ```
 
-```java Java
-// EnvironmentWorker is not currently available in the Java SDK.
-// To handle work items directly, see the Environments Work endpoints.
-```
+The Java SDK does not have `EnvironmentWorker`. To handle work items from your own code, call the [Environments Work endpoints](../api/beta/environments/work.md).
 
-```php PHP
-// EnvironmentWorker is not currently available in the PHP SDK.
-// To handle work items directly, see the Environments Work endpoints.
-```
+The PHP SDK does not have `EnvironmentWorker`. To handle work items from your own code, call the [Environments Work endpoints](../api/beta/environments/work.md).
 
-```ruby Ruby
-# EnvironmentWorker is not currently available in the Ruby SDK.
-# To handle work items directly, see the Environments Work endpoints.
-```
+The Ruby SDK does not have `EnvironmentWorker`. To handle work items from your own code, call the [Environments Work endpoints](../api/beta/environments/work.md).
 
 Because the handler claims work itself, it must [forward the work item's secret](self-hosted-sandboxes-workers.md#forward-the-work-items-secret), as the `work_secret` (typescript: `workSecret`; go: `WorkSecret`) argument does here.
 
@@ -436,7 +412,7 @@ Install `ant` and set `ant beta:worker run` as the entrypoint. When a sandbox st
 
 ```dockerfile
 FROM your-base-image
-ARG ANT_VERSION=1.41.0
+ARG ANT_VERSION=1.42.0
 ARG TARGETARCH
 RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
     curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
@@ -492,15 +468,9 @@ Pass the secret only into the sandbox that serves that session, and never log it
 
 To claim work from your own code instead of `ant beta:worker poll --on-work`, use `work.poller()` (go: `environments.NewWorkPoller()`). It polls the queue and gives you each claimed session, and you launch the sandbox:
 
-```bash cURL
-# The work poller is an SDK helper (Python, TypeScript, Go), not a raw
-# endpoint. From the shell, use `ant beta:worker poll --on-work` instead.
-```
+Claiming work in a loop and launching a sandbox for each session needs more logic than a single shell command. From the shell, run `ant beta:worker poll --on-work` with a spawn script, as in [Run one sandbox per session](self-hosted-sandboxes-workers.md#run-one-sandbox-per-session).
 
-```bash CLI
-# The work poller is an SDK helper (Python, TypeScript, Go), not a raw
-# endpoint. From the shell, use `ant beta:worker poll --on-work` instead.
-```
+To claim work from the shell and launch a sandbox for each session, run `ant beta:worker poll --on-work` with a spawn script, as in [Run one sandbox per session](self-hosted-sandboxes-workers.md#run-one-sandbox-per-session).
 
 ```python Python
 import asyncio
@@ -599,10 +569,7 @@ for await (const work of poller) {
 }
 ```
 
-```csharp C#
-// A work-polling helper is not currently available in the C# SDK.
-// To claim work directly, see the Environments Work endpoints.
-```
+The C# SDK does not have a helper that polls for work. To claim work from your own code, call the [Environments Work endpoints](../api/beta/environments/work.md).
 
 ```go Go
 package main
@@ -674,20 +641,11 @@ func main() {
 }
 ```
 
-```java Java
-// A work-polling helper is not currently available in the Java SDK.
-// To claim work directly, see the Environments Work endpoints.
-```
+The Java SDK does not have a helper that polls for work. To claim work from your own code, call the [Environments Work endpoints](../api/beta/environments/work.md).
 
-```php PHP
-// A work-polling helper is not currently available in the PHP SDK.
-// To claim work directly, see the Environments Work endpoints.
-```
+The PHP SDK does not have a helper that polls for work. To claim work from your own code, call the [Environments Work endpoints](../api/beta/environments/work.md).
 
-```ruby Ruby
-# A work-polling helper is not currently available in the Ruby SDK.
-# To claim work directly, see the Environments Work endpoints.
-```
+The Ruby SDK does not have a helper that polls for work. To claim work from your own code, call the [Environments Work endpoints](../api/beta/environments/work.md).
 
 ### Run the SDK worker inside the sandbox
 
@@ -738,9 +696,7 @@ await new EnvironmentWorker({
 }).handleItem();
 ```
 
-```csharp C#
-// EnvironmentWorker is not currently available in the C# SDK.
-```
+The C# SDK does not have `EnvironmentWorker`.
 
 ```go Go
 package main
@@ -776,17 +732,11 @@ func main() {
 
 ```
 
-```java Java
-// EnvironmentWorker is not currently available in the Java SDK.
-```
+The Java SDK does not have `EnvironmentWorker`.
 
-```php PHP
-// EnvironmentWorker is not currently available in the PHP SDK.
-```
+The PHP SDK does not have `EnvironmentWorker`.
 
-```ruby Ruby
-# EnvironmentWorker is not currently available in the Ruby SDK.
-```
+The Ruby SDK does not have `EnvironmentWorker`.
 
 ## Stage files for a session
 
@@ -802,13 +752,11 @@ curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "agent": "$AGENT_ID",
-  "environment_id": "$ANTHROPIC_ENVIRONMENT_ID",
-  "metadata": {"input_file": "s3://my-bucket/data.csv"}
-}
-EOF
+  -d '{
+    "agent": "'"$AGENT_ID"'",
+    "environment_id": "'"$ANTHROPIC_ENVIRONMENT_ID"'",
+    "metadata": {"input_file": "s3://my-bucket/data.csv"}
+  }'
 ```
 
 ```bash CLI

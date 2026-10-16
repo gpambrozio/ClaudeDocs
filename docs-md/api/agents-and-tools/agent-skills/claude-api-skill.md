@@ -79,7 +79,9 @@ The skill ships with [Claude Code](../../../claude-code/overview.md) and require
 
 You can also invoke it directly:
 
-```text wrap
+Use this skill in Claude Code
+
+```text
 /claude-api
 ```
 
@@ -93,7 +95,15 @@ The skill source is available in the [Anthropic skills repository](https://githu
 npx skills add https://github.com/anthropics/skills --skill claude-api
 ```
 
-Or install it as a [Claude Code plugin](../../../claude-code/plugins.md):
+Or ask Claude Code to install it as a [Claude Code plugin](../../../claude-code/plugins.md):
+
+Let Claude Code install this for you
+
+```text
+Install the claude-api plugin from the anthropics/skills plugin marketplace
+```
+
+**Manual install commands**
 
 ```text wrap
 /plugin marketplace add anthropics/skills
@@ -104,15 +114,24 @@ Or install it as a [Claude Code plugin](../../../claude-code/plugins.md):
 
 The Claude API skill can perform Claude model migrations across a code base. Invoke it directly with `/claude-api migrate`:
 
-```text wrap
-/claude-api migrate this project to claude-opus-5-5
+Let Claude Code migrate your code for you
+
+```text
+/claude-api migrate this project to the latest Claude Opus model
 ```
 
 You can also pass a specific scope up front to skip the scope-confirmation question:
 
-```text wrap
-/claude-api migrate everything under src/ to claude-opus-5-5
-/claude-api migrate apps/api.py and apps/worker.py to claude-opus-5-5
+Let Claude Code migrate your code for you
+
+```text
+/claude-api migrate everything under src/ to the latest Claude Opus model
+```
+
+Let Claude Code migrate your code for you
+
+```text
+/claude-api migrate apps/api.py and apps/worker.py to the latest Claude Opus model
 ```
 
 When the scope is ambiguous (for example, a bare `/claude-api migrate to claude-opus-5-5`), the skill asks you to choose between the entire working directory, a specific subdirectory, or an explicit file list before editing any files. This applies to both Messages API and Managed Agents callers.
@@ -137,7 +156,9 @@ For the full list of model-specific changes the skill applies, see [Migrating to
 
 [Preserved thinking](../../build-with-claude/preserved-thinking.md) keeps a `thinking` block valid only while the `system` prompt, `tools`, and messages before it stay unchanged. To find and fix the places where your code edits that history, open the repository that builds your requests and invoke the `preserved-thinking-migration` subcommand:
 
-```text wrap
+Let Claude Code check your code for you
+
+```text
 /claude-api preserved-thinking-migration
 ```
 
@@ -157,7 +178,9 @@ The test requests and replays are real Messages API requests, billed at the mode
 
 To scaffold a new Managed Agent from scratch, invoke the `managed-agents-onboard` subcommand:
 
-```text wrap
+Let Claude Code set up your agent for you
+
+```text
 /claude-api managed-agents-onboard
 ```
 
@@ -171,19 +194,25 @@ Here are examples of tasks the skill helps Claude handle:
 
 **Building a chat application:**
 
-```text wrap
+Let Claude Code build this for you
+
+```text
 Build a streaming chat UI with the Claude API in TypeScript
 ```
 
 **Migrating an existing project:**
 
-```text wrap
-/claude-api migrate this codebase to claude-opus-5-5 and re-tune effort
+Let Claude Code migrate your code for you
+
+```text
+/claude-api migrate this code base to the latest Claude Opus model and re-tune effort
 ```
 
 **Onboarding a new Managed Agent:**
 
-```text wrap
+Let Claude Code set up your agent for you
+
+```text
 /claude-api managed-agents-onboard
 ```
 

@@ -120,6 +120,12 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   Anthropic offers different levels of service for your API requests. See [service-tiers](../service-tiers.md) for details.
 
+- `--speed: optional "standard" or "fast"`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
+
 - `--stop-sequence: optional array of string`
 
   Custom text sequences that will cause the model to stop generating.
@@ -1265,6 +1271,14 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `"batch"`
 
+    - `speed: "standard" or "fast"`
+
+      The inference speed mode used for this request.
+
+      - `"standard"`
+
+      - `"fast"`
+
 - `raw_message_stream_event: RawMessageStartEvent or RawMessageDeltaEvent or RawMessageStopEvent or 3 more`
 
   - `raw_message_start_event: object`
@@ -1914,7 +1928,8 @@ ant messages create \
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
@@ -1997,6 +2012,12 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 - `--output-config: optional object`
 
   Configuration options for the model's output, such as the output format.
+
+- `--speed: optional "standard" or "fast"`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../build-with-claude/fast-mode.md) for which models.
 
 - `--system: optional string or array of TextBlockParam`
 
@@ -16123,6 +16144,14 @@ ant messages count-tokens \
 
       - `"batch"`
 
+    - `speed: "standard" or "fast"`
+
+      The inference speed mode used for this request.
+
+      - `"standard"`
+
+      - `"fast"`
+
 ### Message Count Tokens Tool
 
 - `message_count_tokens_tool: Tool or ToolBash20250124 or CodeExecutionTool20250522 or 18 more`
@@ -21656,6 +21685,14 @@ ant messages count-tokens \
 
         - `"batch"`
 
+      - `speed: "standard" or "fast"`
+
+        The inference speed mode used for this request.
+
+        - `"standard"`
+
+        - `"fast"`
+
 ### Raw Message Stop Event
 
 - `raw_message_stop_event: object`
@@ -22676,6 +22713,14 @@ ant messages count-tokens \
           - `"priority"`
 
           - `"batch"`
+
+        - `speed: "standard" or "fast"`
+
+          The inference speed mode used for this request.
+
+          - `"standard"`
+
+          - `"fast"`
 
   - `raw_message_delta_event: object`
 
@@ -30337,6 +30382,14 @@ ant messages count-tokens \
 
     - `"batch"`
 
+  - `speed: "standard" or "fast"`
+
+    The inference speed mode used for this request.
+
+    - `"standard"`
+
+    - `"fast"`
+
 ### User Location
 
 - `user_location: object`
@@ -34473,6 +34526,14 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
             - `"priority"`
 
             - `"batch"`
+
+          - `speed: "standard" or "fast"`
+
+            The inference speed mode used for this request.
+
+            - `"standard"`
+
+            - `"fast"`
 
     - `message_batch_errored_result: object`
 

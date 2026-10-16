@@ -737,30 +737,28 @@ curl -X POST https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "model": "claude-opus-5-5",
-  "max_tokens": 1024,
-  "messages": [
-    {
-      "role": "user",
-      "content": [
-        {
-          "type": "document",
-          "source": {"type": "file", "file_id": "$FILE_ID"},
-          "title": "Document Title",
-          "context": "Context about the document that will not be cited from",
-          "citations": {"enabled": true}
-        },
-        {
-          "type": "text",
-          "text": "Summarize this document."
-        }
-      ]
-    }
-  ]
-}
-EOF
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 1024,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "document",
+            "source": {"type": "file", "file_id": "'"$FILE_ID"'"},
+            "title": "Document Title",
+            "context": "Context about the document that will not be cited from",
+            "citations": {"enabled": true}
+          },
+          {
+            "type": "text",
+            "text": "Summarize this document."
+          }
+        ]
+      }
+    ]
+  }'
 ```
 
 ```bash CLI
@@ -1550,30 +1548,28 @@ curl -X POST https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
-  -d @- <<EOF
-{
-  "model": "claude-opus-5-5",
-  "max_tokens": 1024,
-  "messages": [
-    {
-      "role": "user",
-      "content": [
-        {
-          "type": "document",
-          "source": {"type": "file", "file_id": "$FILE_ID"},
-          "title": "Document Title",
-          "context": "Context about the document that will not be cited from",
-          "citations": {"enabled": true}
-        },
-        {
-          "type": "text",
-          "text": "Summarize this document."
-        }
-      ]
-    }
-  ]
-}
-EOF
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 1024,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "document",
+            "source": {"type": "file", "file_id": "'"$FILE_ID"'"},
+            "title": "Document Title",
+            "context": "Context about the document that will not be cited from",
+            "citations": {"enabled": true}
+          },
+          {
+            "type": "text",
+            "text": "Summarize this document."
+          }
+        ]
+      }
+    ]
+  }'
 ```
 
 ```bash CLI

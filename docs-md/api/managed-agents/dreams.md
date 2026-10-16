@@ -33,16 +33,14 @@ curl -s https://api.anthropic.com/v1/dreams \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01,dreaming-2026-04-21" \
   -H "content-type: application/json" \
-  --data @- <<EOF
-{
-  "inputs": [
-    { "type": "memory_store", "memory_store_id": "$store_id" },
-    { "type": "sessions", "session_ids": ["$session_a", "$session_b"] }
-  ],
-  "model": "claude-opus-5-5",
-  "instructions": "Focus on coding-style preferences; ignore one-off debugging notes."
-}
-EOF
+  --data '{
+    "inputs": [
+      { "type": "memory_store", "memory_store_id": "'"$store_id"'" },
+      { "type": "sessions", "session_ids": ["'"$session_a"'", "'"$session_b"'"] }
+    ],
+    "model": "claude-opus-5-5",
+    "instructions": "Focus on coding-style preferences; ignore one-off debugging notes."
+  }'
 ```
 
 ```bash CLI
@@ -305,15 +303,13 @@ curl -s https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<EOF
-{
-  "agent": "$agent_id",
-  "environment_id": "$environment_id",
-  "resources": [
-    { "type": "memory_store", "memory_store_id": "$output_store_id" }
-  ]
-}
-EOF
+  --data '{
+    "agent": "'"$agent_id"'",
+    "environment_id": "'"$environment_id"'",
+    "resources": [
+      { "type": "memory_store", "memory_store_id": "'"$output_store_id"'" }
+    ]
+  }'
 ```
 
 ```bash CLI

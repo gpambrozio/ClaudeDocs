@@ -124,16 +124,14 @@ curl --fail-with-body -sS \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d @- >/dev/null <<'EOF'
-{
-  "events": [
-    {
-      "type": "user.message",
-      "content": [{"type": "text", "text": "In one short sentence, describe what an event delta is."}]
-    }
-  ]
-}
-EOF
+  -d '{
+    "events": [
+      {
+        "type": "user.message",
+        "content": [{"type": "text", "text": "In one short sentence, describe what an event delta is."}]
+      }
+    ]
+  }' >/dev/null
 
 # Accumulate deltas keyed by (message id, content index); the final
 # agent.message carries the full text, so it replaces every preview for that id.
@@ -174,10 +172,7 @@ done
 exec {stream}<&-
 ```
 
-```bash CLI
-# This workflow does not translate well to a one-off shell command.
-# Use one of the SDK examples in this code group instead.
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 # Preview snapshots, keyed by event id. accumulate_managed_agents_event folds each

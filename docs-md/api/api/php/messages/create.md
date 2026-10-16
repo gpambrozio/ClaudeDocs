@@ -7,7 +7,7 @@ url: https://platform.claude.com/docs/en/api/php/messages/create
 
 # Create a Message
 
-`$client->messages->create(int maxTokens, list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?MessageCreateParamsContainer container, ?DiagnosticsParam diagnostics, ?string inferenceGeo, ?Metadata metadata, ?OutputConfig outputConfig, ?ServiceTier serviceTier, ?list<string> stopSequences, ?System system, ?float temperature, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<ToolUnion> tools, ?int topK, ?float topP, ?string userProfileID, ?string workspaceID): Message`
+`$client->messages->create(int maxTokens, list<MessageParam> messages, Model model, ?CacheControlEphemeral cacheControl, ?MessageCreateParamsContainer container, ?DiagnosticsParam diagnostics, ?string inferenceGeo, ?Metadata metadata, ?OutputConfig outputConfig, ?ServiceTier serviceTier, ?Speed speed, ?list<string> stopSequences, ?System system, ?float temperature, ?ThinkingConfigParam thinking, ?ToolChoice toolChoice, ?list<ToolUnion> tools, ?int topK, ?float topP, ?string userProfileID, ?string workspaceID): Message`
 
 **POST** `/v1/messages`
 
@@ -115,6 +115,12 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
   Determines whether to use priority capacity (if available) or standard capacity for this request.
 
   Anthropic offers different levels of service for your API requests. See [service-tiers](../../service-tiers.md) for details.
+
+- `speed?:optional Speed`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../../build-with-claude/fast-mode.md) for which models.
 
 - `stopSequences?:optional list<string>`
 
@@ -439,6 +445,7 @@ $message = $client->messages->create(
     'format' => ['schema' => ['foo' => 'bar'], 'type' => 'json_schema'],
   ],
   serviceTier: 'auto',
+  speed: 'standard',
   stopSequences: ['string'],
   system: [
     [
@@ -553,7 +560,8 @@ var_dump($message);
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
