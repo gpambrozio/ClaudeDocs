@@ -517,7 +517,7 @@ class ClaudeSDKClient:
 | `receive_response()` | Receive messages until and including a ResultMessage |
 | `interrupt()` | Send interrupt signal (only works in streaming mode) |
 | `set_permission_mode(mode)` | Change the permission mode for the current session |
-| `set_model(model)` | Change the model for the current session. Pass `None` to reset to [Claude Code's default model](../model-config.md) |
+| `set_model(model)` | Change the model for the current session. Pass `None` to reset to [Claude Code's default model](../model-config.md). A session in `auto` mode [changes to `default` mode](permissions.md#auto-mode-auto) if the new model doesn't support auto mode |
 | `rewind_files(user_message_id)` | Restore files to their state at the specified user message. Requires `enable_file_checkpointing=True`. See [File checkpointing](file-checkpointing.md) |
 | `get_mcp_status()` | Get the status of all configured MCP servers. Returns [`McpStatusResponse`](#mcpstatusresponse) |
 | `get_context_usage()` | Get a breakdown of context window usage by category, skill, and tool. The same data `/context` shows in an interactive session. Returns [`ContextUsageResponse`](#contextusageresponse). To compute the breakdown, Claude Code makes several token-counting API requests that don't appear in the message stream; see [how these requests are handled](#contextusageresponse) |
@@ -3489,7 +3489,9 @@ class SandboxSettings(TypedDict, total=False):
 
 The sandbox depends on platform support and, on Linux, tools like `bubblewrap` and `socat`. By default, when `enabled` is `True` but the sandbox can't start, commands run unsandboxed with a warning on stderr. This default differs from the TypeScript SDK, where `failIfUnavailable` defaults to `true`.
 
-Set `"failIfUnavailable": True` in your sandbox settings to stop instead. The key isn't declared on `SandboxSettings` yet, but the SDK forwards it to Claude Code, which honors it. `query()` then reports a `ResultMessage` with `subtype="error_during_execution"` and the reason in `errors`. Because this is a single-shot `query()` call, the SDK raises after yielding that error result, so wrap the loop in a try block to continue past it. See [Handle the result](agent-loop.md#handle-the-result) for the error contract.
+Set `"failIfUnavailable": True` in your sandbox settings to stop instead. The SDK forwards `failIfUnavailable` to Claude Code along with the declared `SandboxSettings` fields. `query()` then reports a `ResultMessage` with `subtype="error_during_execution"` and the reason in `errors`. Because this is a single-shot `query()` call, the SDK raises after yielding that error result, so wrap the loop in a try block to continue past it. See [Handle the result](agent-loop.md#handle-the-result) for the error contract.
+
+To keep sandboxed commands from writing to a file, list its absolute path under [`denyWrite`](../settings-reference.md#sandbox-filesystem-denywrite) in your sandbox settings, such as `"filesystem": {"denyWrite": ["/home/user/project/.env"]}`. The SDK forwards `filesystem` to Claude Code along with the declared `SandboxSettings` fields. Once the sandbox starts, it blocks writes to each absolute path you listed.
 
 #### Example usage
 

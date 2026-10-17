@@ -286,7 +286,7 @@ Report findings with severity ratings and remediation steps.`
           note: commandsNote,
           when: <>User types /command-name</>,
           description: <>A file at commands/deploy.md creates /deploy the same way a skill at skills/deploy/SKILL.md does, and both can be auto-invoked by Claude. Skills use a directory with SKILL.md, letting you bundle reference docs, templates, or scripts alongside the prompt.</>,
-          tips: [<>Use $ARGUMENTS in the file to accept parameters: /fix-issue 123</>, 'If a skill and command share a name, the skill takes precedence', 'New commands should usually be skills instead; commands remain supported'],
+          tips: [<>Use $ARGUMENTS in the file to accept parameters: /fix-issue 123</>, 'If a skill and command share a name, the skill takes precedence', 'New commands should usually be skills instead; command files still work'],
           docsLink: '/en/skills',
           children: [{
             id: 'cmd-example',
