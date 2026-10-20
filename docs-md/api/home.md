@@ -9,7 +9,7 @@ description: Claude API Documentation
   
     Quickstart
 
-    Get API key
+    Get API key in Claude Console
 
     API reference
 
@@ -202,13 +202,13 @@ description: Claude API Documentation
 
   Quickstart
 
-  Get API key
+  Get API key in Claude Console
 
   Choose a model
 
   Install an SDK
 
-  Try the API in playground
+  Try the API in Console playground
 
   Messages API
 
@@ -242,7 +242,7 @@ description: Claude API Documentation
 
   Workspaces and admin
 
-  API key management
+  API keys in Claude Console
 
   Usage monitoring
 
@@ -250,7 +250,7 @@ description: Claude API Documentation
 
   Quickstart
 
-  Get API key
+  Get API key in Claude Console
 
   Build in Console
 
@@ -266,7 +266,7 @@ description: Claude API Documentation
 
   Workspaces and admin
 
-  API key management
+  API keys in Claude Console
 
   Usage monitoring
 

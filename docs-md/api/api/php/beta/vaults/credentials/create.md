@@ -1,17 +1,17 @@
-# Create Credential
+# Create a Credential
 
 ---
-title: Create Credential
+title: Create a Credential
 url: https://platform.claude.com/docs/en/api/php/beta/vaults/credentials/create
 ---
 
-# Create Credential
+# Create a Credential
 
 `$client->beta->vaults->credentials->create(string vaultID, Auth auth, ?string displayName, ?array<string,string> metadata, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials`
 
-Create Credential
+Create a Credential
 
 ## Parameters
 
@@ -49,7 +49,7 @@ Create Credential
 
   - `string id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `?\Datetime archivedAt`
 

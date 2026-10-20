@@ -1,4 +1,4 @@
-# Open the stream first, then send the user message
+# Open the stream before you send the first event: only later events are delivered.
 
 ---
 title: Session event stream
@@ -30,52 +30,19 @@ These event type strings follow a `{domain}.{action}` naming convention. See [Ev
 Stream events from the session to receive real-time updates as the agent works. A stream delivers only the events emitted after it opens, so open the stream before you send events to avoid a race condition.
 
 ```bash cURL
-# Open the stream first, then send the user message
-exec {stream}< <(
-  curl --fail-with-body -sS -N \
-    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" \
-    -H "accept: text/event-stream"
-)
-
-curl --fail-with-body -sS \
-  "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
+# Open the stream before you send the first event: only later events are delivered.
+curl --fail-with-body -sS -N \
+  "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "events": [
-      {
-        "type": "user.message",
-        "content": [{"type": "text", "text": "Summarize the repo README"}]
-      }
-    ]
-  }' >/dev/null
-
-while IFS= read -r -u "$stream" event_line; do
-  [[ $event_line == data:* ]] || continue
-  event_json=${event_line#data: }
-  case $(jq -r '.type' <<<"$event_json") in
-    agent.message)
-      jq -j '.content[] | select(.type == "text") | .text' <<<"$event_json"
-      ;;
-    session.status_idle)
-      break
-      ;;
-    session.error)
-      printf '\n[Error: %s]\n' "$(jq -r '.error.message // "unknown"' <<<"$event_json")"
-      break
-      ;;
-  esac
-done
-exec {stream}<&-
+  -H "accept: text/event-stream"
 ```
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+```bash CLI
+# Open the stream before you send the first event: only later events are delivered.
+ant beta:sessions:events stream --session-id "$SESSION_ID"
+```
 
 ```python Python
 # Open the stream first, then send the user message
@@ -328,48 +295,7 @@ To reconnect to an existing session without missing events, combine a new stream
 2. [List the full event history](events-and-streaming.md#list-past-events) to seed a set of seen event IDs.
 3. Tail the live stream, skipping any events already returned by the history list.
 
-```bash cURL
-exec {stream}< <(
-  curl --fail-with-body -sS -N \
-    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" \
-    -H "accept: text/event-stream"
-)
-
-# Stream is open and buffering. List history before tailing live.
-declare -A seen_event_ids
-while IFS= read -r event_id; do
-  seen_event_ids[$event_id]=1
-done < <(
-  curl --fail-with-body -sS \
-    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" | jq -r '.data[].id'
-)
-
-# Tail live events, skipping anything already seen
-while IFS= read -r -u "$stream" event_line; do
-  [[ $event_line == data:* ]] || continue
-  event_json=${event_line#data: }
-  event_id=$(jq -r '.id' <<<"$event_json")
-  [[ -n ${seen_event_ids[$event_id]+seen} ]] && continue
-  seen_event_ids[$event_id]=1
-  case $(jq -r '.type' <<<"$event_json") in
-    agent.message)
-      jq -j '.content[] | select(.type == "text") | .text' <<<"$event_json"
-      ;;
-    session.status_idle)
-      break
-      ;;
-  esac
-done
-exec {stream}<&-
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
@@ -633,11 +559,11 @@ await client.beta.sessions.events.send(session.id, {
       content: [
         {
           type: "text",
-          text: "Analyze the performance of the sort function in utils.py",
-        },
-      ],
-    },
-  ],
+          text: "Analyze the performance of the sort function in utils.py"
+        }
+      ]
+    }
+  ]
 });
 ```
 
@@ -760,41 +686,7 @@ When you [reconnect](events-and-streaming.md#reconnect-without-missing-events) t
 
 The following example answers each call as it arrives:
 
-```bash cURL
-exec {stream_fd}< <(curl --fail-with-body -sS -N \
-  "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -H "accept: text/event-stream")
-
-while IFS= read -r -u "$stream_fd" line; do
-  [[ $line == data:* ]] || continue
-  event_json="${line#data: }"
-  case $(jq -r '.type' <<<"$event_json") in
-    agent.custom_tool_use)
-      # Execute the tool and send the result back
-      result=$(call_tool "$(jq -r '.name' <<<"$event_json")" "$(jq -c '.input' <<<"$event_json")")
-      jq --arg result "$result" \
-        '{events: [{type: "user.custom_tool_result", custom_tool_use_id: .id, content: [{type: "text", text: $result}]}]}' <<<"$event_json" |
-        curl --fail-with-body -sS \
-          "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-          -H "x-api-key: $ANTHROPIC_API_KEY" \
-          -H "anthropic-version: 2023-06-01" \
-          -H "anthropic-beta: managed-agents-2026-04-01" \
-          -H "content-type: application/json" \
-          -d @-
-      ;;
-    session.status_idle)
-      if [[ $(jq -r '.stop_reason.type' <<<"$event_json") == end_turn ]]; then
-        break
-      fi
-      ;;
-  esac
-done
-exec {stream_fd}<&-
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
@@ -837,9 +729,9 @@ loop: for await (const event of stream) {
           {
             type: "user.custom_tool_result",
             custom_tool_use_id: event.id,
-            content: [{ type: "text", text: result }],
-          },
-        ],
+            content: [{ type: "text", text: result }]
+          }
+        ]
       });
       break;
     }
@@ -1019,41 +911,7 @@ Send a `user.tool_confirmation` event, passing the event ID in the `tool_use_id`
 
 The following example approves every pending call:
 
-```bash cURL
-exec {stream_fd}< <(curl --fail-with-body -sS -N \
-  "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" \
-  -H "accept: text/event-stream")
-
-while IFS= read -r -u "$stream_fd" line; do
-  [[ $line == data:* ]] || continue
-  event_json="${line#data: }"
-  stop_reason=$(jq -r 'select(.type == "session.status_idle") | .stop_reason.type // empty' <<<"$event_json")
-  case "$stop_reason" in
-    requires_action)
-      while IFS= read -r event_id; do
-        # Approve the pending tool call
-        jq -n --arg id "$event_id" \
-          '{events: [{type: "user.tool_confirmation", tool_use_id: $id, result: "allow"}]}' |
-          curl --fail-with-body -sS \
-            "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-            -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "anthropic-beta: managed-agents-2026-04-01" \
-            -H "content-type: application/json" \
-            -d @-
-      done < <(jq -r '.stop_reason.event_ids[]' <<<"$event_json")
-      ;;
-    end_turn)
-      break
-      ;;
-  esac
-done
-exec {stream_fd}<&-
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
@@ -1100,9 +958,9 @@ for await (const event of stream) {
         {
           type: "user.tool_confirmation",
           tool_use_id: eventId,
-          result: "allow",
-        },
-      ],
+          result: "allow"
+        }
+      ]
     });
   }
 }
@@ -1311,11 +1169,11 @@ await client.beta.sessions.events.send(session.id, {
       content: [
         {
           type: "text",
-          text: "Now run the tests against the changes you made earlier.",
-        },
-      ],
-    },
-  ],
+          text: "Now run the tests against the changes you made earlier."
+        }
+      ]
+    }
+  ]
 });
 ```
 
@@ -1483,11 +1341,11 @@ await client.beta.sessions.events.send(session.id, {
       content: [
         {
           type: "text",
-          text: "Instead, focus on fixing the bug in line 42.",
-        },
-      ],
-    },
-  ],
+          text: "Instead, focus on fixing the bug in line 42."
+        }
+      ]
+    }
+  ]
 });
 ```
 
@@ -1702,7 +1560,7 @@ for event in events.data:
 
 ```typescript TypeScript
 const events = await client.beta.sessions.events.list(session.id, {
-  types: ["agent.tool_use", "agent.tool_result"],
+  types: ["agent.tool_use", "agent.tool_result"]
 });
 for (const event of events.data) {
   console.log(`[${event.type}] ${event.processed_at}`);
@@ -1828,11 +1686,11 @@ await client.beta.sessions.events.send(session.id, {
       content: [
         {
           type: "text",
-          text: "The user's current timezone is America/New_York.",
-        },
-      ],
-    },
-  ],
+          text: "The user's current timezone is America/New_York."
+        }
+      ]
+    }
+  ]
 });
 ```
 

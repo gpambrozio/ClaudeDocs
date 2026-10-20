@@ -98,14 +98,14 @@ const deployment = await client.beta.deployments.create({
   initial_events: [
     {
       type: "user.message",
-      content: [{ type: "text", text: "Run the weekly compliance scan." }],
-    },
+      content: [{ type: "text", text: "Run the weekly compliance scan." }]
+    }
   ],
   schedule: {
     type: "cron",
     expression: "0 20 * * 5",
-    timezone: "America/New_York",
-  },
+    timezone: "America/New_York"
+  }
 });
 ```
 
@@ -322,8 +322,8 @@ print(updated_deployment.budget.max_list_cost.amount)  # 2000
 const updatedDeployment = await client.beta.deployments.update(deployment.id, {
   budget: {
     type: "limit",
-    max_list_cost: { amount: "2000", currency: "USD" },
-  },
+    max_list_cost: { amount: "2000", currency: "USD" }
+  }
 });
 console.log(updatedDeployment.budget?.max_list_cost.amount); // 2000
 ```
@@ -422,7 +422,7 @@ for run in client.beta.deployment_runs.list(
 
 ```typescript TypeScript
 for await (const run of client.beta.deploymentRuns.list({
-  deployment_id: deployment.id,
+  deployment_id: deployment.id
 })) {
   console.log(run.created_at, run.session_id ?? run.error?.type);
 }
@@ -511,7 +511,7 @@ for run in client.beta.deployment_runs.list(
 ```typescript TypeScript
 for await (const run of client.beta.deploymentRuns.list({
   deployment_id: deployment.id,
-  has_error: true,
+  has_error: true
 })) {
   console.log(run.created_at, run.error?.type, run.error?.message);
 }

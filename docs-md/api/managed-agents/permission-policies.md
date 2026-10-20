@@ -35,7 +35,7 @@ You set permission policies in the agent's `tools` (csharp, go: `Tools`) configu
 When creating an agent, you can apply a policy to every tool in `agent_toolset_20260401` using `default_config.permission_policy` (java, php: `defaultConfig.permissionPolicy`; csharp, go: `DefaultConfig.PermissionPolicy`):
 
 ```bash cURL
-agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
+curl -fsSL https://api.anthropic.com/v1/agents \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -51,7 +51,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
         }
       }
     ]
-  }')
+  }'
 ```
 
 ```bash CLI
@@ -216,7 +216,7 @@ The `mcp_server_name` (java, php: `mcpServerName`; csharp: `McpServerName`; go: 
 This example connects a GitHub MCP server and allows its tools to run without confirmation:
 
 ```bash cURL
-agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
+curl -fsSL https://api.anthropic.com/v1/agents \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -237,7 +237,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
         }
       }
     ]
-  }')
+  }'
 ```
 
 ```bash CLI
@@ -468,20 +468,29 @@ agent = client.beta.agents.create(
 Use the `configs` (csharp, go: `Configs`) array to override the default for individual tools. The `name` (csharp, go: `Name`) values for the agent toolset are listed in [Available tools](tools.md#available-tools). This example allows the full agent toolset by default but requires confirmation before any bash command runs:
 
 ```bash cURL
-tools='[
-  {
-    "type": "agent_toolset_20260401",
-    "default_config": {
-      "permission_policy": {"type": "always_allow"}
-    },
-    "configs": [
+curl -fsSL https://api.anthropic.com/v1/agents \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "name": "Coding Assistant",
+    "model": "claude-opus-5-5",
+    "tools": [
       {
-        "name": "bash",
-        "permission_policy": {"type": "always_ask"}
+        "type": "agent_toolset_20260401",
+        "default_config": {
+          "permission_policy": {"type": "always_allow"}
+        },
+        "configs": [
+          {
+            "name": "bash",
+            "permission_policy": {"type": "always_ask"}
+          }
+        ]
       }
     ]
-  }
-]'
+  }'
 ```
 
 ```bash CLI
@@ -672,7 +681,7 @@ To turn on `auto`, set `permission_policy` to `{"type": "auto"}`. It goes in the
 The following example sets `auto` as the default for the agent toolset and for the `github` MCP toolset, and overrides `bash` to `always_ask`:
 
 ```bash cURL
-agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
+curl -fsSL https://api.anthropic.com/v1/agents \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -701,7 +710,7 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
         }
       }
     ]
-  }')
+  }'
 ```
 
 ```bash CLI

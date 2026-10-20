@@ -14,7 +14,13 @@ featureMetadata:
 
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
-**Prefer an interactive walkthrough?** Run `/claude-api managed-agents-onboard` in the latest version of [Claude Code](https://claude.com/product/claude-code) for a guided setup and interactive question-answering.
+**Prefer an interactive walkthrough?** The latest version of [Claude Code](https://claude.com/product/claude-code) can guide you through the setup and answer your questions:
+
+Let Claude Code set up your agent for you
+
+```text
+/claude-api managed-agents-onboard
+```
 
 ## Core concepts
 
@@ -28,7 +34,7 @@ This guide walks you through creating an agent, setting up an environment, start
 ## Prerequisites
 
 * A [Claude Console account](https://platform.claude.com)
-* An [API key](https://platform.claude.com/settings/keys)
+* An [API key](https://platform.claude.com/settings/keys) from the Console
 
 ## Install the CLI
 
@@ -132,28 +138,19 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 Create an agent that defines the model, system prompt, and available tools.
 
 ```bash cURL
-set -euo pipefail
-
-agent=$(
-  curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" \
-    -d '{
-      "name": "Coding Assistant",
-      "model": "claude-opus-5-5",
-      "system": "You are a helpful coding assistant. Write clean, well-documented code.",
-      "tools": [
-        {"type": "agent_toolset_20260401"}
-      ]
-    }'
-)
-
-AGENT_ID=$(jq -er '.id' <<<"$agent")
-AGENT_VERSION=$(jq -er '.version' <<<"$agent")
-
-echo "Agent ID: $AGENT_ID, version: $AGENT_VERSION"
+curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "name": "Coding Assistant",
+    "model": "claude-opus-5-5",
+    "system": "You are a helpful coding assistant. Write clean, well-documented code.",
+    "tools": [
+      {"type": "agent_toolset_20260401"}
+    ]
+  }'
 ```
 
 Save the returned `agent.id`. You'll reference it in every session you create.
@@ -203,9 +200,7 @@ const agent = await client.beta.agents.create({
   name: "Coding Assistant",
   model: "claude-opus-5-5",
   system: "You are a helpful coding assistant. Write clean, well-documented code.",
-  tools: [
-    { type: "agent_toolset_20260401" },
-  ],
+  tools: [{ type: "agent_toolset_20260401" }]
 });
 
 console.log(`Agent ID: ${agent.id}, version: ${agent.version}`);
@@ -349,24 +344,18 @@ The `agent_toolset_20260401` tool type enables the full set of pre-built agent t
 An environment defines the sandbox where your agent runs. This one uses `limited` [networking](environments.md#networking) with package managers allowed, so code running in the sandbox can reach public [package registries and code hosts](environments.md#package-manager-hosts). Web search and web fetch run outside the sandbox, and this quickstart does not need them. With `limited` networking, the [`allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) list](environments.md#networking) applies to them too. They return no pages or search results in this environment, because it lists no hosts. For your own agent, list the hosts it needs in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`).
 
 ```bash cURL
-environment=$(
-  curl -sS --fail-with-body https://api.anthropic.com/v1/environments \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" \
-    -d '{
-      "name": "quickstart-env",
-      "config": {
-        "type": "cloud",
-        "networking": {"type": "limited", "allow_package_managers": true}
-      }
-    }'
-)
-
-ENVIRONMENT_ID=$(jq -er '.id' <<<"$environment")
-
-echo "Environment ID: $ENVIRONMENT_ID"
+curl -sS --fail-with-body https://api.anthropic.com/v1/environments \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "name": "quickstart-env",
+    "config": {
+      "type": "cloud",
+      "networking": {"type": "limited", "allow_package_managers": true}
+    }
+  }'
 ```
 
 Save the returned `environment.id` too.
@@ -406,8 +395,8 @@ const environment = await client.beta.environments.create({
   name: "quickstart-env",
   config: {
     type: "cloud",
-    networking: { type: "limited", allow_package_managers: true },
-  },
+    networking: { type: "limited", allow_package_managers: true }
+  }
 });
 
 console.log(`Environment ID: ${environment.id}`);
@@ -507,32 +496,23 @@ This quickstart uses a cloud environment. To decide whether to run tools on your
 Create a session that references your agent and environment.
 
 ```bash cURL
-session=$(
-  curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" \
-    -d '{
-      "agent": "'"$AGENT_ID"'",
-      "environment_id": "'"$ENVIRONMENT_ID"'",
-      "title": "Quickstart session"
-    }'
-)
-
-SESSION_ID=$(jq -er '.id' <<<"$session")
-
-echo "Session ID: $SESSION_ID"
+curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "agent": "'"$AGENT_ID"'",
+    "environment_id": "'"$ENVIRONMENT_ID"'",
+    "title": "Quickstart session"
+  }'
 ```
 
 ```bash CLI
-SESSION_ID=$(ant beta:sessions create \
+ant beta:sessions create \
   --agent "$AGENT_ID" \
   --environment-id "$ENVIRONMENT_ID" \
-  --title "Quickstart session" \
-  --transform id --raw-output)
-
-echo "Session ID: $SESSION_ID"
+  --title "Quickstart session"
 ```
 
 ```python Python
@@ -549,7 +529,7 @@ print(f"Session ID: {session.id}")
 const session = await client.beta.sessions.create({
   agent: agent.id,
   environment_id: environment.id,
-  title: "Quickstart session",
+  title: "Quickstart session"
 });
 
 console.log(`Session ID: ${session.id}`);
@@ -660,11 +640,11 @@ await client.beta.sessions.events.send(session.id, {
       content: [
         {
           type: "text",
-          text: "Create a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt",
-        },
-      ],
-    },
-  ],
+          text: "Create a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt"
+        }
+      ]
+    }
+  ]
 });
 
 // Process streaming events

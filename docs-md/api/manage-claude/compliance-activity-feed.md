@@ -1,4 +1,4 @@
-# Fetch the first page (newest activities first) and capture its trailing cursor.
+# Fetch the first page (newest activities first).
 
 ---
 title: Query the Activity Feed
@@ -95,19 +95,19 @@ The cursor parameter sets the page direction; the endpoint's sort order sets the
 Page tokens on the local session endpoints are the exception over longer pauses. On the [local session messages endpoint](compliance-sessions.md#retrieve-a-local-session-transcript), a walk's `page` tokens expire 24 hours after its first page (a walk is one pass through the pages), so finish or resume within that window, or restart without the `page` parameter. On the [local session list](compliance-sessions.md#retrieve-local-sessions), an older `page` token is still accepted but is re-evaluated against the current retention boundary and can skip sessions, so complete list walks within 24 hours as well.
 
 ```bash cURL
-# Fetch the first page (newest activities first) and capture its trailing cursor.
-last_id=$(curl --fail-with-body -sS \
+# Fetch the first page (newest activities first).
+curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/activities?limit=2" \
   --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  --header "anthropic-version: 2023-06-01" | jq -er '.last_id')
+  --header "anthropic-version: 2023-06-01"
 
-# Pass the cursor back unchanged to fetch the next (older) page.
+# LAST_ID is the last_id from the first response. Pass it back unchanged to fetch the next (older) page.
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
   --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
   --header "anthropic-version: 2023-06-01" \
   --data-urlencode "limit=2" \
-  --data-urlencode "after_id=${last_id}"
+  --data-urlencode "after_id=$LAST_ID"
 ```
 
 A production **backfill** loop pages through older activities by driving iteration off `has_more` and `last_id`:

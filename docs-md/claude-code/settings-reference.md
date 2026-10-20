@@ -742,7 +742,7 @@ scope: "Which settings files can set the key: user (~/.claude/settings.json), pr
 | [`spinnerTipsEnabled`](#spinnertipsenabled) | Hide tips in the spinner while Claude works | Interface and terminal | Any file |
 | [`spinnerTipsOverride`](#spinnertipsoverride) | Add your own tips to the spinner rotation, or replace the built-in tips | Interface and terminal | Any file |
 | [`spinnerVerbs`](#spinnerverbs) | Add or replace the verbs shown while a turn runs | Interface and terminal | Any file |
-| [`sshConfigs`](#sshconfigs) | Add [SSH connections](desktop.md#pre-configure-ssh-connections-for-your-team) to the Desktop environment dropdown | Remote, desktop, and notifications | User or managed |
+| [`sshConfigs`](#sshconfigs) | Add [SSH connections](desktop.md#pre-configure-ssh-connections-for-your-team) to the Desktop environment selector | Remote, desktop, and notifications | User or managed |
 | [`sshHostAllowlist`](#sshhostallowlist) | Limit which hosts [Desktop SSH sessions](desktop.md#restrict-which-ssh-hosts-users-can-connect-to) can reach | Remote, desktop, and notifications | Managed |
 | [`statusLine`](#statusline) | Run your own command to render a [status line](statusline.md) below the prompt | Interface and terminal | Any file |
 | [`strictKnownMarketplaces`](#strictknownmarketplaces) | Allowlist the [marketplace](plugins/overview.md) sources users can add and install from | Plugins and skills | Managed |
@@ -1628,7 +1628,7 @@ Set the [permission mode](permission-modes.md) new sessions start in. When you l
   * `"acceptEdits"`: Claude Code also runs file edits and common filesystem commands such as `mkdir` and `mv` without asking
   * `"plan"`: Claude Code reads and plans but blocks edits until you approve a plan
   * `"auto"`: Claude Code runs without routine prompts; before actions such as shell commands and network requests run, a background classifier checks that they align with your request
-  * `"dontAsk"`: Claude Code auto-denies every call that would otherwise prompt; file reads inside your working directories, other actions that need no approval, and pre-approved tools still run, apart from reads from [network paths](permissions.md#network-paths)
+  * `"dontAsk"`: Claude Code auto-denies every call that would otherwise prompt, though a [mod](plugins/mods/overview.md) you installed can still approve [some of those calls](permissions.md#precedence-among-rules-hooks-and-mods). File reads inside your working directories, other actions that need no approval, and pre-approved tools still run, apart from reads from [network paths](permissions.md#network-paths)
   * `"bypassPermissions"`: Claude Code runs everything without asking
   * `"manual"`: an alias for `"default"`
 * **Default**: unset
@@ -2729,7 +2729,7 @@ Set how full the context window gets before Claude Code [compacts automatically]
 * **Scope**: [`Any file`](#scopes)
 * **Type**: number of tokens, from `100000` to `1000000`. Claude Code caps the value at your model's context window; the [models overview](../api/models/overview.md) lists each model's window
 * **Default**: unset, so Claude Code picks a window tuned for your model
-* **Per-session overrides**: [`--autocompact`](cli-reference.md#cli-flags) takes precedence over this key for one session, and [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](env-vars.md) takes precedence over both
+* **Per-session overrides**: [`--autocompact`](cli-reference.md#cli-flags) takes precedence over this key for one session, and [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](env-vars.md) takes precedence over both unless Claude Code [ignores the variable's value](model-config.md#claude_code_auto_compact_window-values)
 
 ```json settings.json
 {
@@ -2889,7 +2889,7 @@ This example turns off automatic compaction and routes API requests through a pr
 * [`CLAUDE_CODE_PROJECT_DIR_NAME`](sessions.md#name-the-project-directory-yourself), which Claude Code reads from the launch environment only, is ignored from every file; requires v2.1.234 or later.
 * [`CLAUDE_CODE_RESTRICTED`](env-vars.md#variables), which Claude Code reads from the launch environment only, is ignored from every file.
 * [`CLAUDE_CODE_DISABLE_POWERSHELL_CMD_RM_DENY`](env-vars.md#variables), which Claude Code reads from the launch environment only, is ignored from every file. The variable requires Claude Code v2.1.283 or later.
-* [`CLAUDE_CODE_DISABLE_DANGEROUS_RM_TIMEOUT`, `CLAUDE_CODE_DISABLE_SUBSTITUTION_RM_PROMPT`, and `CLAUDE_CODE_DISABLE_INLINE_SHELL_RM_PROMPT`](env-vars.md#variables), which Claude Code reads from the launch environment only, are ignored from every file.
+* [`CLAUDE_CODE_DISABLE_DANGEROUS_RM_TIMEOUT`, `CLAUDE_CODE_DISABLE_SUBSTITUTION_RM_PROMPT`, `CLAUDE_CODE_DISABLE_INLINE_SHELL_RM_PROMPT`, and `CLAUDE_CODE_DISABLE_MOUNTED_DRIVE_RM_PROMPT`](env-vars.md#variables), which Claude Code reads from the launch environment only, are ignored from every file.
 
 ### `fileCheckpointingEnabled`
 
@@ -3747,7 +3747,7 @@ Set the transcript view Claude Code starts in: `"default"`, `"verbose"`, or `"fo
 
 ### `vimInsertModeRemaps`
 
-Map two-key INSERT-mode sequences to Escape in [vim editor mode](interactive-mode.md#vim-editor-mode). Each key is exactly two printable characters typed in sequence, and `"<Esc>"` is the only supported target; Claude Code ignores other entries. Requires Claude Code v2.1.208 or later.
+Map two-key INSERT-mode sequences to Escape in [vim editor mode](interactive-mode.md#vim-editor-mode). Each key is exactly two printable characters typed in sequence, and `"<Esc>"` is the only supported target; Claude Code ignores other entries.
 
 * **Scope**: [`User or managed`](#scopes). A repository can't remap your keystrokes.
 * **Type**: object mapping a two-character sequence to `"<Esc>"`
@@ -3761,7 +3761,7 @@ Map two-key INSERT-mode sequences to Escape in [vim editor mode](interactive-mod
 }
 ```
 
-Has no effect unless `editorMode` is `"vim"`. See [Remap INSERT-mode key sequences](interactive-mode.md#remap-insert-mode-key-sequences). Requires Claude Code v2.1.208 or later.
+Has no effect unless `editorMode` is `"vim"`. See [Remap INSERT-mode key sequences](interactive-mode.md#remap-insert-mode-key-sequences).
 
 ### `voice`
 
@@ -4780,7 +4780,7 @@ Claude Code ignores project and local entries because it substitutes these value
 
 List the managed plugins whose [mods](plugins/mods/overview.md) run before every mod a user installs, in the listed order. When you set this key in managed settings, name `sec-default@builtin` in the list to keep the built-in guard. In managed settings, Claude Code skips an id whose plugin doesn't count as your organization's. See [Install your organization's mods and set the order](plugins/mods/admin.md#install-your-organizations-mods) for those conditions and for how the two ordering keys work together.
 
-* **Scope**: [`User or managed`](#scopes). Claude Code reads the key from managed settings. It reads the key from user settings only on a machine with no managed settings, for a user who isn't signed in with a Team or Enterprise plan. It ignores the key in project and local settings and in a `--settings` file.
+* **Scope**: [`User or managed`](#scopes). Claude Code reads the key from managed settings. It reads the key from user settings only on a machine with no managed settings, in a session whose credential isn't a Team or Enterprise `/login`. It ignores the key in project and local settings and in a `--settings` file.
 * **Type**: array of `plugin-name@marketplace-name` strings
 * **Default**: unset
 
@@ -4800,7 +4800,7 @@ List the managed plugins whose [mods](plugins/mods/overview.md) run before every
 
 List the managed plugins whose [mods](plugins/mods/overview.md) run after every mod a user installs, in the listed order. An id listed in both `prependPlugins` and `appendPlugins` is prepended. In managed settings, Claude Code skips an id whose plugin doesn't [count as your organization's](plugins/mods/admin.md#install-your-organizations-mods).
 
-* **Scope**: [`User or managed`](#scopes). Claude Code reads the key from managed settings. It reads the key from user settings only on a machine with no managed settings, for a user who isn't signed in with a Team or Enterprise plan. It ignores the key in project and local settings and in a `--settings` file.
+* **Scope**: [`User or managed`](#scopes). Claude Code reads the key from managed settings. It reads the key from user settings only on a machine with no managed settings, in a session whose credential isn't a Team or Enterprise `/login`. It ignores the key in project and local settings and in a `--settings` file.
 * **Type**: array of `plugin-name@marketplace-name` strings
 * **Default**: unset
 
@@ -5329,7 +5329,14 @@ Stop Claude Code from registering the `claude-cli://` protocol handler with the 
 
 ### `disableDesktopLocalSessions`
 
-Turn off Code sessions that run on the device in the [desktop app](desktop.md#local-sessions-on-managed-devices), for deployments where developers should work on remote machines over SSH. In the Code tab, the **Local** environment stays in the environment dropdown but is grayed out and can't be selected, with a tooltip saying your organization turned it off; on Windows the WSL entry is grayed out the same way, though whether WSL sessions run on a managed device at all is [governed separately](admin-setup.md#wsl-sessions-in-claude-code-desktop). New sessions default to the first [SSH connection](desktop.md#ssh-sessions) if one is configured, and the app refuses to start or resume a session on the device, including an SSH connection back to the same machine. SSH sessions to other hosts and cloud sessions are unaffected. The desktop app reads this key; the terminal CLI ignores it. Requires Claude Desktop v1.37937.0 or later.
+Turn off Code sessions that run on the device in the [desktop app](desktop.md#local-sessions-on-managed-devices), for deployments where developers should work on remote machines over SSH. With the key set to `true`, users see this in the Code tab:
+
+* **Environment selector**: the entry for the user's computer is grayed out and unselectable, with the tooltip **Disabled by your organization**. On Windows the WSL entry is grayed out the same way, though whether WSL sessions run on a managed device at all is [governed separately](admin-setup.md#wsl-sessions-in-claude-code-desktop).
+* **New sessions**: default to the first [SSH connection](desktop.md#ssh-sessions) if one is configured
+* **Sessions on the device**: the app refuses to start or resume a session on the device, including an SSH connection back to the same machine
+* **SSH sessions to other hosts and cloud sessions**: unaffected
+
+The desktop app reads this key; the terminal CLI ignores it. Requires Claude Desktop v1.37937.0 or later.
 
 * **Scope**: [`Managed`](#scopes). By default, the desktop app reads the key from [one managed source](managed-settings.md#how-claude-code-combines-managed-sources).
 * **Type**: Boolean; only the JSON Boolean `true` takes effect
@@ -5462,7 +5469,7 @@ Claude Code ignores a `true` from project or local settings, so a repository can
 
 ### `sshConfigs`
 
-Add SSH connections to the [Desktop](desktop.md#pre-configure-ssh-connections-for-your-team) environment dropdown. Administrators use it to distribute shared connections to a team. Connections you define in managed settings show as managed. Users can select them and [set their own **Worktree folder**](desktop.md#choose-where-ssh-session-worktrees-go) for them, but can't edit anything else or delete them in the app.
+Add SSH connections to the [Desktop](desktop.md#pre-configure-ssh-connections-for-your-team) environment selector. Administrators use `sshConfigs` to distribute shared connections to a team. Users can select a managed connection and [set their own **Worktree folder**](desktop.md#set-the-worktree-folder-on-an-existing-connection) for it. They can't edit its other fields or delete it in the app.
 
 * **Scope**: [`User or managed`](#scopes). The desktop app reads this key. By default, it reads managed connections from [one managed source](managed-settings.md#how-claude-code-combines-managed-sources).
 * **Type**: array of objects, each with required `id`, `name`, and `sshHost` and optional `sshPort` and `sshIdentityFile`

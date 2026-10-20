@@ -1,4 +1,4 @@
-# After the dream ends, the memory_store output holds the rebuilt store
+# $output_store_id is the memory_store_id of the completed dream's memory_store output
 
 ---
 title: Dreams
@@ -71,10 +71,10 @@ print(dream.id)  # drm_01...
 let dream = await client.beta.dreams.create({
   inputs: [
     { type: "memory_store", memory_store_id: storeId },
-    { type: "sessions", session_ids: [sessionA, sessionB] },
+    { type: "sessions", session_ids: [sessionA, sessionB] }
   ],
   model: "claude-opus-5-5",
-  instructions: "Focus on coding-style preferences; ignore one-off debugging notes.",
+  instructions: "Focus on coding-style preferences; ignore one-off debugging notes."
 });
 console.log(dream.id); // drm_01...
 ```
@@ -197,16 +197,10 @@ Use `instructions` (csharp, go: `Instructions`) for high-level synthesis guidanc
 Dreams run asynchronously and typically take minutes to a few hours, driven by the number of input transcripts. Poll the dream by ID to check status:
 
 ```bash cURL
-while true; do
-  dream=$(curl -s "https://api.anthropic.com/v1/dreams/$dream_id" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01,dreaming-2026-04-21")
-  status=$(jq -r '.status' <<< "$dream")
-  echo "status=$status input_tokens=$(jq -r '.usage.input_tokens' <<< "$dream")"
-  [[ "$status" == "pending" || "$status" == "running" ]] || break
-  sleep 10
-done
+curl -s "https://api.anthropic.com/v1/dreams/$dream_id" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01,dreaming-2026-04-21"
 ```
 
 ```bash CLI
@@ -295,9 +289,7 @@ When `status` (csharp, go: `Status`) reaches `completed`, the `memory_store` ent
 * **Discard it:** [delete the memory store](../api/beta/memory_stores/delete.md) or [archive the memory store](../api/beta/memory_stores/archive.md).
 
 ```bash cURL
-# After the dream ends, the memory_store output holds the rebuilt store
-output_store_id=$(jq -r 'first(.outputs[] | select(.type == "memory_store")).memory_store_id' <<< "$dream")
-
+# $output_store_id is the memory_store_id of the completed dream's memory_store output
 curl -s https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -313,9 +305,7 @@ curl -s https://api.anthropic.com/v1/sessions \
 ```
 
 ```bash CLI
-output_store_id=$(ant beta:dreams retrieve --dream-id "$dream_id" --format json |
-  jq -r 'first(.outputs[] | select(.type == "memory_store")).memory_store_id')
-
+# $output_store_id is the memory_store_id of the completed dream's memory_store output
 ant beta:sessions create <<YAML
 agent: $agent_id
 environment_id: $environment_id
@@ -348,9 +338,7 @@ const outputStoreId = output!.memory_store_id;
 await client.beta.sessions.create({
   agent: agentId,
   environment_id: environmentId,
-  resources: [
-    { type: "memory_store", memory_store_id: outputStoreId },
-  ],
+  resources: [{ type: "memory_store", memory_store_id: outputStoreId }]
 });
 ```
 

@@ -31,7 +31,7 @@ Include the `diagnostics` object on every turn. The object is the opt-in: the AP
 
 ```bash cURL
 # Turn 1: establish the cache and opt in to diagnostics
-response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
+curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
@@ -42,11 +42,10 @@ response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
     "system": "You are an AI assistant analyzing a large document. <document>...</document>",
     "messages": [{"role": "user", "content": "Summarize section 1."}],
     "diagnostics": {"previous_message_id": null}
-  }')
-jq '{id, diagnostics}' <<< "$response"
-message_id=$(jq -r '.id' <<< "$response")
+  }'
 
-# Turn 2: reference the previous turn so the API can compare prefixes
+# Turn 2: pass the id from the turn 1 response as previous_message_id, so the API can compare prefixes.
+# In the response, diagnostics: null means no divergence was found.
 curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -62,13 +61,12 @@ curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
       {"role": "user", "content": "Now summarize section 2."}
     ],
     "diagnostics": {"previous_message_id": "'"$message_id"'"}
-  }' | jq '{id, diagnostics}'  # diagnostics: null means no divergence was found
+  }'
 ```
 
 ```bash CLI
-# Turn 1
-turn1=$(ant beta:messages create \
-  --transform '{id,usage,diagnostics}' <<'YAML'
+# Turn 1: establish the cache and opt in to diagnostics
+ant beta:messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 cache_control:
@@ -80,13 +78,9 @@ messages:
 diagnostics:
   previous_message_id: null
 YAML
-)
-printf '%s\n' "$turn1"
 
-# Turn 2: pass the id from turn 1 as previous_message_id
-message_id=$(jq -r '.id' <<<"$turn1")
-ant beta:messages create \
-  --transform '{id,usage,diagnostics}' <<YAML
+# Turn 2: pass the id from the turn 1 response as previous_message_id
+ant beta:messages create <<YAML
 model: claude-opus-5-5
 max_tokens: 1024
 cache_control:
@@ -422,14 +416,13 @@ curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
       {"role": "user", "content": "Now summarize section 2."}
     ],
     "diagnostics": {"previous_message_id": "'"$message_id"'"}
-  }' | jq -R 'select(startswith("data: ")) | ltrimstr("data: ") | fromjson | select(.type == "message_start") | .message.diagnostics'
+  }'
 ```
 
 ```bash CLI
 # Turn 2: stream. With --stream the CLI emits each SSE event as one JSON object.
-# diagnostics arrives on the message_start event; pick it out with jq.
-ant beta:messages create \
-  --stream --format jsonl <<YAML |
+# diagnostics arrives on the message_start event.
+ant beta:messages create --stream <<YAML
 model: claude-opus-5-5
 max_tokens: 1024
 cache_control:
@@ -445,7 +438,6 @@ messages:
 diagnostics:
   previous_message_id: $message_id
 YAML
-  jq -c 'select(.type == "message_start") | .message | {id,usage,diagnostics}'
 ```
 
 ```python Python

@@ -7,13 +7,13 @@ url: https://platform.claude.com/docs/en/api/python/beta/vaults/credentials
 
 # Credentials
 
-## Create Credential
+## Create a Credential
 
 `beta.vaults.credentials.create(vault_id, **kwargs)  -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials`
 
-Create Credential
+Create a Credential
 
 ### Parameters
 
@@ -33,7 +33,7 @@ Create Credential
 
     - `access_token: str`
 
-      OAuth access token.
+      The OAuth access token to send to the MCP server.
 
       minLength: 1, maxLength: 8192
 
@@ -45,7 +45,9 @@ Create Credential
 
     - `expires_at: Optional[Union[str, datetime, null]]`
 
-      A timestamp in RFC 3339 format
+      When `access_token` expires, in RFC 3339.
+
+      Must be in the future.
 
       format: date-time
 
@@ -55,13 +57,13 @@ Create Credential
 
       - `client_id: str`
 
-        OAuth client ID.
+        The OAuth client ID to use when refreshing the access token. It can't be changed after the credential is created.
 
         minLength: 1, maxLength: 1024
 
       - `refresh_token: str`
 
-        OAuth refresh token.
+        The OAuth refresh token that the API uses to get a new access token when the current one expires.
 
         minLength: 1, maxLength: 8192
 
@@ -87,7 +89,7 @@ Create Credential
 
           - `client_secret: str`
 
-            OAuth client secret.
+            The OAuth client secret, sent to `token_endpoint` with HTTP Basic authentication.
 
             minLength: 1, maxLength: 512
 
@@ -99,7 +101,7 @@ Create Credential
 
           - `client_secret: str`
 
-            OAuth client secret.
+            The OAuth client secret, sent to `token_endpoint` in the POST body.
 
             minLength: 1, maxLength: 512
 
@@ -123,7 +125,7 @@ Create Credential
 
     - `token: str`
 
-      Static bearer token value.
+      The static bearer token to send to the MCP server, such as an API key or personal access token.
 
       minLength: 1, maxLength: 8192
 
@@ -157,7 +159,9 @@ Create Credential
 
         - `allowed_hosts: Sequence[str]`
 
-          Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+          The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+          Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
     - `secret_name: str`
 
@@ -167,7 +171,7 @@ Create Credential
 
     - `secret_value: str`
 
-      Secret value. Write-only; never returned in responses.
+      The secret to substitute into the agent's outbound requests. It's write-only and never returned in responses.
 
       minLength: 1, maxLength: 4096
 
@@ -317,7 +321,7 @@ Create Credential
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -341,7 +345,7 @@ Create Credential
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -351,7 +355,7 @@ Create Credential
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -431,7 +435,9 @@ Create Credential
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -520,7 +526,7 @@ List Credentials
 
 - `include_archived: Optional[bool]` (query parameter)
 
-  Whether to include archived credentials in the results.
+  Whether to include archived credentials in the results. Defaults to `false`.
 
 - `limit: Optional[int]` (query parameter)
 
@@ -530,7 +536,7 @@ List Credentials
 
 - `page: Optional[str]` (query parameter)
 
-  Opaque pagination token from a previous `list_credentials` response.
+  The `next_page` value from a previous [List Credentials](../../../beta/vaults/credentials/list.md) response, to get the next page. Leave it out to get the first page.
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
@@ -656,7 +662,7 @@ List Credentials
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -680,7 +686,7 @@ List Credentials
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -690,7 +696,7 @@ List Credentials
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -770,7 +776,9 @@ List Credentials
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -844,13 +852,13 @@ print(page.id)
 }
 ```
 
-## Get Credential
+## Retrieve a Credential
 
 `beta.vaults.credentials.retrieve(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
 
 **GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Get Credential
+Retrieve a Credential
 
 ### Parameters
 
@@ -986,7 +994,7 @@ Get Credential
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -1010,7 +1018,7 @@ Get Credential
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -1020,7 +1028,7 @@ Get Credential
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -1100,7 +1108,9 @@ Get Credential
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -1169,13 +1179,13 @@ print(beta_managed_agents_credential.id)
 }
 ```
 
-## Update Credential
+## Update a Credential
 
 `beta.vaults.credentials.update(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Update Credential
+Update a Credential
 
 ### Parameters
 
@@ -1189,7 +1199,7 @@ Update Credential
 
 - `auth: Optional[Auth]`
 
-  Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
+  New authentication settings for the credential. The `type` must match the credential's current type, which can't be changed.
 
   - `class BetaManagedAgentsMCPOAuthUpdateParams`
 
@@ -1199,13 +1209,17 @@ Update Credential
 
     - `access_token: Optional[str]`
 
-      Updated OAuth access token.
+      The new OAuth access token to replace the stored one.
 
       minLength: 1, maxLength: 8192
 
     - `expires_at: Optional[Union[str, datetime, null]]`
 
-      A timestamp in RFC 3339 format
+      When the credential's access token expires, in RFC 3339. Leave it out to keep the stored expiry.
+
+      If you send a new `access_token`, send its `expires_at` too, or the new token keeps the old expiry.
+
+      Must be in the future.
 
       format: date-time
 
@@ -1215,13 +1229,13 @@ Update Credential
 
       - `refresh_token: Optional[str]`
 
-        Updated OAuth refresh token.
+        The new OAuth refresh token to replace the stored one.
 
         minLength: 1, maxLength: 8192
 
       - `scope: Optional[str]`
 
-        Updated OAuth scope for the refresh request.
+        The new OAuth scope for refresh requests. Send an empty string to clear the stored scope.
 
         maxLength: 8192
 
@@ -1235,7 +1249,9 @@ Update Credential
 
           - `client_secret: Optional[str]`
 
-            Updated OAuth client secret.
+            A new OAuth client secret to replace the stored one.
+
+            The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
             minLength: 1, maxLength: 512
 
@@ -1247,7 +1263,9 @@ Update Credential
 
           - `client_secret: Optional[str]`
 
-            Updated OAuth client secret.
+            A new OAuth client secret to replace the stored one.
+
+            The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
             minLength: 1, maxLength: 512
 
@@ -1259,7 +1277,7 @@ Update Credential
 
     - `token: Optional[str]`
 
-      Updated static bearer token value.
+      The new static bearer token to replace the stored one.
 
       minLength: 1, maxLength: 8192
 
@@ -1283,7 +1301,7 @@ Update Credential
 
     - `networking: Optional[BetaManagedAgentsCredentialNetworkingParams]`
 
-      Updated networking scope. Full replacement.
+      The new networking scope, which replaces the stored one as a whole.
 
       - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
@@ -1299,11 +1317,13 @@ Update Credential
 
         - `allowed_hosts: Sequence[str]`
 
-          Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+          The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+          Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
     - `secret_value: Optional[str]`
 
-      Updated secret value.
+      The new secret value to replace the stored one.
 
       minLength: 1, maxLength: 4096
 
@@ -1441,7 +1461,7 @@ Update Credential
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -1465,7 +1485,7 @@ Update Credential
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -1475,7 +1495,7 @@ Update Credential
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -1555,7 +1575,9 @@ Update Credential
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -1624,13 +1646,13 @@ print(beta_managed_agents_credential.id)
 }
 ```
 
-## Delete Credential
+## Delete a Credential
 
 `beta.vaults.credentials.delete(credential_id, **kwargs)  -> BetaManagedAgentsDeletedCredential`
 
 **DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Delete Credential
+Delete a Credential
 
 ### Parameters
 
@@ -1766,7 +1788,7 @@ Delete Credential
 
   - `id: str`
 
-    Unique identifier of the deleted credential.
+    The unique ID of the deleted credential (`vcrd_...`).
 
 ### Example
 
@@ -1795,13 +1817,13 @@ print(beta_managed_agents_deleted_credential.id)
 }
 ```
 
-## Archive Credential
+## Archive a Credential
 
 `beta.vaults.credentials.archive(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
-Archive Credential
+Archive a Credential
 
 ### Parameters
 
@@ -1937,7 +1959,7 @@ Archive Credential
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -1961,7 +1983,7 @@ Archive Credential
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -1971,7 +1993,7 @@ Archive Credential
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -2051,7 +2073,9 @@ Archive Credential
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -2120,13 +2144,13 @@ print(beta_managed_agents_credential.id)
 }
 ```
 
-## Validate Credential
+## Validate an MCP OAuth Credential
 
 `beta.vaults.credentials.mcp_oauth_validate(credential_id, **kwargs)  -> BetaManagedAgentsCredentialValidation`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
-Validate Credential
+Validate an MCP OAuth Credential
 
 ### Parameters
 
@@ -2270,11 +2294,11 @@ Validate Credential
 
   - `mcp_probe: Optional[BetaManagedAgentsMCPProbe]`
 
-    Details of the failing MCP probe step. Null when the probe succeeded.
+    Details of the MCP probe step that failed, or `null` if the probe succeeded or there was no access token to test.
 
     - `http_response: Optional[BetaManagedAgentsRefreshHTTPResponse]`
 
-      The captured HTTP error response. Null when no HTTP response was received (timeout, DNS, TLS).
+      The HTTP error response from the MCP server, or `null` if the MCP server didn't return one for the failing step, for example after a timeout or a DNS or TLS failure.
 
       - `body: str`
 
@@ -2336,11 +2360,11 @@ Validate Credential
 
     - `"invalid"`
 
-      The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+      The probe reached the MCP server and the server rejected the credential, or no access token is stored. A refresh, if one was tried, didn't recover it. Usually the end user needs to authorize again.
 
     - `"unknown"`
 
-      The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
+      The probe couldn't tell whether the credential works, for example because of a network error or because a refresh succeeded but the new access token wasn't tested. Validate the credential again to find out.
 
   - `validated_at: datetime`
 
@@ -2415,7 +2439,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -2439,7 +2463,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -2449,7 +2473,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -2529,7 +2553,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -2577,7 +2603,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     - `allowed_hosts: Sequence[str]`
 
-      Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+      The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+      Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
 ### Beta Managed Agents Credential Validation
 
@@ -2597,11 +2625,11 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `mcp_probe: Optional[BetaManagedAgentsMCPProbe]`
 
-    Details of the failing MCP probe step. Null when the probe succeeded.
+    Details of the MCP probe step that failed, or `null` if the probe succeeded or there was no access token to test.
 
     - `http_response: Optional[BetaManagedAgentsRefreshHTTPResponse]`
 
-      The captured HTTP error response. Null when no HTTP response was received (timeout, DNS, TLS).
+      The HTTP error response from the MCP server, or `null` if the MCP server didn't return one for the failing step, for example after a timeout or a DNS or TLS failure.
 
       - `body: str`
 
@@ -2663,11 +2691,11 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     - `"invalid"`
 
-      The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+      The probe reached the MCP server and the server rejected the credential, or no access token is stored. A refresh, if one was tried, didn't recover it. Usually the end user needs to authorize again.
 
     - `"unknown"`
 
-      The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
+      The probe couldn't tell whether the credential works, for example because of a network error or because a refresh succeeded but the new access token wasn't tested. Validate the credential again to find out.
 
   - `validated_at: datetime`
 
@@ -2691,11 +2719,11 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `"invalid"`
 
-    The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+    The probe reached the MCP server and the server rejected the credential, or no access token is stored. A refresh, if one was tried, didn't recover it. Usually the end user needs to authorize again.
 
   - `"unknown"`
 
-    The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
+    The probe couldn't tell whether the credential works, for example because of a network error or because a refresh succeeded but the new access token wasn't tested. Validate the credential again to find out.
 
 ### Beta Managed Agents Deleted Credential
 
@@ -2707,7 +2735,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `id: str`
 
-    Unique identifier of the deleted credential.
+    The unique ID of the deleted credential (`vcrd_...`).
 
 ### Beta Managed Agents Environment Variable Auth Response
 
@@ -2747,7 +2775,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       - `allowed_hosts: List[str]`
 
-        Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+        The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+        An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
   - `secret_name: str`
 
@@ -2779,7 +2809,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       - `allowed_hosts: Sequence[str]`
 
-        Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+        The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+        Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
   - `secret_name: str`
 
@@ -2789,7 +2821,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `secret_value: str`
 
-    Secret value. Write-only; never returned in responses.
+    The secret to substitute into the agent's outbound requests. It's write-only and never returned in responses.
 
     minLength: 1, maxLength: 4096
 
@@ -2827,7 +2859,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `networking: Optional[BetaManagedAgentsCredentialNetworkingParams]`
 
-    Updated networking scope. Full replacement.
+    The new networking scope, which replaces the stored one as a whole.
 
     - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
@@ -2843,11 +2875,13 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       - `allowed_hosts: Sequence[str]`
 
-        Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+        The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+        Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
   - `secret_value: Optional[str]`
 
-    Updated secret value.
+    The new secret value to replace the stored one.
 
     minLength: 1, maxLength: 4096
 
@@ -2883,7 +2917,11 @@ print(beta_managed_agents_credential_validation.credential_id)
 
 - `class BetaManagedAgentsInjectionLocationUpdateParams`
 
-  Updated injection location.
+  Changes which parts of an outbound request the secret is substituted into. A location you leave out keeps its current setting.
+
+  After the change, at least one location must be enabled.
+
+  See [Authenticate with vaults](../../../../managed-agents/vaults.md#add-a-credential) to learn more about injection locations.
 
   - `body: Optional[bool]`
 
@@ -2903,7 +2941,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `allowed_hosts: Sequence[str]`
 
-    Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+    The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+    Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
 ### Beta Managed Agents Limited Credential Networking Response
 
@@ -2915,7 +2955,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `allowed_hosts: List[str]`
 
-    Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+    The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+    An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
 ### Beta Managed Agents MCP OAuth Auth Response
 
@@ -2931,7 +2973,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `expires_at: Optional[datetime]`
 
-    A timestamp in RFC 3339 format
+    When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
     format: date-time
 
@@ -2941,7 +2983,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     - `client_id: str`
 
-      OAuth client ID.
+      The OAuth client ID used when refreshing the access token.
 
     - `token_endpoint: str`
 
@@ -2985,7 +3027,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `access_token: str`
 
-    OAuth access token.
+    The OAuth access token to send to the MCP server.
 
     minLength: 1, maxLength: 8192
 
@@ -2997,7 +3039,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `expires_at: Optional[Union[str, datetime, null]]`
 
-    A timestamp in RFC 3339 format
+    When `access_token` expires, in RFC 3339.
+
+    Must be in the future.
 
     format: date-time
 
@@ -3007,13 +3051,13 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     - `client_id: str`
 
-      OAuth client ID.
+      The OAuth client ID to use when refreshing the access token. It can't be changed after the credential is created.
 
       minLength: 1, maxLength: 1024
 
     - `refresh_token: str`
 
-      OAuth refresh token.
+      The OAuth refresh token that the API uses to get a new access token when the current one expires.
 
       minLength: 1, maxLength: 8192
 
@@ -3039,7 +3083,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
         - `client_secret: str`
 
-          OAuth client secret.
+          The OAuth client secret, sent to `token_endpoint` with HTTP Basic authentication.
 
           minLength: 1, maxLength: 512
 
@@ -3051,7 +3095,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
         - `client_secret: str`
 
-          OAuth client secret.
+          The OAuth client secret, sent to `token_endpoint` in the POST body.
 
           minLength: 1, maxLength: 512
 
@@ -3075,13 +3119,13 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `client_id: str`
 
-    OAuth client ID.
+    The OAuth client ID to use when refreshing the access token. It can't be changed after the credential is created.
 
     minLength: 1, maxLength: 1024
 
   - `refresh_token: str`
 
-    OAuth refresh token.
+    The OAuth refresh token that the API uses to get a new access token when the current one expires.
 
     minLength: 1, maxLength: 8192
 
@@ -3107,7 +3151,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       - `client_secret: str`
 
-        OAuth client secret.
+        The OAuth client secret, sent to `token_endpoint` with HTTP Basic authentication.
 
         minLength: 1, maxLength: 512
 
@@ -3119,7 +3163,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       - `client_secret: str`
 
-        OAuth client secret.
+        The OAuth client secret, sent to `token_endpoint` in the POST body.
 
         minLength: 1, maxLength: 512
 
@@ -3143,7 +3187,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `client_id: str`
 
-    OAuth client ID.
+    The OAuth client ID used when refreshing the access token.
 
   - `token_endpoint: str`
 
@@ -3185,13 +3229,13 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `refresh_token: Optional[str]`
 
-    Updated OAuth refresh token.
+    The new OAuth refresh token to replace the stored one.
 
     minLength: 1, maxLength: 8192
 
   - `scope: Optional[str]`
 
-    Updated OAuth scope for the refresh request.
+    The new OAuth scope for refresh requests. Send an empty string to clear the stored scope.
 
     maxLength: 8192
 
@@ -3205,7 +3249,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       - `client_secret: Optional[str]`
 
-        Updated OAuth client secret.
+        A new OAuth client secret to replace the stored one.
+
+        The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
         minLength: 1, maxLength: 512
 
@@ -3217,7 +3263,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
       - `client_secret: Optional[str]`
 
-        Updated OAuth client secret.
+        A new OAuth client secret to replace the stored one.
+
+        The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
         minLength: 1, maxLength: 512
 
@@ -3231,13 +3279,17 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `access_token: Optional[str]`
 
-    Updated OAuth access token.
+    The new OAuth access token to replace the stored one.
 
     minLength: 1, maxLength: 8192
 
   - `expires_at: Optional[Union[str, datetime, null]]`
 
-    A timestamp in RFC 3339 format
+    When the credential's access token expires, in RFC 3339. Leave it out to keep the stored expiry.
+
+    If you send a new `access_token`, send its `expires_at` too, or the new token keeps the old expiry.
+
+    Must be in the future.
 
     format: date-time
 
@@ -3247,13 +3299,13 @@ print(beta_managed_agents_credential_validation.credential_id)
 
     - `refresh_token: Optional[str]`
 
-      Updated OAuth refresh token.
+      The new OAuth refresh token to replace the stored one.
 
       minLength: 1, maxLength: 8192
 
     - `scope: Optional[str]`
 
-      Updated OAuth scope for the refresh request.
+      The new OAuth scope for refresh requests. Send an empty string to clear the stored scope.
 
       maxLength: 8192
 
@@ -3267,7 +3319,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
         - `client_secret: Optional[str]`
 
-          Updated OAuth client secret.
+          A new OAuth client secret to replace the stored one.
+
+          The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
           minLength: 1, maxLength: 512
 
@@ -3279,7 +3333,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
         - `client_secret: Optional[str]`
 
-          Updated OAuth client secret.
+          A new OAuth client secret to replace the stored one.
+
+          The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
           minLength: 1, maxLength: 512
 
@@ -3291,7 +3347,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `http_response: Optional[BetaManagedAgentsRefreshHTTPResponse]`
 
-    The captured HTTP error response. Null when no HTTP response was received (timeout, DNS, TLS).
+    The HTTP error response from the MCP server, or `null` if the MCP server didn't return one for the failing step, for example after a timeout or a DNS or TLS failure.
 
     - `body: str`
 
@@ -3409,7 +3465,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `token: str`
 
-    Static bearer token value.
+    The static bearer token to send to the MCP server, such as an API key or personal access token.
 
     minLength: 1, maxLength: 8192
 
@@ -3429,7 +3485,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `token: Optional[str]`
 
-    Updated static bearer token value.
+    The new static bearer token to replace the stored one.
 
     minLength: 1, maxLength: 8192
 
@@ -3443,7 +3499,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `client_secret: str`
 
-    OAuth client secret.
+    The OAuth client secret, sent to `token_endpoint` with HTTP Basic authentication.
 
     minLength: 1, maxLength: 512
 
@@ -3465,7 +3521,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `client_secret: Optional[str]`
 
-    Updated OAuth client secret.
+    A new OAuth client secret to replace the stored one.
+
+    The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
     minLength: 1, maxLength: 512
 
@@ -3495,7 +3553,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `client_secret: str`
 
-    OAuth client secret.
+    The OAuth client secret, sent to `token_endpoint` in the POST body.
 
     minLength: 1, maxLength: 512
 
@@ -3517,7 +3575,9 @@ print(beta_managed_agents_credential_validation.credential_id)
 
   - `client_secret: Optional[str]`
 
-    Updated OAuth client secret.
+    A new OAuth client secret to replace the stored one.
+
+    The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
     minLength: 1, maxLength: 512
 

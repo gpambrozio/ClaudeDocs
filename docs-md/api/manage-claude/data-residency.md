@@ -47,8 +47,7 @@ ant messages create \
   --model claude-opus-5-5 \
   --max-tokens 1024 \
   --inference-geo us \
-  --message '{role: user, content: "Summarize the key points of this document."}' \
-  --transform '{content.#(type=="text").text,usage.inference_geo}' --format yaml
+  --message '{role: user, content: "Summarize the key points of this document."}'
 ```
 
 ```python Python
@@ -85,9 +84,7 @@ const response = await client.messages.create({
   ]
 });
 
-const textBlock = response.content.find(
-  (block): block is Anthropic.TextBlock => block.type === "text"
-);
+const textBlock = response.content.find((block) => block.type === "text");
 console.log(textBlock?.text);
 // Check where inference actually ran
 console.log(`Inference geo: ${response.usage.inference_geo}`);

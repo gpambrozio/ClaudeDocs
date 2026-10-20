@@ -17,7 +17,7 @@ List Vaults
 
 - `include_archived: Optional[bool]` (query parameter)
 
-  Whether to include archived vaults in the results.
+  Whether to include archived vaults in the results. Defaults to `false`.
 
 - `limit: Optional[int]` (query parameter)
 
@@ -27,7 +27,7 @@ List Vaults
 
 - `page: Optional[str]` (query parameter)
 
-  Opaque pagination token from a previous `list_vaults` response.
+  The `next_page` value from a previous [List Vaults](../../../beta/vaults/list.md) response, to get the next page. Leave it out to get the first page.
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
@@ -153,7 +153,7 @@ List Vaults
 
   - `id: str`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: Optional[datetime]`
 

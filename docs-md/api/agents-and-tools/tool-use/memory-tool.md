@@ -337,6 +337,7 @@ console.log(finalMessage.content);
 using Anthropic;
 using Anthropic.Helpers.Beta;
 using Anthropic.Models.Beta.Messages;
+using Model = Anthropic.Models.Messages.Model;
 
 var client = new AnthropicClient();
 
@@ -346,7 +347,7 @@ var memory = new FilesystemMemoryTool("./memories");
 var runner = client.Beta.Messages.ToolRunner(
     new MessageCreateParams
     {
-        Model = Anthropic.Models.Messages.Model.ClaudeOpus5_5,
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages =
         [

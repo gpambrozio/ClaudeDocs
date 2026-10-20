@@ -21,7 +21,7 @@ List Credentials
 
 - `includeArchived?:optional bool` (query parameter)
 
-  Whether to include archived credentials in the results.
+  Whether to include archived credentials in the results. Defaults to `false`.
 
 - `limit?:optional int` (query parameter)
 
@@ -29,7 +29,7 @@ List Credentials
 
 - `page?:optional string` (query parameter)
 
-  Opaque pagination token from a previous `list_credentials` response.
+  The `next_page` value from a previous [List Credentials](../../../../beta/vaults/credentials/list.md) response, to get the next page. Leave it out to get the first page.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -49,7 +49,7 @@ List Credentials
 
   - `string id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `?\Datetime archivedAt`
 

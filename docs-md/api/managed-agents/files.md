@@ -19,14 +19,15 @@ You can provide files to your agent by uploading them through the Files API and 
 First, upload a file using the [Files API](../build-with-claude/files.md):
 
 ```bash cURL
-file=$(curl --fail-with-body -sS "${auth[@]}" \
-  "${base_url}/files" \
-  -F file=@data.csv)
-FILE_ID=$(jq -er '.id' <<<"${file}")
+curl --fail-with-body -sS https://api.anthropic.com/v1/files \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -F file=@data.csv
 ```
 
 ```bash CLI
-FILE_ID=$(ant files upload --file data.csv --transform id --raw-output)
+ant files upload --file data.csv
 ```
 
 ```python Python
@@ -36,7 +37,7 @@ print(f"File ID: {file.id}")
 
 ```typescript TypeScript
 const file = await client.files.upload({
-  file: await toFile(readFile("data.csv"), "data.csv", { type: "text/csv" }),
+  file: await toFile(readFile("data.csv"), "data.csv", { type: "text/csv" })
 });
 console.log(`File ID: ${file.id}`);
 ```
@@ -89,21 +90,22 @@ Mount uploaded files into the sandbox by adding them to the `resources` (csharp,
 The `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) is optional, but make sure the uploaded file has a descriptive name so the agent can identify it.
 
 ```bash cURL
-jq -n \
-  --arg agent_id "${AGENT_ID}" \
-  --arg environment_id "${ENVIRONMENT_ID}" \
-  --arg file_id "${FILE_ID}" \
-  '{
-    agent: $agent_id,
-    environment_id: $environment_id,
-    resources: [
+curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "agent": "'"$AGENT_ID"'",
+    "environment_id": "'"$ENVIRONMENT_ID"'",
+    "resources": [
       {
-        type: "file",
-        file_id: $file_id,
-        mount_path: "/data.csv"
+        "type": "file",
+        "file_id": "'"$FILE_ID"'",
+        "mount_path": "/data.csv"
       }
     ]
-  }' | curl --fail-with-body -sS "${auth[@]}" "${base_url}/sessions" --json @-
+  }'
 ```
 
 ```bash CLI
@@ -139,9 +141,9 @@ const session = await client.beta.sessions.create({
     {
       type: "file",
       file_id: file.id,
-      mount_path: "/data.csv",
-    },
-  ],
+      mount_path: "/data.csv"
+    }
+  ]
 });
 ```
 
@@ -351,9 +353,15 @@ A maximum of 500 files is supported per session.
 You can add or remove files from a session after creation using the session resources API. Each resource has an `id` (csharp, go: `ID`) returned when it is added (or listed), which you use for deletes.
 
 ```bash cURL
-jq -n --arg file_id "${FILE_ID}" '{type: "file", file_id: $file_id}' \
-  | curl --fail-with-body -sS "${auth[@]}" \
-      "${base_url}/sessions/${SESSION_ID}/resources" --json @-
+curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/resources" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "type": "file",
+    "file_id": "'"$FILE_ID"'"
+  }'
 ```
 
 ```bash CLI
@@ -375,7 +383,7 @@ print(resource.id)  # "sesrsc_01ABC..."
 ```typescript TypeScript
 const resource = await client.beta.sessions.resources.add(session.id, {
   type: "file",
-  file_id: file.id,
+  file_id: file.id
 });
 if (resource.type !== "file") {
   throw new Error(`Unexpected resource type: ${resource.type}`);
@@ -441,11 +449,15 @@ puts resource.id # "sesrsc_01ABC..."
 List all resources on a session with `GET /v1/sessions/{session_id}/resources` (python, typescript, ruby: `client.beta.sessions.resources.list()`; go, csharp: `client.Beta.Sessions.Resources.List()`; java: `client.beta().sessions().resources().list()`; php: `$client->beta->sessions->resources->list()`; cli: `ant beta:sessions:resources list`). To remove a file, call `DELETE /v1/sessions/{session_id}/resources/{resource_id}` (python, typescript, ruby: `client.beta.sessions.resources.delete()`; go, csharp: `client.Beta.Sessions.Resources.Delete()`; java: `client.beta().sessions().resources().delete()`; php: `$client->beta->sessions->resources->delete()`; cli: `ant beta:sessions:resources delete`) with the resource ID:
 
 ```bash cURL
-curl --fail-with-body -sS "${auth[@]}" \
-  "${base_url}/sessions/${SESSION_ID}/resources"
+curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/resources" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01"
 
-curl --fail-with-body -sS "${auth[@]}" -X DELETE \
-  "${base_url}/sessions/${SESSION_ID}/resources/${RESOURCE_ID}" >/dev/null
+curl --fail-with-body -sS -X DELETE "https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 
 ```bash CLI
@@ -473,7 +485,7 @@ for (const entry of listed.data) {
 }
 
 await client.beta.sessions.resources.delete(resource.id, {
-  session_id: session.id,
+  session_id: session.id
 });
 ```
 

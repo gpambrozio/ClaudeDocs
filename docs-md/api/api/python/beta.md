@@ -739,9 +739,13 @@ The Models API response can be used to determine which models are available for 
 
           Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
 
+        - `between_tools: BetaCapabilitySupport`
+
+          Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
         - `disabled: BetaCapabilitySupport`
 
-          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
         - `enabled: BetaCapabilitySupport`
 
@@ -901,6 +905,9 @@ print(page.id)
           "supported": true,
           "types": {
             "adaptive": {
+              "supported": true
+            },
+            "between_tools": {
               "supported": true
             },
             "disabled": {
@@ -1203,9 +1210,13 @@ The Models API response can be used to determine information about a specific mo
 
           Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
 
+        - `between_tools: BetaCapabilitySupport`
+
+          Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
         - `disabled: BetaCapabilitySupport`
 
-          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
         - `enabled: BetaCapabilitySupport`
 
@@ -1364,6 +1375,9 @@ print(beta_model_info.id)
       "supported": true,
       "types": {
         "adaptive": {
+          "supported": true
+        },
+        "between_tools": {
           "supported": true
         },
         "disabled": {
@@ -23448,7 +23462,11 @@ Create Agent
 
   Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control
 
-  - `Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
+  - `type BetaManagedAgentsModel = Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
+
+    The model that will power your agent.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `"claude-haiku-5-5"`
 
@@ -23529,76 +23547,6 @@ Create Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `"claude-haiku-5-5"`
-
-        Fastest model for high-volume, real-time tasks
-
-      - `"claude-sonnet-5-5"`
-
-        Efficient model for coding and agents
-
-      - `"claude-opus-5-5"`
-
-        Powerful intelligence for coding, knowledge work, and long-running agents
-
-      - `"claude-fable-5-1"`
-
-        Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
-
-      - `"claude-sonnet-5"`
-
-        Efficient model for coding and agents
-
-      - `"claude-fable-5"`
-
-        Next generation of intelligence for the hardest knowledge work and coding problems
-
-      - `"claude-opus-5"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-8"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-7"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-6"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-sonnet-4-6"`
-
-        Best combination of speed and intelligence
-
-      - `"claude-haiku-4-5"`
-
-      - `"claude-haiku-4-5-20251001"`
-
-      - `"claude-opus-4-5"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-5-20251101"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-sonnet-4-5"`
-
-        **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-        High-performance model for agents and coding
-
-      - `"claude-sonnet-4-5-20250929"`
-
-        **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-        High-performance model for agents and coding
-
-      - `str`
 
     - `effort: Optional[Effort]`
 
@@ -24180,7 +24128,9 @@ Create Agent
 
             Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
-            - `Literal["all", "none"]`
+            - `type BetaManagedAgentsWebFetchURLSourceShorthand = Literal["all", "none"]`
+
+              String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
 
               - `"all"`
 
@@ -24250,11 +24200,9 @@ Create Agent
 
             Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
-            - `Literal["all", "none"]`
+            - `type BetaManagedAgentsWebFetchURLSourceShorthand = Literal["all", "none"]`
 
-              - `"all"`
-
-              - `"none"`
+              String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
 
             - `type BetaManagedAgentsWebFetchURLSourceUserInput = ...`
 
@@ -27646,7 +27594,11 @@ Update Agent
 
   Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
-  - `Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
+  - `type BetaManagedAgentsModel = Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
+
+    The model that will power your agent.
+
+    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
     - `"claude-haiku-5-5"`
 
@@ -27727,76 +27679,6 @@ Update Agent
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-      - `"claude-haiku-5-5"`
-
-        Fastest model for high-volume, real-time tasks
-
-      - `"claude-sonnet-5-5"`
-
-        Efficient model for coding and agents
-
-      - `"claude-opus-5-5"`
-
-        Powerful intelligence for coding, knowledge work, and long-running agents
-
-      - `"claude-fable-5-1"`
-
-        Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
-
-      - `"claude-sonnet-5"`
-
-        Efficient model for coding and agents
-
-      - `"claude-fable-5"`
-
-        Next generation of intelligence for the hardest knowledge work and coding problems
-
-      - `"claude-opus-5"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-8"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-7"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-6"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-sonnet-4-6"`
-
-        Best combination of speed and intelligence
-
-      - `"claude-haiku-4-5"`
-
-      - `"claude-haiku-4-5-20251001"`
-
-      - `"claude-opus-4-5"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-5-20251101"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-sonnet-4-5"`
-
-        **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-        High-performance model for agents and coding
-
-      - `"claude-sonnet-4-5-20250929"`
-
-        **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-        High-performance model for agents and coding
-
-      - `str`
 
     - `effort: Optional[Effort]`
 
@@ -28328,7 +28210,9 @@ Update Agent
 
             Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
-            - `Literal["all", "none"]`
+            - `type BetaManagedAgentsWebFetchURLSourceShorthand = Literal["all", "none"]`
+
+              String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
 
               - `"all"`
 
@@ -28398,11 +28282,9 @@ Update Agent
 
             Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
-            - `Literal["all", "none"]`
+            - `type BetaManagedAgentsWebFetchURLSourceShorthand = Literal["all", "none"]`
 
-              - `"all"`
-
-              - `"none"`
+              String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
 
             - `type BetaManagedAgentsWebFetchURLSourceUserInput = ...`
 
@@ -35774,7 +35656,11 @@ Create Session
 
       Replacement model. Accepts the model string, e.g. `claude-opus-5-5`, or a `model_config` object. Omit to use the agent's model.
 
-      - `Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
+      - `type BetaManagedAgentsModel = Union[Literal["claude-haiku-5-5", "claude-sonnet-5-5", "claude-opus-5-5", 14 more], str]`
+
+        The model that will power your agent.
+
+        See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
         - `"claude-haiku-5-5"`
 
@@ -35855,76 +35741,6 @@ Create Session
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-          - `"claude-haiku-5-5"`
-
-            Fastest model for high-volume, real-time tasks
-
-          - `"claude-sonnet-5-5"`
-
-            Efficient model for coding and agents
-
-          - `"claude-opus-5-5"`
-
-            Powerful intelligence for coding, knowledge work, and long-running agents
-
-          - `"claude-fable-5-1"`
-
-            Frontier intelligence for ambitious tasks across coding, scientific discovery, and enterprise workflows
-
-          - `"claude-sonnet-5"`
-
-            Efficient model for coding and agents
-
-          - `"claude-fable-5"`
-
-            Next generation of intelligence for the hardest knowledge work and coding problems
-
-          - `"claude-opus-5"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-opus-4-8"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-opus-4-7"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-opus-4-6"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-sonnet-4-6"`
-
-            Best combination of speed and intelligence
-
-          - `"claude-haiku-4-5"`
-
-          - `"claude-haiku-4-5-20251001"`
-
-          - `"claude-opus-4-5"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-opus-4-5-20251101"`
-
-            Powerful intelligence for long-running agents and coding
-
-          - `"claude-sonnet-4-5"`
-
-            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-            High-performance model for agents and coding
-
-          - `"claude-sonnet-4-5-20250929"`
-
-            **Deprecated**: Will reach end-of-life on November 30, 2026. Please migrate to claude-sonnet-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
-
-            High-performance model for agents and coding
-
-          - `str`
 
         - `effort: Optional[Effort]`
 
@@ -36290,7 +36106,9 @@ Create Session
 
                 Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
-                - `Literal["all", "none"]`
+                - `type BetaManagedAgentsWebFetchURLSourceShorthand = Literal["all", "none"]`
+
+                  String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
 
                   - `"all"`
 
@@ -36360,11 +36178,9 @@ Create Session
 
                 Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
-                - `Literal["all", "none"]`
+                - `type BetaManagedAgentsWebFetchURLSourceShorthand = Literal["all", "none"]`
 
-                  - `"all"`
-
-                  - `"none"`
+                  String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
 
                 - `type BetaManagedAgentsWebFetchURLSourceUserInput = ...`
 
@@ -41732,7 +41548,9 @@ Update Session
 
               Which custom tools' results contribute URLs that may be fetched: "all" (the default), "none", or an only or except list. Each name in a list must be a custom tool in the same tools array.
 
-              - `Literal["all", "none"]`
+              - `type BetaManagedAgentsWebFetchURLSourceShorthand = Literal["all", "none"]`
+
+                String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
 
                 - `"all"`
 
@@ -41802,11 +41620,9 @@ Update Session
 
               Whether URLs in the text of user messages may be fetched: "all" (the default) or "none".
 
-              - `Literal["all", "none"]`
+              - `type BetaManagedAgentsWebFetchURLSourceShorthand = Literal["all", "none"]`
 
-                - `"all"`
-
-                - `"none"`
+                String form of a url_sources value that has no field other than its type: "all" means {"type": "all"} and "none" means {"type": "none"}.
 
               - `type BetaManagedAgentsWebFetchURLSourceUserInput = ...`
 
@@ -70451,13 +70267,13 @@ print(beta_managed_agents_deployment_run.id)
 
 ## Beta › Vaults
 
-### Create Vault
+### Create a Vault
 
 `beta.vaults.create(**kwargs)  -> BetaManagedAgentsVault`
 
 **POST** `/v1/vaults`
 
-Create Vault
+Create a Vault
 
 #### Parameters
 
@@ -70595,7 +70411,7 @@ Create Vault
 
   - `id: str`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -70668,7 +70484,7 @@ List Vaults
 
 - `include_archived: Optional[bool]` (query parameter)
 
-  Whether to include archived vaults in the results.
+  Whether to include archived vaults in the results. Defaults to `false`.
 
 - `limit: Optional[int]` (query parameter)
 
@@ -70678,7 +70494,7 @@ List Vaults
 
 - `page: Optional[str]` (query parameter)
 
-  Opaque pagination token from a previous `list_vaults` response.
+  The `next_page` value from a previous [List Vaults](../beta/vaults/list.md) response, to get the next page. Leave it out to get the first page.
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
@@ -70804,7 +70620,7 @@ List Vaults
 
   - `id: str`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -70869,13 +70685,13 @@ print(page.id)
 }
 ```
 
-### Get Vault
+### Retrieve a Vault
 
 `beta.vaults.retrieve(vault_id, **kwargs)  -> BetaManagedAgentsVault`
 
 **GET** `/v1/vaults/{vault_id}`
 
-Get Vault
+Retrieve a Vault
 
 #### Parameters
 
@@ -71007,7 +70823,7 @@ Get Vault
 
   - `id: str`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -71068,13 +70884,13 @@ print(beta_managed_agents_vault.id)
 }
 ```
 
-### Update Vault
+### Update a Vault
 
 `beta.vaults.update(vault_id, **kwargs)  -> BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}`
 
-Update Vault
+Update a Vault
 
 #### Parameters
 
@@ -71216,7 +71032,7 @@ Update Vault
 
   - `id: str`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -71277,13 +71093,13 @@ print(beta_managed_agents_vault.id)
 }
 ```
 
-### Delete Vault
+### Delete a Vault
 
 `beta.vaults.delete(vault_id, **kwargs)  -> BetaManagedAgentsDeletedVault`
 
 **DELETE** `/v1/vaults/{vault_id}`
 
-Delete Vault
+Delete a Vault
 
 #### Parameters
 
@@ -71415,7 +71231,7 @@ Delete Vault
 
   - `id: str`
 
-    Unique identifier of the deleted vault.
+    The unique ID of the deleted vault (`vlt_...`).
 
 #### Example
 
@@ -71443,13 +71259,13 @@ print(beta_managed_agents_deleted_vault.id)
 }
 ```
 
-### Archive Vault
+### Archive a Vault
 
 `beta.vaults.archive(vault_id, **kwargs)  -> BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}/archive`
 
-Archive Vault
+Archive a Vault
 
 #### Parameters
 
@@ -71581,7 +71397,7 @@ Archive Vault
 
   - `id: str`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -71644,13 +71460,13 @@ print(beta_managed_agents_vault.id)
 
 ## Beta › Vaults › Credentials
 
-### Create Credential
+### Create a Credential
 
 `beta.vaults.credentials.create(vault_id, **kwargs)  -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials`
 
-Create Credential
+Create a Credential
 
 #### Parameters
 
@@ -71670,7 +71486,7 @@ Create Credential
 
     - `access_token: str`
 
-      OAuth access token.
+      The OAuth access token to send to the MCP server.
 
       minLength: 1, maxLength: 8192
 
@@ -71682,7 +71498,9 @@ Create Credential
 
     - `expires_at: Optional[Union[str, datetime, null]]`
 
-      A timestamp in RFC 3339 format
+      When `access_token` expires, in RFC 3339.
+
+      Must be in the future.
 
       format: date-time
 
@@ -71692,13 +71510,13 @@ Create Credential
 
       - `client_id: str`
 
-        OAuth client ID.
+        The OAuth client ID to use when refreshing the access token. It can't be changed after the credential is created.
 
         minLength: 1, maxLength: 1024
 
       - `refresh_token: str`
 
-        OAuth refresh token.
+        The OAuth refresh token that the API uses to get a new access token when the current one expires.
 
         minLength: 1, maxLength: 8192
 
@@ -71724,7 +71542,7 @@ Create Credential
 
           - `client_secret: str`
 
-            OAuth client secret.
+            The OAuth client secret, sent to `token_endpoint` with HTTP Basic authentication.
 
             minLength: 1, maxLength: 512
 
@@ -71736,7 +71554,7 @@ Create Credential
 
           - `client_secret: str`
 
-            OAuth client secret.
+            The OAuth client secret, sent to `token_endpoint` in the POST body.
 
             minLength: 1, maxLength: 512
 
@@ -71760,7 +71578,7 @@ Create Credential
 
     - `token: str`
 
-      Static bearer token value.
+      The static bearer token to send to the MCP server, such as an API key or personal access token.
 
       minLength: 1, maxLength: 8192
 
@@ -71794,7 +71612,9 @@ Create Credential
 
         - `allowed_hosts: Sequence[str]`
 
-          Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+          The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+          Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
     - `secret_name: str`
 
@@ -71804,7 +71624,7 @@ Create Credential
 
     - `secret_value: str`
 
-      Secret value. Write-only; never returned in responses.
+      The secret to substitute into the agent's outbound requests. It's write-only and never returned in responses.
 
       minLength: 1, maxLength: 4096
 
@@ -71954,7 +71774,7 @@ Create Credential
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -71978,7 +71798,7 @@ Create Credential
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -71988,7 +71808,7 @@ Create Credential
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -72068,7 +71888,9 @@ Create Credential
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -72157,7 +71979,7 @@ List Credentials
 
 - `include_archived: Optional[bool]` (query parameter)
 
-  Whether to include archived credentials in the results.
+  Whether to include archived credentials in the results. Defaults to `false`.
 
 - `limit: Optional[int]` (query parameter)
 
@@ -72167,7 +71989,7 @@ List Credentials
 
 - `page: Optional[str]` (query parameter)
 
-  Opaque pagination token from a previous `list_credentials` response.
+  The `next_page` value from a previous [List Credentials](../beta/vaults/credentials/list.md) response, to get the next page. Leave it out to get the first page.
 
 - `betas: Optional[List[AnthropicBetaParam]]` (header parameter)
 
@@ -72293,7 +72115,7 @@ List Credentials
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -72317,7 +72139,7 @@ List Credentials
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -72327,7 +72149,7 @@ List Credentials
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -72407,7 +72229,9 @@ List Credentials
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -72481,13 +72305,13 @@ print(page.id)
 }
 ```
 
-### Get Credential
+### Retrieve a Credential
 
 `beta.vaults.credentials.retrieve(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
 
 **GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Get Credential
+Retrieve a Credential
 
 #### Parameters
 
@@ -72623,7 +72447,7 @@ Get Credential
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -72647,7 +72471,7 @@ Get Credential
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -72657,7 +72481,7 @@ Get Credential
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -72737,7 +72561,9 @@ Get Credential
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -72806,13 +72632,13 @@ print(beta_managed_agents_credential.id)
 }
 ```
 
-### Update Credential
+### Update a Credential
 
 `beta.vaults.credentials.update(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Update Credential
+Update a Credential
 
 #### Parameters
 
@@ -72826,7 +72652,7 @@ Update Credential
 
 - `auth: Optional[Auth]`
 
-  Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
+  New authentication settings for the credential. The `type` must match the credential's current type, which can't be changed.
 
   - `class BetaManagedAgentsMCPOAuthUpdateParams`
 
@@ -72836,13 +72662,17 @@ Update Credential
 
     - `access_token: Optional[str]`
 
-      Updated OAuth access token.
+      The new OAuth access token to replace the stored one.
 
       minLength: 1, maxLength: 8192
 
     - `expires_at: Optional[Union[str, datetime, null]]`
 
-      A timestamp in RFC 3339 format
+      When the credential's access token expires, in RFC 3339. Leave it out to keep the stored expiry.
+
+      If you send a new `access_token`, send its `expires_at` too, or the new token keeps the old expiry.
+
+      Must be in the future.
 
       format: date-time
 
@@ -72852,13 +72682,13 @@ Update Credential
 
       - `refresh_token: Optional[str]`
 
-        Updated OAuth refresh token.
+        The new OAuth refresh token to replace the stored one.
 
         minLength: 1, maxLength: 8192
 
       - `scope: Optional[str]`
 
-        Updated OAuth scope for the refresh request.
+        The new OAuth scope for refresh requests. Send an empty string to clear the stored scope.
 
         maxLength: 8192
 
@@ -72872,7 +72702,9 @@ Update Credential
 
           - `client_secret: Optional[str]`
 
-            Updated OAuth client secret.
+            A new OAuth client secret to replace the stored one.
+
+            The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
             minLength: 1, maxLength: 512
 
@@ -72884,7 +72716,9 @@ Update Credential
 
           - `client_secret: Optional[str]`
 
-            Updated OAuth client secret.
+            A new OAuth client secret to replace the stored one.
+
+            The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
             minLength: 1, maxLength: 512
 
@@ -72896,7 +72730,7 @@ Update Credential
 
     - `token: Optional[str]`
 
-      Updated static bearer token value.
+      The new static bearer token to replace the stored one.
 
       minLength: 1, maxLength: 8192
 
@@ -72920,7 +72754,7 @@ Update Credential
 
     - `networking: Optional[BetaManagedAgentsCredentialNetworkingParams]`
 
-      Updated networking scope. Full replacement.
+      The new networking scope, which replaces the stored one as a whole.
 
       - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
@@ -72936,11 +72770,13 @@ Update Credential
 
         - `allowed_hosts: Sequence[str]`
 
-          Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+          The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+          Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
     - `secret_value: Optional[str]`
 
-      Updated secret value.
+      The new secret value to replace the stored one.
 
       minLength: 1, maxLength: 4096
 
@@ -73078,7 +72914,7 @@ Update Credential
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -73102,7 +72938,7 @@ Update Credential
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -73112,7 +72948,7 @@ Update Credential
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -73192,7 +73028,9 @@ Update Credential
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -73261,13 +73099,13 @@ print(beta_managed_agents_credential.id)
 }
 ```
 
-### Delete Credential
+### Delete a Credential
 
 `beta.vaults.credentials.delete(credential_id, **kwargs)  -> BetaManagedAgentsDeletedCredential`
 
 **DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Delete Credential
+Delete a Credential
 
 #### Parameters
 
@@ -73403,7 +73241,7 @@ Delete Credential
 
   - `id: str`
 
-    Unique identifier of the deleted credential.
+    The unique ID of the deleted credential (`vcrd_...`).
 
 #### Example
 
@@ -73432,13 +73270,13 @@ print(beta_managed_agents_deleted_credential.id)
 }
 ```
 
-### Archive Credential
+### Archive a Credential
 
 `beta.vaults.credentials.archive(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
-Archive Credential
+Archive a Credential
 
 #### Parameters
 
@@ -73574,7 +73412,7 @@ Archive Credential
 
   - `id: str`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: Optional[datetime]`
 
@@ -73598,7 +73436,7 @@ Archive Credential
 
       - `expires_at: Optional[datetime]`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -73608,7 +73446,7 @@ Archive Credential
 
         - `client_id: str`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: str`
 
@@ -73688,7 +73526,9 @@ Archive Credential
 
           - `allowed_hosts: List[str]`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: str`
 
@@ -73757,13 +73597,13 @@ print(beta_managed_agents_credential.id)
 }
 ```
 
-### Validate Credential
+### Validate an MCP OAuth Credential
 
 `beta.vaults.credentials.mcp_oauth_validate(credential_id, **kwargs)  -> BetaManagedAgentsCredentialValidation`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
-Validate Credential
+Validate an MCP OAuth Credential
 
 #### Parameters
 
@@ -73907,11 +73747,11 @@ Validate Credential
 
   - `mcp_probe: Optional[BetaManagedAgentsMCPProbe]`
 
-    Details of the failing MCP probe step. Null when the probe succeeded.
+    Details of the MCP probe step that failed, or `null` if the probe succeeded or there was no access token to test.
 
     - `http_response: Optional[BetaManagedAgentsRefreshHTTPResponse]`
 
-      The captured HTTP error response. Null when no HTTP response was received (timeout, DNS, TLS).
+      The HTTP error response from the MCP server, or `null` if the MCP server didn't return one for the failing step, for example after a timeout or a DNS or TLS failure.
 
       - `body: str`
 
@@ -73973,11 +73813,11 @@ Validate Credential
 
     - `"invalid"`
 
-      The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+      The probe reached the MCP server and the server rejected the credential, or no access token is stored. A refresh, if one was tried, didn't recover it. Usually the end user needs to authorize again.
 
     - `"unknown"`
 
-      The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
+      The probe couldn't tell whether the credential works, for example because of a network error or because a refresh succeeded but the new access token wasn't tested. Validate the credential again to find out.
 
   - `validated_at: datetime`
 
@@ -105129,7 +104969,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: Optional[str]`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `marketplace_id: str`
 
@@ -105181,7 +105021,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: Optional[Literal["contained", "privileged", "remote"]]`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `"contained"`
 
@@ -105516,7 +105360,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: Optional[str]`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `marketplace_id: str`
 
@@ -105568,7 +105412,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: Optional[Literal["contained", "privileged", "remote"]]`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `"contained"`
 
@@ -105923,7 +105771,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: Optional[str]`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `marketplace_id: str`
 
@@ -105975,7 +105823,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: Optional[Literal["contained", "privileged", "remote"]]`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `"contained"`
 
@@ -106367,7 +106219,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: Optional[str]`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `marketplace_id: str`
 
@@ -106419,7 +106271,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: Optional[Literal["contained", "privileged", "remote"]]`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `"contained"`
 
@@ -106958,7 +106814,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: Optional[str]`
 
-    The version string the manifest declares; null when it declares none.
+    The manifest's `version`, normalized for display: one leading `v` or `V` is dropped, and the result is returned only if it is 1 to 64 characters, starts with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry can take the place of the manifest's `version`. It is also `null` for a version stored before claude.ai began recording this field (August 2026).
 
   - `plugin_id: str`
 
@@ -106966,7 +106822,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: Optional[Literal["contained", "privileged", "remote"]]`
 
-    How far the version reaches: `remote`, `privileged` or `contained`, as on the Plugin; null when not classifiable.
+    How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as defined on the Plugin's `reach`.
 
     - `"contained"`
 
@@ -107296,7 +107152,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: Optional[str]`
 
-    The version string the manifest declares; null when it declares none.
+    The manifest's `version`, normalized for display: one leading `v` or `V` is dropped, and the result is returned only if it is 1 to 64 characters, starts with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry can take the place of the manifest's `version`. It is also `null` for a version stored before claude.ai began recording this field (August 2026).
 
   - `plugin_id: str`
 
@@ -107304,7 +107160,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: Optional[Literal["contained", "privileged", "remote"]]`
 
-    How far the version reaches: `remote`, `privileged` or `contained`, as on the Plugin; null when not classifiable.
+    How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as defined on the Plugin's `reach`.
 
     - `"contained"`
 
@@ -107626,7 +107482,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: Optional[str]`
 
-    The version string the manifest declares; null when it declares none.
+    The manifest's `version`, normalized for display: one leading `v` or `V` is dropped, and the result is returned only if it is 1 to 64 characters, starts with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry can take the place of the manifest's `version`. It is also `null` for a version stored before claude.ai began recording this field (August 2026).
 
   - `plugin_id: str`
 
@@ -107634,7 +107490,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: Optional[Literal["contained", "privileged", "remote"]]`
 
-    How far the version reaches: `remote`, `privileged` or `contained`, as on the Plugin; null when not classifiable.
+    How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as defined on the Plugin's `reach`.
 
     - `"contained"`
 
@@ -109791,13 +109647,13 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `repository_url: str`
 
-  The `https://` URL of a public repository on github.com that holds the marketplace. Any other host, a URL with credentials in it, or one that does not name a repository is a 400.
+  The `https://` URL of a public repository on github.com that holds the marketplace. A URL longer than 2,048 characters, on any other host or scheme, with a port other than 443 or 80, with credentials in it, or that does not name exactly `owner/repo` (a trailing `.git` or `/` is accepted) is a 400. A private or missing repository is reported in the response, not refused.
 
   minLength: 1
 
 - `ref: Optional[str]`
 
-  The branch to validate the tip of, or the full 40-character SHA of the commit to validate. When omitted, the branch a synchronization would read (usually the repository's default branch); if that is not the default branch, the report's `ref` says which branch was read. An empty string, or a value that is neither a branch name nor a 40-character SHA, is a 400.
+  The branch to validate the tip of, or the full 40-character SHA of the commit to validate. When omitted, the branch a synchronization would read (usually the repository's default branch); if that is not the default branch, the report's `ref` says which branch was read. An empty string, a value longer than 255 characters, or one that contains `..` or a character other than ASCII letters, digits, `.`, `_`, `-`, `+`, and `/`, is a 400. Any other value that is not a 40-character SHA is read as a branch name; if the repository has no such branch, the response is a report with `valid: false`, not a 400.
 
   minLength: 1
 

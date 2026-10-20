@@ -1,17 +1,17 @@
-# Archive Credential
+# Archive a Credential
 
 ---
-title: Archive Credential
+title: Archive a Credential
 url: https://platform.claude.com/docs/en/api/php/beta/vaults/credentials/archive
 ---
 
-# Archive Credential
+# Archive a Credential
 
 `$client->beta->vaults->credentials->archive(string credentialID, string vaultID, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
-Archive Credential
+Archive a Credential
 
 ## Parameters
 
@@ -41,7 +41,7 @@ Archive Credential
 
   - `string id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `?\Datetime archivedAt`
 

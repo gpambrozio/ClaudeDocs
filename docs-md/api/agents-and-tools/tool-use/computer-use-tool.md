@@ -499,7 +499,7 @@ def sampling_loop(model: str, messages: list[MessageParam], max_iterations: int 
 async function samplingLoop(
   model: string,
   messages: Anthropic.MessageParam[],
-  maxIterations = 10,
+  maxIterations = 10
 ): Promise<Anthropic.MessageParam[]> {
   // Run the computer-use agent loop until Claude stops requesting tools
   // or the iteration limit is reached.
@@ -508,7 +508,7 @@ async function samplingLoop(
       model,
       max_tokens: 4096,
       messages,
-      tools,
+      tools
     });
 
     // Add Claude's response to the conversation history
@@ -604,7 +604,6 @@ func samplingLoop(ctx context.Context, model anthropic.Model, messages []anthrop
 	}
 	return messages, nil
 }
-
 ```
 
 ```java Java
@@ -916,7 +915,11 @@ def capture_screenshot() -> list[ImageBlockParam]:
     return [
         {
             "type": "image",
-            "source": {"type": "base64", "media_type": "image/png", "data": PLACEHOLDER_PNG},
+            "source": {
+                "type": "base64",
+                "media_type": "image/png",
+                "data": PLACEHOLDER_PNG,
+            },
         }
     ]
 
@@ -944,7 +947,8 @@ def handle_computer_action(name, tool_input):
 
 ```typescript TypeScript
 // Placeholder image data; a real executor captures the screen as PNG bytes
-const PLACEHOLDER_PNG = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
+const PLACEHOLDER_PNG =
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
 
 function captureScreenshot(): Anthropic.ImageBlockParam[] {
   // screenshot answers with an image block rather than text
@@ -954,9 +958,9 @@ function captureScreenshot(): Anthropic.ImageBlockParam[] {
       source: {
         type: "base64",
         media_type: "image/png",
-        data: PLACEHOLDER_PNG,
-      },
-    },
+        data: PLACEHOLDER_PNG
+      }
+    }
   ];
 }
 
@@ -974,10 +978,9 @@ function typeText(text: string): string {
 
 function handleComputerAction(
   action: string,
-  input: unknown,
+  input: unknown
 ): string | Anthropic.ImageBlockParam[] {
-  const params: object =
-    typeof input === "object" && input !== null ? input : {};
+  const params: object = typeof input === "object" && input !== null ? input : {};
   switch (action) {
     case "screenshot":
       return captureScreenshot();
@@ -1102,7 +1105,6 @@ func handleComputerAction(action string, params map[string]any) ([]anthropic.Too
 	// Reached when a member's input is missing a field or a field has the wrong type
 	return nil, fmt.Errorf("invalid input for %s", action)
 }
-
 ```
 
 ```java Java
@@ -1280,26 +1282,23 @@ def process_tool_calls(response: Message) -> list[ToolResultBlockParam]:
 ```
 
 ```typescript TypeScript
-const HALT_TEXT =
-  "Not executed: an earlier computer action in this turn failed.";
+const HALT_TEXT = "Not executed: an earlier computer action in this turn failed.";
 
 function computerResult(
   toolUseId: string,
   content: string | Anthropic.ImageBlockParam[],
-  isError?: boolean,
+  isError?: boolean
 ): Anthropic.ToolResultBlockParam {
   return {
     type: "tool_result",
     tool_use_id: toolUseId,
     toolset_name: "computer",
     content,
-    is_error: isError,
+    is_error: isError
   };
 }
 
-function processToolCalls(
-  response: Anthropic.Message,
-): Anthropic.ToolResultBlockParam[] {
+function processToolCalls(response: Anthropic.Message): Anthropic.ToolResultBlockParam[] {
   const toolResults: Anthropic.ToolResultBlockParam[] = [];
   let failed = false;
   for (const block of response.content) {
@@ -1440,7 +1439,6 @@ func processToolCalls(response *anthropic.Message) []anthropic.ContentBlockParam
 	}
 	return toolResults
 }
-
 ```
 
 ```java Java

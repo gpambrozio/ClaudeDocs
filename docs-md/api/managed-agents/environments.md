@@ -66,8 +66,8 @@ const environment = await client.beta.environments.create({
   name: "python-dev",
   config: {
     type: "cloud",
-    networking: { type: "limited", allow_package_managers: true },
-  },
+    networking: { type: "limited", allow_package_managers: true }
+  }
 });
 
 console.log(`Environment ID: ${environment.id}`);
@@ -176,7 +176,7 @@ session = client.beta.sessions.create(
 ```typescript TypeScript
 const session = await client.beta.sessions.create({
   agent: agent.id,
-  environment_id: environment.id,
+  environment_id: environment.id
 });
 ```
 

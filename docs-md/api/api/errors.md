@@ -1,4 +1,4 @@
-# Print the response headers (including request-id); discard the body
+# -i prints the response headers, including request-id, before the body
 
 ---
 title: Claude API errors
@@ -85,8 +85,8 @@ On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), res
 The Python and TypeScript SDKs expose the request ID as a `_request_id` property on top-level response objects. The C#, Go, Java, and PHP SDKs expose it through their raw-response accessors, and the Ruby SDK through [middleware](../cli-sdks-libraries/middleware.md). In every SDK except Ruby, use `with_raw_response` (typescript: `.withResponse()`; java: `.withRawResponse()`; csharp: `WithRawResponse`; go: `option.WithResponseInto`; php: `->raw`) to read any other [response header](overview.md#response-headers), such as `anthropic-organization-id` and [`anthropic-workspace-id`](../manage-claude/workspaces.md#identify-the-workspace-behind-an-api-response). In Ruby, use the same middleware. On Claude Platform on AWS, use the raw-response accessor to read the AWS request ID (`x-amzn-requestid`) as well:
 
 ```bash cURL
-# Print the response headers (including request-id); discard the body
-curl -sS -D - -o /dev/null https://api.anthropic.com/v1/messages \
+# -i prints the response headers, including request-id, before the body
+curl -sS -i https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \

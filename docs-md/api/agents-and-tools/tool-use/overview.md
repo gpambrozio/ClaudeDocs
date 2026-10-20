@@ -24,7 +24,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create --transform content --format yaml \
+ant messages create \
   --model claude-opus-5-5 \
   --max-tokens 1024 \
   --tool '{type: web_search_20260209, name: web_search}' \
@@ -142,111 +142,9 @@ Tools differ primarily by where the code executes. **Client tools** (including u
 
 Here's that round trip in full for a client tool. The first request defines a `get_weather` tool, and Claude answers the question by calling it: the response carries a `tool_use` block, your code runs the lookup, and a second request sends the result back in a `tool_result` block so Claude can reply with the answer.
 
-```bash cURL
-# Claude replies with a tool_use block naming the tool and its arguments.
-TOOLS='[
-  {
-    "name": "get_weather",
-    "description": "Get the current weather for a given location.",
-    "input_schema": {
-      "type": "object",
-      "properties": {
-        "location": {"type": "string", "description": "City and state, e.g. San Francisco, CA"}
-      },
-      "required": ["location"]
-    }
-  }
-]'
-USER_MSG="What's the weather in San Francisco?"
-RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d "$(jq -n --argjson tools "$TOOLS" --arg msg "$USER_MSG" '{
-    model: "claude-opus-5-5",
-    max_tokens: 1024,
-    tools: $tools,
-    # Ask for at most one tool call per turn.
-    tool_choice: {type: "auto", disable_parallel_tool_use: true},
-    messages: [{role: "user", content: $msg}]
-  }')")
-TOOL_USE=$(echo "$RESPONSE" | jq '.content[] | select(.type == "tool_use")')
-echo "Claude called $(echo "$TOOL_USE" | jq -r '.name') with $(echo "$TOOL_USE" | jq -c '.input')"
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
 
-# Run the tool, then send the result back in a tool_result block.
-# Claude uses the result to answer the original question.
-WEATHER="15 degrees Celsius, partly cloudy"
-curl -s https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d "$(jq -n \
-    --argjson tools "$TOOLS" \
-    --arg msg "$USER_MSG" \
-    --argjson assistant "$(echo "$RESPONSE" | jq '.content')" \
-    --arg tool_use_id "$(echo "$TOOL_USE" | jq -r '.id')" \
-    --arg weather "$WEATHER" \
-    '{
-      model: "claude-opus-5-5",
-      max_tokens: 1024,
-      tools: $tools,
-      tool_choice: {type: "auto", disable_parallel_tool_use: true},
-      messages: [
-        {role: "user", content: $msg},
-        {role: "assistant", content: $assistant},
-        {role: "user", content: [
-          {type: "tool_result", tool_use_id: $tool_use_id, content: $weather}
-        ]}
-      ]
-    }')"
-```
-
-```bash CLI
-# ant reads the request body as YAML on stdin; jq carries the conversation
-# state into the second request.
-USER_MSG="What's the weather in San Francisco?"
-MESSAGES=$(jq -n --arg msg "$USER_MSG" '[{role: "user", content: $msg}]')
-call_api() {
-  {
-    cat <<'YAML'
-model: claude-opus-5-5
-max_tokens: 1024
-# Ask for at most one tool call per turn.
-tool_choice: {type: auto, disable_parallel_tool_use: true}
-tools:
-  - name: get_weather
-    description: Get the current weather for a given location.
-    input_schema:
-      type: object
-      properties:
-        location: {type: string, description: "City and state, e.g. San Francisco, CA"}
-      required: [location]
-YAML
-    printf 'messages: %s\n' "$MESSAGES"
-  } | ant messages create --format json
-}
-
-# Claude replies with a tool_use block naming the tool and its arguments.
-RESPONSE=$(call_api)
-TOOL_USE=$(jq '.content[] | select(.type == "tool_use")' <<<"$RESPONSE")
-echo "Claude called $(jq -r '.name' <<<"$TOOL_USE") with $(jq -c '.input' <<<"$TOOL_USE")"
-
-# Run the tool, then send the result back in a tool_result block.
-WEATHER="15 degrees Celsius, partly cloudy"
-MESSAGES=$(jq \
-  --argjson assistant "$(jq '.content' <<<"$RESPONSE")" \
-  --arg tool_use_id "$(jq -r '.id' <<<"$TOOL_USE")" \
-  --arg weather "$WEATHER" \
-  '. + [
-    {role: "assistant", content: $assistant},
-    {role: "user", content: [
-      {type: "tool_result", tool_use_id: $tool_use_id, content: $weather}
-    ]}
-  ]' <<<"$MESSAGES")
-
-# Claude uses the result to answer the original question.
-call_api
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = anthropic.Anthropic()
@@ -334,9 +232,7 @@ const response = await client.messages.create({
   tool_choice: { type: "auto", disable_parallel_tool_use: true },
   messages
 });
-const toolUse = response.content.find(
-  (block): block is Anthropic.ToolUseBlock => block.type === "tool_use"
-)!;
+const toolUse = response.content.find((block) => block.type === "tool_use")!;
 console.log(`Claude called ${toolUse.name} with ${JSON.stringify(toolUse.input)}`);
 
 // Run the tool, then send the result back in a tool_result block.
@@ -357,9 +253,7 @@ const followup = await client.messages.create({
 });
 
 // Claude uses the result to answer the original question.
-const finalText = followup.content.find(
-  (block): block is Anthropic.TextBlock => block.type === "text"
-)!;
+const finalText = followup.content.find((block) => block.type === "text")!;
 console.log(finalText.text);
 ```
 

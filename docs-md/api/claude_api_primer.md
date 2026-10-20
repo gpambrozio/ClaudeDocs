@@ -102,7 +102,7 @@ print(message)
 
 You can prefill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
-Claude 4.6 and later models and Claude Mythos Preview do not support assistant message prefill; requests to those models must end with a user message. The examples below use a model that supports prefill.
+Claude 4.6 and later models and Claude Mythos Preview do not support assistant message prefill; requests to those models must end with a user message. The following examples use a model that supports prefill.
 
 ```bash CLI
 ant messages create <<'YAML'
@@ -138,10 +138,8 @@ print(message.content[0].text)
 Claude can read both text and images in requests. Both `base64` and `url` source types are supported for images, along with the `image/jpeg`, `image/png`, `image/gif`, and `image/webp` media types.
 
 ```bash CLI
-IMAGE_URL="https://platform.claude.com/docs/images/vision-example.jpg"
-
 # Option 1: Base64-encoded image (@ prefix auto-encodes binary files as base64)
-curl -sSo vision-example.jpg "$IMAGE_URL"
+curl -sSo vision-example.jpg https://platform.claude.com/docs/images/vision-example.jpg
 
 ant messages create <<'YAML'
 model: claude-opus-5-5
@@ -159,7 +157,7 @@ messages:
 YAML
 
 # Option 2: URL-referenced image
-ant messages create <<YAML
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 messages:
@@ -168,7 +166,7 @@ messages:
       - type: image
         source:
           type: url
-          url: $IMAGE_URL
+          url: https://platform.claude.com/docs/images/vision-example.jpg
       - type: text
         text: What is in the above image?
 YAML
@@ -261,7 +259,7 @@ On Claude 4.7 and later models, manual extended thinking (`type: enabled` with a
 When thinking is on, Claude creates `thinking` content blocks where it outputs its internal reasoning. The API response includes `thinking` content blocks, followed by `text` content blocks.
 
 ```bash CLI
-ant messages create --transform content --format yaml <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 16000
 thinking:
@@ -311,66 +309,6 @@ Important limitations:
 2. **Preserving thinking blocks:** During tool use, you must pass `thinking` blocks back to the API for the last assistant message.
 
 ### Preserving thinking blocks
-
-```bash CLI
-# First request: capture the assistant content array (thinking + tool_use
-# blocks, signatures intact) as compact JSON.
-ASSISTANT_CONTENT=$(ant messages create \
-  --transform content --format jsonl <<'YAML'
-model: claude-opus-5-5
-max_tokens: 16000
-thinking:
-  type: adaptive
-  display: summarized
-tools:
-  - name: get_weather
-    description: Get the current weather for a location.
-    input_schema:
-      type: object
-      properties:
-        location:
-          type: string
-          description: The city name.
-      required: [location]
-messages:
-  - role: user
-    content: "What's the weather in Paris?"
-YAML
-)
-
-TOOL_USE_ID=$(printf '%s' "$ASSISTANT_CONTENT" \
-  | jq -r '.[] | select(.type == "tool_use") | .id')
-
-# Second request: pass the captured blocks back unchanged as the assistant
-# message. The thinking block must accompany the tool_use block.
-ant messages create <<YAML
-model: claude-opus-5-5
-max_tokens: 16000
-thinking:
-  type: adaptive
-  display: summarized
-tools:
-  - name: get_weather
-    description: Get the current weather for a location.
-    input_schema:
-      type: object
-      properties:
-        location:
-          type: string
-          description: The city name.
-      required: [location]
-messages:
-  - role: user
-    content: "What's the weather in Paris?"
-  - role: assistant
-    content: $ASSISTANT_CONTENT
-  - role: user
-    content:
-      - type: tool_result
-        tool_use_id: $TOOL_USE_ID
-        content: "Current temperature: 72°F"
-YAML
-```
 
 ```python Python
 import anthropic
@@ -707,11 +645,10 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 ### Streaming with SDKs
 
 ```bash CLI
-ant messages create --stream --format jsonl \
+ant messages create --stream \
   --model claude-opus-5-5 \
   --max-tokens 1024 \
-  --message '{role: user, content: "Hello"}' \
-  | jq -rj 'select(.delta.type? == "text_delta") | .delta.text'
+  --message '{role: user, content: "Hello"}'
 ```
 
 ```python Python

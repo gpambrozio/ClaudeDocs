@@ -32,6 +32,8 @@ ant beta:sessions:events list --session-id session_01...
 | Flag                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `--profile`                           | Named profile to use for this invocation (equivalent to setting `ANTHROPIC_PROFILE`). See [Switch between workspaces](authentication.md#switch-between-workspaces).                                                                                                                                                                                                                                              |
+| `--api-key-stdin`                     | Read the API key from standard input. The flag reads all of standard input, so pass the request body with [flags](using.md#flags).                                                                                                                                                                                                                                                                               |
+| `--auth-token-stdin`                  | Read the bearer token from standard input. The flag reads all of standard input, so pass the request body with [flags](using.md#flags).                                                                                                                                                                                                                                                                          |
 | `--format`                            | Output format: `auto`, `json`, `jsonl`, `yaml`, `pretty`, `raw`, `explore`                                                                                                                                                                                                                                                                                                                                                                                               |
 | `--transform`                         | Filter or reshape the response with a [GJSON path](using.md#transform-output-with-gjson)                                                                                                                                                                                                                                                                                                                         |
 | `-r`, `--raw-output`                  | Print string results without surrounding quotes, like `jq -r`                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -91,12 +93,6 @@ AGENT_ID=$(ant beta:agents create \
   --name "My Agent" \
   --model '{id: claude-opus-5-5}' \
   --transform id --raw-output)
-
-printf '%s\n' "$AGENT_ID"
-```
-
-```text Output wrap
-agent_011CYm1BLqPXpQRk5khsSXrs
 ```
 
 `--raw-output` is distinct from `--format raw`. `--raw-output` strips JSON quotes from string results, like `jq -r`. `--format raw` prints the response body's raw JSON bytes without auto-paginating; on list endpoints it applies `--transform` to the pagination envelope rather than to each item.
@@ -173,8 +169,7 @@ ant messages create \
   --message '{role: user, content: [
     {type: document, source: {type: base64, media_type: application/pdf, data: "@./scan.pdf"}},
     {type: text, text: "Extract the text from this scanned document."}
-  ]}' \
-  --transform 'content.#(type=="text").text' --raw-output
+  ]}'
 ```
 
 The CLI detects the file type and encodes binary files as base64 automatically. To force a specific encoding use `@file://` for plain text or `@data://` for base64. Escape a literal leading `@` with a backslash (`\@username`).

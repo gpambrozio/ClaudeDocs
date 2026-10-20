@@ -496,7 +496,11 @@ class ChatBot:
                 return f"An error occurred: {follow_up_response['error']}"
 
             response_text = next(
-                (block.text for block in follow_up_response.content if block.type == "text"),
+                (
+                    block.text
+                    for block in follow_up_response.content
+                    if block.type == "text"
+                ),
                 None,
             )
             if response_text is None:
@@ -565,9 +569,7 @@ class ChatBot {
 
       const followUpResponse = await this.generateMessage(this.messages, 2048);
 
-      const followUpBlock = followUpResponse.content.find(
-        (block): block is Anthropic.TextBlock => block.type === "text"
-      );
+      const followUpBlock = followUpResponse.content.find((block) => block.type === "text");
       if (!followUpBlock) {
         throw new Error("An error occurred: Unexpected response type");
       }
@@ -575,9 +577,7 @@ class ChatBot {
       return followUpBlock.text;
     }
 
-    const firstBlock = responseMessage.content.find(
-      (block): block is Anthropic.TextBlock => block.type === "text"
-    );
+    const firstBlock = responseMessage.content.find((block) => block.type === "text");
     if (firstBlock) {
       this.messages.push({ role: "assistant", content: firstBlock.text });
       return firstBlock.text;
@@ -592,11 +592,16 @@ class ChatBot {
       if (
         toolInput === null ||
         typeof toolInput !== "object" ||
-        !("make" in toolInput) || typeof toolInput.make !== "string" ||
-        !("model" in toolInput) || typeof toolInput.model !== "string" ||
-        !("year" in toolInput) || typeof toolInput.year !== "number" ||
-        !("mileage" in toolInput) || typeof toolInput.mileage !== "number" ||
-        !("driver_age" in toolInput) || typeof toolInput.driver_age !== "number"
+        !("make" in toolInput) ||
+        typeof toolInput.make !== "string" ||
+        !("model" in toolInput) ||
+        typeof toolInput.model !== "string" ||
+        !("year" in toolInput) ||
+        typeof toolInput.year !== "number" ||
+        !("mileage" in toolInput) ||
+        typeof toolInput.mileage !== "number" ||
+        !("driver_age" in toolInput) ||
+        typeof toolInput.driver_age !== "number"
       ) {
         throw new Error("An error occurred: Unexpected tool input");
       }
@@ -800,7 +805,6 @@ func (bot *ChatBot) HandleToolUse(toolName string, toolInput json.RawMessage) (s
 	premium := getQuote(input.Make, input.Model, input.Year, input.Mileage, input.DriverAge)
 	return fmt.Sprintf("Quote generated: $%.2f per month", premium), nil
 }
-
 ```
 
 ```java Java

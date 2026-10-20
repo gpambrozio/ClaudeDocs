@@ -105,8 +105,11 @@ curl https://api.anthropic.com/v1/messages \
   -H "authorization: Bearer $ACCESS_TOKEN" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
-  -d '{"model": "claude-opus-5-5", "max_tokens": 1024, "messages": [{"role": "user", "content": "Hello, Claude"}]}' \
-  | jq -r '.content[] | select(.type == "text") | .text'
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 1024,
+    "messages": [{"role": "user", "content": "Hello, Claude"}]
+  }'
 ```
 
 ```python Python
@@ -384,14 +387,13 @@ class OktaTokenProvider : IIdentityTokenProvider
 
 ```bash CLI
 # 1. Request an access token from Okta and write it to a temp file.
-ANTHROPIC_IDENTITY_TOKEN_FILE=$(mktemp)
+export ANTHROPIC_IDENTITY_TOKEN_FILE=$(mktemp)
 curl -sS "$OKTA_ISSUER/v1/token" \
   -d grant_type=client_credentials \
   -d scope=anthropic.access \
   -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer \
   --data-urlencode client_assertion="$SIGNED_CLIENT_ASSERTION" \
   | jq -r .access_token > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
-export ANTHROPIC_IDENTITY_TOKEN_FILE
 
 # 2. Call the Claude API. The CLI reads ANTHROPIC_FEDERATION_RULE_ID,
 # ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and

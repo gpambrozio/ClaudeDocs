@@ -7,13 +7,13 @@ url: https://platform.claude.com/docs/en/api/cli/beta/vaults
 
 # Vaults
 
-## Create Vault
+## Create a Vault
 
 `$ ant beta:vaults create`
 
 **POST** `/v1/vaults`
 
-Create Vault
+Create a Vault
 
 ### Parameters
 
@@ -47,7 +47,7 @@ Create Vault
 
   - `id: string`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: string`
 
@@ -111,7 +111,7 @@ List Vaults
 
 - `--include-archived: optional boolean` (query parameter)
 
-  Whether to include archived vaults in the results.
+  Whether to include archived vaults in the results. Defaults to `false`.
 
 - `--limit: optional number` (query parameter)
 
@@ -121,7 +121,7 @@ List Vaults
 
 - `--page: optional string` (query parameter)
 
-  Opaque pagination token from a previous `list_vaults` response.
+  The `next_page` value from a previous [List Vaults](../../beta/vaults/list.md) response, to get the next page. Leave it out to get the first page.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -141,13 +141,13 @@ List Vaults
 
   - `data: optional array of BetaManagedAgentsVault`
 
-    List of vaults.
+    The vaults on this page, newest first.
 
     - `type: "vault"`
 
     - `id: string`
 
-      Unique identifier for the vault.
+      The unique ID of the vault (`vlt_...`).
 
     - `archived_at: string`
 
@@ -207,13 +207,13 @@ ant beta:vaults list \
 }
 ```
 
-## Get Vault
+## Retrieve a Vault
 
 `$ ant beta:vaults retrieve`
 
 **GET** `/v1/vaults/{vault_id}`
 
-Get Vault
+Retrieve a Vault
 
 ### Parameters
 
@@ -241,7 +241,7 @@ Get Vault
 
   - `id: string`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: string`
 
@@ -293,13 +293,13 @@ ant beta:vaults retrieve \
 }
 ```
 
-## Update Vault
+## Update a Vault
 
 `$ ant beta:vaults update`
 
 **POST** `/v1/vaults/{vault_id}`
 
-Update Vault
+Update a Vault
 
 ### Parameters
 
@@ -337,7 +337,7 @@ Update Vault
 
   - `id: string`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: string`
 
@@ -389,13 +389,13 @@ ant beta:vaults update \
 }
 ```
 
-## Delete Vault
+## Delete a Vault
 
 `$ ant beta:vaults delete`
 
 **DELETE** `/v1/vaults/{vault_id}`
 
-Delete Vault
+Delete a Vault
 
 ### Parameters
 
@@ -423,7 +423,7 @@ Delete Vault
 
   - `id: string`
 
-    Unique identifier of the deleted vault.
+    The unique ID of the deleted vault (`vlt_...`).
 
 ### Example
 
@@ -442,13 +442,13 @@ ant beta:vaults delete \
 }
 ```
 
-## Archive Vault
+## Archive a Vault
 
 `$ ant beta:vaults archive`
 
 **POST** `/v1/vaults/{vault_id}/archive`
 
-Archive Vault
+Archive a Vault
 
 ### Parameters
 
@@ -476,7 +476,7 @@ Archive Vault
 
   - `id: string`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: string`
 
@@ -540,7 +540,7 @@ ant beta:vaults archive \
 
   - `id: string`
 
-    Unique identifier of the deleted vault.
+    The unique ID of the deleted vault (`vlt_...`).
 
 ### Beta Managed Agents Vault
 
@@ -552,7 +552,7 @@ ant beta:vaults archive \
 
   - `id: string`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: string`
 
@@ -582,13 +582,13 @@ ant beta:vaults archive \
 
 ## Vaults › Credentials
 
-### Create Credential
+### Create a Credential
 
 `$ ant beta:vaults:credentials create`
 
 **POST** `/v1/vaults/{vault_id}/credentials`
 
-Create Credential
+Create a Credential
 
 #### Parameters
 
@@ -630,7 +630,7 @@ Create Credential
 
   - `id: string`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: string`
 
@@ -654,7 +654,7 @@ Create Credential
 
       - `expires_at: optional string`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -664,7 +664,7 @@ Create Credential
 
         - `client_id: string`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: string`
 
@@ -744,7 +744,9 @@ Create Credential
 
           - `allowed_hosts: array of string`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: string`
 
@@ -820,7 +822,7 @@ List Credentials
 
 - `--include-archived: optional boolean` (query parameter)
 
-  Whether to include archived credentials in the results.
+  Whether to include archived credentials in the results. Defaults to `false`.
 
 - `--limit: optional number` (query parameter)
 
@@ -830,7 +832,7 @@ List Credentials
 
 - `--page: optional string` (query parameter)
 
-  Opaque pagination token from a previous `list_credentials` response.
+  The `next_page` value from a previous [List Credentials](../../beta/vaults/credentials/list.md) response, to get the next page. Leave it out to get the first page.
 
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
@@ -850,13 +852,13 @@ List Credentials
 
   - `data: optional array of BetaManagedAgentsCredential`
 
-    List of credentials.
+    The credentials on this page, newest first.
 
     - `type: "vault_credential"`
 
     - `id: string`
 
-      Unique identifier for the credential.
+      The unique ID of the credential (`vcrd_...`).
 
     - `archived_at: string`
 
@@ -880,7 +882,7 @@ List Credentials
 
         - `expires_at: optional string`
 
-          A timestamp in RFC 3339 format
+          When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
           format: date-time
 
@@ -890,7 +892,7 @@ List Credentials
 
           - `client_id: string`
 
-            OAuth client ID.
+            The OAuth client ID used when refreshing the access token.
 
           - `token_endpoint: string`
 
@@ -970,7 +972,9 @@ List Credentials
 
             - `allowed_hosts: array of string`
 
-              Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+              The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+              An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
         - `secret_name: string`
 
@@ -1038,13 +1042,13 @@ ant beta:vaults:credentials list \
 }
 ```
 
-### Get Credential
+### Retrieve a Credential
 
 `$ ant beta:vaults:credentials retrieve`
 
 **GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Get Credential
+Retrieve a Credential
 
 #### Parameters
 
@@ -1076,7 +1080,7 @@ Get Credential
 
   - `id: string`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: string`
 
@@ -1100,7 +1104,7 @@ Get Credential
 
       - `expires_at: optional string`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -1110,7 +1114,7 @@ Get Credential
 
         - `client_id: string`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: string`
 
@@ -1190,7 +1194,9 @@ Get Credential
 
           - `allowed_hosts: array of string`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: string`
 
@@ -1250,13 +1256,13 @@ ant beta:vaults:credentials retrieve \
 }
 ```
 
-### Update Credential
+### Update a Credential
 
 `$ ant beta:vaults:credentials update`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Update Credential
+Update a Credential
 
 #### Parameters
 
@@ -1270,7 +1276,7 @@ Update Credential
 
 - `--auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams or BetaManagedAgentsEnvironmentVariableUpdateParams`
 
-  Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
+  New authentication settings for the credential. The `type` must match the credential's current type, which can't be changed.
 
 - `--display-name: optional string`
 
@@ -1302,7 +1308,7 @@ Update Credential
 
   - `id: string`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: string`
 
@@ -1326,7 +1332,7 @@ Update Credential
 
       - `expires_at: optional string`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -1336,7 +1342,7 @@ Update Credential
 
         - `client_id: string`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: string`
 
@@ -1416,7 +1422,9 @@ Update Credential
 
           - `allowed_hosts: array of string`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: string`
 
@@ -1476,13 +1484,13 @@ ant beta:vaults:credentials update \
 }
 ```
 
-### Delete Credential
+### Delete a Credential
 
 `$ ant beta:vaults:credentials delete`
 
 **DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Delete Credential
+Delete a Credential
 
 #### Parameters
 
@@ -1514,7 +1522,7 @@ Delete Credential
 
   - `id: string`
 
-    Unique identifier of the deleted credential.
+    The unique ID of the deleted credential (`vcrd_...`).
 
 #### Example
 
@@ -1534,13 +1542,13 @@ ant beta:vaults:credentials delete \
 }
 ```
 
-### Archive Credential
+### Archive a Credential
 
 `$ ant beta:vaults:credentials archive`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
-Archive Credential
+Archive a Credential
 
 #### Parameters
 
@@ -1572,7 +1580,7 @@ Archive Credential
 
   - `id: string`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: string`
 
@@ -1596,7 +1604,7 @@ Archive Credential
 
       - `expires_at: optional string`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -1606,7 +1614,7 @@ Archive Credential
 
         - `client_id: string`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: string`
 
@@ -1686,7 +1694,9 @@ Archive Credential
 
           - `allowed_hosts: array of string`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: string`
 
@@ -1746,13 +1756,13 @@ ant beta:vaults:credentials archive \
 }
 ```
 
-### Validate Credential
+### Validate an MCP OAuth Credential
 
 `$ ant beta:vaults:credentials mcp-oauth-validate`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
-Validate Credential
+Validate an MCP OAuth Credential
 
 #### Parameters
 
@@ -1792,11 +1802,11 @@ Validate Credential
 
   - `mcp_probe: object`
 
-    Details of the failing MCP probe step. Null when the probe succeeded.
+    Details of the MCP probe step that failed, or `null` if the probe succeeded or there was no access token to test.
 
     - `http_response: object`
 
-      The captured HTTP error response. Null when no HTTP response was received (timeout, DNS, TLS).
+      The HTTP error response from the MCP server, or `null` if the MCP server didn't return one for the failing step, for example after a timeout or a DNS or TLS failure.
 
       - `body: string`
 
@@ -1876,11 +1886,11 @@ Validate Credential
 
     - `"invalid"`
 
-      The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+      The probe reached the MCP server and the server rejected the credential, or no access token is stored. A refresh, if one was tried, didn't recover it. Usually the end user needs to authorize again.
 
     - `"unknown"`
 
-      The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
+      The probe couldn't tell whether the credential works, for example because of a network error or because a refresh succeeded but the new access token wasn't tested. Validate the credential again to find out.
 
   - `validated_at: string`
 

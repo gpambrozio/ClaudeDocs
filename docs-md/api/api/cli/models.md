@@ -245,9 +245,17 @@ The Models API response can be used to determine which models are available for 
 
               Whether this capability is supported by the model.
 
+          - `between_tools: object`
+
+            Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
+            - `supported: boolean`
+
+              Whether this capability is supported by the model.
+
           - `disabled: object`
 
-            Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+            Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
             - `supported: boolean`
 
@@ -407,6 +415,9 @@ ant models list \
           "supported": true,
           "types": {
             "adaptive": {
+              "supported": true
+            },
+            "between_tools": {
               "supported": true
             },
             "disabled": {
@@ -653,9 +664,17 @@ The Models API response can be used to determine information about a specific mo
 
             Whether this capability is supported by the model.
 
+        - `between_tools: object`
+
+          Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
+          - `supported: boolean`
+
+            Whether this capability is supported by the model.
+
         - `disabled: object`
 
-          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
           - `supported: boolean`
 
@@ -802,6 +821,9 @@ ant models retrieve \
       "supported": true,
       "types": {
         "adaptive": {
+          "supported": true
+        },
+        "between_tools": {
           "supported": true
         },
         "disabled": {
@@ -1099,9 +1121,17 @@ ant models retrieve \
 
           Whether this capability is supported by the model.
 
+      - `between_tools: object`
+
+        Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
+        - `supported: boolean`
+
+          Whether this capability is supported by the model.
+
       - `disabled: object`
 
-        Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+        Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
         - `supported: boolean`
 
@@ -1305,9 +1335,17 @@ ant models retrieve \
 
             Whether this capability is supported by the model.
 
+        - `between_tools: object`
+
+          Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
+          - `supported: boolean`
+
+            Whether this capability is supported by the model.
+
         - `disabled: object`
 
-          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
           - `supported: boolean`
 
@@ -1443,9 +1481,17 @@ ant models retrieve \
 
         Whether this capability is supported by the model.
 
+    - `between_tools: object`
+
+      Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
+      - `supported: boolean`
+
+        Whether this capability is supported by the model.
+
     - `disabled: object`
 
-      Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+      Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
       - `supported: boolean`
 
@@ -1473,9 +1519,17 @@ ant models retrieve \
 
       Whether this capability is supported by the model.
 
+  - `between_tools: object`
+
+    Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
+    - `supported: boolean`
+
+      Whether this capability is supported by the model.
+
   - `disabled: object`
 
-    Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+    Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
     - `supported: boolean`
 

@@ -166,7 +166,6 @@ func main() {
 		log.Fatalf("worker: %v", err)
 	}
 }
-
 ```
 
 The Java SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
@@ -207,6 +206,7 @@ from typing import Any, cast
 from anthropic import AsyncAnthropic
 from anthropic.types.beta import BetaManagedAgentsCustomToolParams
 from mcp import ClientSession, types
+
 # Requires mcp >= 1.24, which renamed streamablehttp_client to streamable_http_client.
 from mcp.client.streamable_http import streamable_http_client
 
@@ -437,7 +437,6 @@ func main() {
 	}
 	fmt.Println(agent.ID)
 }
-
 ```
 
 ```java Java
@@ -588,6 +587,7 @@ from anthropic.lib.environments import EnvironmentWorker
 from anthropic.lib.tools.agent_toolset import beta_agent_toolset_20260401
 from anthropic.lib.tools.mcp import async_mcp_tool
 from mcp import ClientSession
+
 # Requires mcp >= 1.24, which renamed streamablehttp_client to streamable_http_client.
 from mcp.client.streamable_http import streamable_http_client
 
@@ -601,7 +601,9 @@ async def main() -> None:
     # result instead of a stalled call.
     async with (
         streamable_http_client(MCP_SERVER_URL) as (read, write, _),
-        ClientSession(read, write, read_timeout_seconds=timedelta(seconds=60)) as mcp_session,
+        ClientSession(
+            read, write, read_timeout_seconds=timedelta(seconds=60)
+        ) as mcp_session,
         AsyncAnthropic(auth_token=environment_key) as client,
     ):
         await mcp_session.initialize()
@@ -721,7 +723,6 @@ func main() {
 		log.Fatalf("worker: %v", err)
 	}
 }
-
 ```
 
 The Java SDK does not have `EnvironmentWorker`.

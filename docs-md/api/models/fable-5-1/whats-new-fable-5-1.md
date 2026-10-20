@@ -90,8 +90,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant beta:messages create --beta mid-conversation-output-config-2026-07-01 \
-  --transform 'content.#(type=="text").text' --raw-output <<'YAML'
+ant beta:messages create --beta mid-conversation-output-config-2026-07-01 <<'YAML'
 model: claude-fable-5-1
 max_tokens: 4096
 output_config:

@@ -1,4 +1,4 @@
-# Initial request (may be refused)
+# Fallback Credit
 
 ---
 title: Fallback credit
@@ -46,67 +46,9 @@ The `fallback_has_prefill_claim` field tells you whether the retry can continue 
 
 The following example makes a request that may be refused and redeems the credit token on a retry against Claude Opus 4.8. When a retry attempt is rejected, the example degrades through the rejection ladder: the sequence of progressively simpler retry shapes covered in [When a retry is rejected](fallback-credit.md#when-a-retry-is-rejected).
 
-```bash cURL
-# Initial request (may be refused)
-response=$(curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: fallback-credit-2026-07-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-fable-5",
-    "max_tokens": 1024,
-    "messages": [{"role": "user", "content": "Hello, Claude"}]
-  }')
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
-# A refusal carries a one-time credit token in stop_details
-token=$(jq -r '.stop_details.fallback_credit_token // empty' <<<"${response}")
-
-if [[ -n "${token}" ]]; then
-  # Retry on the fallback model with the credit token (same body)
-  response=$(curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: fallback-credit-2026-07-01" \
-    -H "content-type: application/json" \
-    -d "$(jq -n --arg token "${token}" '{
-      model: "claude-opus-4-8",
-      max_tokens: 1024,
-      messages: [{"role": "user", "content": "Hello, Claude"}],
-      fallback_credit_token: $token
-    }')")
-fi
-
-# See the SDK examples for the full rejection-handling ladder.
-jq -c '{stop_reason, model}' <<<"${response}"
-```
-
-```bash CLI
-# Initial request (may be refused)
-response=$(ant beta:messages create \
-  --model claude-fable-5 \
-  --max-tokens 1024 \
-  --message '{"role":"user","content":"Hello, Claude"}' \
-  --beta fallback-credit-2026-07-01 \
-  --format json)
-
-# A refusal carries a one-time credit token in stop_details
-token=$(jq -r '.stop_details.fallback_credit_token // empty' <<<"${response}")
-
-if [[ -n "${token}" ]]; then
-  # Retry on the fallback model with the credit token
-  response=$(ant beta:messages create \
-    --model claude-opus-4-8 \
-    --max-tokens 1024 \
-    --message '{"role":"user","content":"Hello, Claude"}' \
-    --fallback-credit-token "${token}" \
-    --beta fallback-credit-2026-07-01 \
-    --format json)
-fi
-
-# See the SDK examples for the full rejection-handling ladder.
-jq -c '{stop_reason, model}' <<<"${response}"
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = Anthropic()
@@ -564,7 +506,7 @@ The retry model must be one of the refused model's permitted fallback targets. F
 
 **Looking up permitted fallback targets programmatically**
 
-On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model's entry in the [Models API](../api/models/list.md) when the `server-side-fallback-2026-07-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
+On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model's entry in the [Models API](../api/beta/models/list.md) when the `server-side-fallback-2026-07-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
 
 ## Checking that the credit applied
 

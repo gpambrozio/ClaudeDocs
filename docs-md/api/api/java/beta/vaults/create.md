@@ -1,17 +1,17 @@
-# Create Vault
+# Create a Vault
 
 ---
-title: Create Vault
+title: Create a Vault
 url: https://platform.claude.com/docs/en/api/java/beta/vaults/create
 ---
 
-# Create Vault
+# Create a Vault
 
 `BetaManagedAgentsVault beta().vaults().create(params, requestOptions = RequestOptions.none())`
 
 **POST** `/v1/vaults`
 
-Create Vault
+Create a Vault
 
 ## Parameters
 
@@ -149,7 +149,7 @@ Create Vault
 
   - `String id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 

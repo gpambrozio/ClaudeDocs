@@ -1,15 +1,15 @@
-# Update Vault
+# Update a Vault
 
 ---
-title: Update Vault
+title: Update a Vault
 url: https://platform.claude.com/docs/en/api/beta/vaults/update
 ---
 
-# Update Vault
+# Update a Vault
 
 **POST** `/v1/vaults/{vault_id}`
 
-Update Vault
+Update a Vault
 
 ## Path parameters
 
@@ -161,7 +161,7 @@ Update Vault
 
   - `id: string`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `archived_at: string or null`
 

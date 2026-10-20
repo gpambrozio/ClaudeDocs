@@ -37,7 +37,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create --transform usage <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 cache_control:
@@ -294,7 +294,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create --transform usage <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 cache_control:
@@ -892,8 +892,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create \
-  --transform '{stop_reason,content,usage}' --format yaml <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 0
 system:
@@ -1145,7 +1144,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 # Warm the cache at application startup or on a scheduled interval.
-ant messages create --transform usage <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 0
 system:
@@ -1161,7 +1160,7 @@ messages:
 YAML
 
 # Later, when the user submits a message, the system-prompt prefix is already cached.
-ant messages create --transform 'content.#(type=="text").text' --raw-output <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 system:
@@ -1252,9 +1251,7 @@ await prewarmCache();
 
 // Later, when the user submits a message, the system-prompt prefix is already cached.
 const response = await respond("How do I implement a binary search tree?");
-const textBlock = response.content.find(
-  (block): block is Anthropic.TextBlock => block.type === "text"
-);
+const textBlock = response.content.find((block) => block.type === "text");
 console.log(textBlock?.text);
 ```
 
@@ -1538,7 +1535,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create --transform usage <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 system:
@@ -1860,7 +1857,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create --transform usage <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 system:
@@ -2317,7 +2314,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create --transform usage <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 tools:

@@ -1,15 +1,15 @@
-# Delete Vault
+# Delete a Vault
 
 ---
-title: Delete Vault
+title: Delete a Vault
 url: https://platform.claude.com/docs/en/api/beta/vaults/delete
 ---
 
-# Delete Vault
+# Delete a Vault
 
 **DELETE** `/v1/vaults/{vault_id}`
 
-Delete Vault
+Delete a Vault
 
 ## Path parameters
 
@@ -149,7 +149,7 @@ Delete Vault
 
   - `id: string`
 
-    Unique identifier of the deleted vault.
+    The unique ID of the deleted vault (`vlt_...`).
 
 ## Example
 

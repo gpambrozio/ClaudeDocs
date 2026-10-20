@@ -175,7 +175,7 @@ RESPONSE=$(curl -sS https://api.anthropic.com/v1/oauth/token \
 JSON
 )
 
-ACCESS_TOKEN=$(echo "$RESPONSE" | jq -r .access_token)
+ACCESS_TOKEN=$(jq -r .access_token <<<"$RESPONSE")
 
 # 3. Call the Claude API with the bearer token.
 curl https://api.anthropic.com/v1/messages \
@@ -186,7 +186,7 @@ curl https://api.anthropic.com/v1/messages \
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "Hello from Azure"}]
-  }' | jq -r '.content[] | select(.type == "text") | .text'
+  }'
 ```
 
 ```python Python
@@ -588,12 +588,11 @@ puts message.content.find { it.type == :text }.text
 # Container Apps, fetch from "$IDENTITY_ENDPOINT?api-version=2019-08-01&resource=api://<APP_ID>"
 # with -H "X-IDENTITY-HEADER: $IDENTITY_HEADER" instead.
 # With multiple user-assigned identities, append &client_id=<IDENTITY_CLIENT_ID>.
-ANTHROPIC_IDENTITY_TOKEN_FILE=$(mktemp)
+export ANTHROPIC_IDENTITY_TOKEN_FILE=$(mktemp)
 trap 'rm -f "$ANTHROPIC_IDENTITY_TOKEN_FILE"' EXIT
 curl -sS -H "Metadata: true" \
   "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=api://<APP_ID>" \
   | jq -r .access_token > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
-export ANTHROPIC_IDENTITY_TOKEN_FILE
 
 # ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
 # ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read from the environment.
@@ -815,7 +814,7 @@ curl -sS https://api.anthropic.com/v1/messages \
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{"role": "user", "content": "Hello from Azure"}]
-  }' | jq -r '.content[] | select(.type == "text") | .text'
+  }'
 ```
 
 ```python Python
@@ -1199,7 +1198,7 @@ puts message.content.find { it.type == :text }.text
 ```bash CLI
 # 1. Exchange the Kubernetes-projected token for an Entra-issued access
 # token and write it to a temp file the CLI can read.
-ANTHROPIC_IDENTITY_TOKEN_FILE=$(mktemp)
+export ANTHROPIC_IDENTITY_TOKEN_FILE=$(mktemp)
 trap 'rm -f "$ANTHROPIC_IDENTITY_TOKEN_FILE"' EXIT
 curl -sS "https://login.microsoftonline.com/$AZURE_TENANT_ID/oauth2/v2.0/token" \
   -d client_id="$AZURE_CLIENT_ID" \
@@ -1208,7 +1207,6 @@ curl -sS "https://login.microsoftonline.com/$AZURE_TENANT_ID/oauth2/v2.0/token" 
   -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer \
   --data-urlencode client_assertion@"$AZURE_FEDERATED_TOKEN_FILE" \
   | jq -r .access_token > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
-export ANTHROPIC_IDENTITY_TOKEN_FILE
 
 # 2. Call the Claude API. ANTHROPIC_FEDERATION_RULE_ID,
 # ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read

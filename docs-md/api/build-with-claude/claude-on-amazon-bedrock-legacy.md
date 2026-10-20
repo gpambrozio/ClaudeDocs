@@ -708,7 +708,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * [Thinking](thinking.md)
 * [Tool use](../agents-and-tools/tool-use/overview.md), including the [Bash tool](../agents-and-tools/tool-use/bash-tool.md), [Computer use tool](../agents-and-tools/tool-use/computer-use-tool.md), [Memory tool](../agents-and-tools/tool-use/memory-tool.md), and [Text editor tool](../agents-and-tools/tool-use/text-editor-tool.md)
 * [Citations](citations.md)
-* [Structured outputs](structured-outputs.md), for the models in the Amazon Bedrock note under its [Compatibility](structured-outputs.md#compatibility) section
+* [Structured outputs](structured-outputs.md)
 
 ### Features not supported
 

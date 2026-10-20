@@ -185,6 +185,9 @@ var_dump($betaModelInfo);
         "adaptive": {
           "supported": true
         },
+        "between_tools": {
+          "supported": true
+        },
         "disabled": {
           "supported": true
         },

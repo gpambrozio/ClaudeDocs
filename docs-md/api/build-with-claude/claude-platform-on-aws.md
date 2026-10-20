@@ -197,7 +197,7 @@ API keys for Claude Platform on AWS are managed in the AWS Console, not the Clau
 
 For workloads that need to hand a credential to a separate process (such as an LLM gateway, a serverless function, or a tool that supports bearer-token authentication but not SigV4), generate a short-term API key from your AWS credentials instead of provisioning a long-lived key in the AWS Console.
 
-AWS publishes token-generator libraries for [JavaScript](https://github.com/aws/token-generator-for-aws-external-anthropic-js), [Python](https://github.com/aws/token-generator-for-aws-external-anthropic-python), and [Java](https://github.com/aws/token-generator-for-aws-external-anthropic-java). Each library reads your AWS credentials through the standard provider chain and returns a time-limited token that works with the `x-api-key` header. Token lifetime defaults to 12 hours and is capped at the lesser of your requested duration, your AWS credentials' expiry, and 12 hours. See the linked repository READMEs for installation and full configuration options.
+AWS publishes token-generator libraries for [JavaScript](https://github.com/aws/token-generator-for-aws-external-anthropic-js), [Python](https://github.com/aws/token-generator-for-aws-external-anthropic-python), and [Java](https://github.com/aws/token-generator-for-aws-external-anthropic-java). Each library reads your AWS credentials through the standard provider chain and returns a time-limited token that you send as `Authorization: Bearer <token>`. Token lifetime defaults to 12 hours and is capped at the lesser of your requested duration, your AWS credentials' expiry, and 12 hours. See the linked repository READMEs for installation and full configuration options.
 
 Pass the generated token to the SDK the same way you'd pass an AWS Console-generated API key:
 
@@ -347,7 +347,15 @@ Model IDs are identical to the first-party Claude API. There are no Bedrock-styl
 
 New models typically launch on Claude Platform on AWS the same day as the first-party Claude API.
 
-Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](../agents-and-tools/agent-skills/claude-api-skill.md#migrating-to-a-newer-claude-model).
+Upgrading to a newer Claude model? The [Claude API skill](../agents-and-tools/agent-skills/claude-api-skill.md#migrating-to-a-newer-claude-model) in Claude Code applies model ID swaps and breaking parameter changes across your code base:
+
+Let Claude Code migrate your code for you
+
+```text
+/claude-api migrate this project to the latest Claude Opus model
+```
+
+The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform.
 
 ## Making requests
 
@@ -376,8 +384,8 @@ curl "https://aws-external-anthropic.us-west-2.api.aws/v1/messages" \
 
 ```bash CLI
 # Replace us-west-2 with your AWS region
-# ant reads ANTHROPIC_API_KEY and sends it as x-api-key. Generate a key in the
-# AWS Console (see API key authentication).
+# ant reads ANTHROPIC_API_KEY. Generate a key in the AWS Console
+# (see API key authentication).
 export ANTHROPIC_API_KEY="YOUR_AWS_API_KEY"
 
 ant messages create \
@@ -385,8 +393,7 @@ ant messages create \
   --workspace-id "$ANTHROPIC_AWS_WORKSPACE_ID" \
   --model claude-sonnet-5-5 \
   --max-tokens 1024 \
-  --message '{role: user, content: "Hello!"}' \
-  --transform content
+  --message '{role: user, content: "Hello!"}'
 ```
 
 ```python Python
@@ -593,8 +600,8 @@ curl "https://aws-external-anthropic.us-west-2.api.aws/v1/messages" \
 
 ```bash CLI
 # Replace us-west-2 with your AWS region
-# ant reads ANTHROPIC_API_KEY and sends it as x-api-key. Generate a key in the
-# AWS Console (see API key authentication).
+# ant reads ANTHROPIC_API_KEY. Generate a key in the AWS Console
+# (see API key authentication).
 export ANTHROPIC_API_KEY="YOUR_AWS_API_KEY"
 
 ant messages create \
@@ -603,8 +610,7 @@ ant messages create \
   --model claude-sonnet-5-5 \
   --max-tokens 1024 \
   --inference-geo us \
-  --message '{role: user, content: "Hello!"}' \
-  --transform content
+  --message '{role: user, content: "Hello!"}'
 ```
 
 ```python Python
@@ -866,8 +872,8 @@ curl -i "https://aws-external-anthropic.us-west-2.api.aws/v1/messages" \
 
 ```bash CLI
 # Replace us-west-2 with your AWS region
-# ant reads ANTHROPIC_API_KEY and sends it as x-api-key. Generate a key in the
-# AWS Console (see API key authentication).
+# ant reads ANTHROPIC_API_KEY. Generate a key in the AWS Console
+# (see API key authentication).
 export ANTHROPIC_API_KEY="YOUR_AWS_API_KEY"
 
 # --debug prints the HTTP response, including the X-Amzn-Requestid and

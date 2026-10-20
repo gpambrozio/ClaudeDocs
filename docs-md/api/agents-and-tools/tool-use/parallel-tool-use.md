@@ -207,7 +207,7 @@ if (toolUses.length > 1) {
 
 // Simulate tool execution and format results correctly
 const toolResults: Anthropic.ToolResultBlockParam[] = toolUses
-  .filter((block): block is Anthropic.ToolUseBlock => block.type === "tool_use")
+  .filter((block) => block.type === "tool_use")
   .map((toolUse) => {
     const input = toolUse.input as Record<string, string>;
     let result: string;

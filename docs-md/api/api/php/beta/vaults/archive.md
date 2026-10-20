@@ -1,17 +1,17 @@
-# Archive Vault
+# Archive a Vault
 
 ---
-title: Archive Vault
+title: Archive a Vault
 url: https://platform.claude.com/docs/en/api/php/beta/vaults/archive
 ---
 
-# Archive Vault
+# Archive a Vault
 
 `$client->beta->vaults->archive(string vaultID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}/archive`
 
-Archive Vault
+Archive a Vault
 
 ## Parameters
 
@@ -37,7 +37,7 @@ Archive Vault
 
   - `string id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `?\Datetime archivedAt`
 

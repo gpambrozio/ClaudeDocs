@@ -114,7 +114,7 @@ curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d "{\"events\": [{\"type\": \"user.interrupt\", \"session_thread_id\": \"$THREAD_ID\"}]}"
+  -d '{"events": [{"type": "user.interrupt", "session_thread_id": "'"$THREAD_ID"'"}]}'
 ```
 
 ```bash CLI
@@ -132,7 +132,7 @@ client.beta.sessions.events.send(
 
 ```typescript TypeScript
 await client.beta.sessions.events.send(session.id, {
-  events: [{ type: "user.interrupt", session_thread_id: thread.id }],
+  events: [{ type: "user.interrupt", session_thread_id: thread.id }]
 });
 ```
 
@@ -216,7 +216,7 @@ print(archived.status, archived.archived_at)
 
 ```typescript TypeScript
 const archived = await client.beta.sessions.threads.archive(thread.id, {
-  session_id: session.id,
+  session_id: session.id
 });
 console.log(archived.status, archived.archived_at);
 ```
@@ -264,7 +264,7 @@ curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d "{\"events\": [{\"type\": \"user.interrupt\", \"session_thread_id\": \"$THREAD_ID\"}]}"
+  -d '{"events": [{"type": "user.interrupt", "session_thread_id": "'"$THREAD_ID"'"}]}'
 
 curl -fsS -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archive" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -293,10 +293,10 @@ print(archived.status, archived.archived_at)
 
 ```typescript TypeScript
 await client.beta.sessions.events.send(session.id, {
-  events: [{ type: "user.interrupt", session_thread_id: thread.id }],
+  events: [{ type: "user.interrupt", session_thread_id: thread.id }]
 });
 const archived = await client.beta.sessions.threads.archive(thread.id, {
-  session_id: session.id,
+  session_id: session.id
 });
 console.log(archived.status, archived.archived_at);
 ```
@@ -412,19 +412,7 @@ A thread's stream doesn't replay earlier events. Right after `session.thread_cre
 curl -fsSN "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" |
-  while IFS= read -r line; do
-    [[ $line == data:* ]] || continue
-    json=${line#data: }
-    case $(jq -r '.type' <<<"$json") in
-      agent.message)
-        printf '%s' "$(jq -j '.content[] | select(.type == "text") | .text' <<<"$json")"
-        ;;
-      session.thread_status_idle)
-        break
-        ;;
-    esac
-  done
+  -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 
 ```bash CLI
@@ -450,7 +438,7 @@ with client.beta.sessions.threads.events.stream(
 
 ```typescript TypeScript
 const stream = await client.beta.sessions.threads.events.stream(thread.id, {
-  session_id: session.id,
+  session_id: session.id
 });
 
 loop: for await (const event of stream) {
@@ -576,8 +564,7 @@ List all past session thread events to pull a complete history.
 curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/events" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01" \
-  | jq -r '.data[] | "[\(.type)] \(.processed_at)"'
+  -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 
 ```bash CLI
@@ -596,7 +583,7 @@ for event in client.beta.sessions.threads.events.list(
 
 ```typescript TypeScript
 for await (const event of client.beta.sessions.threads.events.list(thread.id, {
-  session_id: session.id,
+  session_id: session.id
 })) {
   console.log(`[${event.type}] ${event.processed_at}`);
 }
@@ -681,18 +668,7 @@ Under `auto`, your `user.message` events can lead the server to allow a call it 
 
 The following example goes inside the event loop of the [tool confirmation handler](events-and-streaming.md#tool-confirmation). For each ID in `stop_reason.event_ids`, it sends a `user.tool_confirmation` that allows the call. The same pattern applies to `user.custom_tool_result`, which you can also send as soon as its `agent.custom_tool_use` event arrives.
 
-```bash cURL
-while IFS= read -r event_id; do
-  jq -n --arg id "$event_id" \
-    '{events: [{type: "user.tool_confirmation", tool_use_id: $id, result: "allow"}]}' |
-    curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01" \
-      -H "content-type: application/json" \
-      -d @-
-done < <(jq -r '.stop_reason.event_ids[]' <<<"$data")
-```
+This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
@@ -717,9 +693,9 @@ for (const eventId of stop.event_ids) {
       {
         type: "user.tool_confirmation",
         tool_use_id: eventId,
-        result: "allow",
-      },
-    ],
+        result: "allow"
+      }
+    ]
   });
 }
 ```

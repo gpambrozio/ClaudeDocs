@@ -208,8 +208,7 @@ ant messages create \
   --base-url https://example-resource.services.ai.azure.com/anthropic \
   --model claude-opus-5-5 \
   --max-tokens 1024 \
-  --message '{role: user, content: "Hello!"}' \
-  --transform content
+  --message '{role: user, content: "Hello!"}'
 ```
 
 ```python Python
@@ -386,13 +385,10 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
 **Example using Entra ID:**
 
 ```bash cURL
-# Get Microsoft Entra ID token
-ACCESS_TOKEN=$(az account get-access-token --resource https://ai.azure.com --query accessToken -o tsv)
-
-# Make request with token. Replace {resource} with your resource name
+# Make a request with a Microsoft Entra ID token. Replace {resource} with your resource name
 curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
   -H "content-type: application/json" \
-  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "Authorization: Bearer $(az account get-access-token --resource https://ai.azure.com --query accessToken -o tsv)" \
   -H "anthropic-version: 2023-06-01" \
   -d '{
     "model": "claude-opus-5-5",
@@ -404,16 +400,15 @@ curl https://{resource}.services.ai.azure.com/anthropic/v1/messages \
 ```
 
 ```bash CLI
-# Get Microsoft Entra ID token
-ACCESS_TOKEN=$(az account get-access-token --resource https://ai.azure.com --query accessToken -o tsv)
-
-# Make request with token. Replace {resource} with your resource name
+# Make a request with a Microsoft Entra ID token. Replace {resource} with your resource name
 # env -u unsets ANTHROPIC_API_KEY, which the CLI would send instead of the token
-env -u ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN="$ACCESS_TOKEN" ant messages create \
-  --base-url https://{resource}.services.ai.azure.com/anthropic \
-  --model claude-opus-5-5 \
-  --max-tokens 1024 \
-  --message '{role: user, content: "Hello!"}'
+env -u ANTHROPIC_API_KEY \
+  ANTHROPIC_AUTH_TOKEN="$(az account get-access-token --resource https://ai.azure.com --query accessToken -o tsv)" \
+  ant messages create \
+    --base-url https://{resource}.services.ai.azure.com/anthropic \
+    --model claude-opus-5-5 \
+    --max-tokens 1024 \
+    --message '{role: user, content: "Hello!"}'
 ```
 
 ```python Python
@@ -691,7 +686,15 @@ By default, deployment names match the model IDs shown in the preceding table. H
 
 [Claude Mythos Preview](https://anthropic.com/glasswing) is a research preview available to invited customers on Microsoft Foundry.
 
-Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](../agents-and-tools/agent-skills/claude-api-skill.md#migrating-to-a-newer-claude-model).
+Upgrading to a newer Claude model? The [Claude API skill](../agents-and-tools/agent-skills/claude-api-skill.md#migrating-to-a-newer-claude-model) in Claude Code applies model ID swaps and breaking parameter changes across your code base:
+
+Let Claude Code migrate your code for you
+
+```text
+/claude-api migrate this project to the latest Claude Opus model
+```
+
+The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform.
 
 ## Billing
 

@@ -50,37 +50,9 @@ Resetting context is not the only way to recover. You can also retry the refused
 
 Here's how to detect and handle streaming refusals in your application:
 
-```bash cURL
-response=$(curl -N https://api.anthropic.com/v1/messages \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -d '{
-    "model": "claude-opus-5-5",
-    "messages": [{"role": "user", "content": "Hello"}],
-    "max_tokens": 1024,
-    "stream": true
-  }')
+Detecting a refusal in the stream and resetting the conversation needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
 
-if echo "$response" | jq -R -e 'select(startswith("data: "))
-    | sub("^data: "; "") | fromjson
-    | select(.delta.stop_reason == "refusal")' >/dev/null; then
-  echo "Response refused - resetting conversation context"
-  # Reset your conversation state here
-fi
-```
-
-```bash CLI
-response=$(ant messages create --stream --format jsonl \
-  --model claude-opus-5-5 \
-  --max-tokens 1024 \
-  --message '{role: user, content: Hello}')
-
-if echo "$response" | jq -e 'select(.delta.stop_reason == "refusal")' >/dev/null; then
-  echo "Response refused - resetting conversation context"
-  # Reset your conversation state here
-fi
-```
+Detecting a refusal in the stream and resetting the conversation needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = anthropic.Anthropic()

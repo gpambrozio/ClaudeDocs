@@ -13,11 +13,10 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 The [Python SDK](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript) offer multiple ways of streaming. The [PHP SDK](https://github.com/anthropics/anthropic-sdk-php) provides streaming through `createStream()`. The Python SDK allows both sync and async streams. See the documentation in each SDK for details.
 
 ```bash CLI
-ant messages create --stream --format jsonl \
+ant messages create --stream \
   --model claude-opus-5-5 \
   --max-tokens 1024 \
-  --message '{role: user, content: "Hello"}' \
-  | jq -rj 'select(.delta.type? == "text_delta") | .delta.text'
+  --message '{role: user, content: "Hello"}'
 ```
 
 ```python Python

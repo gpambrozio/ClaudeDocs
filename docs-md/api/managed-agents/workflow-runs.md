@@ -245,9 +245,14 @@ await client.beta.sessions.events.send(sessionId, {
   events: [
     {
       type: "user.message",
-      content: [{ type: "text", text: "Which contracts in /contracts have a change-of-control clause?" }],
-    },
-  ],
+      content: [
+        {
+          type: "text",
+          text: "Which contracts in /contracts have a change-of-control clause?"
+        }
+      ]
+    }
+  ]
 });
 
 events: for await (const event of stream) {
@@ -281,9 +286,9 @@ events: for await (const event of stream) {
             {
               type: "user.custom_tool_result",
               custom_tool_use_id: event.id,
-              content: [{ type: "text", text: result }],
-            },
-          ],
+              content: [{ type: "text", text: result }]
+            }
+          ]
         });
       } catch (error) {
         // The server refuses a result that comes too late, after it
@@ -430,7 +435,7 @@ await foreach (var streamEvent in stream.Enumerate())
 ```
 
 ```go Go
-	openRuns := map[string]string{}   // workflow_run_id -> run name
+	openRuns := map[string]string{}      // workflow_run_id -> run name
 	phaseNames := map[[2]string]string{} // {run ID, phase ID} -> phase name
 
 	// Open the stream first, then send the user message

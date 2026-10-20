@@ -135,7 +135,6 @@ func main() {
 		log.Fatalf("worker: %v", err)
 	}
 }
-
 ```
 
 The Java SDK does not have `EnvironmentWorker`. Run the `ant` CLI worker instead: `ant beta:worker poll --workdir /workspace`.
@@ -389,7 +388,6 @@ func main() {
 		slog.Error("http shutdown", "err", err)
 	}
 }
-
 ```
 
 The Java SDK does not have `EnvironmentWorker`. To handle work items from your own code, call the [Environments Work endpoints](../api/beta/environments/work.md).
@@ -660,7 +658,9 @@ from anthropic import AsyncAnthropic
 from anthropic.lib.environments import EnvironmentWorker
 
 async def main() -> None:
-    async with AsyncAnthropic(auth_token=os.environ["ANTHROPIC_ENVIRONMENT_KEY"]) as client:
+    async with AsyncAnthropic(
+        auth_token=os.environ["ANTHROPIC_ENVIRONMENT_KEY"]
+    ) as client:
         worker = EnvironmentWorker(client, workdir="/workspace")
         # With no arguments, handle_item() reads the ANTHROPIC_* variables the spawn
         # script forwarded, including ANTHROPIC_WORK_SECRET.
@@ -729,7 +729,6 @@ func main() {
 		log.Fatalf("worker: %v", err)
 	}
 }
-
 ```
 
 The Java SDK does not have `EnvironmentWorker`.

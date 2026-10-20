@@ -741,9 +741,7 @@ async function classifySupportRequest(
     output_config: { effort: "low" },
     messages: [{ role: "user", content: classificationPrompt }]
   });
-  const textBlock = message.content.find(
-    (block): block is Anthropic.TextBlock => block.type === "text"
-  );
+  const textBlock = message.content.find((block) => block.type === "text");
   const reasoningAndIntent = textBlock?.text ?? "";
 
   // Use a regular expression to extract `reasoning`.
@@ -1089,9 +1087,7 @@ async function classifySupportRequest(
   });
   // Get the usage statistics for the API call for how many input and output tokens were used.
   const usage = message.usage;
-  const textBlock = message.content.find(
-    (block): block is Anthropic.TextBlock => block.type === "text"
-  );
+  const textBlock = message.content.find((block) => block.type === "text");
   const reasoningAndIntent = textBlock?.text ?? "";
 
   // Use a regular expression to extract `reasoning`.

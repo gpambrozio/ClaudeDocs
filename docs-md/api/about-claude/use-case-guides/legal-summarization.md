@@ -83,7 +83,6 @@ var detailsToExtract = []string{
 	"Consent and notices (landlord's consent, and notice requirements)",
 	"Special provisions (furniture, parking, and subletting restrictions)",
 }
-
 ```
 
 ```java Java
@@ -362,7 +361,6 @@ func extractDocumentText() {
 	}
 	fmt.Println(documentText[:min(50000, len(documentText))])
 }
-
 ```
 
 ```java Java
@@ -406,8 +404,10 @@ void extractDocumentText() throws IOException, InterruptedException {
 ```
 
 ```php PHP
+use Smalot\PdfParser\Parser;
+
 $getLlmText = function (string $pdfData): string {
-    $document = (new \Smalot\PdfParser\Parser())->parseContent($pdfData);
+    $document = (new Parser())->parseContent($pdfData);
     $text = implode("\n", array_map(fn ($page) => $page->getText(), $document->getPages()));
 
     // Remove page numbers
@@ -668,7 +668,6 @@ func printSubleaseSummary() {
 	subleaseSummary := summarizeDocument(documentText, detailsToExtract, anthropic.ModelClaudeOpus5_5, 16000)
 	fmt.Println(subleaseSummary)
 }
-
 ```
 
 ```java Java
@@ -722,12 +721,12 @@ void printSubleaseSummary() {
 
 ```php PHP
 // Initialize the Anthropic client
-$client = new \Anthropic\Client();
+$client = new Client();
 
 $summarizeDocument = function (
     string $text,
     array $detailsToExtract,
-    \Anthropic\Messages\Model $model = \Anthropic\Messages\Model::CLAUDE_OPUS_5_5,
+    Model $model = Model::CLAUDE_OPUS_5_5,
     int $maxTokens = 16000,
 ) use ($client): string {
     // Format the details to extract to be placed within the prompt's context
@@ -1122,7 +1121,6 @@ func printLongSummary() {
 	longSummary := summarizeLongDocument(documentText, detailsToExtract, anthropic.ModelClaudeOpus5_5, 16000)
 	fmt.Println(longSummary)
 }
-
 ```
 
 ```java Java
@@ -1191,7 +1189,7 @@ $chunkText = fn (string $text, int $chunkSize = 20000): array => mb_str_split($t
 $summarizeLongDocument = function (
     string $text,
     array $detailsToExtract,
-    \Anthropic\Messages\Model $model = \Anthropic\Messages\Model::CLAUDE_OPUS_5_5,
+    Model $model = Model::CLAUDE_OPUS_5_5,
     int $maxTokens = 16000,
 ) use ($client, $chunkText, $summarizeDocument): string {
     // Format the details to extract to be placed within the prompt's context

@@ -1,17 +1,17 @@
-# Update Vault
+# Update a Vault
 
 ---
-title: Update Vault
+title: Update a Vault
 url: https://platform.claude.com/docs/en/api/csharp/beta/vaults/update
 ---
 
-# Update Vault
+# Update a Vault
 
 `BetaManagedAgentsVault Beta.Vaults.Update(parameters, cancellationToken = default)`
 
 **POST** `/v1/vaults/{vault_id}`
 
-Update Vault
+Update a Vault
 
 ## Parameters
 
@@ -153,7 +153,7 @@ Update Vault
 
   - `required string ID`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `required DateTimeOffset? ArchivedAt`
 

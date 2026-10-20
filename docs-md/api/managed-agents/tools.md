@@ -42,7 +42,7 @@ Each config entry can also set a `permission_policy` (java, php: `permissionPoli
 The following example enables the toolset and disables `web_fetch`:
 
 ```bash cURL
-agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
+curl -fsSL https://api.anthropic.com/v1/agents \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -59,7 +59,6 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
       }
     ]
   }'
-)
 ```
 
 ```bash CLI
@@ -249,7 +248,7 @@ Claude does not run a custom tool itself. It emits a structured request, your co
 The following example creates an agent with the built-in toolset and one custom tool, `get_weather`:
 
 ```bash cURL
-agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
+curl -fsSL https://api.anthropic.com/v1/agents \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -275,7 +274,6 @@ agent=$(curl -fsSL https://api.anthropic.com/v1/agents \
       }
     ]
   }'
-)
 ```
 
 ```bash CLI

@@ -30,9 +30,7 @@ featureMetadata:
   supportedPlatforms:
     Claude API: ga
     Claude Platform on AWS: ga
-    Amazon Bedrock:
-      availability: ga
-      note: On Amazon Bedrock, structured outputs are available on the legacy [Amazon Bedrock (Opus 4.6 and earlier)](claude-on-amazon-bedrock-legacy.md) integration for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5, and not on [Claude in Amazon Bedrock](claude-in-amazon-bedrock.md).
+    Amazon Bedrock: ga
     Google Cloud: ga
     Microsoft Foundry: ga
 ---
@@ -124,9 +122,7 @@ Claude returns JSON like this in the response's text content block:
 **CLI**
 
 ```bash
-ant messages create \
-  --transform 'content.#(type=="text").text|@fromstr' \
-  --format jsonl <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 messages:
@@ -150,12 +146,15 @@ output_config:
 YAML
 ```
 
-To print only some properties of the JSON output, pass a [GJSON path](../cli-sdks-libraries/cli/using.md#transform-output-with-gjson) to `--transform`.
+Claude returns JSON like this in the response's text content block:
 
-The example above outputs:
-
-```text Output wrap
-{"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise","demo_requested":true}
+```json Output
+{
+  "name": "John Smith",
+  "email": "john@example.com",
+  "plan_interest": "Enterprise",
+  "demo_requested": true
+}
 ```
 
 **Python**
@@ -794,9 +793,7 @@ Claude returns JSON like this in the response's text content block:
 **CLI**
 
 ```bash
-ant messages create \
-  --transform 'content.#(type=="text").text|@fromstr' \
-  --format jsonl <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 messages:
@@ -820,10 +817,15 @@ output_config:
 YAML
 ```
 
-The example above outputs:
+Claude returns JSON like this in the response's text content block:
 
-```text Output wrap
-{"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise","demo_requested":true}
+```json Output
+{
+  "name": "John Smith",
+  "email": "john@example.com",
+  "plan_interest": "Enterprise",
+  "demo_requested": true
+}
 ```
 
 **Python**
@@ -1226,9 +1228,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create \
-  --transform 'content.#(type=="text").text|@fromstr' \
-  --format jsonl <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 4096
 messages:
@@ -1552,9 +1552,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create \
-  --transform 'content.#(type=="text").text|@fromstr' \
-  --format jsonl <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 messages:
@@ -1838,9 +1836,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create \
-  --transform 'content.#(type=="text").text' \
-  --raw-output <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 output_config:

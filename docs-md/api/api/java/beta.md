@@ -627,9 +627,13 @@ The Models API response can be used to determine which models are available for 
 
           Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
 
+        - `BetaCapabilitySupport betweenTools`
+
+          Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
         - `BetaCapabilitySupport disabled`
 
-          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
         - `BetaCapabilitySupport enabled`
 
@@ -792,6 +796,9 @@ public final class Main {
           "supported": true,
           "types": {
             "adaptive": {
+              "supported": true
+            },
+            "between_tools": {
               "supported": true
             },
             "disabled": {
@@ -1092,9 +1099,13 @@ The Models API response can be used to determine information about a specific mo
 
           Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
 
+        - `BetaCapabilitySupport betweenTools`
+
+          Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
         - `BetaCapabilitySupport disabled`
 
-          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
         - `BetaCapabilitySupport enabled`
 
@@ -1255,6 +1266,9 @@ public final class Main {
       "supported": true,
       "types": {
         "adaptive": {
+          "supported": true
+        },
+        "between_tools": {
           "supported": true
         },
         "disabled": {
@@ -68448,13 +68462,13 @@ public final class Main {
 
 ## Beta › Vaults
 
-### Create Vault
+### Create a Vault
 
 `BetaManagedAgentsVault beta().vaults().create(params, requestOptions = RequestOptions.none())`
 
 **POST** `/v1/vaults`
 
-Create Vault
+Create a Vault
 
 #### Parameters
 
@@ -68592,7 +68606,7 @@ Create Vault
 
   - `String id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -68674,7 +68688,7 @@ List Vaults
 
   - `Optional<Boolean> includeArchived` (query parameter)
 
-    Whether to include archived vaults in the results.
+    Whether to include archived vaults in the results. Defaults to `false`.
 
   - `Optional<Long> limit` (query parameter)
 
@@ -68684,7 +68698,7 @@ List Vaults
 
   - `Optional<String> page` (query parameter)
 
-    Opaque pagination token from a previous `list_vaults` response.
+    The `next_page` value from a previous [List Vaults](../beta/vaults/list.md) response, to get the next page. Leave it out to get the first page.
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
@@ -68808,7 +68822,7 @@ List Vaults
 
   - `String id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -68878,13 +68892,13 @@ public final class Main {
 }
 ```
 
-### Get Vault
+### Retrieve a Vault
 
 `BetaManagedAgentsVault beta().vaults().retrieve(params = VaultRetrieveParams.none(), requestOptions = RequestOptions.none())`
 
 **GET** `/v1/vaults/{vault_id}`
 
-Get Vault
+Retrieve a Vault
 
 #### Parameters
 
@@ -69016,7 +69030,7 @@ Get Vault
 
   - `String id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -69081,13 +69095,13 @@ public final class Main {
 }
 ```
 
-### Update Vault
+### Update a Vault
 
 `BetaManagedAgentsVault beta().vaults().update(params = VaultUpdateParams.none(), requestOptions = RequestOptions.none())`
 
 **POST** `/v1/vaults/{vault_id}`
 
-Update Vault
+Update a Vault
 
 #### Parameters
 
@@ -69229,7 +69243,7 @@ Update Vault
 
   - `String id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -69294,13 +69308,13 @@ public final class Main {
 }
 ```
 
-### Delete Vault
+### Delete a Vault
 
 `BetaManagedAgentsDeletedVault beta().vaults().delete(params = VaultDeleteParams.none(), requestOptions = RequestOptions.none())`
 
 **DELETE** `/v1/vaults/{vault_id}`
 
-Delete Vault
+Delete a Vault
 
 #### Parameters
 
@@ -69432,7 +69446,7 @@ Delete Vault
 
   - `String id`
 
-    Unique identifier of the deleted vault.
+    The unique ID of the deleted vault (`vlt_...`).
 
 #### Example
 
@@ -69464,13 +69478,13 @@ public final class Main {
 }
 ```
 
-### Archive Vault
+### Archive a Vault
 
 `BetaManagedAgentsVault beta().vaults().archive(params = VaultArchiveParams.none(), requestOptions = RequestOptions.none())`
 
 **POST** `/v1/vaults/{vault_id}/archive`
 
-Archive Vault
+Archive a Vault
 
 #### Parameters
 
@@ -69602,7 +69616,7 @@ Archive Vault
 
   - `String id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -69669,13 +69683,13 @@ public final class Main {
 
 ## Beta › Vaults › Credentials
 
-### Create Credential
+### Create a Credential
 
 `BetaManagedAgentsCredential beta().vaults().credentials().create(params, requestOptions = RequestOptions.none())`
 
 **POST** `/v1/vaults/{vault_id}/credentials`
 
-Create Credential
+Create a Credential
 
 #### Parameters
 
@@ -69809,7 +69823,7 @@ Create Credential
 
       - `String accessToken`
 
-        OAuth access token.
+        The OAuth access token to send to the MCP server.
 
         minLength: 1, maxLength: 8192
 
@@ -69821,7 +69835,9 @@ Create Credential
 
       - `Optional<LocalDateTime> expiresAt`
 
-        A timestamp in RFC 3339 format
+        When `access_token` expires, in RFC 3339.
+
+        Must be in the future.
 
         format: date-time
 
@@ -69831,13 +69847,13 @@ Create Credential
 
         - `String clientId`
 
-          OAuth client ID.
+          The OAuth client ID to use when refreshing the access token. It can't be changed after the credential is created.
 
           minLength: 1, maxLength: 1024
 
         - `String refreshToken`
 
-          OAuth refresh token.
+          The OAuth refresh token that the API uses to get a new access token when the current one expires.
 
           minLength: 1, maxLength: 8192
 
@@ -69863,7 +69879,7 @@ Create Credential
 
             - `String clientSecret`
 
-              OAuth client secret.
+              The OAuth client secret, sent to `token_endpoint` with HTTP Basic authentication.
 
               minLength: 1, maxLength: 512
 
@@ -69875,7 +69891,7 @@ Create Credential
 
             - `String clientSecret`
 
-              OAuth client secret.
+              The OAuth client secret, sent to `token_endpoint` in the POST body.
 
               minLength: 1, maxLength: 512
 
@@ -69899,7 +69915,7 @@ Create Credential
 
       - `String token`
 
-        Static bearer token value.
+        The static bearer token to send to the MCP server, such as an API key or personal access token.
 
         minLength: 1, maxLength: 8192
 
@@ -69933,7 +69949,9 @@ Create Credential
 
           - `List<String> allowedHosts`
 
-            Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
       - `String secretName`
 
@@ -69943,7 +69961,7 @@ Create Credential
 
       - `String secretValue`
 
-        Secret value. Write-only; never returned in responses.
+        The secret to substitute into the agent's outbound requests. It's write-only and never returned in responses.
 
         minLength: 1, maxLength: 4096
 
@@ -69979,7 +69997,7 @@ Create Credential
 
   - `String id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -70003,7 +70021,7 @@ Create Credential
 
       - `Optional<LocalDateTime> expiresAt`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -70013,7 +70031,7 @@ Create Credential
 
         - `String clientId`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `String tokenEndpoint`
 
@@ -70093,7 +70111,9 @@ Create Credential
 
           - `List<String> allowedHosts`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `String secretName`
 
@@ -70192,7 +70212,7 @@ List Credentials
 
   - `Optional<Boolean> includeArchived` (query parameter)
 
-    Whether to include archived credentials in the results.
+    Whether to include archived credentials in the results. Defaults to `false`.
 
   - `Optional<Long> limit` (query parameter)
 
@@ -70202,7 +70222,7 @@ List Credentials
 
   - `Optional<String> page` (query parameter)
 
-    Opaque pagination token from a previous `list_credentials` response.
+    The `next_page` value from a previous [List Credentials](../beta/vaults/credentials/list.md) response, to get the next page. Leave it out to get the first page.
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
@@ -70326,7 +70346,7 @@ List Credentials
 
   - `String id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -70350,7 +70370,7 @@ List Credentials
 
       - `Optional<LocalDateTime> expiresAt`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -70360,7 +70380,7 @@ List Credentials
 
         - `String clientId`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `String tokenEndpoint`
 
@@ -70440,7 +70460,9 @@ List Credentials
 
           - `List<String> allowedHosts`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `String secretName`
 
@@ -70517,13 +70539,13 @@ public final class Main {
 }
 ```
 
-### Get Credential
+### Retrieve a Credential
 
 `BetaManagedAgentsCredential beta().vaults().credentials().retrieve(params, requestOptions = RequestOptions.none())`
 
 **GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Get Credential
+Retrieve a Credential
 
 #### Parameters
 
@@ -70659,7 +70681,7 @@ Get Credential
 
   - `String id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -70683,7 +70705,7 @@ Get Credential
 
       - `Optional<LocalDateTime> expiresAt`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -70693,7 +70715,7 @@ Get Credential
 
         - `String clientId`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `String tokenEndpoint`
 
@@ -70773,7 +70795,9 @@ Get Credential
 
           - `List<String> allowedHosts`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `String secretName`
 
@@ -70849,13 +70873,13 @@ public final class Main {
 }
 ```
 
-### Update Credential
+### Update a Credential
 
 `BetaManagedAgentsCredential beta().vaults().credentials().update(params, requestOptions = RequestOptions.none())`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Update Credential
+Update a Credential
 
 #### Parameters
 
@@ -70983,7 +71007,7 @@ Update Credential
 
   - `Optional<Auth> auth`
 
-    Updated authentication configuration. The `type` is immutable; the variant sent must match the stored credential's type.
+    New authentication settings for the credential. The `type` must match the credential's current type, which can't be changed.
 
     - `class BetaManagedAgentsMcpOAuthUpdateParams`
 
@@ -70993,13 +71017,17 @@ Update Credential
 
       - `Optional<String> accessToken`
 
-        Updated OAuth access token.
+        The new OAuth access token to replace the stored one.
 
         minLength: 1, maxLength: 8192
 
       - `Optional<LocalDateTime> expiresAt`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Leave it out to keep the stored expiry.
+
+        If you send a new `access_token`, send its `expires_at` too, or the new token keeps the old expiry.
+
+        Must be in the future.
 
         format: date-time
 
@@ -71009,13 +71037,13 @@ Update Credential
 
         - `Optional<String> refreshToken`
 
-          Updated OAuth refresh token.
+          The new OAuth refresh token to replace the stored one.
 
           minLength: 1, maxLength: 8192
 
         - `Optional<String> scope`
 
-          Updated OAuth scope for the refresh request.
+          The new OAuth scope for refresh requests. Send an empty string to clear the stored scope.
 
           maxLength: 8192
 
@@ -71029,7 +71057,9 @@ Update Credential
 
             - `Optional<String> clientSecret`
 
-              Updated OAuth client secret.
+              A new OAuth client secret to replace the stored one.
+
+              The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
               minLength: 1, maxLength: 512
 
@@ -71041,7 +71071,9 @@ Update Credential
 
             - `Optional<String> clientSecret`
 
-              Updated OAuth client secret.
+              A new OAuth client secret to replace the stored one.
+
+              The credential must already use `client_secret_basic` or `client_secret_post`. It keeps its current `token_endpoint_auth` type, even if the `type` sent with this secret is the other one.
 
               minLength: 1, maxLength: 512
 
@@ -71053,7 +71085,7 @@ Update Credential
 
       - `Optional<String> token`
 
-        Updated static bearer token value.
+        The new static bearer token to replace the stored one.
 
         minLength: 1, maxLength: 8192
 
@@ -71077,7 +71109,7 @@ Update Credential
 
       - `Optional<BetaManagedAgentsCredentialNetworkingParams> networking`
 
-        Updated networking scope. Full replacement.
+        The new networking scope, which replaces the stored one as a whole.
 
         - `class BetaManagedAgentsUnrestrictedCredentialNetworkingParams`
 
@@ -71093,11 +71125,13 @@ Update Credential
 
           - `List<String> allowedHosts`
 
-            Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.` wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses aren't accepted. The list can have up to 16 entries.
 
       - `Optional<String> secretValue`
 
-        Updated secret value.
+        The new secret value to replace the stored one.
 
         minLength: 1, maxLength: 4096
 
@@ -71121,7 +71155,7 @@ Update Credential
 
   - `String id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -71145,7 +71179,7 @@ Update Credential
 
       - `Optional<LocalDateTime> expiresAt`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -71155,7 +71189,7 @@ Update Credential
 
         - `String clientId`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `String tokenEndpoint`
 
@@ -71235,7 +71269,9 @@ Update Credential
 
           - `List<String> allowedHosts`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `String secretName`
 
@@ -71311,13 +71347,13 @@ public final class Main {
 }
 ```
 
-### Delete Credential
+### Delete a Credential
 
 `BetaManagedAgentsDeletedCredential beta().vaults().credentials().delete(params, requestOptions = RequestOptions.none())`
 
 **DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Delete Credential
+Delete a Credential
 
 #### Parameters
 
@@ -71453,7 +71489,7 @@ Delete Credential
 
   - `String id`
 
-    Unique identifier of the deleted credential.
+    The unique ID of the deleted credential (`vcrd_...`).
 
 #### Example
 
@@ -71489,13 +71525,13 @@ public final class Main {
 }
 ```
 
-### Archive Credential
+### Archive a Credential
 
 `BetaManagedAgentsCredential beta().vaults().credentials().archive(params, requestOptions = RequestOptions.none())`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
-Archive Credential
+Archive a Credential
 
 #### Parameters
 
@@ -71631,7 +71667,7 @@ Archive Credential
 
   - `String id`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 
@@ -71655,7 +71691,7 @@ Archive Credential
 
       - `Optional<LocalDateTime> expiresAt`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -71665,7 +71701,7 @@ Archive Credential
 
         - `String clientId`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `String tokenEndpoint`
 
@@ -71745,7 +71781,9 @@ Archive Credential
 
           - `List<String> allowedHosts`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `String secretName`
 
@@ -71821,13 +71859,13 @@ public final class Main {
 }
 ```
 
-### Validate Credential
+### Validate an MCP OAuth Credential
 
 `BetaManagedAgentsCredentialValidation beta().vaults().credentials().mcpOAuthValidate(params, requestOptions = RequestOptions.none())`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
-Validate Credential
+Validate an MCP OAuth Credential
 
 #### Parameters
 
@@ -71971,11 +72009,11 @@ Validate Credential
 
   - `Optional<BetaManagedAgentsMcpProbe> mcpProbe`
 
-    Details of the failing MCP probe step. Null when the probe succeeded.
+    Details of the MCP probe step that failed, or `null` if the probe succeeded or there was no access token to test.
 
     - `Optional<BetaManagedAgentsRefreshHttpResponse> httpResponse`
 
-      The captured HTTP error response. Null when no HTTP response was received (timeout, DNS, TLS).
+      The HTTP error response from the MCP server, or `null` if the MCP server didn't return one for the failing step, for example after a timeout or a DNS or TLS failure.
 
       - `String body`
 
@@ -72037,11 +72075,11 @@ Validate Credential
 
     - `INVALID("invalid")`
 
-      The probe reached the MCP server and was rejected, and a refresh (if attempted) did not recover it.
+      The probe reached the MCP server and the server rejected the credential, or no access token is stored. A refresh, if one was tried, didn't recover it. Usually the end user needs to authorize again.
 
     - `UNKNOWN("unknown")`
 
-      The probe could not determine validity — for example, a transport error or a successful refresh that was not re-probed.
+      The probe couldn't tell whether the credential works, for example because of a network error or because a refresh succeeded but the new access token wasn't tested. Validate the credential again to find out.
 
   - `LocalDateTime validatedAt`
 
@@ -103181,7 +103219,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<String> manifestVersion`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `String marketplaceId`
 
@@ -103229,7 +103267,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<Reach> reach`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `CONTAINED("contained")`
 
@@ -103566,7 +103608,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<String> manifestVersion`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `String marketplaceId`
 
@@ -103614,7 +103656,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<Reach> reach`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `CONTAINED("contained")`
 
@@ -103967,7 +104013,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<String> manifestVersion`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `String marketplaceId`
 
@@ -104015,7 +104061,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<Reach> reach`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `CONTAINED("contained")`
 
@@ -104408,7 +104458,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<String> manifestVersion`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `String marketplaceId`
 
@@ -104456,7 +104506,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<Reach> reach`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `CONTAINED("contained")`
 
@@ -104996,7 +105050,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<String> manifestVersion`
 
-    The version string the manifest declares; null when it declares none.
+    The manifest's `version`, normalized for display: one leading `v` or `V` is dropped, and the result is returned only if it is 1 to 64 characters, starts with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry can take the place of the manifest's `version`. It is also `null` for a version stored before claude.ai began recording this field (August 2026).
 
   - `String pluginId`
 
@@ -105004,7 +105058,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<Reach> reach`
 
-    How far the version reaches: `remote`, `privileged` or `contained`, as on the Plugin; null when not classifiable.
+    How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as defined on the Plugin's `reach`.
 
     - `CONTAINED("contained")`
 
@@ -105336,7 +105390,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<String> manifestVersion`
 
-    The version string the manifest declares; null when it declares none.
+    The manifest's `version`, normalized for display: one leading `v` or `V` is dropped, and the result is returned only if it is 1 to 64 characters, starts with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry can take the place of the manifest's `version`. It is also `null` for a version stored before claude.ai began recording this field (August 2026).
 
   - `String pluginId`
 
@@ -105344,7 +105398,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<Reach> reach`
 
-    How far the version reaches: `remote`, `privileged` or `contained`, as on the Plugin; null when not classifiable.
+    How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as defined on the Plugin's `reach`.
 
     - `CONTAINED("contained")`
 
@@ -105663,7 +105717,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<String> manifestVersion`
 
-    The version string the manifest declares; null when it declares none.
+    The manifest's `version`, normalized for display: one leading `v` or `V` is dropped, and the result is returned only if it is 1 to 64 characters, starts with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry can take the place of the manifest's `version`. It is also `null` for a version stored before claude.ai began recording this field (August 2026).
 
   - `String pluginId`
 
@@ -105671,7 +105725,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `Optional<Reach> reach`
 
-    How far the version reaches: `remote`, `privileged` or `contained`, as on the Plugin; null when not classifiable.
+    How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as defined on the Plugin's `reach`.
 
     - `CONTAINED("contained")`
 
@@ -107926,13 +107980,13 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `String repositoryUrl`
 
-    The `https://` URL of a public repository on github.com that holds the marketplace. Any other host, a URL with credentials in it, or one that does not name a repository is a 400.
+    The `https://` URL of a public repository on github.com that holds the marketplace. A URL longer than 2,048 characters, on any other host or scheme, with a port other than 443 or 80, with credentials in it, or that does not name exactly `owner/repo` (a trailing `.git` or `/` is accepted) is a 400. A private or missing repository is reported in the response, not refused.
 
     minLength: 1
 
   - `Optional<String> ref`
 
-    The branch to validate the tip of, or the full 40-character SHA of the commit to validate. When omitted, the branch a synchronization would read (usually the repository's default branch); if that is not the default branch, the report's `ref` says which branch was read. An empty string, or a value that is neither a branch name nor a 40-character SHA, is a 400.
+    The branch to validate the tip of, or the full 40-character SHA of the commit to validate. When omitted, the branch a synchronization would read (usually the repository's default branch); if that is not the default branch, the report's `ref` says which branch was read. An empty string, a value longer than 255 characters, or one that contains `..` or a character other than ASCII letters, digits, `.`, `_`, `-`, `+`, and `/`, is a 400. Any other value that is not a 40-character SHA is read as a branch name; if the repository has no such branch, the response is a report with `valid: false`, not a 400.
 
     minLength: 1
 

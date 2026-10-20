@@ -1,17 +1,17 @@
-# Get Vault
+# Retrieve a Vault
 
 ---
-title: Get Vault
+title: Retrieve a Vault
 url: https://platform.claude.com/docs/en/api/csharp/beta/vaults/retrieve
 ---
 
-# Get Vault
+# Retrieve a Vault
 
 `BetaManagedAgentsVault Beta.Vaults.Retrieve(parameters, cancellationToken = default)`
 
 **GET** `/v1/vaults/{vault_id}`
 
-Get Vault
+Retrieve a Vault
 
 ## Parameters
 
@@ -143,7 +143,7 @@ Get Vault
 
   - `required string ID`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `required DateTimeOffset? ArchivedAt`
 

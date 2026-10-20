@@ -21,12 +21,12 @@ GitHub repositories are cached, so future sessions that use the same repository 
 First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no authentication token:
 
 ```bash cURL
-agent_id=$(curl -fsS https://api.anthropic.com/v1/agents \
+curl -fsS https://api.anthropic.com/v1/agents \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data '{
+  -d '{
     "name": "Code Reviewer",
     "model": "claude-opus-5-5",
     "system": "You are a code review assistant with access to GitHub.",
@@ -44,8 +44,7 @@ agent_id=$(curl -fsS https://api.anthropic.com/v1/agents \
         "mcp_server_name": "github"
       }
     ]
-  }' | jq -r '.id'
-)
+  }'
 ```
 
 ```bash CLI
@@ -100,16 +99,16 @@ const agent = await client.beta.agents.create({
     {
       type: "url",
       name: "github",
-      url: "https://api.githubcopilot.com/mcp/",
-    },
+      url: "https://api.githubcopilot.com/mcp/"
+    }
   ],
   tools: [
     { type: "agent_toolset_20260401" },
     {
       type: "mcp_toolset",
-      mcp_server_name: "github",
-    },
-  ],
+      mcp_server_name: "github"
+    }
+  ]
 });
 ```
 
@@ -238,12 +237,12 @@ agent = client.beta.agents.create(
 Then create a session that mounts the GitHub repository. With a `limited` [environment](environments.md#networking), session creation fails with a 400 error when the agent declares an MCP server whose host is not in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`). Setting `allow_mcp_servers` (java: `allowMcpServers`; php: `allowMCPServers`; csharp: `AllowMcpServers`; go: `AllowMCPServers`) to `true` in the environment's networking turns this check off.
 
 ```bash cURL
-session_id=$(curl -fsS https://api.anthropic.com/v1/sessions \
+curl -fsS https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data @- <<JSON | jq -r '.id'
+  -d @- <<JSON
 {
   "agent": "$agent_id",
   "environment_id": "$environment_id",
@@ -257,21 +256,18 @@ session_id=$(curl -fsS https://api.anthropic.com/v1/sessions \
   ]
 }
 JSON
-)
 ```
 
 ```bash CLI
-SESSION_ID=$(ant beta:sessions create \
+ant beta:sessions create \
   --agent "$AGENT_ID" \
-  --environment-id "$ENVIRONMENT_ID" \
-  --transform id --raw-output <<'EOF'
+  --environment-id "$ENVIRONMENT_ID" <<'EOF'
 resources:
   - type: github_repository
     url: https://github.com/org/repo
     mount_path: /workspace/repo
     authorization_token: ghp_your_github_token
 EOF
-)
 ```
 
 ```python Python
@@ -298,9 +294,9 @@ const session = await client.beta.sessions.create({
       type: "github_repository",
       url: "https://github.com/org/repo",
       mount_path: "/workspace/repo",
-      authorization_token: "ghp_your_github_token",
-    },
-  ],
+      authorization_token: "ghp_your_github_token"
+    }
+  ]
 });
 ```
 
@@ -415,24 +411,37 @@ Use fine-grained personal access tokens with minimum required permissions. Avoid
 Mount multiple repositories by adding entries to the `resources` (csharp, go: `Resources`) array:
 
 ```bash cURL
-resources='[
-  {
-    "type": "github_repository",
-    "url": "https://github.com/org/frontend",
-    "mount_path": "/workspace/frontend",
-    "authorization_token": "ghp_your_github_token"
-  },
-  {
-    "type": "github_repository",
-    "url": "https://github.com/org/backend",
-    "mount_path": "/workspace/backend",
-    "authorization_token": "ghp_your_github_token"
-  }
-]'
+curl -fsS https://api.anthropic.com/v1/sessions \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d @- <<JSON
+{
+  "agent": "$agent_id",
+  "environment_id": "$environment_id",
+  "resources": [
+    {
+      "type": "github_repository",
+      "url": "https://github.com/org/frontend",
+      "mount_path": "/workspace/frontend",
+      "authorization_token": "ghp_your_github_token"
+    },
+    {
+      "type": "github_repository",
+      "url": "https://github.com/org/backend",
+      "mount_path": "/workspace/backend",
+      "authorization_token": "ghp_your_github_token"
+    }
+  ]
+}
+JSON
 ```
 
 ```bash CLI
-RESOURCES_BODY=$(cat <<'EOF'
+ant beta:sessions create \
+  --agent "$AGENT_ID" \
+  --environment-id "$ENVIRONMENT_ID" <<'EOF'
 resources:
   - type: github_repository
     url: https://github.com/org/frontend
@@ -443,7 +452,6 @@ resources:
     mount_path: /workspace/backend
     authorization_token: ghp_your_github_token
 EOF
-)
 ```
 
 ```python Python
@@ -469,14 +477,14 @@ const resources = [
     type: "github_repository",
     url: "https://github.com/org/frontend",
     mount_path: "/workspace/frontend",
-    authorization_token: "ghp_your_github_token",
+    authorization_token: "ghp_your_github_token"
   },
   {
     type: "github_repository",
     url: "https://github.com/org/backend",
     mount_path: "/workspace/backend",
-    authorization_token: "ghp_your_github_token",
-  },
+    authorization_token: "ghp_your_github_token"
+  }
 ];
 ```
 
@@ -577,18 +585,17 @@ After a session is created, you can list its repository resources and rotate the
 
 ```bash cURL
 # List resources on the session
-repo_resource_id=$(curl -fsS "https://api.anthropic.com/v1/sessions/$session_id/resources" \
+curl -fsS "https://api.anthropic.com/v1/sessions/$session_id/resources" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
-  -H "content-type: application/json" | jq -r '.data[0].id')
-echo "$repo_resource_id"  # "sesrsc_01ABC..."
+  -H "content-type: application/json"
 
 # Rotate the authorization token
-curl -fsS "https://api.anthropic.com/v1/sessions/$session_id/resources/$repo_resource_id" \
+curl -fsS \
+  "https://api.anthropic.com/v1/sessions/$session_id/resources/$repo_resource_id" \
 # ...
-  -o /dev/null \
-  --data @- <<JSON
+  -d @- <<'JSON'
 {
   "authorization_token": "ghp_your_new_github_token"
 }
@@ -623,9 +630,7 @@ client.beta.sessions.resources.update(
 ```typescript TypeScript
 // List resources on the session
 const listed = await client.beta.sessions.resources.list(session.id);
-const repoResource = listed.data.find(
-  (entry) => entry.type === "github_repository",
-);
+const repoResource = listed.data.find((entry) => entry.type === "github_repository");
 if (!repoResource) {
   throw new Error("No GitHub repository resource on the session");
 }
@@ -635,7 +640,7 @@ console.log(repoResourceId); // "sesrsc_01ABC..."
 // Rotate the authorization token
 await client.beta.sessions.resources.update(repoResourceId, {
   session_id: session.id,
-  authorization_token: "ghp_your_new_github_token",
+  authorization_token: "ghp_your_new_github_token"
 });
 ```
 
@@ -723,8 +728,7 @@ curl -fsS "https://api.anthropic.com/v1/sessions/$session_id/events" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -o /dev/null \
-  --data '{
+  -d '{
     "events": [
       {
         "type": "user.message",
@@ -740,7 +744,7 @@ curl -fsS "https://api.anthropic.com/v1/sessions/$session_id/events" \
 ```
 
 ```bash CLI
-ant beta:sessions:events send --session-id "$SESSION_ID" > /dev/null <<'EOF'
+ant beta:sessions:events send --session-id "$SESSION_ID" <<'EOF'
 events:
   - type: user.message
     content:
@@ -774,11 +778,11 @@ await client.beta.sessions.events.send(session.id, {
       content: [
         {
           type: "text",
-          text: "Fix the type error in src/utils.ts, commit it to a new branch, and push it.",
-        },
-      ],
-    },
-  ],
+          text: "Fix the type error in src/utils.ts, commit it to a new branch, and push it."
+        }
+      ]
+    }
+  ]
 });
 ```
 

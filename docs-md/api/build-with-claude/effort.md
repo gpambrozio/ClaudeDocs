@@ -39,7 +39,7 @@ To learn how effort interacts with thinking and which control to reach for, see 
 
 ## Set the effort level
 
-Set `output_config.effort` on the request. The following example runs one request at `medium` effort and prints the response text.
+Set `output_config.effort` on the request. The following example runs one request at `medium` effort.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -64,9 +64,7 @@ ant messages create \
   --model claude-opus-5-5 \
   --max-tokens 4096 \
   --output-config '{effort: medium}' \
-  --message '{role: user, content: "Analyze the trade-offs between microservices and monolithic architectures"}' \
-  --transform 'content.#(type=="text").text' \
-  --raw-output
+  --message '{role: user, content: "Analyze the trade-offs between microservices and monolithic architectures"}'
 ```
 
 ```python Python
@@ -106,9 +104,7 @@ const response = await client.messages.create({
   }
 });
 
-const textBlock = response.content.find(
-  (block): block is Anthropic.TextBlock => block.type === "text"
-);
+const textBlock = response.content.find((block) => block.type === "text");
 console.log(textBlock?.text);
 ```
 
@@ -400,8 +396,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant beta:messages create --beta mid-conversation-output-config-2026-07-01 \
-  --transform 'content.#(type=="text").text' --raw-output <<'YAML'
+ant beta:messages create --beta mid-conversation-output-config-2026-07-01 <<'YAML'
 model: claude-fable-5-1
 max_tokens: 4096
 output_config:

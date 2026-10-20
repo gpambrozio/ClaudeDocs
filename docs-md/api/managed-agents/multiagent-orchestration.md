@@ -1,4 +1,4 @@
-# Create the subagents, then read their IDs from the lockfile.
+# Create the researcher
 
 ---
 title: Multiagent orchestration
@@ -112,7 +112,7 @@ Which configuration a subagent uses depends on whether it is a [predefined or an
 When [defining your agent](agent-setup.md), set the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) in the `multiagent` (csharp, go: `Multiagent`) block to list the agents that it can delegate to:
 
 ```bash cURL
-lead_agent=$(curl -fsS https://api.anthropic.com/v1/agents \
+curl -fsS https://api.anthropic.com/v1/agents \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -137,17 +137,13 @@ lead_agent=$(curl -fsS https://api.anthropic.com/v1/agents \
       }
     }
   }'
-)
 ```
 
 ```bash CLI
-# Create the subagents, then read their IDs from the lockfile.
-ant apply reviewer.md test-writer.md
-REVIEWER_AGENT_ID=$(jq -er '.resources["./reviewer.md"].id' claude-lock.json)
-TEST_WRITER_AGENT_ID=$(jq -er '.resources["./test-writer.md"].id' claude-lock.json)
+ant apply engineering-lead.md reviewer.md test-writer.md
+```
 
-# Write the agent's definition, listing each subagent by ID.
-cat > engineering-lead.md <<EOF
+```markdown
 ---
 name: Engineering Lead
 model: claude-opus-5-5
@@ -157,19 +153,13 @@ multiagent:
   type: multiagent_20261001
   subagents:
     type: enabled
-    predefined_agents:
-      - type: agent
-        id: $REVIEWER_AGENT_ID
-      - type: agent
-        id: $TEST_WRITER_AGENT_ID
+    predefined_agents: # ant apply replaces each path with {type: agent, id, version}
+      - ./reviewer.md
+      - ./test-writer.md
 ---
 
 You coordinate engineering work. Delegate code review to the reviewer agent
 and test writing to the test agent.
-EOF
-
-# Create the agent.
-ant apply engineering-lead.md reviewer.md test-writer.md
 ```
 
 ```markdown
@@ -224,10 +214,10 @@ const leadAgent = await client.beta.agents.create({
       type: "enabled",
       predefined_agents: [
         { type: "agent", id: reviewerAgent.id },
-        { type: "agent", id: testWriterAgent.id },
-      ],
-    },
-  },
+        { type: "agent", id: testWriterAgent.id }
+      ]
+    }
+  }
 });
 ```
 
@@ -369,7 +359,7 @@ The following rules apply to the agents you list in the `predefined_agents` (jav
 Create a session referencing the agent. The agent delegates to the agents you list in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) as needed. It can also delegate to [inline agents](multiagent-orchestration.md#predefined-and-inline-agents) unless you turn them off.
 
 ```bash cURL
-session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -378,8 +368,6 @@ session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
     "agent": "'"$LEAD_AGENT_ID"'",
     "environment_id": "'"$ENVIRONMENT_ID"'"
   }'
-)
-SESSION_ID=$(jq -r '.id' <<< "$session")
 ```
 
 ```bash CLI
@@ -398,7 +386,7 @@ session = client.beta.sessions.create(
 ```typescript TypeScript
 const session = await client.beta.sessions.create({
   agent: leadAgent.id,
-  environment_id: environment.id,
+  environment_id: environment.id
 });
 ```
 
@@ -457,36 +445,44 @@ With a `limited` [environment](environments.md#networking), session creation fai
 Create the researcher, which declares the GitHub MCP server, and the agent that delegates to the researcher:
 
 ```bash cURL
-research_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data '{
-  "name": "researcher",
-  "model": "claude-haiku-5-5",
-  "mcp_servers": [{"type": "url", "name": "github", "url": "https://api.githubcopilot.com/mcp/"}],
-  "tools": [{"type": "mcp_toolset", "mcp_server_name": "github"}]
-}' | jq -er '.id'
-)
+# Create the researcher
+curl --fail-with-body -sS https://api.anthropic.com/v1/agents \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "name": "researcher",
+    "model": "claude-haiku-5-5",
+    "mcp_servers": [{"type": "url", "name": "github", "url": "https://api.githubcopilot.com/mcp/"}],
+    "tools": [{"type": "mcp_toolset", "mcp_server_name": "github"}]
+  }'
 
-lead_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data '{
-  "name": "lead",
-  "model": "claude-opus-5-5",
-  "tools": [{"type": "agent_toolset_20260401"}],
-  "multiagent": {
-    "type": "multiagent_20261001",
-    "subagents": {
-      "type": "enabled",
-      "predefined_agents": [{"type": "agent", "id": "'"$research_agent_id"'"}]
+# Create the agent that delegates to it: research_agent_id is the id from the first response
+curl --fail-with-body -sS https://api.anthropic.com/v1/agents \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "name": "lead",
+    "model": "claude-opus-5-5",
+    "tools": [{"type": "agent_toolset_20260401"}],
+    "multiagent": {
+      "type": "multiagent_20261001",
+      "subagents": {
+        "type": "enabled",
+        "predefined_agents": [{"type": "agent", "id": "'"$research_agent_id"'"}]
+      }
     }
-  }
-}' | jq -er '.id'
-)
+  }'
 ```
 
 ```bash CLI
-# Create the researcher, then read its ID from the lockfile.
-ant apply researcher.md
-research_agent_id=$(jq -er '.resources["./researcher.md"].id' claude-lock.json)
+ant apply lead.md researcher.md
+```
 
-# Write the agent's definition, listing the researcher by ID.
-cat > lead.md <<EOF
+```markdown
 ---
 name: lead
 model: claude-opus-5-5
@@ -496,14 +492,9 @@ multiagent:
   type: multiagent_20261001
   subagents:
     type: enabled
-    predefined_agents:
-      - type: agent
-        id: $research_agent_id
+    predefined_agents: # ant apply replaces each path with {type: agent, id, version}
+      - ./researcher.md
 ---
-EOF
-
-# Create the agent.
-ant apply lead.md researcher.md
 ```
 
 ```markdown
@@ -548,10 +539,8 @@ lead_agent = client.beta.agents.create(
 const researchAgent = await client.beta.agents.create({
   name: "researcher",
   model: "claude-haiku-5-5",
-  mcp_servers: [
-    { type: "url", name: "github", url: "https://api.githubcopilot.com/mcp/" },
-  ],
-  tools: [{ type: "mcp_toolset", mcp_server_name: "github" }],
+  mcp_servers: [{ type: "url", name: "github", url: "https://api.githubcopilot.com/mcp/" }],
+  tools: [{ type: "mcp_toolset", mcp_server_name: "github" }]
 });
 
 const leadAgent = await client.beta.agents.create({
@@ -562,9 +551,9 @@ const leadAgent = await client.beta.agents.create({
     type: "multiagent_20261001",
     subagents: {
       type: "enabled",
-      predefined_agents: [{ type: "agent", id: researchAgent.id }],
-    },
-  },
+      predefined_agents: [{ type: "agent", id: researchAgent.id }]
+    }
+  }
 });
 ```
 
@@ -767,22 +756,23 @@ lead_agent = client.beta.agents.create(
 Then create the session with the vault that holds the GitHub credential:
 
 ```bash cURL
-session_id=$(curl --fail-with-body -sS "$BASE/v1/sessions" "${H[@]}" --data '{
-  "agent": "'"$lead_agent_id"'",
-  "environment_id": "'"$environment_id"'",
-  "vault_ids": ["'"$vault_id"'"]
-}' | jq -er '.id'
-)
-echo "$session_id"
+curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: managed-agents-2026-04-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "agent": "'"$lead_agent_id"'",
+    "environment_id": "'"$environment_id"'",
+    "vault_ids": ["'"$vault_id"'"]
+  }'
 ```
 
 ```bash CLI
-session_id=$(ant beta:sessions create \
+ant beta:sessions create \
   --agent "$lead_agent_id" \
   --environment-id "$environment_id" \
-  --vault-id "$vault_id" \
-  --transform id --raw-output)
-echo "$session_id"
+  --vault-id "$vault_id"
 ```
 
 ```python Python
@@ -798,7 +788,7 @@ print(session.id)
 const session = await client.beta.sessions.create({
   agent: leadAgent.id,
   environment_id: environment.id,
-  vault_ids: [vault.id],
+  vault_ids: [vault.id]
 });
 console.log(session.id);
 ```
@@ -927,7 +917,7 @@ const agent = await client.beta.agents.create({
   system:
     "You review contracts. When you're asked to review more than a few contracts, start a workflow run that reads them in parallel and combines the findings. Review one or two contracts yourself, without a run.",
   tools: [{ type: "agent_toolset_20260401" }],
-  multiagent: { type: "multiagent_20261001", workflows: { type: "enabled" } },
+  multiagent: { type: "multiagent_20261001", workflows: { type: "enabled" } }
 });
 ```
 
@@ -1151,8 +1141,8 @@ const agent = await client.beta.agents.create({
     "You implement backend features end to end. Consult the advisor before major backend design decisions.",
   multiagent: {
     type: "multiagent_20261001",
-    advisor: { type: "enabled", model: "claude-opus-5-5" },
-  },
+    advisor: { type: "enabled", model: "claude-opus-5-5" }
+  }
 });
 console.log(agent.id);
 ```

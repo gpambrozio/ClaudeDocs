@@ -28,7 +28,7 @@ Specify MCP servers in the `mcp_servers` (java, php: `mcpServers`; csharp: `McpS
 Each declared server also needs a matching `mcp_toolset` entry in the `tools` (csharp, go: `Tools`) array. The toolset's `mcp_server_name` (java, php: `mcpServerName`; csharp: `McpServerName`; go: `MCPServerName`) must match the server's `name` (csharp, go: `Name`).
 
 ```bash cURL
-agent_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
+curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -48,8 +48,6 @@ agent_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
       {"type": "mcp_toolset", "mcp_server_name": "github"}
     ]
   }'
-)
-agent_id=$(jq -r '.id' <<<"$agent_response")
 ```
 
 ```bash CLI
@@ -97,13 +95,13 @@ const agent = await client.beta.agents.create({
     {
       type: "url",
       name: "github",
-      url: "https://api.githubcopilot.com/mcp/",
-    },
+      url: "https://api.githubcopilot.com/mcp/"
+    }
   ],
   tools: [
     { type: "agent_toolset_20260401" },
-    { type: "mcp_toolset", mcp_server_name: "github" },
-  ],
+    { type: "mcp_toolset", mcp_server_name: "github" }
+  ]
 });
 ```
 
@@ -286,7 +284,7 @@ When starting a session, pass `vault_ids` (java: `vaultIds`; php: `vaultIDs`; cs
 With a `limited` [environment](environments.md#networking), session creation fails with a 400 error when the agent declares an MCP server whose host is not in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`). Setting `allow_mcp_servers` (java: `allowMcpServers`; php: `allowMCPServers`; csharp: `AllowMcpServers`; go: `AllowMCPServers`) to `true` in the environment's networking turns this check off.
 
 ```bash cURL
-session_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
+curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -296,16 +294,13 @@ session_response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessio
     "environment_id": "'"$environment_id"'",
     "vault_ids": ["'"$vault_id"'"]
   }'
-)
-session_id=$(jq -r '.id' <<<"$session_response")
 ```
 
 ```bash CLI
-SESSION_ID=$(ant beta:sessions create \
+ant beta:sessions create \
   --agent "$AGENT_ID" \
   --environment-id "$ENVIRONMENT_ID" \
-  --vault-id "$VAULT_ID" \
-  --transform id --raw-output)
+  --vault-id "$VAULT_ID"
 ```
 
 ```python Python
@@ -320,7 +315,7 @@ session = client.beta.sessions.create(
 const session = await client.beta.sessions.create({
   agent: agent.id,
   environment_id: environment.id,
-  vault_ids: [vault.id],
+  vault_ids: [vault.id]
 });
 ```
 

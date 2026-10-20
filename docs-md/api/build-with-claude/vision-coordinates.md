@@ -264,7 +264,6 @@ func resizedSize(width, height, maxEdge, maxTokens int) (int, int) {
 	}
 	return lo, max(int(math.RoundToEven(float64(lo)/aspectRatio)), 1)
 }
-
 ```
 
 ```java Java
@@ -513,12 +512,7 @@ function toRelativeCoordinates(
   maxEdge = 1568,
   maxTokens = 1568
 ): [number, number] {
-  const [resizedW, resizedH] = resizedSize(
-    originalWidth,
-    originalHeight,
-    maxEdge,
-    maxTokens
-  );
+  const [resizedW, resizedH] = resizedSize(originalWidth, originalHeight, maxEdge, maxTokens);
   return [x / resizedW, y / resizedH];
 }
 

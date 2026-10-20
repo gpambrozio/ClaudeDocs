@@ -64,7 +64,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create --transform content <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 1024
 messages:

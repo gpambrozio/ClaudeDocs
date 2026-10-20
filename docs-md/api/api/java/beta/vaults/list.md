@@ -19,7 +19,7 @@ List Vaults
 
   - `Optional<Boolean> includeArchived` (query parameter)
 
-    Whether to include archived vaults in the results.
+    Whether to include archived vaults in the results. Defaults to `false`.
 
   - `Optional<Long> limit` (query parameter)
 
@@ -29,7 +29,7 @@ List Vaults
 
   - `Optional<String> page` (query parameter)
 
-    Opaque pagination token from a previous `list_vaults` response.
+    The `next_page` value from a previous [List Vaults](../../../beta/vaults/list.md) response, to get the next page. Leave it out to get the first page.
 
   - `Optional<List<AnthropicBeta>> betas` (header parameter)
 
@@ -153,7 +153,7 @@ List Vaults
 
   - `String id`
 
-    Unique identifier for the vault.
+    The unique ID of the vault (`vlt_...`).
 
   - `Optional<LocalDateTime> archivedAt`
 

@@ -70,7 +70,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create --transform usage.service_tier --raw-output <<'YAML'
+ant messages create <<'YAML'
 model: claude-opus-4-8
 max_tokens: 1024
 messages:
