@@ -2,13 +2,15 @@
 
 > A worked example of running Claude apps gateway on Google Cloud: Cloud Run or GKE, Cloud SQL for PostgreSQL, Secret Manager, and service-account auth to Google Cloud's Agent Platform.
 
-This page walks through one way to run Claude apps gateway on Google Cloud. The configuration is a working example for customer-managed infrastructure rather than a supported production deployment; use it to see how the pieces fit together before adapting it to your own environment. For the platform-agnostic requirements, see the [deployment guide](claude-apps-gateway-deploy.md).
+> [!NOTE]
+>
+> This page walks through one way to run Claude apps gateway on Google Cloud. The configuration is a working example for customer-managed infrastructure rather than a supported production deployment; use it to see how the pieces fit together before adapting it to your own environment. For the platform-agnostic requirements, see the [deployment guide](claude-apps-gateway-deploy.md).
 
 This example provisions Claude apps gateway on Google Cloud with Google Cloud's Agent Platform as the model upstream, using either Cloud Run or GKE for compute. Google Workspace is the example identity provider (IdP), but any OpenID Connect (OIDC) compliant IdP works; only the `oidc` block changes. See [Identity provider setup](claude-apps-gateway-deploy.md#identity-provider-setup) for per-IdP details.
 
 ## What you'll build
 
-![Diagram of Claude apps gateway on Google Cloud: Claude Code clients connect over HTTPS to the gateway (Cloud Run or GKE), which runs inside a VPC alongside a private-IP Cloud SQL database for session state. The gateway signs users in via OIDC against Google Workspace, reads config and secrets from Secret Manager, forwards model requests to Google Cloud's Agent Platform, and pulls its image from Artifact Registry at deploy.](https://mintcdn.com/claude-code/-uq-4JE0W_JO5Er5/images/claude-gateway-gcp-architecture.svg?fit=max&auto=format&n=-uq-4JE0W_JO5Er5&q=85&s=cb705151c69128ac0da235852d5600ab)
+![Diagram of Claude apps gateway on Google Cloud: Claude Code clients connect over HTTPS to the gateway (Cloud Run or GKE), which runs inside a VPC alongside a private-IP Cloud SQL database for session state. The gateway signs users in via OIDC against Google Workspace, reads config and secrets from Secret Manager, forwards model requests to Google Cloud's Agent Platform, and pulls its image from Artifact Registry at deploy.](https://mintcdn.com/claude-code/-uq-4JE0W_JO5Er5/images/claude-gateway-gcp-architecture.svg?fit=max\&auto=format\&n=-uq-4JE0W_JO5Er5\&q=85\&s=cb705151c69128ac0da235852d5600ab)
 
 The deployment consists of:
 
@@ -40,7 +42,7 @@ gcloud config set project "$PROJECT_ID"
 
 The steps below provision the full deployment with `gcloud` commands.
 
-**Enable APIs**
+**1. Enable APIs**
 
 Enable the service APIs the walkthrough uses:
 
@@ -64,7 +66,7 @@ The APIs you need depend on the deployment path:
 * `run`: Cloud Run only
 * `container`: GKE only
 
-**Create the service account and grant IAM**
+**2. Create the service account and grant IAM**
 
 The gateway runs as a dedicated service account with permission to call Google Cloud's Agent Platform. It reaches Cloud SQL over the VPC with a password user, so no Cloud SQL IAM role is required:
 
@@ -78,7 +80,7 @@ gcloud projects add-iam-policy-binding "$PROJECT_ID" \
 
 Then enable the Claude models for the project in Model Garden; models publish to specific regions, so check each model card.
 
-**Build and push the image to Artifact Registry**
+**3. Build and push the image to Artifact Registry**
 
 Build the image per the [container image requirements](claude-apps-gateway-deploy.md#container-image), using the `linux-x64` glibc binary, and push it:
 
@@ -94,7 +96,7 @@ docker build --platform=linux/amd64 --provenance=false \
 docker push "${REGION}-docker.pkg.dev/${PROJECT_ID}/claude-gateway/gateway:<version>"
 ```
 
-**Provision Cloud SQL for PostgreSQL**
+**4. Provision Cloud SQL for PostgreSQL**
 
 Create the instance on a VPC via Private Services Access so it has no public IP; this also satisfies projects where `constraints/sql.restrictPublicIp` is enforced:
 
@@ -125,7 +127,7 @@ GATEWAY_POSTGRES_URL="postgres://gateway:${PGPASS}@${PRIVATE_IP}:5432/claude_gat
 
 The Cloud Run or GKE runtime must be on, or routed into, this VPC.
 
-**Write gateway.yaml**
+**5. Write gateway.yaml**
 
 The `upstreams` block points at Google Cloud's Agent Platform with `auth: {}`, so the gateway authenticates via Application Default Credentials from the runtime service account. See the [configuration reference](claude-apps-gateway-config.md) for every field.
 
@@ -175,9 +177,11 @@ upstreams:
     auth: {}                                     # ADC via the runtime service account
 ```
 
-Google id\_tokens carry no `groups` claim. To use group-based policies in [`managed.policies`](claude-apps-gateway-config.md#managed) with Google Workspace as the IdP, configure [`oidc.google_groups`](claude-apps-gateway-config.md#oidc), which looks up each user's groups through the Admin SDK Directory API using a service account with domain-wide delegation. Without it, match on `email_domain` instead.
+> [!NOTE]
+>
+> Google id\_tokens carry no `groups` claim. To use group-based policies in [`managed.policies`](claude-apps-gateway-config.md#managed) with Google Workspace as the IdP, configure [`oidc.google_groups`](claude-apps-gateway-config.md#oidc), which looks up each user's groups through the Admin SDK Directory API using a service account with domain-wide delegation. Without it, match on `email_domain` instead.
 
-**Store secrets in Secret Manager**
+**6. Store secrets in Secret Manager**
 
 Create four secrets and grant `roles/secretmanager.secretAccessor` to the `claude-gateway` service account:
 
@@ -193,7 +197,7 @@ How the secrets reach the container differs by track:
 * On GKE they mount as files via the Secret Manager CSI driver, and `gateway.yaml` references `${file:/secrets/...}`.
 * On Cloud Run, which can't mount multiple secrets into one directory, `gateway.yaml` mounts as a file and the other three inject as environment variables, so `gateway.yaml` references `${GATEWAY_JWT_SECRET}`, `${OIDC_CLIENT_SECRET}`, and `${GATEWAY_POSTGRES_URL}` instead.
 
-**Deploy**
+**7. Deploy**
 
 **Cloud Run**
 
@@ -271,7 +275,7 @@ Don't apply an egress NetworkPolicy that blocks `169.254.169.254` on a Workload 
 
 The gateway logs a boot warning that the metadata endpoint is reachable and suggests applying an egress NetworkPolicy. Under Workload Identity that warning is expected, because the pod needs the endpoint.
 
-**Push the gateway URL to developer machines**
+**8. Push the gateway URL to developer machines**
 
 The gateway is now running, but developers can't reach it from `/login` until the gateway URL is on their machines. Deploy the full [managed settings snippet](claude-apps-gateway.md#set-the-gateway-url), with `forceLoginMethod`, `forceLoginGatewayUrl`, and the `parentSettingsBehavior: "merge"` opt-in, to each device via MDM. There is no gateway option in the login picker for a developer to select manually.
 

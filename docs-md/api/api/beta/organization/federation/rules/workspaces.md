@@ -146,6 +146,8 @@ other scopes require a Console session.
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Body parameters
 
 - `workspace_id: string`
@@ -355,6 +357,8 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `data: array of BetaFederationRuleWorkspace`
@@ -553,6 +557,8 @@ Console session.
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ### Returns
 

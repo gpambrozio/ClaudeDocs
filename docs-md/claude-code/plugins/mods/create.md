@@ -9,7 +9,9 @@ A mod is a Claude Code [plugin](../overview.md) with an entry file, called the h
 
 If you haven't decided whether a mod is the right tool, read the [comparison on the overview](overview.md#compare-mods-settings-hooks-skills-and-mcp-servers) first.
 
-Use Claude Code v2.1.287 or later. In your shell, run `claude --version` to check. To see whether mods can load for you, see [Check whether mods can load](troubleshoot.md#check-whether-mods-can-load).
+> [!NOTE]
+>
+> Use Claude Code v2.1.287 or later. In your shell, run `claude --version` to check. To see whether mods can load for you, see [Check whether mods can load](troubleshoot.md#check-whether-mods-can-load).
 
 ## Ask Claude for a mod
 
@@ -17,13 +19,15 @@ Describe the mod you want in an interactive Claude Code session, and Claude writ
 
 The mod runs once you approve it, except in [sessions where a mod Claude writes can't load](#sessions-that-skip-the-approval).
 
-**Describe the mod**
+**1. Describe the mod**
 
 Ask for the mod in your own words, for example `make a mod that shows the current git branch above the prompt`. Claude writes the mod in a directory of its own in the session's mods folder, which is `~/.claude/dev-mods/` followed by the session's ID. A mod's full path looks like `~/.claude/dev-mods/3f2a9c1e-5b7d-4e8a-9c21-6d0f4b8a7e13/git-branch/`.
 
-In the `default` and `acceptEdits` [permission modes](../../permission-modes.md), Claude Code asks you to approve each of the mod's files before Claude creates it, because the mods folder is a [protected path](../../permission-modes.md#protected-paths). Approve each file as it comes up.
+> [!NOTE]
+>
+> In the `default` and `acceptEdits` [permission modes](../../permission-modes.md), Claude Code asks you to approve each of the mod's files before Claude creates it, because the mods folder is a [protected path](../../permission-modes.md#protected-paths). Approve each file as it comes up.
 
-**Approve the mod**
+**2. Approve the mod**
 
 When Claude saves the first file, Claude Code asks whether to enable hot reloading for the session. Hot reloading runs the mods Claude writes in this session and picks up each later change.
 
@@ -32,11 +36,11 @@ Choose one of these answers:
 * **Enable for this session**: the mods in the session's mods folder load when the turn ends, and reload at the end of each turn that changes them. Your answer lasts for the session, including after you resume it.
 * **Not now**: nothing loads for now. The files stay where Claude wrote them, and the mods load the next time that session starts. To keep a mod from ever loading, delete its directory.
 
-**Check that the mod loaded**
+**3. Check that the mod loaded**
 
 Run `/plugin` at the Claude Code prompt and press Tab until the **Installed** tab is selected. It lists the mod, and you can turn it off there.
 
-**Try the mod**
+**4. Try the mod**
 
 Use what you asked for. For the example prompt, the current branch name appears above the prompt box. If the mod doesn't do what you wanted, tell Claude what to change. The mod reloads at the end of each turn that changes its files, so you can try the change as soon as Claude finishes.
 
@@ -47,9 +51,7 @@ A mod Claude wrote loads only in the session that made it, and Claude Code delet
 * **In a session you start**: in your shell, run `claude --plugin-dir ~/mods/git-branch`
 * **For other people**: [add it to a marketplace](#share-your-mod) so they can install it
 
-<h3 id="sessions-that-skip-the-approval">
-  Sessions where a mod Claude writes can't load
-</h3>
+### Sessions where a mod Claude writes can't load
 
 A mod Claude writes loads only after you approve it, in a trusted workspace where mods are allowed to run. In these sessions it doesn't load:
 
@@ -63,9 +65,7 @@ In this tutorial you build a mod named `first-mod` that counts the tool calls Cl
 
 This recording shows the finished mod. The spinner counts tool calls, `/tally` prints the count, and an edit to the code takes effect while the session runs:
 
-<video autoPlay muted loop playsInline controls className="w-full dark:hidden" src="https://mintcdn.com/claude-code/dgiVO_Od1X1faduV/images/mods-first-mod-light.mp4?fit=max&auto=format&n=dgiVO_Od1X1faduV&q=85&s=eb561134afa90375777408453ba51c77" aria-label="In a Claude Code session, the prompt 'list the files here and read the README' is typed and sent. The spinner reads 'Thinking · tool calls: 1' and the count rises as Claude works. The /tally command prints 'first-mod: Claude has made 3 tool calls since this mod loaded'. A line says first-mod reloaded and lists its four hooks. On the next prompt the spinner reads 'Thinking · tools used: 1'." data-path="images/mods-first-mod-light.mp4" />
-
-<video autoPlay muted loop playsInline controls className="w-full hidden dark:block" src="https://mintcdn.com/claude-code/dgiVO_Od1X1faduV/images/mods-first-mod-dark.mp4?fit=max&auto=format&n=dgiVO_Od1X1faduV&q=85&s=09779dadc7ef66c2b1e2da0c2e31ac72" aria-label="In a Claude Code session, the prompt 'list the files here and read the README' is typed and sent. The spinner reads 'Thinking · tool calls: 1' and the count rises as Claude works. The /tally command prints 'first-mod: Claude has made 3 tool calls since this mod loaded'. A line says first-mod reloaded and lists its four hooks. On the next prompt the spinner reads 'Thinking · tools used: 1'." data-path="images/mods-first-mod-dark.mp4" />
+<video autoPlay muted loop playsInline controls src="https://mintcdn.com/claude-code/dgiVO_Od1X1faduV/images/mods-first-mod-light.mp4?fit=max&auto=format&n=dgiVO_Od1X1faduV&q=85&s=eb561134afa90375777408453ba51c77" aria-label="In a Claude Code session, the prompt 'list the files here and read the README' is typed and sent. The spinner reads 'Thinking · tool calls: 1' and the count rises as Claude works. The /tally command prints 'first-mod: Claude has made 3 tool calls since this mod loaded'. A line says first-mod reloaded and lists its four hooks. On the next prompt the spinner reads 'Thinking · tools used: 1'." />
 
 You write three files:
 
@@ -82,7 +82,7 @@ first-mod/
 * **`hooks.json`**: [points to your code file](reference.md#files)
 * **`register.js`**: your code, called the hooks module
 
-**Create the plugin directory**
+**1. Create the plugin directory**
 
 Create the two directories that hold the files:
 
@@ -98,7 +98,7 @@ mkdir -p first-mod/.claude-plugin first-mod/hooks
 New-Item -ItemType Directory -Force first-mod\.claude-plugin, first-mod\hooks
 ```
 
-**Write the manifest**
+**2. Write the manifest**
 
 A mod is a plugin, and a mod needs a [manifest](../manifest-reference.md). This mod's manifest has no special fields. Save this as `first-mod/.claude-plugin/plugin.json`:
 
@@ -111,7 +111,7 @@ A mod is a plugin, and a mod needs a [manifest](../manifest-reference.md). This 
 }
 ```
 
-**Tell Claude Code where your code is**
+**3. Tell Claude Code where your code is**
 
 When Claude Code loads a plugin, it reads the plugin's `hooks/hooks.json`. The `modules` key in that file gives the path to your code, and having it is what makes the plugin a mod. List one path, relative to `hooks.json`. Here it points to `register.js`, which you write in the next step.
 
@@ -124,7 +124,7 @@ Save this as `first-mod/hooks/hooks.json`:
 }
 ```
 
-**Write the code**
+**4. Write the code**
 
 This file is the mod's code, called the hooks module. When the mod loads, Claude Code calls the `register` function the file exports and passes it a function named [`on`](reference.md#the-hook-function). Each call to `on` registers an event handler, called a hook, for the event it names.
 
@@ -179,7 +179,7 @@ The file keeps a count in `calls` and registers four hooks:
 
 [How the example mod works](#how-the-example-mod-works) explains the three arguments each hook takes and what each one returns.
 
-**Load the mod**
+**5. Load the mod**
 
 Start Claude Code with the `--plugin-dir` flag, which loads a plugin directory for one session without installing it:
 
@@ -187,7 +187,7 @@ Start Claude Code with the `--plugin-dir` flag, which loads a plugin directory f
 claude --plugin-dir ./first-mod
 ```
 
-**Try the mod**
+**6. Try the mod**
 
 Ask Claude to do something that takes a few tool calls, such as `list the files here and read the README`. While Claude works, the spinner's word is followed by a count that rises, as in `Thinking · tool calls: 2…`. When Claude finishes, type `/tally` and press Enter. The transcript shows `first-mod: Claude has made 2 tool calls since this mod loaded`, with your own count. Claude Code puts the plugin's name in front of the command's text.
 
@@ -203,7 +203,7 @@ first-mod: Claude has made 0 tool calls since this mod loaded
 
 If `/tally` isn't in the command list, the module didn't load. See [Find out why a mod does nothing](troubleshoot.md#find-out-why-a-mod-does-nothing).
 
-**Change the code while the session runs**
+**7. Change the code while the session runs**
 
 Leave the session open. In `register.js`, change `' · tool calls: '` to `' · tools used: '` in the `ui.render` hook and save. The highlighted line is the one that changes:
 
@@ -249,9 +249,7 @@ Then ask for the change, for example `add a /tally-reset command to this mod tha
 
 Files Claude saves during its turn reload when the turn ends, so you can try `/tally-reset` as soon as Claude finishes.
 
-<h3 id="get-the-types-for-your-build">
-  Get type definitions for your version
-</h3>
+### Get type definitions for your version
 
 When Claude Code loads a mod from `--plugin-dir` in an interactive session, or a mod [Claude wrote for you](#ask-claude-for-a-mod), it writes TypeScript declaration files into the mod's `.claude-plugin/types/` directory. They describe the exact events, mods API methods, and elements in the Claude Code version you're running, so your editor can autocomplete and type-check your hooks. The directory holds these files:
 

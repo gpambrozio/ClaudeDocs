@@ -128,25 +128,25 @@ The objective is to establish a small number of lightweight habits that allow mo
 
 If a loose plan is helpful, the sequence below reflects what tends to work across most teams. Adjust freely to fit your context.
 
-**Week 1: Seed the channel**
+**1. Week 1: Seed the channel**
 
 Create the channel, pin the [Quickstart](quickstart.md), and post two or three of your own examples with the prompts included.
 
 **Signal that it is working:** a few colleagues react or reply, and at least one question is asked in the channel.
 
-**Week 2: Start the rhythm**
+**2. Week 2: Start the rhythm**
 
 Start the weekly show-and-tell thread, answer every question publicly, and share one custom skill or `CLAUDE.md` snippet.
 
 **Signal that it is working:** someone other than you posts an example of their own.
 
-**Week 3: Pair and consolidate**
+**3. Week 3: Pair and consolidate**
 
 Offer two or three short pairing sessions and consolidate the most common questions and answers into a pinned FAQ message.
 
 **Signal that it is working:** you see repeat usage, with the same colleagues returning rather than trying once and stopping.
 
-**Week 4: Hand off**
+**4. Week 4: Hand off**
 
 Identify a second champion and share a brief summary of what is working and what is not with your lead or administrator.
 
@@ -182,7 +182,9 @@ The techniques below are the ones that most reliably move someone from a first t
 | Recover from an incorrect result | Rather than rephrasing the request, paste the failing test or stack trace back to Claude and ask it to address that specific failure. |
 | Keep edits surgical | Ask for a diff, or specify "only change X." Claude respects scope when scope is stated. |
 
-Claude Code is updated frequently. Verify version-specific details against the [documentation home page](overview.md) before distributing this material internally.
+> [!TIP]
+>
+> Claude Code is updated frequently. Verify version-specific details against the [documentation home page](overview.md) before distributing this material internally.
 
 ---
 

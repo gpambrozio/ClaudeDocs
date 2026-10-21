@@ -12,39 +12,39 @@ Agents return free-form text by default, which works for chat but not when you n
 
 Consider a recipe app where an agent searches the web and brings back recipes. Without structured outputs, you get free-form text that you'd need to parse yourself. With structured outputs, you define the shape you want and get typed data you can use directly in your app.
 
-**Without structured outputs**
+> **Without structured outputs**
+>
+> ```text theme={null}
+> Here's a classic chocolate chip cookie recipe!
+>
+> **Chocolate Chip Cookies**
+> Prep time: 15 minutes | Cook time: 10 minutes
+>
+> Ingredients:
+> - 2 1/4 cups all-purpose flour
+> - 1 cup butter, softened
+> ...
+> ```
+>
+> To use this in your app, you'd need to parse out the title, convert "15 minutes" to a number, separate ingredients from instructions, and handle inconsistent formatting across responses.
 
-```text
-Here's a classic chocolate chip cookie recipe!
-
-**Chocolate Chip Cookies**
-Prep time: 15 minutes | Cook time: 10 minutes
-
-Ingredients:
-- 2 1/4 cups all-purpose flour
-- 1 cup butter, softened
-...
-```
-
-To use this in your app, you'd need to parse out the title, convert "15 minutes" to a number, separate ingredients from instructions, and handle inconsistent formatting across responses.
-
-**With structured outputs**
-
-```jsonc
-{
-  "name": "Chocolate Chip Cookies",
-  "prep_time_minutes": 15,
-  "cook_time_minutes": 10,
-  "ingredients": [
-    { "item": "all-purpose flour", "amount": 2.25, "unit": "cups" },
-    { "item": "butter, softened", "amount": 1, "unit": "cup" }
-    // ...
-  ],
-  "steps": ["Preheat oven to 375°F", "Cream butter and sugar" /* ... */]
-}
-```
-
-Typed data you can use directly in your UI.
+> **With structured outputs**
+>
+> ```jsonc theme={null}
+> {
+>   "name": "Chocolate Chip Cookies",
+>   "prep_time_minutes": 15,
+>   "cook_time_minutes": 10,
+>   "ingredients": [
+>     { "item": "all-purpose flour", "amount": 2.25, "unit": "cups" },
+>     { "item": "butter, softened", "amount": 1, "unit": "cup" }
+>     // ...
+>   ],
+>   "steps": ["Preheat oven to 375°F", "Cream butter and sugar" /* ... */]
+> }
+> ```
+>
+> Typed data you can use directly in your UI.
 
 ## Quick start
 
@@ -355,6 +355,17 @@ async def main():
 
 asyncio.run(main())
 ```
+
+## Recognize the StructuredOutput tool call
+
+When you set `outputFormat` in TypeScript or `output_format` in Python, your message stream carries a tool call named `StructuredOutput` that you never defined. Claude Code adds this tool to the session, and the agent calls it to return its answer. The [system init message](typescript.md#sdksystemmessage) lists it in the `tools` array, and each call arrives as two blocks:
+
+* A `tool_use` block named `StructuredOutput`, whose input is the object the agent produced for your schema
+* A `tool_result` block reading `Structured output provided successfully`
+
+When that object doesn't match your schema, the `tool_result` carries `is_error: true` instead and the agent calls `StructuredOutput` again, so your stream can hold several calls for one query. Read the validated data from `structured_output` on the result message rather than from a `tool_use` block, and see [Error handling](#error-handling) for the result you get when no attempt succeeds.
+
+If your application shows or logs tool calls, skip the ones named `StructuredOutput` so the mechanism doesn't appear as a step the agent chose. A `tool_result` block carries no tool name, only the `tool_use_id` of the call it answers, so match that against the `id` of each call you skipped.
 
 ## Error handling
 

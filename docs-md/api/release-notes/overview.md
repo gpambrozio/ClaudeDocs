@@ -12,6 +12,12 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### October 20, 2026
+
+* [Inference hooks](../manage-claude/inference-hooks.md) are out of beta for Claude Enterprise organizations.
+* We've launched [user profiles](../manage-claude/user-profiles.md), so you can tell Anthropic which of your end customers each API request is for. If you operate a platform or gateway, or resell API access, a safety enforcement action can then apply to one end customer instead of your whole organization. The SDK and the `ant` CLI support the new [`/v1/user_profiles` endpoints](../api/user_profiles.md).
+* We've added [organization webhooks](../manage-claude/organization-webhooks.md) to the [Admin API](../manage-claude/admin-api.md), in beta with the `webhooks-2026-10-07` beta header. Its [`/v1/organizations/webhooks` endpoints](../api/beta/organization/webhooks.md) register webhook endpoints for two event types: one for when Anthropic restricts or bans one of your organization's user profiles, and one for when the restriction or ban ends. To request access, contact your Anthropic account team.
+
 ### October 15, 2026
 
 * We've added `capabilities.thinking.types.between_tools` to the [Models API](../api/models/list.md). `GET /v1/models` and `GET /v1/models/{model_id}` now report whether each model accepts `thinking: {type: "between_tools"}`, which turns off up-front thinking. See [Using the Models API](../models/overview.md#using-the-models-api).
@@ -21,9 +27,9 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### October 14, 2026
 
-* We've launched [OpenTelemetry export](../manage-claude/opentelemetry.md) in beta, so you can trace Messages API requests and Claude Managed Agents sessions in your observability backend. The Claude SDK emits spans in Python, TypeScript, C#, Go, Java, PHP, and Ruby. To get spans from the API, [add an OpenTelemetry destination](../manage-claude/opentelemetry/api.md#add-a-destination) in the Claude Console.
-
-- Claude Managed Agents [scheduled deployments](../managed-agents/scheduled-deployments.md) are now available on [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md#claude-managed-agents).
+* We've launched [OpenTelemetry export](../manage-claude/opentelemetry.md) in beta, so you can trace Messages API requests and Claude Managed Agents sessions in your observability platform. The Claude SDK emits spans in Python, TypeScript, C#, Go, Java, PHP, and Ruby. To get spans from the API, [add an OpenTelemetry destination](../manage-claude/opentelemetry/api.md#add-a-destination) in the Claude Console.
+* Claude Managed Agents [scheduled deployments](../managed-agents/scheduled-deployments.md) are now available on [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md#claude-managed-agents).
+* In Claude Managed Agents, the [`web_search` tool](../managed-agents/tools.md#available-tools) now follows your organization's web search domain restrictions set in the Claude Console. The agent receives only the search results that both the organization's domain restrictions and the `allowed_domains` or `blocked_domains` list on the agent's `web_search` tool allow. Sessions have followed the organization's **Allow web search** setting since October 6. See [Restrict web search and web fetch domains](../managed-agents/tools-web-restrictions.md).
 
 ### October 9, 2026
 

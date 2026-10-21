@@ -127,9 +127,11 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
   - `Optional<String> userProfileId` (header parameter)
 
-    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -6971,6 +6973,10 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
       - `class BetaCacheMissModelChanged`
 
+        A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+        See the [cache diagnostics guide](../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonValue type = "model_changed"`
 
         - `long cacheMissedInputTokens`
@@ -6978,6 +6984,10 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `class BetaCacheMissSystemChanged`
+
+        A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+        See the [cache diagnostics guide](../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonValue type = "system_changed"`
 
@@ -6987,6 +6997,10 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
       - `class BetaCacheMissToolsChanged`
 
+        A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+        See the [cache diagnostics guide](../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonValue type = "tools_changed"`
 
         - `long cacheMissedInputTokens`
@@ -6994,6 +7008,10 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `class BetaCacheMissMessagesChanged`
+
+        A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+        See the [cache diagnostics guide](../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonValue type = "messages_changed"`
 
@@ -7003,9 +7021,21 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
       - `class BetaCacheMissPreviousMessageNotFound`
 
+        A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+        This doesn't mean that this request changed.
+
+        See the [cache diagnostics guide](../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonValue type = "previous_message_not_found"`
 
       - `class BetaCacheMissUnavailable`
+
+        A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+        This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+        See the [cache diagnostics guide](../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonValue type = "unavailable"`
 

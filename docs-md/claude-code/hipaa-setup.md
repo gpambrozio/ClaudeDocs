@@ -4,13 +4,15 @@
 
 The HIPAA configuration is an organization setting on Claude Enterprise plans, for organizations that handle protected health information (PHI) and have a [Business Associate Agreement (BAA)](https://support.claude.com/en/articles/8114513-business-associate-agreements-baa-for-commercial-customers) with Anthropic. It applies to Claude Code (local mode) and Cowork (local mode), and it restricts features in both products.
 
-"(local mode)" means a local session, not a [cloud session](claude-code-on-the-web.md). Local sessions run in one of these places:
-
-* Claude Code in the terminal
-* Claude Code in the Code tab of Claude Desktop
-* Cowork in Claude Desktop
-
-The Claude Code extensions for VS Code and JetBrains aren't part of (local mode). They keep working with the HIPAA configuration applied, but your BAA doesn't cover them. See the [Implementation Guide](https://trust.anthropic.com/resources?s=l1wrssd9hsbi4gak0tp5a6\&name=%5Banthropic%5D-hipaa-ready-offering-implementation-guide) for the full list of Eligible Services.
+> [!NOTE]
+>
+> "(local mode)" means a local session, not a [cloud session](claude-code-on-the-web.md). Local sessions run in one of these places:
+>
+> * Claude Code in the terminal
+> * Claude Code in the Code tab of Claude Desktop
+> * Cowork in Claude Desktop
+>
+> The Claude Code extensions for VS Code and JetBrains aren't part of (local mode). They keep working with the HIPAA configuration applied, but your BAA doesn't cover them. See the [Implementation Guide](https://trust.anthropic.com/resources?s=l1wrssd9hsbi4gak0tp5a6\&name=%5Banthropic%5D-hipaa-ready-offering-implementation-guide) for the full list of Eligible Services.
 
 This page is for the IT or security administrator who prepares developers' computers. The Primary Owner of your Claude organization applies the configuration itself. [Use Claude Code (local mode) and Cowork (local mode) on a HIPAA-ready Enterprise plan](https://support.claude.com/en/articles/17318731) explains what your BAA includes, how the configuration is applied, and how to schedule the date it's applied.
 
@@ -87,6 +89,7 @@ Allow the hosts in this table through your proxy and firewall, over HTTPS on por
 | :- | :- |
 | `api.anthropic.com` | Claude API requests, telemetry, and the organization policy that tells Claude Code the HIPAA configuration is on |
 | `claude.ai`, `claude.com`, `platform.claude.com` | Sign-in and token refresh |
+| `sso.claude.com` | Sign-in, when your organization uses single sign-on |
 | `downloads.claude.ai` | The native installer and its updates |
 | `mcp-proxy.anthropic.com` | [Connectors from claude.ai](mcp.md#use-mcp-servers-from-claude-ai) |
 
@@ -132,7 +135,9 @@ The table shows what to set each key to and what Claude Code enforces for it.
 | [`allowedProviders`](settings-reference.md#allowedproviders) | `["anthropic"]` | Claude Code refuses to start on a cloud provider or a gateway |
 | [`cleanupPeriodDays`](settings-reference.md#cleanupperioddays) | The number of days your records policy lets a computer keep session data | Every computer deletes old session data after the same number of days |
 
-Check the `forceLoginOrgUUID` value before you deploy it. If it doesn't match your organization ID, Claude Code exits at startup for every developer who signs in with a claude.ai account.
+> [!WARNING]
+>
+> Check the `forceLoginOrgUUID` value before you deploy it. If it doesn't match your organization ID, Claude Code exits at startup for every developer who signs in with a claude.ai account.
 
 The HIPAA configuration doesn't limit `cleanupPeriodDays`, so a developer can raise it in their own settings. When you set it in managed settings, Claude Code ignores the developer's value.
 
@@ -156,23 +161,23 @@ To find out whether your BAA covers a session that runs without the HIPAA config
 
 Run this check on one managed computer after the configuration is applied to your organization.
 
-**Restart Claude Code**
+**1. Restart Claude Code**
 
 Quit any running session, open a terminal, and run `claude`. A running session that's in use picks up the configuration within about an hour without a restart. When you restart, Claude Code fetches it right away.
 
-**Check the startup notice**
+**2. Check the startup notice**
 
 Confirm that Claude Code prints `Per your organization's policy, some features are limited · /status for details` when it starts.
 
-**Check the footer**
+**3. Check the footer**
 
 Confirm that a `HIPAA configured` tag appears at the right of the footer, below the prompt. Before v2.1.286, the tag read `HIPAA`.
 
-**Run /status**
+**4. Run /status**
 
 Enter `/status` at the prompt. Confirm that the **Status** tab lists `HIPAA` on the `Organization configuration` line.
 
-**Check Claude Desktop**
+**5. Check Claude Desktop**
 
 Applying the HIPAA configuration turns the Code tab off for your organization. If your organization uses it, ask an Owner to go to [**Organization settings > Claude Code**](https://claude.ai/admin-settings/claude-code) and turn on the **Desktop** toggle. For Cowork, see [Confirm the HIPAA configuration in Claude Desktop](https://claude.com/docs/cowork/hipaa-setup#confirm-the-hipaa-configuration-in-claude-desktop).
 

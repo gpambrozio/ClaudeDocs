@@ -4,13 +4,17 @@
 
 File checkpointing tracks file modifications made through the [Write](../tools-reference.md#write-tool-behavior), [Edit](../tools-reference.md#edit-tool-behavior), and [NotebookEdit](../tools-reference.md#notebookedit-tool-behavior) tools during an agent session, allowing you to rewind files to any previous state. To watch a rewind restore a file, jump to the [interactive example](#try-it-out).
 
-Only changes made through the Write, Edit, and NotebookEdit tools are tracked. Changes made through Bash commands (like `echo > file.txt` or `sed -i`) are not captured by the checkpoint system, and neither are edits a [subagent](subagents.md) applies, except a [skill with `context: fork`](../skills.md#run-skills-in-a-subagent) that runs in the foreground.
+> [!WARNING]
+>
+> Only changes made through the Write, Edit, and NotebookEdit tools are tracked. Changes made through Bash commands (like `echo > file.txt` or `sed -i`) are not captured by the checkpoint system, and neither are edits a [subagent](subagents.md) applies, except a [skill with `context: fork`](../skills.md#run-skills-in-a-subagent) that runs in the foreground.
 
 ## How checkpointing works
 
 When you enable file checkpointing, the SDK creates backups of files before modifying them through the Write, Edit, or NotebookEdit tools. User messages in the response stream include a checkpoint UUID that you can use as a restore point.
 
-File rewinding restores files on disk to a previous state. It does not rewind the conversation itself. The conversation history and context remain intact after calling `rewindFiles()` (TypeScript) or `rewind_files()` (Python).
+> [!NOTE]
+>
+> File rewinding restores files on disk to a previous state. It does not rewind the conversation itself. The conversation history and context remain intact after calling `rewindFiles()` (TypeScript) or `rewind_files()` (Python).
 
 When you rewind to a checkpoint, Claude Code deletes the files it created and restores the files it modified to their content at that point. Claude Code skips a tracked path that is a symlink, hard link, or other non-regular file. It also skips a tracked file whose parent directory no longer resolves to its checkpoint-time location, or whose backup it can't read safely. [`RewindFilesResult`](typescript.md#rewindfilesresult) counts every skipped path in its `skippedLinks` field. Skipping requires Claude Code v2.1.216 or later; before v2.1.216, a rewind wrote and deleted through links at tracked paths.
 
@@ -124,7 +128,7 @@ async function main() {
 main();
 ```
 
-**Enable checkpointing**
+**1. Enable checkpointing**
 
 Configure your SDK options to enable checkpointing and receive checkpoint UUIDs:
 
@@ -135,7 +139,7 @@ Configure your SDK options to enable checkpointing and receive checkpoint UUIDs:
 
 The lead example under [Implement checkpointing](#implement-checkpointing) also sets the permission mode to `acceptEdits`, which approves the agent's file edits without a prompt. For more information, see [Permission modes](permissions.md#permission-modes).
 
-**Capture checkpoint UUID and session ID**
+**2. Capture checkpoint UUID and session ID**
 
 With the `replay-user-messages` option set, each user message in the response stream has a UUID that serves as a checkpoint.
 
@@ -143,7 +147,7 @@ For most use cases, capture the first user message UUID (`message.uuid`); rewind
 
 Capturing the session ID (`message.session_id`) is optional; you only need it if you want to rewind later, after the stream completes. If you're calling `rewindFiles()` immediately while still processing messages (as the example in [Checkpoint before risky operations](#checkpoint-before-risky-operations) does), you can skip capturing the session ID.
 
-**Rewind files**
+**3. Rewind files**
 
 To rewind after the stream completes, resume the session with an empty prompt and call `rewind_files()` (Python) or `rewindFiles()` (TypeScript) with your checkpoint UUID. Enable checkpointing on the resumed session's options too, and call rewind from inside the response loop. You can also rewind during the stream. See [Checkpoint before risky operations](#checkpoint-before-risky-operations) for that pattern.
 
@@ -367,7 +371,7 @@ This complete example creates a small utility file, has the agent add documentat
 
 Before you begin, make sure you have the [Claude Agent SDK installed](quickstart.md).
 
-**Create a test file**
+**1. Create a test file**
 
 Create a new file called `utils.py` (Python) or `utils.ts` (TypeScript) and paste the following code:
 
@@ -408,7 +412,7 @@ export function divide(a: number, b: number): number {
 }
 ```
 
-**Run the interactive example**
+**2. Run the interactive example**
 
 Create a new file called `try_checkpointing.py` (Python) or `try_checkpointing.ts` (TypeScript) in the same directory as your utility file, and paste the following code.
 
@@ -557,11 +561,13 @@ async function main() {
 main();
 ```
 
-**Run the example**
+**3. Run the example**
 
 Run the script from the same directory as your utility file.
 
-Open your utility file (`utils.py` or `utils.ts`) in your IDE or editor before running the script. You'll see the file update in real-time as the agent adds doc comments, then revert back to the original when you choose to rewind.
+> [!TIP]
+>
+> Open your utility file (`utils.py` or `utils.ts`) in your IDE or editor before running the script. You'll see the file update in real-time as the agent adds doc comments, then revert back to the original when you choose to rewind.
 
 **Python**
 

@@ -27,6 +27,8 @@ Match the error message or symptom you're seeing to a fix:
 | `CRYPT_E_NO_REVOCATION_CHECK` or `CRYPT_E_REVOCATION_OFFLINE` | [Work around blocked revocation checks](#tls-or-ssl-connection-errors) |
 | `Failed to fetch version` or can't reach download server | [Check network and proxy settings](#check-network-connectivity) |
 | `The connection dropped while downloading the update` or `Download timed out: exceeded the total deadline` | [Run the update again or set your proxy](#the-connection-dropped-while-downloading-the-update) |
+| `Release verification failed for Claude Code` | [Run `claude update` or `claude install` again](#release-verification-failed) |
+| `Auto-update failed · Run claude doctor` in red in the session footer | [Run `claude update` from your shell](#auto-update-failed) |
 | `irm is not recognized` or `The token '&&' is not a valid statement separator` | [Use the right command for your shell](#wrong-install-command-on-windows) |
 | `Cask 'claude-code' is unavailable: No Cask with this name exists` | [Update Homebrew](#homebrew-cask-unavailable-or-outdated) |
 | `Cask 'claude-code@latest' is not installed` | [Upgrade the cask you installed](#cask-is-not-installed) |
@@ -59,7 +61,9 @@ Match the error message or symptom you're seeing to a fix:
 
 If your issue isn't listed, work through the diagnostic checks below to narrow down the cause.
 
-If you'd rather skip the terminal entirely, the [Claude Code Desktop app](desktop-quickstart.md) lets you install and use Claude Code through a graphical interface. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs) or [Windows](https://claude.com/download?utm_source=claude_code\&utm_medium=docs) and start coding without any command-line setup. On Linux, install the app with apt by following the [Linux install instructions](desktop-linux.md).
+> [!TIP]
+>
+> If you'd rather skip the terminal entirely, the [Claude Code Desktop app](desktop-quickstart.md) lets you install and use Claude Code through a graphical interface. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs) or [Windows](https://claude.com/download?utm_source=claude_code\&utm_medium=docs) and start coding without any command-line setup. On Linux, install the app with apt by following the [Linux install instructions](desktop-linux.md).
 
 ## Run diagnostic checks
 
@@ -118,7 +122,9 @@ If installation succeeded but you get a `command not found` or `not recognized` 
 
 The installer detects this case and reports it under `Setup notes:` in its output: `Native installation exists but ~/.local/bin is not in your PATH.` on macOS and Linux, or `Native installation exists but C:\Users\you\.local\bin is not in your PATH.` on Windows. It prints the fix with that note but doesn't change PATH itself.
 
-The [VS Code extension](vs-code.md) does not place `claude` at this location. It bundles a private copy of the CLI inside the extension directory for its own chat panel and does not add it to PATH. If you have only installed the extension, `~/.local/bin/claude` will not exist. Run the [standalone install](setup.md) to use `claude` from a terminal, then continue below.
+> [!NOTE]
+>
+> The [VS Code extension](vs-code.md) does not place `claude` at this location. It bundles a private copy of the CLI inside the extension directory for its own chat panel and does not add it to PATH. If you have only installed the extension, `~/.local/bin/claude` will not exist. Run the [standalone install](setup.md) to use `claude` from a terminal, then continue below.
 
 First check that the program is there at all, then check whether its folder is in your PATH. The PATH fix is permanent, so you apply it once. Pick your platform's tab and run its commands there: in your terminal on macOS and Linux, or in PowerShell or Command Prompt on Windows.
 
@@ -514,9 +520,7 @@ brew install --cask claude-code
 
 If Homebrew installs an older Claude Code version than you expect, the same stale index is usually the cause. The `claude-code` cask tracks the stable channel and is typically about one week behind the latest release; for the newest version run `brew install --cask claude-code@latest` instead. See [Configure release channel](setup.md#configure-release-channel) for the difference between the two casks.
 
-<h3 id="cask-is-not-installed">
-  `Cask 'claude-code@latest' is not installed`
-</h3>
+### `Cask 'claude-code@latest' is not installed`
 
 Homebrew offers two casks, `claude-code` and `claude-code@latest`. Running `brew upgrade --cask claude-code@latest` when that cask isn't the one installed prints `Error: Cask 'claude-code@latest' is not installed.` To see which cask you have, run this in your terminal:
 
@@ -625,6 +629,27 @@ A proxy or gateway can close a long transfer before it finishes, and the Claude 
 * If a corporate proxy keeps closing the transfer, ask your network team to allow the full download from `downloads.claude.ai`. See [Network access requirements](network-config.md#network-access-requirements).
 * Run `claude doctor` from your shell for installation diagnostics
 
+### Release verification failed for Claude Code
+
+This message from `claude update` or `claude install` means Claude Code couldn't confirm that the release it was about to install is genuine, so it installed nothing. Any version you already have keeps working.
+
+```text
+Release verification failed for Claude Code <version> (<reason>). The update was not installed.
+```
+
+Take the step that matches the value in parentheses in your message:
+
+* **A value that starts with `sidecar_fetch_`**: run the same command again from your shell. `claude update` succeeded if it prints a line that starts with `Successfully updated from`, and `claude install` succeeded if it prints `Claude Code successfully installed!`.
+* **Any other value**: try the same command again later
+
+With any value, if the message repeats, [report the problem](#still-stuck) and include the full message.
+
+### `Auto-update failed · Run claude doctor` in the session footer
+
+This red line means Claude Code tried to update itself in the background and the update didn't install. You can keep working without doing anything.
+
+The line points you to `claude doctor`, whose `Last update attempt: failed (install_failed)` line gives a date but no cause. To finish the update or see why it failed, run `claude update` in your shell instead. If that install fails too, look for the error `claude update` prints under [Find your error](#find-your-error).
+
 ### Wrong install command on Windows
 
 If you see `'irm' is not recognized`, `The token '&&' is not a valid statement separator`, `A parameter cannot be found that matches parameter name 'fsSL'`, or `'bash' is not recognized as the name of a cmdlet`, you copied the install command for a different shell or operating system. If the command prints the script's text instead of installing anything, you ran only part of it.
@@ -672,9 +697,7 @@ If you see `'irm' is not recognized`, `The token '&&' is not a valid statement s
 
 Whichever installer you use, confirm it worked: open a new terminal and run `claude --version`, which prints a version number such as `2.1.211 (Claude Code)`.
 
-<h3 id="running-scripts-is-disabled-on-this-system">
-  `running scripts is disabled on this system`
-</h3>
+### `running scripts is disabled on this system`
 
 Installing or running Claude Code through npm on Windows can fail with a `SecurityError`:
 
@@ -706,9 +729,7 @@ Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\downloads"
 irm https://claude.ai/install.ps1 | iex
 ```
 
-<h3 id="claude-exe-missing-after-an-update-on-windows">
-  `claude.exe` missing after an update on Windows
-</h3>
+### `claude.exe` missing after an update on Windows
 
 If your terminal reports `'claude' is not recognized` right after Claude Code updated on Windows, check whether `%USERPROFILE%\.local\bin` still contains `claude.exe`. If that directory isn't on your PATH at all, see [Verify your PATH](#verify-your-path) instead. To update on Windows, Claude Code renames the existing `claude.exe` aside to a backup and moves the new version into its place. If moving the new version into place fails and Claude Code can't rename the backup back either, the directory keeps the backup but has no `claude.exe`.
 
@@ -996,7 +1017,9 @@ If nvm is loaded but Windows paths still take priority, prepend your Linux Node 
 export PATH="$HOME/.nvm/versions/node/$(node -v)/bin:$PATH"
 ```
 
-Avoid disabling Windows PATH importing via `appendWindowsPath = false` as this breaks the ability to call Windows executables from WSL. Similarly, avoid uninstalling Node.js from Windows if you use it for Windows development.
+> [!WARNING]
+>
+> Avoid disabling Windows PATH importing via `appendWindowsPath = false` as this breaks the ability to call Windows executables from WSL. Similarly, avoid uninstalling Node.js from Windows if you use it for Windows development.
 
 ### Permission errors during installation
 
@@ -1034,9 +1057,7 @@ Check the following causes:
 * **Unsupported platform.** Prebuilt binaries are published for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64`, `linux-x64-musl`, `linux-arm64-musl`, `win32-x64`, and `win32-arm64`. Claude Code does not ship a binary for other platforms; see the [system requirements](setup.md#system-requirements). On FreeBSD, the installer reports the platform as unsupported. Before v2.1.205, it treated FreeBSD as Linux and downloaded a binary that couldn't run.
 * **Corporate npm mirror is missing the platform packages.** Ensure your registry mirrors all eight `@anthropic-ai/claude-code-*` platform packages in addition to the meta package.
 
-<h3 id="npm-enotempty-during-update-or-reinstall">
-  npm `ENOTEMPTY` error during update or reinstall
-</h3>
+### npm `ENOTEMPTY` error during update or reinstall
 
 When you run `npm install -g @anthropic-ai/claude-code` over an existing installation, npm can fail while moving the old package directory aside:
 
@@ -1177,11 +1198,11 @@ On macOS, Claude Code saves credentials to the login Keychain. When the Keychain
 
 To make the Keychain writable again and move your login back into the encrypted Keychain:
 
-**Check Keychain access**
+**1. Check Keychain access**
 
 Run `claude doctor` to check Keychain access. When the Keychain rejects writes, the report lists a warning that starts with `macOS Keychain is not writable`, followed by a suggested fix. When the report lists no Keychain warning, the Keychain is writable and you can skip to the last step.
 
-**Unlock the Keychain**
+**2. Unlock the Keychain**
 
 ```bash
 security unlock-keychain ~/Library/Keychains/login.keychain-db
@@ -1189,11 +1210,11 @@ security unlock-keychain ~/Library/Keychains/login.keychain-db
 
 Enter your Keychain password when the command asks for it, then run `claude doctor` again. When the unlock worked, the report no longer lists the Keychain warning.
 
-**Resync the Keychain password if unlocking doesn't help**
+**3. Resync the Keychain password if unlocking doesn't help**
 
 Open Keychain Access, select the `login` keychain, and choose **Edit > Change Password for Keychain "login"** to resync it with your account password. Then run `claude doctor` again. Go on to the next step once the report no longer lists the Keychain warning.
 
-**Log out and back in**
+**4. Log out and back in**
 
 Once the Keychain is writable again, Claude Code moves the credentials back the next time it writes a credential. To force it now, run `/logout` and then `/login`. Logging out removes all stored credentials, including the plaintext file's contents, saved MCP server logins, and plugin sensitive values, so expect to re-authorize MCP servers and re-enter plugin secrets afterwards. Logging in again stores your login in the Keychain.
 

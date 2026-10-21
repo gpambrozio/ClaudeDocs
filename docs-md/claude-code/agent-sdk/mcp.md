@@ -6,7 +6,9 @@ The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-
 
 MCP servers can run as local processes, connect over HTTP, or execute directly within your SDK application.
 
-This page covers MCP configuration for the Agent SDK. To add MCP servers to the Claude Code CLI so they load in every project, see [MCP installation scopes](../mcp.md#mcp-installation-scopes).
+> [!NOTE]
+>
+> This page covers MCP configuration for the Agent SDK. To add MCP servers to the Claude Code CLI so they load in every project, see [MCP installation scopes](../mcp.md#mcp-installation-scopes).
 
 ## Quickstart
 
@@ -64,8 +66,6 @@ The agent connects to the documentation server, searches for information about h
 
 You can configure MCP servers in code when calling `query()`, or in a `.mcp.json` file loaded via [`settingSources`](#from-a-config-file).
 
-<span id="in-code" />
-
 ### Add a server in code
 
 Pass MCP servers directly in the `mcpServers` option. This example starts a local filesystem MCP server for `/Users/me/projects`. Replace that path with a directory on your machine:
@@ -117,8 +117,6 @@ async def main():
 asyncio.run(main())
 ```
 
-<span id="from-a-config-file" />
-
 ### Add a server from a config file
 
 Create a `.mcp.json` file at your project root. The file is picked up when the `project` setting source is enabled, which it is for default `query()` options. If you set `settingSources` explicitly, include `"project"` for this file to load. Replace `/Users/me/projects` with a directory on your machine:
@@ -136,7 +134,9 @@ Create a `.mcp.json` file at your project root. The file is picked up when the `
 
 ## Connection timing
 
-Claude Code registers the servers you pass in `options.mcpServers` at startup and emits the [init message](#error-handling) once the first-turn wait, if any, resolves. Whether each `options.mcpServers` server delays the first turn, and when it connects, depends on its type:
+Claude Code starts connecting your MCP servers when the session starts, and sends the [init message](#error-handling) once the first-turn wait, if any, ends. How long the first turn waits for a server depends on where you configured it. If you set `permissionPromptToolName`, the first turn always waits for that tool's server, up to `MCP_TIMEOUT`, wherever you configured it.
+
+For a server in `options.mcpServers`, find its type in the first column to see how long the first turn waits for it.
 
 | Server type | Delays the first turn? | First-turn wait timeout |
 | :- | :- | :- |
@@ -144,23 +144,39 @@ Claude Code registers the servers you pass in `options.mcpServers` at startup an
 | Remote server with a cached tool list, saved by Claude Code from a previous connection | No; the cached tools are available from the first turn | None; connects on its first tool call, and that deferred connect has its own timeout |
 | In-process [SDK server](#sdk-mcp-servers) | Yes, until it connects and lists its tools | [`MCP_TIMEOUT`](../env-vars.md), 30 seconds by default, per connect attempt; the connection fails at that deadline |
 
-Servers loaded from [settings files](#from-a-config-file) such as `.mcp.json` or from plugins commonly show `pending` in the init message. When `options.mcpServers` holds a stdio, HTTP, or SSE server, the first turn waits for these pending servers too, up to `MCP_TIMEOUT`. When `options.mcpServers` is empty or holds only SDK servers, the first turn waits up to 2 seconds instead:
+A server has a cached tool list only when the [MCP discovery cache](../mcp.md#server-status-detail) is on.
 
-* **With [tool search](tool-search.md), the default**: the wait covers still-pending servers configured with [`alwaysLoad: true`](../mcp.md#exempt-a-server-from-deferral) and not the rest. The rest keep connecting in the background. [Tool availability](../mcp.md#tool-availability) describes how Claude reaches their tools once they connect.
-* **Without tool search**: the wait covers every pending server. [Configure tool search](tool-search.md#configure-tool-search) covers what turns tool search off. If you exclude the `ToolSearch` tool from the session, for example through `disallowedTools`, the session also runs without tool search.
+Servers from [settings files](#from-a-config-file) such as `.mcp.json`, or from plugins, often still show `pending` in the init message. How long the first turn waits for them depends on `options.mcpServers` and tool search:
 
-If you set `permissionPromptToolName`, the first turn also waits for that tool's server in every case, up to `MCP_TIMEOUT`.
+* **`options.mcpServers` includes a stdio, HTTP, or SSE server**: the first turn waits for the pending settings-file and plugin servers too, up to `MCP_TIMEOUT`.
+* **Otherwise, when `ANTHROPIC_BASE_URL` points to a [gateway](../mcp.md#tool-search-through-a-gateway) and [`ENABLE_TOOL_SEARCH`](../mcp.md#configure-tool-search) is unset**: the first turn waits up to 2 seconds for every pending settings-file and plugin server.
+* **Otherwise, with [tool search](tool-search.md) on, which is the default**: the first turn waits up to 2 seconds, and only for pending servers that set [`alwaysLoad: true`](../mcp.md#exempt-a-server-from-deferral) or that you [named](#named-servers). The rest keep connecting in the background, and Claude [reaches their tools](../mcp.md#tool-availability) once they connect.
+* **Otherwise, with tool search off**: the first turn waits up to 2 seconds for every pending settings-file and plugin server. Tool search is off when your [`ENABLE_TOOL_SEARCH` value or model](tool-search.md#configure-tool-search) turns it off, or when you exclude the `ToolSearch` tool, for example through `disallowedTools`.
 
-To set the first-turn wait yourself, add `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` to the [`env` option](configuration.md#set-environment-variables), for example `CLAUDE_CODE_MCP_STARTUP_WAIT_MS: "5000"`. The first turn then waits up to that many milliseconds for every pending server, whether or not tool search is available. This deadline also replaces the `MCP_TIMEOUT` first-turn wait for stdio, HTTP, and SSE servers in `options.mcpServers`. `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` requires Claude Code v2.1.274 or later.
+### Named servers
 
-Servers still pending when the wait ends keep connecting in the background. Set the variable to `0` to skip the wait. A `permissionPromptToolName` server keeps its own `MCP_TIMEOUT` wait regardless of the value.
+You name a server by listing any of its tools, such as `mcp__github__list_issues` or `mcp__github__*`, in [`allowedTools`](#allow-mcp-tools) or in a `permissions.allow` rule in the `settings` option. An [`mcp_tool` hook](../hooks.md#mcp-tool-hook-fields) also names the server it calls when you configure it on a prompt-submission, tool-use, permission, subagent, task, elicitation, or worktree event. Before v2.1.284, naming a server had no effect on the first-turn wait.
 
-To block startup itself at a separate, earlier phase than the first-turn wait, before the init message is sent:
+### Set the first-turn wait yourself
 
-* Set [`MCP_CONNECTION_NONBLOCKING`](../env-vars.md) to `0` to block on the whole connection batch. Claude Code caps that wait at 5 seconds by default. Adjust the cap with the [`MCP_CONNECT_TIMEOUT_MS`](../env-vars.md) environment variable, in milliseconds. Servers still pending at that deadline keep connecting in the background.
-* Set `alwaysLoad: true` on a server's config to make its tools available at their full schemas on the first turn, [exempt from tool search deferral](../mcp.md#exempt-a-server-from-deferral). Claude Code waits at startup for that server's tools, capped at the same deadline, while other servers keep connecting in the background; a remote server with a cached tool list supplies them without connecting, per the table above.
+To choose the first-turn wait yourself, set `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` in the [`env` option](configuration.md#set-environment-variables), for example `CLAUDE_CODE_MCP_STARTUP_WAIT_MS: "5000"`. The first turn then waits up to that many milliseconds for pending settings-file and plugin servers, whether or not tool search is on. The same limit replaces the `MCP_TIMEOUT` wait for the stdio, HTTP, and SSE servers in `options.mcpServers`.
 
-The `system` message with subtype `init` reports each server's status at the moment it's emitted; see [Error handling](#error-handling) for reading those statuses.
+Three waits apply whatever value you set, including `0`:
+
+* **A `permissionPromptToolName` server**: up to `MCP_TIMEOUT`.
+* **An in-process [SDK server](#sdk-mcp-servers)**: up to `MCP_TIMEOUT` per connect attempt.
+* **A still-connecting [named server](#named-servers)**: at least up to 2 seconds, so a value below `2000` doesn't shorten its wait.
+
+Set the variable to `0` to skip the wait for every other server. Servers still pending when the wait ends keep connecting in the background. `CLAUDE_CODE_MCP_STARTUP_WAIT_MS` requires Claude Code v2.1.274 or later.
+
+### Make startup wait for servers
+
+Two settings make startup itself wait, before Claude Code sends the init message:
+
+* **[`MCP_CONNECTION_NONBLOCKING`](../env-vars.md) set to `0`**: startup waits for the whole connection batch, up to 5 seconds by default. Set [`MCP_CONNECT_TIMEOUT_MS`](../env-vars.md), in milliseconds, to change that cap. Servers still pending at the cap keep connecting in the background.
+* **`alwaysLoad: true` on a server's config**: startup waits up to the same cap for that server's tools, so the first turn has them at full schema, [exempt from tool search deferral](../mcp.md#exempt-a-server-from-deferral). A remote server with a cached tool list supplies them without connecting or holding startup.
+
+The init message reports each server's status as of the moment Claude Code sends it.
 
 ## Allow MCP tools
 
@@ -213,7 +229,9 @@ options = ClaudeAgentOptions(
 
 Wildcards (`*`) let you allow all tools from a server without listing each one individually.
 
-**Prefer `allowedTools` over permission modes for MCP access.** `permissionMode: "acceptEdits"` does not auto-approve MCP tools (only file edits and filesystem Bash commands). `permissionMode: "bypassPermissions"` does auto-approve MCP tools but also disables most other safety prompts, which is broader than necessary; see [How permissions are evaluated](permissions.md#how-permissions-are-evaluated) for the prompts that remain. A wildcard in `allowedTools` grants exactly the MCP server you want and nothing more. See [Permission modes](permissions.md#permission-modes) for a full comparison.
+> [!NOTE]
+>
+> **Prefer `allowedTools` over permission modes for MCP access.** `permissionMode: "acceptEdits"` does not auto-approve MCP tools (only file edits and filesystem Bash commands). `permissionMode: "bypassPermissions"` does auto-approve MCP tools but also disables most other safety prompts, which is broader than necessary; see [How permissions are evaluated](permissions.md#how-permissions-are-evaluated) for the prompts that remain. A wildcard in `allowedTools` grants exactly the MCP server you want and nothing more. See [Permission modes](permissions.md#permission-modes) for a full comparison.
 
 ### Discover available tools
 

@@ -56,15 +56,15 @@ For teams and organizations, you can configure Claude Code access in one of thes
 * **Claude for Teams**: self-service plan with collaboration features, admin tools, SSO, billing management, and [server-managed settings](server-managed-settings.md) for organization-wide Claude Code configuration. Best for smaller teams.
 * **Claude for Enterprise**: adds domain capture, role-based permissions, and the compliance API. Best for larger organizations with security and compliance requirements.
 
-**Subscribe**
+**1. Subscribe**
 
 Subscribe to [Claude for Teams](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=authentication_teams_step#team-&-enterprise) or contact sales for [Claude for Enterprise](https://anthropic.com/contact-sales?utm_source=claude_code\&utm_medium=docs\&utm_content=authentication_enterprise_step).
 
-**Invite team members**
+**2. Invite team members**
 
 Invite team members from the admin dashboard.
 
-**Install and log in**
+**3. Install and log in**
 
 Team members install Claude Code and log in with their claude.ai accounts.
 
@@ -72,25 +72,25 @@ Team members install Claude Code and log in with their claude.ai accounts.
 
 For organizations that prefer API-based billing, you can set up access through the Claude Console.
 
-**Create or use a Console account**
+**1. Create or use a Console account**
 
 Use your existing Claude Console account or create a new one.
 
-**Add users**
+**2. Add users**
 
 You can add users through either method:
 
 * Bulk invite users from the Console's Members page at [platform.claude.com/settings/members](https://platform.claude.com/settings/members): click **Invite**
 * [Set up SSO](https://support.claude.com/en/articles/13132885-setting-up-single-sign-on-sso)
 
-**Assign roles**
+**3. Assign roles**
 
 When inviting users, assign one of:
 
 * **Claude Code** role: users can only create Claude Code API keys
 * **Developer** role: users can create any kind of API key
 
-**Users complete setup**
+**4. Users complete setup**
 
 Each invited user needs to:
 
@@ -128,15 +128,15 @@ Everything else about profiles applies to this sign-in, including where it ranks
 
 For teams using Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry:
 
-**Follow provider setup**
+**1. Follow provider setup**
 
 Follow the [Amazon Bedrock docs](amazon-bedrock.md), [Google Cloud's Agent Platform docs](google-vertex-ai.md), or [Microsoft Foundry docs](microsoft-foundry.md).
 
-**Distribute configuration**
+**2. Distribute configuration**
 
 Distribute the environment variables and instructions for generating cloud credentials to your users. Read more about how to [manage configuration here](settings.md).
 
-**Install Claude Code**
+**3. Install Claude Code**
 
 Users can [install Claude Code](setup.md#install-claude-code).
 

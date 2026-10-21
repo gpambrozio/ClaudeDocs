@@ -1303,6 +1303,8 @@ Create Session
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2452,6 +2454,9 @@ Create Session
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionCreateParams parameters = new()
 {
     Agent = "agent_011CZkYpogX7uDKUyvBTophP",
@@ -2865,6 +2870,8 @@ List Sessions
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4014,6 +4021,9 @@ List Sessions
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionListParams parameters = new();
 
 var page = await client.Beta.Sessions.List(parameters);
@@ -4349,6 +4359,8 @@ Get Session
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5498,6 +5510,9 @@ Get Session
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionRetrieveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -5850,6 +5865,8 @@ Update Session
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -6999,6 +7016,9 @@ Update Session
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionUpdateParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -7329,6 +7349,8 @@ Delete Session
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -7348,6 +7370,9 @@ Delete Session
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionDeleteParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -7486,6 +7511,8 @@ Archive Session
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -8636,6 +8663,9 @@ Archive Session
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionArchiveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -19324,6 +19354,8 @@ List Events
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -22257,6 +22289,9 @@ List Events
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Events;
+
 EventListParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -22783,6 +22818,8 @@ Send Events
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -23238,6 +23275,9 @@ Send Events
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Events;
+
 EventSendParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -23250,10 +23290,10 @@ EventSendParams parameters = new()
                 new BetaManagedAgentsTextBlock()
                 {
                     Text = "Where is my order #1234?",
-                    Type = Type.Text,
+                    Type = BetaManagedAgentsTextBlockType.Text,
                 },
             ],
-            Type = Type.UserMessage,
+            Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
         },
     ],
 };
@@ -23410,6 +23450,8 @@ Stream Events
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -26394,6 +26436,9 @@ Stream Events
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Events;
+
 EventStreamParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -26559,6 +26604,8 @@ Add Session Resource
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -26592,11 +26639,14 @@ Add Session Resource
 #### Example
 
 ```csharp
-ResourceAddParams parameters = new()
+using System;
+using Resources = Anthropic.Models.Beta.Sessions.Resources;
+
+Resources::ResourceAddParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
     FileID = "file_011CNha8iCJcU1wXNR6q4V8w",
-    Type = Type.File,
+    Type = Resources::Type.File,
 };
 
 var betaManagedAgentsFileResource = await client.Beta.Sessions.Resources.Add(parameters);
@@ -26747,6 +26797,8 @@ List Session Resources
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -26862,6 +26914,9 @@ List Session Resources
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Resources;
+
 ResourceListParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -27026,6 +27081,8 @@ Get Session Resource
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -27143,6 +27200,9 @@ Get Session Resource
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Resources;
+
 ResourceRetrieveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -27299,6 +27359,8 @@ Update Session Resource
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -27416,6 +27478,9 @@ Update Session Resource
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Resources;
+
 ResourceUpdateParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -27567,6 +27632,8 @@ Delete Session Resource
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -27586,6 +27653,9 @@ Delete Session Resource
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Resources;
+
 ResourceDeleteParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -27751,6 +27821,8 @@ List Session Threads
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -28597,6 +28669,9 @@ List Session Threads
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Threads;
+
 ThreadListParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -28829,6 +28904,8 @@ Get Session Thread
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -29674,6 +29751,9 @@ Get Session Thread
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Threads;
+
 ThreadRetrieveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -29900,6 +29980,8 @@ Archive Session Thread
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -30745,6 +30827,9 @@ Archive Session Thread
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Threads;
+
 ThreadArchiveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -30978,6 +31063,8 @@ List Session Thread Events
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -33912,6 +33999,9 @@ List Session Thread Events
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Threads.Events;
+
 EventListParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -34086,6 +34176,8 @@ Stream Session Thread Events
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -37070,6 +37162,9 @@ Stream Session Thread Events
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Threads.Events;
+
 EventStreamParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",

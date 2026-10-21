@@ -13,7 +13,9 @@ The Agent SDK can export this data as OpenTelemetry traces, metrics, and log eve
 
 This guide explains how the SDK emits telemetry, how to configure the export, and how to tag and filter the data once it reaches your backend. To read token usage and cost directly from the SDK response stream instead of exporting to a backend, see [Track cost and usage](cost-tracking.md).
 
-For the Claude API or Managed Agents, see [OpenTelemetry for the Claude API](../../api/manage-claude/opentelemetry.md).
+> [!NOTE]
+>
+> For the Claude API or Managed Agents, see [OpenTelemetry for the Claude API](../../api/manage-claude/opentelemetry.md).
 
 ## How telemetry flows from the SDK
 
@@ -99,10 +101,12 @@ Because the child process inherits your application's environment by default, yo
 
 To confirm that export is working, check your collector's logs for incoming spans, metrics, and log events after the task completes. The CLI fails silently on export errors by default: if the endpoint is unreachable or rejects the data, the agent still runs normally and the CLI drops the telemetry without surfacing an error in your application. To surface exporter errors, set [`CLAUDE_CODE_OTEL_DIAG_STDERR=1`](../env-vars.md) alongside the exporter variables and read the diagnostics through the SDK's `stderr` callback (Python) or `stderr` option (TypeScript). Requires Claude Code v2.1.179 or later.
 
-The `console` exporter writes telemetry to standard output, which the SDK uses
-as its message channel. Do not set `console` as an exporter value when running
-through the SDK. To inspect telemetry locally, point
-`OTEL_EXPORTER_OTLP_ENDPOINT` at a local OpenTelemetry Collector instead.
+> [!NOTE]
+>
+> The `console` exporter writes telemetry to standard output, which the SDK uses
+> as its message channel. Do not set `console` as an exporter value when running
+> through the SDK. To inspect telemetry locally, point
+> `OTEL_EXPORTER_OTLP_ENDPOINT` at a local OpenTelemetry Collector instead.
 
 ### Flush telemetry from short-lived calls
 
@@ -141,9 +145,11 @@ The `llm_request`, `tool`, and `hook` spans are children of the enclosing `claud
 
 Spans carry a `session.id` attribute by default. When you make several `query()` calls against the same [session](sessions.md), filter on `session.id` in your backend to see them as one timeline. Claude Code omits the attribute if you set `OTEL_METRICS_INCLUDE_SESSION_ID` to a falsy value.
 
-Tracing is in beta. Span names and attributes may change between releases. See
-[Traces (beta)](../monitoring-usage.md#traces-beta) in the Monitoring reference
-for the trace exporter configuration variables.
+> [!NOTE]
+>
+> Tracing is in beta. Span names and attributes may change between releases. See
+> [Traces (beta)](../monitoring-usage.md#traces-beta) in the Monitoring reference
+> for the trace exporter configuration variables.
 
 ## Link traces to your application
 

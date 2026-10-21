@@ -8,6 +8,8 @@ This page covers performance, stability, and search problems once Claude Code is
 | :- | :- |
 | `command not found`, install fails, PATH issues, `EACCES`, TLS errors | [Troubleshoot installation and login](troubleshoot-install.md) |
 | Update or install download fails with `The connection dropped while downloading the update` or `aborted` | [Troubleshoot installation and login](troubleshoot-install.md#the-connection-dropped-while-downloading-the-update) |
+| Update or install fails with `Release verification failed for Claude Code` | [Troubleshoot installation and login](troubleshoot-install.md#release-verification-failed) |
+| Session footer shows `Auto-update failed · Run claude doctor` in red | [Troubleshoot installation and login](troubleshoot-install.md#auto-update-failed) |
 | Login loops, OAuth errors, `403 Forbidden`, "organization disabled", Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry credentials | [Troubleshoot installation and login](troubleshoot-install.md#login-and-authentication) |
 | Settings not applying, hooks not firing, MCP servers not loading | [Debug your configuration](debug-your-config.md) |
 | Session started in auto mode, or Claude edits files and runs commands without asking | [Which mode a session starts in](permission-modes.md#which-mode-a-session-starts-in) |
@@ -41,7 +43,9 @@ Outside [fullscreen rendering](fullscreen.md), running `/compact` frees memory t
 
 If memory usage stays high after these steps, run `/heapdump` to write two files to `~/Desktop`: a JavaScript heap snapshot named `<session-id>.heapsnapshot` and a memory breakdown named `<session-id>-diagnostics.json`. Claude Code [hides the command from the command menu](commands.md#how-the-command-menu-matches-what-you-type); type it in full. On Linux without a Desktop folder, the files are written to your home directory.
 
-The `.heapsnapshot` file contains every string in the process, including your full conversation and credentials. Don't attach it to a public issue or share it.
+> [!WARNING]
+>
+> The `.heapsnapshot` file contains every string in the process, including your full conversation and credentials. Don't attach it to a public issue or share it.
 
 The command also prints a summary in the conversation, showing the process's total memory, how much of it is in the JS heap, and how much sits outside the heap. The summary also lists any leak indicators, such as a high memory growth rate or an unusually high number of open handles. The summary says whether most memory is in the JS heap, which the snapshot captures, or in native memory, which it doesn't.
 
@@ -84,6 +88,18 @@ Restarting doesn't lose your conversation. Run `claude --resume` in the same dir
 ### Garbled or corrupted text in an editor's integrated terminal
 
 If characters render as boxes, smears, or the wrong glyphs when running Claude Code in the VS Code, Cursor, or Devin Desktop integrated terminal, the terminal's GPU renderer is likely the cause. Run `/terminal-setup` inside Claude Code to set `terminal.integrated.gpuAcceleration` to `"off"`, or set it manually in your editor settings and reload the window. See [Terminal configuration](terminal-config.md) for the other settings `/terminal-setup` writes.
+
+### Stray `>0q` at startup or `>4m` after exit
+
+These characters, printed by terminals built on a VTE library older than 0.53, are the ends of two Claude Code control sequences. To stop the text, [update Claude Code](setup.md#update-claude-code) to v2.1.301 or later, which skips both sequences when it identifies such a terminal.
+
+If the text remains, print the VTE version from the terminal's shell:
+
+```bash
+echo $VTE_VERSION
+```
+
+On a VTE-based terminal, a result below `5300` means a library older than 0.53: update or replace the terminal to get VTE 0.53 or later. Otherwise, see [Get more help](#get-more-help).
 
 ### Mouse wheel scrolls one line at a time in fullscreen rendering
 
@@ -162,7 +178,9 @@ To confirm the switch took effect, run `claude doctor` in your terminal and chec
 
 Disk read performance penalties when [working across file systems on WSL](https://learn.microsoft.com/en-us/windows/wsl/filesystems) may result in fewer-than-expected matches when using Claude Code on WSL. Search still functions, but returns fewer results than on a native filesystem.
 
-`claude doctor` shows Search as OK in this case.
+> [!NOTE]
+>
+> `claude doctor` shows Search as OK in this case.
 
 **Solutions:**
 

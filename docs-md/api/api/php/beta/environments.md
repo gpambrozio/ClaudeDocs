@@ -98,6 +98,9 @@ Create a new environment with the specified configuration.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaEnvironment = $client->beta->environments->create(
@@ -266,6 +269,9 @@ List environments with pagination support.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->environments->list(
@@ -405,6 +411,9 @@ Retrieve a specific environment by ID.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -559,6 +568,9 @@ Update an existing environment's configuration.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaEnvironment = $client->beta->environments->update(
@@ -682,6 +694,9 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaEnvironmentDeleteResponse = $client->beta->environments->delete(
@@ -774,6 +789,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -1144,6 +1162,9 @@ Retrieve detailed information about a specific work item.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSelfHostedWork = $client->beta->environments->work->retrieve(
@@ -1274,6 +1295,9 @@ Long poll for work items in the queue.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSelfHostedWork = $client->beta->environments->work->poll(
@@ -1395,6 +1419,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSelfHostedWork = $client->beta->environments->work->ack(
@@ -1489,6 +1516,9 @@ Record a heartbeat for a work item to maintain the lease.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -1613,6 +1643,9 @@ Stop a work item, initiating graceful or forced shutdown.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -1742,6 +1775,9 @@ List work items in an environment.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -1878,6 +1914,9 @@ Update work item metadata with merge semantics.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSelfHostedWork = $client->beta->environments->work->update(
@@ -1968,6 +2007,9 @@ Get statistics about the work queue for an environment.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 

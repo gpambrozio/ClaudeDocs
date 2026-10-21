@@ -317,7 +317,7 @@ Each MCP server in the `mcp_servers` array defines the connection details:
 | Property              | Type   | Required | Description                                                                                                                                                                                                                                                                                                            |
 | --------------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`                | string | Yes      | Currently only "url" is supported.                                                                                                                                                                                                                                                                                     |
-| `url`                 | string | Yes      | The URL of the MCP server. Must start with https\://.                                                                                                                                                                                                                                                                  |
+| `url`                 | string | Yes      | The URL of the MCP server. Must start with `https://`.                                                                                                                                                                                                                                                                 |
 | `name`                | string | Yes      | A unique identifier for this MCP server. Must be referenced by exactly one MCPToolset in the `tools` array.                                                                                                                                                                                                            |
 | `authorization_token` | string | No       | OAuth authorization token if required by the MCP server. See [Authentication](mcp-connector.md#authentication) for how to obtain one, or the [MCP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) for protocol details. |
 
@@ -1270,8 +1270,8 @@ The helpers live in the separate `anthropic-java-mcp` artifact, which requires J
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:2.73.0")
-implementation("com.anthropic:anthropic-java-mcp:2.73.0")
+implementation("com.anthropic:anthropic-java:2.75.0")
+implementation("com.anthropic:anthropic-java-mcp:2.75.0")
 ```
 
 **Maven**
@@ -1280,12 +1280,12 @@ implementation("com.anthropic:anthropic-java-mcp:2.73.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.73.0</version>
+    <version>2.75.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-mcp</artifactId>
-    <version>2.73.0</version>
+    <version>2.75.0</version>
 </dependency>
 ```
 

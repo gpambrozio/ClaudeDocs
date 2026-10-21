@@ -117,6 +117,8 @@ url: https://platform.claude.com/docs/en/api/php/beta
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Beta API Error
 
 - `class BetaAPIError`
@@ -382,6 +384,9 @@ The Models API response can be used to determine which models are available for 
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->models->list(
@@ -595,6 +600,9 @@ The Models API response can be used to determine information about a specific mo
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -973,7 +981,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
 - `userProfileID?:optional string` (header parameter)
 
-  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -1242,6 +1250,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Messages\BetaThinkingPrefixMismatchBehavior;
+use Anthropic\Messages\Model;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -1652,7 +1665,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
 - `userProfileID?:optional string` (header parameter)
 
-  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -1686,6 +1699,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Messages\BetaThinkingPrefixMismatchBehavior;
+use Anthropic\Messages\Model;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -1817,7 +1835,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 - `userProfileID?:optional string` (header parameter)
 
-  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -1885,6 +1903,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Messages\BetaThinkingPrefixMismatchBehavior;
+use Anthropic\Messages\Model;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -2122,6 +2145,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaMessageBatch = $client->beta->messages->batches->retrieve(
@@ -2255,6 +2281,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->messages->batches->list(
@@ -2387,6 +2416,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaMessageBatch = $client->beta->messages->batches->cancel(
@@ -2470,6 +2502,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaDeletedMessageBatch = $client->beta->messages->batches->delete(
@@ -2540,6 +2575,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -2674,6 +2712,10 @@ Create Agent
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Agents\BetaManagedAgentsModel;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -2918,6 +2960,9 @@ List Agents
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->agents->list(
@@ -3124,6 +3169,9 @@ Get Agent
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -3364,6 +3412,10 @@ Update Agent
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Agents\BetaManagedAgentsModel;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsAgent = $client->beta->agents->update(
@@ -3598,6 +3650,9 @@ Archive Agent
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsAgent = $client->beta->agents->archive(
@@ -3801,6 +3856,9 @@ List Agent Versions
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -4015,6 +4073,9 @@ Create a new environment with the specified configuration.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaEnvironment = $client->beta->environments->create(
@@ -4183,6 +4244,9 @@ List environments with pagination support.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->environments->list(
@@ -4322,6 +4386,9 @@ Retrieve a specific environment by ID.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -4476,6 +4543,9 @@ Update an existing environment's configuration.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaEnvironment = $client->beta->environments->update(
@@ -4599,6 +4669,9 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaEnvironmentDeleteResponse = $client->beta->environments->delete(
@@ -4691,6 +4764,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -4843,6 +4919,9 @@ Retrieve detailed information about a specific work item.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSelfHostedWork = $client->beta->environments->work->retrieve(
@@ -4973,6 +5052,9 @@ Long poll for work items in the queue.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSelfHostedWork = $client->beta->environments->work->poll(
@@ -5094,6 +5176,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSelfHostedWork = $client->beta->environments->work->ack(
@@ -5188,6 +5273,9 @@ Record a heartbeat for a work item to maintain the lease.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -5312,6 +5400,9 @@ Stop a work item, initiating graceful or forced shutdown.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -5441,6 +5532,9 @@ List work items in an environment.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -5577,6 +5671,9 @@ Update work item metadata with merge semantics.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSelfHostedWork = $client->beta->environments->work->update(
@@ -5667,6 +5764,9 @@ Get statistics about the work queue for an environment.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -5809,6 +5909,10 @@ Create Session
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\BetaCurrency;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -6179,6 +6283,9 @@ List Sessions
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->sessions->list(
@@ -6494,6 +6601,9 @@ Get Session
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -6813,6 +6923,10 @@ Update Session
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\BetaCurrency;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsSession = $client->beta->sessions->update(
@@ -7093,6 +7207,9 @@ Delete Session
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeletedSession = $client->beta->sessions->delete(
@@ -7199,6 +7316,9 @@ Archive Session
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -8358,6 +8478,10 @@ List Events
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Sessions\Events\ManagedAgentsSessionEventType;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->sessions->events->list(
@@ -8449,6 +8573,9 @@ Send Events
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -9426,6 +9553,10 @@ Stream Events
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Sessions\BetaManagedAgentsDeltaType;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsStreamSessionEvents = $client
@@ -9518,6 +9649,9 @@ Add Session Resource
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -9652,6 +9786,9 @@ List Session Resources
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -9797,6 +9934,9 @@ Get Session Resource
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $resource = $client->beta->sessions->resources->retrieve(
@@ -9931,6 +10071,9 @@ Update Session Resource
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $resource = $client->beta->sessions->resources->update(
@@ -9999,6 +10142,9 @@ Delete Session Resource
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -10119,6 +10265,10 @@ List Session Threads
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Sessions\Threads\ManagedAgentsSessionThreadStatus;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -10313,6 +10463,9 @@ Get Session Thread
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsSessionThread = $client->beta->sessions->threads->retrieve(
@@ -10498,6 +10651,9 @@ Archive Session Thread
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -11527,6 +11683,9 @@ List Session Thread Events
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->sessions->threads->events->list(
@@ -12514,6 +12673,10 @@ Stream Session Thread Events
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Sessions\BetaManagedAgentsDeltaType;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsStreamSessionThreadEvents = $client
@@ -12686,6 +12849,10 @@ Create Deployment
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\BetaCurrency;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -12917,6 +13084,10 @@ List Deployments
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Deployments\BetaManagedAgentsDeploymentStatus;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->deployments->list(
@@ -13106,6 +13277,9 @@ Get Deployment
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -13326,6 +13500,10 @@ Update Deployment
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\BetaCurrency;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeployment = $client->beta->deployments->update(
@@ -13533,6 +13711,9 @@ Archive Deployment
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeployment = $client->beta->deployments->archive(
@@ -13676,6 +13857,9 @@ Run Deployment Now
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeploymentRun = $client->beta->deployments->run(
@@ -13812,6 +13996,9 @@ Pause Deployment
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -13992,6 +14179,9 @@ Unpause Deployment
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeployment = $client->beta->deployments->unpause(
@@ -14169,6 +14359,10 @@ List Deployment Runs
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\DeploymentRuns\BetaManagedAgentsTriggerType;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->deploymentRuns->list(
@@ -14283,6 +14477,9 @@ Get Deployment Run
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeploymentRun = $client->beta->deploymentRuns->retrieve(
@@ -14386,6 +14583,9 @@ Create a Vault
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsVault = $client->beta->vaults->create(
@@ -14483,6 +14683,9 @@ List Vaults
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->vaults->list(
@@ -14577,6 +14780,9 @@ Retrieve a Vault
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -14674,6 +14880,9 @@ Update a Vault
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsVault = $client->beta->vaults->update(
@@ -14743,6 +14952,9 @@ Delete a Vault
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -14824,6 +15036,9 @@ Archive a Vault
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -14934,6 +15149,9 @@ Create a Credential
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -15055,6 +15273,9 @@ List Credentials
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->vaults->credentials->list(
@@ -15167,6 +15388,9 @@ Retrieve a Credential
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -15286,6 +15510,9 @@ Update a Credential
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsCredential = $client->beta->vaults->credentials->update(
@@ -15377,6 +15604,9 @@ Delete a Credential
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -15475,6 +15705,9 @@ Archive a Credential
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -15578,6 +15811,9 @@ Validate an MCP OAuth Credential
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsCredentialValidation = $client
@@ -15627,27 +15863,33 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 ## Beta › Memory Stores
 
-### Create a memory store
+### Create a Memory Store
 
 `$client->beta->memoryStores->create(string name, ?string description, ?array<string,string> metadata, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsMemoryStore`
 
 **POST** `/v1/memory_stores`
 
-Create a memory store
+Create a Memory Store
 
 #### Parameters
 
 - `name: string`
 
-  Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
+  The name of the memory store, 1 to 255 characters long, without control characters. Names don't have to be unique in a workspace.
+
+  In a session, the store's directory under `/mnt/memory/` is based on this name. The name is lowercased and every run of characters other than ASCII letters and digits becomes one hyphen. The session's memory store resource gives the exact path in `mount_path`.
+
+  See the [memory guide](../../managed-agents/memory.md#how-the-agent-accesses-memory) to learn more about how agents access memory stores.
 
 - `description?:optional string`
 
-  Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
+  Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
 
 - `metadata?:optional array<string,string>`
 
-  Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
+  Key-value pairs for your own use, such as the end user that the store belongs to. The agent doesn't see them.
+
+  A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -15667,23 +15909,29 @@ Create a memory store
 
   - `string id`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `?\Datetime archivedAt`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
   - `\Datetime createdAt`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
   - `string description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `array<string,string> metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `string name`
 
@@ -15691,7 +15939,9 @@ Create a memory store
 
   - `\Datetime updatedAt`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
 #### Example
 
@@ -15699,6 +15949,9 @@ Create a memory store
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -15730,23 +15983,23 @@ var_dump($betaManagedAgentsMemoryStore);
 }
 ```
 
-### List memory stores
+### List Memory Stores
 
 `$client->beta->memoryStores->list(?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<BetaManagedAgentsMemoryStore>`
 
 **GET** `/v1/memory_stores`
 
-List memory stores
+List Memory Stores
 
 #### Parameters
 
 - `createdAtGte?:optional \Datetime` (query parameter)
 
-  Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
+  Return only memory stores created at or after this time (inclusive).
 
 - `createdAtLte?:optional \Datetime` (query parameter)
 
-  Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
+  Return only memory stores created at or before this time (inclusive).
 
 - `includeArchived?:optional bool` (query parameter)
 
@@ -15758,7 +16011,7 @@ List memory stores
 
 - `page?:optional string` (query parameter)
 
-  Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+  The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -15778,23 +16031,29 @@ List memory stores
 
   - `string id`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `?\Datetime archivedAt`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
   - `\Datetime createdAt`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
   - `string description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `array<string,string> metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `string name`
 
@@ -15802,7 +16061,9 @@ List memory stores
 
   - `\Datetime updatedAt`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
 #### Example
 
@@ -15810,6 +16071,9 @@ List memory stores
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -15846,19 +16110,19 @@ var_dump($page);
 }
 ```
 
-### Retrieve a memory store
+### Retrieve a Memory Store
 
 `$client->beta->memoryStores->retrieve(string memoryStoreID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsMemoryStore`
 
 **GET** `/v1/memory_stores/{memory_store_id}`
 
-Retrieve a memory store
+Retrieve a Memory Store
 
 #### Parameters
 
 - `memoryStoreID: string` (path parameter)
 
-  ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`.
+  The ID of the memory store to retrieve (`memstore_...`).
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -15878,23 +16142,29 @@ Retrieve a memory store
 
   - `string id`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `?\Datetime archivedAt`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
   - `\Datetime createdAt`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
   - `string description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `array<string,string> metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `string name`
 
@@ -15902,7 +16172,9 @@ Retrieve a memory store
 
   - `\Datetime updatedAt`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
 #### Example
 
@@ -15910,6 +16182,9 @@ Retrieve a memory store
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -15939,31 +16214,37 @@ var_dump($betaManagedAgentsMemoryStore);
 }
 ```
 
-### Update a memory store
+### Update a Memory Store
 
 `$client->beta->memoryStores->update(string memoryStoreID, ?string description, ?array<string,string> metadata, ?string name, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsMemoryStore`
 
 **POST** `/v1/memory_stores/{memory_store_id}`
 
-Update a memory store
+Update a Memory Store
 
 #### Parameters
 
 - `memoryStoreID: string` (path parameter)
 
-  ID of the memory store to update (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store returns 400.
+  The ID of the memory store to update (`memstore_...`).
+
+  The request fails with HTTP status 400 if the store is archived.
 
 - `description?:optional string`
 
-  New description for the store, up to 1024 characters. Pass an empty string to clear it.
+  New description for the store, up to 1,024 characters. Pass an empty string to clear it.
 
 - `metadata?:optional array<string,string>`
 
-  Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+  Changes to apply to the memory store's metadata. Keys you leave out keep their values.
+
+  Set a key to a string to add or replace it, or to `null` to remove it. After the change, the metadata can hold at most 16 key-value pairs. Keys are 1 to 64 characters long and values at most 512 characters.
 
 - `name?:optional string`
 
-  New human-readable name for the store. 1–255 characters; no control characters. Renaming changes the slug used for the store's `mount_path` in sessions created after the update.
+  The new name of the memory store, 1 to 255 characters long, without control characters.
+
+  Sessions created after the change use the new name for the store's directory under `/mnt/memory/`.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -15983,23 +16264,29 @@ Update a memory store
 
   - `string id`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `?\Datetime archivedAt`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
   - `\Datetime createdAt`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
   - `string description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `array<string,string> metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `string name`
 
@@ -16007,7 +16294,9 @@ Update a memory store
 
   - `\Datetime updatedAt`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
 #### Example
 
@@ -16015,6 +16304,9 @@ Update a memory store
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -16047,19 +16339,21 @@ var_dump($betaManagedAgentsMemoryStore);
 }
 ```
 
-### Delete a memory store
+### Delete a Memory Store
 
 `$client->beta->memoryStores->delete(string memoryStoreID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsDeletedMemoryStore`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}`
 
-Delete a memory store
+Delete a Memory Store
 
 #### Parameters
 
 - `memoryStoreID: string` (path parameter)
 
-  ID of the memory store to permanently delete (a `memstore_...` identifier). Required. Deletion cascades to all memories and memory versions in the store and cannot be undone.
+  The ID of the memory store to delete (`memstore_...`).
+
+  Deleting a store also deletes all its memories and memory versions. It can't be undone.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -16088,6 +16382,9 @@ Delete a memory store
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeletedMemoryStore = $client->beta->memoryStores->delete(
@@ -16108,19 +16405,21 @@ var_dump($betaManagedAgentsDeletedMemoryStore);
 }
 ```
 
-### Archive a memory store
+### Archive a Memory Store
 
 `$client->beta->memoryStores->archive(string memoryStoreID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaManagedAgentsMemoryStore`
 
 **POST** `/v1/memory_stores/{memory_store_id}/archive`
 
-Archive a memory store
+Archive a Memory Store
 
 #### Parameters
 
 - `memoryStoreID: string` (path parameter)
 
-  ID of the memory store to archive (a `memstore_...` identifier). Required. Archiving is one-way and idempotent; archived stores cannot be unarchived. Enumerate IDs via `GET /v1/memory_stores`.
+  The ID of the memory store to archive (`memstore_...`).
+
+  Archiving can't be undone. Archiving a store that is already archived returns it unchanged.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -16140,23 +16439,29 @@ Archive a memory store
 
   - `string id`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `?\Datetime archivedAt`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
   - `\Datetime createdAt`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
   - `string description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `array<string,string> metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `string name`
 
@@ -16164,7 +16469,9 @@ Archive a memory store
 
   - `\Datetime updatedAt`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
 #### Example
 
@@ -16172,6 +16479,9 @@ Archive a memory store
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -16203,13 +16513,13 @@ var_dump($betaManagedAgentsMemoryStore);
 
 ## Beta › Memory Stores › Memories
 
-### Create a memory
+### Create a Memory
 
 `$client->beta->memoryStores->memories->create(string memoryStoreID, ?string content, string path, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemory`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories`
 
-Create a memory
+Create a Memory
 
 #### Parameters
 
@@ -16219,15 +16529,21 @@ Create a memory
 
 - `content: string`
 
-  UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
+  The UTF-8 text content of the new memory. Pass `""` to create an empty memory.
+
+  The maximum size is 100 kB (102,400 bytes).
 
 - `path: string`
 
-  Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive.
+  The path of the new memory, such as `/projects/foo/notes.md`. Paths are case-sensitive.
+
+  A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long.
 
 - `view?:optional ManagedAgentsMemoryView` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -16247,7 +16563,9 @@ Create a memory
 
   - `string id`
 
-    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+    To retrieve, update, or delete the memory, pass this ID.
 
   - `string contentSha256`
 
@@ -16255,7 +16573,7 @@ Create a memory
 
   - `int contentSizeBytes`
 
-    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
   - `\Datetime createdAt`
 
@@ -16267,7 +16585,11 @@ Create a memory
 
   - `string memoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    The ID of the memory version that holds the memory's current content (`memver_...`).
+
+    Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+    See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `string path`
 
@@ -16275,11 +16597,15 @@ Create a memory
 
   - `\Datetime updatedAt`
 
-    When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    When the memory was last changed, in RFC 3339.
+
+    To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
   - `?string content`
 
-    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+    The maximum size is 100 kB (102,400 bytes).
 
 #### Example
 
@@ -16287,6 +16613,10 @@ Create a memory
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\MemoryStores\Memories\ManagedAgentsMemoryView;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -16319,13 +16649,13 @@ var_dump($betaManagedAgentsMemory);
 }
 ```
 
-### List memories
+### List Memories
 
 `$client->beta->memoryStores->memories->list(string memoryStoreID, ?int depth, ?int limit, ?string page, ?string pathPrefix, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<ManagedAgentsMemoryListItem>`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories`
 
-List memories
+List Memories
 
 #### Parameters
 
@@ -16335,23 +16665,31 @@ List memories
 
 - `depth?:optional int` (query parameter)
 
-  `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
+  How far below `path_prefix` to list. Defaults to `0`, which lists every memory below the prefix.
+
+  Pass `1` to list only the direct children. Deeper memories are then grouped into `memory_prefix` items.
 
 - `limit?:optional int` (query parameter)
 
-  Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
+  The maximum number of items to return per page, from 1 to 100. Defaults to 20.
+
+  With `view=full`, a page holds at most 20 items. `memory` and `memory_prefix` items both count toward the limit.
 
 - `page?:optional string` (query parameter)
 
-  Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+  The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
 
 - `pathPrefix?:optional string` (query parameter)
 
-  Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
+  Return only memories whose path starts with this prefix, such as `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
+
+  Omit it to list the whole store. The prefix must end with `/` and matches whole segments, so `/notes/` matches `/notes/todo.md` but not `/notes-archive/todo.md`.
 
 - `view?:optional ManagedAgentsMemoryView` (query parameter)
 
-  Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
+  Whether each memory in the response includes `content`. Defaults to `basic`, which sets it to `null`.
+
+  With `full`, a page holds at most 20 items.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -16373,7 +16711,9 @@ List memories
 
     - `string id`
 
-      Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+      The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+      To retrieve, update, or delete the memory, pass this ID.
 
     - `string contentSha256`
 
@@ -16381,7 +16721,7 @@ List memories
 
     - `int contentSizeBytes`
 
-      Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+      The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     - `\Datetime createdAt`
 
@@ -16393,7 +16733,11 @@ List memories
 
     - `string memoryVersionID`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+      The ID of the memory version that holds the memory's current content (`memver_...`).
+
+      Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+      See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
     - `string path`
 
@@ -16401,11 +16745,15 @@ List memories
 
     - `\Datetime updatedAt`
 
-      When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+      When the memory was last changed, in RFC 3339.
+
+      To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
     - `?string content`
 
-      The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+      The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+      The maximum size is 100 kB (102,400 bytes).
 
   - `class ManagedAgentsMemoryPrefix`
 
@@ -16421,6 +16769,10 @@ List memories
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\MemoryStores\Memories\ManagedAgentsMemoryView;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -16460,13 +16812,13 @@ var_dump($page);
 }
 ```
 
-### Retrieve a memory
+### Retrieve a Memory
 
 `$client->beta->memoryStores->memories->retrieve(string memoryID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemory`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-Retrieve a memory
+Retrieve a Memory
 
 #### Parameters
 
@@ -16480,7 +16832,9 @@ Retrieve a memory
 
 - `view?:optional ManagedAgentsMemoryView` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -16500,7 +16854,9 @@ Retrieve a memory
 
   - `string id`
 
-    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+    To retrieve, update, or delete the memory, pass this ID.
 
   - `string contentSha256`
 
@@ -16508,7 +16864,7 @@ Retrieve a memory
 
   - `int contentSizeBytes`
 
-    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
   - `\Datetime createdAt`
 
@@ -16520,7 +16876,11 @@ Retrieve a memory
 
   - `string memoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    The ID of the memory version that holds the memory's current content (`memver_...`).
+
+    Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+    See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `string path`
 
@@ -16528,11 +16888,15 @@ Retrieve a memory
 
   - `\Datetime updatedAt`
 
-    When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    When the memory was last changed, in RFC 3339.
+
+    To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
   - `?string content`
 
-    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+    The maximum size is 100 kB (102,400 bytes).
 
 #### Example
 
@@ -16540,6 +16904,10 @@ Retrieve a memory
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\MemoryStores\Memories\ManagedAgentsMemoryView;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -16571,13 +16939,13 @@ var_dump($betaManagedAgentsMemory);
 }
 ```
 
-### Update a memory
+### Update a Memory
 
 `$client->beta->memoryStores->memories->update(string memoryID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?string content, ?string path, ?ManagedAgentsPrecondition precondition, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemory`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-Update a memory
+Update a Memory
 
 #### Parameters
 
@@ -16591,7 +16959,9 @@ Update a memory
 
 - `view?:optional ManagedAgentsMemoryView` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `content?:optional string`
 
@@ -16599,11 +16969,15 @@ Update a memory
 
 - `path?:optional string`
 
-  New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
+  The new path of the memory, which renames it. Omit it to keep the current path.
+
+  The memory keeps its `id`. A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long. Paths are case-sensitive.
 
 - `precondition?:optional ManagedAgentsPrecondition`
 
-  Optional optimistic-concurrency precondition. When supplied, the update applies only if the memory's current state matches; on mismatch the request returns `memory_precondition_failed_error` (HTTP 409). When omitted, the update is unconditional.
+  The condition that the memory must meet for the update to apply. Omit it to update unconditionally.
+
+  If the condition fails, the request fails with HTTP status 409.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -16623,7 +16997,9 @@ Update a memory
 
   - `string id`
 
-    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+    To retrieve, update, or delete the memory, pass this ID.
 
   - `string contentSha256`
 
@@ -16631,7 +17007,7 @@ Update a memory
 
   - `int contentSizeBytes`
 
-    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
   - `\Datetime createdAt`
 
@@ -16643,7 +17019,11 @@ Update a memory
 
   - `string memoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    The ID of the memory version that holds the memory's current content (`memver_...`).
+
+    Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+    See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `string path`
 
@@ -16651,11 +17031,15 @@ Update a memory
 
   - `\Datetime updatedAt`
 
-    When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    When the memory was last changed, in RFC 3339.
+
+    To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
   - `?string content`
 
-    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+    The maximum size is 100 kB (102,400 bytes).
 
 #### Example
 
@@ -16663,6 +17047,10 @@ Update a memory
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\MemoryStores\Memories\ManagedAgentsMemoryView;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -16699,13 +17087,13 @@ var_dump($betaManagedAgentsMemory);
 }
 ```
 
-### Delete a memory
+### Delete a Memory
 
 `$client->beta->memoryStores->memories->delete(string memoryID, string memoryStoreID, ?string expectedContentSha256, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsDeletedMemory`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-Delete a memory
+Delete a Memory
 
 #### Parameters
 
@@ -16750,6 +17138,9 @@ Delete a memory
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaManagedAgentsDeletedMemory = $client->beta->memoryStores->memories->delete(
@@ -16774,13 +17165,13 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ## Beta › Memory Stores › Memory Versions
 
-### List memory versions
+### List Memory Versions
 
 `$client->beta->memoryStores->memoryVersions->list(string memoryStoreID, ?string apiKeyID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?int limit, ?string memoryID, ?ManagedAgentsMemoryVersionOperation operation, ?string page, ?string serviceAccountID, ?string sessionID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): PageCursor<ManagedAgentsMemoryVersion>`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
-List memory versions
+List Memory Versions
 
 #### Parameters
 
@@ -16802,13 +17193,15 @@ List memory versions
 
 - `limit?:optional int` (query parameter)
 
-  The maximum number of versions to return per page. Defaults to 20.
+  The maximum number of versions to return per page, from 1 to 100. Defaults to 20.
+
+  With `view=full`, a page holds at most 20 versions.
 
 - `memoryID?:optional string` (query parameter)
 
   Return only versions of the memory with this ID (`mem_...`).
 
-  The filter still works after the memory is deleted. The results then include the version whose `operation` is `deleted`.
+  The filter still works after the memory is deleted. While that memory's versions are retained, the results include the version whose `operation` is `deleted`.
 
 - `operation?:optional ManagedAgentsMemoryVersionOperation` (query parameter)
 
@@ -16828,7 +17221,9 @@ List memory versions
 
 - `view?:optional ManagedAgentsMemoryView` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -16856,7 +17251,9 @@ List memory versions
 
   - `string memoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](../beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](../beta/memory_stores/memory_versions/list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `string memoryStoreID`
 
@@ -16880,7 +17277,11 @@ List memory versions
 
   - `?ManagedAgentsActor createdBy`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](../beta/sessions/retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](../beta/sessions/retrieve.md) to learn more about where the change came from.
 
   - `?string path`
 
@@ -16888,7 +17289,11 @@ List memory versions
 
   - `?\Datetime redactedAt`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](../beta/memory_stores/memory_versions/redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../../managed-agents/memory.md#redact-a-version) to learn more about redaction.
 
   - `?ManagedAgentsActor redactedBy`
 
@@ -16900,6 +17305,11 @@ List memory versions
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\MemoryStores\Memories\ManagedAgentsMemoryView;
+use Anthropic\Beta\MemoryStores\MemoryVersions\ManagedAgentsMemoryVersionOperation;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -16953,13 +17363,13 @@ var_dump($page);
 }
 ```
 
-### Retrieve a memory version
+### Retrieve a Memory Version
 
 `$client->beta->memoryStores->memoryVersions->retrieve(string memoryVersionID, string memoryStoreID, ?ManagedAgentsMemoryView view, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemoryVersion`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
-Retrieve a memory version
+Retrieve a Memory Version
 
 #### Parameters
 
@@ -16973,7 +17383,9 @@ Retrieve a memory version
 
 - `view?:optional ManagedAgentsMemoryView` (query parameter)
 
-  Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+  Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+  With `full`, list operations return at most 20 items per page.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -17001,7 +17413,9 @@ Retrieve a memory version
 
   - `string memoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](../beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](../beta/memory_stores/memory_versions/list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `string memoryStoreID`
 
@@ -17025,7 +17439,11 @@ Retrieve a memory version
 
   - `?ManagedAgentsActor createdBy`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](../beta/sessions/retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](../beta/sessions/retrieve.md) to learn more about where the change came from.
 
   - `?string path`
 
@@ -17033,7 +17451,11 @@ Retrieve a memory version
 
   - `?\Datetime redactedAt`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](../beta/memory_stores/memory_versions/redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../../managed-agents/memory.md#redact-a-version) to learn more about redaction.
 
   - `?ManagedAgentsActor redactedBy`
 
@@ -17045,6 +17467,10 @@ Retrieve a memory version
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\MemoryStores\Memories\ManagedAgentsMemoryView;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -17089,13 +17515,13 @@ var_dump($betaManagedAgentsMemoryVersion);
 }
 ```
 
-### Redact a memory version
+### Redact a Memory Version
 
 `$client->beta->memoryStores->memoryVersions->redact(string memoryVersionID, string memoryStoreID, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsMemoryVersion`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
 
-Redact a memory version
+Redact a Memory Version
 
 #### Parameters
 
@@ -17133,7 +17559,9 @@ Redact a memory version
 
   - `string memoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](../beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](../beta/memory_stores/memory_versions/list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `string memoryStoreID`
 
@@ -17157,7 +17585,11 @@ Redact a memory version
 
   - `?ManagedAgentsActor createdBy`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](../beta/sessions/retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](../beta/sessions/retrieve.md) to learn more about where the change came from.
 
   - `?string path`
 
@@ -17165,7 +17597,11 @@ Redact a memory version
 
   - `?\Datetime redactedAt`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](../beta/memory_stores/memory_versions/redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../../managed-agents/memory.md#redact-a-version) to learn more about redaction.
 
   - `?ManagedAgentsActor redactedBy`
 
@@ -17177,6 +17613,9 @@ Redact a memory version
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -17301,6 +17740,10 @@ Upload File
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Core\FileParam;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaFileMetadata = $client->beta->files->upload(
@@ -17423,6 +17866,9 @@ List Files
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->files->list(
@@ -17495,6 +17941,9 @@ Download File
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -17582,6 +18031,9 @@ Get File Metadata
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaFileMetadata = $client->beta->files->retrieveMetadata(
@@ -17656,6 +18108,9 @@ Delete File
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -17762,6 +18217,10 @@ Create Skill
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Core\FileParam;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -17888,6 +18347,9 @@ List Skills
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->skills->list(
@@ -18000,6 +18462,9 @@ Get Skill
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSkill = $client->beta->skills->retrieve(
@@ -18075,6 +18540,9 @@ Delete Skill
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -18174,6 +18642,10 @@ Create Skill Version
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Core\FileParam;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -18285,6 +18757,9 @@ List Skill Versions
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->skills->versions->list(
@@ -18358,6 +18833,9 @@ Download a skill version's content as a zip archive.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -18448,6 +18926,9 @@ Get Skill Version
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSkillVersion = $client->beta->skills->versions->retrieve(
@@ -18527,6 +19008,9 @@ Delete Skill Version
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaDeletedSkillVersion = $client->beta->skills->versions->delete(
@@ -18566,15 +19050,15 @@ Create User Profile
 
 - `externalID?:optional string`
 
-  Platform's own identifier for this user. Not enforced unique. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
+  Platform's own identifier for this user. Not enforced unique. Maximum 255 characters. Legacy field, accepted only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, send `external_user_details.reference_id`.
 
 - `externalUserDetails?:optional BetaUserProfileExternalUserDetailsParams`
 
-  Details about the entity this profile represents, as the platform states them. Every field is optional. Accepted under the `user-profiles-2026-09-04` beta header only.
+  Details about the entity this profile represents, as the platform states them. Every field is optional. Not accepted under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which take the top-level `external_id` (and, under `user-profiles-2026-08-18`, `external_user_onboarded_at`) instead.
 
 - `externalUserOnboardedAt?:optional \Datetime`
 
-  When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
+  When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Legacy field, accepted only under the `user-profiles-2026-08-18` beta header; without a legacy header, send `external_user_details.onboarded_at`.
 
 - `metadata?:optional array<string,string>`
 
@@ -18586,7 +19070,7 @@ Create User Profile
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -18614,33 +19098,33 @@ Create User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `?string name`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
   - `\Datetime updatedAt`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
   - `?AccessType accessType`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
   - `?string externalID`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `?BetaUserProfileExternalUserDetails externalUserDetails`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
   - `?\Datetime externalUserOnboardedAt`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
-
-  - `?string name`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
 #### Example
 
@@ -18649,23 +19133,26 @@ Create User Profile
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaUserProfile = $client->beta->userProfiles->create(
   accessType: 'application',
-  externalID: 'user_12345',
+  externalID: 'x',
   externalUserDetails: [
     'accountStatus' => 'active',
-    'country' => 'country',
+    'country' => 'US',
     'emailHash' => 'x',
-    'entityType' => 'individual',
+    'entityType' => 'business',
     'nameHash' => 'x',
-    'onboardedAt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
-    'referenceID' => 'x',
+    'onboardedAt' => new \DateTimeImmutable('2024-11-02T08:15:00Z'),
+    'referenceID' => 'user_12345',
   ],
-  externalUserOnboardedAt: new \DateTimeImmutable('2024-11-02T08:15:00Z'),
+  externalUserOnboardedAt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
   metadata: [],
-  name: 'x',
+  name: 'Example User',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
   workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
 );
@@ -18680,6 +19167,7 @@ var_dump($betaUserProfile);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "name": "Example User",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -18691,15 +19179,14 @@ var_dump($betaUserProfile);
   "external_id": "user_12345",
   "external_user_details": {
     "account_status": "active",
-    "country": "country",
-    "email_hash": "email_hash",
-    "entity_type": "individual",
-    "name_hash": "name_hash",
-    "onboarded_at": "2019-12-27T18:11:19.117Z",
-    "reference_id": "reference_id"
+    "country": "US",
+    "email_hash": null,
+    "entity_type": "business",
+    "name_hash": null,
+    "onboarded_at": "2024-11-02T08:15:00Z",
+    "reference_id": "user_12345"
   },
-  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-  "name": "Example User"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z"
 }
 ```
 
@@ -18733,7 +19220,7 @@ List User Profiles
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -18761,33 +19248,33 @@ List User Profiles
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `?string name`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
   - `\Datetime updatedAt`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
   - `?AccessType accessType`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
   - `?string externalID`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `?BetaUserProfileExternalUserDetails externalUserDetails`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
   - `?\Datetime externalUserOnboardedAt`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
-
-  - `?string name`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
 #### Example
 
@@ -18795,6 +19282,9 @@ List User Profiles
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -18819,6 +19309,7 @@ var_dump($page);
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
+      "name": "Example User",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -18830,15 +19321,14 @@ var_dump($page);
       "external_id": "user_12345",
       "external_user_details": {
         "account_status": "active",
-        "country": "country",
-        "email_hash": "email_hash",
-        "entity_type": "individual",
-        "name_hash": "name_hash",
-        "onboarded_at": "2019-12-27T18:11:19.117Z",
-        "reference_id": "reference_id"
+        "country": "US",
+        "email_hash": null,
+        "entity_type": "business",
+        "name_hash": null,
+        "onboarded_at": "2024-11-02T08:15:00Z",
+        "reference_id": "user_12345"
       },
-      "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-      "name": "Example User"
+      "external_user_onboarded_at": "2024-11-02T08:15:00Z"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -18861,7 +19351,7 @@ Get User Profile
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -18889,33 +19379,33 @@ Get User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `?string name`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
   - `\Datetime updatedAt`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
   - `?AccessType accessType`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
   - `?string externalID`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `?BetaUserProfileExternalUserDetails externalUserDetails`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
   - `?\Datetime externalUserOnboardedAt`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
-
-  - `?string name`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
 #### Example
 
@@ -18923,6 +19413,9 @@ Get User Profile
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -18942,6 +19435,7 @@ var_dump($betaUserProfile);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "name": "Example User",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -18953,15 +19447,14 @@ var_dump($betaUserProfile);
   "external_id": "user_12345",
   "external_user_details": {
     "account_status": "active",
-    "country": "country",
-    "email_hash": "email_hash",
-    "entity_type": "individual",
-    "name_hash": "name_hash",
-    "onboarded_at": "2019-12-27T18:11:19.117Z",
-    "reference_id": "reference_id"
+    "country": "US",
+    "email_hash": null,
+    "entity_type": "business",
+    "name_hash": null,
+    "onboarded_at": "2024-11-02T08:15:00Z",
+    "reference_id": "user_12345"
   },
-  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-  "name": "Example User"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z"
 }
 ```
 
@@ -18985,15 +19478,15 @@ Update User Profile
 
 - `externalID?:optional string`
 
-  If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
+  If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters. Legacy field, accepted only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, send `external_user_details.reference_id`.
 
 - `externalUserDetails?:optional BetaUserProfileExternalUserDetailsParams`
 
-  Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Accepted under the `user-profiles-2026-09-04` beta header only.
+  Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Not accepted under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers.
 
 - `externalUserOnboardedAt?:optional \Datetime`
 
-  If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
+  If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Legacy field, accepted only under the `user-profiles-2026-08-18` beta header; without a legacy header, send `external_user_details.onboarded_at`.
 
 - `metadata?:optional array<string,string>`
 
@@ -19005,7 +19498,7 @@ Update User Profile
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -19033,33 +19526,33 @@ Update User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `?string name`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `array<string,BetaUserProfileTrustGrant> trustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
   - `\Datetime updatedAt`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
   - `?AccessType accessType`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
   - `?string externalID`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `?BetaUserProfileExternalUserDetails externalUserDetails`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
   - `?\Datetime externalUserOnboardedAt`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
-
-  - `?string name`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
 #### Example
 
@@ -19068,14 +19561,17 @@ Update User Profile
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaUserProfile = $client->beta->userProfiles->update(
   'uprof_011CZkZCu8hGbp5mYRQgUmz9',
   accessType: 'application',
-  externalID: 'user_12345',
+  externalID: 'x',
   externalUserDetails: [
-    'accountStatus' => 'active',
+    'accountStatus' => 'suspended',
     'country' => 'country',
     'emailHash' => 'x',
     'entityType' => 'individual',
@@ -19100,6 +19596,7 @@ var_dump($betaUserProfile);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "name": "Example User",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -19111,15 +19608,80 @@ var_dump($betaUserProfile);
   "external_id": "user_12345",
   "external_user_details": {
     "account_status": "active",
-    "country": "country",
-    "email_hash": "email_hash",
-    "entity_type": "individual",
-    "name_hash": "name_hash",
-    "onboarded_at": "2019-12-27T18:11:19.117Z",
-    "reference_id": "reference_id"
+    "country": "US",
+    "email_hash": null,
+    "entity_type": "business",
+    "name_hash": null,
+    "onboarded_at": "2024-11-02T08:15:00Z",
+    "reference_id": "user_12345"
   },
-  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-  "name": "Example User"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z"
+}
+```
+
+### Delete User Profile
+
+`$client->beta->userProfiles->delete(string userProfileID, ?list<AnthropicBeta> betas, ?string workspaceID): BetaDeletedUserProfile`
+
+**DELETE** `/v1/user_profiles/{user_profile_id}`
+
+Delete User Profile
+
+#### Parameters
+
+- `userProfileID: string` (path parameter)
+
+  The ID of the user profile to delete (`uprof_...`).
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  Optional header to specify the beta version(s) you want to use.
+
+- `workspaceID?:optional string` (header parameter)
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+#### Returns
+
+- `class BetaDeletedUserProfile`
+
+  - `"user_profile_deleted" type`
+
+    Object type. Always `user_profile_deleted`.
+
+  - `string id`
+
+    Identifier of the deleted user profile, prefixed `uprof_`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaDeletedUserProfile = $client->beta->userProfiles->delete(
+  'uprof_011CZkZCu8hGbp5mYRQgUmz9',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
+);
+
+var_dump($betaDeletedUserProfile);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "type": "user_profile_deleted"
 }
 ```
 
@@ -19139,7 +19701,7 @@ Create Enrollment URL
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -19170,6 +19732,9 @@ Create Enrollment URL
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaUserProfileEnrollmentURL = $client
@@ -19190,6 +19755,84 @@ var_dump($betaUserProfileEnrollmentURL);
 {
   "expires_at": "2026-03-15T10:15:00Z",
   "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
+}
+```
+
+## Beta › User Profiles › Action URLs
+
+### Create Action URL
+
+`$client->beta->userProfiles->actionURLs->create(string userProfileID, UserProfileEnrollEndUserAction action, ?list<AnthropicBeta> betas, ?string workspaceID): UserProfileActionURL`
+
+**POST** `/v1/user_profiles/{user_profile_id}/action_urls`
+
+Create Action URL
+
+#### Parameters
+
+- `userProfileID: string` (path parameter)
+
+  The ID of the user profile the action is for (`uprof_...`).
+
+- `action: UserProfileEnrollEndUserAction`
+
+  The action that the person who opens the URL takes.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  Optional header to specify the beta version(s) you want to use.
+
+- `workspaceID?:optional string` (header parameter)
+
+  Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+  Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+#### Returns
+
+- `class UserProfileActionURL`
+
+  - `"user_profile_action_url" type`
+
+    Object type. Always `user_profile_action_url`.
+
+  - `\Datetime expiresAt`
+
+    When the URL stops working, in RFC 3339 format.
+
+  - `string url`
+
+    The URL to give to the person who takes the action. Anyone who holds it can open it until `expires_at`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaUserProfileActionURL = $client->beta->userProfiles->actionURLs->create(
+  'uprof_011CZkZCu8hGbp5mYRQgUmz9',
+  action: ['type' => 'enroll_end_user'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+  workspaceID: 'wrkspc_011CZkZaBF1tNoB5wlCeusgy',
+);
+
+var_dump($betaUserProfileActionURL);
+```
+
+##### Response (200)
+
+```json
+{
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "user_profile_action_url",
   "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
@@ -19322,6 +19965,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -19514,6 +20160,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Dreams\BetaDreamStatus;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->dreams->list(
@@ -19688,6 +20338,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaDream = $client->beta->dreams->retrieve(
@@ -19851,6 +20504,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -20016,6 +20672,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaDream = $client->beta->dreams->archive(
@@ -20132,6 +20791,9 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnel = $client->beta->tunnels->create(
@@ -20214,6 +20876,9 @@ Fetches a tunnel by ID.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -20306,6 +20971,9 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->tunnels->list(
@@ -20396,6 +21064,9 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnel = $client->beta->tunnels->archive(
@@ -20466,6 +21137,9 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -20538,6 +21212,9 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -20629,6 +21306,9 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -20722,6 +21402,9 @@ Fetches a tunnel certificate by ID.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -20824,6 +21507,9 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->tunnels->certificates->list(
@@ -20924,6 +21610,9 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTunnelCertificate = $client->beta->tunnels->certificates->archive(
@@ -20984,6 +21673,8 @@ Retrieve information about the organization associated with the authenticated AP
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -21102,6 +21793,8 @@ List API Keys
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -21226,6 +21919,8 @@ Retrieve information about a single API key in your organization, looked up by i
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaAPIKey = $client->beta->organization->apiKeys->retrieve('api_key_id');
@@ -21343,6 +22038,8 @@ Update API Key
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaAPIKey = $client->beta->organization->apiKeys->update(
@@ -21439,6 +22136,8 @@ Create an external key config owned by the caller's organization.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -21538,6 +22237,8 @@ Results are ordered by creation time (newest first). Use the
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->externalKeys->list(limit: 1, page: 'page');
@@ -21622,6 +22323,8 @@ Retrieve a single external key config in the caller's organization by ID.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -21721,6 +22424,8 @@ encrypted data requires the original key identity to decrypt.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaExternalKey = $client->beta->organization->externalKeys->update(
@@ -21793,6 +22498,8 @@ The request is rejected if any workspace still references this config.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $externalKey = $client->beta->organization->externalKeys->delete(
@@ -21850,6 +22557,8 @@ message if it failed or timed out.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -21986,6 +22695,9 @@ matched as the JWT's `iss` claim and is not fetched.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -22143,6 +22855,9 @@ Archived issuers are excluded unless `include_archived=true`.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->federation->issuers->list(
@@ -22278,6 +22993,9 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -22443,6 +23161,9 @@ session.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaFederationIssuer = $client
@@ -22591,6 +23312,9 @@ issuer cannot be changed), or recreate them against another issuer.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -22797,6 +23521,9 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaFederationRule = $client->beta->organization->federation->rules->create(
@@ -22995,6 +23722,9 @@ unless `include_archived=true`.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->federation->rules->list(
@@ -23163,6 +23893,9 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -23376,6 +24109,9 @@ Console session.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaFederationRule = $client->beta->organization->federation->rules->update(
@@ -23563,6 +24299,9 @@ other scopes require a Console session.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaFederationRule = $client->beta->organization->federation->rules->archive(
@@ -23682,6 +24421,9 @@ other scopes require a Console session.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaFederationRuleWorkspace = $client
@@ -23781,6 +24523,9 @@ rules with `applies_to_all_workspaces` or a legacy single
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->federation->rules->workspaces->list(
@@ -23860,6 +24605,9 @@ Console session.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -23958,6 +24706,8 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -24075,6 +24825,8 @@ List the organization's invites.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->invites->list(
@@ -24177,6 +24929,8 @@ Retrieve an invite by ID.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaOrganizationInvite = $client->beta->organization->invites->retrieve(
@@ -24238,6 +24992,8 @@ Delete a pending invite.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -24345,6 +25101,9 @@ accounts.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -24465,6 +25224,9 @@ archived service accounts.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->serviceAccounts->list(
@@ -24572,6 +25334,9 @@ Retrieve a service account by its ID (`svac_...`).
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -24686,6 +25451,9 @@ interactive credential (a user OAuth token or a Console session).
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaServiceAccount = $client->beta->organization->serviceAccounts->update(
@@ -24794,6 +25562,9 @@ those rules first or change their target to another service account.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaServiceAccount = $client->beta->organization->serviceAccounts->archive(
@@ -24890,6 +25661,10 @@ rejected.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Organization\Workspaces\NoBillingWorkspaceRole;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -24998,6 +25773,9 @@ page to recover.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->serviceAccounts->workspaces->list(
@@ -25080,6 +25858,9 @@ to the implicit `workspace_user` membership. Archived workspaces return
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -25177,6 +25958,8 @@ List the organization's members.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->users->list(
@@ -25261,6 +26044,8 @@ Retrieve a member of the organization by user ID.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaOrganizationUser = $client->beta->organization->users->retrieve('user_id');
@@ -25338,6 +26123,8 @@ Update a member's organization role.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaOrganizationUser = $client->beta->organization->users->update(
@@ -25394,6 +26181,8 @@ Remove a member from the organization.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -25523,6 +26312,8 @@ List Workspaces
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -25685,6 +26476,9 @@ Create Workspace
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaWorkspace = $client->beta->organization->workspaces->create(
@@ -25813,6 +26607,8 @@ Get Workspace
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -25962,6 +26758,8 @@ Update Workspace
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaWorkspace = $client->beta->organization->workspaces->update(
@@ -26087,6 +26885,8 @@ Archive Workspace
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaWorkspace = $client->beta->organization->workspaces->archive(
@@ -26207,6 +27007,8 @@ the remaining entries.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->workspaces->rateLimits->list(
@@ -26251,6 +27053,127 @@ var_dump($page);
     }
   ],
   "next_page": "next_page"
+}
+```
+
+### Set Workspace Rate Limits
+
+`$client->beta->organization->workspaces->rateLimits->update(string rateLimitID, string workspaceID, list<BetaWorkspaceRateLimitUpdateValue> limits): BetaWorkspaceRateLimit`
+
+**POST** `/v1/organizations/workspaces/{workspace_id}/rate_limits/{rate_limit_id}`
+
+Set or clear rate-limit overrides for one rate-limit group in a workspace.
+
+Only the limiter types named in `limits` change: an integer `value` sets
+that type's override and `null` clears it. Types not named keep their
+current value. A value above the organization's own limit is stored, but
+the organization limit still applies, so the lower of the two is
+enforced.
+
+Returns the targeted group's entry with this request applied, in the shape
+`GET /v1/organizations/workspaces/{workspace_id}/rate_limits` returns.
+Changes take effect within about an hour.
+
+#### Parameters
+
+- `workspaceID: string` (path parameter)
+
+  The ID of the workspace.
+
+- `rateLimitID: string` (path parameter)
+
+  The `id` of the organization's rate-limit entry to set overrides for.
+
+- `limits: list<BetaWorkspaceRateLimitUpdateValue>`
+
+  Limits to set or clear. Unspecified limit types are unchanged.
+
+#### Returns
+
+- `class BetaWorkspaceRateLimit`
+
+  - `"workspace_rate_limit" type`
+
+    Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
+
+  - `Group group`
+
+    The rate-limit group this entry's limits apply to. Its `type` equals `group_type`.
+
+  - `list<BetaWorkspaceRateLimitValue> limits`
+
+    The workspace's limiter values for this group. By default only the limiter types with a workspace-level override are listed. With `include_inherited` set to `true`, the limiter types the workspace inherits from the organization are listed too, each marked by `source`.
+
+  - `?list<string> models`
+
+    Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+  - `string rateLimitID`
+
+    The `id` of the organization's RateLimit entry this entry applies to.
+
+  - `string workspaceID`
+
+    ID of the Workspace this entry applies to.
+
+  - `GroupType groupType`
+
+    **Deprecated**: Use `group.type` instead. `group_type` is still returned and always equals `group.type`.
+
+    Deprecated: use `group.type` instead. The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`. Always equal to `group.type`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\Organization\Workspaces\RateLimits\BetaWorkspaceRateLimitType;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaWorkspaceRateLimit = $client
+  ->beta
+  ->organization
+  ->workspaces
+  ->rateLimits
+  ->update(
+  'rate_limit_id',
+  workspaceID: 'workspace_id',
+  limits: [['type' => BetaWorkspaceRateLimitType::FAST_ITPMCA, 'value' => 0]],
+);
+
+var_dump($betaWorkspaceRateLimit);
+```
+
+##### Response (200)
+
+```json
+{
+  "group": {
+    "id": "id",
+    "display_name": "display_name",
+    "type": "model_group"
+  },
+  "group_type": "batch",
+  "limits": [
+    {
+      "org_limit": 0,
+      "source": {
+        "type": "workspace"
+      },
+      "type": "type",
+      "value": 0
+    }
+  ],
+  "models": [
+    "string"
+  ],
+  "rate_limit_id": "rate_limit_id",
+  "type": "workspace_rate_limit",
+  "workspace_id": "workspace_id"
 }
 ```
 
@@ -26314,6 +27237,8 @@ List Workspace Members
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -26393,6 +27318,9 @@ Create Workspace Member
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\Organization\Workspaces\NoBillingWorkspaceRole;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaWorkspaceMember = $client->beta->organization->workspaces->members->add(
@@ -26461,6 +27389,8 @@ Get Workspace Member
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -26536,6 +27466,9 @@ Update Workspace Member
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\Organization\Workspaces\WorkspaceRole;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaWorkspaceMember = $client->beta->organization->workspaces->members->update(
@@ -26600,6 +27533,8 @@ Delete Workspace Member
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -26691,6 +27626,9 @@ omitted from the results.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -26792,6 +27730,10 @@ accounts cannot be added and are rejected.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Organization\Workspaces\NoBillingWorkspaceRole;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaServiceAccountWorkspaceMember = $client
@@ -26885,6 +27827,9 @@ account returns 404.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -26983,6 +27928,10 @@ rejected.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Organization\Workspaces\NoBillingWorkspaceRole;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaServiceAccountWorkspaceMember = $client
@@ -27064,6 +28013,9 @@ membership. Archived workspaces return 400.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $serviceAccount = $client
@@ -27138,7 +28090,7 @@ the remaining entries.
 
   - `string id`
 
-    Identifier of this rate-limit entry. It is stable within the organization and differs between organizations; the group's own identifier is `group.id`.
+    Identifier of this rate-limit entry. It is stable within the organization and differs between organizations; the group's own identifier is `group.id`. Pass it as `rate_limit_id` to set a workspace's overrides for this group.
 
   - `Group group`
 
@@ -27164,6 +28116,8 @@ the remaining entries.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -27235,6 +28189,8 @@ organization reads the state inherited from the parent's configuration.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaComplianceSettings = $client
@@ -27300,6 +28256,8 @@ compliance settings.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -27504,6 +28462,8 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -27714,6 +28674,8 @@ the `read:analytics` scope.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -28008,6 +28970,8 @@ plan. Requires an API key with the `read:analytics` scope.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->analytics->apps->chat->projects->list(
@@ -28187,6 +29151,8 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -28379,6 +29345,8 @@ range-rollup mode like `/skills`.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->analytics->plugins->list(
@@ -28564,6 +29532,8 @@ on a Claude Enterprise plan. Requires an API key with the
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->analytics->skills->list(
@@ -28722,6 +29692,8 @@ can be broken out per product, per member, or per RBAC group via
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->analytics->artifacts->list(
@@ -28760,7 +29732,7 @@ var_dump($page);
 
 ### Get Token Usage Over Time
 
-`$client->beta->organization->analytics->usageReport->list(\Datetime startingAt, ?BucketWidth bucketWidth, ?list<AnalyticsClaudeTagCategory> claudeTagCategories, ?list<string> claudeTagUserIDs, ?list<AnalyticsContextWindow> contextWindows, ?\Datetime endingAt, ?list<GroupBy> groupBy, ?list<AnalyticsInferenceGeoFilter> inferenceGeos, ?int limit, ?list<string> models, ?string page, ?list<AnalyticsProductFilter> products, ?list<string> rbacGroupIDs, ?list<string> slackChannelIDs, ?list<Speed> speeds, ?list<string> userIDs): PageCursor<AnalyticsUsageReportTimeBucket>`
+`$client->beta->organization->analytics->usageReport->list(\Datetime startingAt, ?BucketWidth bucketWidth, ?list<AnalyticsClaudeTagCategory> claudeTagCategories, ?list<string> claudeTagUserIDs, ?list<AnalyticsContextWindow> contextWindows, ?\Datetime endingAt, ?list<GroupBy> groupBy, ?list<AnalyticsInferenceGeoFilter> inferenceGeos, ?int limit, ?list<string> models, ?string page, ?list<AnalyticsProductFilter> products, ?list<string> rbacGroupIDs, ?list<string> slackChannelIDs, ?list<Speed> speeds, ?list<string> userIDs): ReportPageCursor<AnalyticsUsageReportTimeBucket>`
 
 **GET** `/v1/organizations/analytics/usage_report`
 
@@ -28862,6 +29834,12 @@ key with the `read:analytics` scope.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\Organization\Analytics\AnalyticsClaudeTagCategory;
+use Anthropic\Beta\Organization\Analytics\AnalyticsContextWindow;
+use Anthropic\Beta\Organization\Analytics\AnalyticsInferenceGeoFilter;
+use Anthropic\Beta\Organization\Analytics\AnalyticsProductFilter;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->analytics->usageReport->list(
@@ -28931,7 +29909,7 @@ var_dump($page);
 
 ### Get Per-User Token Usage
 
-`$client->beta->organization->analytics->userUsageReport->list(\Datetime startingAt, ?BucketWidth bucketWidth, ?list<AnalyticsClaudeTagCategory> claudeTagCategories, ?list<string> claudeTagUserIDs, ?list<AnalyticsContextWindow> contextWindows, ?\Datetime endingAt, ?bool excludeDeletedUsers, ?list<GroupBy> groupBy, ?list<AnalyticsInferenceGeoFilter> inferenceGeos, ?int limit, ?list<string> models, ?Order order, ?OrderBy orderBy, ?string page, ?list<AnalyticsProductFilter> products, ?list<string> rbacGroupIDs, ?list<string> slackChannelIDs, ?list<Speed> speeds, ?list<string> userIDs): PageCursor<AnalyticsUsageUsersItem>`
+`$client->beta->organization->analytics->userUsageReport->list(\Datetime startingAt, ?BucketWidth bucketWidth, ?list<AnalyticsClaudeTagCategory> claudeTagCategories, ?list<string> claudeTagUserIDs, ?list<AnalyticsContextWindow> contextWindows, ?\Datetime endingAt, ?bool excludeDeletedUsers, ?list<GroupBy> groupBy, ?list<AnalyticsInferenceGeoFilter> inferenceGeos, ?int limit, ?list<string> models, ?Order order, ?OrderBy orderBy, ?string page, ?list<AnalyticsProductFilter> products, ?list<string> rbacGroupIDs, ?list<string> slackChannelIDs, ?list<Speed> speeds, ?list<string> userIDs): ReportPageCursor<AnalyticsUsageUsersItem>`
 
 **GET** `/v1/organizations/analytics/user_usage_report`
 
@@ -29118,6 +30096,12 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\Organization\Analytics\AnalyticsClaudeTagCategory;
+use Anthropic\Beta\Organization\Analytics\AnalyticsContextWindow;
+use Anthropic\Beta\Organization\Analytics\AnalyticsInferenceGeoFilter;
+use Anthropic\Beta\Organization\Analytics\AnalyticsProductFilter;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->analytics->userUsageReport->list(
@@ -29195,7 +30179,7 @@ var_dump($page);
 
 ### Get Cost Over Time
 
-`$client->beta->organization->analytics->costReport->list(\Datetime startingAt, ?BucketWidth bucketWidth, ?list<AnalyticsClaudeTagCategory> claudeTagCategories, ?list<string> claudeTagUserIDs, ?list<AnalyticsContextWindow> contextWindows, ?\Datetime endingAt, ?list<GroupBy> groupBy, ?list<AnalyticsInferenceGeoFilter> inferenceGeos, ?int limit, ?list<string> models, ?string page, ?list<AnalyticsProductFilter> products, ?list<string> rbacGroupIDs, ?list<string> slackChannelIDs, ?list<Speed> speeds, ?list<string> userIDs): PageCursor<AnalyticsCostReportTimeBucket>`
+`$client->beta->organization->analytics->costReport->list(\Datetime startingAt, ?BucketWidth bucketWidth, ?list<AnalyticsClaudeTagCategory> claudeTagCategories, ?list<string> claudeTagUserIDs, ?list<AnalyticsContextWindow> contextWindows, ?\Datetime endingAt, ?list<GroupBy> groupBy, ?list<AnalyticsInferenceGeoFilter> inferenceGeos, ?int limit, ?list<string> models, ?string page, ?list<AnalyticsProductFilter> products, ?list<string> rbacGroupIDs, ?list<string> slackChannelIDs, ?list<Speed> speeds, ?list<string> userIDs): ReportPageCursor<AnalyticsCostReportTimeBucket>`
 
 **GET** `/v1/organizations/analytics/cost_report`
 
@@ -29297,6 +30281,12 @@ Requires an API key with the `read:analytics` scope.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\Organization\Analytics\AnalyticsClaudeTagCategory;
+use Anthropic\Beta\Organization\Analytics\AnalyticsContextWindow;
+use Anthropic\Beta\Organization\Analytics\AnalyticsInferenceGeoFilter;
+use Anthropic\Beta\Organization\Analytics\AnalyticsProductFilter;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->analytics->costReport->list(
@@ -29361,7 +30351,7 @@ var_dump($page);
 
 ### Get Per-User Cost
 
-`$client->beta->organization->analytics->userCostReport->list(\Datetime startingAt, ?BucketWidth bucketWidth, ?list<AnalyticsClaudeTagCategory> claudeTagCategories, ?list<string> claudeTagUserIDs, ?list<AnalyticsContextWindow> contextWindows, ?\Datetime endingAt, ?bool excludeDeletedUsers, ?list<GroupBy> groupBy, ?list<AnalyticsInferenceGeoFilter> inferenceGeos, ?int limit, ?list<string> models, ?Order order, ?OrderBy orderBy, ?string page, ?list<AnalyticsProductFilter> products, ?list<string> rbacGroupIDs, ?list<string> slackChannelIDs, ?list<Speed> speeds, ?list<string> userIDs): PageCursor<AnalyticsCostUsersItem>`
+`$client->beta->organization->analytics->userCostReport->list(\Datetime startingAt, ?BucketWidth bucketWidth, ?list<AnalyticsClaudeTagCategory> claudeTagCategories, ?list<string> claudeTagUserIDs, ?list<AnalyticsContextWindow> contextWindows, ?\Datetime endingAt, ?bool excludeDeletedUsers, ?list<GroupBy> groupBy, ?list<AnalyticsInferenceGeoFilter> inferenceGeos, ?int limit, ?list<string> models, ?Order order, ?OrderBy orderBy, ?string page, ?list<AnalyticsProductFilter> products, ?list<string> rbacGroupIDs, ?list<string> slackChannelIDs, ?list<Speed> speeds, ?list<string> userIDs): ReportPageCursor<AnalyticsCostUsersItem>`
 
 **GET** `/v1/organizations/analytics/user_cost_report`
 
@@ -29544,6 +30534,12 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\Organization\Analytics\AnalyticsClaudeTagCategory;
+use Anthropic\Beta\Organization\Analytics\AnalyticsContextWindow;
+use Anthropic\Beta\Organization\Analytics\AnalyticsInferenceGeoFilter;
+use Anthropic\Beta\Organization\Analytics\AnalyticsProductFilter;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->analytics->userCostReport->list(
@@ -29692,6 +30688,10 @@ Anthropic account team.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Organization\SpendLimits\SpendLimitPeriod;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSpendLimit = $client->beta->organization->spendLimits->set(
@@ -29784,6 +30784,8 @@ Retrieve a spend limit by ID.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSpendLimit = $client->beta->organization->spendLimits->retrieve(
@@ -29847,6 +30849,8 @@ workspace limits through the API is in an early access preview.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -29945,6 +30949,9 @@ organizations only, not for Claude Console organizations.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -30053,6 +31060,8 @@ organizations.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->spendLimits->effective->list(
@@ -30155,6 +31164,9 @@ Requests whose requester is no longer a member are excluded.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\Organization\SpendLimits\IncreaseRequests\BetaSpendLimitIncreaseRequestStatus;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -30269,6 +31281,8 @@ requester at the request's period.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -30392,6 +31406,9 @@ the member was blocked on. Anthropic emails the requester unless
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\Organization\SpendLimits\SpendLimitPeriod;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -30518,6 +31535,8 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSpendLimitIncreaseRequest = $client
@@ -30638,6 +31657,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaRBACGroup = $client->beta->organization->rbacGroups->create(
@@ -30731,6 +31752,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->rbacGroups->list(
@@ -30822,6 +31845,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaRBACGroup = $client->beta->organization->rbacGroups->retrieve(
@@ -30911,6 +31936,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaRBACGroup = $client->beta->organization->rbacGroups->update(
@@ -30975,6 +32002,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -31054,6 +32083,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -31136,6 +32167,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaRBACGroupMember = $client->beta->organization->rbacGroups->members->add(
@@ -31200,6 +32233,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -31286,6 +32321,8 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->rbacRoles->list(
@@ -31368,6 +32405,8 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -31463,6 +32502,8 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -31641,6 +32682,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Core\FileParam;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaPlugin = $client->beta->organization->plugins->create(
@@ -31813,6 +32858,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -32003,6 +33051,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -32216,6 +33267,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->plugins->list(
@@ -32333,6 +33387,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -32461,6 +33518,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Core\FileParam;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -32609,6 +33670,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->plugins->versions->list(
@@ -32749,6 +33813,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaPluginVersion = $client->beta->organization->plugins->versions->retrieve(
@@ -32851,6 +33918,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $response = $client->beta->organization->plugins->versions->download(
@@ -32946,6 +34016,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -33058,6 +34131,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaPluginInstallationSetting = $client
@@ -33154,6 +34230,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -33260,6 +34339,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -33394,6 +34476,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->pluginMarketplaces->list(
@@ -33508,6 +34593,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -33624,6 +34712,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -33746,6 +34837,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -33877,6 +34971,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Core\FileParam;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -34031,6 +35129,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Organization\TelemetryDestinations\TelemetryDestinationContentMode;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTelemetryDestination = $client
@@ -34174,6 +35276,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->telemetryDestinations->list(
@@ -34300,6 +35405,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -34464,6 +35572,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+use Anthropic\Beta\Organization\TelemetryDestinations\TelemetryDestinationContentMode;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTelemetryDestination = $client
@@ -34561,6 +35673,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaDeletedTelemetryDestination = $client
@@ -34617,6 +35732,9 @@ Send one test span, named `anthropic.test`, to the destination with its register
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -34696,6 +35814,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -34778,6 +35899,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaTelemetryDestinationWorkspace = $client
@@ -34854,6 +35978,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaDeletedTelemetryDestinationWorkspace = $client
@@ -34877,6 +36004,613 @@ var_dump($betaDeletedTelemetryDestinationWorkspace);
   "telemetry_destination_id": "telemetry_destination_id",
   "type": "telemetry_destination_workspace_deleted",
   "workspace_id": "workspace_id"
+}
+```
+
+## Beta › Organization › Webhooks
+
+### Create Organization Webhook Endpoint
+
+`$client->beta->organization->webhooks->create(list<EnabledEvent> enabledEvents, string url, ?string description, ?string name, ?list<AnthropicBeta> betas): NewOrganizationWebhookEndpoint`
+
+**POST** `/v1/organizations/webhooks`
+
+Create an organization webhook endpoint.
+
+An organization webhook endpoint belongs to the organization rather than to one of its workspaces. An organization can have at most 32 organization
+webhook endpoints, enabled or disabled.
+
+The response includes the endpoint's signing secret. No read returns it, so store
+it when you receive it.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `enabledEvents: list<EnabledEvent>`
+
+  The event types to deliver to the endpoint. Must list at least one.
+
+- `url: string`
+
+  The HTTPS URL that deliveries are sent to.
+
+- `description?:optional string`
+
+  Notes about the endpoint.
+
+- `name?:optional string`
+
+  A short label for the endpoint.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `class NewOrganizationWebhookEndpoint`
+
+  - `string id`
+
+    ID of the webhook endpoint.
+
+  - `\Datetime createdAt`
+
+    When the endpoint was created, in RFC 3339 format.
+
+  - `string description`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `string disabledReason`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `list<EnabledEvent> enabledEvents`
+
+    The event types delivered to the endpoint.
+
+  - `string name`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `string signingSecret`
+
+    The secret Anthropic signs deliveries to the endpoint with (prefix `whsec_`). No other response returns it, so store it now. To replace it, regenerate the signing secret.
+
+  - `OrganizationWebhookEndpointState state`
+
+    Whether deliveries are sent to the endpoint.
+
+  - `\Datetime updatedAt`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+  - `string url`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaNewOrganizationWebhookEndpoint = $client
+  ->beta
+  ->organization
+  ->webhooks
+  ->create(
+  enabledEvents: ['user_profile.enforcement_action_opened'],
+  url: 'x',
+  description: 'description',
+  name: 'name',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaNewOrganizationWebhookEndpoint);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "disabled_reason": "disabled_reason",
+  "enabled_events": [
+    "user_profile.enforcement_action_opened"
+  ],
+  "name": "name",
+  "signing_secret": "signing_secret",
+  "state": "disabled",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "url": "url"
+}
+```
+
+### List Organization Webhook Endpoints
+
+`$client->beta->organization->webhooks->list(?string afterID, ?string beforeID, ?int limit, ?Order order, ?list<AnthropicBeta> betas): Page<OrganizationWebhookEndpoint>`
+
+**GET** `/v1/organizations/webhooks`
+
+List the organization's webhook endpoints.
+
+An organization webhook endpoint belongs to the organization rather than to one of its workspaces. The list does not include webhook endpoints that
+belong to a workspace.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `afterID?:optional string` (query parameter)
+
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+
+- `beforeID?:optional string` (query parameter)
+
+  ID of a webhook endpoint to use as a cursor. Returns the first `limit` endpoints that come before it in list order, not the `limit` endpoints just before it.
+
+- `limit?:optional int` (query parameter)
+
+  Number of items to return per page, up to `100`. The default, `0`, means `20`.
+
+  default: 0
+
+- `order?:optional Order` (query parameter)
+
+  Sort order by `created_at`. Defaults to `desc`, newest first.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `class OrganizationWebhookEndpoint`
+
+  - `string id`
+
+    ID of the webhook endpoint.
+
+  - `\Datetime createdAt`
+
+    When the endpoint was created, in RFC 3339 format.
+
+  - `string description`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `string disabledReason`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `list<EnabledEvent> enabledEvents`
+
+    The event types delivered to the endpoint.
+
+  - `string name`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `OrganizationWebhookEndpointState state`
+
+    Whether deliveries are sent to the endpoint.
+
+  - `\Datetime updatedAt`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+  - `string url`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->organization->webhooks->list(
+  afterID: 'after_id',
+  beforeID: 'before_id',
+  limit: 0,
+  order: 'asc',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "description": "description",
+      "disabled_reason": "disabled_reason",
+      "enabled_events": [
+        "user_profile.enforcement_action_opened"
+      ],
+      "name": "name",
+      "state": "disabled",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "url": "url"
+    }
+  ],
+  "has_more": true,
+  "first_id": "first_id",
+  "last_id": "last_id"
+}
+```
+
+### Get Organization Webhook Endpoint
+
+`$client->beta->organization->webhooks->retrieve(string webhookEndpointID, ?list<AnthropicBeta> betas): OrganizationWebhookEndpoint`
+
+**GET** `/v1/organizations/webhooks/{webhook_endpoint_id}`
+
+Retrieve an organization webhook endpoint by ID.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `webhookEndpointID: string` (path parameter)
+
+  ID of the webhook endpoint.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `class OrganizationWebhookEndpoint`
+
+  - `string id`
+
+    ID of the webhook endpoint.
+
+  - `\Datetime createdAt`
+
+    When the endpoint was created, in RFC 3339 format.
+
+  - `string description`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `string disabledReason`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `list<EnabledEvent> enabledEvents`
+
+    The event types delivered to the endpoint.
+
+  - `string name`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `OrganizationWebhookEndpointState state`
+
+    Whether deliveries are sent to the endpoint.
+
+  - `\Datetime updatedAt`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+  - `string url`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaOrganizationWebhookEndpoint = $client
+  ->beta
+  ->organization
+  ->webhooks
+  ->retrieve(
+  'webhook_endpoint_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($betaOrganizationWebhookEndpoint);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "disabled_reason": "disabled_reason",
+  "enabled_events": [
+    "user_profile.enforcement_action_opened"
+  ],
+  "name": "name",
+  "state": "disabled",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "url": "url"
+}
+```
+
+### Update Organization Webhook Endpoint
+
+`$client->beta->organization->webhooks->update(string webhookEndpointID, ?string description, ?list<EnabledEvent> enabledEvents, ?string name, ?State state, ?string url, ?list<AnthropicBeta> betas): OrganizationWebhookEndpoint`
+
+**POST** `/v1/organizations/webhooks/{webhook_endpoint_id}`
+
+Update an organization webhook endpoint. Only the fields you send are changed.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `webhookEndpointID: string` (path parameter)
+
+  ID of the webhook endpoint.
+
+- `description?:optional string`
+
+  Notes about the endpoint.
+
+- `enabledEvents?:optional list<EnabledEvent>`
+
+  The event types to deliver to the endpoint. Replaces the whole set; an empty list leaves it unchanged.
+
+- `name?:optional string`
+
+  A short label for the endpoint.
+
+- `state?:optional State`
+
+  `disabled` stops deliveries. `enabled` resumes them and clears `disabled_reason`. Events that happen while the endpoint is disabled are never delivered.
+
+- `url?:optional string`
+
+  The HTTPS URL that deliveries are sent to.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `class OrganizationWebhookEndpoint`
+
+  - `string id`
+
+    ID of the webhook endpoint.
+
+  - `\Datetime createdAt`
+
+    When the endpoint was created, in RFC 3339 format.
+
+  - `string description`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `string disabledReason`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `list<EnabledEvent> enabledEvents`
+
+    The event types delivered to the endpoint.
+
+  - `string name`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `OrganizationWebhookEndpointState state`
+
+    Whether deliveries are sent to the endpoint.
+
+  - `\Datetime updatedAt`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+  - `string url`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaOrganizationWebhookEndpoint = $client
+  ->beta
+  ->organization
+  ->webhooks
+  ->update(
+  'webhook_endpoint_id',
+  description: 'description',
+  enabledEvents: ['user_profile.enforcement_action_opened'],
+  name: 'name',
+  state: 'disabled',
+  url: 'x',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaOrganizationWebhookEndpoint);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "disabled_reason": "disabled_reason",
+  "enabled_events": [
+    "user_profile.enforcement_action_opened"
+  ],
+  "name": "name",
+  "state": "disabled",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "url": "url"
+}
+```
+
+### Delete Organization Webhook Endpoint
+
+`$client->beta->organization->webhooks->delete(string webhookEndpointID, ?list<AnthropicBeta> betas): DeletedOrganizationWebhookEndpoint`
+
+**DELETE** `/v1/organizations/webhooks/{webhook_endpoint_id}`
+
+Delete an organization webhook endpoint.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `webhookEndpointID: string` (path parameter)
+
+  ID of the webhook endpoint.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `class DeletedOrganizationWebhookEndpoint`
+
+  - `"webhook_endpoint_deleted" type`
+
+    Always `webhook_endpoint_deleted`.
+
+  - `string id`
+
+    ID of the deleted webhook endpoint.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaDeletedOrganizationWebhookEndpoint = $client
+  ->beta
+  ->organization
+  ->webhooks
+  ->delete(
+  'webhook_endpoint_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($betaDeletedOrganizationWebhookEndpoint);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "webhook_endpoint_deleted"
+}
+```
+
+### Regenerate Organization Webhook Endpoint Signing Secret
+
+`$client->beta->organization->webhooks->regenerateSigningSecret(string webhookEndpointID, ?list<AnthropicBeta> betas): OrganizationWebhookEndpointSigningSecret`
+
+**POST** `/v1/organizations/webhooks/{webhook_endpoint_id}/regenerate_signing_secret`
+
+Replace an organization webhook endpoint's signing secret. The old secret stops
+working immediately. The new secret is returned only in this response.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `webhookEndpointID: string` (path parameter)
+
+  ID of the webhook endpoint.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+#### Returns
+
+- `class OrganizationWebhookEndpointSigningSecret`
+
+  - `string signingSecret`
+
+    The new signing secret. Deliveries are signed with it from now on, and no other response returns it.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaOrganizationWebhookEndpointSigningSecret = $client
+  ->beta
+  ->organization
+  ->webhooks
+  ->regenerateSigningSecret(
+  'webhook_endpoint_id', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($betaOrganizationWebhookEndpointSigningSecret);
+```
+
+##### Response (200)
+
+```json
+{
+  "signing_secret": "signing_secret"
 }
 ```
 

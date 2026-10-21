@@ -12,7 +12,7 @@ The samples on this page are snippets, not whole mods. Each one is the code for 
 
 To see a sample in your own terminal, create the small mod in these steps and paste the sample into it. The mod adds a `/gallery` command that opens a pane and draws the sample there. A [pane](interface.md#pick-where-to-draw) is a sidebar beside the transcript in a wide fullscreen terminal, or a framed region above the prompt otherwise.
 
-**Create the mod**
+**1. Create the mod**
 
 Create a directory named `gallery` with `.claude-plugin` and `hooks` directories inside it. [Create a mod](create.md#write-a-mod-yourself) explains the files.
 
@@ -70,7 +70,7 @@ export function register(on) {
 }
 ```
 
-**Run the mod**
+**2. Run the mod**
 
 In your shell, start Claude Code from the directory that holds `gallery`:
 
@@ -80,7 +80,7 @@ claude --plugin-dir ./gallery
 
 At the Claude Code prompt, run `/gallery`. A pane opens with `Plain text` in it.
 
-**Swap in a sample**
+**3. Swap in a sample**
 
 Copy a sample from this page. In `register.js`, paste it over `Text({ children: ['Plain text'] })`, so that it follows `return`, and save the file. Claude Code reloads the module each time you save, so run `/gallery` again to see the new sample.
 
@@ -119,9 +119,7 @@ Box({
 })
 ```
 
-![A pane with nine lines of text, each named for its style: plain, bold, italic, underline, strikethrough, dimColor in gray, inverse, color red, and backgroundColor blue.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-text-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=90724ce3953d9347b61b6a9266fda451)
-
-![A pane with nine lines of text, each named for its style: plain, bold, italic, underline, strikethrough, dimColor in gray, inverse, color red, and backgroundColor blue.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-text-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=790dd3465e06db0842639d0d8fcbbc96)
+![A pane with nine lines of text, each named for its style: plain, bold, italic, underline, strikethrough, dimColor in gray, inverse, color red, and backgroundColor blue.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-text-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=90724ce3953d9347b61b6a9266fda451)
 
 `dimColor` draws the text in gray. `backgroundColor` fills only as wide as the text.
 
@@ -135,9 +133,7 @@ Markdown({
 })
 ```
 
-![A pane with a bold heading, Release notes, then a sentence with one bold word and one colored code word, a two-item list, and a quote drawn in italics with a bar on its left.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-markdown-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=e40eacc4e3fbe06eb003f4463f552ec1)
-
-![A pane with a bold heading, Release notes, then a sentence with one bold word and one colored code word, a two-item list, and a quote drawn in italics with a bar on its left.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-markdown-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=2cc342ed0c58e752c425fff3c95a33a6)
+![A pane with a bold heading, Release notes, then a sentence with one bold word and one colored code word, a two-item list, and a quote drawn in italics with a bar on its left.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-markdown-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=e40eacc4e3fbe06eb003f4463f552ec1)
 
 A heading draws in bold without its `#` marks. Inline code draws in color without its backticks. A quote draws in italics with a bar on its left.
 
@@ -149,9 +145,7 @@ A heading draws in bold without its `#` marks. Inline code draws in color withou
 Link({ href: 'https://code.claude.com/docs', label: 'Claude Code docs' })
 ```
 
-![A pane with one line: the label Claude Code docs, then the URL in gray.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-link-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=8217bd2dfb561a8ba57023c6d89ea977)
-
-![A pane with one line: the label Claude Code docs, then the URL in gray.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-link-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=cd32f222a7d3530b070f58f5f189a1f8)
+![A pane with one line: the label Claude Code docs, then the URL in gray.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-link-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=8217bd2dfb561a8ba57023c6d89ea977)
 
 The terminal draws the URL as text after the label. Whether a click opens it depends on the user's terminal.
 
@@ -171,9 +165,7 @@ Code({
 })
 ```
 
-![A pane with two numbered lines of JavaScript in syntax colors.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-code-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=4e13f5d506d3fdcc59d6d9524f48d2a9)
-
-![A pane with two numbered lines of JavaScript in syntax colors.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-code-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=59f797371dd91b16b874a382b784b668)
+![A pane with two numbered lines of JavaScript in syntax colors.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-code-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=4e13f5d506d3fdcc59d6d9524f48d2a9)
 
 The colors come from the user's theme.
 
@@ -188,9 +180,7 @@ Code({
 })
 ```
 
-![A pane with a four-line diff. The removed line is shaded red and the added line green, each with its line number. In the added line, the words that runs code have a stronger shade.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-diff-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=4f12c9f7229ceccd9b4f47479a7235dd)
-
-![A pane with a four-line diff. The removed line is shaded red and the added line green, each with its line number. In the added line, the words that runs code have a stronger shade.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-diff-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=9db96f34381bac8bebc32d41859b8808)
+![A pane with a four-line diff. The removed line is shaded red and the added line green, each with its line number. In the added line, the words that runs code have a stronger shade.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-diff-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=4f12c9f7229ceccd9b4f47479a7235dd)
 
 Claude Code draws line numbers in place of the `@@` line. Where a removed line and an added line are alike, the words that changed get a stronger shade.
 
@@ -219,9 +209,7 @@ Box({
 })
 ```
 
-![A pane with three words in a row, four columns apart, then a blank row, then a rounded border around one line of text. The border runs the full width of the pane.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-box-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=cb9263bb02f5c8afb6e5b8450e0cdadc)
-
-![A pane with three words in a row, four columns apart, then a blank row, then a rounded border around one line of text. The border runs the full width of the pane.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-box-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=dae83407af4d667a58717f68f13848e2)
+![A pane with three words in a row, four columns apart, then a blank row, then a rounded border around one line of text. The border runs the full width of the pane.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-box-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=cb9263bb02f5c8afb6e5b8450e0cdadc)
 
 The border stretches to the width of the pane.
 
@@ -246,15 +234,11 @@ Box({
 })
 ```
 
-![A pane with three buttons, one per line: Save in brackets, n: Next without brackets and with the n in color, and Skip in brackets in gray.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-button-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=8c638c15e12d9736f327dfcaa797b512)
-
-![A pane with three buttons, one per line: Save in brackets, n: Next without brackets and with the n in color, and Skip in brackets in gray.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-button-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=6a88a1fe18ba63b050366dcfab14be45)
+![A pane with three buttons, one per line: Save in brackets, n: Next without brackets and with the n in color, and Skip in brackets in gray.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-button-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=8c638c15e12d9736f327dfcaa797b512)
 
 A button that has the focus draws in inverse video. Here the user has pressed Tab twice:
 
-![The same three buttons, with the second one, n: Next, drawn in inverse video.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-button-plain-focused-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=a6224e58d10752a894615047d9824ad9)
-
-![The same three buttons, with the second one, n: Next, drawn in inverse video.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-button-plain-focused-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=9aeb7145615e77c84e7436180ed69e86)
+![The same three buttons, with the second one, n: Next, drawn in inverse video.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-button-plain-focused-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=a6224e58d10752a894615047d9824ad9)
 
 ### `Input`
 
@@ -273,21 +257,15 @@ Input({
 
 Without the focus, the field shows its label and its placeholder:
 
-![A pane with one line: the label Title, then the placeholder Type a title and press Enter in gray.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-input-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=7d580be1aaf5507032e1962b9167d725)
-
-![A pane with one line: the label Title, then the placeholder Type a title and press Enter in gray.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-input-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=9d254a8adc5959ba173717fb45eabd52)
+![A pane with one line: the label Title, then the placeholder Type a title and press Enter in gray.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-input-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=7d580be1aaf5507032e1962b9167d725)
 
 With the focus, the label turns bold, a cursor appears, and the `submitLabel` shows after `⏎`:
 
-![The same field with its label in bold, a block cursor on the first letter of the placeholder, and a return sign followed by the word save.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-input-focused-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=dcfcce0174480cc624d06c8521734fe7)
-
-![The same field with its label in bold, a block cursor on the first letter of the placeholder, and a return sign followed by the word save.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-input-focused-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=2f5cf7d0e5f813983070e883009f528e)
+![The same field with its label in bold, a block cursor on the first letter of the placeholder, and a return sign followed by the word save.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-input-focused-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=dcfcce0174480cc624d06c8521734fe7)
 
 Typing replaces the placeholder:
 
-![The same field holding the typed letters Rel, followed by the return sign and the word save.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-input-typed-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=4eb6d4443763a21415dad4e426bc747a)
-
-![The same field holding the typed letters Rel, followed by the return sign and the word save.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-input-typed-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=90fbac3c7a47ab26a4fb71401975eac6)
+![The same field holding the typed letters Rel, followed by the return sign and the word save.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-input-typed-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=4eb6d4443763a21415dad4e426bc747a)
 
 ### `Select`
 
@@ -311,21 +289,15 @@ Select({
 
 Closed, it shows its label and the current option:
 
-![A pane with one line: the label Format, the current option Markdown, and a small down arrow.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-select-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=4e3b18268ffd87d2cad06442e6d661a9)
-
-![A pane with one line: the label Format, the current option Markdown, and a small down arrow.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-select-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=1e329e6aee748c2dd70e92dbe4960de0)
+![A pane with one line: the label Format, the current option Markdown, and a small down arrow.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-select-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=4e3b18268ffd87d2cad06442e6d661a9)
 
 Open, it lists its options and marks one:
 
-![The picker open, with its three options listed under the label. The second option, HTML, is drawn in inverse video.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-select-moved-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=deb6ce0a49d213235feedaa79ac658c0)
-
-![The picker open, with its three options listed under the label. The second option, HTML, is drawn in inverse video.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-select-moved-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=d69edeecd4f97dad4bdb39b908e3d98e)
+![The picker open, with its three options listed under the label. The second option, HTML, is drawn in inverse video.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-select-moved-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=deb6ce0a49d213235feedaa79ac658c0)
 
 After the user picks an option, the list closes:
 
-![The picker closed again, now showing HTML as the current option.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-select-picked-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=f065ab5bc479868f03088dc736f17097)
-
-![The picker closed again, now showing HTML as the current option.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-select-picked-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=f084630e325825f3831219215a6a595e)
+![The picker closed again, now showing HTML as the current option.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-select-picked-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=f065ab5bc479868f03088dc736f17097)
 
 ## Draw pictures
 
@@ -345,9 +317,7 @@ Raster({
 })
 ```
 
-![A pane with a small grid of colored blocks, two rows of three: green, amber, and red, then green, green, and amber.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-raster-light.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=5ed719481d3dd45b568bab696e57bf16)
-
-![A pane with a small grid of colored blocks, two rows of three: green, amber, and red, then green, green, and amber.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-raster-dark.png?fit=max&auto=format&n=EXkwf0kKMewZsyod&q=85&s=b381f05d4cc99e2abfacb505c77b17f5)
+![A pane with a small grid of colored blocks, two rows of three: green, amber, and red, then green, green, and amber.](https://mintcdn.com/claude-code/EXkwf0kKMewZsyod/images/mods-el-raster-light.png?fit=max\&auto=format\&n=EXkwf0kKMewZsyod\&q=85\&s=5ed719481d3dd45b568bab696e57bf16)
 
 A `Raster` rounds each color to a smaller palette, so `0x2e7d32` draws as `#337733`.
 
@@ -371,13 +341,20 @@ In the terminal, a pane that returns only an `Svg` opens empty. To draw somethin
 
 Two more elements have no sample here. `Image` draws a PNG or raw pixels in the terminal. `Client` is a region that a second file of yours draws, for animation and pointer input. The [elements reference](reference.md#elements) lists their props.
 
-Unless Claude Code detects that the terminal draws kitty graphics protocol images with Unicode placeholders, the user sees an `Image`'s `alt` text, dimmed, in place of the picture. Write `alt` text that stands on its own. Detection runs at startup: it succeeds in kitty 0.28 or later and in Ghostty, once the terminal answers Claude Code's graphics query, and fails in these cases:
+An `Image` draws as a picture in these terminals:
 
-* **Other terminals**: any terminal that isn't one of those two, or that doesn't answer the query.
-* **tmux and screen**: a session running inside tmux or screen, in any terminal, kitty and Ghostty included.
+* kitty 0.28 or later
+* Ghostty
+* iTerm2 3.5 or later. Drawing in iTerm2 requires Claude Code v2.1.305 or later.
+
+In any other terminal, the user sees the `Image`'s `alt` text, dimmed, in place of the picture. Write `alt` text that stands on its own, because it also shows in these cases, among others:
+
+* **tmux and screen**: a session running inside tmux or screen, in any terminal.
 * **Background sessions**: every [background session](../../agent-view.md), whatever terminal it's attached from.
+* **iTerm2 outside fullscreen rendering**: in iTerm2 the picture draws only under [fullscreen rendering](../../fullscreen.md), and not while [`CLAUDE_CODE_ALT_SCREEN_FULL_REPAINT`](../../env-vars.md) is set to `1`. To see the picture, run `/tui fullscreen` at the Claude Code prompt and leave that variable unset.
+* **A file path source in iTerm2**: iTerm2 draws an `Image` whose `source` prop holds `png` or `rgba` bytes, and shows the `alt` text for one whose `source` names a `file`. If your mod has iTerm2 users, pass the picture as base64 in `source.png` or `source.rgba` rather than as a path in `source.file`.
 
-If your mod's users see the dimmed text in a terminal that does draw those placeholder images, they can set [`CLAUDE_CODE_FORCE_TERMINAL_IMAGES`](../../env-vars.md) to `1`, which skips detection. Inside tmux or screen that doesn't help: the `alt` text goes away, and Claude Code sends the picture without wrapping it for tmux or screen passthrough.
+If your mod's users see the dimmed text in a terminal that draws kitty graphics protocol images with Unicode placeholders, they can set [`CLAUDE_CODE_FORCE_TERMINAL_IMAGES`](../../env-vars.md) to `1`. Inside tmux or screen that doesn't help: the `alt` text goes away, and Claude Code sends the picture without wrapping it for tmux or screen passthrough.
 
 ## See where a mod can draw
 

@@ -132,6 +132,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 ## Example
 
 ```csharp
+using System;
+using Anthropic.Models.Messages.Batches;
+
 BatchCancelParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 var messageBatch = await client.Messages.Batches.Cancel(parameters);

@@ -130,8 +130,8 @@ def search_knowledge_base(query):
     ]
 
 # Build up the conversation in a list, starting with the user's question
-messages = [
-    MessageParam(role="user", content="How do I configure the timeout settings?")
+messages: list[MessageParam] = [
+    {"role": "user", "content": "How do I configure the timeout settings?"}
 ]
 
 # Create a message with the tool
@@ -150,18 +150,18 @@ if tool_use is not None:
     tool_result = search_knowledge_base(tool_use.input["query"])
 
     # Append Claude's turn, then the tool result, to the running conversation
-    messages.append(MessageParam(role="assistant", content=response.content))
+    messages.append({"role": "assistant", "content": response.content})
     messages.append(
-        MessageParam(
-            role="user",
-            content=[
+        {
+            "role": "user",
+            "content": [
                 ToolResultBlockParam(
                     type="tool_result",
                     tool_use_id=tool_use.id,
                     content=tool_result,  # Search results go here
                 )
             ],
-        )
+        }
     )
 
     # Send the tool result back
@@ -861,7 +861,7 @@ YAML
 ```
 
 ```python Python
-from anthropic.types import MessageParam, TextBlockParam, SearchResultBlockParam
+from anthropic.types import TextBlockParam, SearchResultBlockParam
 
 client = Anthropic()
 
@@ -870,9 +870,9 @@ response = client.messages.create(
     model="claude-opus-5-5",
     max_tokens=1024,
     messages=[
-        MessageParam(
-            role="user",
-            content=[
+        {
+            "role": "user",
+            "content": [
                 SearchResultBlockParam(
                     type="search_result",
                     source="https://docs.company.com/api-reference",
@@ -902,7 +902,7 @@ response = client.messages.create(
                     text="Based on these search results, how do I authenticate API requests and what are the rate limits?",
                 ),
             ],
-        )
+        }
     ],
 )
 
@@ -1428,7 +1428,6 @@ YAML
 
 ```python Python
 from anthropic.types import (
-    MessageParam,
     SearchResultBlockParam,
     TextBlockParam,
     ToolResultBlockParam,
@@ -1454,9 +1453,9 @@ response = client.messages.create(
     max_tokens=1024,
     tools=[knowledge_base_tool],
     messages=[
-        MessageParam(
-            role="user",
-            content=[
+        {
+            "role": "user",
+            "content": [
                 SearchResultBlockParam(
                     type="search_result",
                     source="https://docs.company.com/overview",
@@ -1474,10 +1473,10 @@ response = client.messages.create(
                     text="What does Acme Dashboard do, and what plans is it available on?",
                 ),
             ],
-        ),
-        MessageParam(
-            role="assistant",
-            content=[
+        },
+        {
+            "role": "assistant",
+            "content": [
                 TextBlockParam(
                     type="text", text="Let me check the pricing information."
                 ),
@@ -1488,10 +1487,10 @@ response = client.messages.create(
                     input={"query": "Acme Dashboard pricing plans"},
                 ),
             ],
-        ),
-        MessageParam(
-            role="user",
-            content=[
+        },
+        {
+            "role": "user",
+            "content": [
                 ToolResultBlockParam(
                     type="tool_result",
                     tool_use_id="toolu_01A09q90qw90lq917835lq9",
@@ -1511,7 +1510,7 @@ response = client.messages.create(
                     ],
                 )
             ],
-        ),
+        },
     ],
 )
 

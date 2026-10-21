@@ -127,6 +127,8 @@ Add Session Resource
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -332,6 +334,8 @@ List Session Resources
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -618,6 +622,8 @@ Get Session Resource
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -895,6 +901,8 @@ Update Session Resource
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1180,6 +1188,8 @@ Delete Session Resource
     - `SPEND_LIMIT_READS_2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
   - `Optional<String> workspaceId` (header parameter)
 

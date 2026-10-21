@@ -4,7 +4,9 @@
 
 Server-managed settings let organization Owners centrally configure Claude Code from [**Organization settings > Claude Code > Managed settings**](https://claude.ai/admin-settings/claude-code) in the claude.ai console. Claude Code clients fetch these settings automatically when users authenticate with an eligible credential on a platform where server-managed delivery is supported. See [Platform availability](#platform-availability) for the credentials and platforms that qualify.
 
-Server-managed settings are available for [Claude for Teams](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=server_settings_teams#team-&-enterprise) and [Claude for Enterprise](https://anthropic.com/contact-sales?utm_source=claude_code\&utm_medium=docs\&utm_content=server_settings_enterprise) customers.
+> [!NOTE]
+>
+> Server-managed settings are available for [Claude for Teams](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=server_settings_teams#team-&-enterprise) and [Claude for Enterprise](https://anthropic.com/contact-sales?utm_source=claude_code\&utm_medium=docs\&utm_content=server_settings_enterprise) customers.
 
 ## Requirements
 
@@ -27,13 +29,13 @@ If your devices are enrolled in an MDM or endpoint management solution, endpoint
 
 ## Configure server-managed settings
 
-**Open the admin console**
+**1. Open the admin console**
 
 In the claude.ai console, go to [**Organization settings > Claude Code > Managed settings**](https://claude.ai/admin-settings/claude-code).
 
 In a Team or Enterprise organization, if the page says you don't have access, ask an [Owner or Primary Owner](#access-control) to make the change.
 
-**Define your settings**
+**2. Define your settings**
 
 Add your configuration as JSON. All [settings available in `settings.json`](settings-reference.md#all-settings) are supported except those restricted to OS-level policy delivery; see [Current limitations](#current-limitations) for that short list. This includes [hooks](hooks.md), [environment variables](env-vars.md), and [managed-only settings](managed-settings.md#managed-only-settings) like `allowManagedPermissionRulesOnly`.
 
@@ -77,7 +79,7 @@ Because hooks execute shell commands, users in interactive sessions see a [secur
 
 To configure the [auto mode](permission-modes.md#eliminate-prompts-with-auto-mode) classifier so it knows which repos, buckets, and domains your organization trusts, deliver an `autoMode` block the same way; see [Configure auto mode](auto-mode-config.md) for how the `autoMode` entries affect what the classifier blocks and important warnings about the `environment`, `allow`, `soft_deny`, and `hard_deny` fields.
 
-**Save and deploy**
+**3. Save and deploy**
 
 Save your changes. Claude Code clients receive the updated settings on their next startup or hourly polling cycle.
 
@@ -315,7 +317,7 @@ A session receives the managed settings of the organization that owns the creden
 * **OAuth token**: generate a token with [`claude setup-token`](authentication.md#generate-a-long-lived-token), authorize it for your Team or Enterprise organization, and set it as `CLAUDE_CODE_OAUTH_TOKEN` in the job's environment. Remove any credential that [takes precedence](authentication.md#authentication-precedence) over the token from that environment, such as `ANTHROPIC_API_KEY`.
 * **Endpoint-managed settings**: deploy a [managed settings file](managed-settings.md#delivery-mechanisms) to the machine that runs the job.
 
-In a [Cowork](https://claude.com/docs/cowork/overview) session in the Claude Desktop app, Claude Code doesn't fetch server-managed settings from the claude.ai admin console, even when the user signs in with a Team or Enterprise account. [Where and when a policy applies](managed-settings.md#where-and-when-a-policy-applies) covers which policy reaches Cowork sessions on the user's machine and remote Cowork sessions. claude.ai still applies your [`strictKnownMarketplaces`](settings-reference.md#strictknownmarketplaces) and [`blockedMarketplaces`](settings-reference.md#blockedmarketplaces) lists itself when a Cowork user adds a marketplace from a git repository on claude.ai or from **Customize** in the Cowork tab. [How restrictions work](plugins/org.md#restrict-what-users-can-install) describes that check.
+In a [Cowork](https://claude.com/docs/cowork/overview) session in the Claude Desktop app, Claude Code doesn't fetch server-managed settings from the claude.ai admin console, even when the user signs in with a Team or Enterprise account. [Where and when a policy applies](managed-settings.md#where-and-when-a-policy-applies) covers which policy reaches Cowork sessions on the user's machine and remote Cowork sessions. claude.ai still applies your [`strictKnownMarketplaces`](settings-reference.md#strictknownmarketplaces) and [`blockedMarketplaces`](settings-reference.md#blockedmarketplaces) lists itself when a Cowork user adds a marketplace from a git repository on claude.ai or from **Customize** in Cowork. [How restrictions work](plugins/org.md#restrict-what-users-can-install) describes that check.
 
 If you export a `CLAUDE_CODE_USE_*` provider variable or a non-default `ANTHROPIC_BASE_URL` in your shell, Claude Code skips the settings fetch for your sessions. [`claude doctor` and `/status` report the skipped fetch and its cause](#verify-settings-delivery).
 

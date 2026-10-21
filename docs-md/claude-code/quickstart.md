@@ -12,10 +12,12 @@ Make sure you have:
 * A code project to work with
 * A [Claude subscription](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=quickstart_prereq) (Pro, Max, Team, or Enterprise), [Claude Console](https://platform.claude.com/) account, or access through a [supported cloud provider](third-party-integrations.md)
 
-These cases are covered on other pages:
-
-* **Never used a terminal before**: start with the [terminal guide](terminal-guide.md)
-* **Want Claude Code somewhere other than the terminal**: Claude Code is also available on the [web](https://claude.ai/code), as a [desktop app](desktop.md), in [VS Code](vs-code.md) and [JetBrains IDEs](jetbrains.md), in [Slack](slack.md), and in CI/CD with [GitHub Actions](github-actions.md) and [GitLab](gitlab-ci-cd.md). See [all interfaces](overview.md#use-claude-code-everywhere).
+> [!NOTE]
+>
+> These cases are covered on other pages:
+>
+> * **Never used a terminal before**: start with the [terminal guide](terminal-guide.md)
+> * **Want Claude Code somewhere other than the terminal**: Claude Code is also available on the [web](https://claude.ai/code), as a [desktop app](desktop.md), in [VS Code](vs-code.md) and [JetBrains IDEs](jetbrains.md), in [Slack](slack.md), and in CI/CD with [GitHub Actions](github-actions.md) and [GitLab](gitlab-ci-cd.md). See [all interfaces](overview.md#use-claude-code-everywhere).
 
 ## Step 1: Install Claude Code
 
@@ -51,7 +53,9 @@ If the install command fails with `syntax error near unexpected token '<'`, a `4
 
 [Git for Windows](https://git-scm.com/downloads/win) is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.
 
-Native installations automatically update in the background to keep you on the latest version.
+> [!NOTE]
+>
+> Native installations automatically update in the background to keep you on the latest version.
 
 **Homebrew**
 
@@ -61,7 +65,9 @@ brew install --cask claude-code
 
 Homebrew offers two casks. `claude-code` tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. `claude-code@latest` tracks the latest channel and receives new versions as soon as they ship.
 
-Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed, to get the latest features and security fixes.
+> [!NOTE]
+>
+> Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed, to get the latest features and security fixes.
 
 **WinGet**
 
@@ -69,7 +75,9 @@ Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `br
 winget install Anthropic.ClaudeCode
 ```
 
-WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
+> [!NOTE]
+>
+> WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
 
 You can also install with [apt, dnf, or apk](setup.md#install-with-linux-package-managers) on Debian, Fedora, RHEL, and Alpine.
 
@@ -141,7 +149,9 @@ how do I create custom skills in Claude Code?
 can Claude Code work with Docker?
 ```
 
-Claude Code reads your project files as needed. You don't have to manually add context.
+> [!NOTE]
+>
+> Claude Code reads your project files as needed. You don't have to manually add context.
 
 ## Step 4: Make your first code change
 
@@ -215,7 +225,9 @@ update the README with installation instructions
 review my changes and suggest improvements
 ```
 
-Talk to Claude like you would a helpful colleague. Describe what you want to achieve, and it will help you get there.
+> [!TIP]
+>
+> Talk to Claude like you would a helpful colleague. Describe what you want to achieve, and it will help you get there.
 
 ## Essential commands
 
@@ -251,40 +263,40 @@ See the [commands reference](commands.md) for the complete list of session comma
 
 For more, see [best practices](best-practices.md) and [common workflows](common-workflows.md).
 
-**Be specific with your requests**
+> **Be specific with your requests**
+>
+> Instead of: "fix the bug"
+>
+> Try: "fix the login bug where users see a blank screen after entering wrong credentials"
 
-Instead of: "fix the bug"
+> **Use step-by-step instructions**
+>
+> Break complex tasks into steps:
+>
+> ```text wrap theme={null}
+> 1. create a new database table for user profiles
+> 2. create an API endpoint to get and update user profiles
+> 3. build a webpage that allows users to see and edit their information
+> ```
 
-Try: "fix the login bug where users see a blank screen after entering wrong credentials"
+> **Let Claude explore first**
+>
+> Before making changes, let Claude understand your code:
+>
+> ```text wrap theme={null}
+> analyze the database schema
+> ```
+>
+> ```text wrap theme={null}
+> build a dashboard showing products that are most frequently returned by our UK customers
+> ```
 
-**Use step-by-step instructions**
-
-Break complex tasks into steps:
-
-```text wrap
-1. create a new database table for user profiles
-2. create an API endpoint to get and update user profiles
-3. build a webpage that allows users to see and edit their information
-```
-
-**Let Claude explore first**
-
-Before making changes, let Claude understand your code:
-
-```text wrap
-analyze the database schema
-```
-
-```text wrap
-build a dashboard showing products that are most frequently returned by our UK customers
-```
-
-**Save time with shortcuts**
-
-* Type `/` to see the commands and skills available to you
-* Use Tab for command completion
-* Press ↑ for command history
-* Press `Shift+Tab` to cycle permission modes
+> **Save time with shortcuts**
+>
+> * Type `/` to see the commands and skills available to you
+> * Use Tab for command completion
+> * Press ↑ for command history
+> * Press `Shift+Tab` to cycle permission modes
 
 ## What's next?
 

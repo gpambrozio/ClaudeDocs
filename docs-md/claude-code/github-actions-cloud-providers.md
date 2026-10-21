@@ -4,7 +4,9 @@
 
 [Claude Code GitHub Actions](github-actions.md) calls the Claude API by default. To route inference through your own cloud account instead, set the Claude Code GitHub Action's provider input and configure your cloud to trust the workflow's OpenID Connect (OIDC) token. The workflow authenticates with that token, so you store no long-lived cloud credential in your repository.
 
-This page builds on the [GitHub Actions setup](github-actions.md#setup). It assumes you already know the workflow file and the `anthropics/claude-code-action` step, and covers only what a cloud provider changes.
+> [!NOTE]
+>
+> This page builds on the [GitHub Actions setup](github-actions.md#setup). It assumes you already know the workflow file and the `anthropics/claude-code-action` step, and covers only what a cloud provider changes.
 
 ## Choose your provider
 
@@ -31,7 +33,7 @@ Before you start, you need:
 
 Beyond the prerequisites, you create a GitHub identity for the Claude Code GitHub Action, the cloud-side trust configuration, the repository secrets, and the workflow file. The steps below walk through each.
 
-**Choose a GitHub identity**
+**1. Choose a GitHub identity**
 
 The Claude Code GitHub Action pushes commits and posts comments through a GitHub identity. The [quick setup](github-actions.md#quick-setup) installs the official Claude GitHub App for this. With a cloud provider, you choose the identity yourself:
 
@@ -49,7 +51,7 @@ To create a custom app, [register a new GitHub App](https://docs.github.com/en/a
 
 After registering the app, generate a private key and keep the downloaded `.pem` file, note the App ID from the app's settings page, and [install the app](https://docs.github.com/en/apps/using-github-apps/installing-your-own-github-app) on the repository where the Claude Code GitHub Action runs. You add the key and the ID as secrets in the third step.
 
-**Configure cloud authentication**
+**2. Configure cloud authentication**
 
 Configure your cloud to trust the OIDC token that GitHub issues to the workflow, so each workflow run gets short-lived cloud credentials. The bullets in each tab summarize what to create, and each tab links the cloud vendor's own guide for the console-level steps.
 
@@ -82,7 +84,7 @@ Create a Microsoft Entra application with a federated credential for your reposi
 
 Note the application's client ID, your tenant ID, and your subscription ID. You add them as secrets in the next step.
 
-**Add repository secrets**
+**3. Add repository secrets**
 
 In the repository where the Claude Code GitHub Action runs, add the secrets for your provider, plus the two app secrets if you created a custom GitHub App in the first step. See GitHub's guide to [using secrets in GitHub Actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions).
 
@@ -97,7 +99,7 @@ In the repository where the Claude Code GitHub Action runs, add the secrets for 
 | `APP_ID` | Custom GitHub App | The GitHub App's ID |
 | `APP_PRIVATE_KEY` | Custom GitHub App | The contents of the `.pem` private key file |
 
-**Create the workflow file**
+**4. Create the workflow file**
 
 Create a workflow file for your provider, such as `.github/workflows/claude.yml`. Each example responds to `@claude` mentions, authenticates to GitHub with a custom app, and includes the `id-token: write` permission, which GitHub requires to issue the OIDC token that your cloud provider exchanges for credentials.
 
@@ -106,7 +108,9 @@ If you chose a different GitHub identity in the first step, adjust the example:
 * **Official Claude GitHub App**: delete the Generate GitHub App token step and the `github_token` line
 * **GitHub's automatic token**: delete the token-generation step and change the `github_token` line to `github_token: ${{ secrets.GITHUB_TOKEN }}`
 
-On public repositories, a comment containing the trigger phrase from any user starts this workflow. The credential steps run before the Claude Code GitHub Action checks the commenter's write access, so the action rejects unauthorized users only after the workflow has generated an App token and signed in to your cloud provider, which leaves audit-log entries and consumes Actions minutes. To avoid those runs, add a step that verifies the commenter's write access before the credential steps.
+> [!WARNING]
+>
+> On public repositories, a comment containing the trigger phrase from any user starts this workflow. The credential steps run before the Claude Code GitHub Action checks the commenter's write access, so the action rejects unauthorized users only after the workflow has generated an App token and signed in to your cloud provider, which leaves audit-log entries and consumes Actions minutes. To avoid those runs, add a step that verifies the commenter's write access before the credential steps.
 
 **Amazon Bedrock**
 
@@ -160,7 +164,9 @@ jobs:
           claude_args: '--model us.anthropic.claude-sonnet-4-6'
 ```
 
-Bedrock model IDs include a cross-region inference profile prefix such as `us.`. Use the prefix for the region group where you granted model access.
+> [!TIP]
+>
+> Bedrock model IDs include a cross-region inference profile prefix such as `us.`. Use the prefix for the region group where you granted model access.
 
 **Google Cloud's Agent Platform**
 
@@ -273,11 +279,13 @@ jobs:
           ANTHROPIC_FOUNDRY_RESOURCE: your-resource-name
 ```
 
-Use a model ID that matches a Claude deployment in your Foundry resource. See [Claude Code on Microsoft Foundry](microsoft-foundry.md) for model configuration and version pinning.
+> [!TIP]
+>
+> Use a model ID that matches a Claude deployment in your Foundry resource. See [Claude Code on Microsoft Foundry](microsoft-foundry.md) for model configuration and version pinning.
 
 With any provider, you can bound run length and cost by adding `--max-turns` to `claude_args`. See [Manage costs](github-actions.md#manage-costs).
 
-**Test the setup**
+**5. Test the setup**
 
 Mention `@claude` in an issue or PR comment, then watch the run in the repository's Actions tab. Claude replies in a comment on the same issue or PR.
 

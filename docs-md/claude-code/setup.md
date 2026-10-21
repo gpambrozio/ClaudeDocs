@@ -25,7 +25,9 @@ Claude Code runs on the following platforms and configurations:
 
 ## Install Claude Code
 
-Prefer a graphical interface? The [Desktop app](desktop-quickstart.md) lets you use Claude Code without the terminal. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs), [Windows](https://claude.com/download?utm_source=claude_code\&utm_medium=docs), or [Linux](desktop-linux.md).
+> [!TIP]
+>
+> Prefer a graphical interface? The [Desktop app](desktop-quickstart.md) lets you use Claude Code without the terminal. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs), [Windows](https://claude.com/download?utm_source=claude_code\&utm_medium=docs), or [Linux](desktop-linux.md).
 
 To install Claude Code, open a terminal and run the command for your system. If you haven't used a terminal before, the [terminal guide](terminal-guide.md) shows how to open one and paste the command.
 
@@ -59,7 +61,9 @@ If the install command fails with `syntax error near unexpected token '<'`, a `4
 
 [Git for Windows](https://git-scm.com/downloads/win) is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.
 
-Native installations automatically update in the background to keep you on the latest version.
+> [!NOTE]
+>
+> Native installations automatically update in the background to keep you on the latest version.
 
 **Homebrew**
 
@@ -69,7 +73,9 @@ brew install --cask claude-code
 
 Homebrew offers two casks. `claude-code` tracks the stable release channel, which is typically about a week behind and skips releases with major regressions. `claude-code@latest` tracks the latest channel and receives new versions as soon as they ship.
 
-Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed, to get the latest features and security fixes.
+> [!NOTE]
+>
+> Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed, to get the latest features and security fixes.
 
 **WinGet**
 
@@ -77,7 +83,9 @@ Homebrew installations do not auto-update. Run `brew upgrade claude-code` or `br
 winget install Anthropic.ClaudeCode
 ```
 
-WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
+> [!NOTE]
+>
+> WinGet installations do not auto-update. Run `winget upgrade Anthropic.ClaudeCode` periodically to get the latest features and security fixes.
 
 You can also install with [apt, dnf, or apk](setup.md#install-with-linux-package-managers) on Debian, Fedora, RHEL, and Alpine.
 
@@ -188,7 +196,7 @@ Native installations automatically update in the background. You can [configure 
 
 Claude Code checks for updates on startup and periodically while running. Updates download and install in the background, then take effect the next time you start Claude Code.
 
-Run `claude doctor` to see the result of the most recent update attempt.
+Run `claude doctor` in your shell to see the result of the last update attempt Claude Code recorded. On a native installation, if it reports a failed attempt, see [`Auto-update failed` in the session footer](troubleshoot-install.md#auto-update-failed) for what to do next.
 
 On macOS and Linux, the native installer manages the launcher at `~/.local/bin/claude` as a symlink into `~/.local/share/claude/versions/`. If you replace that launcher with your own script or symlink, auto-update and `claude update` leave it in place: new versions still install under the `versions/` directory, and your launcher decides which version runs.
 
@@ -198,15 +206,17 @@ To let Claude Code manage the launcher again, remove `~/.local/bin/claude` and r
 
 If an npm global install can't auto-update because the npm global directory isn't writable, Claude Code shows a one-time notice at startup, and `claude doctor` lists the available fixes. See [permission errors during installation](troubleshoot-install.md#permission-errors-during-installation) for details.
 
-Homebrew, WinGet, apt, dnf, and apk installations do not auto-update by default; see below to opt in for Homebrew and WinGet. To upgrade Homebrew manually, run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed. For WinGet, run `winget upgrade Anthropic.ClaudeCode`. For Linux package managers, see the upgrade commands in [Install with Linux package managers](#install-with-linux-package-managers).
-
-To have Claude Code run the upgrade command for you on Homebrew or WinGet, set [`CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE`](env-vars.md) to `1`. Claude Code then runs the upgrade in the background when a new version is available and shows a restart prompt on success. The upgrade targets only the Claude Code package and does not affect other software you have installed.
-
-On WinGet the upgrade may fail while Claude Code is running because Windows locks the executable. In that case Claude Code shows the manual command instead. apt, dnf, and apk continue to require a manual upgrade because those commands need elevated privileges.
-
-**Known issue:** Claude Code may notify you of updates before the new version is available in these package managers. If an upgrade fails, wait and try again later.
-
-Homebrew keeps old versions on disk after upgrades. Run `brew cleanup` periodically to reclaim disk space.
+> [!NOTE]
+>
+> Homebrew, WinGet, apt, dnf, and apk installations do not auto-update by default; see below to opt in for Homebrew and WinGet. To upgrade Homebrew manually, run `brew upgrade claude-code` or `brew upgrade claude-code@latest`, depending on which cask you installed. For WinGet, run `winget upgrade Anthropic.ClaudeCode`. For Linux package managers, see the upgrade commands in [Install with Linux package managers](#install-with-linux-package-managers).
+>
+> To have Claude Code run the upgrade command for you on Homebrew or WinGet, set [`CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE`](env-vars.md) to `1`. Claude Code then runs the upgrade in the background when a new version is available and shows a restart prompt on success. The upgrade targets only the Claude Code package and does not affect other software you have installed.
+>
+> On WinGet the upgrade may fail while Claude Code is running because Windows locks the executable. In that case Claude Code shows the manual command instead. apt, dnf, and apk continue to require a manual upgrade because those commands need elevated privileges.
+>
+> **Known issue:** Claude Code may notify you of updates before the new version is available in these package managers. If an upgrade fails, wait and try again later.
+>
+> Homebrew keeps old versions on disk after upgrades. Run `brew cleanup` periodically to reclaim disk space.
 
 ### Configure release channel
 
@@ -456,7 +466,9 @@ Supported npm install platforms are `darwin-arm64`, `darwin-x64`, `linux-x64`, `
 
 To upgrade an npm installation, run `npm install -g @anthropic-ai/claude-code@latest`. Avoid `npm update -g`, which respects the semver range from the original install and may not move you to the newest release.
 
-Do NOT use `sudo npm install -g` as this can lead to permission issues and security risks. If you encounter permission errors, see [troubleshooting permission errors](troubleshoot-install.md#permission-errors-during-installation).
+> [!WARNING]
+>
+> Do NOT use `sudo npm install -g` as this can lead to permission issues and security risks. If you encounter permission errors, see [troubleshooting permission errors](troubleshoot-install.md#permission-errors-during-installation).
 
 ### Install on network storage
 
@@ -479,7 +491,7 @@ Each release publishes a `manifest.json` containing SHA256 checksums for every p
 
 Steps 1-3 require a POSIX shell with `gpg` and `curl`. On Windows, run them in Git Bash or WSL. Step 4 includes a PowerShell option.
 
-**Download and import the public key**
+**1. Download and import the public key**
 
 The release signing key is published at a fixed URL.
 
@@ -499,7 +511,7 @@ Confirm the output includes this fingerprint:
 31DD DE24 DDFA B679 F42D  7BD2 BAA9 29FF 1A7E CACE
 ```
 
-**Download the manifest and signature**
+**2. Download the manifest and signature**
 
 Set `VERSION` to the release you want to verify.
 
@@ -510,7 +522,7 @@ curl -fsSLO "$REPO/$VERSION/manifest.json"
 curl -fsSLO "$REPO/$VERSION/manifest.json.sig"
 ```
 
-**Verify the signature**
+**3. Verify the signature**
 
 Verify the detached signature against the manifest.
 
@@ -522,7 +534,7 @@ A valid result reports `Good signature from "Anthropic Claude Code Release Signi
 
 `gpg` also prints `WARNING: This key is not certified with a trusted signature!` for any freshly imported key. This is expected. The `Good signature` line confirms the cryptographic check passed. The fingerprint comparison in Step 1 confirms the key itself is authentic.
 
-**Check the binary against the manifest**
+**4. Check the binary against the manifest**
 
 Compare the SHA256 checksum of the binary with the value listed under `platforms.<platform>.checksum` in `manifest.json`. The commands below assume a `claude` binary in the current directory. To verify an installed native binary instead, run the command against `~/.local/share/claude/versions/VERSION`, replacing VERSION with the release you set in Step 2.
 
@@ -544,7 +556,9 @@ shasum -a 256 claude
 (Get-FileHash claude.exe -Algorithm SHA256).Hash.ToLower()
 ```
 
-Manifest signatures are available for releases from `2.1.89` onward. Earlier releases publish checksums in `manifest.json` without a detached signature.
+> [!NOTE]
+>
+> Manifest signatures are available for releases from `2.1.89` onward. Earlier releases publish checksums in `manifest.json` without a detached signature.
 
 #### Platform code signatures
 
@@ -557,8 +571,6 @@ In addition to the signed manifest, individual binaries carry platform-native co
 ## Uninstall Claude Code
 
 To remove Claude Code, follow the instructions for your installation method. If `claude` still runs afterward, you likely have a second installation or a leftover shell alias from an older installer. See [Check for conflicting installations](troubleshoot-install.md#check-for-conflicting-installations) to find and remove it.
-
-<span id="native-installation" />
 
 ### Uninstall a native installation
 
@@ -578,8 +590,6 @@ Remove-Item -Path "$env:USERPROFILE\.local\bin\claude.exe" -Force
 Remove-Item -Path "$env:USERPROFILE\.local\share\claude" -Recurse -Force
 ```
 
-<span id="homebrew-installation" />
-
 ### Uninstall with Homebrew
 
 Remove the Homebrew cask you installed. If you installed the stable cask:
@@ -594,8 +604,6 @@ If you installed the latest cask:
 brew uninstall --cask claude-code@latest
 ```
 
-<span id="winget-installation" />
-
 ### Uninstall with WinGet
 
 Remove the WinGet package:
@@ -603,8 +611,6 @@ Remove the WinGet package:
 ```powershell
 winget uninstall Anthropic.ClaudeCode
 ```
-
-<span id="apt-/-dnf-/-apk" />
 
 ### Uninstall with apt, dnf, or apk
 
@@ -632,8 +638,6 @@ sed -i '\|downloads.claude.ai/claude-code/apk|d' /etc/apk/repositories
 rm /etc/apk/keys/claude-code.rsa.pub
 ```
 
-<span id="npm" />
-
 ### Uninstall with npm
 
 Remove the global npm package:
@@ -644,7 +648,9 @@ npm uninstall -g @anthropic-ai/claude-code
 
 ### Remove configuration files
 
-Removing configuration files will delete all your settings, allowed tools, MCP server configurations, and session history.
+> [!WARNING]
+>
+> Removing configuration files will delete all your settings, allowed tools, MCP server configurations, and session history.
 
 The VS Code extension, the JetBrains plugin, and the Desktop app also write to `~/.claude/`. If any of them is still installed, the directory is recreated the next time it runs. To remove Claude Code completely, uninstall the [VS Code extension](vs-code.md#uninstall-the-extension), the JetBrains plugin, and the Desktop app before deleting these files.
 

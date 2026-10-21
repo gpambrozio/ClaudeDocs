@@ -265,7 +265,7 @@ url: https://platform.claude.com/docs/en/api/cli/beta/webhooks
 
     format: date-time
 
-  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 41 more`
+  - `data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 43 more`
 
     - `beta_webhook_session_created_event_data: object`
 
@@ -823,9 +823,37 @@ url: https://platform.claude.com/docs/en/api/cli/beta/webhooks
 
       - `workspace_id: string`
 
+    - `beta_webhook_user_profile_enforcement_action_opened_event_data: object`
+
+      - `type: "user_profile.enforcement_action_opened"`
+
+      - `id: string`
+
+        ID of the user profile the enforcement action is on.
+
+      - `enforcement_action_id: string`
+
+        ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+      - `organization_id: string`
+
+    - `beta_webhook_user_profile_enforcement_action_resolved_event_data: object`
+
+      - `type: "user_profile.enforcement_action_resolved"`
+
+      - `id: string`
+
+        ID of the user profile the enforcement action is on.
+
+      - `enforcement_action_id: string`
+
+        ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+      - `organization_id: string`
+
 ### Beta Webhook Event Data
 
-- `beta_webhook_event_data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 41 more`
+- `beta_webhook_event_data: BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 43 more`
 
   - `beta_webhook_session_created_event_data: object`
 
@@ -1383,6 +1411,34 @@ url: https://platform.claude.com/docs/en/api/cli/beta/webhooks
 
     - `workspace_id: string`
 
+  - `beta_webhook_user_profile_enforcement_action_opened_event_data: object`
+
+    - `type: "user_profile.enforcement_action_opened"`
+
+    - `id: string`
+
+      ID of the user profile the enforcement action is on.
+
+    - `enforcement_action_id: string`
+
+      ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+    - `organization_id: string`
+
+  - `beta_webhook_user_profile_enforcement_action_resolved_event_data: object`
+
+    - `type: "user_profile.enforcement_action_resolved"`
+
+    - `id: string`
+
+      ID of the user profile the enforcement action is on.
+
+    - `enforcement_action_id: string`
+
+      ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+    - `organization_id: string`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `beta_webhook_memory_store_archived_event_data: object`
@@ -1674,6 +1730,38 @@ url: https://platform.claude.com/docs/en/api/cli/beta/webhooks
   - `organization_id: string`
 
   - `workspace_id: string`
+
+### Beta Webhook User Profile Enforcement Action Opened Event Data
+
+- `beta_webhook_user_profile_enforcement_action_opened_event_data: object`
+
+  - `type: "user_profile.enforcement_action_opened"`
+
+  - `id: string`
+
+    ID of the user profile the enforcement action is on.
+
+  - `enforcement_action_id: string`
+
+    ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `organization_id: string`
+
+### Beta Webhook User Profile Enforcement Action Resolved Event Data
+
+- `beta_webhook_user_profile_enforcement_action_resolved_event_data: object`
+
+  - `type: "user_profile.enforcement_action_resolved"`
+
+  - `id: string`
+
+    ID of the user profile the enforcement action is on.
+
+  - `enforcement_action_id: string`
+
+    ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `organization_id: string`
 
 ### Beta Webhook Vault Archived Event Data
 

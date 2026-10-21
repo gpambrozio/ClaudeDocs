@@ -131,6 +131,8 @@ Retrieve detailed information about a specific work item.
 
   - `:"telemetry-destinations-2026-08-11"`
 
+  - `:"webhooks-2026-10-07"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -388,6 +390,8 @@ Long poll for work items in the queue.
 
   - `:"telemetry-destinations-2026-08-11"`
 
+  - `:"webhooks-2026-10-07"`
+
 - `anthropic_worker_id: String` (header parameter)
 
   Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -632,6 +636,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `:"spend-limit-reads-2026-09-26"`
 
   - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
 
 ### Returns
 
@@ -882,6 +888,8 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `:"telemetry-destinations-2026-08-11"`
 
+  - `:"webhooks-2026-10-07"`
+
 ### Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse`
@@ -1069,6 +1077,8 @@ Stop a work item, initiating graceful or forced shutdown.
   - `:"spend-limit-reads-2026-09-26"`
 
   - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
 
 - `workspace_id: String` (header parameter)
 
@@ -1325,6 +1335,8 @@ List work items in an environment.
 
   - `:"telemetry-destinations-2026-08-11"`
 
+  - `:"webhooks-2026-10-07"`
+
 ### Returns
 
 - `class BetaSelfHostedWork`
@@ -1575,6 +1587,8 @@ Update work item metadata with merge semantics.
 
   - `:"telemetry-destinations-2026-08-11"`
 
+  - `:"webhooks-2026-10-07"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1821,6 +1835,8 @@ Get statistics about the work queue for an environment.
   - `:"spend-limit-reads-2026-09-26"`
 
   - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
 
 - `workspace_id: String` (header parameter)
 

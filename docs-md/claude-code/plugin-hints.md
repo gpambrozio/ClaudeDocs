@@ -6,7 +6,9 @@ If you maintain a CLI or SDK, your tool can prompt Claude Code users to install 
 
 This page applies only if your plugin is listed in `claude-plugins-official` or another marketplace with one of Anthropic's [official marketplace names](plugins/security.md#official-marketplace-names). The community marketplace, `claude-community`, isn't one of them.
 
-To publish a plugin, see [Publish and distribute a plugin](plugins/publish.md).
+> [!NOTE]
+>
+> To publish a plugin, see [Publish and distribute a plugin](plugins/publish.md).
 
 ## Emit the hint
 

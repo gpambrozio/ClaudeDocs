@@ -135,6 +135,8 @@ Create a Vault
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -182,6 +184,9 @@ Create a Vault
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultCreateParams parameters = new() { DisplayName = "Example vault" };
 
 var betaManagedAgentsVault = await client.Beta.Vaults.Create(parameters);
@@ -337,6 +342,8 @@ List Vaults
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -384,6 +391,9 @@ List Vaults
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultListParams parameters = new();
 
 var page = await client.Beta.Vaults.List(parameters);
@@ -536,6 +546,8 @@ Retrieve a Vault
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -583,6 +595,9 @@ Retrieve a Vault
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultRetrieveParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -741,6 +756,8 @@ Update a Vault
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -788,6 +805,9 @@ Update a Vault
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultUpdateParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -936,6 +956,8 @@ Delete a Vault
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -957,6 +979,9 @@ Delete a Vault
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultDeleteParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -1098,6 +1123,8 @@ Archive a Vault
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1145,6 +1172,9 @@ Archive a Vault
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultArchiveParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -1523,6 +1553,8 @@ Create a Credential
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1688,6 +1720,9 @@ Create a Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialCreateParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -1695,7 +1730,7 @@ CredentialCreateParams parameters = new()
     {
         Token = "bearer_exampletoken",
         McpServerUrl = "https://example-server.modelcontextprotocol.io/sse",
-        Type = Type.StaticBearer,
+        Type = BetaManagedAgentsStaticBearerCreateParamsType.StaticBearer,
     },
 };
 
@@ -1861,6 +1896,8 @@ List Credentials
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2026,6 +2063,9 @@ List Credentials
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialListParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -2190,6 +2230,8 @@ Retrieve a Credential
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2355,6 +2397,9 @@ Retrieve a Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialRetrieveParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -2653,6 +2698,8 @@ Update a Credential
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2818,6 +2865,9 @@ Update a Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialUpdateParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -2976,6 +3026,8 @@ Delete a Credential
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2997,6 +3049,9 @@ Delete a Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialDeleteParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -3142,6 +3197,8 @@ Archive a Credential
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -3308,6 +3365,9 @@ Archive a Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialArchiveParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -3466,6 +3526,8 @@ Validate an MCP OAuth Credential
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3575,6 +3637,9 @@ Validate an MCP OAuth Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialMcpOAuthValidateParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",

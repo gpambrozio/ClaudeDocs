@@ -618,7 +618,9 @@ return {
 };
 ```
 
-The Python `@tool` decorator forwards only `content` and `is_error` from the handler's return dict. To return `structuredContent` from Python, run a [standalone MCP server](mcp.md) instead of an in-process SDK server.
+> [!NOTE]
+>
+> The Python `@tool` decorator forwards only `content` and `is_error` from the handler's return dict. To return `structuredContent` from Python, run a [standalone MCP server](mcp.md) instead of an in-process SDK server.
 
 ## Example: unit converter
 

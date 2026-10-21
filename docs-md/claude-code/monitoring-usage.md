@@ -4,7 +4,9 @@
 
 Track Claude Code usage, costs, and tool activity across your organization by exporting telemetry data through OpenTelemetry (OTel). Claude Code exports metrics as time series data via the standard metrics protocol, events via the logs/events protocol, and optionally [distributed traces via OpenTelemetry](#traces-beta).
 
-For the Claude API or Managed Agents, see [OpenTelemetry for the Claude API](../api/manage-claude/opentelemetry.md).
+> [!NOTE]
+>
+> For the Claude API or Managed Agents, see [OpenTelemetry for the Claude API](../api/manage-claude/opentelemetry.md).
 
 ## Quick start
 
@@ -272,7 +274,7 @@ Each retry attempt is also recorded as a `gen_ai.request.attempt` span event wit
 | `skill_name` | Skill name for the Skill tool | `OTEL_LOG_TOOL_DETAILS` |
 | `subagent_type` | Subagent type for the Agent tool or legacy Task tool | `OTEL_LOG_TOOL_DETAILS` |
 
-<span id="tool-output-span-event" />**`tool.output` span event on `claude_code.tool`**
+**`tool.output` span event on `claude_code.tool`**
 
 If you set `OTEL_LOG_TOOL_CONTENT=1`, Read and Bash calls can record a `tool.output` span event on the `claude_code.tool` span. Edit and Write calls record one only when you also set `OTEL_LOG_TOOL_DETAILS=1`. That variable isn't scoped to those two tools, so check its [row in the configuration table](#common-configuration-variables) for the arguments it adds elsewhere.
 
@@ -336,11 +338,11 @@ In interactive CLI sessions, detailed beta tracing also requires your organizati
 | `num_non_blocking_error` | Count of hooks that failed without blocking | |
 | `num_cancelled` | Count of hooks cancelled before completion | |
 
-<span id="new-context-gates" />
-
 **Content attributes under detailed beta tracing**
 
-Additional content-bearing attributes such as `new_context`, `system_reminders`, `system_prompt_preview`, `user_system_prompt`, `tool_input`, and `response.model_output` are emitted only when detailed beta tracing is active. They are not part of the stable span schema.
+> [!NOTE]
+>
+> Additional content-bearing attributes such as `new_context`, `system_reminders`, `system_prompt_preview`, `user_system_prompt`, `tool_input`, and `response.model_output` are emitted only when detailed beta tracing is active. They are not part of the stable span schema.
 
 These attributes appear on the spans below, and `Gated by` names the variable an attribute needs on top of detailed beta tracing. Values longer than the content limit (60 KB by default) are truncated.
 
@@ -414,27 +416,29 @@ Claude Code attaches these values as attributes on every metric datapoint and ev
 
 Each custom key becomes a label on every metric series, so high-cardinality values increase storage cost in your metrics backend. To send custom attributes in the resource block only and omit them from datapoint labels, set `OTEL_METRICS_INCLUDE_RESOURCE_ATTRIBUTES=false`. See [Metrics cardinality control](#metrics-cardinality-control).
 
-The `OTEL_RESOURCE_ATTRIBUTES` environment variable uses comma-separated key=value pairs with strict formatting requirements:
-
-* **No spaces allowed**: values can't contain spaces. For example, `user.organizationName=My Company` is invalid
-* **Format**: must be comma-separated key=value pairs: `key1=value1,key2=value2`
-* **Allowed characters**: only US-ASCII characters excluding control characters, whitespace, double quotes, commas, semicolons, and backslashes
-* **Special characters**: characters outside the allowed range must be percent-encoded
-
-For a value that would need a space, use underscores or camelCase instead. The following examples set `org.name` with each form:
-
-```bash
-export OTEL_RESOURCE_ATTRIBUTES="org.name=Johns_Organization"
-export OTEL_RESOURCE_ATTRIBUTES="org.name=JohnsOrganization"
-```
-
-You can percent-encode any character, not only the excluded ones. This example encodes both the space and the apostrophe:
-
-```bash
-export OTEL_RESOURCE_ATTRIBUTES="org.name=John%27s%20Organization"
-```
-
-Wrapping values in quotes doesn't escape spaces. For example, `org.name="My Company"` results in the literal value `"My Company"` with the quotes included, not `My Company`.
+> [!WARNING]
+>
+> The `OTEL_RESOURCE_ATTRIBUTES` environment variable uses comma-separated key=value pairs with strict formatting requirements:
+>
+> * **No spaces allowed**: values can't contain spaces. For example, `user.organizationName=My Company` is invalid
+> * **Format**: must be comma-separated key=value pairs: `key1=value1,key2=value2`
+> * **Allowed characters**: only US-ASCII characters excluding control characters, whitespace, double quotes, commas, semicolons, and backslashes
+> * **Special characters**: characters outside the allowed range must be percent-encoded
+>
+> For a value that would need a space, use underscores or camelCase instead. The following examples set `org.name` with each form:
+>
+> ```bash theme={null}
+> export OTEL_RESOURCE_ATTRIBUTES="org.name=Johns_Organization"
+> export OTEL_RESOURCE_ATTRIBUTES="org.name=JohnsOrganization"
+> ```
+>
+> You can percent-encode any character, not only the excluded ones. This example encodes both the space and the apostrophe:
+>
+> ```bash theme={null}
+> export OTEL_RESOURCE_ATTRIBUTES="org.name=John%27s%20Organization"
+> ```
+>
+> Wrapping values in quotes doesn't escape spaces. For example, `org.name="My Company"` results in the literal value `"My Company"` with the quotes included, not `My Company`.
 
 ### Attribute telemetry to Desktop SSH sessions
 
@@ -585,7 +589,9 @@ All metrics and events share these standard attributes:
 
 In sessions signed in to a [Claude apps gateway](claude-apps-gateway.md) through `/login`, the CLI stamps exports with the authenticated identity: `user.id` is the IdP subject, `user.email` is the signed-in email, and `user.groups` carries IdP group membership as a comma-separated string. Each export also carries `identity.source: gateway-oidc`. The gateway identity is applied last, so `user.*` and `identity.*` keys set through `OTEL_RESOURCE_ATTRIBUTES` are ignored on those sessions.
 
-Events that Claude Code logs before a developer signs in don't carry the gateway identity. When Claude Code opens a session signed out of the gateway, for example after [the gateway ends the sign-in](errors.md#cloud-gateway-session-expired), the startup events logged before sign-in carry the anonymous `user.id` and no `identity.source`. These include [`managed_settings_resolved`](#managed-settings-resolved-event), [`plugin_loaded`](#plugin-loaded-event), and [`mcp_server_connection`](#mcp-server-connection-event).
+> [!NOTE]
+>
+> Events that Claude Code logs before a developer signs in don't carry the gateway identity. When Claude Code opens a session signed out of the gateway, for example after [the gateway ends the sign-in](errors.md#cloud-gateway-session-expired), the startup events logged before sign-in carry the anonymous `user.id` and no `identity.source`. These include [`managed_settings_resolved`](#managed-settings-resolved-event), [`plugin_loaded`](#plugin-loaded-event), and [`mcp_server_connection`](#mcp-server-connection-event).
 
 For the identity attributes on Claude Desktop and Cowork sessions that connect through a gateway, see the [gateway `telemetry` reference](claude-apps-gateway-config.md#telemetry).
 
@@ -1009,6 +1015,8 @@ Logged when a tool permission decision is made (accept/reject).
   * For MCP tools: includes `mcp_server_name`, `mcp_tool_name`
   * For Skill tool: includes `skill_name`
   * For Agent tool or legacy Task tool: includes `subagent_type`
+
+If you lower the OpenTelemetry SDK's `OTEL_LOGRECORD_ATTRIBUTE_COUNT_LIMIT` below the number of attributes on a `tool_decision` event, the SDK drops the attributes that Claude Code set last. The SDK drops `permission_mode` first, `classifier_category` second, and `classifier_verdict` third, and drops the event's other attributes only after those three. This ordering requires Claude Code v2.1.302 or later.
 
 #### Permission mode changed event
 
@@ -1439,7 +1447,9 @@ The `claude_code.cost.usage` metric helps with:
 * Identifying high-usage sessions for optimization
 * Attributing spend to specific skills, plugins, or subagent types via the `skill.name`, `plugin.name`, and `agent.name` attributes
 
-Cost metrics are approximations. For official billing data, refer to your API provider (Claude Console, Amazon Bedrock, or Google Cloud's Agent Platform).
+> [!NOTE]
+>
+> Cost metrics are approximations. For official billing data, refer to your API provider (Claude Console, Amazon Bedrock, or Google Cloud's Agent Platform).
 
 Claude Code counts each streaming response toward the cost and token metrics exactly once, including when a gateway or proxy behind `ANTHROPIC_BASE_URL` streams usage progressively across multiple frames.
 
@@ -1614,23 +1624,17 @@ To confirm events arrive, submit a prompt in a session running under this config
 
 Your choice of metrics, logs, and traces backends determines the types of analyses you can perform:
 
-<span id="for-metrics" />
-
 ### Backends for metrics
 
 * **Time series databases**: Rate calculations, aggregated metrics
 * **Columnar stores**: Complex queries, unique user analysis
 * **Full-featured observability platforms**: Advanced querying, visualization, alerting
 
-<span id="for-events/logs" />
-
 ### Backends for events and logs
 
 * **Log aggregation systems**: Full-text search, log analysis
 * **Columnar stores**: Structured event analysis
 * **Full-featured observability platforms**: Correlation between metrics and events
-
-<span id="for-traces" />
 
 ### Backends for traces
 

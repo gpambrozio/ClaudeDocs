@@ -149,6 +149,8 @@ See the [OpenTelemetry export guide](../../../../../manage-claude/opentelemetry.
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ## Returns
 
 - `data: array of BetaTelemetryDestinationWorkspace`

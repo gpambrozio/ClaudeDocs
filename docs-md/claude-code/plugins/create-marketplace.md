@@ -6,11 +6,13 @@ A plugin marketplace is a directory or repository with a `.claude-plugin/marketp
 
 Create your own marketplace when you want a group you choose, such as your team or your organization, to install your plugins and keep receiving your updates from a catalog you control. The repository can be private, it can list as many plugins as you like, and an administrator can [require it on every machine](org.md).
 
-These cases are covered on other pages:
-
-* **Sharing one plugin with a few people**: send them the plugin's directory or a `.zip` of it. See [Share a plugin without a marketplace](publish.md#share-a-plugin-without-a-marketplace).
-* **Offering a plugin to everyone**: submit it to Anthropic's directory. See [Submit to Anthropic's directory](publish.md#submit-to-anthropics-directory).
-* **Using a plugin yourself**: load it with `--plugin-dir` or save it in your skills directory. See [Develop without a marketplace](create.md#develop-without-a-marketplace).
+> [!NOTE]
+>
+> These cases are covered on other pages:
+>
+> * **Sharing one plugin with a few people**: send them the plugin's directory or a `.zip` of it. See [Share a plugin without a marketplace](publish.md#share-a-plugin-without-a-marketplace).
+> * **Offering a plugin to everyone**: submit it to Anthropic's directory. See [Submit to Anthropic's directory](publish.md#submit-to-anthropics-directory).
+> * **Using a plugin yourself**: load it with `--plugin-dir` or save it in your skills directory. See [Develop without a marketplace](create.md#develop-without-a-marketplace).
 
 Start with [Create a marketplace](#create-a-marketplace) to build one on your own machine and install a plugin from it, then [add more plugin entries](#add-plugin-entries).
 
@@ -20,7 +22,7 @@ The following steps create a marketplace on your machine, add a plugin to it, re
 
 You need a plugin to list. The example uses `my-first-plugin` from [Create your first plugin](create.md#create-your-first-plugin), a plugin with one skill that you run as `/my-first-plugin:hello`; build it first if you don't have a plugin yet. To use a plugin of your own instead, substitute its directory and its `name` wherever the steps say `my-first-plugin`. For what a plugin directory can contain, see the [plugin directory explorer](components.md#explore-the-plugin-directory).
 
-**Set up the marketplace directory**
+**1. Set up the marketplace directory**
 
 A marketplace is a directory with a `.claude-plugin/marketplace.json` file, plus the plugins it lists. Create the marketplace directory and its `.claude-plugin/` folder, then copy your plugin in under `plugins/`:
 
@@ -37,7 +39,7 @@ claude plugin validate ./my-marketplace/plugins/my-first-plugin
 
 The last line of the output reads `✔ Validation passed`.
 
-**Create the marketplace file**
+**2. Create the marketplace file**
 
 Save `marketplace.json` at `my-marketplace/.claude-plugin/marketplace.json`. The file requires a `name`, an `owner`, and a `plugins` array.
 
@@ -60,7 +62,7 @@ Each object in `plugins` is a plugin entry and needs a `name` and a `source`. Wr
 }
 ```
 
-**Validate the marketplace**
+**3. Validate the marketplace**
 
 Run `claude plugin validate` on the marketplace directory to check the JSON syntax, the required fields, and each plugin entry in its `.claude-plugin/marketplace.json`.
 
@@ -70,7 +72,7 @@ claude plugin validate ./my-marketplace
 
 For the file as written in step 2, the last line of the output reads `✔ Validation passed`.
 
-**Add the marketplace and install the plugin**
+**4. Add the marketplace and install the plugin**
 
 Register the directory as a marketplace.
 
@@ -90,7 +92,7 @@ The command prints `✔ Successfully installed plugin: my-first-plugin@my-market
 
 Inside a session, `/plugin marketplace add ./my-marketplace` registers the marketplace the same way. `/plugin install my-first-plugin@my-marketplace` opens the plugin's details in the `/plugin` panel, where you install it. For that flow, see [Install and manage plugins](install.md).
 
-**Confirm the plugin loaded**
+**5. Confirm the plugin loaded**
 
 List installed plugins.
 

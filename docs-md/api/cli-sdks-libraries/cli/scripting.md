@@ -122,9 +122,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-Keep `ANTHROPIC_API_KEY` and `ANTHROPIC_AUTH_TOKEN` unset when working from a CLI login. Either variable takes precedence over the login for `ant` commands (see [Credential precedence](../../manage-claude/wif-reference.md#credential-precedence)) and can silently route them to a different organization or workspace.
-
-Run [`ant auth status`](authentication.md#check-authentication-status) to confirm which organization and workspace you are logged in to; it warns when an environment variable is overriding your login.
+Run [`ant auth status`](authentication.md#check-authentication-status) to confirm which organization and workspace you are logged in to; it warns when an environment variable is overriding your login. For the full ordering of credential sources, see [Credential precedence](../../manage-claude/wif-reference.md#credential-precedence).
 
 ---
 

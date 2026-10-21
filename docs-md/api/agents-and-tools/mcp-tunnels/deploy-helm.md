@@ -118,7 +118,7 @@ The daily certificate-renewal CronJob uses a separate ServiceAccount (also deriv
 ```bash
 helm show values \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 2.0.2 > values.yaml
+  --version 2.1.0 > values.yaml
 ```
 
 **Configure tunnel attachment and routes**
@@ -160,7 +160,7 @@ Render the chart and review the output according to your organization's vetting 
 ```bash
 helm template mcp-tunnel \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 2.0.2 \
+  --version 2.1.0 \
   -n mcp-tunnel \
   -f values.yaml > rendered.yaml
 ```
@@ -170,7 +170,7 @@ helm template mcp-tunnel \
 ```bash
 helm install mcp-tunnel \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 2.0.2 \
+  --version 2.1.0 \
   --namespace mcp-tunnel --create-namespace \
   -f values.yaml
 ```
@@ -255,7 +255,7 @@ kubectl -n mcp-tunnel create secret generic mcp-tunnel-cert \
 ```bash
 helm show values \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 2.0.2 > values.yaml
+  --version 2.1.0 > values.yaml
 ```
 
 **Configure values for manual provisioning**
@@ -291,7 +291,7 @@ If you're using the [sample MCP server](deploy-helm.md#optional-use-a-sample-mcp
 ```bash
 helm template mcp-tunnel \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 2.0.2 \
+  --version 2.1.0 \
   -n mcp-tunnel \
   -f values.yaml > rendered.yaml
 ```
@@ -301,7 +301,7 @@ helm template mcp-tunnel \
 ```bash
 helm install mcp-tunnel \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 2.0.2 \
+  --version 2.1.0 \
   --namespace mcp-tunnel --create-namespace \
   -f values.yaml
 ```
@@ -341,7 +341,7 @@ For routine changes such as routes, replica count, or NetworkPolicy:
 ```bash
 helm upgrade mcp-tunnel \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 2.0.2 \
+  --version 2.1.0 \
   -n mcp-tunnel \
   -f values.yaml
 ```
@@ -355,7 +355,7 @@ With programmatic access, increment `tunnel.tokenVersion` in `values.yaml` and u
 ```bash
 helm upgrade mcp-tunnel \
   oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
-  --version 2.0.2 \
+  --version 2.1.0 \
   -n mcp-tunnel \
   -f values.yaml \
   --set setup.force=true

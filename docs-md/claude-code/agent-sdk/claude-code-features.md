@@ -87,7 +87,9 @@ The `cwd` option determines where the SDK looks for project-level inputs. Projec
 | [claude.ai MCP connectors](../mcp.md#use-mcp-servers-from-claude-ai) | Loaded when the session authenticates with your claude.ai login. Not loaded when `CLAUDE_CODE_OAUTH_TOKEN` holds a token from [`claude setup-token`](../authentication.md#generate-a-long-lived-token), which can only make model requests. Passing `mcpServers: {}` does not suppress the connectors | Set `strictMcpConfig: true`, [`disableClaudeAiConnectors: true`](../mcp.md#disable-claude-ai-connectors) in settings, or `ENABLE_CLAUDEAI_MCP_SERVERS=false` in `env` |
 | [`sandbox.credentials`](../sandboxing.md#protect-credentials) `deny` entries and file `mask` entries in `~/.claude/settings.json` | When the [command sandbox](../sandboxing.md) runs, Claude Code applies the `deny` entries and keeps the `credentials.files` `mask` entries as restrictions even when `settingSources` excludes user settings. Claude Code uses these entries only to narrow what sandboxed commands can access | Remove the entries from `~/.claude/settings.json` |
 
-Do not rely on default `query()` options for multi-tenant isolation. Because the inputs above are read regardless of `settingSources`, an SDK process can pick up host-level configuration and per-directory memory. For multi-tenant deployments, run each tenant in its own filesystem and set `settingSources: []` plus `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1` in `env`. [Server-managed settings](../server-managed-settings.md) are fetched when the process authenticates with an organization credential; filesystem isolation does not remove them. See [Secure deployment](secure-deployment.md).
+> [!WARNING]
+>
+> Do not rely on default `query()` options for multi-tenant isolation. Because the inputs above are read regardless of `settingSources`, an SDK process can pick up host-level configuration and per-directory memory. For multi-tenant deployments, run each tenant in its own filesystem and set `settingSources: []` plus `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1` in `env`. [Server-managed settings](../server-managed-settings.md) are fetched when the process authenticates with an organization credential; filesystem isolation does not remove them. See [Secure deployment](secure-deployment.md).
 
 ## Project instructions (CLAUDE.md and rules)
 
@@ -107,7 +109,9 @@ Do not rely on default `query()` options for multi-tenant isolation. Because the
 
 All levels are additive: if both project and user CLAUDE.md files exist, the agent sees both. There is no hard precedence rule between levels; if instructions conflict, the outcome depends on how Claude interprets them. Write non-conflicting rules, or state precedence explicitly in the more specific file ("These project instructions override any conflicting user-level defaults").
 
-You can also inject context directly via `systemPrompt` without using CLAUDE.md files. See [Modify system prompts](modifying-system-prompts.md). Use CLAUDE.md when you want the same context shared between interactive Claude Code sessions and your SDK agents.
+> [!TIP]
+>
+> You can also inject context directly via `systemPrompt` without using CLAUDE.md files. See [Modify system prompts](modifying-system-prompts.md). Use CLAUDE.md when you want the same context shared between interactive Claude Code sessions and your SDK agents.
 
 For how to structure and organize CLAUDE.md content, see [Manage Claude's memory](../memory.md).
 
@@ -157,7 +161,9 @@ for await (const message of query({
 }
 ```
 
-Skills must be created as filesystem artifacts (`.claude/skills/<name>/SKILL.md`). The SDK does not have a programmatic API for registering skills. See [Agent Skills in the SDK](skills.md) for full details.
+> [!NOTE]
+>
+> Skills must be created as filesystem artifacts (`.claude/skills/<name>/SKILL.md`). The SDK does not have a programmatic API for registering skills. See [Agent Skills in the SDK](skills.md) for full details.
 
 ## Hooks
 
@@ -253,7 +259,9 @@ for await (const message of query({
 | **Filesystem** (`settings.json`) | Sharing hooks between CLI and SDK sessions. Supports `"command"` (shell scripts), `"http"` (POST to an endpoint), `"mcp_tool"` (call a connected MCP server's tool), `"prompt"` (LLM evaluates a prompt), and `"agent"` (spawns a verifier agent). These fire in the main agent and any subagents it spawns. |
 | **Programmatic** (callbacks in `query()`) | Application-specific logic, structured decisions, and in-process integration. These also fire inside subagents. The hook input, the callback's first argument, carries `agent_id` and `agent_type` fields that identify which agent fired the hook. |
 
-The TypeScript SDK supports additional hook events beyond Python, including `SessionStart`, `SessionEnd`, `TeammateIdle`, and `TaskCompleted`. See the [hooks guide](hooks.md) for the full event compatibility table.
+> [!NOTE]
+>
+> The TypeScript SDK supports additional hook events beyond Python, including `SessionStart`, `SessionEnd`, `TeammateIdle`, and `TaskCompleted`. See the [hooks guide](hooks.md) for the full event compatibility table.
 
 For full details on programmatic hooks, see [Control execution with hooks](hooks.md). For filesystem hook syntax, see [Hooks](../hooks.md).
 

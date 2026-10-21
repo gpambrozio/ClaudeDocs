@@ -6,7 +6,9 @@ A session is the conversation history the SDK accumulates while your agent works
 
 Returning to a session means the agent has full context from before: files it already read, analysis it already performed, decisions it already made. You can ask a follow-up question, recover from an interruption, or branch off to try a different approach.
 
-Sessions persist the **conversation**, not the filesystem. To snapshot and revert file changes the agent made, use [file checkpointing](file-checkpointing.md).
+> [!NOTE]
+>
+> Sessions persist the **conversation**, not the filesystem. To snapshot and revert file changes the agent made, use [file checkpointing](file-checkpointing.md).
 
 This guide covers how to pick the right approach for your app, the SDK interfaces that track sessions automatically, how to capture session IDs and use `resume` and `fork` manually, and what to know about resuming sessions across hosts.
 
@@ -130,7 +132,9 @@ for await (const message of query({
 }
 ```
 
-The experimental [V2 session API](typescript-v2-preview.md), which provided `createSession()` with a `send` / `stream` pattern, was removed in TypeScript Agent SDK 0.3.142. Use the `query()` function and the session options described on this page instead.
+> [!NOTE]
+>
+> The experimental [V2 session API](typescript-v2-preview.md), which provided `createSession()` with a `send` / `stream` pattern, was removed in TypeScript Agent SDK 0.3.142. Use the `query()` function and the session options described on this page instead.
 
 ## Use session options with `query()`
 
@@ -249,18 +253,20 @@ for await (const message of query({
 
 You should see a response that builds on the earlier analysis instead of starting fresh. That confirms the agent resumed the session with its prior context intact.
 
-Claude Code stores sessions under `~/.claude/projects/<encoded-cwd>/*.jsonl`. If you set the `CLAUDE_CONFIG_DIR` environment variable, look under `$CLAUDE_CONFIG_DIR/projects/` instead.
-
-To find your session's directory, replace every non-alphanumeric character in the absolute working directory with `-`: `/Users/me/proj` becomes `-Users-me-proj`. For a working directory whose converted name exceeds 200 characters, Claude Code [truncates the name and appends a hash](../sessions.md#where-transcripts-are-stored), so match the first 200 characters of the converted name when you list `projects/`.
-
-If you set [`CLAUDE_CODE_PROJECT_DIR_NAME`](../sessions.md#name-the-project-directory-yourself) beside `CLAUDE_CONFIG_DIR`, look under that name in `projects/` instead. Requires TypeScript Agent SDK v0.3.234 or later, or Python Agent SDK v0.2.140 or later.
-
-You can resume from any working directory:
-
-* **Cross-directory lookup**: Claude Code searches beyond the current project directory to find the ID; see [Resume a session](../sessions.md#where-the-session-picker-looks) for the exact lookup order and how duplicate copies are handled.
-* **Same machine only**: the session file still needs to exist on the current machine.
-
-Before v2.1.223, the lookup was scoped to the current project directory and its git worktrees; SDK versions that bundle an older CLI still behave this way.
+> [!TIP]
+>
+> Claude Code stores sessions under `~/.claude/projects/<encoded-cwd>/*.jsonl`. If you set the `CLAUDE_CONFIG_DIR` environment variable, look under `$CLAUDE_CONFIG_DIR/projects/` instead.
+>
+> To find your session's directory, replace every non-alphanumeric character in the absolute working directory with `-`: `/Users/me/proj` becomes `-Users-me-proj`. For a working directory whose converted name exceeds 200 characters, Claude Code [truncates the name and appends a hash](../sessions.md#where-transcripts-are-stored), so match the first 200 characters of the converted name when you list `projects/`.
+>
+> If you set [`CLAUDE_CODE_PROJECT_DIR_NAME`](../sessions.md#name-the-project-directory-yourself) beside `CLAUDE_CONFIG_DIR`, look under that name in `projects/` instead. Requires TypeScript Agent SDK v0.3.234 or later, or Python Agent SDK v0.2.140 or later.
+>
+> You can resume from any working directory:
+>
+> * **Cross-directory lookup**: Claude Code searches beyond the current project directory to find the ID; see [Resume a session](../sessions.md#where-the-session-picker-looks) for the exact lookup order and how duplicate copies are handled.
+> * **Same machine only**: the session file still needs to exist on the current machine.
+>
+> Before v2.1.223, the lookup was scoped to the current project directory and its git worktrees; SDK versions that bundle an older CLI still behave this way.
 
 To resume sessions across machines or in serverless environments, mirror transcripts to shared storage with a [`SessionStore` adapter](session-storage.md).
 
@@ -268,7 +274,9 @@ To resume sessions across machines or in serverless environments, mirror transcr
 
 Forking creates a new session that starts with a copy of the original's history but diverges from that point. The fork gets its own session ID; the original's ID and history stay unchanged. You end up with two independent sessions you can resume separately.
 
-Forking branches the conversation history, not the filesystem. If a forked agent edits files, those changes are real and visible to any session working in the same directory. To branch and revert file changes, use [file checkpointing](file-checkpointing.md).
+> [!NOTE]
+>
+> Forking branches the conversation history, not the filesystem. If a forked agent edits files, those changes are real and visible to any session working in the same directory. To branch and revert file changes, use [file checkpointing](file-checkpointing.md).
 
 This example builds on [Capture the session ID](#capture-the-session-id): you've already analyzed an auth module in `session_id` and want to explore OAuth2 without losing the JWT-focused thread. The first block forks the session and captures the fork's ID (`forked_id`); the second block resumes the original `session_id` to continue down the JWT path. You now have two session IDs pointing at two separate histories:
 

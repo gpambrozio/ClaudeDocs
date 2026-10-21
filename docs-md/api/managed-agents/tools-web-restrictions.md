@@ -19,7 +19,9 @@ To control which sites the agent's web tools can reach, set a domain list on the
 
 Each tool carries its own list, so `web_search` and `web_fetch` can have different restrictions.
 
-`web_search` and `web_fetch` run on Anthropic's servers, not in the sandbox. A cloud environment with `limited` [networking](environments.md#networking) also applies its `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) to them; see [Set domain lists on an agent](tools-web-restrictions.md#set-domain-lists-on-an-agent). `unrestricted` networking and self-hosted environments do not limit them. The per-tool lists restrict these tools further. Organization-level web search and web fetch settings in the Claude Console apply to the Messages API. They do not apply to Managed Agents sessions.
+`web_search` and `web_fetch` run on Anthropic's servers, not in the sandbox. A cloud environment with `limited` [networking](environments.md#networking) also applies its `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) to them; see [Set domain lists on an agent](tools-web-restrictions.md#set-domain-lists-on-an-agent). `unrestricted` networking and self-hosted environments do not limit them. The per-tool lists restrict these tools further.
+
+Your organization's web search settings on the [**Capabilities**](https://platform.claude.com/settings/capabilities) page of the Claude Console also apply to `web_search` in a session. If an administrator disables web search, `web_search` calls return an error result to the agent, and the session continues. If the organization restricts web search domains, the agent receives only the search results that both the organization's domain restrictions and the agent's per-tool lists allow.
 
 ## Set domain lists on an agent
 
@@ -453,7 +455,7 @@ To continue the session:
 
 ## Multiagent and outcome-driven sessions
 
-In a [multiagent session](multiagent-orchestration.md), every domain list that applies to a thread is enforced at the same time. An agent listed in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) is bound by three sets of lists:
+In a [multiagent session](multiagent-orchestration.md), every domain list that applies to a thread is enforced at the same time. An agent listed in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) is bound by three sets of per-tool lists:
 
 * Its own `allowed_domains` and `blocked_domains`
 * Those of any agent that called it

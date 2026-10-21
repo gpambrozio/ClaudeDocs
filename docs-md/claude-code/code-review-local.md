@@ -6,11 +6,13 @@
 
 The command works on any plan. The review runs in your own session, so it counts toward your plan's usage or API billing the same way the rest of the session does.
 
-To have every pull request in a repository reviewed automatically on GitHub, see [Code Review](code-review.md), a managed service that an Owner turns on for your organization.
+> [!NOTE]
+>
+> To have every pull request in a repository reviewed automatically on GitHub, see [Code Review](code-review.md), a managed service that an Owner turns on for your organization.
 
 `/review` is an alias of `/code-review`. Before v2.1.223, `/review` was a separate command that ran a single-pass, read-only review of a GitHub pull request.
 
-**Run /code-review**
+**1. Run /code-review**
 
 Run the command:
 
@@ -25,11 +27,11 @@ You can also add flags:
 * `--fix`: also asks Claude to apply the findings to your working tree after the review. Its edits go through your [permission mode](permission-modes.md).
 * `--comment`: posts the findings on a GitHub pull request as inline comments, or on a [GitLab merge request](#post-findings-to-a-gitlab-merge-request) as a single note
 
-**Keep working**
+**2. Keep working**
 
 The review runs as a background [subagent](sub-agents.md) with its own context window, so it doesn't fill your conversation. The findings arrive in your conversation when the review completes.
 
-**Act on the findings**
+**3. Act on the findings**
 
 Ask Claude to fix what the review found. With `--fix` or `--comment`, Claude applies or posts the findings as part of the review, and you may be asked to approve its edits.
 
@@ -143,7 +145,9 @@ Ultrareview uses its own scope:
 
 When the target is a `github.com` pull request, you can have Claude [post the finished findings to the PR](ultrareview.md#post-findings-to-the-pull-request) as a comment from your GitHub account. Requires Claude Code v2.1.227 or later.
 
-Ultrareview requires authentication with a claude.ai account. It isn't available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, or to organizations with Zero Data Retention enabled or with the [HIPAA configuration](hipaa-setup.md) applied. In these cases, `/code-review ultra` runs a local review in your session instead. Organizations that use [customer-managed encryption keys](../api/manage-claude/cmek.md) (CMEK) can't run ultrareview. To review your changes locally, run `/code-review`.
+> [!NOTE]
+>
+> Ultrareview requires authentication with a claude.ai account. It isn't available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, or to organizations with Zero Data Retention enabled or with the [HIPAA configuration](hipaa-setup.md) applied. In these cases, `/code-review ultra` runs a local review in your session instead. Organizations that use [customer-managed encryption keys](../api/manage-claude/cmek.md) (CMEK) can't run ultrareview. To review your changes locally, run `/code-review`.
 
 To run a cloud review from a script or CI job, use the [`claude ultrareview` subcommand](ultrareview.md#run-ultrareview-non-interactively), which waits for the findings and prints them to stdout.
 

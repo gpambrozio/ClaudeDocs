@@ -4,7 +4,9 @@
 
 By default, the Agent SDK yields a complete `AssistantMessage` for each non-empty content block, such as a text block or a tool call, after Claude finishes generating that block. To receive incremental updates as text and tool calls are generated, enable partial message streaming.
 
-This page covers output streaming (receiving tokens in real-time). For input modes (how you send messages), see [Send messages to agents](streaming-vs-single-mode.md). You can also [stream responses using the Agent SDK via the CLI](../headless.md).
+> [!TIP]
+>
+> This page covers output streaming (receiving tokens in real-time). For input modes (how you send messages), see [Send messages to agents](streaming-vs-single-mode.md). You can also [stream responses using the Agent SDK via the CLI](../headless.md).
 
 ## Enable streaming output
 
@@ -306,7 +308,7 @@ for await (const message of query({
 
 ## Known limitations
 
-* **Structured output**: with partial messages enabled, the JSON streams as a tool call's unvalidated `input_json_delta` chunks, and only the validated result reaches the final `ResultMessage.structured_output`. See [structured outputs](structured-outputs.md) for details.
+* **Structured output**: with partial messages enabled, the JSON streams as a tool call's unvalidated `input_json_delta` chunks, and only the validated result reaches the final `ResultMessage.structured_output`. [Recognize the StructuredOutput tool call](structured-outputs.md#recognize-the-structuredoutput-tool-call) covers how that call appears in your stream.
 
 ## Next steps
 

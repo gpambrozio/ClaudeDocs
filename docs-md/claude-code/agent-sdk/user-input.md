@@ -43,9 +43,11 @@ The callback fires in two cases:
 1. **Tool needs approval**: Claude wants to use a tool that isn't auto-approved by a [permission rule](permissions.md) or permission mode. Check `tool_name` for the tool (e.g., `"Bash"`, `"Write"`).
 2. **Claude asks a question**: Claude calls the `AskUserQuestion` tool. Check if `tool_name == "AskUserQuestion"` to handle it differently. If you specify a `tools` array, include `AskUserQuestion` for this to work. See [Handle clarifying questions](#handle-clarifying-questions) for details.
 
-**The callback never fires for auto-approved tools.** Any approval earlier in the [permission evaluation flow](permissions.md#how-permissions-are-evaluated), an allow rule or a mode like `acceptEdits` or `bypassPermissions`, resolves the call before `canUseTool` is consulted. If you list a tool bare in `allowed_tools`, a `canUseTool` check for that tool runs only when the [evaluation flow](permissions.md#how-permissions-are-evaluated) routes the call back to a prompt, such as an ask rule or `plan` mode. For logic that must apply to every tool call, use a [`PreToolUse` hook](hooks.md), which executes before the rest of the flow and can allow, deny, or modify requests.
-
-An allow rule doesn't pre-approve the [actions no mode auto-approves](../permission-modes.md#actions-no-mode-auto-approves); see [How permissions are evaluated](permissions.md#how-permissions-are-evaluated) for which of them reach the callback and what happens in `dontAsk` and `auto` mode.
+> [!WARNING]
+>
+> **The callback never fires for auto-approved tools.** Any approval earlier in the [permission evaluation flow](permissions.md#how-permissions-are-evaluated), an allow rule or a mode like `acceptEdits` or `bypassPermissions`, resolves the call before `canUseTool` is consulted. If you list a tool bare in `allowed_tools`, a `canUseTool` check for that tool runs only when the [evaluation flow](permissions.md#how-permissions-are-evaluated) routes the call back to a prompt, such as an ask rule or `plan` mode. For logic that must apply to every tool call, use a [`PreToolUse` hook](hooks.md), which executes before the rest of the flow and can allow, deny, or modify requests.
+>
+> An allow rule doesn't pre-approve the [actions no mode auto-approves](../permission-modes.md#actions-no-mode-auto-approves); see [How permissions are evaluated](permissions.md#how-permissions-are-evaluated) for which of them reach the callback and what happens in `dontAsk` and `auto` mode.
 
 You can also use the [`PermissionRequest` hook](hooks.md#available-hooks) to send external notifications (Slack, email, push) when Claude is waiting for approval.
 
@@ -376,11 +378,13 @@ For a complete change of direction (not just a nudge), use [streaming input](str
 
 When Claude needs more direction on a task with multiple valid approaches, it calls the `AskUserQuestion` tool. This triggers your `canUseTool` callback with `toolName` set to `AskUserQuestion`. The input contains Claude's questions as multiple-choice options, which you display to the user and return their selections.
 
-Clarifying questions are especially common in [`plan` mode](permissions.md#plan-mode-plan), where Claude explores the codebase and asks questions before proposing a plan. This makes plan mode ideal for interactive workflows where you want Claude to gather requirements before making changes.
+> [!TIP]
+>
+> Clarifying questions are especially common in [`plan` mode](permissions.md#plan-mode-plan), where Claude explores the codebase and asks questions before proposing a plan. This makes plan mode ideal for interactive workflows where you want Claude to gather requirements before making changes.
 
 The following steps show how to handle clarifying questions:
 
-**Pass a canUseTool callback**
+**1. Pass a canUseTool callback**
 
 Pass a `canUseTool` callback in your query options. By default, `AskUserQuestion` is available. If you specify a `tools` array to restrict Claude's capabilities (for example, a read-only agent with only `Read`, `Glob`, and `Grep`), include `AskUserQuestion` in that array. Otherwise, Claude won't be able to ask clarifying questions:
 
@@ -412,7 +416,7 @@ for await (const message of query({
 }
 ```
 
-**Detect AskUserQuestion**
+**2. Detect AskUserQuestion**
 
 In your callback, check if `toolName` equals `AskUserQuestion` to handle it differently from other tools:
 
@@ -436,7 +440,7 @@ canUseTool: async (toolName, input) => {
 };
 ```
 
-**Parse the question input**
+**3. Parse the question input**
 
 The input contains Claude's questions in a `questions` array. Each question has a `question` (the text to display), `options` (the choices), and `multiSelect` (whether multiple selections are allowed):
 
@@ -467,11 +471,11 @@ The input contains Claude's questions in a `questions` array. Each question has 
 
 See [Question format](#question-format) for full field descriptions.
 
-**Collect answers from the user**
+**4. Collect answers from the user**
 
 Present the questions to the user and collect their selections. How you do this depends on your application: a terminal prompt, a web form, a mobile dialog, etc.
 
-**Return answers to Claude**
+**5. Return answers to Claude**
 
 Build the `answers` object as a record where each key is the `question` text and each value is the selected option's `label`:
 

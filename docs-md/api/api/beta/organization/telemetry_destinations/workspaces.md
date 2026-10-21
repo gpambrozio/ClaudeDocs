@@ -151,6 +151,8 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `data: array of BetaTelemetryDestinationWorkspace`
@@ -340,6 +342,8 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `BetaTelemetryDestinationWorkspace object`
@@ -522,6 +526,8 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ### Returns
 

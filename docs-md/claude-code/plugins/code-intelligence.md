@@ -6,7 +6,9 @@ A code intelligence plugin gives Claude the live diagnostics and go-to-definitio
 
 Each plugin connects Claude Code to a language server for one language through the Language Server Protocol (LSP). You install the plugin from Anthropic's official marketplace and the language server binary on your machine.
 
-Code intelligence plugins work in terminal sessions. In [cloud sessions](../claude-code-on-the-web.md), Claude Code doesn't start plugin language servers, so Claude gets no diagnostics or code navigation there. To write your own language server plugin, or to connect a language server that has no plugin, see [LSP servers in plugin components](components.md#lsp-servers).
+> [!NOTE]
+>
+> Code intelligence plugins work in terminal sessions. In [cloud sessions](../claude-code-on-the-web.md), Claude Code doesn't start plugin language servers, so Claude gets no diagnostics or code navigation there. To write your own language server plugin, or to connect a language server that has no plugin, see [LSP servers in plugin components](components.md#lsp-servers).
 
 To get started, find your language in the table under [Install a code intelligence plugin](#install-a-code-intelligence-plugin). The plugins in that table come from Anthropic's [official plugin marketplace](anthropic-marketplaces.md).
 
@@ -16,7 +18,7 @@ If you already saw an **LSP plugin recommendation** dialog, see [Accept or dismi
 
 A code intelligence plugin tells Claude Code which command starts the language server and which file extensions it handles. It doesn't include the language server. Install the language server binary first, then the plugin, then confirm the server starts.
 
-**Install the language server binary**
+**1. Install the language server binary**
 
 Find your language in the table below and install the binary in its row. If your language isn't listed, see [Add a language without an official plugin](#add-a-language-without-an-official-plugin).
 
@@ -42,7 +44,7 @@ To find the command that installs the binary, follow the plugin's link in the ta
 
 After you install the binary, confirm it's on the `PATH` of the shell you start `claude` from, for example with `which typescript-language-server`, or `Get-Command typescript-language-server` in PowerShell.
 
-**Install the plugin**
+**2. Install the plugin**
 
 In the VS Code extension or the desktop app, follow [Install a plugin](install.md#install-a-plugin) instead of this step. In a terminal, start Claude Code by running `claude`, then enter this at its prompt, replacing `typescript-lsp` with the plugin the step 1 table lists for your language:
 
@@ -52,7 +54,7 @@ In the VS Code extension or the desktop app, follow [Install a plugin](install.m
 
 A confirmation message says whether the plugin is active now or needs `/reload-plugins`. If the install fails with `Marketplace "claude-plugins-official" not found`, see the [troubleshooting entry for that error](troubleshooting.md#marketplace-claude-plugins-official-not-found). To control where the plugin is installed, or to run the install from your shell instead of inside Claude Code, see [Install plugins](install.md).
 
-**Confirm the server starts**
+**3. Confirm the server starts**
 
 The language server starts the first time Claude edits a file with one of the plugin's extensions. To see it work, ask Claude to introduce a type error in a file of that language and then fix it. Then check the conversation for a diagnostics line:
 

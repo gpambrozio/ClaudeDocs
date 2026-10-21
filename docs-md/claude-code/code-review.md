@@ -6,13 +6,11 @@ With Code Review, Claude reviews the pull requests in your GitHub repositories. 
 
 Findings arrive as inline comments on the lines concerned, ranked by [severity](code-review-pull-requests.md#severity-levels), with a summary and a check run on the pull request. A review never approves or blocks the pull request, so the decision to merge stays with your team.
 
-![Diagram of a review in four stages. A pull request on GitHub goes to several agents that search in parallel on Anthropic infrastructure. A verification step drops false positives, the remaining findings are deduplicated and ranked by severity, and the review posts inline comments, a summary, and a check run back on GitHub.](https://mintcdn.com/claude-code/gLJVaPQEgKC8ZyUD/images/code-review-pipeline.svg?fit=max&auto=format&n=gLJVaPQEgKC8ZyUD&q=85&s=0351c96df9efa3105172eb00a672f130)
+![Diagram of a review in four stages. A pull request on GitHub goes to several agents that search in parallel on Anthropic infrastructure. A verification step drops false positives, the remaining findings are deduplicated and ranked by severity, and the review posts inline comments, a summary, and a check run back on GitHub.](https://mintcdn.com/claude-code/gLJVaPQEgKC8ZyUD/images/code-review-pipeline.svg?fit=max\&auto=format\&n=gLJVaPQEgKC8ZyUD\&q=85\&s=0351c96df9efa3105172eb00a672f130)
 
-![Diagram of a review in four stages. A pull request on GitHub goes to several agents that search in parallel on Anthropic infrastructure. A verification step drops false positives, the remaining findings are deduplicated and ranked by severity, and the review posts inline comments, a summary, and a check run back on GitHub.](https://mintcdn.com/claude-code/gLJVaPQEgKC8ZyUD/images/code-review-pipeline-dark.svg?fit=max&auto=format&n=gLJVaPQEgKC8ZyUD&q=85&s=9cf26bde98f4e999d0d9ff5bf5bdff40)
-
-Code Review uses AI to review code and may miss bugs, security vulnerabilities, or other issues. A review with no findings doesn't mean your code is error-free or secure.
-
-<span id="review-a-diff-locally" />
+> [!NOTE]
+>
+> Code Review uses AI to review code and may miss bugs, security vulnerabilities, or other issues. A review with no findings doesn't mean your code is error-free or secure.
 
 To turn on Code Review, an Owner of your Claude organization follows [Set up Code Review](code-review-setup.md). Claude can also review code without this service. Run [`/code-review`](code-review-local.md) in your Claude Code session on any plan, or [compare all the options](#compare-ways-to-get-a-review).
 
@@ -28,41 +26,29 @@ Check that your organization qualifies before you set up Code Review:
 
 ## Set up and use Code Review
 
-<span id="set-up-code-review" />
-
-<span id="pricing" />
-
-<span id="manually-trigger-reviews" />
-
-<span id="customize-reviews" />
-
-<span id="troubleshooting" />
-
 Pick the page for what you need to do:
 
-**Set up Code Review**
+> **[Set up Code Review](code-review-setup.md)**
+>
+> Check the requirements, install the Claude GitHub App, and choose repositories, a review level, and when reviews run
 
-Check the requirements, install the Claude GitHub App, and choose repositories, a review level, and when reviews run
+> **[Customize Code Review](code-review-customize.md)**
+>
+> Tune what gets flagged with `REVIEW.md` and `CLAUDE.md` files in your repository
 
-**Customize Code Review**
+> **[Read and request reviews on a pull request](code-review-pull-requests.md)**
+>
+> Read the findings and their severities, and request another review with a comment
 
-Tune what gets flagged with `REVIEW.md` and `CLAUDE.md` files in your repository
+> **[Troubleshoot Code Review](code-review-troubleshooting.md)**
+>
+> Fix a review that didn't start, failed, or was skipped for budget
 
-**Read and request reviews on a pull request**
-
-Read the findings and their severities, and request another review with a comment
-
-**Troubleshoot Code Review**
-
-Fix a review that didn't start, failed, or was skipped for budget
-
-**Code Review costs and usage**
-
-See how reviews are billed, estimate spend, set the monthly spend limit, and track review activity
+> **[Code Review costs and usage](code-review-costs.md)**
+>
+> See how reviews are billed, estimate spend, set the monthly spend limit, and track review activity
 
 ## How reviews work
-
-<span id="what-code-review-checks" />
 
 By default, Code Review focuses on correctness: bugs that would break production, not formatting preferences or missing test coverage. To change what it flags, [add guidance files](code-review-customize.md) to your repository.
 

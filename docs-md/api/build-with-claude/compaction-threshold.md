@@ -2877,7 +2877,7 @@ async function chat(userMessage: string): Promise<string> {
             }
           : message
       )
-      .filter((message) => message.content.length > 0);
+      .filter((message) => message.role !== "assistant" || message.content.length > 0);
 
     // Build new message list: compaction + preserved messages
     const messagesAfterCompaction: Anthropic.Beta.Messages.BetaMessageParam[] = [

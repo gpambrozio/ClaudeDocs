@@ -8,17 +8,19 @@ In a session that has the task-tracking tools, Claude keeps a written todo list,
 
 ## Model availability
 
-The following tools are available by default only on Claude Opus 4.7, Claude Sonnet 4.6, Claude Haiku 4.5, and earlier models. On every other model, including model IDs Claude Code doesn't recognize, they aren't available unless you opt in:
-
-* `TodoWrite`
-* `TaskCreate`
-* `TaskGet`
-* `TaskUpdate`
-* `TaskList`
-
-Wherever the tools are available, Claude Code provides the four Task tools, or `TodoWrite` instead when you set `CLAUDE_CODE_ENABLE_TASKS=0`.
-
-This default set applies in Claude Code v2.1.268 and later, which the TypeScript Agent SDK bundles from v0.3.268.
+> [!NOTE]
+>
+> The following tools are available by default only on Claude Opus 4.7, Claude Sonnet 4.6, Claude Haiku 4.5, and earlier models. On every other model, including model IDs Claude Code doesn't recognize, they aren't available unless you opt in:
+>
+> * `TodoWrite`
+> * `TaskCreate`
+> * `TaskGet`
+> * `TaskUpdate`
+> * `TaskList`
+>
+> Wherever the tools are available, Claude Code provides the four Task tools, or `TodoWrite` instead when you set `CLAUDE_CODE_ENABLE_TASKS=0`.
+>
+> This default set applies in Claude Code v2.1.268 and later, which the TypeScript Agent SDK bundles from v0.3.268.
 
 On a model that doesn't have the tools by default, unless you opt a session in, you see no `tool_use` blocks for them in the message stream. The Agent SDK applies these defaults through the Claude Code binary that it bundles. If you point `pathToClaudeCodeExecutable` (TypeScript) or `cli_path` (Python) at your own Claude Code install, you get whichever tools that install provides, under its own defaults. To see the exact set in a running session, [check which tools are available](../tools-reference.md#check-which-tools-are-available). To opt a session in, do one of the following:
 
@@ -54,7 +56,9 @@ Before running these examples, install the Claude Agent SDK by following the [qu
 * **Turn limit**: each example runs until the agent finishes and yields its final result message. If a session reaches its turn limit first, that result message has the `error_max_turns` subtype. Check `subtype` to detect that ending.
 * **Error handling**: these examples use single-shot `query()` calls. After yielding an `error_max_turns` result, `query()` raises an error that includes `Reached maximum number of turns`. Each example wraps its loop in a try block to exit cleanly when that happens. See [Handle the result](agent-loop.md#handle-the-result) for the result subtypes.
 
-The task system messages, [`SDKTaskNotificationMessage`](typescript.md#sdktasknotificationmessage) (TypeScript) or [`TaskNotificationMessage`](python.md#tasknotificationmessage) (Python) among them, report background tasks such as backgrounded commands and subagents. In the message stream, you see todo activity as `tool_use` blocks in the assistant messages.
+> [!NOTE]
+>
+> The task system messages, [`SDKTaskNotificationMessage`](typescript.md#sdktasknotificationmessage) (TypeScript) or [`TaskNotificationMessage`](python.md#tasknotificationmessage) (Python) among them, report background tasks such as backgrounded commands and subagents. In the message stream, you see todo activity as `tool_use` blocks in the assistant messages.
 
 ### Monitor todo changes
 

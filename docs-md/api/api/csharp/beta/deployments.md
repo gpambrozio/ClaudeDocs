@@ -497,6 +497,8 @@ Create Deployment
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1026,6 +1028,10 @@ Create Deployment
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+using Anthropic.Models.Beta.Sessions.Events;
+
 DeploymentCreateParams parameters = new()
 {
     Agent = "string",
@@ -1039,10 +1045,10 @@ DeploymentCreateParams parameters = new()
                 new BetaManagedAgentsTextBlock()
                 {
                     Text = "Where is my order #1234?",
-                    Type = Type.Text,
+                    Type = BetaManagedAgentsTextBlockType.Text,
                 },
             ],
-            Type = Type.UserMessage,
+            Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
         },
     ],
     Name = "x",
@@ -1272,6 +1278,8 @@ List Deployments
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1801,6 +1809,9 @@ List Deployments
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentListParams parameters = new();
 
 var page = await client.Beta.Deployments.List(parameters);
@@ -2004,6 +2015,8 @@ Get Deployment
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2533,6 +2546,9 @@ Get Deployment
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentRetrieveParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -3104,6 +3120,8 @@ Update Deployment
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3633,6 +3651,9 @@ Update Deployment
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentUpdateParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -3832,6 +3853,8 @@ Archive Deployment
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4361,6 +4384,9 @@ Archive Deployment
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentArchiveParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -4559,6 +4585,8 @@ Run Deployment Now
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -4793,6 +4821,9 @@ Run Deployment Now
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentRunParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -4949,6 +4980,8 @@ Pause Deployment
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -5479,6 +5512,9 @@ Pause Deployment
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentPauseParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -5678,6 +5714,8 @@ Unpause Deployment
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -6207,6 +6245,9 @@ Unpause Deployment
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentUnpauseParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"

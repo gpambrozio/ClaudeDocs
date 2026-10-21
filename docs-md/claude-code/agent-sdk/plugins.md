@@ -60,7 +60,9 @@ Plugin paths can be:
 * **Relative paths**: resolved relative to the `cwd` option (for example, `"./plugins/my-plugin"`)
 * **Absolute paths**: full file system paths (for example, `"/home/user/plugins/my-plugin"`)
 
-The path should point to the plugin's root directory: the parent of `skills/`, `agents/`, `hooks/`, `commands/`, or `.claude-plugin/`.
+> [!NOTE]
+>
+> The path should point to the plugin's root directory: the parent of `skills/`, `agents/`, `hooks/`, `commands/`, or `.claude-plugin/`.
 
 ## Verifying plugin installation
 
@@ -160,7 +162,9 @@ async def main():
 asyncio.run(main())
 ```
 
-If you installed a plugin via the CLI (for example, `/plugin install my-plugin@marketplace`), you can still use it in the SDK by providing its installation path. Check `~/.claude/plugins/` for CLI-installed plugins.
+> [!NOTE]
+>
+> If you installed a plugin via the CLI (for example, `/plugin install my-plugin@marketplace`), you can still use it in the SDK by providing its installation path. Check `~/.claude/plugins/` for CLI-installed plugins.
 
 ## Complete example
 
@@ -260,7 +264,9 @@ my-plugin/
 └── .mcp.json                # MCP server definitions
 ```
 
-The `commands/` directory holds skills as flat Markdown files. Use `skills/` for new plugins. Claude Code supports both locations.
+> [!NOTE]
+>
+> The `commands/` directory holds skills as flat Markdown files. Use `skills/` for new plugins. Claude Code supports both locations.
 
 ## Multiple plugin sources
 
@@ -279,7 +285,9 @@ plugins: [
 ];
 ```
 
-The SDK doesn't expand tilde paths like `~/plugins`. If a plugin path doesn't exist, the SDK skips that plugin and the session continues, so check the `plugins` list in the init message to confirm each plugin loaded.
+> [!NOTE]
+>
+> The SDK doesn't expand tilde paths like `~/plugins`. If a plugin path doesn't exist, the SDK skips that plugin and the session continues, so check the `plugins` list in the init message to confirm each plugin loaded.
 
 ## Troubleshooting
 

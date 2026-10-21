@@ -133,6 +133,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#add
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Body parameters
 
 - `endpoint_url: string`
@@ -606,6 +608,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#set
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `data: array of BetaTelemetryDestination`
@@ -957,6 +961,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#del
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `BetaTelemetryDestination object`
@@ -1302,6 +1308,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#del
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ### Body parameters
 
@@ -1783,6 +1791,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#del
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `BetaDeletedTelemetryDestination object`
@@ -1941,6 +1951,8 @@ Send one test span, named `anthropic.test`, to the destination with its register
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ### Returns
 
@@ -2871,6 +2883,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#cho
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Returns
 
 - `data: array of BetaTelemetryDestinationWorkspace`
@@ -3060,6 +3074,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#cho
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Returns
 
 - `BetaTelemetryDestinationWorkspace object`
@@ -3242,6 +3258,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#cho
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 #### Returns
 

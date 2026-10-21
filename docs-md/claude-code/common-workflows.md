@@ -25,7 +25,7 @@ For configuring Claude Code in a monorepo or large codebase, see [Monorepos and 
 
 Suppose you've just joined a new project and need to understand its structure quickly.
 
-**Navigate to the project root directory**
+**1. Navigate to the project root directory**
 
 ```bash
 cd /path/to/project 
@@ -33,19 +33,19 @@ cd /path/to/project
 
 Replace `/path/to/project` with the path to your project.
 
-**Start Claude Code**
+**2. Start Claude Code**
 
 ```bash
 claude 
 ```
 
-**Ask for a high-level overview**
+**3. Ask for a high-level overview**
 
 ```text wrap
 give me an overview of this codebase
 ```
 
-**Dive deeper into specific components**
+**4. Dive deeper into specific components**
 
 ```text wrap
 explain the main architecture patterns used here
@@ -59,39 +59,43 @@ what are the key data models?
 how is authentication handled?
 ```
 
-Tips:
-
-* Start with broad questions, then narrow down to specific areas
-* Ask about coding conventions and patterns used in the project
-* Request a glossary of project-specific terms
+> [!TIP]
+>
+> Tips:
+>
+> * Start with broad questions, then narrow down to specific areas
+> * Ask about coding conventions and patterns used in the project
+> * Request a glossary of project-specific terms
 
 #### Find relevant code
 
 Suppose you need to locate code related to a specific feature or functionality.
 
-**Ask Claude to find relevant files**
+**1. Ask Claude to find relevant files**
 
 ```text wrap
 find the files that handle user authentication
 ```
 
-**Get context on how components interact**
+**2. Get context on how components interact**
 
 ```text wrap
 how do these authentication files work together?
 ```
 
-**Understand the execution flow**
+**3. Understand the execution flow**
 
 ```text wrap
 trace the login process from front-end to database
 ```
 
-Tips:
-
-* Be specific about what you're looking for
-* Use domain language from the project
-* Install a [code intelligence plugin](plugins/code-intelligence.md) for your language to give Claude precise "go to definition" and "find references" navigation
+> [!TIP]
+>
+> Tips:
+>
+> * Be specific about what you're looking for
+> * Use domain language from the project
+> * Install a [code intelligence plugin](plugins/code-intelligence.md) for your language to give Claude precise "go to definition" and "find references" navigation
 
 ***
 
@@ -99,29 +103,31 @@ Tips:
 
 Suppose you've encountered an error message and need to find and fix its source.
 
-**Share the error with Claude**
+**1. Share the error with Claude**
 
 ```text wrap
 I'm seeing an error when I run npm test
 ```
 
-**Ask for fix recommendations**
+**2. Ask for fix recommendations**
 
 ```text wrap
 suggest a few ways to fix the @ts-ignore in user.ts
 ```
 
-**Apply the fix**
+**3. Apply the fix**
 
 ```text wrap
 update user.ts to add the null check you suggested
 ```
 
-Tips:
-
-* Tell Claude the command to reproduce the issue and get a stack trace
-* Mention any steps to reproduce the error
-* Let Claude know if the error is intermittent or consistent
+> [!TIP]
+>
+> Tips:
+>
+> * Tell Claude the command to reproduce the issue and get a stack trace
+> * Mention any steps to reproduce the error
+> * Let Claude know if the error is intermittent or consistent
 
 ***
 
@@ -131,35 +137,37 @@ Suppose you need to update old code to use modern patterns and practices.
 
 For porting an entire codebase to a new language, see [how Anthropic runs large-scale code migrations with Claude Code](https://claude.com/blog/ai-code-migration) on the blog.
 
-**Identify legacy code for refactoring**
+**1. Identify legacy code for refactoring**
 
 ```text wrap
 find deprecated API usage in our codebase
 ```
 
-**Get refactoring recommendations**
+**2. Get refactoring recommendations**
 
 ```text wrap
 suggest how to refactor utils.js to use modern JavaScript features
 ```
 
-**Apply the changes safely**
+**3. Apply the changes safely**
 
 ```text wrap
 refactor utils.js to use ES2024 features while maintaining the same behavior
 ```
 
-**Verify the refactoring**
+**4. Verify the refactoring**
 
 ```text wrap
 run tests for the refactored code
 ```
 
-Tips:
-
-* Ask Claude to explain the benefits of the modern approach
-* Request that changes maintain backward compatibility when needed
-* Do refactoring in small, testable increments
+> [!TIP]
+>
+> Tips:
+>
+> * Ask Claude to explain the benefits of the modern approach
+> * Request that changes maintain backward compatibility when needed
+> * Do refactoring in small, testable increments
 
 ***
 
@@ -167,25 +175,25 @@ Tips:
 
 Suppose you need to add tests for uncovered code.
 
-**Identify untested code**
+**1. Identify untested code**
 
 ```text wrap
 find functions in NotificationsService.swift that are not covered by tests
 ```
 
-**Generate test scaffolding**
+**2. Generate test scaffolding**
 
 ```text wrap
 add tests for the notification service
 ```
 
-**Add meaningful test cases**
+**3. Add meaningful test cases**
 
 ```text wrap
 add test cases for edge conditions in the notification service
 ```
 
-**Run and verify tests**
+**4. Run and verify tests**
 
 ```text wrap
 run the new tests and fix any failures
@@ -201,19 +209,19 @@ To improve coverage, ask Claude to identify edge cases you might have missed. Cl
 
 You can create pull requests by asking Claude directly ("create a pr for my changes"), or guide Claude through it step-by-step:
 
-**Summarize your changes**
+**1. Summarize your changes**
 
 ```text wrap
 summarize the changes I've made to the authentication module
 ```
 
-**Generate a pull request**
+**2. Generate a pull request**
 
 ```text wrap
 create a pr
 ```
 
-**Review and refine**
+**3. Review and refine**
 
 ```text wrap
 enhance the PR description with more context about the security improvements
@@ -221,41 +229,45 @@ enhance the PR description with more context about the security improvements
 
 To find the session later, run `claude --from-pr 1234` with your own PR number, which opens the session picker filtered to sessions linked to that PR, or paste the PR URL into the [`/resume` picker](sessions.md#use-the-session-picker) search. Claude Code links the session to the PR when Claude creates it with `gh pr create` or `glab mr create`, and when Claude [works on an existing PR](agent-view.md#pull-request-status).
 
-Review Claude's generated PR before submitting and ask Claude to highlight potential risks or considerations.
+> [!TIP]
+>
+> Review Claude's generated PR before submitting and ask Claude to highlight potential risks or considerations.
 
 ### Handle documentation
 
 Suppose you need to add or update documentation for your code.
 
-**Identify undocumented code**
+**1. Identify undocumented code**
 
 ```text wrap
 find functions without proper JSDoc comments in the auth module
 ```
 
-**Generate documentation**
+**2. Generate documentation**
 
 ```text wrap
 add JSDoc comments to the undocumented functions in auth.js
 ```
 
-**Review and enhance**
+**3. Review and enhance**
 
 ```text wrap
 improve the generated documentation with more context and examples
 ```
 
-**Verify documentation**
+**4. Verify documentation**
 
 ```text wrap
 check if the documentation follows our project standards
 ```
 
-Tips:
-
-* Specify the documentation style you want (JSDoc, docstrings, etc.)
-* Ask for examples in the documentation
-* Request documentation for public APIs, interfaces, and complex logic
+> [!TIP]
+>
+> Tips:
+>
+> * Specify the documentation style you want (JSDoc, docstrings, etc.)
+> * Ask for examples in the documentation
+> * Request documentation for public APIs, interfaces, and complex logic
 
 ***
 
@@ -271,7 +283,7 @@ The `.claude/` directory and `CLAUDE.md` sit alongside other tools' config direc
 
 Suppose you need to work with images in your codebase, and you want Claude's help analyzing image content.
 
-**Add an image to the conversation**
+**1. Add an image to the conversation**
 
 You can use any of these methods:
 
@@ -279,7 +291,7 @@ You can use any of these methods:
 2. Copy an image and paste it into the CLI with `Ctrl+V`, or with [`Alt+V` on Windows and WSL](interactive-mode.md#general-controls)
 3. Provide an image path to Claude, for example "Analyze this image: /path/to/your/image.png"
 
-**Ask Claude to analyze the image**
+**2. Ask Claude to analyze the image**
 
 ```text wrap
 What does this image show?
@@ -293,7 +305,7 @@ Describe the UI elements in this screenshot
 Are there any problematic elements in this diagram?
 ```
 
-**Use images for context**
+**3. Use images for context**
 
 ```text wrap
 Here's a screenshot of the error. What's causing it?
@@ -303,7 +315,7 @@ Here's a screenshot of the error. What's causing it?
 This is our current database schema. How should we modify it for the new feature?
 ```
 
-**Get code suggestions from visual content**
+**4. Get code suggestions from visual content**
 
 ```text wrap
 Generate CSS to match this design mockup
@@ -313,13 +325,15 @@ Generate CSS to match this design mockup
 What HTML structure would recreate this component?
 ```
 
-Tips:
-
-* Use images when text descriptions would be unclear or cumbersome
-* Include screenshots of errors, UI designs, or diagrams for better context
-* You can work with multiple images in a conversation
-* Image analysis works with diagrams, screenshots, mockups, and more
-* When Claude references images (for example, `[Image #1]`), `Cmd+Click` (Mac) or `Ctrl+Click` (Windows/Linux) the link to open the image in your default viewer
+> [!TIP]
+>
+> Tips:
+>
+> * Use images when text descriptions would be unclear or cumbersome
+> * Include screenshots of errors, UI designs, or diagrams for better context
+> * You can work with multiple images in a conversation
+> * Image analysis works with diagrams, screenshots, mockups, and more
+> * When Claude references images (for example, `[Image #1]`), `Cmd+Click` (Mac) or `Ctrl+Click` (Windows/Linux) the link to open the image in your default viewer
 
 ***
 
@@ -327,7 +341,7 @@ Tips:
 
 Use @ to quickly include files or directories without waiting for Claude to read them.
 
-**Reference a single file**
+**1. Reference a single file**
 
 ```text wrap
 Explain the logic in @src/utils/auth.js
@@ -335,13 +349,13 @@ Explain the logic in @src/utils/auth.js
 
 This includes the content of the file in the conversation when it fits the [Read tool](tools-reference.md#read-tool-behavior)'s token limit, 25,000 tokens by default. A text file larger than 256KB isn't included.
 
-**Reference a directory**
+**2. Reference a directory**
 
 ```text wrap
 What's the structure of @src/components?
 ```
 
-**Reference MCP resources**
+**3. Reference MCP resources**
 
 ```text wrap
 Show me the data from @github:repos/owner/repo/issues
@@ -349,13 +363,15 @@ Show me the data from @github:repos/owner/repo/issues
 
 This fetches data from connected MCP servers using the format @server:resource. See [MCP resources](mcp.md#use-mcp-resources) for details.
 
-Tips:
-
-* File paths can be relative or absolute
-* Type `@` to open a path suggestion menu, then press Enter or Tab to accept the highlighted path and Enter again to send the message
-* @ file references add `CLAUDE.md` in the file's directory and parent directories to context
-* Directory references show file listings, not contents
-* You can reference multiple files in a single message (for example, "@file1.js and @file2.js")
+> [!TIP]
+>
+> Tips:
+>
+> * File paths can be relative or absolute
+> * Type `@` to open a path suggestion menu, then press Enter or Tab to accept the highlighted path and Enter again to send the message
+> * @ file references add `CLAUDE.md` in the file's directory and parent directories to context
+> * Directory references show file listings, not contents
+> * You can reference multiple files in a single message (for example, "@file1.js and @file2.js")
 
 To stop `@` references from including file contents and directory listings in your message, set [`CLAUDE_CODE_DISABLE_FILE_MENTIONS=1`](env-vars.md#variables) in your shell or user settings. Claude then receives the paths you referenced with a note to read them using its file tools. The variable requires Claude Code v2.1.299 or later, and Claude Code ignores it in project and local settings.
 
@@ -374,7 +390,9 @@ Pick a scheduling option based on where you want the task to run:
 | [GitHub Actions](github-actions.md) | Your CI pipeline | Tasks tied to repo events like opened PRs, or cron schedules that should live alongside your workflow config. |
 | [`/loop`](scheduled-tasks.md) | The current CLI session | Quick polling while a session is open. `--resume` and `--continue` restore unexpired fixed-interval loops. |
 
-When writing prompts for scheduled tasks, be explicit about what success looks like and what to do with results. The task runs autonomously, so it can't ask clarifying questions. For example: "Review open PRs labeled `needs-review`, leave inline comments on any issues, and post a summary in the `#eng-reviews` Slack channel."
+> [!TIP]
+>
+> When writing prompts for scheduled tasks, be explicit about what success looks like and what to do with results. The task runs autonomously, so it can't ask clarifying questions. For example: "Review open PRs labeled `needs-review`, leave inline comments on any issues, and post a summary in the `#eng-reviews` Slack channel."
 
 ***
 
@@ -408,12 +426,16 @@ how do I configure Claude Code for Amazon Bedrock?
 what are the limitations of Claude Code?
 ```
 
-Claude provides documentation-based answers to these questions. For hands-on demonstrations, run `/powerup` for interactive lessons with animated demos, or refer to the specific workflow sections above.
+> [!NOTE]
+>
+> Claude provides documentation-based answers to these questions. For hands-on demonstrations, run `/powerup` for interactive lessons with animated demos, or refer to the specific workflow sections above.
 
-Tips:
-
-* Ask specific questions to get detailed answers
-* Claude can explain complex features like MCP integration, enterprise configurations, and advanced workflows
+> [!TIP]
+>
+> Tips:
+>
+> * Ask specific questions to get detailed answers
+> * Claude can explain complex features like MCP integration, enterprise configurations, and advanced workflows
 
 ***
 
@@ -469,21 +491,21 @@ See [Non-interactive mode](headless.md) for output formats, permission flags, an
 
 ## Next steps
 
-**Best practices**
+> **[Best practices](best-practices.md)**
+>
+> Patterns for getting the most out of Claude Code
 
-Patterns for getting the most out of Claude Code
+> **[Manage sessions](sessions.md)**
+>
+> Resume, name, and branch conversations
 
-**Manage sessions**
+> **[Worktrees](worktrees.md)**
+>
+> Run isolated parallel sessions
 
-Resume, name, and branch conversations
-
-**Worktrees**
-
-Run isolated parallel sessions
-
-**Extend Claude Code**
-
-Add skills, hooks, MCP, subagents, and plugins
+> **[Extend Claude Code](features-overview.md)**
+>
+> Add skills, hooks, MCP, subagents, and plugins
 
 ---
 

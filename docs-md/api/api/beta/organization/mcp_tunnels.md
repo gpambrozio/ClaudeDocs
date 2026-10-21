@@ -162,6 +162,8 @@ archived tunnels are excluded unless `include_archived` is set.
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `data: array of BetaOrganizationTunnel`
@@ -368,6 +370,8 @@ Retrieve a single tunnel in the caller's organization by ID.
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `BetaOrganizationTunnel object`
@@ -569,6 +573,8 @@ tunnel returns the existing record unchanged.
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ### Returns
 
@@ -773,6 +779,8 @@ access logs.
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `BetaOrganizationTunnelToken object`
@@ -947,6 +955,8 @@ restarted after rotation must use the new value. An optional
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ### Body parameters
 
@@ -1197,6 +1207,8 @@ holds at most two non-archived certificates.
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Body parameters
 
 - `ca_certificate_pem: string`
@@ -1429,6 +1441,8 @@ Archived certificates are excluded unless `include_archived` is set.
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Returns
 
 - `data: array of BetaOrganizationTunnelCertificate`
@@ -1639,6 +1653,8 @@ Retrieve a single certificate registered on a tunnel by ID.
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Returns
 
 - `BetaOrganizationTunnelCertificate object`
@@ -1843,6 +1859,8 @@ certificate is added.
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 #### Returns
 

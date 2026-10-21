@@ -373,6 +373,8 @@ The Models API response can be used to determine which models are available for 
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -594,6 +596,9 @@ The Models API response can be used to determine which models are available for 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Models;
+
 ModelListParams parameters = new();
 
 var page = await client.Beta.Models.List(parameters);
@@ -836,6 +841,8 @@ The Models API response can be used to determine information about a specific mo
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1057,6 +1064,9 @@ The Models API response can be used to determine information about a specific mo
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Models;
+
 ModelRetrieveParams parameters = new() { ModelID = "model_id" };
 
 var betaModelInfo = await client.Beta.Models.Retrieve(parameters);
@@ -5036,9 +5046,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string userProfileID` (header parameter)
 
-    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
   - `string workspaceID` (header parameter)
 
@@ -8134,6 +8146,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `class BetaCacheMissModelChanged`
 
+        A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonElement Type = "model_changed"`
 
         - `required long CacheMissedInputTokens`
@@ -8141,6 +8157,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `class BetaCacheMissSystemChanged`
+
+        A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonElement Type = "system_changed"`
 
@@ -8150,6 +8170,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `class BetaCacheMissToolsChanged`
 
+        A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonElement Type = "tools_changed"`
 
         - `required long CacheMissedInputTokens`
@@ -8157,6 +8181,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `class BetaCacheMissMessagesChanged`
+
+        A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonElement Type = "messages_changed"`
 
@@ -8166,9 +8194,21 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `class BetaCacheMissPreviousMessageNotFound`
 
+        A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+        This doesn't mean that this request changed.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `JsonElement Type = "previous_message_not_found"`
 
       - `class BetaCacheMissUnavailable`
+
+        A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+        This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `JsonElement Type = "unavailable"`
 
@@ -9066,6 +9106,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
+
 MessageCreateParams parameters = new()
 {
     MaxTokens = 1024,
@@ -9076,10 +9120,13 @@ MessageCreateParams parameters = new()
             Content = "Hello, world",
             Role = Role.User,
             ClearAt = ClearAt.NextUserMessage,
-            OutputConfig = new() { Effort = Effort.Low },
+            OutputConfig = new()
+            {
+                Effort = BetaSystemMessageOutputConfigEffort.Low
+            },
         },
     ],
-    Model = Model.ClaudeOpus5_5,
+    Model = Messages::Model.ClaudeOpus5_5,
 };
 
 var betaMessage = await client.Beta.Messages.Create(parameters);
@@ -12930,9 +12977,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string userProfileID` (header parameter)
 
-    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+    The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
   - `string workspaceID` (header parameter)
 
@@ -12967,6 +13016,10 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Messages;
+using Messages = Anthropic.Models.Messages;
+
 MessageCountTokensParams parameters = new()
 {
     Messages =
@@ -12976,10 +13029,13 @@ MessageCountTokensParams parameters = new()
             Content = "Hello, world",
             Role = Role.User,
             ClearAt = ClearAt.NextUserMessage,
-            OutputConfig = new() { Effort = Effort.Low },
+            OutputConfig = new()
+            {
+                Effort = BetaSystemMessageOutputConfigEffort.Low
+            },
         },
     ],
-    Model = Model.ClaudeOpus5_5,
+    Model = Messages::Model.ClaudeOpus5_5,
 };
 
 var betaMessageTokensCount = await client.Beta.Messages.CountTokens(parameters);
@@ -16667,7 +16723,21 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `long? MaxTokens`
 
+            The `max_tokens` for the fallback attempt that uses this `fallbacks` entry's `model`, in place of the request's `max_tokens`. If you leave it out or set it to `null`, the attempt uses the request's `max_tokens`.
+
+            See the [refusals and fallback guide](../../build-with-claude/refusals-and-fallback.md#naming-your-own-fallback-models) to learn more about fallback entries.
+
           - `BetaOutputConfig? OutputConfig`
+
+            Output parameters for the fallback attempt that uses this `fallbacks` entry's `model`, combined with the request's `output_config` one field at a time.
+
+            - `format`: If you leave it out, the attempt uses the request's `format`. If you set it to `null`, the attempt runs without a format.
+            - `effort`: If you leave it out, the attempt uses the request's `effort` when `model` supports that level with the attempt's `thinking`. If the request doesn't set `effort`, if `model` doesn't support the level, or if you set `effort` to `null`, the attempt runs at the default effort of `model`.
+            - `task_budget`: If you leave it out, the attempt uses the request's `task_budget` when `model` accepts a task budget of that size. If the request doesn't set `task_budget`, if `model` doesn't accept it, or if you set `task_budget` to `null`, the attempt runs without a task budget.
+
+            Set `output_config` to `null` to run the attempt without a format or a task budget, at the default effort of `model`.
+
+            These rules apply with the `server-side-fallback-2026-07-01` beta header.
 
             - `Effort? Effort`
 
@@ -16717,13 +16787,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           - `Speed? Speed`
 
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
+            The inference speed mode for the fallback attempt that uses this `fallbacks` entry's `model`. If you leave it out, the attempt runs at `fast` speed only when the request sets `speed` to `fast` and your organization can use fast mode on `model`.
+
+            Otherwise, or when you set this field to `null`, the attempt runs at `standard` speed.
+
+            These rules apply with the `server-side-fallback-2026-07-01` beta header.
 
             - `Standard("standard")`
 
             - `Fast("fast")`
 
           - `Thinking? Thinking`
+
+            The thinking configuration for the fallback attempt that uses this `fallbacks` entry's `model`. If you leave it out, the attempt uses the request's `thinking` when `model` supports that thinking `type`.
+
+            If you leave it out and the request's thinking `type` is `between_tools` but `model` doesn't support `between_tools`, the attempt uses `disabled` if `model` supports it. Otherwise, if `model` doesn't support the request's thinking `type`, if the request doesn't set `thinking`, or if you set this field to `null`, the attempt uses the thinking `type` that `model` uses when a request leaves out `thinking`. The request's `thinking.display` still applies where `model` allows it.
+
+            These rules apply with the `server-side-fallback-2026-07-01` beta header.
 
             - `class BetaThinkingConfigEnabled`
 
@@ -17246,9 +17326,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string userProfileID` (header parameter)
 
-    The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+    The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
   - `string workspaceID` (header parameter)
 
@@ -17357,6 +17439,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 #### Example
 
 ```csharp
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using Messages = Anthropic.Models.Beta.Messages;
+using Anthropic.Models.Beta.Messages.Batches;
+using ModelsMessages = Anthropic.Models.Messages;
+
 BatchCreateParams parameters = new()
 {
     Requests =
@@ -17372,15 +17461,18 @@ BatchCreateParams parameters = new()
                     new()
                     {
                         Content = "Hello, world",
-                        Role = Role.User,
-                        ClearAt = ClearAt.NextUserMessage,
-                        OutputConfig = new() { Effort = Effort.Low },
+                        Role = Messages::Role.User,
+                        ClearAt = Messages::ClearAt.NextUserMessage,
+                        OutputConfig = new()
+                        {
+                            Effort = Messages::BetaSystemMessageOutputConfigEffort.Low,
+                        },
                     },
                 ],
-                Model = Model.ClaudeOpus5_5,
-                CacheControl = new() { Ttl = Ttl.Ttl5m },
+                Model = ModelsMessages::Model.ClaudeOpus5_5,
+                CacheControl = new() { Ttl = Messages::Ttl.Ttl5m },
                 Compaction = new() { Instructions = "instructions" },
-                Container = new BetaContainerParams()
+                Container = new Messages::BetaContainerParams()
                 {
                     ID = "id",
                     Skills =
@@ -17388,7 +17480,7 @@ BatchCreateParams parameters = new()
                         new()
                         {
                             SkillID = "pdf",
-                            Type = Type.Anthropic,
+                            Type = Messages::BetaSkillParamsType.Anthropic,
                             Version = "latest",
                         },
                     ],
@@ -17397,7 +17489,7 @@ BatchCreateParams parameters = new()
                 {
                     Edits =
                     [
-                        new BetaClearToolUses20250919Edit()
+                        new Messages::BetaClearToolUses20250919Edit()
                         {
                             ClearAtLeast = new(0),
                             ClearToolInputs = true,
@@ -17406,7 +17498,7 @@ BatchCreateParams parameters = new()
                                 "string"
                             ],
                             Keep = new(0),
-                            Trigger = new BetaInputTokensTrigger(1),
+                            Trigger = new Messages::BetaInputTokensTrigger(1),
                         },
                     ],
                 },
@@ -17415,7 +17507,7 @@ BatchCreateParams parameters = new()
                     PreviousMessageID = "previous_message_id"
                 },
                 FallbackCreditToken = "x",
-                Fallbacks = new Default(),
+                Fallbacks = new Messages::Default(),
                 InferenceGeo = "inference_geo",
                 McpServers =
                 [
@@ -17440,7 +17532,7 @@ BatchCreateParams parameters = new()
                 },
                 OutputConfig = new()
                 {
-                    Effort = Effort.Low,
+                    Effort = Messages::Effort.Low,
                     Format = new()
                     {
                         Schema = new Dictionary<string, JsonElement>()
@@ -17471,13 +17563,13 @@ BatchCreateParams parameters = new()
                 System = new(
 
                     [
-                        new BetaTextBlockParam()
+                        new Messages::BetaTextBlockParam()
                         {
                             Text = "Today's date is 2024-06-01.",
-                            CacheControl = new() { Ttl = Ttl.Ttl5m },
+                            CacheControl = new() { Ttl = Messages::Ttl.Ttl5m },
                             Citations =
                             [
-                                new BetaCitationCharLocationParam()
+                                new Messages::BetaCitationCharLocationParam()
                                 {
                                     CitedText = "The grass is green. The sky is blue.",
                                     DocumentIndex = 0,
@@ -17490,21 +17582,21 @@ BatchCreateParams parameters = new()
                     ]
                 ),
                 Temperature = 1,
-                Thinking = new BetaThinkingConfigAdaptive()
+                Thinking = new Messages::BetaThinkingConfigAdaptive()
                 {
                     BlockBinding = new()
                     {
-                        PrefixMismatchBehavior = BetaThinkingPrefixMismatchBehavior.Error,
+                        PrefixMismatchBehavior = Messages::BetaThinkingPrefixMismatchBehavior.Error,
                     },
-                    Display = Display.Summarized,
+                    Display = Messages::Display.Summarized,
                 },
-                ToolChoice = new BetaToolChoiceAuto()
+                ToolChoice = new Messages::BetaToolChoiceAuto()
                 {
                     DisableParallelToolUse = true
                 },
                 Tools =
                 [
-                    new BetaTool()
+                    new Messages::BetaTool()
                     {
                         InputSchema = new()
                         {
@@ -17521,9 +17613,9 @@ BatchCreateParams parameters = new()
                         Name = "name",
                         AllowedCallers =
                         [
-                            AllowedCaller.Direct
+                            Messages::BetaToolAllowedCaller.Direct
                         ],
-                        CacheControl = new() { Ttl = Ttl.Ttl5m },
+                        CacheControl = new() { Ttl = Messages::Ttl.Ttl5m },
                         DeferLoading = true,
                         Description = "Get the current weather in a given location",
                         EagerInputStreaming = true,
@@ -17535,7 +17627,7 @@ BatchCreateParams parameters = new()
                             },
                         ],
                         Strict = true,
-                        Type = Type.Custom,
+                        Type = Messages::BetaToolType.Custom,
                     },
                 ],
                 TopK = 5,
@@ -17697,6 +17789,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -17804,6 +17898,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Messages.Batches;
+
 BatchRetrieveParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 var betaMessageBatch = await client.Beta.Messages.Batches.Retrieve(parameters);
@@ -17970,6 +18067,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18077,6 +18176,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Messages.Batches;
+
 BatchListParams parameters = new();
 
 var page = await client.Beta.Messages.Batches.List(parameters);
@@ -18242,6 +18344,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18349,6 +18453,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Messages.Batches;
+
 BatchCancelParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 var betaMessageBatch = await client.Beta.Messages.Batches.Cancel(parameters);
@@ -18505,6 +18612,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18528,6 +18637,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Messages.Batches;
+
 BatchDeleteParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 var betaDeletedMessageBatch = await client.Beta.Messages.Batches.Delete(parameters);
@@ -18669,6 +18781,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -21740,6 +21854,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `class BetaCacheMissModelChanged`
 
+              A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+              See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "model_changed"`
 
               - `required long CacheMissedInputTokens`
@@ -21747,6 +21865,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `class BetaCacheMissSystemChanged`
+
+              A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+              See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "system_changed"`
 
@@ -21756,6 +21878,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `class BetaCacheMissToolsChanged`
 
+              A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+              See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "tools_changed"`
 
               - `required long CacheMissedInputTokens`
@@ -21763,6 +21889,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `class BetaCacheMissMessagesChanged`
+
+              A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+              See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "messages_changed"`
 
@@ -21772,9 +21902,21 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `class BetaCacheMissPreviousMessageNotFound`
 
+              A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+              This doesn't mean that this request changed.
+
+              See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "previous_message_not_found"`
 
             - `class BetaCacheMissUnavailable`
+
+              A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+              This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+              See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "unavailable"`
 
@@ -22450,6 +22592,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Messages.Batches;
+
 BatchResultsParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Batches.ResultsStreaming(parameters))
@@ -23418,6 +23563,8 @@ Create Agent
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -24213,6 +24360,9 @@ Create Agent
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents;
+
 AgentCreateParams parameters = new()
 {
     Model = BetaManagedAgentsModel.ClaudeOpus5_5,
@@ -24470,6 +24620,8 @@ List Agents
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -25265,6 +25417,9 @@ List Agents
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents;
+
 AgentListParams parameters = new();
 
 var page = await client.Beta.Agents.List(parameters);
@@ -25509,6 +25664,8 @@ Get Agent
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -26304,6 +26461,9 @@ Get Agent
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents;
+
 AgentRetrieveParams parameters = new()
 {
     AgentID = "agent_011CZkYpogX7uDKUyvBTophP"
@@ -27384,6 +27544,8 @@ Update Agent
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -28179,6 +28341,9 @@ Update Agent
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents;
+
 AgentUpdateParams parameters = new()
 {
     AgentID = "agent_011CZkYpogX7uDKUyvBTophP"
@@ -28413,6 +28578,8 @@ Archive Agent
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -29208,6 +29375,9 @@ Archive Agent
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents;
+
 AgentArchiveParams parameters = new()
 {
     AgentID = "agent_011CZkYpogX7uDKUyvBTophP"
@@ -29454,6 +29624,8 @@ List Agent Versions
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -30249,6 +30421,9 @@ List Agent Versions
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Agents.Versions;
+
 VersionListParams parameters = new()
 {
     AgentID = "agent_011CZkYpogX7uDKUyvBTophP"
@@ -30602,6 +30777,8 @@ Create a new environment with the specified configuration.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -30741,6 +30918,9 @@ Create a new environment with the specified configuration.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentCreateParams parameters = new() { Name = "python-data-analysis" };
 
 var betaEnvironment = await client.Beta.Environments.Create(parameters);
@@ -30929,6 +31109,8 @@ List environments with pagination support.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -31068,6 +31250,9 @@ List environments with pagination support.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentListParams parameters = new();
 
 var page = await client.Beta.Environments.List(parameters);
@@ -31251,6 +31436,8 @@ Retrieve a specific environment by ID.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -31390,6 +31577,9 @@ Retrieve a specific environment by ID.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentRetrieveParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -31683,6 +31873,8 @@ Update an existing environment's configuration.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -31822,6 +32014,9 @@ Update an existing environment's configuration.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentUpdateParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -32001,6 +32196,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -32024,6 +32221,9 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentDeleteParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -32162,6 +32362,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -32302,6 +32504,9 @@ Archive an environment by ID. Archived environments cannot be used to create new
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments;
+
 EnvironmentArchiveParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -32487,6 +32692,8 @@ Retrieve detailed information about a specific work item.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -32576,6 +32783,9 @@ Retrieve detailed information about a specific work item.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkRetrieveParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -32746,6 +32956,8 @@ Long poll for work items in the queue.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string anthropicWorkerID` (header parameter)
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -32833,6 +33045,9 @@ Long poll for work items in the queue.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkPollParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -32992,6 +33207,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaSelfHostedWork`
@@ -33075,6 +33292,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkAckParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -33243,6 +33463,8 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse`
@@ -33282,6 +33504,9 @@ Record a heartbeat for a work item to maintain the lease.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkHeartbeatParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -33433,6 +33658,8 @@ Stop a work item, initiating graceful or forced shutdown.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -33522,6 +33749,9 @@ Stop a work item, initiating graceful or forced shutdown.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkStopParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -33690,6 +33920,8 @@ List work items in an environment.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaSelfHostedWork`
@@ -33773,6 +34005,9 @@ List work items in an environment.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkListParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -33943,6 +34178,8 @@ Update work item metadata with merge semantics.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -34032,6 +34269,10 @@ Update work item metadata with merge semantics.
 #### Example
 
 ```csharp
+using System;
+using System.Collections.Generic;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkUpdateParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -34189,6 +34430,8 @@ Get statistics about the work queue for an environment.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -34226,6 +34469,9 @@ Get statistics about the work queue for an environment.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Environments.Work;
+
 WorkStatsParams parameters = new()
 {
     EnvironmentID = "env_011CZkZ9X2dpNyB7HsEFoRfW"
@@ -35546,6 +35792,8 @@ Create Session
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -36695,6 +36943,9 @@ Create Session
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionCreateParams parameters = new()
 {
     Agent = "agent_011CZkYpogX7uDKUyvBTophP",
@@ -37108,6 +37359,8 @@ List Sessions
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -38257,6 +38510,9 @@ List Sessions
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionListParams parameters = new();
 
 var page = await client.Beta.Sessions.List(parameters);
@@ -38592,6 +38848,8 @@ Get Session
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -39741,6 +39999,9 @@ Get Session
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionRetrieveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -40093,6 +40354,8 @@ Update Session
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -41242,6 +41505,9 @@ Update Session
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionUpdateParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -41572,6 +41838,8 @@ Delete Session
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -41591,6 +41859,9 @@ Delete Session
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionDeleteParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -41729,6 +42000,8 @@ Archive Session
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -42879,6 +43152,9 @@ Archive Session
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions;
+
 SessionArchiveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -43336,6 +43612,8 @@ List Events
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -46270,6 +46548,9 @@ List Events
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Events;
+
 EventListParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -46796,6 +47077,8 @@ Send Events
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -47251,6 +47534,9 @@ Send Events
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Events;
+
 EventSendParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -47263,10 +47549,10 @@ EventSendParams parameters = new()
                 new BetaManagedAgentsTextBlock()
                 {
                     Text = "Where is my order #1234?",
-                    Type = Type.Text,
+                    Type = BetaManagedAgentsTextBlockType.Text,
                 },
             ],
-            Type = Type.UserMessage,
+            Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
         },
     ],
 };
@@ -47423,6 +47709,8 @@ Stream Events
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -50407,6 +50695,9 @@ Stream Events
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Events;
+
 EventStreamParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -50572,6 +50863,8 @@ Add Session Resource
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -50605,11 +50898,14 @@ Add Session Resource
 #### Example
 
 ```csharp
-ResourceAddParams parameters = new()
+using System;
+using Resources = Anthropic.Models.Beta.Sessions.Resources;
+
+Resources::ResourceAddParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
     FileID = "file_011CNha8iCJcU1wXNR6q4V8w",
-    Type = Type.File,
+    Type = Resources::Type.File,
 };
 
 var betaManagedAgentsFileResource = await client.Beta.Sessions.Resources.Add(parameters);
@@ -50760,6 +51056,8 @@ List Session Resources
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -50875,6 +51173,9 @@ List Session Resources
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Resources;
+
 ResourceListParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -51039,6 +51340,8 @@ Get Session Resource
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -51156,6 +51459,9 @@ Get Session Resource
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Resources;
+
 ResourceRetrieveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -51312,6 +51618,8 @@ Update Session Resource
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -51429,6 +51737,9 @@ Update Session Resource
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Resources;
+
 ResourceUpdateParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -51580,6 +51891,8 @@ Delete Session Resource
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -51599,6 +51912,9 @@ Delete Session Resource
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Resources;
+
 ResourceDeleteParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -51764,6 +52080,8 @@ List Session Threads
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -52610,6 +52928,9 @@ List Session Threads
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Threads;
+
 ThreadListParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7"
@@ -52842,6 +53163,8 @@ Get Session Thread
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -53687,6 +54010,9 @@ Get Session Thread
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Threads;
+
 ThreadRetrieveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -53913,6 +54239,8 @@ Archive Session Thread
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -54758,6 +55086,9 @@ Archive Session Thread
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Threads;
+
 ThreadArchiveParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -54991,6 +55322,8 @@ List Session Thread Events
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -57925,6 +58258,9 @@ List Session Thread Events
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Threads.Events;
+
 EventListParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -58099,6 +58435,8 @@ Stream Session Thread Events
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -61083,6 +61421,9 @@ Stream Session Thread Events
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Sessions.Threads.Events;
+
 EventStreamParams parameters = new()
 {
     SessionID = "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -61603,6 +61944,8 @@ Create Deployment
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -62132,6 +62475,10 @@ Create Deployment
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+using Anthropic.Models.Beta.Sessions.Events;
+
 DeploymentCreateParams parameters = new()
 {
     Agent = "string",
@@ -62145,10 +62492,10 @@ DeploymentCreateParams parameters = new()
                 new BetaManagedAgentsTextBlock()
                 {
                     Text = "Where is my order #1234?",
-                    Type = Type.Text,
+                    Type = BetaManagedAgentsTextBlockType.Text,
                 },
             ],
-            Type = Type.UserMessage,
+            Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
         },
     ],
     Name = "x",
@@ -62378,6 +62725,8 @@ List Deployments
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -62907,6 +63256,9 @@ List Deployments
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentListParams parameters = new();
 
 var page = await client.Beta.Deployments.List(parameters);
@@ -63110,6 +63462,8 @@ Get Deployment
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -63639,6 +63993,9 @@ Get Deployment
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentRetrieveParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -64210,6 +64567,8 @@ Update Deployment
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -64739,6 +65098,9 @@ Update Deployment
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentUpdateParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -64938,6 +65300,8 @@ Archive Deployment
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -65467,6 +65831,9 @@ Archive Deployment
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentArchiveParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -65665,6 +66032,8 @@ Run Deployment Now
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -65899,6 +66268,9 @@ Run Deployment Now
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentRunParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -66055,6 +66427,8 @@ Pause Deployment
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -66585,6 +66959,9 @@ Pause Deployment
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentPauseParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -66784,6 +67161,8 @@ Unpause Deployment
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -67313,6 +67692,9 @@ Unpause Deployment
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Deployments;
+
 DeploymentUnpauseParams parameters = new()
 {
     DeploymentID = "depl_011CZkZcDH3vPqd7xnEfwTai"
@@ -67556,6 +67938,8 @@ List Deployment Runs
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -67789,6 +68173,9 @@ List Deployment Runs
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.DeploymentRuns;
+
 DeploymentRunListParams parameters = new();
 
 var page = await client.Beta.DeploymentRuns.List(parameters);
@@ -67950,6 +68337,8 @@ Get Deployment Run
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68183,6 +68572,9 @@ Get Deployment Run
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.DeploymentRuns;
+
 DeploymentRunRetrieveParams parameters = new()
 {
     DeploymentRunID = "deployment_run_id"
@@ -68348,6 +68740,8 @@ Create a Vault
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68395,6 +68789,9 @@ Create a Vault
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultCreateParams parameters = new() { DisplayName = "Example vault" };
 
 var betaManagedAgentsVault = await client.Beta.Vaults.Create(parameters);
@@ -68550,6 +68947,8 @@ List Vaults
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68597,6 +68996,9 @@ List Vaults
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultListParams parameters = new();
 
 var page = await client.Beta.Vaults.List(parameters);
@@ -68749,6 +69151,8 @@ Retrieve a Vault
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68796,6 +69200,9 @@ Retrieve a Vault
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultRetrieveParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -68954,6 +69361,8 @@ Update a Vault
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69001,6 +69410,9 @@ Update a Vault
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultUpdateParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -69149,6 +69561,8 @@ Delete a Vault
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69170,6 +69584,9 @@ Delete a Vault
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultDeleteParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -69311,6 +69728,8 @@ Archive a Vault
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69358,6 +69777,9 @@ Archive a Vault
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults;
+
 VaultArchiveParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -69684,6 +70106,8 @@ Create a Credential
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69849,6 +70273,9 @@ Create a Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialCreateParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -69856,7 +70283,7 @@ CredentialCreateParams parameters = new()
     {
         Token = "bearer_exampletoken",
         McpServerUrl = "https://example-server.modelcontextprotocol.io/sse",
-        Type = Type.StaticBearer,
+        Type = BetaManagedAgentsStaticBearerCreateParamsType.StaticBearer,
     },
 };
 
@@ -70022,6 +70449,8 @@ List Credentials
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70187,6 +70616,9 @@ List Credentials
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialListParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv"
@@ -70351,6 +70783,8 @@ Retrieve a Credential
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70516,6 +70950,9 @@ Retrieve a Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialRetrieveParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -70814,6 +71251,8 @@ Update a Credential
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70979,6 +71418,9 @@ Update a Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialUpdateParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -71137,6 +71579,8 @@ Delete a Credential
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71158,6 +71602,9 @@ Delete a Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialDeleteParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -71303,6 +71750,8 @@ Archive a Credential
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -71469,6 +71918,9 @@ Archive a Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialArchiveParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -71627,6 +72079,8 @@ Validate an MCP OAuth Credential
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71736,6 +72190,9 @@ Validate an MCP OAuth Credential
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Vaults.Credentials;
+
 CredentialMcpOAuthValidateParams parameters = new()
 {
     VaultID = "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -71780,13 +72237,13 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 
 ## Beta › Memory Stores
 
-### Create a memory store
+### Create a Memory Store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Create(parameters, cancellationToken = default)`
 
 **POST** `/v1/memory_stores`
 
-Create a memory store
+Create a Memory Store
 
 #### Parameters
 
@@ -71794,19 +72251,25 @@ Create a memory store
 
   - `required string name`
 
-    Human-readable name for the store. Required; 1–255 characters; no control characters. The mount-path slug under `/mnt/memory/` is derived from this name (lowercased, non-alphanumeric runs collapsed to a hyphen). Names need not be unique within a workspace.
+    The name of the memory store, 1 to 255 characters long, without control characters. Names don't have to be unique in a workspace.
+
+    In a session, the store's directory under `/mnt/memory/` is based on this name. The name is lowercased and every run of characters other than ASCII letters and digits becomes one hyphen. The session's memory store resource gives the exact path in `mount_path`.
+
+    See the [memory guide](../../managed-agents/memory.md#how-the-agent-accesses-memory) to learn more about how agents access memory stores.
 
     minLength: 1, maxLength: 255
 
   - `string description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent.
 
     maxLength: 1024
 
   - `IReadOnlyDictionary<string, string> metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Not visible to the agent.
+    Key-value pairs for your own use, such as the end user that the store belongs to. The agent doesn't see them.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -71914,6 +72377,8 @@ Create a memory store
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71930,27 +72395,33 @@ Create a memory store
 
   - `required string ID`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `required DateTimeOffset? ArchivedAt`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 
   - `required DateTimeOffset CreatedAt`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
     format: date-time
 
   - `required string Description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `required IReadOnlyDictionary<string, string> Metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `required string Name`
 
@@ -71958,13 +72429,18 @@ Create a memory store
 
   - `required DateTimeOffset UpdatedAt`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
     format: date-time
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores;
+
 MemoryStoreCreateParams parameters = new() { Name = "x" };
 
 var betaManagedAgentsMemoryStore = await client.Beta.MemoryStores.Create(parameters);
@@ -71989,13 +72465,13 @@ Console.WriteLine(betaManagedAgentsMemoryStore);
 }
 ```
 
-### List memory stores
+### List Memory Stores
 
 `MemoryStoreListPage Beta.MemoryStores.List(parameters, cancellationToken = default)`
 
 **GET** `/v1/memory_stores`
 
-List memory stores
+List Memory Stores
 
 #### Parameters
 
@@ -72003,13 +72479,13 @@ List memory stores
 
   - `DateTimeOffset createdAtGte` (query parameter)
 
-    Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
+    Return only memory stores created at or after this time (inclusive).
 
     format: date-time
 
   - `DateTimeOffset createdAtLte` (query parameter)
 
-    Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
+    Return only memory stores created at or before this time (inclusive).
 
     format: date-time
 
@@ -72025,7 +72501,7 @@ List memory stores
 
   - `string page` (query parameter)
 
-    Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+    The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -72133,6 +72609,8 @@ List memory stores
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72149,27 +72627,33 @@ List memory stores
 
   - `required string ID`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `required DateTimeOffset? ArchivedAt`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 
   - `required DateTimeOffset CreatedAt`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
     format: date-time
 
   - `required string Description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `required IReadOnlyDictionary<string, string> Metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `required string Name`
 
@@ -72177,13 +72661,18 @@ List memory stores
 
   - `required DateTimeOffset UpdatedAt`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
     format: date-time
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores;
+
 MemoryStoreListParams parameters = new();
 
 var page = await client.Beta.MemoryStores.List(parameters);
@@ -72213,13 +72702,13 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-### Retrieve a memory store
+### Retrieve a Memory Store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Retrieve(parameters, cancellationToken = default)`
 
 **GET** `/v1/memory_stores/{memory_store_id}`
 
-Retrieve a memory store
+Retrieve a Memory Store
 
 #### Parameters
 
@@ -72227,7 +72716,7 @@ Retrieve a memory store
 
   - `required string memoryStoreID` (path parameter)
 
-    ID of the memory store to retrieve (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`.
+    The ID of the memory store to retrieve (`memstore_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -72335,6 +72824,8 @@ Retrieve a memory store
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72351,27 +72842,33 @@ Retrieve a memory store
 
   - `required string ID`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `required DateTimeOffset? ArchivedAt`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 
   - `required DateTimeOffset CreatedAt`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
     format: date-time
 
   - `required string Description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `required IReadOnlyDictionary<string, string> Metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `required string Name`
 
@@ -72379,13 +72876,18 @@ Retrieve a memory store
 
   - `required DateTimeOffset UpdatedAt`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
     format: date-time
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores;
+
 MemoryStoreRetrieveParams parameters = new()
 {
     MemoryStoreID = "memory_store_id"
@@ -72413,13 +72915,13 @@ Console.WriteLine(betaManagedAgentsMemoryStore);
 }
 ```
 
-### Update a memory store
+### Update a Memory Store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Update(parameters, cancellationToken = default)`
 
 **POST** `/v1/memory_stores/{memory_store_id}`
 
-Update a memory store
+Update a Memory Store
 
 #### Parameters
 
@@ -72427,21 +72929,27 @@ Update a memory store
 
   - `required string memoryStoreID` (path parameter)
 
-    ID of the memory store to update (a `memstore_...` identifier). Required. Enumerate IDs via `GET /v1/memory_stores`. Updating an archived store returns 400.
+    The ID of the memory store to update (`memstore_...`).
+
+    The request fails with HTTP status 400 if the store is archived.
 
   - `string? description`
 
-    New description for the store, up to 1024 characters. Pass an empty string to clear it.
+    New description for the store, up to 1,024 characters. Pass an empty string to clear it.
 
     maxLength: 1024
 
   - `IReadOnlyDictionary<string, string>? metadata`
 
-    Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
+    Changes to apply to the memory store's metadata. Keys you leave out keep their values.
+
+    Set a key to a string to add or replace it, or to `null` to remove it. After the change, the metadata can hold at most 16 key-value pairs. Keys are 1 to 64 characters long and values at most 512 characters.
 
   - `string? name`
 
-    New human-readable name for the store. 1–255 characters; no control characters. Renaming changes the slug used for the store's `mount_path` in sessions created after the update.
+    The new name of the memory store, 1 to 255 characters long, without control characters.
+
+    Sessions created after the change use the new name for the store's directory under `/mnt/memory/`.
 
     minLength: 1, maxLength: 255
 
@@ -72551,6 +73059,8 @@ Update a memory store
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72567,27 +73077,33 @@ Update a memory store
 
   - `required string ID`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `required DateTimeOffset? ArchivedAt`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 
   - `required DateTimeOffset CreatedAt`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
     format: date-time
 
   - `required string Description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `required IReadOnlyDictionary<string, string> Metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `required string Name`
 
@@ -72595,13 +73111,18 @@ Update a memory store
 
   - `required DateTimeOffset UpdatedAt`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
     format: date-time
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores;
+
 MemoryStoreUpdateParams parameters = new()
 {
     MemoryStoreID = "memory_store_id"
@@ -72629,13 +73150,13 @@ Console.WriteLine(betaManagedAgentsMemoryStore);
 }
 ```
 
-### Delete a memory store
+### Delete a Memory Store
 
 `BetaManagedAgentsDeletedMemoryStore Beta.MemoryStores.Delete(parameters, cancellationToken = default)`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}`
 
-Delete a memory store
+Delete a Memory Store
 
 #### Parameters
 
@@ -72643,7 +73164,9 @@ Delete a memory store
 
   - `required string memoryStoreID` (path parameter)
 
-    ID of the memory store to permanently delete (a `memstore_...` identifier). Required. Deletion cascades to all memories and memory versions in the store and cannot be undone.
+    The ID of the memory store to delete (`memstore_...`).
+
+    Deleting a store also deletes all its memories and memory versions. It can't be undone.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -72750,6 +73273,8 @@ Delete a memory store
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -72772,6 +73297,9 @@ Delete a memory store
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores;
+
 MemoryStoreDeleteParams parameters = new()
 {
     MemoryStoreID = "memory_store_id"
@@ -72791,13 +73319,13 @@ Console.WriteLine(betaManagedAgentsDeletedMemoryStore);
 }
 ```
 
-### Archive a memory store
+### Archive a Memory Store
 
 `BetaManagedAgentsMemoryStore Beta.MemoryStores.Archive(parameters, cancellationToken = default)`
 
 **POST** `/v1/memory_stores/{memory_store_id}/archive`
 
-Archive a memory store
+Archive a Memory Store
 
 #### Parameters
 
@@ -72805,7 +73333,9 @@ Archive a memory store
 
   - `required string memoryStoreID` (path parameter)
 
-    ID of the memory store to archive (a `memstore_...` identifier). Required. Archiving is one-way and idempotent; archived stores cannot be unarchived. Enumerate IDs via `GET /v1/memory_stores`.
+    The ID of the memory store to archive (`memstore_...`).
+
+    Archiving can't be undone. Archiving a store that is already archived returns it unchanged.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -72913,6 +73443,8 @@ Archive a memory store
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72929,27 +73461,33 @@ Archive a memory store
 
   - `required string ID`
 
-    Unique identifier for the memory store (a `memstore_...` tagged ID). Use this when attaching the store to a session, or in the `{memory_store_id}` path parameter of subsequent calls.
+    The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
   - `required DateTimeOffset? ArchivedAt`
 
-    Timestamp when the store was archived, or `null` if active. Set once and never cleared; archiving is one-way. Archived stores are read-only and cannot be attached to new sessions.
+    When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
+
+    Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
+
+    See the [memory guide](../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 
   - `required DateTimeOffset CreatedAt`
 
-    Timestamp when the store was created.
+    When the memory store was created, in RFC 3339.
 
     format: date-time
 
   - `required string Description`
 
-    Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
+    Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
   - `required IReadOnlyDictionary<string, string> Metadata`
 
-    Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
+    Key-value pairs for your own use, such as the end user that the store belongs to.
+
+    A store has at most 16 pairs. Keys are 1 to 64 characters long and values at most 512 characters. You can't filter lists by metadata.
 
   - `required string Name`
 
@@ -72957,13 +73495,18 @@ Archive a memory store
 
   - `required DateTimeOffset UpdatedAt`
 
-    Timestamp when the store's `name`, `description`, or `metadata` was last modified. Memory writes inside the store do not advance this.
+    When the memory store was last changed, in RFC 3339.
+
+    Changing its `name`, `description`, or `metadata` updates it. Archiving the store does too. Changes to the store's memories don't.
 
     format: date-time
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores;
+
 MemoryStoreArchiveParams parameters = new()
 {
     MemoryStoreID = "memory_store_id"
@@ -72993,13 +73536,13 @@ Console.WriteLine(betaManagedAgentsMemoryStore);
 
 ## Beta › Memory Stores › Memories
 
-### Create a memory
+### Create a Memory
 
 `BetaManagedAgentsMemory Beta.MemoryStores.Memories.Create(parameters, cancellationToken = default)`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories`
 
-Create a memory
+Create a Memory
 
 #### Parameters
 
@@ -73011,17 +73554,23 @@ Create a memory
 
   - `required string? content`
 
-    UTF-8 text content for the new memory. Maximum 100 kB (102,400 bytes). Required; pass `""` explicitly to create an empty memory.
+    The UTF-8 text content of the new memory. Pass `""` to create an empty memory.
+
+    The maximum size is 100 kB (102,400 bytes).
 
   - `required string path`
 
-    Hierarchical path for the new memory, e.g. `/projects/foo/notes.md`. Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive.
+    The path of the new memory, such as `/projects/foo/notes.md`. Paths are case-sensitive.
+
+    A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long.
 
     minLength: 2, maxLength: 1024
 
   - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+    Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+    With `full`, list operations return at most 20 items per page.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -73129,6 +73678,8 @@ Create a memory
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73139,13 +73690,19 @@ Create a memory
 
 - `class BetaManagedAgentsMemory`
 
-  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+  A text document at a path inside a memory store.
+
+  `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
+
+  See the [memory guide](../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `required Type Type`
 
   - `required string ID`
 
-    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+    To retrieve, update, or delete the memory, pass this ID.
 
   - `required string ContentSha256`
 
@@ -73153,7 +73710,7 @@ Create a memory
 
   - `required int ContentSizeBytes`
 
-    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
@@ -73169,7 +73726,11 @@ Create a memory
 
   - `required string MemoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    The ID of the memory version that holds the memory's current content (`memver_...`).
+
+    Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+    See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `required string Path`
 
@@ -73177,17 +73738,24 @@ Create a memory
 
   - `required DateTimeOffset UpdatedAt`
 
-    When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    When the memory was last changed, in RFC 3339.
+
+    To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
     format: date-time
 
   - `string? Content`
 
-    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+    The maximum size is 100 kB (102,400 bytes).
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores.Memories;
+
 MemoryCreateParams parameters = new()
 {
     MemoryStoreID = "memory_store_id",
@@ -73217,13 +73785,13 @@ Console.WriteLine(betaManagedAgentsMemory);
 }
 ```
 
-### List memories
+### List Memories
 
 `MemoryListPage Beta.MemoryStores.Memories.List(parameters, cancellationToken = default)`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories`
 
-List memories
+List Memories
 
 #### Parameters
 
@@ -73235,27 +73803,35 @@ List memories
 
   - `int depth` (query parameter)
 
-    `0` (or omitted) returns all descendants below `path_prefix` (recursive). `1` returns immediate children only; deeper entries roll up as `memory_prefix` items. `depth=1` behaves like `ls`; omitting `depth` behaves like `find`.
+    How far below `path_prefix` to list. Defaults to `0`, which lists every memory below the prefix.
+
+    Pass `1` to list only the direct children. Deeper memories are then grouped into `memory_prefix` items.
 
     format: int32
 
   - `int limit` (query parameter)
 
-    Maximum number of items to return per page. Must be between 1 and 100. Defaults to 20 when omitted. Capped at 20 when `view=full`. Both `memory` and `memory_prefix` items count toward the limit.
+    The maximum number of items to return per page, from 1 to 100. Defaults to 20.
+
+    With `view=full`, a page holds at most 20 items. `memory` and `memory_prefix` items both count toward the limit.
 
     format: int32
 
   - `string page` (query parameter)
 
-    Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
+    The `next_page` value from a previous response, to get the next page. Omit it to get the first page.
 
   - `string pathPrefix` (query parameter)
 
-    Optional path prefix filter. Must end with `/` (segment-aligned), e.g., `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
+    Return only memories whose path starts with this prefix, such as `/notes/`. This value appears in request URLs. Do not include secrets or personally identifiable information.
+
+    Omit it to list the whole store. The prefix must end with `/` and matches whole segments, so `/notes/` matches `/notes/todo.md` but not `/notes-archive/todo.md`.
 
   - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Which projection of each `memory` to return. Defaults to `basic` (content omitted). `full` populates `content` on each item and caps `limit` at 20; use this as the bulk-read path for export and sync.
+    Whether each memory in the response includes `content`. Defaults to `basic`, which sets it to `null`.
+
+    With `full`, a page holds at most 20 items.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -73363,6 +73939,8 @@ List memories
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73373,17 +73951,23 @@ List memories
 
 - `class BetaManagedAgentsMemoryListItem: union`
 
-  One item in a [List memories](../beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
+  One item in a [List Memories](../beta/memory_stores/memories/list.md) response: a `memory`, or a `memory_prefix` marker when `depth` is `1`.
 
   - `class BetaManagedAgentsMemory`
 
-    A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+    A text document at a path inside a memory store.
+
+    `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
+
+    See the [memory guide](../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
     - `required Type Type`
 
     - `required string ID`
 
-      Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+      The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+      To retrieve, update, or delete the memory, pass this ID.
 
     - `required string ContentSha256`
 
@@ -73391,7 +73975,7 @@ List memories
 
     - `required int ContentSizeBytes`
 
-      Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+      The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
       format: int32
 
@@ -73407,7 +73991,11 @@ List memories
 
     - `required string MemoryVersionID`
 
-      ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+      The ID of the memory version that holds the memory's current content (`memver_...`).
+
+      Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+      See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
     - `required string Path`
 
@@ -73415,17 +74003,23 @@ List memories
 
     - `required DateTimeOffset UpdatedAt`
 
-      When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+      When the memory was last changed, in RFC 3339.
+
+      To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
       format: date-time
 
     - `string? Content`
 
-      The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+      The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+      The maximum size is 100 kB (102,400 bytes).
 
   - `class BetaManagedAgentsMemoryPrefix`
 
-    A rolled-up directory marker returned by [List memories](../beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
+    A directory marker that [List Memories](../beta/memory_stores/memories/list.md) returns instead of the memories below the requested `depth`.
+
+    It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
     - `required Type Type`
 
@@ -73436,6 +74030,9 @@ List memories
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores.Memories;
+
 MemoryListParams parameters = new() { MemoryStoreID = "memory_store_id" };
 
 var page = await client.Beta.MemoryStores.Memories.List(parameters);
@@ -73467,13 +74064,13 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-### Retrieve a memory
+### Retrieve a Memory
 
 `BetaManagedAgentsMemory Beta.MemoryStores.Memories.Retrieve(parameters, cancellationToken = default)`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-Retrieve a memory
+Retrieve a Memory
 
 #### Parameters
 
@@ -73489,7 +74086,9 @@ Retrieve a memory
 
   - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+    Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+    With `full`, list operations return at most 20 items per page.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -73597,6 +74196,8 @@ Retrieve a memory
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73607,13 +74208,19 @@ Retrieve a memory
 
 - `class BetaManagedAgentsMemory`
 
-  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+  A text document at a path inside a memory store.
+
+  `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
+
+  See the [memory guide](../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `required Type Type`
 
   - `required string ID`
 
-    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+    To retrieve, update, or delete the memory, pass this ID.
 
   - `required string ContentSha256`
 
@@ -73621,7 +74228,7 @@ Retrieve a memory
 
   - `required int ContentSizeBytes`
 
-    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
@@ -73637,7 +74244,11 @@ Retrieve a memory
 
   - `required string MemoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    The ID of the memory version that holds the memory's current content (`memver_...`).
+
+    Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+    See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `required string Path`
 
@@ -73645,17 +74256,24 @@ Retrieve a memory
 
   - `required DateTimeOffset UpdatedAt`
 
-    When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    When the memory was last changed, in RFC 3339.
+
+    To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
     format: date-time
 
   - `string? Content`
 
-    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+    The maximum size is 100 kB (102,400 bytes).
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores.Memories;
+
 MemoryRetrieveParams parameters = new()
 {
     MemoryStoreID = "memory_store_id",
@@ -73684,13 +74302,13 @@ Console.WriteLine(betaManagedAgentsMemory);
 }
 ```
 
-### Update a memory
+### Update a Memory
 
 `BetaManagedAgentsMemory Beta.MemoryStores.Memories.Update(parameters, cancellationToken = default)`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-Update a memory
+Update a Memory
 
 #### Parameters
 
@@ -73706,7 +74324,9 @@ Update a memory
 
   - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+    Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+    With `full`, list operations return at most 20 items per page.
 
   - `string? content`
 
@@ -73714,13 +74334,17 @@ Update a memory
 
   - `string? path`
 
-    New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, or the Unicode line and paragraph separators (U+2028, U+2029), and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
+    The new path of the memory, which renames it. Omit it to keep the current path.
+
+    The memory keeps its `id`. A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long. Paths are case-sensitive.
 
     minLength: 2, maxLength: 1024
 
   - `BetaManagedAgentsPrecondition precondition`
 
-    Optional optimistic-concurrency precondition. When supplied, the update applies only if the memory's current state matches; on mismatch the request returns `memory_precondition_failed_error` (HTTP 409). When omitted, the update is unconditional.
+    The condition that the memory must meet for the update to apply. Omit it to update unconditionally.
+
+    If the condition fails, the request fails with HTTP status 409.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -73828,6 +74452,8 @@ Update a memory
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73838,13 +74464,19 @@ Update a memory
 
 - `class BetaManagedAgentsMemory`
 
-  A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
+  A text document at a path inside a memory store.
+
+  `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
+
+  See the [memory guide](../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `required Type Type`
 
   - `required string ID`
 
-    Unique identifier for this memory (a `mem_...` value). Stable across renames; use this ID, not the path, to read, update, or delete the memory.
+    The unique ID of the memory (`mem_...`). It stays the same when the memory's path changes.
+
+    To retrieve, update, or delete the memory, pass this ID.
 
   - `required string ContentSha256`
 
@@ -73852,7 +74484,7 @@ Update a memory
 
   - `required int ContentSizeBytes`
 
-    Size of `content` in bytes (the UTF-8 plaintext length). Always populated, regardless of `view`.
+    The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
@@ -73868,7 +74500,11 @@ Update a memory
 
   - `required string MemoryVersionID`
 
-    ID of the `memory_version` representing this memory's current content (a `memver_...` value). This is the authoritative head pointer; `memory_version` objects do not carry an `is_latest` flag, so compare against this field instead. Enumerate the history via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    The ID of the memory version that holds the memory's current content (`memver_...`).
+
+    Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
+
+    See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `required string Path`
 
@@ -73876,17 +74512,24 @@ Update a memory
 
   - `required DateTimeOffset UpdatedAt`
 
-    When this memory was last modified, in RFC 3339 format. Use this as a cheap freshness signal; for who made the change, look up the head version's `created_by` via [List memory versions](../beta/memory_stores/memory_versions/list.md).
+    When the memory was last changed, in RFC 3339.
+
+    To find out who made the change, look at `created_by` on the memory version that `memory_version_id` references.
 
     format: date-time
 
   - `string? Content`
 
-    The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
+    The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
+
+    The maximum size is 100 kB (102,400 bytes).
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores.Memories;
+
 MemoryUpdateParams parameters = new()
 {
     MemoryStoreID = "memory_store_id",
@@ -73915,13 +74558,13 @@ Console.WriteLine(betaManagedAgentsMemory);
 }
 ```
 
-### Delete a memory
+### Delete a Memory
 
 `BetaManagedAgentsDeletedMemory Beta.MemoryStores.Memories.Delete(parameters, cancellationToken = default)`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
-Delete a memory
+Delete a Memory
 
 #### Parameters
 
@@ -74047,6 +74690,8 @@ Delete a memory
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74057,7 +74702,11 @@ Delete a memory
 
 - `class BetaManagedAgentsDeletedMemory`
 
-  Tombstone returned by [Delete a memory](../beta/memory_stores/memories/delete.md). Deleting a memory does not erase its version history: its versions remain listable via [List memory versions](../beta/memory_stores/memory_versions/list.md) while they are retained (each version is kept for at least the version retention period after it was written, unless the store itself is deleted).
+  The confirmation that [Delete a Memory](../beta/memory_stores/memories/delete.md) returns.
+
+  Deleting a memory doesn't delete its versions. [List Memory Versions](../beta/memory_stores/memory_versions/list.md) returns them while they are retained: each version is kept for at least the version retention period after it was written, unless the store itself is deleted.
+
+  See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
   - `required Type Type`
 
@@ -74068,6 +74717,9 @@ Delete a memory
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores.Memories;
+
 MemoryDeleteParams parameters = new()
 {
     MemoryStoreID = "memory_store_id",
@@ -74090,13 +74742,13 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
 ## Beta › Memory Stores › Memory Versions
 
-### List memory versions
+### List Memory Versions
 
 `MemoryVersionListPage Beta.MemoryStores.MemoryVersions.List(parameters, cancellationToken = default)`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
-List memory versions
+List Memory Versions
 
 #### Parameters
 
@@ -74124,7 +74776,9 @@ List memory versions
 
   - `int limit` (query parameter)
 
-    The maximum number of versions to return per page. Defaults to 20.
+    The maximum number of versions to return per page, from 1 to 100. Defaults to 20.
+
+    With `view=full`, a page holds at most 20 versions.
 
     format: int32
 
@@ -74132,7 +74786,7 @@ List memory versions
 
     Return only versions of the memory with this ID (`mem_...`).
 
-    The filter still works after the memory is deleted. The results then include the version whose `operation` is `deleted`.
+    The filter still works after the memory is deleted. While that memory's versions are retained, the results include the version whose `operation` is `deleted`.
 
   - `BetaManagedAgentsMemoryVersionOperation operation` (query parameter)
 
@@ -74152,7 +74806,9 @@ List memory versions
 
   - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+    Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+    With `full`, list operations return at most 20 items per page.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -74260,6 +74916,8 @@ List memory versions
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74270,7 +74928,13 @@ List memory versions
 
 - `class BetaManagedAgentsMemoryVersion`
 
-  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+  One entry in a memory's history, recording a single change and who made it.
+
+  Every change to a memory adds one version. Only redaction can change a version after that. Versions belong to the memory store and stay after the memory is deleted. Each version is retained for at least the version retention period after it was written, unless the store itself is deleted.
+
+  Retrieving a redacted version succeeds, with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`. Check `redacted_at` to find out whether a version was redacted.
+
+  See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `required Type Type`
 
@@ -74286,7 +74950,9 @@ List memory versions
 
   - `required string MemoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](../beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](../beta/memory_stores/memory_versions/list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `required string MemoryStoreID`
 
@@ -74324,7 +74990,11 @@ List memory versions
 
   - `BetaManagedAgentsActor CreatedBy`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](../beta/sessions/retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](../beta/sessions/retrieve.md) to learn more about where the change came from.
 
     - `class BetaManagedAgentsSessionActor`
 
@@ -74380,7 +75050,11 @@ List memory versions
 
   - `DateTimeOffset? RedactedAt`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](../beta/memory_stores/memory_versions/redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../../managed-agents/memory.md#redact-a-version) to learn more about redaction.
 
     format: date-time
 
@@ -74391,6 +75065,9 @@ List memory versions
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores.MemoryVersions;
+
 MemoryVersionListParams parameters = new()
 {
     MemoryStoreID = "memory_store_id"
@@ -74434,13 +75111,13 @@ await foreach (var item in page.Paginate())
 }
 ```
 
-### Retrieve a memory version
+### Retrieve a Memory Version
 
 `BetaManagedAgentsMemoryVersion Beta.MemoryStores.MemoryVersions.Retrieve(parameters, cancellationToken = default)`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
-Retrieve a memory version
+Retrieve a Memory Version
 
 #### Parameters
 
@@ -74456,7 +75133,9 @@ Retrieve a memory version
 
   - `BetaManagedAgentsMemoryView view` (query parameter)
 
-    Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
+    Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
+
+    With `full`, list operations return at most 20 items per page.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -74564,6 +75243,8 @@ Retrieve a memory version
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74574,7 +75255,13 @@ Retrieve a memory version
 
 - `class BetaManagedAgentsMemoryVersion`
 
-  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+  One entry in a memory's history, recording a single change and who made it.
+
+  Every change to a memory adds one version. Only redaction can change a version after that. Versions belong to the memory store and stay after the memory is deleted. Each version is retained for at least the version retention period after it was written, unless the store itself is deleted.
+
+  Retrieving a redacted version succeeds, with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`. Check `redacted_at` to find out whether a version was redacted.
+
+  See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `required Type Type`
 
@@ -74590,7 +75277,9 @@ Retrieve a memory version
 
   - `required string MemoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](../beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](../beta/memory_stores/memory_versions/list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `required string MemoryStoreID`
 
@@ -74628,7 +75317,11 @@ Retrieve a memory version
 
   - `BetaManagedAgentsActor CreatedBy`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](../beta/sessions/retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](../beta/sessions/retrieve.md) to learn more about where the change came from.
 
     - `class BetaManagedAgentsSessionActor`
 
@@ -74684,7 +75377,11 @@ Retrieve a memory version
 
   - `DateTimeOffset? RedactedAt`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](../beta/memory_stores/memory_versions/redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../../managed-agents/memory.md#redact-a-version) to learn more about redaction.
 
     format: date-time
 
@@ -74695,6 +75392,9 @@ Retrieve a memory version
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores.MemoryVersions;
+
 MemoryVersionRetrieveParams parameters = new()
 {
     MemoryStoreID = "memory_store_id",
@@ -74732,13 +75432,13 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
 }
 ```
 
-### Redact a memory version
+### Redact a Memory Version
 
 `BetaManagedAgentsMemoryVersion Beta.MemoryStores.MemoryVersions.Redact(parameters, cancellationToken = default)`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
 
-Redact a memory version
+Redact a Memory Version
 
 #### Parameters
 
@@ -74858,6 +75558,8 @@ Redact a memory version
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74868,7 +75570,13 @@ Redact a memory version
 
 - `class BetaManagedAgentsMemoryVersion`
 
-  A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and are not deleted with the memory; each version is retained for at least the version retention period after it was written, unless the store itself is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
+  One entry in a memory's history, recording a single change and who made it.
+
+  Every change to a memory adds one version. Only redaction can change a version after that. Versions belong to the memory store and stay after the memory is deleted. Each version is retained for at least the version retention period after it was written, unless the store itself is deleted.
+
+  Retrieving a redacted version succeeds, with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`. Check `redacted_at` to find out whether a version was redacted.
+
+  See the [memory guide](../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `required Type Type`
 
@@ -74884,7 +75592,9 @@ Redact a memory version
 
   - `required string MemoryID`
 
-    ID of the memory this version snapshots (a `mem_...` value). Remains valid after the memory is deleted; pass it as `memory_id` to [List memory versions](../beta/memory_stores/memory_versions/list.md) to retrieve the memory's retained versions, including the `deleted` row while the lineage is retained.
+    The ID of the memory that this version belongs to (`mem_...`).
+
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](../beta/memory_stores/memory_versions/list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `required string MemoryStoreID`
 
@@ -74922,7 +75632,11 @@ Redact a memory version
 
   - `BetaManagedAgentsActor CreatedBy`
 
-    Who performed this write: one of `session_actor`, `api_actor`, `user_actor`, or `service_account_actor`; `null` when no writer is recorded. Captured at write time and preserved through redaction. A `session_actor` is an agent writing through the store's mounted filesystem at `/mnt/memory/`. The API key that created that session is not recorded on agent writes, so attribution names who made the write, not who is ultimately responsible; look up session provenance via the [Sessions API](../beta/sessions/retrieve.md).
+    Who made this change to the memory, or `null` if the author wasn't recorded.
+
+    Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
+
+    You can [retrieve the session](../beta/sessions/retrieve.md) to learn more about where the change came from.
 
     - `class BetaManagedAgentsSessionActor`
 
@@ -74978,7 +75692,11 @@ Redact a memory version
 
   - `DateTimeOffset? RedactedAt`
 
-    When this version was redacted, in RFC 3339 format, or `null` if it has not been redacted. When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are all `null`. See [Redact a memory version](../beta/memory_stores/memory_versions/redact.md).
+    When the version was redacted, in RFC 3339, or `null` if it hasn't been.
+
+    When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
+
+    See the [memory guide](../../managed-agents/memory.md#redact-a-version) to learn more about redaction.
 
     format: date-time
 
@@ -74989,6 +75707,9 @@ Redact a memory version
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.MemoryStores.MemoryVersions;
+
 MemoryVersionRedactParams parameters = new()
 {
     MemoryStoreID = "memory_store_id",
@@ -75158,6 +75879,8 @@ Upload File
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75229,6 +75952,10 @@ Upload File
 #### Example
 
 ```csharp
+using System;
+using System.Text;
+using Anthropic.Models.Beta.Files;
+
 FileUploadParams parameters = new()
 {
     File = Encoding.UTF8.GetBytes("Example data")
@@ -75396,6 +76123,8 @@ List Files
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75467,6 +76196,9 @@ List Files
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Files;
+
 FileListParams parameters = new();
 
 var page = await client.Beta.Files.List(parameters);
@@ -75622,6 +76354,8 @@ Download File
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75631,6 +76365,9 @@ Download File
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Files;
+
 FileDownloadParams parameters = new() { FileID = "file_id" };
 
 var response = await client.Beta.Files.Download(parameters);
@@ -75760,6 +76497,8 @@ Get File Metadata
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75831,6 +76570,9 @@ Get File Metadata
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Files;
+
 FileRetrieveMetadataParams parameters = new() { FileID = "file_id" };
 
 var betaFileMetadata = await client.Beta.Files.RetrieveMetadata(parameters);
@@ -75979,6 +76721,8 @@ Delete File
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76002,6 +76746,9 @@ Delete File
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Files;
+
 FileDeleteParams parameters = new() { FileID = "file_id" };
 
 var betaDeletedFile = await client.Beta.Files.Delete(parameters);
@@ -76150,6 +76897,8 @@ Create Skill
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76227,6 +76976,10 @@ Create Skill
 #### Example
 
 ```csharp
+using System;
+using System.Text;
+using Anthropic.Models.Beta.Skills;
+
 SkillCreateParams parameters = new()
 {
     Files =
@@ -76397,6 +77150,8 @@ List Skills
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76474,6 +77229,9 @@ List Skills
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills;
+
 SkillListParams parameters = new();
 
 var page = await client.Beta.Skills.List(parameters);
@@ -76628,6 +77386,8 @@ Get Skill
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76705,6 +77465,9 @@ Get Skill
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills;
+
 SkillRetrieveParams parameters = new() { SkillID = "skill_id" };
 
 var betaSkill = await client.Beta.Skills.Retrieve(parameters);
@@ -76852,6 +77615,8 @@ Delete Skill
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76877,6 +77642,9 @@ Delete Skill
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills;
+
 SkillDeleteParams parameters = new() { SkillID = "skill_id" };
 
 var betaDeletedSkill = await client.Beta.Skills.Delete(parameters);
@@ -77025,6 +77793,8 @@ Create Skill Version
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77074,6 +77844,10 @@ Create Skill Version
 #### Example
 
 ```csharp
+using System;
+using System.Text;
+using Anthropic.Models.Beta.Skills.Versions;
+
 VersionCreateParams parameters = new()
 {
     SkillID = "skill_id",
@@ -77237,6 +78011,8 @@ List Skill Versions
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77286,6 +78062,9 @@ List Skill Versions
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills.Versions;
+
 VersionListParams parameters = new() { SkillID = "skill_id" };
 
 var page = await client.Beta.Skills.Versions.List(parameters);
@@ -77443,6 +78222,8 @@ Download a skill version's content as a zip archive.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77452,6 +78233,9 @@ Download a skill version's content as a zip archive.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills.Versions;
+
 VersionDownloadParams parameters = new()
 {
     SkillID = "skill_id",
@@ -77593,6 +78377,8 @@ Get Skill Version
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77642,6 +78428,9 @@ Get Skill Version
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills.Versions;
+
 VersionRetrieveParams parameters = new()
 {
     SkillID = "skill_id",
@@ -77796,6 +78585,8 @@ Delete Skill Version
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77820,6 +78611,9 @@ Delete Skill Version
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Skills.Versions;
+
 VersionDeleteParams parameters = new()
 {
     SkillID = "skill_id",
@@ -77868,17 +78662,17 @@ Create User Profile
 
   - `string? externalID`
 
-    Platform's own identifier for this user. Not enforced unique. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
+    Platform's own identifier for this user. Not enforced unique. Maximum 255 characters. Legacy field, accepted only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, send `external_user_details.reference_id`.
 
     minLength: 1, maxLength: 255
 
   - `BetaUserProfileExternalUserDetailsParams externalUserDetails`
 
-    Details about the entity this profile represents, as the platform states them. Every field is optional. Accepted under the `user-profiles-2026-09-04` beta header only.
+    Details about the entity this profile represents, as the platform states them. Every field is optional. Not accepted under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which take the top-level `external_id` (and, under `user-profiles-2026-08-18`, `external_user_onboarded_at`) instead.
 
   - `DateTimeOffset externalUserOnboardedAt`
 
-    When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
+    When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Legacy field, accepted only under the `user-profiles-2026-08-18` beta header; without a legacy header, send `external_user_details.onboarded_at`.
 
     format: date-time
 
@@ -77894,7 +78688,7 @@ Create User Profile
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -77998,6 +78792,8 @@ Create User Profile
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78030,6 +78826,10 @@ Create User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `required string? Name`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -78046,13 +78846,13 @@ Create User Profile
 
   - `required DateTimeOffset UpdatedAt`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
     format: date-time
 
   - `AccessType AccessType`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
     - `Application("application")`
 
@@ -78064,11 +78864,11 @@ Create User Profile
 
   - `string? ExternalID`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `BetaUserProfileExternalUserDetails ExternalUserDetails`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
     - `required AccountStatus? AccountStatus`
 
@@ -78122,17 +78922,16 @@ Create User Profile
 
   - `DateTimeOffset? ExternalUserOnboardedAt`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
     format: date-time
-
-  - `string? Name`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.UserProfiles;
+
 UserProfileCreateParams parameters = new();
 
 var betaUserProfile = await client.Beta.UserProfiles.Create(parameters);
@@ -78147,6 +78946,7 @@ Console.WriteLine(betaUserProfile);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "name": "Example User",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -78158,15 +78958,14 @@ Console.WriteLine(betaUserProfile);
   "external_id": "user_12345",
   "external_user_details": {
     "account_status": "active",
-    "country": "country",
-    "email_hash": "email_hash",
-    "entity_type": "individual",
-    "name_hash": "name_hash",
-    "onboarded_at": "2019-12-27T18:11:19.117Z",
-    "reference_id": "reference_id"
+    "country": "US",
+    "email_hash": null,
+    "entity_type": "business",
+    "name_hash": null,
+    "onboarded_at": "2024-11-02T08:15:00Z",
+    "reference_id": "user_12345"
   },
-  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-  "name": "Example User"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z"
 }
 ```
 
@@ -78220,7 +79019,7 @@ List User Profiles
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -78324,6 +79123,8 @@ List User Profiles
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78356,6 +79157,10 @@ List User Profiles
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `required string? Name`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -78372,13 +79177,13 @@ List User Profiles
 
   - `required DateTimeOffset UpdatedAt`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
     format: date-time
 
   - `AccessType AccessType`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
     - `Application("application")`
 
@@ -78390,11 +79195,11 @@ List User Profiles
 
   - `string? ExternalID`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `BetaUserProfileExternalUserDetails ExternalUserDetails`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
     - `required AccountStatus? AccountStatus`
 
@@ -78448,17 +79253,16 @@ List User Profiles
 
   - `DateTimeOffset? ExternalUserOnboardedAt`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
     format: date-time
-
-  - `string? Name`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.UserProfiles;
+
 UserProfileListParams parameters = new();
 
 var page = await client.Beta.UserProfiles.List(parameters);
@@ -78477,6 +79281,7 @@ await foreach (var item in page.Paginate())
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "created_at": "2026-03-15T10:00:00Z",
       "metadata": {},
+      "name": "Example User",
       "trust_grants": {
         "cyber": {
           "status": "active"
@@ -78488,15 +79293,14 @@ await foreach (var item in page.Paginate())
       "external_id": "user_12345",
       "external_user_details": {
         "account_status": "active",
-        "country": "country",
-        "email_hash": "email_hash",
-        "entity_type": "individual",
-        "name_hash": "name_hash",
-        "onboarded_at": "2019-12-27T18:11:19.117Z",
-        "reference_id": "reference_id"
+        "country": "US",
+        "email_hash": null,
+        "entity_type": "business",
+        "name_hash": null,
+        "onboarded_at": "2024-11-02T08:15:00Z",
+        "reference_id": "user_12345"
       },
-      "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-      "name": "Example User"
+      "external_user_onboarded_at": "2024-11-02T08:15:00Z"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -78521,7 +79325,7 @@ Get User Profile
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -78625,6 +79429,8 @@ Get User Profile
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78657,6 +79463,10 @@ Get User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `required string? Name`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -78673,13 +79483,13 @@ Get User Profile
 
   - `required DateTimeOffset UpdatedAt`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
     format: date-time
 
   - `AccessType AccessType`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
     - `Application("application")`
 
@@ -78691,11 +79501,11 @@ Get User Profile
 
   - `string? ExternalID`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `BetaUserProfileExternalUserDetails ExternalUserDetails`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
     - `required AccountStatus? AccountStatus`
 
@@ -78749,17 +79559,16 @@ Get User Profile
 
   - `DateTimeOffset? ExternalUserOnboardedAt`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
     format: date-time
-
-  - `string? Name`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.UserProfiles;
+
 UserProfileRetrieveParams parameters = new()
 {
     UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
@@ -78777,6 +79586,7 @@ Console.WriteLine(betaUserProfile);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "name": "Example User",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -78788,15 +79598,14 @@ Console.WriteLine(betaUserProfile);
   "external_id": "user_12345",
   "external_user_details": {
     "account_status": "active",
-    "country": "country",
-    "email_hash": "email_hash",
-    "entity_type": "individual",
-    "name_hash": "name_hash",
-    "onboarded_at": "2019-12-27T18:11:19.117Z",
-    "reference_id": "reference_id"
+    "country": "US",
+    "email_hash": null,
+    "entity_type": "business",
+    "name_hash": null,
+    "onboarded_at": "2024-11-02T08:15:00Z",
+    "reference_id": "user_12345"
   },
-  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-  "name": "Example User"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z"
 }
 ```
 
@@ -78830,17 +79639,17 @@ Update User Profile
 
   - `string? externalID`
 
-    If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters. Accepted under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` send `external_user_details.reference_id` instead.
+    If present, replaces the stored external_id. Omit to leave unchanged. Maximum 255 characters. Legacy field, accepted only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, send `external_user_details.reference_id`.
 
     minLength: 1, maxLength: 255
 
   - `BetaUserProfileExternalUserDetailsParams externalUserDetails`
 
-    Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Accepted under the `user-profiles-2026-09-04` beta header only.
+    Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Not accepted under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers.
 
   - `DateTimeOffset externalUserOnboardedAt`
 
-    If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Accepted under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` send `external_user_details.onboarded_at` instead.
+    If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Legacy field, accepted only under the `user-profiles-2026-08-18` beta header; without a legacy header, send `external_user_details.onboarded_at`.
 
     format: date-time
 
@@ -78856,7 +79665,7 @@ Update User Profile
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -78960,6 +79769,8 @@ Update User Profile
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78992,6 +79803,10 @@ Update User Profile
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
+  - `required string? Name`
+
+    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
+
   - `required IReadOnlyDictionary<string, BetaUserProfileTrustGrant> TrustGrants`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
@@ -79008,13 +79823,13 @@ Update User Profile
 
   - `required DateTimeOffset UpdatedAt`
 
-    When this user profile was last modified, in RFC 3339 format. Trust-grant status changes also bump this timestamp.
+    When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
     format: date-time
 
   - `AccessType AccessType`
 
-    How the platform uses the API for this entity: `application` (default) or `passthrough`. Present under the `user-profiles-2026-08-18` and later beta headers.
+    How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
     - `Application("application")`
 
@@ -79026,11 +79841,11 @@ Update User Profile
 
   - `string? ExternalID`
 
-    Platform's own identifier for this user. Not enforced unique. Present under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; under `user-profiles-2026-09-04` the value is `external_user_details.reference_id`.
+    Platform's own identifier for this user. Not enforced unique. Legacy field, present only under the `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers; without one of them, the value is `external_user_details.reference_id`.
 
   - `BetaUserProfileExternalUserDetails ExternalUserDetails`
 
-    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Present under the `user-profiles-2026-09-04` beta header, with every field present and `null` until the platform supplies a value; the earlier beta headers serve `reference_id` as the top-level `external_id`, and `user-profiles-2026-08-18` serves `onboarded_at` as `external_user_onboarded_at`.
+    Details about the entity this profile represents, as the platform states them; not verified by Anthropic. Every field is present, `null` until the platform supplies a value. Absent under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which serve `reference_id` as the top-level `external_id` and, under `user-profiles-2026-08-18`, `onboarded_at` as `external_user_onboarded_at`.
 
     - `required AccountStatus? AccountStatus`
 
@@ -79084,17 +79899,16 @@ Update User Profile
 
   - `DateTimeOffset? ExternalUserOnboardedAt`
 
-    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Present under the `user-profiles-2026-08-18` beta header; under `user-profiles-2026-09-04` the value is `external_user_details.onboarded_at`.
+    When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
     format: date-time
-
-  - `string? Name`
-
-    Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name.
 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.UserProfiles;
+
 UserProfileUpdateParams parameters = new()
 {
     UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
@@ -79112,6 +79926,7 @@ Console.WriteLine(betaUserProfile);
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "created_at": "2026-03-15T10:00:00Z",
   "metadata": {},
+  "name": "Example User",
   "trust_grants": {
     "cyber": {
       "status": "active"
@@ -79123,37 +79938,36 @@ Console.WriteLine(betaUserProfile);
   "external_id": "user_12345",
   "external_user_details": {
     "account_status": "active",
-    "country": "country",
-    "email_hash": "email_hash",
-    "entity_type": "individual",
-    "name_hash": "name_hash",
-    "onboarded_at": "2019-12-27T18:11:19.117Z",
-    "reference_id": "reference_id"
+    "country": "US",
+    "email_hash": null,
+    "entity_type": "business",
+    "name_hash": null,
+    "onboarded_at": "2024-11-02T08:15:00Z",
+    "reference_id": "user_12345"
   },
-  "external_user_onboarded_at": "2024-11-02T08:15:00Z",
-  "name": "Example User"
+  "external_user_onboarded_at": "2024-11-02T08:15:00Z"
 }
 ```
 
-### Create Enrollment URL
+### Delete User Profile
 
-`BetaUserProfileEnrollmentUrl Beta.UserProfiles.CreateEnrollmentUrl(parameters, cancellationToken = default)`
+`BetaDeletedUserProfile Beta.UserProfiles.Delete(parameters, cancellationToken = default)`
 
-**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
+**DELETE** `/v1/user_profiles/{user_profile_id}`
 
-Create Enrollment URL
+Delete User Profile
 
 #### Parameters
 
-- `UserProfileCreateEnrollmentUrlParams parameters`
+- `UserProfileDeleteParams parameters`
 
   - `required string userProfileID` (path parameter)
 
-    The ID of the user profile to create an enrollment URL for (`uprof_...`).
+    The ID of the user profile to delete (`uprof_...`).
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
-    This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+    Optional header to specify the beta version(s) you want to use.
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
 
@@ -79257,6 +80071,175 @@ Create Enrollment URL
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+  - `string workspaceID` (header parameter)
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+#### Returns
+
+- `class BetaDeletedUserProfile`
+
+  - `JsonElement Type = "user_profile_deleted"`
+
+    Object type. Always `user_profile_deleted`.
+
+  - `required string ID`
+
+    Identifier of the deleted user profile, prefixed `uprof_`.
+
+#### Example
+
+```csharp
+using System;
+using Anthropic.Models.Beta.UserProfiles;
+
+UserProfileDeleteParams parameters = new()
+{
+    UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
+};
+
+var betaDeletedUserProfile = await client.Beta.UserProfiles.Delete(parameters);
+
+Console.WriteLine(betaDeletedUserProfile);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+  "type": "user_profile_deleted"
+}
+```
+
+### Create Enrollment URL
+
+`BetaUserProfileEnrollmentUrl Beta.UserProfiles.CreateEnrollmentUrl(parameters, cancellationToken = default)`
+
+**POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
+
+Create Enrollment URL
+
+#### Parameters
+
+- `UserProfileCreateEnrollmentUrlParams parameters`
+
+  - `required string userProfileID` (path parameter)
+
+    The ID of the user profile to create an enrollment URL for (`uprof_...`).
+
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79267,7 +80250,7 @@ Create Enrollment URL
 
 - `class BetaUserProfileEnrollmentUrl`
 
-  A URL to give to the entity that a user profile represents, so that the entity can enroll for a trust grant.
+  A URL to give to the entity that a user profile represents, so that the entity can enroll in a program.
 
   - `required Type Type`
 
@@ -79286,6 +80269,9 @@ Create Enrollment URL
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.UserProfiles;
+
 UserProfileCreateEnrollmentUrlParams parameters = new()
 {
     UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9"
@@ -79302,6 +80288,189 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 {
   "expires_at": "2026-03-15T10:15:00Z",
   "type": "enrollment_url",
+  "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
+}
+```
+
+## Beta › User Profiles › Action URLs
+
+### Create Action URL
+
+`BetaUserProfileActionUrl Beta.UserProfiles.ActionUrls.Create(parameters, cancellationToken = default)`
+
+**POST** `/v1/user_profiles/{user_profile_id}/action_urls`
+
+Create Action URL
+
+#### Parameters
+
+- `ActionUrlCreateParams parameters`
+
+  - `required string userProfileID` (path parameter)
+
+    The ID of the user profile the action is for (`uprof_...`).
+
+  - `required BetaUserProfileEnrollEndUserAction action`
+
+    The action that the person who opens the URL takes.
+
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
+
+    Optional header to specify the beta version(s) you want to use.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+  - `string workspaceID` (header parameter)
+
+    Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
+
+    Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+#### Returns
+
+- `class BetaUserProfileActionUrl`
+
+  A URL to give to the person who takes the requested action.
+
+  - `JsonElement Type = "user_profile_action_url"`
+
+    Object type. Always `user_profile_action_url`.
+
+  - `required DateTimeOffset ExpiresAt`
+
+    When the URL stops working, in RFC 3339 format.
+
+    format: date-time
+
+  - `required string Url`
+
+    The URL to give to the person who takes the action. Anyone who holds it can open it until `expires_at`.
+
+#### Example
+
+```csharp
+using System;
+using Anthropic.Models.Beta.UserProfiles.ActionUrls;
+
+ActionUrlCreateParams parameters = new()
+{
+    UserProfileID = "uprof_011CZkZCu8hGbp5mYRQgUmz9",
+    Action = new(),
+};
+
+var betaUserProfileActionUrl = await client.Beta.UserProfiles.ActionUrls.Create(parameters);
+
+Console.WriteLine(betaUserProfileActionUrl);
+```
+
+##### Response (200)
+
+```json
+{
+  "expires_at": "2026-03-15T10:15:00Z",
+  "type": "user_profile_action_url",
   "url": "https://platform.claude.com/user-profiles/enrollment/M3J0bGJxZ2ppMnptbnB1"
 }
 ```
@@ -79509,6 +80678,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
     - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
   - `string workspaceID` (header parameter)
 
@@ -79743,6 +80914,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Dreams;
+
 DreamCreateParams parameters = new()
 {
     Inputs =
@@ -79750,7 +80924,7 @@ DreamCreateParams parameters = new()
         new BetaDreamMemoryStoreInput()
         {
             MemoryStoreID = "x",
-            Type = Type.MemoryStore,
+            Type = BetaDreamMemoryStoreInputType.MemoryStore,
         },
     ],
     Model = "string",
@@ -79989,6 +81163,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -80222,6 +81398,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Dreams;
+
 DreamListParams parameters = new();
 
 var page = await client.Beta.Dreams.List(parameters);
@@ -80406,6 +81585,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -80639,6 +81820,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Dreams;
+
 DreamRetrieveParams parameters = new() { DreamID = "dream_id" };
 
 var betaDream = await client.Beta.Dreams.Retrieve(parameters);
@@ -80816,6 +82000,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81049,6 +82235,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Dreams;
+
 DreamCancelParams parameters = new() { DreamID = "dream_id" };
 
 var betaDream = await client.Beta.Dreams.Cancel(parameters);
@@ -81226,6 +82415,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81459,6 +82650,9 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Dreams;
+
 DreamArchiveParams parameters = new() { DreamID = "dream_id" };
 
 var betaDream = await client.Beta.Dreams.Archive(parameters);
@@ -81638,6 +82832,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81679,6 +82875,9 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Tunnels;
+
 TunnelCreateParams parameters = new();
 
 var betaTunnel = await client.Beta.Tunnels.Create(parameters);
@@ -81823,6 +83022,8 @@ Fetches a tunnel by ID.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81864,6 +83065,9 @@ Fetches a tunnel by ID.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Tunnels;
+
 TunnelRetrieveParams parameters = new() { TunnelID = "tunnel_id" };
 
 var betaTunnel = await client.Beta.Tunnels.Retrieve(parameters);
@@ -82018,6 +83222,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82059,6 +83265,9 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Tunnels;
+
 TunnelListParams parameters = new();
 
 var page = await client.Beta.Tunnels.List(parameters);
@@ -82210,6 +83419,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82251,6 +83462,9 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Tunnels;
+
 TunnelArchiveParams parameters = new() { TunnelID = "tunnel_id" };
 
 var betaTunnel = await client.Beta.Tunnels.Archive(parameters);
@@ -82395,6 +83609,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82420,6 +83636,9 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Tunnels;
+
 TunnelRevealTokenParams parameters = new() { TunnelID = "tunnel_id" };
 
 var betaTunnelToken = await client.Beta.Tunnels.RevealToken(parameters);
@@ -82567,6 +83786,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82592,6 +83813,9 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Tunnels;
+
 TunnelRotateTokenParams parameters = new() { TunnelID = "tunnel_id" };
 
 var betaTunnelToken = await client.Beta.Tunnels.RotateToken(parameters);
@@ -82741,6 +83965,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82788,6 +84014,9 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Tunnels.Certificates;
+
 CertificateCreateParams parameters = new()
 {
     TunnelID = "tunnel_id",
@@ -82941,6 +84170,8 @@ Fetches a tunnel certificate by ID.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82988,6 +84219,9 @@ Fetches a tunnel certificate by ID.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Tunnels.Certificates;
+
 CertificateRetrieveParams parameters = new()
 {
     TunnelID = "tunnel_id",
@@ -83151,6 +84385,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -83198,6 +84434,9 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Tunnels.Certificates;
+
 CertificateListParams parameters = new() { TunnelID = "tunnel_id" };
 
 var page = await client.Beta.Tunnels.Certificates.List(parameters);
@@ -83354,6 +84593,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -83401,6 +84642,9 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Tunnels.Certificates;
+
 CertificateArchiveParams parameters = new()
 {
     TunnelID = "tunnel_id",
@@ -83463,6 +84707,9 @@ Retrieve information about the organization associated with the authenticated AP
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization;
+
 OrganizationRetrieveParams parameters = new();
 
 var betaOrganization = await client.Beta.Organization.Retrieve(parameters);
@@ -83647,6 +84894,9 @@ List API Keys
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ApiKeys;
+
 ApiKeyListParams parameters = new();
 
 var page = await client.Beta.Organization.ApiKeys.List(parameters);
@@ -83823,6 +85073,9 @@ Retrieve information about a single API key in your organization, looked up by i
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ApiKeys;
+
 ApiKeyRetrieveParams parameters = new() { ApiKeyID = "api_key_id" };
 
 var betaApiKey = await client.Beta.Organization.ApiKeys.Retrieve(parameters);
@@ -84006,6 +85259,9 @@ Update API Key
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ApiKeys;
+
 ApiKeyUpdateParams parameters = new() { ApiKeyID = "api_key_id" };
 
 var betaApiKey = await client.Beta.Organization.ApiKeys.Update(parameters);
@@ -84219,6 +85475,9 @@ Create an external key config owned by the caller's organization.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ExternalKeys;
+
 ExternalKeyCreateParams parameters = new()
 {
     ProviderConfig = new BetaAwsExternalKeyConfig()
@@ -84380,6 +85639,9 @@ Results are ordered by creation time (newest first). Use the
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ExternalKeys;
+
 ExternalKeyListParams parameters = new();
 
 var page = await client.Beta.Organization.ExternalKeys.List(parameters);
@@ -84533,6 +85795,9 @@ Retrieve a single external key config in the caller's organization by ID.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ExternalKeys;
+
 ExternalKeyRetrieveParams parameters = new()
 {
     ExternalKeyID = "external_key_id"
@@ -84752,6 +86017,9 @@ encrypted data requires the original key identity to decrypt.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ExternalKeys;
+
 ExternalKeyUpdateParams parameters = new()
 {
     ExternalKeyID = "external_key_id"
@@ -84817,6 +86085,9 @@ The request is rejected if any workspace still references this config.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ExternalKeys;
+
 ExternalKeyDeleteParams parameters = new()
 {
     ExternalKeyID = "external_key_id"
@@ -84885,6 +86156,9 @@ message if it failed or timed out.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ExternalKeys;
+
 ExternalKeyValidateParams parameters = new()
 {
     ExternalKeyID = "external_key_id"
@@ -85109,6 +86383,8 @@ matched as the JWT's `iss` claim and is not fetched.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationIssuer`
@@ -85249,6 +86525,9 @@ matched as the JWT's `iss` claim and is not fetched.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Issuers;
+
 IssuerCreateParams parameters = new()
 {
     IssuerUrl = "x",
@@ -85426,6 +86705,8 @@ Archived issuers are excluded unless `include_archived=true`.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationIssuer`
@@ -85566,6 +86847,9 @@ Archived issuers are excluded unless `include_archived=true`.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Issuers;
+
 IssuerListParams parameters = new();
 
 var page = await client.Beta.Organization.Federation.Issuers.List(parameters);
@@ -85734,6 +87018,8 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationIssuer`
@@ -85874,6 +87160,9 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Issuers;
+
 IssuerRetrieveParams parameters = new()
 {
     FederationIssuerID = "federation_issuer_id"
@@ -86121,6 +87410,8 @@ session.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationIssuer`
@@ -86261,6 +87552,9 @@ session.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Issuers;
+
 IssuerUpdateParams parameters = new()
 {
     FederationIssuerID = "federation_issuer_id"
@@ -86430,6 +87724,8 @@ issuer cannot be changed), or recreate them against another issuer.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationIssuer`
@@ -86570,6 +87866,9 @@ issuer cannot be changed), or recreate them against another issuer.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Issuers;
+
 IssuerArchiveParams parameters = new()
 {
     FederationIssuerID = "federation_issuer_id"
@@ -86794,6 +88093,8 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationRule`
@@ -86928,6 +88229,10 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 #### Example
 
 ```csharp
+using System;
+using System.Collections.Generic;
+using Anthropic.Models.Beta.Organization.Federation.Rules;
+
 RuleCreateParams parameters = new()
 {
     IssuerID = "issuer_id",
@@ -87135,6 +88440,8 @@ unless `include_archived=true`.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationRule`
@@ -87269,6 +88576,9 @@ unless `include_archived=true`.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Rules;
+
 RuleListParams parameters = new();
 
 var page = await client.Beta.Organization.Federation.Rules.List(parameters);
@@ -87449,6 +88759,8 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationRule`
@@ -87583,6 +88895,9 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Rules;
+
 RuleRetrieveParams parameters = new()
 {
     FederationRuleID = "federation_rule_id"
@@ -87819,6 +89134,8 @@ Console session.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationRule`
@@ -87953,6 +89270,9 @@ Console session.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Rules;
+
 RuleUpdateParams parameters = new() { FederationRuleID = "federation_rule_id" };
 
 var betaFederationRule = await client.Beta.Organization.Federation.Rules.Update(parameters);
@@ -88134,6 +89454,8 @@ other scopes require a Console session.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationRule`
@@ -88268,6 +89590,9 @@ other scopes require a Console session.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Rules;
+
 RuleArchiveParams parameters = new()
 {
     FederationRuleID = "federation_rule_id"
@@ -88459,6 +89784,8 @@ other scopes require a Console session.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationRuleWorkspace`
@@ -88490,6 +89817,9 @@ other scopes require a Console session.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Rules.Workspaces;
+
 WorkspaceAddParams parameters = new()
 {
     FederationRuleID = "federation_rule_id",
@@ -88654,6 +89984,8 @@ rules with `applies_to_all_workspaces` or a legacy single
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaFederationRuleWorkspace`
@@ -88685,6 +90017,9 @@ rules with `applies_to_all_workspaces` or a legacy single
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Rules.Workspaces;
+
 WorkspaceListParams parameters = new()
 {
     FederationRuleID = "federation_rule_id"
@@ -88848,6 +90183,8 @@ Console session.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class WorkspaceRemoveResponse`
@@ -88865,6 +90202,9 @@ Console session.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Federation.Rules.Workspaces;
+
 WorkspaceRemoveParams parameters = new()
 {
     FederationRuleID = "federation_rule_id",
@@ -89007,6 +90347,9 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Invites;
+
 InviteCreateParams parameters = new()
 {
     Email = "user@emaildomain.com",
@@ -89163,6 +90506,9 @@ List the organization's invites.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Invites;
+
 InviteListParams parameters = new();
 
 var page = await client.Beta.Organization.Invites.List(parameters);
@@ -89290,6 +90636,9 @@ Retrieve an invite by ID.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Invites;
+
 InviteRetrieveParams parameters = new() { InviteID = "invite_id" };
 
 var betaOrganizationInvite = await client.Beta.Organization.Invites.Retrieve(parameters);
@@ -89348,6 +90697,9 @@ Delete a pending invite.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Invites;
+
 InviteDeleteParams parameters = new() { InviteID = "invite_id" };
 
 var invite = await client.Beta.Organization.Invites.Delete(parameters);
@@ -89514,6 +90866,8 @@ accounts.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -89578,6 +90932,9 @@ accounts.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ServiceAccounts;
+
 ServiceAccountCreateParams parameters = new() { Name = "ci-deploy-bot" };
 
 var betaServiceAccount = await client.Beta.Organization.ServiceAccounts.Create(parameters);
@@ -89741,6 +91098,8 @@ archived service accounts.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -89805,6 +91164,9 @@ archived service accounts.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ServiceAccounts;
+
 ServiceAccountListParams parameters = new();
 
 var page = await client.Beta.Organization.ServiceAccounts.List(parameters);
@@ -89961,6 +91323,8 @@ Retrieve a service account by its ID (`svac_...`).
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -90025,6 +91389,9 @@ Retrieve a service account by its ID (`svac_...`).
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ServiceAccounts;
+
 ServiceAccountRetrieveParams parameters = new()
 {
     ServiceAccountID = "service_account_id"
@@ -90196,6 +91563,8 @@ interactive credential (a user OAuth token or a Console session).
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -90260,6 +91629,9 @@ interactive credential (a user OAuth token or a Console session).
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ServiceAccounts;
+
 ServiceAccountUpdateParams parameters = new()
 {
     ServiceAccountID = "service_account_id"
@@ -90417,6 +91789,8 @@ those rules first or change their target to another service account.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -90481,6 +91855,9 @@ those rules first or change their target to another service account.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ServiceAccounts;
+
 ServiceAccountArchiveParams parameters = new()
 {
     ServiceAccountID = "service_account_id"
@@ -90650,6 +92027,8 @@ rejected.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -90689,6 +92068,10 @@ rejected.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ServiceAccounts.Workspaces;
+using Anthropic.Models.Beta.Organization.Workspaces;
+
 WorkspaceAddParams parameters = new()
 {
     ServiceAccountID = "service_account_id",
@@ -90862,6 +92245,8 @@ page to recover.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -90901,6 +92286,9 @@ page to recover.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ServiceAccounts.Workspaces;
+
 WorkspaceListParams parameters = new()
 {
     ServiceAccountID = "service_account_id"
@@ -91067,6 +92455,8 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class WorkspaceRemoveResponse`
@@ -91084,6 +92474,9 @@ to the implicit `workspace_user` membership. Archived workspaces return
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ServiceAccounts.Workspaces;
+
 WorkspaceRemoveParams parameters = new()
 {
     ServiceAccountID = "service_account_id",
@@ -91200,6 +92593,9 @@ List the organization's members.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Users;
+
 UserListParams parameters = new();
 
 var page = await client.Beta.Organization.Users.List(parameters);
@@ -91298,6 +92694,9 @@ Retrieve a member of the organization by user ID.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Users;
+
 UserRetrieveParams parameters = new() { UserID = "user_id" };
 
 var betaOrganizationUser = await client.Beta.Organization.Users.Retrieve(parameters);
@@ -91403,6 +92802,9 @@ Update a member's organization role.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Users;
+
 UserUpdateParams parameters = new()
 {
     UserID = "user_id",
@@ -91460,6 +92862,9 @@ Remove a member from the organization.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Users;
+
 UserRemoveParams parameters = new() { UserID = "user_id" };
 
 var user = await client.Beta.Organization.Users.Remove(parameters);
@@ -91611,6 +93016,9 @@ List Workspaces
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces;
+
 WorkspaceListParams parameters = new();
 
 var page = await client.Beta.Organization.Workspaces.List(parameters);
@@ -91803,6 +93211,8 @@ Create Workspace
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaWorkspace`
@@ -91900,6 +93310,9 @@ Create Workspace
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces;
+
 WorkspaceCreateParams parameters = new() { Name = "x" };
 
 var betaWorkspace = await client.Beta.Organization.Workspaces.Create(parameters);
@@ -92044,6 +93457,9 @@ Get Workspace
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces;
+
 WorkspaceRetrieveParams parameters = new() { WorkspaceID = "workspace_id" };
 
 var betaWorkspace = await client.Beta.Organization.Workspaces.Retrieve(parameters);
@@ -92220,6 +93636,9 @@ Update Workspace
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces;
+
 WorkspaceUpdateParams parameters = new() { WorkspaceID = "workspace_id" };
 
 var betaWorkspace = await client.Beta.Organization.Workspaces.Update(parameters);
@@ -92362,6 +93781,9 @@ Archive Workspace
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces;
+
 WorkspaceArchiveParams parameters = new() { WorkspaceID = "workspace_id" };
 
 var betaWorkspace = await client.Beta.Organization.Workspaces.Archive(parameters);
@@ -92594,6 +94016,9 @@ the remaining entries.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces.RateLimits;
+
 RateLimitListParams parameters = new() { WorkspaceID = "workspace_id" };
 
 var page = await client.Beta.Organization.Workspaces.RateLimits.List(parameters);
@@ -92634,6 +94059,262 @@ await foreach (var item in page.Paginate())
     }
   ],
   "next_page": "next_page"
+}
+```
+
+### Set Workspace Rate Limits
+
+`BetaWorkspaceRateLimit Beta.Organization.Workspaces.RateLimits.Update(parameters, cancellationToken = default)`
+
+**POST** `/v1/organizations/workspaces/{workspace_id}/rate_limits/{rate_limit_id}`
+
+Set or clear rate-limit overrides for one rate-limit group in a workspace.
+
+Only the limiter types named in `limits` change: an integer `value` sets
+that type's override and `null` clears it. Types not named keep their
+current value. A value above the organization's own limit is stored, but
+the organization limit still applies, so the lower of the two is
+enforced.
+
+Returns the targeted group's entry with this request applied, in the shape
+`GET /v1/organizations/workspaces/{workspace_id}/rate_limits` returns.
+Changes take effect within about an hour.
+
+#### Parameters
+
+- `RateLimitUpdateParams parameters`
+
+  - `required string workspaceID` (path parameter)
+
+    The ID of the workspace.
+
+  - `required string rateLimitID` (path parameter)
+
+    The `id` of the organization's rate-limit entry to set overrides for.
+
+  - `required IReadOnlyList<BetaWorkspaceRateLimitUpdateValue> limits`
+
+    Limits to set or clear. Unspecified limit types are unchanged.
+
+    minItems: 1, maxItems: 16
+
+    - `required BetaWorkspaceRateLimitType Type`
+
+      Rate limiter type.
+
+      - `FastItpmca("fast_itpmca")`
+
+      - `FastOtpm("fast_otpm")`
+
+      - `InputTokensPerMinute("input_tokens_per_minute")`
+
+      - `InputTokensPerMinuteCacheAware("input_tokens_per_minute_cache_aware")`
+
+      - `OutputTokensPerMinute("output_tokens_per_minute")`
+
+      - `RequestsPerMinute("requests_per_minute")`
+
+      - `TokensPerDay("tokens_per_day")`
+
+      - `TokensPerMinute("tokens_per_minute")`
+
+      - `ToolUsesPerSecond("tool_uses_per_second")`
+
+    - `required long? Value`
+
+      New limit value. Set to null to clear the workspace override and fall back to the organization limit.
+
+      minimum: 0, maximum: 9007199254740991
+
+#### Returns
+
+- `class BetaWorkspaceRateLimit`
+
+  - `JsonElement Type = "workspace_rate_limit"`
+
+    Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
+
+  - `required Group Group`
+
+    The rate-limit group this entry's limits apply to. Its `type` equals `group_type`.
+
+    - `class BetaOrganizationRateLimitModelGroup`
+
+      - `JsonElement Type = "model_group"`
+
+        Always `model_group`: a family of models.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+      - `required string DisplayName`
+
+        Human-readable name of the model group (for example, `Claude Sonnet 4.x`). For display only; it may change.
+
+    - `class BetaOrganizationRateLimitBatchGroup`
+
+      - `JsonElement Type = "batch"`
+
+        Always `batch`: the Message Batches API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitTokenCountGroup`
+
+      - `JsonElement Type = "token_count"`
+
+        Always `token_count`: the Token Count API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitFilesGroup`
+
+      - `JsonElement Type = "files"`
+
+        Always `files`: the Files API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitSkillsGroup`
+
+      - `JsonElement Type = "skills"`
+
+        Always `skills`: the Skills API.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+    - `class BetaOrganizationRateLimitWebSearchGroup`
+
+      - `JsonElement Type = "web_search"`
+
+        Always `web_search`: the Messages API web search tool.
+
+      - `required string ID`
+
+        Opaque identifier of the rate-limit group (for example, `rlg_01VPTCmyiu5ZLsWkcxYG2pY8`). It is the same in every organization and never changes, unlike the entry's own identifier, which differs per organization.
+
+  - `required IReadOnlyList<BetaWorkspaceRateLimitValue> Limits`
+
+    The workspace's limiter values for this group. By default only the limiter types with a workspace-level override are listed. With `include_inherited` set to `true`, the limiter types the workspace inherits from the organization are listed too, each marked by `source`.
+
+    - `required string Type`
+
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+
+    - `required long? OrgLimit`
+
+      The organization-level value for the same limiter type, for reference. `null` when the organization has no limit configured for this limiter type.
+
+    - `required Source Source`
+
+      Where `value` comes from. `organization` values are listed only when `include_inherited` is `true`, and then `value` equals `org_limit`.
+
+      - `class BetaWorkspaceRateLimitWorkspaceSource`
+
+        - `JsonElement Type = "workspace"`
+
+          Always `workspace`: a workspace-level override is stored.
+
+      - `class BetaWorkspaceRateLimitOrganizationSource`
+
+        - `JsonElement Type = "organization"`
+
+          Always `organization`: no workspace-level override is stored, so the organization's value applies.
+
+    - `required long Value`
+
+      The workspace's value for this limiter type: the workspace-level override when `source.type` is `workspace`, otherwise the organization's value.
+
+  - `required IReadOnlyList<string>? Models`
+
+    Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
+
+  - `required string RateLimitID`
+
+    The `id` of the organization's RateLimit entry this entry applies to.
+
+  - `required string WorkspaceID`
+
+    ID of the Workspace this entry applies to.
+
+  - `required GroupType GroupType`
+
+    **Deprecated**: Use `group.type` instead. `group_type` is still returned and always equals `group.type`.
+
+    Deprecated: use `group.type` instead. The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`. Always equal to `group.type`.
+
+    - `Batch("batch")`
+
+    - `Files("files")`
+
+    - `ModelGroup("model_group")`
+
+    - `Skills("skills")`
+
+    - `TokenCount("token_count")`
+
+    - `WebSearch("web_search")`
+
+#### Example
+
+```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces.RateLimits;
+
+RateLimitUpdateParams parameters = new()
+{
+    WorkspaceID = "workspace_id",
+    RateLimitID = "rate_limit_id",
+    Limits =
+    [
+        new()
+        {
+            Type = BetaWorkspaceRateLimitType.FastItpmca,
+            Value = 0,
+        },
+    ],
+};
+
+var betaWorkspaceRateLimit = await client.Beta.Organization.Workspaces.RateLimits.Update(parameters);
+
+Console.WriteLine(betaWorkspaceRateLimit);
+```
+
+##### Response (200)
+
+```json
+{
+  "group": {
+    "id": "id",
+    "display_name": "display_name",
+    "type": "model_group"
+  },
+  "group_type": "batch",
+  "limits": [
+    {
+      "org_limit": 0,
+      "source": {
+        "type": "workspace"
+      },
+      "type": "type",
+      "value": 0
+    }
+  ],
+  "models": [
+    "string"
+  ],
+  "rate_limit_id": "rate_limit_id",
+  "type": "workspace_rate_limit",
+  "workspace_id": "workspace_id"
 }
 ```
 
@@ -92706,6 +94387,9 @@ List Workspace Members
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces.Members;
+
 MemberListParams parameters = new() { WorkspaceID = "workspace_id" };
 
 var page = await client.Beta.Organization.Workspaces.Members.List(parameters);
@@ -92792,6 +94476,10 @@ Create Workspace Member
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces;
+using Anthropic.Models.Beta.Organization.Workspaces.Members;
+
 MemberAddParams parameters = new()
 {
     WorkspaceID = "workspace_id",
@@ -92870,6 +94558,9 @@ Get Workspace Member
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces.Members;
+
 MemberRetrieveParams parameters = new()
 {
     WorkspaceID = "workspace_id",
@@ -92951,6 +94642,10 @@ Update Workspace Member
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces;
+using Anthropic.Models.Beta.Organization.Workspaces.Members;
+
 MemberUpdateParams parameters = new()
 {
     WorkspaceID = "workspace_id",
@@ -93015,6 +94710,9 @@ Delete Workspace Member
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces.Members;
+
 MemberRemoveParams parameters = new()
 {
     WorkspaceID = "workspace_id",
@@ -93179,6 +94877,8 @@ omitted from the results.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -93218,6 +94918,9 @@ omitted from the results.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces.ServiceAccounts;
+
 ServiceAccountListParams parameters = new() { WorkspaceID = "workspace_id" };
 
 var page = await client.Beta.Organization.Workspaces.ServiceAccounts.List(parameters);
@@ -93386,6 +95089,8 @@ accounts cannot be added and are rejected.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -93425,6 +95130,10 @@ accounts cannot be added and are rejected.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces;
+using Anthropic.Models.Beta.Organization.Workspaces.ServiceAccounts;
+
 ServiceAccountAddParams parameters = new()
 {
     WorkspaceID = "workspace_id",
@@ -93585,6 +95294,8 @@ account returns 404.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -93624,6 +95335,9 @@ account returns 404.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces.ServiceAccounts;
+
 ServiceAccountRetrieveParams parameters = new()
 {
     WorkspaceID = "workspace_id",
@@ -93787,6 +95501,8 @@ rejected.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -93826,6 +95542,10 @@ rejected.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces;
+using Anthropic.Models.Beta.Organization.Workspaces.ServiceAccounts;
+
 ServiceAccountUpdateParams parameters = new()
 {
     WorkspaceID = "workspace_id",
@@ -93985,6 +95705,8 @@ membership. Archived workspaces return 400.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class ServiceAccountRemoveResponse`
@@ -94002,6 +95724,9 @@ membership. Archived workspaces return 400.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Workspaces.ServiceAccounts;
+
 ServiceAccountRemoveParams parameters = new()
 {
     WorkspaceID = "workspace_id",
@@ -94087,7 +95812,7 @@ the remaining entries.
 
   - `required string ID`
 
-    Identifier of this rate-limit entry. It is stable within the organization and differs between organizations; the group's own identifier is `group.id`.
+    Identifier of this rate-limit entry. It is stable within the organization and differs between organizations; the group's own identifier is `group.id`. Pass it as `rate_limit_id` to set a workspace's overrides for this group.
 
   - `required Group Group`
 
@@ -94194,6 +95919,9 @@ the remaining entries.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RateLimits;
+
 RateLimitListParams parameters = new();
 
 var page = await client.Beta.Organization.RateLimits.List(parameters);
@@ -94272,6 +96000,9 @@ organization reads the state inherited from the parent's configuration.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ComplianceSettings;
+
 ComplianceSettingRetrieveParams parameters = new();
 
 var betaComplianceSettings = await client.Beta.Organization.ComplianceSettings.Retrieve(parameters);
@@ -94340,6 +96071,9 @@ compliance settings.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.ComplianceSettings;
+
 ComplianceSettingUpdateParams parameters = new()
 {
     State = new BetaComplianceSettingsStateEnabledParam()
@@ -94555,6 +96289,9 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.Summaries;
+
 SummaryListParams parameters = new() { StartingDate = "2019-12-27" };
 
 var page = await client.Beta.Organization.Analytics.Summaries.List(parameters);
@@ -95171,6 +96908,9 @@ the `read:analytics` scope.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.Users;
+
 UserListParams parameters = new();
 
 var page = await client.Beta.Organization.Analytics.Users.List(parameters);
@@ -95490,6 +97230,9 @@ plan. Requires an API key with the `read:analytics` scope.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.Apps.Chat.Projects;
+
 ProjectListParams parameters = new();
 
 var page = await client.Beta.Organization.Analytics.Apps.Chat.Projects.List(parameters);
@@ -95734,6 +97477,9 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.Connectors;
+
 ConnectorListParams parameters = new();
 
 var page = await client.Beta.Organization.Analytics.Connectors.List(parameters);
@@ -95957,6 +97703,9 @@ range-rollup mode like `/skills`.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.Plugins;
+
 PluginListParams parameters = new();
 
 var page = await client.Beta.Organization.Analytics.Plugins.List(parameters);
@@ -96212,6 +97961,9 @@ on a Claude Enterprise plan. Requires an API key with the
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.Skills;
+
 SkillListParams parameters = new();
 
 var page = await client.Beta.Organization.Analytics.Skills.List(parameters);
@@ -96385,6 +98137,9 @@ can be broken out per product, per member, or per RBAC group via
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.Artifacts;
+
 ArtifactListParams parameters = new() { Date = "2019-12-27" };
 
 var page = await client.Beta.Organization.Analytics.Artifacts.List(parameters);
@@ -96711,6 +98466,9 @@ key with the `read:analytics` scope.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.UsageReport;
+
 UsageReportListParams parameters = new()
 {
     StartingAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")
@@ -97111,6 +98869,9 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.UserUsageReport;
+
 UserUsageReportListParams parameters = new()
 {
     StartingAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")
@@ -97469,6 +99230,9 @@ Requires an API key with the `read:analytics` scope.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.CostReport;
+
 CostReportListParams parameters = new()
 {
     StartingAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")
@@ -97860,6 +99624,9 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Analytics.UserCostReport;
+
 UserCostReportListParams parameters = new()
 {
     StartingAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z")
@@ -98078,6 +99845,8 @@ Anthropic account team.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaSpendLimit`
@@ -98191,6 +99960,9 @@ Anthropic account team.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.SpendLimits;
+
 SpendLimitSetParams parameters = new()
 {
     Amount = "50000",
@@ -98350,6 +100122,9 @@ Retrieve a spend limit by ID.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.SpendLimits;
+
 SpendLimitRetrieveParams parameters = new() { SpendLimitID = "spend_limit_id" };
 
 var betaSpendLimit = await client.Beta.Organization.SpendLimits.Retrieve(parameters);
@@ -98410,6 +100185,9 @@ workspace limits through the API is in an early access preview.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.SpendLimits;
+
 SpendLimitDeleteParams parameters = new() { SpendLimitID = "spend_limit_id" };
 
 var spendLimit = await client.Beta.Organization.SpendLimits.Delete(parameters);
@@ -98577,6 +100355,8 @@ organizations only, not for Claude Console organizations.
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaSpendLimit`
@@ -98690,6 +100470,9 @@ organizations only, not for Claude Console organizations.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.SpendLimits;
+
 SpendLimitListParams parameters = new();
 
 var page = await client.Beta.Organization.SpendLimits.List(parameters);
@@ -98926,6 +100709,9 @@ organizations.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.SpendLimits.Effective;
+
 EffectiveListParams parameters = new();
 
 var page = await client.Beta.Organization.SpendLimits.Effective.List(parameters);
@@ -99209,6 +100995,9 @@ Requests whose requester is no longer a member are excluded.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.SpendLimits.IncreaseRequests;
+
 IncreaseRequestListParams parameters = new();
 
 var page = await client.Beta.Organization.SpendLimits.IncreaseRequests.List(parameters);
@@ -99494,6 +101283,9 @@ requester at the request's period.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.SpendLimits.IncreaseRequests;
+
 IncreaseRequestRetrieveParams parameters = new()
 {
     SpendLimitIncreaseRequestID = "spend_limit_increase_request_id"
@@ -99853,6 +101645,9 @@ the member was blocked on. Anthropic emails the requester unless
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.SpendLimits.IncreaseRequests;
+
 IncreaseRequestApproveParams parameters = new()
 {
     SpendLimitIncreaseRequestID = "spend_limit_increase_request_id",
@@ -100151,6 +101946,9 @@ Idempotent on `denied`; denying an already-`approved` request returns
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.SpendLimits.IncreaseRequests;
+
 IncreaseRequestDenyParams parameters = new()
 {
     SpendLimitIncreaseRequestID = "spend_limit_increase_request_id"
@@ -100277,6 +102075,9 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacGroups;
+
 RbacGroupCreateParams parameters = new() { Name = "Engineering" };
 
 var betaRbacGroup = await client.Beta.Organization.RbacGroups.Create(parameters);
@@ -100374,6 +102175,9 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacGroups;
+
 RbacGroupListParams parameters = new();
 
 var page = await client.Beta.Organization.RbacGroups.List(parameters);
@@ -100471,6 +102275,9 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacGroups;
+
 RbacGroupRetrieveParams parameters = new() { RbacGroupID = "rbac_group_id" };
 
 var betaRbacGroup = await client.Beta.Organization.RbacGroups.Retrieve(parameters);
@@ -100566,6 +102373,9 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacGroups;
+
 RbacGroupUpdateParams parameters = new() { RbacGroupID = "rbac_group_id" };
 
 var betaRbacGroup = await client.Beta.Organization.RbacGroups.Update(parameters);
@@ -100627,6 +102437,9 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacGroups;
+
 RbacGroupDeleteParams parameters = new() { RbacGroupID = "rbac_group_id" };
 
 var rbacGroup = await client.Beta.Organization.RbacGroups.Delete(parameters);
@@ -100706,6 +102519,9 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacGroups.Members;
+
 MemberListParams parameters = new() { RbacGroupID = "rbac_group_id" };
 
 var page = await client.Beta.Organization.RbacGroups.Members.List(parameters);
@@ -100787,6 +102603,9 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacGroups.Members;
+
 MemberAddParams parameters = new()
 {
     RbacGroupID = "rbac_group_id",
@@ -100852,6 +102671,9 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacGroups.Members;
+
 MemberRemoveParams parameters = new()
 {
     RbacGroupID = "rbac_group_id",
@@ -100941,6 +102763,9 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacRoles;
+
 RbacRoleListParams parameters = new();
 
 var page = await client.Beta.Organization.RbacRoles.List(parameters);
@@ -101026,6 +102851,9 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacRoles;
+
 RbacRoleRetrieveParams parameters = new() { RbacRoleID = "rbac_role_id" };
 
 var betaRbacRole = await client.Beta.Organization.RbacRoles.Retrieve(parameters);
@@ -101182,6 +103010,9 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.RbacRoles.Permissions;
+
 PermissionListParams parameters = new() { RbacRoleID = "rbac_role_id" };
 
 var page = await client.Beta.Organization.RbacRoles.Permissions.List(parameters);
@@ -101374,6 +103205,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPlugin`
@@ -101569,6 +103402,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using System.Text;
+using Anthropic.Models.Beta.Organization.Plugins;
+
 PluginCreateParams parameters = new()
 {
     Files =
@@ -101754,6 +103591,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPlugin`
@@ -101949,6 +103788,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins;
+
 PluginRetrieveParams parameters = new() { PluginID = "plugin_id" };
 
 var betaPlugin = await client.Beta.Organization.Plugins.Retrieve(parameters);
@@ -102148,6 +103990,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPlugin`
@@ -102343,6 +104187,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins;
+
 PluginUpdateParams parameters = new()
 {
     PluginID = "plugin_id",
@@ -102582,6 +104429,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPlugin`
@@ -102777,6 +104626,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins;
+
 PluginListParams parameters = new();
 
 var page = await client.Beta.Organization.Plugins.List(parameters);
@@ -102970,6 +104822,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaDeletedPlugin`
@@ -102985,6 +104839,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins;
+
 PluginDeleteParams parameters = new() { PluginID = "plugin_id" };
 
 var betaDeletedPlugin = await client.Beta.Organization.Plugins.Delete(parameters);
@@ -103158,6 +105015,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginVersion`
@@ -103295,6 +105154,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using System.Text;
+using Anthropic.Models.Beta.Organization.Plugins.Versions;
+
 VersionCreateParams parameters = new()
 {
     PluginID = "plugin_id",
@@ -103489,6 +105352,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginVersion`
@@ -103626,6 +105491,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins.Versions;
+
 VersionListParams parameters = new() { PluginID = "plugin_id" };
 
 var page = await client.Beta.Organization.Plugins.Versions.List(parameters);
@@ -103807,6 +105675,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginVersion`
@@ -103944,6 +105814,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins.Versions;
+
 VersionRetrieveParams parameters = new()
 {
     PluginID = "plugin_id",
@@ -104138,9 +106011,14 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins.Versions;
+
 VersionDownloadParams parameters = new()
 {
     PluginID = "plugin_id",
@@ -104311,6 +106189,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginInstallationSetting`
@@ -104384,6 +106264,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins.InstallationSettings;
+
 InstallationSettingListParams parameters = new() { PluginID = "plugin_id" };
 
 var page = await client.Beta.Organization.Plugins.InstallationSettings.List(parameters);
@@ -104567,6 +106450,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginInstallationSetting`
@@ -104640,6 +106525,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins.InstallationSettings;
+
 InstallationSettingSetParams parameters = new()
 {
     PluginID = "plugin_id",
@@ -104813,6 +106701,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaDeletedPluginInstallationSetting`
@@ -104861,6 +106751,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins.InstallationSettings;
+
 InstallationSettingRemoveParams parameters = new()
 {
     PluginID = "plugin_id",
@@ -105047,6 +106940,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginShare`
@@ -105102,6 +106997,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Plugins.Shares;
+
 ShareListParams parameters = new() { PluginID = "plugin_id" };
 
 var page = await client.Beta.Organization.Plugins.Shares.List(parameters);
@@ -105299,6 +107197,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginMarketplace`
@@ -105396,6 +107296,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.PluginMarketplaces;
+
 PluginMarketplaceListParams parameters = new();
 
 var page = await client.Beta.Organization.PluginMarketplaces.List(parameters);
@@ -105559,6 +107462,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginMarketplace`
@@ -105656,6 +107561,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.PluginMarketplaces;
+
 PluginMarketplaceRetrieveParams parameters = new()
 {
     MarketplaceID = "marketplace_id"
@@ -105828,6 +107736,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginMarketplace`
@@ -105925,6 +107835,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.PluginMarketplaces;
+
 PluginMarketplaceUpdateParams parameters = new()
 {
     MarketplaceID = "marketplace_id",
@@ -106104,6 +108017,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginMarketplaceValidationReport`
@@ -106178,6 +108093,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.PluginMarketplaces;
+
 PluginMarketplaceValidateRepositoryParams parameters = new()
 {
     RepositoryUrl = "https://github.com/example-org/example-marketplace"
@@ -106363,6 +108281,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaPluginMarketplaceValidationReport`
@@ -106437,6 +108357,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Example
 
 ```csharp
+using System;
+using System.Text;
+using Anthropic.Models.Beta.Organization.PluginMarketplaces;
+
 PluginMarketplaceValidateArchiveParams parameters = new()
 {
     Archive = Encoding.UTF8.GetBytes("Example data")
@@ -106635,6 +108559,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaTelemetryDestination`
@@ -106808,6 +108734,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.TelemetryDestinations;
+
 TelemetryDestinationCreateParams parameters = new()
 {
     EndpointUrl = "x",
@@ -106988,6 +108917,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaTelemetryDestination`
@@ -107161,6 +109092,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.TelemetryDestinations;
+
 TelemetryDestinationListParams parameters = new();
 
 var page = await client.Beta.Organization.TelemetryDestinations.List(parameters);
@@ -107332,6 +109266,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaTelemetryDestination`
@@ -107505,6 +109441,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.TelemetryDestinations;
+
 TelemetryDestinationRetrieveParams parameters = new()
 {
     DestinationID = "destination_id"
@@ -107714,6 +109653,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaTelemetryDestination`
@@ -107887,6 +109828,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.TelemetryDestinations;
+
 TelemetryDestinationUpdateParams parameters = new()
 {
     DestinationID = "destination_id"
@@ -108056,6 +110000,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaDeletedTelemetryDestination`
@@ -108071,6 +110017,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.TelemetryDestinations;
+
 TelemetryDestinationDeleteParams parameters = new()
 {
     DestinationID = "destination_id"
@@ -108212,6 +110161,8 @@ Send one test span, named `anthropic.test`, to the destination with its register
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaTelemetryDestinationTestResponse`
@@ -108243,6 +110194,9 @@ Send one test span, named `anthropic.test`, to the destination with its register
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.TelemetryDestinations;
+
 TelemetryDestinationTestParams parameters = new()
 {
     DestinationID = "destination_id"
@@ -108402,6 +110356,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaTelemetryDestinationWorkspace`
@@ -108429,6 +110385,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.TelemetryDestinations.Workspaces;
+
 WorkspaceListParams parameters = new() { DestinationID = "destination_id" };
 
 var page = await client.Beta.Organization.TelemetryDestinations.Workspaces.List(parameters);
@@ -108586,6 +110545,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaTelemetryDestinationWorkspace`
@@ -108613,6 +110574,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.TelemetryDestinations.Workspaces;
+
 WorkspaceAddParams parameters = new()
 {
     DestinationID = "destination_id",
@@ -108767,6 +110731,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 #### Returns
 
 - `class BetaDeletedTelemetryDestinationWorkspace`
@@ -108786,6 +110752,9 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 #### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Organization.TelemetryDestinations.Workspaces;
+
 WorkspaceRemoveParams parameters = new()
 {
     DestinationID = "destination_id",
@@ -108804,6 +110773,1291 @@ Console.WriteLine(betaDeletedTelemetryDestinationWorkspace);
   "telemetry_destination_id": "telemetry_destination_id",
   "type": "telemetry_destination_workspace_deleted",
   "workspace_id": "workspace_id"
+}
+```
+
+## Beta › Organization › Webhooks
+
+### Create Organization Webhook Endpoint
+
+`BetaNewOrganizationWebhookEndpoint Beta.Organization.Webhooks.Create(parameters, cancellationToken = default)`
+
+**POST** `/v1/organizations/webhooks`
+
+Create an organization webhook endpoint.
+
+An organization webhook endpoint belongs to the organization rather than to one of its workspaces. An organization can have at most 32 organization
+webhook endpoints, enabled or disabled.
+
+The response includes the endpoint's signing secret. No read returns it, so store
+it when you receive it.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `WebhookCreateParams parameters`
+
+  - `required IReadOnlyList<EnabledEvent> enabledEvents`
+
+    The event types to deliver to the endpoint. Must list at least one.
+
+    - `UserProfileEnforcementActionOpened("user_profile.enforcement_action_opened")`
+
+    - `UserProfileEnforcementActionResolved("user_profile.enforcement_action_resolved")`
+
+  - `required string url`
+
+    The HTTPS URL that deliveries are sent to.
+
+    minLength: 1
+
+  - `string description`
+
+    Notes about the endpoint.
+
+  - `string name`
+
+    A short label for the endpoint.
+
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
+
+    This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+#### Returns
+
+- `class BetaNewOrganizationWebhookEndpoint`
+
+  A new organization webhook endpoint, with its signing secret.
+
+  - `required string ID`
+
+    ID of the webhook endpoint.
+
+  - `required DateTimeOffset CreatedAt`
+
+    When the endpoint was created, in RFC 3339 format.
+
+    format: date-time
+
+  - `required string Description`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `required string DisabledReason`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `required IReadOnlyList<EnabledEvent> EnabledEvents`
+
+    The event types delivered to the endpoint.
+
+    - `UserProfileEnforcementActionOpened("user_profile.enforcement_action_opened")`
+
+    - `UserProfileEnforcementActionResolved("user_profile.enforcement_action_resolved")`
+
+  - `required string Name`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `required string SigningSecret`
+
+    The secret Anthropic signs deliveries to the endpoint with (prefix `whsec_`). No other response returns it, so store it now. To replace it, regenerate the signing secret.
+
+  - `required BetaOrganizationWebhookEndpointState State`
+
+    Whether deliveries are sent to the endpoint.
+
+    - `Disabled("disabled")`
+
+    - `Enabled("enabled")`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+    format: date-time
+
+  - `required string Url`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Webhooks;
+
+WebhookCreateParams parameters = new()
+{
+    EnabledEvents =
+    [
+        EnabledEvent.UserProfileEnforcementActionOpened
+    ],
+    UrlValue = "x",
+};
+
+var betaNewOrganizationWebhookEndpoint = await client.Beta.Organization.Webhooks.Create(parameters);
+
+Console.WriteLine(betaNewOrganizationWebhookEndpoint);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "disabled_reason": "disabled_reason",
+  "enabled_events": [
+    "user_profile.enforcement_action_opened"
+  ],
+  "name": "name",
+  "signing_secret": "signing_secret",
+  "state": "disabled",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "url": "url"
+}
+```
+
+### List Organization Webhook Endpoints
+
+`WebhookListPage Beta.Organization.Webhooks.List(parameters, cancellationToken = default)`
+
+**GET** `/v1/organizations/webhooks`
+
+List the organization's webhook endpoints.
+
+An organization webhook endpoint belongs to the organization rather than to one of its workspaces. The list does not include webhook endpoints that
+belong to a workspace.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `WebhookListParams parameters`
+
+  - `string? afterID` (query parameter)
+
+    ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
+
+  - `string? beforeID` (query parameter)
+
+    ID of a webhook endpoint to use as a cursor. Returns the first `limit` endpoints that come before it in list order, not the `limit` endpoints just before it.
+
+  - `long limit` (query parameter)
+
+    Number of items to return per page, up to `100`. The default, `0`, means `20`.
+
+    minimum: 0, maximum: 100
+
+  - `Order? order` (query parameter)
+
+    Sort order by `created_at`. Defaults to `desc`, newest first.
+
+    - `Asc("asc")`
+
+    - `Desc("desc")`
+
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
+
+    This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+#### Returns
+
+- `class BetaOrganizationWebhookEndpoint`
+
+  A webhook endpoint that belongs to the organization rather than to one of
+  its workspaces.
+
+  - `required string ID`
+
+    ID of the webhook endpoint.
+
+  - `required DateTimeOffset CreatedAt`
+
+    When the endpoint was created, in RFC 3339 format.
+
+    format: date-time
+
+  - `required string Description`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `required string DisabledReason`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `required IReadOnlyList<EnabledEvent> EnabledEvents`
+
+    The event types delivered to the endpoint.
+
+    - `UserProfileEnforcementActionOpened("user_profile.enforcement_action_opened")`
+
+    - `UserProfileEnforcementActionResolved("user_profile.enforcement_action_resolved")`
+
+  - `required string Name`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `required BetaOrganizationWebhookEndpointState State`
+
+    Whether deliveries are sent to the endpoint.
+
+    - `Disabled("disabled")`
+
+    - `Enabled("enabled")`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+    format: date-time
+
+  - `required string Url`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Webhooks;
+
+WebhookListParams parameters = new();
+
+var page = await client.Beta.Organization.Webhooks.List(parameters);
+await foreach (var item in page.Paginate())
+{
+    Console.WriteLine(item);
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "description": "description",
+      "disabled_reason": "disabled_reason",
+      "enabled_events": [
+        "user_profile.enforcement_action_opened"
+      ],
+      "name": "name",
+      "state": "disabled",
+      "updated_at": "2019-12-27T18:11:19.117Z",
+      "url": "url"
+    }
+  ],
+  "has_more": true,
+  "first_id": "first_id",
+  "last_id": "last_id"
+}
+```
+
+### Get Organization Webhook Endpoint
+
+`BetaOrganizationWebhookEndpoint Beta.Organization.Webhooks.Retrieve(parameters, cancellationToken = default)`
+
+**GET** `/v1/organizations/webhooks/{webhook_endpoint_id}`
+
+Retrieve an organization webhook endpoint by ID.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `WebhookRetrieveParams parameters`
+
+  - `required string webhookEndpointID` (path parameter)
+
+    ID of the webhook endpoint.
+
+    maxLength: 2048
+
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
+
+    This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+#### Returns
+
+- `class BetaOrganizationWebhookEndpoint`
+
+  A webhook endpoint that belongs to the organization rather than to one of
+  its workspaces.
+
+  - `required string ID`
+
+    ID of the webhook endpoint.
+
+  - `required DateTimeOffset CreatedAt`
+
+    When the endpoint was created, in RFC 3339 format.
+
+    format: date-time
+
+  - `required string Description`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `required string DisabledReason`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `required IReadOnlyList<EnabledEvent> EnabledEvents`
+
+    The event types delivered to the endpoint.
+
+    - `UserProfileEnforcementActionOpened("user_profile.enforcement_action_opened")`
+
+    - `UserProfileEnforcementActionResolved("user_profile.enforcement_action_resolved")`
+
+  - `required string Name`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `required BetaOrganizationWebhookEndpointState State`
+
+    Whether deliveries are sent to the endpoint.
+
+    - `Disabled("disabled")`
+
+    - `Enabled("enabled")`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+    format: date-time
+
+  - `required string Url`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Webhooks;
+
+WebhookRetrieveParams parameters = new()
+{
+    WebhookEndpointID = "webhook_endpoint_id"
+};
+
+var betaOrganizationWebhookEndpoint = await client.Beta.Organization.Webhooks.Retrieve(parameters);
+
+Console.WriteLine(betaOrganizationWebhookEndpoint);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "disabled_reason": "disabled_reason",
+  "enabled_events": [
+    "user_profile.enforcement_action_opened"
+  ],
+  "name": "name",
+  "state": "disabled",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "url": "url"
+}
+```
+
+### Update Organization Webhook Endpoint
+
+`BetaOrganizationWebhookEndpoint Beta.Organization.Webhooks.Update(parameters, cancellationToken = default)`
+
+**POST** `/v1/organizations/webhooks/{webhook_endpoint_id}`
+
+Update an organization webhook endpoint. Only the fields you send are changed.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `WebhookUpdateParams parameters`
+
+  - `required string webhookEndpointID` (path parameter)
+
+    ID of the webhook endpoint.
+
+    maxLength: 2048
+
+  - `string description`
+
+    Notes about the endpoint.
+
+  - `IReadOnlyList<EnabledEvent> enabledEvents`
+
+    The event types to deliver to the endpoint. Replaces the whole set; an empty list leaves it unchanged.
+
+    - `UserProfileEnforcementActionOpened("user_profile.enforcement_action_opened")`
+
+    - `UserProfileEnforcementActionResolved("user_profile.enforcement_action_resolved")`
+
+  - `string name`
+
+    A short label for the endpoint.
+
+  - `State state`
+
+    `disabled` stops deliveries. `enabled` resumes them and clears `disabled_reason`. Events that happen while the endpoint is disabled are never delivered.
+
+    - `Disabled("disabled")`
+
+    - `Enabled("enabled")`
+
+  - `string url`
+
+    The HTTPS URL that deliveries are sent to.
+
+    minLength: 1
+
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
+
+    This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+#### Returns
+
+- `class BetaOrganizationWebhookEndpoint`
+
+  A webhook endpoint that belongs to the organization rather than to one of
+  its workspaces.
+
+  - `required string ID`
+
+    ID of the webhook endpoint.
+
+  - `required DateTimeOffset CreatedAt`
+
+    When the endpoint was created, in RFC 3339 format.
+
+    format: date-time
+
+  - `required string Description`
+
+    Notes about the endpoint. An empty string when none were given.
+
+  - `required string DisabledReason`
+
+    Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
+
+  - `required IReadOnlyList<EnabledEvent> EnabledEvents`
+
+    The event types delivered to the endpoint.
+
+    - `UserProfileEnforcementActionOpened("user_profile.enforcement_action_opened")`
+
+    - `UserProfileEnforcementActionResolved("user_profile.enforcement_action_resolved")`
+
+  - `required string Name`
+
+    A short label for the endpoint. An empty string when none was given.
+
+  - `required BetaOrganizationWebhookEndpointState State`
+
+    Whether deliveries are sent to the endpoint.
+
+    - `Disabled("disabled")`
+
+    - `Enabled("enabled")`
+
+  - `required DateTimeOffset UpdatedAt`
+
+    When the endpoint was last changed, in RFC 3339 format.
+
+    format: date-time
+
+  - `required string Url`
+
+    The HTTPS URL that deliveries are sent to.
+
+#### Example
+
+```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Webhooks;
+
+WebhookUpdateParams parameters = new()
+{
+    WebhookEndpointID = "webhook_endpoint_id"
+};
+
+var betaOrganizationWebhookEndpoint = await client.Beta.Organization.Webhooks.Update(parameters);
+
+Console.WriteLine(betaOrganizationWebhookEndpoint);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "disabled_reason": "disabled_reason",
+  "enabled_events": [
+    "user_profile.enforcement_action_opened"
+  ],
+  "name": "name",
+  "state": "disabled",
+  "updated_at": "2019-12-27T18:11:19.117Z",
+  "url": "url"
+}
+```
+
+### Delete Organization Webhook Endpoint
+
+`BetaDeletedOrganizationWebhookEndpoint Beta.Organization.Webhooks.Delete(parameters, cancellationToken = default)`
+
+**DELETE** `/v1/organizations/webhooks/{webhook_endpoint_id}`
+
+Delete an organization webhook endpoint.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `WebhookDeleteParams parameters`
+
+  - `required string webhookEndpointID` (path parameter)
+
+    ID of the webhook endpoint.
+
+    maxLength: 2048
+
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
+
+    This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+#### Returns
+
+- `class BetaDeletedOrganizationWebhookEndpoint`
+
+  A deleted organization webhook endpoint.
+
+  - `JsonElement Type = "webhook_endpoint_deleted"`
+
+    Always `webhook_endpoint_deleted`.
+
+  - `required string ID`
+
+    ID of the deleted webhook endpoint.
+
+#### Example
+
+```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Webhooks;
+
+WebhookDeleteParams parameters = new()
+{
+    WebhookEndpointID = "webhook_endpoint_id"
+};
+
+var betaDeletedOrganizationWebhookEndpoint = await client.Beta.Organization.Webhooks.Delete(parameters);
+
+Console.WriteLine(betaDeletedOrganizationWebhookEndpoint);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "webhook_endpoint_deleted"
+}
+```
+
+### Regenerate Organization Webhook Endpoint Signing Secret
+
+`BetaOrganizationWebhookEndpointSigningSecret Beta.Organization.Webhooks.RegenerateSigningSecret(parameters, cancellationToken = default)`
+
+**POST** `/v1/organizations/webhooks/{webhook_endpoint_id}/regenerate_signing_secret`
+
+Replace an organization webhook endpoint's signing secret. The old secret stops
+working immediately. The new secret is returned only in this response.
+
+Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`. A request without it returns `404`, exactly as if this API did not exist. Anthropic turns organization webhook endpoints on for each organization; until yours is on, requests also return `404`. Organization webhook endpoints are in beta and are not available to organizations with HIPAA readiness enabled.
+
+#### Parameters
+
+- `WebhookRegenerateSigningSecretParams parameters`
+
+  - `required string webhookEndpointID` (path parameter)
+
+    ID of the webhook endpoint.
+
+    maxLength: 2048
+
+  - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
+
+    This endpoint is in beta: requests must send `webhooks-2026-10-07` in this header.
+
+    - `MessageBatches2024_09_24("message-batches-2024-09-24")`
+
+    - `PromptCaching2024_07_31("prompt-caching-2024-07-31")`
+
+    - `ComputerUse2024_10_22("computer-use-2024-10-22")`
+
+    - `ComputerUse2025_01_24("computer-use-2025-01-24")`
+
+    - `Pdfs2024_09_25("pdfs-2024-09-25")`
+
+    - `TokenCounting2024_11_01("token-counting-2024-11-01")`
+
+    - `TokenEfficientTools2025_02_19("token-efficient-tools-2025-02-19")`
+
+    - `Output128k2025_02_19("output-128k-2025-02-19")`
+
+    - `FilesApi2025_04_14("files-api-2025-04-14")`
+
+    - `McpClient2025_04_04("mcp-client-2025-04-04")`
+
+    - `McpClient2025_11_20("mcp-client-2025-11-20")`
+
+    - `DevFullThinking2025_05_14("dev-full-thinking-2025-05-14")`
+
+    - `InterleavedThinking2025_05_14("interleaved-thinking-2025-05-14")`
+
+    - `CodeExecution2025_05_22("code-execution-2025-05-22")`
+
+    - `ExtendedCacheTtl2025_04_11("extended-cache-ttl-2025-04-11")`
+
+    - `Context1m2025_08_07("context-1m-2025-08-07")`
+
+    - `ContextManagement2025_06_27("context-management-2025-06-27")`
+
+    - `ModelContextWindowExceeded2025_08_26("model-context-window-exceeded-2025-08-26")`
+
+    - `Skills2025_10_02("skills-2025-10-02")`
+
+    - `FastMode2026_02_01("fast-mode-2026-02-01")`
+
+    - `Output300k2026_03_24("output-300k-2026-03-24")`
+
+    - `UserProfiles2026_03_24("user-profiles-2026-03-24")`
+
+    - `UserProfiles2026_08_18("user-profiles-2026-08-18")`
+
+    - `UserProfiles2026_09_04("user-profiles-2026-09-04")`
+
+    - `AdvisorTool2026_03_01("advisor-tool-2026-03-01")`
+
+    - `ManagedAgents2026_04_01("managed-agents-2026-04-01")`
+
+    - `CacheDiagnosis2026_04_07("cache-diagnosis-2026-04-07")`
+
+    - `Dreaming2026_04_21("dreaming-2026-04-21")`
+
+    - `ThinkingTokenCount2026_05_13("thinking-token-count-2026-05-13")`
+
+    - `ServerSideFallback2026_06_01("server-side-fallback-2026-06-01")`
+
+    - `ServerSideFallback2026_07_01("server-side-fallback-2026-07-01")`
+
+    - `FallbackCredit2026_06_01("fallback-credit-2026-06-01")`
+
+    - `FallbackCredit2026_07_01("fallback-credit-2026-07-01")`
+
+    - `AgentMemory2026_07_22("agent-memory-2026-07-22")`
+
+    - `MidConversationToolChanges2026_07_01("mid-conversation-tool-changes-2026-07-01")`
+
+    - `Compact2026_01_12("compact-2026-01-12")`
+
+    - `ComputerUse2025_11_24("computer-use-2025-11-24")`
+
+    - `McpTunnels2026_06_22("mcp-tunnels-2026-06-22")`
+
+    - `StructuredOutputs2025_11_13("structured-outputs-2025-11-13")`
+
+    - `TaskBudgets2026_03_13("task-budgets-2026-03-13")`
+
+    - `ThinkingDisplayUpdates2026_08_18("thinking-display-updates-2026-08-18")`
+
+    - `CEUserManagement2026_07_13("ce-user-management-2026-07-13")`
+
+    - `MidConversationOutputConfig2026_07_01("mid-conversation-output-config-2026-07-01")`
+
+    - `ThinkingBindingControls2026_08_01("thinking-binding-controls-2026-08-01")`
+
+    - `MidConversationSystemClearAt2026_08_21("mid-conversation-system-clear-at-2026-08-21")`
+
+    - `Compact2026_09_04("compact-2026-09-04")`
+
+    - `InlineTools2026_09_15("inline-tools-2026-09-15")`
+
+    - `McpClient2026_09_15("mcp-client-2026-09-15")`
+
+    - `CEPlugins2026_09_01("ce-plugins-2026-09-01")`
+
+    - `SpendLimitReads2026_09_26("spend-limit-reads-2026-09-26")`
+
+    - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
+
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+#### Returns
+
+- `class BetaOrganizationWebhookEndpointSigningSecret`
+
+  An organization webhook endpoint's new signing secret.
+
+  - `required string SigningSecret`
+
+    The new signing secret. Deliveries are signed with it from now on, and no other response returns it.
+
+#### Example
+
+```csharp
+using System;
+using Anthropic.Models.Beta.Organization.Webhooks;
+
+WebhookRegenerateSigningSecretParams parameters = new()
+{
+    WebhookEndpointID = "webhook_endpoint_id"
+};
+
+var betaOrganizationWebhookEndpointSigningSecret = await client.Beta.Organization.Webhooks.RegenerateSigningSecret(parameters);
+
+Console.WriteLine(betaOrganizationWebhookEndpointSigningSecret);
+```
+
+##### Response (200)
+
+```json
+{
+  "signing_secret": "signing_secret"
 }
 ```
 

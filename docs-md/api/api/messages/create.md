@@ -25,7 +25,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
 - `"anthropic-user-profile-id": optional string`
 
-  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header.
+  The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -3880,6 +3880,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `CacheMissModelChanged object`
 
+        A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `type: "model_changed"`
 
           default: model_changed
@@ -3889,6 +3893,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `CacheMissSystemChanged object`
+
+        A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `type: "system_changed"`
 
@@ -3900,6 +3908,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `CacheMissToolsChanged object`
 
+        A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `type: "tools_changed"`
 
           default: tools_changed
@@ -3909,6 +3921,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
           Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
       - `CacheMissMessagesChanged object`
+
+        A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `type: "messages_changed"`
 
@@ -3920,11 +3936,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `CacheMissPreviousMessageNotFound object`
 
+        A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+        This doesn't mean that this request changed.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
         - `type: "previous_message_not_found"`
 
           default: previous_message_not_found
 
       - `CacheMissUnavailable object`
+
+        A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+        This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+        See the [cache diagnostics guide](../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
         - `type: "unavailable"`
 

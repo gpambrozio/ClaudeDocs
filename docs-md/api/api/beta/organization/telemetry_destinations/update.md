@@ -139,6 +139,8 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ## Body parameters
 
 - `display_name: optional string or null`

@@ -4,7 +4,9 @@
 
 Claude Code combines a model that reasons about your code with [built-in tools](how-claude-code-works.md#tools) for file operations, search, execution, and web access. The built-in tools cover most coding tasks. This guide covers the extension layer: features you add to customize what Claude knows, connect it to external services, and automate workflows.
 
-For how the core agentic loop works, see [How Claude Code works](how-claude-code-works.md).
+> [!NOTE]
+>
+> For how the core agentic loop works, see [How Claude Code works](how-claude-code-works.md).
 
 **New to Claude Code?** Start with [CLAUDE.md](memory.md) for project conventions, then add other extensions [as specific triggers come up](#build-your-setup-over-time).
 
@@ -230,9 +232,7 @@ Each feature has a different loading strategy and context cost:
 
 Each feature loads at different points in your session. The tabs below explain when each one loads and what goes into context.
 
-![Context loading: CLAUDE.md loads at session start and stays in every request. MCP tool names load at start with full schemas deferred until use. Skills load descriptions at start, full content on invocation. Subagents get isolated context. Hooks run externally.](https://mintcdn.com/claude-code/ikqp3_70mqIahteV/images/context-loading.svg?fit=max&auto=format&n=ikqp3_70mqIahteV&q=85&s=aab139e750494a237ae2e0c8f9139b0a)
-
-![Context loading: CLAUDE.md loads at session start and stays in every request. MCP tool names load at start with full schemas deferred until use. Skills load descriptions at start, full content on invocation. Subagents get isolated context. Hooks run externally.](https://mintcdn.com/claude-code/_xqph1dUOslCOwsj/images/context-loading-dark.svg?fit=max&auto=format&n=_xqph1dUOslCOwsj&q=85&s=b274089ef9612d9c760bca9838557626)
+![Context loading: CLAUDE.md loads at session start and stays in every request. MCP tool names load at start with full schemas deferred until use. Skills load descriptions at start, full content on invocation. Subagents get isolated context. Hooks run externally.](https://mintcdn.com/claude-code/ikqp3_70mqIahteV/images/context-loading.svg?fit=max\&auto=format\&n=ikqp3_70mqIahteV\&q=85\&s=aab139e750494a237ae2e0c8f9139b0a)
 
 **CLAUDE.md**
 
@@ -242,7 +242,9 @@ Each feature loads at different points in your session. The tabs below explain w
 
 **Inheritance:** Claude reads CLAUDE.md files from your working directory up to the root, and discovers nested ones in subdirectories as it accesses those files. See [How CLAUDE.md files load](memory.md#how-claude-md-files-load) for details.
 
-Keep CLAUDE.md under 200 lines. Move reference material to skills, which load on demand. To get [trim proposals for a checked-in CLAUDE.md](memory.md#my-claude-md-is-too-large), run `/doctor`.
+> [!TIP]
+>
+> Keep CLAUDE.md under 200 lines. Move reference material to skills, which load on demand. To get [trim proposals for a checked-in CLAUDE.md](memory.md#my-claude-md-is-too-large), run `/doctor`.
 
 **Skills**
 
@@ -258,7 +260,9 @@ Skills are extra capabilities in Claude's toolkit. They can be reference materia
 
 **In subagents:** Skills work differently in subagents. Instead of on-demand loading, skills listed in the subagent's `skills` field are fully preloaded into its context at launch. Subagents can still discover and invoke unlisted project, user, and plugin skills through the Skill tool.
 
-Use `disable-model-invocation: true` for skills with side effects. This saves context and ensures they run only when you name them.
+> [!TIP]
+>
+> Use `disable-model-invocation: true` for skills with side effects. This saves context and ensures they run only when you name them.
 
 **MCP servers**
 
@@ -268,7 +272,9 @@ Use `disable-model-invocation: true` for skills with side effects. This saves co
 
 **Context cost:** [Tool search](mcp.md#scale-with-mcp-tool-search) is on by default, so idle MCP tools consume minimal context.
 
-Run `/mcp` to see each server's connection status. Run `/context all` to see how many tokens each loaded MCP tool uses. Claude Code [reconnects to remote servers automatically](mcp.md#automatic-reconnection) if they drop, and you can disconnect servers you're not actively using.
+> [!TIP]
+>
+> Run `/mcp` to see each server's connection status. Run `/context all` to see how many tokens each loaded MCP tool uses. Claude Code [reconnects to remote servers automatically](mcp.md#automatic-reconnection) if they drop, and you can disconnect servers you're not actively using.
 
 **Code intelligence**
 
@@ -278,7 +284,9 @@ Run `/mcp` to see each server's connection status. Run `/context all` to see how
 
 **Context cost:** Low. Symbol lookups often replace broad file reads, so net context use can go down.
 
-The LSP tool is inactive until you install a [code intelligence plugin](plugins/code-intelligence.md) for your language.
+> [!TIP]
+>
+> The LSP tool is inactive until you install a [code intelligence plugin](plugins/code-intelligence.md) for your language.
 
 **Subagents**
 
@@ -295,7 +303,9 @@ For a [fork](sub-agents.md#fork-the-current-conversation), Claude Code loads the
 
 **Context cost:** Isolated from main session.
 
-Use subagents for work that doesn't need your full conversation context. Their isolation prevents bloating your main session.
+> [!TIP]
+>
+> Use subagents for work that doesn't need your full conversation context. Their isolation prevents bloating your main session.
 
 **Hooks**
 
@@ -305,47 +315,49 @@ Use subagents for work that doesn't need your full conversation context. Their i
 
 **Context cost:** Zero, unless the hook returns output that gets added as messages to your conversation.
 
-Hooks are ideal for side effects (linting, logging) that don't need to affect Claude's context.
+> [!TIP]
+>
+> Hooks are ideal for side effects (linting, logging) that don't need to affect Claude's context.
 
 ## Learn more
 
 Each feature has its own guide with setup instructions, examples, and configuration options.
 
-**CLAUDE.md**
+> **[CLAUDE.md](memory.md)**
+>
+> Store project context, conventions, and instructions
 
-Store project context, conventions, and instructions
+> **[Skills](skills.md)**
+>
+> Give Claude domain expertise and reusable workflows
 
-**Skills**
+> **[Subagents](sub-agents.md)**
+>
+> Offload work to isolated context
 
-Give Claude domain expertise and reusable workflows
+> **[Dynamic workflows](workflows.md)**
+>
+> Run many subagents from one script
 
-**Subagents**
+> **[Cross-session messaging](cross-session-messaging.md)**
+>
+> Let Claude message your other sessions
 
-Offload work to isolated context
+> **[MCP](mcp.md)**
+>
+> Connect Claude to external services
 
-**Dynamic workflows**
+> **[Hooks](hooks-guide.md)**
+>
+> Automate actions with hooks
 
-Run many subagents from one script
+> **[Plugins](plugins/overview.md)**
+>
+> Bundle and share feature sets
 
-**Cross-session messaging**
-
-Let Claude message your other sessions
-
-**MCP**
-
-Connect Claude to external services
-
-**Hooks**
-
-Automate actions with hooks
-
-**Plugins**
-
-Bundle and share feature sets
-
-**Marketplaces**
-
-Host and distribute plugin collections
+> **[Marketplaces](plugins/create-marketplace.md)**
+>
+> Host and distribute plugin collections
 
 ---
 

@@ -163,6 +163,8 @@ The Models API response can be used to determine which models are available for 
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 ### Returns
 
 - `class ModelInfo`
@@ -362,6 +364,9 @@ The Models API response can be used to determine which models are available for 
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Models;
+
 ModelListParams parameters = new();
 
 var page = await client.Models.List(parameters);
@@ -603,6 +608,8 @@ The Models API response can be used to determine information about a specific mo
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
 ### Returns
 
 - `class ModelInfo`
@@ -802,6 +809,9 @@ The Models API response can be used to determine information about a specific mo
 ### Example
 
 ```csharp
+using System;
+using Anthropic.Models.Models;
+
 ModelRetrieveParams parameters = new() { ModelID = "model_id" };
 
 var modelInfo = await client.Models.Retrieve(parameters);

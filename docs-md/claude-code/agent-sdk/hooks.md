@@ -12,23 +12,23 @@ Hooks are callback functions that run your code in response to agent events, lik
 
 ## How hooks work
 
-**An event fires**
+**1. An event fires**
 
 Something happens during agent execution and the SDK fires an event: a tool is about to be called (`PreToolUse`), a tool returned a result (`PostToolUse`), a subagent started or stopped, the agent is idle, or execution finished. See the [full list of events](#available-hooks).
 
-**The SDK collects registered hooks**
+**2. The SDK collects registered hooks**
 
 The SDK checks for hooks registered for that event type. This includes callback hooks you pass in `options.hooks` and shell command hooks from settings files when the corresponding [`settingSources`](typescript.md#settingsource) or [`setting_sources`](python.md#settingsource) entry is enabled, which it is for default `query()` options.
 
-**Matchers filter which hooks run**
+**3. Matchers filter which hooks run**
 
 If a hook has a [`matcher`](#matchers) pattern (like `"Write|Edit"`), the SDK tests it against the event's target (for example, the tool name). Hooks without a matcher run for every event of that type.
 
-**Callback functions execute**
+**4. Callback functions execute**
 
 Each matching hook's [callback function](#callback-functions) receives input about what's happening: the tool name, its arguments, the session ID, and other event-specific details.
 
-**Your callback returns a decision**
+**5. Your callback returns a decision**
 
 After performing any operations (logging, API calls, validation), your callback returns an [output object](#outputs) that tells the agent what to do: allow the operation, block it, modify the input, or inject context into the conversation.
 
@@ -129,7 +129,9 @@ for await (const message of query({
 
 The hook denies a Write or Edit call whose `file_path` ends in `/.env`, in any letter case. On Windows, `file_path` uses backslashes, such as `C:\project\.env`, and this hook allows a Write or Edit call to `C:\project\.env`.
 
-The `Write|Edit` matcher limits this hook to the Write and Edit tools. If Claude writes `.env` with a Bash command, the hook doesn't run. To block Bash writes to a file where [the sandbox runs](../sandboxing.md), see the sandbox configuration for [Python](python.md#sandbox-configuration) or [TypeScript](typescript.md#sandbox-configuration).
+> [!WARNING]
+>
+> The `Write|Edit` matcher limits this hook to the Write and Edit tools. If Claude writes `.env` with a Bash command, the hook doesn't run. To block Bash writes to a file where [the sandbox runs](../sandboxing.md), see the sandbox configuration for [Python](python.md#sandbox-configuration) or [TypeScript](typescript.md#sandbox-configuration).
 
 ## Available hooks
 
@@ -242,7 +244,9 @@ Your callback returns an object with two categories of fields:
 
 Return `{}` to allow the operation without changes. SDK callback hooks use the same JSON output format as [Claude Code shell command hooks](../hooks.md#json-output), which documents every field and event-specific option. For the SDK type definitions, see the [TypeScript](typescript.md#synchookjsonoutput) and [Python](python.md#synchookjsonoutput) SDK references.
 
-When multiple `PreToolUse` hooks return different [decisions](../hooks.md#pretooluse-decision-control), `deny` takes priority over `defer`, which takes priority over `ask`, which takes priority over `allow`.
+> [!NOTE]
+>
+> When multiple `PreToolUse` hooks return different [decisions](../hooks.md#pretooluse-decision-control), `deny` takes priority over `defer`, which takes priority over `ask`, which takes priority over `allow`.
 
 #### Asynchronous output
 
@@ -268,7 +272,9 @@ const asyncHook: HookCallback = async (input, toolUseID, { signal }) => {
 | `async` | `true` | Signals async mode. The agent proceeds without waiting. In Python, use `async_` to avoid the reserved keyword. |
 | `asyncTimeout` | `number` | Optional timeout in milliseconds for the background operation |
 
-Async outputs can't block, modify, or inject context into the operation since the agent has already moved on. Use them only for side effects like logging, metrics, or notifications.
+> [!NOTE]
+>
+> Async outputs can't block, modify, or inject context into the operation since the agent has already moved on. Use them only for side effects like logging, metrics, or notifications.
 
 ## Examples
 
@@ -321,7 +327,9 @@ const redirectToSandbox: HookCallback = async (input, toolUseID, { signal }) => 
 };
 ```
 
-Pair `updatedInput` with `permissionDecision: 'allow'` to auto-approve the modified input, or `permissionDecision: 'ask'` to show it to the user. If you omit `permissionDecision`, the modified input still applies and flows through the normal permission evaluation. With `'defer'`, `updatedInput` is ignored. Always return a new object rather than mutating the original `tool_input`.
+> [!NOTE]
+>
+> Pair `updatedInput` with `permissionDecision: 'allow'` to auto-approve the modified input, or `permissionDecision: 'ask'` to show it to the user. If you omit `permissionDecision`, the modified input still applies and flows through the normal permission evaluation. With `'defer'`, `updatedInput` is ignored. Always return a new object rather than mutating the original `tool_input`.
 
 To confirm the redirect, set the prefix to a path you can write to, such as `./sandbox` or `/tmp/sandbox` (macOS doesn't allow creating a root-level `/sandbox` directory), then ask the agent to write a file: the Write tool's result in the message stream names the path with your sandbox prefix rather than the one Claude requested.
 
@@ -620,6 +628,7 @@ Use `Notification` hooks to receive system notifications from the agent and forw
 
 * [`permission_prompt`](../hooks.md#notification) once a permission request has waited about six seconds on your [`canUseTool` callback](user-input.md). Requires TypeScript Agent SDK v0.3.233 or later, or Python Agent SDK v0.2.139 or later
 * `elicitation_complete` and `elicitation_response` for user-prompt elicitation flows
+* `plugin_notification` when a [mod](../plugins/mods/api.md#show-something-without-starting-a-turn) calls `$.ui.notify`
 
 Claude Code emits the other types, such as `idle_prompt`, `auth_success`, and `elicitation_dialog`, from interactive UI that SDK sessions don't run.
 

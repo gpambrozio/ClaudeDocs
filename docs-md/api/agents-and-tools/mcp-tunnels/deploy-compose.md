@@ -78,7 +78,7 @@ The compose file pins images by SHA-256 digest, runs every container as non-root
 cat > docker-compose.yaml <<'EOF'
 services:
   setup:
-    image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:efb27b299d627e4134815663cb8896641eeaee025d734c0f695582b4df38f013
+    image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:d243d30642d39857a0579e465cb3b9bf3ae7c1141e83143bb6856777a31467a5
     entrypoint: ["/setup"]
     command:
       - init
@@ -102,7 +102,7 @@ services:
     profiles: ["setup"]
 
   cloudflared:
-    image: cloudflare/cloudflared@sha256:6b599ca3e974349ead3286d178da61d291961182ec3fe9c505e1dd02c8ac31b0
+    image: cloudflare/cloudflared@sha256:0e56c13c7058fcef9c4f0e7d83372f82330548dbf8f8b366f3d8b506526d93b2
     command: tunnel --no-autoupdate run --url http://localhost:8080
     environment:
       - TUNNEL_TOKEN
@@ -122,7 +122,7 @@ services:
         max-file: "3"
 
   mcp-proxy:
-    image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:efb27b299d627e4134815663cb8896641eeaee025d734c0f695582b4df38f013
+    image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:d243d30642d39857a0579e465cb3b9bf3ae7c1141e83143bb6856777a31467a5
     volumes:
       - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
       - ./data:/data:ro
@@ -311,7 +311,7 @@ The `network_mode: "service:mcp-proxy"` setting places [cloudflared](concepts.md
 cat > docker-compose.yaml <<'EOF'
 services:
   cloudflared:
-    image: cloudflare/cloudflared@sha256:6b599ca3e974349ead3286d178da61d291961182ec3fe9c505e1dd02c8ac31b0
+    image: cloudflare/cloudflared@sha256:0e56c13c7058fcef9c4f0e7d83372f82330548dbf8f8b366f3d8b506526d93b2
     # --url is required: no ingress rules are pushed in the manual flow,
     # so without it cloudflared 503s every request.
     command: tunnel --no-autoupdate run --url http://localhost:8080
@@ -333,7 +333,7 @@ services:
         max-file: "3"
 
   mcp-proxy:
-    image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:efb27b299d627e4134815663cb8896641eeaee025d734c0f695582b4df38f013
+    image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:d243d30642d39857a0579e465cb3b9bf3ae7c1141e83143bb6856777a31467a5
     volumes:
       - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
       - ./data:/data:ro

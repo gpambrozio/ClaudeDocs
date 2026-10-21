@@ -27,7 +27,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 - `userProfileID?:optional string` (header parameter)
 
-  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Requires the `user-profiles` beta header. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
+  The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
 - `workspaceID?:optional string` (header parameter)
 
@@ -95,6 +95,9 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Messages\Model;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -280,6 +283,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $messageBatch = $client->messages->batches->retrieve(
@@ -406,6 +411,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
@@ -534,6 +541,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $messageBatch = $client->messages->batches->cancel(
@@ -611,6 +620,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Anthropic\Client;
+
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $deletedMessageBatch = $client->messages->batches->delete(
@@ -675,6 +686,8 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 <?php
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
 
 $client = new Client(apiKey: 'my-anthropic-api-key');
 

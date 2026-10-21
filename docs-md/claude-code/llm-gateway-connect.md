@@ -6,25 +6,27 @@ An [LLM gateway](llm-gateway.md) is a proxy your organization runs between Claud
 
 This page is for developers running Claude Code through a gateway their organization operates. It covers two paths: [checking whether your administrator already configured it for you](#check-for-an-existing-configuration), and [configuring it yourself](#configure-claude-code-yourself) when they haven't.
 
-* To deploy a gateway for your organization, see [Roll out an LLM gateway](llm-gateway-rollout.md)
-* For what Claude Code sends to a gateway, see the [gateway compatibility guide](llm-gateway-protocol.md)
+> [!NOTE]
+>
+> * To deploy a gateway for your organization, see [Roll out an LLM gateway](llm-gateway-rollout.md)
+> * For what Claude Code sends to a gateway, see the [gateway compatibility guide](llm-gateway-protocol.md)
 
 ## Check for an existing configuration
 
 Administrators can distribute the gateway address and credential through [managed settings](managed-settings.md), device management, or an [`apiKeyHelper`](#rotate-credentials-with-apikeyhelper), so Claude Code picks them up at startup with nothing for you to set. To check whether your organization already did this:
 
-**Start Claude Code**
+**1. Start Claude Code**
 
 Run `claude`. If it opens to the login screen instead of a session, no gateway credential was distributed; [configure it yourself](#configure-claude-code-yourself) below.
 
-**Check the Status tab**
+**2. Check the Status tab**
 
 If Claude Code started a session without showing the login screen, run `/status`, which opens on the **Status** tab, and check two lines:
 
 * `Anthropic base URL`: this line only appears when a gateway address is set. If it isn't there, Claude Code isn't pointed at the gateway; [configure it yourself](#configure-claude-code-yourself) below.
 * `Auth token` or `API key`: a line naming `ANTHROPIC_AUTH_TOKEN`, `ANTHROPIC_API_KEY`, or an `apiKeyHelper` confirms a gateway credential is active. A `Login method` line naming a claude.ai account instead means the credential wasn't distributed; [set it yourself](#set-the-credential-variable).
 
-**Send a test message**
+**3. Send a test message**
 
 Close the `/status` menu and send any prompt in Claude Code. A normal response from Claude, with no error, confirms the gateway connection works.
 
@@ -92,7 +94,9 @@ To make the configuration apply everywhere Claude Code runs, including [backgrou
 * `~/.claude/settings.json` applies to all your projects. On Windows the path is `%USERPROFILE%\.claude\settings.json`
 * `.claude/settings.local.json` applies to one project. Claude Code adds it to your global gitignore when it saves a setting there; if you create it by hand or have Claude write it, add it to your gitignore yourself first so you don't accidentally commit your credential
 
-Don't put the credential in a project's `.claude/settings.json`. That file is committed and shared with everyone who clones the repository.
+> [!WARNING]
+>
+> Don't put the credential in a project's `.claude/settings.json`. That file is committed and shared with everyone who clones the repository.
 
 The `env` block looks the same in either file:
 
@@ -505,7 +509,7 @@ These are the most common errors when running Claude Code through a gateway, wit
 | `Your apiKeyHelper script is failing`, or `apiKeyHelper failed:` on stderr in non-interactive mode | The command in the [`apiKeyHelper`](settings-reference.md#apikeyhelper) setting didn't produce a usable key, so requests carry a placeholder key | Run the command directly to see why it fails, and re-authenticate with your credential provider if it reports an expired session; see [the error reference](errors.md#your-apikeyhelper-script-is-failing) |
 | `Connection refused — a firewall or proxy may be blocking it (ConnectionRefused)` when nothing answers at the address, or `Can't reach the API server — check your internet or DNS (ENOTFOUND)` when the hostname doesn't resolve, often after a silent pause while Claude Code [retries with backoff](errors.md#automatic-retries). The code in parentheses varies; [Unable to connect to API](errors.md#unable-to-connect-to-api) covers the code spellings and the earlier wording | Nothing answered at the base URL: the address is wrong, or a VPN or firewall blocks the path to the gateway | Run the [curl test above](#verify-the-connection), which fails immediately with the same cause, and confirm the URL and network path with your gateway team |
 | `API returned an empty or malformed response (HTTP 200)` | The gateway or an intermediate proxy returned a non-API response, often an HTML error or login page | Test with the [curl request above](#verify-the-connection); fix the gateway route that answers with something other than a Claude API response. [The error reference](errors.md#api-returned-an-empty-or-malformed-response) explains the detail the message reports |
-| `400` errors naming `context_management`, `Extra inputs are not permitted`, or other unrecognized fields | The gateway forwards requests to an upstream that rejects fields Claude Code sends to Anthropic-format endpoints | Set `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`, which suppresses most pre-release fields; see [feature pass-through](llm-gateway-protocol.md#feature-pass-through). Some betas aren't gated by this flag; for those, set the matching `CLAUDE_CODE_USE_*` provider variable so Claude Code sends only what that provider accepts |
+| `400` errors naming `context_management`, `Extra inputs are not permitted`, or other unrecognized fields | The gateway forwards requests to an upstream that rejects fields Claude Code sends to Anthropic-format endpoints | Set `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`, which suppresses most pre-release fields; see [feature pass-through](llm-gateway-protocol.md#feature-pass-through). Some betas aren't gated by this flag; for those, set the matching `CLAUDE_CODE_USE_*` provider variable so Claude Code sends only what that provider accepts. For steps that depend on which field the message names, see [Extra inputs are not permitted](errors.md#extra-inputs-are-not-permitted) |
 | `400` errors naming `thinking` or `adaptive`, such as `Input tag 'adaptive' found` | The upstream model build doesn't accept adaptive reasoning, which Claude Code requests for Claude Opus 4.6, Claude Sonnet 4.6, Claude Haiku 5.5, Claude Fable 5, and later models | Upgrade the gateway's upstream. On Opus 4.6 and Sonnet 4.6, `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1` works instead. The [model configuration](model-config.md) capability variables apply only to the provider configurations, such as `CLAUDE_CODE_USE_BEDROCK` and `CLAUDE_CODE_USE_VERTEX`, not behind an `ANTHROPIC_BASE_URL` gateway |
 | `400` errors stating a context or token limit in the gateway's own words, such as `ContextWindowExceededError` or `prompt token count of N exceeds the limit of M` | The gateway enforces a smaller context than the model's native window and rewrites the upstream error, so Claude Code doesn't recognize it as a [too-long error](errors.md#prompt-is-too-long) and doesn't compact and retry automatically | Run `/compact` to recover the session. To prevent it, set `CLAUDE_CODE_AUTO_COMPACT_WINDOW` to the gateway's limit; Claude Code clamps the value to at least 100,000 tokens and at most the model's context window, so you can't match a gateway limit below 100,000, and `/compact` remains the recovery there. Also set `CLAUDE_CODE_MAX_OUTPUT_TOKENS` below the gateway model's output limit |
 | `400` errors on every request, in the gateway's own words rejecting a tool's input schema or its `pattern`, on Claude Code v2.1.265 through v2.1.267 | In a gradual rollout on those versions, the [Artifact tool](artifacts.md#availability) schema carries a regular expression with `\p{...}` Unicode character classes. The Anthropic API accepts it, but a gateway or upstream that checks each tool schema's `pattern` with its own regex engine rejects the whole request | Update to v2.1.268 or later, which doesn't send the regular expression. On an affected version, [turn artifacts off](artifacts.md#disable-artifacts), which removes the tool and its schema from requests |

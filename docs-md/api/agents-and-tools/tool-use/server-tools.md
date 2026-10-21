@@ -1055,13 +1055,13 @@ When using domain filters:
 
 Invalid domain formats are rejected at request time with a 400 `invalid_request_error`.
 
-Request-level domain restrictions work together with any organization-level domain restrictions configured in Claude Console. Request-level `allowed_domains` must be a subset of the organization-level allowed list; entries outside it cause the API to return a validation error. A request-level allowed list that includes a domain your organization blocks is rejected with a `400` error that names the conflicting entries.
+In a Messages API request, request-level domain restrictions work together with any organization-level domain restrictions configured in Claude Console. Request-level `allowed_domains` must be a subset of the organization-level allowed list; entries outside it cause the API to return a validation error. A request-level allowed list that includes a domain your organization blocks is rejected with a `400` error that names the conflicting entries.
 
 Unicode characters in domain names can bypass domain filters through homograph attacks: `аmazon.com` (with a Cyrillic `а`) looks identical to `amazon.com` but is a different domain. Use ASCII-only domain names in allow and block lists, and audit existing entries for non-ASCII characters.
 
 [Claude Managed Agents](../../managed-agents/overview.md) uses the same `allowed_domains` and `blocked_domains` fields on the `web_search` and `web_fetch` entries of the agent toolset. On Managed Agents, each list holds at most 64 entries, domains listed for `web_fetch` cannot include a path, and fields specific to the Messages API tools, such as `max_uses`, `citations`, and `cache_control`, are not available. See [Domain list rules](../../managed-agents/tools-web-restrictions.md#domain-list-rules) for the full rules.
 
-Organization-level web search and web fetch settings in the Claude Console apply to Messages API requests only. They do not apply to Managed Agents sessions, which use the per-tool lists on the agent toolset instead. For a session in a cloud environment with `limited` networking, the environment's `allowed_hosts` also applies to `web_search` and `web_fetch`; see [Networking](../../managed-agents/environments.md#networking). The per-tool lists restrict these tools further, within the hosts that `allowed_hosts` allows.
+Your organization's web search settings on the [**Capabilities**](https://platform.claude.com/settings/capabilities) page of the Claude Console apply to Messages API requests and to Managed Agents sessions. In a session, the agent receives only the search results that both the organization's domain restrictions and the agent's per-tool lists allow. For a session in a cloud environment with `limited` networking, the environment's `allowed_hosts` also applies to `web_search` and `web_fetch`; see [Networking](../../managed-agents/environments.md#networking). The per-tool lists restrict these tools further, within the hosts that `allowed_hosts` allows.
 
 ## Dynamic filtering with code execution
 

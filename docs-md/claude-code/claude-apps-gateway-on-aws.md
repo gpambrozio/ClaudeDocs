@@ -2,15 +2,19 @@
 
 > A worked example of running Claude apps gateway on AWS: ECS Fargate or EKS, Amazon RDS for PostgreSQL, AWS Secrets Manager, and IAM-role auth to Amazon Bedrock.
 
-This page walks through one way to run Claude apps gateway on AWS. The configuration is a working example for customer-managed infrastructure rather than a supported production deployment; use it to see how the pieces fit together before adapting it to your own environment. For the platform-agnostic requirements, see the [deployment guide](claude-apps-gateway-deploy.md).
+> [!NOTE]
+>
+> This page walks through one way to run Claude apps gateway on AWS. The configuration is a working example for customer-managed infrastructure rather than a supported production deployment; use it to see how the pieces fit together before adapting it to your own environment. For the platform-agnostic requirements, see the [deployment guide](claude-apps-gateway-deploy.md).
 
 This example provisions Claude apps gateway on AWS with Amazon Bedrock as the model upstream, using either [Amazon ECS](https://aws.amazon.com/ecs/) on [AWS Fargate](https://aws.amazon.com/fargate/) or [Amazon EKS](https://aws.amazon.com/eks/) for compute. [Okta](https://www.okta.com/) is the example identity provider (IdP), but any OpenID Connect (OIDC) compliant IdP works; see [Identity provider setup](claude-apps-gateway-deploy.md#identity-provider-setup) for per-IdP details.
 
-Bedrock isn't the only Claude upstream on AWS. The gateway also supports Claude Platform on AWS, the Anthropic-operated Claude API with AWS authentication and AWS Marketplace billing, in place of Bedrock or alongside it. Its upstream entry, credentials, and IAM permissions differ from this page's Bedrock-scoped ones; the [Claude Platform on AWS upstream reference](claude-apps-gateway-config.md#claude-platform-on-aws) covers what changes, and the rest of this page applies unchanged.
+> [!NOTE]
+>
+> Bedrock isn't the only Claude upstream on AWS. The gateway also supports Claude Platform on AWS, the Anthropic-operated Claude API with AWS authentication and AWS Marketplace billing, in place of Bedrock or alongside it. Its upstream entry, credentials, and IAM permissions differ from this page's Bedrock-scoped ones; the [Claude Platform on AWS upstream reference](claude-apps-gateway-config.md#claude-platform-on-aws) covers what changes, and the rest of this page applies unchanged.
 
 ## Architecture
 
-![Diagram of Claude apps gateway on AWS: Claude Code clients connect over HTTPS to an internal Application Load Balancer fronting the gateway (ECS Fargate or EKS), which runs in private subnets alongside an Amazon RDS for PostgreSQL instance for session state. The gateway signs users in via OIDC against the corporate IdP, reads secrets from AWS Secrets Manager, forwards model requests to Amazon Bedrock using its IAM role, and pulls its image from Amazon ECR at deploy.](https://mintcdn.com/claude-code/PHweeRmDUYEKff49/images/claude-gateway-aws-architecture.svg?fit=max&auto=format&n=PHweeRmDUYEKff49&q=85&s=8599cc34aa28522cde208ee831439bb4)
+![Diagram of Claude apps gateway on AWS: Claude Code clients connect over HTTPS to an internal Application Load Balancer fronting the gateway (ECS Fargate or EKS), which runs in private subnets alongside an Amazon RDS for PostgreSQL instance for session state. The gateway signs users in via OIDC against the corporate IdP, reads secrets from AWS Secrets Manager, forwards model requests to Amazon Bedrock using its IAM role, and pulls its image from Amazon ECR at deploy.](https://mintcdn.com/claude-code/PHweeRmDUYEKff49/images/claude-gateway-aws-architecture.svg?fit=max\&auto=format\&n=PHweeRmDUYEKff49\&q=85\&s=8599cc34aa28522cde208ee831439bb4)
 
 The gateway runs as a private HTTPS endpoint on your network that developers sign in to through your IdP. Their Claude Code sessions reach Claude models on Amazon Bedrock through the gateway's IAM role, so no model credentials land on developer machines. The reference configuration provisions:
 
@@ -57,7 +61,7 @@ export PRIVATE_SUBNETS="<subnet-id-a> <subnet-id-b>"
 
 The steps below provision the full deployment with `aws` commands.
 
-**Create the security groups**
+**1. Create the security groups**
 
 Three security groups chain the traffic path: your corporate network reaches the load balancer on 443, the load balancer reaches the gateway on 8080, and the gateway reaches Postgres on 5432. Nothing else is reachable. How you attach them depends on the compute track:
 
@@ -83,7 +87,7 @@ aws ec2 authorize-security-group-ingress --group-id "$DB_SG" \
   --protocol tcp --port 5432 --source-group "$GW_SG"
 ```
 
-**Create the IAM roles and submit the use case form**
+**2. Create the IAM roles and submit the use case form**
 
 The gateway runs with a dedicated task role whose only permission is invoking Claude models on Bedrock. Per the [Bedrock upstream reference](claude-apps-gateway-config.md#amazon-bedrock), the policy must cover both the cross-region inference-profile ARNs and the underlying foundation-model ARNs:
 
@@ -149,7 +153,7 @@ The IAM policy grants the gateway permission to call Bedrock, and Bedrock enable
 
 The EKS track reuses both policy documents on an IRSA role instead of the two ECS roles; see the deploy step.
 
-**Provision Amazon RDS for PostgreSQL**
+**3. Provision Amazon RDS for PostgreSQL**
 
 The instance runs Postgres 16 in the private subnets, with no public address and storage encryption on.
 
@@ -198,7 +202,7 @@ GATEWAY_POSTGRES_URL="postgres://gateway:${PGPASS}@${DB_HOST}:5432/claude_gatewa
 
 The ECS service or EKS pods must run in this VPC so they can reach the instance's private endpoint, and the `claude-gateway-db` security group only admits the gateway's security group.
 
-**Write gateway.yaml**
+**4. Write gateway.yaml**
 
 The `upstreams` block points at Bedrock with `auth: {}`, so the gateway authenticates via the AWS default credential chain from the task role on ECS or the IRSA role on EKS. See the [configuration reference](claude-apps-gateway-config.md) for every field.
 
@@ -248,9 +252,11 @@ upstreams:
                                                  # ECS task role, or IRSA on EKS
 ```
 
-Only the `oidc` block is Okta-specific. To use Microsoft Entra ID instead, set `issuer` to `https://login.microsoftonline.com/<tenant-id>/v2.0`, drop `userinfo_fallback` and the `groups` scope, and note that Entra emits group Object IDs rather than names, so [`managed.policies`](claude-apps-gateway-config.md#managed) must match on the GUIDs, or on App Roles with `oidc.groups_claim: roles`. See [Identity provider setup](claude-apps-gateway-deploy.md#identity-provider-setup).
+> [!NOTE]
+>
+> Only the `oidc` block is Okta-specific. To use Microsoft Entra ID instead, set `issuer` to `https://login.microsoftonline.com/<tenant-id>/v2.0`, drop `userinfo_fallback` and the `groups` scope, and note that Entra emits group Object IDs rather than names, so [`managed.policies`](claude-apps-gateway-config.md#managed) must match on the GUIDs, or on App Roles with `oidc.groups_claim: roles`. See [Identity provider setup](claude-apps-gateway-deploy.md#identity-provider-setup).
 
-**Store secrets in AWS Secrets Manager**
+**5. Store secrets in AWS Secrets Manager**
 
 Create three secrets; the execution role from the IAM step can already read them:
 
@@ -265,14 +271,16 @@ aws secretsmanager create-secret --name gateway-postgres-url \
 
 Note the ARN each call prints; the ECS task definition references secrets by ARN.
 
-Literal `--secret-string` arguments are visible in the process table and in audit/EDR logs while each command runs. On a shared or monitored host, put the value in a `0600` file and pass `--secret-string file://<path>` instead. The bundle's `setup.sh` keeps secret values off process argv the same way, passing `0600` temporary files to `--cli-input-json`.
+> [!NOTE]
+>
+> Literal `--secret-string` arguments are visible in the process table and in audit/EDR logs while each command runs. On a shared or monitored host, put the value in a `0600` file and pass `--secret-string file://<path>` instead. The bundle's `setup.sh` keeps secret values off process argv the same way, passing `0600` temporary files to `--cli-input-json`.
 
 Unlike the secrets, `gateway.yaml` itself contains no secret values, because every credential resolves at boot through [`${VAR}` or `${file:...}` expansion](claude-apps-gateway-config.md#secret-expansion). How everything reaches the container differs by track:
 
 * On ECS, the next step's build copies `gateway.yaml` into the image at `/etc/claude/gateway.yaml`, and the task definition injects the three secrets as environment variables via its `secrets` field, so the YAML references `${GATEWAY_JWT_SECRET}`, `${OIDC_CLIENT_SECRET}`, and `${GATEWAY_POSTGRES_URL}`.
 * On EKS, mount `gateway.yaml` from a ConfigMap and the secrets as files at `/secrets`, referenced as `${file:/secrets/...}`. Source the Kubernetes Secrets from Secrets Manager with External Secrets Operator or the Secrets Store CSI driver's AWS provider, or create them directly with `kubectl`.
 
-**Build and push the image to Amazon ECR**
+**6. Build and push the image to Amazon ECR**
 
 Build the image per the [container image requirements](claude-apps-gateway-deploy.md#container-image), placing the `linux-x64` glibc binary at `./claude` in the build context. Write your own Dockerfile per those requirements or start from the bundle's [`Dockerfile`](https://github.com/anthropics/claude-code/blob/main/examples/gateway/aws/Dockerfile), which copies the filled-in `gateway.yaml` from the previous steps into the image at `/etc/claude/gateway.yaml`. On ECS that embedded copy is how the configuration reaches the container, which is why the build comes after the file is written. The EKS track instead mounts `gateway.yaml` from a ConfigMap at deploy, so the embedded copy is unused there.
 
@@ -309,7 +317,7 @@ docker build --platform=linux/amd64 \
 docker push "${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/claude-gateway:<version>"
 ```
 
-**Deploy**
+**7. Deploy**
 
 **ECS Fargate**
 
@@ -452,7 +460,7 @@ For the front end, an Ingress managed by the AWS Load Balancer Controller provis
 
 With IRSA, the AWS SDK reads a projected service-account token and exchanges it with AWS STS, so the pod never needs the EC2 instance metadata service; an egress NetworkPolicy may block `169.254.169.254` for gateway pods. The node hop-limit problem in [Troubleshooting](#troubleshooting) below applies only to clusters that skip IRSA and rely on node instance roles.
 
-**Push the gateway URL to developer machines**
+**8. Push the gateway URL to developer machines**
 
 The gateway is now running, but developers can't reach it from `/login` until the gateway URL is on their machines. Deploy the full [managed settings snippet](claude-apps-gateway.md#set-the-gateway-url), with `forceLoginMethod`, `forceLoginGatewayUrl`, and the `parentSettingsBehavior: "merge"` opt-in, to each device via MDM. There is no gateway option in the login picker for a developer to select manually.
 

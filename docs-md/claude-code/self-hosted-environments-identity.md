@@ -2,7 +2,9 @@
 
 > Verify the CLAUDE_CODE_SESSION_ACCESS_TOKEN JWT so services on your network can trust requests from sessions in your self-hosted environment.
 
-Self-hosted environments are in public beta on Team and Enterprise plans; an [Owner](cloud-environments.md#organization-shared-environments) enables them by turning on **Allow self-hosted environments** on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments). This page covers session identity verification; see the [quickstart](self-hosted-environments-quickstart.md) for setup and [Deploy to production](self-hosted-environments-deploy.md) for the fleet recipes.
+> [!NOTE]
+>
+> Self-hosted environments are in public beta on Team and Enterprise plans; an [Owner](cloud-environments.md#organization-shared-environments) enables them by turning on **Allow self-hosted environments** on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments). This page covers session identity verification; see the [quickstart](self-hosted-environments-quickstart.md) for setup and [Deploy to production](self-hosted-environments-deploy.md) for the fleet recipes.
 
 A [self-hosted environment](self-hosted-environments.md) lets Claude Code [cloud sessions](claude-code-on-the-web.md) run on infrastructure you operate instead of on Anthropic's. Because the session runs inside your network, Claude can call your internal services directly. Those services need a way to confirm that a request came from a Claude Code session in your environment, and to identify the user or service identity that created that session.
 
@@ -52,31 +54,31 @@ The response is a standard [JSON Web Key Set](https://www.rfc-editor.org/rfc/rfc
 
 Verify each incoming token against these checks:
 
-**Check the prefix**
+**1. Check the prefix**
 
 Reject the value if it doesn't start with `sk-ant-cc-`, then remove that prefix. The remainder is a standard compact JWT.
 
-**Verify the signature**
+**2. Verify the signature**
 
 Fetch the JWKS, select the key whose `kid` matches the token header, and verify the `ES256` signature. Reject tokens whose `alg` header is not `ES256`. If a token arrives with a `kid` that isn't in your cached key set, refetch the JWKS once before rejecting it: after a rotation, new tokens are signed with a key your cached set doesn't have yet.
 
-**Verify the issuer**
+**3. Verify the issuer**
 
 Reject the token if `iss` is not exactly `ccr`.
 
-**Verify the audience against your environment**
+**4. Verify the audience against your environment**
 
 The `aud` claim is an array. Reject the token unless it contains your environment ID, which has the form `ccpool_...`. The environment ID is shown in your environment's detail dialog on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments), and appears as the `ccr:pool_id` claim in any of the environment's session tokens. This check is what scopes the token to your environment and rejects tokens issued to other organizations.
 
-**Verify the role**
+**5. Verify the role**
 
 Reject the token if `ccr:role` is not exactly `session_worker`. Other tokens issued for self-hosted environments, such as environment secrets, runner tokens, and work orders, are signed by the same key set but carry different roles.
 
-**Verify expiry**
+**6. Verify expiry**
 
 Reject the token if `exp` is in the past. Anthropic issues session tokens with a four-hour lifetime by default and a maximum of eight hours. The runner refreshes the token before expiry and pushes the new value to the session, so subprocesses that Claude starts after a refresh inherit it. One session can therefore present several distinct valid tokens to your service over its lifetime.
 
-**Read the identity**
+**7. Read the identity**
 
 The creating user's identity is in the `act` claim: `act.sub` is their Anthropic user ID in the prefixed form `user:<id>`, and `act.email`, when the creating surface recorded one, is their email address. Sessions your organization's service identity creates, including Claude Tag channel sessions, carry an `agent:` subject instead, so treat a session as user-created only when `act.sub` carries the `user:` prefix, rather than testing whether identity claims are absent. See the [claims reference](#claims-reference) for the full structure and the flat duplicate claims.
 

@@ -2,396 +2,19 @@
 
 > Add skills, hooks, MCP servers, and every other component type to a Claude Code plugin, with an example that validates for each.
 
-export const Piece = ({id, children}) => {children};
-
-export const PluginExplorer = ({children}) => {
-  const PIECES = [{
-    id: 'manifest',
-    name: 'Manifest',
-    path: '.claude-plugin/plugin.json',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: '.claude-plugin/'
-    }, {
-      depth: 1,
-      kind: 'file',
-      text: 'plugin.json'
-    }],
-    href: '/en/plugins/manifest-reference#manifest-file',
-    linkText: 'Go to the manifest reference'
-  }, {
-    id: 'skills',
-    name: 'Skills',
-    path: 'skills/review/SKILL.md',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: 'skills/'
-    }, {
-      depth: 1,
-      kind: 'folder',
-      text: 'review/'
-    }, {
-      depth: 2,
-      kind: 'file',
-      text: 'SKILL.md'
-    }],
-    href: '/en/plugins/components#skills',
-    linkText: 'Go to the Skills section'
-  }, {
-    id: 'commands',
-    name: 'Commands',
-    path: 'commands/about.md',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: 'commands/'
-    }, {
-      depth: 1,
-      kind: 'file',
-      text: 'about.md'
-    }],
-    href: '/en/plugins/components#commands',
-    linkText: 'Go to the Commands section'
-  }, {
-    id: 'agents',
-    name: 'Agents',
-    path: 'agents/security-reviewer.md',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: 'agents/'
-    }, {
-      depth: 1,
-      kind: 'file',
-      text: 'security-reviewer.md'
-    }],
-    href: '/en/plugins/components#agents',
-    linkText: 'Go to the Agents section'
-  }, {
-    id: 'hooks',
-    name: 'Hooks',
-    path: 'hooks/hooks.json',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: 'hooks/'
-    }, {
-      depth: 1,
-      kind: 'file',
-      text: 'hooks.json'
-    }],
-    href: '/en/plugins/components#hooks',
-    linkText: 'Go to the Hooks section'
-  }, {
-    id: 'monitors',
-    name: 'Monitors',
-    path: 'monitors/monitors.json',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: 'monitors/'
-    }, {
-      depth: 1,
-      kind: 'file',
-      text: 'monitors.json'
-    }],
-    href: '/en/plugins/components#monitors',
-    linkText: 'Go to the Monitors section'
-  }, {
-    id: 'output-styles',
-    name: 'Output styles',
-    path: 'output-styles/terse.md',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: 'output-styles/'
-    }, {
-      depth: 1,
-      kind: 'file',
-      text: 'terse.md'
-    }],
-    href: '/en/plugins/components#themes-and-output-styles',
-    linkText: 'Go to the Themes and output styles section'
-  }, {
-    id: 'themes',
-    name: 'Themes',
-    path: 'themes/dracula.json',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: 'themes/'
-    }, {
-      depth: 1,
-      kind: 'file',
-      text: 'dracula.json'
-    }],
-    href: '/en/plugins/components#themes-and-output-styles',
-    linkText: 'Go to the Themes and output styles section'
-  }, {
-    id: 'workflows',
-    name: 'Workflows',
-    path: 'workflows/audit-routes.js',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: 'workflows/'
-    }, {
-      depth: 1,
-      kind: 'file',
-      text: 'audit-routes.js'
-    }],
-    href: '/en/workflows#distribute-a-workflow-in-a-plugin',
-    linkText: 'Go to Distribute a workflow in a plugin'
-  }, {
-    id: 'bin',
-    name: 'Executables',
-    path: 'bin/hello-plugin',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: 'bin/'
-    }, {
-      depth: 1,
-      kind: 'file',
-      text: 'hello-plugin'
-    }],
-    href: '/en/plugins/components#executables',
-    linkText: 'Go to the Executables section'
-  }, {
-    id: 'scripts',
-    name: 'Scripts',
-    path: 'scripts/format.sh',
-    lines: [{
-      depth: 0,
-      kind: 'folder',
-      text: 'scripts/'
-    }, {
-      depth: 1,
-      kind: 'file',
-      text: 'format.sh'
-    }],
-    href: '/en/plugins/components#hooks',
-    linkText: 'Go to the Hooks section'
-  }, {
-    id: 'settings',
-    name: 'Default settings',
-    path: 'settings.json',
-    lines: [{
-      depth: 0,
-      kind: 'file',
-      text: 'settings.json'
-    }],
-    href: '/en/plugins/components#default-settings',
-    linkText: 'Go to the Default settings section'
-  }, {
-    id: 'mcp',
-    name: 'MCP servers',
-    path: '.mcp.json',
-    lines: [{
-      depth: 0,
-      kind: 'file',
-      text: '.mcp.json'
-    }],
-    href: '/en/plugins/components#mcp-servers',
-    linkText: 'Go to the MCP servers section'
-  }, {
-    id: 'lsp',
-    name: 'LSP servers',
-    path: '.lsp.json',
-    lines: [{
-      depth: 0,
-      kind: 'file',
-      text: '.lsp.json'
-    }],
-    href: '/en/plugins/components#lsp-servers',
-    linkText: 'Go to the LSP servers section'
-  }];
-  const [selectedId, setSelectedId] = useState('manifest');
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const rootRef = useRef(null);
-  useEffect(() => {
-    const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
-    document.addEventListener('fullscreenchange', onFsChange);
-    return () => document.removeEventListener('fullscreenchange', onFsChange);
-  }, []);
-  const toggleFullscreen = () => {
-    if (!rootRef.current) return;
-    if (document.fullscreenElement) document.exitFullscreen(); else rootRef.current.requestFullscreen().catch(() => {});
-  };
-  const selected = PIECES.find(p => p.id === selectedId) || PIECES[0];
-  const onTreeKeyDown = e => {
-    const keys = ['ArrowDown', 'ArrowUp', 'Home', 'End'];
-    if (keys.indexOf(e.key) === -1) return;
-    const i = PIECES.findIndex(p => p.id === selectedId);
-    let next = i;
-    if (e.key === 'ArrowDown') next = Math.min(PIECES.length - 1, i + 1);
-    if (e.key === 'ArrowUp') next = Math.max(0, i - 1);
-    if (e.key === 'Home') next = 0;
-    if (e.key === 'End') next = PIECES.length - 1;
-    e.preventDefault();
-    if (next === i) return;
-    const id = PIECES[next].id;
-    setSelectedId(id);
-    const el = document.getElementById('pe-node-' + id);
-    if (el) el.focus();
-  };
-  const FolderIcon = () => <svg className="pe-icon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" aria-hidden="true">
-      <path d="M1.5 4.5a1 1 0 0 1 1-1h3.2l1.3 1.5h6a1 1 0 0 1 1 1V12a1 1 0 0 1-1 1h-10.5a1 1 0 0 1-1-1z" />
-    </svg>;
-  const FileIcon = () => <svg className="pe-icon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" aria-hidden="true">
-      <path d="M4 1.5h5.5L13 5v9.5H4z" />
-      <path d="M9.5 1.5V5H13" />
-    </svg>;
-  return 
-      <style>{`
-        .pe-root {
-          --pe-mono: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
-          --pe-accent: #D97757;
-          --pe-accent-text: #A8502F;
-          --pe-accent-bg: rgba(217,119,87,0.10);
-          --pe-bg: #FFFFFF;
-          --pe-surface: #FAFAF7;
-          --pe-hover: #F0EEE6;
-          --pe-border: #E8E6DC;
-          --pe-text: #141413;
-          --pe-text-2: #3D3D3A;
-          --pe-text-3: #5E5D59;
-          font-family: inherit;
-          background: var(--pe-bg);
-          color: var(--pe-text);
-          border: 1px solid var(--pe-border);
-          border-radius: 12px;
-          margin: 1.5rem 0;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
-        .dark .pe-root {
-          --pe-accent-text: #EBA98F;
-          --pe-accent-bg: rgba(217,119,87,0.18);
-          --pe-bg: #1A1918;
-          --pe-surface: #232221;
-          --pe-hover: #2E2D2B;
-          --pe-border: #3A3936;
-          --pe-text: #F1EFE9;
-          --pe-text-2: #D6D4CA;
-          --pe-text-3: #B8B5AD;
-        }
-        .pe-root *, .pe-root *::before, .pe-root *::after { box-sizing: border-box; }
-        .pe-head { display: flex; align-items: flex-start; gap: 12px; padding: 18px 24px 16px; border-bottom: 1px solid var(--pe-border); }
-        .pe-head-text { flex: 1; min-width: 0; }
-        .pe-fs-btn { flex-shrink: 0; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--pe-border); border-radius: 6px; background: var(--pe-surface); color: var(--pe-text-2); font-size: 15px; line-height: 1; cursor: pointer; }
-        .pe-fs-btn:hover { background: var(--pe-hover); }
-        .pe-fs-btn:focus-visible { outline: 2px solid var(--pe-accent); outline-offset: 2px; }
-        .pe-fullscreen { border-radius: 0; height: 100vh; display: flex; flex-direction: column; overflow: auto; }
-        .pe-fullscreen .pe-body { flex: 1; }
-        .pe-title { font-size: 19px; font-weight: 600; line-height: 1.3; color: var(--pe-text); margin: 0; }
-        .pe-sub { font-size: 15px; line-height: 1.5; color: var(--pe-text-3); margin: 4px 0 0; }
-        .pe-sub code { font-family: var(--pe-mono); font-size: 0.88em; padding: 1px 5px; border-radius: 4px; background: var(--pe-surface); border: 1px solid var(--pe-border); }
-        .pe-body { display: flex; align-items: stretch; }
-        .pe-tree-pane { width: 270px; flex-shrink: 0; background: var(--pe-surface); border-right: 1px solid var(--pe-border); padding: 16px 0 12px; }
-        .pe-panel { flex: 1; min-width: 0; padding: 16px 24px 24px; }
-        .pe-caption { font-size: 13px; font-weight: 600; color: var(--pe-text-3); margin: 0 0 10px; }
-        .pe-tree-pane .pe-caption { padding: 0 16px; }
-        .pe-rootline { display: flex; align-items: center; gap: 7px; padding: 3px 16px; font-family: var(--pe-mono); font-size: 13.5px; color: var(--pe-text-3); }
-        .pe-node {
-          display: block; width: 100%; margin: 0; padding: 3px 16px 3px 30px; text-align: left; cursor: pointer;
-          background: transparent; color: var(--pe-text-2);
-          border: none; border-left: 3px solid transparent;
-          font-family: var(--pe-mono); font-size: 13.5px; line-height: 1.4;
-        }
-        .pe-node:hover { background: var(--pe-hover); }
-        .pe-node:focus-visible { outline: 2px solid var(--pe-accent); outline-offset: -2px; }
-        .pe-node[aria-pressed="true"] { background: var(--pe-accent-bg); border-left-color: var(--pe-accent); color: var(--pe-accent-text); font-weight: 600; }
-        .pe-line { display: flex; align-items: center; gap: 7px; padding: 2px 0; }
-        .pe-line-tree { flex-wrap: wrap; }
-        .pe-line-tree .pe-req { flex-basis: 100%; margin: 2px 0 0 22px; white-space: normal; width: fit-content; max-width: calc(100% - 22px); }
-        .pe-line span { overflow-wrap: anywhere; }
-        .pe-piece { display: none; font-size: 16px; line-height: 1.6; color: var(--pe-text-2); }
-        .pe-root[data-selected="manifest"] .pe-piece[data-piece="manifest"],
-        .pe-root[data-selected="skills"] .pe-piece[data-piece="skills"],
-        .pe-root[data-selected="commands"] .pe-piece[data-piece="commands"],
-        .pe-root[data-selected="agents"] .pe-piece[data-piece="agents"],
-        .pe-root[data-selected="hooks"] .pe-piece[data-piece="hooks"],
-        .pe-root[data-selected="monitors"] .pe-piece[data-piece="monitors"],
-        .pe-root[data-selected="output-styles"] .pe-piece[data-piece="output-styles"],
-        .pe-root[data-selected="themes"] .pe-piece[data-piece="themes"],
-        .pe-root[data-selected="workflows"] .pe-piece[data-piece="workflows"],
-        .pe-root[data-selected="bin"] .pe-piece[data-piece="bin"],
-        .pe-root[data-selected="scripts"] .pe-piece[data-piece="scripts"],
-        .pe-root[data-selected="settings"] .pe-piece[data-piece="settings"],
-        .pe-root[data-selected="mcp"] .pe-piece[data-piece="mcp"],
-        .pe-root[data-selected="lsp"] .pe-piece[data-piece="lsp"] { display: block; }
-        .pe-piece p { margin: 0 0 10px; }
-        .pe-piece p:last-child { margin-bottom: 0; }
-        .pe-piece code { font-family: var(--pe-mono); font-size: 0.88em; padding: 1px 5px; border-radius: 4px; background: var(--pe-surface); border: 1px solid var(--pe-border); }
-        .pe-piece .code-block { margin: 12px 0 0; }
-        .pe-piece pre code { padding: 0; border: none; background: none; }
-        .pe-piece a { color: var(--pe-accent-text); }
-        .pe-line-compact { display: none; }
-        .pe-icon { flex-shrink: 0; }
-        .pe-req { margin-left: 8px; padding: 0 6px; border-radius: 999px; font-size: 11px; line-height: 18px; letter-spacing: .02em; color: var(--pe-accent-text); border: 1px solid var(--pe-border); background: var(--pe-surface); white-space: nowrap; font-weight: 500; vertical-align: middle; }
-        .pe-name { font-size: 22px; font-weight: 600; line-height: 1.25; letter-spacing: -0.2px; color: var(--pe-text); margin: 0; }
-        .pe-path { font-family: var(--pe-mono); font-size: 13.5px; color: var(--pe-accent-text); margin: 4px 0 0; overflow-wrap: anywhere; }
-        .pe-block { margin: 20px 0 0; }
-        .pe-link {
-          display: inline-block; margin: 24px 0 0; padding: 8px 14px; border-radius: 8px;
-          font-size: 14.5px; font-weight: 600; text-decoration: none;
-          color: var(--pe-accent-text); background: var(--pe-accent-bg); border: 1px solid var(--pe-accent);
-        }
-        .pe-link:hover { filter: brightness(0.97); }
-        .pe-link:focus-visible { outline: 2px solid var(--pe-accent); outline-offset: 2px; }
-        @media (max-width: 700px) {
-          .pe-head { padding: 16px 16px 14px; }
-          .pe-body { flex-direction: column; }
-          .pe-tree-pane { width: 100%; border-right: none; border-bottom: 1px solid var(--pe-border); }
-          .pe-line-tree { display: none; }
-          .pe-line-compact { display: flex; }
-          .pe-panel { padding: 16px 16px 20px; }
-        }
-      `}</style>
-
-      What goes in a plugin
-      This example plugin, <code>my-plugin</code>, has one of every kind of component, each in its default location. Select a file or folder to read what it’s for and see what goes in it.
-      <button type="button" className="pe-fs-btn" onClick={toggleFullscreen} aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'} title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}>
-        {isFullscreen ? '⤡' : '⛶'}
-      </button>
-
-          Plugin directory
-            <FolderIcon />my-plugin/
-            {PIECES.map(p => <button key={p.id} id={'pe-node-' + p.id} type="button" className="pe-node" aria-pressed={p.id === selected.id} aria-label={p.name + ', ' + p.path} onClick={() => setSelectedId(p.id)}>
-                {p.lines.map((line, i) => 
-                    {line.kind === 'folder' ? <FolderIcon /> : <FileIcon />}
-                    {line.text}
-                    {p.required && i === p.lines.length - 1 ? {p.required} : null}
-                  )}
-
-                {p.path}
-                {p.required ? {p.required} : null}
-              </button>)}
-
-        Selected piece
-        {selected.name}{selected.required ? {selected.required} : null}
-        {selected.path}
-
-        {children}
-
-        <a className="pe-link" href={selected.href}>{selected.linkText}</a>
-    ;
-};
-
 A Claude Code plugin is built from components, such as skills, agents, hooks, and MCP servers. Each component has a default folder in the plugin, an optional manifest key in `.claude-plugin/plugin.json` that replaces or adds to that folder, and a name the user sees. For each key's full field table, see the [manifest reference](manifest-reference.md#fields).
 
 Use this page to add a component to a plugin that already loads.
 
 After you add a component, run `/reload-plugins` in a running session or start a new one so Claude Code loads it. To check the component's file before loading it, run [`claude plugin validate .`](cli-reference.md#plugin-validate) in your shell from the plugin directory.
 
-These cases are covered on other pages:
-
-* **Building your first plugin**: start with [Create a plugin](create.md)
-* **Installing someone else's plugin**: see [Install plugins](install.md)
-* **Your plugin's users are on claude.ai or in Cowork**: a different set of components loads there. See [Plugin structure and testing](https://claude.com/docs/plugins/build) and the [component support table](https://claude.com/docs/plugins/platform-support#compare-component-support-by-app)
+> [!NOTE]
+>
+> These cases are covered on other pages:
+>
+> * **Building your first plugin**: start with [Create a plugin](create.md)
+> * **Installing someone else's plugin**: see [Install plugins](install.md)
+> * **Your plugin's users are on claude.ai or in Cowork**: a different set of components loads there. See [Plugin structure and testing](https://claude.com/docs/plugins/build) and the [component support table](https://claude.com/docs/plugins/platform-support#compare-component-support-by-app)
 
 ## Explore the plugin directory
 
@@ -408,6 +31,16 @@ The explorer shows an example plugin, `my-plugin`, that has one of every kind of
 * A local MCP server and a Go language server
 
 Each file is the smallest valid example of its format, there to show the shape rather than to be useful: a real skill or agent carries full instructions and often supporting files, and a real hook or monitor does real work. The sections after the explorer use the same files as their examples and link to fuller ones. Select a file or folder to read what it's for, see what goes in it, and find the section that covers it.
+
+What goes in a plugin
+
+This example plugin, `my-plugin`, has one of every kind of component, each in its default location. Select a file or folder to read what it’s for and see what goes in it.
+
+Plugin directory
+
+my-plugin/
+
+Selected piece
 
 The [manifest](manifest-reference.md) is the `plugin.json` file in a plugin's `.claude-plugin/` directory. It contains the plugin's metadata and the `userConfig` values that Claude Code prompts the user for. Claude Code loads a plugin without one. Inside the file, only `name` is required. In this one, `description` is the text users see for the plugin in `/plugin`, and `version` keeps users on that version until you change it:
 
@@ -625,7 +258,9 @@ For frontmatter fields and supporting files, see [Skills](../skills.md).
 
 A command is a single Markdown file the user runs by name, such as `/my-plugin:about`.
 
-Commands are the older format, and [skills](#skills) supersede them for new work. A skill runs by name the same way, and it can also carry supporting files in its directory. Keep `commands/` for files you're moving over from `.claude/commands/`.
+> [!NOTE]
+>
+> Commands are the older format, and [skills](#skills) supersede them for new work. A skill runs by name the same way, and it can also carry supporting files in its directory. Keep `commands/` for files you're moving over from `.claude/commands/`.
 
 Save a command at `commands/<file>.md` and it becomes `/<plugin>:<file>`. A subdirectory adds a segment, so `commands/db/migrate.md` is `/my-plugin:db:migrate`.
 
@@ -831,7 +466,7 @@ Claude Code disconnects a server that exceeds either limit or writes non-protoco
 
 ### Executables
 
-Files in `bin/` at the plugin root are on the `PATH` of the Bash tool's shell while the plugin is enabled, so Claude can run them as bare commands. Add an executable script:
+Files in `bin/` at the plugin root are on the `PATH` of the Bash tool's shell while the plugin is enabled, so Claude can run them as bare commands. A command that Claude runs with the [PowerShell tool](../tools-reference.md#powershell-tool) outside the [sandbox](../sandboxing.md) finds them on its `PATH` too, and a sandboxed PowerShell command doesn't. Add an executable script:
 
 ```bash bin/hello-plugin
 #!/bin/bash
@@ -952,9 +587,7 @@ The `experimental.monitors` manifest key takes the same array inline or a path t
 
 For the `when` trigger and the other fields, see [`monitors`](manifest-reference.md#monitors).
 
-<h2 id="user-configuration">
-  Ask the user for configuration values
-</h2>
+## Ask the user for configuration values
 
 Declare the values your plugin needs from the user in the `userConfig` manifest key, so users don't edit `settings.json` themselves. Each option appears in a dialog with its `title` as the label and its `description` beneath it.
 
@@ -999,9 +632,7 @@ When options remain unset, `claude plugin install` prints a `userConfig options 
 
 For the option fields, where each value is stored, how a component references a saved value, and which fields reject `${user_config.*}`, see [User configuration](manifest-reference.md#user-configuration).
 
-<h2 id="path-variables-and-persistent-data">
-  Reference plugin paths and store data
-</h2>
+## Reference plugin paths and store data
 
 You don't know where your plugin will be installed, so refer to its files and data through these variables rather than fixed paths. They're substituted in skill, command, and agent content, in hook and monitor commands, and in MCP and LSP server configurations. They're also exported to hook, MCP, and LSP processes:
 

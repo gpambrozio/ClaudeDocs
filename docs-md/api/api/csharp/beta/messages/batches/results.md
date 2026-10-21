@@ -131,6 +131,8 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
+    - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
   - `string workspaceID` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3201,6 +3203,10 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `class BetaCacheMissModelChanged`
 
+              A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+              See the [cache diagnostics guide](../../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "model_changed"`
 
               - `required long CacheMissedInputTokens`
@@ -3208,6 +3214,10 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `class BetaCacheMissSystemChanged`
+
+              A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+              See the [cache diagnostics guide](../../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "system_changed"`
 
@@ -3217,6 +3227,10 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `class BetaCacheMissToolsChanged`
 
+              A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+              See the [cache diagnostics guide](../../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "tools_changed"`
 
               - `required long CacheMissedInputTokens`
@@ -3224,6 +3238,10 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `class BetaCacheMissMessagesChanged`
+
+              A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+              See the [cache diagnostics guide](../../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "messages_changed"`
 
@@ -3233,9 +3251,21 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `class BetaCacheMissPreviousMessageNotFound`
 
+              A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+              This doesn't mean that this request changed.
+
+              See the [cache diagnostics guide](../../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
+
               - `JsonElement Type = "previous_message_not_found"`
 
             - `class BetaCacheMissUnavailable`
+
+              A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+              This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+              See the [cache diagnostics guide](../../../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `JsonElement Type = "unavailable"`
 
@@ -3911,6 +3941,9 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 ## Example
 
 ```csharp
+using System;
+using Anthropic.Models.Beta.Messages.Batches;
+
 BatchResultsParams parameters = new() { MessageBatchID = "message_batch_id" };
 
 await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Batches.ResultsStreaming(parameters))
