@@ -22,9 +22,9 @@ anthropic-beta: BETA_FEATURE_NAME
 content-type: application/json
 ```
 
-Each feature's documentation states the exact beta name to send. The [API overview](overview.md) lists the APIs currently in beta.
+Each feature's documentation states the exact beta name to send. The [API overview](overview.md) lists the APIs in beta.
 
-The following examples show the same request with cURL, the `ant` CLI, and the SDK, using the [context editing](../build-with-claude/context-editing.md) beta as the example. The SDK takes beta names through `betas` (csharp, go: `Betas`; java: `.addBeta()`) and sends the `anthropic-beta` header for you:
+The following example sends a request with the [context editing](../build-with-claude/context-editing.md) beta. The SDK takes beta names through `betas` (csharp, go: `Betas`; java: `.addBeta()`) and sends the `anthropic-beta` header for you:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -83,7 +83,7 @@ var message = await client.Beta.Messages.Create(
     {
         Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
-        Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
+        Messages = [new BetaUserMessageParam { Content = "Hello, Claude" }],
         Betas = ["context-management-2025-06-27"],
     }
 );
@@ -140,7 +140,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.beta.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [{role: "user", content: "Hello, Claude"}],
   betas: ["context-management-2025-06-27"]
@@ -181,7 +181,7 @@ Beta names are the same on every platform that accepts them, but not every platf
 On Amazon Bedrock, where beta names go depends on the API you call:
 
 * [Claude in Amazon Bedrock](../build-with-claude/claude-in-amazon-bedrock.md) (`bedrock-mantle` endpoints) takes them in the `anthropic-beta` header.
-* The [InvokeModel API](../build-with-claude/claude-on-amazon-bedrock-legacy.md) reads them from the request body, not from a header. List them in the body's `anthropic_beta` array, one name per element, for example `"anthropic_beta": ["feature1", "feature2"]`.
+* The [InvokeModel API](../build-with-claude/claude-on-amazon-bedrock-legacy.md) reads them from the request body, not from a header. List them in the body's `anthropic_beta` array, one name for each element, for example `"anthropic_beta": ["feature1", "feature2"]`.
 
 ### Endpoint-specific headers
 
@@ -205,7 +205,7 @@ Beta feature names typically follow the pattern `feature-name-YYYY-MM-DD`, where
 
 If you use an invalid beta name, or a beta your organization doesn't have access to, you'll receive a `400` error response:
 
-```json Output
+```text Output
 {
   "type": "error",
   "error": {
@@ -228,7 +228,7 @@ Understand the HTTP status codes, error response shape, and request IDs the Clau
 
 **API overview**
 
-Explore the Claude API's features, including the APIs currently in beta.
+Explore the Claude API's features, including the APIs in beta.
 
 ---
 

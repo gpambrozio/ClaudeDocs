@@ -3,7 +3,7 @@
 ---
 title: Search results
 url: https://platform.claude.com/docs/en/build-with-claude/search-results
-description: Enable natural citations for RAG applications by providing search results with source attribution
+description: Get natural citations for RAG applications by providing search results with source attribution
 ---
 
 To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/api-and-data-retention.md).
@@ -16,8 +16,8 @@ All [active models](../models/overview.md) support search results with citations
 
 Search results can be provided in two ways:
 
-1. **From tool calls:** Your custom tools return search results, enabling dynamic RAG applications
-2. **As top-level content:** You provide search results directly in user messages for pre-fetched or cached content
+1. **From tool calls:** Your custom tools return search results, which lets you build dynamic RAG applications.
+2. **As top-level content:** You provide search results directly in user messages for pre-fetched or cached content.
 
 In both cases, Claude cites the search results automatically when citations are enabled. No special prompting is needed: ask your question, and citations appear on the text blocks that draw on your content.
 
@@ -69,13 +69,13 @@ Search results hold text only. Images and other media are not supported inside t
 
 ## Method 1: Search results from tool calls
 
-Returning search results from your custom tools enables dynamic RAG applications: tools fetch content at runtime, and Claude cites it in the response. The following example forces the tool call with [`tool_choice`](../agents-and-tools/tool-use/define-tools.md#forcing-tool-use), so the retrieval step runs every time.
+Returning search results from your custom tools lets you build dynamic RAG applications: tools fetch content at runtime, and Claude cites it in the response. The following example forces the tool call with [`tool_choice`](../agents-and-tools/tool-use/define-tools.md#forcing-tool-use), so the retrieval step runs every time.
 
 ### Example: Knowledge base tool
 
-The tool-calling flow needs search logic in your application, which needs more than a single shell command. Use the Claude SDK for the full flow. For the raw request shape of a tool conversation with search results, see [Combining both methods](search-results.md#combining-both-methods). For search results as top-level content, see [Method 2](search-results.md#method-2-search-results-as-top-level-content).
+The tool-calling flow needs search logic in your application, which needs more than a single shell command. Use the Claude SDK for the full flow. For the raw request shape of a tool conversation with search results, see [Combining both methods](search-results.md#combining-both-methods). To provide search results directly in user messages, see [Method 2: Search results as top-level content](search-results.md#method-2-search-results-as-top-level-content).
 
-The tool-calling flow needs search logic in your application, which needs more than a single shell command. Use the Claude SDK for the full flow. For the raw request shape of a tool conversation with search results, see [Combining both methods](search-results.md#combining-both-methods). For search results as top-level content, see [Method 2](search-results.md#method-2-search-results-as-top-level-content).
+The tool-calling flow needs search logic in your application, which needs more than a single shell command. Use the Claude SDK for the full flow. For the raw request shape of a tool conversation with search results, see [Combining both methods](search-results.md#combining-both-methods). To provide search results directly in user messages, see [Method 2: Search results as top-level content](search-results.md#method-2-search-results-as-top-level-content).
 
 ```python Python
 from anthropic.types import (
@@ -313,7 +313,7 @@ static List<Block> SearchKnowledgeBase(string query)
 }
 
 // Build up the conversation in a list, starting with the user's question
-List<MessageParam> messages = [new() { Role = Role.User, Content = "How do I configure the timeout settings?" }];
+List<MessageParam> messages = [new UserMessageParam { Content = "How do I configure the timeout settings?" }];
 
 // Create a message with the tool
 var response = await client.Messages.Create(new()
@@ -335,11 +335,10 @@ foreach (var block in response.Content)
         var toolResults = SearchKnowledgeBase(query);
 
         // Append Claude's turn, then the tool result, to the running conversation
-        messages.Add(new() { Role = Role.Assistant, Content = response.Content.Select(contentBlock => new ContentBlockParam(contentBlock.Json)).ToList() });
-        messages.Add(new()
+        messages.Add(new AssistantMessageParam { Content = response.Content.Select(contentBlock => new ContentBlockParam(contentBlock.Json)).ToList() });
+        messages.Add(new UserMessageParam
         {
-            Role = Role.User,
-            Content = new MessageParamContent(
+            Content = new MessageContentParam(
                 [new ContentBlockParam(new ToolResultBlockParam() { ToolUseID = toolUse.ID, Content = new ToolResultBlockParamContent(toolResults) })]
             ),
         });
@@ -487,10 +486,7 @@ void main() {
 
     // Build up the conversation in a list, starting with the user's question
     List<MessageParam> messages = new ArrayList<>();
-    messages.add(MessageParam.builder()
-        .role(MessageParam.Role.USER)
-        .content("How do I configure the timeout settings?")
-        .build());
+    messages.add(MessageParam.ofUser("How do I configure the timeout settings?"));
 
     MessageCreateParams params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5)
@@ -519,25 +515,15 @@ void main() {
             // Rebuilding only the tool_use block would drop any other content blocks Claude
             // returned (e.g. leading text when the tool call is not forced) — append the
             // full turn, as the other language tabs do.
-            messages.add(MessageParam.builder()
-                .role(MessageParam.Role.ASSISTANT)
-                .contentOfBlockParams(
-                    response.content().stream()
-                        .map(block -> block.toParam())
-                        .toList()
+            messages.add(response.toParam());
+            messages.add(MessageParam.ofUserOfContentBlockParams(List.of(
+                ContentBlockParam.ofToolResult(
+                    ToolResultBlockParam.builder()
+                        .toolUseId(toolUse.id())
+                        .contentOfBlocks(toolResult)
+                        .build()
                 )
-                .build());
-            messages.add(MessageParam.builder()
-                .role(MessageParam.Role.USER)
-                .contentOfBlockParams(List.of(
-                    ContentBlockParam.ofToolResult(
-                        ToolResultBlockParam.builder()
-                            .toolUseId(toolUse.id())
-                            .contentOfBlocks(toolResult)
-                            .build()
-                    )
-                ))
-                .build());
+            )));
 
             // Send the tool result back
             MessageCreateParams finalParams = MessageCreateParams.builder()
@@ -966,10 +952,9 @@ var response = await client.Messages.Create(new()
     MaxTokens = 1024,
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
-            Content = new MessageParamContent(
+            Content = new MessageContentParam(
             [
                 new ContentBlockParam(new SearchResultBlockParam
                 {
@@ -1042,7 +1027,7 @@ void main() {
     MessageCreateParams params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
-        .addUserMessageOfBlockParams(List.of(
+        .addUserMessageOfContentBlockParams(List.of(
             ContentBlockParam.ofSearchResult(
                 SearchResultBlockParam.builder()
                     .source("https://docs.company.com/api-reference")
@@ -1130,7 +1115,7 @@ echo json_encode($message, JSON_PRETTY_PRINT);
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     {
@@ -1176,7 +1161,7 @@ puts message
 
 Regardless of how search results are provided, Claude automatically includes citations when using information from them:
 
-```json
+```text
 {
   "role": "assistant",
   "content": [
@@ -1263,7 +1248,7 @@ Search results can contain multiple text blocks in the `content` array:
 
 A citation referencing the rate limits block looks like:
 
-```json
+```text wrap
 {
   "type": "search_result_location",
   "cited_text": "Rate Limits: The API allows 1000 requests per hour per key.",
@@ -1628,10 +1613,9 @@ var response = await client.Messages.Create(new()
     ],
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
-            Content = new MessageParamContent(
+            Content = new MessageContentParam(
             [
                 new ContentBlockParam(new SearchResultBlockParam
                 {
@@ -1643,10 +1627,9 @@ var response = await client.Messages.Create(new()
                 new ContentBlockParam(new TextBlockParam { Text = "What does Acme Dashboard do, and what plans is it available on?" }),
             ]),
         },
-        new()
+        new AssistantMessageParam
         {
-            Role = Role.Assistant,
-            Content = new MessageParamContent(
+            Content = new MessageContentParam(
             [
                 new ContentBlockParam(new TextBlockParam { Text = "Let me check the pricing information." }),
                 new ContentBlockParam(new ToolUseBlockParam
@@ -1660,10 +1643,9 @@ var response = await client.Messages.Create(new()
                 }),
             ]),
         },
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
-            Content = new MessageParamContent(
+            Content = new MessageContentParam(
             [
                 new ContentBlockParam(new ToolResultBlockParam()
                 {
@@ -1784,7 +1766,7 @@ void main() {
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
         .addTool(knowledgeBaseTool)
-        .addUserMessageOfBlockParams(List.of(
+        .addUserMessageOfContentBlockParams(List.of(
             ContentBlockParam.ofSearchResult(SearchResultBlockParam.builder()
                 .source("https://docs.company.com/overview")
                 .title("Product Overview")
@@ -1797,7 +1779,7 @@ void main() {
                 .text("What does Acme Dashboard do, and what plans is it available on?")
                 .build())
         ))
-        .addAssistantMessageOfBlockParams(List.of(
+        .addAssistantMessageOfContentBlockParams(List.of(
             ContentBlockParam.ofText(TextBlockParam.builder()
                 .text("Let me check the pricing information.")
                 .build()),
@@ -1807,7 +1789,7 @@ void main() {
                 .input(JsonValue.from(Map.of("query", "Acme Dashboard pricing plans")))
                 .build())
         ))
-        .addUserMessageOfBlockParams(List.of(
+        .addUserMessageOfContentBlockParams(List.of(
             ContentBlockParam.ofToolResult(ToolResultBlockParam.builder()
                 .toolUseId("toolu_01A09q90qw90lq917835lq9")
                 .contentOfBlocks(List.of(
@@ -1931,7 +1913,7 @@ knowledge_base_tool = {
 # Replay a conversation that provides search results both ways: the first
 # user message carries a pre-fetched result, the tool result returns another
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   tools: [knowledge_base_tool],
   messages: [
@@ -1999,7 +1981,7 @@ puts response
 
 The response cites both sources. The pre-fetched result is `search_result_index: 0` and the tool-returned result is `search_result_index: 1`, matching the order the `search_result` blocks appear in the conversation:
 
-```json
+```text
 {
   "role": "assistant",
   "content": [
@@ -2099,8 +2081,8 @@ Citations are all-or-nothing: either all search results in a request must have c
 ### For top-level search (Method 2)
 
 * **Pre-fetched content:** Use when you already have search results
-* **Batch processing:** Ideal for processing multiple search results at once
-* **Testing:** Great for testing citation behavior with known content
+* **Batch processing:** Use for processing multiple search results at once
+* **Testing:** Use for testing citation behavior with known content
 
 ### General best practices
 

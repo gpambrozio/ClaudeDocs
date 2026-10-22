@@ -30,7 +30,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=1.44.0
+VERSION=2.1.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -47,7 +47,7 @@ You can find all releases on the [GitHub releases page](https://github.com/anthr
 You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
 
 ```bash
-go install github.com/anthropics/anthropic-cli/cmd/ant@latest
+go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
 ```
 
 The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn't already:
@@ -145,7 +145,7 @@ Command structure, output formats, GJSON transforms, and request bodies
 
 **CLI scripting and automation**
 
-Version-control API resources, scripting patterns, and use from Claude Code
+Version control for API resources, scripting patterns, and use from Claude Code
 
 ---
 

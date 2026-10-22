@@ -109,7 +109,7 @@ var response = await client.Messages.Create(new MessageCreateParams
     MaxTokens = 4096,
     Speed = Speed.Fast,
     Messages = [
-        new() { Role = Role.User, Content = "Refactor this module to use dependency injection" }
+        new UserMessageParam { Content = "Refactor this module to use dependency injection" }
     ],
 });
 
@@ -182,7 +182,7 @@ foreach ($response->content as $block) {
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 4096,
   speed: "fast",
   messages: [{role: "user", content: "Refactor this module to use dependency injection"}]
@@ -222,8 +222,8 @@ Fast mode is priced at a multiplier on standard rates across the full context wi
 
 Fast mode pricing stacks with other pricing modifiers:
 
-* [Prompt caching multipliers](../about-claude/pricing.md#prompt-caching) apply on top of fast mode pricing
-* [Data residency](../manage-claude/data-residency.md) multipliers apply on top of fast mode pricing
+* [Prompt caching multipliers](../about-claude/pricing.md#prompt-caching) apply on top of fast mode pricing.
+* [Data residency](../manage-claude/data-residency.md) multipliers apply on top of fast mode pricing.
 
 For complete pricing details, see the [Pricing](../about-claude/pricing.md#fast-mode-pricing) page.
 
@@ -308,7 +308,7 @@ var response = await client.Messages.Create(new MessageCreateParams
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Speed = Speed.Fast,
-    Messages = [new() { Role = Role.User, Content = "Hello" }],
+    Messages = [new UserMessageParam { Content = "Hello" }],
 });
 
 Console.WriteLine(response.Usage.Speed);  // "fast" or "standard"
@@ -362,7 +362,7 @@ echo $response->usage->speed;  // "fast" or "standard"
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   speed: "fast",
   messages: [{ role: "user", content: "Hello" }]
@@ -371,7 +371,7 @@ response = client.messages.create(
 puts(response.usage.speed)  # "fast" or "standard"
 ```
 
-```json Output
+```text Output wrap
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
@@ -397,7 +397,7 @@ The SDK automatically retries fast mode `429` errors up to 2 times by default (c
 
 If you'd prefer to fall back to standard speed rather than wait for fast mode capacity, catch the rate limit error and retry without `speed: "fast"`. Set `max_retries` (typescript, java, php: `maxRetries`; csharp: `MaxRetries`; go: `option.WithMaxRetries`) to `0` on the initial fast request to skip automatic retries and fail immediately on rate limit errors.
 
-Falling back from fast to standard speed will result in a [prompt cache](prompt-caching.md) miss. Requests at different speeds do not share cached prefixes.
+Falling back from fast to standard speed results in a [prompt cache](prompt-caching.md) miss. Requests at different speeds do not share cached prefixes.
 
 Because setting `max_retries` (typescript, java, php: `maxRetries`; csharp: `MaxRetries`; go: `option.WithMaxRetries`) to `0` also disables retries for other transient errors (overloaded, internal server errors), the following examples reissue the original request with default retries for those cases.
 
@@ -511,7 +511,7 @@ var message = await CreateMessageWithFastFallback(
     {
         Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
-        Messages = [new() { Role = Role.User, Content = "Hello" }],
+        Messages = [new UserMessageParam { Content = "Hello" }],
         Speed = Speed.Fast,
     },
     maxRetries: 0);

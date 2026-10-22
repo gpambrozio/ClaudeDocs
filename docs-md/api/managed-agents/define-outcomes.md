@@ -26,7 +26,7 @@ A rubric is a markdown document describing per-criterion scoring. The rubric is 
 
 Structure the rubric as explicit, gradeable criteria, such as "The CSV contains a price column with numeric values" rather than "The data looks good." The grader scores each criterion independently, so vague criteria produce noisy evaluations.
 
-If you don't have a rubric on hand, try giving Claude an example of a known-good artifact and asking it to analyze what makes that content good, then turn that analysis into a rubric. This middle-ground approach often produces better results than writing criteria from scratch.
+If you don't have a rubric, try giving Claude an example of a known-good artifact and asking it to analyze what makes that content good, then turn that analysis into a rubric. This middle-ground approach often produces better results than writing criteria with no example to start from.
 
 Example rubric:
 
@@ -285,7 +285,7 @@ puts "Uploaded rubric: #{rubric.id}"
 
 ## Create a session with an outcome
 
-The following examples create a [session](sessions.md) for an existing [agent](agent-setup.md) and [environment](environments.md) (both created separately), then send a `user.define_outcome` event. The agent begins work immediately. No additional user message event is required.
+The following examples create a [session](sessions.md) for an existing [agent](agent-setup.md) and [environment](environments.md) (both created separately), then send a `user.define_outcome` event. The agent starts work immediately. No additional user message event is required.
 
 ```bash cURL
 # Create a session
@@ -299,7 +299,7 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
     "title": "Financial analysis on Costco"
   }'
 
-# Define the outcome: SESSION_ID is the id from the create response
+# Define the outcome: SESSION_ID is the ID from the create response
 # The agent starts working when it receives the event
 curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -326,7 +326,7 @@ ant beta:sessions create \
   --environment-id "$ENVIRONMENT_ID" \
   --title "Financial analysis on Costco"
 
-# Define the outcome: SESSION_ID is the id from the create response
+# Define the outcome: SESSION_ID is the ID from the create response
 # The agent starts working when it receives the event
 ant beta:sessions:events send --session-id "$SESSION_ID" <<YAML
 events:
@@ -346,7 +346,7 @@ session = client.beta.sessions.create(
     title="Financial analysis on Costco",
 )
 
-# Define the outcome — agent starts working on receipt
+# Define the outcome. The agent starts working on receipt.
 client.beta.sessions.events.send(
     session_id=session.id,
     events=[
@@ -369,7 +369,7 @@ const session = await client.beta.sessions.create({
   title: "Financial analysis on Costco"
 });
 
-// Define the outcome — agent starts working on receipt
+// Define the outcome. The agent starts working on receipt.
 await client.beta.sessions.events.send(session.id, {
   events: [
     {
@@ -399,15 +399,9 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
     [
         new BetaManagedAgentsUserDefineOutcomeEventParams
         {
-            Type = BetaManagedAgentsUserDefineOutcomeEventParamsType.UserDefineOutcome,
             Description = "Build a DCF model for Costco in .xlsx",
-            Rubric = new BetaManagedAgentsTextRubricParams
-            {
-                Type = BetaManagedAgentsTextRubricParamsType.Text,
-                Content = Rubric,
-            },
-            // or: Rubric = new BetaManagedAgentsFileRubricParams
-            //     { Type = BetaManagedAgentsFileRubricParamsType.File, FileID = rubric.ID },
+            Rubric = new BetaManagedAgentsTextRubricParams { Content = Rubric },
+            // or: Rubric = new BetaManagedAgentsFileRubricParams { FileID = rubric.ID },
             MaxIterations = 5, // optional; default 3, max 20
         },
     ],
@@ -464,14 +458,11 @@ client.beta().sessions().events().send(
     session.id(),
     EventSendParams.builder()
         .addEvent(BetaManagedAgentsUserDefineOutcomeEventParams.builder()
-            .type(BetaManagedAgentsUserDefineOutcomeEventParams.Type.USER_DEFINE_OUTCOME)
             .description("Build a DCF model for Costco in .xlsx")
             .rubric(BetaManagedAgentsTextRubricParams.builder()
-                .type(BetaManagedAgentsTextRubricParams.Type.TEXT)
                 .content(RUBRIC)
                 .build())
-            // or: .rubric(BetaManagedAgentsFileRubricParams.builder()
-            //     .type(BetaManagedAgentsFileRubricParams.Type.FILE).fileId(rubric.id()).build())
+            // or: .rubric(BetaManagedAgentsFileRubricParams.builder().fileId(rubric.id()).build())
             .maxIterations(5) // optional; default 3, max 20
             .build())
         .build());
@@ -508,7 +499,7 @@ session = client.beta.sessions.create(
   title: "Financial analysis on Costco"
 )
 
-# Define the outcome — agent starts working on receipt
+# Define the outcome. The agent starts working on receipt.
 client.beta.sessions.events.send_(
   session.id,
   events: [
@@ -532,12 +523,12 @@ Progress on an outcome-oriented session is surfaced on the events [stream](event
 * `agent.*` events (such as messages and tool use) show progress toward the outcome.
 * `span.outcome_evaluation_*` events are only emitted for outcome-oriented sessions and show the number of iteration loops and the grader's feedback process.
 * You can also send `user.message` [events](reference.md#event-types) to an outcome-oriented session to direct the agent's work as it progresses, but it isn't required: the agent works toward the outcome on its own, iterating until it succeeds or runs out of iterations.
-* A `user.interrupt` event pauses work on the current outcome and marks the `result` (csharp, go: `Result`) of the `span.outcome_evaluation_end` event as `interrupted`, allowing you to kick off a new outcome.
+* A `user.interrupt` event pauses work on the current outcome and marks the `result` (csharp, go: `Result`) of the `span.outcome_evaluation_end` event as `interrupted`, allowing you to start a new outcome.
 * After the final outcome evaluation, the session can be continued as a conversational session, or a new outcome can be started. The session retains history of the prior outcome.
 
 ### Define outcome user event
 
-Only one outcome is supported at a time, but you may chain outcomes in sequence. To do this, send a new `user.define_outcome` event after the terminal `span.outcome_evaluation_end` event of the previous outcome.
+Only one outcome is supported at a time, but you can chain outcomes in sequence. To do this, send a new `user.define_outcome` event after the terminal `span.outcome_evaluation_end` event of the previous outcome.
 
 This is the event you send to initiate an outcome. It is echoed back on receipt, including a `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) timestamp and `outcome_id` (java: `outcomeId`; php: `outcomeID`; csharp, go: `OutcomeID`).
 
@@ -554,7 +545,7 @@ This is the event you send to initiate an outcome. It is echoed back on receipt,
 
 Emitted once the grader starts an evaluation over one iteration loop. The `iteration` field is a 0-indexed revision counter: `0` is the first evaluation, `1` is the re-evaluation after the first revision, and so on.
 
-```json
+```text wrap
 {
   "type": "span.outcome_evaluation_start",
   "id": "sevt_01def...",
@@ -566,9 +557,9 @@ Emitted once the grader starts an evaluation over one iteration loop. The `itera
 
 ### Outcome evaluation ongoing
 
-Heartbeat emitted while the grader runs. The grader's internal reasoning is opaque: you see that it's working, not what it's thinking.
+Heartbeat emitted while the grader runs. The grader's internal reasoning is opaque: the event shows only that the grader is working.
 
-```json
+```text wrap
 {
   "type": "span.outcome_evaluation_ongoing",
   "id": "sevt_01ghi...",
@@ -580,7 +571,7 @@ Heartbeat emitted while the grader runs. The grader's internal reasoning is opaq
 
 ### Outcome evaluation end
 
-Emitted when an outcome evaluation cycle ends: after the grader finishes evaluating one iteration, or when the session is interrupted while an outcome is active. The `result` field indicates what happens next.
+Emitted when an outcome evaluation cycle ends: after the grader finishes evaluating one iteration, or when the session is interrupted while an outcome is active. The `result` field indicates what occurs next.
 
 | Result                   | Next                                                                                                                                                                                                                      |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -590,7 +581,7 @@ Emitted when an outcome evaluation cycle ends: after the grader finishes evaluat
 | `failed`                 | Session transitions to `idle`. Returned when the rubric does not apply to the deliverables, for example if the description and rubric contradict each other.                                                              |
 | `interrupted`            | Emitted when the session is interrupted while an outcome is active, even if evaluation hadn't started yet. If no `outcome_evaluation_start` fired before the interrupt, `outcome_evaluation_start_id` is an empty string. |
 
-```json
+```text
 {
   "type": "span.outcome_evaluation_end",
   "id": "sevt_01jkl...",
@@ -692,7 +683,7 @@ end
 
 ## Retrieve deliverables
 
-The agent writes output files to `/mnt/session/outputs/` inside the sandbox. To retrieve them, list files through the [Files API](../build-with-claude/files.md) with the session ID as the `scope_id` (java: `scopeId`; php: `scopeID`; csharp, go: `ScopeID`), then download them by ID. Filtering by `scope_id` (java: `scopeId`; php: `scopeID`; csharp, go: `ScopeID`) requires the `managed-agents-2026-04-01` beta header on the list request, so the SDK and CLI examples make that call through the `beta` namespace and pass the header explicitly. Files appear in the list shortly after the agent finishes writing them, sometimes a few seconds after the session goes idle. If a file you expect is not listed yet, list again after a short delay; once it appears in the list, its upload has finished.
+The agent writes output files to `/mnt/session/outputs/` inside the sandbox. To retrieve them, list files through the [Files API](../build-with-claude/files.md) with the session ID as the `scope_id` (java: `scopeId`; php: `scopeID`; csharp, go: `ScopeID`), then download them by ID. Filtering by `scope_id` (java: `scopeId`; php: `scopeID`; csharp, go: `ScopeID`) requires the `managed-agents-2026-04-01` beta header on the list request, so the SDK and CLI examples make that call through the `beta` namespace and pass the header explicitly. Files appear in the list shortly after the agent finishes writing them, sometimes a few seconds after the session goes idle. If a file you expect is not listed yet, list again after a short delay; once it appears in the list, its upload is complete.
 
 ```bash cURL
 # List files produced by this session
@@ -862,7 +853,7 @@ Register per-user credentials when creating sessions.
 
 **Session event stream**
 
-Send events, stream responses, and interrupt or redirect your session mid-execution.
+Send events, stream responses, and interrupt or redirect your session while it runs.
 
 **Adding files**
 

@@ -14,7 +14,7 @@ This guide assumes that you have:
 2. Some ways to empirically test against those criteria
 3. A first draft prompt you want to improve
 
-If not, spend time establishing that first. Check out [Define success criteria and build evaluations](../../test-and-evaluate/develop-tests.md) for tips and guidance.
+If not, spend time establishing that first. See [Define success criteria and build evaluations](../../test-and-evaluate/develop-tests.md) for tips and guidance.
 
 **Prompt generator notebook**
 
@@ -28,7 +28,7 @@ For model-specific tuning guidance for Claude's latest models, start here.
 
 ## When to prompt engineer
 
-This guide focuses on success criteria that are controllable through prompt engineering. Not every success criteria or failing eval is best solved by prompt engineering. For example, you can sometimes improve latency and cost more easily by selecting a different model.
+This guide focuses on success criteria that are controllable through prompt engineering. Not every success criterion or failing eval is best solved by prompt engineering. For example, you can sometimes improve latency and cost more easily by choosing a different model.
 
 ***
 

@@ -16,7 +16,7 @@ Deployable applications built with the API.
 
 Step-by-step lessons on building with Claude.
 
-**Cookbook**
+**Claude Cookbook**
 
 Replicable code samples and implementations.
 

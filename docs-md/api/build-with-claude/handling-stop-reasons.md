@@ -14,7 +14,7 @@ For the full response schema, see the [Messages API reference](../api/messages/c
 
 | Value                                                                                                                                        | When it occurs                                  | What to do                                                                                                                                              |
 | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`end_turn`](handling-stop-reasons.md#end-turn)                                           | Claude finished its response naturally.         | Use the response.                                                                                                                                       |
+| [`end_turn`](handling-stop-reasons.md#end-turn)                                           | Claude completed its response naturally.        | Use the response.                                                                                                                                       |
 | [`max_tokens`](handling-stop-reasons.md#max-tokens)                                       | The response reached your `max_tokens` limit.   | Raise `max_tokens` or [continue the response](handling-stop-reasons.md#ensuring-complete-responses). |
 | [`stop_sequence`](handling-stop-reasons.md#stop-sequence)                                 | Claude emitted one of your `stop_sequences`.    | Read `stop_sequence` to see which one fired.                                                                                                            |
 | [`tool_use`](handling-stop-reasons.md#tool-use)                                           | Claude is calling a tool.                       | Run the tool and return the result. A server tool call still missing its result block completes in a later response.                                    |
@@ -26,7 +26,7 @@ For the full response schema, see the [Messages API reference](../api/messages/c
 
 The `stop_reason` field is part of every successful Messages API response. Unlike errors, which indicate failures in processing your request, `stop_reason` tells you why Claude completed its response generation.
 
-```json Example response
+```text Example response wrap
 {
   "id": "msg_01234",
   "type": "message",
@@ -51,7 +51,7 @@ The `stop_reason` field is part of every successful Messages API response. Unlik
 
 ### end\_turn
 
-The most common stop reason. Indicates Claude finished its response naturally.
+The most common stop reason. Indicates Claude completed its response naturally.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -110,7 +110,7 @@ var response = await client.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello!" }]
+    Messages = [new UserMessageParam { Content = "Hello!" }]
 });
 
 if (response.StopReason == "end_turn")
@@ -192,7 +192,7 @@ if ($response->stopReason === 'end_turn') {
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello!" }]
 )
@@ -207,11 +207,11 @@ end
 
 **Empty responses with end_turn**
 
-Sometimes Claude returns an empty response (exactly 2–3 tokens with no content) with `stop_reason: "end_turn"`. This typically occurs when Claude interprets that the assistant turn is complete, particularly after tool results.
+Sometimes Claude returns an empty response (exactly 2–3 tokens with no content) with `stop_reason: "end_turn"`. This typically occurs when Claude determines that the assistant turn is complete, particularly after tool results.
 
 **Common causes:**
 
-* Adding text blocks immediately after tool results (Claude learns to expect the user to always insert text after tool results, so it ends its turn to follow the pattern)
+* Adding text blocks immediately after tool results (the history then shows user text after every tool result, so Claude ends its turn to follow that pattern)
 * Sending Claude's completed response back without adding anything (Claude already determined it's done, so it will remain done)
 
 **How to prevent empty responses:**
@@ -323,18 +323,16 @@ var input = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(
 // INCORRECT: Adding text immediately after tool_result
 List<MessageParam> messages =
 [
-    new() { Role = Role.User, Content = "Calculate the sum of 1234 and 5678" },
-    new()
+    new UserMessageParam { Content = "Calculate the sum of 1234 and 5678" },
+    new AssistantMessageParam
     {
-        Role = Role.Assistant,
         Content = new List<ContentBlockParam>
         {
             new ToolUseBlockParam { ID = "toolu_123", Name = "calculator", Input = input }
         }
     },
-    new()
+    new UserMessageParam
     {
-        Role = Role.User,
         Content = new List<ContentBlockParam>
         {
             new ToolResultBlockParam { ToolUseID = "toolu_123", Content = "6912" },
@@ -346,18 +344,16 @@ List<MessageParam> messages =
 // CORRECT: Send tool results directly without additional text
 messages =
 [
-    new() { Role = Role.User, Content = "Calculate the sum of 1234 and 5678" },
-    new()
+    new UserMessageParam { Content = "Calculate the sum of 1234 and 5678" },
+    new AssistantMessageParam
     {
-        Role = Role.Assistant,
         Content = new List<ContentBlockParam>
         {
             new ToolUseBlockParam { ID = "toolu_123", Name = "calculator", Input = input }
         }
     },
-    new()
+    new UserMessageParam
     {
-        Role = Role.User,
         // Just the tool_result, no additional text
         Content = new List<ContentBlockParam>
         {
@@ -408,31 +404,25 @@ ToolUseBlockParam toolUse = ToolUseBlockParam.builder()
 
 // INCORRECT: Adding text immediately after tool_result
 List<MessageParam> messages = List.of(
-    MessageParam.builder().role(MessageParam.Role.USER)
-        .content("Calculate the sum of 1234 and 5678").build(),
-    MessageParam.builder().role(MessageParam.Role.ASSISTANT)
-        .contentOfBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))).build(),
-    MessageParam.builder().role(MessageParam.Role.USER)
-        .contentOfBlockParams(List.of(
-            ContentBlockParam.ofToolResult(
-                ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build()),
-            // Don't add text after tool_result
-            ContentBlockParam.ofText(TextBlockParam.builder().text("Here's the result").build())
-        )).build()
+    MessageParam.ofUser("Calculate the sum of 1234 and 5678"),
+    MessageParam.ofAssistantOfContentBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))),
+    MessageParam.ofUserOfContentBlockParams(List.of(
+        ContentBlockParam.ofToolResult(
+            ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build()),
+        // Don't add text after tool_result
+        ContentBlockParam.ofText(TextBlockParam.builder().text("Here's the result").build())
+    ))
 );
 
 // CORRECT: Send tool results directly without additional text
 messages = List.of(
-    MessageParam.builder().role(MessageParam.Role.USER)
-        .content("Calculate the sum of 1234 and 5678").build(),
-    MessageParam.builder().role(MessageParam.Role.ASSISTANT)
-        .contentOfBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))).build(),
+    MessageParam.ofUser("Calculate the sum of 1234 and 5678"),
+    MessageParam.ofAssistantOfContentBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))),
     // Just the tool_result, no additional text
-    MessageParam.builder().role(MessageParam.Role.USER)
-        .contentOfBlockParams(List.of(
-            ContentBlockParam.ofToolResult(
-                ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build())
-        )).build()
+    MessageParam.ofUserOfContentBlockParams(List.of(
+        ContentBlockParam.ofToolResult(
+            ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build())
+    ))
 );
 ```
 
@@ -545,7 +535,7 @@ def handle_empty_response(client, messages):
     # Check if response is empty
     if response.stop_reason == "end_turn" and not response.content:
         # INCORRECT: Don't just retry with the empty response
-        # This won't work because Claude already decided it's done
+        # This won't work because Claude already determined it's done
 
         # CORRECT: Add a continuation prompt in a NEW user message
         messages.append({"role": "user", "content": "Please continue"})
@@ -571,7 +561,7 @@ async function handleEmptyResponse(
   // Check if response is empty
   if (response.stop_reason === "end_turn" && response.content.length === 0) {
     // INCORRECT: Don't just retry with the empty response
-    // This won't work because Claude already decided it's done
+    // This won't work because Claude already determined it's done
 
     // CORRECT: Add a continuation prompt in a NEW user message
     messages.push({ role: "user", content: "Please continue" });
@@ -601,7 +591,7 @@ static async Task<Message> HandleEmptyResponse(AnthropicClient client, List<Mess
     if (response.StopReason == "end_turn" && response.Content.Count == 0)
     {
         // CORRECT: Add a continuation prompt in a NEW user message
-        messages.Add(new() { Role = Role.User, Content = "Please continue" });
+        messages.Add(new UserMessageParam { Content = "Please continue" });
 
         response = await client.Messages.Create(new MessageCreateParams
         {
@@ -660,10 +650,7 @@ static Message handleEmptyResponse(AnthropicClient client, List<MessageParam> me
     if (isEndTurn && response.content().isEmpty()) {
         // CORRECT: Add a continuation prompt in a NEW user message
         List<MessageParam> extended = new ArrayList<>(messages);
-        extended.add(MessageParam.builder()
-            .role(MessageParam.Role.USER)
-            .content("Please continue")
-            .build());
+        extended.add(MessageParam.ofUser("Please continue"));
 
         response = client.messages().create(
             MessageCreateParams.builder()
@@ -729,7 +716,7 @@ end
 
 **Best practices:**
 
-1. **Never add text blocks immediately after tool results:** This teaches Claude to expect user input after every tool use.
+1. **Never add text blocks immediately after tool results:** This sets a pattern of user input after every tool use, and Claude follows that pattern by ending its turn.
 2. **Don't retry empty responses without modification:** Sending the empty response back won't help.
 3. **Use continuation prompts as a last resort:** Only if these fixes don't resolve the issue.
 
@@ -796,7 +783,7 @@ var response = await client.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 10,
-    Messages = [new() { Role = Role.User, Content = "Explain quantum physics" }]
+    Messages = [new UserMessageParam { Content = "Explain quantum physics" }]
 });
 
 if (response.StopReason == "max_tokens")
@@ -870,7 +857,7 @@ client = Anthropic::Client.new
 
 # Request with limited tokens
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 10,
   messages: [{ role: "user", content: "Explain quantum physics" }]
 )
@@ -1018,7 +1005,7 @@ if ($response->stopReason === 'max_tokens') {
 
 ```ruby Ruby
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: messages,
   tools: tools
@@ -1028,7 +1015,7 @@ if response.stop_reason == :max_tokens
   last_block = response.content.last
   if last_block.type == :tool_use
     response = client.messages.create(
-      model: "claude-opus-5-5",
+      model: Anthropic::Model::CLAUDE_OPUS_5_5,
       max_tokens: 4096,
       messages: messages,
       tools: tools
@@ -1098,7 +1085,7 @@ var response = await client.Messages.Create(new MessageCreateParams
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     StopSequences = ["END", "STOP"],
-    Messages = [new() { Role = Role.User, Content = "Generate text until you say END" }]
+    Messages = [new UserMessageParam { Content = "Generate text until you say END" }]
 });
 
 if (response.StopReason == "stop_sequence")
@@ -1164,7 +1151,7 @@ if ($response->stopReason === 'stop_sequence') {
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   stop_sequences: ["END", "STOP"],
   messages: [{ role: "user", content: "Generate text until you say END" }]
@@ -1177,7 +1164,7 @@ end
 
 ### tool\_use
 
-Claude is calling a tool and expects you to run it.
+Claude is calling a tool that you need to run.
 
 For most tool use implementations, use the [tool runner](../agents-and-tools/tool-use/tool-runner.md), which automatically handles tool execution, result formatting, and conversation management.
 
@@ -1313,7 +1300,7 @@ var response = await client.Messages.Create(new MessageCreateParams
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Tools = [weatherTool],
-    Messages = [new() { Role = Role.User, Content = "What is the weather in San Francisco?" }]
+    Messages = [new UserMessageParam { Content = "What is the weather in San Francisco?" }]
 });
 
 if (response.StopReason == "tool_use")
@@ -1463,11 +1450,11 @@ if response.stop_reason == :tool_use
 end
 ```
 
-A `tool_use` response can also contain a `server_tool_use` block whose `id` has no matching result block. That server tool call is not finished, and this response does not carry its result. In the common case, Claude calls a [server tool](../agents-and-tools/tool-use/server-tools.md) and one of your client tools in the same group of parallel tool calls: the API returns without running the server tool so that you can run the client tools first. There is no other marker for the state; detect it by checking each `server_tool_use` or `mcp_tool_use` block's `id` for a matching result block.
+A `tool_use` response can also contain a `server_tool_use` block whose `id` has no matching result block. That server tool call is not complete, and this response does not carry its result. In the common case, Claude calls a [server tool](../agents-and-tools/tool-use/server-tools.md) and one of your client tools in the same group of parallel tool calls: the API returns without running the server tool so that you can run the client tools first. There is no other marker for the state; detect it by checking each `server_tool_use` or `mcp_tool_use` block's `id` for a matching result block.
 
-With [programmatic tool calling](../agents-and-tools/tool-use/programmatic-tool-calling.md), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code finishes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
+With [programmatic tool calling](../agents-and-tools/tool-use/programmatic-tool-calling.md), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code completes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
 
-```json A mixed tool_use response
+```text A mixed tool_use response wrap
 {
   "stop_reason": "tool_use",
   "content": [
@@ -1512,9 +1499,9 @@ Leaving out a `tool_result`, or putting one after other content, fails earlier w
 
 ### pause\_turn
 
-Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](../agents-and-tools/tool-use/server-tools.md) such as web search. The default limit is 10 iterations per request.
+Returned when the server-side sampling loop reaches its iteration limit while running [server tools](../agents-and-tools/tool-use/server-tools.md) such as web search. The default limit is 10 iterations for each request.
 
-When this happens, the response may contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](handling-stop-reasons.md#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
+When this occurs, the response might contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](handling-stop-reasons.md#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
 
 ```bash cURL
 # The SDKs handle continuation directly. With cURL, inspect stop_reason
@@ -1590,7 +1577,7 @@ if (response.stop_reason === "pause_turn") {
 
 ```csharp C#
 List<ToolUnion> tools = [new ToolUnion(new WebSearchTool20250305())];
-MessageParam userMessage = new() { Role = Role.User, Content = "Search for latest AI news" };
+MessageParam userMessage = new UserMessageParam { Content = "Search for latest AI news" };
 
 var response = await client.Messages.Create(new MessageCreateParams
 {
@@ -1611,9 +1598,8 @@ if (response.StopReason == "pause_turn")
         Messages =
         [
             userMessage,
-            new()
+            new AssistantMessageParam
             {
-                Role = Role.Assistant,
                 Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
             }
         ]
@@ -1789,7 +1775,7 @@ var response = await client.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "[Unsafe request]" }]
+    Messages = [new UserMessageParam { Content = "[Unsafe request]" }]
 });
 
 if (response.StopReason == "refusal")
@@ -1859,7 +1845,7 @@ if ($response->stopReason === 'refusal') {
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [{ role: "user", content: "[Unsafe request]" }]
 )
@@ -1873,7 +1859,7 @@ end
 
 If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 ([deprecated](../about-claude/model-deprecations.md)) or Claude Opus 4.1 (the latter [retired, except on Bedrock and Google Cloud](../about-claude/model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 
-On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](refusals-and-fallback.md#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
+On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered in [What a refusal looks like](refusals-and-fallback.md#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
 
 A refused request on Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, or Claude Haiku 5.5 can usually be served by retrying on another Claude model. [Refusals and fallback](refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. Claude Haiku 5.5 has no server-side fallback, so set up its retry [in your client](refusals-and-fallback.md#client-side-fallback). If you build the retry yourself from Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, or Claude Sonnet 5.5, [fallback credit](fallback-credit.md) covers how to avoid paying the prompt-cache cost twice.
 
@@ -1881,7 +1867,7 @@ A refused request on Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude O
 
 Claude stopped because it reached the model's context window limit. This lets you request the maximum possible tokens without knowing the exact input size.
 
-This stop reason is currently typed only in the SDK's `beta` (csharp, go: `Beta`; java: `beta()`) namespace, so the following examples call `client.beta.messages` (csharp, go: `client.Beta.Messages`; java: `client.beta().messages()`; php: `$client->beta->messages`) and use the `Beta`-prefixed types. On Sonnet 4.5 (deprecated) and newer models the API returns this value without a beta header. For earlier models, add the `model-context-window-exceeded-2025-08-26` beta header to enable it.
+This stop reason is currently typed only in the SDK's `beta` (csharp, go: `Beta`; java: `beta()`) namespace, so the following examples call `client.beta.messages` (csharp, go: `client.Beta.Messages`; java: `client.beta().messages()`; php: `$client->beta->messages`) and use the `Beta`-prefixed types. On Sonnet 4.5 (deprecated) and newer models, the API returns this value without a beta header. For earlier models, add the `model-context-window-exceeded-2025-08-26` beta header to enable it.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -1942,7 +1928,7 @@ var response = await client.Beta.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 20000,
-    Messages = [new() { Role = Role.User, Content = "Large input that uses most of context window..." }]
+    Messages = [new BetaUserMessageParam { Content = "Large input that uses most of context window..." }]
 });
 
 if (response.StopReason?.Value() == BetaStopReason.ModelContextWindowExceeded)
@@ -2294,7 +2280,7 @@ end
 
 ### Implement retry logic for pause\_turn
 
-When using [server tools](../agents-and-tools/tool-use/server-tools.md), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
+When you use [server tools](../agents-and-tools/tool-use/server-tools.md), the API might return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
 ```python Python
 def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
@@ -2371,7 +2357,7 @@ static async Task<Message> HandleServerToolConversation(
     List<ToolUnion> tools,
     int maxContinuations = 5)
 {
-    List<MessageParam> messages = [new() { Role = Role.User, Content = userQuery }];
+    List<MessageParam> messages = [new UserMessageParam { Content = userQuery }];
     Message response = null!;
 
     for (var i = 0; i < maxContinuations; i++)
@@ -2393,10 +2379,9 @@ static async Task<Message> HandleServerToolConversation(
         // pause_turn: replace the full message list to maintain alternating roles
         messages =
         [
-            new() { Role = Role.User, Content = userQuery },
-            new()
+            new UserMessageParam { Content = userQuery },
+            new AssistantMessageParam
             {
-                Role = Role.Assistant,
                 Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
             }
         ];
@@ -2547,7 +2532,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 end
 ```
 
-## Stop reasons vs. errors
+## Stop reasons versus errors
 
 It's important to distinguish between `stop_reason` values and actual errors:
 
@@ -2648,7 +2633,7 @@ try
     {
         Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
-        Messages = [new() { Role = Role.User, Content = "Hello!" }]
+        Messages = [new UserMessageParam { Content = "Hello!" }]
     });
 
     // Handle successful response with stop_reason
@@ -2751,7 +2736,7 @@ client = Anthropic::Client.new
 
 begin
   response = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello!" }]
   )
@@ -2836,7 +2821,7 @@ var parameters = new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello!" }]
+    Messages = [new UserMessageParam { Content = "Hello!" }]
 };
 
 await foreach (var streamEvent in client.Messages.CreateStreaming(parameters))
@@ -2918,7 +2903,7 @@ foreach ($stream as $event) {
 client = Anthropic::Client.new
 
 stream = client.messages.stream(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello!" }]
 )
@@ -2993,7 +2978,7 @@ static async Task<Message> CompleteToolWorkflow(
     string userQuery,
     List<ToolUnion> tools)
 {
-    List<MessageParam> messages = [new() { Role = Role.User, Content = userQuery }];
+    List<MessageParam> messages = [new UserMessageParam { Content = userQuery }];
 
     while (true)
     {
@@ -3009,12 +2994,11 @@ static async Task<Message> CompleteToolWorkflow(
         {
             // Execute tools and continue
             var toolResults = ExecuteTools(response.Content);
-            messages.Add(new()
+            messages.Add(new AssistantMessageParam
             {
-                Role = Role.Assistant,
                 Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
             });
-            messages.Add(new() { Role = Role.User, Content = toolResults });
+            messages.Add(new UserMessageParam { Content = toolResults });
         }
         else
         {
@@ -3068,7 +3052,7 @@ static Message completeToolWorkflow(
     List<Tool> tools
 ) {
     List<MessageParam> messages = new ArrayList<>();
-    messages.add(MessageParam.builder().role(MessageParam.Role.USER).content(userQuery).build());
+    messages.add(MessageParam.ofUser(userQuery));
 
     while (true) {
         MessageCreateParams.Builder params = MessageCreateParams.builder()
@@ -3087,10 +3071,8 @@ static Message completeToolWorkflow(
         // Execute tools and continue
         List<ToolResultBlockParam> toolResults = executeTools(response.content());
         messages.add(response.toParam());
-        messages.add(MessageParam.builder()
-            .role(MessageParam.Role.USER)
-            .contentOfBlockParams(toolResults.stream().map(ContentBlockParam::ofToolResult).toList())
-            .build());
+        messages.add(MessageParam.ofUserOfContentBlockParams(
+            toolResults.stream().map(ContentBlockParam::ofToolResult).toList()));
     }
 }
 ```
@@ -3211,7 +3193,7 @@ async function getCompleteResponse(
 ```csharp C#
 static async Task<string> GetCompleteResponse(AnthropicClient client, string prompt, int maxAttempts = 3)
 {
-    List<MessageParam> messages = [new() { Role = Role.User, Content = prompt }];
+    List<MessageParam> messages = [new UserMessageParam { Content = prompt }];
     var fullResponse = "";
 
     for (var i = 0; i < maxAttempts; i++)
@@ -3240,9 +3222,9 @@ static async Task<string> GetCompleteResponse(AnthropicClient client, string pro
         // Continue from where it left off
         messages =
         [
-            new() { Role = Role.User, Content = prompt },
-            new() { Role = Role.Assistant, Content = fullResponse },
-            new() { Role = Role.User, Content = "Please continue from where you left off." }
+            new UserMessageParam { Content = prompt },
+            new AssistantMessageParam { Content = fullResponse },
+            new UserMessageParam { Content = "Please continue from where you left off." }
         ];
     }
 
@@ -3290,9 +3272,7 @@ func getCompleteResponse(client anthropic.Client, prompt string, maxAttempts int
 
 ```java Java
 static String getCompleteResponse(AnthropicClient client, String prompt, int maxAttempts) {
-    List<MessageParam> messages = List.of(
-        MessageParam.builder().role(MessageParam.Role.USER).content(prompt).build()
-    );
+    List<MessageParam> messages = List.of(MessageParam.ofUser(prompt));
     StringBuilder fullResponse = new StringBuilder();
 
     for (int i = 0; i < maxAttempts; i++) {
@@ -3315,9 +3295,9 @@ static String getCompleteResponse(AnthropicClient client, String prompt, int max
 
         // Continue from where it left off
         messages = List.of(
-            MessageParam.builder().role(MessageParam.Role.USER).content(prompt).build(),
-            MessageParam.builder().role(MessageParam.Role.ASSISTANT).content(fullResponse.toString()).build(),
-            MessageParam.builder().role(MessageParam.Role.USER).content("Please continue from where you left off.").build()
+            MessageParam.ofUser(prompt),
+            MessageParam.ofAssistant(fullResponse.toString()),
+            MessageParam.ofUser("Please continue from where you left off.")
         );
     }
 
@@ -3458,7 +3438,7 @@ static async Task<string> GetMaxPossibleTokens(AnthropicClient client, string pr
     {
         Model = Model.ClaudeOpus5_5,
         MaxTokens = 20000,
-        Messages = [new() { Role = Role.User, Content = prompt }]
+        Messages = [new BetaUserMessageParam { Content = prompt }]
     });
 
     var tokens = response.Usage.OutputTokens;
@@ -3608,7 +3588,7 @@ end
 
 Retry refused requests on a fallback model, server-side or in your client.
 
-**Tool Runner (SDK)**
+**Tool runner (SDK)**
 
 Let the SDK manage the `tool_use` loop, result formatting, and retries for you.
 

@@ -84,7 +84,7 @@ Detailed documentation of Claude Haiku 3.5 and Claude Sonnet 3.5.
 
 **Claude 3 Model Card**
 
-Detailed documentation of Claude 3 models including latest 3.5 addendum.
+Detailed documentation of Claude 3 models including the latest 3.5 addendum.
 
 **Claude 2 Model Card**
 

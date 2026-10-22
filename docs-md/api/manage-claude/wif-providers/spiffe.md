@@ -81,10 +81,10 @@ Each workload that calls the Claude API needs a SPIRE registration entry that ma
 # Replace NODE_UID with the node's UID:
 #   kubectl get node <node-name> -o jsonpath='{.metadata.uid}'
 spire-server entry create \
-    -spiffeID spiffe://prod.example.com/ns/inference/sa/worker \
-    -parentID spiffe://prod.example.com/spire/agent/k8s_psat/prod-cluster/NODE_UID \
-    -selector k8s:ns:inference \
-    -selector k8s:sa:worker
+  -spiffeID spiffe://prod.example.com/ns/inference/sa/worker \
+  -parentID spiffe://prod.example.com/spire/agent/k8s_psat/prod-cluster/NODE_UID \
+  -selector k8s:ns:inference \
+  -selector k8s:sa:worker
 ```
 
 The `parentID` shown is a single node's auto-generated agent ID. For cluster-wide registration, parent the entry to a [node alias](https://spiffe.io/docs/latest/deploying/registering/#mapping-workloads-to-multiple-nodes) so it matches workloads on every node, as the [SPIRE Kubernetes quickstart](https://spiffe.io/docs/latest/try/getting-started-k8s/) does.
@@ -168,7 +168,7 @@ JWT=$(cat "$ANTHROPIC_IDENTITY_TOKEN_FILE")
 
 ACCESS_TOKEN=$(curl -sS https://api.anthropic.com/v1/oauth/token \
   -H "content-type: application/json" \
-  --data @- <<JSON | jq -r .access_token
+  -d @- <<JSON | jq -r .access_token
 {
   "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
   "assertion": "$JWT",
@@ -247,7 +247,7 @@ var message = await client.Messages.Create(new()
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
+    Messages = [new UserMessageParam { Content = "Hello, Claude" }],
 });
 foreach (var block in message.Content)
 {
@@ -332,7 +332,7 @@ puts message.content.find { it.type == :text }.text
 
 **Token provider through the SPIFFE Workload API**
 
-Except in Java, workloads that link a SPIFFE Workload API client directly can skip spiffe-helper and pass the SDK a token provider that fetches a fresh JWT-SVID from the agent socket. The SDK invokes the provider before each token exchange, so the workload always presents an unexpired SVID. Python ([py-spiffe](https://github.com/HewlettPackard/py-spiffe)) and Go ([go-spiffe](https://github.com/spiffe/go-spiffe)) have mature Workload API clients.
+Except in Java, workloads that link a SPIFFE Workload API client directly can skip spiffe-helper and pass the SDK a token provider that fetches a fresh JWT-SVID from the agent socket. The SDK calls the provider before each token exchange, so the workload always presents an unexpired SVID. Python ([py-spiffe](https://github.com/HewlettPackard/py-spiffe)) and Go ([go-spiffe](https://github.com/spiffe/go-spiffe)) have mature Workload API clients.
 
 ```python Python
 import os
@@ -427,15 +427,15 @@ For other languages, fetch the JWT-SVID with your runtime's SPIFFE Workload API 
 
 ## Verify the setup
 
-Before wiring the SDK in, fetch a JWT-SVID directly from SPIRE Agent and confirm the claims match what your federation rule expects. If you use a different SPIFFE implementation, fetch a JWT-SVID with its CLI or Workload API client and decode the payload the same way.
+Before integrating the SDK, fetch a JWT-SVID directly from SPIRE Agent and confirm the claims match what your federation rule expects. If you use a different SPIFFE implementation, fetch a JWT-SVID with its CLI or Workload API client and decode the payload the same way.
 
 The Workload API attests the calling process. For a Kubernetes registration entry, run this command inside a pod that satisfies the entry's selectors and has the agent socket mounted (for example, by using `kubectl exec`). On VMs and bare metal, run it as the user or process that matches the entry's `unix:` selectors. Running from an unattested host shell returns `no identity issued`, which is the most common verify-step failure.
 
 ```bash CLI
 spire-agent api fetch jwt \
-    -audience https://api.anthropic.com \
-    -socketPath /run/spire/sockets/agent.sock \
-    -output json \
+  -audience https://api.anthropic.com \
+  -socketPath /run/spire/sockets/agent.sock \
+  -output json \
   | jq -r '.[0].svids[0].svid' \
   | jq -rR 'split(".")[1] | gsub("-";"+") | gsub("_";"/") | @base64d | fromjson'
 ```
@@ -452,8 +452,8 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 
 * **Pin to one workload:** Set `subject_prefix` to the full SPIFFE ID with no trailing `*`.
 * **Always set an audience:** Require `audience` on the rule and configure spiffe-helper (or the Workload API call) with the same value so SVIDs minted for other relying parties are rejected.
-* **Scope by path segment:** Use `spiffe://prod.example.com/ns/inference/*` to grant every workload registered under a namespace, and create a separate rule and Anthropic service account per namespace rather than widening one rule.
-* **One issuer per trust domain:** Each SPIRE trust domain has its own signing keys and OIDC Discovery Provider. Register each as a separate federation issuer and bind rules to the issuer that owns the SPIFFE IDs they match.
+* **Scope by path segment:** Use `spiffe://prod.example.com/ns/inference/*` to grant every workload registered under a namespace, and create a separate rule and Anthropic service account for each namespace rather than widening one rule.
+* **Register one issuer for each trust domain:** Each SPIRE trust domain has its own signing keys and OIDC Discovery Provider. Register each as a separate federation issuer and bind rules to the issuer that owns the SPIFFE IDs they match.
 
 ## Next steps
 

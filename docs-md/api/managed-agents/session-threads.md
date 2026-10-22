@@ -18,7 +18,7 @@ In a [multiagent session](multiagent-orchestration.md), each agent works in its 
 
 The **session-level event stream** (`/v1/sessions/{session_id}/events/stream`) is considered the **primary thread**, containing a condensed view of all activity across all threads. You don't see the full activity from [subagents](multiagent-orchestration.md#delegate-to-subagents), but you do see the start and end of their work, and blocking events such as tool permission requests.
 
-**Session threads** are where you drill into a specific agent's activity.
+**Session threads** are where you examine a specific agent's activity.
 
 The session `status` (csharp, go: `Status`) is an aggregation of all agent activity; if at least one thread is `running`, then the overall session status is `running` as well. A [workflow run](workflow-runs.md) that's running can keep the session `running` too, even while none of its threads is working. When no thread is working and a thread waits on your client, the session is `idle`; see [Know when the work is done](workflow-runs.md#know-when-the-work-is-done).
 
@@ -114,7 +114,11 @@ curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d '{"events": [{"type": "user.interrupt", "session_thread_id": "'"$THREAD_ID"'"}]}'
+  -d '{
+    "events": [
+      {"type": "user.interrupt", "session_thread_id": "'"$THREAD_ID"'"}
+    ]
+  }'
 ```
 
 ```bash CLI
@@ -139,14 +143,7 @@ await client.beta.sessions.events.send(session.id, {
 ```csharp C#
 await client.Beta.Sessions.Events.Send(session.ID, new()
 {
-    Events =
-    [
-        new BetaManagedAgentsUserInterruptEventParams
-        {
-            Type = BetaManagedAgentsUserInterruptEventParamsType.UserInterrupt,
-            SessionThreadID = thread.ID,
-        },
-    ],
+    Events = [new BetaManagedAgentsUserInterruptEventParams { SessionThreadID = thread.ID }],
 });
 ```
 
@@ -168,7 +165,6 @@ client.beta().sessions().events().send(
     session.id(),
     EventSendParams.builder()
         .addEvent(BetaManagedAgentsUserInterruptEventParams.builder()
-            .type(BetaManagedAgentsUserInterruptEventParams.Type.USER_INTERRUPT)
             .sessionThreadId(thread.id())
             .build())
         .build());
@@ -264,7 +260,11 @@ curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  -d '{"events": [{"type": "user.interrupt", "session_thread_id": "'"$THREAD_ID"'"}]}'
+  -d '{
+    "events": [
+      {"type": "user.interrupt", "session_thread_id": "'"$THREAD_ID"'"}
+    ]
+  }'
 
 curl -fsS -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archive" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -304,14 +304,7 @@ console.log(archived.status, archived.archived_at);
 ```csharp C#
 await client.Beta.Sessions.Events.Send(session.ID, new()
 {
-    Events =
-    [
-        new BetaManagedAgentsUserInterruptEventParams
-        {
-            Type = BetaManagedAgentsUserInterruptEventParamsType.UserInterrupt,
-            SessionThreadID = thread.ID,
-        },
-    ],
+    Events = [new BetaManagedAgentsUserInterruptEventParams { SessionThreadID = thread.ID }],
 });
 archived = await client.Beta.Sessions.Threads.Archive(thread.ID, new() { SessionID = session.ID });
 Console.WriteLine($"{archived.Status} {archived.ArchivedAt}");
@@ -343,7 +336,6 @@ client.beta().sessions().events().send(
     session.id(),
     EventSendParams.builder()
         .addEvent(BetaManagedAgentsUserInterruptEventParams.builder()
-            .type(BetaManagedAgentsUserInterruptEventParams.Type.USER_INTERRUPT)
             .sessionThreadId(thread.id())
             .build())
         .build());
@@ -647,7 +639,7 @@ end
 
 If a subagent needs something from your client, such as [permission](events-and-streaming.md#tool-confirmation) to run a tool call or the [result of a custom tool](events-and-streaming.md#handling-custom-tool-calls), the event is cross-posted to the **primary thread** with `session_thread_id` identifying the originating session thread. A tool call needs your permission under `always_ask`, or under [`auto`](permission-policies.md#let-the-server-evaluate-each-call-with-auto) when the server reaches no determination.
 
-```json
+```text wrap
 {
   "type": "session.thread_status_idle",
   "id": "sevt_01ABC...",
@@ -709,7 +701,6 @@ foreach (var eventId in requiresAction.EventIds)
         [
             new BetaManagedAgentsUserToolConfirmationEventParams
             {
-                Type = BetaManagedAgentsUserToolConfirmationEventParamsType.UserToolConfirmation,
                 ToolUseID = eventId,
                 Result = BetaManagedAgentsUserToolConfirmationEventParamsResult.Allow,
             },
@@ -739,7 +730,6 @@ for (var eventId : pendingToolUseIds) {
         session.id(),
         EventSendParams.builder()
             .addEvent(BetaManagedAgentsUserToolConfirmationEventParams.builder()
-                .type(BetaManagedAgentsUserToolConfirmationEventParams.Type.USER_TOOL_CONFIRMATION)
                 .toolUseId(eventId)
                 .result(BetaManagedAgentsUserToolConfirmationEventParams.Result.ALLOW)
                 .build())

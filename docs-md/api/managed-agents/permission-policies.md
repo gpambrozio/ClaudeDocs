@@ -3,7 +3,7 @@
 ---
 title: Permission policies
 url: https://platform.claude.com/docs/en/managed-agents/permission-policies
-description: Control when agent and MCP tools execute.
+description: Control when agent and MCP tools run.
 featureMetadata:
   topic:
     title: Managed Agents
@@ -12,7 +12,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-Permission policies control whether server-executed tools (the pre-built agent toolset and MCP toolset) run automatically, wait for your approval, or have each call evaluated by the server. Custom tools are executed by your application and controlled by you, so they are not governed by permission policies.
+Permission policies control whether server-executed tools (the pre-built agent toolset and MCP toolset) run automatically, wait for your approval, or have each call evaluated by the server. Custom tools are run by your application and controlled by you, so they are not governed by permission policies.
 
 ## Permission policy types
 
@@ -111,10 +111,9 @@ var agent = await client.Beta.Agents.Create(new()
     [
         new BetaManagedAgentsAgentToolset20260401Params
         {
-            Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
             DefaultConfig = new()
             {
-                PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy { Type = "always_ask" },
+                PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy(),
             },
         },
     ],
@@ -155,14 +154,9 @@ var agent = client.beta().agents().create(
         .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
         .addTool(
             BetaManagedAgentsAgentToolset20260401Params.builder()
-                .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
                 .defaultConfig(
                     BetaManagedAgentsAgentToolsetDefaultConfigParams.builder()
-                        .permissionPolicy(
-                            BetaManagedAgentsAlwaysAskPolicy.builder()
-                                .type(BetaManagedAgentsAlwaysAskPolicy.Type.ALWAYS_ASK)
-                                .build()
-                        )
+                        .permissionPolicy(BetaManagedAgentsAlwaysAskPolicy.builder().build())
                         .build()
                 )
                 .build()
@@ -181,9 +175,8 @@ $agent = $client->beta->agents->create(
     model: 'claude-opus-5-5',
     tools: [
         BetaManagedAgentsAgentToolset20260401Params::with(
-            type: 'agent_toolset_20260401',
             defaultConfig: BetaManagedAgentsAgentToolsetDefaultConfigParams::with(
-                permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(type: 'always_ask'),
+                permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(),
             ),
         ),
     ],
@@ -209,7 +202,7 @@ agent = client.beta.agents.create(
 
 ### MCP toolset permissions
 
-MCP toolsets default to `always_ask`. This ensures that new tools added to an MCP server do not execute in your application without approval. To auto-approve tools from a trusted MCP server, set `default_config.permission_policy` (java, php: `defaultConfig.permissionPolicy`; csharp, go: `DefaultConfig.PermissionPolicy`) on the `mcp_toolset` entry.
+MCP toolsets default to `always_ask`. This ensures that new tools added to an MCP server do not run in your application without approval. To auto-approve tools from a trusted MCP server, set `default_config.permission_policy` (java, php: `defaultConfig.permissionPolicy`; csharp, go: `DefaultConfig.PermissionPolicy`) on the `mcp_toolset` entry.
 
 The `mcp_server_name` (java, php: `mcpServerName`; csharp: `McpServerName`; go: `MCPServerName`) must match the `name` (csharp, go: `Name`) of a server in the `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`) array.
 
@@ -311,24 +304,19 @@ var agent = await client.Beta.Agents.Create(new()
     [
         new()
         {
-            Type = BetaManagedAgentsUrlMcpServerParamsType.Url,
             Name = "github",
             Url = "https://mcp.example.com/github",
         },
     ],
     Tools =
     [
-        new BetaManagedAgentsAgentToolset20260401Params
-        {
-            Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
-        },
+        new BetaManagedAgentsAgentToolset20260401Params(),
         new BetaManagedAgentsMcpToolsetParams
         {
-            Type = BetaManagedAgentsMcpToolsetParamsType.McpToolset,
             McpServerName = "github",
             DefaultConfig = new()
             {
-                PermissionPolicy = new BetaManagedAgentsAlwaysAllowPolicy { Type = "always_allow" },
+                PermissionPolicy = new BetaManagedAgentsAlwaysAllowPolicy(),
             },
         },
     ],
@@ -382,27 +370,17 @@ var agent = client.beta().agents().create(
         .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
         .addMcpServer(
             BetaManagedAgentsUrlMcpServerParams.builder()
-                .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
                 .name("github")
                 .url("https://mcp.example.com/github")
                 .build()
         )
-        .addTool(
-            BetaManagedAgentsAgentToolset20260401Params.builder()
-                .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-                .build()
-        )
+        .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
         .addTool(
             BetaManagedAgentsMcpToolsetParams.builder()
-                .type(BetaManagedAgentsMcpToolsetParams.Type.MCP_TOOLSET)
                 .mcpServerName("github")
                 .defaultConfig(
                     BetaManagedAgentsMcpToolsetDefaultConfigParams.builder()
-                        .permissionPolicy(
-                            BetaManagedAgentsAlwaysAllowPolicy.builder()
-                                .type(BetaManagedAgentsAlwaysAllowPolicy.Type.ALWAYS_ALLOW)
-                                .build()
-                        )
+                        .permissionPolicy(BetaManagedAgentsAlwaysAllowPolicy.builder().build())
                         .build()
                 )
                 .build()
@@ -423,20 +401,16 @@ $agent = $client->beta->agents->create(
     model: 'claude-opus-5-5',
     mcpServers: [
         BetaManagedAgentsURLMCPServerParams::with(
-            type: 'url',
             name: 'github',
             url: 'https://mcp.example.com/github',
         ),
     ],
     tools: [
-        BetaManagedAgentsAgentToolset20260401Params::with(
-            type: 'agent_toolset_20260401',
-        ),
+        BetaManagedAgentsAgentToolset20260401Params::with(),
         BetaManagedAgentsMCPToolsetParams::with(
-            type: 'mcp_toolset',
             mcpServerName: 'github',
             defaultConfig: BetaManagedAgentsMCPToolsetDefaultConfigParams::with(
-                permissionPolicy: BetaManagedAgentsAlwaysAllowPolicy::with(type: 'always_allow'),
+                permissionPolicy: BetaManagedAgentsAlwaysAllowPolicy::with(),
             ),
         ),
     ],
@@ -555,16 +529,15 @@ Tool[] tools =
 [
     new BetaManagedAgentsAgentToolset20260401Params
     {
-        Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
         DefaultConfig = new()
         {
-            PermissionPolicy = new BetaManagedAgentsAlwaysAllowPolicy { Type = "always_allow" },
+            PermissionPolicy = new BetaManagedAgentsAlwaysAllowPolicy(),
         },
         Configs =
         [
             new BetaManagedAgentsBashToolConfigParams
             {
-                PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy { Type = "always_ask" },
+                PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy(),
             },
         ],
     },
@@ -603,23 +576,14 @@ import java.util.List;
 var tools = List.of(
     AgentCreateParams.Tool.ofAgentToolset20260401(
         BetaManagedAgentsAgentToolset20260401Params.builder()
-            .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
             .defaultConfig(
                 BetaManagedAgentsAgentToolsetDefaultConfigParams.builder()
-                    .permissionPolicy(
-                        BetaManagedAgentsAlwaysAllowPolicy.builder()
-                            .type(BetaManagedAgentsAlwaysAllowPolicy.Type.ALWAYS_ALLOW)
-                            .build()
-                    )
+                    .permissionPolicy(BetaManagedAgentsAlwaysAllowPolicy.builder().build())
                     .build()
             )
             .addConfig(
                 BetaManagedAgentsBashToolConfigParams.builder()
-                    .permissionPolicy(
-                        BetaManagedAgentsAlwaysAskPolicy.builder()
-                            .type(BetaManagedAgentsAlwaysAskPolicy.Type.ALWAYS_ASK)
-                            .build()
-                    )
+                    .permissionPolicy(BetaManagedAgentsAlwaysAskPolicy.builder().build())
                     .build()
             )
             .build()
@@ -636,13 +600,12 @@ use Anthropic\Beta\Agents\BetaManagedAgentsAlwaysAskPolicy;
 
 $tools = [
     BetaManagedAgentsAgentToolset20260401Params::with(
-        type: 'agent_toolset_20260401',
         defaultConfig: BetaManagedAgentsAgentToolsetDefaultConfigParams::with(
-            permissionPolicy: BetaManagedAgentsAlwaysAllowPolicy::with(type: 'always_allow'),
+            permissionPolicy: BetaManagedAgentsAlwaysAllowPolicy::with(),
         ),
         configs: [
             BetaManagedAgentsBashToolConfigParams::with(
-                permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(type: 'always_ask'),
+                permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(),
             ),
         ],
     ),
@@ -805,7 +768,6 @@ var agent = await client.Beta.Agents.Create(new()
     [
         new()
         {
-            Type = BetaManagedAgentsUrlMcpServerParamsType.Url,
             Name = "github",
             Url = "https://mcp.example.com/github",
         },
@@ -814,7 +776,6 @@ var agent = await client.Beta.Agents.Create(new()
     [
         new BetaManagedAgentsAgentToolset20260401Params
         {
-            Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
             DefaultConfig = new()
             {
                 PermissionPolicy = new BetaManagedAgentsAutoPolicy(),
@@ -823,13 +784,12 @@ var agent = await client.Beta.Agents.Create(new()
             [
                 new BetaManagedAgentsBashToolConfigParams
                 {
-                    PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy { Type = "always_ask" },
+                    PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy(),
                 },
             ],
         },
         new BetaManagedAgentsMcpToolsetParams
         {
-            Type = BetaManagedAgentsMcpToolsetParamsType.McpToolset,
             McpServerName = "github",
             DefaultConfig = new()
             {
@@ -899,14 +859,12 @@ var agent = client.beta().agents().create(
         .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
         .addMcpServer(
             BetaManagedAgentsUrlMcpServerParams.builder()
-                .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
                 .name("github")
                 .url("https://mcp.example.com/github")
                 .build()
         )
         .addTool(
             BetaManagedAgentsAgentToolset20260401Params.builder()
-                .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
                 .defaultConfig(
                     BetaManagedAgentsAgentToolsetDefaultConfigParams.builder()
                         .permissionPolicy(BetaManagedAgentsAutoPolicy.builder().build())
@@ -914,18 +872,13 @@ var agent = client.beta().agents().create(
                 )
                 .addConfig(
                     BetaManagedAgentsBashToolConfigParams.builder()
-                        .permissionPolicy(
-                            BetaManagedAgentsAlwaysAskPolicy.builder()
-                                .type(BetaManagedAgentsAlwaysAskPolicy.Type.ALWAYS_ASK)
-                                .build()
-                        )
+                        .permissionPolicy(BetaManagedAgentsAlwaysAskPolicy.builder().build())
                         .build()
                 )
                 .build()
         )
         .addTool(
             BetaManagedAgentsMcpToolsetParams.builder()
-                .type(BetaManagedAgentsMcpToolsetParams.Type.MCP_TOOLSET)
                 .mcpServerName("github")
                 .defaultConfig(
                     BetaManagedAgentsMcpToolsetDefaultConfigParams.builder()
@@ -953,25 +906,22 @@ $agent = $client->beta->agents->create(
     model: 'claude-opus-5-5',
     mcpServers: [
         BetaManagedAgentsURLMCPServerParams::with(
-            type: 'url',
             name: 'github',
             url: 'https://mcp.example.com/github',
         ),
     ],
     tools: [
         BetaManagedAgentsAgentToolset20260401Params::with(
-            type: 'agent_toolset_20260401',
             defaultConfig: BetaManagedAgentsAgentToolsetDefaultConfigParams::with(
                 permissionPolicy: BetaManagedAgentsAutoPolicy::with(),
             ),
             configs: [
                 BetaManagedAgentsBashToolConfigParams::with(
-                    permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(type: 'always_ask'),
+                    permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(),
                 ),
             ],
         ),
         BetaManagedAgentsMCPToolsetParams::with(
-            type: 'mcp_toolset',
             mcpServerName: 'github',
             defaultConfig: BetaManagedAgentsMCPToolsetDefaultConfigParams::with(
                 permissionPolicy: BetaManagedAgentsAutoPolicy::with(),
@@ -1019,7 +969,7 @@ Under any permission policy, each `agent.tool_use` and `agent.mcp_tool_use` even
 
 For example, when `bash` is under `auto` and the server evaluates a call as high-risk, the denied call appears on the event stream as follows:
 
-```json
+```text wrap
 {
   "type": "agent.tool_use",
   "id": "sevt_01pqr...",
@@ -1057,16 +1007,16 @@ Write your client to tolerate an `evaluation.type` or `reason_code` it does not 
 
 ## Respond to confirmation requests
 
-A tool call evaluates to `ask` under an `always_ask` policy, or under `auto` when the server reaches no determination. When that happens:
+A tool call evaluates to `ask` under an `always_ask` policy, or under `auto` when the server reaches no determination. When that occurs:
 
 1. The session emits an `agent.tool_use` or `agent.mcp_tool_use` event.
 2. The session pauses with a `session.status_idle` event whose `stop_reason.type` is `requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array. The session waits indefinitely for a response. A call from a thread of a [workflow run](workflow-runs.md#while-a-run-is-open) reaches your client on the primary stream. While anything else in the session is working, the session can stay `running` and send no `session.status_idle`, so answer the tool-use event itself. The call waits only until the run finishes with that thread or the run ends. An interrupt might leave it waiting, so allow or deny it yourself.
 3. Send a `user.tool_confirmation` event for each blocking event, passing the event ID in the `tool_use_id` (java: `toolUseId`; php: `toolUseID`; csharp, go: `ToolUseID`) parameter. Set `result` (csharp, go: `Result`) to `"allow"` or `"deny"`. Use `deny_message` (java, php: `denyMessage`; csharp, go: `DenyMessage`) to explain a denial. You can send several confirmations in a single `events` request.
-4. Once all blocking events are resolved, the session transitions back to `running`. Allowed tools execute. Denied tools do not run, and the agent receives a tool result saying the call was rejected, including your `deny_message` (java, php: `denyMessage`; csharp, go: `DenyMessage`).
+4. Once all blocking events are resolved, the session transitions back to `running`. Allowed tools run. Denied tools do not run, and the agent receives a tool result saying the call was rejected, including your `deny_message` (java, php: `denyMessage`; csharp, go: `DenyMessage`).
 
 For example, a `bash` call paused under an `always_ask` policy appears on the stream as follows:
 
-```json
+```text wrap
 {
   "type": "agent.tool_use",
   "id": "sevt_01def...",
@@ -1086,7 +1036,7 @@ If you send a `user.tool_confirmation` for an event whose `evaluated_permission`
 
 To answer interactively instead, use `ant beta:sessions connect`, which shows the waiting call and sends this event when you allow or deny it. See [Connect to a Managed Agents session from your terminal](../cli-sdks-libraries/cli/sessions-connect.md#follow-and-steer-the-session).
 
-In the following examples, the tool-use event IDs come from the `stop_reason.event_ids` array of the `session.status_idle` event. Learn more about receiving events in the [Session event stream](events-and-streaming.md#stream-events) guide, or [subscribe to webhooks](webhooks.md) to be notified when a session pauses for input.
+In the following examples, the tool-use event IDs come from the `stop_reason.event_ids` array of the `session.status_idle` event. Learn more about [receiving events](events-and-streaming.md#stream-events) in the Session event stream guide, or [subscribe to webhooks](webhooks.md) to be notified when a session pauses for input.
 
 ```bash cURL
 # Allow the tool to execute
@@ -1196,7 +1146,6 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
     [
         new BetaManagedAgentsUserToolConfirmationEventParams
         {
-            Type = BetaManagedAgentsUserToolConfirmationEventParamsType.UserToolConfirmation,
             ToolUseID = agentToolUseEvent.ID,
             Result = "allow",
         },
@@ -1210,7 +1159,6 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
     [
         new BetaManagedAgentsUserToolConfirmationEventParams
         {
-            Type = BetaManagedAgentsUserToolConfirmationEventParamsType.UserToolConfirmation,
             ToolUseID = mcpToolUseEvent.ID,
             Result = "deny",
             DenyMessage = "Don't create issues in the production project. Use the staging project.",
@@ -1257,7 +1205,6 @@ client.beta().sessions().events().send(
     EventSendParams.builder()
         .addEvent(
             BetaManagedAgentsUserToolConfirmationEventParams.builder()
-                .type(BetaManagedAgentsUserToolConfirmationEventParams.Type.USER_TOOL_CONFIRMATION)
                 .toolUseId(agentToolUseEvent.id())
                 .result(BetaManagedAgentsUserToolConfirmationEventParams.Result.ALLOW)
                 .build()
@@ -1271,7 +1218,6 @@ client.beta().sessions().events().send(
     EventSendParams.builder()
         .addEvent(
             BetaManagedAgentsUserToolConfirmationEventParams.builder()
-                .type(BetaManagedAgentsUserToolConfirmationEventParams.Type.USER_TOOL_CONFIRMATION)
                 .toolUseId(mcpToolUseEvent.id())
                 .result(BetaManagedAgentsUserToolConfirmationEventParams.Result.DENY)
                 .denyMessage("Don't create issues in the production project. Use the staging project.")
@@ -1289,7 +1235,6 @@ $client->beta->sessions->events->send(
     $session->id,
     events: [
         ManagedAgentsUserToolConfirmationEventParams::with(
-            type: 'user.tool_confirmation',
             toolUseID: $agentToolUseEvent->id,
             result: 'allow',
         ),
@@ -1301,7 +1246,6 @@ $client->beta->sessions->events->send(
     $session->id,
     events: [
         ManagedAgentsUserToolConfirmationEventParams::with(
-            type: 'user.tool_confirmation',
             toolUseID: $mcpToolUseEvent->id,
             result: 'deny',
             denyMessage: "Don't create issues in the production project. Use the staging project.",
@@ -1339,7 +1283,7 @@ client.beta.sessions.events.send_(
 
 ## Custom tools
 
-Permission policies do not apply to custom tools. When the agent invokes a custom tool, your application receives an `agent.custom_tool_use` event and is responsible for deciding whether to execute it before sending back a `user.custom_tool_result`. See [Session event stream](events-and-streaming.md#answer-tool-calls-that-pause-the-session) for the full flow.
+Permission policies do not apply to custom tools. When the agent calls a custom tool, your application receives an `agent.custom_tool_use` event and is responsible for deciding whether to run it before sending back a `user.custom_tool_result`. See [Answer tool calls that pause the session](events-and-streaming.md#answer-tool-calls-that-pause-the-session) for the full flow.
 
 ## Next steps
 
@@ -1349,7 +1293,7 @@ Attach reusable, filesystem-based expertise to your agent for domain-specific wo
 
 **Session event stream**
 
-Send events, stream responses, and interrupt or redirect your session mid-execution.
+Send events, stream responses, and interrupt or redirect your session while it runs.
 
 ---
 

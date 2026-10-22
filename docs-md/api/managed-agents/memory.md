@@ -197,7 +197,7 @@ client.beta.memory_stores.memories.create(
 )
 ```
 
-Individual memories within the store are capped at 100 kB (\~25k tokens). A store holds a maximum of 10,000 memories. Structure memory as many small focused files, not a few large ones.
+Individual memories within the store are capped at 100 kB (\~25k tokens). A store holds a maximum of 10,000 memories. Structure memory as many small focused files, not a few large ones.
 
 ## Attach a memory store to a session
 
@@ -213,7 +213,7 @@ curl -s https://api.anthropic.com/v1/sessions \
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
-  --data '{
+  -d '{
     "agent": "'"$agent_id"'",
     "environment_id": "'"$environment_id"'",
     "resources": [
@@ -278,7 +278,6 @@ var session = await client.Beta.Sessions.Create(new()
     [
         new BetaManagedAgentsMemoryStoreResourceParam
         {
-            Type = "memory_store",
             MemoryStoreID = store.ID,
             Access = "read_write",
             Instructions = "User preferences and project context. Check before starting any task.",
@@ -314,7 +313,6 @@ var session = client.beta().sessions().create(
         .environmentId(environment.id())
         .addResource(
             BetaManagedAgentsMemoryStoreResourceParam.builder()
-                .type(BetaManagedAgentsMemoryStoreResourceParam.Type.MEMORY_STORE)
                 .memoryStoreId(store.id())
                 .access(BetaManagedAgentsMemoryStoreResourceParam.Access.READ_WRITE)
                 .instructions("User preferences and project context. Check before starting any task.")
@@ -356,17 +354,17 @@ session = client.beta.sessions.create(
 
 Memory stores attach with `read_write` access by default. If the agent processes untrusted input (user-supplied prompts, fetched web content, or third-party tool output), a successful prompt injection could write malicious content into the store. Later sessions then read that content as trusted memory. Use `read_only` for reference material, shared lookups, and any store the agent does not need to modify.
 
-A maximum of **8 memory stores** are supported per session. Attach multiple stores when different parts of memory have different owners or access rules. Common reasons:
+A maximum of **8 memory stores** is supported for each session. Attach multiple stores when different parts of memory have different owners or access rules. Common reasons:
 
-* **Shared reference material:** one read-only store attached to many sessions (standards, conventions, domain knowledge), kept separate from each session's own read-write store.
-* **Mapping to your product's structure:** one store per end user, per team, or per project, while sharing a single agent configuration.
-* **Different lifecycles:** a store that outlives any single session, or one you want to archive on its own schedule.
+* **Shared reference material:** one read-only store attached to many sessions (standards, conventions, domain knowledge), kept separate from each session's own read-write store
+* **Mapping to your product's structure:** one store for each end user, team, or project, while sharing a single agent configuration
+* **Different lifecycles:** a store that outlives any single session, or one you want to archive on its own schedule
 
 ### How the agent accesses memory
 
-Each attached store is mounted inside the session's sandbox as a directory under `/mnt/memory/`. The directory name is the store's display name sanitized to a filesystem-safe slug (lowercased; non-alphanumeric runs become a single hyphen), so a store named "Demo Memory" mounts at `/mnt/memory/demo-memory/`. The exact path is returned in the `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) field on the session's memory-store resource; read it from there rather than constructing it yourself. The agent reads and writes the store with the standard [agent toolset](tools.md). Writes under the mount path are persisted back to the store and stay in sync across sessions that share it; writes to any other path under `/mnt/memory/` fail, because the sandbox mounts that parent directory read-only. A short description of each mount (display name, mount path, access mode, store `description` (csharp, go: `Description`), and any `instructions` (csharp, go: `Instructions`)) is automatically added to the system prompt.
+Each attached store is mounted inside the session's sandbox as a directory under `/mnt/memory/`. The directory name is the store's display name sanitized to a filesystem-safe slug (lowercased, with each non-alphanumeric run replaced by a single hyphen), so a store named "Demo Memory" mounts at `/mnt/memory/demo-memory/`. The exact path is returned in the `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) field on the session's memory-store resource; read it from there rather than constructing it yourself. The agent reads and writes the store with the standard [agent toolset](tools.md). Writes under the mount path are persisted back to the store and stay in sync across sessions that share it; writes to any other path under `/mnt/memory/` fail, because the sandbox mounts that parent directory read-only. A short description of each mount (display name, mount path, access mode, store `description` (csharp, go: `Description`), and any `instructions` (csharp, go: `Instructions`)) is automatically added to the system prompt.
 
-`access` (csharp, go: `Access`) is enforced at the filesystem level: a `read_only` mount rejects writes, while writes to a `read_write` mount produce [memory versions](memory.md#audit-memory-changes) attributed to the session.
+`access` (csharp, go: `Access`) is enforced at the filesystem level: a `read_only` mount rejects writes, whereas writes to a `read_write` mount produce [memory versions](memory.md#audit-memory-changes) attributed to the session.
 
 On [self-hosted sandboxes](self-hosted-sandboxes-memory.md), each store's directory is a local copy that the worker manages rather than a live mount. The worker reconciles each copy with its store after tool calls, at most once per sync interval (15 seconds by default), and once more when the session ends. The agent's `write` and `edit` tools change only the local copy; the worker uploads those changes at its next sync, so another session running on a self-hosted sandbox sees a change only after both workers have synced. Paths under `/mnt/memory/` outside the store directories are not scratch space there: the worker's file tools refuse to write to them, and anything a shell command writes there is never synced to a store.
 
@@ -383,7 +381,7 @@ Memory stores can be managed directly through the API. Use this for building rev
 List the memories in a store. Results are returned in a stable, server-defined order.
 
 * `path_prefix` scopes the list to one directory. It must end with `/` and matches whole path segments, so `path_prefix=/notes/` returns `/notes/todo.md` but not `/notes-archive/todo.md`.
-* `depth` controls how deep the listing goes below `path_prefix`: omit it (or pass `0`) to list the whole subtree, or pass `1` to list only the immediate children. Other values return a `400` error.
+* `depth` controls how deep the list goes below `path_prefix`: omit it (or pass `0`) to list the whole subtree, or pass `1` to list only the immediate children. Other values return a `400` error.
 
 ```bash cURL
 curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories?path_prefix=/" \
@@ -473,7 +471,7 @@ page.data.each do |entry|
 end
 ```
 
-See the [List memories reference](../api/beta/memory_stores/memories/list.md) for full parameters and response schema.
+See the [List memories](../api/beta/memory_stores/memories/list.md) reference for full parameters and response schema.
 
 ### Read a memory
 
@@ -546,11 +544,11 @@ retrieved = client.beta.memory_stores.memories.retrieve(
 puts retrieved.content
 ```
 
-See the [Retrieve a memory reference](../api/beta/memory_stores/memories/retrieve.md) for full parameters and response schema.
+See the [Retrieve a memory](../api/beta/memory_stores/memories/retrieve.md) reference for full parameters and response schema.
 
 ### Create a memory
 
-`POST /v1/memory_stores/{memory_store_id}/memories` (python, ruby: `client.beta.memory_stores.memories.create()`; typescript: `client.beta.memoryStores.memories.create()`; go: `client.Beta.MemoryStores.Memories.New()`; java: `client.beta().memoryStores().memories().create()`; csharp: `client.Beta.MemoryStores.Memories.Create()`; php: `$client->beta->memoryStores->memories->create()`; cli: `ant beta:memory-stores:memories create`) creates a memory at a given `path` (csharp, go: `Path`). Create does not overwrite; to change an existing memory, [update it](memory.md#update-a-memory) with `POST /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.update()`; typescript: `client.beta.memoryStores.memories.update()`; go, csharp: `client.Beta.MemoryStores.Memories.Update()`; java: `client.beta().memoryStores().memories().update()`; php: `$client->beta->memoryStores->memories->update()`; cli: `ant beta:memory-stores:memories update`).
+`POST /v1/memory_stores/{memory_store_id}/memories` (python, ruby: `client.beta.memory_stores.memories.create()`; typescript: `client.beta.memoryStores.memories.create()`; go: `client.Beta.MemoryStores.Memories.New()`; java: `client.beta().memoryStores().memories().create()`; csharp: `client.Beta.MemoryStores.Memories.Create()`; php: `$client->beta->memoryStores->memories->create()`; cli: `ant beta:memory-stores:memories create`) creates a memory at a given `path` (csharp, go: `Path`). Create does not overwrite; to [update an existing memory](memory.md#update-a-memory), use `POST /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.update()`; typescript: `client.beta.memoryStores.memories.update()`; go, csharp: `client.Beta.MemoryStores.Memories.Update()`; java: `client.beta().memoryStores().memories().update()`; php: `$client->beta->memoryStores->memories->update()`; cli: `ant beta:memory-stores:memories update`).
 
 ```bash cURL
 curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
@@ -627,7 +625,7 @@ mem = client.beta.memory_stores.memories.create(
 )
 ```
 
-See the [Create a memory reference](../api/beta/memory_stores/memories/create.md) for full parameters and response schema.
+See the [Create a memory](../api/beta/memory_stores/memories/create.md) reference for full parameters and response schema.
 
 ### Update a memory
 
@@ -708,11 +706,11 @@ client.beta.memory_stores.memories.update(
 )
 ```
 
-See the [Update a memory reference](../api/beta/memory_stores/memories/update.md) for full parameters and response schema.
+See the [Update a memory](../api/beta/memory_stores/memories/update.md) reference for full parameters and response schema.
 
 #### Safe content edits (optimistic concurrency)
 
-To avoid clobbering a concurrent write, pass a `content_sha256` precondition. The update only applies if the stored content hash still matches the one you read; on mismatch, re-read the memory and retry against the fresh state.
+To avoid overwriting a concurrent write, pass a `content_sha256` precondition. The update only applies if the stored content hash still matches the one you read; on mismatch, re-read the memory and retry against the fresh state.
 
 ```bash cURL
 curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
@@ -756,11 +754,7 @@ await client.Beta.MemoryStores.Memories.Update(mem.ID, new()
 {
     MemoryStoreID = store.ID,
     Content = "CORRECTED: Always use 2-space indentation.",
-    Precondition = new BetaManagedAgentsPrecondition
-    {
-        Type = "content_sha256",
-        ContentSha256 = mem.ContentSha256,
-    },
+    Precondition = new BetaManagedAgentsPrecondition { ContentSha256 = mem.ContentSha256 },
 });
 ```
 
@@ -786,7 +780,6 @@ client.beta().memoryStores().memories().update(
         .content("CORRECTED: Always use 2-space indentation.")
         .precondition(
             BetaManagedAgentsPrecondition.builder()
-                .type(BetaManagedAgentsPrecondition.Type.CONTENT_SHA256)
                 .contentSha256(mem.contentSha256())
                 .build()
         )
@@ -874,13 +867,13 @@ client.beta.memory_stores.memories.delete(
 )
 ```
 
-See the [Delete a memory reference](../api/beta/memory_stores/memories/delete.md) for full parameters and response schema.
+See the [Delete a memory](../api/beta/memory_stores/memories/delete.md) reference for full parameters and response schema.
 
 ## Audit memory changes
 
 Every mutation to a memory creates an immutable **memory version** (`memver_...`). Use the version endpoints to audit who changed what and when, to inspect or restore a prior snapshot, and to scrub sensitive content out of history with redact.
 
-Versions belong to the store (not the individual memory) and are not deleted when the memory itself is deleted, so the audit trail also covers deleted memories, subject to the retention described below. Versions are retained for 30 days after they are written; however, the recent versions of a live memory are always kept regardless of age, so memories that change infrequently might retain history beyond 30 days. The live `GET /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.retrieve()`; typescript: `client.beta.memoryStores.memories.retrieve()`; go: `client.Beta.MemoryStores.Memories.Get()`; java: `client.beta().memoryStores().memories().retrieve()`; csharp: `client.Beta.MemoryStores.Memories.Retrieve()`; php: `$client->beta->memoryStores->memories->retrieve()`; cli: `ant beta:memory-stores:memories retrieve`) call always returns the latest version; the version endpoints give you the retained history.
+Versions belong to the store (not the individual memory) and are not deleted when the memory itself is deleted, so the audit trail also covers deleted memories, subject to the retention described later. Versions are retained for 30 days after they are written; however, the recent versions of a live memory are always kept regardless of age, so memories that change infrequently might retain history beyond 30 days. The live `GET /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.retrieve()`; typescript: `client.beta.memoryStores.memories.retrieve()`; go: `client.Beta.MemoryStores.Memories.Get()`; java: `client.beta().memoryStores().memories().retrieve()`; csharp: `client.Beta.MemoryStores.Memories.Retrieve()`; php: `$client->beta->memoryStores->memories->retrieve()`; cli: `ant beta:memory-stores:memories retrieve`) call always returns the latest version; the version endpoints give you the retained history.
 
 There is no dedicated restore endpoint; to roll back, retrieve the version you want and write its `content` (csharp, go: `Content`) back with `POST /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.update()`; typescript: `client.beta.memoryStores.memories.update()`; go, csharp: `client.Beta.MemoryStores.Memories.Update()`; java: `client.beta().memoryStores().memories().update()`; php: `$client->beta->memoryStores->memories->update()`; cli: `ant beta:memory-stores:memories update`) (or `POST /v1/memory_stores/{memory_store_id}/memories` (python, ruby: `client.beta.memory_stores.memories.create()`; typescript: `client.beta.memoryStores.memories.create()`; go: `client.Beta.MemoryStores.Memories.New()`; java: `client.beta().memoryStores().memories().create()`; csharp: `client.Beta.MemoryStores.Memories.Create()`; php: `$client->beta->memoryStores->memories->create()`; cli: `ant beta:memory-stores:memories create`) if the parent memory has been deleted, provided the version you want is still retained).
 
@@ -919,8 +912,8 @@ version_id = versions.data[1].id
 const versions = await client.beta.memoryStores.memoryVersions.list(store.id, {
   memory_id: mem.id
 });
-for await (const v of versions) {
-  console.log(`${v.id}: ${v.operation}`);
+for await (const memoryVersion of versions) {
+  console.log(`${memoryVersion.id}: ${memoryVersion.operation}`);
 }
 
 const versionId = versions.data[1].id;
@@ -998,7 +991,7 @@ end
 version_id = versions.data[1].id
 ```
 
-See the [List memory versions reference](../api/beta/memory_stores/memory_versions/list.md) for full parameters and response schema.
+See the [List memory versions](../api/beta/memory_stores/memory_versions/list.md) reference for full parameters and response schema.
 
 ### Retrieve a version
 
@@ -1074,11 +1067,11 @@ version = client.beta.memory_stores.memory_versions.retrieve(
 puts version.content
 ```
 
-See the [Retrieve a memory version reference](../api/beta/memory_stores/memory_versions/retrieve.md) for full parameters and response schema.
+See the [Retrieve a memory version](../api/beta/memory_stores/memory_versions/retrieve.md) reference for full parameters and response schema.
 
 ### Redact a version
 
-Redact scrubs content out of a historical version while preserving the audit trail (who did what, when). Use it for compliance workflows such as removing leaked secrets, PII, or user deletion requests.
+Redact scrubs content out of a historical version while preserving the audit trail (who did what, when). Use it for compliance workflows such as removing leaked secrets or PII, or fulfilling user deletion requests.
 
 A version that is the current head of a live memory cannot be redacted. Write a new version first (or delete the memory), then redact the old one.
 
@@ -1147,7 +1140,7 @@ client.beta.memory_stores.memory_versions.redact(
 )
 ```
 
-See the [Redact a memory version reference](../api/beta/memory_stores/memory_versions/redact.md) for full parameters and response schema.
+See the [Redact a memory version](../api/beta/memory_stores/memory_versions/redact.md) reference for full parameters and response schema.
 
 ## Manage memory stores
 
@@ -1174,8 +1167,8 @@ for memory_store in client.beta.memory_stores.list(include_archived=True):
 ```
 
 ```typescript TypeScript
-for await (const s of client.beta.memoryStores.list({ include_archived: true })) {
-  console.log(s.id, s.name, s.archived_at);
+for await (const memoryStore of client.beta.memoryStores.list({ include_archived: true })) {
+  console.log(memoryStore.id, memoryStore.name, memoryStore.archived_at);
 }
 ```
 
@@ -1222,7 +1215,7 @@ client.beta.memory_stores.list(include_archived: true).auto_paging_each do |memo
 end
 ```
 
-See the [List memory stores reference](../api/beta/memory_stores/list.md) for full parameters and response schema.
+See the [List memory stores](../api/beta/memory_stores/list.md) reference for full parameters and response schema.
 
 ### Archive a store
 
@@ -1270,15 +1263,15 @@ $client->beta->memoryStores->archive($store->id);
 client.beta.memory_stores.archive(store.id)
 ```
 
-See the [Archive a memory store reference](../api/beta/memory_stores/archive.md) for full parameters and response schema.
+See the [Archive a memory store](../api/beta/memory_stores/archive.md) reference for full parameters and response schema.
 
-To [permanently remove a store](../api/beta/memory_stores/delete.md) along with all of its memories and versions, call `DELETE /v1/memory_stores/{memory_store_id}` (python, ruby: `client.beta.memory_stores.delete()`; typescript: `client.beta.memoryStores.delete()`; go, csharp: `client.Beta.MemoryStores.Delete()`; java: `client.beta().memoryStores().delete()`; php: `$client->beta->memoryStores->delete()`; cli: `ant beta:memory-stores delete`).
+To [permanently delete a store](../api/beta/memory_stores/delete.md) along with all of its memories and versions, call `DELETE /v1/memory_stores/{memory_store_id}` (python, ruby: `client.beta.memory_stores.delete()`; typescript: `client.beta.memoryStores.delete()`; go, csharp: `client.Beta.MemoryStores.Delete()`; java: `client.beta().memoryStores().delete()`; php: `$client->beta->memoryStores->delete()`; cli: `ant beta:memory-stores delete`).
 
 ## Best practices for memory management
 
 When a store reaches its 10,000-memory limit, writes to new memories fail: both direct `POST /v1/memory_stores/{memory_store_id}/memories` (python, ruby: `client.beta.memory_stores.memories.create()`; typescript: `client.beta.memoryStores.memories.create()`; go: `client.Beta.MemoryStores.Memories.New()`; java: `client.beta().memoryStores().memories().create()`; csharp: `client.Beta.MemoryStores.Memories.Create()`; php: `$client->beta->memoryStores->memories->create()`; cli: `ant beta:memory-stores:memories create`) calls and the agent's file writes to unmapped paths. Existing memories remain readable and editable. The following practices help you stay well under the limit and recover gracefully if you reach it.
 
-* **Use focused stores.** Rather than one large general-purpose store, use smaller purpose-built stores: one per user, one for shared domain knowledge, and one for project-specific context. Each store has its own 10,000-memory limit, so keeping stores scoped reduces the chance any single one fills up.
+* **Use focused stores.** Rather than one large general-purpose store, use smaller purpose-built stores: one for each user, one for shared domain knowledge, and one for project-specific context. Each store has its own 10,000-memory limit, so keeping stores scoped reduces the chance any single one fills up.
 
 * **Condense or prune before the store fills up.** Delete stale or redundant memories with `DELETE /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.delete()`; typescript: `client.beta.memoryStores.memories.delete()`; go, csharp: `client.Beta.MemoryStores.Memories.Delete()`; java: `client.beta().memoryStores().memories().delete()`; php: `$client->beta->memoryStores->memories->delete()`; cli: `ant beta:memory-stores:memories delete`). You can also run a [dreaming session](dreams.md), which consolidates fragmented content into a separate new output store rather than modifying the original. Switch your sessions over to that output store, then archive or delete the original.
 

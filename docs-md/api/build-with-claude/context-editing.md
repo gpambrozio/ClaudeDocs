@@ -12,11 +12,11 @@ To learn how zero data retention (ZDR) applies to this feature, see [API and dat
 
 For most use cases, [server-side compaction](compaction.md) is the primary strategy for managing context in long-running conversations. The strategies on this page are useful for specific scenarios where you need more fine-grained control over what content is cleared.
 
-Context editing allows you to selectively clear specific content from conversation history as it grows. Beyond optimizing costs and staying within limits, this is about actively curating what Claude sees: context is a finite resource with diminishing returns, and irrelevant content degrades model focus. Context editing gives you fine-grained runtime control over that curation. For the broader principles behind context management, see [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents). This page covers:
+Context editing allows you to selectively clear specific content from conversation history as it grows. Beyond optimizing costs and staying within limits, this is about actively curating what Claude receives: context is a finite resource with diminishing returns, and irrelevant content degrades model focus. Context editing gives you fine-grained runtime control over that curation. For the broader principles behind context management, see [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents). This page covers:
 
-* **Tool result clearing** - Best for agentic workflows with heavy tool use where old tool results are no longer needed
-* **Thinking block clearing** - For managing thinking blocks from earlier turns, with options to preserve recent thinking for context continuity
-* **Client-side SDK compaction** - An SDK-based alternative for summary-based context management (server-side compaction is generally preferred)
+* **Tool result clearing:** Best for agentic workflows with heavy tool use where old tool results are no longer needed
+* **Thinking block clearing:** For managing thinking blocks from earlier turns, with options to preserve recent thinking for context continuity
+* **Client-side SDK compaction:** An SDK-based alternative for summary-based context management (server-side compaction is generally preferred)
 
 | Approach        | Where it runs | Strategies                                                                                                 | How it works                                                                                                                                                                                                                                                                                                                                                                                                |
 | --------------- | ------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -31,7 +31,7 @@ Share feedback on this feature through the [feedback form](https://forms.gle/YXC
 
 ### Tool result clearing
 
-The `clear_tool_uses_20250919` strategy clears tool results when conversation context grows beyond your configured threshold. This is particularly useful for agentic workflows with heavy tool use. Older tool results (like file contents or search results) are no longer needed once Claude has processed them.
+The `clear_tool_uses_20250919` strategy clears tool results when conversation context grows beyond your configured threshold. This is particularly useful for agentic workflows with heavy tool use. Older tool results (such as file contents or search results) are no longer needed once Claude has processed them.
 
 When activated, the API automatically clears the oldest tool results in chronological order. The API replaces each cleared result with placeholder text indicating to Claude that it was removed. By default, only tool results are cleared. You can optionally clear both tool results and tool calls (the tool use parameters) by setting `clear_tool_inputs` to true.
 
@@ -50,9 +50,9 @@ The `clear_thinking_20251015` strategy manages `thinking` blocks from earlier as
 
 Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
 
-An assistant conversation turn may include multiple content blocks (for example, when using tools) and multiple thinking blocks (for example, with [interleaved thinking](thinking.md#interleaved-thinking)).
+An assistant conversation turn might include multiple content blocks (for example, when using tools) and multiple thinking blocks (for example, with [interleaved thinking](thinking.md#interleaved-thinking)).
 
-### Context editing happens server-side
+### Context editing occurs server-side
 
 Context editing is applied server-side before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history. You do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.
 
@@ -64,7 +64,7 @@ Context editing's interaction with [prompt caching](prompt-caching.md) varies by
 
 * **Tool result clearing:** Invalidates cached prompt prefixes when content is cleared. To account for this, clear enough tokens to make the cache invalidation worthwhile. Use the `clear_at_least` parameter to ensure a minimum number of tokens is cleared each time. You'll incur cache write costs each time content is cleared, but subsequent requests can reuse the newly cached prefix.
 
-* **Thinking block clearing:** When thinking blocks are **kept** in context (not cleared), the prompt cache is preserved, enabling cache hits and reducing input token costs. When thinking blocks are **cleared**, the cache is invalidated at the point where clearing occurs. Configure the `keep` parameter based on whether you want to prioritize cache performance or context window availability.
+* **Thinking block clearing:** When thinking blocks are **kept** in context (not cleared), the prompt cache is preserved, allowing cache hits and reducing input token costs. When thinking blocks are **cleared**, the cache is invalidated at the point where clearing occurs. Configure the `keep` parameter based on whether you want to prioritize cache performance or context window availability.
 
 ## Supported models
 
@@ -76,31 +76,31 @@ The simplest way to enable tool result clearing is to specify only the strategy 
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-5-5",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Search for recent developments in AI"
-            }
-        ],
-        "tools": [
-            {
-                "type": "web_search_20250305",
-                "name": "web_search"
-            }
-        ],
-        "context_management": {
-            "edits": [
-                {"type": "clear_tool_uses_20250919"}
-            ]
-        }
-    }'
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -H "anthropic-beta: context-management-2025-06-27" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 4096,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Search for recent developments in AI"
+      }
+    ],
+    "tools": [
+      {
+        "type": "web_search_20250305",
+        "name": "web_search"
+      }
+    ],
+    "context_management": {
+      "edits": [
+        {"type": "clear_tool_uses_20250919"}
+      ]
+    }
+  }'
 ```
 
 ```bash CLI
@@ -169,9 +169,7 @@ var parameters = new MessageCreateParams
 {
     Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 4096,
-    Messages = [
-        new() { Role = Role.User, Content = "Search for recent developments in AI" }
-    ],
+    Messages = [new BetaUserMessageParam { Content = "Search for recent developments in AI" }],
     Tools = [
         new BetaWebSearchTool20250305()
     ],
@@ -265,7 +263,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 4096,
   messages: [
     { role: "user", content: "Search for recent developments in AI" }
@@ -289,52 +287,52 @@ You can customize the tool result clearing behavior with additional parameters:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-5-5",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Create a simple command line calculator app using Python"
-            }
-        ],
-        "tools": [
-            {
-                "type": "text_editor_20250728",
-                "name": "str_replace_based_edit_tool",
-                "max_characters": 10000
-            },
-            {
-                "type": "web_search_20250305",
-                "name": "web_search",
-                "max_uses": 3
-            }
-        ],
-        "context_management": {
-            "edits": [
-                {
-                    "type": "clear_tool_uses_20250919",
-                    "trigger": {
-                        "type": "input_tokens",
-                        "value": 30000
-                    },
-                    "keep": {
-                        "type": "tool_uses",
-                        "value": 3
-                    },
-                    "clear_at_least": {
-                        "type": "input_tokens",
-                        "value": 5000
-                    },
-                    "exclude_tools": ["web_search"]
-                }
-            ]
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -H "anthropic-beta: context-management-2025-06-27" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 4096,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Create a simple command line calculator app using Python"
+      }
+    ],
+    "tools": [
+      {
+        "type": "text_editor_20250728",
+        "name": "str_replace_based_edit_tool",
+        "max_characters": 10000
+      },
+      {
+        "type": "web_search_20250305",
+        "name": "web_search",
+        "max_uses": 3
+      }
+    ],
+    "context_management": {
+      "edits": [
+        {
+          "type": "clear_tool_uses_20250919",
+          "trigger": {
+            "type": "input_tokens",
+            "value": 30000
+          },
+          "keep": {
+            "type": "tool_uses",
+            "value": 3
+          },
+          "clear_at_least": {
+            "type": "input_tokens",
+            "value": 5000
+          },
+          "exclude_tools": ["web_search"]
         }
-    }'
+      ]
+    }
+  }'
 ```
 
 ```bash CLI
@@ -472,7 +470,7 @@ var parameters = new MessageCreateParams
     Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Messages = [
-        new() { Role = Role.User, Content = "Create a simple command line calculator app using Python" }
+        new BetaUserMessageParam { Content = "Create a simple command line calculator app using Python" }
     ],
     Tools = [
         new BetaToolTextEditor20250728 { MaxCharacters = 10000 },
@@ -690,26 +688,26 @@ Use thinking block clearing to manage context and prompt caching in conversation
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-5-5",
-        "max_tokens": 16000,
-        "messages": [{"role": "user", "content": "Hello"}],
-        "context_management": {
-            "edits": [
-                {
-                    "type": "clear_thinking_20251015",
-                    "keep": {
-                        "type": "thinking_turns",
-                        "value": 2
-                    }
-                }
-            ]
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -H "anthropic-beta: context-management-2025-06-27" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 16000,
+    "messages": [{"role": "user", "content": "Hello"}],
+    "context_management": {
+      "edits": [
+        {
+          "type": "clear_thinking_20251015",
+          "keep": {
+            "type": "thinking_turns",
+            "value": 2
+          }
         }
-    }'
+      ]
+    }
+  }'
 ```
 
 ```bash CLI
@@ -781,9 +779,7 @@ var parameters = new MessageCreateParams
 {
     Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 16000,
-    Messages = [
-        new() { Role = Role.User, Content = "Hello" }
-    ],
+    Messages = [new BetaUserMessageParam { Content = "Hello" }],
     Betas = [AnthropicBeta.ContextManagement2025_06_27],
     ContextManagement = new BetaContextManagementConfig
     {
@@ -886,7 +882,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 16000,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["context-management-2025-06-27"],
@@ -919,26 +915,26 @@ Keep thinking blocks from the last 3 assistant turns:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-5-5",
-        "max_tokens": 16000,
-        "messages": [{"role": "user", "content": "Hello"}],
-        "context_management": {
-            "edits": [
-                {
-                    "type": "clear_thinking_20251015",
-                    "keep": {
-                        "type": "thinking_turns",
-                        "value": 3
-                    }
-                }
-            ]
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -H "anthropic-beta: context-management-2025-06-27" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 16000,
+    "messages": [{"role": "user", "content": "Hello"}],
+    "context_management": {
+      "edits": [
+        {
+          "type": "clear_thinking_20251015",
+          "keep": {
+            "type": "thinking_turns",
+            "value": 3
+          }
         }
-    }'
+      ]
+    }
+  }'
 ```
 
 ```bash CLI
@@ -1010,9 +1006,7 @@ var parameters = new MessageCreateParams
 {
     Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 16000,
-    Messages = [
-        new() { Role = Role.User, Content = "Hello" }
-    ],
+    Messages = [new BetaUserMessageParam { Content = "Hello" }],
     Betas = [AnthropicBeta.ContextManagement2025_06_27],
     ContextManagement = new BetaContextManagementConfig
     {
@@ -1108,7 +1102,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 16000,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["context-management-2025-06-27"],
@@ -1131,23 +1125,23 @@ Keep all thinking blocks (maximizes cache hits):
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-5-5",
-        "max_tokens": 16000,
-        "messages": [{"role": "user", "content": "Hello"}],
-        "context_management": {
-            "edits": [
-                {
-                    "type": "clear_thinking_20251015",
-                    "keep": "all"
-                }
-            ]
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -H "anthropic-beta: context-management-2025-06-27" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 16000,
+    "messages": [{"role": "user", "content": "Hello"}],
+    "context_management": {
+      "edits": [
+        {
+          "type": "clear_thinking_20251015",
+          "keep": "all"
         }
-    }'
+      ]
+    }
+  }'
 ```
 
 ```bash CLI
@@ -1214,9 +1208,7 @@ var parameters = new MessageCreateParams
 {
     Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 16000,
-    Messages = [
-        new() { Role = Role.User, Content = "Hello" }
-    ],
+    Messages = [new BetaUserMessageParam { Content = "Hello" }],
     Betas = [AnthropicBeta.ContextManagement2025_06_27],
     ContextManagement = new BetaContextManagementConfig
     {
@@ -1305,7 +1297,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 16000,
   messages: [{ role: "user", content: "Hello" }],
   betas: ["context-management-2025-06-27"],
@@ -1329,49 +1321,49 @@ When using multiple strategies, the `clear_thinking_20251015` strategy must be l
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-5-5",
-        "max_tokens": 16000,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Search for the latest developments in quantum error correction and summarize the key breakthroughs."
-            }
-        ],
-        "tools": [
-            {
-                "type": "web_search_20250305",
-                "name": "web_search",
-                "max_uses": 5
-            }
-        ],
-        "context_management": {
-            "edits": [
-                {
-                    "type": "clear_thinking_20251015",
-                    "keep": {
-                        "type": "thinking_turns",
-                        "value": 2
-                    }
-                },
-                {
-                    "type": "clear_tool_uses_20250919",
-                    "trigger": {
-                        "type": "input_tokens",
-                        "value": 50000
-                    },
-                    "keep": {
-                        "type": "tool_uses",
-                        "value": 5
-                    }
-                }
-            ]
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -H "anthropic-beta: context-management-2025-06-27" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 16000,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Search for the latest developments in quantum error correction and summarize the key breakthroughs."
+      }
+    ],
+    "tools": [
+      {
+        "type": "web_search_20250305",
+        "name": "web_search",
+        "max_uses": 5
+      }
+    ],
+    "context_management": {
+      "edits": [
+        {
+          "type": "clear_thinking_20251015",
+          "keep": {
+            "type": "thinking_turns",
+            "value": 2
+          }
+        },
+        {
+          "type": "clear_tool_uses_20250919",
+          "trigger": {
+            "type": "input_tokens",
+            "value": 50000
+          },
+          "keep": {
+            "type": "tool_uses",
+            "value": 5
+          }
         }
-    }'
+      ]
+    }
+  }'
 ```
 
 ```bash CLI
@@ -1402,6 +1394,8 @@ YAML
 ```
 
 ```python Python
+client = anthropic.Anthropic()
+
 response = client.beta.messages.create(
     model="claude-opus-5-5",
     max_tokens=16000,
@@ -1500,7 +1494,7 @@ var parameters = new MessageCreateParams
     Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 16000,
     Messages = [
-        new() { Role = Role.User, Content = "Search for the latest developments in quantum error correction and summarize the key breakthroughs." }
+        new BetaUserMessageParam { Content = "Search for the latest developments in quantum error correction and summarize the key breakthroughs." }
     ],
     Tools = [
         new BetaWebSearchTool20250305 { MaxUses = 5 }
@@ -1665,7 +1659,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 16000,
   messages: [
     {
@@ -1711,7 +1705,7 @@ puts response
 
 | Configuration option | Default              | Description                                                                                                                                                                                                                                           |
 | -------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `trigger`            | 100,000 input tokens | Defines when the context editing strategy activates. Once the prompt exceeds this threshold, clearing begins. You can specify this value in either `input_tokens` or `tool_uses`.                                                                     |
+| `trigger`            | 100,000 input tokens | Defines when the context editing strategy activates. Once the prompt exceeds this threshold, clearing starts. You can specify this value in either `input_tokens` or `tool_uses`.                                                                     |
 | `keep`               | 3 tool uses          | Defines how many recent tool use/result pairs to keep after clearing occurs. The API removes the oldest tool interactions first, preserving the most recent ones.                                                                                     |
 | `clear_at_least`     | None                 | Ensures a minimum number of tokens is cleared each time the strategy activates. If the API can't clear at least the specified amount, the strategy will not be applied. This helps determine if context clearing is worth breaking your prompt cache. |
 | `exclude_tools`      | None                 | List of tool names whose tool uses and results should never be cleared. Useful for preserving important context.                                                                                                                                      |
@@ -1721,7 +1715,7 @@ puts response
 
 You can see which context edits were applied to your request using the `context_management` response field, along with helpful statistics about the content and input tokens cleared.
 
-```json Output
+```text Output wrap
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message",
@@ -1753,7 +1747,7 @@ You can see which context edits were applied to your request using the `context_
 
 For streaming responses, the context edits are included in the final `message_delta` event:
 
-```json Streaming Response
+```text Streaming Response wrap
 {
   "type": "message_delta",
   "delta": {
@@ -1777,39 +1771,38 @@ The [token counting](token-counting.md) endpoint supports context management, al
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages/count_tokens \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-5-5",
-        "messages": [
-            {
-                "role": "user",
-                "content": "Continue our conversation..."
-            }
-        ],
-        "context_management": {
-            "edits": [
-                {
-                    "type": "clear_tool_uses_20250919",
-                    "trigger": {
-                        "type": "input_tokens",
-                        "value": 30000
-                    },
-                    "keep": {
-                        "type": "tool_uses",
-                        "value": 5
-                    }
-                }
-            ]
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -H "anthropic-beta: context-management-2025-06-27" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Continue our conversation..."
+      }
+    ],
+    "context_management": {
+      "edits": [
+        {
+          "type": "clear_tool_uses_20250919",
+          "trigger": {
+            "type": "input_tokens",
+            "value": 30000
+          },
+          "keep": {
+            "type": "tool_uses",
+            "value": 5
+          }
         }
-    }'
+      ]
+    }
+  }'
 ```
 
 ```bash CLI
-ant beta:messages count-tokens \
-  --beta context-management-2025-06-27 <<'YAML'
+ant beta:messages count-tokens --beta context-management-2025-06-27 <<'YAML'
 model: claude-opus-5-5
 messages:
   - role: user
@@ -1900,7 +1893,7 @@ AnthropicClient client = new();
 var parameters = new MessageCountTokensParams
 {
     Model = Messages::Model.ClaudeOpus5_5,
-    Messages = [new() { Role = Role.User, Content = "Continue our conversation..." }],
+    Messages = [new BetaUserMessageParam { Content = "Continue our conversation..." }],
     Betas = [AnthropicBeta.ContextManagement2025_06_27],
     ContextManagement = new BetaContextManagementConfig
     {
@@ -2027,7 +2020,7 @@ echo "Savings: " . ($response->contextManagement->originalInputTokens - $respons
 client = Anthropic::Client.new
 
 response = client.beta.messages.count_tokens(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   messages: [
     { role: "user", content: "Continue our conversation..." }
   ],
@@ -2054,7 +2047,7 @@ puts "After clearing: #{response.input_tokens}"
 puts "Savings: #{response.context_management.original_input_tokens - response.input_tokens} tokens"
 ```
 
-```json Output
+```text Output wrap
 {
   "input_tokens": 25000,
   "context_management": {
@@ -2067,13 +2060,13 @@ The response shows both the final token count after context management is applie
 
 ## Using with the memory tool
 
-Context editing can be combined with the [memory tool](../agents-and-tools/tool-use/memory-tool.md). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This enables Claude to save tool results or context to its memory files before they're cleared from the conversation history.
+Context editing can be combined with the [memory tool](../agents-and-tools/tool-use/memory-tool.md). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This allows Claude to save tool results or context to its memory files before they're cleared from the conversation history.
 
 This combination allows you to:
 
-* **Preserve important context:** Claude can write essential information from tool results to memory files before those results are cleared
-* **Maintain long-running workflows:** Enable agentic workflows that would otherwise exceed context limits by offloading information to persistent storage
-* **Access information on demand:** Claude can look up previously cleared information from memory files when needed, rather than keeping everything in the active context window
+* **Preserve important context:** Claude can write essential information from tool results to memory files before those results are cleared.
+* **Maintain long-running workflows:** Claude can continue agentic workflows that would otherwise exceed context limits by offloading information to persistent storage.
+* **Access information on demand:** Claude can look up previously cleared information from memory files when needed, rather than keeping everything in the active context window.
 
 For example, in a file editing workflow where Claude performs many operations, Claude can summarize completed changes to memory files as the context grows. When tool results are cleared, Claude retains access to that information through its memory system and can continue working effectively.
 
@@ -2081,31 +2074,31 @@ To use both features together, enable them in your API request:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --header "anthropic-beta: context-management-2025-06-27" \
-    --data '{
-        "model": "claude-opus-5-5",
-        "max_tokens": 4096,
-        "messages": [
-            {
-                "role": "user",
-                "content": "Hello"
-            }
-        ],
-        "tools": [
-            {
-                "type": "memory_20250818",
-                "name": "memory"
-            }
-        ],
-        "context_management": {
-            "edits": [
-                {"type": "clear_tool_uses_20250919"}
-            ]
-        }
-    }'
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -H "anthropic-beta: context-management-2025-06-27" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 4096,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hello"
+      }
+    ],
+    "tools": [
+      {
+        "type": "memory_20250818",
+        "name": "memory"
+      }
+    ],
+    "context_management": {
+      "edits": [
+        {"type": "clear_tool_uses_20250919"}
+      ]
+    }
+  }'
 ```
 
 ```bash CLI
@@ -2169,9 +2162,7 @@ var parameters = new MessageCreateParams
 {
     Model = Messages::Model.ClaudeOpus5_5,
     MaxTokens = 4096,
-    Messages = [
-        new() { Role = Role.User, Content = "Hello" }
-    ],
+    Messages = [new BetaUserMessageParam { Content = "Hello" }],
     Tools = [
         new BetaMemoryTool20250818()
     ],
@@ -2266,7 +2257,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 4096,
   messages: [{ role: "user", content: "Hello" }],
   tools: [
@@ -2291,7 +2282,7 @@ For the full memory tool reference including commands and examples, see [Memory 
 
 **Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](compaction.md) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
 
-The `compaction_control` parameter is deprecated in the TypeScript and Ruby SDKs and will be removed in a future version. The SDKs emit a deprecation warning when it is enabled. The Python SDK removed it in v1.0. To use server-side compaction with a tool runner, pass the `compact_20260112` edit in the request's `context_management` parameter.
+The `compaction_control` parameter is deprecated in the TypeScript and Ruby SDKs and will be removed in a future version. The TypeScript and Ruby SDKs emit a deprecation warning when it is enabled. The Python SDK removed it in v1.0. To use server-side compaction with a tool runner, pass the `compact_20260112` edit in the request's `context_management` parameter.
 
 Compaction is available in the [TypeScript and Ruby SDKs](../cli-sdks-libraries/overview.md) when using the [`tool_runner` method](../agents-and-tools/tool-use/tool-runner.md).
 
@@ -2304,7 +2295,7 @@ When compaction is enabled, the SDK monitors token usage after each model respon
 1. **Threshold check:** The SDK calculates total tokens as `input_tokens + cache_creation_input_tokens + cache_read_input_tokens + output_tokens` (see [Prompt caching](prompt-caching.md) for the cache token fields).
 2. **Summary generation:** When the threshold is exceeded, a summary prompt is injected as a user turn, and Claude generates a structured summary wrapped in `<summary></summary>` tags.
 3. **Context replacement:** The SDK extracts the summary and replaces the entire message history with it.
-4. **Continuation:** The conversation resumes from the summary, with Claude picking up where it left off.
+4. **Continuation:** The conversation resumes from the summary, with Claude continuing from where it stopped.
 
 ### Using compaction
 
@@ -2320,7 +2311,7 @@ The CLI does not include a `tool_runner` helper. Use [server-side compaction](co
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **TypeScript**
 
@@ -2342,19 +2333,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Ruby**
 
@@ -2436,7 +2427,7 @@ The CLI does not include a `tool_runner` helper. Use [server-side compaction](co
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **TypeScript**
 
@@ -2459,19 +2450,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Ruby**
 
@@ -2506,7 +2497,7 @@ The CLI does not include a `tool_runner` helper. Use [server-side compaction](co
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **TypeScript**
 
@@ -2532,19 +2523,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Ruby**
 
@@ -2582,7 +2573,7 @@ The CLI does not include a `tool_runner` helper. Use [server-side compaction](co
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **TypeScript**
 
@@ -2613,19 +2604,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
 
 **Ruby**
 
@@ -2666,7 +2657,7 @@ The built-in summary prompt instructs Claude to create a structured continuation
 4. **Next Steps:** Specific actions needed, blockers, and priority order.
 5. **Context to Preserve:** User preferences, domain-specific details, and commitments made.
 
-This structure enables Claude to resume work efficiently without losing important context or repeating mistakes.
+This structure allows Claude to resume work efficiently without losing important context or repeating mistakes.
 
 **View full default prompt**
 
@@ -2709,11 +2700,11 @@ Wrap your summary in <summary></summary> tags.
 
 Compaction requires special consideration when using server-side tools such as [web search](../agents-and-tools/tool-use/web-search-tool.md) or [web fetch](../agents-and-tools/tool-use/web-fetch-tool.md).
 
-When using server-side tools, the SDK may incorrectly calculate token usage, causing compaction to trigger at the wrong time.
+When using server-side tools, the SDK might incorrectly calculate token usage, causing compaction to trigger at the wrong time.
 
 For example, after a web search operation, the API response might show:
 
-```json Output
+```text Output wrap
 {
   "usage": {
     "input_tokens": 63000,
@@ -2724,12 +2715,12 @@ For example, after a web search operation, the API response might show:
 }
 ```
 
-The SDK calculates total usage as 63,000 + 0 + 270,000 + 1,400 = 334,400 tokens. However, the `cache_read_input_tokens` value includes accumulated reads from multiple internal API calls made by the server-side tool, not your actual conversation context. Your real context length might only be the 63,000 `input_tokens`, but the SDK sees 334k and triggers compaction prematurely.
+The SDK calculates total usage as 63,000 + 0 + 270,000 + 1,400 = 334,400 tokens. However, the `cache_read_input_tokens` value includes accumulated reads from multiple internal API calls made by the server-side tool, not your actual conversation context. Your real context length might only be the 63,000 `input_tokens`, but the SDK calculates 334k and triggers compaction prematurely.
 
 **Workarounds:**
 
-* Use the [token counting](token-counting.md) endpoint to get accurate context length
-* Avoid compaction when using server-side tools extensively
+* Use the [token counting](token-counting.md) endpoint to get accurate context length.
+* Avoid compaction when using server-side tools extensively.
 
 #### Tool use edge cases
 

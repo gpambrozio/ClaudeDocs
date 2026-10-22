@@ -27,7 +27,7 @@ To create custom Skills, see the [Agent Skills Cookbook](https://platform.claude
 
 ## Step 1: List available Skills
 
-First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills. Each language tab is an excerpt from one continuous script, with any imports and client setup at the top:
+First, check what Skills are available. Use the Skills API to list all Anthropic-managed Skills. The example is an excerpt from one continuous script, with any imports and client setup at the top:
 
 ```bash cURL
 # List Anthropic-managed Skills
@@ -220,9 +220,8 @@ var response = await client.Messages.Create(new MessageCreateParams
     },
     Messages =
     [
-        new MessageParam
+        new UserMessageParam
         {
-            Role = Role.User,
             Content = "Create a presentation about renewable energy with 5 slides",
         },
     ],
@@ -388,7 +387,9 @@ file_id=$(jq -r '
 
 if [[ -n "$file_id" ]]; then
   # Download the file and save it
-  ant files download --file-id "$file_id" --output "${TMPDIR:-/tmp}/renewable_energy.pptx"
+  ant files download \
+    --file-id "$file_id" \
+    --output "${TMPDIR:-/tmp}/renewable_energy.pptx"
 fi
 ```
 
@@ -674,9 +675,8 @@ var response = await client.Messages.Create(
         },
         Messages =
         [
-            new MessageParam
+            new UserMessageParam
             {
-                Role = Role.User,
                 Content = "Create a quarterly sales tracking spreadsheet with sample data",
             },
         ],
@@ -865,9 +865,8 @@ var response = await client.Messages.Create(
         },
         Messages =
         [
-            new MessageParam
+            new UserMessageParam
             {
-                Role = Role.User,
                 Content = "Write a 2-page report on the benefits of renewable energy",
             },
         ],
@@ -1054,14 +1053,7 @@ var response = await client.Messages.Create(
                 },
             ],
         },
-        Messages =
-        [
-            new MessageParam
-            {
-                Role = Role.User,
-                Content = "Generate a PDF invoice template",
-            },
-        ],
+        Messages = [new UserMessageParam { Content = "Generate a PDF invoice template" }],
         Tools = [new CodeExecutionTool20260521()],
     }
 );

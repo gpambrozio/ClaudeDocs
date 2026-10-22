@@ -3,7 +3,7 @@
 ---
 title: Start a session
 url: https://platform.claude.com/docs/en/managed-agents/sessions
-description: Create a session to run your agent and begin executing tasks.
+description: Create a session to run your agent and start running tasks.
 featureMetadata:
   topic:
     title: Managed Agents
@@ -31,9 +31,7 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
 ```
 
 ```bash CLI
-ant beta:sessions create \
-  --agent "$AGENT_ID" \
-  --environment-id "$ENVIRONMENT_ID"
+ant beta:sessions create --agent "$AGENT_ID" --environment-id "$ENVIRONMENT_ID"
 ```
 
 ```python Python
@@ -134,7 +132,6 @@ var pinnedSession = await client.Beta.Sessions.Create(new()
 {
     Agent = new BetaManagedAgentsAgentParams
     {
-        Type = BetaManagedAgentsAgentParamsType.Agent,
         ID = agent.ID,
         Version = 1,
     },
@@ -161,7 +158,6 @@ if err != nil {
 ```java Java
 var pinnedSession = client.beta().sessions().create(SessionCreateParams.builder()
     .agent(BetaManagedAgentsAgentParams.builder()
-        .type(BetaManagedAgentsAgentParams.Type.AGENT)
         .id(agent.id())
         .version(1)
         .build())
@@ -275,12 +271,10 @@ var seededSession = await client.Beta.Sessions.Create(new()
     [
         new BetaManagedAgentsUserMessageEventParams
         {
-            Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
             Content =
             [
                 new BetaManagedAgentsTextBlock
                 {
-                    Type = BetaManagedAgentsTextBlockType.Text,
                     Text = "List the files in the working directory.",
                 },
             ],
@@ -349,7 +343,6 @@ var seededSession = client.beta().sessions().create(SessionCreateParams.builder(
     .agent(agent.id())
     .environmentId(environment.id())
     .addInitialEvent(BetaManagedAgentsUserMessageEventParams.builder()
-        .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
         .addTextContent("List the files in the working directory.")
         .build())
     .build());
@@ -437,8 +430,8 @@ Each overridable field follows the same three rules:
 
 * **Set the field to `null`, or to an empty array for list fields:** The session runs with that field cleared. This rule applies in full to `system` (csharp, go: `System`; ruby: `system_`) and `skills` (csharp, go: `Skills`). There are three exceptions:
 
-  * `model` is never clearable. A session always needs a model, so `model: null` returns a 400 `agent_model_required` error.
-  * Clearing `tools` returns a 400 error when the session's effective `skills` (csharp, go: `Skills`) is non-empty, because skills require the `read` tool. Otherwise, `tools: null` and `tools: []` clear the field.
+  * `model` (csharp, go: `Model`) is never clearable. A session always needs a model, so setting `model` (csharp, go: `Model`) to `null` returns a 400 `agent_model_required` error.
+  * Clearing `tools` (csharp, go: `Tools`) returns a 400 error when the session's effective `skills` (csharp, go: `Skills`) is non-empty, because skills require the `read` tool. Otherwise, setting `tools` (csharp, go: `Tools`) to `null` or to an empty array clears the field.
   * Clearing `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`) returns a 400 error when the session's effective `tools` (csharp, go: `Tools`) still contains an `mcp_toolset` that references one of the agent's servers. Override `tools` (csharp, go: `Tools`) in the same request to remove those `mcp_toolset` entries, then clear `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`).
 
 * **Set the field to a value:** The value replaces the agent's value in full. Overrides never merge with the agent's configuration, so a `tools` (csharp, go: `Tools`) override must list every tool the session should have. Likewise, a `model` (csharp, go: `Model`) override replaces the agent's `model` (csharp, go: `Model`) object in full, so the agent's own `effort` (csharp, go: `Effort`) isn't carried over. To run the session at a specific effort level, set `effort` (csharp, go: `Effort`) inside the override's `model` (csharp, go: `Model`) object. A level the model doesn't support returns a 400 error, and a `model` (csharp, go: `Model`) override without `effort` (csharp, go: `Effort`) runs at that model's default effort level.
@@ -468,7 +461,7 @@ curl -fsSL https://api.anthropic.com/v1/sessions \
 
 ```bash CLI
 # The response's `agent` is the resolved snapshot: each override replaces that
-# field for this session only, and the agent resource keeps its id and version.
+# field for this session only, and the agent resource keeps its ID and version.
 ant beta:sessions create <<YAML
 agent:
   type: agent_with_overrides
@@ -515,7 +508,6 @@ var overrideSession = await client.Beta.Sessions.Create(new()
 {
     Agent = new BetaManagedAgentsAgentWithOverridesParams
     {
-        Type = BetaManagedAgentsAgentWithOverridesParamsType.AgentWithOverrides,
         ID = agent.ID,
         Model = new BetaManagedAgentsModelConfigParams
         {
@@ -556,7 +548,6 @@ fmt.Printf("System: %q\n", overrideSession.Agent.System)
 ```java Java
 var overrideSession = client.beta().sessions().create(SessionCreateParams.builder()
     .agent(BetaManagedAgentsAgentWithOverridesParams.builder()
-        .type(BetaManagedAgentsAgentWithOverridesParams.Type.AGENT_WITH_OVERRIDES)
         .id(agent.id())
         .model(BetaManagedAgentsModelConfigParams.builder()
             .id(BetaManagedAgentsModel.CLAUDE_SONNET_5_5)
@@ -573,7 +564,6 @@ IO.println("System: " + overrideSession.agent().system().orElse("null"));
 ```php PHP
 $overrides = BetaManagedAgentsAgentWithOverridesParams::with(
     id: $agent->id,
-    type: 'agent_with_overrides',
     model: ['id' => 'claude-sonnet-5-5'],
 );
 // Clear the system prompt for this session. Array access is load-bearing here:
@@ -673,7 +663,6 @@ var session = await client.Beta.Sessions.Create(new()
 {
     Agent = new BetaManagedAgentsAgentWithOverridesParams
     {
-        Type = BetaManagedAgentsAgentWithOverridesParamsType.AgentWithOverrides,
         ID = agent.ID,
         // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
         Model = new BetaManagedAgentsModelConfigParams
@@ -711,7 +700,6 @@ fmt.Printf("Inference geo: %s\n", session.Agent.Model.InferenceGeo)
 ```java Java
 var session = client.beta().sessions().create(SessionCreateParams.builder()
     .agent(BetaManagedAgentsAgentWithOverridesParams.builder()
-        .type(BetaManagedAgentsAgentWithOverridesParams.Type.AGENT_WITH_OVERRIDES)
         .id(agent.id())
         // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
         .model(BetaManagedAgentsModelConfigParams.builder()
@@ -728,7 +716,6 @@ IO.println("Inference geo: " + session.agent().model().inferenceGeo().orElseThro
 $session = $client->beta->sessions->create(
     agent: BetaManagedAgentsAgentWithOverridesParams::with(
         id: $agent->id,
-        type: 'agent_with_overrides',
         // Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
         model: BetaManagedAgentsModelConfigParams::with(
             id: 'claude-opus-5-5',
@@ -757,9 +744,9 @@ The agent defines how Claude behaves within the session, including the model, sy
 
 ### Set a session budget
 
-To cap what a session can spend, pass the optional `budget` (csharp, go: `Budget`) object when you create it. A budget is a hard ceiling on the session's list cost: the platform prices everything the session consumes at public list rates, and the session stops issuing new model requests once that running total reaches `max_list_cost` (java, php: `maxListCost`; csharp, go: `MaxListCost`). The budget's `type` (csharp, go: `Type`) is always `limit`. Give `max_list_cost` (java, php: `maxListCost`; csharp, go: `MaxListCost`) an `amount` (csharp, go: `Amount`) and a `currency` (csharp, go: `Currency`). `amount` (csharp, go: `Amount`) is a whole number of US cents written as a string, such as `"125"` for $1.25. The API takes a string rather than a number so no floating-point rounding is ever applied. `USD` is the only currency currently supported. When the session reaches the cap, it pauses and goes idle with the stop reason `budget_reached`. The cap is enforced between model requests, so the request that crosses it finishes first and the session's final list cost can land [a fraction past the cap](budgets.md#when-a-session-reaches-its-budget). A budget can only be attached at creation: you can [change or remove](session-operations.md#updating-the-session-budget) it later, but you can't add one to a session created without it.
+To cap what a session can spend, pass the optional `budget` (csharp, go: `Budget`) object when you create it. A budget is a hard ceiling on the session's list cost: the platform prices everything the session consumes at public list rates, and the session stops issuing new model requests once that running total reaches `max_list_cost` (java, php: `maxListCost`; csharp, go: `MaxListCost`). The budget's `type` (csharp, go: `Type`) is always `limit`. Give `max_list_cost` (java, php: `maxListCost`; csharp, go: `MaxListCost`) an `amount` (csharp, go: `Amount`) and a `currency` (csharp, go: `Currency`). `amount` (csharp, go: `Amount`) is a whole number of US cents written as a string, such as `"125"` for $1.25 USD. The API takes a string rather than a number so no floating-point rounding is ever applied. `USD` is the only currency currently supported. When the session reaches the cap, it pauses and goes idle with the stop reason `budget_reached`. The cap is enforced between model requests, so the request that crosses it completes first and the session's final list cost can land [a fraction past the cap](budgets.md#when-a-session-reaches-its-budget). A budget can only be attached at creation: you can [change or remove the budget](session-operations.md#updating-the-session-budget) later, but you can't add one to a session created without it.
 
-The following example creates a session with a $1.25 budget:
+The following example creates a session with a $1.25 USD budget:
 
 ```bash cURL
 curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
@@ -816,7 +803,6 @@ var session = await client.Beta.Sessions.Create(new()
     EnvironmentID = environment.ID,
     Budget = new()
     {
-        Type = BetaManagedAgentsBudgetLimitType.Limit,
         MaxListCost = new() { Amount = "125", Currency = BetaCurrency.Usd },
     },
 });
@@ -848,7 +834,6 @@ var session = client.beta().sessions().create(SessionCreateParams.builder()
     .agent(agent.id())
     .environmentId(environment.id())
     .budget(BetaManagedAgentsBudgetLimit.builder()
-        .type(BetaManagedAgentsBudgetLimit.Type.LIMIT)
         .maxListCost(BetaMonetaryAmount.builder()
             .amount("125")
             .currency(BetaCurrency.USD)
@@ -993,8 +978,7 @@ curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
 ```
 
 ```bash CLI
-ant beta:sessions:events send \
-  --session-id "$SESSION_ID" <<'YAML'
+ant beta:sessions:events send --session-id "$SESSION_ID" <<'YAML'
 events:
   - type: user.message
     content:
@@ -1035,12 +1019,10 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
     [
         new BetaManagedAgentsUserMessageEventParams
         {
-            Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
             Content =
             [
                 new BetaManagedAgentsTextBlock
                 {
-                    Type = BetaManagedAgentsTextBlockType.Text,
                     Text = "List the files in the working directory.",
                 },
             ],
@@ -1072,7 +1054,6 @@ client.beta().sessions().events().send(
     session.id(),
     EventSendParams.builder()
         .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
-            .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
             .addTextContent("List the files in the working directory.")
             .build())
         .build());
@@ -1114,7 +1095,7 @@ Retrieve, list, update, archive, and delete Claude Managed Agents sessions.
 
 **Session event stream**
 
-Send events, stream responses, and interrupt or redirect your session mid-execution.
+Send events, stream responses, and interrupt or redirect your session while it runs.
 
 **Scheduled deployments**
 

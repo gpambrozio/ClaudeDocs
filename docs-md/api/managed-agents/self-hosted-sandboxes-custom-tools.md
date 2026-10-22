@@ -12,7 +12,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-[Custom tools](tools.md#custom-tools) are tools your own code executes: the agent emits an `agent.custom_tool_use` event and waits for a matching `user.custom_tool_result`. Your worker can be that code. Because it runs inside your sandbox, the tool reaches the internal services, credentials, and network egress you configured for the sandbox, and nothing more.
+[Custom tools](tools.md#custom-tools) are tools your own code runs: the agent emits an `agent.custom_tool_use` event and waits for a matching `user.custom_tool_result`. Your worker can be that code. Because it runs inside your sandbox, the tool reaches the internal services, credentials, and network egress you configured for the sandbox, and nothing more.
 
 The environment key authorizes posting custom tool results, so your Claude API key stays off the worker host.
 
@@ -296,10 +296,7 @@ await using var mcpClient = await McpClient.CreateAsync(
 );
 var mcpTools = await mcpClient.ListToolsAsync();
 
-List<Tool> tools =
-[
-    new BetaManagedAgentsAgentToolset20260401Params { Type = "agent_toolset_20260401" },
-];
+List<Tool> tools = [new BetaManagedAgentsAgentToolset20260401Params()];
 foreach (var tool in mcpTools)
 {
     var description = tool.Description;
@@ -313,7 +310,6 @@ foreach (var tool in mcpTools)
     tools.Add(
         new BetaManagedAgentsCustomToolParams
         {
-            Type = "custom",
             Name = tool.Name,
             Description = description,
             InputSchema = new(
@@ -461,7 +457,6 @@ BetaManagedAgentsCustomToolParams toCustomTool(McpSchema.Tool tool) {
     }
 
     return BetaManagedAgentsCustomToolParams.builder()
-        .type(BetaManagedAgentsCustomToolParams.Type.CUSTOM)
         .name(tool.name())
         .description(description)
         .inputSchema(JsonValue.from(tool.inputSchema())
@@ -486,9 +481,7 @@ void main() {
         var params = AgentCreateParams.builder()
             .name("Internal tools agent")
             .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
-            .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
-                .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-                .build());
+            .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build());
         for (var tool : mcpClient.listTools().tools()) {
             params.addTool(toCustomTool(tool));
         }
@@ -754,13 +747,13 @@ The MCP helpers keep the server's names and descriptions, and most schemas pass 
 Two cases need extra work:
 
 * **Two servers expose the same tool name:** Define the wrapper yourself under a prefixed name and have it call the server's original tool name.
-* **A generator such as pydantic factors schemas into `$defs`:** Inline those schemas before you declare the tool.
+* **A generator such as Pydantic factors schemas into `$defs`:** Inline those schemas before you declare the tool.
 
 ### Tool failures surface as error tool results
 
 When the MCP server reports a tool error, the worker posts an error tool result the model can react to. MCP content with no tool result equivalent, such as audio blocks and resource links, also surfaces as an error.
 
-Set a timeout on the MCP client for a faster and clearer failure, as the Python worker example does with `read_timeout_seconds`. See [A wrapped MCP tool call hangs](self-hosted-sandboxes-operations.md#a-wrapped-mcp-tool-call-hangs) for what happens without one.
+Set a timeout on the MCP client for a faster and clearer failure, as the Python worker example does with `read_timeout_seconds`. See [A wrapped MCP tool call hangs](self-hosted-sandboxes-operations.md#a-wrapped-mcp-tool-call-hangs) for what occurs without one.
 
 ### Wrap only servers you operate or trust
 
@@ -768,7 +761,7 @@ A wrapped tool's name, description, and results enter the model's context like a
 
 ### Permission policies do not apply
 
-[Permission policies](permission-policies.md#custom-tools) govern the built-in and MCP toolsets. The worker executes every wrapped tool call the model makes, so put any approval step in your own tool code.
+[Permission policies](permission-policies.md#custom-tools) govern the built-in and MCP toolsets. The worker runs every wrapped tool call the model makes, so put any approval step in your own tool code.
 
 ---
 

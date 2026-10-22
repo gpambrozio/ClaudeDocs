@@ -14,22 +14,22 @@ featureMetadata:
 
 Claude Managed Agents provides a set of built-in tools that Claude can use autonomously within a [session](sessions.md). You control which tools are available by specifying them in the agent configuration.
 
-Claude Managed Agents also supports custom, user-defined tools. Your application executes these tools separately and returns the results to Claude, which uses them to continue the task. To give the agent tools from an MCP server, use the [MCP connector](mcp-connector.md) instead.
+Claude Managed Agents also supports custom, user-defined tools. Your application runs these tools separately and returns the results to Claude, which uses them to continue the task. To give the agent tools from an MCP server, use the [MCP connector](mcp-connector.md) instead.
 
 ## Available tools
 
 The agent toolset includes the following tools. All are enabled by default when you include the toolset in the agent configuration.
 
-| Tool       | Name         | Description                                    |
-| ---------- | ------------ | ---------------------------------------------- |
-| Bash       | `bash`       | Execute bash commands in a shell session       |
-| Read       | `read`       | Read a file from the sandbox filesystem        |
-| Write      | `write`      | Write a file to the sandbox filesystem         |
-| Edit       | `edit`       | Perform string replacement in a file           |
-| Glob       | `glob`       | Fast file pattern matching using glob patterns |
-| Grep       | `grep`       | Text search using regex patterns               |
-| Web fetch  | `web_fetch`  | Fetch content from a URL                       |
-| Web search | `web_search` | Search the web for information                 |
+| Tool       | Name         | Description                                            |
+| ---------- | ------------ | ------------------------------------------------------ |
+| Bash       | `bash`       | Run bash commands in a shell session                   |
+| Read       | `read`       | Read a file from the sandbox filesystem                |
+| Write      | `write`      | Write a file to the sandbox filesystem                 |
+| Edit       | `edit`       | Perform string replacement in a file                   |
+| Glob       | `glob`       | Perform fast file pattern matching using glob patterns |
+| Grep       | `grep`       | Search text using regex patterns                       |
+| Web fetch  | `web_fetch`  | Fetch content from a URL                               |
+| Web search | `web_search` | Search the web for information                         |
 
 When a tool output exceeds 100,000 characters (about 25,000 tokens), it is automatically written to a file in the [sandbox](environments.md). The model receives a truncated preview with the file path and can read the full content from there.
 
@@ -116,7 +116,6 @@ var agent = await client.Beta.Agents.Create(new()
     [
         new BetaManagedAgentsAgentToolset20260401Params
         {
-            Type = "agent_toolset_20260401",
             Configs =
             [
                 new BetaManagedAgentsWebFetchToolConfigParams { Enabled = false },
@@ -156,7 +155,6 @@ var agent = client.beta().agents().create(AgentCreateParams.builder()
     .name("Coding Assistant")
     .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
     .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
-        .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
         .addConfig(BetaManagedAgentsWebFetchToolConfigParams.builder()
             .enabled(false)
             .build())
@@ -173,7 +171,6 @@ $agent = $client->beta->agents->create(
     model: 'claude-opus-5-5',
     tools: [
         BetaManagedAgentsAgentToolset20260401Params::with(
-            type: 'agent_toolset_20260401',
             configs: [
                 BetaManagedAgentsWebFetchToolConfigParams::with(enabled: false),
             ],
@@ -233,7 +230,7 @@ The `web_search` and `web_fetch` entries also accept domain lists, a cap on fetc
 
 ### Config entry types in the SDKs
 
-The Python, TypeScript, Go, Java, C#, Ruby, and PHP SDKs type each `configs` (csharp, go: `Configs`) entry per tool. The type is a union with one member per built-in tool, discriminated by `type` (csharp, go: `Type`).
+The SDK types each `configs` (csharp, go: `Configs`) entry by tool. The type is a union with one member for each built-in tool, discriminated by `type` (csharp, go: `Type`).
 
 In Go, Java, C#, and PHP, you construct entries from typed values rather than plain dictionaries or hashes. In those SDKs, the element type of `configs` (csharp, go: `Configs`) is the union itself, so build each entry from its per-tool member type.
 
@@ -354,13 +351,9 @@ var agent = await client.Beta.Agents.Create(new()
     Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     Tools =
     [
-        new BetaManagedAgentsAgentToolset20260401Params
-        {
-            Type = "agent_toolset_20260401",
-        },
+        new BetaManagedAgentsAgentToolset20260401Params(),
         new BetaManagedAgentsCustomToolParams
         {
-            Type = "custom",
             Name = "get_weather",
             Description = "Get current weather for a location",
             InputSchema = new()
@@ -418,11 +411,8 @@ import java.util.Map;
 var agent = client.beta().agents().create(AgentCreateParams.builder()
     .name("Weather Agent")
     .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
-    .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
-        .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-        .build())
+    .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
     .addTool(BetaManagedAgentsCustomToolParams.builder()
-        .type(BetaManagedAgentsCustomToolParams.Type.CUSTOM)
         .name("get_weather")
         .description("Get current weather for a location")
         .inputSchema(BetaManagedAgentsCustomToolInputSchema.builder()
@@ -446,11 +436,8 @@ $agent = $client->beta->agents->create(
     name: 'Weather Agent',
     model: 'claude-opus-5-5',
     tools: [
-        BetaManagedAgentsAgentToolset20260401Params::with(
-            type: 'agent_toolset_20260401',
-        ),
+        BetaManagedAgentsAgentToolset20260401Params::with(),
         BetaManagedAgentsCustomToolParams::with(
-            type: 'custom',
             name: 'get_weather',
             description: 'Get current weather for a location',
             inputSchema: BetaManagedAgentsCustomToolInputSchema::with(
@@ -484,7 +471,7 @@ agent = client.beta.agents.create(
 
 A custom tool's name can't start with `mcp__` or `ant__`, or match the name of a built-in agent tool. A request that breaks this rule returns a 400 error. An agent that already has a custom tool whose name starts with `ant__` accepts an update only if the update sends `tools` (csharp, go: `Tools`) without that name, so rename or remove the tool in your next update. A new session is refused with a 400 error if such a tool is on its agent (after any [overrides](sessions.md#override-agent-configuration-for-a-session)), on an agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`), or on an agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `workflows` (csharp, go: `Workflows`). Sessions that already exist aren't affected.
 
-The agent calls its custom tools during a session. To receive the calls and return results, see [Session event stream](events-and-streaming.md#handling-custom-tool-calls).
+The agent calls its custom tools during a session. To receive the calls and return results, see [Answer tool calls that pause the session](events-and-streaming.md#handling-custom-tool-calls).
 
 For sessions that run in a self-hosted sandbox, the environment worker can [serve custom tools from the sandbox](self-hosted-sandboxes-custom-tools.md). These can include tools that wrap an MCP server inside your network.
 
@@ -515,11 +502,11 @@ Connect MCP servers to your agents for access to external tools and data sources
 
 **Permission policies**
 
-Control when agent and MCP tools execute.
+Control when agent and MCP tools run.
 
 **Session event stream**
 
-Send events, stream responses, and interrupt or redirect your session mid-execution.
+Send events, stream responses, and interrupt or redirect your session while it runs.
 
 ---
 

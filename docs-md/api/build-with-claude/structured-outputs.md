@@ -44,7 +44,7 @@ You can use these features independently or [together in the same request](struc
 
 ## Why use structured outputs
 
-Without structured outputs, Claude can generate malformed JSON responses or invalid tool inputs that break your applications. Even with careful prompting, you may encounter:
+Without structured outputs, Claude can generate malformed JSON responses or invalid tool inputs that break your applications. Even with careful prompting, you might encounter:
 
 * Parsing errors from invalid JSON syntax
 * Missing required fields
@@ -110,7 +110,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Claude returns JSON like this in the response's text content block:
 
-```json Output
+```text Output wrap
 {
   "name": "John Smith",
   "email": "john@example.com",
@@ -148,7 +148,7 @@ YAML
 
 Claude returns JSON like this in the response's text content block:
 
-```json Output
+```text Output wrap
 {
   "name": "John Smith",
   "email": "john@example.com",
@@ -192,7 +192,7 @@ print(response.parsed_output)
 
 Pass a [Pydantic](https://docs.pydantic.dev/) model to `client.messages.parse()`, the recommended method, as `output_format`. The SDK transforms the model's schema, sends it as `output_config.format`, validates the response, and returns the parsed model in `parsed_output`.
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 name='John Smith' email='john@example.com' plan_interest='Enterprise' demo_requested=True
@@ -234,7 +234,7 @@ console.log(response.parsed_output);
 
 Wrap a [Zod](https://zod.dev/) schema in `zodOutputFormat()` and pass it to `client.messages.parse()` as `output_config.format`. `zodOutputFormat()` transforms the schema, and `parse()` validates the response and returns the parsed result in `parsed_output`, typed to match the schema.
 
-The example above outputs:
+The previous example outputs:
 
 ```javascript Output
 {
@@ -258,8 +258,7 @@ var response = await client.Messages.Create<ContactInfo>(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() {
-        Role = Role.User,
+    Messages = [new UserMessageParam {
         Content = "Extract the key information from this email: "
             + "John Smith (john@example.com) is interested in our Enterprise plan "
             + "and wants to schedule a demo for next Tuesday at 2pm."
@@ -282,7 +281,7 @@ public record ContactInfo
 
 Pass a plain C# class or record to the generic `Create<T>()` overload. The SDK derives a JSON schema from the type, transforms it, and parses each text block back into it.
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 ContactInfo { Name = John Smith, Email = john@example.com, PlanInterest = Enterprise, DemoRequested = True }
@@ -328,7 +327,7 @@ Passing a struct as the schema is in beta in Go, so this example uses `client.Be
 
 The SDK generates and transforms the JSON schema from the struct and unmarshals the response into it.
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 main.ContactInfo{Name:"John Smith", Email:"john@example.com", PlanInterest:"Enterprise", DemoRequested:true}
@@ -366,7 +365,7 @@ void main() throws Exception {
 
 When you pass a Java class to `outputConfig()`, the SDK derives a JSON schema from it and validates the schema. The builder then produces a `StructuredMessageCreateParams<T>`. Rather than transforming the schema, the SDK's local validation rejects [constraints not supported by the API](structured-outputs.md#json-schema-limitations). Read the parsed result with `response.content().stream().flatMap(block -> block.text().stream()).findFirst().orElseThrow().text()`.
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 {"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise","demo_requested":true}
@@ -376,9 +375,9 @@ Declare your schema classes as top-level classes or `static` nested classes. Thi
 
 **Generic type erasure**
 
-Java retains generic type information for fields in the class's metadata, but generic type erasure applies in other scopes. While a JSON schema can be derived from a `BookList.books` field with type `List<Book>`, a valid JSON schema cannot be derived from a local variable of that same type.
+Java retains generic type information for fields in the class's metadata, but generic type erasure applies in other scopes. Although a JSON schema can be derived from a `BookList.books` field with type `List<Book>`, a valid JSON schema cannot be derived from a local variable of that same type.
 
-If an error occurs while converting a JSON response to a Java class instance, the error message includes the JSON response to assist in diagnosis. If your JSON response may contain sensitive information, avoid logging it directly, or ensure that you redact any sensitive details from the error message.
+If an error occurs while converting a JSON response to a Java class instance, the error message includes the JSON response to help with diagnosis. If your JSON response might contain sensitive information, avoid logging it directly, or ensure that you redact any sensitive details from the error message.
 
 **Local schema validation**
 
@@ -388,7 +387,7 @@ Key points:
 
 * **Local validation** occurs without sending requests to the remote AI model.
 * **Remote validation** is also performed by the AI model upon receiving the JSON schema.
-* **Version compatibility:** Local validation may fail while remote validation succeeds if the SDK version is outdated.
+* **Version compatibility:** Local validation might fail while remote validation succeeds if the SDK version is outdated.
 * **Disabling local validation:** Pass `JsonSchemaLocalValidation.NO` if you encounter compatibility issues:
 
 ```java
@@ -421,8 +420,8 @@ When the SDK derives a JSON schema from your Java classes, it includes all prope
 
 You can control visibility with annotations:
 
-* `@JsonIgnore` excludes a `public` field or getter method
-* `@JsonProperty` includes a non-`public` field or getter method
+* `@JsonIgnore` excludes a `public` field or getter method.
+* `@JsonProperty` includes a non-`public` field or getter method.
 
 If you define `private` fields with `public` getter methods, the SDK derives the property name from the getter (for example, `private` field `myValue` with `public` method `getMyValue()` produces a `"myValue"` property). To use a non-conventional getter name, annotate the method with `@JsonProperty`.
 
@@ -551,7 +550,7 @@ static class Article {
 }
 ```
 
-Local validation checks that you haven't used any unsupported constraint keywords, but constraint values aren't validated locally. For example, an unsupported `"format"` value may pass local validation but cause a remote error.
+Local validation checks that you haven't used any unsupported constraint keywords, but constraint values aren't validated locally. For example, an unsupported `"format"` value might pass local validation but cause a remote error.
 
 If you use both Jackson and Swagger annotations to set the same schema field, the Jackson annotation takes precedence.
 
@@ -597,7 +596,7 @@ Define a class that implements `StructuredOutputModel` and uses `StructuredOutpu
 
 `parsedOutput()` returns your model instance on success, or `null` (or an error array) if parsing fails. Use `instanceof` to narrow the type before accessing fields.
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 object(ContactInfo)#42 (4) {
@@ -673,7 +672,7 @@ class ContactInfo < Anthropic::BaseModel
 end
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [{
     role: "user",
@@ -690,7 +689,7 @@ puts contact
 
 Define a class that extends `Anthropic::BaseModel` and pass it to `messages.create()` as `output_config: {format: Model}`. The SDK derives a JSON schema from the class, transforms it, and assigns the parsed result to the response's `parsed_output` attribute as a typed Ruby object.
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 {name: "John Smith", email: "john@example.com", plan_interest: "Enterprise", demo_requested: true}
@@ -716,7 +715,7 @@ class Output < Anthropic::BaseModel
 end
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [{role: "user", content: "give me some famous numbers"}],
   output_config: {format: Output}
@@ -733,7 +732,7 @@ Most SDK helpers transform schemas that use unsupported features. The transforma
 1. **Remove unsupported constraints** (for example, `minimum`, `maximum`, `minLength`, `maxLength`)
 2. **Update descriptions** by adding each unsupported constraint to the field's description (for example, `{minimum: 100}`)
 3. **Add `additionalProperties: false`** to all objects
-4. **Filter string formats** to supported list only
+4. **Filter string formats** to the supported list only
 5. **Validate responses** against your original schema and all its constraints, if the helper validates responses
 
 Claude receives a simplified schema, but a helper that validates responses still enforces every constraint in your code.
@@ -781,7 +780,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Claude returns JSON like this in the response's text content block:
 
-```json Output
+```text Output wrap
 {
   "name": "John Smith",
   "email": "john@example.com",
@@ -819,7 +818,7 @@ YAML
 
 Claude returns JSON like this in the response's text content block:
 
-```json Output
+```text Output wrap
 {
   "name": "John Smith",
   "email": "john@example.com",
@@ -868,7 +867,7 @@ contact = json.loads(text)
 print(contact)
 ```
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 {'name': 'John Smith', 'email': 'john@example.com', 'plan_interest': 'Enterprise', 'demo_requested': True}
@@ -910,11 +909,11 @@ const response = await client.messages.parse({
 console.log(response.parsed_output);
 ```
 
-Use `jsonSchemaOutputFormat()` to pass a plain JSON schema to `parse()`, without installing Zod. The API returns a response that conforms to the schema, and if you declare the schema with `as const`, the type for `parsed_output` is automatically inferred by TypeScript according to your schema. For an imported or generated schema, `parsed_output` is typed as `unknown`.
+Use `jsonSchemaOutputFormat()` to pass a plain JSON schema to `parse()`, without installing Zod. The API returns a response that conforms to the schema, and if you declare the schema with `as const`, TypeScript automatically infers the type for `parsed_output` according to your schema. For an imported or generated schema, `parsed_output` is typed as `unknown`.
 
-By default, the helper [transforms the schema](structured-outputs.md#how-sdk-transformation-works) the same way `zodOutputFormat()` does. Pass `{ transform: false }` as the second argument to send it unchanged. Unlike `zodOutputFormat()`, it doesn't validate the response, so it won't catch violations of [constraints not supported by the API](structured-outputs.md#json-schema-limitations), such as `minimum`.
+By default, the helper [transforms the schema](structured-outputs.md#how-sdk-transformation-works) the same way `zodOutputFormat()` does. Pass `{ transform: false }` as the second argument to send it unchanged. Unlike `zodOutputFormat()`, it doesn't validate the response, so it doesn't catch violations of [constraints not supported by the API](structured-outputs.md#json-schema-limitations), such as `minimum`.
 
-The example above outputs:
+The previous example outputs:
 
 ```javascript Output
 { name: 'John Smith', email: 'john@example.com', planInterest: 'Pro' }
@@ -933,8 +932,7 @@ var response = await client.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() {
-        Role = Role.User,
+    Messages = [new UserMessageParam {
         Content = "Extract the key information from this email: "
             + "John Smith (john@example.com) is interested in our Enterprise plan "
             + "and wants to schedule a demo for next Tuesday at 2pm."
@@ -1026,7 +1024,7 @@ func main() {
 }
 ```
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 main.ContactInfo{Name:"John Smith", Email:"john@example.com", PlanInterest:"Enterprise", DemoRequested:true}
@@ -1081,7 +1079,7 @@ void main() throws Exception {
 }
 ```
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 {"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise"}
@@ -1126,7 +1124,7 @@ var_dump($contact);
 
 Pass the schema as an associative array to `OutputConfig::with()`, and decode the response with `json_decode()`.
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 array(3) {
@@ -1145,7 +1143,7 @@ array(3) {
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     {
@@ -1178,7 +1176,7 @@ contact = JSON.parse(text)
 p contact
 ```
 
-The example above outputs:
+The previous example outputs:
 
 ```text Output wrap
 {"name" => "John Smith", "email" => "john@example.com", "plan_interest" => "Enterprise", "demo_requested" => true}
@@ -1338,7 +1336,7 @@ var parameters = new MessageCreateParams
             },
         },
     },
-    Messages = [new() { Role = Role.User, Content = $"Extract invoice data from: {invoiceText}" }]
+    Messages = [new UserMessageParam { Content = $"Extract invoice data from: {invoiceText}" }]
 };
 
 var message = await client.Messages.Create(parameters);
@@ -1502,7 +1500,7 @@ end
 invoice_text = "Invoice #12345, Date: 2024-01-15, Total: $500.00"
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 4096,
   output_config: {format: Invoice},
   messages: [
@@ -1636,7 +1634,7 @@ var parameters = new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = $"Classify this feedback: {feedbackText}" }],
+    Messages = [new UserMessageParam { Content = $"Classify this feedback: {feedbackText}" }],
     OutputConfig = new OutputConfig
     {
         Format = new JsonOutputFormat
@@ -1785,7 +1783,7 @@ end
 feedback_text = "Great product, fast shipping!"
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   output_config: {format: Classification},
   messages: [
@@ -1918,7 +1916,7 @@ var parameters = new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Process this request: ..." }],
+    Messages = [new UserMessageParam { Content = "Process this request: ..." }],
     OutputConfig = new OutputConfig
     {
         Format = new JsonOutputFormat
@@ -2120,7 +2118,7 @@ class APIResponse < Anthropic::BaseModel
 end
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   output_config: {format: APIResponse},
   messages: [
@@ -2138,8 +2136,8 @@ To enforce JSON Schema compliance on tool inputs with grammar-constrained sampli
 
 JSON outputs and strict tool use solve different problems and work together:
 
-* **JSON outputs** control Claude's response format (what Claude says)
-* **Strict tool use** validates tool parameters (how Claude calls your functions)
+* **JSON outputs** control Claude's response format (what Claude says).
+* **Strict tool use** validates tool parameters (how Claude calls your functions).
 
 When combined, Claude can call tools with guaranteed-valid parameters AND return structured JSON responses. This is useful for agentic workflows where you need both reliable tool calls and structured final outputs.
 
@@ -2229,6 +2227,8 @@ YAML
 ```
 
 ```python Python
+client = anthropic.Anthropic()
+
 response = client.messages.create(
     model="claude-opus-5-5",
     max_tokens=1024,
@@ -2275,6 +2275,8 @@ print(response)
 ```
 
 ```typescript TypeScript
+const client = new Anthropic();
+
 const response = await client.messages.create({
   model: "claude-opus-5-5",
   max_tokens: 1024,
@@ -2332,7 +2334,7 @@ var parameters = new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Help me plan a trip to Paris departing May 15, 2026" }],
+    Messages = [new UserMessageParam { Content = "Help me plan a trip to Paris departing May 15, 2026" }],
     // JSON outputs: structured response format
     OutputConfig = new OutputConfig
     {
@@ -2519,7 +2521,7 @@ if ($plan instanceof TripPlan) {
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     {role: "user", content: "Help me plan a trip to Paris departing May 15, 2026"}
@@ -2565,23 +2567,17 @@ puts message
 
 Structured outputs use constrained sampling with compiled grammar artifacts. This introduces some performance characteristics to be aware of:
 
-* **First request latency:** The first time you use a specific schema, there is additional latency while the grammar compiles
-
-* **Automatic caching:** Compiled grammars are cached for 24 hours from last use, making subsequent requests much faster
-
-* **Cache invalidation:** The cache is invalidated if you change:
-
-  * The JSON schema structure
-  * The set of tools in your request (when using both structured outputs and tool use)
-  * Changing only `name` or `description` fields does not invalidate the cache
+* **First request latency:** The first time you use a specific schema, there is additional latency while the grammar compiles.
+* **Automatic caching:** Compiled grammars are cached for 24 hours from last use, making subsequent requests much faster.
+* **Cache invalidation:** The cache is invalidated if you change the JSON schema structure or, when using both structured outputs and tool use, the set of tools in your request. Changing only `name` or `description` fields does not invalidate the cache.
 
 ### Prompt modification and token costs
 
 When using structured outputs, Claude automatically receives an additional system prompt explaining the expected output format. This means:
 
-* Your input token count is slightly higher
-* The injected prompt costs you tokens like any other system prompt
-* Changing the `output_config.format` parameter will invalidate any [prompt cache](prompt-caching.md) for that conversation thread
+* Your input token count is slightly higher.
+* The injected prompt costs you tokens like any other system prompt.
+* Changing the `output_config.format` parameter will invalidate any [prompt cache](prompt-caching.md) for that conversation thread.
 
 ### JSON Schema limitations
 
@@ -2590,9 +2586,9 @@ Structured outputs support standard JSON Schema with some limitations. Both JSON
 **Supported features**
 
 * All basic types: object, array, string, integer, number, boolean, null
-* `enum` (strings, numbers, bools, or nulls only - no complex types). For a capitalization caveat, see [Invalid outputs](structured-outputs.md#invalid-outputs).
+* `enum` (strings, numbers, Booleans, or nulls only, no complex types). For a capitalization caveat, see [Invalid outputs](structured-outputs.md#invalid-outputs).
 * `const`
-* `anyOf` and `allOf` (with limitations - `allOf` with `$ref` not supported)
+* `anyOf` and `allOf` (with limitations: `allOf` with `$ref` not supported)
 * `$ref`, `$def`, and `definitions` (external `$ref` not supported)
 * `default` property for all supported types
 * `required` and `additionalProperties` (must be set to `false` for objects)
@@ -2627,7 +2623,7 @@ If you use an unsupported feature, you'll receive a 400 error with details.
 * Word boundaries: `\b`, `\B`
 * Complex `{n,m}` quantifiers with large ranges
 
-Simple regex patterns work well. Complex patterns may result in 400 errors.
+Simple regex patterns work well. Complex patterns might result in 400 errors.
 
 SDK helpers can transform schemas with [constraints not supported by the API](structured-outputs.md#json-schema-limitations). See [How SDK transformation works](structured-outputs.md#how-sdk-transformation-works).
 
@@ -2673,30 +2669,30 @@ If property order in the output is important to your application, mark all prope
 
 ### Invalid outputs
 
-While structured outputs guarantee schema compliance in most cases, there are scenarios where the output may not match your schema:
+Although structured outputs guarantee schema compliance in most cases, there are scenarios where the output might not match your schema:
 
 **Refusals** (`stop_reason: "refusal"`)
 
 Claude maintains its safety and helpfulness properties even when using structured outputs. If Claude refuses a request for safety reasons:
 
-* The response has `stop_reason: "refusal"`
-* You'll receive a 200 status code
-* You'll be billed for the tokens generated
-* The output may not match your schema because the refusal message takes precedence over schema constraints
+* The response has `stop_reason: "refusal"`.
+* You'll receive a 200 status code.
+* You'll be billed for the tokens generated.
+* The output might not match your schema because the refusal message takes precedence over schema constraints.
 
-A property that asks for the model's thinking or step-by-step reasoning may lead to a `reasoning_extraction` refusal. Ask for a short explanation instead. See [Keep reasoning in thinking blocks](refusals-and-fallback.md#keep-reasoning-in-thinking-blocks).
+A property that asks for the model's thinking or step-by-step reasoning might lead to a `reasoning_extraction` refusal. Ask for a short explanation instead. See [Keep reasoning in thinking blocks](refusals-and-fallback.md#keep-reasoning-in-thinking-blocks).
 
 **Token limit reached** (`stop_reason: "max_tokens"`)
 
-If the response is cut off due to reaching the `max_tokens` limit:
+If the response is cut off because it reached the `max_tokens` limit:
 
-* The response has `stop_reason: "max_tokens"`
-* The output may be incomplete and not match your schema
-* Retry with a higher `max_tokens` value to get the complete structured output
+* The response has `stop_reason: "max_tokens"`.
+* The output might be incomplete and not match your schema.
+* Retry with a higher `max_tokens` value to get the complete structured output.
 
 **Enum value casing**
 
-Structured outputs don't guarantee the capitalization of string `enum` and `const` values: Claude may return a value that differs from your schema only in capitalization, typically in the first letter of a word following a space. For example, given this schema:
+Structured outputs don't guarantee the capitalization of string `enum` and `const` values: Claude might return a value that differs from your schema only in capitalization, typically in the first letter of a word following a space. For example, given this schema:
 
 ```json
 {
@@ -2705,7 +2701,7 @@ Structured outputs don't guarantee the capitalization of string `enum` and `cons
 }
 ```
 
-The output may contain `"Conversation Topic 3"` (capital "T") even though that exact value isn't in the enum. The response completes normally, with no error and no special `stop_reason`. This applies to both JSON outputs and strict tool use. Compare enum values case-insensitively, and avoid enum values that differ only in capitalization.
+The output might contain `"Conversation Topic 3"` (capital "T") even though that exact value isn't in the enum. The response completes normally, with no error and no special `stop_reason`. This applies to both JSON outputs and strict tool use. Compare enum values case-insensitively, and avoid enum values that differ only in capitalization.
 
 ### Schema complexity limits
 
@@ -2725,27 +2721,27 @@ These limits apply to the combined total across all strict schemas in a single r
 
 #### Additional internal limits
 
-Beyond the explicit limits in the preceding table, there are additional internal limits on the compiled grammar size. These limits exist because schema complexity doesn't reduce to a single dimension: features like optional parameters, union types, nested objects, and number of tools interact with each other in ways that can make the compiled grammar disproportionately large.
+Beyond the explicit limits in the preceding table, there are additional internal limits on the compiled grammar size. These limits exist because schema complexity doesn't reduce to a single dimension: features such as optional parameters, union types, nested objects, and number of tools interact with each other in ways that can make the compiled grammar disproportionately large.
 
-When these limits are exceeded, you'll receive a 400 error with the message "Schema is too complex for compilation." These errors mean the combined complexity of your schemas exceeds what can be efficiently compiled, even if each individual limit in the preceding table is satisfied. As a final stop-gap, the API also enforces a **compilation timeout of 180 seconds**. Schemas that pass all explicit checks but produce very large compiled grammars may hit this timeout.
+When these limits are exceeded, you'll receive a 400 error with the message "Schema is too complex for compilation." These errors mean the combined complexity of your schemas exceeds what can be efficiently compiled, even if each individual limit in the preceding table is satisfied. As a final stop-gap, the API also enforces a **compilation timeout of 180 seconds**. Schemas that pass all explicit checks but produce very large compiled grammars might hit this timeout.
 
 #### Tips for reducing schema complexity
 
 If you're hitting complexity limits, try these strategies in order:
 
-1. **Mark only critical tools as strict.** If you have many tools, reserve it for tools where schema violations cause real problems, and rely on Claude's natural adherence for simpler tools.
+1. **Mark only critical tools as strict.** If you have many tools, reserve strict tool use for those where schema violations cause real problems, and rely on Claude's natural adherence for simpler tools.
 
 2. **Reduce optional parameters.** Make parameters `required` where possible. Each optional parameter roughly doubles a portion of the grammar's state space. If a parameter always has a reasonable default, consider making it required and having Claude provide that default explicitly.
 
 3. **Simplify nested structures.** Deeply nested objects with optional fields compound the complexity. Flatten structures where possible.
 
-4. **Split into multiple requests.** If you have many strict tools, consider splitting them across separate requests or sub-agents.
+4. **Split into multiple requests.** If you have many strict tools, consider splitting them across separate requests or subagents.
 
 For persistent issues with valid schemas, [contact support](https://support.claude.com/en/articles/9015913-how-to-get-support) with your schema definition.
 
 ## Migrating from the beta
 
-The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The `output_format` parameter is deprecated and will be removed in the future. To use it anyway, add the `structured-outputs-2025-11-13` beta header. Without it, the API returns a 400 error.
+The `output_format` parameter has moved to `output_config.format`, and beta headers are no longer required. The `output_format` parameter is deprecated. To use it anyway, add the `structured-outputs-2025-11-13` beta header. Without it, the API returns a 400 error.
 
 The Python SDK (v1.0 and later) does not accept `output_format={...}` on `client.beta.messages.create()` or `count_tokens()` and raises a `TypeError`. Use `output_config` instead. See [Using a raw JSON schema](structured-outputs.md#using-a-raw-json-schema) for the updated API shape.
 
@@ -2761,15 +2757,15 @@ For ZDR and HIPAA eligibility across all features, see [API and data retention](
 
 **Works with:**
 
-* **[Batch processing](batch-processing.md):** Process structured outputs at scale with 50% discount
+* **[Batch processing](batch-processing.md):** Process structured outputs at scale with a 50 percent discount
 * **[Token counting](token-counting.md):** Count tokens without compilation
 * **[Streaming](streaming.md):** Stream structured outputs like normal responses
 * **[Combined usage](structured-outputs.md#using-both-features-together):** Use JSON outputs (`output_config.format`) and strict tool use (`strict: true`) together in the same request
 
 **Incompatible with:**
 
-* **[Citations](citations.md):** Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. Returns 400 error if citations enabled with `output_config.format`.
-* **Message Prefilling:** Incompatible with JSON outputs
+* **[Citations](citations.md):** Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. The API returns a 400 error if citations are enabled with `output_config.format`.
+* **Message prefilling:** Prefilling is incompatible with JSON outputs.
 
 **Grammar scope:** Grammars apply only to Claude's direct output, not to tool use calls, tool results, or thinking tags (when using [thinking](thinking.md)). Grammar state resets between sections, allowing Claude to think freely while still producing structured output in the final response.
 
@@ -2785,7 +2781,7 @@ Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained 
 
 **Tool use with Claude**
 
-Connect Claude to external tools and APIs. Learn where tools execute and how the agentic loop works.
+Connect Claude to external tools and APIs. Learn where tools run and how the agentic loop works.
 
 **Pricing**
 

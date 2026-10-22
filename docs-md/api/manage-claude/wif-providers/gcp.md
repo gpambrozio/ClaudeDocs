@@ -65,7 +65,7 @@ The `sub` claim is the Google service account's opaque numeric unique ID. The `e
 
 **GKE with Workload Identity**
 
-Enable [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) on your cluster and bind your Kubernetes service account to a Google service account with the `iam.gke.io/gcp-service-account` annotation:
+Enable [GKE Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) on your cluster and bind your Kubernetes service account to a Google service account with the `iam.gke.io/gcp-service-account` annotation:
 
 ```yaml
 apiVersion: v1
@@ -79,7 +79,7 @@ metadata:
 
 With this binding in place, the GKE metadata server returns a Google-signed token identical to the Cloud Run and GCE case: same `https://accounts.google.com` issuer, same `email` claim, same fetch URL. Configure Anthropic exactly as in the next section.
 
-A `format=full` token from GKE additionally includes `google.compute_engine.project_id`, `google.compute_engine.zone`, and `google.compute_engine.instance_name` claims, which you can reference in a federation rule's `condition` matcher (a CEL expression like `claims.google.compute_engine.project_id == "my-project"`) to scope access to a specific cluster or node pool.
+A `format=full` token from GKE additionally includes `google.compute_engine.project_id`, `google.compute_engine.zone`, and `google.compute_engine.instance_name` claims, which you can reference in a federation rule's `condition` matcher (a CEL expression such as `claims.google.compute_engine.project_id == "my-project"`) to scope access to a specific cluster or node pool.
 
 If you do not want to bind Kubernetes service accounts to Google service accounts, GKE pods can instead use the cluster's own OIDC issuer (`https://container.googleapis.com/v1/projects/PROJECT/locations/REGION/clusters/CLUSTER`) with a projected `serviceAccountToken` volume. That path uses a per-cluster issuer rather than `accounts.google.com`. See [Use WIF with Kubernetes](kubernetes.md) for that pattern.
 
@@ -99,7 +99,7 @@ The wizard creates these resources for you. Use the following values whether you
 }
 ```
 
-**Federation rule:** Match on both the `sub` and `email` claims. `email` is the readable service-account address; `sub` is the service account's numeric unique ID, which Google never reuses, so pinning it protects the rule if the service account is deleted and a new one is later created with the same email. Find the unique ID with `gcloud iam service-accounts describe SA_EMAIL --format='value(uniqueId)'`.
+**Federation rule:** Match on both the `sub` and `email` claims. `email` is the readable service-account address; `sub` is the service account's numeric unique ID, which Google never reuses, so pinning it protects the rule if the service account is deleted and a new one is later created with the same email. Find the unique ID with `gcloud iam service-accounts describe inference-worker@my-project.iam.gserviceaccount.com --format='value(uniqueId)'`.
 
 ```json
 {
@@ -134,7 +134,7 @@ JWT=$(curl -sS -H "Metadata-Flavor: Google" \
 # Exchange it for an Anthropic access token
 RESPONSE=$(curl -sS https://api.anthropic.com/v1/oauth/token \
   -H "content-type: application/json" \
-  --data @- <<JSON
+  -d @- <<JSON
 {
   "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
   "assertion": "$JWT",
@@ -341,7 +341,7 @@ var message = await client.Messages.Create(new()
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello from Cloud Run" }],
+    Messages = [new UserMessageParam { Content = "Hello from Cloud Run" }],
 });
 foreach (var block in message.Content)
 {
@@ -375,7 +375,7 @@ curl -sS -H "Metadata-Flavor: Google" \
   "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://api.anthropic.com&format=full" \
   > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
 
-# ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID, and
+# ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
 # ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read from the environment.
 ant messages create \
   --model claude-opus-5-5 \
@@ -447,7 +447,7 @@ message = client.messages.create(
 puts message.content.find { it.type == :text }.text
 ```
 
-Google identity tokens expire after roughly one hour. Except in Java (see the comment in that example), the SDK re-invokes the token provider and re-exchanges automatically before expiry. For shell scripts that run longer than the access token's `expires_in`, refresh on a timer and repeat the exchange.
+Google identity tokens expire after roughly 1 hour. Except in Java (see the comment in that example), the SDK calls the token provider again and re-exchanges automatically before expiry. For shell scripts that run longer than the access token's `expires_in`, refresh on a timer and repeat the exchange.
 
 ## Verify the setup
 
@@ -475,7 +475,7 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 ## Next steps
 
 * Read the [Workload Identity Federation](../workload-identity-federation.md) page for the full resource model and SDK credential precedence.
-* Add a separate federation rule per environment (production, staging) so you can revoke one without affecting the others.
+* Add a separate federation rule for each environment (production, staging) so you can revoke one without affecting the others.
 
 ---
 

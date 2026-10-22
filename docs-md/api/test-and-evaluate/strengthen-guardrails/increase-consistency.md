@@ -14,9 +14,9 @@ The techniques below are useful for general output consistency or when you need 
 
 Here's how to make Claude's responses more consistent:
 
-## Specify the desired output format
+## Specify the output format you want
 
-Precisely define your desired output format using JSON, XML, or custom templates so that Claude follows every output formatting element you require.
+Precisely define the output format you want using JSON, XML, or custom templates so that Claude follows every output formatting element you require.
 
 **Example: Standardizing customer feedback**
 
@@ -67,7 +67,7 @@ Prefilling is not supported on Claude 4.6 and later models and
 
  on models that support it, or system prompt instructions, instead.
 
-Prefill the `Assistant` turn with your desired format. This trick bypasses Claude's friendly preamble and enforces your structure.
+Prefill the `Assistant` turn with the format you want. This trick bypasses Claude's friendly preamble and enforces your structure.
 
 **Example: Daily sales report**
 
@@ -160,7 +160,7 @@ Structure the report like this:
 
 ## Constrain with examples
 
-Provide examples of your desired output. This is more effective than abstract instructions.
+Provide examples of the output you want. This is more effective than abstract instructions.
 
 **Example: Generating consistent market intelligence**
 
@@ -314,7 +314,7 @@ Once connected, you'll have secure access to all internal resources as if you we
 
 ## Chain prompts for complex tasks
 
-Break down complex tasks into smaller, consistent subtasks. Each subtask gets Claude's full attention, reducing inconsistency errors across scaled workflows.
+Break down complex tasks into smaller, consistent subtasks. Each prompt then covers a single subtask, reducing inconsistency errors across scaled workflows.
 
 ## Keep Claude in character
 

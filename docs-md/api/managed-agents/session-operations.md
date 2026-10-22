@@ -23,11 +23,11 @@ Sessions progress through these statuses. See [Start a session](sessions.md) for
 | `idle`         | Agent is waiting for input, including user messages or tool confirmations. Sessions created without `initial_events` (java, php: `initialEvents`; csharp, go: `InitialEvents`) start in `idle`. A session can be `idle` while a [workflow run](workflow-runs.md#while-a-run-is-open) is still open, so `idle` alone doesn't mean that the work is done. See [Know when the work is done](workflow-runs.md#know-when-the-work-is-done). |
 | `running`      | Agent is actively executing.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `rescheduling` | Transient error occurred, retrying automatically.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `terminated`   | Session has ended, either because of an unrecoverable error or because it was archived. A session that finishes its work goes `idle`, not `terminated`.                                                                                                                                                                                                                                                                                                                                                                                |
+| `terminated`   | Session has ended, either because of an unrecoverable error or because it was archived. A session that completes its work goes `idle`, not `terminated`.                                                                                                                                                                                                                                                                                                                                                                               |
 
 ## Updating the agent configuration
 
-You can update a session's `agent.tools` (csharp, go: `Agent.Tools`) and `agent.mcp_servers` (java, php: `agent.mcpServers`; csharp: `Agent.McpServers`; go: `Agent.MCPServers`), including permission policies and per-tool web settings such as [domain filters](tools-web-restrictions.md#change-the-lists-mid-session), mid-session without creating a new agent version. Updates are session-local and do not propagate back to the underlying agent. Updated `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) and `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) apply to the rest of the session.
+You can update a session's `agent.tools` (csharp, go: `Agent.Tools`) and `agent.mcp_servers` (java, php: `agent.mcpServers`; csharp: `Agent.McpServers`; go: `Agent.MCPServers`), including permission policies and per-tool web settings such as [domain filters](tools-web-restrictions.md#change-the-lists-mid-session), mid-session without creating a new agent version. Updates are session-local and do not apply to the underlying agent. Updated `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) and `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) apply to the rest of the session.
 
 Only the agent's `tools` (csharp, go: `Tools`) and `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`) can change after a session is created. To run a session with `model` (csharp, go: `Model`), `system` (csharp, go: `System`; ruby: `system_`), or `skills` (csharp, go: `Skills`) values other than the agent's, use [agent configuration overrides](sessions.md#override-agent-configuration-for-a-session) when you create the session. The agent's model configuration, including its [`inference_geo`](../manage-claude/data-residency.md) pin, also can't change mid-session: set the pin when you save the agent, or set or clear it for a single session with a `model` (csharp, go: `Model`) override when you create it. The agent's configured `system` (csharp, go: `System`; ruby: `system_`) field is fixed for the session's lifetime. On models that support it, you can still append system-level guidance mid-session by sending a [`system.message` event](events-and-streaming.md#send-system-messages).
 
@@ -102,21 +102,13 @@ await client.Beta.Sessions.Update(session.ID, new()
     {
         Tools =
         [
-            new BetaManagedAgentsAgentToolset20260401Params
-            {
-                Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
-            },
-            new BetaManagedAgentsMcpToolsetParams
-            {
-                Type = BetaManagedAgentsMcpToolsetParamsType.McpToolset,
-                McpServerName = "linear",
-            },
+            new BetaManagedAgentsAgentToolset20260401Params(),
+            new BetaManagedAgentsMcpToolsetParams { McpServerName = "linear" },
         ],
         McpServers =
         [
             new()
             {
-                Type = BetaManagedAgentsUrlMcpServerParamsType.Url,
                 Name = "linear",
                 Url = "https://mcp.linear.app/sse",
             },
@@ -160,15 +152,11 @@ client.beta().sessions().update(
     session.id(),
     SessionUpdateParams.builder()
         .agent(BetaManagedAgentsSessionAgentUpdate.builder()
-            .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
-                .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-                .build())
+            .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
             .addTool(BetaManagedAgentsMcpToolsetParams.builder()
-                .type(BetaManagedAgentsMcpToolsetParams.Type.MCP_TOOLSET)
                 .mcpServerName("linear")
                 .build())
             .addMcpServer(BetaManagedAgentsUrlMcpServerParams.builder()
-                .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
                 .name("linear")
                 .url("https://mcp.linear.app/sse")
                 .build())
@@ -182,13 +170,12 @@ $client->beta->sessions->update(
     $session->id,
     agent: BetaManagedAgentsSessionAgentUpdate::with(
         tools: [
-            BetaManagedAgentsAgentToolset20260401Params::with(type: 'agent_toolset_20260401'),
-            BetaManagedAgentsMCPToolsetParams::with(mcpServerName: 'linear', type: 'mcp_toolset'),
+            BetaManagedAgentsAgentToolset20260401Params::with(),
+            BetaManagedAgentsMCPToolsetParams::with(mcpServerName: 'linear'),
         ],
         mcpServers: [
             BetaManagedAgentsURLMCPServerParams::with(
                 name: 'linear',
-                type: 'url',
                 url: 'https://mcp.linear.app/sse',
             ),
         ],
@@ -287,10 +274,7 @@ curl -sS --fail-with-body \
 ```bash CLI
 # --format raw returns one page envelope with its prev_page and next_page
 # cursors; the default output auto-paginates and emits only the sessions.
-ant beta:sessions list \
-  --agent-id "$AGENT_ID" \
-  --limit 1 \
-  --format raw
+ant beta:sessions list --agent-id "$AGENT_ID" --limit 1 --format raw
 # Pass next_page back as --page to fetch the next page, or prev_page to go back.
 ```
 
@@ -512,8 +496,7 @@ curl -fsSL -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/archive" \
 ```
 
 ```bash CLI
-ant beta:sessions archive \
-  --session-id "$SESSION_ID"
+ant beta:sessions archive --session-id "$SESSION_ID"
 ```
 
 ```python Python
@@ -549,7 +532,7 @@ client.beta.sessions.archive(session.id)
 
 ## Deleting a session
 
-Delete a session to permanently remove its record, events, and associated sandbox. A `running` session cannot be deleted; to delete one, send a [`user.interrupt` event](events-and-streaming.md#interrupt-the-agent) by itself and wait for the session to become `idle`. If a [workflow run](workflow-runs.md#while-a-run-is-open) is open, deleting might return a 400 error, even when the session is `idle`, or it might succeed. After a delete that succeeds, no `workflow_run` event reports the end of the session's runs. Before you delete, send a `user.message` that [asks the agent to stop its runs](workflow-runs.md#interrupt-a-session-with-runs-open), or wait until each run has ended. Then delete the session once it's `idle`.
+Deleting a session is permanent. It deletes the session's record, events, and associated sandbox. A `running` session cannot be deleted; to delete one, send a [`user.interrupt` event](events-and-streaming.md#interrupt-the-agent) by itself and wait for the session to become `idle`. If a [workflow run](workflow-runs.md#while-a-run-is-open) is open, deleting might return a 400 error, even when the session is `idle`, or it might succeed. After a delete that succeeds, no `workflow_run` event reports the end of the session's runs. Before you delete, send a `user.message` that [asks the agent to stop its runs](workflow-runs.md#interrupt-a-session-with-runs-open), or wait until each run has ended. Then delete the session once it's `idle`.
 
 Memory stores, vaults, skills, environments, and agents are independent resources and are not affected by session deletion. Files you uploaded through the Files API are also unaffected, but files the session itself produced are scoped to it and are permanently deleted along with its filesystem. Download anything you need to keep before deleting the session. An output file written at the end of the last turn can take a few seconds after the session goes idle to appear in the [session's file list](files.md#listing-and-downloading-session-files), so check that the files you expect are listed first.
 
@@ -561,8 +544,7 @@ curl -fsSL -X DELETE "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
 ```
 
 ```bash CLI
-ant beta:sessions delete \
-  --session-id "$SESSION_ID"
+ant beta:sessions delete --session-id "$SESSION_ID"
 ```
 
 ```python Python

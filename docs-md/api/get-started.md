@@ -8,7 +8,7 @@ description: Make your first API call to Claude and build a simple web search as
 
 ## Prerequisites
 
-* A [Claude Console account](https://platform.claude.com)
+* A [Claude Console account](https://platform.claude.com/)
 * An [API key](get-api-key.md)
 
 ## Call the API
@@ -17,7 +17,7 @@ description: Make your first API call to Claude and build a simple web search as
 
 **Set your API key**
 
-Export your API key as an environment variable. The cURL command below reads it from `$ANTHROPIC_API_KEY`.
+Export your API key as an environment variable. The cURL command in the following step reads it from `$ANTHROPIC_API_KEY`.
 
 ```bash
 export ANTHROPIC_API_KEY="your-api-key-here"
@@ -46,7 +46,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Claude returns a JSON response containing the assistant's message:
 
-```json Output
+```text Output
 {
   "model": "claude-opus-5-5",
   "id": "msg_013mHbppMPd2PrVJzGMZPt2D",
@@ -112,7 +112,7 @@ ant messages create \
 
 The CLI prints the JSON response:
 
-```json Output
+```text Output
 {
   "model": "claude-opus-5-5",
   "id": "msg_01N1ycuCkM5Mzd7WhTU4fwST",
@@ -284,9 +284,8 @@ var message = await client.Messages.Create(new MessageCreateParams
     MaxTokens = 1000,
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
             Content = "What should I search for to find the latest developments in renewable energy?",
         },
     ],
@@ -426,7 +425,7 @@ java {
 }
 
 dependencies {
-    implementation("com.anthropic:anthropic-java:2.75.0")
+    implementation("com.anthropic:anthropic-java:3.1.0")
 }
 
 application {
@@ -452,7 +451,7 @@ Save this as `pom.xml`:
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>2.75.0</version>
+      <version>3.1.0</version>
     </dependency>
   </dependencies>
 </project>

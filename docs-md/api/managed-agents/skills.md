@@ -14,7 +14,7 @@ featureMetadata:
 
 Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Each skill you add incurs a modest cost on the session's context window, adding instructions and metadata that help the model use the skill. Learn more in the [Agent Skills](../agents-and-tools/agent-skills/overview.md) overview.
 
-Skills reach your agent in two ways: attach them through the agent's `skills` (csharp, go: `Skills`) array, or [load them from a GitHub repository](skills.md#load-skills-from-a-github-repository) mounted on the session. Attached skills come in two types. All skills work the same way: your agent invokes them automatically when they are relevant to the task.
+Skills reach your agent in two ways: attach them through the agent's `skills` (csharp, go: `Skills`) array, or [load them from a GitHub repository](skills.md#load-skills-from-a-github-repository) mounted on the session. Attached skills come in two types. All skills work the same way: your agent uses them automatically when they are relevant to the task.
 
 * **Pre-built Anthropic skills:** Common document tasks such as PowerPoint, Excel, Word, and PDF handling (`pptx`, `xlsx`, `docx`, `pdf`).
 * **Custom skills:** Skills you author and upload to your workspace.
@@ -194,7 +194,7 @@ puts "Created skill: #{skill.id}"
 puts "Latest version: #{skill.latest_version_id}"
 ```
 
-To list, retrieve, delete, and version custom skills, see [Managing custom skills](../build-with-claude/skills-guide.md#managing-custom-skills). For the full request and response schemas, see the [Create Skill API reference](../api/skills/create.md). Skill bundles upload directly to the Skills API rather than through the [Files API](../build-with-claude/files.md).
+To list, retrieve, delete, and version custom skills, see [Managing custom skills](../build-with-claude/skills-guide.md#managing-custom-skills). For the full request and response schemas, see the [Create Skill](../api/skills/create.md) API reference. Skill bundles upload directly to the Skills API rather than through the [Files API](../build-with-claude/files.md).
 
 ## Attach skills to an agent
 
@@ -293,8 +293,8 @@ var agent = await client.Beta.Agents.Create(new()
     System = "You are a financial analysis agent.",
     Skills =
     [
-        new BetaManagedAgentsAnthropicSkillParams { Type = BetaManagedAgentsAnthropicSkillParamsType.Anthropic, SkillID = "xlsx" },
-        new BetaManagedAgentsCustomSkillParams { Type = BetaManagedAgentsCustomSkillParamsType.Custom, SkillID = "skill_01AbCdEfGhIjKlMnOpQrStUv", Version = "latest" },
+        new BetaManagedAgentsAnthropicSkillParams { SkillID = "xlsx" },
+        new BetaManagedAgentsCustomSkillParams { SkillID = "skill_01AbCdEfGhIjKlMnOpQrStUv", Version = "latest" },
     ],
 });
 ```
@@ -334,13 +334,11 @@ var agent = client.beta().agents().create(
         .system("You are a financial analysis agent.")
         .addSkill(
             BetaManagedAgentsAnthropicSkillParams.builder()
-                .type(BetaManagedAgentsAnthropicSkillParams.Type.ANTHROPIC)
                 .skillId("xlsx")
                 .build()
         )
         .addSkill(
             BetaManagedAgentsCustomSkillParams.builder()
-                .type(BetaManagedAgentsCustomSkillParams.Type.CUSTOM)
                 .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
                 .version("latest")
                 .build()
@@ -375,7 +373,7 @@ agent = client.beta.agents.create(
 
 ## Load skills from a GitHub repository
 
-Skills can also live in your codebase. When a session mounts a repository through the [`github_repository` resource](github.md), the repository's root `.claude/skills` directory is scanned at session start, and each skill found there becomes available to the agent. No upload and no entry in the agent's `skills` (csharp, go: `Skills`) array are required. The agent sees each discovered skill's name, description, and path in the sandbox, and reads the skill's `SKILL.md` when a task matches, including any scripts and resources the skill ships. Discovery relies on the agent's `read` tool from the [agent toolset](tools.md), which is enabled by default; an agent with `read` disabled doesn't load repository skills.
+Skills can also live in your code base. When a session mounts a repository through the [`github_repository` resource](github.md), the repository's root `.claude/skills` directory is scanned at session start, and each skill found there becomes available to the agent. No upload and no entry in the agent's `skills` (csharp, go: `Skills`) array are required. The agent receives each discovered skill's name, description, and path in the sandbox, and reads the skill's `SKILL.md` when a task matches, including any scripts and resources the skill ships. Discovery relies on the agent's `read` tool from the [agent toolset](tools.md), which is enabled by default; an agent with `read` disabled doesn't load repository skills.
 
 Repository skills are agent instructions, so a mounted repository is part of your agent's trust boundary. Anyone who can commit to the repository (a merged external pull request, a compromised dependency, a contributor) can add or change a skill, the platform loads it at session start without a review step, and session tools such as `bash` and `web_fetch` give those instructions real reach. Mount only repositories you trust, and review `.claude/skills` before mounting a repository that accepts outside contributions.
 
@@ -485,7 +483,6 @@ var session = await client.Beta.Sessions.Create(new()
     [
         new BetaManagedAgentsGitHubRepositoryResourceParams
         {
-            Type = "github_repository",
             Url = "https://github.com/org/repo",
             MountPath = "/workspace/repo",
             AuthorizationToken = "ghp_your_github_token",
@@ -519,7 +516,6 @@ var session = client.beta().sessions().create(SessionCreateParams.builder()
     .agent(agent.id())
     .environmentId(environment.id())
     .addResource(BetaManagedAgentsGitHubRepositoryResourceParams.builder()
-        .type(BetaManagedAgentsGitHubRepositoryResourceParams.Type.GITHUB_REPOSITORY)
         .url("https://github.com/org/repo")
         .mountPath("/workspace/repo")
         .authorizationToken("ghp_your_github_token")

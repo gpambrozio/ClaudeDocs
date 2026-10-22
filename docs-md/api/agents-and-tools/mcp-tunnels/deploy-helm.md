@@ -8,17 +8,17 @@ description: Install the tunnel stack on a Kubernetes cluster using the Anthropi
 
 MCP tunnels are in research preview. [Request access](https://claude.com/form/mcp-tunnels) to try them.
 
-The Anthropic Helm chart installs the [tunnel stack](concepts.md#components) as a single Deployment and attaches it to your tunnel: one the chart's setup hook creates for you, or an existing tunnel you created in the [Console](console.md#create-a-tunnel).
+The Anthropic Helm chart installs the [tunnel stack](concepts.md#components) as a single Deployment and attaches it to your tunnel: one the chart's setup hook creates for you, or an existing tunnel you created in the [Claude Console](console.md#create-a-tunnel).
 
-## Before you begin
+## Before you start
 
 You need:
 
-* **A tunnel.** With programmatic access, the chart's setup hook creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Console](console.md#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel; you'll also need its tunnel token and tunnel domain.
+* **A tunnel.** With programmatic access, the chart's setup hook creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Console](console.md#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel; you also need its tunnel token and tunnel domain.
 
 * **A way for the chart to authenticate to the Tunnels API.**
 
-  * **[Programmatic access](concepts.md#credential-provisioning) (recommended).** The [setup component](concepts.md#components) authenticates through Workload Identity Federation, fetches the tunnel token, generates a CA, registers it with Anthropic, and stores everything in a Secret. You'll need a federation rule scoped to `workspace:manage_tunnels`.
+  * **[Programmatic access](concepts.md#credential-provisioning) (recommended).** The [setup component](concepts.md#components) authenticates through Workload Identity Federation, fetches the tunnel token, generates a CA, registers it with Anthropic, and stores everything in a Secret. You need a federation rule scoped to `workspace:manage_tunnels`.
   * **[Manual](concepts.md#credential-provisioning).** Skip programmatic access. You'll [get the tunnel token from the Console](console.md#get-the-connection-details), generate a CA and server certificate yourself, [register the CA in the Console](console.md#add-a-ca-certificate), and supply the credentials to the cluster as Secrets.
 
 * **A Kubernetes cluster** you can deploy to with `helm` and `kubectl`. The **Without programmatic access** tab also uses `openssl` (1.1.1 or later).
@@ -149,7 +149,7 @@ gateway:
       search: http://search-mcp.internal:8080
 ```
 
-With these routes, Claude reaches the servers at `docs.<your-tunnel-domain>` and `search.<your-tunnel-domain>`. Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here per [Upstream IP validation](troubleshooting.md#upstream-ip-validation).
+With these routes, Claude reaches the servers at `docs.<your-tunnel-domain>` and `search.<your-tunnel-domain>`. Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here as described in [Upstream IP validation](troubleshooting.md#upstream-ip-validation).
 
 If you're using the [sample MCP server](deploy-helm.md#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
 
@@ -200,7 +200,7 @@ Record the tunnel domain from the detail page. You'll set it as `gateway.config.
 
 **Generate a CA and server certificate**
 
-The proxy listens on plain WebSocket, with [inner TLS](concepts.md#components) carried inside that stream using the certificate you generate here. The server certificate's SAN must include `*.<tunnel-domain>` per the [certificate requirements](reference.md#certificate-requirements).
+The proxy listens on plain WebSocket, with [inner TLS](concepts.md#components) carried inside that stream using the certificate you generate here. The server certificate's SAN must include `*.<tunnel-domain>` as described in the [certificate requirements](reference.md#certificate-requirements).
 
 ```bash
 export TUNNEL_DOMAIN=YOUR_TUNNEL_DOMAIN_HERE
@@ -282,7 +282,7 @@ gateway:
       search: http://search-mcp.internal:8080
 ```
 
-Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here per [Upstream IP validation](troubleshooting.md#upstream-ip-validation).
+Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here as described in [Upstream IP validation](troubleshooting.md#upstream-ip-validation).
 
 If you're using the [sample MCP server](deploy-helm.md#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
 

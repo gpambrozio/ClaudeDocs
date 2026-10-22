@@ -19,7 +19,7 @@ To learn how zero data retention (ZDR) applies to this feature, see [API and dat
 
 ## Basic request and response
 
-The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](../models/opus-5-5/migration-guide.md#opus-46-breaking-changes).
+The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview, or on any model starting with [API version `2026-10-21`](../api/migration-2026-10-21.md#sampling-parameters). Setting them to a non-default value returns a 400 error, and starting with `2026-10-21` any value does. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [breaking changes in the migration guide](../models/opus-5-5/migration-guide.md#opus-46-breaking-changes).
 
 ```bash cURL
 #!/bin/sh
@@ -70,7 +70,7 @@ var parameters = new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
+    Messages = [new UserMessageParam { Content = "Hello, Claude" }]
 };
 var message = await client.Messages.Create(parameters);
 Console.WriteLine(message);
@@ -120,7 +120,7 @@ echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     { role: "user", content: "Hello, Claude" }
@@ -129,7 +129,7 @@ message = client.messages.create(
 puts message
 ```
 
-```json Output
+```text Output wrap
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
@@ -220,9 +220,9 @@ var parameters = new MessageCreateParams
     MaxTokens = 1024,
     Messages =
     [
-        new() { Role = Role.User, Content = "Hello, Claude" },
-        new() { Role = Role.Assistant, Content = "Hello!" },
-        new() { Role = Role.User, Content = "Can you describe LLMs to me?" }
+        new UserMessageParam { Content = "Hello, Claude" },
+        new AssistantMessageParam { Content = "Hello!" },
+        new UserMessageParam { Content = "Can you describe LLMs to me?" }
     ]
 };
 
@@ -283,7 +283,7 @@ echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     { role: "user", content: "Hello, Claude" },
@@ -294,7 +294,7 @@ message = client.messages.create(
 puts message
 ```
 
-```json Output
+```text Output wrap
 {
   "id": "msg_018gCsTGsXkYJVqYPxTgDHBU",
   "type": "message",
@@ -325,7 +325,7 @@ See [Mid-conversation system messages](mid-conversation-system-messages.md) for 
 
 ## Prefilling Claude's response
 
-You can pre-fill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
+You can prefill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 Prefilling is not supported on Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). Requests using prefill with these models return a 400 error. Use [structured outputs](structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](../about-claude/models/migration-guide.md) for migration patterns.
 
@@ -397,8 +397,8 @@ var parameters = new MessageCreateParams
     Model = Model.ClaudeSonnet4_5,
     MaxTokens = 1,
     Messages = [
-        new() { Role = Role.User, Content = "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae" },
-        new() { Role = Role.Assistant, Content = "The answer is (" }
+        new UserMessageParam { Content = "What is latin for Ant? (A) Apoidea, (B) Rhopalocera, (C) Formicidae" },
+        new AssistantMessageParam { Content = "The answer is (" }
     ]
 };
 
@@ -455,7 +455,7 @@ echo $message->content[0]->text;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-sonnet-4-5",
+  model: Anthropic::Model::CLAUDE_SONNET_4_5,
   max_tokens: 1,
   messages: [
     {
@@ -468,7 +468,7 @@ message = client.messages.create(
 puts message
 ```
 
-```json Output
+```text Output wrap
 {
   "id": "msg_01Q8Faay6S7QPTvEUUQARt7h",
   "type": "message",
@@ -491,7 +491,7 @@ puts message
 
 ## Vision
 
-Claude can read both text and images in requests. You can supply images using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](files.md). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](vision.md) for more details.
+Claude can read both text and images in requests. You can supply images using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](files.md). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [Vision](vision.md) guide for more details.
 
 ```bash cURL
 #!/bin/sh
@@ -542,7 +542,8 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 # Option 1: Base64-encoded image (CLI auto-encodes binary @file refs)
-curl -s "https://platform.claude.com/docs/images/vision-example.jpg" -o ./vision-example.jpg
+curl -s "https://platform.claude.com/docs/images/vision-example.jpg" \
+  -o ./vision-example.jpg
 
 ant messages create <<'YAML'
 model: claude-opus-5-5
@@ -710,10 +711,9 @@ var parameters = new MessageCreateParams
     MaxTokens = 1024,
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
-            Content = new MessageParamContent(new List<ContentBlockParam>
+            Content = new List<ContentBlockParam>
             {
                 new ContentBlockParam(new ImageBlockParam(
                     new ImageBlockParamSource(new Base64ImageSource()
@@ -723,7 +723,7 @@ var parameters = new MessageCreateParams
                     })
                 )),
                 new ContentBlockParam(new TextBlockParam("What is in the above image?")),
-            }),
+            },
         }
     ]
 };
@@ -738,10 +738,9 @@ var parametersFromUrl = new MessageCreateParams
     MaxTokens = 1024,
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
-            Content = new MessageParamContent(new List<ContentBlockParam>
+            Content = new List<ContentBlockParam>
             {
                 new ContentBlockParam(new ImageBlockParam(
                     new ImageBlockParamSource(new UrlImageSource()
@@ -750,7 +749,7 @@ var parametersFromUrl = new MessageCreateParams
                     })
                 )),
                 new ContentBlockParam(new TextBlockParam("What is in the above image?")),
-            }),
+            },
         }
     ]
 };
@@ -846,7 +845,7 @@ Message message = client.messages().create(
     MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
-        .addUserMessageOfBlockParams(base64Content)
+        .addUserMessageOfContentBlockParams(base64Content)
         .build());
 System.out.println(message);
 
@@ -868,7 +867,7 @@ Message messageFromUrl = client.messages().create(
     MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
-        .addUserMessageOfBlockParams(urlContent)
+        .addUserMessageOfContentBlockParams(urlContent)
         .build());
 System.out.println(messageFromUrl);
 ```
@@ -994,7 +993,7 @@ message_from_url = client.messages.create(
 puts message_from_url
 ```
 
-```json Output
+```text Output
 {
   "id": "msg_011CdKmWtV3oFx1C5yUbf5CY",
   "type": "message",

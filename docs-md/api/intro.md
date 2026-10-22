@@ -32,7 +32,7 @@ If you're unsure which model to use, start with [Claude Opus 5.5](models/opus-5-
 
 ## Recommended path for new developers
 
-Follow these steps to go from zero to a working Claude integration.
+Follow these steps to build a working Claude integration.
 
 **Make your first API call**
 
@@ -74,7 +74,7 @@ Anthropic provides developer tools to help you build and scale applications with
 
 Explore and understand the API in your browser with playground.
 
-**API Reference**
+**API reference**
 
 Explore the full Claude API and client SDK documentation.
 
@@ -86,7 +86,7 @@ Learn with interactive Jupyter notebooks covering PDFs, embeddings, and more.
 
 ## Key capabilities
 
-Claude can assist with many tasks that involve text, code, and images.
+Claude can help with many tasks that involve text, code, and images.
 
 **Text and code generation**
 
@@ -104,7 +104,7 @@ Process and analyze visual input and generate text and code from images.
 
 Find answers to frequently asked account and billing questions.
 
-**Service Status**
+**Service status**
 
 Check the status of Anthropic services.
 

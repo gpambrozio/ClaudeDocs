@@ -14,9 +14,9 @@ Claude's response differs based on whether it uses a [client or server tool](ove
 
 ## Handling results from client tools
 
-The response will have a `stop_reason` of `tool_use` and one or more `tool_use` content blocks that include:
+The response has a `stop_reason` of `tool_use` and one or more `tool_use` content blocks that include:
 
-* `id`: A unique identifier for this particular tool use block. This will be used to match up the tool results later.
+* `id`: A unique identifier for this particular tool use block. This is used to match up the tool results later.
 * `name`: The name of the tool being used.
 * `input`: An object containing the input being passed to the tool, conforming to the tool's `input_schema`.
 
@@ -24,7 +24,7 @@ A `tool_use` block for a member of the [computer use](computer-use-tool.md) or [
 
 **Example API response with a `tool_use` content block**
 
-```json JSON
+```text JSON wrap
 {
   "id": "msg_01Aq9w938a90dw8q",
   "model": "claude-opus-5-5",
@@ -49,7 +49,7 @@ When you receive a tool use response for a client tool, you should:
 
 1. Extract the `name`, `id`, and `input` from the `tool_use` block.
 
-2. Run the actual tool in your codebase corresponding to that tool name, passing in the tool `input`.
+2. Run the actual tool in your code base corresponding to that tool name, passing in the tool `input`.
 
 3. Continue the conversation by sending a new message with the `role` of `user`, and a `content` block containing the `tool_result` type and the following information:
 
@@ -62,10 +62,10 @@ A `tool_result` that answers a computer use or browser use member block must als
 **Important formatting requirements:**
 
 * Tool result blocks must immediately follow their corresponding tool use blocks in the message history. You cannot include any messages between the assistant's tool use message and the user's tool result message.
-* In the user message containing tool results, the tool\_result blocks must come FIRST in the content array. Any text must come AFTER all tool results.
+* In the user message containing tool results, the `tool_result` blocks must come FIRST in the content array. Any text must come AFTER all tool results.
 * If the assistant turn also called a [server tool](server-tools.md) that has no result block yet, the user message must contain only `tool_result` blocks. Text after the results ends the turn early; for a server tool Claude called directly, the request then fails with a 400 error that names the unresolved server tool. See [Stop reasons and fallback](../../build-with-claude/handling-stop-reasons.md#tool-use).
 
-For example, this will cause a 400 error:
+For example, this causes a 400 error:
 
 ```json
 {
@@ -89,9 +89,9 @@ This is correct when the assistant turn calls only client tools:
 }
 ```
 
-If you receive an error like "tool\_use ids were found without tool\_result blocks immediately after", check that your tool results are formatted correctly.
+If you receive an error such as "tool\_use ids were found without tool\_result blocks immediately after", check that your tool results are formatted correctly.
 
-Tool results often carry content from sources outside your control: web pages, inbound email, user uploads, third-party APIs. Treat that content as untrusted: an attacker who can influence it may embed instructions that try to redirect Claude (indirect prompt injection). Keep untrusted content inside `tool_result` blocks rather than `system` prompts or plain user `text` blocks, and see [Mitigate jailbreaks and prompt injections](../../test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md#indirect-prompt-injection) for further hardening.
+Tool results often carry content from sources outside your control: webpages, inbound email, user uploads, third-party APIs. Treat that content as untrusted: an attacker who can influence it might embed instructions that try to redirect Claude (indirect prompt injection). Keep untrusted content inside `tool_result` blocks rather than `system` prompts or plain user `text` blocks, and see [Mitigate jailbreaks and prompt injections](../../test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md#indirect-prompt-injection) for further hardening.
 
 **Example of successful tool result**
 
@@ -176,15 +176,15 @@ After receiving the tool result, Claude will use that information to continue ge
 
 ## Handling results from server tools
 
-Claude executes the tool internally and incorporates the results directly into its response without requiring additional user interaction.
+Claude runs the tool internally and incorporates the results directly into its response without requiring additional user interaction.
 
-A response can contain both a client `tool_use` block and a `server_tool_use` block that has no result block. That server tool call is not finished yet, and its result block arrives in a later response. Reply with a user message that contains only the `tool_result` blocks for the client tools and keep the same `tools` array; for a server tool Claude called directly, the API runs it on that request and the next response starts with its result block. See [Stop reasons and fallback](../../build-with-claude/handling-stop-reasons.md#tool-use).
+A response can contain both a client `tool_use` block and a `server_tool_use` block that has no result block. That server tool call is not complete yet, and its result block arrives in a later response. Reply with a user message that contains only the `tool_result` blocks for the client tools and keep the same `tools` array; for a server tool Claude called directly, the API runs it on that request and the next response starts with its result block. See [Stop reasons and fallback](../../build-with-claude/handling-stop-reasons.md#tool-use).
 
 **Differences from other APIs**
 
 Unlike APIs that separate tool use or use special roles like `tool` or `function`, the Claude API integrates tools directly into the `user` and `assistant` message structure.
 
-Messages contain arrays of `text`, `image`, `tool_use`, and `tool_result` blocks. `user` messages include client content and `tool_result`, while `assistant` messages contain AI-generated content and `tool_use`.
+Messages contain arrays of `text`, `image`, `tool_use`, and `tool_result` blocks. `user` messages include client content and `tool_result`, whereas `assistant` messages contain AI-generated content and `tool_use`.
 
 ## Handling errors with is\_error
 
@@ -210,13 +210,13 @@ If the tool itself throws an error during execution (for example, a network erro
 
 Claude will then incorporate this error into its response to the user. For example: "I'm sorry, I was unable to retrieve the current weather because the weather service API is not available. Please try again later."
 
-Write instructive error messages. Instead of generic errors like `"failed"`, include what went wrong and what Claude should try next (for example, `"Rate limit exceeded. Retry after 60 seconds."`). This gives Claude the context it needs to recover or adapt without guessing.
+Write instructive error messages. Instead of generic errors such as `"failed"`, include what went wrong and what Claude should try next (for example, `"Rate limit exceeded. Retry after 60 seconds."`). This gives Claude the context it needs to recover or adapt without guessing.
 
 **Invalid tool name**
 
-If Claude's attempted use of a tool is invalid (for example, missing required parameters), it usually means that there wasn't enough information for Claude to use the tool correctly. Your best bet during development is to try the request again with more-detailed `description` values in your tool definitions.
+If Claude's attempted use of a tool is invalid (for example, missing required parameters), it usually means that there wasn't enough information for Claude to use the tool correctly. The best approach during development is to try the request again with more-detailed `description` values in your tool definitions.
 
-However, you can also continue the conversation forward with a `tool_result` that indicates the error, and Claude will try to use the tool again with the missing information filled in:
+However, you can also continue the conversation forward with a `tool_result` that indicates the error, and Claude will attempt to use the tool again with the missing information filled in:
 
 ```json JSON
 {
@@ -232,13 +232,13 @@ However, you can also continue the conversation forward with a `tool_result` tha
 }
 ```
 
-If a tool request is invalid or missing parameters, Claude will retry 2-3 times with corrections before apologizing to the user.
+If a tool request is invalid or missing parameters, Claude will retry 2–3 times with corrections before apologizing to the user.
 
-To eliminate invalid tool calls entirely, use [strict tool use](strict-tool-use.md) with `strict: true` on your tool definitions. This guarantees that tool inputs will always match your schema exactly, preventing missing parameters and type mismatches.
+To eliminate invalid tool calls entirely, use [strict tool use](strict-tool-use.md) with `strict: true` on your tool definitions. This guarantees that tool inputs always match your schema exactly, preventing missing parameters and type mismatches.
 
 **Server tool errors**
 
-When server tools encounter errors (for example, network issues with Web Search), Claude will transparently handle these errors and attempt to provide an alternative response or explanation to the user. Unlike client tools, you do not need to handle `is_error` results for server tools.
+When server tools encounter errors (for example, network issues with web search), Claude will transparently handle these errors and attempt to provide an alternative response or explanation to the user. Unlike client tools, you do not need to handle `is_error` results for server tools.
 
 For web search specifically, possible error codes include:
 
@@ -254,7 +254,7 @@ For web search specifically, possible error codes include:
 
 Handle responses where Claude calls several tools in a single turn.
 
-**Tool Runner (SDK)**
+**Tool runner (SDK)**
 
 Let the SDK manage the `tool_use` loop, result formatting, and retries for you.
 

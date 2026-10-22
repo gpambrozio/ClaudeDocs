@@ -19,7 +19,7 @@ Access Transparency is available to eligible customers on request and is not sel
 
 Anthropic personnel access customer content only under defined conditions. Access Transparency is designed to make such access visible to you. The design rests on the following principles:
 
-* **Human access happens only under a published reason code.**
+* **Human access occurs only under a published reason code.**
 * **Human views of your covered content are recorded.** Anthropic's internal tooling that can reach your covered content is instrumented to emit an event on each view.
 * **Events represent human access, not automated processing.** Anthropic's automated safety systems process your content in a secured pipeline with no interactive human access; that processing does not generate `anthropic_access` events. The one event automated processing can initiate is a `cmek_preserve` preservation record (see [CMEK content preservation](access-transparency.md#cmek-content-preservation)).
 * **Events arrive on your existing feed.** Activities are accessible through your [Compliance API Activity Feed](compliance-activity-feed.md). Existing credentials, audit, export, and SIEM integrations for the Compliance API still apply.
@@ -27,7 +27,7 @@ Anthropic personnel access customer content only under defined conditions. Acces
 
 ## What Access Transparency covers
 
-* **Covered content:** Access Transparency covers prompt and response content sent through the Claude Messages API or Claude Code sessions. Anthropic's [general ZDR documentation](api-and-data-retention.md) explains which APIs and features are covered by ZDR. The same APIs and features are covered by Access Transparency.
+* **Covered content:** Access Transparency covers prompt and response content sent through the Claude Messages API or Claude Code sessions. The [API and data retention](api-and-data-retention.md) page explains which APIs and features are covered by ZDR. The same APIs and features are covered by Access Transparency.
 * **Manual views by Anthropic personnel:** Manual views of your covered content by Anthropic reviewers generate events.
 
 ## What Access Transparency does not cover
@@ -66,8 +66,8 @@ curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
   --data-urlencode "activity_types[]=anthropic_access" \
   --data-urlencode "limit=50" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  --header "anthropic-version: 2023-06-01"
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  -H "anthropic-version: 2023-06-01"
 ```
 
 Pagination, date-range filtering (`created_at.gte` / `.lt`), and the response envelope (`has_more`, `first_id`, `last_id`) are shared with the rest of the Activity Feed. See [Query the Activity Feed](compliance-activity-feed.md).
@@ -93,7 +93,7 @@ Each `anthropic_access` activity carries the standard Activity fields plus the f
 
 Example JSON message:
 
-```json
+```text wrap
 {
   "id": "activity_013b013744txqZtFHLUaRqLr",
   "type": "anthropic_access",
@@ -124,13 +124,13 @@ curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
   --data-urlencode "activity_types[]=cmek_preserve" \
   --data-urlencode "limit=50" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  --header "anthropic-version: 2023-06-01"
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  -H "anthropic-version: 2023-06-01"
 ```
 
 Example JSON message:
 
-```json
+```text wrap
 {
   "id": "activity_01AbCdEfGhJkMnPqRsTuVwXy",
   "type": "cmek_preserve",
@@ -180,11 +180,11 @@ The following table lists which surfaces are covered by Access Transparency. Cov
 
 ### Coverage timing
 
-Access Transparency applies from the time it is enabled for your organization. Content already in your retention window at enablement might also generate events when accessed, but Anthropic does not guarantee coverage for content written before enablement. Treat your enablement date as the start of reliable coverage. There might be a delay of up to two hours between enabling Access Transparency and your content being covered.
+Access Transparency applies from the time it is enabled for your organization. Content already in your retention window at enablement might also generate events when accessed, but Anthropic does not guarantee coverage for content written before enablement. Treat your enablement date as the start of reliable coverage. There might be a delay of up to 2 hours between enabling Access Transparency and your content being covered.
 
 ### Notification timing
 
-`anthropic_access` and `cmek_preserve` events are delivered to your Compliance API feed within two business days of the access or preservation they record. This feed should not be treated as a real-time alerting channel, and the `accessed_at` timestamp reflects when the access occurred, which might be up to two business days before the activity becomes visible in your feed. The `created_at` field reflects the time Anthropic recorded the event, and the event usually becomes visible in your feed shortly after that time. These events do not follow the Activity Feed's usual 1-minute [indexing lag](compliance-integration-patterns.md#window-polling): an event can become visible up to two business days after its `created_at`. If you poll the feed by `created_at` window, overlap consecutive windows by at least two business days for `anthropic_access` and `cmek_preserve` events so that a late-indexed event is not dropped.
+`anthropic_access` and `cmek_preserve` events are delivered to your Compliance API feed within 2 business days of the access or preservation they record. This feed should not be treated as a real-time alerting channel, and the `accessed_at` timestamp reflects when the access occurred, which might be up to 2 business days before the activity becomes visible in your feed. The `created_at` field reflects the time Anthropic recorded the event, and the event usually becomes visible in your feed shortly after that time. These events do not follow the Activity Feed's usual 1-minute [indexing lag](compliance-integration-patterns.md#window-polling): an event can become visible up to 2 business days after its `created_at`. If you poll the feed by `created_at` window, overlap consecutive windows by at least 2 business days for `anthropic_access` and `cmek_preserve` events so that a late-indexed event is not dropped.
 
 ### Automated processing does not generate access events
 
@@ -208,17 +208,17 @@ Contact your Anthropic account representative.
 
 No. Automated processing does not generate `anthropic_access` events; you will see an `anthropic_access` event only if a human reviewer subsequently views the content. Separately, a `cmek_preserve` event is written when content is preserved, whether the preservation was initiated by a human reviewer or an automated safety pipeline.
 
-**We are a platform that serves Claude to our own end users. Can we enable Access Transparency?**
+**Can a platform that serves Claude to its own end users enable Access Transparency?**
 
 Access Transparency is not available for platform deployments. Contact your Anthropic account representative to discuss your use case.
 
-**Will I see events for access that happened before we enrolled, or for our older data?**
+**Will I see events for access that occurred before my organization enrolled, or for its older data?**
 
 Access Transparency is not guaranteed to be retroactive. It covers human access to content written to the Claude API on or after your enrollment date. You might see events for access to content that was written before enrollment.
 
 **How soon after an access will I see the event?**
 
-Within two business days of the access. Configure any SIEM alerting or scheduled exports with a matching lookback window rather than assuming real-time arrival.
+Within 2 business days of the access. Configure any SIEM alerting or scheduled exports with a matching lookback window rather than assuming real-time arrival.
 
 **How do I know which request an anthropic_access event refers to?**
 
@@ -230,7 +230,7 @@ Access Transparency is enabled at the organization level and covers all workspac
 
 **How does Access Transparency relate to CMEK?**
 
-They are independent. With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](access-transparency.md#cmek-content-preservation) and [CMEK](cmek.md).
+They are independent. With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](access-transparency.md#cmek-content-preservation) and [Customer-managed encryption keys](cmek.md).
 
 **How can I tell that my Access Transparency record has not been altered?**
 
@@ -246,7 +246,7 @@ Contact your Anthropic account representative.
 * [Compliance API overview](compliance-api.md)
 * [Activity Feed](compliance-activity-feed.md)
 * [API and data retention](api-and-data-retention.md)
-* [Customer-Managed Encryption Keys (CMEK)](cmek.md)
+* [Customer-managed encryption keys (CMEK)](cmek.md)
 * [Claude Code data usage](../../claude-code/data-usage.md)
 * [Trust Center](https://trust.anthropic.com/resources)
 

@@ -33,7 +33,7 @@ This endpoint returns an `invalid_request_error` for a few inputs that the Messa
 
 The token count is an **estimate**. In some cases, the actual number of input tokens used when creating a message might differ by a small amount.
 
-Token counts may include tokens added automatically by Anthropic for system optimizations. **You are not billed for system-added tokens**. Billing reflects only your content.
+Token counts might include tokens added automatically by Anthropic for system optimizations. **You are not billed for system-added tokens**. Billing reflects only your content.
 
 ### Supported models
 
@@ -106,7 +106,7 @@ var parameters = new MessageCountTokensParams
 {
     Model = Model.ClaudeOpus5_5,
     System = "You are a scientist",
-    Messages = [new() { Role = Role.User, Content = "Hello, Claude" }]
+    Messages = [new UserMessageParam { Content = "Hello, Claude" }]
 };
 
 var response = await client.Messages.CountTokens(parameters);
@@ -172,7 +172,7 @@ echo json_encode($response);
 client = Anthropic::Client.new
 
 response = client.messages.count_tokens(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   system: "You are a scientist",
   messages: [
     { role: "user", content: "Hello, Claude" }
@@ -182,7 +182,7 @@ response = client.messages.count_tokens(
 puts response
 ```
 
-```json Output
+```text Output wrap
 { "input_tokens": 14 }
 ```
 
@@ -325,7 +325,7 @@ var parameters = new MessageCountTokensParams
             },
         }),
     ],
-    Messages = [new() { Role = Role.User, Content = "What's the weather like in San Francisco?" }]
+    Messages = [new UserMessageParam { Content = "What's the weather like in San Francisco?" }]
 };
 
 var count = await client.Messages.CountTokens(parameters);
@@ -436,7 +436,7 @@ echo json_encode($response, JSON_PRETTY_PRINT);
 client = Anthropic::Client.new
 
 response = client.messages.count_tokens(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   tools: [
     {
       name: "get_weather",
@@ -461,7 +461,7 @@ response = client.messages.count_tokens(
 puts response
 ```
 
-```json Output
+```text Output wrap
 { "input_tokens": 403 }
 ```
 
@@ -494,7 +494,8 @@ EOF
 ```
 
 ```bash CLI
-curl -s "https://platform.claude.com/docs/images/vision-example.jpg" -o ./vision-example.jpg
+curl -s "https://platform.claude.com/docs/images/vision-example.jpg" \
+  -o ./vision-example.jpg
 
 ant messages count-tokens <<'YAML'
 model: claude-opus-5-5
@@ -597,10 +598,9 @@ var parameters = new MessageCountTokensParams
     Model = Model.ClaudeOpus5_5,
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
-            Content = new MessageParamContent(new List<ContentBlockParam>
+            Content = new List<ContentBlockParam>
             {
                 new ContentBlockParam(new ImageBlockParam(
                     new ImageBlockParamSource(new Base64ImageSource()
@@ -610,7 +610,7 @@ var parameters = new MessageCountTokensParams
                     })
                 )),
                 new ContentBlockParam(new TextBlockParam("Describe this image")),
-            }),
+            },
         }
     ]
 };
@@ -694,7 +694,7 @@ import com.anthropic.models.messages.MessageTokensCount;
 
     MessageCountTokensParams params = MessageCountTokensParams.builder()
       .model(Model.CLAUDE_OPUS_5_5)
-      .addUserMessageOfBlockParams(List.of(imageBlock, textBlock))
+      .addUserMessageOfContentBlockParams(List.of(imageBlock, textBlock))
       .build();
 
     MessageTokensCount count = client.messages().countTokens(params);
@@ -743,7 +743,7 @@ image_data = Base64.strict_encode64(Net::HTTP.get(uri))
 client = Anthropic::Client.new
 
 response = client.messages.count_tokens(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   messages: [
     {
       role: "user",
@@ -764,7 +764,7 @@ response = client.messages.count_tokens(
 puts response
 ```
 
-```json Output
+```text Output wrap
 { "input_tokens": 1028 }
 ```
 
@@ -774,8 +774,8 @@ An embedded image block that sets [`"oversized_image": "error"`](vision-coordina
 
 See [Thinking and the context window](thinking.md#thinking-and-the-context-window) for more details.
 
-* Thinking blocks from **previous** assistant turns count toward your input tokens on models that [keep all prior turns](thinking.md#thinking-block-preservation-by-model); on models that keep only the last turn, the API strips them and they do **not** count
-* **Current** assistant turn thinking **does** count toward your input tokens
+* Thinking blocks from **previous** assistant turns count toward your input tokens on models that [keep all prior turns](thinking.md#thinking-block-preservation-by-model); on models that keep only the last turn, the API strips them and they do **not** count.
+* **Current** assistant turn thinking **does** count toward your input tokens.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages/count_tokens \
@@ -920,15 +920,13 @@ var parameters = new MessageCountTokensParams
     Thinking = new ThinkingConfigAdaptive(),
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
             Content = "Are there an infinite number of prime numbers such that n mod 4 == 3?"
         },
-        new()
+        new AssistantMessageParam
         {
-            Role = Role.Assistant,
-            Content = new MessageParamContent(new List<ContentBlockParam>
+            Content = new List<ContentBlockParam>
             {
                 new ContentBlockParam(new ThinkingBlockParam()
                 {
@@ -936,13 +934,9 @@ var parameters = new MessageCountTokensParams
                     Signature = "EuYBCkQYAiJAgCs1le6/Pol5Z4/JMomVOouGrWdhYNsH3ukzUECbB6iWrSQtsQuRHJID6lWV...",
                 }),
                 new ContentBlockParam(new TextBlockParam("Yes, there are infinitely many prime numbers p such that p mod 4 = 3...")),
-            }),
+            },
         },
-        new()
-        {
-            Role = Role.User,
-            Content = "Can you write a formal proof?"
-        }
+        new UserMessageParam { Content = "Can you write a formal proof?" }
     ]
 };
 
@@ -1011,7 +1005,7 @@ import com.anthropic.models.messages.ThinkingConfigAdaptive;
       .model(Model.CLAUDE_OPUS_5_5)
       .thinking(ThinkingConfigAdaptive.builder().build())
       .addUserMessage("Are there an infinite number of prime numbers such that n mod 4 == 3?")
-      .addAssistantMessageOfBlockParams(assistantBlocks)
+      .addAssistantMessageOfContentBlockParams(assistantBlocks)
       .addUserMessage("Can you write a formal proof?")
       .build();
 
@@ -1091,7 +1085,7 @@ response = client.messages.count_tokens(
 puts response
 ```
 
-```json Output
+```text Output wrap
 { "input_tokens": 88 }
 ```
 
@@ -1227,10 +1221,9 @@ var parameters = new MessageCountTokensParams
     Model = Model.ClaudeOpus5_5,
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
-            Content = new MessageParamContent(new List<ContentBlockParam>
+            Content = new List<ContentBlockParam>
             {
                 new ContentBlockParam(new DocumentBlockParam(
                     new DocumentBlockParamSource(new Base64PdfSource()
@@ -1239,7 +1232,7 @@ var parameters = new MessageCountTokensParams
                     })
                 )),
                 new ContentBlockParam(new TextBlockParam("Please summarize this document.")),
-            }),
+            },
         }
     ]
 };
@@ -1299,7 +1292,7 @@ import com.anthropic.models.messages.MessageTokensCount;
 
     MessageCountTokensParams params = MessageCountTokensParams.builder()
       .model(Model.CLAUDE_OPUS_5_5)
-      .addUserMessageOfBlockParams(List.of(documentBlock, textBlock))
+      .addUserMessageOfContentBlockParams(List.of(documentBlock, textBlock))
       .build();
 
     MessageTokensCount count = client.messages().countTokens(params);
@@ -1345,7 +1338,7 @@ client = Anthropic::Client.new
 pdf_base64 = Base64.strict_encode64(File.binread("/path/to/document.pdf"))
 
 response = client.messages.count_tokens(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   messages: [
     {
       role: "user",
@@ -1370,7 +1363,7 @@ response = client.messages.count_tokens(
 puts response
 ```
 
-```json Output
+```text Output wrap
 { "input_tokens": 2188 }
 ```
 

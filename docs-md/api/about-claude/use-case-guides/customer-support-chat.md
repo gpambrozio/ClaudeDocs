@@ -1,4 +1,4 @@
-# In your chatbot.py, import these from the config.py you wrote above:
+# In your chatbot.py, import these from the config.py you wrote earlier:
 
 ---
 title: Customer support agent
@@ -23,7 +23,7 @@ pip install anthropic streamlit python-dotenv
 
 ### Decide whether to use Claude for support chat
 
-Here are some key indicators that you should employ an LLM like Claude to automate portions of your customer support process:
+Here are some key indicators that you should employ an LLM such as Claude to automate portions of your customer support process:
 
 **High volume of repetitive queries**
 
@@ -31,11 +31,11 @@ Claude excels at handling a large number of similar questions efficiently, freei
 
 **Need for quick information synthesis**
 
-Claude can quickly retrieve, process, and combine information from vast knowledge bases, while human agents may need time to research or consult multiple sources.
+Claude can quickly retrieve, process, and combine information from vast knowledge bases, whereas human agents might need time to research or consult multiple sources.
 
 **24/7 availability requirement**
 
-Claude can provide round-the-clock support without fatigue, whereas staffing human agents for continuous coverage can be costly and challenging.
+Claude can provide support at all hours without fatigue, whereas staffing human agents for continuous coverage can be costly and challenging.
 
 **Rapid scaling during peak periods**
 
@@ -43,12 +43,12 @@ Claude can handle sudden increases in query volume without the need for hiring a
 
 **Consistent brand voice**
 
-You can instruct Claude to consistently represent your brand's tone and values, whereas human agents may vary in their communication styles.
+You can instruct Claude to consistently represent your brand's tone and values, whereas human agents might vary in their communication styles.
 
 Some considerations for choosing Claude over other LLMs:
 
 * You prioritize natural, nuanced conversation: Claude's sophisticated language understanding allows for more natural, context-aware conversations that feel more human-like than chats with other LLMs.
-* You often receive complex and open-ended queries: Claude can handle a wide range of topics and inquiries without generating canned responses or requiring extensive programming of permutations of user utterances.
+* You often receive complex and open-ended queries: Claude can handle a wide range of topics and inquiries without generating scripted responses or requiring extensive programming of permutations of user utterances.
 * You need scalable multilingual support: Claude's multilingual capabilities allow it to engage in conversations in over 200 languages without the need for separate chatbots or extensive translation processes for each supported language.
 
 ### Define your ideal chat interaction
@@ -63,7 +63,7 @@ Here is an example chat interaction for car insurance customer support:
 * **Customer:** Asks about insurance for their new electric car
   * **Claude:** Provides relevant information about electric vehicle coverage
 
-* **Customer:** Asks questions related to unique needs for electric vehicle insurances
+* **Customer:** Asks questions related to unique needs for electric vehicle insurance
   * **Claude:** Responds with accurate and informative answers and provides links to the sources
 
 * **Customer:** Asks off-topic questions unrelated to insurance or cars
@@ -71,16 +71,16 @@ Here is an example chat interaction for car insurance customer support:
 
 * **Customer:** Expresses interest in an insurance quote
 
-  * **Claude:** Ask a set of questions to determine the appropriate quote, adapting to their responses
+  * **Claude:** Asks a set of questions to determine the appropriate quote, adapting to their responses
   * **Claude:** Sends a request to use the quote generation API tool along with necessary information collected from the user
   * **Claude:** Receives the response information from the API tool use, synthesizes the information into a natural response, and presents the provided quote to the user
 
-* **Customer:** Asks follow up questions
+* **Customer:** Asks follow-up questions
 
-  * **Claude:** Answers follow up questions as needed
+  * **Claude:** Answers follow-up questions as needed
   * **Claude:** Guides the customer to the next steps in the insurance process and closes out the conversation
 
-In the real example that you write for your own use case, you might find it useful to write out the actual words in this interaction so that you can also get a sense of the ideal tone, response length, and level of detail you want Claude to have.
+In the real example that you write for your own use case, you might find it useful to write the actual words in this interaction so that you can also get a sense of the ideal tone, response length, and level of detail you want Claude to have.
 
 ### Break the interaction into unique tasks
 
@@ -127,41 +127,41 @@ Here are criteria and benchmarks that can be used to evaluate how successfully C
 
 **Query comprehension accuracy**
 
-This metric evaluates how accurately Claude understands customer inquiries across various topics. Measure this by reviewing a sample of conversations and assessing whether Claude has the correct interpretation of customer intent, critical next steps, what successful resolution looks like, and more. Aim for a comprehension accuracy of 95% or higher.
+This metric evaluates how accurately Claude interprets customer inquiries across various topics. Measure this by reviewing a sample of conversations and assessing whether Claude has the correct interpretation of customer intent, critical next steps, what successful resolution looks like, and more. Aim for a comprehension accuracy of 95 percent or higher.
 
 **Response relevance**
 
-This assesses how well Claude's response addresses the customer's specific question or issue. Evaluate a set of conversations and rate the relevance of each response (using LLM-based grading for scale). Target a relevance score of 90% or above.
+This assesses how well Claude's response addresses the customer's specific question or issue. Evaluate a set of conversations and rate the relevance of each response (using LLM-based grading for scale). Target a relevance score of 90 percent or above.
 
 **Response accuracy**
 
-Assess the correctness of general company and product information provided to the user, based on the information provided to Claude in context. Target 100% accuracy in this introductory information.
+Assess the correctness of general company and product information provided to the user, based on the information provided to Claude in context. Target 100 percent accuracy in this introductory information.
 
 **Citation provision relevance**
 
-Track the frequency and relevance of links or sources offered. Target providing relevant sources in 80% of interactions where additional information could be beneficial.
+Track the frequency and relevance of links or sources offered. Target providing relevant sources in 80 percent of interactions where additional information could be beneficial.
 
 **Topic adherence**
 
-Measure how well Claude stays on topic, such as the topic of car insurance in the example implementation. Aim for 95% of responses to be directly related to car insurance or the customer's specific query.
+Measure how well Claude stays on topic, such as the topic of car insurance in the example implementation. Aim for 95 percent of responses to be directly related to car insurance or the customer's specific query.
 
 **Content generation effectiveness**
 
-Measure how successful Claude is at determining when to generate informational content and how relevant that content is. For example, in this implementation, you would be determining how well Claude understands when to generate a quote and how accurate that quote is. Target 100% accuracy, as this is vital information for a successful customer interaction.
+Measure how successful Claude is at determining when to generate informational content and how relevant that content is. For example, in this implementation, you would be determining how well Claude identifies when to generate a quote and how accurate that quote is. Target 100 percent accuracy, as this is vital information for a successful customer interaction.
 
 **Escalation efficiency**
 
-This measures Claude's ability to recognize when a query needs human intervention and escalate appropriately. Track the percentage of correctly escalated conversations versus those that should have been escalated but weren't. Aim for an escalation accuracy of 95% or higher.
+This measures Claude's ability to recognize when a query needs human intervention and escalate appropriately. Track the percentage of correctly escalated conversations versus those that should have been escalated but weren't. Aim for an escalation accuracy of 95 percent or higher.
 
 Here are criteria and benchmarks that can be used to evaluate the business impact of employing Claude for support:
 
 **Sentiment maintenance**
 
-This assesses Claude's ability to maintain or improve customer sentiment throughout the conversation. Use sentiment analysis tools to measure sentiment at the beginning and end of each conversation. Aim for maintained or improved sentiment in 90% of interactions.
+This assesses Claude's ability to maintain or improve customer sentiment throughout the conversation. Use sentiment analysis tools to measure sentiment at the beginning and end of each conversation. Aim for maintained or improved sentiment in 90 percent of interactions.
 
 **Deflection rate**
 
-The percentage of customer inquiries successfully handled by the chatbot without human intervention. Typically aim for 70-80% deflection rate, depending on the complexity of inquiries.
+The percentage of customer inquiries successfully handled by the chatbot without human intervention. Typically aim for a 70–80 percent deflection rate, depending on the complexity of inquiries.
 
 **Customer satisfaction score**
 
@@ -175,9 +175,9 @@ The average time it takes for the chatbot to resolve an inquiry. This varies wid
 
 ### Choose the right Claude model
 
-The choice of model depends on the trade-offs between cost, accuracy, and response time.
+The choice of model depends on the trade-offs among cost, accuracy, and response time.
 
-For customer support chat, Claude Opus 5.5 is well suited to balance intelligence, latency, and cost, including the most complex support scenarios that require deep reasoning across long, multi-step conversations. However, for instances where you have conversation flow with multiple prompts including RAG, tool use, or long-context prompts, Claude Haiku 5.5 may be more suitable to optimize for latency. [Effort](../../build-with-claude/effort.md) is its main control for speed: `low` is the fastest level, suited to chat and short tool tasks.
+For customer support chat, Claude Opus 5.5 is well suited to balance intelligence, latency, and cost, including the most complex support scenarios that require deep reasoning across long, multistep conversations. However, for instances where you have a conversation flow with multiple prompts including RAG, tool use, or long-context prompts, Claude Haiku 5.5 might be more suitable to optimize for latency. [Effort](../../build-with-claude/effort.md) is its main control for speed: `low` is the fastest level, suited to chat and short tool tasks.
 
 ### Build a strong prompt
 
@@ -192,7 +192,7 @@ Acme's insurance offerings, which include car insurance and electric car
 insurance. You can also help customers get quotes for their insurance needs."""
 ```
 
-While you may be tempted to put all your information inside a system prompt as a way to separate instructions from the user conversation, Claude actually works best with the bulk of its prompt content written inside the first 
+Although you might be tempted to put all your information inside a system prompt as a way to separate instructions from the user conversation, Claude actually works best with the bulk of its prompt content written inside the first 
 
 `User`
 
@@ -268,7 +268,7 @@ that gives you the confidence to enjoy every electron-powered mile.
 """
 ```
 
-Now that you have your static content, add at least 4-5 sample "good" interactions to guide Claude's responses. These examples should be representative of your ideal customer interaction and can include elements such as guardrails and tool calls.
+Now that you have your static content, add at least 4–5 sample "good" interactions to guide Claude's responses. These examples should be representative of your ideal customer interaction and can include elements such as guardrails and tool calls.
 
 ```python
 EXAMPLES = """
@@ -337,7 +337,7 @@ Once you provide this information, I'll use our quoting tool to generate a perso
 """
 ```
 
-You will also want to include any important instructions outlining dos and don'ts for how Claude should interact with the customer. This may draw from brand guardrails or support policies.
+Also include any important instructions outlining dos and don'ts for how Claude should interact with the customer. This might draw from brand guardrails or support policies.
 
 ```python
 ADDITIONAL_GUARDRAILS = """Please adhere to the following guardrails:
@@ -371,7 +371,7 @@ Claude is capable of taking actions and retrieving information dynamically using
 
 For this example, start with one tool for calculating the quote.
 
-As a reminder, this tool will not perform the actual calculation, it will just signal to the application that a tool should be used with whatever arguments specified.
+As a reminder, this tool does not perform the actual calculation; it just signals to the application that a tool should be used with whatever arguments specified.
 
 Add the model name, the tool definition, and a stub implementation to `config.py`:
 
@@ -409,8 +409,8 @@ TOOLS = [
 
 def get_quote(make, model, year, mileage, driver_age):
     """Returns the premium per month in USD"""
-    # You can call an http endpoint or a database to get the quote.
-    # Here, we simulate a delay of 1 seconds and return a fixed quote of 100.
+    # You can call an HTTP endpoint or a database to get the quote.
+    # This example simulates a delay of 1 second and returns a fixed quote of 100.
     time.sleep(1)
     return 100
 ```
@@ -424,7 +424,7 @@ In a file called `chatbot.py` (or the equivalent module in your language), set u
 The class should have two main methods: one that calls the API to generate a message, and one that processes each incoming user input.
 
 ```python Python
-# In your chatbot.py, import these from the config.py you wrote above:
+# In your chatbot.py, import these from the config.py you wrote earlier:
 # from config import IDENTITY, TOOLS, MODEL, get_quote
 from anthropic import Anthropic
 from dotenv import load_dotenv
@@ -643,7 +643,7 @@ public class ChatBot
 
     public async Task<string> ProcessUserInput(string userInput)
     {
-        Messages.Add(new() { Role = Role.User, Content = userInput });
+        Messages.Add(new UserMessageParam { Content = userInput });
 
         var responseMessage = await GenerateMessage(Messages, maxTokens: 2048);
 
@@ -651,16 +651,14 @@ public class ChatBot
         {
             var toolResult = HandleToolUse(toolUse.Name, toolUse.Input);
 
-            Messages.Add(new()
+            Messages.Add(new AssistantMessageParam
             {
-                Role = Role.Assistant,
                 Content = responseMessage.Content
                     .Select(contentBlock => new ContentBlockParam(contentBlock.Json))
                     .ToList(),
             });
-            Messages.Add(new()
+            Messages.Add(new UserMessageParam
             {
-                Role = Role.User,
                 Content = new List<ContentBlockParam>
                 {
                     new ToolResultBlockParam { ToolUseID = toolUse.ID, Content = toolResult },
@@ -673,7 +671,7 @@ public class ChatBot
             {
                 if (block.TryPickText(out var followUpText))
                 {
-                    Messages.Add(new() { Role = Role.Assistant, Content = followUpText.Text });
+                    Messages.Add(new AssistantMessageParam { Content = followUpText.Text });
                     return followUpText.Text;
                 }
             }
@@ -685,7 +683,7 @@ public class ChatBot
         {
             if (block.TryPickText(out var textBlock))
             {
-                Messages.Add(new() { Role = Role.Assistant, Content = textBlock.Text });
+                Messages.Add(new AssistantMessageParam { Content = textBlock.Text });
                 return textBlock.Text;
             }
         }
@@ -842,10 +840,7 @@ class ChatBot {
     }
 
     String processUserInput(String userInput) {
-        messages.add(MessageParam.builder()
-                .role(MessageParam.Role.USER)
-                .content(userInput)
-                .build());
+        messages.add(MessageParam.ofUser(userInput));
 
         Message responseMessage = generateMessage(messages, 2048);
 
@@ -857,18 +852,13 @@ class ChatBot {
                     (Map<String, JsonValue>) toolUse._input().asObject().orElseThrow();
             String result = handleToolUse(toolUse.name(), toolInput);
 
-            messages.add(MessageParam.builder()
-                    .role(MessageParam.Role.ASSISTANT)
-                    .contentOfBlockParams(content.stream().map(ContentBlock::toParam).toList())
-                    .build());
-            messages.add(MessageParam.builder()
-                    .role(MessageParam.Role.USER)
-                    .contentOfBlockParams(List.of(ContentBlockParam.ofToolResult(
-                            ToolResultBlockParam.builder()
-                                    .toolUseId(toolUse.id())
-                                    .content(result)
-                                    .build())))
-                    .build());
+            messages.add(MessageParam.ofAssistantOfContentBlockParams(
+                    content.stream().map(ContentBlock::toParam).toList()));
+            messages.add(MessageParam.ofUserOfContentBlockParams(List.of(ContentBlockParam.ofToolResult(
+                    ToolResultBlockParam.builder()
+                            .toolUseId(toolUse.id())
+                            .content(result)
+                            .build()))));
 
             Message followUpResponse = generateMessage(messages, 2048);
 
@@ -877,10 +867,7 @@ class ChatBot {
                     .findFirst()
                     .orElseThrow(() -> new IllegalStateException("An error occurred: Unexpected response type"));
             String responseText = followUpBlock.asText().text();
-            messages.add(MessageParam.builder()
-                    .role(MessageParam.Role.ASSISTANT)
-                    .content(responseText)
-                    .build());
+            messages.add(MessageParam.ofAssistant(responseText));
             return responseText;
         } else {
             ContentBlock textBlock = content.stream()
@@ -888,10 +875,7 @@ class ChatBot {
                     .findFirst()
                     .orElseThrow(() -> new IllegalStateException("An error occurred: Unexpected response type"));
             String responseText = textBlock.asText().text();
-            messages.add(MessageParam.builder()
-                    .role(MessageParam.Role.ASSISTANT)
-                    .content(responseText)
-                    .build());
+            messages.add(MessageParam.ofAssistant(responseText));
             return responseText;
         }
     }
@@ -915,18 +899,19 @@ class ChatBot {
 
 ```php PHP
 use Anthropic\Client;
+use Anthropic\Messages\AssistantMessageParam;
 use Anthropic\Messages\Message;
-use Anthropic\Messages\MessageParam;
 use Anthropic\Messages\TextBlock;
 use Anthropic\Messages\ToolResultBlockParam;
 use Anthropic\Messages\ToolUseBlock;
+use Anthropic\Messages\UserMessageParam;
 
 class ChatBot
 {
     // MODEL, IDENTITY, TOOLS, and get_quote() mirror the config.py values
     // defined earlier in this guide (shown in Python).
 
-    /** @var list<MessageParam> */
+    /** @var list<UserMessageParam|AssistantMessageParam> */
     public private(set) array $messages = [];
 
     public function __construct(
@@ -934,7 +919,7 @@ class ChatBot
     ) {}
 
     /**
-     * @param list<MessageParam> $messages
+     * @param list<UserMessageParam|AssistantMessageParam> $messages
      */
     public function generateMessage(array $messages, int $maxTokens): Message
     {
@@ -949,7 +934,7 @@ class ChatBot
 
     public function processUserInput(string $userInput): string
     {
-        $this->messages[] = MessageParam::with(role: 'user', content: $userInput);
+        $this->messages[] = UserMessageParam::with(content: $userInput);
 
         $responseMessage = $this->generateMessage($this->messages, maxTokens: 2048);
 
@@ -959,9 +944,8 @@ class ChatBot
         if ($lastBlock instanceof ToolUseBlock) {
             $toolResult = $this->handleToolUse($lastBlock->name, $lastBlock->input);
 
-            $this->messages[] = MessageParam::with(role: 'assistant', content: $content);
-            $this->messages[] = MessageParam::with(
-                role: 'user',
+            $this->messages[] = AssistantMessageParam::with(content: $content);
+            $this->messages[] = UserMessageParam::with(
                 content: [
                     ToolResultBlockParam::with(toolUseID: $lastBlock->id, content: $toolResult),
                 ],
@@ -977,14 +961,14 @@ class ChatBot
                 throw new \RuntimeException('An error occurred: Unexpected response type');
             }
 
-            $this->messages[] = MessageParam::with(role: 'assistant', content: $firstBlock->text);
+            $this->messages[] = AssistantMessageParam::with(content: $firstBlock->text);
 
             return $firstBlock->text;
         }
 
         $firstBlock = array_find($content, static fn ($block): bool => $block instanceof TextBlock);
         if ($firstBlock instanceof TextBlock) {
-            $this->messages[] = MessageParam::with(role: 'assistant', content: $firstBlock->text);
+            $this->messages[] = AssistantMessageParam::with(content: $firstBlock->text);
 
             return $firstBlock->text;
         }
@@ -1073,9 +1057,9 @@ end
 
 ### Build your user interface
 
-Test deploying this code with Streamlit using a main method. This `main()` function sets up a Streamlit-based chat interface. Streamlit is a Python framework, so this part of the walkthrough is shown in Python only; the ChatBot class above is the piece you can port to any language.
+Test deploying this code with Streamlit using a main function. This `main()` function sets up a Streamlit-based chat interface. Streamlit is a Python framework, so this part of the walkthrough is shown in Python only; the ChatBot class shown earlier is the piece you can port to any language.
 
-Do this in a file called `app.py`
+Do this in a file called `app.py`:
 
 ```python
 import streamlit as st
@@ -1125,7 +1109,7 @@ Prompting often requires testing and optimization for it to be production ready.
 
 ### Improve performance
 
-In complex scenarios, it may be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](../../build-with-claude/prompt-engineering/overview.md) & [guardrail implementation strategies](../../test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md). Here are some common scenarios:
+In complex scenarios, it might be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](../../build-with-claude/prompt-engineering/overview.md) and [guardrail implementation strategies](../../test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md). Here are some common scenarios:
 
 #### Reduce long context latency with RAG
 
@@ -1139,19 +1123,19 @@ Implementing RAG for support use cases has been shown to increase accuracy, redu
 
 When dealing with queries that require real-time information, such as account balances or policy details, embedding-based RAG approaches are not sufficient. Instead, tool use can enhance your chatbot's ability to provide accurate, real-time responses. For example, you can use tool use to look up customer information, retrieve order details, and cancel orders on behalf of the customer.
 
-This approach, [outlined in the tool use: customer service agent recipe](https://platform.claude.com/cookbook/tool-use-customer-service-agent), lets you integrate live data into Claude's responses and provide a more personalized and efficient customer experience.
+This approach, outlined in the [tool use: customer service agent recipe](https://platform.claude.com/cookbook/tool-use-customer-service-agent), lets you integrate live data into Claude's responses and provide a more personalized and efficient customer experience.
 
 #### Strengthen input and output guardrails
 
-When deploying a chatbot, especially in customer service scenarios, it's important to prevent risks associated with misuse, out-of-scope queries, and inappropriate responses. While Claude is inherently resilient to such scenarios, here are additional steps to strengthen your chatbot guardrails:
+When deploying a chatbot, especially in customer service scenarios, it's important to prevent risks associated with misuse, out-of-scope queries, and inappropriate responses. Although Claude is inherently resilient to such scenarios, here are additional steps to strengthen your chatbot guardrails:
 
 * [Reduce hallucination](../../test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md): Implement fact-checking mechanisms and [citations](https://platform.claude.com/cookbook/misc-using-citations) to ground responses in provided information.
 * Cross-check information: Verify that the agent's responses align with your company's policies and known facts.
 * Avoid contractual commitments: Ensure the agent doesn't make promises or enter into agreements it's not authorized to make.
-* [Mitigate jailbreaks](../../test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md): Use methods like harmlessness screens and input validation to prevent users from exploiting model vulnerabilities, aiming to generate inappropriate content.
+* [Mitigate jailbreaks](../../test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md): Use methods such as harmlessness screens and input validation to prevent users from exploiting model vulnerabilities to generate inappropriate content.
 * Avoid mentioning competitors: Implement a competitor mention filter to maintain brand focus and not mention any competitor's products or services.
 * [Increase output consistency](../../test-and-evaluate/strengthen-guardrails/increase-consistency.md): Prevent Claude from changing style or going out of character, even during long, complex interactions.
-* Remove Personally Identifiable Information (PII): Unless explicitly required and authorized, strip out any PII from responses.
+* Remove personally identifiable information (PII): Unless explicitly required and authorized, strip out any PII from responses.
 
 #### Reduce perceived response time with streaming
 
@@ -1160,11 +1144,11 @@ When dealing with potentially lengthy responses, implementing streaming can impr
 Here is how to implement streaming:
 
 1. Use the [Anthropic Streaming API](../../build-with-claude/streaming.md) to support streaming responses.
-2. Set up your frontend to handle incoming chunks of text.
+2. Set up your front end to handle incoming chunks of text.
 3. Display each chunk as it arrives, simulating real-time typing.
 4. Implement a mechanism to save the full response, allowing users to view it if they navigate away and return.
 
-In some cases, streaming enables the use of more advanced models with higher base latencies, as the progressive display mitigates the impact of longer processing times.
+In some cases, streaming makes it possible to use more advanced models with higher base latencies, as the progressive display mitigates the impact of longer processing times.
 
 #### Scale your chatbot
 
@@ -1173,15 +1157,15 @@ As the complexity of your chatbot grows, your application architecture can evolv
 * Ensure that you are making the most out of your prompts and optimizing through prompt engineering. Use the [prompt engineering guides](../../build-with-claude/prompt-engineering/overview.md) to write the most effective prompts.
 * Add additional [tools](../../agents-and-tools/tool-use/overview.md) to the prompt (which can include [prompt chains](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#chain-complex-prompts)) and see if you can achieve the functionality required.
 
-If your chatbot handles incredibly varied tasks, you may want to consider adding a [separate intent classifier](https://platform.claude.com/cookbook/capabilities-classification-guide) to route the initial customer query. For the existing application, this would involve creating a decision tree that would route customer queries through the classifier and then to specialized conversations (with their own set of tools and system prompts). Note, this method requires an additional call to Claude that can increase latency.
+If your chatbot handles incredibly varied tasks, you might want to consider adding a [separate intent classifier](https://platform.claude.com/cookbook/capabilities-classification-guide) to route the initial customer query. For the existing application, this would involve creating a decision tree that would route customer queries through the classifier and then to specialized conversations (with their own set of tools and system prompts). Note that this method requires an additional call to Claude that can increase latency.
 
 ### Integrate Claude into your support workflow
 
-While these examples have focused on Python functions callable within a Streamlit environment, deploying Claude for real-time support chatbot requires an API service.
+Although these examples have focused on Python functions callable within a Streamlit environment, deploying Claude for a real-time support chatbot requires an API service.
 
 Here's how you can approach this:
 
-1. Create an API wrapper: Develop a simple API wrapper around your classification function. For example, you can use Flask API or Fast API to wrap your code into a HTTP Service. Your HTTP service could accept the user input and return the Assistant response in its entirety. Thus, your service could have the following characteristics:
+1. Create an API wrapper: Develop a simple API wrapper around your classification function. For example, you can use Flask or FastAPI to wrap your code into an HTTP service. Your HTTP service could accept the user input and return the Assistant response in its entirety. Thus, your service could have the following characteristics:
 
    * Server-Sent Events (SSE): SSE allows for real-time streaming of responses from the server to the client. This provides a smooth, interactive experience when working with LLMs.
    * Caching: Implementing caching can improve response times and reduce unnecessary API calls.

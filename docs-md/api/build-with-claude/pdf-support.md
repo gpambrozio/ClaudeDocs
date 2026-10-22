@@ -21,20 +21,20 @@ You can ask Claude about any text, pictures, charts, and tables in PDFs you prov
 
 * Analyzing financial reports and understanding charts/tables
 * Extracting key information from legal documents
-* Assisting with document translation
+* Helping with document translation
 * Converting document information into structured formats
 
-## Before you begin
+## Before you start
 
 ### Check PDF requirements
 
 Claude works with any standard PDF. Ensure your request size meets these requirements:
 
-| Requirement               | Limit                                                                                              |
-| ------------------------- | -------------------------------------------------------------------------------------------------- |
-| Maximum request size      | 32 MB ([varies by platform](../api/overview.md#request-size-limits)) |
-| Maximum pages per request | 600 (100 when the request's context window is under 1M tokens)                                     |
-| Format                    | Standard PDF (no passwords/encryption)                                                             |
+| Requirement               | Limit                                                                                                                       |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Maximum request size      | 32 MB (varies by platform; see [request size limits](../api/overview.md#request-size-limits)) |
+| Maximum pages per request | 600 (100 when the request's context window is under 1M tokens)                                                              |
+| Format                    | Standard PDF (no passwords/encryption)                                                                                      |
 
 Both limits are on the entire request payload, including any other content sent alongside PDFs. For large PDFs, consider uploading with the [Files API](files.md) and referencing by `file_id` to keep request payloads small.
 
@@ -107,20 +107,20 @@ curl https://api.anthropic.com/v1/messages \
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
     "messages": [{
-        "role": "user",
-        "content": [{
-            "type": "document",
-            "source": {
-                "type": "url",
-                "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-            }
-        },
-        {
-            "type": "text",
-            "text": "What are the key findings in this document?"
-        }]
+      "role": "user",
+      "content": [{
+        "type": "document",
+        "source": {
+          "type": "url",
+          "url": "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
+        }
+      },
+      {
+        "type": "text",
+        "text": "What are the key findings in this document?"
+      }]
     }]
-}'
+  }'
 ```
 
 ```bash CLI
@@ -212,9 +212,8 @@ var message = await client.Messages.Create(new MessageCreateParams
     MaxTokens = 1024,
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
             Content = new List<ContentBlockParam>
             {
                 documentParam,
@@ -267,7 +266,7 @@ DocumentBlockParam documentParam = DocumentBlockParam.builder()
 MessageCreateParams params = MessageCreateParams.builder()
   .model(Model.CLAUDE_OPUS_5_5)
   .maxTokens(1024)
-  .addUserMessageOfBlockParams(
+  .addUserMessageOfContentBlockParams(
     List.of(
       ContentBlockParam.ofDocument(documentParam),
       ContentBlockParam.ofText(
@@ -340,7 +339,7 @@ puts(message.content)
 
 The response returns Claude's analysis as text blocks in `content`, with token consumption in `usage`:
 
-```json Output
+```text Output
 {
   "id": "msg_01Hfp8YuFjQ55VgWbpdHDehB",
   "type": "message",
@@ -401,9 +400,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create \
-  --model claude-opus-5-5 \
-  --max-tokens 1024 <<'YAML'
+ant messages create --model claude-opus-5-5 --max-tokens 1024 <<'YAML'
 messages:
   - role: user
     content:
@@ -467,7 +464,7 @@ const pdfBase64 = Buffer.from(arrayBuffer).toString("base64");
 
 // Method 2: Load from a local file
 // import { readFile } from "node:fs/promises";
-// const pdfBase64 = (await readFile('document.pdf')).toString('base64');
+// const pdfBase64 = (await readFile("document.pdf")).toString("base64");
 
 // Send the API request with base64-encoded PDF
 const anthropic = new Anthropic();
@@ -522,9 +519,8 @@ var message = await client.Messages.Create(new MessageCreateParams
     MaxTokens = 1024,
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
             Content = new List<ContentBlockParam>
             {
                 documentParam,
@@ -604,7 +600,7 @@ DocumentBlockParam documentParam = DocumentBlockParam.builder()
 MessageCreateParams params = MessageCreateParams.builder()
   .model(Model.CLAUDE_OPUS_5_5)
   .maxTokens(1024)
-  .addUserMessageOfBlockParams(
+  .addUserMessageOfContentBlockParams(
     List.of(
       ContentBlockParam.ofDocument(documentParam),
       ContentBlockParam.ofText(
@@ -672,7 +668,7 @@ pdf_data = [pdf_bytes].pack("m0") # Base64-encode without newlines
 # Send to Claude using base64 encoding
 anthropic = Anthropic::Client.new
 message = anthropic.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     {
@@ -733,8 +729,7 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 # First, upload your PDF to the Files API
-ant files upload \
-  --file ./document.pdf
+ant files upload --file ./document.pdf
 
 # Then use the file_id from the upload response in your message
 ant messages create <<YAML
@@ -841,9 +836,8 @@ var message = await client.Messages.Create(new MessageCreateParams
     MaxTokens = 1024,
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
             Content = new List<ContentBlockParam>
             {
                 new DocumentBlockParam
@@ -908,7 +902,7 @@ FileMetadata file = client
 MessageCreateParams params = MessageCreateParams.builder()
   .model(Model.CLAUDE_OPUS_5_5)
   .maxTokens(1024)
-  .addUserMessageOfBlockParams(
+  .addUserMessageOfContentBlockParams(
     List.of(
       ContentBlockParam.ofDocument(
         DocumentBlockParam.builder().fileSource(file.id()).build()
@@ -975,7 +969,7 @@ end
 
 # Use the uploaded file in a message
 message = anthropic.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     {
@@ -1003,7 +997,7 @@ When you send a PDF to Claude, the following steps occur:
 * The system converts each page of the document into an image.
 * The text from each page is extracted and provided alongside each page's image.
 
-**Claude analyzes both the text and images to better understand the document.**
+**Claude analyzes both the text and images.**
 
 * Documents are provided as a combination of text and images for analysis.
 * This allows users to ask for insights on visual elements of a PDF, such as charts, diagrams, and other non-textual content.
@@ -1013,7 +1007,7 @@ When you send a PDF to Claude, the following steps occur:
 Claude can reference both textual and visual content when it responds. You can further improve performance by integrating PDF support with:
 
 * [Use prompt caching](pdf-support.md#use-prompt-caching): To improve performance for repeated analysis.
-* [Process document batches](pdf-support.md#process-document-batches): For high-volume document processing.
+* [Process document batches](pdf-support.md#process-document-batches): To process documents at high volume.
 * [Tool use](../agents-and-tools/tool-use/overview.md): To extract specific information from documents for use as tool inputs.
 
 ### Estimate your costs
@@ -1183,9 +1177,8 @@ var message = await client.Messages.Create(new MessageCreateParams
     MaxTokens = 1024,
     Messages =
     [
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
             Content = new List<ContentBlockParam>
             {
                 new DocumentBlockParam
@@ -1262,7 +1255,7 @@ String pdfBase64 = Base64.getEncoder().encodeToString(response.body());
 MessageCreateParams params = MessageCreateParams.builder()
   .model(Model.CLAUDE_OPUS_5_5)
   .maxTokens(1024)
-  .addUserMessageOfBlockParams(
+  .addUserMessageOfContentBlockParams(
     List.of(
       ContentBlockParam.ofDocument(
         DocumentBlockParam.builder()
@@ -1331,7 +1324,7 @@ pdf_data = [pdf_bytes].pack("m0") # Base64-encode without newlines
 anthropic = Anthropic::Client.new
 
 message = anthropic.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     {
@@ -1620,9 +1613,8 @@ var batch = await client.Messages.Batches.Create(new BatchCreateParams
                 MaxTokens = 1024,
                 Messages =
                 [
-                    new()
+                    new UserMessageParam
                     {
-                        Role = Role.User,
                         Content = new List<ContentBlockParam>
                         {
                             new DocumentBlockParam
@@ -1644,9 +1636,8 @@ var batch = await client.Messages.Batches.Create(new BatchCreateParams
                 MaxTokens = 1024,
                 Messages =
                 [
-                    new()
+                    new UserMessageParam
                     {
-                        Role = Role.User,
                         Content = new List<ContentBlockParam>
                         {
                             new DocumentBlockParam
@@ -1745,7 +1736,7 @@ BatchCreateParams params = BatchCreateParams.builder()
         BatchCreateParams.Request.Params.builder()
           .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
-          .addUserMessageOfBlockParams(
+          .addUserMessageOfContentBlockParams(
             List.of(
               ContentBlockParam.ofDocument(
                 DocumentBlockParam.builder()
@@ -1772,7 +1763,7 @@ BatchCreateParams params = BatchCreateParams.builder()
         BatchCreateParams.Request.Params.builder()
           .model(Model.CLAUDE_OPUS_5_5)
           .maxTokens(1024)
-          .addUserMessageOfBlockParams(
+          .addUserMessageOfContentBlockParams(
             List.of(
               ContentBlockParam.ofDocument(
                 DocumentBlockParam.builder()
@@ -1878,7 +1869,7 @@ message_batch = anthropic.messages.batches.create(
     {
       custom_id: "my-first-request",
       params: {
-        model: "claude-opus-5-5",
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 1024,
         messages: [
           {
@@ -1904,7 +1895,7 @@ message_batch = anthropic.messages.batches.create(
     {
       custom_id: "my-second-request",
       params: {
-        model: "claude-opus-5-5",
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 1024,
         messages: [
           {
@@ -1939,7 +1930,7 @@ Batches process asynchronously. To check progress and retrieve results once proc
 
 **Vision**
 
-Claude's vision capabilities allow it to understand and analyze images, opening up exciting possibilities for multimodal interaction.
+Claude's vision capabilities allow it to process and analyze images, opening up exciting possibilities for multimodal interaction.
 
 **Try PDF examples**
 

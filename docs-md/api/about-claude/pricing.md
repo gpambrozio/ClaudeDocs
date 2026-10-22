@@ -71,7 +71,7 @@ Starting with Claude Sonnet 4.5, Haiku 4.5, and Opus 4.5:
 * **Bedrock** offers two endpoint types: global endpoints (dynamic routing for maximum availability) and regional endpoints (guaranteed data routing through specific geographic regions).
 * **Google Cloud** offers global endpoints and multi-region endpoints (dynamic routing within a geographic area) for these models, and regional endpoints for Claude Sonnet 4.6 and earlier models.
 
-Regional and multi-region endpoints include a 10% premium over global endpoints. The Claude API (first-party) is global by default; for first-party data residency options and pricing, see [Data residency pricing](pricing.md#data-residency-pricing).
+Regional and multi-region endpoints include a 10 percent premium over global endpoints. The Claude API (first-party) is global by default; for first-party data residency options and pricing, see [Data residency pricing](pricing.md#data-residency-pricing).
 
 **Scope:** This pricing structure applies to Claude Sonnet 4.5 (deprecated), Haiku 4.5, Opus 4.5, and all future models. Earlier models (Claude Opus 4.1 and prior releases) retain their existing pricing.
 
@@ -82,18 +82,18 @@ For implementation details and code examples:
 
 ## Claude Platform on AWS pricing
 
-[Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md) bills through AWS Marketplace using Claude Consumption Units (CCUs). Anthropic rates your token usage in USD at standard per-model, per-feature rates, applies any negotiated discount, converts the result to CCUs at $0.01 per CCU, and reports the CCU quantity to AWS Marketplace hourly. Your AWS bill shows a single CCU line item.
+[Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md) bills through AWS Marketplace using Claude Consumption Units (CCUs). Anthropic rates your token usage in USD at standard per-model, per-feature rates, applies any negotiated discount, converts the result to CCUs at $0.01 USD per CCU, and reports the CCU quantity to AWS Marketplace hourly. Your AWS bill shows a single CCU line item.
 
-| Concept             | Details                                                                                                                                                                                                           |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Billing unit**    | Claude Consumption Unit (CCU)                                                                                                                                                                                     |
-| **CCU price**       | $0.01 per CCU (fixed; discounts apply at token-to-CCU conversion, not to the CCU price)                                                                                                                           |
-| **Conversion**      | Token usage rated in USD at standard per-model, per-feature rates (same as [Claude API pricing](pricing.md#model-pricing)), then converted to CCUs at $0.01 per CCU |
-| **Billing cadence** | Hourly metering to AWS Marketplace; monthly invoices                                                                                                                                                              |
-| **Payment model**   | Arrears only (postpaid); no prepaid credits                                                                                                                                                                       |
-| **Discounts**       | Applied as fewer CCUs metered                                                                                                                                                                                     |
-| **Tax**             | Pre-tax metering; AWS Marketplace handles tax                                                                                                                                                                     |
-| **Cost visibility** | Real-time breakdown in the Claude Console (access through the AWS Console); AWS Cost Explorer shows aggregated CCU                                                                                                |
+| Concept             | Details                                                                                                                                                                                                               |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Billing unit**    | Claude Consumption Unit (CCU)                                                                                                                                                                                         |
+| **CCU price**       | $0.01 USD per CCU (fixed; discounts apply at token-to-CCU conversion, not to the CCU price)                                                                                                                           |
+| **Conversion**      | Token usage rated in USD at standard per-model, per-feature rates (same as [Claude API pricing](pricing.md#model-pricing)), then converted to CCUs at $0.01 USD per CCU |
+| **Billing cadence** | Hourly metering to AWS Marketplace; monthly invoices                                                                                                                                                                  |
+| **Payment model**   | Arrears only (postpaid); no prepaid credits                                                                                                                                                                           |
+| **Discounts**       | Applied as fewer CCUs metered                                                                                                                                                                                         |
+| **Tax**             | Pre-tax metering; AWS Marketplace handles tax                                                                                                                                                                         |
+| **Cost visibility** | Real-time breakdown in the Claude Console (access through the AWS Console); AWS Cost Explorer shows aggregated CCU                                                                                                    |
 
 **CCU:** Claude Consumption Unit. A CCU is a unit of measure used solely for Marketplace Platform invoicing. If Customer accesses the Services through certain Marketplace Platforms (e.g., Claude Platform on AWS), usage will be invoiced in Claude Consumption Units ("CCU") rather than per MTok. One hundred (100) CCU represents $1.00 USD of fees owed for the Services, calculated at the applicable prices on [claude.com/pricing#api](https://claude.com/pricing#api), after application of any discounts.
 
@@ -109,18 +109,18 @@ If you have an existing Amazon Bedrock private offer, contact your Anthropic or 
 
 ## Claude in Microsoft Foundry pricing
 
-[Claude in Microsoft Foundry](../build-with-claude/claude-in-microsoft-foundry.md) bills through the Azure Marketplace using Claude Consumption Units (CCUs). Anthropic rates your token usage in USD at standard per-model, per-feature rates, applies any negotiated discount, converts the result to CCUs at $0.01 per CCU, and reports the CCU quantity to the Azure Marketplace hourly. Your Azure bill shows a single CCU line item.
+[Claude in Microsoft Foundry](../build-with-claude/claude-in-microsoft-foundry.md) bills through the Azure Marketplace using Claude Consumption Units (CCUs). Anthropic rates your token usage in USD at standard per-model, per-feature rates, applies any negotiated discount, converts the result to CCUs at $0.01 USD per CCU, and reports the CCU quantity to the Azure Marketplace hourly. Your Azure bill shows a single CCU line item.
 
-| Concept             | Details                                                                                                                                                                                                           |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Billing unit**    | Claude Consumption Unit (CCU)                                                                                                                                                                                     |
-| **CCU price**       | $0.01 per CCU (fixed; discounts apply at token-to-CCU conversion, not to the CCU price)                                                                                                                           |
-| **Conversion**      | Token usage rated in USD at standard per-model, per-feature rates (same as [Claude API pricing](pricing.md#model-pricing)), then converted to CCUs at $0.01 per CCU |
-| **Billing cadence** | Hourly metering to the Azure Marketplace; monthly invoices                                                                                                                                                        |
-| **Payment model**   | Arrears only (postpaid); no prepaid credits                                                                                                                                                                       |
-| **Discounts**       | Applied as fewer CCUs metered                                                                                                                                                                                     |
-| **Tax**             | Pre-tax metering; Azure Marketplace handles tax                                                                                                                                                                   |
-| **Cost visibility** | Azure Cost Management shows aggregated CCU                                                                                                                                                                        |
+| Concept             | Details                                                                                                                                                                                                               |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Billing unit**    | Claude Consumption Unit (CCU)                                                                                                                                                                                         |
+| **CCU price**       | $0.01 USD per CCU (fixed; discounts apply at token-to-CCU conversion, not to the CCU price)                                                                                                                           |
+| **Conversion**      | Token usage rated in USD at standard per-model, per-feature rates (same as [Claude API pricing](pricing.md#model-pricing)), then converted to CCUs at $0.01 USD per CCU |
+| **Billing cadence** | Hourly metering to the Azure Marketplace; monthly invoices                                                                                                                                                            |
+| **Payment model**   | Arrears only (postpaid); no prepaid credits                                                                                                                                                                           |
+| **Discounts**       | Applied as fewer CCUs metered                                                                                                                                                                                         |
+| **Tax**             | Pre-tax metering; Azure Marketplace handles tax                                                                                                                                                                       |
+| **Cost visibility** | Azure Cost Management shows aggregated CCU                                                                                                                                                                            |
 
 **CCU:** Claude Consumption Unit. A CCU is a unit of measure used solely for Marketplace Platform invoicing. If Customer accesses the Services through certain Marketplace Platforms (e.g., Claude Platform on AWS, Claude in Microsoft Foundry), usage will be invoiced in Claude Consumption Units ("CCU") rather than per MTok. One hundred (100) CCU represents $1.00 USD of fees owed for the Services, calculated at the applicable prices on [claude.com/pricing#api](https://claude.com/pricing#api), after application of any discounts.
 
@@ -172,8 +172,8 @@ For more information, see [Data residency](../manage-claude/data-residency.md).
 
 Fast mode pricing stacks with other pricing modifiers:
 
-* [Prompt caching multipliers](pricing.md#prompt-caching) apply on top of fast mode pricing
-* [Data residency](../manage-claude/data-residency.md) multipliers apply on top of fast mode pricing
+* [Prompt caching multipliers](pricing.md#prompt-caching) apply on top of fast mode pricing.
+* [Data residency](../manage-claude/data-residency.md) multipliers apply on top of fast mode pricing.
 
 Fast mode is not available with the [Batch API](pricing.md#batch-processing).
 
@@ -181,7 +181,7 @@ For more information, see [Fast mode](../build-with-claude/fast-mode.md).
 
 ### Batch processing
 
-The Batch API allows asynchronous processing of large volumes of requests with a 50% discount on both input and output tokens.
+The Batch API allows asynchronous processing of large volumes of requests with a 50 percent discount on both input and output tokens.
 
 | Model                                                                                                                                | Batch input  | Batch output  |
 | :----------------------------------------------------------------------------------------------------------------------------------- | :----------- | :------------ |
@@ -217,7 +217,7 @@ For more information about batch processing, see [Batch processing](../build-wit
 
 Claude 4.6 and later models (except Claude Haiku 5.5) and [Claude Mythos Preview](https://anthropic.com/glasswing) include the full [1M token context window](../build-with-claude/context-windows.md) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
 
-Claude Haiku 5.5 is priced by prompt length: a request whose prompt is over 100,000 tokens pays higher prices. A request's prompt length counts all of its input tokens, including cache reads and cache writes. Each request is priced on its own: a request over the threshold pays the higher prices even when part of its prompt is a cache hit, and earlier requests keep the prices they were billed at. [Model pricing](pricing.md#model-pricing) and [Batch processing](pricing.md#batch-processing) list both sets of prices.
+Claude Haiku 5.5 is priced by prompt length: a request whose prompt is over 100,000 tokens pays higher prices. A request's prompt length counts all of its input tokens, including cache reads and cache writes. Each request is priced on its own: a request over the threshold pays the higher prices even when part of its prompt is a cache hit, and earlier requests keep the prices they were billed at. The [model pricing](pricing.md#model-pricing) and [batch processing pricing](pricing.md#batch-processing) sections list both sets of prices.
 
 ### Tool use pricing
 
@@ -291,14 +291,14 @@ See [tool use pricing](pricing.md#tool-use-pricing) for complete pricing details
 
 When used without these tools, code execution is billed by execution time, tracked separately from token usage:
 
-* Execution time has a minimum of 5 minutes
-* Each organization receives **1,550 free hours** of usage per month
-* Additional usage beyond 1,550 hours is billed at **$0.05 USD per hour, per container**
-* If files are included in the request, execution time is billed even if the tool is not called, because files are preloaded onto the container
+* Execution time has a minimum of 5 minutes.
+* Each organization receives **1,550 free hours** of usage per month.
+* Additional usage beyond 1,550 hours is billed at **$0.05 USD per hour, per container**.
+* If files are included in the request, execution time is billed even if the tool is not called, because files are preloaded onto the container.
 
 Code execution usage is tracked in the response:
 
-```json
+```text wrap
 {
   "usage": {
     "input_tokens": 105,
@@ -327,7 +327,7 @@ See [tool use pricing](pricing.md#tool-use-pricing) for complete pricing details
 
 Web search usage is charged in addition to token usage:
 
-```json
+```text wrap
 {
   "usage": {
     "input_tokens": 105,
@@ -341,7 +341,7 @@ Web search usage is charged in addition to token usage:
 }
 ```
 
-Web search is available on the Claude API for **$10 per 1,000 searches**, plus standard token costs for search-generated content. Web search results retrieved throughout a conversation are counted as input tokens, in search iterations executed during a single turn and in subsequent conversation turns.
+Web search is available on the Claude API for **$10 USD per 1,000 searches**, plus standard token costs for search-generated content. Web search results retrieved throughout a conversation are counted as input tokens, in search iterations run during a single turn and in subsequent conversation turns.
 
 Each web search counts as one use, regardless of the number of results returned. If an error occurs during web search, the web search will not be billed.
 
@@ -349,7 +349,7 @@ Each web search counts as one use, regardless of the number of results returned.
 
 Web fetch usage has **no additional charges** beyond standard token costs:
 
-```json
+```text wrap
 {
   "usage": {
     "input_tokens": 25039,
@@ -369,7 +369,7 @@ To protect against inadvertently fetching large content that would consume exces
 
 Example token usage for typical content:
 
-* Average web page (10 kB): \~2,500 tokens
+* Average webpage (10 kB): \~2,500 tokens
 * Large documentation page (100 kB): \~25,000 tokens
 * Research paper PDF (500 kB): \~125,000 tokens
 
@@ -410,7 +410,7 @@ If you also use the computer use tool, bash tool, text editor tool, or your own 
 
 ### Tokens
 
-All tokens consumed by a Claude Managed Agents session are billed at the rates shown in [Model pricing](pricing.md#model-pricing). [Prompt caching](pricing.md#prompt-caching) multipliers apply identically. Web search triggered inside a session incurs the standard $10 per 1,000 searches. On [Claude Platform on AWS](pricing.md#claude-platform-on-aws-pricing), session token and runtime charges convert to Claude Consumption Units at the standard rate. [Fast mode](pricing.md#fast-mode-pricing) premium pricing applies when an agent's `model.speed` is set to `"fast"`.
+All tokens consumed by a Claude Managed Agents session are billed at the rates shown in [Model pricing](pricing.md#model-pricing). [Prompt caching multipliers](pricing.md#prompt-caching) apply identically. Web search triggered inside a session incurs the standard $10 USD per 1,000 searches. On Claude Platform on AWS, session token and runtime charges convert to Claude Consumption Units at the standard rate (see [Claude Platform on AWS pricing](pricing.md#claude-platform-on-aws-pricing)). [Fast mode premium pricing](pricing.md#fast-mode-pricing) applies when an agent's `model.speed` is set to `"fast"`.
 
 The [data residency multiplier](pricing.md#data-residency-pricing) also applies: when an agent's `model.inference_geo` is pinned to `"us"`, tokens consumed by sessions running that agent are billed at 1.1x the standard rates, the same multiplier that applies to US-only inference on the Messages API.
 
@@ -423,9 +423,9 @@ The following Messages API modifiers do **not** apply to Claude Managed Agents s
 
 ### Session runtime
 
-| SKU             | Rate                   | Metering                  |
-| --------------- | ---------------------- | ------------------------- |
-| Session runtime | $0.08 per session-hour | `running` status duration |
+| SKU             | Rate                       | Metering                  |
+| --------------- | -------------------------- | ------------------------- |
+| Session runtime | $0.08 USD per session-hour | `running` status duration |
 
 Runtime is measured to the millisecond and accrues only while the session's status is `running`. Time spent `idle` (waiting for your next message or a tool confirmation), `rescheduling`, or `terminated` does not count toward runtime.
 
@@ -433,24 +433,24 @@ Session runtime replaces the [code execution](pricing.md#code-execution-tool) co
 
 ### Worked example
 
-A one-hour coding session using Claude Opus 5.5 that consumes 50,000 input tokens and 15,000 output tokens:
+A 1-hour coding session using Claude Opus 5.5 that consumes 50,000 input tokens and 15,000 output tokens:
 
-| Line item       | Calculation              | Cost      |
-| --------------- | ------------------------ | --------- |
-| Input tokens    | 50,000 × $4 / 1,000,000  | $0.20     |
-| Output tokens   | 15,000 × $20 / 1,000,000 | $0.30     |
-| Session runtime | 1.0 hour × $0.08         | $0.08     |
-| **Total**       |                          | **$0.58** |
+| Line item       | Calculation              | Cost          |
+| --------------- | ------------------------ | ------------- |
+| Input tokens    | 50,000 × $4 / 1,000,000  | $0.20 USD     |
+| Output tokens   | 15,000 × $20 / 1,000,000 | $0.30 USD     |
+| Session runtime | 1.0 hour × $0.08         | $0.08 USD     |
+| **Total**       |                          | **$0.58 USD** |
 
 If prompt caching is active and 40,000 of the input tokens are cache reads:
 
-| Line item             | Calculation                    | Cost       |
-| --------------------- | ------------------------------ | ---------- |
-| Uncached input tokens | 10,000 × $4 / 1,000,000        | $0.04      |
-| Cache read tokens     | 40,000 × $4 × 0.05 / 1,000,000 | $0.008     |
-| Output tokens         | 15,000 × $20 / 1,000,000       | $0.30      |
-| Session runtime       | 1.0 hour × $0.08               | $0.08      |
-| **Total**             |                                | **$0.428** |
+| Line item             | Calculation                    | Cost           |
+| --------------------- | ------------------------------ | -------------- |
+| Uncached input tokens | 10,000 × $4 / 1,000,000        | $0.04 USD      |
+| Cache read tokens     | 40,000 × $4 × 0.05 / 1,000,000 | $0.008 USD     |
+| Output tokens         | 15,000 × $20 / 1,000,000       | $0.30 USD      |
+| Session runtime       | 1.0 hour × $0.08               | $0.08 USD      |
+| **Total**             |                                | **$0.428 USD** |
 
 ## Additional pricing considerations
 
@@ -458,10 +458,10 @@ If prompt caching is active and 40,000 of the input tokens are cache reads:
 
 When building agents with Claude:
 
-1. **Use appropriate models:** Choose Haiku for simple tasks, Sonnet for most production workloads, and Opus for the most complex reasoning
-2. **Implement prompt caching:** Reduce costs for repeated context
-3. **Batch operations:** Use the Batch API for non-time-sensitive tasks
-4. **Monitor usage patterns:** Track token consumption to identify optimization opportunities
+1. **Use appropriate models:** Choose Haiku for simple tasks, Sonnet for most production workloads, and Opus for the most complex reasoning.
+2. **Implement prompt caching:** Reduce costs for repeated context.
+3. **Batch operations:** Use the Batch API for non-time-sensitive tasks.
+4. **Monitor usage patterns:** Track token consumption to identify optimization opportunities.
 
 For high-volume agent applications, contact the [enterprise sales team](https://claude.com/contact-sales) for custom pricing arrangements.
 
@@ -479,11 +479,11 @@ For limits beyond the Scale tier or custom pricing arrangements, [contact the sa
 
 ### Volume discounts
 
-Volume discounts may be available for high-volume users. These are negotiated on a case-by-case basis.
+Volume discounts might be available for high-volume users. These are negotiated on a case-by-case basis.
 
-* Standard usage tiers use the pricing shown in [Model pricing](pricing.md#model-pricing)
-* Enterprise customers can [contact sales](mailto:sales@anthropic.com) for custom pricing
-* Academic and research discounts may be available
+* Standard usage tiers use the pricing shown in [Model pricing](pricing.md#model-pricing).
+* Enterprise customers can [contact sales](mailto:sales@anthropic.com) for custom pricing.
+* Academic and research discounts might be available.
 
 ### Enterprise pricing
 
@@ -498,10 +498,10 @@ Contact the sales team at [sales@anthropic.com](mailto:sales@anthropic.com) or t
 
 ## Billing and payment
 
-* Billing is based on actual monthly usage
-* All payments are in USD
-* Credit card and invoicing options available
-* Usage tracking available in the [Claude Console](https://platform.claude.com/)
+* Billing is based on actual monthly usage.
+* All payments are in USD.
+* Credit card and invoicing options are available.
+* Usage tracking is available in the Claude Console at [platform.claude.com](https://platform.claude.com/).
 
 ## Frequently asked questions
 

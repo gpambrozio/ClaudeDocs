@@ -51,7 +51,7 @@ Whether thinking blocks from previous assistant turns stay in the context window
 
 The following diagram shows how tokens are managed when thinking is enabled on a model that strips previous thinking blocks:
 
-![Diagram of thinking on a model that strips previous thinking blocks: each turn's thinking block is generated in the output and not carried into later turns' input](https://platform.claude.com/docs/images/context-window-thinking.svg)
+![Thinking on a model that strips previous thinking: each turn's thinking is generated but not carried into later turns' input](https://platform.claude.com/docs/images/context-window-thinking.svg)
 
 * **Stripping thinking blocks:** On models that strip previous thinking blocks, thinking blocks (shown in dark gray) are generated during each turn's output phase but are not carried forward as input tokens for subsequent turns. You do not need to strip the thinking blocks yourself: if you pass them back, the Claude API strips them automatically.
 * **Billing:** Thinking tokens are billed as output tokens once, when they are generated. On models that keep previous thinking blocks, the kept blocks are then part of later requests' input and are billed as input tokens, like the rest of the conversation history.
@@ -62,7 +62,7 @@ You can read more about the context window and thinking in the [Thinking](thinki
 
 The following diagram illustrates how tokens are managed when you combine thinking with tool use on a model that strips previous thinking blocks:
 
-![Diagram of thinking with tool use: thinking is kept with its tool result, then dropped on the next user turn on models that strip previous thinking blocks](https://platform.claude.com/docs/images/context-window-thinking-tools.svg)
+![Thinking with tools on a model that strips previous thinking: thinking stays with its tool result until the next user turn](https://platform.claude.com/docs/images/context-window-thinking-tools.svg)
 
 **First turn architecture**
 

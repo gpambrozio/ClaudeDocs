@@ -293,7 +293,7 @@ var parameters = new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "What's the weather in SF and NYC, and what time is it there?" }],
+    Messages = [new UserMessageParam { Content = "What's the weather in SF and NYC, and what time is it there?" }],
     Tools = tools
 };
 
@@ -352,9 +352,9 @@ var finalParameters = new MessageCreateParams
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
     Messages = [
-        new() { Role = Role.User, Content = "What's the weather in SF and NYC, and what time is it there?" },
-        new() { Role = Role.Assistant, Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
-        new() { Role = Role.User, Content = new MessageParamContent(toolResults) }
+        new UserMessageParam { Content = "What's the weather in SF and NYC, and what time is it there?" },
+        new AssistantMessageParam { Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
+        new UserMessageParam { Content = toolResults }
     ],
     Tools = tools
 };
@@ -587,7 +587,7 @@ MessageCreateParams finalParams = MessageCreateParams.builder()
     .addTool(timeTool)
     .addUserMessage("What's the weather in SF and NYC, and what time is it there?")
     .addMessage(response)
-    .addUserMessageOfBlockParams(toolResults)
+    .addUserMessageOfContentBlockParams(toolResults)
     .build();
 
 Message finalResponse = client.messages().create(finalParams);
@@ -733,7 +733,7 @@ tools = [
 
 puts "Requesting parallel tool calls..."
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     { role: "user", content: "What's the weather in SF and NYC, and what time is it there?" }
@@ -771,7 +771,7 @@ end
 
 puts "\nGetting final response..."
 final_response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     { role: "user", content: "What's the weather in SF and NYC, and what time is it there?" },
@@ -837,7 +837,7 @@ Parallel tool use is on by default. To turn it off, set `disable_parallel_tool_u
 
 ### At most one tool call
 
-When `tool_choice` type is `auto` (the default), setting `disable_parallel_tool_use: true` means Claude calls at most one tool per response. Claude can still answer in plain text without calling any tool. The highlighted lines are the only change from a standard tool use request:
+When the `tool_choice` type is `auto` (the default), setting `disable_parallel_tool_use: true` means Claude calls at most one tool in each response. Claude can still answer in plain text without calling any tool. The highlighted lines are the only change from a standard tool use request:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -975,7 +975,7 @@ var parameters = new MessageCreateParams
         }),
     ],
     ToolChoice = new ToolChoiceAuto { DisableParallelToolUse = true },
-    Messages = [new() { Role = Role.User, Content = "What is the weather in San Francisco and New York?" }]
+    Messages = [new UserMessageParam { Content = "What is the weather in San Francisco and New York?" }]
 };
 
 var response = await client.Messages.Create(parameters);
@@ -1088,7 +1088,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   tools: [
     {
@@ -1254,7 +1254,7 @@ var parameters = new MessageCreateParams
         }),
     ],
     ToolChoice = new ToolChoiceAny { DisableParallelToolUse = true },
-    Messages = [new() { Role = Role.User, Content = "What is the weather in San Francisco and New York?" }]
+    Messages = [new UserMessageParam { Content = "What is the weather in San Francisco and New York?" }]
 };
 
 var response = await client.Messages.Create(parameters);
@@ -1367,7 +1367,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5,
   max_tokens: 1024,
   tools: [
     {
@@ -1554,13 +1554,13 @@ Execution order is your choice. If your tools have ordering dependencies, runnin
 
 ## Next steps
 
-**Tool Runner (SDK)**
+**Tool runner (SDK)**
 
-Use the SDK's Tool Runner abstraction to handle the agentic loop, error wrapping, and type safety automatically.
+Use the SDK's tool runner abstraction to handle the agentic loop, error wrapping, and type safety automatically.
 
 **Handle tool calls**
 
-Parse tool\_use blocks, format tool\_result responses, and handle errors with is\_error.
+Parse `tool_use` blocks, format `tool_result` responses, and handle errors with `is_error`.
 
 **Define tools**
 

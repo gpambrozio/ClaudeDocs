@@ -59,7 +59,7 @@ See [Model IDs and versioning](../about-claude/models/model-ids-and-versions.md)
 
 Legacy models (still available): [Claude Fable 5](fable-5/overview.md), [Claude Opus 5](opus-5/overview.md), [Claude Opus 4.8](opus-4-8/overview.md), [Claude Opus 4.7](opus-4-7/overview.md), [Claude Opus 4.6](opus-4-6/overview.md), [Claude Opus 4.5](opus-4-5/overview.md), [Claude Sonnet 5](sonnet-5/overview.md), [Claude Sonnet 4.6](sonnet-4-6/overview.md), [Claude Haiku 4.5](haiku-4-5/overview.md).
 
-Once you've picked a model, [learn how to make your first API call](../get-started.md). To understand how model IDs, aliases, and snapshots work, see [Model IDs and versioning](../about-claude/models/model-ids-and-versions.md); for the reliable-knowledge and training-data cutoffs behind each model, see [Anthropic's Transparency Hub](https://www.anthropic.com/transparency).
+Once you've picked a model, [learn how to make your first API call](../get-started.md). To understand how model IDs, aliases, and snapshots work, see [Model IDs and versioning](../about-claude/models/model-ids-and-versions.md); for the reliable-knowledge and training-data cutoffs behind each model, see Anthropic's [Transparency Hub](https://www.anthropic.com/transparency).
 
 ## Using the Models API
 
@@ -80,12 +80,12 @@ The top-level `code_execution` capability is a different check. It reports wheth
 Current Claude models excel in:
 
 * **Performance:** Top-tier results in reasoning, coding, multilingual tasks, long-context handling, honesty, and image processing. See [Prompting best practices](../build-with-claude/prompt-engineering/claude-prompting-best-practices.md) for general and model-specific prompting guidance.
-* **Engaging responses:** Claude models are ideal for applications that require rich, human-like interactions. If you prefer more concise responses, adjust your prompts to guide the model toward the desired output length. Refer to the [prompt engineering guides](../build-with-claude/prompt-engineering/overview.md) for details.
-* **Output quality:** When migrating from a previous model generation, you may notice larger improvements in overall performance. If you're on Claude Opus 5 or earlier, see the [Claude Opus 5.5 migration guide](opus-5-5/migration-guide.md).
+* **Engaging responses:** Claude models are ideal for applications that require rich, human-like interactions. If you prefer more concise responses, adjust your prompts to guide the model toward the output length you want. Refer to the [prompt engineering guides](../build-with-claude/prompt-engineering/overview.md) for details.
+* **Output quality:** When migrating from a previous model generation, you might notice larger improvements in overall performance. If you're on Claude Opus 5 or earlier, see the [Claude Opus 5.5 migration guide](opus-5-5/migration-guide.md).
 
 ## Get started with Claude
 
-If you're ready to start exploring what Claude can do for you, dive in! Whether you're a developer looking to integrate Claude into your applications or a user wanting to experience the power of AI firsthand, the following resources can help.
+Whether you're a developer looking to integrate Claude into your applications or a user wanting to experience the power of AI firsthand, the following resources can help.
 
 **Intro to Claude**
 
@@ -111,7 +111,7 @@ Lifecycle status and retirement commitments for every model.
 
 Craft and test prompts directly in your browser.
 
-Looking to chat with Claude? Visit [claude.ai](https://claude.ai). If you have questions, reach out to the [support team](https://support.claude.com/) or the [Discord community](https://www.anthropic.com/discord).
+Looking to chat with Claude? Visit [claude.ai](https://claude.ai). If you have questions, contact the [support team](https://support.claude.com/) or the [Discord community](https://www.anthropic.com/discord).
 
 ---
 

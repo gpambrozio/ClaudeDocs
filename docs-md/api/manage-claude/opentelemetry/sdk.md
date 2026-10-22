@@ -83,14 +83,14 @@ go get go.opentelemetry.io/otel/sdk go.opentelemetry.io/otel/exporters/stdout/st
 Add the Claude SDK to your dependencies, or update it to at least the following version if your build file already declares it:
 
 ```kotlin Gradle
-implementation("com.anthropic:anthropic-java:2.75.0")
+implementation("com.anthropic:anthropic-java:3.1.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>2.75.0</version>
+    <version>3.1.0</version>
 </dependency>
 ```
 
@@ -198,7 +198,7 @@ var message = await client.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
+    Messages = [new UserMessageParam { Content = "Hello, Claude" }],
 });
 Console.WriteLine(message);
 ```
@@ -428,7 +428,7 @@ var message = await conversation.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
+    Messages = [new UserMessageParam { Content = "Hello, Claude" }],
 });
 ```
 
@@ -579,9 +579,9 @@ Set
 
 `@opentelemetry/auto-instrumentations-node`
 
- includes. Otherwise, a 
+ includes. Otherwise, an 
 
-[bug in that package](https://github.com/open-telemetry/opentelemetry-js-contrib/issues/3711)
+[undici instrumentation bug](https://github.com/open-telemetry/opentelemetry-js-contrib/issues/3711)
 
  adds a second 
 
@@ -628,7 +628,7 @@ While the SDK calls an [MCP tool](../../agents-and-tools/mcp-connector.md#client
 | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | No spans from the SDK                                                                                         | Register the tracer provider before the first call. Make sure that you installed the SDK as in [Install the SDK](sdk.md#install-the-sdk) and that `ANTHROPIC_OPEN_TELEMETRY` isn't `false`.                                                                 |
 | The Java SDK doesn't send spans to the registered tracer provider, or doesn't send trace context to the API   | Another dependency sets `opentelemetry-api` below 1.57.0. Upgrade `opentelemetry-api` to 1.57.0 or later.                                                                                                                                                                                                                |
-| The SDK spans don't nest under your spans, or the spans that your tool creates don't nest under the tool span | Call the SDK from inside one of your own spans, as the [example in Connect API spans to your own traces](api.md#connect-api-spans-to-your-own-traces) does. In Go, start the spans that your tool creates from the `ctx` that the tool runner passes to it. |
+| The SDK spans don't nest under your spans, or the spans that your tool creates don't nest under the tool span | Call the SDK from inside one of your own spans, as the example in [Connect API spans to your own traces](api.md#connect-api-spans-to-your-own-traces) does. In Go, start the spans that your tool creates from the `ctx` that the tool runner passes to it. |
 | Requests from the SDK don't have a `traceparent` header                                                       | Register the W3C trace context propagator with OpenTelemetry. The SDK writes the headers with your application's propagator.                                                                                                                                                                                             |
 | A stream's SDK span doesn't end or doesn't have the response                                                  | See [Tracing a stream](sdk.md#trace-a-stream).                                                                                                                                                                                                              |
 | Each request appears twice                                                                                    | A request's SDK span and API span have the same name. Use the span kind or `service.name` to tell them apart. If another library also traces the SDK, turn off one of the two.                                                                                                                                           |

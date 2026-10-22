@@ -66,7 +66,7 @@ Send user messages as events. Claude autonomously runs tools and streams back re
 
 **Steer or interrupt**
 
-Send additional user events to guide the agent mid-execution, or interrupt it to change direction.
+Send additional user events to guide the agent while it runs, or interrupt it to change direction.
 
 ## When to use Claude Managed Agents
 

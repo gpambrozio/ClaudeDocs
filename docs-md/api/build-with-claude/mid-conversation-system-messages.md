@@ -225,13 +225,12 @@ var response = await client.Beta.Messages.Create(new MessageCreateParams
     ],
     Messages =
     [
-        new() { Role = Role.User, Content = "Say OK." },
+        new BetaUserMessageParam { Content = "Say OK." },
         // Withdraw get_weather from this point onward. The block references
         // the tool by name instead of editing `Tools`, so earlier turns stay
         // byte-identical and the cache still hits.
-        new()
+        new BetaSystemMessageParam
         {
-            Role = Role.System,
             Content = new(
             [
                 new BetaRequestToolRemovalBlock
@@ -304,10 +303,9 @@ for _, block := range response.Content {
 
 ```java Java
 import com.anthropic.models.beta.AnthropicBeta;
-import com.anthropic.models.beta.messages.BetaContentBlockParam;
 import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaMessageParam;
 import com.anthropic.models.beta.messages.BetaRequestToolRemovalBlock;
+import com.anthropic.models.beta.messages.BetaSystemMessageParam.Content.SystemMessageContentBlock;
 import com.anthropic.models.beta.messages.BetaTool;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 // ...
@@ -337,13 +335,10 @@ import com.anthropic.models.beta.messages.MessageCreateParams;
         // Withdraw get_weather from this point onward. The block references
         // the tool by name instead of editing `tools`, so earlier turns stay
         // byte-identical and the cache still hits.
-        .addMessage(BetaMessageParam.builder()
-            .role(BetaMessageParam.Role.SYSTEM)
-            .contentOfBetaContentBlockParams(List.of(
-                BetaContentBlockParam.ofToolRemoval(BetaRequestToolRemovalBlock.builder()
-                    .referenceTool("get_weather")
-                    .build())))
-            .build())
+        .addSystemMessageOfBlocks(List.of(
+            SystemMessageContentBlock.ofToolRemoval(BetaRequestToolRemovalBlock.builder()
+                .referenceTool("get_weather")
+                .build())))
         .build();
 
     BetaMessage response = client.beta().messages().create(params);
@@ -714,12 +709,11 @@ var response = await client.Beta.Messages.Create(new MessageCreateParams
     ],
     Messages =
     [
-        new() { Role = Role.User, Content = "How many orders shipped yesterday?" },
+        new BetaUserMessageParam { Content = "How many orders shipped yesterday?" },
         // Define db_query by value from this point onward. `Tools` and the
         // earlier messages stay exactly as sent, so the cache still hits.
-        new()
+        new BetaSystemMessageParam
         {
-            Role = Role.System,
             Content = new(
             [
                 new BetaRequestToolAdditionBlock
@@ -815,9 +809,9 @@ for _, block := range response.Content {
 
 ```java Java
 import com.anthropic.models.beta.AnthropicBeta;
-import com.anthropic.models.beta.messages.BetaContentBlockParam;
 import com.anthropic.models.beta.messages.BetaMessage;
 import com.anthropic.models.beta.messages.BetaRequestToolAdditionBlock;
+import com.anthropic.models.beta.messages.BetaSystemMessageParam.Content.SystemMessageContentBlock;
 import com.anthropic.models.beta.messages.BetaTool;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 // ...
@@ -859,8 +853,8 @@ void main() {
         .addUserMessage("How many orders shipped yesterday?")
         // Define db_query by value from this point onward. `tools` and the
         // earlier messages stay exactly as sent, so the cache still hits.
-        .addSystemMessageOfBetaContentBlockParams(List.of(
-            BetaContentBlockParam.ofToolAddition(BetaRequestToolAdditionBlock.builder()
+        .addSystemMessageOfBlocks(List.of(
+            SystemMessageContentBlock.ofToolAddition(BetaRequestToolAdditionBlock.builder()
                 .definitionTool(dbQueryTool)
                 .build())))
         .build();
@@ -991,7 +985,7 @@ end
 
 The response's `content` includes a `tool_use` block for the new tool, for example:
 
-```json
+```text
 {
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
@@ -1006,7 +1000,7 @@ To change a tool's schema, or to move a server tool to a newer version, send a d
 
 A few rules follow from where the definition renders:
 
-* **Declare what you know up front.** A tool you know about at the first request belongs in `tools`, with `defer_loading: true` and a later `tool_addition` reference if the model shouldn't see it yet. Define by value only what is unknown at the first request or changes later.
+* **Declare what you know up front.** A tool you know about at the first request belongs in `tools`, with `defer_loading: true` and a later `tool_addition` reference if you don't want to offer it to the model yet. Define by value only what is unknown at the first request or changes later.
 * **Keep at least one non-deferred tool in `tools`.** A conversation whose `tools` array has no non-deferred tool is accepted, but the first tool it defines by value changes the start of the rendered prompt, which costs one full cache miss on that request. A [tool search tool](../agents-and-tools/tool-use/tool-search-tool.md) counts as non-deferred.
 * **Dated tool types keep their own beta headers.** If a server tool you define by value requires its own beta header, send that header on every later request in the conversation.
 * **`cache_control` goes on the block or in the definition, not both,** and counts toward the request's breakpoint limit. A deferred definition can't carry `cache_control`.
@@ -1015,8 +1009,8 @@ A request returns a 400 error with `error.details.error_code` set to `available_
 
 * More than 10,000 deferred tools are available after any message.
 * More than 10,000 tools defined after the first user message are available after any message.
-* The tool definitions sent after the first user message that are still available after any message total more than 4 MB (4,194,304 bytes).
-* The rendered tool text is larger than 4 MB (4,194,304 bytes).
+* The tool definitions sent after the first user message that are still available after any message total more than 4 MB (4,194,304 bytes).
+* The rendered tool text is larger than 4 MB (4,194,304 bytes).
 
 ### Add an MCP server mid-conversation (beta)
 
@@ -1295,12 +1289,11 @@ var response = await client.Beta.Messages.Create(new MessageCreateParams
     ],
     Messages =
     [
-        new() { Role = Role.User, Content = "What's on my calendar tomorrow?" },
+        new BetaUserMessageParam { Content = "What's on my calendar tomorrow?" },
         // Make the calendar server's tools available from this point onward.
         // The block names the server; it never holds a URL or token.
-        new()
+        new BetaSystemMessageParam
         {
-            Role = Role.System,
             Content = new(
             [
                 new BetaRequestToolAdditionBlock
@@ -1400,12 +1393,12 @@ for _, block := range response.Content {
 
 ```java Java
 import com.anthropic.models.beta.AnthropicBeta;
-import com.anthropic.models.beta.messages.BetaContentBlockParam;
 import com.anthropic.models.beta.messages.BetaMcpTool;
 import com.anthropic.models.beta.messages.BetaMcpToolset;
 import com.anthropic.models.beta.messages.BetaMessage;
 import com.anthropic.models.beta.messages.BetaRequestMcpServerUrlDefinition;
 import com.anthropic.models.beta.messages.BetaRequestToolAdditionBlock;
+import com.anthropic.models.beta.messages.BetaSystemMessageParam.Content.SystemMessageContentBlock;
 import com.anthropic.models.beta.messages.BetaTool;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 // ...
@@ -1440,8 +1433,8 @@ void main() {
         .addUserMessage("What's on my calendar tomorrow?")
         // Make the calendar server's tools available from this point onward.
         // The block names the server; it never holds a URL or token.
-        .addSystemMessageOfBetaContentBlockParams(List.of(
-            BetaContentBlockParam.ofToolAddition(BetaRequestToolAdditionBlock.builder()
+        .addSystemMessageOfBlocks(List.of(
+            SystemMessageContentBlock.ofToolAddition(BetaRequestToolAdditionBlock.builder()
                 .definitionTool(BetaMcpToolset.builder()
                     .mcpServerName("calendar")
                     .build())
@@ -1620,12 +1613,12 @@ A few situations where this matters:
 
 * **Mid-session policy or persona changes.** A long agentic session needs a new constraint ("from now on, write all SQL as parameterized queries") after dozens of cached turns. Adding it to the top-level `system` field would re-process the entire history.
 * **Per-turn context that must be authoritative.** You want to inject a freshness note, a session deadline, or a tool-availability change with system-level weight, and it changes too often to live in the cached prefix.
-* **Per-turn reminders that shouldn't pile up.** A harness nudges the model after each batch of tool results ("request independent reads together", "the user hasn't heard from you in a while") and wants the model to see only the newest copy. A [turn-scoped system message](mid-conversation-system-messages.md#turn-scoped-system-messages) renders for one turn and then costs nothing, without deleting anything from the history.
-* **State changes your application observes.** Your application notices something Claude should treat as an operator-level fact: files changed on disk, the user toggled an auto-approve setting, available tools changed, or the remaining token budget dropped below a threshold.
-* **User input that should not interrupt an agentic loop.** A user types a follow-up while Claude is still executing tools for the previous request. Relaying it as a system message after the next tool result lets Claude fold the new input into the work it is already doing, instead of treating it as a fresh request to switch to. On Claude Sonnet 5.5 and Claude Haiku 5.5, append the user's words as a `text` block after the last `tool_result` in the same `user` message instead. See [Placement after tool results](mid-conversation-system-messages.md#placement-after-tool-results).
+* **Per-turn reminders that shouldn't pile up.** A harness nudges the model after each batch of tool results ("request independent reads together," "the user hasn't heard from you in a while") and needs the model to receive only the newest copy. A [turn-scoped system message](mid-conversation-system-messages.md#turn-scoped-system-messages) renders for one turn and then costs nothing, without deleting anything from the history.
+* **State changes your application observes.** Your application detects something Claude should treat as an operator-level fact: files changed on disk, the user toggled an auto-approve setting, available tools changed, or the remaining token budget dropped below a threshold.
+* **User input that should not interrupt an agentic loop.** A user types a follow-up while Claude is still running tools for the previous request. Relaying it as a system message after the next tool result lets Claude fold the new input into the work it is already doing, instead of treating it as a fresh request to switch to. On Claude Sonnet 5.5 and Claude Haiku 5.5, append the user's words as a `text` block after the last `tool_result` in the same `user` message instead. See [Placement after tool results](mid-conversation-system-messages.md#placement-after-tool-results).
 * **Mode switches that grant standing permissions.** A session-level mode can use a mid-conversation system message to grant standing consent to an expensive capability, such as automatically launching multiagent workflows, with a short refresher every several turns and an exit notice when the mode is turned off. For a worked example, see [Build an orchestration mode](mid-conversation-effort-example.md).
 
-In all of these cases you could put the instruction in a regular `user` message, and Claude does follow instructions that arrive in user turns. The difference is priority: a `user` message is treated as coming from the end user, while a `system` message is treated as coming from you, the application operator. When the two conflict, system instructions take precedence, so use the `system` role for operator-level facts and constraints that should hold even if the end user asks for something different. A mid-conversation system message keeps that operator-level priority without paying the cache-miss cost of editing the top-level `system` field.
+In all of these cases you could put the instruction in a regular `user` message, and Claude does follow instructions that arrive in user turns. The difference is priority: a `user` message is treated as coming from the end user, whereas a `system` message is treated as coming from you, the application operator. When the two conflict, system instructions take precedence, so use the `system` role for operator-level facts and constraints that should hold even if the end user asks for something different. A mid-conversation system message keeps that operator-level priority without paying the cache-miss cost of editing the top-level `system` field.
 
 ## How it works
 
@@ -1778,28 +1771,18 @@ var parameters = new MessageCreateParams
     System = "You are a code review assistant. Be concise.",
     Messages =
     [
-        new()
+        new UserMessageParam { Content = "Review process() in utils.py for performance issues." },
+        new AssistantMessageParam
         {
-            Role = Role.User,
-            Content = "Review process() in utils.py for performance issues."
-        },
-        new()
-        {
-            Role = Role.Assistant,
             Content = "The list comprehension is fine for small inputs. For large inputs, consider a generator to avoid materializing the full list."
         },
-        new()
-        {
-            Role = Role.User,
-            Content = "Now review the calling code that invokes process()."
-        },
+        new UserMessageParam { Content = "Now review the calling code that invokes process()." },
         // The reviewer realizes mid-session that all suggestions must also pass
         // the team's strict typing policy. Appending the instruction here keeps
         // earlier turns byte-identical, so the prefix cached by the previous
         // request is still read from cache.
-        new()
+        new SystemMessageParam
         {
-            Role = Role.System,
             Content = "From now on, every suggestion must include explicit type annotations."
         }
     ]
@@ -1850,8 +1833,6 @@ for _, block := range response.Content {
 ```java Java
 import com.anthropic.models.messages.CacheControlEphemeral;
 // ...
-import com.anthropic.models.messages.MessageParam;
-// ...
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     MessageCreateParams params = MessageCreateParams.builder()
@@ -1868,10 +1849,7 @@ import com.anthropic.models.messages.MessageParam;
         // the team's strict typing policy. Appending the instruction here keeps
         // earlier turns byte-identical, so the prefix cached by the previous
         // request is still read from cache.
-        .addMessage(MessageParam.builder()
-            .role(MessageParam.Role.SYSTEM)
-            .content("From now on, every suggestion must include explicit type annotations.")
-            .build())
+        .addSystemMessage("From now on, every suggestion must include explicit type annotations.")
         .build();
 
     Message response = client.messages().create(params);
@@ -1915,7 +1893,7 @@ foreach ($response->content as $block) {
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   # Automatic prompt caching: each request caches the conversation so far,
   # and the next request reads the unchanged prefix from cache.
@@ -1966,7 +1944,7 @@ In an [agentic loop](../agents-and-tools/tool-use/overview.md), the system messa
 ]
 ```
 
-Phrase the system content as context rather than as a command that overrides the user. State the fact ("new input arrived from the user: X", "the remaining token budget is now Y") and let Claude act on it. Claude is trained to resist instructions that appear to work against the user, and that protection still applies to the system role, so language such as "ignore what the user said" is less effective than stating what changed.
+Phrase the system content as context rather than as a command that overrides the user. State the fact ("new input arrived from the user: X," "the remaining token budget is now Y") and let Claude act on it. Claude is trained to resist instructions that appear to work against the user, and that protection still applies to the system role, so language such as "ignore what the user said" is less effective than stating what changed.
 
 This pattern is for relaying input from the conversation's own end user. Do not use it to pass tool output, retrieved documents, or other third-party content; keep that content in `tool_result` blocks (see [Limitations](mid-conversation-system-messages.md#limitations)).
 
@@ -2010,7 +1988,7 @@ Turn-scoped system messages are in beta. Include the [beta header](../api/beta-h
 
 The main use is a per-turn reminder in a tool loop. Append the reminder after the `tool_result` message each time you want the model to see it, and leave every earlier copy where it is. The model sees only the copies that come after the last user message, so the reminder never piles up. Nothing earlier in `messages` changes, so the [prompt cache](prompt-caching.md) keeps matching. On Claude Fable 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 this also keeps later [thinking blocks valid](thinking.md#preserved-in-conversation): deleting an earlier reminder would change the conversation before those blocks and fail the conversation check, while a cleared message stays in the array and leaves that conversation unchanged.
 
-The following request is a later step of an agent loop. `messages[3]` rendered on the earlier request, when it was the last message in the array. Once `messages[5]` (a later user message) exists, `messages[3]` is cleared: the cleared message stays in the array, so the conversation before the thinking block in `messages[4]` is unchanged, but the model no longer sees its text. `messages[6]` and `messages[7]` both render, in order.
+The following request is a later step of an agent loop. `messages[3]` rendered on the earlier request, when it was the last message in the array. Once `messages[5]` (a later user message) exists, `messages[3]` is cleared: the cleared message stays in the array, so the conversation before the thinking block in `messages[4]` is unchanged, but the model no longer receives its text. `messages[6]` and `messages[7]` both render, in order.
 
 ```json
 {
@@ -2085,13 +2063,13 @@ The following request is a later step of an agent loop. `messages[3]` rendered o
 
 Rules for turn-scoped messages:
 
-* **Re-send cleared messages verbatim.** A cleared message is still part of the conversation history. Rebuilding it from current state (a fresh token count, a timestamp), dropping it as redundant, or changing its `clear_at` value is an edit to an earlier message. The prompt cache misses from that point, and on Claude Fable 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 every thinking block produced after it fails the [conversation check](thinking.md#preserved-in-conversation).
+* **Re-send cleared messages verbatim.** A cleared message is still part of the conversation history. Rebuilding it from current state (a fresh token count, a timestamp), dropping it as redundant, or changing its `clear_at` value is an edit to an earlier message. On Claude Fable 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5, every thinking block produced after it fails the [conversation check](thinking.md#preserved-in-conversation).
 * **Text only.** `content` is one or more `text` blocks (or a string). `tool_addition` and `tool_removal` blocks return a 400 error on a turn-scoped message, and so does `output_config`. Use a separate `role: "system"` message without `clear_at` for those.
 * **No `cache_control` on its blocks.** A cleared message is never part of a cache key, so a breakpoint on it could never match. Put the breakpoint on the last block of the preceding user turn instead, as the example does. The top-level [automatic caching](prompt-caching.md#automatic-caching) field skips turn-scoped messages when it picks a breakpoint. On the request that clears a message, the reusable cached prefix ends at the user turn before it, so only the one assistant turn between that message and the new user message is reprocessed.
 * **Placement rules still apply**, cleared or not. A turn-scoped message must follow a `user` turn (or an `assistant` turn ending in a server tool result) and precede an `assistant` turn or end the array, like any mid-conversation system message. One that ends the array always renders. One followed directly by another `user` message is a 400 error, not a cleared message: put all of a tool round's results in one user message and the reminders after it.
 * **Assistant turns don't clear it.** A prefilled or [paused](handling-stop-reasons.md#pause-turn) assistant turn after the message, or a server-side tool loop, adds no user message, so the message still renders on that continuation. To keep a reminder in view through a client-side tool loop, append it again after each `tool_result` message.
 * **Token counting follows what renders.** A cleared message adds nothing to `usage.input_tokens` or to a [token count](token-counting.md).
-* **Imported history.** In a transcript you construct in one step (few-shot examples, a migrated conversation), a turn-scoped message that already has an assistant turn and a user message after it is cleared from the first request and never renders. That is the right state for a per-turn reminder you are carrying over. Leave `clear_at` unset only on a message the model should see on every request.
+* **Imported history.** In a transcript you construct in one step (few-shot examples, a migrated conversation), a turn-scoped message that already has an assistant turn and a user message after it is cleared from the first request and never renders. That is the right state for a per-turn reminder you are carrying over. Leave `clear_at` unset only on a message that should render on every request.
 
 The validation errors are:
 
@@ -2125,7 +2103,8 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant beta:messages create --beta mid-conversation-system-clear-at-2026-08-21 <<'YAML'
+ant beta:messages create \
+  --beta mid-conversation-system-clear-at-2026-08-21 <<'YAML'
 model: claude-fable-5-1
 max_tokens: 4096
 messages:
@@ -2205,11 +2184,10 @@ var response = await client.Beta.Messages.Create(new MessageCreateParams
     MaxTokens = 4096,
     Messages =
     [
-        new() { Role = Role.User, Content = "Draft a short status update on the database migration for the team channel." },
+        new BetaUserMessageParam { Content = "Draft a short status update on the database migration for the team channel." },
         // Turn-scoped reminder: renders for this turn, then clears once a later user message exists.
-        new()
+        new BetaSystemMessageParam
         {
-            Role = Role.System,
             ClearAt = ClearAt.NextUserMessage,
             Content = "The reader is on call: keep this reply under 50 words.",
         },
@@ -2257,7 +2235,7 @@ for _, block := range response.Content {
 ```java Java
 import com.anthropic.models.beta.AnthropicBeta;
 import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaMessageParam;
+import com.anthropic.models.beta.messages.BetaSystemMessageParam;
 import com.anthropic.models.beta.messages.MessageCreateParams;
 import com.anthropic.models.messages.Model;
 
@@ -2270,9 +2248,8 @@ void main() {
         .addBeta(AnthropicBeta.MID_CONVERSATION_SYSTEM_CLEAR_AT_2026_08_21)
         .addUserMessage("Draft a short status update on the database migration for the team channel.")
         // Turn-scoped reminder: renders for this turn, then clears once a later user message exists.
-        .addMessage(BetaMessageParam.builder()
-            .role(BetaMessageParam.Role.SYSTEM)
-            .clearAt(BetaMessageParam.ClearAt.NEXT_USER_MESSAGE)
+        .addMessage(BetaSystemMessageParam.builder()
+            .clearAt(BetaSystemMessageParam.ClearAt.NEXT_USER_MESSAGE)
             .content("The reader is on call: keep this reply under 50 words.")
             .build())
         .build();
@@ -2317,7 +2294,7 @@ foreach ($response->content as $block) {
 client = Anthropic::Client.new
 
 response = client.beta.messages.create(
-  model: "claude-fable-5-1",
+  model: Anthropic::Model::CLAUDE_FABLE_5_1,
   max_tokens: 4096,
   messages: [
     {role: "user", content: "Draft a short status update on the database migration for the team channel."},
@@ -2336,7 +2313,7 @@ end
 
 Mid-conversation system messages and [prompt caching](prompt-caching.md) are designed to be used together:
 
-* **Enable caching explicitly.** Caching only happens when the request includes `cache_control`, either the top-level [automatic caching](prompt-caching.md#automatic-caching) field or an [explicit breakpoint](prompt-caching.md#explicit-cache-breakpoints) on a content block. A mid-conversation system message does not create a cache entry on its own, and without caching enabled there are no savings to preserve.
+* **Enable caching explicitly.** Caching only occurs when the request includes `cache_control`, either the top-level [automatic caching](prompt-caching.md#automatic-caching) field or an [explicit breakpoint](prompt-caching.md#explicit-cache-breakpoints) on a content block. A mid-conversation system message does not create a cache entry on its own, and without caching enabled there are no savings to preserve.
 * **Cache the stable prefix as usual.** Place `cache_control` on the last block that stays the same across requests, whether that is the end of the top-level `system` field, the end of your tool definitions, or a stable point in the message history.
 * **Append the system message after the breakpoint.** Because it comes after the cached prefix, it does not change the prefix hash and the cache still hits.
 * **A mid-conversation system message is itself cacheable.** Once it is in the conversation, it becomes part of the stable history. On the next turn you can move your cache breakpoint past it (or rely on [automatic caching](prompt-caching.md#automatic-caching) to do so) and the system message is read from cache like any other turn.
@@ -2358,7 +2335,7 @@ How caching works, where to place breakpoints, and how to read cache usage field
 
 **Cache diagnostics**
 
-Find out exactly where two requests diverged when a cache hit you expected does not happen.
+Find out exactly where two requests diverged when a cache hit you expected does not occur.
 
 **Using the Messages API**
 

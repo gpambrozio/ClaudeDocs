@@ -17,7 +17,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
 ## Use cases
 
 * **Development workflows:** Run build commands, tests, and development tools
-* **System automation:** Execute scripts, manage files, automate tasks
+* **System automation:** Run scripts, manage files, automate tasks
 * **Data processing:** Process files, run analysis scripts, manage datasets
 * **Environment setup:** Install packages, configure environments
 
@@ -98,11 +98,7 @@ var response = await client.Messages.Create(
         Tools = [new ToolBash20250124()],
         Messages =
         [
-            new()
-            {
-                Role = Role.User,
-                Content = "List all Python files in the current directory.",
-            },
+            new UserMessageParam { Content = "List all Python files in the current directory." },
         ],
     }
 );
@@ -169,7 +165,7 @@ echo $response;
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   tools: [{type: "bash_20250124", name: "bash"}],
   messages: [
@@ -182,7 +178,7 @@ puts response
 
 Claude responds with `stop_reason: "tool_use"` and a `tool_use` block that contains the command for your application to run:
 
-```json Output
+```text Output wrap
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
   "model": "claude-opus-5-5",
@@ -218,7 +214,7 @@ Each tool call is one round trip between Claude and your application:
 
 Claude can also return several `tool_use` blocks in one response. Run them in order in the same session and return all of the results in one `user` message. See [Parallel tool use](parallel-tool-use.md).
 
-The API is stateless. Nothing about your shell session travels between requests, so your application decides when the session starts, how long it lives, and when to restart it. For the full request and response cycle, see [Handle tool calls](handle-tool-calls.md).
+The API is stateless. Nothing about your shell session travels between requests, so your application determines when the session starts, how long it lives, and when to restart it. For the full request and response cycle, see [Handle tool calls](handle-tool-calls.md).
 
 ## Parameters
 
@@ -677,7 +673,7 @@ puts session.execute_command("cd /tmp && pwd")
 puts session.execute_command("pwd") # still /tmp: the session kept its state
 ```
 
-The session interleaves stderr with stdout, so error messages land where they happened. The example leaves out what a complete implementation also needs: a timeout that kills the shell and every process it started when a command hangs, then restarts the session. The [Use command timeouts](bash-tool.md#follow-implementation-best-practices) best practice shows one way to add it.
+The session interleaves stderr with stdout, so error messages land where they occurred. The example leaves out what a complete implementation also needs: a timeout that kills the shell and every process it started when a command hangs, then restarts the session. The [Use command timeouts](bash-tool.md#follow-implementation-best-practices) best practice shows one way to add it.
 
 **Process Claude's tool calls**
 
@@ -824,7 +820,7 @@ end
 
 **Return the result to Claude**
 
-Send the `tool_result` back in a `user` message that continues the same conversation. Claude either requests another command in the same session or finishes its answer:
+Send the `tool_result` back in a `user` message that continues the same conversation. Claude either requests another command in the same session or completes its answer:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -985,15 +981,10 @@ var response = await client.Messages.Create(
         Tools = [new ToolBash20250124()],
         Messages =
         [
-            new()
+            new UserMessageParam { Content = "List all Python files in the current directory." },
+            new AssistantMessageParam
             {
-                Role = Role.User,
-                Content = "List all Python files in the current directory.",
-            },
-            new()
-            {
-                Role = Role.Assistant,
-                Content = new MessageParamContent(new List<ContentBlockParam>
+                Content = new List<ContentBlockParam>
                 {
                     new ContentBlockParam(new ToolUseBlockParam()
                     {
@@ -1004,19 +995,18 @@ var response = await client.Messages.Create(
                             ["command"] = JsonSerializer.SerializeToElement("ls *.py"),
                         },
                     }),
-                }),
+                },
             },
-            new()
+            new UserMessageParam
             {
-                Role = Role.User,
-                Content = new MessageParamContent(new List<ContentBlockParam>
+                Content = new List<ContentBlockParam>
                 {
                     new ContentBlockParam(new ToolResultBlockParam()
                     {
                         ToolUseID = "toolu_01A09q90qw90lq917835lq9",
                         Content = "analysis.py\nprocess_data.py\n",
                     }),
-                }),
+                },
             },
         ],
     }
@@ -1074,7 +1064,7 @@ void main() {
         .maxTokens(1024)
         .addTool(ToolBash20250124.builder().build())
         .addUserMessage("List all Python files in the current directory.")
-        .addAssistantMessageOfBlockParams(
+        .addAssistantMessageOfContentBlockParams(
             List.of(
                 ContentBlockParam.ofToolUse(
                     ToolUseBlockParam.builder()
@@ -1089,7 +1079,7 @@ void main() {
                 )
             )
         )
-        .addUserMessageOfBlockParams(
+        .addUserMessageOfContentBlockParams(
             List.of(
                 ContentBlockParam.ofToolResult(
                     ToolResultBlockParam.builder()
@@ -1148,7 +1138,7 @@ print_r($response->content);
 client = Anthropic::Client.new
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   tools: [{type: "bash_20250124", name: "bash"}],
   messages: [
@@ -1427,11 +1417,11 @@ This check is a tripwire for obvious mistakes, not an enforcement boundary. It r
 
 ### Handle errors
 
-When a command fails or the session breaks, tell Claude what happened. Return the message as the `tool_result` content and set `is_error` to `true`, which marks the tool call as failed. See [Handling errors with is\_error](handle-tool-calls.md#handling-errors-with-is-error).
+When a command fails or the session breaks, tell Claude what occurred. Return the message as the `tool_result` content and set `is_error` to `true`, which marks the tool call as failed. See [Handling errors with is\_error](handle-tool-calls.md#handling-errors-with-is-error).
 
 **Command execution timeout**
 
-If a command takes too long to execute:
+If a command takes too long to run:
 
 ```json
 {
@@ -1487,7 +1477,7 @@ If there are permission issues:
 
 **Use command timeouts**
 
-A command that never finishes, such as one that waits for input, blocks the session forever because its sentinel line never arrives. Give every command a deadline. When the deadline passes, stop the shell and everything the command started, then restart the session:
+A command that never completes, such as one that waits for input, blocks the session forever because its sentinel line never arrives. Give every command a deadline. When the deadline passes, stop the shell and everything the command started, then restart the session:
 
 ```python Python
 import concurrent.futures
@@ -1789,7 +1779,7 @@ end
 
 **Log all commands**
 
-Keep an audit trail. Route every command through one wrapper that records the command before it runs and the output after it finishes. A command that hangs or breaks the session still leaves a record:
+Keep an audit trail. Route every command through one wrapper that records the command before it runs and the output after it completes. A command that hangs or breaks the session still leaves a record:
 
 ```python Python
 import logging
@@ -1908,9 +1898,9 @@ See [tool use pricing](overview.md#pricing) for complete pricing details.
 
 * Running tests: `pytest && coverage report`
 * Building projects: `npm install && npm run build`
-* Git operations: `git status && git add . && git commit -m "message"`
+* Running Git operations: `git status && git add . && git commit -m "message"`
 
-For guidance on using git as a checkpoint-and-recovery mechanism in long-running agent workflows, see [state management best practices](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#state-management-best-practices).
+For guidance on using Git as a checkpoint-and-recovery mechanism in long-running agent workflows, see [state management best practices](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#state-management-best-practices).
 
 ### File operations
 
@@ -1921,8 +1911,8 @@ For guidance on using git as a checkpoint-and-recovery mechanism in long-running
 ### System tasks
 
 * Checking resources: `df -h && free -m`
-* Process management: `ps aux | grep python`
-* Environment setup: `export PATH=$PATH:/new/path && echo $PATH`
+* Managing processes: `ps aux | grep python`
+* Setting up the environment: `export PATH=$PATH:/new/path && echo $PATH`
 
 ## Limitations
 
@@ -1946,7 +1936,7 @@ View and modify text files to debug, fix, and improve code.
 
 **Tool use with Claude**
 
-Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
+Connect Claude to external tools and APIs. See where tools run, when Claude calls them, and which tool fits your task.
 
 ---
 
