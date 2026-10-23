@@ -110,7 +110,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/v2"
 )
 
 func main() {
@@ -309,11 +309,9 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	Skills: []anthropic.BetaManagedAgentsSkillParamsUnion{
 		{OfAnthropic: &anthropic.BetaManagedAgentsAnthropicSkillParams{
 			SkillID: "xlsx",
-			Type:    anthropic.BetaManagedAgentsAnthropicSkillParamsTypeAnthropic,
 		}},
 		{OfCustom: &anthropic.BetaManagedAgentsCustomSkillParams{
 			SkillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
-			Type:    anthropic.BetaManagedAgentsCustomSkillParamsTypeCustom,
 			Version: anthropic.String("latest"),
 		}},
 	},
@@ -321,7 +319,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 if err != nil {
 	panic(err)
 }
-_ = agent
 ```
 
 ```java Java
@@ -375,7 +372,7 @@ agent = client.beta.agents.create(
 
 Skills can also live in your code base. When a session mounts a repository through the [`github_repository` resource](github.md), the repository's root `.claude/skills` directory is scanned at session start, and each skill found there becomes available to the agent. No upload and no entry in the agent's `skills` (csharp, go: `Skills`) array are required. The agent receives each discovered skill's name, description, and path in the sandbox, and reads the skill's `SKILL.md` when a task matches, including any scripts and resources the skill ships. Discovery relies on the agent's `read` tool from the [agent toolset](tools.md), which is enabled by default; an agent with `read` disabled doesn't load repository skills.
 
-Repository skills are agent instructions, so a mounted repository is part of your agent's trust boundary. Anyone who can commit to the repository (a merged external pull request, a compromised dependency, a contributor) can add or change a skill, the platform loads it at session start without a review step, and session tools such as `bash` and `web_fetch` give those instructions real reach. Mount only repositories you trust, and review `.claude/skills` before mounting a repository that accepts outside contributions.
+Repository skills are agent instructions, so a mounted repository is part of your agent's trust boundary. Anyone who can commit to the repository (a merged external pull request, a compromised dependency, a contributor) can add or change a skill. The platform loads that skill at session start without a review step, and session tools such as `bash` and `web_fetch` give its instructions real reach. Mount only repositories you trust, and review `.claude/skills` before mounting a repository that accepts outside contributions.
 
 Repository skill discovery runs in cloud sandboxes. [Self-hosted sandboxes](self-hosted-sandboxes.md) don't support GitHub repository resources.
 
@@ -498,7 +495,6 @@ session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 	Resources: []anthropic.BetaSessionNewParamsResourceUnion{
 		{
 			OfGitHubRepository: &anthropic.BetaManagedAgentsGitHubRepositoryResourceParams{
-				Type:               anthropic.BetaManagedAgentsGitHubRepositoryResourceParamsTypeGitHubRepository,
 				URL:                "https://github.com/org/repo",
 				MountPath:          anthropic.String("/workspace/repo"),
 				AuthorizationToken: "ghp_your_github_token",

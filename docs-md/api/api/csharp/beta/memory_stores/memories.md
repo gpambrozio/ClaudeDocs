@@ -167,7 +167,7 @@ Create a Memory
 
   See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory"`
 
   - `required string ID`
 
@@ -432,7 +432,7 @@ List Memories
 
     See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-    - `required Type Type`
+    - `JsonElement Type = "memory"`
 
     - `required string ID`
 
@@ -492,7 +492,7 @@ List Memories
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-    - `required Type Type`
+    - `JsonElement Type = "memory_prefix"`
 
     - `required string Path`
 
@@ -685,7 +685,7 @@ Retrieve a Memory
 
   See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory"`
 
   - `required string ID`
 
@@ -941,7 +941,7 @@ Update a Memory
 
   See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory"`
 
   - `required string ID`
 
@@ -1179,7 +1179,7 @@ Delete a Memory
 
   See the [memory guide](../../../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_deleted"`
 
   - `required string ID`
 
@@ -1217,7 +1217,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
 - `class BetaManagedAgentsConflictError`
 
-  - `required Type Type`
+  - `JsonElement Type = "conflict_error"`
 
   - `string Message`
 
@@ -1229,7 +1229,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   If the hashes differ, the request fails with HTTP status 409. Retrieve the memory and retry. If the memory already has exactly the requested `content` and `path`, the request succeeds even though the hashes differ.
 
-  - `required Type Type`
+  - `JsonElement Type = "content_sha256"`
 
   - `string ContentSha256`
 
@@ -1245,7 +1245,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   See the [memory guide](../../../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_deleted"`
 
   - `required string ID`
 
@@ -1317,7 +1317,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
     See the [memory guide](../../../../managed-agents/memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
 
-    - `required Type Type`
+    - `JsonElement Type = "memory_precondition_failed_error"`
 
     - `string Message`
 
@@ -1329,7 +1329,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
     Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
 
-    - `required Type Type`
+    - `JsonElement Type = "memory_path_conflict_error"`
 
     - `string ConflictingMemoryID`
 
@@ -1347,7 +1347,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   - `class BetaManagedAgentsConflictError`
 
-    - `required Type Type`
+    - `JsonElement Type = "conflict_error"`
 
     - `string Message`
 
@@ -1361,7 +1361,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory"`
 
   - `required string ID`
 
@@ -1429,7 +1429,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
     See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-    - `required Type Type`
+    - `JsonElement Type = "memory"`
 
     - `required string ID`
 
@@ -1489,7 +1489,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-    - `required Type Type`
+    - `JsonElement Type = "memory_prefix"`
 
     - `required string Path`
 
@@ -1503,7 +1503,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_path_conflict_error"`
 
   - `string ConflictingMemoryID`
 
@@ -1529,7 +1529,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   See the [memory guide](../../../../managed-agents/memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_precondition_failed_error"`
 
   - `string Message`
 
@@ -1543,7 +1543,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_prefix"`
 
   - `required string Path`
 
@@ -1571,7 +1571,7 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
   Optional condition that must hold for an update to apply. When omitted, the update is unconditional. Asserts the current state of the memory being updated. When an update changes `path`, the precondition still refers to the memory's current content, not the destination path. Currently the only supported variant is `content_sha256`.
 
-  - `required Type Type`
+  - `JsonElement Type = "content_sha256"`
 
   - `string ContentSha256`
 

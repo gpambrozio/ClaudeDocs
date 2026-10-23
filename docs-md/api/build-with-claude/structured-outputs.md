@@ -31,7 +31,7 @@ featureMetadata:
     Claude API: ga
     Claude Platform on AWS: ga
     Amazon Bedrock: ga
-    Google Cloud: ga
+    Claude Models on Google Cloud (Google managed): ga
     Microsoft Foundry: ga
 ---
 
@@ -110,7 +110,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Claude returns JSON like this in the response's text content block:
 
-```text Output wrap
+```json Output
 {
   "name": "John Smith",
   "email": "john@example.com",
@@ -148,7 +148,7 @@ YAML
 
 Claude returns JSON like this in the response's text content block:
 
-```text Output wrap
+```json Output
 {
   "name": "John Smith",
   "email": "john@example.com",
@@ -258,11 +258,14 @@ var response = await client.Messages.Create<ContactInfo>(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new UserMessageParam {
-        Content = "Extract the key information from this email: "
-            + "John Smith (john@example.com) is interested in our Enterprise plan "
-            + "and wants to schedule a demo for next Tuesday at 2pm."
-    }],
+    Messages = [
+        new UserMessageParam
+        {
+            Content = "Extract the key information from this email: "
+                + "John Smith (john@example.com) is interested in our Enterprise plan "
+                + "and wants to schedule a demo for next Tuesday at 2pm."
+        }
+    ],
 });
 
 if (response.Content.Select(block => block.Parsed()).OfType<ContactInfo>().FirstOrDefault() is { } contact)
@@ -367,7 +370,7 @@ When you pass a Java class to `outputConfig()`, the SDK derives a JSON schema fr
 
 The previous example outputs:
 
-```text Output wrap
+```json Output
 {"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise","demo_requested":true}
 ```
 
@@ -387,7 +390,7 @@ Key points:
 
 * **Local validation** occurs without sending requests to the remote AI model.
 * **Remote validation** is also performed by the AI model upon receiving the JSON schema.
-* **Version compatibility:** Local validation might fail while remote validation succeeds if the SDK version is outdated.
+* **Version compatibility:** If the SDK version is outdated, local validation might reject a schema that remote validation accepts.
 * **Disabling local validation:** Pass `JsonSchemaLocalValidation.NO` if you encounter compatibility issues:
 
 ```java
@@ -455,7 +458,7 @@ static class Composed {
 
 The JSON output has this nested structure:
 
-```json
+```json Output
 {
   "composedA": { "a": "hello" },
   "composedB": { "b": "world" }
@@ -476,7 +479,7 @@ static class Derived extends Base {
 
 The JSON output has this flat structure:
 
-```json
+```json Output
 {
   "a": "hello",
   "b": "world"
@@ -494,30 +497,30 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 static class Person {
 
-  @JsonPropertyDescription("The first name and surname of the person")
-  public String name;
+    @JsonPropertyDescription("The first name and surname of the person")
+    public String name;
 
-  public int birthYear;
+    public int birthYear;
 
-  @JsonPropertyDescription("The year the person died, or 'present' if the person is living.")
-  public String deathYear;
+    @JsonPropertyDescription("The year the person died, or 'present' if the person is living.")
+    public String deathYear;
 }
 
 @JsonClassDescription("The details of one published book")
 static class Book {
 
-  public String title;
-  public Person author;
+    public String title;
+    public Person author;
 
-  @JsonPropertyDescription("The year in which the book was first published.")
-  public int publicationYear;
+    @JsonPropertyDescription("The year in which the book was first published.")
+    public int publicationYear;
 
-  @JsonIgnore
-  public String genre;
+    @JsonIgnore
+    public String genre;
 }
 
 static class BookList {
-  public List<Book> books;
+    public List<Book> books;
 }
 ```
 
@@ -538,15 +541,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 static class Article {
 
-  @ArraySchema(minItems = 1)
-  public List<String> authors;
+    @ArraySchema(minItems = 1)
+    public List<String> authors;
 
-  public String title;
+    public String title;
 
-  @Schema(format = "date")
-  public String publicationDate;
+    @Schema(format = "date")
+    public String publicationDate;
 
-  public int pageCount;
+    public int pageCount;
 }
 ```
 
@@ -780,7 +783,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Claude returns JSON like this in the response's text content block:
 
-```text Output wrap
+```json Output
 {
   "name": "John Smith",
   "email": "john@example.com",
@@ -818,7 +821,7 @@ YAML
 
 Claude returns JSON like this in the response's text content block:
 
-```text Output wrap
+```json Output
 {
   "name": "John Smith",
   "email": "john@example.com",
@@ -932,11 +935,14 @@ var response = await client.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 1024,
-    Messages = [new UserMessageParam {
-        Content = "Extract the key information from this email: "
-            + "John Smith (john@example.com) is interested in our Enterprise plan "
-            + "and wants to schedule a demo for next Tuesday at 2pm."
-    }],
+    Messages = [
+        new UserMessageParam
+        {
+            Content = "Extract the key information from this email: "
+                + "John Smith (john@example.com) is interested in our Enterprise plan "
+                + "and wants to schedule a demo for next Tuesday at 2pm."
+        }
+    ],
     OutputConfig = new OutputConfig
     {
         Format = new JsonOutputFormat
@@ -959,7 +965,7 @@ var response = await client.Messages.Create(new MessageCreateParams
     },
 });
 
-if (response.Content.Select(b => b.Value).OfType<TextBlock>().FirstOrDefault() is { } textBlock)
+if (response.Content.Select(block => block.Value).OfType<TextBlock>().FirstOrDefault() is { } textBlock)
 {
     // JSON is guaranteed to match the schema
     var contact = JsonSerializer.Deserialize<JsonElement>(textBlock.Text);
@@ -967,9 +973,9 @@ if (response.Content.Select(b => b.Value).OfType<TextBlock>().FirstOrDefault() i
 }
 ```
 
-The example above outputs:
+The previous example outputs:
 
-```text Output wrap
+```json Output
 {"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise","demo_requested":true}
 ```
 
@@ -1057,7 +1063,9 @@ void main() throws Exception {
         .build();
 
     OutputConfig outputConfig = OutputConfig.builder()
-        .format(JsonOutputFormat.builder().schema(schema).build())
+        .format(JsonOutputFormat.builder()
+            .schema(schema)
+            .build())
         .build();
 
     MessageCreateParams createParams = MessageCreateParams.builder()
@@ -1081,7 +1089,7 @@ void main() throws Exception {
 
 The previous example outputs:
 
-```text Output wrap
+```json Output
 {"name":"John Smith","email":"john@example.com","plan_interest":"Enterprise"}
 ```
 
@@ -1753,7 +1761,7 @@ class Classification implements StructuredOutputModel
     public string $sentiment;
 }
 
-$feedbackText = "Great product, fast shipping!";
+$feedbackText = 'Great product, fast shipping!';
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -2315,7 +2323,7 @@ const response = await client.messages.create({
   ]
 });
 
-// Claude may call the tool first (tool_use) or respond with JSON (text)
+// Claude might call the tool first (tool_use) or respond with JSON (text)
 console.log("Stop reason:", response.stop_reason);
 for (const block of response.content) {
   switch (block.type) {
@@ -2453,7 +2461,9 @@ MessageCreateParams params = MessageCreateParams.builder()
     .maxTokens(1024L)
     .addUserMessage("Help me plan a trip to Paris departing May 15, 2026")
     .outputConfig(OutputConfig.builder()
-        .format(JsonOutputFormat.builder().schema(outputSchema).build())
+        .format(JsonOutputFormat.builder()
+            .schema(outputSchema)
+            .build())
         .build())
     .addTool(Tool.builder()
         .name("search_flights")
@@ -2508,7 +2518,7 @@ $message = $client->messages->create(
     ],
 );
 
-// Claude may call the tool first (tool_use) or respond with JSON (text)
+// Claude might call the tool first (tool_use) or respond with JSON (text)
 $plan = $message->parsedOutput();
 if ($plan instanceof TripPlan) {
     echo $plan->summary, "\n";

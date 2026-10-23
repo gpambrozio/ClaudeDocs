@@ -13,7 +13,7 @@ featureMetadata:
     Claude API: ga
     Claude Platform on AWS: ga
     Amazon Bedrock: ga
-    Google Cloud: ga
+    Claude Models on Google Cloud (Google managed): ga
     Microsoft Foundry: ga
 ---
 
@@ -29,7 +29,13 @@ Token counting lets you determine the number of tokens in a message before you s
 
 The [token counting](../api/messages/count_tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](../agents-and-tools/tool-use/overview.md), [images](vision.md), and [PDFs](pdf-support.md). The response contains the total number of input tokens.
 
-This endpoint returns an `invalid_request_error` for a few inputs that the Messages API accepts: [server tools](../agents-and-tools/tool-use/server-tools.md) such as web search, web fetch, code execution, and tool search (every server tool except the [advisor tool](../agents-and-tools/tool-use/advisor-tool.md)), the [MCP connector](../agents-and-tools/mcp-connector.md), and `image` or `document` blocks with a `url` or `file` source. Send images and PDFs as base64 to count them. For requests that use server tools or MCP servers, the Messages API response reports the tokens used in its `usage` object.
+This endpoint returns an `invalid_request_error` for a few inputs that the Messages API accepts:
+
+* [Server tools](../agents-and-tools/tool-use/server-tools.md) such as web search, web fetch, code execution, and tool search (every server tool except the [advisor tool](../agents-and-tools/tool-use/advisor-tool.md))
+* The [MCP connector](../agents-and-tools/mcp-connector.md)
+* `image` or `document` blocks with a `url` or `file` source
+
+Send images and PDFs as base64 to count them. For requests that use server tools or MCP servers, the Messages API response reports the tokens used in its `usage` object.
 
 The token count is an **estimate**. In some cases, the actual number of input tokens used when creating a message might differ by a small amount.
 
@@ -139,18 +145,18 @@ import com.anthropic.models.messages.MessageTokensCount;
 
 public class CountTokensExample {
 
-  public static void main(String[] args) {
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+    public static void main(String[] args) {
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-    MessageCountTokensParams params = MessageCountTokensParams.builder()
-      .model(Model.CLAUDE_OPUS_5_5)
-      .system("You are a scientist")
-      .addUserMessage("Hello, Claude")
-      .build();
+        MessageCountTokensParams params = MessageCountTokensParams.builder()
+            .model(Model.CLAUDE_OPUS_5_5)
+            .system("You are a scientist")
+            .addUserMessage("Hello, Claude")
+            .build();
 
-    MessageTokensCount count = client.messages().countTokens(params);
-    System.out.println(count);
-  }
+        MessageTokensCount count = client.messages().countTokens(params);
+        System.out.println(count);
+    }
 }
 ```
 
@@ -161,7 +167,7 @@ $response = $client->messages->countTokens(
     messages: [
         ['role' => 'user', 'content' => 'Hello, Claude']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     system: 'You are a scientist',
 );
 
@@ -182,7 +188,7 @@ response = client.messages.count_tokens(
 puts response
 ```
 
-```text Output wrap
+```json Output
 { "input_tokens": 14 }
 ```
 
@@ -368,39 +374,39 @@ fmt.Println(string(jsonData))
 import com.anthropic.models.messages.MessageCountTokensParams;
 import com.anthropic.models.messages.MessageTokensCount;
 // ...
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-    InputSchema schema = InputSchema.builder()
-      .properties(
-        JsonValue.from(
-          Map.of(
-            "location",
-            Map.of(
-              "type",
-              "string",
-              "description",
-              "The city and state, e.g. San Francisco, CA"
+        InputSchema schema = InputSchema.builder()
+            .properties(
+                JsonValue.from(
+                    Map.of(
+                        "location",
+                        Map.of(
+                            "type",
+                            "string",
+                            "description",
+                            "The city and state, e.g. San Francisco, CA"
+                        )
+                    )
+                )
             )
-          )
-        )
-      )
-      .putAdditionalProperty("required", JsonValue.from(List.of("location")))
-      .build();
+            .putAdditionalProperty("required", JsonValue.from(List.of("location")))
+            .build();
 
-    MessageCountTokensParams params = MessageCountTokensParams.builder()
-      .model(Model.CLAUDE_OPUS_5_5)
-      .addTool(
-        Tool.builder()
-          .name("get_weather")
-          .description("Get the current weather in a given location")
-          .inputSchema(schema)
-          .build()
-      )
-      .addUserMessage("What's the weather like in San Francisco?")
-      .build();
+        MessageCountTokensParams params = MessageCountTokensParams.builder()
+            .model(Model.CLAUDE_OPUS_5_5)
+            .addTool(
+                Tool.builder()
+                    .name("get_weather")
+                    .description("Get the current weather in a given location")
+                    .inputSchema(schema)
+                    .build()
+            )
+            .addUserMessage("What's the weather like in San Francisco?")
+            .build();
 
-    MessageTokensCount count = client.messages().countTokens(params);
-    System.out.println(count);
+        MessageTokensCount count = client.messages().countTokens(params);
+        System.out.println(count);
 ```
 
 ```php PHP
@@ -410,7 +416,7 @@ $response = $client->messages->countTokens(
     messages: [
         ['role' => 'user', 'content' => "What's the weather like in San Francisco?"]
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [
         [
             'name' => 'get_weather',
@@ -461,7 +467,7 @@ response = client.messages.count_tokens(
 puts response
 ```
 
-```text Output wrap
+```json Output
 { "input_tokens": 403 }
 ```
 
@@ -664,46 +670,50 @@ import com.anthropic.models.messages.Base64ImageSource;
 import com.anthropic.models.messages.MessageCountTokensParams;
 import com.anthropic.models.messages.MessageTokensCount;
 // ...
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-    String imageUrl =
-      "https://platform.claude.com/docs/images/vision-example.jpg";
-    String imageMediaType = "image/jpeg";
+        String imageUrl =
+            "https://platform.claude.com/docs/images/vision-example.jpg";
+        String imageMediaType = "image/jpeg";
 
-    HttpClient httpClient = HttpClient.newHttpClient();
-    HttpRequest request = HttpRequest.newBuilder().uri(URI.create(imageUrl)).build();
-    byte[] imageBytes = httpClient
-      .send(request, HttpResponse.BodyHandlers.ofByteArray())
-      .body();
-    String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(imageUrl))
+            .build();
+        byte[] imageBytes = httpClient
+            .send(request, HttpResponse.BodyHandlers.ofByteArray())
+            .body();
+        String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
 
-    ContentBlockParam imageBlock = ContentBlockParam.ofImage(
-      ImageBlockParam.builder()
-        .source(
-          Base64ImageSource.builder()
-            .mediaType(Base64ImageSource.MediaType.IMAGE_JPEG)
-            .data(imageBase64)
-            .build()
-        )
-        .build()
-    );
+        ContentBlockParam imageBlock = ContentBlockParam.ofImage(
+            ImageBlockParam.builder()
+                .source(
+                    Base64ImageSource.builder()
+                        .mediaType(Base64ImageSource.MediaType.IMAGE_JPEG)
+                        .data(imageBase64)
+                        .build()
+                )
+                .build()
+        );
 
-    ContentBlockParam textBlock = ContentBlockParam.ofText(
-      TextBlockParam.builder().text("Describe this image").build()
-    );
+        ContentBlockParam textBlock = ContentBlockParam.ofText(
+            TextBlockParam.builder()
+                .text("Describe this image")
+                .build()
+        );
 
-    MessageCountTokensParams params = MessageCountTokensParams.builder()
-      .model(Model.CLAUDE_OPUS_5_5)
-      .addUserMessageOfContentBlockParams(List.of(imageBlock, textBlock))
-      .build();
+        MessageCountTokensParams params = MessageCountTokensParams.builder()
+            .model(Model.CLAUDE_OPUS_5_5)
+            .addUserMessageOfContentBlockParams(List.of(imageBlock, textBlock))
+            .build();
 
-    MessageTokensCount count = client.messages().countTokens(params);
-    System.out.println(count);
+        MessageTokensCount count = client.messages().countTokens(params);
+        System.out.println(count);
 ```
 
 ```php PHP
-$imageUrl = "https://platform.claude.com/docs/images/vision-example.jpg";
-$imageMediaType = "image/jpeg";
+$imageUrl = 'https://platform.claude.com/docs/images/vision-example.jpg';
+$imageMediaType = 'image/jpeg';
 $imageData = base64_encode(file_get_contents($imageUrl));
 
 $client = new Client();
@@ -764,7 +774,7 @@ response = client.messages.count_tokens(
 puts response
 ```
 
-```text Output wrap
+```json Output
 { "input_tokens": 1028 }
 ```
 
@@ -981,36 +991,36 @@ import com.anthropic.models.messages.MessageTokensCount;
 import com.anthropic.models.messages.ThinkingBlockParam;
 import com.anthropic.models.messages.ThinkingConfigAdaptive;
 // ...
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-    List<ContentBlockParam> assistantBlocks = List.of(
-      ContentBlockParam.ofThinking(
-        ThinkingBlockParam.builder()
-          .thinking(
-            "This is a nice number theory question. Let's think about it step by step..."
-          )
-          .signature(
-            "EuYBCkQYAiJAgCs1le6/Pol5Z4/JMomVOouGrWdhYNsH3ukzUECbB6iWrSQtsQuRHJID6lWV..."
-          )
-          .build()
-      ),
-      ContentBlockParam.ofText(
-        TextBlockParam.builder()
-          .text("Yes, there are infinitely many prime numbers p such that p mod 4 = 3...")
-          .build()
-      )
-    );
+        List<ContentBlockParam> assistantBlocks = List.of(
+            ContentBlockParam.ofThinking(
+                ThinkingBlockParam.builder()
+                    .thinking(
+                        "This is a nice number theory question. Let's think about it step by step..."
+                    )
+                    .signature(
+                        "EuYBCkQYAiJAgCs1le6/Pol5Z4/JMomVOouGrWdhYNsH3ukzUECbB6iWrSQtsQuRHJID6lWV..."
+                    )
+                    .build()
+            ),
+            ContentBlockParam.ofText(
+                TextBlockParam.builder()
+                    .text("Yes, there are infinitely many prime numbers p such that p mod 4 = 3...")
+                    .build()
+            )
+        );
 
-    MessageCountTokensParams params = MessageCountTokensParams.builder()
-      .model(Model.CLAUDE_OPUS_5_5)
-      .thinking(ThinkingConfigAdaptive.builder().build())
-      .addUserMessage("Are there an infinite number of prime numbers such that n mod 4 == 3?")
-      .addAssistantMessageOfContentBlockParams(assistantBlocks)
-      .addUserMessage("Can you write a formal proof?")
-      .build();
+        MessageCountTokensParams params = MessageCountTokensParams.builder()
+            .model(Model.CLAUDE_OPUS_5_5)
+            .thinking(ThinkingConfigAdaptive.builder().build())
+            .addUserMessage("Are there an infinite number of prime numbers such that n mod 4 == 3?")
+            .addAssistantMessageOfContentBlockParams(assistantBlocks)
+            .addUserMessage("Can you write a formal proof?")
+            .build();
 
-    MessageTokensCount count = client.messages().countTokens(params);
-    System.out.println(count);
+        MessageTokensCount count = client.messages().countTokens(params);
+        System.out.println(count);
 ```
 
 ```php PHP
@@ -1085,7 +1095,7 @@ response = client.messages.count_tokens(
 puts response
 ```
 
-```text Output wrap
+```json Output
 { "input_tokens": 88 }
 ```
 
@@ -1275,34 +1285,38 @@ import com.anthropic.models.messages.DocumentBlockParam;
 import com.anthropic.models.messages.MessageCountTokensParams;
 import com.anthropic.models.messages.MessageTokensCount;
 // ...
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-    byte[] fileBytes = Files.readAllBytes(Path.of("/path/to/document.pdf"));
-    String pdfBase64 = Base64.getEncoder().encodeToString(fileBytes);
+        byte[] fileBytes = Files.readAllBytes(Path.of("/path/to/document.pdf"));
+        String pdfBase64 = Base64.getEncoder().encodeToString(fileBytes);
 
-    ContentBlockParam documentBlock = ContentBlockParam.ofDocument(
-      DocumentBlockParam.builder()
-        .source(Base64PdfSource.builder().data(pdfBase64).build())
-        .build()
-    );
+        ContentBlockParam documentBlock = ContentBlockParam.ofDocument(
+            DocumentBlockParam.builder()
+                .source(Base64PdfSource.builder()
+                    .data(pdfBase64)
+                    .build())
+                .build()
+        );
 
-    ContentBlockParam textBlock = ContentBlockParam.ofText(
-      TextBlockParam.builder().text("Please summarize this document.").build()
-    );
+        ContentBlockParam textBlock = ContentBlockParam.ofText(
+            TextBlockParam.builder()
+                .text("Please summarize this document.")
+                .build()
+        );
 
-    MessageCountTokensParams params = MessageCountTokensParams.builder()
-      .model(Model.CLAUDE_OPUS_5_5)
-      .addUserMessageOfContentBlockParams(List.of(documentBlock, textBlock))
-      .build();
+        MessageCountTokensParams params = MessageCountTokensParams.builder()
+            .model(Model.CLAUDE_OPUS_5_5)
+            .addUserMessageOfContentBlockParams(List.of(documentBlock, textBlock))
+            .build();
 
-    MessageTokensCount count = client.messages().countTokens(params);
-    System.out.println(count);
+        MessageTokensCount count = client.messages().countTokens(params);
+        System.out.println(count);
 ```
 
 ```php PHP
 $client = new Client();
 
-$pdfBase64 = base64_encode(file_get_contents("/path/to/document.pdf"));
+$pdfBase64 = base64_encode(file_get_contents('/path/to/document.pdf'));
 
 $response = $client->messages->countTokens(
     messages: [
@@ -1363,7 +1377,7 @@ response = client.messages.count_tokens(
 puts response
 ```
 
-```text Output wrap
+```json Output
 { "input_tokens": 2188 }
 ```
 

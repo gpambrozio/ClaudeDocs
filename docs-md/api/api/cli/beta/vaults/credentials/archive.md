@@ -193,7 +193,6 @@ Archive a Credential
 
 ```bash
 ant beta:vaults:credentials archive \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYPQfSkw
 ```

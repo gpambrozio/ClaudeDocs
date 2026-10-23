@@ -31,7 +31,7 @@ Delete Session
 
 - `class BetaManagedAgentsDeletedSession`
 
-  - `Type type`
+  - `"session_deleted" type`
 
   - `string id`
 

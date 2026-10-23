@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python
 description: Install and configure the Anthropic Python SDK with sync and async client support
 ---
 
-The Anthropic Python SDK provides convenient access to the Claude API from Python applications. It supports both synchronous and asynchronous operations, streaming, and integrations with Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry.
+The Anthropic Python SDK provides convenient access to the Claude API from Python applications. It supports both synchronous and asynchronous operations, streaming, and integrations with Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Anthropic managed), Claude Models on Google Cloud (Google managed), and Microsoft Foundry.
 
 For API feature documentation with code examples, see the [API reference](../../api/overview.md). This page covers Python-specific SDK features and configuration.
 
@@ -22,7 +22,7 @@ For platform-specific integrations or improved async performance, install with e
 # For Amazon Bedrock support
 pip install "anthropic[bedrock]"
 
-# For Google Cloud support
+# For Claude Models on Google Cloud (Google managed) support
 pip install "anthropic[vertex]"
 
 # For Claude Platform on AWS support
@@ -33,6 +33,8 @@ pip install "anthropic[aws]"
 # For improved async performance with aiohttp
 pip install "anthropic[aiohttp]"
 ```
+
+To use Claude Models on Google Cloud (Anthropic managed), run `pip install "anthropic[google_cloud]"`.
 
 ## Requirements
 
@@ -593,7 +595,7 @@ message = (
 print(message.content)
 ```
 
-These methods return an `APIResponse` object. On the async client they return an `AsyncAPIResponse`, and `.parse()`, `.read()`, `.text()`, and `.json()` must be awaited.
+These methods return an `APIResponse` object. On the async client they return an `AsyncAPIResponse`, and you must await `.parse()`, `.read()`, `.text()`, and `.json()`.
 
 ### Streaming response body
 
@@ -718,20 +720,23 @@ For detailed platform setup guides with code examples, see:
 * [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)
 * [Amazon Bedrock (Opus 4.6 and earlier)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
 * [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)
-* [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)
+* [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md)
 * [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)
 
-All five client classes are included in the base `anthropic` package:
+See also [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md).
 
-| Provider                         | Client                                         | Extra dependencies                 |
-| -------------------------------- | ---------------------------------------------- | ---------------------------------- |
-| Agent Platform                   | `from anthropic import AnthropicVertex`        | `pip install "anthropic[vertex]"`  |
-| Bedrock                          | `from anthropic import AnthropicBedrockMantle` | `pip install "anthropic[bedrock]"` |
-| Bedrock (`bedrock-runtime` path) | `from anthropic import AnthropicBedrock`       | `pip install "anthropic[bedrock]"` |
-| Claude Platform on AWS           | `from anthropic import AnthropicAWS`           | `pip install "anthropic[aws]"`     |
-| Foundry                          | `from anthropic import AnthropicFoundry`       | None                               |
+All six client classes are included in the base `anthropic` package:
 
-The `AnthropicAWS` client is in beta. Pass `workspace_id` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable.
+| Provider                                          | Client                                         | Extra dependencies                      |
+| ------------------------------------------------- | ---------------------------------------------- | --------------------------------------- |
+| Claude Models on Google Cloud (Google managed)    | `from anthropic import AnthropicVertex`        | `pip install "anthropic[vertex]"`       |
+| Bedrock                                           | `from anthropic import AnthropicBedrockMantle` | `pip install "anthropic[bedrock]"`      |
+| Bedrock (`bedrock-runtime` path)                  | `from anthropic import AnthropicBedrock`       | `pip install "anthropic[bedrock]"`      |
+| Claude Platform on AWS                            | `from anthropic import AnthropicAWS`           | `pip install "anthropic[aws]"`          |
+| Claude Models on Google Cloud (Anthropic managed) | `from anthropic import AnthropicGoogleCloud`   | `pip install "anthropic[google_cloud]"` |
+| Foundry                                           | `from anthropic import AnthropicFoundry`       | None                                    |
+
+The `AnthropicAWS` client is in beta. Pass `workspace_id` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable. The `AnthropicGoogleCloud` client is also in beta. Pass `workspace_id` to the constructor or set the `ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID` environment variable. See [Project, location, and workspace resolution](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#project-location-and-workspace-resolution) for how the client resolves the workspace ID.
 
 Use `AnthropicBedrockMantle` for new projects; `AnthropicBedrock` remains for existing applications using the Bedrock `InvokeModel` API.
 

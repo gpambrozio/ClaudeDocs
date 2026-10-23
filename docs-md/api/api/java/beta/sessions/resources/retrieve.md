@@ -143,7 +143,7 @@ Get Session Resource
 
   - `class BetaManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `JsonValue type = "github_repository"`
 
     - `String id`
 
@@ -167,7 +167,7 @@ Get Session Resource
 
       - `class BetaManagedAgentsBranchCheckout`
 
-        - `Type type`
+        - `JsonValue type = "branch"`
 
         - `String name`
 
@@ -177,7 +177,7 @@ Get Session Resource
 
       - `class BetaManagedAgentsCommitCheckout`
 
-        - `Type type`
+        - `JsonValue type = "commit"`
 
         - `String sha`
 
@@ -187,7 +187,7 @@ Get Session Resource
 
   - `class BetaManagedAgentsFileResource`
 
-    - `Type type`
+    - `JsonValue type = "file"`
 
     - `String id`
 
@@ -211,7 +211,7 @@ Get Session Resource
 
     A memory store attached to an agent session.
 
-    - `Type type`
+    - `JsonValue type = "memory_store"`
 
     - `String memoryStoreId`
 

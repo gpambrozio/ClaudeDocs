@@ -47,7 +47,6 @@ Delete a Memory Store
 
 ```bash
 ant beta:memory-stores delete \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 

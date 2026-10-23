@@ -14,7 +14,7 @@ This page covers how refusals appear in streaming responses. For every `stop_rea
 
 When streaming classifiers detect content that violates Anthropic's policies, the API returns this response:
 
-```text
+```json
 {
   "role": "assistant",
   "content": [
@@ -223,7 +223,8 @@ void resetConversation() {
 $client = new Client();
 $messages = [];
 
-function resetConversation(&$messages) {
+function resetConversation(&$messages)
+{
     $messages = [];
     echo "Conversation reset due to refusal\n";
 }
@@ -244,7 +245,7 @@ try {
         }
     }
 } catch (\Exception $e) {
-    echo "Error: " . $e->getMessage() . "\n";
+    echo 'Error: ' . $e->getMessage() . "\n";
 }
 ```
 

@@ -179,7 +179,7 @@ Create User Profile
 
   A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
 
-  - `required Type Type`
+  - `JsonElement Type = "user_profile"`
 
     Object type. Always `user_profile`.
 
@@ -510,7 +510,7 @@ List User Profiles
 
   A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
 
-  - `required Type Type`
+  - `JsonElement Type = "user_profile"`
 
     Object type. Always `user_profile`.
 
@@ -816,7 +816,7 @@ Get User Profile
 
   A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
 
-  - `required Type Type`
+  - `JsonElement Type = "user_profile"`
 
     Object type. Always `user_profile`.
 
@@ -1156,7 +1156,7 @@ Update User Profile
 
   A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
 
-  - `required Type Type`
+  - `JsonElement Type = "user_profile"`
 
     Object type. Always `user_profile`.
 
@@ -1623,7 +1623,7 @@ Create Enrollment URL
 
   A URL to give to the entity that a user profile represents, so that the entity can enroll in a program.
 
-  - `required Type Type`
+  - `JsonElement Type = "enrollment_url"`
 
     Object type. Always `enrollment_url`.
 
@@ -1685,7 +1685,7 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 
   A Messages, Message Batches or token counting request can send a profile's `id` in the `anthropic-user-profile-id` header to attribute the request to that entity.
 
-  - `required Type Type`
+  - `JsonElement Type = "user_profile"`
 
     Object type. Always `user_profile`.
 
@@ -1809,7 +1809,7 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 
   A URL to give to the entity that a user profile represents, so that the entity can enroll in a program.
 
-  - `required Type Type`
+  - `JsonElement Type = "enrollment_url"`
 
     Object type. Always `enrollment_url`.
 

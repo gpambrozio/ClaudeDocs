@@ -94,7 +94,7 @@ You can also steer thinking on a per-message basis from the user turn, independe
 
 Per-message steering is useful when only some requests in a conversation warrant extended reasoning. An agent harness, for example, can append the encouraging phrase on planning steps and the discouraging phrase on routine confirmations, without touching the system prompt or changing any request parameters between turns.
 
-On Claude Haiku 5.5, the discouraging phrase doesn't reliably reduce thinking. On the Claude API and Google Cloud, run routine turns on that model with less thinking by using a [per-message effort change](effort.md#change-effort-mid-conversation-beta) (beta) instead, which also keeps the prompt cache.
+On Claude Haiku 5.5, the discouraging phrase doesn't reliably reduce thinking. On the Claude API and Claude Models on Google Cloud (Google managed), run routine turns on that model with less thinking by using a [per-message effort change](effort.md#change-effort-mid-conversation-beta) (beta) instead, which also keeps the prompt cache.
 
 ### Verify steering on your workload
 
@@ -112,7 +112,7 @@ Assistant turns don't need to start with a thinking block. (Models using a legac
 
 For multi-turn applications, this means you can pass back conversation history in whatever shape you have it:
 
-* Assistant turns without thinking are valid history as-is.
+* Assistant turns that Claude produced without thinking are valid history as-is.
 * You can resume a conversation that started without thinking, or that used a different thinking configuration, without rewriting its history.
 * History assembled from mixed sources doesn't need thinking blocks reinserted at the start of each assistant turn to pass validation.
 
@@ -128,17 +128,11 @@ The following example demonstrates the invalidation with a multi-turn script you
 
 **Effort changes invalidate the prompt cache**
 
-**cURL**
+This workflow needs more logic than a single shell command. Use the Claude SDK to run it; per-turn HTTP requests follow the examples on the [Prompt caching](prompt-caching.md) page.
 
-This workflow doesn't translate well to a one-off shell command. Use the Claude SDK to run it; per-turn HTTP requests follow the examples on the [Prompt caching](prompt-caching.md) page.
+This workflow needs more logic than a single shell command. Use the Claude SDK to run it; per-turn CLI commands follow the examples on the [Prompt caching](prompt-caching.md) page.
 
-**CLI**
-
-This workflow doesn't translate well to a one-off shell command. Use the Claude SDK to run it; per-turn CLI commands follow the examples on the [Prompt caching](prompt-caching.md) page.
-
-**Python**
-
-```python
+```python Python
 import requests
 
 client = Anthropic()
@@ -154,7 +148,7 @@ book_content = fetch_article_content(book_url)
 # Use just enough text for caching (first few chapters)
 LARGE_TEXT = book_content[:10000]
 
-# No system prompt - caching in messages instead
+# No system prompt: caching in messages instead
 MESSAGES = [
     {
         "role": "user",
@@ -169,7 +163,7 @@ MESSAGES = [
     }
 ]
 
-# First request - establish cache
+# First request: establish cache
 print("First request - establishing cache")
 response1 = client.messages.create(
     model="claude-opus-5-5",
@@ -183,7 +177,7 @@ print(f"First response usage: {response1.usage}")
 MESSAGES.append({"role": "assistant", "content": response1.content})
 MESSAGES.append({"role": "user", "content": "Analyze the characters in this passage."})
 
-# Second request - same configuration (cache hit expected)
+# Second request: same configuration (cache hit expected)
 print("\nSecond request - same configuration (cache hit expected)")
 response2 = client.messages.create(
     model="claude-opus-5-5",
@@ -197,7 +191,7 @@ print(f"Second response usage: {response2.usage}")
 MESSAGES.append({"role": "assistant", "content": response2.content})
 MESSAGES.append({"role": "user", "content": "Analyze the setting in this passage."})
 
-# Third request - different effort level (cache miss expected)
+# Third request: different effort level (cache miss expected)
 print("\nThird request - different effort level (cache miss expected)")
 response3 = client.messages.create(
     model="claude-opus-5-5",
@@ -210,9 +204,7 @@ response3 = client.messages.create(
 print(f"Third response usage: {response3.usage}")
 ```
 
-**TypeScript**
-
-```typescript
+```typescript TypeScript
 
 const client = new Anthropic();
 
@@ -227,7 +219,7 @@ const bookUrl = "https://www.gutenberg.org/cache/epub/1342/pg1342.txt";
 const bookContent = await fetchArticleContent(bookUrl);
 const LARGE_TEXT = bookContent.substring(0, 10000);
 
-// No system prompt - caching in messages instead
+// No system prompt: caching in messages instead
 const messages: Anthropic.MessageParam[] = [
   {
     role: "user",
@@ -245,7 +237,7 @@ const messages: Anthropic.MessageParam[] = [
   }
 ];
 
-// First request - establish cache
+// First request: establish cache
 console.log("First request - establishing cache");
 const response1 = await client.messages.create({
   model: "claude-opus-5-5",
@@ -261,7 +253,7 @@ messages.push(
   { role: "user", content: "Analyze the characters in this passage." }
 );
 
-// Second request - same configuration (cache hit expected)
+// Second request: same configuration (cache hit expected)
 console.log("\nSecond request - same configuration (cache hit expected)");
 const response2 = await client.messages.create({
   model: "claude-opus-5-5",
@@ -277,7 +269,7 @@ messages.push(
   { role: "user", content: "Analyze the setting in this passage." }
 );
 
-// Third request - different effort level (cache miss expected)
+// Third request: different effort level (cache miss expected)
 console.log("\nThird request - different effort level (cache miss expected)");
 const response3 = await client.messages.create({
   model: "claude-opus-5-5",
@@ -290,9 +282,7 @@ const response3 = await client.messages.create({
 console.log("Third response usage: ", response3.usage);
 ```
 
-**C#**
-
-```csharp
+```csharp C#
 AnthropicClient client = new();
 
 string bookUrl = "https://www.gutenberg.org/cache/epub/1342/pg1342.txt";
@@ -413,9 +403,7 @@ static async Task<string> FetchArticleContent(string url)
 }
 ```
 
-**Go**
-
-```go
+```go Go
 client := anthropic.NewClient()
 
 bookURL := "https://www.gutenberg.org/cache/epub/1342/pg1342.txt"
@@ -429,7 +417,7 @@ if len(largeText) > 10000 {
 	largeText = largeText[:10000]
 }
 
-// No system prompt - caching in messages instead
+// No system prompt: caching in messages instead
 messages := []anthropic.MessageParam{
 	anthropic.NewUserMessage(
 		anthropic.ContentBlockParamUnion{OfText: &anthropic.TextBlockParam{
@@ -440,7 +428,7 @@ messages := []anthropic.MessageParam{
 	),
 }
 
-// First request - establish cache
+// First request: establish cache
 fmt.Println("First request - establishing cache")
 response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Model:     anthropic.ModelClaudeOpus5_5,
@@ -458,7 +446,7 @@ fmt.Printf("First response usage: %s\n", response1.Usage.RawJSON())
 messages = append(messages, response1.ToParam())
 messages = append(messages, anthropic.NewUserMessage(anthropic.NewTextBlock("Analyze the characters in this passage.")))
 
-// Second request - same configuration (cache hit expected)
+// Second request: same configuration (cache hit expected)
 fmt.Println("\nSecond request - same configuration (cache hit expected)")
 response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Model:     anthropic.ModelClaudeOpus5_5,
@@ -476,7 +464,7 @@ fmt.Printf("Second response usage: %s\n", response2.Usage.RawJSON())
 messages = append(messages, response2.ToParam())
 messages = append(messages, anthropic.NewUserMessage(anthropic.NewTextBlock("Analyze the setting in this passage.")))
 
-// Third request - different effort level (cache miss expected)
+// Third request: different effort level (cache miss expected)
 fmt.Println("\nThird request - different effort level (cache miss expected)")
 response3, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Model:     anthropic.ModelClaudeOpus5_5,
@@ -495,9 +483,7 @@ if err != nil {
 fmt.Printf("Third response usage: %s\n", response3.Usage.RawJSON())
 ```
 
-**Java**
-
-```java
+```java Java
 import com.anthropic.models.messages.CacheControlEphemeral;
 // ...
 void main() throws Exception {
@@ -507,7 +493,7 @@ void main() throws Exception {
     String bookContent = fetchArticleContent(bookUrl);
     String largeText = bookContent.substring(0, Math.min(10000, bookContent.length()));
 
-    // First request - establishing cache
+    // First request: establish cache
     IO.println("First request - establishing cache");
     MessageCreateParams params1 = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
@@ -527,7 +513,7 @@ void main() throws Exception {
     Message response1 = client.messages().create(params1);
     IO.println("First response usage: " + response1.usage());
 
-    // Second request - same configuration (cache hit expected)
+    // Second request: same configuration (cache hit expected)
     IO.println("\nSecond request - same configuration (cache hit expected)");
     MessageCreateParams params2 = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
@@ -551,7 +537,7 @@ void main() throws Exception {
     Message response2 = client.messages().create(params2);
     IO.println("Second response usage: " + response2.usage());
 
-    // Third request - different effort level (cache miss expected)
+    // Third request: different effort level (cache miss expected)
     IO.println("\nThird request - different effort level (cache miss expected)");
     MessageCreateParams params3 = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
@@ -593,10 +579,9 @@ String fetchArticleContent(String url) throws Exception {
 }
 ```
 
-**PHP**
-
-```php
-function fetchArticleContent($url) {
+```php PHP
+function fetchArticleContent($url)
+{
     $content = file_get_contents($url);
     $lines = explode("\n", $content);
     $cleanedLines = array_filter(array_map('trim', $lines));
@@ -605,7 +590,7 @@ function fetchArticleContent($url) {
 
 $client = new Client();
 
-$bookUrl = "https://www.gutenberg.org/cache/epub/1342/pg1342.txt";
+$bookUrl = 'https://www.gutenberg.org/cache/epub/1342/pg1342.txt';
 $bookContent = fetchArticleContent($bookUrl);
 $largeText = substr($bookContent, 0, 10000);
 
@@ -630,7 +615,7 @@ $response1 = $client->messages->create(
     thinking: ['type' => 'adaptive'],
 );
 
-echo "First response usage: " . json_encode($response1->usage) . "\n";
+echo 'First response usage: ' . json_encode($response1->usage) . "\n";
 
 echo "\nSecond request - same configuration (cache hit expected)\n";
 $response2 = $client->messages->create(
@@ -663,7 +648,7 @@ $response2 = $client->messages->create(
     thinking: ['type' => 'adaptive'],
 );
 
-echo "Second response usage: " . json_encode($response2->usage) . "\n";
+echo 'Second response usage: ' . json_encode($response2->usage) . "\n";
 
 echo "\nThird request - different effort level (cache miss expected)\n";
 $response3 = $client->messages->create(
@@ -705,12 +690,10 @@ $response3 = $client->messages->create(
     outputConfig: ['effort' => 'low'],
 );
 
-echo "Third response usage: " . json_encode($response3->usage) . "\n";
+echo 'Third response usage: ' . json_encode($response3->usage) . "\n";
 ```
 
-**Ruby**
-
-```ruby
+```ruby Ruby
 require "net/http"
 require "uri"
 
@@ -890,7 +873,7 @@ The billed output token count does **not** match the visible token count in the 
 
 To see how many billed output tokens were spent on internal reasoning, read `usage.output_tokens_details.thinking_tokens` in the response. This value reflects the raw reasoning the model generated (not the summarized text returned in the body) and is always less than or equal to `output_tokens`. Subtract it from `output_tokens` to approximate the non-reasoning portion of the output. When streaming, this breakdown appears only on the final `message_delta` event.
 
-```text wrap
+```json
 {
   "usage": {
     "input_tokens": 25,

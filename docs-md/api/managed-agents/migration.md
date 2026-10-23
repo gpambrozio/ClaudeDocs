@@ -344,9 +344,7 @@ await foreach (var streamEvent in stream)
 			ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 		},
 		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-				Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-			},
+			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
 		}},
 	})
 	if err != nil {
@@ -356,7 +354,6 @@ await foreach (var streamEvent in stream)
 	session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 		Agent: anthropic.BetaSessionNewParamsAgentUnion{
 			OfBetaManagedAgentsAgents: &anthropic.BetaManagedAgentsAgentParams{
-				Type:    anthropic.BetaManagedAgentsAgentParamsTypeAgent,
 				ID:      agent.ID,
 				Version: anthropic.Int(agent.Version),
 			},
@@ -373,10 +370,8 @@ await foreach (var streamEvent in stream)
 	_, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 						Text: task,
 					},
 				}},
@@ -840,7 +835,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	System: anthropic.String("You are a concise weather assistant."),
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfCustom: &anthropic.BetaManagedAgentsCustomToolParams{
-			Type:        anthropic.BetaManagedAgentsCustomToolParamsTypeCustom,
 			Name:        "get_weather",
 			Description: "Get the current weather for a city.",
 			InputSchema: anthropic.BetaManagedAgentsCustomToolInputSchemaParam{
@@ -874,7 +868,6 @@ if err != nil {
 session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 	Agent: anthropic.BetaSessionNewParamsAgentUnion{
 		OfBetaManagedAgentsAgents: &anthropic.BetaManagedAgentsAgentParams{
-			Type:    anthropic.BetaManagedAgentsAgentParamsTypeAgent,
 			ID:      agent.ID,
 			Version: anthropic.Int(agent.Version),
 		},
@@ -895,10 +888,8 @@ defer stream.Close()
 _, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 					Text: "What's the weather in Tokyo?",
 				},
 			}},
@@ -925,11 +916,9 @@ for stream.Next() {
 		if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 			Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 				OfUserCustomToolResult: &anthropic.BetaManagedAgentsUserCustomToolResultEventParams{
-					Type:            anthropic.BetaManagedAgentsUserCustomToolResultEventParamsTypeUserCustomToolResult,
 					CustomToolUseID: toolUse.ID,
 					Content: []anthropic.BetaManagedAgentsUserCustomToolResultEventParamsContentUnion{{
 						OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-							Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 							Text: result,
 						},
 					}},

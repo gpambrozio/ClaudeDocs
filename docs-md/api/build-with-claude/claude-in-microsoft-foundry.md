@@ -67,7 +67,7 @@ dotnet add package Anthropic.Foundry
 **Go**
 
 ```bash
-go get github.com/anthropics/anthropic-sdk-go/foundry
+go get github.com/anthropics/anthropic-sdk-go/v2/foundry
 
 # For Entra ID authentication, also install the Azure Identity library
 go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
@@ -78,8 +78,8 @@ go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.1.0")
-implementation("com.anthropic:anthropic-java-foundry:3.1.0")
+implementation("com.anthropic:anthropic-java:3.2.0")
+implementation("com.anthropic:anthropic-java-foundry:3.2.0")
 
 // For Entra ID authentication, also add the Azure Identity library
 implementation("com.azure:azure-identity:1.18.3")
@@ -91,12 +91,12 @@ implementation("com.azure:azure-identity:1.18.3")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-foundry</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
 </dependency>
 <!-- For Entra ID authentication, also add the Azure Identity library -->
 <dependency>
@@ -279,8 +279,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/foundry"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/foundry"
 )
 
 func main() {
@@ -493,8 +493,8 @@ import (
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/foundry"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/foundry"
 )
 
 func main() {
@@ -653,7 +653,7 @@ Requests that use these features against a deployment hosted on Azure return a `
 
 ## API responses
 
-API responses from Claude in Microsoft Foundry follow the standard [Claude API response format](../api/messages/create.md). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms (Claude API, Amazon Bedrock, Claude Platform on AWS, Foundry, and Google Cloud).
+API responses from Claude in Microsoft Foundry follow the standard [Claude API response format](../api/messages/create.md). This includes the `usage` object in response bodies, which provides detailed token consumption information for your requests. The `usage` object is consistent across all platforms, including the Claude API, Amazon Bedrock, Claude Platform on AWS, Foundry, and Claude Models on Google Cloud (Google managed).
 
 For details on response headers specific to Foundry, see [Correlation request IDs](claude-in-microsoft-foundry.md#correlation-request-ids).
 

@@ -143,7 +143,6 @@ var pinnedSession = await client.Beta.Sessions.Create(new()
 pinnedSession, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 	Agent: anthropic.BetaSessionNewParamsAgentUnion{
 		OfBetaManagedAgentsAgents: &anthropic.BetaManagedAgentsAgentParams{
-			Type:    anthropic.BetaManagedAgentsAgentParamsTypeAgent,
 			ID:      agent.ID,
 			Version: anthropic.Int(1),
 		},
@@ -307,10 +306,8 @@ seededSession, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewPara
 	EnvironmentID: environment.ID,
 	InitialEvents: []anthropic.BetaSessionNewParamsInitialEventUnion{{
 		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 					Text: "List the files in the working directory.",
 				},
 			}},
@@ -526,8 +523,7 @@ Console.WriteLine($"System: {overrideSession.Agent.System ?? "null"}");
 overrideSession, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 	Agent: anthropic.BetaSessionNewParamsAgentUnion{
 		OfBetaManagedAgentsAgentWithOverridess: &anthropic.BetaManagedAgentsAgentWithOverridesParams{
-			Type: anthropic.BetaManagedAgentsAgentWithOverridesParamsTypeAgentWithOverrides,
-			ID:   agent.ID,
+			ID: agent.ID,
 			Model: anthropic.BetaManagedAgentsModelConfigParams{
 				ID: anthropic.BetaManagedAgentsModelClaudeSonnet5_5,
 			},
@@ -566,7 +562,7 @@ $overrides = BetaManagedAgentsAgentWithOverridesParams::with(
     id: $agent->id,
     model: ['id' => 'claude-sonnet-5-5'],
 );
-// Clear the system prompt for this session. Array access is load-bearing here:
+// Clear the system prompt for this session. Array access is required here:
 // create() strips nulls from raw arrays and ::with() treats null args as omitted.
 $overrides['system'] = null;
 
@@ -598,7 +594,7 @@ puts "System: #{override_session.agent.system_.inspect}"
 
 #### Pin the inference geo for a session
 
-Because a `model` (csharp, go: `Model`) override replaces the agent's `model` (csharp, go: `Model`) object in full, it also sets or clears the model's [inference geo](../manage-claude/data-residency.md) pin for the session: an override that includes `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) pins the geography that serves the session's model requests, and one that omits it clears the agent's pin so the session follows the workspace's `default_inference_geo`. The overridden value is validated against the workspace's `allowed_inference_geos` when the session is created.
+Because a `model` (csharp, go: `Model`) override replaces the agent's `model` (csharp, go: `Model`) object in full, it also sets or clears the model's [inference geo](../manage-claude/data-residency.md) pin for the session. An override that includes `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) pins the geography that serves the session's model requests. An override that omits it clears the agent's pin, so the session follows the workspace's `default_inference_geo`. The overridden value is validated against the workspace's `allowed_inference_geos` when the session is created.
 
 The following example starts a session from an agent whose model has no geo pin, and pins the session's model requests to US inference by including `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) in the `model` (csharp, go: `Model`) override. The response echoes the value in `agent.model` (csharp, go: `Agent.Model`):
 
@@ -680,8 +676,7 @@ Console.WriteLine($"Inference geo: {session.Agent.Model.InferenceGeo}");
 session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 	Agent: anthropic.BetaSessionNewParamsAgentUnion{
 		OfBetaManagedAgentsAgentWithOverridess: &anthropic.BetaManagedAgentsAgentWithOverridesParams{
-			Type: anthropic.BetaManagedAgentsAgentWithOverridesParamsTypeAgentWithOverrides,
-			ID:   agent.ID,
+			ID: agent.ID,
 			// Replaces the agent's `model` in full: restate `id`, add `inference_geo` to pin.
 			Model: anthropic.BetaManagedAgentsModelConfigParams{
 				ID:           anthropic.BetaManagedAgentsModelClaudeOpus5_5,
@@ -816,7 +811,6 @@ session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 	},
 	EnvironmentID: environment.ID,
 	Budget: anthropic.BetaManagedAgentsBudgetLimitParam{
-		Type: anthropic.BetaManagedAgentsBudgetLimitTypeLimit,
 		MaxListCost: anthropic.BetaMonetaryAmountParam{
 			Amount:   "125",
 			Currency: anthropic.BetaCurrencyUsd,
@@ -959,7 +953,7 @@ vault_session = client.beta.sessions.create(
 
 ## Starting the session
 
-Creating a session without `initial_events` (java, php: `initialEvents`; csharp, go: `InitialEvents`) registers the session but does not start any work; the environment's sandbox begins provisioning as soon as the session is created, so the first tool call does not wait on it. To delegate a task, send events to the session using a [user event](reference.md#event-types). To supply the first event in the create request instead, see [Seed the session with initial events](sessions.md#seed-the-session-with-initial-events). The session acts as a state machine that tracks progress while events drive the actual execution.
+Creating a session without `initial_events` (java, php: `initialEvents`; csharp, go: `InitialEvents`) registers the session but does not start any work; the environment's sandbox starts provisioning as soon as the session is created, so the first tool call does not wait on it. To delegate a task, send events to the session using a [user event](reference.md#event-types). To supply the first event in the create request instead, see [Seed the session with initial events](sessions.md#seed-the-session-with-initial-events). The session acts as a state machine that tracks progress, and events drive the actual execution.
 
 ```bash cURL
 curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
@@ -1035,10 +1029,8 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
 if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 					Text: "List the files in the working directory.",
 				},
 			}},

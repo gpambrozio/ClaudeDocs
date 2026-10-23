@@ -8,7 +8,7 @@ description: Connect Claude to a private MCP server using a local Docker Compose
 
 MCP tunnels are in research preview. [Request access](https://claude.com/form/mcp-tunnels) to try them.
 
-This quickstart shows you how to set up a tunnel so that Claude can call a private MCP server through it. It uses Docker Compose with [manual](concepts.md#credential-provisioning) credential provisioning, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](deploy-helm.md) or [Deploy with Docker Compose](deploy-compose.md).
+This quickstart takes you from creating a tunnel to Claude calling a private MCP server through it. It uses Docker Compose with [manual](concepts.md#credential-provisioning) credential provisioning, which is the shortest path for local testing. For production deployments, see [Deploy with Helm](deploy-helm.md) or [Deploy with Docker Compose](deploy-compose.md).
 
 ## What you'll build
 

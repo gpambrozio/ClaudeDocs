@@ -221,7 +221,7 @@ List Sessions
 
   A Managed Agents `session`.
 
-  - `required Type Type`
+  - `JsonElement Type = "session"`
 
   - `required string ID`
 
@@ -229,7 +229,7 @@ List Sessions
 
     Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -257,7 +257,7 @@ List Sessions
 
     - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-      - `required Type Type`
+      - `JsonElement Type = "url"`
 
       - `required string Name`
 
@@ -349,31 +349,31 @@ List Sessions
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string InferenceGeo`
 
@@ -395,7 +395,7 @@ List Sessions
 
         Resolved coordinator topology with full agent definitions for each roster member.
 
-        - `required Type Type`
+        - `JsonElement Type = "coordinator"`
 
         - `required IReadOnlyList<Agent> Agents`
 
@@ -405,7 +405,7 @@ List Sessions
 
             Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -417,7 +417,7 @@ List Sessions
 
             - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-              - `required Type Type`
+              - `JsonElement Type = "url"`
 
               - `required string Name`
 
@@ -435,7 +435,7 @@ List Sessions
 
                 A resolved Anthropic-managed skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "anthropic"`
 
                 - `required string SkillID`
 
@@ -445,7 +445,7 @@ List Sessions
 
                 A resolved user-created custom skill.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string SkillID`
 
@@ -457,7 +457,7 @@ List Sessions
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
-                - `required Type Type`
+                - `JsonElement Type = "agent_toolset_20260401"`
 
                 - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -479,13 +479,13 @@ List Sessions
 
                         Tool calls are automatically approved without user confirmation.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_allow"`
 
                       - `class BetaManagedAgentsAlwaysAskPolicy`
 
                         Tool calls require user confirmation before execution.
 
-                        - `required Type Type`
+                        - `JsonElement Type = "always_ask"`
 
                       - `class BetaManagedAgentsAutoPolicy`
 
@@ -817,7 +817,7 @@ List Sessions
 
               - `class BetaManagedAgentsMcpToolset`
 
-                - `required Type Type`
+                - `JsonElement Type = "mcp_toolset"`
 
                 - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -869,7 +869,7 @@ List Sessions
 
                 A custom tool as returned in API responses.
 
-                - `required Type Type`
+                - `JsonElement Type = "custom"`
 
                 - `required string Description`
 
@@ -893,7 +893,7 @@ List Sessions
 
             Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-            - `required Type Type`
+            - `JsonElement Type = "advisor"`
 
             - `required string Model`
 
@@ -955,7 +955,7 @@ List Sessions
 
               Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -1007,7 +1007,7 @@ List Sessions
 
               Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -1079,7 +1079,7 @@ List Sessions
 
     The session's enforced spend ceiling, or null when no budget is set.
 
-    - `required Type Type`
+    - `JsonElement Type = "limit"`
 
     - `required BetaMonetaryAmount MaxListCost`
 
@@ -1107,7 +1107,7 @@ List Sessions
 
     Per-outcome evaluation state. One entry per `define_outcome` event sent to the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "outcome_evaluation"`
 
     - `required DateTimeOffset? CompletedAt`
 
@@ -1141,7 +1141,7 @@ List Sessions
 
     - `class BetaManagedAgentsGitHubRepositoryResource`
 
-      - `required BetaManagedAgentsGitHubRepositoryResourceType Type`
+      - `JsonElement Type = "github_repository"`
 
       - `required string ID`
 
@@ -1165,7 +1165,7 @@ List Sessions
 
         - `class BetaManagedAgentsBranchCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "branch"`
 
           - `required string Name`
 
@@ -1175,7 +1175,7 @@ List Sessions
 
         - `class BetaManagedAgentsCommitCheckout`
 
-          - `required Type Type`
+          - `JsonElement Type = "commit"`
 
           - `required string Sha`
 
@@ -1185,7 +1185,7 @@ List Sessions
 
     - `class BetaManagedAgentsFileResource`
 
-      - `required BetaManagedAgentsFileResourceType Type`
+      - `JsonElement Type = "file"`
 
       - `required string ID`
 
@@ -1209,7 +1209,7 @@ List Sessions
 
       A memory store attached to an agent session.
 
-      - `required BetaManagedAgentsMemoryStoreResourceType Type`
+      - `JsonElement Type = "memory_store"`
 
       - `required string MemoryStoreID`
 

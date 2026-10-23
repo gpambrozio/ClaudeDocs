@@ -167,7 +167,7 @@ Create a Memory
 
   See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type BetaManagedAgentsMemoryType`
+  - `Type Memory`
 
   - `ID string`
 
@@ -230,8 +230,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -446,7 +446,7 @@ List Memories
 
     See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-    - `Type BetaManagedAgentsMemoryType`
+    - `Type Memory`
 
     - `ID string`
 
@@ -506,7 +506,7 @@ List Memories
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-    - `Type BetaManagedAgentsMemoryPrefixType`
+    - `Type MemoryPrefix`
 
     - `Path string`
 
@@ -521,8 +521,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -713,7 +713,7 @@ Retrieve a Memory
 
   See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type BetaManagedAgentsMemoryType`
+  - `Type Memory`
 
   - `ID string`
 
@@ -776,8 +776,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -983,7 +983,7 @@ Update a Memory
 
   See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type BetaManagedAgentsMemoryType`
+  - `Type Memory`
 
   - `ID string`
 
@@ -1046,8 +1046,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -1235,7 +1235,7 @@ Delete a Memory
 
   See the [memory guide](../../../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `Type BetaManagedAgentsDeletedMemoryType`
+  - `Type MemoryDeleted`
 
   - `ID string`
 
@@ -1250,8 +1250,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -1287,7 +1287,7 @@ func main() {
 
 - `type BetaManagedAgentsConflictError`
 
-  - `Type BetaManagedAgentsConflictErrorType`
+  - `Type ConflictError`
 
   - `Message string Optional`
 
@@ -1299,7 +1299,7 @@ func main() {
 
   If the hashes differ, the request fails with HTTP status 409. Retrieve the memory and retry. If the memory already has exactly the requested `content` and `path`, the request succeeds even though the hashes differ.
 
-  - `Type BetaManagedAgentsContentSha256PreconditionType`
+  - `Type ContentSha256`
 
   - `ContentSha256 string Optional`
 
@@ -1315,7 +1315,7 @@ func main() {
 
   See the [memory guide](../../../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `Type BetaManagedAgentsDeletedMemoryType`
+  - `Type MemoryDeleted`
 
   - `ID string`
 
@@ -1423,7 +1423,7 @@ func main() {
 
     See the [memory guide](../../../../managed-agents/memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
 
-    - `Type BetaManagedAgentsMemoryPreconditionFailedErrorType`
+    - `Type MemoryPreconditionFailedError`
 
     - `Message string Optional`
 
@@ -1435,7 +1435,7 @@ func main() {
 
     Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
 
-    - `Type BetaManagedAgentsMemoryPathConflictErrorType`
+    - `Type MemoryPathConflictError`
 
     - `ConflictingMemoryID string Optional`
 
@@ -1453,7 +1453,7 @@ func main() {
 
   - `type BetaManagedAgentsConflictError`
 
-    - `Type BetaManagedAgentsConflictErrorType`
+    - `Type ConflictError`
 
     - `Message string Optional`
 
@@ -1467,7 +1467,7 @@ func main() {
 
   See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type BetaManagedAgentsMemoryType`
+  - `Type Memory`
 
   - `ID string`
 
@@ -1535,7 +1535,7 @@ func main() {
 
     See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-    - `Type BetaManagedAgentsMemoryType`
+    - `Type Memory`
 
     - `ID string`
 
@@ -1595,7 +1595,7 @@ func main() {
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-    - `Type BetaManagedAgentsMemoryPrefixType`
+    - `Type MemoryPrefix`
 
     - `Path string`
 
@@ -1609,7 +1609,7 @@ func main() {
 
   Two paths overlap when one is an ancestor of the other, such as `/notes` and `/notes/todo.md`. To free the path, rename or delete the memory that `conflicting_memory_id` references, then retry. To change that memory instead of creating a new one, update it.
 
-  - `Type BetaManagedAgentsMemoryPathConflictErrorType`
+  - `Type MemoryPathConflictError`
 
   - `ConflictingMemoryID string Optional`
 
@@ -1635,7 +1635,7 @@ func main() {
 
   See the [memory guide](../../../../managed-agents/memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
 
-  - `Type BetaManagedAgentsMemoryPreconditionFailedErrorType`
+  - `Type MemoryPreconditionFailedError`
 
   - `Message string Optional`
 
@@ -1649,7 +1649,7 @@ func main() {
 
   It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-  - `Type BetaManagedAgentsMemoryPrefixType`
+  - `Type MemoryPrefix`
 
   - `Path string`
 
@@ -1677,7 +1677,7 @@ func main() {
 
   Optional condition that must hold for an update to apply. When omitted, the update is unconditional. Asserts the current state of the memory being updated. When an update changes `path`, the precondition still refers to the memory's current content, not the destination path. Currently the only supported variant is `content_sha256`.
 
-  - `Type BetaManagedAgentsPreconditionType`
+  - `Type ContentSha256`
 
   - `ContentSha256 string Optional`
 

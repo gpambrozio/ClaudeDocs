@@ -13,7 +13,7 @@ featureMetadata:
     Claude API: beta
     Claude Platform on AWS: beta
     Amazon Bedrock: beta
-    Google Cloud: beta
+    Claude Models on Google Cloud (Google managed): beta
     Microsoft Foundry: beta
   rows:
     - label: Works with
@@ -69,7 +69,7 @@ dotnet add package OpenTelemetry.Exporter.Console
 **Go**
 
 ```bash
-go get github.com/anthropics/anthropic-sdk-go@latest
+go get github.com/anthropics/anthropic-sdk-go/v2@latest
 ```
 
 If your application doesn't use the OpenTelemetry SDK yet, install it with a console exporter, which you use in the next step to print spans:
@@ -83,14 +83,14 @@ go get go.opentelemetry.io/otel/sdk go.opentelemetry.io/otel/exporters/stdout/st
 Add the Claude SDK to your dependencies, or update it to at least the following version if your build file already declares it:
 
 ```kotlin Gradle
-implementation("com.anthropic:anthropic-java:3.1.0")
+implementation("com.anthropic:anthropic-java:3.2.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
 </dependency>
 ```
 
@@ -210,7 +210,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/v2"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/stdout/stdouttrace"
 	"go.opentelemetry.io/otel/propagation"
@@ -472,7 +472,10 @@ var client = AnthropicOkHttpClient.builder()
     .build();
 
 // Turn spans off for one client.
-var quietClient = AnthropicOkHttpClient.builder().fromEnv().openTelemetry(false).build();
+var quietClient = AnthropicOkHttpClient.builder()
+    .fromEnv()
+    .openTelemetry(false)
+    .build();
 
 // Set a conversation ID in the request options of one call.
 var params = MessageCreateParams.builder()
@@ -481,7 +484,9 @@ var params = MessageCreateParams.builder()
     .addUserMessage("Hello, Claude")
     .build();
 var message = client.messages().create(params, RequestOptions.builder()
-    .openTelemetry(OpenTelemetryRequestOptions.builder().conversationId("conv_42").build())
+    .openTelemetry(OpenTelemetryRequestOptions.builder()
+        .conversationId("conv_42")
+        .build())
     .build());
 ```
 
@@ -608,7 +613,9 @@ client := anthropic.NewClient(option.WithOpenTelemetryPropagation(false))
 var envOptions = OpenTelemetryOptions.fromEnv();
 var client = AnthropicOkHttpClient.builder()
     .fromEnv()
-    .openTelemetry(envOptions.toBuilder().propagation(false).build())
+    .openTelemetry(envOptions.toBuilder()
+        .propagation(false)
+        .build())
     .build();
 ```
 

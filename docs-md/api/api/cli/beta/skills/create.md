@@ -109,7 +109,6 @@ Create Skill
 
 ```bash
 ant beta:skills create \
-  --api-key my-anthropic-api-key \
   --file 'Example data'
 ```
 

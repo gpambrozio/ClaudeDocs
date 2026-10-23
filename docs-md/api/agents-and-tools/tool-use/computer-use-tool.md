@@ -24,13 +24,13 @@ featureMetadata:
     Claude API: ga
     Claude Platform on AWS: beta
     Amazon Bedrock: beta
-    Google Cloud: ga
+    Claude Models on Google Cloud (Google managed): ga
     Microsoft Foundry: beta
   details:
-    - On the Claude API and Google Cloud, Claude 5.5 and later models support computer use only through the `computer_toolset_20260801` toolset and return an error for the earlier `computer_20251124` and `computer_20250124` tool versions. To move an existing integration, see [Migrate from `computer_20251124`](computer-use-tool.md#migrate-from-computer-20251124). To move from `computer_20250124`, see [Move computer use to the toolset](../../models/haiku-5-5/migration-guide.md#computer-use-toolset) in the Claude Haiku 5.5 migration guide.
+    - On the Claude API and Claude Models on Google Cloud (Google managed), Claude 5.5 and later models support computer use only through the `computer_toolset_20260801` toolset and return an error for the earlier `computer_20251124` and `computer_20250124` tool versions. To move an existing integration, see [Migrate from `computer_20251124`](computer-use-tool.md#migrate-from-computer-20251124). To move from `computer_20250124`, see [Move computer use to the toolset](../../models/haiku-5-5/migration-guide.md#computer-use-toolset) in the Claude Haiku 5.5 migration guide.
     - On Amazon Bedrock, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 accept the earlier `computer_20251124` tool version as Claude Opus 5 and Claude Sonnet 5 do.
     - Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 support computer use only through the earlier `computer_20251124` tool version, which requires a beta header; see [Earlier tool versions](computer-use-tool.md#earlier-tool-versions).
-    - Platforms other than the Claude API and Google Cloud currently offer only the [earlier beta tool versions](computer-use-tool.md#earlier-tool-versions).
+    - On Claude Platform on AWS, Amazon Bedrock, and Microsoft Foundry, computer use is available only through the [earlier beta tool versions](computer-use-tool.md#earlier-tool-versions).
 ---
 
 **Start with the SDK toolsets:** For `computer_toolset_20260801`, the Python and TypeScript SDKs have a computer toolset class, in beta. Start from [a partner's integration](browser-use-sdk.md#partner-integrations), or see the [computer toolset](browser-use-sdk.md#computer-toolset) section of the SDK toolsets page. Use this page as the tool reference, or when you handle the tool calls yourself.
@@ -41,7 +41,7 @@ The computer use tool is an Anthropic-defined [client toolset](tool-reference.md
 
 For tasks that stay inside webpages, the [browser use tool](browser-use-tool.md) is the closer fit: its member tools read and act on the page itself, and it doesn't need a full desktop environment.
 
-Computer use is available on the Claude API and [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md) as the `computer_toolset_20260801` toolset; see [Compatibility](computer-use-tool.md#compatibility) for the supported models.
+Computer use is available on the Claude API and [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md) as the `computer_toolset_20260801` toolset; see [Compatibility](computer-use-tool.md#compatibility) for the supported models.
 
 Existing `computer_20251124` integrations keep working on the models listed for it under [Earlier tool versions](computer-use-tool.md#earlier-tool-versions), and earlier tool versions remain available in beta for models and platforms that don't support the toolset. See [Migrate from `computer_20251124`](computer-use-tool.md#migrate-from-computer-20251124) to upgrade, or [Earlier tool versions](computer-use-tool.md#earlier-tool-versions) for the beta headers.
 
@@ -227,7 +227,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Save a picture of a cat to my desktop.'],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [
         ['type' => 'computer_toolset_20260801'],
         [
@@ -271,7 +271,7 @@ puts response
 
 When Claude acts on the desktop, the response has a `stop_reason` of `tool_use` and contains one or more member `tool_use` blocks, each naming a member tool and carrying `"toolset_name": "computer"`. Partway through this task, after Claude has received a screenshot of the desktop, a response might look like this:
 
-```text Output wrap
+```json Output
 {
   "id": "msg_01UZ3bXcQH8mTqNhVfL9eK2p",
   "type": "message",
@@ -339,7 +339,7 @@ Claude can plan a short sequence of actions, such as click, type, and then take 
 
 A response with a three-action batch looks like this:
 
-```text wrap
+```json
 {
   "role": "assistant",
   "content": [
@@ -606,11 +606,11 @@ func samplingLoop(ctx context.Context, model anthropic.Model, messages []anthrop
 List<MessageParam> samplingLoop(Model model, List<MessageParam> messages, int maxIterations) {
     for (int i = 0; i < maxIterations; i++) {
         Message response = client.messages().create(MessageCreateParams.builder()
-                .model(model)
-                .maxTokens(4096)
-                .messages(messages)
-                .addTool(COMPUTER_TOOLSET)
-                .build());
+            .model(model)
+            .maxTokens(4096)
+            .messages(messages)
+            .addTool(COMPUTER_TOOLSET)
+            .build());
 
         // Add Claude's response to the conversation history
         messages.add(response.toParam());
@@ -746,7 +746,7 @@ Each example is a complete `tool_use` block as it appears in Claude's response.
 
 Shift+click at a position, for example, to extend a selection. Unlike `hold_key`, `text` holds the modifiers only for the duration of that click or scroll:
 
-```text wrap
+```json
 {
   "type": "tool_use",
   "id": "toolu_01Qg8m3XqC5aRy7tD2eS4jUg",
@@ -758,7 +758,7 @@ Shift+click at a position, for example, to extend a selection. Unlike `hold_key`
 
 Drag from one point to another:
 
-```text wrap
+```json
 {
   "type": "tool_use",
   "id": "toolu_01Ed6j9VnA3yPw5rB8cQ2gSe",
@@ -773,7 +773,7 @@ Drag from one point to another:
 
 Scroll down three clicks of the wheel:
 
-```text wrap
+```json
 {
   "type": "tool_use",
   "id": "toolu_01Yc5h8UmZ2xNv4qA7bP9fRd",
@@ -789,7 +789,7 @@ Scroll down three clicks of the wheel:
 
 Press Tab four times:
 
-```text wrap
+```json
 {
   "type": "tool_use",
   "id": "toolu_01Sb4g7TkY9wLu3pX6zM8eQc",
@@ -801,7 +801,7 @@ Press Tab four times:
 
 Zoom in to inspect a region at full resolution:
 
-```text wrap
+```json
 {
   "type": "tool_use",
   "id": "toolu_01Kf7k2WpB4zQx6sC9dR3hTf",
@@ -813,7 +813,7 @@ Zoom in to inspect a region at full resolution:
 
 Report the cursor position. Answer this call with a short text result that gives the position in screenshot pixels, for example, `X=512, Y=384`:
 
-```text wrap
+```json
 {
   "type": "tool_use",
   "id": "toolu_01Ekh3vqB6yTs2mNc4Rw8pLd",
@@ -869,11 +869,11 @@ For the earlier `computer_20251124` tool, internal benchmarking on the models th
 
 To add other tools alongside computer use, include them in the same `tools` array. The [Quick start](computer-use-tool.md#quick-start) section shows this pattern with the [bash tool](bash-tool.md) and [text editor tool](text-editor-tool.md). You can add your own [custom tool definitions](define-tools.md) the same way.
 
-For tasks that stay inside webpages, you can also [declare the browser use tool in the same request](browser-use-tool.md#combine-with-other-tools): the two toolsets work independently, each in its own coordinate frame, and calls to members that share a name, such as `screenshot` or `key`, are told apart by `toolset_name`.
+For tasks that stay inside webpages, you can also [declare the browser use tool in the same request](browser-use-tool.md#combine-with-other-tools). The two toolsets work independently, each in its own coordinate frame. The `toolset_name` value distinguishes calls to members that share a name, such as `screenshot` or `key`.
 
 ### Build a custom computer use environment
 
-The [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You'll need:
+The [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You need:
 
 * A virtualized or containerized environment suitable for computer use with Claude
 * An implementation of the computer use tool's actions
@@ -1099,13 +1099,13 @@ static final String PLACEHOLDER_PNG = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF
 
 ToolResultBlockParam.Content captureScreenshot() {
     ImageBlockParam image = ImageBlockParam.builder()
-            .source(Base64ImageSource.builder()
-                    .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
-                    .data(PLACEHOLDER_PNG)
-                    .build())
-            .build();
+        .source(Base64ImageSource.builder()
+            .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+            .data(PLACEHOLDER_PNG)
+            .build())
+        .build();
     return ToolResultBlockParam.Content.ofBlocks(
-            List.of(ToolResultBlockParam.Content.Block.ofImage(image)));
+        List.of(ToolResultBlockParam.Content.Block.ofImage(image)));
 }
 
 String clickAt(long x, long y) {
@@ -1393,7 +1393,7 @@ func computerToolResult(toolUseID string, content []anthropic.ToolResultBlockPar
 }
 
 // processToolCalls runs the computer actions in Claude's response in order and
-// builds one tool_result per tool_use block. After the first failure it skips
+// builds one tool_result for each tool_use block. After the first failure it skips
 // the rest: Claude planned them assuming the earlier actions succeeded.
 func processToolCalls(response *anthropic.Message) []anthropic.ContentBlockParamUnion {
 	var toolResults []anthropic.ContentBlockParamUnion
@@ -1434,13 +1434,13 @@ static final String HALT_TEXT = "Not executed: an earlier computer action in thi
 /** Every result answering a computer toolset member echoes toolset_name. */
 ToolResultBlockParam.Builder computerResult(ToolUseBlock toolUse) {
     return ToolResultBlockParam.builder()
-            .toolUseId(toolUse.id())
-            .toolsetName("computer");
+        .toolUseId(toolUse.id())
+        .toolsetName("computer");
 }
 
 /**
  * Run the computer actions in Claude's response in order and build one
- * tool_result per tool_use block. After the first failure, skip the rest:
+ * tool_result for each tool_use block. After the first failure, skip the rest:
  * Claude planned them assuming the earlier actions succeeded.
  */
 List<ContentBlockParam> processToolCalls(Message response) {
@@ -1454,17 +1454,25 @@ List<ContentBlockParam> processToolCalls(Message response) {
         ToolUseBlock toolUse = block.asToolUse();
         ToolResultBlockParam result;
         if (failed) {
-            result = computerResult(toolUse).content(HALT_TEXT).isError(true).build();
+            result = computerResult(toolUse)
+                .content(HALT_TEXT)
+                .isError(true)
+                .build();
         } else {
             try {
                 Map<String, JsonValue> input =
-                        (Map<String, JsonValue>) toolUse._input().asObject().get();
+                    (Map<String, JsonValue>) toolUse._input().asObject().get();
                 // A string, or the image block that screenshot returns
                 ToolResultBlockParam.Content output = handleComputerAction(toolUse.name(), input);
-                result = computerResult(toolUse).content(output).build();
+                result = computerResult(toolUse)
+                    .content(output)
+                    .build();
             } catch (RuntimeException e) {
                 failed = true;
-                result = computerResult(toolUse).content("Error: " + e.getMessage()).isError(true).build();
+                result = computerResult(toolUse)
+                    .content("Error: " + e.getMessage())
+                    .isError(true)
+                    .build();
             }
         }
         toolResults.add(ContentBlockParam.ofToolResult(result));
@@ -1508,7 +1516,7 @@ function processToolCalls(Message $response): array
 NOT_EXECUTED = "Not executed: an earlier computer action in this turn failed."
 
 # Run the computer actions in Claude's response in order and build one
-# tool_result per tool_use block. After the first failure, skip the rest:
+# tool_result for each tool_use block. After the first failure, skip the rest:
 # Claude planned them assuming the earlier actions succeeded.
 def process_tool_calls(response)
   tool_results = []
@@ -1778,7 +1786,7 @@ Long agent loops accumulate screenshots quickly (roughly 1,000–1,800 input tok
 
 To keep [Prompt caching](../../build-with-claude/prompt-caching.md) effective while bounding context:
 
-* Place one `cache_control` breakpoint after the system prompt and tool definitions, and up to three more on the last `tool_result` block of each of the most recent turns, advancing them each turn. Within a [batch action](computer-use-tool.md#batch-actions), markers on several blocks act as a single breakpoint but each still counts toward the limit of four, so use one for each turn.
+* Place one `cache_control` breakpoint after the system prompt and tool definitions, and up to three more on the last `tool_result` block of each of the most recent turns, advancing them each turn. Within a [batch action](computer-use-tool.md#batch-actions), markers on several blocks act as a single breakpoint, but each still counts toward the limit of four, so use at most one in any turn.
 * Prune old screenshots in *batches*, not one each turn. Dropping a screenshot every turn changes the prefix every turn and invalidates the cache. A reasonable default is to keep the last three screenshots and prune every 25 turns, so the prefix stays byte-identical between prune events; if your screenshots exceed 2000 px on either side, choose an interval that keeps each request at 20 or fewer images.
 * On Claude Fable 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5, avoid pruning on the client: removing an earlier screenshot [invalidates every later thinking block](../../build-with-claude/thinking.md#preserved-in-conversation) in every request that still carries those turns. Resize screenshots to 2000 px or less per side instead, and use server-side [tool result clearing](../../build-with-claude/context-editing.md#tool-result-clearing) to drop old ones from the context. If you must prune, keep [`prefix_mismatch_behavior: "drop_block"`](../../build-with-claude/thinking.md#preserved-thinking-controls) set from then on; after each prune, Claude continues without the thinking produced since the pruned screenshot, on that request and every later one. On Claude Sonnet 5.5, `block_binding` works only with `thinking: {"type": "adaptive"}`. With `between_tools`, keep the history append-only, or strip the thinking blocks from the edited turn on. On Claude Haiku 5.5, `block_binding` works only with `thinking: {"type": "adaptive"}`; with `thinking: {"type": "disabled"}`, keep the history append-only, or strip the thinking blocks from the edited turn on.
 
@@ -1810,7 +1818,7 @@ def click_and_wait(x, y, wait_time=0.5):
 ```typescript TypeScript
 async function clickAndWait(x: number, y: number, waitMs = 500): Promise<void> {
   clickAt(x, y);
-  await setTimeout(waitMs); // Allow UI to update
+  await new Promise((resolve) => setTimeout(resolve, waitMs)); // Allow UI to update
 }
 ```
 
@@ -2055,7 +2063,7 @@ end
 
 ## Migrate from `computer_20251124`
 
-Upgrading from `computer_20251124` to the toolset is optional: the models listed for `computer_20251124` under [Earlier tool versions](computer-use-tool.md#earlier-tool-versions) keep accepting it with its beta header, so an existing integration keeps working until you change it. Claude 5.5 and later models are the exception on the Claude API and Google Cloud: there they accept only the toolset. Upgrade an integration before you move it to one of them. On Amazon Bedrock, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 accept `computer_20251124`. To upgrade, make the following changes together:
+Upgrading from `computer_20251124` to the toolset is optional: the models listed for `computer_20251124` under [Earlier tool versions](computer-use-tool.md#earlier-tool-versions) keep accepting it with its beta header, so an existing integration keeps working until you change it. Claude 5.5 and later models are the exception on the Claude API and Claude Models on Google Cloud (Google managed): there they accept only the toolset. Upgrade an integration before you move it to one of them. On Amazon Bedrock, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 accept `computer_20251124`. To upgrade, make the following changes together:
 
 1. **Remove the beta header.** Drop `anthropic-beta: computer-use-2025-11-24` from your requests. With the SDK, remove `betas` (csharp, go: `Betas`; java: `.addBeta()`) and call the Messages API through the standard client rather than the beta namespace.
 2. **Change the `tools` entry.** Set `type` to `computer_toolset_20260801` and delete `name`, `display_width_px`, `display_height_px`, `display_number`, and `enable_zoom`. The toolset rejects each of these fields.
@@ -2115,10 +2123,10 @@ The following pair shows a `tool_use` block before and after the change. The act
 
 Two earlier versions of the computer use tool remain available in beta for existing integrations, for models that don't support the toolset, and on platforms where the toolset isn't currently available. Each requires its [beta header](../../api/beta-headers.md) on every request, and their parameters are documented in the [beta Messages API reference](../../api/beta/messages/create.md). With the SDK, pass the header through `betas` (csharp, go: `Betas`; java: `.addBeta()`) and use the beta namespace; only the computer use tool needs the header, not the bash or text editor tools in the same request.
 
-| Tool version        | Beta header               | Use with                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Parameters                                                                    |
-| ------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `computer_20251124` | `computer-use-2025-11-24` | Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5; on Amazon Bedrock, also Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5                                                                                                                                                                                                                                               | [API reference](../../api/beta/messages/create.md) |
-| `computer_20250124` | `computer-use-2025-01-24` | Claude Sonnet 4.5 ([deprecated](../../about-claude/model-deprecations.md)), Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](../../about-claude/model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](../../about-claude/model-deprecations.md)), and Claude Opus 4 ([retired, except on Google Cloud](../../about-claude/model-deprecations.md)) | [API reference](../../api/beta/messages/create.md) |
+| Tool version        | Beta header               | Use with                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Parameters                                                                    |
+| ------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `computer_20251124` | `computer-use-2025-11-24` | Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5; on Amazon Bedrock, also Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5                                                                                                                                                                                                                                                                                                                                                     | [API reference](../../api/beta/messages/create.md) |
+| `computer_20250124` | `computer-use-2025-01-24` | Claude Sonnet 4.5 ([deprecated](../../about-claude/model-deprecations.md)), Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](../../about-claude/model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](../../about-claude/model-deprecations.md)), and Claude Opus 4 ([retired, except on Claude Models on Google Cloud (Google managed)](../../about-claude/model-deprecations.md)) | [API reference](../../api/beta/messages/create.md) |
 
 ***
 

@@ -185,7 +185,6 @@ Create a new environment with the specified configuration.
 
 ```bash
 ant beta:environments create \
-  --api-key my-anthropic-api-key \
   --name python-data-analysis
 ```
 
@@ -416,8 +415,7 @@ List environments with pagination support.
 ### Example
 
 ```bash
-ant beta:environments list \
-  --api-key my-anthropic-api-key
+ant beta:environments list
 ```
 
 #### Response (200)
@@ -630,7 +628,6 @@ Retrieve a specific environment by ID.
 
 ```bash
 ant beta:environments retrieve \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
 
@@ -863,7 +860,6 @@ Update an existing environment's configuration.
 
 ```bash
 ant beta:environments update \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
 
@@ -956,7 +952,6 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
 ```bash
 ant beta:environments delete \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
 
@@ -1125,7 +1120,6 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 ```bash
 ant beta:environments archive \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
 
@@ -1739,7 +1733,6 @@ Retrieve detailed information about a specific work item.
 
 ```bash
 ant beta:environments:work retrieve \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
   --work-id work_id
 ```
@@ -1887,7 +1880,6 @@ Long poll for work items in the queue.
 
 ```bash
 ant beta:environments:work poll \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
 
@@ -2020,7 +2012,6 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
 ```bash
 ant beta:environments:work ack \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
   --work-id work_id
 ```
@@ -2118,7 +2109,6 @@ Record a heartbeat for a work item to maintain the lease.
 
 ```bash
 ant beta:environments:work heartbeat \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
   --work-id work_id
 ```
@@ -2249,7 +2239,6 @@ Stop a work item, initiating graceful or forced shutdown.
 
 ```bash
 ant beta:environments:work stop \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
   --work-id work_id
 ```
@@ -2395,7 +2384,6 @@ List work items in an environment.
 
 ```bash
 ant beta:environments:work list \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
 
@@ -2543,7 +2531,6 @@ Update work item metadata with merge semantics.
 
 ```bash
 ant beta:environments:work update \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW \
   --work-id work_id \
   --metadata '{foo: string}'
@@ -2628,7 +2615,6 @@ Get statistics about the work queue for an environment.
 
 ```bash
 ant beta:environments:work stats \
-  --api-key my-anthropic-api-key \
   --environment-id env_011CZkZ9X2dpNyB7HsEFoRfW
 ```
 

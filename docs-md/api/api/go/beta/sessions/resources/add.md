@@ -141,7 +141,7 @@ Add Session Resource
 
 - `type BetaManagedAgentsFileResource`
 
-  - `Type BetaManagedAgentsFileResourceType`
+  - `Type File`
 
   - `ID string`
 
@@ -170,8 +170,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -184,7 +184,6 @@ func main() {
 		anthropic.BetaSessionResourceAddParams{
 			BetaManagedAgentsFileResourceParams: anthropic.BetaManagedAgentsFileResourceParams{
 				FileID: "file_011CNha8iCJcU1wXNR6q4V8w",
-				Type:   anthropic.BetaManagedAgentsFileResourceParamsTypeFile,
 			},
 		},
 	)

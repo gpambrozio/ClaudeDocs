@@ -119,7 +119,6 @@ Create a Memory
 
 ```bash
 ant beta:memory-stores:memories create \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --content content \
   --path xx
@@ -290,7 +289,6 @@ List Memories
 
 ```bash
 ant beta:memory-stores:memories list \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
@@ -418,7 +416,6 @@ Retrieve a Memory
 
 ```bash
 ant beta:memory-stores:memories retrieve \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```
@@ -560,7 +557,6 @@ Update a Memory
 
 ```bash
 ant beta:memory-stores:memories update \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```
@@ -636,7 +632,6 @@ Delete a Memory
 
 ```bash
 ant beta:memory-stores:memories delete \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```

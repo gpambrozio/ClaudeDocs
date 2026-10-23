@@ -88,8 +88,7 @@ List Vaults
 ## Example
 
 ```bash
-ant beta:vaults list \
-  --api-key my-anthropic-api-key
+ant beta:vaults list
 ```
 
 ### Response (200)

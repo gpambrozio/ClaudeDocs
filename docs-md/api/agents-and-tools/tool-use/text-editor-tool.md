@@ -156,22 +156,22 @@ fmt.Println(response)
 import com.anthropic.models.messages.ToolTextEditor20250728;
 // ...
 void main() {
-  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-  ToolTextEditor20250728 editorTool =
-    ToolTextEditor20250728.builder()
-      .maxCharacters(10000L)
-      .build();
+    ToolTextEditor20250728 editorTool =
+        ToolTextEditor20250728.builder()
+            .maxCharacters(10000L)
+            .build();
 
-  MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5_5)
-    .maxTokens(1024)
-    .addTool(editorTool)
-    .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
-    .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_5_5)
+        .maxTokens(1024)
+        .addTool(editorTool)
+        .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+        .build();
 
-  Message message = client.messages().create(params);
-  IO.println(message);
+    Message message = client.messages().create(params);
+    IO.println(message);
 }
 ```
 
@@ -179,7 +179,7 @@ void main() {
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     maxTokens: 1024,
     tools: [ToolTextEditor20250728::with(maxCharacters: 10000)],
     messages: [
@@ -269,7 +269,7 @@ Parameters:
 
 Example for viewing a file:
 
-```text wrap
+```json
 {
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
@@ -283,7 +283,7 @@ Example for viewing a file:
 
 Example for viewing a directory:
 
-```text wrap
+```json
 {
   "type": "tool_use",
   "id": "toolu_02B19r91rw91mr917835mr9",
@@ -308,7 +308,7 @@ Parameters:
 
 **Example str_replace command**
 
-```text wrap
+```json
 {
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
@@ -334,7 +334,7 @@ Parameters:
 
 **Example create command**
 
-```text
+```json
 {
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
@@ -360,7 +360,7 @@ Parameters:
 
 **Example insert command**
 
-```text
+```json
 {
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
@@ -497,20 +497,20 @@ fmt.Println(response)
 import com.anthropic.models.messages.ToolTextEditor20250728;
 // ...
 void main() {
-  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-  ToolTextEditor20250728 editorTool =
-    ToolTextEditor20250728.builder().build();
+    ToolTextEditor20250728 editorTool =
+        ToolTextEditor20250728.builder().build();
 
-  MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5_5)
-    .maxTokens(1024)
-    .addTool(editorTool)
-    .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
-    .build();
+    MessageCreateParams params = MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_5_5)
+        .maxTokens(1024)
+        .addTool(editorTool)
+        .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+        .build();
 
-  Message message = client.messages().create(params);
-  IO.println(message);
+    Message message = client.messages().create(params);
+    IO.println(message);
 }
 ```
 
@@ -518,7 +518,7 @@ void main() {
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     maxTokens: 1024,
     tools: [new ToolTextEditor20250728()],
     messages: [
@@ -552,7 +552,7 @@ puts response
 
 Claude uses the text editor tool first to view the file:
 
-```text Output
+```json Output
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
   "model": "claude-opus-5-5",
@@ -876,42 +876,42 @@ fmt.Println(response)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_5_5)
-  .maxTokens(1024)
-  .addTool(ToolTextEditor20250728.builder().build())
-  .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
-  .addAssistantMessageOfContentBlockParams(
-    List.of(
-      ContentBlockParam.ofText(
-        TextBlockParam.builder()
-          .text("I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue.")
-          .build()
-      ),
-      ContentBlockParam.ofToolUse(
-        ToolUseBlockParam.builder()
-          .id("toolu_01AbCdEfGhIjKlMnOpQrStU")
-          .name("str_replace_based_edit_tool")
-          .input(
-            ToolUseBlockParam.Input.builder()
-              .putAdditionalProperty("command", JsonValue.from("view"))
-              .putAdditionalProperty("path", JsonValue.from("primes.py"))
-              .build()
-          )
-          .build()
-      )
+    .model(Model.CLAUDE_OPUS_5_5)
+    .maxTokens(1024)
+    .addTool(ToolTextEditor20250728.builder().build())
+    .addUserMessage("There's a syntax error in my primes.py file. Can you help me fix it?")
+    .addAssistantMessageOfContentBlockParams(
+        List.of(
+            ContentBlockParam.ofText(
+                TextBlockParam.builder()
+                    .text("I'll help you fix the syntax error in your primes.py file. First, let me take a look at the file to identify the issue.")
+                    .build()
+            ),
+            ContentBlockParam.ofToolUse(
+                ToolUseBlockParam.builder()
+                    .id("toolu_01AbCdEfGhIjKlMnOpQrStU")
+                    .name("str_replace_based_edit_tool")
+                    .input(
+                        ToolUseBlockParam.Input.builder()
+                            .putAdditionalProperty("command", JsonValue.from("view"))
+                            .putAdditionalProperty("path", JsonValue.from("primes.py"))
+                            .build()
+                    )
+                    .build()
+            )
+        )
     )
-  )
-  .addUserMessageOfContentBlockParams(
-    List.of(
-      ContentBlockParam.ofToolResult(
-        ToolResultBlockParam.builder()
-          .toolUseId("toolu_01AbCdEfGhIjKlMnOpQrStU")
-          .content("1: def is_prime(n):\n2:     \"\"\"Check if a number is prime.\"\"\"\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     \"\"\"Generate a list of prime numbers up to the given limit.\"\"\"\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     \"\"\"Main function to demonstrate prime number generation.\"\"\"\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f\"Prime numbers up to {limit}:\")\n29:     print(prime_list)\n30:     print(f\"Found {len(prime_list)} prime numbers.\")\n31: \n32: if __name__ == \"__main__\":\n33:     main()")
-          .build()
-      )
+    .addUserMessageOfContentBlockParams(
+        List.of(
+            ContentBlockParam.ofToolResult(
+                ToolResultBlockParam.builder()
+                    .toolUseId("toolu_01AbCdEfGhIjKlMnOpQrStU")
+                    .content("1: def is_prime(n):\n2:     \"\"\"Check if a number is prime.\"\"\"\n3:     if n <= 1:\n4:         return False\n5:     if n <= 3:\n6:         return True\n7:     if n % 2 == 0 or n % 3 == 0:\n8:         return False\n9:     i = 5\n10:     while i * i <= n:\n11:         if n % i == 0 or n % (i + 2) == 0:\n12:             return False\n13:         i += 6\n14:     return True\n15: \n16: def get_primes(limit):\n17:     \"\"\"Generate a list of prime numbers up to the given limit.\"\"\"\n18:     primes = []\n19:     for num in range(2, limit + 1)\n20:         if is_prime(num):\n21:             primes.append(num)\n22:     return primes\n23: \n24: def main():\n25:     \"\"\"Main function to demonstrate prime number generation.\"\"\"\n26:     limit = 100\n27:     prime_list = get_primes(limit)\n28:     print(f\"Prime numbers up to {limit}:\")\n29:     print(prime_list)\n30:     print(f\"Found {len(prime_list)} prime numbers.\")\n31: \n32: if __name__ == \"__main__\":\n33:     main()")
+                    .build()
+            )
+        )
     )
-  )
-  .build();
+    .build();
 
 Message message = client.messages().create(params);
 System.out.println(message);
@@ -921,7 +921,7 @@ System.out.println(message);
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     maxTokens: 1024,
     tools: [new ToolTextEditor20250728()],
     messages: [
@@ -1009,7 +1009,7 @@ In the preceding example, the `view` tool result includes file contents with lin
 
 Claude identifies the syntax error and uses the `str_replace` command to fix it:
 
-```text Output
+```json Output
 {
   "id": "msg_01VwXyZAbCdEfGhIjKlMnO",
   "model": "claude-opus-5-5",
@@ -1304,52 +1304,52 @@ fmt.Println(response)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-  .model(Model.CLAUDE_OPUS_5_5)
-  .maxTokens(1024)
-  .addTool(ToolTextEditor20250728.builder().build())
-  // Previous messages would go here
-  .addAssistantMessageOfContentBlockParams(
-    List.of(
-      ContentBlockParam.ofText(
-        TextBlockParam.builder()
-          .text(
-            "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you."
-          )
-          .build()
-      ),
-      ContentBlockParam.ofToolUse(
-        ToolUseBlockParam.builder()
-          .id("toolu_01PqRsTuVwXyZAbCdEfGh")
-          .name("str_replace_based_edit_tool")
-          .input(
-            ToolUseBlockParam.Input.builder()
-              .putAdditionalProperty("command", JsonValue.from("str_replace"))
-              .putAdditionalProperty("path", JsonValue.from("primes.py"))
-              .putAdditionalProperty(
-                "old_str",
-                JsonValue.from("    for num in range(2, limit + 1)")
-              )
-              .putAdditionalProperty(
-                "new_str",
-                JsonValue.from("    for num in range(2, limit + 1):")
-              )
-              .build()
-          )
-          .build()
-      )
+    .model(Model.CLAUDE_OPUS_5_5)
+    .maxTokens(1024)
+    .addTool(ToolTextEditor20250728.builder().build())
+    // Previous messages would go here
+    .addAssistantMessageOfContentBlockParams(
+        List.of(
+            ContentBlockParam.ofText(
+                TextBlockParam.builder()
+                    .text(
+                        "I found the syntax error in your primes.py file. In the `get_primes` function, there is a missing colon (:) at the end of the for loop line. Let me fix that for you."
+                    )
+                    .build()
+            ),
+            ContentBlockParam.ofToolUse(
+                ToolUseBlockParam.builder()
+                    .id("toolu_01PqRsTuVwXyZAbCdEfGh")
+                    .name("str_replace_based_edit_tool")
+                    .input(
+                        ToolUseBlockParam.Input.builder()
+                            .putAdditionalProperty("command", JsonValue.from("str_replace"))
+                            .putAdditionalProperty("path", JsonValue.from("primes.py"))
+                            .putAdditionalProperty(
+                                "old_str",
+                                JsonValue.from("    for num in range(2, limit + 1)")
+                            )
+                            .putAdditionalProperty(
+                                "new_str",
+                                JsonValue.from("    for num in range(2, limit + 1):")
+                            )
+                            .build()
+                    )
+                    .build()
+            )
+        )
     )
-  )
-  .addUserMessageOfContentBlockParams(
-    List.of(
-      ContentBlockParam.ofToolResult(
-        ToolResultBlockParam.builder()
-          .toolUseId("toolu_01PqRsTuVwXyZAbCdEfGh")
-          .content("Successfully replaced text at exactly one location.")
-          .build()
-      )
+    .addUserMessageOfContentBlockParams(
+        List.of(
+            ContentBlockParam.ofToolResult(
+                ToolResultBlockParam.builder()
+                    .toolUseId("toolu_01PqRsTuVwXyZAbCdEfGh")
+                    .content("Successfully replaced text at exactly one location.")
+                    .build()
+            )
+        )
     )
-  )
-  .build();
+    .build();
 
 Message message = client.messages().create(params);
 System.out.println(message);
@@ -1359,7 +1359,7 @@ System.out.println(message);
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     maxTokens: 1024,
     tools: [new ToolTextEditor20250728()],
     messages: [
@@ -1447,7 +1447,7 @@ puts response
 
 Finally, Claude provides a complete explanation of the fix:
 
-````text Output
+````json Output
 {
   "id": "msg_01IjKlMnOpQrStUvWxYzAb",
   "model": "claude-opus-5-5",
@@ -1570,18 +1570,18 @@ func handleEditorTool(input map[string]any) string {
 
 ```java Java
 static void handleEditorTool(Map<String, Object> input) {
-  var command = (String) input.getOrDefault("command", "");
-  var filePath = (String) input.getOrDefault("path", "");
+    var command = (String) input.getOrDefault("command", "");
+    var filePath = (String) input.getOrDefault("path", "");
 
-  if (command.equals("view")) {
-    // Read and return file contents
-  } else if (command.equals("str_replace")) {
-    // Replace text in file
-  } else if (command.equals("create")) {
-    // Create new file
-  } else if (command.equals("insert")) {
-    // Insert text at location
-  }
+    if (command.equals("view")) {
+        // Read and return file contents
+    } else if (command.equals("str_replace")) {
+        // Replace text in file
+    } else if (command.equals("create")) {
+        // Create new file
+    } else if (command.equals("insert")) {
+        // Insert text at location
+    }
 }
 ```
 
@@ -1639,7 +1639,7 @@ Extract and handle tool calls from Claude's responses:
 # Process tool use in Claude's response
 for content in response.content:
     if content.type == "tool_use":
-        # Execute the tool based on command
+        # Run the tool based on command
         result = handle_editor_tool(content)
 
         # Return result to Claude
@@ -1654,7 +1654,7 @@ for content in response.content:
 // Process tool use in Claude's response
 for (const block of response.content) {
   if (block.type === "tool_use") {
-    // Execute the tool based on command
+    // Run the tool based on command
     const result = handleEditorTool(block);
 
     // Return result to Claude
@@ -1702,17 +1702,17 @@ for _, block := range response.Content {
 ```java Java
 // Process tool use in Claude's response
 for (var block : response.content()) {
-  if (block.type().equals("tool_use")) {
-    // Execute the tool based on command
-    var result = handleEditorTool(block);
+    if (block.type().equals("tool_use")) {
+        // Run the tool based on command
+        var result = handleEditorTool(block);
 
-    // Return result to Claude
-    var toolResult = Map.of(
-      "type", "tool_result",
-      "tool_use_id", block.id(),
-      "content", result
-    );
-  }
+        // Return result to Claude
+        var toolResult = Map.of(
+            "type", "tool_result",
+            "tool_use_id", block.id(),
+            "content", result
+        );
+    }
 }
 ```
 
@@ -1720,7 +1720,7 @@ for (var block : response.content()) {
 // Process tool use in Claude's response
 foreach ($response->content as $block) {
     if ($block->type === 'tool_use') {
-        // Execute the tool based on command
+        // Run the tool based on command
         $result = handle_editor_tool($block->input);
 
         // Return result to Claude
@@ -1895,11 +1895,11 @@ func backupFile(filePath string) error {
 
 ```java Java
 static void backupFile(String filePath) throws IOException {
-  Path source = Path.of(filePath);
-  Path backupPath = Path.of(filePath + ".backup");
-  if (Files.exists(source)) {
-    Files.copy(source, backupPath, StandardCopyOption.REPLACE_EXISTING);
-  }
+    Path source = Path.of(filePath);
+    Path backupPath = Path.of(filePath + ".backup");
+    if (Files.exists(source)) {
+        Files.copy(source, backupPath, StandardCopyOption.REPLACE_EXISTING);
+    }
 }
 ```
 
@@ -2011,18 +2011,18 @@ func safeReplace(filePath, oldText, newText string) string {
 
 ```java Java
 static String safeReplace(String filePath, String oldText, String newText) throws IOException {
-  String content = Files.readString(Path.of(filePath));
+    String content = Files.readString(Path.of(filePath));
 
-  int count = content.split(Pattern.quote(oldText), -1).length - 1;
-  if (count == 0) {
-    return "Error: No match found";
-  } else if (count > 1) {
-    return "Error: Found " + count + " matches";
-  } else {
-    String newContent = content.replace(oldText, newText);
-    Files.writeString(Path.of(filePath), newContent);
-    return "Successfully replaced text";
-  }
+    int count = content.split(Pattern.quote(oldText), -1).length - 1;
+    if (count == 0) {
+        return "Error: No match found";
+    } else if (count > 1) {
+        return "Error: Found " + count + " matches";
+    } else {
+        String newContent = content.replace(oldText, newText);
+        Files.writeString(Path.of(filePath), newContent);
+        return "Successfully replaced text";
+    }
 }
 ```
 
@@ -2143,21 +2143,21 @@ func verifyChanges(filePath string) string {
 
 ```java Java
 static String verifyChanges(String filePath) {
-  try {
-    // For Python files, check for syntax errors
-    if (filePath.endsWith(".py")) {
-      Process proc = new ProcessBuilder("python3", "-m", "py_compile", filePath)
-        .redirectErrorStream(true)
-        .start();
-      if (proc.waitFor() != 0) {
-        return "Verification failed: " + new String(proc.getInputStream().readAllBytes());
-      }
-      return "Syntax check passed";
+    try {
+        // For Python files, check for syntax errors
+        if (filePath.endsWith(".py")) {
+            Process proc = new ProcessBuilder("python3", "-m", "py_compile", filePath)
+                .redirectErrorStream(true)
+                .start();
+            if (proc.waitFor() != 0) {
+                return "Verification failed: " + new String(proc.getInputStream().readAllBytes());
+            }
+            return "Syntax check passed";
+        }
+        return "No checks defined for this file type";
+    } catch (IOException | InterruptedException e) {
+        return "Verification failed: " + e.getMessage();
     }
-    return "No checks defined for this file type";
-  } catch (IOException | InterruptedException e) {
-    return "Verification failed: " + e.getMessage();
-  }
 }
 ```
 

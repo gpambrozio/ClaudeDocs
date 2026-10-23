@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/php/beta/sessions/resources
 
 ## Add Session Resource
 
-`$client->beta->sessions->resources->add(string sessionID, string fileID, Type type, ?string mountPath, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsFileResource`
+`$client->beta->sessions->resources->add(string sessionID, string fileID, "file" type, ?string mountPath, ?list<AnthropicBeta> betas, ?string workspaceID): ManagedAgentsFileResource`
 
 **POST** `/v1/sessions/{session_id}/resources`
 
@@ -23,7 +23,7 @@ Add Session Resource
 
   ID of a previously uploaded file.
 
-- `type: Type`
+- `type: "file"`
 
 - `mountPath?:optional string`
 
@@ -43,7 +43,7 @@ Add Session Resource
 
 - `class ManagedAgentsFileResource`
 
-  - `Type type`
+  - `"file" type`
 
   - `string id`
 
@@ -132,7 +132,7 @@ List Session Resources
 
   - `class ManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `"github_repository" type`
 
     - `string id`
 
@@ -152,7 +152,7 @@ List Session Resources
 
   - `class ManagedAgentsFileResource`
 
-    - `Type type`
+    - `"file" type`
 
     - `string id`
 
@@ -170,7 +170,7 @@ List Session Resources
 
   - `class ManagedAgentsMemoryStoreResource`
 
-    - `Type type`
+    - `"memory_store" type`
 
     - `string memoryStoreID`
 
@@ -279,7 +279,7 @@ Get Session Resource
 
   - `class ManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `"github_repository" type`
 
     - `string id`
 
@@ -299,7 +299,7 @@ Get Session Resource
 
   - `class ManagedAgentsFileResource`
 
-    - `Type type`
+    - `"file" type`
 
     - `string id`
 
@@ -317,7 +317,7 @@ Get Session Resource
 
   - `class ManagedAgentsMemoryStoreResource`
 
-    - `Type type`
+    - `"memory_store" type`
 
     - `string memoryStoreID`
 
@@ -416,7 +416,7 @@ Update Session Resource
 
   - `class ManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `"github_repository" type`
 
     - `string id`
 
@@ -436,7 +436,7 @@ Update Session Resource
 
   - `class ManagedAgentsFileResource`
 
-    - `Type type`
+    - `"file" type`
 
     - `string id`
 
@@ -454,7 +454,7 @@ Update Session Resource
 
   - `class ManagedAgentsMemoryStoreResource`
 
-    - `Type type`
+    - `"memory_store" type`
 
     - `string memoryStoreID`
 
@@ -548,7 +548,7 @@ Delete Session Resource
 
 - `class ManagedAgentsDeleteSessionResource`
 
-  - `Type type`
+  - `"session_resource_deleted" type`
 
   - `string id`
 
@@ -593,7 +593,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 - `class ManagedAgentsDeleteSessionResource`
 
-  - `Type type`
+  - `"session_resource_deleted" type`
 
   - `string id`
 
@@ -601,7 +601,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 - `class ManagedAgentsFileResource`
 
-  - `Type type`
+  - `"file" type`
 
   - `string id`
 
@@ -621,7 +621,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 - `class ManagedAgentsGitHubRepositoryResource`
 
-  - `Type type`
+  - `"github_repository" type`
 
   - `string id`
 
@@ -643,7 +643,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 - `class ManagedAgentsMemoryStoreResource`
 
-  - `Type type`
+  - `"memory_store" type`
 
   - `string memoryStoreID`
 
@@ -675,7 +675,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
   - `class ManagedAgentsGitHubRepositoryResource`
 
-    - `Type type`
+    - `"github_repository" type`
 
     - `string id`
 
@@ -695,7 +695,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
   - `class ManagedAgentsFileResource`
 
-    - `Type type`
+    - `"file" type`
 
     - `string id`
 
@@ -713,7 +713,7 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
   - `class ManagedAgentsMemoryStoreResource`
 
-    - `Type type`
+    - `"memory_store" type`
 
     - `string memoryStoreID`
 

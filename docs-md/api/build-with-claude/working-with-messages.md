@@ -1,4 +1,4 @@
-# Option 1: Base64-encoded image
+# Option 1: base64-encoded image
 
 ---
 title: Using the Messages API
@@ -111,7 +111,7 @@ $client = new Client();
 $message = $client->messages->create(
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
 ```
@@ -129,7 +129,7 @@ message = client.messages.create(
 puts message
 ```
 
-```text Output wrap
+```json Output
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
@@ -273,7 +273,7 @@ $message = $client->messages->create(
         ['role' => 'assistant', 'content' => 'Hello!'],
         ['role' => 'user', 'content' => 'Can you describe LLMs to me?'],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
@@ -294,7 +294,7 @@ message = client.messages.create(
 puts message
 ```
 
-```text Output wrap
+```json Output
 {
   "id": "msg_018gCsTGsXkYJVqYPxTgDHBU",
   "type": "message",
@@ -468,7 +468,7 @@ message = client.messages.create(
 puts message
 ```
 
-```text Output wrap
+```json Output
 {
   "id": "msg_01Q8Faay6S7QPTvEUUQARt7h",
   "type": "message",
@@ -496,7 +496,7 @@ Claude can read both text and images in requests. You can supply images using th
 ```bash cURL
 #!/bin/sh
 
-# Option 1: Base64-encoded image
+# Option 1: base64-encoded image
 IMAGE_BASE64=$(curl "https://platform.claude.com/docs/images/vision-example.jpg" | base64 | tr -d '\n')
 
 curl https://api.anthropic.com/v1/messages \
@@ -541,7 +541,7 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-# Option 1: Base64-encoded image (CLI auto-encodes binary @file refs)
+# Option 1: base64-encoded image (CLI auto-encodes binary @file refs)
 curl -s "https://platform.claude.com/docs/images/vision-example.jpg" \
   -o ./vision-example.jpg
 
@@ -580,7 +580,7 @@ YAML
 import base64
 import httpx2
 
-# Option 1: Base64-encoded image
+# Option 1: base64-encoded image
 image_url = "https://platform.claude.com/docs/images/vision-example.jpg"
 image_media_type = "image/jpeg"
 image_data = base64.standard_b64encode(httpx2.get(image_url).content).decode("utf-8")
@@ -633,7 +633,7 @@ print(message_from_url)
 ```typescript TypeScript
 const anthropic = new Anthropic();
 
-// Option 1: Base64-encoded image
+// Option 1: base64-encoded image
 const imageUrl = "https://platform.claude.com/docs/images/vision-example.jpg";
 const imageMediaType = "image/jpeg";
 const imageArrayBuffer = await (await fetch(imageUrl)).arrayBuffer();
@@ -698,7 +698,7 @@ using Anthropic.Models.Messages;
 
 AnthropicClient client = new();
 
-// Option 1: Base64-encoded image
+// Option 1: base64-encoded image
 string imageUrl = "https://platform.claude.com/docs/images/vision-example.jpg";
 
 using HttpClient httpClient = new();
@@ -761,7 +761,7 @@ Console.WriteLine(messageFromUrl);
 ```go Go
 client := anthropic.NewClient()
 
-// Option 1: Base64-encoded image
+// Option 1: base64-encoded image
 imageURL := "https://platform.claude.com/docs/images/vision-example.jpg"
 
 req, err := http.NewRequest("GET", imageURL, nil)
@@ -819,11 +819,13 @@ fmt.Println(messageFromURL)
 ```java Java
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-// Option 1: Base64-encoded image
+// Option 1: base64-encoded image
 String imageUrl = "https://platform.claude.com/docs/images/vision-example.jpg";
 
 HttpClient httpClient = HttpClient.newHttpClient();
-HttpRequest request = HttpRequest.newBuilder().uri(URI.create(imageUrl)).build();
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create(imageUrl))
+    .build();
 HttpResponse<byte[]> response = httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
 String imageData = Base64.getEncoder().encodeToString(response.body());
 
@@ -875,9 +877,9 @@ System.out.println(messageFromUrl);
 ```php PHP
 $client = new Client();
 
-// Option 1: Base64-encoded image
+// Option 1: base64-encoded image
 $image_url = 'https://platform.claude.com/docs/images/vision-example.jpg';
-$image_media_type = "image/jpeg";
+$image_media_type = 'image/jpeg';
 $image_data = base64_encode(file_get_contents($image_url));
 
 $message = $client->messages->create(
@@ -937,7 +939,7 @@ require "net/http"
 
 client = Anthropic::Client.new
 
-# Option 1: Base64-encoded image
+# Option 1: base64-encoded image
 image_url = "https://platform.claude.com/docs/images/vision-example.jpg"
 image_media_type = "image/jpeg"
 image_data = Base64.strict_encode64(Net::HTTP.get(URI(image_url)))
@@ -993,7 +995,7 @@ message_from_url = client.messages.create(
 puts message_from_url
 ```
 
-```text Output
+```json Output
 {
   "id": "msg_011CdKmWtV3oFx1C5yUbf5CY",
   "type": "message",

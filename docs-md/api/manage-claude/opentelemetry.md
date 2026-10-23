@@ -43,7 +43,7 @@ Look up spans and their attributes.
 | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | [Messages API](../api/messages/create.md) requests                                                  | ✅                                                                           | ✅                                                                                          | ✅                                                                                          |
 | [Sessions API](../managed-agents/sessions.md) requests                                              | ✅                                                                           | ✅                                                                                          | ✅                                                                                          |
-| [Token counts](opentelemetry.md#count-tokens)                                      | ✅                                                                           | ✅                                                                                          | ✅                                                                                          |
+| Token usage (see [Counting tokens](opentelemetry.md#count-tokens))                 | ✅                                                                           | ✅                                                                                          | ✅                                                                                          |
 | Each model run within a request                                                                                                   | —                                                                           | ✅                                                                                          | ✅                                                                                          |
 | [Managed Agents](../managed-agents/overview.md) turns                                               | —                                                                           | ✅                                                                                          | ✅                                                                                          |
 | [Server tools](../agents-and-tools/tool-use/server-tools.md), run by the API                        | —                                                                           | ✅                                                                                          | ✅                                                                                          |
@@ -77,6 +77,14 @@ Unified AI control plane for observability and evaluation.
 
 AI-powered observability and security.
 
+**Dynatrace**
+
+Observability built for the age of AI.
+
+**Elastic**
+
+Observability built on open source.
+
 **Grafana Cloud**
 
 Fully managed open observability platform.
@@ -101,9 +109,17 @@ Intelligent observability platform.
 
 All-in-one platform for building successful products.
 
+**Pydantic Logfire**
+
+Production-grade AI & general observability.
+
 **Sentry**
 
 Debug your broken code and misbehaving agents.
+
+**Snowflake**
+
+Agentic control plane with built-in observability and governance.
 
 **Splunk**
 

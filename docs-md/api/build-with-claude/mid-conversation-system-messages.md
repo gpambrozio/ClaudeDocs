@@ -12,11 +12,11 @@ System instructions normally live in the top-level `system` field, ahead of ever
 
 Mid-conversation system messages close that gap. You append a `{"role": "system"}` message at the point in the conversation where the new instruction becomes relevant, instead of editing the top-level `system` field. The cached prefix stays the same, so the next request still reads it from cache, and the new instruction is still applied as a system instruction rather than as ordinary user text.
 
-Mid-conversation system messages are available on the Claude API, [Claude in Amazon Bedrock](claude-in-amazon-bedrock.md), and [Google Cloud](claude-on-vertex-ai.md).
+Mid-conversation system messages are available on the Claude API, [Claude in Amazon Bedrock](claude-in-amazon-bedrock.md), and [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md).
 
 This feature is available on Claude Fable 5.1, [Claude Mythos 5.1](../models/mythos-5-1/overview.md), Claude Fable 5, [Claude Mythos 5](../models/mythos-5/overview.md), Claude Opus 5.5, Claude Opus 4.8, Claude Opus 5, Claude Sonnet 5.5, and Claude Haiku 5.5. No beta header is required for mid-conversation system messages. This feature is not available on Claude Sonnet 5. Use the top-level `system` field there instead.
 
-[Mid-conversation tool changes](mid-conversation-system-messages.md#mid-conversation-tool-changes) are in beta on the same models. On the Claude API, send the `inline-tools-2026-09-15` beta header, which also covers [defining a tool inside a `tool_addition` block](mid-conversation-system-messages.md#define-tools-in-a-message-beta). [Adding an MCP server that way](mid-conversation-system-messages.md#add-an-mcp-server-mid-conversation-beta) needs a second beta header, `mcp-client-2026-09-15`, which is available on the Claude API. The `mid-conversation-tool-changes-2026-07-01` header works for changes that name a tool by reference, on the Claude API, Amazon Bedrock, and Google Cloud.
+[Mid-conversation tool changes](mid-conversation-system-messages.md#mid-conversation-tool-changes) are in beta on the same models. On the Claude API, send the `inline-tools-2026-09-15` beta header, which also covers [defining a tool inside a `tool_addition` block](mid-conversation-system-messages.md#define-tools-in-a-message-beta). [Adding an MCP server that way](mid-conversation-system-messages.md#add-an-mcp-server-mid-conversation-beta) needs a second beta header, `mcp-client-2026-09-15`, which is available on the Claude API. The `mid-conversation-tool-changes-2026-07-01` header works for changes that name a tool by reference, on the Claude API, Amazon Bedrock, and Claude Models on Google Cloud (Google managed).
 
 [Turn-scoped system messages](mid-conversation-system-messages.md#turn-scoped-system-messages) (`clear_at`) are in beta and require the `mid-conversation-system-clear-at-2026-08-21` beta header, on the same models and platforms as mid-conversation system messages.
 
@@ -280,14 +280,15 @@ response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageN
 		// Withdraw get_weather from this point onward. The block references
 		// the tool by name instead of editing Tools, so earlier turns stay
 		// byte-identical and the cache still hits.
-		{
-			Role: anthropic.BetaMessageParamRoleSystem,
-			Content: []anthropic.BetaContentBlockParamUnion{
-				anthropic.NewBetaToolRemovalBlock(anthropic.BetaToolChangeToolReferenceParam{
-					Name: "get_weather",
-				}),
+		anthropic.NewBetaSystemMessage(anthropic.BetaSystemMessageOutputConfigParam{}, anthropic.BetaSystemMessageParamContentUnion{
+			OfToolRemoval: &anthropic.BetaRequestToolRemovalBlockParam{
+				Tool: anthropic.BetaRequestToolRemovalBlockToolUnionParam{
+					OfToolReference: &anthropic.BetaToolChangeToolReferenceParam{
+						Name: "get_weather",
+					},
+				},
 			},
-		},
+		}),
 	},
 })
 if err != nil {
@@ -777,23 +778,24 @@ response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageN
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("How many orders shipped yesterday?")),
 		// Define db_query by value from this point onward. Tools and the
 		// earlier messages stay exactly as sent, so the cache still hits.
-		{
-			Role: anthropic.BetaMessageParamRoleSystem,
-			Content: []anthropic.BetaContentBlockParamUnion{
-				anthropic.NewBetaToolAdditionBlock(anthropic.BetaToolChangeToolDefinitionParam{
-					Definition: anthropic.BetaToolUnionParam{OfTool: &anthropic.BetaToolParam{
-						Name:        "db_query",
-						Description: anthropic.String("Run a read-only SQL query against the analytics database."),
-						InputSchema: anthropic.BetaToolInputSchemaParam{
-							Properties: map[string]any{
-								"sql": map[string]any{"type": "string"},
+		anthropic.NewBetaSystemMessage(anthropic.BetaSystemMessageOutputConfigParam{}, anthropic.BetaSystemMessageParamContentUnion{
+			OfToolAddition: &anthropic.BetaRequestToolAdditionBlockParam{
+				Tool: anthropic.BetaRequestToolAdditionBlockToolUnionParam{
+					OfToolDefinition: &anthropic.BetaToolChangeToolDefinitionParam{
+						Definition: anthropic.BetaToolUnionParam{OfTool: &anthropic.BetaToolParam{
+							Name:        "db_query",
+							Description: anthropic.String("Run a read-only SQL query against the analytics database."),
+							InputSchema: anthropic.BetaToolInputSchemaParam{
+								Properties: map[string]any{
+									"sql": map[string]any{"type": "string"},
+								},
+								Required: []string{"sql"},
 							},
-							Required: []string{"sql"},
-						},
-					}},
-				}),
+						}},
+					},
+				},
 			},
-		},
+		}),
 	},
 })
 if err != nil {
@@ -985,7 +987,7 @@ end
 
 The response's `content` includes a `tool_use` block for the new tool, for example:
 
-```text
+```json
 {
   "type": "tool_use",
   "id": "toolu_01A09q90qw90lq917835lq9",
@@ -1359,16 +1361,17 @@ response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageN
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("What's on my calendar tomorrow?")),
 		// Make the calendar server's tools available from this point onward.
 		// The block names the server; it never holds a URL or token.
-		{
-			Role: anthropic.BetaMessageParamRoleSystem,
-			Content: []anthropic.BetaContentBlockParamUnion{
-				anthropic.NewBetaToolAdditionBlock(anthropic.BetaToolChangeToolDefinitionParam{
-					Definition: anthropic.BetaToolUnionParam{OfMCPToolset: &anthropic.BetaMCPToolsetParam{
-						MCPServerName: "calendar",
-					}},
-				}),
+		anthropic.NewBetaSystemMessage(anthropic.BetaSystemMessageOutputConfigParam{}, anthropic.BetaSystemMessageParamContentUnion{
+			OfToolAddition: &anthropic.BetaRequestToolAdditionBlockParam{
+				Tool: anthropic.BetaRequestToolAdditionBlockToolUnionParam{
+					OfToolDefinition: &anthropic.BetaToolChangeToolDefinitionParam{
+						Definition: anthropic.BetaToolUnionParam{OfMCPToolset: &anthropic.BetaMCPToolsetParam{
+							MCPServerName: "calendar",
+						}},
+					},
+				},
 			},
-		},
+		}),
 	},
 })
 if err != nil {
@@ -1626,7 +1629,7 @@ Add a message with `"role": "system"` to the `messages` array. Use a plain strin
 
 You can still set the top-level `system` field for instructions that should apply to the entire conversation. Reserve mid-conversation system messages for instructions that only become relevant later, or that you want to add without invalidating the cached prefix.
 
-A `role: "system"` message can also carry `output_config.effort` to change the [effort](effort.md) level partway through a conversation. This is in beta on Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Haiku 5.5 on the Claude API and Google Cloud, and requires the `mid-conversation-output-config-2026-07-01` beta header. On Amazon Bedrock, it's in beta on Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5.5, with the same beta value. Claude Opus 5 doesn't support it on Amazon Bedrock. See [Per-message effort](effort.md#change-effort-mid-conversation-beta).
+A `role: "system"` message can also carry `output_config.effort` to change the [effort](effort.md) level partway through a conversation. This is in beta on Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Haiku 5.5 on the Claude API and Claude Models on Google Cloud (Google managed), and requires the `mid-conversation-output-config-2026-07-01` beta header. On Amazon Bedrock, it's in beta on Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5.5, with the same beta value. Claude Opus 5 doesn't support it on Amazon Bedrock. See [Per-message effort](effort.md#change-effort-mid-conversation-beta).
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -1812,12 +1815,11 @@ response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 		// pass the team's strict typing policy. Appending the instruction
 		// here keeps earlier turns byte-identical, so the prefix cached by
 		// the previous request is still read from cache.
-		{
-			Role: anthropic.MessageParamRoleSystem,
-			Content: []anthropic.ContentBlockParamUnion{
-				anthropic.NewTextBlock("From now on, every suggestion must include explicit type annotations."),
+		{OfSystem: &anthropic.SystemMessageParam{
+			Content: []anthropic.TextBlockParam{
+				{Text: "From now on, every suggestion must include explicit type annotations."},
 			},
-		},
+		}},
 	},
 })
 if err != nil {
@@ -2082,7 +2084,7 @@ messages.3: output_config is not permitted on a turn-scoped system message (clea
 messages.3.content.0: cache_control is not permitted on a turn-scoped system message (clear_at: 'next_user_message')
 ```
 
-The first is the error returned without the beta header. On Google Cloud and [Claude in Amazon Bedrock](claude-in-amazon-bedrock.md), send the beta value in the `anthropic-beta` header, as on the Claude API (see [Beta headers](../api/beta-headers.md)). With the Amazon Bedrock [InvokeModel API](claude-on-amazon-bedrock-legacy.md), put it in the `anthropic_beta` array of the request body instead.
+The first is the error returned without the beta header. On Claude Models on Google Cloud (Google managed) and [Claude in Amazon Bedrock](claude-in-amazon-bedrock.md), send the beta value in the `anthropic-beta` header, as on the Claude API (see [Beta headers](../api/beta-headers.md)). With the Amazon Bedrock [InvokeModel API](claude-on-amazon-bedrock-legacy.md), put it in the `anthropic_beta` array of the request body instead.
 
 Through the SDK, set `clear_at` (csharp, go: `ClearAt`; java: `.clearAt()`; php: `clearAt`) on the `role: "system"` entry in `messages` and send the beta header. The following example appends a turn-scoped reminder after the user turn; on the next request, once a later user message exists, the reminder stays in the array but no longer renders:
 
@@ -2213,11 +2215,10 @@ response, err := client.Beta.Messages.New(context.Background(), anthropic.BetaMe
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Draft a short status update on the database migration for the team channel.")),
 		// Turn-scoped reminder: renders for this turn, then clears once a later user message exists.
-		{
-			Role:    anthropic.BetaMessageParamRoleSystem,
-			ClearAt: anthropic.BetaMessageParamClearAtNextUserMessage,
-			Content: []anthropic.BetaContentBlockParamUnion{anthropic.NewBetaTextBlock("The reader is on call: keep this reply under 50 words.")},
-		},
+		{OfSystem: &anthropic.BetaSystemMessageParam{
+			ClearAt: anthropic.BetaSystemMessageParamClearAtNextUserMessage,
+			Content: []anthropic.BetaSystemMessageParamContentUnion{{OfText: &anthropic.BetaTextBlockParam{Text: "The reader is on call: keep this reply under 50 words."}}},
+		}},
 	},
 	Betas: []anthropic.AnthropicBeta{anthropic.AnthropicBetaMidConversationSystemClearAt2026_08_21},
 })

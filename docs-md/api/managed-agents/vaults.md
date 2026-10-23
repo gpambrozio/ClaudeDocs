@@ -109,7 +109,7 @@ puts vault.id # "vlt_01ABC..."
 
 The response is the full vault record:
 
-```text wrap
+```json
 {
   "type": "vault",
   "id": "vlt_01ABC...",
@@ -264,7 +264,6 @@ credential, err := client.Beta.Vaults.Credentials.New(ctx, vault.ID, anthropic.B
 	DisplayName: anthropic.String("Alice's Slack"),
 	Auth: anthropic.BetaVaultCredentialNewParamsAuthUnion{
 		OfMCPOAuth: &anthropic.BetaManagedAgentsMCPOAuthCreateParams{
-			Type:         anthropic.BetaManagedAgentsMCPOAuthCreateParamsTypeMCPOAuth,
 			MCPServerURL: "https://mcp.slack.com/mcp",
 			AccessToken:  "xoxp-...",
 			ExpiresAt:    anthropic.Time(time.Date(2099, time.December, 31, 23, 59, 59, 0, time.UTC)),
@@ -275,7 +274,6 @@ credential, err := client.Beta.Vaults.Credentials.New(ctx, vault.ID, anthropic.B
 				RefreshToken:  "xoxe-1-...",
 				TokenEndpointAuth: anthropic.BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnion{
 					OfClientSecretPost: &anthropic.BetaManagedAgentsTokenEndpointAuthPostParam{
-						Type:         anthropic.BetaManagedAgentsTokenEndpointAuthPostParamTypeClientSecretPost,
 						ClientSecret: "abc123...",
 					},
 				},
@@ -425,7 +423,6 @@ bearerCredential, err := client.Beta.Vaults.Credentials.New(ctx, vault.ID, anthr
 	DisplayName: anthropic.String("Linear API key"),
 	Auth: anthropic.BetaVaultCredentialNewParamsAuthUnion{
 		OfStaticBearer: &anthropic.BetaManagedAgentsStaticBearerCreateParams{
-			Type:         anthropic.BetaManagedAgentsStaticBearerCreateParamsTypeStaticBearer,
 			MCPServerURL: "https://mcp.linear.app/mcp",
 			Token:        "lin_api_your_linear_key",
 		},
@@ -434,7 +431,6 @@ bearerCredential, err := client.Beta.Vaults.Credentials.New(ctx, vault.ID, anthr
 if err != nil {
 	panic(err)
 }
-_ = bearerCredential
 ```
 
 ```java Java
@@ -589,12 +585,10 @@ envVarCredential, err := client.Beta.Vaults.Credentials.New(ctx, vault.ID, anthr
 	DisplayName: anthropic.String("Notion API key for sandbox"),
 	Auth: anthropic.BetaVaultCredentialNewParamsAuthUnion{
 		OfEnvironmentVariable: &anthropic.BetaManagedAgentsEnvironmentVariableCreateParams{
-			Type:        anthropic.BetaManagedAgentsEnvironmentVariableCreateParamsTypeEnvironmentVariable,
 			SecretName:  "NOTION_API_KEY",
 			SecretValue: "ntn_your-secret-here",
 			Networking: anthropic.BetaManagedAgentsCredentialNetworkingParamsUnion{
 				OfLimited: &anthropic.BetaManagedAgentsLimitedCredentialNetworkingParams{
-					Type:         anthropic.BetaManagedAgentsLimitedCredentialNetworkingParamsTypeLimited,
 					AllowedHosts: []string{"api.notion.com"},
 				},
 			},
@@ -886,7 +880,6 @@ _, err = client.Beta.Vaults.Credentials.Update(ctx, credential.ID, anthropic.Bet
 	VaultID: vault.ID,
 	Auth: anthropic.BetaVaultCredentialUpdateParamsAuthUnion{
 		OfMCPOAuth: &anthropic.BetaManagedAgentsMCPOAuthUpdateParams{
-			Type:        anthropic.BetaManagedAgentsMCPOAuthUpdateParamsTypeMCPOAuth,
 			AccessToken: anthropic.String("xoxp-new-..."),
 			ExpiresAt:   anthropic.Time(time.Date(2099, time.December, 31, 23, 59, 59, 0, time.UTC)),
 			Refresh: anthropic.BetaManagedAgentsMCPOAuthRefreshUpdateParams{
@@ -1040,7 +1033,7 @@ puts validation.status # :valid, :invalid, or :unknown
 
 The response is a `vault_credential_validation` object. `mcp_probe` includes the failed MCP handshake step; `refresh` includes the outcome of the attempted refresh.
 
-```text wrap
+```json
 {
   "type": "vault_credential_validation",
   "credential_id": "vcrd_01ABC...",

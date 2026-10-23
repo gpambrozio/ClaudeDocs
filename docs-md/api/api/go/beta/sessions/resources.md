@@ -143,7 +143,7 @@ Add Session Resource
 
 - `type BetaManagedAgentsFileResource`
 
-  - `Type BetaManagedAgentsFileResourceType`
+  - `Type File`
 
   - `ID string`
 
@@ -172,8 +172,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -186,7 +186,6 @@ func main() {
 		anthropic.BetaSessionResourceAddParams{
 			BetaManagedAgentsFileResourceParams: anthropic.BetaManagedAgentsFileResourceParams{
 				FileID: "file_011CNha8iCJcU1wXNR6q4V8w",
-				Type:   anthropic.BetaManagedAgentsFileResourceParamsTypeFile,
 			},
 		},
 	)
@@ -354,7 +353,7 @@ List Session Resources
 
   - `type BetaManagedAgentsGitHubRepositoryResource`
 
-    - `Type BetaManagedAgentsGitHubRepositoryResourceType`
+    - `Type GitHubRepository`
 
     - `ID string`
 
@@ -378,7 +377,7 @@ List Session Resources
 
       - `type BetaManagedAgentsBranchCheckout`
 
-        - `Type BetaManagedAgentsBranchCheckoutType`
+        - `Type Branch`
 
         - `Name string`
 
@@ -388,7 +387,7 @@ List Session Resources
 
       - `type BetaManagedAgentsCommitCheckout`
 
-        - `Type BetaManagedAgentsCommitCheckoutType`
+        - `Type Commit`
 
         - `Sha string`
 
@@ -398,7 +397,7 @@ List Session Resources
 
   - `type BetaManagedAgentsFileResource`
 
-    - `Type BetaManagedAgentsFileResourceType`
+    - `Type File`
 
     - `ID string`
 
@@ -422,7 +421,7 @@ List Session Resources
 
     A memory store attached to an agent session.
 
-    - `Type BetaManagedAgentsMemoryStoreResourceType`
+    - `Type MemoryStore`
 
     - `MemoryStoreID string`
 
@@ -463,8 +462,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -651,7 +650,7 @@ Get Session Resource
 
   - `type BetaManagedAgentsGitHubRepositoryResource`
 
-    - `Type BetaManagedAgentsGitHubRepositoryResourceType`
+    - `Type GitHubRepository`
 
     - `ID string`
 
@@ -675,7 +674,7 @@ Get Session Resource
 
       - `type BetaManagedAgentsBranchCheckout`
 
-        - `Type BetaManagedAgentsBranchCheckoutType`
+        - `Type Branch`
 
         - `Name string`
 
@@ -685,7 +684,7 @@ Get Session Resource
 
       - `type BetaManagedAgentsCommitCheckout`
 
-        - `Type BetaManagedAgentsCommitCheckoutType`
+        - `Type Commit`
 
         - `Sha string`
 
@@ -695,7 +694,7 @@ Get Session Resource
 
   - `type BetaManagedAgentsFileResource`
 
-    - `Type BetaManagedAgentsFileResourceType`
+    - `Type File`
 
     - `ID string`
 
@@ -719,7 +718,7 @@ Get Session Resource
 
     A memory store attached to an agent session.
 
-    - `Type BetaManagedAgentsMemoryStoreResourceType`
+    - `Type MemoryStore`
 
     - `MemoryStoreID string`
 
@@ -760,8 +759,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -943,7 +942,7 @@ Update Session Resource
 
   - `type BetaManagedAgentsGitHubRepositoryResource`
 
-    - `Type BetaManagedAgentsGitHubRepositoryResourceType`
+    - `Type GitHubRepository`
 
     - `ID string`
 
@@ -967,7 +966,7 @@ Update Session Resource
 
       - `type BetaManagedAgentsBranchCheckout`
 
-        - `Type BetaManagedAgentsBranchCheckoutType`
+        - `Type Branch`
 
         - `Name string`
 
@@ -977,7 +976,7 @@ Update Session Resource
 
       - `type BetaManagedAgentsCommitCheckout`
 
-        - `Type BetaManagedAgentsCommitCheckoutType`
+        - `Type Commit`
 
         - `Sha string`
 
@@ -987,7 +986,7 @@ Update Session Resource
 
   - `type BetaManagedAgentsFileResource`
 
-    - `Type BetaManagedAgentsFileResourceType`
+    - `Type File`
 
     - `ID string`
 
@@ -1011,7 +1010,7 @@ Update Session Resource
 
     A memory store attached to an agent session.
 
-    - `Type BetaManagedAgentsMemoryStoreResourceType`
+    - `Type MemoryStore`
 
     - `MemoryStoreID string`
 
@@ -1052,8 +1051,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -1228,7 +1227,7 @@ Delete Session Resource
 
   Confirmation of resource deletion.
 
-  - `Type BetaManagedAgentsDeleteSessionResourceType`
+  - `Type SessionResourceDeleted`
 
   - `ID string`
 
@@ -1241,8 +1240,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -1280,7 +1279,7 @@ func main() {
 
   Confirmation of resource deletion.
 
-  - `Type BetaManagedAgentsDeleteSessionResourceType`
+  - `Type SessionResourceDeleted`
 
   - `ID string`
 
@@ -1288,7 +1287,7 @@ func main() {
 
 - `type BetaManagedAgentsFileResource`
 
-  - `Type BetaManagedAgentsFileResourceType`
+  - `Type File`
 
   - `ID string`
 
@@ -1312,7 +1311,7 @@ func main() {
 
 - `type BetaManagedAgentsGitHubRepositoryResource`
 
-  - `Type BetaManagedAgentsGitHubRepositoryResourceType`
+  - `Type GitHubRepository`
 
   - `ID string`
 
@@ -1336,7 +1335,7 @@ func main() {
 
     - `type BetaManagedAgentsBranchCheckout`
 
-      - `Type BetaManagedAgentsBranchCheckoutType`
+      - `Type Branch`
 
       - `Name string`
 
@@ -1346,7 +1345,7 @@ func main() {
 
     - `type BetaManagedAgentsCommitCheckout`
 
-      - `Type BetaManagedAgentsCommitCheckoutType`
+      - `Type Commit`
 
       - `Sha string`
 
@@ -1360,7 +1359,7 @@ func main() {
 
   A memory store attached to an agent session.
 
-  - `Type BetaManagedAgentsMemoryStoreResourceType`
+  - `Type MemoryStore`
 
   - `MemoryStoreID string`
 
@@ -1398,7 +1397,7 @@ func main() {
 
   - `type BetaManagedAgentsGitHubRepositoryResource`
 
-    - `Type BetaManagedAgentsGitHubRepositoryResourceType`
+    - `Type GitHubRepository`
 
     - `ID string`
 
@@ -1422,7 +1421,7 @@ func main() {
 
       - `type BetaManagedAgentsBranchCheckout`
 
-        - `Type BetaManagedAgentsBranchCheckoutType`
+        - `Type Branch`
 
         - `Name string`
 
@@ -1432,7 +1431,7 @@ func main() {
 
       - `type BetaManagedAgentsCommitCheckout`
 
-        - `Type BetaManagedAgentsCommitCheckoutType`
+        - `Type Commit`
 
         - `Sha string`
 
@@ -1442,7 +1441,7 @@ func main() {
 
   - `type BetaManagedAgentsFileResource`
 
-    - `Type BetaManagedAgentsFileResourceType`
+    - `Type File`
 
     - `ID string`
 
@@ -1466,7 +1465,7 @@ func main() {
 
     A memory store attached to an agent session.
 
-    - `Type BetaManagedAgentsMemoryStoreResourceType`
+    - `Type MemoryStore`
 
     - `MemoryStoreID string`
 

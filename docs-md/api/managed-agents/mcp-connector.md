@@ -129,19 +129,15 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
-		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
 		Name: "github",
 		URL:  "https://api.githubcopilot.com/mcp/",
 	}},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{
 		{
-			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-				Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-			},
+			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
 		},
 		{
 			OfMCPToolset: &anthropic.BetaManagedAgentsMCPToolsetParams{
-				Type:          anthropic.BetaManagedAgentsMCPToolsetParamsTypeMCPToolset,
 				MCPServerName: "github",
 			},
 		},
@@ -176,7 +172,7 @@ var agent = client.beta().agents().create(
 ```php PHP
 $agent = $client->beta->agents->create(
     name: 'GitHub Assistant',
-    model: 'claude-opus-5-5',
+    model: BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
     mcpServers: [
         BetaManagedAgentsURLMCPServerParams::with(
             name: 'github',

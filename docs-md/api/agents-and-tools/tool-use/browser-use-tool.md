@@ -22,7 +22,7 @@ featureMetadata:
     - claude-haiku-5-5
   supportedPlatforms:
     Claude API: ga
-    Google Cloud: ga
+    Claude Models on Google Cloud (Google managed): ga
 ---
 
 **Start with the SDK toolsets:** The Python and TypeScript SDKs have a browser toolset class, in beta. Start from [a partner's integration](browser-use-sdk.md#partner-integrations), or see [Browser and computer use with the SDK toolsets](browser-use-sdk.md). Use this page as the tool reference, or when you handle the tool calls yourself.
@@ -37,7 +37,7 @@ With browser use, Claude reads and acts on live webpages, so everything a page s
 
 ## Quick start
 
-The browser use tool is available on the Claude API and [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md): add one entry of type `browser_toolset_20260801`, with no `name`, to the `tools` array of a [Messages API](../../api/messages/create.md) request.
+The browser use tool is available on the Claude API and [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md): add one entry of type `browser_toolset_20260801`, with no `name`, to the `tools` array of a [Messages API](../../api/messages/create.md) request.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -172,7 +172,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Open example.com/docs and tell me how to get started.'],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [
         ['type' => 'browser_toolset_20260801'],
     ],
@@ -203,7 +203,7 @@ puts response
 
 Claude's first response ends with `stop_reason: "tool_use"` and carries one or more member `tool_use` blocks, each naming a member tool in `name` and carrying `"toolset_name": "browser"`:
 
-```text Output
+```json Output
 {
   "id": "msg_01HCDu4XSTLzTAcodEQ58vDo",
   "type": "message",
@@ -551,13 +551,13 @@ static final String PLACEHOLDER_PNG = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF
 
 ToolResultBlockParam.Content captureScreenshot() {
     ImageBlockParam image = ImageBlockParam.builder()
-            .source(Base64ImageSource.builder()
-                    .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
-                    .data(PLACEHOLDER_PNG)
-                    .build())
-            .build();
+        .source(Base64ImageSource.builder()
+            .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+            .data(PLACEHOLDER_PNG)
+            .build())
+        .build();
     return ToolResultBlockParam.Content.ofBlocks(
-            List.of(ToolResultBlockParam.Content.Block.ofImage(image)));
+        List.of(ToolResultBlockParam.Content.Block.ofImage(image)));
 }
 
 String navigate(String url) {
@@ -566,8 +566,8 @@ String navigate(String url) {
 
 String readPage() {
     return """
-            link "Docs" [ref_1]
-            button "Search" [ref_2]""";
+        link "Docs" [ref_1]
+        button "Search" [ref_2]""";
 }
 
 String clickRef(String ref) {
@@ -593,7 +593,7 @@ ToolResultBlockParam.Content handleBrowserAction(String action, Map<String, Json
         case "left_click" -> {
             // target is {"type": "ref", "ref": "ref_1"} or {"type": "coordinate", "x": 640, "y": 380}
             Map<String, JsonValue> target =
-                    (Map<String, JsonValue>) input.get("target").asObject().get();
+                (Map<String, JsonValue>) input.get("target").asObject().get();
             if (target.get("type").asStringOrThrow().equals("ref")) {
                 yield clickRef(target.get("ref").asStringOrThrow());
             }
@@ -887,7 +887,7 @@ func browserToolResult(toolUseID string, content []anthropic.ToolResultBlockPara
 }
 
 // processToolCalls runs the browser actions in Claude's response in order and
-// builds one tool_result per tool_use block. After the first failure it skips
+// builds one tool_result for each tool_use block. After the first failure it skips
 // the rest: Claude planned them assuming the earlier actions succeeded.
 func processToolCalls(response *anthropic.Message) []anthropic.ContentBlockParamUnion {
 	var toolResults []anthropic.ContentBlockParamUnion
@@ -927,13 +927,13 @@ static final String HALT_TEXT = "Not executed: an earlier action in this turn fa
 /** Every result answering a browser toolset member echoes toolset_name. */
 ToolResultBlockParam.Builder browserResult(ToolUseBlock toolUse) {
     return ToolResultBlockParam.builder()
-            .toolUseId(toolUse.id())
-            .toolsetName("browser");
+        .toolUseId(toolUse.id())
+        .toolsetName("browser");
 }
 
 /**
  * Run the browser actions in Claude's response in order and build one
- * tool_result per tool_use block. After the first failure, skip the rest:
+ * tool_result for each tool_use block. After the first failure, skip the rest:
  * Claude planned them assuming the earlier actions succeeded.
  */
 List<ContentBlockParam> processToolCalls(Message response) {
@@ -947,18 +947,26 @@ List<ContentBlockParam> processToolCalls(Message response) {
         ToolUseBlock toolUse = block.asToolUse();
         ToolResultBlockParam result;
         if (failed) {
-            result = browserResult(toolUse).content(HALT_TEXT).isError(true).build();
+            result = browserResult(toolUse)
+                .content(HALT_TEXT)
+                .isError(true)
+                .build();
         } else {
             try {
                 Map<String, JsonValue> input =
-                        (Map<String, JsonValue>) toolUse._input().asObject().get();
+                    (Map<String, JsonValue>) toolUse._input().asObject().get();
                 ToolResultBlockParam.Content output = handleBrowserAction(toolUse.name(), input);
                 // A real executor also adds a browser_state block to navigation and
                 // tab-management results; see "Track tabs with browser_state" on this page.
-                result = browserResult(toolUse).content(output).build();
+                result = browserResult(toolUse)
+                    .content(output)
+                    .build();
             } catch (RuntimeException e) {
                 failed = true;
-                result = browserResult(toolUse).content("Error: " + e.getMessage()).isError(true).build();
+                result = browserResult(toolUse)
+                    .content("Error: " + e.getMessage())
+                    .isError(true)
+                    .build();
             }
         }
         toolResults.add(ContentBlockParam.ofToolResult(result));
@@ -1002,7 +1010,7 @@ function processToolCalls(Message $response): array
 NOT_EXECUTED = "Not executed: an earlier action in this turn failed."
 
 # Run the browser actions in Claude's response in order and build one
-# tool_result per tool_use block. After the first failure, skip the rest:
+# tool_result for each tool_use block. After the first failure, skip the rest:
 # Claude planned them assuming the earlier actions succeeded.
 def process_tool_calls(response)
   tool_results = []
@@ -1039,7 +1047,7 @@ When you stream the response, each member's `input` arrives as one complete `inp
 
 A turn with several member calls is a batch action: run the calls in the order they appear, stop at the first failure, and answer every later call with `is_error: true` and the exact text `Not executed: an earlier action in this turn failed.` A batch uses the same response shape as [parallel tool use](parallel-tool-use.md); the difference is that you run the blocks in order rather than concurrently. Here Claude clicks the search box it found earlier, types a query, and presses Enter in one turn:
 
-```text wrap
+```json
 {
   "role": "assistant",
   "content": [
@@ -1115,7 +1123,7 @@ To reduce these risks, take precautions such as the following:
 
 1. Run the browser and your executor in a dedicated container or virtual machine with minimal privileges, a fresh profile that holds no credentials, and no access to sensitive filesystems or internal networks; isolate any tool you run alongside it the same way.
 2. Restrict the hosts the browser can reach to a domain allowlist enforced at the network layer and re-checked in your `navigate` handler after redirects, and block loopback, link-local, and private ranges unless the task needs them.
-3. Treat everything a page supplies as untrusted input, including the tab titles and URLs, and each download's `url`, `path`, and `error`, that you report in a [`browser_state`](browser-use-tool.md#track-tabs-and-page-state) block, and build page reads from what the page renders (the accessibility tree or visible text), not raw DOM source, so hidden text doesn't reach Claude.
+3. Treat everything a page supplies as untrusted input. That includes the tab titles and URLs, and each download's `url`, `path`, and `error`, that you report in a [`browser_state`](browser-use-tool.md#track-tabs-and-page-state) block. Build page reads from what the page renders (the accessibility tree or visible text), not raw DOM source, so hidden text doesn't reach Claude.
 4. In your `navigate` handler, accept the history keywords `"back"`, `"forward"`, and `"reload"`, treat a URL without a scheme as `https://`, then parse the URL and refuse any scheme other than `http` or `https` (`javascript:`, `file:`, `data:`, `chrome:`, and so on) with an [error result](browser-use-tool.md#return-errors-from-your-executor). Check the scheme with a URL parser rather than a string prefix; the API doesn't filter the URLs Claude opens, so it can't reject one for you.
 5. Leave `javascript_exec` and `file_upload` disabled unless you need them, and read [Enable optional members](browser-use-tool.md#enable-optional-member-tools) before turning either on.
 6. Have a human confirm consequential actions and anything that requires affirmative consent (purchasing, modifying accounts, messaging, and accepting terms), and make that check in your executor before each call, because one turn can carry several.
@@ -1246,7 +1254,7 @@ Four member tools are disabled by default: `javascript_exec` and `file_upload` b
 * `paths` are file paths on the executor's filesystem, for deployments where the executor can read your application's files directly (the same condition under which you populate a download's `path`).
 * `document_ids` are identifiers for files your application has staged for the browser, for deployments where it can't. Your application defines what the identifiers mean; scope their resolution the way you scope `paths`, to files staged for this task.
 
-```text wrap
+```json
 {
   "type": "tool_use",
   "id": "toolu_01N7gVzFEfZjLjgsYwnrPgrF",
@@ -1532,7 +1540,7 @@ The API validates the toolset entry and every member `tool_use` and `tool_result
 
 ## Limitations
 
-* **Platform availability:** Browser use is available on the Claude API and [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md).
+* **Platform availability:** Browser use is available on the Claude API and [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md).
 * **Whole-input streaming only:** When you stream, each member's `input` arrives as one complete `input_json_delta` ([Client toolsets](tool-reference.md#client-toolsets)).
 * **Element references are best-effort:** Highly dynamic pages (virtualized lists, canvas-rendered interfaces, pages that re-render on scroll) might not expose stable references, and Claude falls back to screenshots and coordinate clicks there.
 * **`read_console` and `read_network` depend on your browser automation:** They report only what it can capture, and only from the moment it attached to a tab.

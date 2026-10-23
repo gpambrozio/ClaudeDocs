@@ -24,7 +24,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
 2. A URL reference to an image hosted online
 3. A `file_id` returned by the [Files API](files.md) (upload once, reference many times)
 
-On Amazon Bedrock and Google Cloud, only base64-encoded sources are currently available.
+On Amazon Bedrock and Claude Models on Google Cloud (Google managed), only base64-encoded sources are currently available.
 
 Just as [placing long documents before your query](prompt-engineering/claude-prompting-best-practices.md#long-context-prompting) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
 
@@ -125,7 +125,7 @@ const message = await anthropic.messages.create({
           source: {
             type: "base64",
             media_type: "image/jpeg",
-            data: imageData // Base64-encoded image data as string
+            data: imageData // base64-encoded image data as string
           }
         },
         {
@@ -200,30 +200,32 @@ fmt.Println(message)
 ```java Java
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 String imageData =
-  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
 
 List<ContentBlockParam> contentBlockParams = List.of(
-  ContentBlockParam.ofImage(
-    ImageBlockParam.builder()
-      .source(
-        Base64ImageSource.builder()
-          .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
-          .data(imageData)
-          .build()
-      )
-      .build()
-  ),
-  ContentBlockParam.ofText(TextBlockParam.builder().text("Describe this image.").build())
+    ContentBlockParam.ofImage(
+        ImageBlockParam.builder()
+            .source(
+                Base64ImageSource.builder()
+                    .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+                    .data(imageData)
+                    .build()
+            )
+            .build()
+    ),
+    ContentBlockParam.ofText(TextBlockParam.builder()
+        .text("Describe this image.")
+        .build())
 );
 Message message = client
-  .messages()
-  .create(
-    MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5_5)
-      .maxTokens(1024)
-      .addUserMessageOfContentBlockParams(contentBlockParams)
-      .build()
-  );
+    .messages()
+    .create(
+        MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_5_5)
+            .maxTokens(1024)
+            .addUserMessageOfContentBlockParams(contentBlockParams)
+            .build()
+    );
 
 IO.println(message);
 ```
@@ -231,7 +233,7 @@ IO.println(message);
 ```php PHP
 $client = new Client();
 
-$imageData = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+$imageData = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC';
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -251,7 +253,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
@@ -444,26 +446,28 @@ fmt.Println(message)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 List<ContentBlockParam> contentBlockParams = List.of(
-  ContentBlockParam.ofImage(
-    ImageBlockParam.builder()
-      .source(
-        UrlImageSource.builder()
-          .url("https://platform.claude.com/docs/images/vision-example.jpg")
-          .build()
-      )
-      .build()
-  ),
-  ContentBlockParam.ofText(TextBlockParam.builder().text("Describe this image.").build())
+    ContentBlockParam.ofImage(
+        ImageBlockParam.builder()
+            .source(
+                UrlImageSource.builder()
+                    .url("https://platform.claude.com/docs/images/vision-example.jpg")
+                    .build()
+            )
+            .build()
+    ),
+    ContentBlockParam.ofText(TextBlockParam.builder()
+        .text("Describe this image.")
+        .build())
 );
 Message message = client
-  .messages()
-  .create(
-    MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5_5)
-      .maxTokens(1024)
-      .addUserMessageOfContentBlockParams(contentBlockParams)
-      .build()
-  );
+    .messages()
+    .create(
+        MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_5_5)
+            .maxTokens(1024)
+            .addUserMessageOfContentBlockParams(contentBlockParams)
+            .build()
+    );
 System.out.println(message);
 ```
 
@@ -739,39 +743,43 @@ import com.anthropic.core.MultipartField;
 import com.anthropic.models.files.FileMetadata;
 import com.anthropic.models.files.FileUploadParams;
 // ...
-    AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+        AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-    // Upload the image file
-    FileMetadata file = client.files().upload(
-      FileUploadParams.builder()
-        .file(
-          MultipartField.<InputStream>builder()
-            .value(Files.newInputStream(Path.of("vision-example.jpg")))
-            .filename("vision-example.jpg")
-            .contentType("image/jpeg")
-            .build()
-        )
-        .build()
-    );
+        // Upload the image file
+        FileMetadata file = client.files().upload(
+            FileUploadParams.builder()
+                .file(
+                    MultipartField.<InputStream>builder()
+                        .value(Files.newInputStream(Path.of("vision-example.jpg")))
+                        .filename("vision-example.jpg")
+                        .contentType("image/jpeg")
+                        .build()
+                )
+                .build()
+        );
 
-    // Use the uploaded file in a message
-    ImageBlockParam imageParam = ImageBlockParam.builder().fileSource(file.id()).build();
+        // Use the uploaded file in a message
+        ImageBlockParam imageParam = ImageBlockParam.builder()
+            .fileSource(file.id())
+            .build();
 
-    MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5_5)
-      .maxTokens(1024)
-      .addUserMessageOfContentBlockParams(
-        List.of(
-          ContentBlockParam.ofImage(imageParam),
-          ContentBlockParam.ofText(
-            TextBlockParam.builder().text("Describe this image.").build()
-          )
-        )
-      )
-      .build();
+        MessageCreateParams params = MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_5_5)
+            .maxTokens(1024)
+            .addUserMessageOfContentBlockParams(
+                List.of(
+                    ContentBlockParam.ofImage(imageParam),
+                    ContentBlockParam.ofText(
+                        TextBlockParam.builder()
+                            .text("Describe this image.")
+                            .build()
+                    )
+                )
+            )
+            .build();
 
-    Message message = client.messages().create(params);
-    System.out.println(message.content());
+        Message message = client.messages().create(params);
+        System.out.println(message.content());
 ```
 
 ```php PHP
@@ -1078,7 +1086,9 @@ String image1Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP
 String image2Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
 
 List<ContentBlockParam> contentBlockParams = List.of(
-    ContentBlockParam.ofText(TextBlockParam.builder().text("Image 1:").build()),
+    ContentBlockParam.ofText(TextBlockParam.builder()
+        .text("Image 1:")
+        .build()),
     ContentBlockParam.ofImage(
         ImageBlockParam.builder()
             .source(
@@ -1089,7 +1099,9 @@ List<ContentBlockParam> contentBlockParams = List.of(
             )
             .build()
     ),
-    ContentBlockParam.ofText(TextBlockParam.builder().text("Image 2:").build()),
+    ContentBlockParam.ofText(TextBlockParam.builder()
+        .text("Image 2:")
+        .build()),
     ContentBlockParam.ofImage(
         ImageBlockParam.builder()
             .source(
@@ -1101,7 +1113,9 @@ List<ContentBlockParam> contentBlockParams = List.of(
             .build()
     ),
     ContentBlockParam.ofText(
-        TextBlockParam.builder().text("How are these images different?").build()
+        TextBlockParam.builder()
+            .text("How are these images different?")
+            .build()
     )
 );
 
@@ -1152,7 +1166,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo $message;
@@ -1214,15 +1228,15 @@ The maximum number of images for each message or request is:
 
 The maximum dimensions for each image are 8000x8000 px.
 
-If a single API request contains more than 20 images, a stricter per-image dimension limit applies to every image in that request. All `image` blocks in the request count toward this threshold, including images from earlier conversation turns that you resend and images nested inside `tool_result` content (for example, screenshots returned to the computer use tool). On Amazon Bedrock and Google Cloud, document blocks such as PDFs also count toward this threshold. Images exceeding the stricter limit are rejected with an `invalid_request_error` whose message references "many-image requests" and states the current limit in pixels. To stay under the limit on all platforms, either resize each image so that neither dimension exceeds 2000 px, or keep the request to 20 or fewer image and document blocks.
+If a single API request contains more than 20 images, a stricter per-image dimension limit applies to every image in that request. All `image` blocks in the request count toward this threshold, including images from earlier conversation turns that you resend and images nested inside `tool_result` content (for example, screenshots returned to the computer use tool). On Amazon Bedrock and Claude Models on Google Cloud (Google managed), document blocks such as PDFs also count toward this threshold. Images exceeding the stricter limit are rejected with an `invalid_request_error` whose message references "many-image requests" and states the current limit in pixels. To stay under the limit on all platforms, either resize each image so that neither dimension exceeds 2000 px, or keep the request to 20 or fewer image and document blocks.
 
 The maximum size per image is:
 
-* 10 MB (base64-encoded) when using the Claude API directly.
-* 5 MB (base64-encoded) on Amazon Bedrock and Google Cloud.
+* 10 MB (base64-encoded) on the Claude API and Claude Models on Google Cloud (Google managed).
+* 5 MB (base64-encoded) on Amazon Bedrock.
 * 10 MB on [claude.ai](https://claude.ai/).
 
-Although the API supports up to 600 images per request, [request size limits](../api/overview.md#request-size-limits) (32 MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Google Cloud) can be reached first. For many images, consider uploading with the [Files API](vision.md#files-api-image-example) and referencing by `file_id` to keep request payloads small.
+Although the API supports up to 600 images for each request, [request size limits](../api/overview.md#request-size-limits) can be reached first: 32 MB for standard endpoints, and lower on some partner-operated platforms, such as Amazon Bedrock and Claude Models on Google Cloud (Google managed). For many images, consider [uploading with the Files API](vision.md#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
 Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Resolution and token cost](vision.md#evaluate-image-size)).
 
@@ -1305,7 +1319,7 @@ Yes. Use the `url` source type instead of `base64` in the `image` content block.
 
 **Is there a limit to the image file size I can upload?**
 
-Yes. See [Request limits](vision.md#request-limits) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Google Cloud, and claude.ai.
+Yes. See [Request limits](vision.md#request-limits) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Claude Models on Google Cloud (Google managed), and claude.ai.
 
 **How many images can I include in one request?**
 

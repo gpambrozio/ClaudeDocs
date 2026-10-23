@@ -1,4 +1,4 @@
-# Preview snapshots, keyed by event id. accumulate_managed_agents_event folds each
+# Preview snapshots, keyed by event ID. accumulate_managed_agents_event folds each
 
 ---
 title: Preview responses with event deltas
@@ -33,7 +33,7 @@ A subagent's previews appear on [that subagent's own thread stream](event-deltas
 
 When a previewed event starts, the stream emits an `event_start` carrying the upcoming event's type and `id`:
 
-```text wrap
+```json
 {
   "type": "event_start",
   "event": {
@@ -45,7 +45,7 @@ When a previewed event starts, the stream emits an `event_start` carrying the up
 
 For `agent.message`, the start is followed by `event_delta` events carrying incremental text. Each delta names the event it extends in `event_id` and the content block it extends in `delta.index`:
 
-```text wrap
+```json
 {
   "type": "event_delta",
   "event_id": "sevt_01abc...",
@@ -112,7 +112,7 @@ This workflow needs more logic than a single shell command. Use the [Claude SDK]
 This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
-# Preview snapshots, keyed by event id. accumulate_managed_agents_event folds each
+# Preview snapshots, keyed by event ID. accumulate_managed_agents_event folds each
 # event_start / event_delta into an agent.message snapshot; the buffered
 # agent.message replaces it.
 previews: dict[str, BetaManagedAgentsAgentMessageEvent] = {}
@@ -166,7 +166,7 @@ with client.beta.sessions.events.stream(
 ```
 
 ```typescript TypeScript
-// Preview snapshots, keyed by event id. `accumulateManagedAgentsEvent`
+// Preview snapshots, keyed by event ID. `accumulateManagedAgentsEvent`
 // folds event_start / event_delta previews into an agent.message snapshot.
 const previews = new Map<string, BetaManagedAgentsAgentMessageEvent>();
 
@@ -186,8 +186,8 @@ await client.beta.sessions.events.send(session.id, {
 deltas: for await (const event of stream) {
   switch (event.type) {
     case "event_start": {
-      // 1. Note the announced id and open the snapshot. Deltas and the
-      //    buffered event carry the same id.
+      // 1. Note the announced ID and open the snapshot. Deltas and the
+      //    buffered event carry the same ID.
       const preview = accumulateManagedAgentsEvent(undefined, event);
       if (preview) {
         previews.set(event.event.id, preview);
@@ -251,7 +251,7 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
     ],
 });
 
-// Accumulate preview fragments per (event id, content index). The buffered
+// Accumulate preview fragments for each (event ID, content index). The buffered
 // agent.message that follows carries the complete content, so it replaces the
 // accumulated preview rather than appending to it.
 Dictionary<string, SortedDictionary<long, string>> previews = [];
@@ -260,7 +260,7 @@ await foreach (var streamEvent in stream.Enumerate())
 {
     if (streamEvent.TryPickStartEvent(out var start))
     {
-        // A preview opened for the event with this id. This stream only opts in
+        // A preview opened for the event with this ID. This stream only opts in
         // to agent.message deltas; TryPick* returns false instead of throwing,
         // so other preview types (including ones added later) are skipped.
         if (start.Event.TryPickAgentMessage(out var preview))
@@ -314,10 +314,8 @@ await foreach (var streamEvent in stream.Enumerate())
 	if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 						Text: "Write a haiku about the ocean.",
 					},
 				}},
@@ -328,7 +326,7 @@ await foreach (var streamEvent in stream.Enumerate())
 	}
 
 	// The accumulator folds event_start / event_delta fragments into
-	// per-event-id agent.message snapshots. The zero value is ready to use.
+	// agent.message snapshots, one for each event ID. The zero value is ready to use.
 	var previews anthropic.BetaManagedAgentsEventAccumulator
 
 deltas:
@@ -433,7 +431,7 @@ use Anthropic\Beta\Sessions\Events\ManagedAgentsSpanModelRequestEndEvent;
 use Anthropic\Beta\Sessions\Events\ManagedAgentsTextBlock;
 use Anthropic\Lib\Sessions\EventAccumulator;
 
-// Preview snapshots, keyed by event id. EventAccumulator::accumulate() adds each
+// Preview snapshots, keyed by event ID. EventAccumulator::accumulate() adds each
 // event_start / event_delta to an agent.message snapshot; the buffered
 // agent.message replaces it.
 $previews = [];
@@ -520,7 +518,7 @@ client.beta.sessions.events.send_(
 
 # Accumulate preview fragments by (event_id, index) into explicitly mutable
 # (`+""`) buffers so `<<` can append in place. The buffered agent.message with
-# the same id is authoritative and replaces whatever the deltas built up.
+# the same ID is authoritative and replaces whatever the deltas built up.
 buffers = Hash.new do |by_event, event_id|
   by_event[event_id] = Hash.new { |fragments, index| fragments[index] = +"" }
 end
@@ -601,7 +599,7 @@ with client.beta.sessions.threads.events.stream(
             case "event_delta":
                 print(event.delta.content.text, end="")
             case "agent.message":
-                # The buffered event is the authoritative record; render its content
+                # The buffered event is the authoritative record; render its content.
                 print()
                 for block in event.content:
                     if block.type == "text":
@@ -703,7 +701,7 @@ await foreach (var streamEvent in stream.Enumerate())
 	}
 
 	// The child thread's stream takes the same event_deltas parameter as the
-	// session stream; run one read loop per stream connection.
+	// session stream; run one read loop for each stream connection.
 	stream := client.Beta.Sessions.Threads.Events.StreamEvents(ctx, childThreadID, anthropic.BetaSessionThreadEventStreamParams{
 		SessionID: session.ID,
 		EventDeltas: []anthropic.BetaManagedAgentsDeltaType{
@@ -801,7 +799,7 @@ foreach ($stream as $event) {
             echo $event->delta->content->text;
             break;
         case $event instanceof ManagedAgentsAgentMessageEvent:
-            // The buffered event is the authoritative record; render its content
+            // The buffered event is the authoritative record; render its content.
             echo "\n";
             foreach ($event->content as $block) {
                 if ($block instanceof ManagedAgentsTextBlock) {

@@ -139,20 +139,16 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	System: anthropic.String("You are a code review assistant with access to GitHub."),
 	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{
 		{
-			Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
 			Name: "github",
 			URL:  "https://api.githubcopilot.com/mcp/",
 		},
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{
 		{
-			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-				Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-			},
+			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
 		},
 		{
 			OfMCPToolset: &anthropic.BetaManagedAgentsMCPToolsetParams{
-				Type:          anthropic.BetaManagedAgentsMCPToolsetParamsTypeMCPToolset,
 				MCPServerName: "github",
 			},
 		},
@@ -313,7 +309,6 @@ session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 	Resources: []anthropic.BetaSessionNewParamsResourceUnion{
 		{
 			OfGitHubRepository: &anthropic.BetaManagedAgentsGitHubRepositoryResourceParams{
-				Type:               anthropic.BetaManagedAgentsGitHubRepositoryResourceParamsTypeGitHubRepository,
 				URL:                "https://github.com/org/repo",
 				MountPath:          anthropic.String("/workspace/repo"),
 				AuthorizationToken: "ghp_your_github_token",
@@ -497,7 +492,6 @@ BetaManagedAgentsGitHubRepositoryResourceParams[] resources =
 resources := []anthropic.BetaSessionNewParamsResourceUnion{
 	{
 		OfGitHubRepository: &anthropic.BetaManagedAgentsGitHubRepositoryResourceParams{
-			Type:               anthropic.BetaManagedAgentsGitHubRepositoryResourceParamsTypeGitHubRepository,
 			URL:                "https://github.com/org/frontend",
 			MountPath:          anthropic.String("/workspace/frontend"),
 			AuthorizationToken: "ghp_your_github_token",
@@ -505,7 +499,6 @@ resources := []anthropic.BetaSessionNewParamsResourceUnion{
 	},
 	{
 		OfGitHubRepository: &anthropic.BetaManagedAgentsGitHubRepositoryResourceParams{
-			Type:               anthropic.BetaManagedAgentsGitHubRepositoryResourceParamsTypeGitHubRepository,
 			URL:                "https://github.com/org/backend",
 			MountPath:          anthropic.String("/workspace/backend"),
 			AuthorizationToken: "ghp_your_github_token",
@@ -793,11 +786,9 @@ _, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSession
 	Events: []anthropic.BetaManagedAgentsEventParamsUnion{
 		{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
 					{
 						OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-							Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 							Text: "Fix the type error in src/utils.ts, commit it to a new branch, and push it.",
 						},
 					},

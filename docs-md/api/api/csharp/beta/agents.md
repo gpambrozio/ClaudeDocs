@@ -207,31 +207,31 @@ Create Agent
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string? InferenceGeo`
 
@@ -265,7 +265,7 @@ Create Agent
 
     MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../../managed-agents/mcp-connector.md).
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -295,7 +295,7 @@ Create Agent
 
       An Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -313,7 +313,7 @@ Create Agent
 
       A user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -341,7 +341,7 @@ Create Agent
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `IReadOnlyList<BetaManagedAgentsAgentToolConfigParams> Configs`
 
@@ -369,13 +369,13 @@ Create Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -769,7 +769,7 @@ Create Agent
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required string McpServerName`
 
@@ -835,7 +835,7 @@ Create Agent
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -979,7 +979,7 @@ Create Agent
 
   A Managed Agents `agent`.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -1019,7 +1019,7 @@ Create Agent
 
   - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -1113,31 +1113,31 @@ Create Agent
 
         Low effort. Favors latency over reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `required Type Type`
+        - `JsonElement Type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `required Type Type`
+        - `JsonElement Type = "max"`
 
     - `string InferenceGeo`
 
@@ -1159,7 +1159,7 @@ Create Agent
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `required Type Type`
+      - `JsonElement Type = "coordinator"`
 
       - `required IReadOnlyList<Agent> Agents`
 
@@ -1169,7 +1169,7 @@ Create Agent
 
           A resolved agent reference with a concrete version.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -1181,7 +1181,7 @@ Create Agent
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `required Type Type`
+          - `JsonElement Type = "advisor"`
 
           - `required string Model`
 
@@ -1243,7 +1243,7 @@ Create Agent
 
             Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -1275,7 +1275,7 @@ Create Agent
 
             Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -1297,7 +1297,7 @@ Create Agent
 
       A resolved Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -1307,7 +1307,7 @@ Create Agent
 
       A resolved user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -1319,7 +1319,7 @@ Create Agent
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -1341,13 +1341,13 @@ Create Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -1679,7 +1679,7 @@ Create Agent
 
     - `class BetaManagedAgentsMcpToolset`
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -1731,7 +1731,7 @@ Create Agent
 
       A custom tool as returned in API responses.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -2036,7 +2036,7 @@ List Agents
 
   A Managed Agents `agent`.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -2076,7 +2076,7 @@ List Agents
 
   - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -2170,31 +2170,31 @@ List Agents
 
         Low effort. Favors latency over reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `required Type Type`
+        - `JsonElement Type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `required Type Type`
+        - `JsonElement Type = "max"`
 
     - `string InferenceGeo`
 
@@ -2216,7 +2216,7 @@ List Agents
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `required Type Type`
+      - `JsonElement Type = "coordinator"`
 
       - `required IReadOnlyList<Agent> Agents`
 
@@ -2226,7 +2226,7 @@ List Agents
 
           A resolved agent reference with a concrete version.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -2238,7 +2238,7 @@ List Agents
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `required Type Type`
+          - `JsonElement Type = "advisor"`
 
           - `required string Model`
 
@@ -2300,7 +2300,7 @@ List Agents
 
             Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -2332,7 +2332,7 @@ List Agents
 
             Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -2354,7 +2354,7 @@ List Agents
 
       A resolved Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -2364,7 +2364,7 @@ List Agents
 
       A resolved user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -2376,7 +2376,7 @@ List Agents
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -2398,13 +2398,13 @@ List Agents
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -2736,7 +2736,7 @@ List Agents
 
     - `class BetaManagedAgentsMcpToolset`
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -2788,7 +2788,7 @@ List Agents
 
       A custom tool as returned in API responses.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -3080,7 +3080,7 @@ Get Agent
 
   A Managed Agents `agent`.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -3120,7 +3120,7 @@ Get Agent
 
   - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -3214,31 +3214,31 @@ Get Agent
 
         Low effort. Favors latency over reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `required Type Type`
+        - `JsonElement Type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `required Type Type`
+        - `JsonElement Type = "max"`
 
     - `string InferenceGeo`
 
@@ -3260,7 +3260,7 @@ Get Agent
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `required Type Type`
+      - `JsonElement Type = "coordinator"`
 
       - `required IReadOnlyList<Agent> Agents`
 
@@ -3270,7 +3270,7 @@ Get Agent
 
           A resolved agent reference with a concrete version.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -3282,7 +3282,7 @@ Get Agent
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `required Type Type`
+          - `JsonElement Type = "advisor"`
 
           - `required string Model`
 
@@ -3344,7 +3344,7 @@ Get Agent
 
             Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -3376,7 +3376,7 @@ Get Agent
 
             Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -3398,7 +3398,7 @@ Get Agent
 
       A resolved Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -3408,7 +3408,7 @@ Get Agent
 
       A resolved user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -3420,7 +3420,7 @@ Get Agent
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -3442,13 +3442,13 @@ Get Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -3780,7 +3780,7 @@ Get Agent
 
     - `class BetaManagedAgentsMcpToolset`
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -3832,7 +3832,7 @@ Get Agent
 
       A custom tool as returned in API responses.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -4008,7 +4008,7 @@ Update Agent
 
     MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../../managed-agents/mcp-connector.md).
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -4214,31 +4214,31 @@ Update Agent
 
           Low effort. Favors latency over reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "low"`
 
         - `class BetaManagedAgentsEffortMedium`
 
           Medium effort. Balances latency and reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "medium"`
 
         - `class BetaManagedAgentsEffortHigh`
 
           High effort. Favors reasoning depth.
 
-          - `required Type Type`
+          - `JsonElement Type = "high"`
 
         - `class BetaManagedAgentsEffortXhigh`
 
           Extra-high effort. Not all models accept this level.
 
-          - `required Type Type`
+          - `JsonElement Type = "xhigh"`
 
         - `class BetaManagedAgentsEffortMax`
 
           Maximum effort. Favors reasoning depth over latency.
 
-          - `required Type Type`
+          - `JsonElement Type = "max"`
 
       - `string? InferenceGeo`
 
@@ -4270,7 +4270,7 @@ Update Agent
 
       An Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -4288,7 +4288,7 @@ Update Agent
 
       A user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -4316,7 +4316,7 @@ Update Agent
 
       Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `IReadOnlyList<BetaManagedAgentsAgentToolConfigParams> Configs`
 
@@ -4344,13 +4344,13 @@ Update Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -4744,7 +4744,7 @@ Update Agent
 
       Configuration for tools from an MCP server defined in `mcp_servers`.
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required string McpServerName`
 
@@ -4810,7 +4810,7 @@ Update Agent
 
       A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -4960,7 +4960,7 @@ Update Agent
 
   A Managed Agents `agent`.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -5000,7 +5000,7 @@ Update Agent
 
   - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -5094,31 +5094,31 @@ Update Agent
 
         Low effort. Favors latency over reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `required Type Type`
+        - `JsonElement Type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `required Type Type`
+        - `JsonElement Type = "max"`
 
     - `string InferenceGeo`
 
@@ -5140,7 +5140,7 @@ Update Agent
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `required Type Type`
+      - `JsonElement Type = "coordinator"`
 
       - `required IReadOnlyList<Agent> Agents`
 
@@ -5150,7 +5150,7 @@ Update Agent
 
           A resolved agent reference with a concrete version.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -5162,7 +5162,7 @@ Update Agent
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `required Type Type`
+          - `JsonElement Type = "advisor"`
 
           - `required string Model`
 
@@ -5224,7 +5224,7 @@ Update Agent
 
             Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -5256,7 +5256,7 @@ Update Agent
 
             Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -5278,7 +5278,7 @@ Update Agent
 
       A resolved Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -5288,7 +5288,7 @@ Update Agent
 
       A resolved user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -5300,7 +5300,7 @@ Update Agent
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -5322,13 +5322,13 @@ Update Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -5660,7 +5660,7 @@ Update Agent
 
     - `class BetaManagedAgentsMcpToolset`
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -5712,7 +5712,7 @@ Update Agent
 
       A custom tool as returned in API responses.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -5994,7 +5994,7 @@ Archive Agent
 
   A Managed Agents `agent`.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -6034,7 +6034,7 @@ Archive Agent
 
   - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -6128,31 +6128,31 @@ Archive Agent
 
         Low effort. Favors latency over reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `required Type Type`
+        - `JsonElement Type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `required Type Type`
+        - `JsonElement Type = "max"`
 
     - `string InferenceGeo`
 
@@ -6174,7 +6174,7 @@ Archive Agent
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `required Type Type`
+      - `JsonElement Type = "coordinator"`
 
       - `required IReadOnlyList<Agent> Agents`
 
@@ -6184,7 +6184,7 @@ Archive Agent
 
           A resolved agent reference with a concrete version.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -6196,7 +6196,7 @@ Archive Agent
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `required Type Type`
+          - `JsonElement Type = "advisor"`
 
           - `required string Model`
 
@@ -6258,7 +6258,7 @@ Archive Agent
 
             Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -6290,7 +6290,7 @@ Archive Agent
 
             Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -6312,7 +6312,7 @@ Archive Agent
 
       A resolved Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -6322,7 +6322,7 @@ Archive Agent
 
       A resolved user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -6334,7 +6334,7 @@ Archive Agent
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -6356,13 +6356,13 @@ Archive Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -6694,7 +6694,7 @@ Archive Agent
 
     - `class BetaManagedAgentsMcpToolset`
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -6746,7 +6746,7 @@ Archive Agent
 
       A custom tool as returned in API responses.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -6900,7 +6900,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-  - `required Type Type`
+  - `JsonElement Type = "advisor"`
 
   - `required string Model`
 
@@ -6912,7 +6912,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   A Managed Agents `agent`.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -6952,7 +6952,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -7046,31 +7046,31 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Low effort. Favors latency over reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `required Type Type`
+        - `JsonElement Type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `required Type Type`
+        - `JsonElement Type = "max"`
 
     - `string InferenceGeo`
 
@@ -7092,7 +7092,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `required Type Type`
+      - `JsonElement Type = "coordinator"`
 
       - `required IReadOnlyList<Agent> Agents`
 
@@ -7102,7 +7102,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
           A resolved agent reference with a concrete version.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -7114,7 +7114,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `required Type Type`
+          - `JsonElement Type = "advisor"`
 
           - `required string Model`
 
@@ -7176,7 +7176,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
             Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -7208,7 +7208,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
             Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -7230,7 +7230,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       A resolved Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -7240,7 +7240,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       A resolved user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -7252,7 +7252,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -7274,13 +7274,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -7612,7 +7612,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     - `class BetaManagedAgentsMcpToolset`
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -7664,7 +7664,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       A custom tool as returned in API responses.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -7698,7 +7698,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   A resolved agent reference with a concrete version.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -7730,13 +7730,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Tool calls are automatically approved without user confirmation.
 
-        - `required Type Type`
+        - `JsonElement Type = "always_allow"`
 
       - `class BetaManagedAgentsAlwaysAskPolicy`
 
         Tool calls require user confirmation before execution.
 
-        - `required Type Type`
+        - `JsonElement Type = "always_ask"`
 
       - `class BetaManagedAgentsAutoPolicy`
 
@@ -8072,13 +8072,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Tool calls are automatically approved without user confirmation.
 
-        - `required Type Type`
+        - `JsonElement Type = "always_allow"`
 
       - `class BetaManagedAgentsAlwaysAskPolicy`
 
         Tool calls require user confirmation before execution.
 
-        - `required Type Type`
+        - `JsonElement Type = "always_ask"`
 
       - `class BetaManagedAgentsAutoPolicy`
 
@@ -8460,13 +8460,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -8492,13 +8492,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -8510,7 +8510,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsAgentToolset20260401`
 
-  - `required Type Type`
+  - `JsonElement Type = "agent_toolset_20260401"`
 
   - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -8532,13 +8532,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
           Tool calls are automatically approved without user confirmation.
 
-          - `required Type Type`
+          - `JsonElement Type = "always_allow"`
 
         - `class BetaManagedAgentsAlwaysAskPolicy`
 
           Tool calls require user confirmation before execution.
 
-          - `required Type Type`
+          - `JsonElement Type = "always_ask"`
 
         - `class BetaManagedAgentsAutoPolicy`
 
@@ -8959,7 +8959,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent_toolset_20260401"`
 
   - `IReadOnlyList<BetaManagedAgentsAgentToolConfigParams> Configs`
 
@@ -8987,13 +8987,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
           Tool calls are automatically approved without user confirmation.
 
-          - `required Type Type`
+          - `JsonElement Type = "always_allow"`
 
         - `class BetaManagedAgentsAlwaysAskPolicy`
 
           Tool calls require user confirmation before execution.
 
-          - `required Type Type`
+          - `JsonElement Type = "always_ask"`
 
         - `class BetaManagedAgentsAutoPolicy`
 
@@ -9424,7 +9424,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Tool calls are automatically approved without user confirmation.
 
-  - `required Type Type`
+  - `JsonElement Type = "always_allow"`
 
 ### Beta Managed Agents Always Ask Policy
 
@@ -9432,7 +9432,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Tool calls require user confirmation before execution.
 
-  - `required Type Type`
+  - `JsonElement Type = "always_ask"`
 
 ### Beta Managed Agents Anthropic Skill
 
@@ -9440,7 +9440,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   A resolved Anthropic-managed skill.
 
-  - `required Type Type`
+  - `JsonElement Type = "anthropic"`
 
   - `required string SkillID`
 
@@ -9452,7 +9452,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   An Anthropic-managed skill.
 
-  - `required Type Type`
+  - `JsonElement Type = "anthropic"`
 
   - `required string SkillID`
 
@@ -9520,13 +9520,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -9558,13 +9558,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -9578,7 +9578,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   A resolved user-created custom skill.
 
-  - `required Type Type`
+  - `JsonElement Type = "custom"`
 
   - `required string SkillID`
 
@@ -9590,7 +9590,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   A user-created custom skill.
 
-  - `required Type Type`
+  - `JsonElement Type = "custom"`
 
   - `required string SkillID`
 
@@ -9610,7 +9610,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   A custom tool as returned in API responses.
 
-  - `required Type Type`
+  - `JsonElement Type = "custom"`
 
   - `required string Description`
 
@@ -9644,7 +9644,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
-  - `required Type Type`
+  - `JsonElement Type = "custom"`
 
   - `required string Description`
 
@@ -9688,13 +9688,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -9726,13 +9726,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -9746,7 +9746,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   High effort. Favors reasoning depth.
 
-  - `required Type Type`
+  - `JsonElement Type = "high"`
 
 ### Beta Managed Agents Effort Low
 
@@ -9754,7 +9754,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Low effort. Favors latency over reasoning depth.
 
-  - `required Type Type`
+  - `JsonElement Type = "low"`
 
 ### Beta Managed Agents Effort Max
 
@@ -9762,7 +9762,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Maximum effort. Favors reasoning depth over latency.
 
-  - `required Type Type`
+  - `JsonElement Type = "max"`
 
 ### Beta Managed Agents Effort Medium
 
@@ -9770,7 +9770,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Medium effort. Balances latency and reasoning depth.
 
-  - `required Type Type`
+  - `JsonElement Type = "medium"`
 
 ### Beta Managed Agents Effort Xhigh
 
@@ -9778,7 +9778,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Extra-high effort. Not all models accept this level.
 
-  - `required Type Type`
+  - `JsonElement Type = "xhigh"`
 
 ### Beta Managed Agents Execution Identity
 
@@ -9846,13 +9846,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -9884,13 +9884,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -9918,13 +9918,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -9956,13 +9956,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -9976,7 +9976,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   URL-based MCP server connection as returned in API responses.
 
-  - `required Type Type`
+  - `JsonElement Type = "url"`
 
   - `required string Name`
 
@@ -10000,13 +10000,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -10038,13 +10038,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -10056,7 +10056,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
 - `class BetaManagedAgentsMcpToolset`
 
-  - `required Type Type`
+  - `JsonElement Type = "mcp_toolset"`
 
   - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -10072,13 +10072,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Tool calls are automatically approved without user confirmation.
 
-        - `required Type Type`
+        - `JsonElement Type = "always_allow"`
 
       - `class BetaManagedAgentsAlwaysAskPolicy`
 
         Tool calls require user confirmation before execution.
 
-        - `required Type Type`
+        - `JsonElement Type = "always_ask"`
 
       - `class BetaManagedAgentsAutoPolicy`
 
@@ -10126,13 +10126,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -10158,13 +10158,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -10178,7 +10178,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Configuration for tools from an MCP server defined in `mcp_servers`.
 
-  - `required Type Type`
+  - `JsonElement Type = "mcp_toolset"`
 
   - `required string McpServerName`
 
@@ -10208,13 +10208,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Tool calls are automatically approved without user confirmation.
 
-        - `required Type Type`
+        - `JsonElement Type = "always_allow"`
 
       - `class BetaManagedAgentsAlwaysAskPolicy`
 
         Tool calls require user confirmation before execution.
 
-        - `required Type Type`
+        - `JsonElement Type = "always_ask"`
 
       - `class BetaManagedAgentsAutoPolicy`
 
@@ -10334,31 +10334,31 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Low effort. Favors latency over reasoning depth.
 
-      - `required Type Type`
+      - `JsonElement Type = "low"`
 
     - `class BetaManagedAgentsEffortMedium`
 
       Medium effort. Balances latency and reasoning depth.
 
-      - `required Type Type`
+      - `JsonElement Type = "medium"`
 
     - `class BetaManagedAgentsEffortHigh`
 
       High effort. Favors reasoning depth.
 
-      - `required Type Type`
+      - `JsonElement Type = "high"`
 
     - `class BetaManagedAgentsEffortXhigh`
 
       Extra-high effort. Not all models accept this level.
 
-      - `required Type Type`
+      - `JsonElement Type = "xhigh"`
 
     - `class BetaManagedAgentsEffortMax`
 
       Maximum effort. Favors reasoning depth over latency.
 
-      - `required Type Type`
+      - `JsonElement Type = "max"`
 
   - `string InferenceGeo`
 
@@ -10484,31 +10484,31 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Low effort. Favors latency over reasoning depth.
 
-      - `required Type Type`
+      - `JsonElement Type = "low"`
 
     - `class BetaManagedAgentsEffortMedium`
 
       Medium effort. Balances latency and reasoning depth.
 
-      - `required Type Type`
+      - `JsonElement Type = "medium"`
 
     - `class BetaManagedAgentsEffortHigh`
 
       High effort. Favors reasoning depth.
 
-      - `required Type Type`
+      - `JsonElement Type = "high"`
 
     - `class BetaManagedAgentsEffortXhigh`
 
       Extra-high effort. Not all models accept this level.
 
-      - `required Type Type`
+      - `JsonElement Type = "xhigh"`
 
     - `class BetaManagedAgentsEffortMax`
 
       Maximum effort. Favors reasoning depth over latency.
 
-      - `required Type Type`
+      - `JsonElement Type = "max"`
 
   - `string? InferenceGeo`
 
@@ -10616,7 +10616,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Resolved coordinator topology with a concrete agent roster.
 
-  - `required Type Type`
+  - `JsonElement Type = "coordinator"`
 
   - `required IReadOnlyList<Agent> Agents`
 
@@ -10626,7 +10626,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       A resolved agent reference with a concrete version.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -10638,7 +10638,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-      - `required Type Type`
+      - `JsonElement Type = "advisor"`
 
       - `required string Model`
 
@@ -10650,7 +10650,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
-  - `required Type Type`
+  - `JsonElement Type = "coordinator"`
 
   - `required IReadOnlyList<BetaManagedAgentsMultiagentRosterEntryParams> Agents`
 
@@ -10662,7 +10662,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -10680,13 +10680,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-      - `required Type Type`
+      - `JsonElement Type = "self"`
 
     - `class BetaManagedAgentsAdvisorParams`
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
 
-      - `required Type Type`
+      - `JsonElement Type = "advisor"`
 
       - `required string Model`
 
@@ -10774,7 +10774,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -10792,7 +10792,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-    - `required Type Type`
+    - `JsonElement Type = "self"`
 
 ### Beta Managed Agents Multiagent Self Params
 
@@ -10800,7 +10800,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-  - `required Type Type`
+  - `JsonElement Type = "self"`
 
 ### Beta Managed Agents Multiagent Subagents
 
@@ -10834,7 +10834,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -10892,7 +10892,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -10934,7 +10934,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -10952,7 +10952,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-      - `required Type Type`
+      - `JsonElement Type = "self"`
 
 ### Beta Managed Agents Multiagent Subagents Params
 
@@ -10992,7 +10992,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-        - `required Type Type`
+        - `JsonElement Type = "agent"`
 
         - `required string ID`
 
@@ -11010,7 +11010,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-        - `required Type Type`
+        - `JsonElement Type = "self"`
 
   - `class BetaManagedAgentsMultiagentSubagentsDisabledParams`
 
@@ -11050,7 +11050,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -11108,7 +11108,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent"`
 
     - `required string ID`
 
@@ -11150,7 +11150,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -11168,7 +11168,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-      - `required Type Type`
+      - `JsonElement Type = "self"`
 
 ### Beta Managed Agents Multiagent Workflows Params
 
@@ -11208,7 +11208,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-        - `required Type Type`
+        - `JsonElement Type = "agent"`
 
         - `required string ID`
 
@@ -11226,7 +11226,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-        - `required Type Type`
+        - `JsonElement Type = "self"`
 
   - `class BetaManagedAgentsMultiagentWorkflowsDisabledParams`
 
@@ -11292,7 +11292,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-        - `required Type Type`
+        - `JsonElement Type = "agent"`
 
         - `required string ID`
 
@@ -11324,7 +11324,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-        - `required Type Type`
+        - `JsonElement Type = "agent"`
 
         - `required string ID`
 
@@ -11404,7 +11404,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
           Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -11422,7 +11422,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
           Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
-          - `required Type Type`
+          - `JsonElement Type = "self"`
 
     - `class BetaManagedAgentsMultiagentSubagentsDisabledParams`
 
@@ -11484,13 +11484,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -11522,13 +11522,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -11558,7 +11558,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -11586,7 +11586,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -11678,31 +11678,31 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Low effort. Favors latency over reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `required Type Type`
+        - `JsonElement Type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `required Type Type`
+        - `JsonElement Type = "max"`
 
     - `string InferenceGeo`
 
@@ -11724,7 +11724,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       A resolved Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -11734,7 +11734,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       A resolved user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -11746,7 +11746,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -11768,13 +11768,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -12106,7 +12106,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     - `class BetaManagedAgentsMcpToolset`
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -12158,7 +12158,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       A custom tool as returned in API responses.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 
@@ -12188,7 +12188,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     An Anthropic-managed skill.
 
-    - `required Type Type`
+    - `JsonElement Type = "anthropic"`
 
     - `required string SkillID`
 
@@ -12206,7 +12206,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     A user-created custom skill.
 
-    - `required Type Type`
+    - `JsonElement Type = "custom"`
 
     - `required string SkillID`
 
@@ -12226,7 +12226,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   URL-based MCP server connection.
 
-  - `required Type Type`
+  - `JsonElement Type = "url"`
 
   - `required string Name`
 
@@ -12292,13 +12292,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -12428,13 +12428,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -12996,13 +12996,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -13076,13 +13076,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -13140,13 +13140,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -13178,13 +13178,13 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Tool calls are automatically approved without user confirmation.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_allow"`
 
     - `class BetaManagedAgentsAlwaysAskPolicy`
 
       Tool calls require user confirmation before execution.
 
-      - `required Type Type`
+      - `JsonElement Type = "always_ask"`
 
     - `class BetaManagedAgentsAutoPolicy`
 
@@ -13340,7 +13340,7 @@ List Agent Versions
 
   A Managed Agents `agent`.
 
-  - `required Type Type`
+  - `JsonElement Type = "agent"`
 
   - `required string ID`
 
@@ -13380,7 +13380,7 @@ List Agent Versions
 
   - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-    - `required Type Type`
+    - `JsonElement Type = "url"`
 
     - `required string Name`
 
@@ -13474,31 +13474,31 @@ List Agent Versions
 
         Low effort. Favors latency over reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `required Type Type`
+        - `JsonElement Type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `required Type Type`
+        - `JsonElement Type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `required Type Type`
+        - `JsonElement Type = "max"`
 
     - `string InferenceGeo`
 
@@ -13520,7 +13520,7 @@ List Agent Versions
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `required Type Type`
+      - `JsonElement Type = "coordinator"`
 
       - `required IReadOnlyList<Agent> Agents`
 
@@ -13530,7 +13530,7 @@ List Agent Versions
 
           A resolved agent reference with a concrete version.
 
-          - `required Type Type`
+          - `JsonElement Type = "agent"`
 
           - `required string ID`
 
@@ -13542,7 +13542,7 @@ List Agent Versions
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `required Type Type`
+          - `JsonElement Type = "advisor"`
 
           - `required string Model`
 
@@ -13604,7 +13604,7 @@ List Agent Versions
 
             Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -13636,7 +13636,7 @@ List Agent Versions
 
             Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-            - `required Type Type`
+            - `JsonElement Type = "agent"`
 
             - `required string ID`
 
@@ -13658,7 +13658,7 @@ List Agent Versions
 
       A resolved Anthropic-managed skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "anthropic"`
 
       - `required string SkillID`
 
@@ -13668,7 +13668,7 @@ List Agent Versions
 
       A resolved user-created custom skill.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string SkillID`
 
@@ -13680,7 +13680,7 @@ List Agent Versions
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `required Type Type`
+      - `JsonElement Type = "agent_toolset_20260401"`
 
       - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -13702,13 +13702,13 @@ List Agent Versions
 
               Tool calls are automatically approved without user confirmation.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `required Type Type`
+              - `JsonElement Type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -14040,7 +14040,7 @@ List Agent Versions
 
     - `class BetaManagedAgentsMcpToolset`
 
-      - `required Type Type`
+      - `JsonElement Type = "mcp_toolset"`
 
       - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -14092,7 +14092,7 @@ List Agent Versions
 
       A custom tool as returned in API responses.
 
-      - `required Type Type`
+      - `JsonElement Type = "custom"`
 
       - `required string Description`
 

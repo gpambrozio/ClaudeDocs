@@ -147,23 +147,23 @@ for _, block := range response.Content {
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 Message response = client.messages().create(
-        MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_5_5)
-                .maxTokens(4096L)
-                .speed(MessageCreateParams.Speed.FAST)
-                .addUserMessage("Refactor this module to use dependency injection")
-                .build());
+    MessageCreateParams.builder()
+        .model(Model.CLAUDE_OPUS_5_5)
+        .maxTokens(4096L)
+        .speed(MessageCreateParams.Speed.FAST)
+        .addUserMessage("Refactor this module to use dependency injection")
+        .build());
 
 response.content().stream()
-        .flatMap(block -> block.text().stream())
-        .forEach(textBlock -> IO.println(textBlock.text()));
+    .flatMap(block -> block.text().stream())
+    .forEach(textBlock -> IO.println(textBlock.text()));
 ```
 
 ```php PHP
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     maxTokens: 4096,
     speed: 'fast',
     messages: [
@@ -198,6 +198,8 @@ end
 Fast mode is available on the Claude API, including [Claude Managed Agents](../managed-agents/overview.md).
 
 Fast mode on Claude Opus 5.5 is also available on [Claude in Microsoft Foundry](claude-in-microsoft-foundry.md) for deployments hosted on Azure. It is not available for deployments [hosted on Anthropic](claude-in-microsoft-foundry.md#hosting-options).
+
+Fast mode on Claude Opus 5.5 is also available on [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md).
 
 ## Model availability
 
@@ -248,7 +250,7 @@ To see your fast mode rate limits, go to the [Rate limits](https://platform.clau
 
 ## Checking which speed was used
 
-The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`. Requesting `speed: "fast"` on a [model that doesn't support fast mode](fast-mode.md#supported-models) returns an error, and so does exceeding fast mode's rate limits or capacity (a `429` or `529`). When a request with `speed: "fast"` succeeds, `usage.speed` is `"fast"`. Claude Opus 4.6 is an exception: instead of returning an error, a request with `speed: "fast"` and the `fast-mode-2026-02-01` beta header succeeds, but runs at standard speed. This behavior is correctly reflected in `usage.speed`, which shows `"standard"` in this situation.
+The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`. Requesting `speed: "fast"` on a [model that doesn't support fast mode](fast-mode.md#supported-models) returns an error, and so does exceeding fast mode's rate limits or capacity (a `429` or `529`). When a request with `speed: "fast"` succeeds, `usage.speed` is `"fast"`. Claude Opus 4.6 is an exception: instead of returning an error, a request with `speed: "fast"` and the `fast-mode-2026-02-01` beta header succeeds, but runs at standard speed. This behavior is correctly reflected in `usage.speed`, which shows `"standard"` in this situation. On Claude Models on Google Cloud (Anthropic managed), a Claude Opus 4.6 request with `speed: "fast"` returns a `400` error even with the header.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -335,11 +337,11 @@ fmt.Println(response.Usage.Speed) // "fast" or "standard"
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5_5)
-        .maxTokens(1024L)
-        .speed(MessageCreateParams.Speed.FAST)
-        .addUserMessage("Hello")
-        .build();
+    .model(Model.CLAUDE_OPUS_5_5)
+    .maxTokens(1024L)
+    .speed(MessageCreateParams.Speed.FAST)
+    .addUserMessage("Hello")
+    .build();
 
 Message response = client.messages().create(params);
 IO.println(response.usage().speed().orElseThrow());  // "fast" or "standard"
@@ -349,7 +351,7 @@ IO.println(response.usage().speed().orElseThrow());  // "fast" or "standard"
 $client = new Client();
 
 $response = $client->messages->create(
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     maxTokens: 1024,
     speed: 'fast',
     messages: [['role' => 'user', 'content' => 'Hello']],
@@ -371,7 +373,7 @@ response = client.messages.create(
 puts(response.usage.speed)  # "fast" or "standard"
 ```
 
-```text Output wrap
+```json Output
 {
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
@@ -391,15 +393,15 @@ To track fast mode usage and costs across your organization, see the [Usage and 
 
 ### Automatic retries
 
-The SDK automatically retries fast mode `429` errors up to 2 times by default (configurable with `max_retries` (typescript, java, php: `maxRetries`; csharp: `MaxRetries`; go: `option.WithMaxRetries`)), waiting for the delay in the `retry-after` header before each retry. Because fast mode uses continuous token replenishment, the `retry-after` delay is typically short and requests succeed once capacity is available.
+The SDK automatically retries fast mode `429` errors up to 2 times by default (configurable with `max_retries` (typescript, php: `maxRetries`; java: `.maxRetries()`; csharp: `MaxRetries`; go: `option.WithMaxRetries()`)), waiting for the delay in the `retry-after` header before each retry. Because fast mode uses continuous token replenishment, the `retry-after` delay is typically short and requests succeed once capacity is available.
 
 ### Falling back to standard speed
 
-If you'd prefer to fall back to standard speed rather than wait for fast mode capacity, catch the rate limit error and retry without `speed: "fast"`. Set `max_retries` (typescript, java, php: `maxRetries`; csharp: `MaxRetries`; go: `option.WithMaxRetries`) to `0` on the initial fast request to skip automatic retries and fail immediately on rate limit errors.
+If you'd prefer to fall back to standard speed rather than wait for fast mode capacity, catch the rate limit error and retry without `speed: "fast"`. Set `max_retries` (typescript, php: `maxRetries`; java: `.maxRetries()`; csharp: `MaxRetries`; go: `option.WithMaxRetries()`) to `0` on the initial fast request to skip automatic retries and fail immediately on rate limit errors.
 
 Falling back from fast to standard speed results in a [prompt cache](prompt-caching.md) miss. Requests at different speeds do not share cached prefixes.
 
-Because setting `max_retries` (typescript, java, php: `maxRetries`; csharp: `MaxRetries`; go: `option.WithMaxRetries`) to `0` also disables retries for other transient errors (overloaded, internal server errors), the following examples reissue the original request with default retries for those cases.
+Because setting `max_retries` (typescript, php: `maxRetries`; java: `.maxRetries()`; csharp: `MaxRetries`; go: `option.WithMaxRetries()`) to `0` also disables retries for other transient errors (overloaded, internal server errors), the following examples reissue the original request with default retries for those cases.
 
 ```python Python
 client = anthropic.Anthropic()
@@ -569,9 +571,12 @@ func main() {
 import com.anthropic.errors.InternalServerException;
 import com.anthropic.errors.RateLimitException;
 // ...
-// Disable SDK auto-retry so the fallback logic below handles it
+// Disable SDK auto-retry so the fallback logic that follows handles it
 AnthropicClient client =
-        AnthropicOkHttpClient.builder().fromEnv().maxRetries(0).build();
+    AnthropicOkHttpClient.builder()
+        .fromEnv()
+        .maxRetries(0)
+        .build();
 
 Message createMessageWithFastFallback(
         MessageCreateParams params, int maxAttempts) {
@@ -580,8 +585,8 @@ Message createMessageWithFastFallback(
     } catch (RateLimitException e) {
         if (params.speed().isPresent()) {
             MessageCreateParams retryParams = params.toBuilder()
-                    .speed(Optional.empty())
-                    .build();
+                .speed(Optional.empty())
+                .build();
             return createMessageWithFastFallback(retryParams, maxAttempts);
         }
         throw e;
@@ -595,16 +600,16 @@ Message createMessageWithFastFallback(
 
 void main() {
     Message message = createMessageWithFastFallback(
-            MessageCreateParams.builder()
-                    .model(Model.CLAUDE_OPUS_5_5)
-                    .maxTokens(1024L)
-                    .addUserMessage("Hello")
-                    .speed(MessageCreateParams.Speed.FAST)
-                    .build(),
-            3);
+        MessageCreateParams.builder()
+            .model(Model.CLAUDE_OPUS_5_5)
+            .maxTokens(1024L)
+            .addUserMessage("Hello")
+            .speed(MessageCreateParams.Speed.FAST)
+            .build(),
+        3);
     message.content().stream()
-            .flatMap(block -> block.text().stream())
-            .forEach(textBlock -> IO.println(textBlock.text()));
+        .flatMap(block -> block.text().stream())
+        .forEach(textBlock -> IO.println(textBlock.text()));
 }
 ```
 

@@ -553,7 +553,6 @@ Get Deployment
 
 ```bash
 ant beta:deployments retrieve \
-  --api-key my-anthropic-api-key \
   --deployment-id depl_011CZkZcDH3vPqd7xnEfwTai
 ```
 

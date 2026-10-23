@@ -3147,7 +3147,6 @@ List Events
 
 ```bash
 ant beta:sessions:events list \
-  --api-key my-anthropic-api-key \
   --session-id sesn_011CZkZAtmR3yMPDzynEDxu7
 ```
 

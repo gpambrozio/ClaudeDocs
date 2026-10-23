@@ -137,17 +137,14 @@ deployment, err := client.Beta.Deployments.New(ctx, anthropic.BetaDeploymentNewP
 	EnvironmentID: environment.ID,
 	InitialEvents: []anthropic.BetaManagedAgentsDeploymentInitialEventParamsUnion{{
 		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 					Text: "Run the weekly compliance scan.",
 				},
 			}},
 		},
 	}},
 	Schedule: anthropic.BetaManagedAgentsScheduleParams{
-		Type:       anthropic.BetaManagedAgentsScheduleParamsTypeCron,
 		Expression: "0 20 * * 5",
 		Timezone:   "America/New_York",
 	},
@@ -218,7 +215,7 @@ deployment = client.beta.deployments.create(
 
 The response includes a deployment object with a populated `schedule.upcoming_runs_at` with the next upcoming fire times, to confirm your schedule was set correctly.
 
-```text wrap
+```json
 {
   "id": "depl_01xyz",
   "status": "active",
@@ -331,7 +328,6 @@ Console.WriteLine(updatedDeployment.Budget?.MaxListCost.Amount);  // 2000
 ```go Go
 updatedDeployment, err := client.Beta.Deployments.Update(ctx, deployment.ID, anthropic.BetaDeploymentUpdateParams{
 	Budget: anthropic.BetaManagedAgentsBudgetLimitParam{
-		Type: anthropic.BetaManagedAgentsBudgetLimitTypeLimit,
 		MaxListCost: anthropic.BetaMonetaryAmountParam{
 			Amount:   "2000",
 			Currency: anthropic.BetaCurrencyUsd,
@@ -560,7 +556,7 @@ end
 
 A failed run includes an `error` with a `type` describing why session creation was rejected (for example, `environment_archived_error`, `agent_archived_error`, or `session_rate_limited_error`). See the [List Deployment Runs](../api/beta/deployment_runs/list.md) reference for all filter parameters and the response schema.
 
-```text
+```json
 {
   "type": "deployment_run",
   "id": "drun_01abc124",

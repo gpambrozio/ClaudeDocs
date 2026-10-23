@@ -597,7 +597,6 @@ Create Deployment
 
 ```bash
 ant beta:deployments create \
-  --api-key my-anthropic-api-key \
   --agent string \
   --environment-id x \
   --initial-event '{content: [{text: '\''Where is my order #1234?'\'', type: text}], type: user.message}' \
@@ -1256,8 +1255,7 @@ List Deployments
 ### Example
 
 ```bash
-ant beta:deployments list \
-  --api-key my-anthropic-api-key
+ant beta:deployments list
 ```
 
 #### Response (200)
@@ -1880,7 +1878,6 @@ Get Deployment
 
 ```bash
 ant beta:deployments retrieve \
-  --api-key my-anthropic-api-key \
   --deployment-id depl_011CZkZcDH3vPqd7xnEfwTai
 ```
 
@@ -2545,7 +2542,6 @@ Update Deployment
 
 ```bash
 ant beta:deployments update \
-  --api-key my-anthropic-api-key \
   --deployment-id depl_011CZkZcDH3vPqd7xnEfwTai
 ```
 
@@ -3164,7 +3160,6 @@ Archive Deployment
 
 ```bash
 ant beta:deployments archive \
-  --api-key my-anthropic-api-key \
   --deployment-id depl_011CZkZcDH3vPqd7xnEfwTai
 ```
 
@@ -3487,7 +3482,6 @@ Run Deployment Now
 
 ```bash
 ant beta:deployments run \
-  --api-key my-anthropic-api-key \
   --deployment-id depl_011CZkZcDH3vPqd7xnEfwTai
 ```
 
@@ -4064,7 +4058,6 @@ Pause Deployment
 
 ```bash
 ant beta:deployments pause \
-  --api-key my-anthropic-api-key \
   --deployment-id depl_011CZkZcDH3vPqd7xnEfwTai
 ```
 
@@ -4683,7 +4676,6 @@ Unpause Deployment
 
 ```bash
 ant beta:deployments unpause \
-  --api-key my-anthropic-api-key \
   --deployment-id depl_011CZkZcDH3vPqd7xnEfwTai
 ```
 

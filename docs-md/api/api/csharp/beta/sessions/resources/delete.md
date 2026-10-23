@@ -141,7 +141,7 @@ Delete Session Resource
 
   Confirmation of resource deletion.
 
-  - `required BetaManagedAgentsDeleteSessionResourceType Type`
+  - `JsonElement Type = "session_resource_deleted"`
 
   - `required string ID`
 

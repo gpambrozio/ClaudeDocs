@@ -129,8 +129,7 @@ List Skills
 ## Example
 
 ```bash
-ant beta:skills list \
-  --api-key my-anthropic-api-key
+ant beta:skills list
 ```
 
 ### Response (200)

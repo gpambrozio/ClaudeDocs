@@ -133,7 +133,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
 			Configs: []anthropic.BetaManagedAgentsAgentToolConfigParamsUnion{{
 				OfWebFetch: &anthropic.BetaManagedAgentsWebFetchToolConfigParams{
 					Enabled: anthropic.Bool(false),
@@ -145,7 +144,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 if err != nil {
 	panic(err)
 }
-_ = agent
 ```
 
 ```java Java
@@ -378,12 +376,9 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-		},
+		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
 	}, {
 		OfCustom: &anthropic.BetaManagedAgentsCustomToolParams{
-			Type:        anthropic.BetaManagedAgentsCustomToolParamsTypeCustom,
 			Name:        "get_weather",
 			Description: "Get current weather for a location",
 			InputSchema: anthropic.BetaManagedAgentsCustomToolInputSchemaParam{
@@ -401,7 +396,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 if err != nil {
 	panic(err)
 }
-_ = agent
 ```
 
 ```java Java

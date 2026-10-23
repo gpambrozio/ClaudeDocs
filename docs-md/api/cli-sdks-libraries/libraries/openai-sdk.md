@@ -16,7 +16,7 @@ For the best experience and access to the full Claude API feature set ([PDF proc
 
 ## Getting started with the OpenAI SDK
 
-To use the OpenAI SDK compatibility feature, you'll need to:
+To use the OpenAI SDK compatibility feature, you need to:
 
 1. Use an official OpenAI SDK.
 
@@ -134,15 +134,15 @@ import com.openai.models.chat.completions.ChatCompletionCreateParams;
 public class QuickStart {
     public static void main(String[] args) {
         OpenAIClient client = OpenAIOkHttpClient.builder()
-                .apiKey(System.getenv("ANTHROPIC_API_KEY")) // Your Claude API key
-                .baseUrl("https://api.anthropic.com/v1/") // the Claude API endpoint
-                .build();
+            .apiKey(System.getenv("ANTHROPIC_API_KEY")) // Your Claude API key
+            .baseUrl("https://api.anthropic.com/v1/") // the Claude API endpoint
+            .build();
 
         ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
-                .model("claude-opus-5-5") // Claude model name
-                .addSystemMessage("You are a helpful assistant.")
-                .addUserMessage("Who are you?")
-                .build();
+            .model("claude-opus-5-5") // Claude model name
+            .addSystemMessage("You are a helpful assistant.")
+            .addUserMessage("Who are you?")
+            .build();
 
         ChatCompletion completion = client.chat().completions().create(params);
         System.out.println(completion.choices().get(0).message().content().orElse(""));
@@ -244,11 +244,11 @@ response, err := client.Chat.Completions.New(
 
 ```java Java
 ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
-        .model("claude-sonnet-4-6")
-        .addUserMessage("Who are you?")
-        .putAdditionalBodyProperty("thinking",
-                JsonValue.from(Map.of("type", "enabled", "budget_tokens", 2000)))
-        .build();
+    .model("claude-sonnet-4-6")
+    .addUserMessage("Who are you?")
+    .putAdditionalBodyProperty("thinking",
+        JsonValue.from(Map.of("type", "enabled", "budget_tokens", 2000)))
+    .build();
 
 ChatCompletion completion = client.chat().completions().create(params);
 ```

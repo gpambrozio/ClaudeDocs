@@ -27,7 +27,7 @@ Send Events
 
       Parameters for sending a user message to the session.
 
-      - `Type BetaManagedAgentsUserMessageEventParamsType`
+      - `Type UserMessage`
 
       - `Content []BetaManagedAgentsUserMessageEventParamsContentUnion`
 
@@ -37,7 +37,7 @@ Send Events
 
           Regular text content.
 
-          - `Type BetaManagedAgentsTextBlockType`
+          - `Type Text`
 
           - `Text string`
 
@@ -49,7 +49,7 @@ Send Events
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type BetaManagedAgentsImageBlockType`
+          - `Type Image`
 
           - `Source BetaManagedAgentsImageBlockSourceUnion`
 
@@ -59,7 +59,7 @@ Send Events
 
               Base64-encoded image data.
 
-              - `Type BetaManagedAgentsBase64ImageSourceType`
+              - `Type Base64`
 
               - `Data string`
 
@@ -77,7 +77,7 @@ Send Events
 
               Image referenced by URL.
 
-              - `Type BetaManagedAgentsURLImageSourceType`
+              - `Type URL`
 
               - `URL string`
 
@@ -89,7 +89,7 @@ Send Events
 
               Image referenced by file ID.
 
-              - `Type BetaManagedAgentsFileImageSourceType`
+              - `Type File`
 
               - `FileID string`
 
@@ -101,7 +101,7 @@ Send Events
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type BetaManagedAgentsDocumentBlockType`
+          - `Type Document`
 
           - `Source BetaManagedAgentsDocumentBlockSourceUnion`
 
@@ -111,7 +111,7 @@ Send Events
 
               Base64-encoded document data.
 
-              - `Type BetaManagedAgentsBase64DocumentSourceType`
+              - `Type Base64`
 
               - `Data string`
 
@@ -129,7 +129,7 @@ Send Events
 
               Plain text document content.
 
-              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+              - `Type Text`
 
               - `Data string`
 
@@ -137,7 +137,7 @@ Send Events
 
                 minLength: 1
 
-              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+              - `MediaType TextPlain`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -145,7 +145,7 @@ Send Events
 
               Document referenced by URL.
 
-              - `Type BetaManagedAgentsURLDocumentSourceType`
+              - `Type URL`
 
               - `URL string`
 
@@ -157,7 +157,7 @@ Send Events
 
               Document referenced by file ID.
 
-              - `Type BetaManagedAgentsFileDocumentSourceType`
+              - `Type File`
 
               - `FileID string`
 
@@ -177,13 +177,13 @@ Send Events
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type BetaManagedAgentsRedactedBlockType`
+          - `Type Redacted`
 
     - `type BetaManagedAgentsUserInterruptEventParams`
 
       Parameters for sending an interrupt to pause the agent.
 
-      - `Type BetaManagedAgentsUserInterruptEventParamsType`
+      - `Type UserInterrupt`
 
       - `SessionThreadID string Optional`
 
@@ -193,7 +193,7 @@ Send Events
 
       Parameters for confirming or denying a tool execution request.
 
-      - `Type BetaManagedAgentsUserToolConfirmationEventParamsType`
+      - `Type UserToolConfirmation`
 
       - `Result BetaManagedAgentsUserToolConfirmationEventParamsResult`
 
@@ -219,7 +219,7 @@ Send Events
 
       Parameters for providing the result of a custom tool execution.
 
-      - `Type BetaManagedAgentsUserCustomToolResultEventParamsType`
+      - `Type UserCustomToolResult`
 
       - `CustomToolUseID string`
 
@@ -247,7 +247,7 @@ Send Events
 
           A block containing a web search result.
 
-          - `Type BetaManagedAgentsSearchResultBlockType`
+          - `Type SearchResult`
 
           - `Citations BetaManagedAgentsSearchResultCitations`
 
@@ -261,7 +261,7 @@ Send Events
 
             Array of text content blocks from the search result.
 
-            - `Type BetaManagedAgentsSearchResultContentType`
+            - `Type Text`
 
             - `Text string`
 
@@ -289,7 +289,7 @@ Send Events
 
       Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
-      - `Type BetaManagedAgentsUserDefineOutcomeEventParamsType`
+      - `Type UserDefineOutcome`
 
       - `Description string`
 
@@ -303,7 +303,7 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type BetaManagedAgentsFileRubricParamsType`
+          - `Type File`
 
           - `FileID string`
 
@@ -313,7 +313,7 @@ Send Events
 
           Rubric content provided inline as text.
 
-          - `Type BetaManagedAgentsTextRubricParamsType`
+          - `Type Text`
 
           - `Content string`
 
@@ -331,7 +331,7 @@ Send Events
 
       Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-      - `Type BetaManagedAgentsUserToolResultEventParamsType`
+      - `Type UserToolResult`
 
       - `ToolUseID string`
 
@@ -367,13 +367,13 @@ Send Events
 
       Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
 
-      - `Type BetaManagedAgentsSystemMessageEventParamsType`
+      - `Type SystemMessage`
 
       - `Content []BetaManagedAgentsSystemContentBlockParam`
 
         System content blocks to append. Text-only.
 
-        - `Type BetaManagedAgentsSystemContentBlockType`
+        - `Type Text`
 
         - `Text string`
 
@@ -509,7 +509,7 @@ Send Events
 
       A user message event in the session conversation.
 
-      - `Type BetaManagedAgentsUserMessageEventType`
+      - `Type UserMessage`
 
       - `ID string`
 
@@ -523,7 +523,7 @@ Send Events
 
           Regular text content.
 
-          - `Type BetaManagedAgentsTextBlockType`
+          - `Type Text`
 
           - `Text string`
 
@@ -535,7 +535,7 @@ Send Events
 
           Image content specified directly as base64 data or as a reference via a URL.
 
-          - `Type BetaManagedAgentsImageBlockType`
+          - `Type Image`
 
           - `Source BetaManagedAgentsImageBlockSourceUnion`
 
@@ -545,7 +545,7 @@ Send Events
 
               Base64-encoded image data.
 
-              - `Type BetaManagedAgentsBase64ImageSourceType`
+              - `Type Base64`
 
               - `Data string`
 
@@ -563,7 +563,7 @@ Send Events
 
               Image referenced by URL.
 
-              - `Type BetaManagedAgentsURLImageSourceType`
+              - `Type URL`
 
               - `URL string`
 
@@ -575,7 +575,7 @@ Send Events
 
               Image referenced by file ID.
 
-              - `Type BetaManagedAgentsFileImageSourceType`
+              - `Type File`
 
               - `FileID string`
 
@@ -587,7 +587,7 @@ Send Events
 
           Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-          - `Type BetaManagedAgentsDocumentBlockType`
+          - `Type Document`
 
           - `Source BetaManagedAgentsDocumentBlockSourceUnion`
 
@@ -597,7 +597,7 @@ Send Events
 
               Base64-encoded document data.
 
-              - `Type BetaManagedAgentsBase64DocumentSourceType`
+              - `Type Base64`
 
               - `Data string`
 
@@ -615,7 +615,7 @@ Send Events
 
               Plain text document content.
 
-              - `Type BetaManagedAgentsPlainTextDocumentSourceType`
+              - `Type Text`
 
               - `Data string`
 
@@ -623,7 +623,7 @@ Send Events
 
                 minLength: 1
 
-              - `MediaType BetaManagedAgentsPlainTextDocumentSourceMediaType`
+              - `MediaType TextPlain`
 
                 MIME type of the text content. Must be "text/plain".
 
@@ -631,7 +631,7 @@ Send Events
 
               Document referenced by URL.
 
-              - `Type BetaManagedAgentsURLDocumentSourceType`
+              - `Type URL`
 
               - `URL string`
 
@@ -643,7 +643,7 @@ Send Events
 
               Document referenced by file ID.
 
-              - `Type BetaManagedAgentsFileDocumentSourceType`
+              - `Type File`
 
               - `FileID string`
 
@@ -663,7 +663,7 @@ Send Events
 
           Placeholder for content withheld by Anthropic model policy.
 
-          - `Type BetaManagedAgentsRedactedBlockType`
+          - `Type Redacted`
 
       - `ProcessedAt Time Optional`
 
@@ -675,7 +675,7 @@ Send Events
 
       An interrupt event that pauses agent execution and returns control to the user.
 
-      - `Type BetaManagedAgentsUserInterruptEventType`
+      - `Type UserInterrupt`
 
       - `ID string`
 
@@ -695,7 +695,7 @@ Send Events
 
       A tool confirmation event that approves or denies a pending tool execution.
 
-      - `Type BetaManagedAgentsUserToolConfirmationEventType`
+      - `Type UserToolConfirmation`
 
       - `ID string`
 
@@ -733,7 +733,7 @@ Send Events
 
       Event sent by the client providing the result of a custom tool execution.
 
-      - `Type BetaManagedAgentsUserCustomToolResultEventType`
+      - `Type UserCustomToolResult`
 
       - `ID string`
 
@@ -763,7 +763,7 @@ Send Events
 
           A block containing a web search result.
 
-          - `Type BetaManagedAgentsSearchResultBlockType`
+          - `Type SearchResult`
 
           - `Citations BetaManagedAgentsSearchResultCitations`
 
@@ -777,7 +777,7 @@ Send Events
 
             Array of text content blocks from the search result.
 
-            - `Type BetaManagedAgentsSearchResultContentType`
+            - `Type Text`
 
             - `Text string`
 
@@ -815,7 +815,7 @@ Send Events
 
       Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-      - `Type BetaManagedAgentsUserDefineOutcomeEventType`
+      - `Type UserDefineOutcome`
 
       - `ID string`
 
@@ -849,7 +849,7 @@ Send Events
 
           Rubric referenced by a file uploaded via the Files API.
 
-          - `Type BetaManagedAgentsFileRubricType`
+          - `Type File`
 
           - `FileID string`
 
@@ -859,7 +859,7 @@ Send Events
 
           Rubric content provided inline as text.
 
-          - `Type BetaManagedAgentsTextRubricType`
+          - `Type Text`
 
           - `Content string`
 
@@ -869,7 +869,7 @@ Send Events
 
       Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-      - `Type BetaManagedAgentsUserToolResultEventType`
+      - `Type UserToolResult`
 
       - `ID string`
 
@@ -917,7 +917,7 @@ Send Events
 
       A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-      - `Type BetaManagedAgentsSystemMessageEventType`
+      - `Type SystemMessage`
 
       - `ID string`
 
@@ -927,7 +927,7 @@ Send Events
 
         System content blocks. Text-only.
 
-        - `Type BetaManagedAgentsSystemContentBlockType`
+        - `Type Text`
 
         - `Text string`
 
@@ -950,8 +950,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -967,10 +967,8 @@ func main() {
 					Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
 						OfText: &anthropic.BetaManagedAgentsTextBlockParam{
 							Text: "Where is my order #1234?",
-							Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 						},
 					}},
-					Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 				},
 			}},
 		},

@@ -1,4 +1,4 @@
-# Allow the tool to execute
+# Allow the tool to run
 
 ---
 title: Permission policies
@@ -128,12 +128,9 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
 		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
 			DefaultConfig: anthropic.BetaManagedAgentsAgentToolsetDefaultConfigParams{
 				PermissionPolicy: anthropic.BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion{
-					OfAlwaysAsk: &anthropic.BetaManagedAgentsAlwaysAskPolicyParam{
-						Type: anthropic.BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk,
-					},
+					OfAlwaysAsk: &anthropic.BetaManagedAgentsAlwaysAskPolicyParam{},
 				},
 			},
 		},
@@ -142,7 +139,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 if err != nil {
 	panic(err)
 }
-_ = agent
 ```
 
 ```java Java
@@ -330,25 +326,19 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
-		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
 		Name: "github",
 		URL:  "https://mcp.example.com/github",
 	}},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{
 		{
-			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-				Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-			},
+			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
 		},
 		{
 			OfMCPToolset: &anthropic.BetaManagedAgentsMCPToolsetParams{
-				Type:          anthropic.BetaManagedAgentsMCPToolsetParamsTypeMCPToolset,
 				MCPServerName: "github",
 				DefaultConfig: anthropic.BetaManagedAgentsMCPToolsetDefaultConfigParams{
 					PermissionPolicy: anthropic.BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnion{
-						OfAlwaysAllow: &anthropic.BetaManagedAgentsAlwaysAllowPolicyParam{
-							Type: anthropic.BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow,
-						},
+						OfAlwaysAllow: &anthropic.BetaManagedAgentsAlwaysAllowPolicyParam{},
 					},
 				},
 			},
@@ -358,7 +348,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 if err != nil {
 	panic(err)
 }
-_ = agent
 ```
 
 ```java Java
@@ -547,26 +536,20 @@ Tool[] tools =
 ```go Go
 tools := []anthropic.BetaAgentNewParamsToolUnion{{
 	OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-		Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
 		DefaultConfig: anthropic.BetaManagedAgentsAgentToolsetDefaultConfigParams{
 			PermissionPolicy: anthropic.BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion{
-				OfAlwaysAllow: &anthropic.BetaManagedAgentsAlwaysAllowPolicyParam{
-					Type: anthropic.BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow,
-				},
+				OfAlwaysAllow: &anthropic.BetaManagedAgentsAlwaysAllowPolicyParam{},
 			},
 		},
 		Configs: []anthropic.BetaManagedAgentsAgentToolConfigParamsUnion{{
 			OfBash: &anthropic.BetaManagedAgentsBashToolConfigParams{
 				PermissionPolicy: anthropic.BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion{
-					OfAlwaysAsk: &anthropic.BetaManagedAgentsAlwaysAskPolicyParam{
-						Type: anthropic.BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk,
-					},
+					OfAlwaysAsk: &anthropic.BetaManagedAgentsAlwaysAskPolicyParam{},
 				},
 			},
 		}},
 	},
 }}
-_ = tools
 ```
 
 ```java Java
@@ -807,14 +790,12 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
-		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
 		Name: "github",
 		URL:  "https://mcp.example.com/github",
 	}},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{
 		{
 			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-				Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
 				DefaultConfig: anthropic.BetaManagedAgentsAgentToolsetDefaultConfigParams{
 					PermissionPolicy: anthropic.BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion{
 						OfAuto: &anthropic.BetaManagedAgentsAutoPolicyParam{},
@@ -823,9 +804,7 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 				Configs: []anthropic.BetaManagedAgentsAgentToolConfigParamsUnion{{
 					OfBash: &anthropic.BetaManagedAgentsBashToolConfigParams{
 						PermissionPolicy: anthropic.BetaManagedAgentsBashToolConfigParamsPermissionPolicyUnion{
-							OfAlwaysAsk: &anthropic.BetaManagedAgentsAlwaysAskPolicyParam{
-								Type: anthropic.BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk,
-							},
+							OfAlwaysAsk: &anthropic.BetaManagedAgentsAlwaysAskPolicyParam{},
 						},
 					},
 				}},
@@ -833,7 +812,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		},
 		{
 			OfMCPToolset: &anthropic.BetaManagedAgentsMCPToolsetParams{
-				Type:          anthropic.BetaManagedAgentsMCPToolsetParamsTypeMCPToolset,
 				MCPServerName: "github",
 				DefaultConfig: anthropic.BetaManagedAgentsMCPToolsetDefaultConfigParams{
 					PermissionPolicy: anthropic.BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnion{
@@ -847,7 +825,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 if err != nil {
 	panic(err)
 }
-_ = agent
 ```
 
 ```java Java
@@ -969,7 +946,7 @@ Under any permission policy, each `agent.tool_use` and `agent.mcp_tool_use` even
 
 For example, when `bash` is under `auto` and the server evaluates a call as high-risk, the denied call appears on the event stream as follows:
 
-```text wrap
+```json
 {
   "type": "agent.tool_use",
   "id": "sevt_01pqr...",
@@ -1016,7 +993,7 @@ A tool call evaluates to `ask` under an `always_ask` policy, or under `auto` whe
 
 For example, a `bash` call paused under an `always_ask` policy appears on the stream as follows:
 
-```text wrap
+```json
 {
   "type": "agent.tool_use",
   "id": "sevt_01def...",
@@ -1039,7 +1016,7 @@ To answer interactively instead, use `ant beta:sessions connect`, which shows th
 In the following examples, the tool-use event IDs come from the `stop_reason.event_ids` array of the `session.status_idle` event. Learn more about [receiving events](events-and-streaming.md#stream-events) in the Session event stream guide, or [subscribe to webhooks](webhooks.md) to be notified when a session pauses for input.
 
 ```bash cURL
-# Allow the tool to execute
+# Allow the tool to run
 curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -1074,7 +1051,7 @@ curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
 ```
 
 ```bash CLI
-# Allow the tool to execute
+# Allow the tool to run
 ant beta:sessions:events send \
   --session-id "$SESSION_ID" \
   --event "{type: user.tool_confirmation, tool_use_id: $AGENT_TOOL_USE_EVENT_ID, result: allow}"
@@ -1087,7 +1064,7 @@ ant beta:sessions:events send \
 ```
 
 ```python Python
-# Allow the tool to execute
+# Allow the tool to run
 client.beta.sessions.events.send(
     session.id,
     events=[
@@ -1114,7 +1091,7 @@ client.beta.sessions.events.send(
 ```
 
 ```typescript TypeScript
-// Allow the tool to execute
+// Allow the tool to run
 await client.beta.sessions.events.send(session.id, {
   events: [
     {
@@ -1139,7 +1116,7 @@ await client.beta.sessions.events.send(session.id, {
 ```
 
 ```csharp C#
-// Allow the tool to execute
+// Allow the tool to run
 await client.Beta.Sessions.Events.Send(session.ID, new()
 {
     Events =
@@ -1168,11 +1145,10 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
 ```
 
 ```go Go
-// Allow the tool to execute
+// Allow the tool to run
 _, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 		OfUserToolConfirmation: &anthropic.BetaManagedAgentsUserToolConfirmationEventParams{
-			Type:      anthropic.BetaManagedAgentsUserToolConfirmationEventParamsTypeUserToolConfirmation,
 			ToolUseID: agentToolUseEvent.ID,
 			Result:    anthropic.BetaManagedAgentsUserToolConfirmationEventParamsResultAllow,
 		},
@@ -1186,7 +1162,6 @@ if err != nil {
 _, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 		OfUserToolConfirmation: &anthropic.BetaManagedAgentsUserToolConfirmationEventParams{
-			Type:        anthropic.BetaManagedAgentsUserToolConfirmationEventParamsTypeUserToolConfirmation,
 			ToolUseID:   mcpToolUseEvent.ID,
 			Result:      anthropic.BetaManagedAgentsUserToolConfirmationEventParamsResultDeny,
 			DenyMessage: anthropic.String("Don't create issues in the production project. Use the staging project."),
@@ -1199,7 +1174,7 @@ if err != nil {
 ```
 
 ```java Java
-// Allow the tool to execute
+// Allow the tool to run
 client.beta().sessions().events().send(
     session.id(),
     EventSendParams.builder()
@@ -1230,7 +1205,7 @@ client.beta().sessions().events().send(
 ```php PHP
 use Anthropic\Beta\Sessions\Events\ManagedAgentsUserToolConfirmationEventParams;
 
-// Allow the tool to execute
+// Allow the tool to run
 $client->beta->sessions->events->send(
     $session->id,
     events: [
@@ -1255,7 +1230,7 @@ $client->beta->sessions->events->send(
 ```
 
 ```ruby Ruby
-# Allow the tool to execute
+# Allow the tool to run
 client.beta.sessions.events.send_(
   session.id,
   events: [
@@ -1283,7 +1258,7 @@ client.beta.sessions.events.send_(
 
 ## Custom tools
 
-Permission policies do not apply to custom tools. When the agent calls a custom tool, your application receives an `agent.custom_tool_use` event and is responsible for deciding whether to run it before sending back a `user.custom_tool_result`. See [Answer tool calls that pause the session](events-and-streaming.md#answer-tool-calls-that-pause-the-session) for the full flow.
+Permission policies do not apply to custom tools. When the agent calls a custom tool, your application receives an `agent.custom_tool_use` event and is responsible for determining whether to run it before sending back a `user.custom_tool_result`. See [Answer tool calls that pause the session](events-and-streaming.md#answer-tool-calls-that-pause-the-session) for the full flow.
 
 ## Next steps
 

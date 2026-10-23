@@ -35,7 +35,7 @@ Archive a Memory Store
 
 - `class BetaManagedAgentsMemoryStore`
 
-  - `Type type`
+  - `"memory_store" type`
 
   - `string id`
 

@@ -46,7 +46,7 @@ curl https://api.anthropic.com/v1/messages \
 
 Claude returns a JSON response containing the assistant's message:
 
-```text Output
+```json Output
 {
   "model": "claude-opus-5-5",
   "id": "msg_013mHbppMPd2PrVJzGMZPt2D",
@@ -112,7 +112,7 @@ ant messages create \
 
 The CLI prints the JSON response:
 
-```text Output
+```json Output
 {
   "model": "claude-opus-5-5",
   "id": "msg_01N1ycuCkM5Mzd7WhTU4fwST",
@@ -331,7 +331,7 @@ Create a new module and add the Anthropic SDK:
 ```bash
 mkdir claude-quickstart && cd claude-quickstart
 go mod init claude-quickstart
-go get github.com/anthropics/anthropic-sdk-go
+go get github.com/anthropics/anthropic-sdk-go/v2
 ```
 
 **Create your code**
@@ -346,7 +346,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/v2"
 )
 
 func main() {
@@ -425,7 +425,7 @@ java {
 }
 
 dependencies {
-    implementation("com.anthropic:anthropic-java:3.1.0")
+    implementation("com.anthropic:anthropic-java:3.2.0")
 }
 
 application {
@@ -451,7 +451,7 @@ Save this as `pom.xml`:
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>3.1.0</version>
+      <version>3.2.0</version>
     </dependency>
   </dependencies>
 </project>

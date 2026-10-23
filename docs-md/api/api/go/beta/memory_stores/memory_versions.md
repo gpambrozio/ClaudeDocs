@@ -201,7 +201,7 @@ List Memory Versions
 
   See the [memory guide](../../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `Type BetaManagedAgentsMemoryVersionType`
+  - `Type MemoryVersion`
 
   - `ID string`
 
@@ -265,7 +265,7 @@ List Memory Versions
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `Type BetaManagedAgentsSessionActorType`
+      - `Type SessionActor`
 
       - `SessionID string`
 
@@ -277,7 +277,7 @@ List Memory Versions
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `Type BetaManagedAgentsAPIActorType`
+      - `Type APIActor`
 
       - `APIKeyID string`
 
@@ -289,7 +289,7 @@ List Memory Versions
 
       A human user, for example acting through the Anthropic Console.
 
-      - `Type BetaManagedAgentsUserActorType`
+      - `Type UserActor`
 
       - `UserID string`
 
@@ -336,8 +336,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -539,7 +539,7 @@ Retrieve a Memory Version
 
   See the [memory guide](../../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `Type BetaManagedAgentsMemoryVersionType`
+  - `Type MemoryVersion`
 
   - `ID string`
 
@@ -603,7 +603,7 @@ Retrieve a Memory Version
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `Type BetaManagedAgentsSessionActorType`
+      - `Type SessionActor`
 
       - `SessionID string`
 
@@ -615,7 +615,7 @@ Retrieve a Memory Version
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `Type BetaManagedAgentsAPIActorType`
+      - `Type APIActor`
 
       - `APIKeyID string`
 
@@ -627,7 +627,7 @@ Retrieve a Memory Version
 
       A human user, for example acting through the Anthropic Console.
 
-      - `Type BetaManagedAgentsUserActorType`
+      - `Type UserActor`
 
       - `UserID string`
 
@@ -674,8 +674,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -868,7 +868,7 @@ Redact a Memory Version
 
   See the [memory guide](../../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `Type BetaManagedAgentsMemoryVersionType`
+  - `Type MemoryVersion`
 
   - `ID string`
 
@@ -932,7 +932,7 @@ Redact a Memory Version
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `Type BetaManagedAgentsSessionActorType`
+      - `Type SessionActor`
 
       - `SessionID string`
 
@@ -944,7 +944,7 @@ Redact a Memory Version
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `Type BetaManagedAgentsAPIActorType`
+      - `Type APIActor`
 
       - `APIKeyID string`
 
@@ -956,7 +956,7 @@ Redact a Memory Version
 
       A human user, for example acting through the Anthropic Console.
 
-      - `Type BetaManagedAgentsUserActorType`
+      - `Type UserActor`
 
       - `UserID string`
 
@@ -1003,8 +1003,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {
@@ -1063,7 +1063,7 @@ func main() {
 
     An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-    - `Type BetaManagedAgentsSessionActorType`
+    - `Type SessionActor`
 
     - `SessionID string`
 
@@ -1075,7 +1075,7 @@ func main() {
 
     A direct caller of the public API, identified by the API key that authenticated the request.
 
-    - `Type BetaManagedAgentsAPIActorType`
+    - `Type APIActor`
 
     - `APIKeyID string`
 
@@ -1087,7 +1087,7 @@ func main() {
 
     A human user, for example acting through the Anthropic Console.
 
-    - `Type BetaManagedAgentsUserActorType`
+    - `Type UserActor`
 
     - `UserID string`
 
@@ -1113,7 +1113,7 @@ func main() {
 
   A direct caller of the public API, identified by the API key that authenticated the request.
 
-  - `Type BetaManagedAgentsAPIActorType`
+  - `Type APIActor`
 
   - `APIKeyID string`
 
@@ -1133,7 +1133,7 @@ func main() {
 
   See the [memory guide](../../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `Type BetaManagedAgentsMemoryVersionType`
+  - `Type MemoryVersion`
 
   - `ID string`
 
@@ -1197,7 +1197,7 @@ func main() {
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `Type BetaManagedAgentsSessionActorType`
+      - `Type SessionActor`
 
       - `SessionID string`
 
@@ -1209,7 +1209,7 @@ func main() {
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `Type BetaManagedAgentsAPIActorType`
+      - `Type APIActor`
 
       - `APIKeyID string`
 
@@ -1221,7 +1221,7 @@ func main() {
 
       A human user, for example acting through the Anthropic Console.
 
-      - `Type BetaManagedAgentsUserActorType`
+      - `Type UserActor`
 
       - `UserID string`
 
@@ -1299,7 +1299,7 @@ func main() {
 
   An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-  - `Type BetaManagedAgentsSessionActorType`
+  - `Type SessionActor`
 
   - `SessionID string`
 
@@ -1313,7 +1313,7 @@ func main() {
 
   A human user, for example acting through the Anthropic Console.
 
-  - `Type BetaManagedAgentsUserActorType`
+  - `Type UserActor`
 
   - `UserID string`
 

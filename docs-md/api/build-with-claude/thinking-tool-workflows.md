@@ -1,4 +1,4 @@
-# First request - Claude responds with thinking and tool request
+# First request: Claude responds with thinking and tool request
 
 ---
 title: Thinking in tool and multi-turn workflows
@@ -90,7 +90,7 @@ weather_tool = {
     },
 }
 
-# First request - Claude responds with thinking and tool request
+# First request: Claude responds with thinking and tool request
 response = client.messages.create(
     model="claude-opus-5-5",
     max_tokens=16000,
@@ -116,7 +116,7 @@ const weatherTool: Anthropic.Tool = {
   }
 };
 
-// First request - Claude responds with thinking and tool request
+// First request: Claude responds with thinking and tool request
 const response = await client.messages.create({
   model: "claude-opus-5-5",
   max_tokens: 16000,
@@ -241,7 +241,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "What's the weather in Paris?"]
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     thinking: ['type' => 'adaptive'],
     tools: [$weatherTool],
 );
@@ -283,7 +283,7 @@ You should see `thinking` and `tool_use` blocks in the response content on a run
 
 To see thinking text like this output, add `display: "summarized"` to the request. On models where display defaults to omitted, including Claude Opus 5.5, the `thinking` field otherwise comes back as an empty string with only the `signature` populated. Either way, echo the content array back unchanged; see [Controlling thinking display](thinking.md#controlling-thinking-display).
 
-```text Output
+```json Output
 {
   "content": [
     {
@@ -339,7 +339,7 @@ tool_use_block = next(block for block in response.content if block.type == "tool
 # Pretend this is what the weather API returns
 weather_data = {"temperature": 88}
 
-# Second request - Include the assistant turn and the tool result
+# Second request: include the assistant turn and the tool result
 continuation = client.messages.create(
     model="claude-opus-5-5",
     max_tokens=16000,
@@ -398,7 +398,7 @@ const toolUseBlock = response.content.find((block) => block.type === "tool_use")
 const weatherData = { temperature: 88 };
 
 if (toolUseBlock) {
-  // Second request - Include the assistant turn and the tool result
+  // Second request: include the assistant turn and the tool result
   const continuation = await client.messages.create({
     model: "claude-opus-5-5",
     max_tokens: 16000,
@@ -479,14 +479,17 @@ var continuationParams = new MessageCreateParams
         new UserMessageParam { Content = "What's the weather in Paris?" },
         // response.Content includes the thinking blocks; passing them back is required
         new AssistantMessageParam { Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
-        new UserMessageParam { Content = new List<ContentBlockParam>
+        new UserMessageParam
         {
-            new ContentBlockParam(new ToolResultBlockParam()
+            Content = new List<ContentBlockParam>
             {
-                ToolUseID = toolUseBlock?.ID ?? "",
-                Content = $"Current temperature: {weatherData.temperature}°F"
-            })
-        }}
+                new ContentBlockParam(new ToolResultBlockParam()
+                {
+                    ToolUseID = toolUseBlock?.ID ?? "",
+                    Content = $"Current temperature: {weatherData.temperature}°F"
+                })
+            }
+        }
     ]
 };
 
@@ -740,7 +743,7 @@ puts continuation
 
 You should see Claude complete the turn with text. Because [interleaved thinking](thinking.md#interleaved-thinking) is automatic in adaptive mode, the continuation can also open with a new thinking block before the final text:
 
-```text Output wrap
+```json Output
 {
   "content": [
     {

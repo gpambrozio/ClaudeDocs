@@ -12,9 +12,9 @@ The web fetch tool allows Claude to retrieve full content from specified webpage
 
 The latest web fetch tool version (`web_fetch_20260318`) supports **dynamic filtering**: Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. Dynamic filtering is available with Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). `web_fetch_20260318` also adds [response inclusion](web-fetch-tool.md#response-inclusion) control for agentic workflows. The previous versions (`web_fetch_20260309` for dynamic filtering and [cache bypass](web-fetch-tool.md#cache-bypass), `web_fetch_20260209` for dynamic filtering only, `web_fetch_20250910` for basic fetch) remain available.
 
-Web fetch (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, deployments [hosted on Azure](../../build-with-claude/claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure) support only the basic web fetch tool (`web_fetch_20250910`, without dynamic filtering). Deployments hosted on Anthropic support all versions. Web fetch is not currently available on Amazon Bedrock or Google Cloud.
+Web fetch (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), and [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, deployments [hosted on Azure](../../build-with-claude/claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure) support only the basic web fetch tool (`web_fetch_20250910`, without dynamic filtering). Deployments hosted on Anthropic support all versions.
 
-For [Claude Mythos Preview](https://anthropic.com/glasswing), web fetch is available on the Claude API and Microsoft Foundry. It is not currently available for Mythos Preview on Amazon Bedrock or Google Cloud.
+For [Claude Mythos Preview](https://anthropic.com/glasswing), web fetch is available on the Claude API and Microsoft Foundry.
 
 Use the [feedback form](https://forms.gle/NhWcgmkcvPCMmPE86) to provide feedback on the quality of the model responses, the API itself, or the quality of the documentation.
 
@@ -232,7 +232,9 @@ puts message
 
 ## How to use web fetch
 
-An organization admin can turn off web fetch for your organization on the [**Capabilities**](https://platform.claude.com/settings/capabilities) page of the Claude Console. With web fetch off, a Messages API request that includes the tool fails with a 400 `invalid_request_error` that says web fetch is not enabled, and `web_fetch` calls in a [Claude Managed Agents](../../managed-agents/overview.md) session return an error result to the agent while the session continues. With web fetch on, the admin can also set allowed or blocked domains for web fetch on the same page. For how the organization's domain lists apply, see [Domain filtering](server-tools.md#domain-filtering) for Messages API requests and [Restrict web search and web fetch domains](../../managed-agents/tools-web-restrictions.md) for Managed Agents sessions.
+An organization admin can turn off web fetch for your organization on the [**Capabilities**](https://platform.claude.com/settings/capabilities) page of the Claude Console. With web fetch off, a Messages API request that includes the tool fails with a 400 `invalid_request_error` that says web fetch is not enabled. With web fetch on, the admin can also set allowed or blocked domains for web fetch on the same page. For how those lists apply to a request, see [Domain filtering](server-tools.md#domain-filtering).
+
+For how your organization's web fetch settings apply in Claude Managed Agents sessions, see [Restrict web search and web fetch domains](../../managed-agents/tools-web-restrictions.md).
 
 Provide the web fetch tool in your API request:
 
@@ -408,7 +410,7 @@ The web fetch tool supports the following parameters:
   "type": "web_fetch_20250910",
   "name": "web_fetch",
 
-  // Optional: Limit the number of fetches per request
+  // Optional: Limit the number of fetches for each request
   "max_uses": 10,
 
   // Optional: Only fetch from these domains
@@ -442,7 +444,7 @@ The `max_uses` parameter limits the number of web fetches performed. Failed fetc
 
 For domain filtering with `allowed_domains` and `blocked_domains`, see [Server tools](server-tools.md#domain-filtering).
 
-On [Claude Managed Agents](../../managed-agents/overview.md), set these fields on the `web_fetch` entry of the agent toolset, where each listed domain must be a plain hostname with no path; see [Restrict web search and web fetch domains](../../managed-agents/tools-web-restrictions.md).
+On [Claude Managed Agents](../../managed-agents/overview.md), set these fields on the `web_fetch` entry of the agent toolset; see [Restrict web search and web fetch domains](../../managed-agents/tools-web-restrictions.md).
 
 ### Content limits
 
@@ -498,7 +500,7 @@ When displaying API outputs directly to end users, include citations to the orig
 
 Here's an example response structure:
 
-```text Output
+```json Output
 {
   "role": "assistant",
   "content": [
@@ -580,7 +582,7 @@ The web fetch tool caches results to improve performance and reduce redundant re
 
 For PDF documents, content is returned as base64-encoded data:
 
-```text Output wrap
+```json Output
 {
   "type": "web_fetch_tool_result",
   "tool_use_id": "srvtoolu_02",
@@ -605,7 +607,7 @@ For PDF documents, content is returned as base64-encoded data:
 
 When the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body. Claude receives the error result and continues the turn. For example:
 
-```text Output wrap
+```json Output
 {
   "type": "web_fetch_tool_result",
   "tool_use_id": "srvtoolu_a93jad",
@@ -852,7 +854,9 @@ void main() {
             .build())
         .addTool(WebFetchTool20250910.builder()
             .maxUses(5L)
-            .citations(CitationsConfigParam.builder().enabled(true).build())
+            .citations(CitationsConfigParam.builder()
+                .enabled(true)
+                .build())
             .build())
         .build();
 
@@ -928,7 +932,7 @@ To cache tool definitions across turns, see [Tool use with prompt caching](tool-
 
 With streaming enabled, fetch events are part of the stream with a pause during content retrieval:
 
-```text Output
+```sse Output
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_abc123", "type": "message"}}
 
@@ -961,7 +965,7 @@ You can include the web fetch tool in the [Messages Batches API](../../build-wit
 
 Web fetch usage has **no additional charges** beyond standard token costs:
 
-```text wrap
+```json
 {
   "usage": {
     "input_tokens": 25039,

@@ -141,7 +141,7 @@ puts file_id
 
 The response from uploading a file includes:
 
-```text Response wrap
+```json Response
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
   "type": "file",
@@ -602,7 +602,7 @@ response.content().stream()
 $client = new Client();
 
 // Read the text file
-$textContent = file_get_contents("document.txt");
+$textContent = file_get_contents('document.txt');
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -660,7 +660,7 @@ For .docx files containing images, convert them to PDF format first, then use [P
 
 #### List files
 
-Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](../api/files/list.md). The SDK returns the first page and provides [auto-pagination](../api/overview.md#pagination) helpers. The CLI example bounds the total with `--max-items`:
+Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](../api/files/list.md). The SDK returns the first page and provides [auto-pagination](../api/overview.md#pagination) helpers.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/files \
@@ -669,6 +669,7 @@ curl https://api.anthropic.com/v1/files \
 ```
 
 ```bash CLI
+# List commands auto-paginate, so --max-items limits the total
 ant files list --max-items 10
 ```
 
@@ -976,7 +977,7 @@ Common errors when using the Files API include:
 * **File too large (413):** The file exceeds the 500 MB limit.
 * **Storage limit exceeded (400):** Your organization has reached the 1 TB storage limit.
 
-```text Output wrap
+```json Output
 {
   "type": "error",
   "error": {

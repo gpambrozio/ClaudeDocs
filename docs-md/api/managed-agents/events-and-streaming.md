@@ -147,10 +147,8 @@ await foreach (var streamEvent in stream.Enumerate())
 	if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 						Text: "Summarize the repo README",
 					},
 				}},
@@ -324,7 +322,7 @@ for await (const event of client.beta.sessions.events.list(session.id)) {
 
 // Tail live events, skipping anything already seen
 tail: for await (const event of stream) {
-  // Preview events (event_start/event_delta) carry no top-level id
+  // Preview events (event_start/event_delta) carry no top-level `id`
   if (event.type === "event_start" || event.type === "event_delta") {
     continue;
   }
@@ -581,10 +579,8 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
 if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 					Text: "Analyze the performance of the sort function in utils.py",
 				},
 			}},
@@ -683,10 +679,8 @@ with client.beta.sessions.events.stream(session.id) as stream:
     for event in stream:
         match event.type:
             case "agent.custom_tool_use":
-                # Execute the tool
                 result = call_tool(event.name, event.input)
 
-                # Send the result back
                 client.beta.sessions.events.send(
                     session.id,
                     events=[
@@ -708,10 +702,8 @@ const stream = await client.beta.sessions.events.stream(session.id);
 loop: for await (const event of stream) {
   switch (event.type) {
     case "agent.custom_tool_use": {
-      // Execute the tool
       const result = await callTool(event.name, event.input);
 
-      // Send the result back
       await client.beta.sessions.events.send(session.id, {
         events: [
           {
@@ -737,10 +729,8 @@ await foreach (var streamEvent in client.Beta.Sessions.Events.StreamStreaming(se
 {
     if (streamEvent.Value is BetaManagedAgentsAgentCustomToolUseEvent toolUse)
     {
-        // Execute the tool
         var result = await CallTool(toolUse.Name, toolUse.Input);
 
-        // Send the result back
         await client.Beta.Sessions.Events.Send(session.ID, new()
         {
             Events =
@@ -769,17 +759,13 @@ loop:
 	for stream.Next() {
 		switch event := stream.Current().AsAny().(type) {
 		case anthropic.BetaManagedAgentsAgentCustomToolUseEvent:
-			// Execute the tool
 			result := callTool(event.Name, event.Input)
-			// Send the result back
 			if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 				Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 					OfUserCustomToolResult: &anthropic.BetaManagedAgentsUserCustomToolResultEventParams{
-						Type:            anthropic.BetaManagedAgentsUserCustomToolResultEventParamsTypeUserCustomToolResult,
 						CustomToolUseID: event.ID,
 						Content: []anthropic.BetaManagedAgentsUserCustomToolResultEventParamsContentUnion{{
 							OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-								Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 								Text: result,
 							},
 						}},
@@ -805,11 +791,9 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
     for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
         switch (event.type().value()) {
             case AGENT_CUSTOM_TOOL_USE -> {
-                // Execute the tool
                 var toolUse = event.asAgentCustomToolUse();
                 var result = callTool(toolUse.name(), toolUse.input());
 
-                // Send the result back
                 client.beta().sessions().events().send(
                     session.id(),
                     EventSendParams.builder()
@@ -835,10 +819,8 @@ $stream = $client->beta->sessions->events->streamStream($session->id);
 foreach ($stream as $event) {
     switch (true) {
         case $event instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsAgentCustomToolUseEvent:
-            // Execute the tool
             $result = callTool($event->name, $event->input);
 
-            // Send the result back
             $client->beta->sessions->events->send(
                 $session->id,
                 events: [
@@ -863,9 +845,7 @@ foreach ($stream as $event) {
 client.beta.sessions.events.stream_events(session.id).each do |event|
   case event
   when Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent
-    # Execute the tool
     result = call_tool.call(event.name, event.input)
-    # Send the result back
     client.beta.sessions.events.send_(
       session.id,
       events: [
@@ -901,7 +881,6 @@ with client.beta.sessions.events.stream(session.id) as stream:
             match stop_reason.type:
                 case "requires_action":
                     for event_id in stop_reason.event_ids:
-                        # Approve the pending tool call
                         client.beta.sessions.events.send(
                             session.id,
                             events=[
@@ -931,7 +910,6 @@ for await (const event of stream) {
   }
 
   for (const eventId of event.stop_reason.event_ids) {
-    // Approve the pending tool call
     await client.beta.sessions.events.send(session.id, {
       events: [
         {
@@ -954,7 +932,6 @@ await foreach (var streamEvent in client.Beta.Sessions.Events.StreamStreaming(se
     {
         foreach (var eventId in requiresAction.EventIds)
         {
-            // Approve the pending tool call
             await client.Beta.Sessions.Events.Send(session.ID, new()
             {
                 Events =
@@ -988,11 +965,9 @@ loop:
 		switch stopReason := event.StopReason.AsAny().(type) {
 		case anthropic.BetaManagedAgentsSessionRequiresAction:
 			for _, eventID := range stopReason.EventIDs {
-				// Approve the pending tool call
 				if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 					Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 						OfUserToolConfirmation: &anthropic.BetaManagedAgentsUserToolConfirmationEventParams{
-							Type:      anthropic.BetaManagedAgentsUserToolConfirmationEventParamsTypeUserToolConfirmation,
 							ToolUseID: eventID,
 							Result:    anthropic.BetaManagedAgentsUserToolConfirmationEventParamsResultAllow,
 						},
@@ -1018,7 +993,6 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
         .takeWhile(stopReason -> !stopReason.isEndTurn())
         .filter(stopReason -> stopReason.isRequiresAction())
         .flatMap(stopReason -> stopReason.asRequiresAction().eventIds().stream())
-        // Approve each pending tool call
         .forEach(toolUseId -> client.beta().sessions().events().send(
             session.id(),
             EventSendParams.builder()
@@ -1038,7 +1012,6 @@ foreach ($stream as $event) {
         switch (true) {
             case $event->stopReason instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsSessionRequiresAction:
                 foreach ($event->stopReason->eventIDs as $eventId) {
-                    // Approve the pending tool call
                     $client->beta->sessions->events->send(
                         $session->id,
                         events: [
@@ -1066,7 +1039,6 @@ client.beta.sessions.events.stream_events(session.id).each do |event|
     case stop_reason
     when Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction
       stop_reason.event_ids.each do |event_id|
-        # Approve the pending tool call
         client.beta.sessions.events.send_(
           session.id,
           events: [
@@ -1181,10 +1153,8 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
 if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 					Text: "Now run the tests against the changes you made earlier.",
 				},
 			}},
@@ -1351,16 +1321,12 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
 if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 	Events: []anthropic.BetaManagedAgentsEventParamsUnion{
 		{
-			OfUserInterrupt: &anthropic.BetaManagedAgentsUserInterruptEventParams{
-				Type: anthropic.BetaManagedAgentsUserInterruptEventParamsTypeUserInterrupt,
-			},
+			OfUserInterrupt: &anthropic.BetaManagedAgentsUserInterruptEventParams{},
 		},
 		{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 						Text: "Instead, focus on fixing the bug in line 42.",
 					},
 				}},
@@ -1683,9 +1649,7 @@ await client.Beta.Sessions.Events.Send(session.ID, new()
 if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
 	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 		OfSystemMessage: &anthropic.BetaManagedAgentsSystemMessageEventParams{
-			Type: anthropic.BetaManagedAgentsSystemMessageEventParamsTypeSystemMessage,
 			Content: []anthropic.BetaManagedAgentsSystemContentBlockParam{{
-				Type: anthropic.BetaManagedAgentsSystemContentBlockTypeText,
 				Text: "The user's current timezone is America/New_York.",
 			}},
 		},

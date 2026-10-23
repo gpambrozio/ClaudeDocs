@@ -43,7 +43,7 @@ Retrieve a Memory Version
 
 - `class ManagedAgentsMemoryVersion`
 
-  - `Type type`
+  - `"memory_version" type`
 
   - `string id`
 

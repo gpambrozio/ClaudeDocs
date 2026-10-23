@@ -95,7 +95,6 @@ Get File Metadata
 
 ```bash
 ant beta:files retrieve-metadata \
-  --api-key my-anthropic-api-key \
   --file-id file_id
 ```
 

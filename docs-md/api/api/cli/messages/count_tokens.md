@@ -66,7 +66,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
   See [input examples](../../../build-with-claude/working-with-messages.md).
 
-  Note that if you want to include a [system prompt](../../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](../../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role), you can use the top-level `system` parameter.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -194,7 +194,6 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
 ```bash
 ant messages count-tokens \
-  --api-key my-anthropic-api-key \
   --message '{content: [{text: x, type: text}], role: user}' \
   --model claude-opus-5-5
 ```

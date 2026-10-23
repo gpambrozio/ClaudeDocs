@@ -131,7 +131,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/v2"
 )
 
 var client = anthropic.NewClient()
@@ -198,15 +198,17 @@ AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 static final Model MODEL = Model.CLAUDE_OPUS_5_5;
 static final boolean DOC_TEST_MODE =
-        !Objects.requireNonNullElse(System.getenv("DOC_TEST_MODE"), "").isEmpty();
+    !Objects.requireNonNullElse(System.getenv("DOC_TEST_MODE"), "").isEmpty();
 static final OutputConfig.Effort EFFORT = OutputConfig.Effort.XHIGH;
 
 static final String SYSTEM_PROMPT =
-        "You are a helpful general-purpose agent. Answer the user's request directly.";
+    "You are a helpful general-purpose agent. Answer the user's request directly.";
 
 static final int REQUEST_TIMEOUT_SECONDS = 600;
 static final RequestOptions REQUEST_OPTIONS =
-        RequestOptions.builder().timeout(Duration.ofSeconds(REQUEST_TIMEOUT_SECONDS)).build();
+    RequestOptions.builder()
+        .timeout(Duration.ofSeconds(REQUEST_TIMEOUT_SECONDS))
+        .build();
 static final int BASH_TIMEOUT_SECONDS = 60;
 static final int TOOL_RESULT_MAX_CHARS = 8000;
 static final int MAX_CONCURRENT = 10;
@@ -215,8 +217,8 @@ static final int MAX_SUBAGENT_TURNS = DOC_TEST_MODE ? 1 : 15;
 static final int MAX_MAIN_TURNS = DOC_TEST_MODE ? 1 : 30;
 static final int TURNS_BETWEEN_REFRESHERS = 10;
 static final Path JOURNAL_PATH = Path.of(Optional.ofNullable(System.getenv("ORCH_JOURNAL"))
-        .filter(path -> !path.isEmpty())
-        .orElse("orchestration_journal.json"));
+    .filter(path -> !path.isEmpty())
+    .orElse("orchestration_journal.json"));
 ```
 
 ```php PHP
@@ -327,15 +329,15 @@ const (
 
 ```java Java
 static final String MODE_ENTER = """
-        Orchestration mode is on: optimize for the most exhaustive, correct answer rather than \
-        the fastest one. Use the Workflow tool on every substantive task, sized to the problem's \
-        natural decomposition rather than the maximum the tool allows. See the Workflow tool's \
-        description for standing consent, granularity guidance, and quality patterns. Work solo \
-        only on conversational or trivial turns.""";
+    Orchestration mode is on: optimize for the most exhaustive, correct answer rather than \
+    the fastest one. Use the Workflow tool on every substantive task, sized to the problem's \
+    natural decomposition rather than the maximum the tool allows. See the Workflow tool's \
+    description for standing consent, granularity guidance, and quality patterns. Work solo \
+    only on conversational or trivial turns.""";
 static final String MODE_REFRESH =
-        "Orchestration mode is still on. Use the Workflow tool; see its standing consent section.";
+    "Orchestration mode is still on. Use the Workflow tool; see its standing consent section.";
 static final String MODE_EXIT =
-        "Orchestration mode is off. The Workflow tool's standard opt-in rule applies again.";
+    "Orchestration mode is off. The Workflow tool's standard opt-in rule applies again.";
 ```
 
 ```php PHP
@@ -657,72 +659,72 @@ var reportTool = anthropic.ToolUnionParam{
 
 ```java Java
 static final Tool WORKFLOW_TOOL = Tool.builder()
-        .name("Workflow")
-        .description("""
-                Orchestrate a multiagent workflow: split a large task into independent subtasks \
-                and run them as parallel agents, then collect their results.
+    .name("Workflow")
+    .description("""
+        Orchestrate a multiagent workflow: split a large task into independent subtasks \
+        and run them as parallel agents, then collect their results.
 
-                Opt-in: only use this tool when the user explicitly asks for a workflow, or when a \
-                system message confirms that orchestration mode is on.
+        Opt-in: only use this tool when the user explicitly asks for a workflow, or when a \
+        system message confirms that orchestration mode is on.
 
-                Quality patterns: adversarial verification (a second wave of agents checks the first \
-                wave's findings against the source), a completeness critic (one agent hunts for what \
-                the others missed), and multiphase sequencing (understand, design, implement, and \
-                review as separate workflow calls, reading results between phases). A useful default \
-                is hybrid: scout inline first to discover the work-list, then fan out over it.
+        Quality patterns: adversarial verification (a second wave of agents checks the first \
+        wave's findings against the source), a completeness critic (one agent hunts for what \
+        the others missed), and multiphase sequencing (understand, design, implement, and \
+        review as separate workflow calls, reading results between phases). A useful default \
+        is hybrid: scout inline first to discover the work-list, then fan out over it.
 
-                Granularity: scope each subtask to a distinct concern, component, or question rather \
-                than per line or per file section. Scale the count to what the user asked for: a \
-                focused review of a module of a few hundred lines rarely needs more than about ten \
-                subtasks; a broad audit of a large codebase can justify more.
+        Granularity: scope each subtask to a distinct concern, component, or question rather \
+        than per line or per file section. Scale the count to what the user asked for: a \
+        focused review of a module of a few hundred lines rarely needs more than about ten \
+        subtasks; a broad audit of a large codebase can justify more.
 
-                Standing consent: while a system message confirms orchestration mode is on, that \
-                opt-in is standing. Author and run a workflow for every substantive task by default, \
-                and lean toward verifying findings adversarially. Work solo only on conversational \
-                turns or trivial mechanical edits. When a system message says the mode is off, \
-                revert to the opt-in rule above.""")
-        .inputSchema(Tool.InputSchema.builder()
-                .properties(Tool.InputSchema.Properties.builder()
-                        .putAdditionalProperty("subtasks", JsonValue.from(Map.of(
-                                "type", "array",
-                                "items", Map.of("type", "string"),
-                                "description", "Independent subtask prompts to run as parallel agents")))
-                        .build())
-                .putAdditionalProperty("required", JsonValue.from(List.of("subtasks")))
-                .build())
-        .build();
+        Standing consent: while a system message confirms orchestration mode is on, that \
+        opt-in is standing. Author and run a workflow for every substantive task by default, \
+        and lean toward verifying findings adversarially. Work solo only on conversational \
+        turns or trivial mechanical edits. When a system message says the mode is off, \
+        revert to the opt-in rule above.""")
+    .inputSchema(Tool.InputSchema.builder()
+        .properties(Tool.InputSchema.Properties.builder()
+            .putAdditionalProperty("subtasks", JsonValue.from(Map.of(
+                "type", "array",
+                "items", Map.of("type", "string"),
+                "description", "Independent subtask prompts to run as parallel agents")))
+            .build())
+        .putAdditionalProperty("required", JsonValue.from(List.of("subtasks")))
+        .build())
+    .build();
 
 static final ToolBash20250124 BASH_TOOL = ToolBash20250124.builder().build();
 
 static final Tool REPORT_TOOL = Tool.builder()
-        .name("report_findings")
-        .description("""
-                Report the final findings for your subtask. Call this exactly once, when you are \
-                done investigating; it ends your task.""")
-        .inputSchema(Tool.InputSchema.builder()
-                .properties(Tool.InputSchema.Properties.builder()
-                        .putAdditionalProperty("summary", JsonValue.from(Map.of(
-                                "type", "string",
-                                "description", "Two or three sentences of synthesis")))
-                        .putAdditionalProperty("findings", JsonValue.from(Map.of(
-                                "type", "array",
-                                "items", Map.of(
-                                        "type", "object",
-                                        "properties", Map.of(
-                                                "claim", Map.of(
-                                                        "type", "string",
-                                                        "description", "The finding, one sentence"),
-                                                "evidence", Map.of(
-                                                        "type", "string",
-                                                        "description", "How it was verified (file, line, or command output)"),
-                                                "severity", Map.of(
-                                                        "type", "string",
-                                                        "enum", List.of("high", "medium", "low", "info"))),
-                                        "required", List.of("claim", "evidence", "severity")))))
-                        .build())
-                .putAdditionalProperty("required", JsonValue.from(List.of("summary", "findings")))
-                .build())
-        .build();
+    .name("report_findings")
+    .description("""
+        Report the final findings for your subtask. Call this exactly once, when you are \
+        done investigating; it ends your task.""")
+    .inputSchema(Tool.InputSchema.builder()
+        .properties(Tool.InputSchema.Properties.builder()
+            .putAdditionalProperty("summary", JsonValue.from(Map.of(
+                "type", "string",
+                "description", "Two or three sentences of synthesis")))
+            .putAdditionalProperty("findings", JsonValue.from(Map.of(
+                "type", "array",
+                "items", Map.of(
+                    "type", "object",
+                    "properties", Map.of(
+                        "claim", Map.of(
+                            "type", "string",
+                            "description", "The finding, one sentence"),
+                        "evidence", Map.of(
+                            "type", "string",
+                            "description", "How it was verified (file, line, or command output)"),
+                        "severity", Map.of(
+                            "type", "string",
+                            "enum", List.of("high", "medium", "low", "info"))),
+                    "required", List.of("claim", "evidence", "severity")))))
+            .build())
+        .putAdditionalProperty("required", JsonValue.from(List.of("summary", "findings")))
+        .build())
+    .build();
 ```
 
 ```php PHP
@@ -1047,7 +1049,7 @@ async Task<(string Output, bool IsError)> RunBash(string command)
     return (output, process.ExitCode != 0);
 }
 
-// Execute one bash tool call requested by the model.
+// Run one bash tool call requested by the model.
 async Task<(string Output, bool IsError)> HandleBashBlock(ToolUseBlock block)
 {
     if (block.Input.GetValueOrDefault("restart").ValueKind is JsonValueKind.True)
@@ -1115,7 +1117,7 @@ func runBash(ctx context.Context, command string) (string, bool) {
 	return fmt.Sprintf("(%s)\n%s", err, output), true
 }
 
-// handleBashBlock executes one bash tool call requested by the model.
+// handleBashBlock runs one bash tool call requested by the model.
 func handleBashBlock(ctx context.Context, block anthropic.ToolUseBlock) (string, bool) {
 	var input struct {
 		Command string `json:"command"`
@@ -1148,11 +1150,11 @@ static Path createWorkDir() {
     try {
         var dir = Files.createTempDirectory("orchestration-");
         Files.writeString(dir.resolve("sample.py"), """
-                def fib(n):
-                    return n if n < 2 else fib(n - 1) + fib(n - 2)
+            def fib(n):
+                return n if n < 2 else fib(n - 1) + fib(n - 2)
 
-                print(fib(10))
-                """);
+            print(fib(10))
+            """);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             // Best-effort cleanup; the OS tmp sweeper handles leftovers.
             try (var paths = Files.walk(dir)) {
@@ -1173,13 +1175,13 @@ ToolOutput runBash(String command) throws InterruptedException {
     Process process;
     try {
         process = new ProcessBuilder("bash", "-c", command)
-                .directory(WORK_DIR.toFile())
-                .redirectErrorStream(true)
-                .start();
+            .directory(WORK_DIR.toFile())
+            .redirectErrorStream(true)
+            .start();
     } catch (IOException error) {
         return new ToolOutput("(" + error + ")", true);
     }
-    // Drain stdout on another thread so a filled pipe cannot stall the timeout wait below.
+    // Drain stdout on another thread so a filled pipe cannot stall the timeout wait that follows.
     CompletableFuture<String> outputReader = CompletableFuture.supplyAsync(() -> {
         try (var stdout = process.getInputStream()) {
             return new String(stdout.readAllBytes(), StandardCharsets.UTF_8);
@@ -1197,12 +1199,12 @@ ToolOutput runBash(String command) throws InterruptedException {
         output = "(no output)";
     } else if (output.length() > TOOL_RESULT_MAX_CHARS) {
         output = output.substring(0, TOOL_RESULT_MAX_CHARS)
-                + "\n(truncated at " + TOOL_RESULT_MAX_CHARS + " chars)";
+            + "\n(truncated at " + TOOL_RESULT_MAX_CHARS + " chars)";
     }
     int exitCode = process.exitValue();
     return exitCode == 0
-            ? new ToolOutput(output, false)
-            : new ToolOutput("(exit code " + exitCode + ")\n" + output, true);
+        ? new ToolOutput(output, false)
+        : new ToolOutput("(exit code " + exitCode + ")\n" + output, true);
 }
 
 // A tool call's input fields, or an empty map if the model sent something other than an object.
@@ -1210,7 +1212,7 @@ Map<String, JsonValue> toolInput(ToolUseBlock toolUse) {
     return toolUse._input() instanceof JsonObject object ? object.values() : Map.of();
 }
 
-// Execute one bash tool call requested by the model.
+// Run one bash tool call requested by the model.
 ToolOutput handleBashBlock(ToolUseBlock toolUse) throws InterruptedException {
     Map<String, JsonValue> input = toolInput(toolUse);
     if (input.get("restart") instanceof JsonBoolean restart && restart.value()) {
@@ -1280,7 +1282,7 @@ function runBash(string $command): array
     return [$output, $exitCode !== 0];
 }
 
-/** Execute one bash tool call requested by the model. */
+/** Run one bash tool call requested by the model. */
 function handleBashBlock(ToolUseBlock $block): array
 {
     if (($block->input['restart'] ?? null) === true) {
@@ -1328,7 +1330,7 @@ def run_bash(command)
     stdin.close
     reader = Thread.new { stdout_and_stderr.read.scrub }
     # Enforce the time limit with a monotonic-clock deadline so a timed-out command is
-    # stopped rather than left running in the background.
+    # ended rather than left running in the background.
     deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + BASH_TIMEOUT_SECONDS
     until wait_thr.join(0.1)
       next if Process.clock_gettime(Process::CLOCK_MONOTONIC) < deadline
@@ -1362,7 +1364,7 @@ def run_bash(command)
   end
 end
 
-# Execute one bash tool call requested by the model.
+# Run one bash tool call requested by the model.
 def handle_bash_block(block)
   input = parse_tool_input(block.input)
   return ["Shell restarted.", false] if input["restart"] == true
@@ -1694,9 +1696,9 @@ func runSubagent(ctx context.Context, model string, prompt string) (string, erro
 
 ```java Java
 static final String SUBAGENT_SYSTEM = """
-        You are one agent in a larger parallel fan-out, assigned a single subtask. \
-        Investigate it directly, using bash to check facts rather than guessing, and finish \
-        by calling report_findings exactly once. Return findings, not narration.""";
+    You are one agent in a larger parallel fan-out, assigned a single subtask. \
+    Investigate it directly, using bash to check facts rather than guessing, and finish \
+    by calling report_findings exactly once. Return findings, not narration.""";
 
 // One subagent: a small nested agent loop with the bash tool plus report_findings.
 // Subagents inherit the main loop's effort level.
@@ -1705,14 +1707,16 @@ String runSubagent(Model model, String prompt) throws InterruptedException {
     messages.add(MessageParam.ofUser(prompt));
     for (int turn = 0; turn < MAX_SUBAGENT_TURNS; turn++) {
         MessageCreateParams params = MessageCreateParams.builder()
-                .model(model)
-                .maxTokens(64000L)
-                .system(SUBAGENT_SYSTEM)
-                .outputConfig(OutputConfig.builder().effort(EFFORT).build())
-                .addTool(BASH_TOOL)
-                .addTool(REPORT_TOOL)
-                .messages(messages)
-                .build();
+            .model(model)
+            .maxTokens(64000L)
+            .system(SUBAGENT_SYSTEM)
+            .outputConfig(OutputConfig.builder()
+                .effort(EFFORT)
+                .build())
+            .addTool(BASH_TOOL)
+            .addTool(REPORT_TOOL)
+            .messages(messages)
+            .build();
         MessageAccumulator accumulator = MessageAccumulator.create();
         try (var stream = client.messages().createStreaming(params, REQUEST_OPTIONS)) {
             stream.stream().forEach(accumulator::accumulate);
@@ -1725,17 +1729,17 @@ String runSubagent(Model model, String prompt) throws InterruptedException {
         }
         if (!StopReason.TOOL_USE.equals(stopReason)) {
             String text = response.content().stream()
-                    .flatMap(block -> block.text().stream())
-                    .map(TextBlock::text)
-                    .collect(Collectors.joining());
+                .flatMap(block -> block.text().stream())
+                .map(TextBlock::text)
+                .collect(Collectors.joining());
             if (StopReason.MAX_TOKENS.equals(stopReason)) {
                 text += "\n\n(warning: subagent response was truncated at max_tokens)";
             }
             return text;
         }
         List<ToolUseBlock> toolUses = response.content().stream()
-                .flatMap(block -> block.toolUse().stream())
-                .toList();
+            .flatMap(block -> block.toolUse().stream())
+            .toList();
         List<ContentBlockParam> toolResults = new ArrayList<>();
         String report = null;
         for (ToolUseBlock toolUse : toolUses) {
@@ -1748,10 +1752,10 @@ String runSubagent(Model model, String prompt) throws InterruptedException {
                 default -> new ToolOutput("unknown tool: " + toolUse.name(), true);
             };
             toolResults.add(ContentBlockParam.ofToolResult(ToolResultBlockParam.builder()
-                    .toolUseId(toolUse.id())
-                    .content(result.output())
-                    .isError(result.isError())
-                    .build()));
+                .toolUseId(toolUse.id())
+                .content(result.output())
+                .isError(result.isError())
+                .build()));
         }
         if (report != null) {
             return report;
@@ -2113,8 +2117,8 @@ static final ReentrantLock JOURNAL_LOCK = new ReentrantLock();
 Map<String, String> loadJournal() {
     try {
         return Objects.requireNonNullElseGet(
-                JOURNAL_MAPPER.readValue(Files.readString(JOURNAL_PATH), new TypeReference<HashMap<String, String>>() {}),
-                HashMap::new);
+            JOURNAL_MAPPER.readValue(Files.readString(JOURNAL_PATH), new TypeReference<HashMap<String, String>>() {}),
+            HashMap::new);
     } catch (IOException _) {
         return new HashMap<>();
     }
@@ -2592,16 +2596,16 @@ func runWorkflow(ctx context.Context, model string, rawSubtasks json.RawMessage)
 List<String> normalizeSubtasks(JsonValue rawSubtasks) {
     List<String> tasks = switch (rawSubtasks) {
         case JsonArray array -> array.values().stream()
-                .map(item -> item instanceof JsonString text ? text.value() : item.toString())
-                .toList();
+            .map(item -> item instanceof JsonString text ? text.value() : item.toString())
+            .toList();
         case JsonString string -> parseSubtaskString(string.value());
         default -> List.of();
     };
     return tasks.stream()
-            .filter(Objects::nonNull)
-            .map(String::strip)
-            .filter(task -> !task.isEmpty())
-            .toList();
+        .filter(Objects::nonNull)
+        .map(String::strip)
+        .filter(task -> !task.isEmpty())
+        .toList();
 }
 
 List<String> parseSubtaskString(String encoded) {
@@ -2615,31 +2619,31 @@ List<String> parseSubtaskString(String encoded) {
 
 String verifyPromptFor(String subtask, String result) {
     return """
-            Adversarially verify the subagent result below: try to REFUTE it. Re-derive the \
-            claims yourself with bash rather than trusting the result, and look for evidence \
-            that contradicts them. Default to refuted if uncertain. Call report_findings with \
-            summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command \
-            output that decided it.
+        Adversarially verify the subagent result below: try to REFUTE it. Re-derive the \
+        claims yourself with bash rather than trusting the result, and look for evidence \
+        that contradicts them. Default to refuted if uncertain. Call report_findings with \
+        summary 'refuted: <why>' or 'confirmed: <why>', citing the file:line or command \
+        output that decided it.
 
-            Subtask: %s
+        Subtask: %s
 
-            Result to verify:
-            %s""".formatted(subtask, result);
+        Result to verify:
+        %s""".formatted(subtask, result);
 }
 
 // invokeAll waits for every job, so each future is finished when it is read here.
 List<String> runAll(ExecutorService pool, List<String> prompts, Model model) throws InterruptedException {
     List<Callable<String>> jobs = prompts.stream()
-            .<Callable<String>>map(prompt -> () -> journaled(prompt, () -> runSubagent(model, prompt)))
-            .toList();
+        .<Callable<String>>map(prompt -> () -> journaled(prompt, () -> runSubagent(model, prompt)))
+        .toList();
     return pool.invokeAll(jobs).stream()
-            .map(future -> switch (future.state()) {
-                case SUCCESS -> future.resultNow();
-                // Isolation boundary: one bad subagent should not end the run.
-                case FAILED -> "(subagent failed: " + future.exceptionNow() + ")";
-                case CANCELLED, RUNNING -> "(subagent failed: cancelled)";
-            })
-            .toList();
+        .map(future -> switch (future.state()) {
+            case SUCCESS -> future.resultNow();
+            // Isolation boundary: one bad subagent should not end the run.
+            case FAILED -> "(subagent failed: " + future.exceptionNow() + ")";
+            case CANCELLED, RUNNING -> "(subagent failed: cancelled)";
+        })
+        .toList();
 }
 
 // Run subtasks as parallel subagents, then run a second verification wave over
@@ -2660,23 +2664,23 @@ ToolOutput runWorkflow(Model model, JsonValue rawSubtasks) throws InterruptedExc
         results = runAll(pool, subtasks, model);
         System.err.println("[workflow] verifying " + results.size() + " results");
         List<String> verifyPrompts = IntStream.range(0, subtasks.size())
-                .mapToObj(index -> verifyPromptFor(subtasks.get(index), results.get(index)))
-                .toList();
+            .mapToObj(index -> verifyPromptFor(subtasks.get(index), results.get(index)))
+            .toList();
         verdicts = runAll(pool, verifyPrompts, model);
     }
     String joined = IntStream.range(0, subtasks.size())
-            .mapToObj(index -> """
-                    [agent %d: %s]
-                    %s
+        .mapToObj(index -> """
+            [agent %d: %s]
+            %s
 
-                    [verify %d]
-                    %s""".formatted(index + 1, subtasks.get(index), results.get(index), index + 1, verdicts.get(index)))
-            .collect(Collectors.joining("\n\n"));
+            [verify %d]
+            %s""".formatted(index + 1, subtasks.get(index), results.get(index), index + 1, verdicts.get(index)))
+        .collect(Collectors.joining("\n\n"));
     if (dropped > 0) {
         joined = """
-                (note: %d subtasks beyond MAX_TOTAL_SUBTASKS=%d were not run; rerun them in a follow-up Workflow call)
+            (note: %d subtasks beyond MAX_TOTAL_SUBTASKS=%d were not run; rerun them in a follow-up Workflow call)
 
-                %s""".formatted(dropped, MAX_TOTAL_SUBTASKS, joined);
+            %s""".formatted(dropped, MAX_TOTAL_SUBTASKS, joined);
     }
     return new ToolOutput(joined, false);
 }
@@ -3210,7 +3214,7 @@ List<MessageParam> DueSystemMessages()
     return due;
 }
 
-// Send one user turn through the loop, executing tool calls until the model stops.
+// Send one user turn through the loop, running tool calls until the model stops.
 async Task<string> Turn(string userInput)
 {
     // Mid-conversation system messages follow the user turn they apply to, which keeps
@@ -3309,10 +3313,9 @@ func (agent *modeAgent) setMode(modeOn bool) {
 // full mode text on entry, or a one-line refresher every turnsBetweenRefreshers user turns.
 func (agent *modeAgent) dueSystemMessages() []anthropic.MessageParam {
 	systemMessage := func(content string) anthropic.MessageParam {
-		return anthropic.MessageParam{
-			Role:    anthropic.MessageParamRoleSystem,
-			Content: []anthropic.ContentBlockParamUnion{anthropic.NewTextBlock(content)},
-		}
+		return anthropic.MessageParam{OfSystem: &anthropic.SystemMessageParam{
+			Content: []anthropic.TextBlockParam{{Text: content}},
+		}}
 	}
 	var due []anthropic.MessageParam
 	if agent.exitPending {
@@ -3333,7 +3336,7 @@ func (agent *modeAgent) dueSystemMessages() []anthropic.MessageParam {
 	return due
 }
 
-// turn sends one user turn through the loop, executing tool calls until the model stops.
+// turn sends one user turn through the loop, running tool calls until the model stops.
 func (agent *modeAgent) turn(ctx context.Context, userInput string) (string, error) {
 	// Mid-conversation system messages follow the user turn they apply to, which keeps
 	// the cached prefix ahead of them untouched.
@@ -3453,7 +3456,7 @@ class ModeAgent {
         return MessageParam.ofSystem(content);
     }
 
-    // Send one user turn through the loop, executing tool calls until the model stops.
+    // Send one user turn through the loop, running tool calls until the model stops.
     String turn(String userInput) throws InterruptedException {
         // Mid-conversation system messages follow the user turn they apply to, which keeps
         // the cached prefix ahead of them untouched.
@@ -3463,14 +3466,16 @@ class ModeAgent {
 
         for (int turn = 0; turn < MAX_MAIN_TURNS; turn++) {
             MessageCreateParams params = MessageCreateParams.builder()
-                    .model(model)
-                    .maxTokens(64000L)
-                    .system(SYSTEM_PROMPT) // static for the whole session
-                    .outputConfig(OutputConfig.builder().effort(EFFORT).build())
-                    .addTool(WORKFLOW_TOOL)
-                    .addTool(BASH_TOOL)
-                    .messages(messages)
-                    .build();
+                .model(model)
+                .maxTokens(64000L)
+                .system(SYSTEM_PROMPT) // static for the whole session
+                .outputConfig(OutputConfig.builder()
+                    .effort(EFFORT)
+                    .build())
+                .addTool(WORKFLOW_TOOL)
+                .addTool(BASH_TOOL)
+                .messages(messages)
+                .build();
             MessageAccumulator accumulator = MessageAccumulator.create();
             try (var stream = client.messages().createStreaming(params, REQUEST_OPTIONS)) {
                 stream.stream().forEach(accumulator::accumulate);
@@ -3484,9 +3489,9 @@ class ModeAgent {
             }
             if (!StopReason.TOOL_USE.equals(stopReason)) {
                 String text = response.content().stream()
-                        .flatMap(block -> block.text().stream())
-                        .map(TextBlock::text)
-                        .collect(Collectors.joining());
+                    .flatMap(block -> block.text().stream())
+                    .map(TextBlock::text)
+                    .collect(Collectors.joining());
                 if (StopReason.MAX_TOKENS.equals(stopReason)) {
                     // Drop the truncated assistant message so later turns do not build on it.
                     messages.removeLast();
@@ -3496,21 +3501,21 @@ class ModeAgent {
             }
 
             List<ToolUseBlock> toolUses = response.content().stream()
-                    .flatMap(block -> block.toolUse().stream())
-                    .toList();
+                .flatMap(block -> block.toolUse().stream())
+                .toList();
             List<ContentBlockParam> toolResults = new ArrayList<>();
             for (ToolUseBlock toolUse : toolUses) {
                 ToolOutput result = switch (toolUse.name()) {
                     case "Workflow" -> runWorkflow(model,
-                            toolInput(toolUse).getOrDefault("subtasks", JsonValue.from(List.of())));
+                        toolInput(toolUse).getOrDefault("subtasks", JsonValue.from(List.of())));
                     case "bash" -> handleBashBlock(toolUse);
                     default -> new ToolOutput("unknown tool: " + toolUse.name(), true);
                 };
                 toolResults.add(ContentBlockParam.ofToolResult(ToolResultBlockParam.builder()
-                        .toolUseId(toolUse.id())
-                        .content(result.output())
-                        .isError(result.isError())
-                        .build()));
+                    .toolUseId(toolUse.id())
+                    .content(result.output())
+                    .isError(result.isError())
+                    .build()));
             }
             messages.add(MessageParam.ofUserOfContentBlockParams(toolResults));
         }
@@ -3823,8 +3828,8 @@ func run(ctx context.Context) error {
 ```java Java
 void main(String[] args) throws InterruptedException {
     String task = args.length > 0 ? args[0] : """
-            Explore the current directory, then give a thorough review: what it does, \
-            code-quality issues, and concrete improvements.""";
+        Explore the current directory, then give a thorough review: what it does, \
+        code-quality issues, and concrete improvements.""";
     ModeAgent agent = new ModeAgent(MODEL);
     IO.println(agent.turn(task));
     agent.setMode(false);

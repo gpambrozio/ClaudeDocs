@@ -155,7 +155,7 @@ Delete a Memory
 
   See the [memory guide](../../../../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `Type BetaManagedAgentsDeletedMemoryType`
+  - `Type MemoryDeleted`
 
   - `ID string`
 
@@ -170,8 +170,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {

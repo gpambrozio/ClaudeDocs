@@ -165,7 +165,7 @@ Create a Memory
 
   See the [memory guide](../../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `Type type`
+  - `JsonValue type = "memory"`
 
   - `String id`
 

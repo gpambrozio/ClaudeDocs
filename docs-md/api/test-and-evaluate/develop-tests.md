@@ -1102,7 +1102,7 @@ async function getCompletion(prompt: string): Promise<string> {
 
 // ROUGE-L measures the longest common subsequence (LCS) of words between the
 // candidate and reference summaries, reported here as an F1 score. Tokenization
-// is simplified to whitespace words; scores may differ from the Python rouge library.
+// is simplified to whitespace words; scores might differ from the Python rouge library.
 function rougeL(candidate: string, reference: string): number {
   const candidateWords = candidate.toLowerCase().trim().split(/\s+/);
   const referenceWords = reference.toLowerCase().trim().split(/\s+/);
@@ -1171,7 +1171,7 @@ async Task<string> GetCompletion(string prompt)
 
 // ROUGE-L measures the longest common subsequence (LCS) of words between the
 // candidate and reference summaries, reported here as an F1 score. Tokenization
-// is simplified to whitespace words; scores may differ from the Python rouge library.
+// is simplified to whitespace words; scores might differ from the Python rouge library.
 double RougeL(string candidate, string reference)
 {
     var candidateWords = Regex.Split(candidate.ToLowerInvariant().Trim(), @"\s+");
@@ -1274,7 +1274,7 @@ func getCompletion(prompt string) string {
 
 // ROUGE-L measures the longest common subsequence (LCS) of words between the
 // candidate and reference summaries, reported here as an F1 score. Tokenization
-// is simplified to whitespace words; scores may differ from the Python rouge library.
+// is simplified to whitespace words; scores might differ from the Python rouge library.
 func rougeL(candidate, reference string) float64 {
 	candidateWords := strings.Fields(strings.ToLower(candidate))
 	referenceWords := strings.Fields(strings.ToLower(reference))
@@ -1355,7 +1355,7 @@ String getCompletion(String prompt) {
 
 // ROUGE-L measures the longest common subsequence (LCS) of words between the
 // candidate and reference summaries, reported here as an F1 score. Tokenization
-// is simplified to whitespace words; scores may differ from the Python rouge library.
+// is simplified to whitespace words; scores might differ from the Python rouge library.
 double rougeL(String candidate, String reference) {
     var candidateWords = candidate.toLowerCase().strip().split("\\s+");
     var referenceWords = reference.toLowerCase().strip().split("\\s+");
@@ -1427,7 +1427,7 @@ function getCompletion(Client $client, string $prompt): string
 
 // ROUGE-L measures the longest common subsequence (LCS) of words between the
 // candidate and reference summaries, reported here as an F1 score. Tokenization
-// is simplified to whitespace words; scores may differ from the Python rouge library.
+// is simplified to whitespace words; scores might differ from the Python rouge library.
 function rougeL(string $candidate, string $reference): float
 {
     $candidateWords = preg_split('/\s+/', strtolower(trim($candidate)));
@@ -1511,7 +1511,7 @@ end
 
 # ROUGE-L measures the longest common subsequence (LCS) of words between the
 # candidate and reference summaries, reported here as an F1 score. Tokenization
-# is simplified to whitespace words; scores may differ from the Python rouge library.
+# is simplified to whitespace words; scores might differ from the Python rouge library.
 def rouge_l(candidate, reference)
   candidate_words = candidate.downcase.split
   reference_words = reference.downcase.split
@@ -1582,7 +1582,7 @@ def evaluate_likert(model_output, target_tone):
     5: Perfectly {target_tone}
     Output only the number."""
 
-    # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     response = client.messages.create(
         model="claude-opus-5-5",
         max_tokens=1024,
@@ -1639,7 +1639,7 @@ async function evaluateLikert(modelOutput: string, targetTone: string): Promise<
 5: Perfectly ${targetTone}
 Output only the number.`;
 
-  // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+  // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
   const response = await client.messages.create({
     model: "claude-opus-5-5",
     max_tokens: 1024,
@@ -1700,7 +1700,7 @@ async Task<int> EvaluateLikert(string modelOutput, string targetTone)
         Output only the number.
         """;
 
-    // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     var response = await client.Messages.Create(new MessageCreateParams
     {
         Model = Model.ClaudeOpus5_5,
@@ -1783,7 +1783,7 @@ func evaluateLikert(modelOutput, targetTone string) int {
 5: Perfectly %[1]s
 Output only the number.`, targetTone, modelOutput)
 
-	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+	// Generally best practice to evaluate with a different model from the one used to generate the evaluated output
 	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
@@ -1852,7 +1852,7 @@ int evaluateLikert(String modelOutput, String targetTone) {
         5: Perfectly %1$s
         Output only the number.""".formatted(targetTone, modelOutput);
 
-    // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     var params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
@@ -1910,7 +1910,7 @@ function evaluateLikert(Client $client, string $modelOutput, string $targetTone)
     Output only the number.
     PROMPT;
 
-    // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     $response = $client->messages->create(
         model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 1024,
@@ -1987,7 +1987,7 @@ def evaluate_likert(client, model_output, target_tone)
     Output only the number.
   PROMPT
 
-  # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+  # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
   response = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
@@ -2057,7 +2057,7 @@ def evaluate_binary(model_output, query_contains_phi):
     <response>{model_output}</response>
     Output only 'yes' or 'no'."""
 
-    # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     response = client.messages.create(
         model="claude-opus-5-5",
         max_tokens=1024,
@@ -2133,7 +2133,7 @@ Key aspects of PHI include:
 <response>${modelOutput}</response>
 Output only 'yes' or 'no'.`;
 
-  // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+  // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
   const response = await client.messages.create({
     model: "claude-opus-5-5",
     max_tokens: 1024,
@@ -2201,7 +2201,7 @@ async Task<bool> EvaluateBinary(string modelOutput, bool queryContainsPhi)
         Output only 'yes' or 'no'.
         """;
 
-    // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     var response = await client.Messages.Create(new MessageCreateParams
     {
         Model = Model.ClaudeOpus5_5,
@@ -2298,7 +2298,7 @@ Key aspects of PHI include:
 <response>%s</response>
 Output only 'yes' or 'no'.`, modelOutput)
 
-	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+	// Generally best practice to evaluate with a different model from the one used to generate the evaluated output
 	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
@@ -2375,7 +2375,7 @@ boolean evaluateBinary(String modelOutput, boolean queryContainsPhi) {
         <response>%s</response>
         Output only 'yes' or 'no'.""".formatted(modelOutput);
 
-    // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     var params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
@@ -2446,7 +2446,7 @@ function evaluateBinary(Client $client, string $modelOutput, bool $queryContains
     Output only 'yes' or 'no'.
     PROMPT;
 
-    // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     $response = $client->messages->create(
         model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 1024,
@@ -2532,7 +2532,7 @@ def evaluate_binary(client, model_output, query_contains_phi)
     Output only 'yes' or 'no'.
   PROMPT
 
-  # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+  # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
   response = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
@@ -2626,7 +2626,7 @@ def evaluate_ordinal(model_output, conversation):
     5: Perfectly utilizes context
     Output only the number and nothing else."""
 
-    # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     response = client.messages.create(
         model="claude-opus-5-5",
         max_tokens=1024,
@@ -2717,7 +2717,7 @@ ${conversationText}
 5: Perfectly utilizes context
 Output only the number and nothing else.`;
 
-  // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+  // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
   const response = await client.messages.create({
     model: "claude-opus-5-5",
     max_tokens: 1024,
@@ -2798,7 +2798,7 @@ async Task<int> EvaluateOrdinal(string modelOutput, Turn[] conversation)
         Output only the number and nothing else.
         """;
 
-    // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     var response = await client.Messages.Create(new MessageCreateParams
     {
         Model = Model.ClaudeOpus5_5,
@@ -2909,7 +2909,7 @@ func evaluateOrdinal(modelOutput string, conversation []turn) int {
 5: Perfectly utilizes context
 Output only the number and nothing else.`, conversationText.String(), modelOutput)
 
-	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+	// Generally best practice to evaluate with a different model from the one used to generate the evaluated output
 	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeOpus5_5,
 		MaxTokens: 1024,
@@ -2998,7 +2998,7 @@ int evaluateOrdinal(String modelOutput, List<Turn> conversation) {
         5: Perfectly utilizes context
         Output only the number and nothing else.""".formatted(conversationText, modelOutput);
 
-    // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     var params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024L)
@@ -3069,7 +3069,7 @@ function evaluateOrdinal(Client $client, string $modelOutput, array $conversatio
     Output only the number and nothing else.
     PROMPT;
 
-    // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+    // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
     $response = $client->messages->create(
         model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 1024,
@@ -3156,7 +3156,7 @@ def evaluate_ordinal(client, model_output, conversation)
     Output only the number and nothing else.
   PROMPT
 
-  # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+  # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
   response = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,

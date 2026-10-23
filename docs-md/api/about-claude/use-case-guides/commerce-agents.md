@@ -6,7 +6,11 @@ url: https://platform.claude.com/docs/en/about-claude/use-case-guides/commerce-a
 description: Build a shopping agent and a merchant agent on Claude using Claude for commerce, an open-source blueprint with working implementations on the Messages API, the Claude Agent SDK, and Claude Managed Agents.
 ---
 
-This guide shows how to build commerce agents on Claude: a shopping agent that customers use inside your app, and a merchant agent for the people running the store, whether that is the business's own operations staff or the sellers on its platform. It does that through Claude for commerce, an open-source blueprint with a working implementation of each agent on the [Messages API](../../build-with-claude/working-with-messages.md), the [Claude Agent SDK](../../../claude-code/agent-sdk/overview.md), and [Claude Managed Agents](../../managed-agents/overview.md), runnable examples for retail, travel, telecom, and entertainment, and a Claude Code plugin that scaffolds the same design against your own systems.
+This guide shows how to build commerce agents on Claude: a shopping agent that customers use inside your app, and a merchant agent for the people running the store, whether that is the business's own operations staff or the sellers on its platform. It does that through Claude for commerce, an open-source blueprint that includes the following:
+
+* A working implementation of each agent on the [Messages API](../../build-with-claude/working-with-messages.md), the [Claude Agent SDK](../../../claude-code/agent-sdk/overview.md), and [Claude Managed Agents](../../managed-agents/overview.md)
+* Runnable examples for retail, travel, telecom, and entertainment
+* A Claude Code plugin that scaffolds the same design against your own systems
 
 The code, setup instructions, and safety documentation are in the [Claude for commerce repository on GitHub](https://github.com/anthropics/commerce-agents). For how the agents are built and why, including the single-agent-with-skills design, UI components as tools, harness-enforced safety, prompt caching, memory, and evals, read the engineering post [A guide to the anatomy of effective commerce agents](https://claude.com/blog/the-anatomy-of-effective-commerce-agents).
 
@@ -54,7 +58,7 @@ Each example includes a customer storefront and a merchant portal over fictional
 
 ## Where it runs
 
-The Messages API and Agent SDK runtimes run against the Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Google Cloud's Agent Platform](../../build-with-claude/claude-on-vertex-ai.md), or [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), or through your own gateway. The Claude Managed Agents path runs on the Claude API. The repository's deployment guide shows where each path selects its platform and which model ID format each expects.
+The Messages API and Agent SDK runtimes run against the Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), or [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), or through your own gateway. The Claude Managed Agents path runs on the Claude API. The repository's deployment guide shows where each path selects its platform and which model ID format each expects.
 
 ## Build your own with the Claude Code plugin
 

@@ -41,6 +41,8 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
 
 On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](../build-with-claude/claude-platform-on-aws.md#api-key-authentication), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](../api/claude-platform-on-aws-iam-actions.md#managed-policies) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
 
+On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), the worker authenticates with [Google Cloud credentials](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#authentication), not an environment key. Grant the Google Cloud identity your worker uses `roles/claude.user` or `roles/claude.admin` on the project. Both roles include [`environments.processWork`](../api/claude-models-on-google-cloud-anthropic-managed-iam-permissions.md#environments), which the worker needs to poll for and manage work items, and the session and skill permissions it needs to run a session. Environment keys generated in the Claude Console don't work with the Claude Models on Google Cloud (Anthropic managed) endpoint. The pre-built workers in the `ant` CLI and in the Python, TypeScript, and Go SDKs don't support Claude Models on Google Cloud (Anthropic managed), so implement your own worker that calls the [Environments Work endpoints](../api/beta/environments/work.md) directly. See [Features not supported](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#features-not-supported).
+
 ### Run your first session
 
 **Create a self-hosted environment**
@@ -178,7 +180,7 @@ Run this on the worker host.
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=2.1.0
+VERSION=2.2.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -419,10 +421,8 @@ if err != nil {
 _, err = client.Beta.Sessions.Events.Send(context.Background(), session.ID, anthropic.BetaSessionEventSendParams{
 	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
 			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
 					Text: "Write the output of \"uname -a\" to hello.txt in your working directory.",
 				},
 			}},

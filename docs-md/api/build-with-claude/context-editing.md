@@ -860,7 +860,7 @@ $response = $client->beta->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     betas: ['context-management-2025-06-27'],
     contextManagement: [
         'edits' => [
@@ -1080,7 +1080,7 @@ $response = $client->beta->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     betas: ['context-management-2025-06-27'],
     contextManagement: [
         'edits' => [
@@ -1278,7 +1278,7 @@ $response = $client->beta->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     betas: ['context-management-2025-06-27'],
     contextManagement: [
         'edits' => [
@@ -1317,7 +1317,7 @@ puts response
 
 You can use both thinking block clearing and tool result clearing together:
 
-When using multiple strategies, the `clear_thinking_20251015` strategy must be listed first in the `edits` array.
+When using multiple strategies, you must list the `clear_thinking_20251015` strategy first in the `edits` array.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -1715,7 +1715,7 @@ puts response
 
 You can see which context edits were applied to your request using the `context_management` response field, along with helpful statistics about the content and input tokens cleared.
 
-```text Output wrap
+```json Output
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
   "type": "message",
@@ -1747,7 +1747,7 @@ You can see which context edits were applied to your request using the `context_
 
 For streaming responses, the context edits are included in the final `message_delta` event:
 
-```text Streaming Response wrap
+```json Streaming Response
 {
   "type": "message_delta",
   "delta": {
@@ -2011,9 +2011,9 @@ $response = $client->beta->messages->countTokens(
     ],
 );
 
-echo "Original tokens: " . $response->contextManagement->originalInputTokens . "\n";
-echo "After clearing: " . $response->inputTokens . "\n";
-echo "Savings: " . ($response->contextManagement->originalInputTokens - $response->inputTokens) . " tokens\n";
+echo 'Original tokens: ' . $response->contextManagement->originalInputTokens . "\n";
+echo 'After clearing: ' . $response->inputTokens . "\n";
+echo 'Savings: ' . ($response->contextManagement->originalInputTokens - $response->inputTokens) . " tokens\n";
 ```
 
 ```ruby Ruby
@@ -2047,7 +2047,7 @@ puts "After clearing: #{response.input_tokens}"
 puts "Savings: #{response.context_management.original_input_tokens - response.input_tokens} tokens"
 ```
 
-```text Output wrap
+```json Output
 {
   "input_tokens": 25000,
   "context_management": {
@@ -2235,7 +2235,7 @@ $response = $client->beta->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Hello']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     betas: ['context-management-2025-06-27'],
     tools: [
         [
@@ -2704,7 +2704,7 @@ When using server-side tools, the SDK might incorrectly calculate token usage, c
 
 For example, after a web search operation, the API response might show:
 
-```text Output wrap
+```json Output
 {
   "usage": {
     "input_tokens": 63000,

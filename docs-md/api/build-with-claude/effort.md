@@ -29,7 +29,7 @@ featureMetadata:
     Claude API: ga
     Claude Platform on AWS: ga
     Amazon Bedrock: ga
-    Google Cloud: ga
+    Claude Models on Google Cloud (Google managed): ga
     Microsoft Foundry: ga
 ---
 
@@ -116,7 +116,8 @@ var parameters = new MessageCreateParams
     Model = Model.ClaudeOpus5_5,
     MaxTokens = 4096,
     Messages = [
-        new UserMessageParam {
+        new UserMessageParam
+        {
             Content = "Analyze the trade-offs between microservices and monolithic architectures"
         }
     ],
@@ -261,7 +262,7 @@ Claude Opus 5.5 supports all five effort levels, and `medium` is the default (Cl
 
 ### Recommended effort levels for Claude Opus 5
 
-Claude Opus 5 supports all five effort levels. **Start with `high`, the default**, and adjust based on your evals: step up to `xhigh` for demanding coding and agentic work, or to `max` when a task justifies unconstrained token spending, and use `low` and `medium` liberally as your primary control for token cost and response time wherever your evals show quality holds. If you carried effort settings over from an earlier model, run a fresh effort sweep on your evals rather than reusing them.
+Claude Opus 5 supports all five effort levels. **Start with `high`, the default**, and adjust based on your evals: step up to `xhigh` for demanding coding and agentic work, or to `max` when a task justifies unconstrained token spending. Use `low` and `medium` liberally as your primary control for token cost and response time wherever your evals show quality holds. If you carried effort settings over from an earlier model, run a fresh effort sweep on your evals rather than reusing them.
 
 Effort controls thinking volume, not visible response length: on Claude Opus 5, changing effort does not reliably shorten responses, so [prompt for length](prompt-engineering/prompting-claude-opus-5.md#response-length-and-verbosity) instead.
 
@@ -332,7 +333,7 @@ Claude Haiku 5.5 supports all five effort levels, and `medium` is the default. E
 
 To get less thinking, lower the effort level. You can also send `thinking: {"type": "disabled"}` at `high` effort or below. At `xhigh` or `max`, it returns a 400 error, so use adaptive thinking there: omit the `thinking` field or send `thinking: {"type": "adaptive"}`.
 
-On the Claude API and Google Cloud, Claude Haiku 5.5 also supports [changing effort mid-conversation](effort.md#change-effort-mid-conversation-beta) with a per-message `output_config`, which preserves the prompt cache. With `thinking: {"type": "disabled"}`, effort can't change mid-conversation: a per-message `output_config.effort` that differs from the level in effect returns a 400 error. To vary effort per turn, use adaptive thinking.
+On the Claude API and Claude Models on Google Cloud (Google managed), Claude Haiku 5.5 also supports [changing effort mid-conversation](effort.md#change-effort-mid-conversation-beta) with a per-message `output_config`, which preserves the prompt cache. With `thinking: {"type": "disabled"}`, effort can't change mid-conversation: a per-message `output_config.effort` that differs from the level in effect returns a 400 error. To vary effort for each turn, use adaptive thinking.
 
 ## Effort with tool use
 
@@ -366,7 +367,7 @@ You can run later turns of a conversation at a different effort level in two way
 
 ### Per-message effort (beta)
 
-Per-message effort is in beta. On the Claude API and [Google Cloud](claude-on-vertex-ai.md), it's available on Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Haiku 5.5. On [Amazon Bedrock](claude-in-amazon-bedrock.md), it's available on Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5.5. It requires the [beta header](../api/beta-headers.md) `mid-conversation-output-config-2026-07-01`. With the Amazon Bedrock [InvokeModel API](claude-on-amazon-bedrock-legacy.md), it's available on Claude Fable 5.1 and Claude Opus 5.5, and you send that value in the `anthropic_beta` array of the request body instead.
+Per-message effort is in beta. On the Claude API and [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), it's available on Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Haiku 5.5. On [Amazon Bedrock](claude-in-amazon-bedrock.md), it's available on Claude Fable 5.1, Claude Mythos 5.1, and Claude Opus 5.5. It requires the [beta header](../api/beta-headers.md) `mid-conversation-output-config-2026-07-01`. With the Amazon Bedrock [InvokeModel API](claude-on-amazon-bedrock-legacy.md), it's available on Claude Fable 5.1 and Claude Opus 5.5, and you send that value in the `anthropic_beta` array of the request body instead.
 
 Without the beta value, a per-message `output_config` returns a 400 error: `messages.N.output_config: Extra inputs are not permitted`, where `N` is the index of the `system` message in `messages`. With the beta value, models without per-message effort, including Claude Fable 5, return a 400 error: `output_config.effort requires a model that supports per-turn effort; this model does not`. On Amazon Bedrock, those models and Claude Opus 5 return the `Extra inputs are not permitted` error instead. On Claude Sonnet 5.5 with `thinking: {"type": "between_tools"}` and on Claude Haiku 5.5 with `thinking: {"type": "disabled"}`, effort can't change mid-conversation: a per-message `output_config.effort` that differs from the level in effect returns a 400 error. To vary effort for each turn, use adaptive thinking.
 
@@ -522,10 +523,9 @@ response, err := client.Beta.Messages.New(context.Background(), anthropic.BetaMe
 	},
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Plan a migration from SQLite to PostgreSQL in three short steps.")),
-		{
-			Role:    anthropic.BetaMessageParamRoleAssistant,
+		{OfAssistant: &anthropic.BetaAssistantMessageParam{
 			Content: []anthropic.BetaContentBlockParamUnion{anthropic.NewBetaTextBlock("1. Export the SQLite data. 2. Create the PostgreSQL schema. 3. Import the data and verify row counts.")},
-		},
+		}},
 		// Effort-only system message: the new level takes effect from the next user turn.
 		anthropic.NewBetaSystemMessage(anthropic.BetaSystemMessageOutputConfigParam{
 			Effort: anthropic.BetaSystemMessageOutputConfigEffortLow,

@@ -496,7 +496,7 @@ When Claude uses MCP tools, the response includes two new content block types:
 
 ### MCP tool use block
 
-```text wrap
+```json
 {
   "type": "mcp_tool_use",
   "id": "mcptoolu_014Q35RayjACSWkSj4X2yov1",
@@ -508,7 +508,7 @@ When Claude uses MCP tools, the response includes two new content block types:
 
 ### MCP tool result block
 
-```text wrap
+```json
 {
   "type": "mcp_tool_result",
   "tool_use_id": "mcptoolu_014Q35RayjACSWkSj4X2yov1",
@@ -528,7 +528,7 @@ An MCP server can change its tools at any time. The `mcp-client-2026-09-15` beta
 
 When the API asks an MCP server for its tools while producing a response, the response starts with an `mcp_tool_listing` block for that server, one block for each server it asked:
 
-```text wrap
+```json
 {
   "type": "mcp_tool_listing",
   "mcp_server_name": "example-mcp",
@@ -1260,7 +1260,7 @@ dotnet add package ModelContextProtocol
 The helpers live in the `mcp` subpackage of the Go SDK, which builds on the [MCP Go SDK](https://github.com/modelcontextprotocol/go-sdk):
 
 ```bash
-go get github.com/anthropics/anthropic-sdk-go/mcp
+go get github.com/anthropics/anthropic-sdk-go/v2/mcp
 ```
 
 **Java**
@@ -1270,8 +1270,8 @@ The helpers live in the separate `anthropic-java-mcp` artifact, which requires J
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.1.0")
-implementation("com.anthropic:anthropic-java-mcp:3.1.0")
+implementation("com.anthropic:anthropic-java:3.2.0")
+implementation("com.anthropic:anthropic-java-mcp:3.2.0")
 ```
 
 **Maven**
@@ -1280,12 +1280,12 @@ implementation("com.anthropic:anthropic-java-mcp:3.1.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-mcp</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
 </dependency>
 ```
 
@@ -1334,7 +1334,7 @@ using Anthropic.Helpers.Beta.Mcp;
 
 ```go Go
 import (
-	"github.com/anthropics/anthropic-sdk-go/mcp"
+	"github.com/anthropics/anthropic-sdk-go/v2/mcp"
 )
 ```
 
@@ -1465,7 +1465,7 @@ import (
 // ...
 
 // ...
-	"github.com/anthropics/anthropic-sdk-go/mcp"
+	"github.com/anthropics/anthropic-sdk-go/v2/mcp"
 	mcpsdk "github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
@@ -1529,7 +1529,7 @@ void main() throws Exception {
 
     // Connect to an MCP server
     StdioClientTransport transport = new StdioClientTransport(
-            ServerParameters.builder("mcp-server").build(), McpJsonDefaults.getMapper());
+        ServerParameters.builder("mcp-server").build(), McpJsonDefaults.getMapper());
 
     try (McpSyncClient mcpClient = McpClient.sync(transport)
             .clientInfo(new McpSchema.Implementation("my-client", "1.0.0"))
@@ -1541,13 +1541,13 @@ void main() throws Exception {
         List<McpBetaTool> betaTools = BetaMcp.mcpTools(mcpClient.listTools().tools(), mcpClient);
 
         MessageCreateParams params = MessageCreateParams.builder()
-                .model(Model.CLAUDE_OPUS_5_5)
-                .maxTokens(1024L)
-                .addUserMessage("What tools do you have available?")
-                .addTools(betaTools)
-                .build();
+            .model(Model.CLAUDE_OPUS_5_5)
+            .maxTokens(1024L)
+            .addUserMessage("What tools do you have available?")
+            .addTools(betaTools)
+            .build();
 
-        // The runner yields one message per assistant turn; the last is the final response
+        // The runner yields one message for each assistant turn; the last is the final response
         BetaToolRunner runner = anthropic.beta().messages().toolRunner(params);
         BetaMessage finalMessage = null;
         for (BetaMessage message : runner) {
@@ -1675,13 +1675,13 @@ fmt.Println(response.RawJSON())
 
 ```java Java
 McpSchema.GetPromptResult prompt = mcpClient.getPrompt(
-        new McpSchema.GetPromptRequest("my-prompt", Map.of()));
+    new McpSchema.GetPromptRequest("my-prompt", Map.of()));
 
 BetaMessage response = anthropic.beta().messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5_5)
-        .maxTokens(1024L)
-        .messages(BetaMcp.mcpMessages(prompt.messages()))
-        .build());
+    .model(Model.CLAUDE_OPUS_5_5)
+    .maxTokens(1024L)
+    .messages(BetaMcp.mcpMessages(prompt.messages()))
+    .build());
 
 IO.println(response);
 ```
@@ -1802,7 +1802,7 @@ Console.WriteLine(response);
 var fileResource = await mcpClient.ReadResourceAsync("file:///path/to/data.json");
 var (filename, data, mediaType) = BetaMcp.ResourceToFile(fileResource);
 
-// Build the file part explicitly so the resource's filename and MIME type
+// Build the file part explicitly so the resource's file name and MIME type
 // carry through to the upload.
 var file = new BinaryContent { Stream = new MemoryStream(data), FileName = filename };
 if (mediaType is not null)
@@ -1866,37 +1866,39 @@ fmt.Println(uploaded.ID)
 ```java Java
 // As a content block in a message
 McpSchema.ReadResourceResult resource = mcpClient.readResource(
-        new McpSchema.ReadResourceRequest("file:///path/to/doc.txt"));
+    new McpSchema.ReadResourceRequest("file:///path/to/doc.txt"));
 
 List<BetaContentBlockParam> content =
-        new ArrayList<>(BetaMcp.mcpResourceContents(resource));
+    new ArrayList<>(BetaMcp.mcpResourceContents(resource));
 content.add(BetaContentBlockParam.ofText(
-        BetaTextBlockParam.builder().text("Summarize this document").build()));
+    BetaTextBlockParam.builder()
+        .text("Summarize this document")
+        .build()));
 
 BetaMessage response = anthropic.beta().messages().create(MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_5_5)
-        .maxTokens(1024L)
-        .addUserMessageOfContentBlockParams(content)
-        .build());
+    .model(Model.CLAUDE_OPUS_5_5)
+    .maxTokens(1024L)
+    .addUserMessageOfContentBlockParams(content)
+    .build());
 
 IO.println(response);
 
 // As a file upload
 McpSchema.ReadResourceResult fileResource = mcpClient.readResource(
-        new McpSchema.ReadResourceRequest("file:///path/to/data.json"));
+    new McpSchema.ReadResourceRequest("file:///path/to/data.json"));
 
 McpResourceFile resourceFile = BetaMcp.mcpResourceFiles(fileResource).getFirst();
 
-// Build the file part explicitly so the resource's filename and MIME type
+// Build the file part explicitly so the resource's file name and MIME type
 // carry through to the upload.
 MultipartField.Builder<InputStream> fileField = MultipartField.<InputStream>builder()
-        .value(new ByteArrayInputStream(resourceFile.content()))
-        .filename(resourceFile.filename());
+    .value(new ByteArrayInputStream(resourceFile.content()))
+    .filename(resourceFile.filename());
 resourceFile.mimeType().ifPresent(fileField::contentType);
 
 var uploaded = anthropic.files().upload(FileUploadParams.builder()
-        .file(fileField.build())
-        .build());
+    .file(fileField.build())
+    .build());
 
 IO.println(uploaded.id());
 ```

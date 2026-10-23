@@ -27,7 +27,7 @@ ant beta:sessions create \
   --title "Summarization task"
 ```
 
-```text Output wrap
+```json Output
 {
   "id": "session_01JZCh78XvmxJjiXVy3oSi7K",
   "status": "running"

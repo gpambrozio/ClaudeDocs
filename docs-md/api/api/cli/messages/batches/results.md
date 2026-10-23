@@ -1172,7 +1172,6 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
 ```bash
 ant messages:batches results \
-  --api-key my-anthropic-api-key \
   --message-batch-id message_batch_id
 ```
 

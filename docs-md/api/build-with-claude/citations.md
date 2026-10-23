@@ -13,7 +13,7 @@ featureMetadata:
     Claude API: ga
     Claude Platform on AWS: ga
     Amazon Bedrock: ga
-    Google Cloud: ga
+    Claude Models on Google Cloud (Google managed): ga
     Microsoft Foundry: ga
 ---
 
@@ -216,7 +216,9 @@ DocumentBlockParam documentParam = DocumentBlockParam.builder()
     .source(source)
     .title("My Document")
     .context("This is a trustworthy document.")
-    .citations(CitationsConfigParam.builder().enabled(true).build())
+    .citations(CitationsConfigParam.builder()
+        .enabled(true)
+        .build())
     .build();
 
 TextBlockParam textBlockParam = TextBlockParam.builder()
@@ -265,7 +267,7 @@ $response = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo json_encode($response, JSON_PRETTY_PRINT);
@@ -585,8 +587,12 @@ String longDocument =
         + " ... ".repeat(1000); // Minimum cacheable length
 
 DocumentBlockParam documentParam = DocumentBlockParam.builder()
-    .source(PlainTextSource.builder().data(longDocument).build())
-    .citations(CitationsConfigParam.builder().enabled(true).build())
+    .source(PlainTextSource.builder()
+        .data(longDocument)
+        .build())
+    .citations(CitationsConfigParam.builder()
+        .enabled(true)
+        .build())
     .cacheControl(CacheControlEphemeral.builder().build()) // Cache the document content
     .build();
 
@@ -640,7 +646,7 @@ $response = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo json_encode($response, JSON_PRETTY_PRINT);
@@ -892,7 +898,9 @@ MessageCreateParams citedParams = MessageCreateParams.builder()
             .fileSource(fileId)
             .title("Document Title")
             .context("Context about the document that will not be cited from")
-            .citations(CitationsConfigParam.builder().enabled(true).build())
+            .citations(CitationsConfigParam.builder()
+                .enabled(true)
+                .build())
             .build()),
         ContentBlockParam.ofText(TextBlockParam.builder()
             .text("Summarize this document.")
@@ -957,7 +965,7 @@ puts cited_response
 
 **Example plain text citation**
 
-```text
+```json
 {
   "type": "char_location",
   "cited_text": "The exact text being cited", // not counted toward output tokens
@@ -1174,10 +1182,14 @@ byte[] pdfBytes = Files.readAllBytes(Path.of("/path/to/document.pdf"));
 String pdfBase64 = Base64.getEncoder().encodeToString(pdfBytes);
 
 DocumentBlockParam documentParam = DocumentBlockParam.builder()
-    .source(Base64PdfSource.builder().data(pdfBase64).build())
+    .source(Base64PdfSource.builder()
+        .data(pdfBase64)
+        .build())
     .title("Document Title")
     .context("Context about the document that will not be cited from")
-    .citations(CitationsConfigParam.builder().enabled(true).build())
+    .citations(CitationsConfigParam.builder()
+        .enabled(true)
+        .build())
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
@@ -1186,7 +1198,9 @@ MessageCreateParams params = MessageCreateParams.builder()
     .addUserMessageOfContentBlockParams(
         List.of(
             ContentBlockParam.ofDocument(documentParam),
-            ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+            ContentBlockParam.ofText(TextBlockParam.builder()
+                .text("Summarize this document.")
+                .build())
         )
     )
     .build();
@@ -1452,7 +1466,9 @@ DocumentBlockParam documentParam = DocumentBlockParam.builder()
         .build())
     .title("Document Title")
     .context("Context about the document that will not be cited from")
-    .citations(CitationsConfigParam.builder().enabled(true).build())
+    .citations(CitationsConfigParam.builder()
+        .enabled(true)
+        .build())
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
@@ -1461,7 +1477,9 @@ MessageCreateParams params = MessageCreateParams.builder()
     .addUserMessageOfContentBlockParams(
         List.of(
             ContentBlockParam.ofDocument(documentParam),
-            ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+            ContentBlockParam.ofText(TextBlockParam.builder()
+                .text("Summarize this document.")
+                .build())
         )
     )
     .build();
@@ -1700,7 +1718,9 @@ MessageCreateParams citedParams = MessageCreateParams.builder()
             .fileSource(fileId)
             .title("Document Title")
             .context("Context about the document that will not be cited from")
-            .citations(CitationsConfigParam.builder().enabled(true).build())
+            .citations(CitationsConfigParam.builder()
+                .enabled(true)
+                .build())
             .build()),
         ContentBlockParam.ofText(TextBlockParam.builder()
             .text("Summarize this document.")
@@ -1765,7 +1785,7 @@ puts cited_response
 
 **Example PDF citation**
 
-```text
+```json
 {
   "type": "page_location",
   "cited_text": "The exact text being cited", // not counted toward output tokens
@@ -1985,14 +2005,20 @@ DocumentBlockParam documentParam = DocumentBlockParam.builder()
     .source(ContentBlockSource.builder()
         .contentOfBlockSource(
             List.of(
-                ContentBlockSourceContent.ofText(TextBlockParam.builder().text("First chunk").build()),
-                ContentBlockSourceContent.ofText(TextBlockParam.builder().text("Second chunk").build())
+                ContentBlockSourceContent.ofText(TextBlockParam.builder()
+                    .text("First chunk")
+                    .build()),
+                ContentBlockSourceContent.ofText(TextBlockParam.builder()
+                    .text("Second chunk")
+                    .build())
             )
         )
         .build())
     .title("Document Title")
     .context("Context about the document that will not be cited from")
-    .citations(CitationsConfigParam.builder().enabled(true).build())
+    .citations(CitationsConfigParam.builder()
+        .enabled(true)
+        .build())
     .build();
 
 MessageCreateParams params = MessageCreateParams.builder()
@@ -2001,7 +2027,9 @@ MessageCreateParams params = MessageCreateParams.builder()
     .addUserMessageOfContentBlockParams(
         List.of(
             ContentBlockParam.ofDocument(documentParam),
-            ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+            ContentBlockParam.ofText(TextBlockParam.builder()
+                .text("Summarize this document.")
+                .build())
         )
     )
     .build();
@@ -2039,7 +2067,7 @@ $response = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo json_encode($response, JSON_PRETTY_PRINT);
@@ -2082,7 +2110,7 @@ puts response
 
 **Example citation**
 
-```text
+```json
 {
   "type": "content_block_location",
   "cited_text": "The exact text being cited", // not counted toward output tokens
@@ -2099,7 +2127,7 @@ puts response
 
 When citations are enabled, responses include multiple text blocks with citations:
 
-```text wrap
+```json
 {
   "content": [
     { "type": "text", "text": "According to the document, " },
@@ -2178,7 +2206,7 @@ For streaming responses, citations arrive as a `citations_delta` delta type insi
 
 **Example streaming events**
 
-```text
+```sse
 event: message_start
 data: {"type": "message_start", ...}
 

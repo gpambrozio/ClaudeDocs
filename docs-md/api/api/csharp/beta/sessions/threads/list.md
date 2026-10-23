@@ -163,7 +163,7 @@ List Session Threads
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads.
 
-  - `required Type Type`
+  - `JsonElement Type = "session_thread"`
 
   - `required string ID`
 
@@ -177,7 +177,7 @@ List Session Threads
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -205,7 +205,7 @@ List Session Threads
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -297,31 +297,31 @@ List Session Threads
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -343,7 +343,7 @@ List Session Threads
 
           A resolved Anthropic-managed skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "anthropic"`
 
           - `required string SkillID`
 
@@ -353,7 +353,7 @@ List Session Threads
 
           A resolved user-created custom skill.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string SkillID`
 
@@ -365,7 +365,7 @@ List Session Threads
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
-          - `required Type Type`
+          - `JsonElement Type = "agent_toolset_20260401"`
 
           - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -387,13 +387,13 @@ List Session Threads
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_allow"`
 
                 - `class BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "always_ask"`
 
                 - `class BetaManagedAgentsAutoPolicy`
 
@@ -725,7 +725,7 @@ List Session Threads
 
         - `class BetaManagedAgentsMcpToolset`
 
-          - `required Type Type`
+          - `JsonElement Type = "mcp_toolset"`
 
           - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -777,7 +777,7 @@ List Session Threads
 
           A custom tool as returned in API responses.
 
-          - `required Type Type`
+          - `JsonElement Type = "custom"`
 
           - `required string Description`
 
@@ -801,7 +801,7 @@ List Session Threads
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-      - `required Type Type`
+      - `JsonElement Type = "advisor"`
 
       - `required string Model`
 
@@ -821,7 +821,7 @@ List Session Threads
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 

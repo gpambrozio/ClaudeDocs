@@ -79,7 +79,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/v2"
 )
 
 func main() {
@@ -138,7 +138,7 @@ stats = client.beta.environments.work.stats(ENV.fetch("ANTHROPIC_ENVIRONMENT_ID"
 puts "depth=#{stats.depth} pending=#{stats.pending}"
 ```
 
-```text wrap
+```json
 {
   "type": "work_queue_stats",
   "depth": 0,
@@ -223,7 +223,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/anthropics/anthropic-sdk-go"
+	"github.com/anthropics/anthropic-sdk-go/v2"
 )
 
 func main() {

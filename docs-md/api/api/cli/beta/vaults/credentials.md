@@ -205,7 +205,6 @@ Create a Credential
 
 ```bash
 ant beta:vaults:credentials create \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --auth '{token: bearer_exampletoken, mcp_server_url: https://example-server.modelcontextprotocol.io/sse, type: static_bearer}'
 ```
@@ -437,7 +436,6 @@ List Credentials
 
 ```bash
 ant beta:vaults:credentials list \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv
 ```
 
@@ -655,7 +653,6 @@ Retrieve a Credential
 
 ```bash
 ant beta:vaults:credentials retrieve \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYPQfSkw
 ```
@@ -883,7 +880,6 @@ Update a Credential
 
 ```bash
 ant beta:vaults:credentials update \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYPQfSkw
 ```
@@ -953,7 +949,6 @@ Delete a Credential
 
 ```bash
 ant beta:vaults:credentials delete \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYPQfSkw
 ```
@@ -1155,7 +1150,6 @@ Archive a Credential
 
 ```bash
 ant beta:vaults:credentials archive \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYPQfSkw
 ```
@@ -1331,7 +1325,6 @@ Validate an MCP OAuth Credential
 
 ```bash
 ant beta:vaults:credentials mcp-oauth-validate \
-  --api-key my-anthropic-api-key \
   --vault-id vlt_011CZkZDLs7fYzm1hXNPeRjv \
   --credential-id vcrd_011CZkZEMt8gZan2iYPQfSkw
 ```

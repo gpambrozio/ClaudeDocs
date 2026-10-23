@@ -32,7 +32,7 @@ The Admin API accepts any of these three credentials:
 
 An Admin API key covers most endpoints. The service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. Send a personal key or service account key in the `x-api-key` header, as you would an Admin API key. The following examples call the [organization info endpoint](admin-api.md#accessing-organization-info) with an OAuth token and with an Admin API key.
 
-The SDK exposes the endpoints on this page under `client.organization` (csharp, go: `client.Organization`; java: `client.organization()`; php: `$client->organization`), and the `ant` CLI under `ant organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint's parameters and responses, see the [Admin API reference](../api/organization.md).
+In Python, TypeScript, C#, Go, Java, PHP, and Ruby, the SDK exposes the endpoints on this page under `client.organization` (csharp, go: `client.Organization`; java: `client.organization()`; php: `$client->organization`), and the `ant` CLI under `ant organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint's parameters and responses, see the [Admin API reference](../api/organization.md).
 
 ### OAuth bearer token
 
@@ -340,7 +340,7 @@ end
 Update a member's role:
 
 ```bash cURL
-curl "https://api.anthropic.com/v1/organizations/users/user_01XyDMpzjS89pFZXqSFUBDr6" \
+curl "https://api.anthropic.com/v1/organizations/users/user_01WxYzAbCdEfGhJkMnPqRsTu" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
@@ -349,7 +349,7 @@ curl "https://api.anthropic.com/v1/organizations/users/user_01XyDMpzjS89pFZXqSFU
 
 ```bash CLI
 ant organization:users update \
-  --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
+  --user-id user_01WxYzAbCdEfGhJkMnPqRsTu \
   --role developer
 ```
 
@@ -357,7 +357,7 @@ ant organization:users update \
 client = anthropic.Anthropic()
 
 user = client.organization.users.update(
-    "user_01XyDMpzjS89pFZXqSFUBDr6", role="developer"
+    "user_01WxYzAbCdEfGhJkMnPqRsTu", role="developer"
 )
 
 print(f"id: {user.id}")
@@ -367,7 +367,7 @@ print(f"role: {user.role}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const user = await client.organization.users.update("user_01XyDMpzjS89pFZXqSFUBDr6", {
+const user = await client.organization.users.update("user_01WxYzAbCdEfGhJkMnPqRsTu", {
   role: "developer"
 });
 
@@ -382,7 +382,7 @@ using Anthropic.Models.Organization.Users;
 AnthropicClient client = new();
 
 var user = await client.Organization.Users.Update(
-    "user_01XyDMpzjS89pFZXqSFUBDr6",
+    "user_01WxYzAbCdEfGhJkMnPqRsTu",
     new() { Role = Role.Developer }
 );
 
@@ -395,7 +395,7 @@ client := anthropic.NewClient()
 
 user, err := client.Organization.Users.Update(
 	context.Background(),
-	"user_01XyDMpzjS89pFZXqSFUBDr6",
+	"user_01WxYzAbCdEfGhJkMnPqRsTu",
 	anthropic.OrganizationUserUpdateParams{
 		Role: anthropic.OrganizationUserUpdateParamsRoleDeveloper,
 	},
@@ -418,7 +418,7 @@ void main() {
         .role(UserUpdateParams.Role.DEVELOPER)
         .build();
     var user = client.organization().users()
-        .update("user_01XyDMpzjS89pFZXqSFUBDr6", params);
+        .update("user_01WxYzAbCdEfGhJkMnPqRsTu", params);
 
     IO.println("id: " + user.id());
     IO.println("role: " + user.role().asString());
@@ -432,7 +432,7 @@ use Anthropic\Organization\Users\UserUpdateParams\Role;
 $client = new Client();
 
 $user = $client->organization->users->update(
-    userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
+    userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
     role: Role::DEVELOPER,
 );
 
@@ -443,7 +443,7 @@ echo "role: {$user->role}\n";
 ```ruby Ruby
 client = Anthropic::Client.new
 
-user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
+user_id = "user_01WxYzAbCdEfGhJkMnPqRsTu"
 user = client.organization.users.update(user_id, role: :developer)
 
 puts "id: #{user.id}"
@@ -453,19 +453,19 @@ puts "role: #{user.role}"
 Remove a member from the organization:
 
 ```bash cURL
-curl -X DELETE "https://api.anthropic.com/v1/organizations/users/user_01XyDMpzjS89pFZXqSFUBDr6" \
+curl -X DELETE "https://api.anthropic.com/v1/organizations/users/user_01WxYzAbCdEfGhJkMnPqRsTu" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01"
 ```
 
 ```bash CLI
-ant organization:users remove --user-id user_01XyDMpzjS89pFZXqSFUBDr6
+ant organization:users remove --user-id user_01WxYzAbCdEfGhJkMnPqRsTu
 ```
 
 ```python Python
 client = anthropic.Anthropic()
 
-removed_user = client.organization.users.remove("user_01XyDMpzjS89pFZXqSFUBDr6")
+removed_user = client.organization.users.remove("user_01WxYzAbCdEfGhJkMnPqRsTu")
 
 print(f"id: {removed_user.id}")
 ```
@@ -473,7 +473,7 @@ print(f"id: {removed_user.id}")
 ```typescript TypeScript
 const client = new Anthropic();
 
-const removedUser = await client.organization.users.remove("user_01XyDMpzjS89pFZXqSFUBDr6");
+const removedUser = await client.organization.users.remove("user_01WxYzAbCdEfGhJkMnPqRsTu");
 
 console.log(`id: ${removedUser.id}`);
 ```
@@ -481,7 +481,7 @@ console.log(`id: ${removedUser.id}`);
 ```csharp C#
 AnthropicClient client = new();
 
-var removedUser = await client.Organization.Users.Remove("user_01XyDMpzjS89pFZXqSFUBDr6");
+var removedUser = await client.Organization.Users.Remove("user_01WxYzAbCdEfGhJkMnPqRsTu");
 
 Console.WriteLine($"id: {removedUser.ID}");
 ```
@@ -489,7 +489,7 @@ Console.WriteLine($"id: {removedUser.ID}");
 ```go Go
 client := anthropic.NewClient()
 
-removedUser, err := client.Organization.Users.Remove(context.Background(), "user_01XyDMpzjS89pFZXqSFUBDr6")
+removedUser, err := client.Organization.Users.Remove(context.Background(), "user_01WxYzAbCdEfGhJkMnPqRsTu")
 if err != nil {
 	log.Fatal(err)
 }
@@ -501,7 +501,7 @@ fmt.Printf("id: %s\n", removedUser.ID)
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 var removedUser = client.organization().users()
-    .remove("user_01XyDMpzjS89pFZXqSFUBDr6");
+    .remove("user_01WxYzAbCdEfGhJkMnPqRsTu");
 
 IO.println("id: " + removedUser.id());
 ```
@@ -510,7 +510,7 @@ IO.println("id: " + removedUser.id());
 $client = new Client();
 
 $removedUser = $client->organization->users->remove(
-    userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
+    userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
 );
 
 echo "id: {$removedUser->id}\n";
@@ -519,7 +519,7 @@ echo "id: {$removedUser->id}\n";
 ```ruby Ruby
 client = Anthropic::Client.new
 
-user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
+user_id = "user_01WxYzAbCdEfGhJkMnPqRsTu"
 removed_user = client.organization.users.remove(user_id)
 
 puts "id: #{removed_user.id}"
@@ -844,7 +844,7 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
   -d '{
-    "user_id": "user_01XyDMpzjS89pFZXqSFUBDr6",
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
     "workspace_role": "workspace_developer"
   }'
 ```
@@ -852,7 +852,7 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
 ```bash CLI
 ant organization:workspaces:members add \
   --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ \
-  --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
+  --user-id user_01WxYzAbCdEfGhJkMnPqRsTu \
   --workspace-role workspace_developer
 ```
 
@@ -861,7 +861,7 @@ client = anthropic.Anthropic()
 
 member = client.organization.workspaces.members.add(
     "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-    user_id="user_01XyDMpzjS89pFZXqSFUBDr6",
+    user_id="user_01WxYzAbCdEfGhJkMnPqRsTu",
     workspace_role="workspace_developer",
 )
 
@@ -875,7 +875,7 @@ const client = new Anthropic();
 const member = await client.organization.workspaces.members.add(
   "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   {
-    user_id: "user_01XyDMpzjS89pFZXqSFUBDr6",
+    user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu",
     workspace_role: "workspace_developer"
   }
 );
@@ -893,7 +893,7 @@ var member = await client.Organization.Workspaces.Members.Add(
     "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
     new()
     {
-        UserID = "user_01XyDMpzjS89pFZXqSFUBDr6",
+        UserID = "user_01WxYzAbCdEfGhJkMnPqRsTu",
         WorkspaceRole = NoBillingWorkspaceRole.WorkspaceDeveloper
     }
 );
@@ -909,7 +909,7 @@ member, err := client.Organization.Workspaces.Members.Add(
 	context.Background(),
 	"wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
 	anthropic.OrganizationWorkspaceMemberAddParams{
-		UserID:        "user_01XyDMpzjS89pFZXqSFUBDr6",
+		UserID:        "user_01WxYzAbCdEfGhJkMnPqRsTu",
 		WorkspaceRole: anthropic.NoBillingWorkspaceRoleWorkspaceDeveloper,
 	},
 )
@@ -929,7 +929,7 @@ void main() {
     AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
     var params = MemberAddParams.builder()
-        .userId("user_01XyDMpzjS89pFZXqSFUBDr6")
+        .userId("user_01WxYzAbCdEfGhJkMnPqRsTu")
         .workspaceRole(NoBillingWorkspaceRole.WORKSPACE_DEVELOPER)
         .build();
     var member = client.organization().workspaces().members()
@@ -948,7 +948,7 @@ $client = new Client();
 
 $member = $client->organization->workspaces->members->add(
     workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
-    userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
+    userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
     workspaceRole: NoBillingWorkspaceRole::WORKSPACE_DEVELOPER,
 );
 
@@ -962,7 +962,7 @@ client = Anthropic::Client.new
 workspace_id = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 member = client.organization.workspaces.members.add(
   workspace_id,
-  user_id: "user_01XyDMpzjS89pFZXqSFUBDr6",
+  user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu",
   workspace_role: :workspace_developer
 )
 
@@ -1088,7 +1088,7 @@ end
 Update a workspace member's role:
 
 ```bash cURL
-curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/members/user_01XyDMpzjS89pFZXqSFUBDr6" \
+curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/members/user_01WxYzAbCdEfGhJkMnPqRsTu" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
@@ -1097,7 +1097,7 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
 
 ```bash CLI
 ant organization:workspaces:members update \
-  --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
+  --user-id user_01WxYzAbCdEfGhJkMnPqRsTu \
   --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ \
   --workspace-role workspace_admin
 ```
@@ -1106,7 +1106,7 @@ ant organization:workspaces:members update \
 client = anthropic.Anthropic()
 
 member = client.organization.workspaces.members.update(
-    "user_01XyDMpzjS89pFZXqSFUBDr6",
+    "user_01WxYzAbCdEfGhJkMnPqRsTu",
     workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
     workspace_role="workspace_admin",
 )
@@ -1119,7 +1119,7 @@ print(f"workspace_role: {member.workspace_role}")
 const client = new Anthropic();
 
 const member = await client.organization.workspaces.members.update(
-  "user_01XyDMpzjS89pFZXqSFUBDr6",
+  "user_01WxYzAbCdEfGhJkMnPqRsTu",
   {
     workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
     workspace_role: "workspace_admin"
@@ -1136,7 +1136,7 @@ using Anthropic.Models.Organization.Workspaces;
 AnthropicClient client = new();
 
 var member = await client.Organization.Workspaces.Members.Update(
-    "user_01XyDMpzjS89pFZXqSFUBDr6",
+    "user_01WxYzAbCdEfGhJkMnPqRsTu",
     new()
     {
         WorkspaceID = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
@@ -1153,7 +1153,7 @@ client := anthropic.NewClient()
 
 member, err := client.Organization.Workspaces.Members.Update(
 	context.Background(),
-	"user_01XyDMpzjS89pFZXqSFUBDr6",
+	"user_01WxYzAbCdEfGhJkMnPqRsTu",
 	anthropic.OrganizationWorkspaceMemberUpdateParams{
 		WorkspaceID:   "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
 		WorkspaceRole: anthropic.WorkspaceRoleWorkspaceAdmin,
@@ -1179,7 +1179,7 @@ void main() {
         .workspaceRole(WorkspaceRole.WORKSPACE_ADMIN)
         .build();
     var member = client.organization().workspaces().members()
-        .update("user_01XyDMpzjS89pFZXqSFUBDr6", params);
+        .update("user_01WxYzAbCdEfGhJkMnPqRsTu", params);
 
     IO.println("user_id: " + member.userId());
     IO.println("workspace_role: " + member.workspaceRole().asString());
@@ -1193,7 +1193,7 @@ use Anthropic\Organization\Workspaces\WorkspaceRole;
 $client = new Client();
 
 $member = $client->organization->workspaces->members->update(
-    userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
+    userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
     workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
     workspaceRole: WorkspaceRole::WORKSPACE_ADMIN,
 );
@@ -1205,7 +1205,7 @@ echo "workspace_role: {$member->workspaceRole}\n";
 ```ruby Ruby
 client = Anthropic::Client.new
 
-user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
+user_id = "user_01WxYzAbCdEfGhJkMnPqRsTu"
 member = client.organization.workspaces.members.update(
   user_id,
   workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
@@ -1219,14 +1219,14 @@ puts "workspace_role: #{member.workspace_role}"
 Remove a member from a workspace:
 
 ```bash cURL
-curl -X DELETE "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/members/user_01XyDMpzjS89pFZXqSFUBDr6" \
+curl -X DELETE "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/members/user_01WxYzAbCdEfGhJkMnPqRsTu" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01"
 ```
 
 ```bash CLI
 ant organization:workspaces:members remove \
-  --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
+  --user-id user_01WxYzAbCdEfGhJkMnPqRsTu \
   --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ
 ```
 
@@ -1234,7 +1234,7 @@ ant organization:workspaces:members remove \
 client = anthropic.Anthropic()
 
 removed_member = client.organization.workspaces.members.remove(
-    "user_01XyDMpzjS89pFZXqSFUBDr6", workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+    "user_01WxYzAbCdEfGhJkMnPqRsTu", workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 )
 
 print(f"user_id: {removed_member.user_id}")
@@ -1244,7 +1244,7 @@ print(f"user_id: {removed_member.user_id}")
 const client = new Anthropic();
 
 const removedMember = await client.organization.workspaces.members.remove(
-  "user_01XyDMpzjS89pFZXqSFUBDr6",
+  "user_01WxYzAbCdEfGhJkMnPqRsTu",
   { workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ" }
 );
 
@@ -1255,7 +1255,7 @@ console.log(`user_id: ${removedMember.user_id}`);
 AnthropicClient client = new();
 
 var removedMember = await client.Organization.Workspaces.Members.Remove(
-    "user_01XyDMpzjS89pFZXqSFUBDr6",
+    "user_01WxYzAbCdEfGhJkMnPqRsTu",
     new() { WorkspaceID = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ" }
 );
 
@@ -1267,7 +1267,7 @@ client := anthropic.NewClient()
 
 removedMember, err := client.Organization.Workspaces.Members.Remove(
 	context.Background(),
-	"user_01XyDMpzjS89pFZXqSFUBDr6",
+	"user_01WxYzAbCdEfGhJkMnPqRsTu",
 	anthropic.OrganizationWorkspaceMemberRemoveParams{
 		WorkspaceID: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
 	},
@@ -1289,7 +1289,7 @@ void main() {
         .workspaceId("wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ")
         .build();
     var removedMember = client.organization().workspaces().members()
-        .remove("user_01XyDMpzjS89pFZXqSFUBDr6", params);
+        .remove("user_01WxYzAbCdEfGhJkMnPqRsTu", params);
 
     IO.println("user_id: " + removedMember.userId());
 }
@@ -1299,7 +1299,7 @@ void main() {
 $client = new Client();
 
 $removedMember = $client->organization->workspaces->members->remove(
-    userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
+    userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
     workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
 );
 
@@ -1309,7 +1309,7 @@ echo "user_id: {$removedMember->userID}\n";
 ```ruby Ruby
 client = Anthropic::Client.new
 
-user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
+user_id = "user_01WxYzAbCdEfGhJkMnPqRsTu"
 removed_member = client.organization.workspaces.members.remove(
   user_id,
   workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
@@ -1676,7 +1676,7 @@ puts "id: #{organization.id}"
 puts "name: #{organization.name}"
 ```
 
-```text wrap
+```json
 {
   "id": "12345678-1234-5678-1234-567812345678",
   "type": "organization",

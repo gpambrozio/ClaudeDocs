@@ -447,7 +447,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "What's the weather like in San Francisco?"]
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [
         [
             'name' => 'get_weather',
@@ -775,7 +775,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => "What's the weather like in San Francisco?"]
     ],
-    model: 'claude-opus-5',
+    model: Model::CLAUDE_OPUS_5,
     toolChoice: ['type' => 'tool', 'name' => 'get_weather'],
     tools: [
         [
@@ -855,7 +855,7 @@ When using tools, Claude often comments on what it's doing or responds naturally
 
 For example, given the prompt "What's the weather like in San Francisco right now, and what time is it there?", Claude might respond with:
 
-```text JSON
+```json JSON
 {
   "role": "assistant",
   "content": [

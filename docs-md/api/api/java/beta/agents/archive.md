@@ -141,7 +141,7 @@ Archive Agent
 
   A Managed Agents `agent`.
 
-  - `Type type`
+  - `JsonValue type = "agent"`
 
   - `String id`
 
@@ -181,7 +181,7 @@ Archive Agent
 
   - `List<BetaManagedAgentsMcpServerUrlDefinition> mcpServers`
 
-    - `Type type`
+    - `JsonValue type = "url"`
 
     - `String name`
 
@@ -275,31 +275,31 @@ Archive Agent
 
         Low effort. Favors latency over reasoning depth.
 
-        - `Type type`
+        - `JsonValue type = "low"`
 
       - `class BetaManagedAgentsEffortMedium`
 
         Medium effort. Balances latency and reasoning depth.
 
-        - `Type type`
+        - `JsonValue type = "medium"`
 
       - `class BetaManagedAgentsEffortHigh`
 
         High effort. Favors reasoning depth.
 
-        - `Type type`
+        - `JsonValue type = "high"`
 
       - `class BetaManagedAgentsEffortXhigh`
 
         Extra-high effort. Not all models accept this level.
 
-        - `Type type`
+        - `JsonValue type = "xhigh"`
 
       - `class BetaManagedAgentsEffortMax`
 
         Maximum effort. Favors reasoning depth over latency.
 
-        - `Type type`
+        - `JsonValue type = "max"`
 
     - `Optional<String> inferenceGeo`
 
@@ -321,7 +321,7 @@ Archive Agent
 
       Resolved coordinator topology with a concrete agent roster.
 
-      - `Type type`
+      - `JsonValue type = "coordinator"`
 
       - `List<Agent> agents`
 
@@ -331,7 +331,7 @@ Archive Agent
 
           A resolved agent reference with a concrete version.
 
-          - `Type type`
+          - `JsonValue type = "agent"`
 
           - `String id`
 
@@ -343,7 +343,7 @@ Archive Agent
 
           Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          - `Type type`
+          - `JsonValue type = "advisor"`
 
           - `String model`
 
@@ -405,7 +405,7 @@ Archive Agent
 
             Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
 
-            - `Type type`
+            - `JsonValue type = "agent"`
 
             - `String id`
 
@@ -437,7 +437,7 @@ Archive Agent
 
             Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
 
-            - `Type type`
+            - `JsonValue type = "agent"`
 
             - `String id`
 
@@ -459,7 +459,7 @@ Archive Agent
 
       A resolved Anthropic-managed skill.
 
-      - `Type type`
+      - `JsonValue type = "anthropic"`
 
       - `String skillId`
 
@@ -469,7 +469,7 @@ Archive Agent
 
       A resolved user-created custom skill.
 
-      - `Type type`
+      - `JsonValue type = "custom"`
 
       - `String skillId`
 
@@ -481,7 +481,7 @@ Archive Agent
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
-      - `Type type`
+      - `JsonValue type = "agent_toolset_20260401"`
 
       - `List<BetaManagedAgentsAgentToolConfig> configs`
 
@@ -503,13 +503,13 @@ Archive Agent
 
               Tool calls are automatically approved without user confirmation.
 
-              - `Type type`
+              - `JsonValue type = "always_allow"`
 
             - `class BetaManagedAgentsAlwaysAskPolicy`
 
               Tool calls require user confirmation before execution.
 
-              - `Type type`
+              - `JsonValue type = "always_ask"`
 
             - `class BetaManagedAgentsAutoPolicy`
 
@@ -841,7 +841,7 @@ Archive Agent
 
     - `class BetaManagedAgentsMcpToolset`
 
-      - `Type type`
+      - `JsonValue type = "mcp_toolset"`
 
       - `List<BetaManagedAgentsMcpToolConfig> configs`
 
@@ -893,7 +893,7 @@ Archive Agent
 
       A custom tool as returned in API responses.
 
-      - `Type type`
+      - `JsonValue type = "custom"`
 
       - `String description`
 

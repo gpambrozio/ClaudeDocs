@@ -141,7 +141,7 @@ Archive Session Thread
 
   An execution thread within a `session`. Each session has one primary thread plus zero or more child threads.
 
-  - `Type BetaManagedAgentsSessionThreadType`
+  - `Type SessionThread`
 
   - `ID string`
 
@@ -155,7 +155,7 @@ Archive Session Thread
 
       Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-      - `Type BetaManagedAgentsSessionThreadAgentType`
+      - `Type Agent`
 
       - `ID string`
 
@@ -183,7 +183,7 @@ Archive Session Thread
 
       - `MCPServers []BetaManagedAgentsMCPServerURLDefinition`
 
-        - `Type BetaManagedAgentsMCPServerURLDefinitionType`
+        - `Type URL`
 
         - `Name string`
 
@@ -275,31 +275,31 @@ Archive Session Thread
 
             Low effort. Favors latency over reasoning depth.
 
-            - `Type BetaManagedAgentsEffortLowType`
+            - `Type Low`
 
           - `type BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `Type BetaManagedAgentsEffortMediumType`
+            - `Type Medium`
 
           - `type BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `Type BetaManagedAgentsEffortHighType`
+            - `Type High`
 
           - `type BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `Type BetaManagedAgentsEffortXhighType`
+            - `Type Xhigh`
 
           - `type BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `Type BetaManagedAgentsEffortMaxType`
+            - `Type Max`
 
         - `InferenceGeo string Optional`
 
@@ -321,7 +321,7 @@ Archive Session Thread
 
           A resolved Anthropic-managed skill.
 
-          - `Type BetaManagedAgentsAnthropicSkillType`
+          - `Type Anthropic`
 
           - `SkillID string`
 
@@ -331,7 +331,7 @@ Archive Session Thread
 
           A resolved user-created custom skill.
 
-          - `Type BetaManagedAgentsCustomSkillType`
+          - `Type Custom`
 
           - `SkillID string`
 
@@ -343,7 +343,7 @@ Archive Session Thread
 
         - `type BetaManagedAgentsAgentToolset20260401`
 
-          - `Type BetaManagedAgentsAgentToolset20260401Type`
+          - `Type AgentToolset20260401`
 
           - `Configs []BetaManagedAgentsAgentToolConfigUnion`
 
@@ -365,13 +365,13 @@ Archive Session Thread
 
                   Tool calls are automatically approved without user confirmation.
 
-                  - `Type BetaManagedAgentsAlwaysAllowPolicyType`
+                  - `Type AlwaysAllow`
 
                 - `type BetaManagedAgentsAlwaysAskPolicy`
 
                   Tool calls require user confirmation before execution.
 
-                  - `Type BetaManagedAgentsAlwaysAskPolicyType`
+                  - `Type AlwaysAsk`
 
                 - `type BetaManagedAgentsAutoPolicy`
 
@@ -703,7 +703,7 @@ Archive Session Thread
 
         - `type BetaManagedAgentsMCPToolset`
 
-          - `Type BetaManagedAgentsMCPToolsetType`
+          - `Type MCPToolset`
 
           - `Configs []BetaManagedAgentsMCPToolConfig`
 
@@ -755,7 +755,7 @@ Archive Session Thread
 
           A custom tool as returned in API responses.
 
-          - `Type BetaManagedAgentsCustomToolType`
+          - `Type Custom`
 
           - `Description string`
 
@@ -779,7 +779,7 @@ Archive Session Thread
 
       Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-      - `Type BetaManagedAgentsAdvisorType`
+      - `Type Advisor`
 
       - `Model string`
 
@@ -799,7 +799,7 @@ Archive Session Thread
 
       - `MCPServers []BetaManagedAgentsMCPServerURLDefinition`
 
-        - `Type BetaManagedAgentsMCPServerURLDefinitionType`
+        - `Type URL`
 
         - `Name string`
 
@@ -980,8 +980,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {

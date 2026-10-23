@@ -883,7 +883,9 @@ Classification classifySupportRequest(String ticketContents) {
     Message message = client.messages().create(MessageCreateParams.builder()
         .model(DEFAULT_MODEL)
         .maxTokens(2048L)
-        .outputConfig(OutputConfig.builder().effort(OutputConfig.Effort.LOW).build())
+        .outputConfig(OutputConfig.builder()
+            .effort(OutputConfig.Effort.LOW)
+            .build())
         .addUserMessage(classificationPrompt)
         .build());
     String reasoningAndIntent = message.content().stream()
@@ -989,7 +991,7 @@ end
 This code:
 
 * Creates a client instance using your API key.
-* Defines a `classify_support_request` (typescript, go, java, php: `classifySupportRequest`; csharp: `ClassifySupportRequest`) function that takes a `ticket_contents` (typescript, csharp, go, java: `ticketContents`; php: `$ticketContents`) string.
+* Defines a `classify_support_request()` (typescript, go, java, php: `classifySupportRequest()`; csharp: `ClassifySupportRequest()`) function that takes a `ticket_contents` (typescript, csharp, go, java: `ticketContents`; php: `$ticketContents`) string.
 * Sends the `ticket_contents` (typescript, csharp, go, java: `ticketContents`; php: `$ticketContents`) to Claude for classification using the `classification_prompt` (typescript, csharp, go, java: `classificationPrompt`; php: `$classificationPrompt`).
 * Returns the model's reasoning and intent extracted from the response.
 
@@ -1027,7 +1029,7 @@ client = anthropic.Anthropic()
 # Set the default model
 DEFAULT_MODEL = "claude-haiku-5-5"
 
-def classify_support_request(request, actual_intent):
+def classify_support_request(ticket_contents, actual_intent):
     # Define the prompt for the classification task
     classification_prompt = f"""You will be acting as a customer support ticket classification system.
         […]
@@ -1070,7 +1072,7 @@ const client = new Anthropic();
 const DEFAULT_MODEL = "claude-haiku-5-5";
 
 async function classifySupportRequest(
-  request: string,
+  ticketContents: string,
   actualIntent: string
 ): Promise<{ reasoning: string; intent: string; correct: boolean; usage: Anthropic.Usage }> {
   // Define the prompt for the classification task
@@ -1116,7 +1118,7 @@ AnthropicClient client = new();
 // Set the default model
 const Model DefaultModel = Model.ClaudeHaiku5_5;
 
-async Task<(string Reasoning, string Intent, bool Correct, Usage Usage)> ClassifySupportRequest(string request, string actualIntent)
+async Task<(string Reasoning, string Intent, bool Correct, Usage Usage)> ClassifySupportRequest(string ticketContents, string actualIntent)
 {
     // Define the prompt for the classification task
     var classificationPrompt = """
@@ -1174,7 +1176,7 @@ var client = anthropic.NewClient()
 // Set the default model
 const defaultModel = anthropic.ModelClaudeHaiku5_5
 
-func classifySupportRequest(ctx context.Context, request, actualIntent string) (reasoning, intent string, correct bool, usage anthropic.Usage, err error) {
+func classifySupportRequest(ctx context.Context, ticketContents, actualIntent string) (reasoning, intent string, correct bool, usage anthropic.Usage, err error) {
 	// Define the prompt for the classification task
 	classificationPrompt := `You will be acting as a customer support ticket classification system.
 		[…]
@@ -1233,7 +1235,7 @@ static final Model DEFAULT_MODEL = Model.CLAUDE_HAIKU_5_5;
 
 record Classification(String reasoning, String intent, boolean correct, Usage usage) {}
 
-Classification classifySupportRequest(String request, String actualIntent) {
+Classification classifySupportRequest(String ticketContents, String actualIntent) {
     // Define the prompt for the classification task
     String classificationPrompt = """
         You will be acting as a customer support ticket classification system.
@@ -1244,7 +1246,9 @@ Classification classifySupportRequest(String request, String actualIntent) {
     Message message = client.messages().create(MessageCreateParams.builder()
         .model(DEFAULT_MODEL)
         .maxTokens(2048L)
-        .outputConfig(OutputConfig.builder().effort(OutputConfig.Effort.LOW).build())
+        .outputConfig(OutputConfig.builder()
+            .effort(OutputConfig.Effort.LOW)
+            .build())
         .addUserMessage(classificationPrompt)
         .build());
     // Get the usage statistics for the API call for how many input and output tokens were used.
@@ -1283,7 +1287,7 @@ const DEFAULT_MODEL = Model::CLAUDE_HAIKU_5_5;
 /**
  * @return array{string, string, bool, Usage} the reasoning, the intent, whether the intent is correct, and the usage
  */
-function classifySupportRequest(Client $client, string $request, string $actualIntent): array
+function classifySupportRequest(Client $client, string $ticketContents, string $actualIntent): array
 {
     // Define the prompt for the classification task
     $classificationPrompt = <<<PROMPT
@@ -1333,7 +1337,7 @@ client = Anthropic::Client.new
 # Set the default model
 DEFAULT_MODEL = Anthropic::Model::CLAUDE_HAIKU_5_5
 
-def classify_support_request(client, request, actual_intent)
+def classify_support_request(client, ticket_contents, actual_intent)
   # Define the prompt for the classification task
   classification_prompt = <<~PROMPT
     You will be acting as a customer support ticket classification system.
@@ -1367,7 +1371,7 @@ end
 
 Here is a breakdown of the edits:
 
-* The `classify_support_request` (typescript, go, java, php: `classifySupportRequest`; csharp: `ClassifySupportRequest`) function now takes the `actual_intent` (typescript, csharp, go, java: `actualIntent`; php: `$actualIntent`) from the test cases and compares it against Claude’s intent classification to assess whether they match.
+* The `classify_support_request()` (typescript, go, java, php: `classifySupportRequest()`; csharp: `ClassifySupportRequest()`) function now takes the `actual_intent` (typescript, csharp, go, java: `actualIntent`; php: `$actualIntent`) from the test cases and compares it against Claude’s intent classification to assess whether they match.
 * The function extracts usage statistics for the API call to calculate cost based on input and output tokens used.
 
 ### Run your evaluation
@@ -1377,7 +1381,7 @@ A proper evaluation requires clear thresholds and benchmarks to determine what i
 * **Accuracy:** 95% (out of 100 tests)
 * **Cost per classification:** 50% reduction on average (across 100 tests) from current routing method
 
-Having these thresholds allows you to tell at scale, and with impartial empiricism, what method is best for you and what changes might need to be made to better fit your requirements.
+Having these thresholds allows you to tell at scale, and with impartial empiricism, what method is best for you and what changes you might need to make to better fit your requirements.
 
 ***
 

@@ -76,7 +76,7 @@ max_tokens: 1024
 messages:
   - role: user
     content: Hello, Claude!
-service_tier: auto  # Automatically use Priority Tier when available, fallback to standard
+service_tier: auto  # Automatically use Priority Tier when available, fall back to standard
 YAML
 ```
 
@@ -87,7 +87,7 @@ message = client.messages.create(
     model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude!"}],
-    service_tier="auto",  # Automatically use Priority Tier when available, fallback to standard
+    service_tier="auto",  # Automatically use Priority Tier when available, fall back to standard
 )
 print(message.usage.service_tier)
 ```
@@ -99,7 +99,7 @@ const message = await client.messages.create({
   model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude!" }],
-  service_tier: "auto" // Automatically use Priority Tier when available, fallback to standard
+  service_tier: "auto" // Automatically use Priority Tier when available, fall back to standard
 });
 console.log(message.usage.service_tier);
 ```
@@ -112,7 +112,7 @@ var message = await client.Messages.Create(new MessageCreateParams
     Model = Model.ClaudeOpus4_8,
     MaxTokens = 1024,
     Messages = [new UserMessageParam { Content = "Hello, Claude!" }],
-    ServiceTier = ServiceTier.Auto, // Automatically use Priority Tier when available, fallback to standard
+    ServiceTier = ServiceTier.Auto, // Automatically use Priority Tier when available, fall back to standard
 });
 Console.WriteLine(message.Usage.ServiceTier);
 ```
@@ -126,7 +126,7 @@ message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude!")),
 	},
-	// Automatically use Priority Tier when available, fallback to standard
+	// Automatically use Priority Tier when available, fall back to standard
 	ServiceTier: anthropic.MessageNewParamsServiceTierAuto,
 })
 if err != nil {
@@ -142,7 +142,7 @@ MessageCreateParams params = MessageCreateParams.builder()
     .model(Model.CLAUDE_OPUS_4_8)
     .maxTokens(1024L)
     .addUserMessage("Hello, Claude!")
-    // Automatically use Priority Tier when available, fallback to standard
+    // Automatically use Priority Tier when available, fall back to standard
     .serviceTier(MessageCreateParams.ServiceTier.AUTO)
     .build();
 
@@ -154,10 +154,10 @@ IO.println(message.usage().serviceTier().orElseThrow());
 $client = new Client();
 
 $message = $client->messages->create(
-    model: 'claude-opus-4-8',
+    model: Model::CLAUDE_OPUS_4_8,
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello, Claude!']],
-    serviceTier: 'auto', // Automatically use Priority Tier when available, fallback to standard
+    serviceTier: 'auto', // Automatically use Priority Tier when available, fall back to standard
 );
 echo $message->usage->serviceTier;
 ```
@@ -169,7 +169,7 @@ message = client.messages.create(
   model: Anthropic::Model::CLAUDE_OPUS_4_8,
   max_tokens: 1024,
   messages: [{ role: "user", content: "Hello, Claude!" }],
-  service_tier: :auto # Automatically use Priority Tier when available, fallback to standard
+  service_tier: :auto # Automatically use Priority Tier when available, fall back to standard
 )
 puts(message.usage.service_tier)
 ```
@@ -181,7 +181,7 @@ The `service_tier` parameter accepts the following values:
 
 The response `usage` object also includes the service tier assigned to the request:
 
-```text wrap
+```json
 {
   "usage": {
     "input_tokens": 410,

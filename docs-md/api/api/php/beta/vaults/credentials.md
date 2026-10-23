@@ -47,7 +47,7 @@ Create a Credential
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -170,7 +170,7 @@ List Credentials
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -286,7 +286,7 @@ Retrieve a Credential
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -407,7 +407,7 @@ Update a Credential
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -530,7 +530,7 @@ Delete a Credential
 
 - `class ManagedAgentsDeletedCredential`
 
-  - `Type type`
+  - `"vault_credential_deleted" type`
 
   - `string id`
 
@@ -603,7 +603,7 @@ Archive a Credential
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -712,7 +712,7 @@ Validate an MCP OAuth Credential
 
 - `class ManagedAgentsCredentialValidation`
 
-  - `Type type`
+  - `"vault_credential_validation" type`
 
   - `string credentialID`
 
@@ -805,7 +805,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsCredential`
 
-  - `Type type`
+  - `"vault_credential" type`
 
   - `string id`
 
@@ -845,11 +845,11 @@ var_dump($betaManagedAgentsCredentialValidation);
 
   - `class ManagedAgentsUnrestrictedCredentialNetworkingParams`
 
-    - `Type type`
+    - `"unrestricted" type`
 
   - `class ManagedAgentsLimitedCredentialNetworkingParams`
 
-    - `Type type`
+    - `"limited" type`
 
     - `list<string> allowedHosts`
 
@@ -861,7 +861,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsCredentialValidation`
 
-  - `Type type`
+  - `"vault_credential_validation" type`
 
   - `string credentialID`
 
@@ -911,7 +911,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsDeletedCredential`
 
-  - `Type type`
+  - `"vault_credential_deleted" type`
 
   - `string id`
 
@@ -921,7 +921,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsEnvironmentVariableAuthResponse`
 
-  - `Type type`
+  - `"environment_variable" type`
 
   - `ManagedAgentsInjectionLocationResponse injectionLocation`
 
@@ -939,7 +939,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsEnvironmentVariableCreateParams`
 
-  - `Type type`
+  - `"environment_variable" type`
 
   - `ManagedAgentsCredentialNetworkingParams networking`
 
@@ -961,7 +961,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsEnvironmentVariableUpdateParams`
 
-  - `Type type`
+  - `"environment_variable" type`
 
   - `?ManagedAgentsInjectionLocationUpdateParams injectionLocation`
 
@@ -1015,7 +1015,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsLimitedCredentialNetworkingParams`
 
-  - `Type type`
+  - `"limited" type`
 
   - `list<string> allowedHosts`
 
@@ -1027,7 +1027,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsLimitedCredentialNetworkingResponse`
 
-  - `Type type`
+  - `"limited" type`
 
   - `list<string> allowedHosts`
 
@@ -1039,7 +1039,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsMCPOAuthAuthResponse`
 
-  - `Type type`
+  - `"mcp_oauth" type`
 
   - `string mcpServerURL`
 
@@ -1057,7 +1057,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsMCPOAuthCreateParams`
 
-  - `Type type`
+  - `"mcp_oauth" type`
 
   - `string accessToken`
 
@@ -1143,7 +1143,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsMCPOAuthUpdateParams`
 
-  - `Type type`
+  - `"mcp_oauth" type`
 
   - `?string accessToken`
 
@@ -1209,7 +1209,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsStaticBearerAuthResponse`
 
-  - `Type type`
+  - `"static_bearer" type`
 
   - `string mcpServerURL`
 
@@ -1219,7 +1219,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsStaticBearerCreateParams`
 
-  - `Type type`
+  - `"static_bearer" type`
 
   - `string token`
 
@@ -1233,7 +1233,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsStaticBearerUpdateParams`
 
-  - `Type type`
+  - `"static_bearer" type`
 
   - `?string token`
 
@@ -1243,7 +1243,7 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsTokenEndpointAuthBasicParam`
 
-  - `Type type`
+  - `"client_secret_basic" type`
 
   - `string clientSecret`
 
@@ -1253,13 +1253,13 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsTokenEndpointAuthBasicResponse`
 
-  - `Type type`
+  - `"client_secret_basic" type`
 
 ### Beta Managed Agents Token Endpoint Auth Basic Update Param
 
 - `class ManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
-  - `Type type`
+  - `"client_secret_basic" type`
 
   - `?string clientSecret`
 
@@ -1271,19 +1271,19 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsTokenEndpointAuthNoneParam`
 
-  - `Type type`
+  - `"none" type`
 
 ### Beta Managed Agents Token Endpoint Auth None Response
 
 - `class ManagedAgentsTokenEndpointAuthNoneResponse`
 
-  - `Type type`
+  - `"none" type`
 
 ### Beta Managed Agents Token Endpoint Auth Post Param
 
 - `class ManagedAgentsTokenEndpointAuthPostParam`
 
-  - `Type type`
+  - `"client_secret_post" type`
 
   - `string clientSecret`
 
@@ -1293,13 +1293,13 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsTokenEndpointAuthPostResponse`
 
-  - `Type type`
+  - `"client_secret_post" type`
 
 ### Beta Managed Agents Token Endpoint Auth Post Update Param
 
 - `class ManagedAgentsTokenEndpointAuthPostUpdateParam`
 
-  - `Type type`
+  - `"client_secret_post" type`
 
   - `?string clientSecret`
 
@@ -1311,13 +1311,13 @@ var_dump($betaManagedAgentsCredentialValidation);
 
 - `class ManagedAgentsUnrestrictedCredentialNetworkingParams`
 
-  - `Type type`
+  - `"unrestricted" type`
 
 ### Beta Managed Agents Unrestricted Credential Networking Response
 
 - `class ManagedAgentsUnrestrictedCredentialNetworkingResponse`
 
-  - `Type type`
+  - `"unrestricted" type`
 
 ---
 

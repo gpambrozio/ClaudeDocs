@@ -155,7 +155,7 @@ Delete a Memory
 
   See the [memory guide](../../../../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_deleted"`
 
   - `required string ID`
 

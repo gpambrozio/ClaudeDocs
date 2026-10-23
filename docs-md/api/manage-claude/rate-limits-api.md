@@ -276,7 +276,7 @@ rate_limits.data.each do |entry|
 end
 ```
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -618,7 +618,7 @@ rate_limits.data.each do |entry|
 end
 ```
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -839,7 +839,7 @@ rate_limits.data.each do |entry|
 end
 ```
 
-```text wrap
+```json
 {
   "data": [
     {

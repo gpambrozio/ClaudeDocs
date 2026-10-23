@@ -103,7 +103,6 @@ Create a Memory Store
 
 ```bash
 ant beta:memory-stores create \
-  --api-key my-anthropic-api-key \
   --name x
 ```
 
@@ -231,8 +230,7 @@ List Memory Stores
 ### Example
 
 ```bash
-ant beta:memory-stores list \
-  --api-key my-anthropic-api-key
+ant beta:memory-stores list
 ```
 
 #### Response (200)
@@ -333,7 +331,6 @@ Retrieve a Memory Store
 
 ```bash
 ant beta:memory-stores retrieve \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
@@ -454,7 +451,6 @@ Update a Memory Store
 
 ```bash
 ant beta:memory-stores update \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
@@ -517,7 +513,6 @@ Delete a Memory Store
 
 ```bash
 ant beta:memory-stores delete \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
@@ -610,7 +605,6 @@ Archive a Memory Store
 
 ```bash
 ant beta:memory-stores archive \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
@@ -809,7 +803,6 @@ Create a Memory
 
 ```bash
 ant beta:memory-stores:memories create \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --content content \
   --path xx
@@ -980,7 +973,6 @@ List Memories
 
 ```bash
 ant beta:memory-stores:memories list \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
@@ -1108,7 +1100,6 @@ Retrieve a Memory
 
 ```bash
 ant beta:memory-stores:memories retrieve \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```
@@ -1250,7 +1241,6 @@ Update a Memory
 
 ```bash
 ant beta:memory-stores:memories update \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```
@@ -1326,7 +1316,6 @@ Delete a Memory
 
 ```bash
 ant beta:memory-stores:memories delete \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-id memory_id
 ```
@@ -1578,7 +1567,6 @@ List Memory Versions
 
 ```bash
 ant beta:memory-stores:memory-versions list \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id
 ```
 
@@ -1805,7 +1793,6 @@ Retrieve a Memory Version
 
 ```bash
 ant beta:memory-stores:memory-versions retrieve \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-version-id memory_version_id
 ```
@@ -2022,7 +2009,6 @@ Redact a Memory Version
 
 ```bash
 ant beta:memory-stores:memory-versions redact \
-  --api-key my-anthropic-api-key \
   --memory-store-id memory_store_id \
   --memory-version-id memory_version_id
 ```

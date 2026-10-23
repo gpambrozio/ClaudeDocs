@@ -66,7 +66,9 @@ fmt.Printf("File ID: %s\n", file.ID)
 
 ```java Java
 var file = client.files().upload(
-    FileUploadParams.builder().file(dataCsv).build()
+    FileUploadParams.builder()
+        .file(dataCsv)
+        .build()
 );
 IO.println("File ID: " + file.id());
 ```
@@ -171,7 +173,6 @@ session, err := client.Beta.Sessions.New(ctx, anthropic.BetaSessionNewParams{
 	EnvironmentID: environment.ID,
 	Resources: []anthropic.BetaSessionNewParamsResourceUnion{{
 		OfFile: &anthropic.BetaManagedAgentsFileResourceParams{
-			Type:      anthropic.BetaManagedAgentsFileResourceParamsTypeFile,
 			FileID:    file.ID,
 			MountPath: anthropic.String("/data.csv"),
 		},
@@ -319,11 +320,17 @@ import java.util.List;
 
 var resources = List.of(
     BetaManagedAgentsFileResourceParams.builder()
-        .fileId("file_abc123").mountPath("/data.csv").build(),
+        .fileId("file_abc123")
+        .mountPath("/data.csv")
+        .build(),
     BetaManagedAgentsFileResourceParams.builder()
-        .fileId("file_def456").mountPath("/config.json").build(),
+        .fileId("file_def456")
+        .mountPath("/config.json")
+        .build(),
     BetaManagedAgentsFileResourceParams.builder()
-        .fileId("file_ghi789").mountPath("/src/main.py").build()
+        .fileId("file_ghi789")
+        .mountPath("/src/main.py")
+        .build()
 );
 ```
 
@@ -399,7 +406,6 @@ Console.WriteLine(resource.ID);  // "sesrsc_01ABC..."
 ```go Go
 resource, err := client.Beta.Sessions.Resources.Add(ctx, session.ID, anthropic.BetaSessionResourceAddParams{
 	BetaManagedAgentsFileResourceParams: anthropic.BetaManagedAgentsFileResourceParams{
-		Type:   anthropic.BetaManagedAgentsFileResourceParamsTypeFile,
 		FileID: file.ID,
 	},
 })
@@ -526,7 +532,9 @@ for (var entry : listed.data()) {
 
 client.beta().sessions().resources().delete(
     resource.id(),
-    ResourceDeleteParams.builder().sessionId(session.id()).build()
+    ResourceDeleteParams.builder()
+        .sessionId(session.id())
+        .build()
 );
 ```
 

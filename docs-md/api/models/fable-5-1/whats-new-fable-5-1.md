@@ -8,7 +8,20 @@ description: Overview of new features, breaking changes, and capability improvem
 
 Claude Fable 5.1 extends Claude Fable 5 at the same input and output prices, with cache reads at a quarter of the cost, and brings stronger long-running agentic coding, multistep research, and document, spreadsheet, and slide work. For most workloads, start with Claude Opus 5.5 (see [Choosing a model](../../about-claude/models/choosing-a-model.md)). Use Claude Fable 5.1 for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5.5 at higher effort still don't meet your requirements. Claude Mythos 5.1 offers the same capabilities only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842).
 
-If you already call Claude Fable 5, four changes are breaking: [forced tool use returns an error](whats-new-fable-5-1.md#forced-tool-use-is-not-supported), only Claude Fable 5.1 and Claude Mythos 5.1 can [read Claude Fable 5.1's thinking blocks](whats-new-fable-5-1.md#thinking-blocks-are-tied-to-the-model-that-produced-them), [editing earlier turns invalidates thinking blocks](whats-new-fable-5-1.md#editing-earlier-turns-invalidates-thinking-blocks), and [some advisor tool pairings are not supported](whats-new-fable-5-1.md#advisor-tool-pairings). Five are additive: [mid-conversation effort changes](whats-new-fable-5-1.md#change-effort-mid-conversation-beta) (beta), [turn-scoped system messages](whats-new-fable-5-1.md#turn-scoped-system-messages-beta) (beta), [readable progress updates between tool calls](whats-new-fable-5-1.md#progress-updates-between-tool-calls-beta) (`display: "updates"`, beta), a [lower cache read price](whats-new-fable-5-1.md#pricing), and [content provenance](whats-new-fable-5-1.md#content-provenance).
+If you already call Claude Fable 5, four changes are breaking:
+
+* [Forced tool use returns an error](whats-new-fable-5-1.md#forced-tool-use-is-not-supported).
+* Only Claude Fable 5.1 and Claude Mythos 5.1 can [read Claude Fable 5.1's thinking blocks](whats-new-fable-5-1.md#thinking-blocks-are-tied-to-the-model-that-produced-them).
+* [Editing earlier turns invalidates thinking blocks](whats-new-fable-5-1.md#editing-earlier-turns-invalidates-thinking-blocks).
+* [Some advisor tool pairings are not supported](whats-new-fable-5-1.md#advisor-tool-pairings).
+
+Five changes are additive:
+
+* [Mid-conversation effort changes](whats-new-fable-5-1.md#change-effort-mid-conversation-beta) (beta)
+* [Turn-scoped system messages](whats-new-fable-5-1.md#turn-scoped-system-messages-beta) (beta)
+* [Readable progress updates between tool calls](whats-new-fable-5-1.md#progress-updates-between-tool-calls-beta) (`display: "updates"`, beta)
+* A [lower cache read price](whats-new-fable-5-1.md#pricing)
+* [Content provenance](whats-new-fable-5-1.md#content-provenance)
 
 ## Models
 
@@ -71,7 +84,7 @@ With the [advisor tool](../../agents-and-tools/tool-use/advisor-tool.md) (beta),
 
 ### Change effort mid-conversation (beta)
 
-On Claude Fable 5.1 you can change the [effort](../../build-with-claude/effort.md) level mid-conversation without invalidating the prompt cache. Raise it for a hard step and lower it for routine ones. Per-message effort is in beta: include the `mid-conversation-output-config-2026-07-01` beta header. Claude Fable 5.1 and Claude Mythos 5.1 support it on the Claude API, Google Cloud, and Amazon Bedrock. To use it with Claude Fable 5.1 through the Amazon Bedrock [InvokeModel API](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), send that value in the `anthropic_beta` array of the request body instead. For the other models that support it and the platforms for each, see [Change effort mid-conversation](../../build-with-claude/effort.md#changing-effort-mid-conversation).
+On Claude Fable 5.1 you can change the [effort](../../build-with-claude/effort.md) level mid-conversation without invalidating the prompt cache. Raise it for a hard step and lower it for routine ones. Per-message effort is in beta: include the `mid-conversation-output-config-2026-07-01` beta header. Claude Fable 5.1 and Claude Mythos 5.1 support it on the Claude API, Claude Models on Google Cloud (Google managed), and Amazon Bedrock. To use it with Claude Fable 5.1 through the Amazon Bedrock [InvokeModel API](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), send that value in the `anthropic_beta` array of the request body instead. For the other models that support it and the platforms for each, see [Change effort mid-conversation](../../build-with-claude/effort.md#changing-effort-mid-conversation).
 
 ```bash cURL
 # Effort-only system message: the new level takes effect from the next user turn.
@@ -221,10 +234,9 @@ response, err := client.Beta.Messages.New(context.Background(), anthropic.BetaMe
 	},
 	Messages: []anthropic.BetaMessageParam{
 		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Plan a migration from SQLite to PostgreSQL in three short steps.")),
-		{
-			Role:    anthropic.BetaMessageParamRoleAssistant,
+		{OfAssistant: &anthropic.BetaAssistantMessageParam{
 			Content: []anthropic.BetaContentBlockParamUnion{anthropic.NewBetaTextBlock("1. Export the SQLite data. 2. Create the PostgreSQL schema. 3. Import the data and verify row counts.")},
-		},
+		}},
 		// Effort-only system message: the new level takes effect from the next user turn.
 		anthropic.NewBetaSystemMessage(anthropic.BetaSystemMessageOutputConfigParam{
 			Effort: anthropic.BetaSystemMessageOutputConfigEffortLow,
@@ -399,7 +411,7 @@ Claude Fable 5.1 improves on Claude Fable 5, and the gap is widest at higher [ef
 * **Long-context work**, reasoning over and connecting details across the full [1M token context window](../../build-with-claude/context-windows.md)
 * **Computer use**, operating a browser and desktop applications more reliably and recovering from failed steps
 
-Multilingual performance is comparable to Claude Fable 5.
+Multilingual performance is at the same level as Claude Fable 5's.
 
 ## Refusals, fallback, and billing
 
@@ -425,10 +437,10 @@ Cache reads (hits and refreshes) cost 0.025 times the base input price on these 
 
 Claude Fable 5.1 is available on:
 
-* **Claude API:** all customers, as `claude-fable-5-1`.
-* **AWS:** [Claude in Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), as `anthropic.claude-fable-5-1`, and [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), as `claude-fable-5-1`.
-* **Google Cloud:** [Claude on Google Cloud](../../build-with-claude/claude-on-vertex-ai.md), as `claude-fable-5-1`.
-* **Microsoft Foundry:** [Claude in Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), on Anthropic infrastructure.
+* **Claude API:** all customers, as `claude-fable-5-1`
+* **AWS:** [Claude in Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), as `anthropic.claude-fable-5-1`, and [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), as `claude-fable-5-1`
+* **Google Cloud:** [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), as `claude-fable-5-1`, and [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), as `claude-fable-5-1`
+* **Microsoft Foundry:** [Claude in Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), on Anthropic infrastructure
 
 Claude Mythos 5.1 is available only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). To request access, apply to the program that covers your use case, or contact your Anthropic, AWS, or Google Cloud account team.
 

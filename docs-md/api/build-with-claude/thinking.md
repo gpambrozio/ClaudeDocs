@@ -22,7 +22,7 @@ Whether Claude thinks on a given request, and how deeply, depends on your thinki
 
 Here is what up-front thinking looks like in a response: one or more `thinking` content blocks arrive before the `text` blocks. The thinking block is still generated content, like the `text` block that follows it, but it is separated from the canonical response. Each thinking block also carries a `signature` field, an encrypted copy of the full reasoning that you pass back unchanged in multi-turn and tool-use conversations (see [Thinking encryption](thinking.md#thinking-encryption)):
 
-```text
+```json
 {
   "content": [
     {
@@ -240,6 +240,7 @@ void main() {
 ```
 
 ```php PHP
+use Anthropic\Messages\Model;
 use Anthropic\Messages\TextBlock;
 use Anthropic\Messages\ThinkingBlock;
 
@@ -253,7 +254,7 @@ $message = $client->messages->create(
             'content' => 'What is the greatest common divisor of 1071 and 462?'
         ]
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     thinking: ['type' => 'adaptive', 'display' => 'summarized'],
 );
 
@@ -428,7 +429,7 @@ $message = $client->messages->create(
             'content' => 'Summarize this article in one sentence.'
         ]
     ],
-    model: 'claude-sonnet-5',
+    model: Model::CLAUDE_SONNET_5,
     thinking: ['type' => 'disabled'],
 );
 ```
@@ -475,7 +476,7 @@ Set `display: "omitted"` when your application doesn't surface thinking content 
 
 With `display: "omitted"`, the response contains `thinking` blocks with an empty `thinking` field:
 
-```text Output wrap
+```json Output
 {
   "content": [
     {
@@ -521,7 +522,7 @@ To see the model's reasoning, read the `thinking` blocks rather than prompting f
 
 Thinking works with [streaming](streaming.md). Thinking blocks stream as `thinking_delta` events inside `content_block_delta` events, followed by a single `signature_delta` event just before the block's `content_block_stop`. Text blocks stream afterward as usual.
 
-![Streaming with thinking: thinking deltas (text only if the display setting returns it), a signature delta, then text deltas](https://platform.claude.com/docs/images/how-thinking-streams.svg)
+![Thinking stream: the block opens, deltas carry text only if display returns text, one signature delta closes it, then text](https://platform.claude.com/docs/images/how-thinking-streams.svg)
 
 The following examples stream a response with adaptive thinking, printing thinking and text deltas as they arrive:
 
@@ -707,11 +708,11 @@ void main() {
                 }
                 case CONTENT_BLOCK_DELTA -> {
                     var deltaEvent = event.asContentBlockDelta();
-                    deltaEvent.delta().thinking().ifPresent(td ->
-                        IO.print(td.thinking())
+                    deltaEvent.delta().thinking().ifPresent(thinkingDelta ->
+                        IO.print(thinkingDelta.thinking())
                     );
-                    deltaEvent.delta().text().ifPresent(td ->
-                        IO.print(td.text())
+                    deltaEvent.delta().text().ifPresent(textDelta ->
+                        IO.print(textDelta.text())
                     );
                 }
             }
@@ -721,6 +722,7 @@ void main() {
 ```
 
 ```php PHP
+use Anthropic\Messages\Model;
 use Anthropic\Messages\RawContentBlockDeltaEvent;
 use Anthropic\Messages\RawContentBlockStartEvent;
 use Anthropic\Messages\TextDelta;
@@ -733,7 +735,7 @@ $stream = $client->messages->createStream(
     messages: [
         ['role' => 'user', 'content' => 'What is the greatest common divisor of 1071 and 462?']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     thinking: ['type' => 'adaptive', 'display' => 'summarized'],
 );
 
@@ -785,7 +787,7 @@ To reassemble complete thinking blocks with their signatures after streaming, us
 
 **Full streaming event trace**
 
-```text Output
+```sse Output
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-5-5", "stop_reason": null, "stop_sequence": null}}
 
@@ -826,7 +828,7 @@ data: {"type": "message_stop"}
 
 When `display: "omitted"` is set, the thinking block opens, a `thinking_delta` with an empty `thinking` string arrives, a single `signature_delta` follows, and the block closes. Text streaming starts immediately after:
 
-```text Output
+```sse Output
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"thinking","thinking":"","signature":""}}
 
@@ -845,7 +847,7 @@ data: {"type":"content_block_start","index":1,"content_block":{"type":"text","te
 
 With `display: "updates"` (beta), reasoning blocks stream as they do under `"omitted"`. Each [progress-update block](thinking.md#progress-updates) streams its text as `thinking_delta` events before the `tool_use` block it introduces. A pause of several seconds before the progress-update block opens is normal:
 
-```text Output
+```sse Output
 event: content_block_start
 data: {"type":"content_block_start","index":1,"content_block":{"type":"thinking","thinking":"","signature":""}}
 
@@ -890,7 +892,7 @@ Thinking works alongside [tool use](../agents-and-tools/tool-use/overview.md), l
 1. **Tool choice limitation (manual mode):** tool use with manual extended thinking (`thinking: {type: "enabled"}`) only supports `tool_choice: {"type": "auto"}` (the default) or `tool_choice: {"type": "none"}`. Using `tool_choice: {"type": "any"}` or `tool_choice: {"type": "tool", "name": "..."}` results in an error because these options force tool use, which is incompatible with manual extended thinking. Adaptive thinking, including on models where thinking is on by default, supports forced tool use, except on Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and Claude Mythos 5.1 (see [Response prefill and forced tool use](thinking.md#limits-and-feature-compatibility)). Where forced tool use is accepted, the response starts with the tool call and has no `thinking` block.
 2. **Preserving thinking blocks:** when you return tool results, you must pass the thinking blocks from the assistant message back to the API, complete and unmodified. See [Preserving thinking blocks](thinking.md#preserving-thinking-blocks).
 
-**A tool-use loop is one assistant turn.** From the model's perspective, an assistant turn doesn't complete until Claude finishes its full response, which might include multiple tool calls and results. This whole sequence is a single assistant turn:
+**A tool-use loop is one assistant turn.** From the model's perspective, an assistant turn ends only when Claude completes its full response, which might include multiple tool calls and results. This whole sequence is a single assistant turn:
 
 ```text wrap
 User: "What's the weather in Paris?"
@@ -967,7 +969,7 @@ What a progress-update block contains depends on [`display`](thinking.md#control
 
 On Claude Sonnet 5.5, the lowest thinking setting is `thinking: {type: "between_tools"}`. It turns off up-front thinking, and each progress update comes back with its summary text, as it would under `display: "updates"`. `between_tools` is accepted only at [effort](effort.md) `high` or below. At `xhigh` or `max`, a request with it returns a 400 error. `between_tools` takes no other field: `display`, `budget_tokens`, or `block_binding` sent with it returns a 400 error. The setting needs no beta header and works on every platform that offers Claude Sonnet 5.5. Pass the blocks back unchanged: a progress-update block you send back gives the model the full note it wrote, not the summary.
 
-Use `display: "updates"` for an agent interface that keeps reasoning hidden and shows the user a status line at each step. Under it, any `thinking` block with non-empty text is a progress update, so render those and nothing else. It's in beta and requires the beta header `thinking-display-updates-2026-08-18` (to send it on Amazon Bedrock, Google Cloud, or Microsoft Foundry, see [Beta features on other platforms](../api/beta-headers.md#beta-features-on-other-platforms)). Without it, the value is rejected with the same 400 `invalid_request_error` as an unknown `display` value.
+Use `display: "updates"` for an agent interface that keeps reasoning hidden and shows the user a status line at each step. Under it, any `thinking` block with non-empty text is a progress update, so render those and nothing else. It's in beta and requires the beta header `thinking-display-updates-2026-08-18` (to send it on Amazon Bedrock, Claude Models on Google Cloud (Google managed), or Microsoft Foundry, see [Beta features on other platforms](../api/beta-headers.md#beta-features-on-other-platforms)). Without it, the value is rejected with the same 400 `invalid_request_error` as an unknown `display` value.
 
 ```json
 {
@@ -999,7 +1001,7 @@ Use `display: "updates"` for an agent interface that keeps reasoning hidden and 
 
 Under `"updates"`, the start of the response that follows a `tool_result` looks like this. The first block is reasoning and stays empty, as it would under `"omitted"`. The second carries text, so it's a progress update. Under `"summarized"` both blocks carry text, and under `"omitted"` both are empty.
 
-```text Output
+```json Output
 {
   "content": [
     {
@@ -1045,7 +1047,7 @@ Preservation brings two benefits:
 
 The tradeoff is context usage: long conversations consume more context space on keep-all models, because retained thinking blocks count as input like any other conversation history (see [Thinking and the context window](thinking.md#thinking-and-the-context-window)). The behavior is automatic in both regimes. No code changes or beta headers are required, and you should keep passing complete, unmodified thinking blocks back as described in [Preserving thinking blocks](thinking.md#preserving-thinking-blocks). To override the default in either direction, use [thinking block clearing](context-editing.md#thinking-block-clearing).
 
-**Switching models mid-conversation.** Keep passing thinking blocks back unchanged when you switch models, for example after a [classifier refusal fallback](refusals-and-fallback.md). A thinking block is readable only by the model that produced it and certain other models, and the API ignores or drops the blocks the target model can't read. On Claude Fable 5.1 and Claude Mythos 5.1 the direction matters: they read earlier models' thinking blocks, and only the two of them read each other's, so switching to them keeps the conversation's reasoning and switching from them to any other model drops it (see [how dropped blocks are billed and reported](preserved-thinking.md#switching-models)). Claude Opus 5.5 reads Claude Opus 5's thinking blocks and those of earlier Opus, Sonnet, and Haiku models, and, on the Claude API and Google Cloud, of Claude Haiku 5.5, but not those of the Claude Fable and Claude Mythos models; on the Claude API, Claude Fable 5.1 and Claude Mythos 5.1 read Claude Opus 5.5's blocks. A switch from Claude Opus 5.5 up to Claude Fable 5.1 on the Claude API keeps the earlier turns' reasoning; a switch from Claude Fable 5.1 to Claude Opus 5.5 drops it. Claude Sonnet 5.5 reads thinking blocks from Claude Sonnet 5, Claude Opus 4.8, Claude Haiku 4.5, and earlier models, and, on the Claude API and Google Cloud, from Claude Haiku 5.5, but not from Claude Opus 5, Claude Opus 5.5, or any Claude Fable or Claude Mythos model. On the Claude API and Google Cloud, Claude Opus 5.5 reads Claude Sonnet 5.5's blocks and no other model does: a switch from Claude Sonnet 5.5 up to Claude Opus 5.5 on the Claude API and Google Cloud keeps the earlier turns' reasoning, and any other switch away from Claude Sonnet 5.5 drops it. Claude Haiku 5.5 reads thinking blocks from Claude Sonnet 5, Claude Opus 4.8, Claude Haiku 4.5, and earlier models, but not from Claude Opus 5, Claude Opus 5.5, Claude Sonnet 5.5, or any Claude Fable or Claude Mythos model. On the Claude API and Google Cloud, Claude Opus 5.5 and Claude Sonnet 5.5 read Claude Haiku 5.5's blocks and no other model does. Strip prior `thinking` and `redacted_thinking` blocks yourself only to save input tokens on models that ignore rather than drop them, and never when redeeming a [fallback credit](fallback-credit.md), which requires the body unchanged.
+**Switching models mid-conversation.** Keep passing thinking blocks back unchanged when you switch models, for example after a [classifier refusal fallback](refusals-and-fallback.md). A thinking block is readable only by the model that produced it and certain other models, and the API ignores or drops the blocks the target model can't read. On Claude Fable 5.1 and Claude Mythos 5.1 the direction matters: they read earlier models' thinking blocks, and only the two of them read each other's, so switching to them keeps the conversation's reasoning and switching from them to any other model drops it (see [how dropped blocks are billed and reported](preserved-thinking.md#switching-models)). Claude Opus 5.5 reads Claude Opus 5's thinking blocks and those of earlier Opus, Sonnet, and Haiku models, and, on the Claude API and Claude Models on Google Cloud (Google managed), of Claude Haiku 5.5, but not those of the Claude Fable and Claude Mythos models; on the Claude API, Claude Fable 5.1 and Claude Mythos 5.1 read Claude Opus 5.5's blocks. A switch from Claude Opus 5.5 up to Claude Fable 5.1 on the Claude API keeps the earlier turns' reasoning; a switch from Claude Fable 5.1 to Claude Opus 5.5 drops it. Claude Sonnet 5.5 reads thinking blocks from Claude Sonnet 5, Claude Opus 4.8, Claude Haiku 4.5, and earlier models, and, on the Claude API and Claude Models on Google Cloud (Google managed), from Claude Haiku 5.5, but not from Claude Opus 5, Claude Opus 5.5, or any Claude Fable or Claude Mythos model. On those two platforms, Claude Opus 5.5 reads Claude Sonnet 5.5's blocks and no other model does: a switch from Claude Sonnet 5.5 up to Claude Opus 5.5 there keeps the earlier turns' reasoning, and any other switch away from Claude Sonnet 5.5 drops it. Claude Haiku 5.5 reads thinking blocks from Claude Sonnet 5, Claude Opus 4.8, Claude Haiku 4.5, and earlier models, but not from Claude Opus 5, Claude Opus 5.5, Claude Sonnet 5.5, or any Claude Fable or Claude Mythos model. On the Claude API and Claude Models on Google Cloud (Google managed), Claude Opus 5.5 and Claude Sonnet 5.5 read Claude Haiku 5.5's blocks and no other model does. Strip prior `thinking` and `redacted_thinking` blocks yourself only to save input tokens on models that ignore rather than drop them, and never when redeeming a [fallback credit](fallback-credit.md), which requires the body unchanged.
 
 ## Preserved thinking
 
@@ -1134,13 +1136,13 @@ Keep the following in mind when working with signatures:
 * When [streaming responses](thinking.md#streaming-thinking), the signature arrives as a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
 * `signature` values are significantly longer in Claude 4 and later models than in previous models.
 * The `signature` field is opaque: don't interpret or parse it.
-* `signature` values are compatible across platforms (the Claude API, [Amazon Bedrock](claude-in-amazon-bedrock.md), and [Google Cloud](claude-on-vertex-ai.md)). Values generated on one platform work on another, except that thinking blocks from Claude Sonnet 5.5 and Claude Haiku 5.5 work only in the account that produced them or in an account linked to it. See [Thinking blocks stay with the account that produced them](preserved-thinking.md#account-bound-thinking).
+* `signature` values are compatible across platforms, including the Claude API, [Amazon Bedrock](claude-in-amazon-bedrock.md), and [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md). Values generated on one platform work on another, except that thinking blocks from Claude Sonnet 5.5 and Claude Haiku 5.5 work only in the account that produced them or in an account linked to it. See [Thinking blocks stay with the account that produced them](preserved-thinking.md#account-bound-thinking).
 
 ## Redacted thinking blocks
 
 In addition to regular `thinking` blocks, the API might return `redacted_thinking` blocks when portions of Claude's reasoning are safety-redacted. A `redacted_thinking` block contains encrypted thinking content in a `data` field, with no readable text:
 
-```text wrap
+```json
 {
   "type": "redacted_thinking",
   "data": "..."

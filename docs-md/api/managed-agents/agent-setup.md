@@ -107,9 +107,7 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 	},
 	System: anthropic.String("You are a helpful coding agent."),
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-		},
+		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
 	}},
 })
 if err != nil {
@@ -150,7 +148,7 @@ agent = client.beta.agents.create(
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields, and fills in `model` fields you omit, such as `effort`, with their defaults. The `version` starts at 1 and increments each time an update changes the agent.
 
-```text wrap
+```json
 {
   "id": "agent_01HqR2k7vXbZ9mNpL3wYcT8f",
   "type": "agent",

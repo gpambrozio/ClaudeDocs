@@ -205,33 +205,33 @@ var unsafeCategories = []string{
 final AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 final List<String> allowedUserComments = List.of(
-        "This movie was great, I really enjoyed it. The main actor really killed it!",
-        "I hate Mondays.",
-        "It is a great time to invest in gold!");
+    "This movie was great, I really enjoyed it. The main actor really killed it!",
+    "I hate Mondays.",
+    "It is a great time to invest in gold!");
 
 final List<String> disallowedUserComments = List.of(
-        "Delete this post now or you better hide. I am coming after you and your family.",
-        "Stay away from the 5G cellphones!! They are using 5G to control you.",
-        "Congratulations! You have won a $1,000 gift card. Click here to claim your prize!");
+    "Delete this post now or you better hide. I am coming after you and your family.",
+    "Stay away from the 5G cellphones!! They are using 5G to control you.",
+    "Congratulations! You have won a $1,000 gift card. Click here to claim your prize!");
 
 // Sample user comments to test the content moderation
 final List<String> userComments =
-        Stream.concat(allowedUserComments.stream(), disallowedUserComments.stream()).toList();
+    Stream.concat(allowedUserComments.stream(), disallowedUserComments.stream()).toList();
 
 // Categories considered unsafe for content moderation
 final List<String> unsafeCategories = List.of(
-        "Child Exploitation",
-        "Conspiracy Theories",
-        "Hate",
-        "Indiscriminate Weapons",
-        "Intellectual Property",
-        "Non-Violent Crimes",
-        "Privacy",
-        "Self-Harm",
-        "Sex Crimes",
-        "Sexual Content",
-        "Specialized Advice",
-        "Violent Crimes");
+    "Child Exploitation",
+    "Conspiracy Theories",
+    "Hate",
+    "Indiscriminate Weapons",
+    "Intellectual Property",
+    "Non-Violent Crimes",
+    "Privacy",
+    "Self-Harm",
+    "Sex Crimes",
+    "Sexual Content",
+    "Specialized Advice",
+    "Violent Crimes");
 ```
 
 ```php PHP
@@ -359,7 +359,7 @@ Actual costs might differ from these estimates. These estimates are based on the
 
 ### Build a strong prompt
 
-To use Claude for content moderation, Claude must have information about the moderation requirements of your application. Start by writing a prompt that allows you to define your moderation needs:
+To use Claude for content moderation, Claude must interpret the moderation requirements of your application correctly. Start by writing a prompt that allows you to define your moderation needs:
 
 ```python Python
 def moderate_message(message, unsafe_categories):
@@ -683,21 +683,21 @@ ModerationResult moderateMessage(String message, List<String> unsafeCategories)
             "explanation": [Optional. Only include if there is a violation.]
             }
         Do not include markdown formatting or code fences in your response."""
-            .formatted(message, unsafeCategoryStr);
+        .formatted(message, unsafeCategoryStr);
 
     // Send the request to Claude for content moderation
     Message response = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
-            .maxTokens(200)
-            .addUserMessage(assessmentPrompt)
-            .build());
+        .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
+        .maxTokens(200)
+        .addUserMessage(assessmentPrompt)
+        .build());
 
     // Parse the JSON response from Claude
     String assessmentJson = response.content().stream()
-            .flatMap(contentBlock -> contentBlock.text().stream())
-            .findFirst()
-            .orElseThrow()
-            .text();
+        .flatMap(contentBlock -> contentBlock.text().stream())
+        .findFirst()
+        .orElseThrow()
+        .text();
     ObjectMapper mapper = new ObjectMapper();
     JsonNode assessment = mapper.readTree(assessmentJson);
 
@@ -706,11 +706,11 @@ ModerationResult moderateMessage(String message, List<String> unsafeCategories)
 
     // If there's a violation, get the categories and explanation; otherwise, use empty defaults
     List<String> violatedCategories = containsViolation && assessment.has("categories")
-            ? mapper.convertValue(assessment.get("categories"), new TypeReference<List<String>>() {})
-            : List.of();
+        ? mapper.convertValue(assessment.get("categories"), new TypeReference<List<String>>() {})
+        : List.of();
     String explanation = containsViolation && assessment.hasNonNull("explanation")
-            ? assessment.get("explanation").asText()
-            : null;
+        ? assessment.get("explanation").asText()
+        : null;
 
     return new ModerationResult(containsViolation, violatedCategories, explanation);
 }
@@ -1223,21 +1223,21 @@ RiskAssessment assessRiskLevel(String message, List<String> unsafeCategories)
           "explanation": <Optional. Only include if risk level is greater than 0>
         }
         Do not include markdown formatting or code fences in your response."""
-            .formatted(message, unsafeCategoryStr);
+        .formatted(message, unsafeCategoryStr);
 
     // Send the request to Claude for risk assessment
     Message response = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
-            .maxTokens(200)
-            .addUserMessage(assessmentPrompt)
-            .build());
+        .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
+        .maxTokens(200)
+        .addUserMessage(assessmentPrompt)
+        .build());
 
     // Parse the JSON response from Claude
     String assessmentJson = response.content().stream()
-            .flatMap(contentBlock -> contentBlock.text().stream())
-            .findFirst()
-            .orElseThrow()
-            .text();
+        .flatMap(contentBlock -> contentBlock.text().stream())
+        .findFirst()
+        .orElseThrow()
+        .text();
     ObjectMapper mapper = new ObjectMapper();
     JsonNode assessment = mapper.readTree(assessmentJson);
 
@@ -1245,11 +1245,11 @@ RiskAssessment assessRiskLevel(String message, List<String> unsafeCategories)
     int riskLevel = assessment.required("risk_level").asInt();
     JsonNode categoriesNode = assessment.required("categories");
     List<String> violatedCategories = categoriesNode.isNull()
-            ? List.of()
-            : mapper.convertValue(categoriesNode, new TypeReference<List<String>>() {});
+        ? List.of()
+        : mapper.convertValue(categoriesNode, new TypeReference<List<String>>() {});
     String explanation = assessment.hasNonNull("explanation")
-            ? assessment.get("explanation").asText()
-            : null;
+        ? assessment.get("explanation").asText()
+        : null;
 
     return new RiskAssessment(riskLevel, violatedCategories, explanation);
 }
@@ -1863,49 +1863,49 @@ func moderateAllCommentsWithDefinitions() {
 record CategoryDefinition(String category, String definition) {}
 
 final List<CategoryDefinition> unsafeCategoryDefinitions = List.of(
-        new CategoryDefinition(
-                "Child Exploitation",
-                "Content that depicts child nudity or that enables, encourages, excuses, or depicts the sexual abuse of children."),
-        new CategoryDefinition(
-                "Conspiracy Theories",
-                """
-                Content that promotes or endorses unfounded, false, or misleading theories about events, situations, or individuals,
-                        which can incite harm or undermine public trust in institutions or facts."""),
-        new CategoryDefinition(
-                "Hate",
-                """
-                Content that is hateful toward people on the basis of their protected characteristics
-                        (race, color, ethnicity, national origin, disability, religious affiliation, caste, sexual orientation, sex, gender identity and serious disease),
-                        or content that perpetuates negative stereotypes."""),
-        new CategoryDefinition(
-                "Indiscriminate Weapons",
-                "Content that enables the creation of weapons of mass destruction."),
-        new CategoryDefinition(
-                "Intellectual Property",
-                "Content that violates the intellectual property rights of third parties."),
-        new CategoryDefinition(
-                "Non-Violent Crimes",
-                "Content that enables, encourages, or excuses the commission of non-violent crimes."),
-        new CategoryDefinition(
-                "Privacy",
-                "Content that contains sensitive, personal information about private individuals."),
-        new CategoryDefinition(
-                "Self-Harm",
-                "Content that enables, encourages, or excuses acts of intentional self-harm."),
-        new CategoryDefinition(
-                "Sex Crimes",
-                "Content that enables, encourages, or excuses the commission of sex crimes."),
-        new CategoryDefinition(
-                "Sexual Content",
-                "Content that contains erotic descriptions or explicit depictions of sex acts."),
-        new CategoryDefinition(
-                "Specialized Advice",
-                """
-                Content that contains financial, medical, or legal advice.
-                        Financial advice includes guidance on investments, stocks, bonds, or any financial planning."""),
-        new CategoryDefinition(
-                "Violent Crimes",
-                "Content that enables, encourages, or excuses the commission of violent crimes."));
+    new CategoryDefinition(
+        "Child Exploitation",
+        "Content that depicts child nudity or that enables, encourages, excuses, or depicts the sexual abuse of children."),
+    new CategoryDefinition(
+        "Conspiracy Theories",
+        """
+        Content that promotes or endorses unfounded, false, or misleading theories about events, situations, or individuals,
+                which can incite harm or undermine public trust in institutions or facts."""),
+    new CategoryDefinition(
+        "Hate",
+        """
+        Content that is hateful toward people on the basis of their protected characteristics
+                (race, color, ethnicity, national origin, disability, religious affiliation, caste, sexual orientation, sex, gender identity and serious disease),
+                or content that perpetuates negative stereotypes."""),
+    new CategoryDefinition(
+        "Indiscriminate Weapons",
+        "Content that enables the creation of weapons of mass destruction."),
+    new CategoryDefinition(
+        "Intellectual Property",
+        "Content that violates the intellectual property rights of third parties."),
+    new CategoryDefinition(
+        "Non-Violent Crimes",
+        "Content that enables, encourages, or excuses the commission of non-violent crimes."),
+    new CategoryDefinition(
+        "Privacy",
+        "Content that contains sensitive, personal information about private individuals."),
+    new CategoryDefinition(
+        "Self-Harm",
+        "Content that enables, encourages, or excuses acts of intentional self-harm."),
+    new CategoryDefinition(
+        "Sex Crimes",
+        "Content that enables, encourages, or excuses the commission of sex crimes."),
+    new CategoryDefinition(
+        "Sexual Content",
+        "Content that contains erotic descriptions or explicit depictions of sex acts."),
+    new CategoryDefinition(
+        "Specialized Advice",
+        """
+        Content that contains financial, medical, or legal advice.
+                Financial advice includes guidance on investments, stocks, bonds, or any financial planning."""),
+    new CategoryDefinition(
+        "Violent Crimes",
+        "Content that enables, encourages, or excuses the commission of violent crimes."));
 
 record ModerationDecision(boolean violation, List<String> violatedCategories, String explanation) {}
 
@@ -1914,9 +1914,9 @@ ModerationDecision moderateMessageWithDefinitions(
         throws JsonProcessingException {
     // Format unsafe categories string, with each category and its definition on a new line
     String unsafeCategoryStr = unsafeCategoryDefinitions.stream()
-            .map(categoryDefinition ->
-                    categoryDefinition.category() + ": " + categoryDefinition.definition())
-            .collect(Collectors.joining("\n"));
+        .map(categoryDefinition ->
+            categoryDefinition.category() + ": " + categoryDefinition.definition())
+        .collect(Collectors.joining("\n"));
 
     // Construct the prompt for Claude, including the message and unsafe categories
     String assessmentPrompt = """
@@ -1939,21 +1939,21 @@ ModerationDecision moderateMessageWithDefinitions(
           "explanation": [Optional. Only include if there is a violation.]
         }
         Do not include markdown formatting or code fences in your response."""
-            .formatted(message, unsafeCategoryStr);
+        .formatted(message, unsafeCategoryStr);
 
     // Send the request to Claude for content moderation
     Message response = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
-            .maxTokens(200)
-            .addUserMessage(assessmentPrompt)
-            .build());
+        .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
+        .maxTokens(200)
+        .addUserMessage(assessmentPrompt)
+        .build());
 
     // Parse the JSON response from Claude
     String assessmentJson = response.content().stream()
-            .flatMap(contentBlock -> contentBlock.text().stream())
-            .findFirst()
-            .orElseThrow()
-            .text();
+        .flatMap(contentBlock -> contentBlock.text().stream())
+        .findFirst()
+        .orElseThrow()
+        .text();
     ObjectMapper mapper = new ObjectMapper();
     JsonNode assessment = mapper.readTree(assessmentJson);
 
@@ -1962,11 +1962,11 @@ ModerationDecision moderateMessageWithDefinitions(
 
     // If there's a violation, get the categories and explanation; otherwise, use empty defaults
     List<String> violatedCategories = containsViolation && assessment.has("categories")
-            ? mapper.convertValue(assessment.get("categories"), new TypeReference<List<String>>() {})
-            : List.of();
+        ? mapper.convertValue(assessment.get("categories"), new TypeReference<List<String>>() {})
+        : List.of();
     String explanation = containsViolation && assessment.hasNonNull("explanation")
-            ? assessment.get("explanation").asText()
-            : null;
+        ? assessment.get("explanation").asText()
+        : null;
 
     return new ModerationDecision(containsViolation, violatedCategories, explanation);
 }
@@ -2211,7 +2211,7 @@ Important Notes:
     # Send the request to Claude for content moderation
     response = client.messages.create(
         model="claude-haiku-4-5-20251001",  # Using the Haiku model for lower costs
-        max_tokens=2048,  # Increased max token count to handle batches
+        max_tokens=2048,  # Increased token limit to handle batches
         messages=[{"role": "user", "content": assessment_prompt}],
     )
 
@@ -2285,7 +2285,7 @@ Important Notes:
   // Send the request to Claude for content moderation
   const response = await client.messages.create({
     model: "claude-haiku-4-5-20251001", // Using the Haiku model for lower costs
-    max_tokens: 2048, // Increased max token count to handle batches
+    max_tokens: 2048, // Increased token limit to handle batches
     messages: [{ role: "user", content: assessmentPrompt }]
   });
 
@@ -2358,7 +2358,7 @@ Important Notes:
         new()
         {
             Model = Model.ClaudeHaiku4_5_20251001, // Using the Haiku model for lower costs
-            MaxTokens = 2048, // Increased max token count to handle batches
+            MaxTokens = 2048, // Increased token limit to handle batches
             Messages = [new UserMessageParam { Content = assessmentPrompt }],
         }
     );
@@ -2445,7 +2445,7 @@ Important Notes:
 	// Send the request to Claude for content moderation
 	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeHaiku4_5_20251001, // Using the Haiku model for lower costs
-		MaxTokens: 2048,                                   // Increased max token count to handle batches
+		MaxTokens: 2048,                                   // Increased token limit to handle batches
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock(assessmentPrompt)),
 		},
@@ -2495,8 +2495,8 @@ JsonNode batchModerateMessages(List<String> messages, List<String> unsafeCategor
 
     // Format messages string, with each message wrapped in XML-like tags and given an ID
     String messagesStr = IntStream.range(0, messages.size())
-            .mapToObj(idx -> "<message id=%d>%s</message>".formatted(idx, messages.get(idx)))
-            .collect(Collectors.joining("\n"));
+        .mapToObj(idx -> "<message id=%d>%s</message>".formatted(idx, messages.get(idx)))
+        .collect(Collectors.joining("\n"));
 
     // Construct the prompt for Claude, including the messages and unsafe categories
     String assessmentPrompt = """
@@ -2527,21 +2527,21 @@ JsonNode batchModerateMessages(List<String> messages, List<String> unsafeCategor
         - Remember to analyze every message for a violation.
         - Select any number of violations that reasonably apply.
         - Do not include markdown formatting or code fences in your response."""
-            .formatted(messagesStr, unsafeCategoryStr);
+        .formatted(messagesStr, unsafeCategoryStr);
 
     // Send the request to Claude for content moderation
     Message response = client.messages().create(MessageCreateParams.builder()
-            .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
-            .maxTokens(2048) // Increased max token count to handle batches
-            .addUserMessage(assessmentPrompt)
-            .build());
+        .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
+        .maxTokens(2048) // Increased token limit to handle batches
+        .addUserMessage(assessmentPrompt)
+        .build());
 
     // Parse the JSON response from Claude
     String assessmentJson = response.content().stream()
-            .flatMap(contentBlock -> contentBlock.text().stream())
-            .findFirst()
-            .orElseThrow()
-            .text();
+        .flatMap(contentBlock -> contentBlock.text().stream())
+        .findFirst()
+        .orElseThrow()
+        .text();
     return new ObjectMapper().readTree(assessmentJson);
 }
 
@@ -2552,15 +2552,15 @@ void printBatchViolations() throws JsonProcessingException {
     ObjectMapper mapper = new ObjectMapper();
     for (JsonNode violation : response.required("violations")) {
         List<String> violatedCategories =
-                mapper.convertValue(violation.required("categories"), new TypeReference<List<String>>() {});
+            mapper.convertValue(violation.required("categories"), new TypeReference<List<String>>() {});
         IO.println("""
-                Comment: %s
-                Violated Categories: %s
-                Explanation: %s
-                """.formatted(
-                        userComments.get(violation.required("id").asInt()),
-                        String.join(", ", violatedCategories),
-                        violation.required("explanation").asText()));
+            Comment: %s
+            Violated Categories: %s
+            Explanation: %s
+            """.formatted(
+                userComments.get(violation.required("id").asInt()),
+                String.join(", ", violatedCategories),
+                violation.required("explanation").asText()));
     }
 }
 ```
@@ -2611,7 +2611,7 @@ $batchModerateMessages = function (array $messages, array $unsafeCategories) use
     // Send the request to Claude for content moderation
     $response = $client->messages->create(
         model: 'claude-haiku-4-5-20251001', // Using the Haiku model for lower costs
-        maxTokens: 2048, // Increased max token count to handle batches
+        maxTokens: 2048, // Increased token limit to handle batches
         messages: [['role' => 'user', 'content' => $assessmentPrompt]],
     );
 
@@ -2678,7 +2678,7 @@ def batch_moderate_messages(messages, unsafe_categories)
   # Send the request to Claude for content moderation
   response = CLIENT.messages.create(
     model: Anthropic::Model::CLAUDE_HAIKU_4_5_20251001, # Using the Haiku model for lower costs
-    max_tokens: 2048, # Increased max token count to handle batches
+    max_tokens: 2048, # Increased token limit to handle batches
     messages: [{role: :user, content: assessment_prompt}]
   )
 

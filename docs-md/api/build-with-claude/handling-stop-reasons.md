@@ -26,7 +26,7 @@ For the full response schema, see the [Messages API reference](../api/messages/c
 
 The `stop_reason` field is part of every successful Messages API response. Unlike errors, which indicate failures in processing your request, `stop_reason` tells you why Claude completed its response generation.
 
-```text Example response wrap
+```json Example response
 {
   "id": "msg_01234",
   "type": "message",
@@ -262,7 +262,7 @@ messages = [
         "content": [
             {"type": "tool_result", "tool_use_id": "toolu_123", "content": "6912"}
         ],
-    },  # Just the tool_result, no additional text
+    },  # Only the tool_result, no additional text
 ]
 ```
 
@@ -306,7 +306,7 @@ messages = [
   },
   {
     role: "user",
-    // Just the tool_result, no additional text
+    // Only the tool_result, no additional text
     content: [{ type: "tool_result", tool_use_id: "toolu_123", content: "6912" }]
   }
 ];
@@ -354,7 +354,7 @@ messages =
     },
     new UserMessageParam
     {
-        // Just the tool_result, no additional text
+        // Only the tool_result, no additional text
         Content = new List<ContentBlockParam>
         {
             new ToolResultBlockParam { ToolUseID = "toolu_123", Content = "6912" }
@@ -384,7 +384,7 @@ messages = []anthropic.MessageParam{
 	anthropic.NewAssistantMessage(
 		anthropic.NewToolUseBlock("toolu_123", input, "calculator"),
 	),
-	// Just the tool_result, no additional text
+	// Only the tool_result, no additional text
 	anthropic.NewUserMessage(
 		anthropic.NewToolResultBlock("toolu_123", "6912", false),
 	),
@@ -408,9 +408,14 @@ List<MessageParam> messages = List.of(
     MessageParam.ofAssistantOfContentBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))),
     MessageParam.ofUserOfContentBlockParams(List.of(
         ContentBlockParam.ofToolResult(
-            ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build()),
+            ToolResultBlockParam.builder()
+                .toolUseId("toolu_123")
+                .content("6912")
+                .build()),
         // Don't add text after tool_result
-        ContentBlockParam.ofText(TextBlockParam.builder().text("Here's the result").build())
+        ContentBlockParam.ofText(TextBlockParam.builder()
+            .text("Here's the result")
+            .build())
     ))
 );
 
@@ -418,10 +423,13 @@ List<MessageParam> messages = List.of(
 messages = List.of(
     MessageParam.ofUser("Calculate the sum of 1234 and 5678"),
     MessageParam.ofAssistantOfContentBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))),
-    // Just the tool_result, no additional text
+    // Only the tool_result, no additional text
     MessageParam.ofUserOfContentBlockParams(List.of(
         ContentBlockParam.ofToolResult(
-            ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build())
+            ToolResultBlockParam.builder()
+                .toolUseId("toolu_123")
+                .content("6912")
+                .build())
     ))
 );
 ```
@@ -467,7 +475,7 @@ $messages = [
     ],
     [
         'role' => 'user',
-        // Just the tool_result, no additional text
+        // Only the tool_result, no additional text
         'content' => [
             ['type' => 'tool_result', 'tool_use_id' => 'toolu_123', 'content' => '6912'],
         ],
@@ -516,7 +524,7 @@ messages = [
   },
   {
     role: "user",
-    # Just the tool_result, no additional text
+    # Only the tool_result, no additional text
     content: [
       { type: "tool_result", tool_use_id: "toolu_123", content: "6912" }
     ]
@@ -842,7 +850,7 @@ $client = new Client();
 $response = $client->messages->create(
     maxTokens: 10,
     messages: [['role' => 'user', 'content' => 'Explain quantum physics']],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 if ($response->stopReason === 'max_tokens') {
@@ -1138,7 +1146,7 @@ $client = new Client();
 $response = $client->messages->create(
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Generate text until you say END']],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     stopSequences: ['END', 'STOP'],
 );
 
@@ -1222,7 +1230,7 @@ weather_tool = {
 }
 
 def execute_tool(name, tool_input):
-    """Execute a tool and return the result."""
+    """Run a tool and return the result."""
     return f"Weather in {tool_input.get('location', 'unknown')}: 72°F"
 
 response = client.messages.create(
@@ -1233,7 +1241,7 @@ response = client.messages.create(
 )
 
 if response.stop_reason == "tool_use":
-    # Extract and execute the tool
+    # Extract and run the tool
     for block in response.content:
         if block.type == "tool_use":
             result = execute_tool(block.name, block.input)
@@ -1266,7 +1274,7 @@ const response = await client.messages.create({
 });
 
 if (response.stop_reason === "tool_use") {
-  // Extract and execute the tool
+  // Extract and run the tool
   for (const block of response.content) {
     if (block.type === "tool_use") {
       const result = executeTool(block.name, block.input as Record<string, string>);
@@ -1305,12 +1313,12 @@ var response = await client.Messages.Create(new MessageCreateParams
 
 if (response.StopReason == "tool_use")
 {
-    // Extract and execute the tool
+    // Extract and run the tool
     foreach (var block in response.Content)
     {
         if (block.TryPickToolUse(out var toolUse))
         {
-            // Execute toolUse.Name with toolUse.Input and return the result to Claude
+            // Run toolUse.Name with toolUse.Input and return the result to Claude
         }
     }
 }
@@ -1343,7 +1351,7 @@ if err != nil {
 }
 
 if response.StopReason == "tool_use" {
-	// Extract and execute the tool
+	// Extract and run the tool
 	for _, block := range response.Content {
 		if toolUse, ok := block.AsAny().(anthropic.ToolUseBlock); ok {
 			fmt.Println(toolUse.Name, toolUse.Input)
@@ -1378,10 +1386,10 @@ void main() {
     );
 
     if (response.stopReason().map(StopReason.TOOL_USE::equals).orElse(false)) {
-        // Extract and execute the tool
+        // Extract and run the tool
         for (ContentBlock block : response.content()) {
             block.toolUse().ifPresent(toolUse -> {
-                // Execute toolUse.name() with toolUse.input() and return the result to Claude
+                // Run toolUse.name() with toolUse.input() and return the result to Claude
             });
         }
     }
@@ -1410,10 +1418,10 @@ $response = $client->messages->create(
 );
 
 if ($response->stopReason === 'tool_use') {
-    // Extract and execute the tool
+    // Extract and run the tool
     foreach ($response->content as $block) {
         if ($block->type === 'tool_use') {
-            // Execute $block->name with $block->input and return the result to Claude
+            // Run $block->name with $block->input and return the result to Claude
         }
     }
 }
@@ -1442,10 +1450,10 @@ response = client.messages.create(
 )
 
 if response.stop_reason == :tool_use
-  # Extract and execute the tool
+  # Extract and run the tool
   response.content.each do |block|
     next unless block.type == :tool_use
-    # Execute block.name with block.input and return the result to Claude
+    # Run block.name with block.input and return the result to Claude
   end
 end
 ```
@@ -1454,7 +1462,7 @@ A `tool_use` response can also contain a `server_tool_use` block whose `id` has 
 
 With [programmatic tool calling](../agents-and-tools/tool-use/programmatic-tool-calling.md), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code completes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
 
-```text A mixed tool_use response wrap
+```json A mixed tool_use response
 {
   "stop_reason": "tool_use",
   "content": [
@@ -1831,7 +1839,7 @@ $client = new Client();
 $response = $client->messages->create(
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => '[Unsafe request]']],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 if ($response->stopReason === 'refusal') {
@@ -1857,7 +1865,7 @@ if response.stop_reason == :refusal
 end
 ```
 
-If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 ([deprecated](../about-claude/model-deprecations.md)) or Claude Opus 4.1 (the latter [retired, except on Bedrock and Google Cloud](../about-claude/model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 ([deprecated](../about-claude/model-deprecations.md)) or Claude Opus 4.1 (the latter [retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](../about-claude/model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 
 On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered in [What a refusal looks like](refusals-and-fallback.md#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
 
@@ -2285,9 +2293,9 @@ When you use [server tools](../agents-and-tools/tool-use/server-tools.md), the A
 ```python Python
 def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
     """
-    Handle server tool conversations that may require multiple continuations.
+    Handle server tool conversations that might require multiple continuations.
 
-    The server runs a sampling loop when executing server tools. If the loop
+    The server uses a sampling loop to run server tools. If the loop
     reaches its iteration limit, the API returns pause_turn. Continue the
     conversation by sending the response back to let Claude finish.
     """
@@ -2302,7 +2310,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
         )
 
         if response.stop_reason != "pause_turn":
-            # Claude finished processing - return the final response
+            # Claude finished processing: return the final response
             return response
 
         # pause_turn: replace the full message list to maintain alternating roles
@@ -2311,7 +2319,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
             {"role": "assistant", "content": response.content},
         ]
 
-    # Reached max continuations - return the last response
+    # Reached max continuations: return the last response
     return response
 ```
 
@@ -2334,7 +2342,7 @@ async function handleServerToolConversation(
     });
 
     if (response.stop_reason !== "pause_turn") {
-      // Claude finished processing - return the final response
+      // Claude finished processing: return the final response
       return response;
     }
 
@@ -2345,7 +2353,7 @@ async function handleServerToolConversation(
     ];
   }
 
-  // Reached max continuations - return the last response
+  // Reached max continuations: return the last response
   return response!;
 }
 ```
@@ -2372,7 +2380,7 @@ static async Task<Message> HandleServerToolConversation(
 
         if (response.StopReason != "pause_turn")
         {
-            // Claude finished processing - return the final response
+            // Claude finished processing: return the final response
             return response;
         }
 
@@ -2387,7 +2395,7 @@ static async Task<Message> HandleServerToolConversation(
         ];
     }
 
-    // Reached max continuations - return the last response
+    // Reached max continuations: return the last response
     return response;
 }
 ```
@@ -2415,7 +2423,7 @@ func handleServerToolConversation(
 		}
 
 		if response.StopReason != "pause_turn" {
-			// Claude finished processing - return the final response
+			// Claude finished processing: return the final response
 			return response, nil
 		}
 
@@ -2430,7 +2438,7 @@ func handleServerToolConversation(
 		}
 	}
 
-	// Reached max continuations - return the last response
+	// Reached max continuations: return the last response
 	return response, nil
 }
 ```
@@ -2458,13 +2466,13 @@ static Message handleServerToolConversation(
         response = client.messages().create(params.build());
 
         if (!response.stopReason().map(StopReason.PAUSE_TURN::equals).orElse(false)) {
-            // Claude finished processing - return the final response
+            // Claude finished processing: return the final response
             return response;
         }
         // pause_turn: loop again and send the response back
     }
 
-    // Reached max continuations - return the last response
+    // Reached max continuations: return the last response
     return response;
 }
 ```
@@ -2488,7 +2496,7 @@ function handle_server_tool_conversation(
         );
 
         if ($response->stopReason !== 'pause_turn') {
-            // Claude finished processing - return the final response
+            // Claude finished processing: return the final response
             return $response;
         }
 
@@ -2499,7 +2507,7 @@ function handle_server_tool_conversation(
         ];
     }
 
-    // Reached max continuations - return the last response
+    // Reached max continuations: return the last response
     return $response;
 }
 ```
@@ -2517,7 +2525,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
       tools: tools
     )
 
-    # Claude finished processing - return the final response
+    # Claude finished processing: return the final response
     return response unless response.stop_reason == :pause_turn
 
     # pause_turn: replace the full message list to maintain alternating roles
@@ -2527,7 +2535,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
     ]
   end
 
-  # Reached max continuations - return the last response
+  # Reached max continuations: return the last response
   response
 end
 ```
@@ -2716,7 +2724,7 @@ try {
     $response = $client->messages->create(
         maxTokens: 1024,
         messages: [['role' => 'user', 'content' => 'Hello!']],
-        model: 'claude-opus-5-5',
+        model: Model::CLAUDE_OPUS_5_5,
     );
 
     // Handle successful response with stop_reason
@@ -2763,7 +2771,7 @@ When using streaming, `stop_reason` is:
 
 ```bash cURL
 # The message_delta event in the SSE stream carries stop_reason.
-curl --no-buffer https://api.anthropic.com/v1/messages \
+curl -N https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
@@ -2889,7 +2897,7 @@ $client = new Client();
 $stream = $client->messages->createStream(
     maxTokens: 1024,
     messages: [['role' => 'user', 'content' => 'Hello!']],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 foreach ($stream as $event) {
@@ -2934,7 +2942,7 @@ def complete_tool_workflow(client, user_query, tools):
         )
 
         if response.stop_reason == "tool_use":
-            # Execute tools and continue
+            # Run tools and continue
             tool_results = execute_tools(response.content)
             messages.append({"role": "assistant", "content": response.content})
             messages.append({"role": "user", "content": tool_results})
@@ -2960,7 +2968,7 @@ async function completeToolWorkflow(
     });
 
     if (response.stop_reason === "tool_use") {
-      // Execute tools and continue
+      // Run tools and continue
       const toolResults = executeTools(response.content);
       messages.push({ role: "assistant", content: response.content });
       messages.push({ role: "user", content: toolResults });
@@ -2992,7 +3000,7 @@ static async Task<Message> CompleteToolWorkflow(
 
         if (response.StopReason == "tool_use")
         {
-            // Execute tools and continue
+            // Run tools and continue
             var toolResults = ExecuteTools(response.Content);
             messages.Add(new AssistantMessageParam
             {
@@ -3033,7 +3041,7 @@ func completeToolWorkflow(
 			return response, nil
 		}
 
-		// Execute tools and continue
+		// Run tools and continue
 		toolResults := executeTools(response.Content)
 		var contentParams []anthropic.ContentBlockParamUnion
 		for _, block := range response.Content {
@@ -3068,7 +3076,7 @@ static Message completeToolWorkflow(
             return response;
         }
 
-        // Execute tools and continue
+        // Run tools and continue
         List<ToolResultBlockParam> toolResults = executeTools(response.content());
         messages.add(response.toParam());
         messages.add(MessageParam.ofUserOfContentBlockParams(
@@ -3095,7 +3103,7 @@ function complete_tool_workflow(Client $client, string $userQuery, array $tools)
             return $response;
         }
 
-        // Execute tools and continue
+        // Run tools and continue
         $toolResults = execute_tools($response->content);
         $messages[] = ['role' => 'assistant', 'content' => $response->content];
         $messages[] = ['role' => 'user', 'content' => $toolResults];
@@ -3118,7 +3126,7 @@ def complete_tool_workflow(client, user_query, tools)
     # Final response
     return response unless response.stop_reason == :tool_use
 
-    # Execute tools and continue
+    # Run tools and continue
     tool_results = execute_tools(response.content)
     messages << { role: "assistant", content: response.content }
     messages << { role: "user", content: tool_results }

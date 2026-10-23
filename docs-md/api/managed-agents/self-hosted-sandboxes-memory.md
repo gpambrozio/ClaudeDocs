@@ -25,6 +25,8 @@ The difference is who materializes the store. On a self-hosted environment your 
 
 Memory stores cannot be attached to sessions on self-hosted environments on [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md).
 
+On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), memory stores aren't supported for sessions on self-hosted environments.
+
 ## Prepare the host
 
 Before you start the worker, create the parent directory and make it writable by the user the worker runs as:

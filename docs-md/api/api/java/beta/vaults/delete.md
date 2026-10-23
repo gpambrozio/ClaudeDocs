@@ -141,7 +141,7 @@ Delete a Vault
 
   Confirmation of a deleted vault.
 
-  - `Type type`
+  - `JsonValue type = "vault_deleted"`
 
   - `String id`
 

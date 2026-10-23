@@ -181,7 +181,7 @@ List Memories
 
     See the [memory guide](../../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-    - `Type BetaManagedAgentsMemoryType`
+    - `Type Memory`
 
     - `ID string`
 
@@ -241,7 +241,7 @@ List Memories
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-    - `Type BetaManagedAgentsMemoryPrefixType`
+    - `Type MemoryPrefix`
 
     - `Path string`
 
@@ -256,8 +256,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/anthropics/anthropic-sdk-go"
-	"github.com/anthropics/anthropic-sdk-go/option"
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
 )
 
 func main() {

@@ -6,7 +6,16 @@ url: https://platform.claude.com/docs/en/manage-claude/user-management
 description: "Manage the people in your Claude Enterprise organization with the Admin API: list members and change roles, send and withdraw invites, manage groups, and read custom roles."
 ---
 
-This page covers managing the people in your **Claude Enterprise** (claude.ai) organization programmatically, using the [Admin API](../api/beta/organization.md): list members and look them up by email address, change a member's role, remove members, send and withdraw invites, manage your enterprise's groups and their membership, and read your organization's custom roles. For Claude Console (Claude Platform) organizations, see the [Admin API guide for Claude Console](admin-api.md).
+This page covers managing the people in your **Claude Enterprise** (claude.ai) organization programmatically, using the [Admin API](../api/beta/organization.md):
+
+* List members and look them up by email address
+* Change a member's role
+* Remove members
+* Send and withdraw invites
+* Manage your enterprise's groups and their membership
+* Read your organization's custom roles
+
+For Claude Console (Claude Platform) organizations, see the [Admin API guide for Claude Console](admin-api.md).
 
 Group and custom-role requests don't require the `anthropic-beta: ce-user-management-2026-07-13` [beta header](../api/beta-headers.md). Requests that still send it are accepted and behave identically.
 
@@ -143,7 +152,7 @@ users.auto_paging_each do |user|
 end
 ```
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -592,7 +601,7 @@ removed_user = client.organization.users.remove(user_id)
 puts "id: #{removed_user.id}"
 ```
 
-```text wrap
+```json
 {
   "type": "user_deleted",
   "id": "user_01AbCdEfGhIjKlMnOpQrSt"
@@ -750,7 +759,7 @@ puts "status: #{invite.status}"
 puts "expires_at: #{invite.expires_at.iso8601}"
 ```
 
-```text wrap
+```json
 {
   "type": "invite",
   "id": "invite_01QrStUvWxYzAbCdEfGhIj",
@@ -1139,7 +1148,7 @@ groups.auto_paging_each do |group|
 end
 ```
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -1354,7 +1363,7 @@ puts "id: #{group.id}"
 puts "name: #{group.name}"
 ```
 
-```text wrap
+```json
 {
   "type": "rbac_group",
   "id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
@@ -1565,7 +1574,7 @@ deleted_group = client.beta.organization.rbac_groups.delete(rbac_group_id)
 puts "id: #{deleted_group.id}"
 ```
 
-```text wrap
+```json
 {
   "id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
   "type": "rbac_group_deleted"
@@ -1690,7 +1699,7 @@ members.auto_paging_each do |member|
 end
 ```
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -1822,7 +1831,7 @@ puts "user_id: #{member.user_id}"
 puts "email: #{member.email}"
 ```
 
-```text wrap
+```json
 {
   "type": "rbac_group_member",
   "rbac_group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
@@ -1939,7 +1948,7 @@ removed_member = client.beta.organization.rbac_groups.members.remove(
 puts "user_id: #{removed_member.user_id}"
 ```
 
-```text wrap
+```json
 {
   "rbac_group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
   "group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
@@ -2053,7 +2062,7 @@ roles.auto_paging_each do |role|
 end
 ```
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -2279,7 +2288,7 @@ permissions.auto_paging_each do |permission|
 end
 ```
 
-```text wrap
+```json
 {
   "data": [
     {

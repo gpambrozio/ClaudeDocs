@@ -360,7 +360,7 @@ var finalParameters = new MessageCreateParams
 };
 
 var finalResponse = await client.Messages.Create(finalParameters);
-var text = finalResponse.Content.Select(b => b.Value).OfType<TextBlock>().FirstOrDefault();
+var text = finalResponse.Content.Select(block => block.Value).OfType<TextBlock>().FirstOrDefault();
 Console.WriteLine($"\nClaude's response:\n{text?.Text}");
 
 Console.WriteLine("\n--- Verification ---");
@@ -692,7 +692,7 @@ $textBlock = array_find($finalResponse->content, static fn ($block): bool => $bl
 echo "\nClaude's response:\n{$textBlock->text}\n";
 
 echo "\n--- Verification ---\n";
-echo "✓ Tool results sent in single user message: " . count($toolResults) . " results\n";
+echo '✓ Tool results sent in single user message: ' . count($toolResults) . " results\n";
 echo "✓ No text before tool results in content array\n";
 echo "✓ Conversation formatted correctly for future parallel tool use\n";
 ```
@@ -1045,7 +1045,9 @@ MessageCreateParams params = MessageCreateParams.builder()
             .inputSchema(schema)
             .build()
     )
-    .toolChoice(ToolChoiceAuto.builder().disableParallelToolUse(true).build())
+    .toolChoice(ToolChoiceAuto.builder()
+        .disableParallelToolUse(true)
+        .build())
     .addUserMessage("What is the weather in San Francisco and New York?")
     .build();
 
@@ -1061,7 +1063,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'What is the weather in San Francisco and New York?']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     toolChoice: ['type' => 'auto', 'disableParallelToolUse' => true],
     tools: [
         [
@@ -1324,7 +1326,9 @@ MessageCreateParams params = MessageCreateParams.builder()
             .inputSchema(schema)
             .build()
     )
-    .toolChoice(ToolChoiceAny.builder().disableParallelToolUse(true).build())
+    .toolChoice(ToolChoiceAny.builder()
+        .disableParallelToolUse(true)
+        .build())
     .addUserMessage("What is the weather in San Francisco and New York?")
     .build();
 
@@ -1340,7 +1344,7 @@ $response = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'What is the weather in San Francisco and New York?']
     ],
-    model: 'claude-opus-5',
+    model: Model::CLAUDE_OPUS_5,
     toolChoice: ['type' => 'any', 'disableParallelToolUse' => true],
     tools: [
         [

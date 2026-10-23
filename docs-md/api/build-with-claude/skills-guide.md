@@ -250,7 +250,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Create a presentation about renewable energy']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     container: [
         'skills' => [
             [
@@ -601,7 +601,8 @@ $response = $client->messages->create(
 );
 
 // Step 2: Extract file IDs from the response
-function extractFileIds($response) {
+function extractFileIds($response)
+{
     $fileIds = [];
     foreach ($response->content as $item) {
         if ($item->type === 'bash_code_execution_tool_result') {
@@ -1048,10 +1049,7 @@ response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams
 	},
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Create a sample sales dataset and analyze it")),
-		{
-			Role:    anthropic.MessageParamRoleAssistant,
-			Content: []anthropic.ContentBlockParamUnion{anthropic.NewTextBlock(assistantText)},
-		},
+		anthropic.NewAssistantMessage(anthropic.NewTextBlock(assistantText)),
 		anthropic.NewUserMessage(anthropic.NewTextBlock("What was the total revenue?")),
 	},
 	Tools: []anthropic.ToolUnionParam{
@@ -1914,7 +1912,7 @@ puts message
 
 ## Managing custom Skills
 
-**Custom Skills are accessible to your entire workspace, not scoped to an end user, conversation, or session.** Any API key with access to a workspace can read, use, and delete every custom Skill uploaded to that workspace. Every service account, and every user whose organization role allows API access, can use the Default Workspace in addition to any workspace you add them to, so keep Skills that must stay separate in their own workspace and access them only with [keys scoped to that workspace](../manage-claude/workspaces.md#api-keys-and-resource-scoping).
+**Custom Skills are accessible to your entire workspace, not scoped to an end user, conversation, or session.** Any API key with access to a workspace can read, use, and delete every custom Skill uploaded to that workspace. Every service account, and every user whose organization role allows API access, can use the Default Workspace in addition to any workspace you add them to. For that reason, keep Skills that must stay separate in their own workspace and access them only with [keys scoped to that workspace](../manage-claude/workspaces.md#api-keys-and-resource-scoping).
 
 If you are building a multitenant platform on the Skills API, create a separate [workspace](../manage-claude/workspaces.md) for each tenant. The workspace is the isolation boundary for custom Skills, so a workspace for each tenant gives that tenant's Skills hard isolation from every other tenant. Each organization can have up to 100 workspaces by default (see [How workspaces work](../manage-claude/workspaces.md#how-workspaces-work)); if you need more for tenant isolation, contact your account team.
 
@@ -2028,7 +2026,7 @@ var parameters = new SkillCreateParams
 
 var skill = await client.Skills.Create(parameters);
 
-// Option 2: Using individual files (path-qualified filenames preserve the Skill's directory layout)
+// Option 2: Using individual files (path-qualified file names preserve the Skill's directory layout)
 var parameters2 = new SkillCreateParams
 {
     Files =
@@ -2118,7 +2116,7 @@ void main() throws Exception {
 
     Skill skill = client.skills().create(params);
 
-    // Option 2: Using individual files (path-qualified filenames preserve the Skill's directory layout)
+    // Option 2: Using individual files (path-qualified file names preserve the Skill's directory layout)
     SkillCreateParams params2 = SkillCreateParams.builder()
         .addFile(MultipartField.<InputStream>builder()
             .value(Files.newInputStream(Path.of("financial_skill/SKILL.md")))
@@ -2459,7 +2457,7 @@ puts "Created: #{skill.created_at}"
 
 ### Deleting a Skill
 
-Deleting a Skill also removes all of its versions.
+Deleting a Skill also deletes all of its versions.
 
 ```bash cURL
 curl -X DELETE "https://api.anthropic.com/v1/skills/skill_01AbCdEfGhIjKlMnOpQrStUv" \
@@ -3484,7 +3482,7 @@ puts response
 
 ### Request limits
 
-* **Maximum Skills per request:** 20
+* **Maximum Skills for each request:** 20
 
 * **Maximum Skill upload size:** 30 MB (all files combined, uncompressed)
 
@@ -3825,7 +3823,7 @@ curl https://api.anthropic.com/v1/messages \
     "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
   }'
 
-# Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
+# Changing the Skills list ([xlsx] versus [xlsx, pptx]) changes the prefix: a cache miss, whereas an identical list is a cache hit
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
@@ -3862,7 +3860,7 @@ tools:
     name: code_execution
 YAML
 
-# Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
+# Changing the Skills list ([xlsx] versus [xlsx, pptx]) changes the prefix: a cache miss, whereas an identical list is a cache hit
 ant messages create <<'YAML'
 model: claude-opus-5-5
 max_tokens: 4096
@@ -3897,7 +3895,7 @@ response1 = client.messages.create(
     tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
 )
 
-# Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
+# Changing the Skills list ([xlsx] versus [xlsx, pptx]) changes the prefix: a cache miss, whereas an identical list is a cache hit
 response2 = client.messages.create(
     model="claude-opus-5-5",
     max_tokens=4096,
@@ -3930,7 +3928,7 @@ const response1 = await client.messages.create({
   tools: [{ type: "code_execution_20250825", name: "code_execution" }]
 });
 
-// Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
+// Changing the Skills list ([xlsx] versus [xlsx, pptx]) changes the prefix: a cache miss, whereas an identical list is a cache hit
 const response2 = await client.messages.create({
   model: "claude-opus-5-5",
   max_tokens: 4096,
@@ -3972,7 +3970,7 @@ var parameters1 = new MessageCreateParams
 var response1 = await client.Messages.Create(parameters1);
 Console.WriteLine(response1);
 
-// Different Skill set ([xlsx] vs [xlsx, pptx]) = a different prefix: a cache miss (an identical set is a cache hit)
+// Changing the Skills list ([xlsx] versus [xlsx, pptx]) changes the prefix: a cache miss, whereas an identical list is a cache hit
 var parameters2 = new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
@@ -4033,7 +4031,7 @@ if err != nil {
 }
 fmt.Println(response1)
 
-// Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
+// Changing the Skills list ([xlsx] versus [xlsx, pptx]) changes the prefix: a cache miss, whereas an identical list is a cache hit
 response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Model:     anthropic.ModelClaudeOpus5_5,
 	MaxTokens: 4096,
@@ -4094,7 +4092,7 @@ void main() {
     Message response1 = client.messages().create(params1);
     System.out.println(response1);
 
-    // Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
+    // Changing the Skills list ([xlsx] versus [xlsx, pptx]) changes the prefix: a cache miss, whereas an identical list is a cache hit
     MessageCreateParams params2 = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(4096L)
@@ -4130,7 +4128,7 @@ $response1 = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Analyze sales data']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     container: [
         'skills' => [
             ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest']
@@ -4142,13 +4140,13 @@ $response1 = $client->messages->create(
 );
 echo $response1;
 
-// Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
+// Changing the Skills list ([xlsx] versus [xlsx, pptx]) changes the prefix: a cache miss, whereas an identical list is a cache hit
 $response2 = $client->messages->create(
     maxTokens: 4096,
     messages: [
         ['role' => 'user', 'content' => 'Create a presentation']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     container: [
         'skills' => [
             ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest'],
@@ -4177,7 +4175,7 @@ response1 = client.messages.create(
 )
 puts response1
 
-# Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
+# Changing the Skills list ([xlsx] versus [xlsx, pptx]) changes the prefix: a cache miss, whereas an identical list is a cache hit
 response2 = client.messages.create(
   model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 4096,
@@ -4394,7 +4392,7 @@ try {
     echo $message;
 } catch (BadRequestException $e) {
     if (str_contains($e->getMessage(), 'skill')) {
-        echo "Skill error: " . $e->getMessage();
+        echo 'Skill error: ' . $e->getMessage();
     } else {
         throw $e;
     }

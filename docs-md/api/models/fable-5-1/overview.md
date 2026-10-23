@@ -20,7 +20,20 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTo
 
 Claude Fable 5.1 extends Claude Fable 5 at the same input and output prices, with cache reads at a quarter of the cost, and brings stronger long-running agentic coding, multistep research, and document, spreadsheet, and slide work. For most workloads, start with Claude Opus 5.5 (see [Choosing a model](../../about-claude/models/choosing-a-model.md)). Use Claude Fable 5.1 for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5.5 at higher effort still don't meet your requirements. Claude Mythos 5.1 offers the same capabilities only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842).
 
-If you already call Claude Fable 5, four changes are breaking: [forced tool use returns an error](whats-new-fable-5-1.md#forced-tool-use-is-not-supported), only Claude Fable 5.1 and Claude Mythos 5.1 can [read Claude Fable 5.1's thinking blocks](whats-new-fable-5-1.md#thinking-blocks-are-tied-to-the-model-that-produced-them), [editing earlier turns invalidates thinking blocks](whats-new-fable-5-1.md#editing-earlier-turns-invalidates-thinking-blocks), and [some advisor tool pairings are not supported](whats-new-fable-5-1.md#advisor-tool-pairings). Five are additive: [mid-conversation effort changes](whats-new-fable-5-1.md#change-effort-mid-conversation-beta) (beta), [turn-scoped system messages](whats-new-fable-5-1.md#turn-scoped-system-messages-beta) (beta), [readable progress updates between tool calls](whats-new-fable-5-1.md#progress-updates-between-tool-calls-beta) (`display: "updates"`, beta), a [lower cache read price](whats-new-fable-5-1.md#pricing), and [content provenance](whats-new-fable-5-1.md#content-provenance).
+If you already call Claude Fable 5, four changes are breaking:
+
+* [Forced tool use returns an error](whats-new-fable-5-1.md#forced-tool-use-is-not-supported).
+* Only Claude Fable 5.1 and Claude Mythos 5.1 can [read Claude Fable 5.1's thinking blocks](whats-new-fable-5-1.md#thinking-blocks-are-tied-to-the-model-that-produced-them).
+* [Editing earlier turns invalidates thinking blocks](whats-new-fable-5-1.md#editing-earlier-turns-invalidates-thinking-blocks).
+* [Some advisor tool pairings are not supported](whats-new-fable-5-1.md#advisor-tool-pairings).
+
+Five changes are additive:
+
+* [Mid-conversation effort changes](whats-new-fable-5-1.md#change-effort-mid-conversation-beta) (beta)
+* [Turn-scoped system messages](whats-new-fable-5-1.md#turn-scoped-system-messages-beta) (beta)
+* [Readable progress updates between tool calls](whats-new-fable-5-1.md#progress-updates-between-tool-calls-beta) (`display: "updates"`, beta)
+* A [lower cache read price](whats-new-fable-5-1.md#pricing)
+* [Content provenance](whats-new-fable-5-1.md#content-provenance)
 
 [What's new in Claude Fable 5.1](whats-new-fable-5-1.md)
 
@@ -49,13 +62,14 @@ If you already call Claude Fable 5, four changes are breaking: [forced tool use 
 
 ### Model IDs
 
-| Platform                                                                                               | Model ID                     |
-| :----------------------------------------------------------------------------------------------------- | :--------------------------- |
-| Claude API                                                                                             | `claude-fable-5-1`           |
-| [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)       | `anthropic.claude-fable-5-1` |
-| [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md)              | `claude-fable-5-1`           |
-| [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) | `claude-fable-5-1`           |
-| [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) | `claude-fable-5-1`           |
+| Platform                                                                                                                                                   | Model ID                     |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------- |
+| Claude API                                                                                                                                                 | `claude-fable-5-1`           |
+| [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)                                                           | `anthropic.claude-fable-5-1` |
+| [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md)       | `claude-fable-5-1`           |
+| [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)                                                     | `claude-fable-5-1`           |
+| [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)                                                     | `claude-fable-5-1`           |
+| [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | `claude-fable-5-1`           |
 
 ### Pricing
 
@@ -85,12 +99,12 @@ If you already call Claude Fable 5, four changes are breaking: [forced tool use 
 
 ### Availability
 
-| Feature                                                                       | Value                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Status](../../about-claude/model-deprecations.md) | Active (latest)                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Released                                                                      | September 1, 2026                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Retirement                                                                    | Not sooner than September 1, 2027                                                                                                                                                                                                                                                                                                                                                                                       |
-| Platforms                                                                     | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Google Cloud](../../build-with-claude/claude-on-vertex-ai.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) |
+| Feature                                                                       | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| :---------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Status](../../about-claude/model-deprecations.md) | Active (latest)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Released                                                                      | September 1, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Retirement                                                                    | Not sooner than September 1, 2027                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Platforms                                                                     | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) |
 
 ## Resources
 

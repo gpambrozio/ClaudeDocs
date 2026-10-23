@@ -47,7 +47,7 @@ Compute this size in code.
 import math
 
 def count_image_tokens(width: int, height: int) -> int:
-    """Visual tokens consumed by an image: one token per 28x28 pixel patch."""
+    """Visual tokens consumed by an image: one token for each 28x28 pixel patch."""
     return math.ceil(width / 28) * math.ceil(height / 28)
 
 def resized_size(
@@ -96,7 +96,7 @@ print(resized_size(1075, 1520))  # (924, 1307)
 ```
 
 ```typescript TypeScript
-/** Visual tokens consumed by an image: one token per 28x28 pixel patch. */
+/** Visual tokens consumed by an image: one token for each 28x28 pixel patch. */
 function countImageTokens(width: number, height: number): number {
   return Math.ceil(width / 28) * Math.ceil(height / 28);
 }
@@ -164,7 +164,7 @@ console.log(resizedSize(1075, 1520)); // [ 924, 1307 ]
 ```
 
 ```csharp C#
-// Visual tokens consumed by an image: one token per 28x28 pixel patch.
+// Visual tokens consumed by an image: one token for each 28x28 pixel patch.
 static int CountImageTokens(int width, int height)
 {
     return (width + 27) / 28 * ((height + 27) / 28); // ceil(w/28) * ceil(h/28)
@@ -221,7 +221,7 @@ Console.WriteLine(ResizedSize(1075, 1520)); // (924, 1307)
 ```
 
 ```go Go
-// countImageTokens is the visual tokens consumed by an image: one token per
+// countImageTokens is the visual tokens consumed by an image: one token for each
 // 28x28 pixel patch.
 func countImageTokens(width, height int) int {
 	return ((width + 27) / 28) * ((height + 27) / 28) // ceil(w/28) * ceil(h/28)
@@ -270,7 +270,7 @@ func resizedSize(width, height, maxEdge, maxTokens int) (int, int) {
 /** A resized image size, as returned by resizedSize. */
 record Size(int width, int height) {}
 
-/** Visual tokens consumed by an image: one token per 28x28 pixel patch. */
+/** Visual tokens consumed by an image: one token for each 28x28 pixel patch. */
 static int countImageTokens(int width, int height) {
     return Math.ceilDiv(width, 28) * Math.ceilDiv(height, 28);
 }
@@ -313,8 +313,8 @@ static Size resizedSize(int width, int height, int maxEdge, int maxTokens) {
 
 private static boolean fits(int width, int height, int maxEdge, int maxTokens) {
     return Math.ceilDiv(width, 28) * 28 <= maxEdge
-            && Math.ceilDiv(height, 28) * 28 <= maxEdge
-            && countImageTokens(width, height) <= maxTokens;
+        && Math.ceilDiv(height, 28) * 28 <= maxEdge
+        && countImageTokens(width, height) <= maxTokens;
 }
 
 private static int shortEdge(int longEdge, double aspectRatio) {
@@ -323,7 +323,7 @@ private static int shortEdge(int longEdge, double aspectRatio) {
 ```
 
 ```php PHP
-// Visual tokens consumed by an image: one token per 28x28 pixel patch.
+// Visual tokens consumed by an image: one token for each 28x28 pixel patch.
 function countImageTokens(int $width, int $height): int
 {
     return intdiv($width + 27, 28) * intdiv($height + 27, 28);
@@ -376,7 +376,7 @@ echo "({$resizedWidth}, {$resizedHeight})\n"; // (924, 1307)
 ```
 
 ```ruby Ruby
-# Visual tokens consumed by an image: one token per 28x28 pixel patch.
+# Visual tokens consumed by an image: one token for each 28x28 pixel patch.
 def count_image_tokens(width, height)
   width.ceildiv(28) * height.ceildiv(28)
 end

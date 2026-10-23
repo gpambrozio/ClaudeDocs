@@ -161,7 +161,7 @@ Create a Memory Store
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store"`
 
   - `required string ID`
 
@@ -393,7 +393,7 @@ List Memory Stores
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store"`
 
   - `required string ID`
 
@@ -608,7 +608,7 @@ Retrieve a Memory Store
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store"`
 
   - `required string ID`
 
@@ -843,7 +843,7 @@ Update a Memory Store
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store"`
 
   - `required string ID`
 
@@ -1058,7 +1058,7 @@ Delete a Memory Store
 
   Confirmation that a `memory_store` was deleted.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store_deleted"`
 
   - `required string ID`
 
@@ -1227,7 +1227,7 @@ Archive a Memory Store
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store"`
 
   - `required string ID`
 
@@ -1312,7 +1312,7 @@ Console.WriteLine(betaManagedAgentsMemoryStore);
 
   Confirmation that a `memory_store` was deleted.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store_deleted"`
 
   - `required string ID`
 
@@ -1324,7 +1324,7 @@ Console.WriteLine(betaManagedAgentsMemoryStore);
 
   A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_store"`
 
   - `required string ID`
 
@@ -1530,7 +1530,7 @@ Create a Memory
 
   See the [memory guide](../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory"`
 
   - `required string ID`
 
@@ -1795,7 +1795,7 @@ List Memories
 
     See the [memory guide](../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-    - `required Type Type`
+    - `JsonElement Type = "memory"`
 
     - `required string ID`
 
@@ -1855,7 +1855,7 @@ List Memories
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
-    - `required Type Type`
+    - `JsonElement Type = "memory_prefix"`
 
     - `required string Path`
 
@@ -2048,7 +2048,7 @@ Retrieve a Memory
 
   See the [memory guide](../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory"`
 
   - `required string ID`
 
@@ -2304,7 +2304,7 @@ Update a Memory
 
   See the [memory guide](../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory"`
 
   - `required string ID`
 
@@ -2542,7 +2542,7 @@ Delete a Memory
 
   See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_deleted"`
 
   - `required string ID`
 
@@ -2770,7 +2770,7 @@ List Memory Versions
 
   See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_version"`
 
   - `required string ID`
 
@@ -2834,7 +2834,7 @@ List Memory Versions
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "session_actor"`
 
       - `required string SessionID`
 
@@ -2846,7 +2846,7 @@ List Memory Versions
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `required Type Type`
+      - `JsonElement Type = "api_actor"`
 
       - `required string ApiKeyID`
 
@@ -2858,7 +2858,7 @@ List Memory Versions
 
       A human user, for example acting through the Anthropic Console.
 
-      - `required Type Type`
+      - `JsonElement Type = "user_actor"`
 
       - `required string UserID`
 
@@ -3097,7 +3097,7 @@ Retrieve a Memory Version
 
   See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_version"`
 
   - `required string ID`
 
@@ -3161,7 +3161,7 @@ Retrieve a Memory Version
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "session_actor"`
 
       - `required string SessionID`
 
@@ -3173,7 +3173,7 @@ Retrieve a Memory Version
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `required Type Type`
+      - `JsonElement Type = "api_actor"`
 
       - `required string ApiKeyID`
 
@@ -3185,7 +3185,7 @@ Retrieve a Memory Version
 
       A human user, for example acting through the Anthropic Console.
 
-      - `required Type Type`
+      - `JsonElement Type = "user_actor"`
 
       - `required string UserID`
 
@@ -3412,7 +3412,7 @@ Redact a Memory Version
 
   See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
-  - `required Type Type`
+  - `JsonElement Type = "memory_version"`
 
   - `required string ID`
 
@@ -3476,7 +3476,7 @@ Redact a Memory Version
 
       An agent acting during a session, for example through the session's mounted filesystem. It names the session itself, not the user or API key that started the session.
 
-      - `required Type Type`
+      - `JsonElement Type = "session_actor"`
 
       - `required string SessionID`
 
@@ -3488,7 +3488,7 @@ Redact a Memory Version
 
       A direct caller of the public API, identified by the API key that authenticated the request.
 
-      - `required Type Type`
+      - `JsonElement Type = "api_actor"`
 
       - `required string ApiKeyID`
 
@@ -3500,7 +3500,7 @@ Redact a Memory Version
 
       A human user, for example acting through the Anthropic Console.
 
-      - `required Type Type`
+      - `JsonElement Type = "user_actor"`
 
       - `required string UserID`
 

@@ -67,7 +67,7 @@ List Deployment Runs
 
 - `class BetaManagedAgentsDeploymentRun`
 
-  - `Type type`
+  - `"deployment_run" type`
 
   - `string id`
 
@@ -185,7 +185,7 @@ Get Deployment Run
 
 - `class BetaManagedAgentsDeploymentRun`
 
-  - `Type type`
+  - `"deployment_run" type`
 
   - `string id`
 
@@ -267,7 +267,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsAgentArchivedRunError`
 
-  - `Type type`
+  - `"agent_archived_error" type`
 
   - `string message`
 
@@ -277,7 +277,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsDeploymentRun`
 
-  - `Type type`
+  - `"deployment_run" type`
 
   - `string id`
 
@@ -311,7 +311,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsEnvironmentArchivedRunError`
 
-  - `Type type`
+  - `"environment_archived_error" type`
 
   - `string message`
 
@@ -321,7 +321,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsEnvironmentNotFoundRunError`
 
-  - `Type type`
+  - `"environment_not_found_error" type`
 
   - `string message`
 
@@ -331,7 +331,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsFileNotFoundRunError`
 
-  - `Type type`
+  - `"file_not_found_error" type`
 
   - `string message`
 
@@ -341,13 +341,13 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsManualTriggerContext`
 
-  - `Type type`
+  - `"manual" type`
 
 ### Beta Managed Agents MCP Egress Blocked Run Error
 
 - `class BetaManagedAgentsMCPEgressBlockedRunError`
 
-  - `Type type`
+  - `"mcp_egress_blocked_error" type`
 
   - `string message`
 
@@ -357,7 +357,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsMemoryStoreArchivedRunError`
 
-  - `Type type`
+  - `"memory_store_archived_error" type`
 
   - `string message`
 
@@ -367,7 +367,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsOrganizationDisabledRunError`
 
-  - `Type type`
+  - `"organization_disabled_error" type`
 
   - `string message`
 
@@ -377,7 +377,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsScheduleTriggerContext`
 
-  - `Type type`
+  - `"schedule" type`
 
   - `\Datetime scheduledAt`
 
@@ -387,7 +387,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
 
-  - `Type type`
+  - `"self_hosted_resources_unsupported_error" type`
 
   - `string message`
 
@@ -397,7 +397,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsSessionCreationRejectedRunError`
 
-  - `Type type`
+  - `"session_creation_rejected_error" type`
 
   - `string message`
 
@@ -407,7 +407,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsSessionRateLimitedRunError`
 
-  - `Type type`
+  - `"session_rate_limited_error" type`
 
   - `string message`
 
@@ -417,7 +417,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsSessionResourceNotFoundRunError`
 
-  - `Type type`
+  - `"session_resource_not_found_error" type`
 
   - `string message`
 
@@ -427,7 +427,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsSkillNotFoundRunError`
 
-  - `Type type`
+  - `"skill_not_found_error" type`
 
   - `string message`
 
@@ -439,7 +439,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
   - `class BetaManagedAgentsScheduleTriggerContext`
 
-    - `Type type`
+    - `"schedule" type`
 
     - `\Datetime scheduledAt`
 
@@ -447,7 +447,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
   - `class BetaManagedAgentsManualTriggerContext`
 
-    - `Type type`
+    - `"manual" type`
 
 ### Beta Managed Agents Trigger Type
 
@@ -465,7 +465,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsUnknownRunError`
 
-  - `Type type`
+  - `"unknown_error" type`
 
   - `string message`
 
@@ -475,7 +475,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsVaultArchivedRunError`
 
-  - `Type type`
+  - `"vault_archived_error" type`
 
   - `string message`
 
@@ -485,7 +485,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsVaultNotFoundRunError`
 
-  - `Type type`
+  - `"vault_not_found_error" type`
 
   - `string message`
 
@@ -495,7 +495,7 @@ var_dump($betaManagedAgentsDeploymentRun);
 
 - `class BetaManagedAgentsWorkspaceArchivedRunError`
 
-  - `Type type`
+  - `"workspace_archived_error" type`
 
   - `string message`
 

@@ -853,7 +853,6 @@ Get Agent
 
 ```bash
 ant beta:agents retrieve \
-  --api-key my-anthropic-api-key \
   --agent-id agent_011CZkYpogX7uDKUyvBTophP
 ```
 

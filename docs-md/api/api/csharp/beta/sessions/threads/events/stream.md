@@ -153,7 +153,7 @@ Stream Session Thread Events
 
     A user message event in the session conversation.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.message"`
 
     - `required string ID`
 
@@ -167,7 +167,7 @@ Stream Session Thread Events
 
         Regular text content.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Text`
 
@@ -179,7 +179,7 @@ Stream Session Thread Events
 
         Image content specified directly as base64 data or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "image"`
 
         - `required Source Source`
 
@@ -189,7 +189,7 @@ Stream Session Thread Events
 
             Base64-encoded image data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -207,7 +207,7 @@ Stream Session Thread Events
 
             Image referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -219,7 +219,7 @@ Stream Session Thread Events
 
             Image referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -231,7 +231,7 @@ Stream Session Thread Events
 
         Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
-        - `required Type Type`
+        - `JsonElement Type = "document"`
 
         - `required Source Source`
 
@@ -241,7 +241,7 @@ Stream Session Thread Events
 
             Base64-encoded document data.
 
-            - `required Type Type`
+            - `JsonElement Type = "base64"`
 
             - `required string Data`
 
@@ -259,7 +259,7 @@ Stream Session Thread Events
 
             Plain text document content.
 
-            - `required Type Type`
+            - `JsonElement Type = "text"`
 
             - `required string Data`
 
@@ -267,7 +267,7 @@ Stream Session Thread Events
 
               minLength: 1
 
-            - `required MediaType MediaType`
+            - `JsonElement MediaType = "text/plain"`
 
               MIME type of the text content. Must be "text/plain".
 
@@ -275,7 +275,7 @@ Stream Session Thread Events
 
             Document referenced by URL.
 
-            - `required Type Type`
+            - `JsonElement Type = "url"`
 
             - `required string Url`
 
@@ -287,7 +287,7 @@ Stream Session Thread Events
 
             Document referenced by file ID.
 
-            - `required Type Type`
+            - `JsonElement Type = "file"`
 
             - `required string FileID`
 
@@ -307,7 +307,7 @@ Stream Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-        - `required Type Type`
+        - `JsonElement Type = "redacted"`
 
     - `DateTimeOffset? ProcessedAt`
 
@@ -319,7 +319,7 @@ Stream Session Thread Events
 
     An interrupt event that pauses agent execution and returns control to the user.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.interrupt"`
 
     - `required string ID`
 
@@ -339,7 +339,7 @@ Stream Session Thread Events
 
     A tool confirmation event that approves or denies a pending tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.tool_confirmation"`
 
     - `required string ID`
 
@@ -377,7 +377,7 @@ Stream Session Thread Events
 
     Event sent by the client providing the result of a custom tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.custom_tool_result"`
 
     - `required string ID`
 
@@ -407,7 +407,7 @@ Stream Session Thread Events
 
         A block containing a web search result.
 
-        - `required Type Type`
+        - `JsonElement Type = "search_result"`
 
         - `required BetaManagedAgentsSearchResultCitations Citations`
 
@@ -421,7 +421,7 @@ Stream Session Thread Events
 
           Array of text content blocks from the search result.
 
-          - `required Type Type`
+          - `JsonElement Type = "text"`
 
           - `required string Text`
 
@@ -459,7 +459,7 @@ Stream Session Thread Events
 
     Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result. The client can send it as soon as this event arrives, without waiting for `session.status_idle`.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.custom_tool_use"`
 
     - `required string ID`
 
@@ -487,7 +487,7 @@ Stream Session Thread Events
 
     An agent response event in the session conversation.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.message"`
 
     - `required string ID`
 
@@ -515,7 +515,7 @@ Stream Session Thread Events
 
     Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thinking"`
 
     - `required string ID`
 
@@ -531,7 +531,7 @@ Stream Session Thread Events
 
     Event emitted when the agent invokes a tool provided by an MCP server.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.mcp_tool_use"`
 
     - `required string ID`
 
@@ -629,7 +629,7 @@ Stream Session Thread Events
 
     Event representing the result of an MCP tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.mcp_tool_result"`
 
     - `required string ID`
 
@@ -673,7 +673,7 @@ Stream Session Thread Events
 
     Event emitted when the agent invokes a built-in agent tool.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.tool_use"`
 
     - `required string ID`
 
@@ -709,7 +709,7 @@ Stream Session Thread Events
 
     Event representing the result of an agent tool execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.tool_result"`
 
     - `required string ID`
 
@@ -753,7 +753,7 @@ Stream Session Thread Events
 
     Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_message_received"`
 
     - `required string ID`
 
@@ -797,7 +797,7 @@ Stream Session Thread Events
 
     Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_message_sent"`
 
     - `required string ID`
 
@@ -841,7 +841,7 @@ Stream Session Thread Events
 
     Indicates that context compaction (summarization) occurred during the session.
 
-    - `required Type Type`
+    - `JsonElement Type = "agent.thread_context_compacted"`
 
     - `required string ID`
 
@@ -857,7 +857,7 @@ Stream Session Thread Events
 
     An error event indicating a problem occurred during session execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.error"`
 
     - `required string ID`
 
@@ -869,7 +869,7 @@ Stream Session Thread Events
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-        - `required Type Type`
+        - `JsonElement Type = "unknown_error"`
 
         - `required string Message`
 
@@ -883,25 +883,25 @@ Stream Session Thread Events
 
             The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
-            - `required Type Type`
+            - `JsonElement Type = "retrying"`
 
           - `class BetaManagedAgentsRetryStatusExhausted`
 
             This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
-            - `required Type Type`
+            - `JsonElement Type = "exhausted"`
 
           - `class BetaManagedAgentsRetryStatusTerminal`
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-            - `required Type Type`
+            - `JsonElement Type = "terminal"`
 
       - `class BetaManagedAgentsModelOverloadedError`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_overloaded_error"`
 
         - `required string Message`
 
@@ -927,7 +927,7 @@ Stream Session Thread Events
 
         The model request was rate-limited.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_rate_limited_error"`
 
         - `required string Message`
 
@@ -953,7 +953,7 @@ Stream Session Thread Events
 
         A model request failed for a reason other than overload or rate-limiting.
 
-        - `required Type Type`
+        - `JsonElement Type = "model_request_failed_error"`
 
         - `required string Message`
 
@@ -979,7 +979,7 @@ Stream Session Thread Events
 
         Failed to connect to an MCP server.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_connection_failed_error"`
 
         - `required string McpServerName`
 
@@ -1009,7 +1009,7 @@ Stream Session Thread Events
 
         Authentication to an MCP server failed.
 
-        - `required Type Type`
+        - `JsonElement Type = "mcp_authentication_failed_error"`
 
         - `required string McpServerName`
 
@@ -1039,7 +1039,7 @@ Stream Session Thread Events
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
-        - `required Type Type`
+        - `JsonElement Type = "billing_error"`
 
         - `required string Message`
 
@@ -1065,7 +1065,7 @@ Stream Session Thread Events
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
-        - `required Type Type`
+        - `JsonElement Type = "credential_host_unreachable_error"`
 
         - `required string CredentialID`
 
@@ -1255,7 +1255,7 @@ Stream Session Thread Events
 
     Indicates the session is recovering from an error state and is rescheduled for execution.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_rescheduled"`
 
     - `required string ID`
 
@@ -1271,7 +1271,7 @@ Stream Session Thread Events
 
     Indicates the session is actively running and the agent is working.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_running"`
 
     - `required string ID`
 
@@ -1287,7 +1287,7 @@ Stream Session Thread Events
 
     Indicates the agent has paused and is awaiting user input.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_idle"`
 
     - `required string ID`
 
@@ -1329,13 +1329,13 @@ Stream Session Thread Events
 
         The agent completed its turn naturally and is ready for the next user message.
 
-        - `required Type Type`
+        - `JsonElement Type = "end_turn"`
 
       - `class BetaManagedAgentsSessionRequiresAction`
 
         The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
-        - `required Type Type`
+        - `JsonElement Type = "requires_action"`
 
         - `required IReadOnlyList<string> EventIds`
 
@@ -1345,13 +1345,13 @@ Stream Session Thread Events
 
         The turn ended because repeated errors exhausted the retry budget or an error escalated to `retry_status: 'exhausted'`.
 
-        - `required Type Type`
+        - `JsonElement Type = "retries_exhausted"`
 
       - `class BetaManagedAgentsSessionBudgetReached`
 
         The agent stopped because the session's tracked list cost reached its budget, or because its usage includes a model with no list price (which the budget cannot measure). Raise the budget to continue — or, if raising is rejected because a model has no list price, remove the budget.
 
-        - `required Type Type`
+        - `JsonElement Type = "budget_reached"`
 
       - `class BetaManagedAgentsSessionRefusal`
 
@@ -1363,7 +1363,7 @@ Stream Session Thread Events
 
     Indicates the session has terminated, either due to an error or completion.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.status_terminated"`
 
     - `required string ID`
 
@@ -1379,7 +1379,7 @@ Stream Session Thread Events
 
     Emitted when a child thread is created. Written to the parent thread's output stream so clients observing the session see child creation.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_created"`
 
     - `required string ID`
 
@@ -1407,7 +1407,7 @@ Stream Session Thread Events
 
     Emitted when an outcome evaluation cycle begins.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_start"`
 
     - `required string ID`
 
@@ -1433,7 +1433,7 @@ Stream Session Thread Events
 
     Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_end"`
 
     - `required string ID`
 
@@ -1507,7 +1507,7 @@ Stream Session Thread Events
 
     Emitted when a model request is initiated by the agent.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.model_request_start"`
 
     - `required string ID`
 
@@ -1523,7 +1523,7 @@ Stream Session Thread Events
 
     Emitted when a model request completes.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.model_request_end"`
 
     - `required string ID`
 
@@ -1551,7 +1551,7 @@ Stream Session Thread Events
 
     Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
-    - `required Type Type`
+    - `JsonElement Type = "span.outcome_evaluation_ongoing"`
 
     - `required string ID`
 
@@ -1577,7 +1577,7 @@ Stream Session Thread Events
 
     Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.define_outcome"`
 
     - `required string ID`
 
@@ -1611,7 +1611,7 @@ Stream Session Thread Events
 
         Rubric referenced by a file uploaded via the Files API.
 
-        - `required Type Type`
+        - `JsonElement Type = "file"`
 
         - `required string FileID`
 
@@ -1621,7 +1621,7 @@ Stream Session Thread Events
 
         Rubric content provided inline as text.
 
-        - `required Type Type`
+        - `JsonElement Type = "text"`
 
         - `required string Content`
 
@@ -1631,7 +1631,7 @@ Stream Session Thread Events
 
     Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.deleted"`
 
     - `required string ID`
 
@@ -1647,7 +1647,7 @@ Stream Session Thread Events
 
     A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_running"`
 
     - `required string ID`
 
@@ -1671,7 +1671,7 @@ Stream Session Thread Events
 
     A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_idle"`
 
     - `required string ID`
 
@@ -1721,7 +1721,7 @@ Stream Session Thread Events
 
     A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_terminated"`
 
     - `required string ID`
 
@@ -1745,7 +1745,7 @@ Stream Session Thread Events
 
     Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
-    - `required Type Type`
+    - `JsonElement Type = "user.tool_result"`
 
     - `required string ID`
 
@@ -1793,7 +1793,7 @@ Stream Session Thread Events
 
     A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.thread_status_rescheduled"`
 
     - `required string ID`
 
@@ -1817,7 +1817,7 @@ Stream Session Thread Events
 
     Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.updated"`
 
     - `required string ID`
 
@@ -1833,7 +1833,7 @@ Stream Session Thread Events
 
       The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
-      - `required Type Type`
+      - `JsonElement Type = "agent"`
 
       - `required string ID`
 
@@ -1861,7 +1861,7 @@ Stream Session Thread Events
 
       - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-        - `required Type Type`
+        - `JsonElement Type = "url"`
 
         - `required string Name`
 
@@ -1953,31 +1953,31 @@ Stream Session Thread Events
 
             Low effort. Favors latency over reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "low"`
 
           - `class BetaManagedAgentsEffortMedium`
 
             Medium effort. Balances latency and reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "medium"`
 
           - `class BetaManagedAgentsEffortHigh`
 
             High effort. Favors reasoning depth.
 
-            - `required Type Type`
+            - `JsonElement Type = "high"`
 
           - `class BetaManagedAgentsEffortXhigh`
 
             Extra-high effort. Not all models accept this level.
 
-            - `required Type Type`
+            - `JsonElement Type = "xhigh"`
 
           - `class BetaManagedAgentsEffortMax`
 
             Maximum effort. Favors reasoning depth over latency.
 
-            - `required Type Type`
+            - `JsonElement Type = "max"`
 
         - `string InferenceGeo`
 
@@ -1999,7 +1999,7 @@ Stream Session Thread Events
 
           Resolved coordinator topology with full agent definitions for each roster member.
 
-          - `required Type Type`
+          - `JsonElement Type = "coordinator"`
 
           - `required IReadOnlyList<Agent> Agents`
 
@@ -2009,7 +2009,7 @@ Stream Session Thread Events
 
               Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
-              - `required Type Type`
+              - `JsonElement Type = "agent"`
 
               - `required string ID`
 
@@ -2021,7 +2021,7 @@ Stream Session Thread Events
 
               - `required IReadOnlyList<BetaManagedAgentsMcpServerUrlDefinition> McpServers`
 
-                - `required Type Type`
+                - `JsonElement Type = "url"`
 
                 - `required string Name`
 
@@ -2039,7 +2039,7 @@ Stream Session Thread Events
 
                   A resolved Anthropic-managed skill.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "anthropic"`
 
                   - `required string SkillID`
 
@@ -2049,7 +2049,7 @@ Stream Session Thread Events
 
                   A resolved user-created custom skill.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "custom"`
 
                   - `required string SkillID`
 
@@ -2061,7 +2061,7 @@ Stream Session Thread Events
 
                 - `class BetaManagedAgentsAgentToolset20260401`
 
-                  - `required Type Type`
+                  - `JsonElement Type = "agent_toolset_20260401"`
 
                   - `required IReadOnlyList<BetaManagedAgentsAgentToolConfig> Configs`
 
@@ -2083,13 +2083,13 @@ Stream Session Thread Events
 
                           Tool calls are automatically approved without user confirmation.
 
-                          - `required Type Type`
+                          - `JsonElement Type = "always_allow"`
 
                         - `class BetaManagedAgentsAlwaysAskPolicy`
 
                           Tool calls require user confirmation before execution.
 
-                          - `required Type Type`
+                          - `JsonElement Type = "always_ask"`
 
                         - `class BetaManagedAgentsAutoPolicy`
 
@@ -2421,7 +2421,7 @@ Stream Session Thread Events
 
                 - `class BetaManagedAgentsMcpToolset`
 
-                  - `required Type Type`
+                  - `JsonElement Type = "mcp_toolset"`
 
                   - `required IReadOnlyList<BetaManagedAgentsMcpToolConfig> Configs`
 
@@ -2473,7 +2473,7 @@ Stream Session Thread Events
 
                   A custom tool as returned in API responses.
 
-                  - `required Type Type`
+                  - `JsonElement Type = "custom"`
 
                   - `required string Description`
 
@@ -2497,7 +2497,7 @@ Stream Session Thread Events
 
               Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-              - `required Type Type`
+              - `JsonElement Type = "advisor"`
 
               - `required string Model`
 
@@ -2559,7 +2559,7 @@ Stream Session Thread Events
 
                 Full `agent` definitions of the predefined agents, which are saved agents that this agent can spawn as session threads.
 
-                - `required Type Type`
+                - `JsonElement Type = "agent"`
 
                 - `required string ID`
 
@@ -2611,7 +2611,7 @@ Stream Session Thread Events
 
                 Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
 
-                - `required Type Type`
+                - `JsonElement Type = "agent"`
 
                 - `required string ID`
 
@@ -2677,7 +2677,7 @@ Stream Session Thread Events
 
       The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
-      - `required Type Type`
+      - `JsonElement Type = "limit"`
 
       - `required BetaMonetaryAmount MaxListCost`
 
@@ -2703,7 +2703,7 @@ Stream Session Thread Events
 
     Opens a preview of a buffered event. Carries the previewed event's type and id only. Followed by zero or more event_delta events with the same event id, normally concluded by the buffered event carrying that id. If the producing model request ends without that event (an error or interrupt mid-stream), its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
-    - `required Type Type`
+    - `JsonElement Type = "event_start"`
 
     - `required BetaManagedAgentsStartEventPreview Event`
 
@@ -2711,7 +2711,7 @@ Stream Session Thread Events
 
       - `class BetaManagedAgentsAgentMessagePreview`
 
-        - `required Type Type`
+        - `JsonElement Type = "agent.message"`
 
         - `required string ID`
 
@@ -2719,7 +2719,7 @@ Stream Session Thread Events
 
       - `class BetaManagedAgentsAgentThinkingPreview`
 
-        - `required Type Type`
+        - `JsonElement Type = "agent.thinking"`
 
         - `required string ID`
 
@@ -2729,13 +2729,13 @@ Stream Session Thread Events
 
     An incremental update to an event that is still being streamed. Deltas are best-effort and may stop early; when the buffered event with id == event_id is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no buffered event — its terminal span.model_request_end closes the preview. Only sent on stream connections that opt in via event_deltas; never appears in event history.
 
-    - `required Type Type`
+    - `JsonElement Type = "event_delta"`
 
     - `required BetaManagedAgentsDeltaContent Delta`
 
       One fragment of the previewed event. The delta type is named for the previewed event's field it streams into: agent.message events stream content_delta fragments, each a partial element of the content array.
 
-      - `required Type Type`
+      - `JsonElement Type = "content_delta"`
 
       - `required BetaManagedAgentsTextBlock Content`
 
@@ -2753,7 +2753,7 @@ Stream Session Thread Events
 
     A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
 
-    - `required Type Type`
+    - `JsonElement Type = "system.message"`
 
     - `required string ID`
 
@@ -2763,7 +2763,7 @@ Stream Session Thread Events
 
       System content blocks. Text-only.
 
-      - `required Type Type`
+      - `JsonElement Type = "text"`
 
       - `required string Text`
 
@@ -2781,7 +2781,7 @@ Stream Session Thread Events
 
     Periodic snapshot of the session's cumulative usage and tracked list cost.
 
-    - `required Type Type`
+    - `JsonElement Type = "session.usage"`
 
     - `required string ID`
 

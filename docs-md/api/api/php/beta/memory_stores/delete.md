@@ -35,7 +35,7 @@ Delete a Memory Store
 
 - `class BetaManagedAgentsDeletedMemoryStore`
 
-  - `Type type`
+  - `"memory_store_deleted" type`
 
   - `string id`
 

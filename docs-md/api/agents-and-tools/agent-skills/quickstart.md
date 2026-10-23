@@ -85,7 +85,9 @@ for _, skill := range skills.Data {
 ```java Java
 // List Anthropic-managed Skills
 SkillListPage skills = client.skills().list(
-    SkillListParams.builder().source("anthropic").build()
+    SkillListParams.builder()
+        .source("anthropic")
+        .build()
 );
 
 for (Skill skill : skills.data()) {

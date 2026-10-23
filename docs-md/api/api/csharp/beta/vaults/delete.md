@@ -141,7 +141,7 @@ Delete a Vault
 
   Confirmation of a deleted vault.
 
-  - `required Type Type`
+  - `JsonElement Type = "vault_deleted"`
 
   - `required string ID`
 

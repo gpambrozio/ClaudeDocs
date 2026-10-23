@@ -366,7 +366,7 @@ page.auto_paging_each do |effective_limit|
 end
 ```
 
-```text wrap
+```json
 {
   "data": [
     {
@@ -615,7 +615,7 @@ puts "id: #{spend_limit.id}"
 puts "amount: #{spend_limit.amount}"
 ```
 
-```text wrap
+```json
 {
   "type": "spend_limit",
   "id": "spl_01RsTuVwXyZaBcDeFgHiJk",
