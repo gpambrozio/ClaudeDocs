@@ -147,6 +147,8 @@ $loggingMiddleware = function (RequestInterface $request, callable $next): Respo
 $client = new Client(requestOptions: ['middleware' => [$loggingMiddleware]]);
 ```
 
+For middleware classes, the request options argument, and how middleware interacts with retries, errors, and request signing, see [Middleware in the PHP SDK](sdks/php.md#middleware).
+
 ```ruby Ruby
 logging_middleware = lambda do |request, call_next|
   # Before the request

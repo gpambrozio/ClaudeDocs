@@ -78,8 +78,8 @@ go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.2.0")
-implementation("com.anthropic:anthropic-java-foundry:3.2.0")
+implementation("com.anthropic:anthropic-java:3.3.0")
+implementation("com.anthropic:anthropic-java-foundry:3.3.0")
 
 // For Entra ID authentication, also add the Azure Identity library
 implementation("com.azure:azure-identity:1.18.3")
@@ -91,12 +91,12 @@ implementation("com.azure:azure-identity:1.18.3")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-foundry</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
 </dependency>
 <!-- For Entra ID authentication, also add the Azure Identity library -->
 <dependency>

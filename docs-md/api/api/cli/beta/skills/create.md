@@ -15,7 +15,7 @@ Create Skill
 
 ## Parameters
 
-- `--file: array of string`
+- `--file: array of file`
 
   Files to upload for the skill.
 

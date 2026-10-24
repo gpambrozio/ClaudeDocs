@@ -15,7 +15,7 @@ For API feature documentation with code examples, see the [API reference](../../
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.2.0")
+implementation("com.anthropic:anthropic-java:3.3.0")
 ```
 
 **Maven**
@@ -24,7 +24,7 @@ implementation("com.anthropic:anthropic-java:3.2.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
 </dependency>
 ```
 
@@ -1150,6 +1150,10 @@ There are also bugs in older Jackson versions that can affect the SDK. The SDK d
 Although the SDK uses reflection, it is still usable with ProGuard and R8 because `anthropic-java-core` is published with a configuration file containing keep rules.
 
 ProGuard and R8 should automatically detect and use the published rules, but you can also manually copy the keep rules if necessary.
+
+### OpenTelemetry tracing
+
+When your application registers an OpenTelemetry tracer provider, the SDK emits a span for each request that it sends. To send the spans to your observability platform, see [Set up OpenTelemetry with the Claude SDK](../../manage-claude/opentelemetry/sdk.md).
 
 ### Undocumented API functionality
 

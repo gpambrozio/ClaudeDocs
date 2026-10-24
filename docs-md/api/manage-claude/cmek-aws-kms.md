@@ -83,7 +83,7 @@ You can also [limit the key to specific workspaces](cmek-aws-kms-workspaces.md) 
 
 ### Create the key
 
-Create the key in a US region. For the lowest latency, use `us-east-2`.
+You can create the key in any AWS commercial region. For the lowest latency, use `us-east-2`.
 
 To use a key you already have in AWS KMS, [replace its key policy](cmek-aws-kms-workspaces.md#replace-the-key-policy).
 

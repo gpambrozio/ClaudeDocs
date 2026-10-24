@@ -1270,8 +1270,8 @@ The helpers live in the separate `anthropic-java-mcp` artifact, which requires J
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.2.0")
-implementation("com.anthropic:anthropic-java-mcp:3.2.0")
+implementation("com.anthropic:anthropic-java:3.3.0")
+implementation("com.anthropic:anthropic-java-mcp:3.3.0")
 ```
 
 **Maven**
@@ -1280,12 +1280,12 @@ implementation("com.anthropic:anthropic-java-mcp:3.2.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-mcp</artifactId>
-    <version>3.2.0</version>
+    <version>3.3.0</version>
 </dependency>
 ```
 

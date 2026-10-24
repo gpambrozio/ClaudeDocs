@@ -326,7 +326,7 @@ func main() {
 }
 ```
 
-Passing a struct as the schema is in beta in Go, so this example uses `client.Beta.Messages.New`. To use the GA `client.Messages.New`, pass a JSON schema as shown in [Using a raw JSON schema](structured-outputs.md#using-a-raw-json-schema).
+Passing a struct as the schema is in beta in Go, so this example uses `client.Beta.Messages.New`. To use the stable `client.Messages.New`, pass a JSON schema as shown in [Using a raw JSON schema](structured-outputs.md#using-a-raw-json-schema).
 
 The SDK generates and transforms the JSON schema from the struct and unmarshals the response into it.
 
