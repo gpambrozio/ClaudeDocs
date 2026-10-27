@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/python/beta/files
 
 ## Upload File
 
-`beta.files.upload(**kwargs)  -> BetaFileMetadata`
+`beta.files.upload(**kwargs) -> BetaFileMetadata`
 
 **POST** `/v1/files`
 
@@ -247,7 +247,7 @@ print(beta_file_metadata.id)
 
 ## List Files
 
-`beta.files.list(**kwargs)  -> SyncPageCursor[BetaFileMetadata]`
+`beta.files.list(**kwargs) -> SyncPageCursor[BetaFileMetadata]`
 
 **GET** `/v1/files`
 
@@ -497,7 +497,7 @@ print(page.id)
 
 ## Download File
 
-`beta.files.download(file_id, **kwargs)  -> BinaryResponseContent`
+`beta.files.download(file_id, **kwargs) -> BinaryResponseContent`
 
 **GET** `/v1/files/{file_id}/content`
 
@@ -650,7 +650,7 @@ print(content)
 
 ## Get File Metadata
 
-`beta.files.retrieve_metadata(file_id, **kwargs)  -> BetaFileMetadata`
+`beta.files.retrieve_metadata(file_id, **kwargs) -> BetaFileMetadata`
 
 **GET** `/v1/files/{file_id}`
 
@@ -880,7 +880,7 @@ print(beta_file_metadata.id)
 
 ## Delete File
 
-`beta.files.delete(file_id, **kwargs)  -> BetaDeletedFile`
+`beta.files.delete(file_id, **kwargs) -> BetaDeletedFile`
 
 **DELETE** `/v1/files/{file_id}`
 

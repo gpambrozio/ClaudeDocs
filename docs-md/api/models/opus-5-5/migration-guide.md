@@ -8,15 +8,11 @@ description: Switch to Claude Opus 5.5 from earlier Opus models or Claude Sonnet
 
 This guide covers migrating [Messages API](../../build-with-claude/working-with-messages.md) code. If you use [Claude Managed Agents](../../managed-agents/overview.md), no changes beyond updating the model name are required.
 
-**Automate your migration with the [Claude API skill](../../agents-and-tools/agent-skills/claude-api-skill.md#migrating-to-a-newer-claude-model).** It comes bundled with Claude Code and works for any current Claude model as the target:
-
 Let Claude Code migrate your code for you
 
 ```text
 /claude-api migrate this project to claude-opus-5-5
 ```
-
-The skill applies the model ID swap and, as needed, breaking parameter changes, prefill replacement, and effort calibration for your target model across your code base, then produces a checklist of items to verify manually. It asks you to confirm the migration scope (entire working directory, a subdirectory, or a specific file list) before editing any files. The skill also detects Amazon Bedrock and Claude Platform on AWS clients and adjusts model ID formats and feature changes for those platforms.
 
 This page lists the code changes for moving to Claude Opus 5.5 from [Claude Opus 5](migration-guide.md#migrating-from-claude-opus-5), [Claude Opus 4.8](migration-guide.md#migrating-from-claude-opus-4-8), [Claude Opus 4.7](migration-guide.md#migrating-from-claude-opus-47), [Claude Opus 4.6 and earlier Opus models](migration-guide.md#migrating-from-claude-opus-46), or [Claude Sonnet 5](migration-guide.md#migrating-from-claude-sonnet-5). Every reader needs [What every request to Claude Opus 5.5 must satisfy](migration-guide.md#request-requirements) and [Handle thinking in every response](migration-guide.md#thinking-in-every-response). Then go to the section for your current model: its first sentence names the other sections that apply to you. The [migration checklist](migration-guide.md#migration-checklist) lists every change by starting model.
 

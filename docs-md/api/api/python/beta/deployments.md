@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/python/beta/deployments
 
 ## Create Deployment
 
-`beta.deployments.create(**kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.create(**kwargs) -> BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments`
 
@@ -1152,7 +1152,7 @@ print(beta_managed_agents_deployment.id)
 
 ## List Deployments
 
-`beta.deployments.list(**kwargs)  -> SyncPageCursor[BetaManagedAgentsDeployment]`
+`beta.deployments.list(**kwargs) -> SyncPageCursor[BetaManagedAgentsDeployment]`
 
 **GET** `/v1/deployments`
 
@@ -1928,7 +1928,7 @@ print(page.id)
 
 ## Get Deployment
 
-`beta.deployments.retrieve(deployment_id, **kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.retrieve(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
 
 **GET** `/v1/deployments/{deployment_id}`
 
@@ -2662,7 +2662,7 @@ print(beta_managed_agents_deployment.id)
 
 ## Update Deployment
 
-`beta.deployments.update(deployment_id, **kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.update(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments/{deployment_id}`
 
@@ -3796,7 +3796,7 @@ print(beta_managed_agents_deployment.id)
 
 ## Archive Deployment
 
-`beta.deployments.archive(deployment_id, **kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.archive(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments/{deployment_id}/archive`
 
@@ -4530,7 +4530,7 @@ print(beta_managed_agents_deployment.id)
 
 ## Run Deployment Now
 
-`beta.deployments.run(deployment_id, **kwargs)  -> BetaManagedAgentsDeploymentRun`
+`beta.deployments.run(deployment_id, **kwargs) -> BetaManagedAgentsDeploymentRun`
 
 **POST** `/v1/deployments/{deployment_id}/run`
 
@@ -4926,7 +4926,7 @@ print(beta_managed_agents_deployment_run.id)
 
 ## Pause Deployment
 
-`beta.deployments.pause(deployment_id, **kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.pause(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments/{deployment_id}/pause`
 
@@ -5660,7 +5660,7 @@ print(beta_managed_agents_deployment.id)
 
 ## Unpause Deployment
 
-`beta.deployments.unpause(deployment_id, **kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.unpause(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments/{deployment_id}/unpause`
 

@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/python/beta/skills/versions
 
 ## Create Skill Version
 
-`beta.skills.versions.create(skill_id, **kwargs)  -> BetaSkillVersion`
+`beta.skills.versions.create(skill_id, **kwargs) -> BetaSkillVersion`
 
 **POST** `/v1/skills/{skill_id}/versions`
 
@@ -220,7 +220,7 @@ print(beta_skill_version.id)
 
 ## List Skill Versions
 
-`beta.skills.versions.list(skill_id, **kwargs)  -> SyncPageCursor[BetaSkillVersion]`
+`beta.skills.versions.list(skill_id, **kwargs) -> SyncPageCursor[BetaSkillVersion]`
 
 **GET** `/v1/skills/{skill_id}/versions`
 
@@ -442,7 +442,7 @@ print(page.id)
 
 ## Download Skill Version Content
 
-`beta.skills.versions.download(version, **kwargs)  -> BinaryResponseContent`
+`beta.skills.versions.download(version, **kwargs) -> BinaryResponseContent`
 
 **GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
@@ -604,7 +604,7 @@ print(content)
 
 ## Get Skill Version
 
-`beta.skills.versions.retrieve(version, **kwargs)  -> BetaSkillVersion`
+`beta.skills.versions.retrieve(version, **kwargs) -> BetaSkillVersion`
 
 **GET** `/v1/skills/{skill_id}/versions/{version}`
 
@@ -815,7 +815,7 @@ print(beta_skill_version.id)
 
 ## Delete Skill Version
 
-`beta.skills.versions.delete(version, **kwargs)  -> BetaDeletedSkillVersion`
+`beta.skills.versions.delete(version, **kwargs) -> BetaDeletedSkillVersion`
 
 **DELETE** `/v1/skills/{skill_id}/versions/{version}`
 

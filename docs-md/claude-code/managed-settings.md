@@ -403,7 +403,7 @@ The table covers the permission, plugin, and delivery controls. For any key not 
 | [`managedMcpServers`](settings-reference.md#managedmcpservers) | Remote MCP servers provided to every user alongside their own. It provides servers rather than locking anything down. See [Provide servers through managed settings](https://code.claude.com/docs/en/managed-mcp.md#provide-servers-through-managed-settings). Requires Claude Code v2.1.259 or later |
 | [`managedSourcesBehavior`](settings-reference.md#managedsourcesbehavior) | Whether Claude Code applies only the highest-priority managed source or [composes every one of them](#compose-every-managed-source) |
 | [`parentSettingsBehavior`](settings-reference.md#parentsettingsbehavior) | Whether host-supplied parent settings merge under the managed policy |
-| [`pluginSuggestionMarketplaces`](settings-reference.md#pluginsuggestionmarketplaces) | Marketplaces whose plugins Claude Code may suggest to users |
+| [`pluginSuggestionMarketplaces`](settings-reference.md#pluginsuggestionmarketplaces) | Marketplaces whose plugins Claude Code may suggest to users in the terminal |
 | [`pluginTrustMessage`](settings-reference.md#plugintrustmessage) | Custom message appended to the plugin trust warning shown before installation |
 | [`policyHelper`](settings-reference.md#policyhelper) | Executable that computes managed settings at startup; see [Compute managed settings with a policy helper](https://code.claude.com/docs/en/settings-reference.md#policyhelper) |
 | [`sandbox.filesystem.allowManagedReadPathsOnly`](settings-reference.md#sandbox-filesystem-allowmanagedreadpathsonly) | When `true`, only `filesystem.allowRead` paths from managed settings are respected. `denyRead` still merges from all sources |

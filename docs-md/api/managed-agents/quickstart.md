@@ -14,8 +14,6 @@ featureMetadata:
 
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
-**Prefer an interactive walkthrough?** The latest version of [Claude Code](https://claude.com/product/claude-code) can guide you through the setup and answer your questions:
-
 Let Claude Code set up your agent for you
 
 ```text

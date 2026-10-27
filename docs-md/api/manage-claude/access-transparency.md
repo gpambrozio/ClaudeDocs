@@ -72,6 +72,8 @@ curl --fail-with-body -sS -G \
 
 Pagination, date-range filtering (`created_at.gte` / `.lt`), and the response envelope (`has_more`, `first_id`, `last_id`) are shared with the rest of the Activity Feed. See [Query the Activity Feed](compliance-activity-feed.md).
 
+Turning the Compliance API off stops your access to Access Transparency events, not their recording. The Activity Feed returns them after the Compliance API is turned back on.
+
 Each `anthropic_access` activity carries the standard Activity fields plus the following:
 
 | Field                         | Type            | Description                                                                                                                                                                                                                                                                                                                 |

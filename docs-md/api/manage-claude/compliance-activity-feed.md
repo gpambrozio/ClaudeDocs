@@ -12,7 +12,7 @@ To enable the Compliance API, see [Set up the Compliance API](compliance-api-acc
 
 Both Compliance Access Keys (`sk-ant-api01-...`) carrying this scope and Admin API keys (`sk-ant-admin01-...`) can call the Activity Feed. See [Set up the Compliance API](compliance-api-access.md) for the conditions under which each key type carries the scope.
 
-The Activity Feed records authentication, chat, file, project, administrative, and platform activity across your organization and returns it in reverse chronological order. Activities are queryable within 1 minute of occurring and are retained for 6 years. Recording is not retroactive: it begins when the Compliance API is first enabled for your organization, and activity from before enablement is not backfilled.
+The Activity Feed records authentication, chat, file, project, administrative, and platform activity across your organization and returns it in reverse chronological order. Activities are queryable within 1 minute of occurring and are retained for 6 years. Recording is not retroactive: it begins when the Compliance API is first enabled for your organization, and activity from before enablement is not backfilled. Access Transparency events are an exception. If your organization is enrolled in [Access Transparency](access-transparency.md), these events are recorded even while the Compliance API is off. The feed can therefore include some from before the Compliance API was first enabled.
 
 ```bash cURL
 curl --fail-with-body -sS \

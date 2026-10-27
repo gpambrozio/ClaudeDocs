@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/python/beta/vaults
 
 ## Create a Vault
 
-`beta.vaults.create(**kwargs)  -> BetaManagedAgentsVault`
+`beta.vaults.create(**kwargs) -> BetaManagedAgentsVault`
 
 **POST** `/v1/vaults`
 
@@ -216,7 +216,7 @@ print(beta_managed_agents_vault.id)
 
 ## List Vaults
 
-`beta.vaults.list(**kwargs)  -> SyncPageCursor[BetaManagedAgentsVault]`
+`beta.vaults.list(**kwargs) -> SyncPageCursor[BetaManagedAgentsVault]`
 
 **GET** `/v1/vaults`
 
@@ -431,7 +431,7 @@ print(page.id)
 
 ## Retrieve a Vault
 
-`beta.vaults.retrieve(vault_id, **kwargs)  -> BetaManagedAgentsVault`
+`beta.vaults.retrieve(vault_id, **kwargs) -> BetaManagedAgentsVault`
 
 **GET** `/v1/vaults/{vault_id}`
 
@@ -632,7 +632,7 @@ print(beta_managed_agents_vault.id)
 
 ## Update a Vault
 
-`beta.vaults.update(vault_id, **kwargs)  -> BetaManagedAgentsVault`
+`beta.vaults.update(vault_id, **kwargs) -> BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}`
 
@@ -843,7 +843,7 @@ print(beta_managed_agents_vault.id)
 
 ## Delete a Vault
 
-`beta.vaults.delete(vault_id, **kwargs)  -> BetaManagedAgentsDeletedVault`
+`beta.vaults.delete(vault_id, **kwargs) -> BetaManagedAgentsDeletedVault`
 
 **DELETE** `/v1/vaults/{vault_id}`
 
@@ -1011,7 +1011,7 @@ print(beta_managed_agents_deleted_vault.id)
 
 ## Archive a Vault
 
-`beta.vaults.archive(vault_id, **kwargs)  -> BetaManagedAgentsVault`
+`beta.vaults.archive(vault_id, **kwargs) -> BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}/archive`
 
@@ -1266,7 +1266,7 @@ print(beta_managed_agents_vault.id)
 
 ### Create a Credential
 
-`beta.vaults.credentials.create(vault_id, **kwargs)  -> BetaManagedAgentsCredential`
+`beta.vaults.credentials.create(vault_id, **kwargs) -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials`
 
@@ -1771,7 +1771,7 @@ print(beta_managed_agents_credential.id)
 
 ### List Credentials
 
-`beta.vaults.credentials.list(vault_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsCredential]`
+`beta.vaults.credentials.list(vault_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsCredential]`
 
 **GET** `/v1/vaults/{vault_id}/credentials`
 
@@ -2115,7 +2115,7 @@ print(page.id)
 
 ### Retrieve a Credential
 
-`beta.vaults.credentials.retrieve(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
+`beta.vaults.credentials.retrieve(credential_id, **kwargs) -> BetaManagedAgentsCredential`
 
 **GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
@@ -2444,7 +2444,7 @@ print(beta_managed_agents_credential.id)
 
 ### Update a Credential
 
-`beta.vaults.credentials.update(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
+`beta.vaults.credentials.update(credential_id, **kwargs) -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
@@ -2913,7 +2913,7 @@ print(beta_managed_agents_credential.id)
 
 ### Delete a Credential
 
-`beta.vaults.credentials.delete(credential_id, **kwargs)  -> BetaManagedAgentsDeletedCredential`
+`beta.vaults.credentials.delete(credential_id, **kwargs) -> BetaManagedAgentsDeletedCredential`
 
 **DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
@@ -3086,7 +3086,7 @@ print(beta_managed_agents_deleted_credential.id)
 
 ### Archive a Credential
 
-`beta.vaults.credentials.archive(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
+`beta.vaults.credentials.archive(credential_id, **kwargs) -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
@@ -3415,7 +3415,7 @@ print(beta_managed_agents_credential.id)
 
 ### Validate an MCP OAuth Credential
 
-`beta.vaults.credentials.mcp_oauth_validate(credential_id, **kwargs)  -> BetaManagedAgentsCredentialValidation`
+`beta.vaults.credentials.mcp_oauth_validate(credential_id, **kwargs) -> BetaManagedAgentsCredentialValidation`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 

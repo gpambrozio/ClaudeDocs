@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/python/beta/agents
 
 ## Create Agent
 
-`beta.agents.create(**kwargs)  -> BetaManagedAgentsAgent`
+`beta.agents.create(**kwargs) -> BetaManagedAgentsAgent`
 
 **POST** `/v1/agents`
 
@@ -1987,7 +1987,7 @@ print(beta_managed_agents_agent.id)
 
 ## List Agents
 
-`beta.agents.list(**kwargs)  -> SyncPageCursor[BetaManagedAgentsAgent]`
+`beta.agents.list(**kwargs) -> SyncPageCursor[BetaManagedAgentsAgent]`
 
 **GET** `/v1/agents`
 
@@ -3050,7 +3050,7 @@ print(page.id)
 
 ## Get Agent
 
-`beta.agents.retrieve(agent_id, **kwargs)  -> BetaManagedAgentsAgent`
+`beta.agents.retrieve(agent_id, **kwargs) -> BetaManagedAgentsAgent`
 
 **GET** `/v1/agents/{agent_id}`
 
@@ -4093,7 +4093,7 @@ print(beta_managed_agents_agent.id)
 
 ## Update Agent
 
-`beta.agents.update(agent_id, **kwargs)  -> BetaManagedAgentsAgent`
+`beta.agents.update(agent_id, **kwargs) -> BetaManagedAgentsAgent`
 
 **POST** `/v1/agents/{agent_id}`
 
@@ -6081,7 +6081,7 @@ print(beta_managed_agents_agent.id)
 
 ## Archive Agent
 
-`beta.agents.archive(agent_id, **kwargs)  -> BetaManagedAgentsAgent`
+`beta.agents.archive(agent_id, **kwargs) -> BetaManagedAgentsAgent`
 
 **POST** `/v1/agents/{agent_id}/archive`
 
@@ -13502,7 +13502,7 @@ print(beta_managed_agents_agent.id)
 
 ### List Agent Versions
 
-`beta.agents.versions.list(agent_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsAgent]`
+`beta.agents.versions.list(agent_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsAgent]`
 
 **GET** `/v1/agents/{agent_id}/versions`
 

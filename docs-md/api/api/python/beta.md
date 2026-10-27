@@ -445,7 +445,7 @@ url: https://platform.claude.com/docs/en/api/python/beta
 
 ### List Models
 
-`beta.models.list(**kwargs)  -> SyncPage[BetaModelInfo]`
+`beta.models.list(**kwargs) -> SyncPage[BetaModelInfo]`
 
 **GET** `/v1/models`
 
@@ -942,7 +942,7 @@ print(page.id)
 
 ### Get a Model
 
-`beta.models.retrieve(model_id, **kwargs)  -> BetaModelInfo`
+`beta.models.retrieve(model_id, **kwargs) -> BetaModelInfo`
 
 **GET** `/v1/models/{model_id}`
 
@@ -1411,7 +1411,7 @@ print(beta_model_info.id)
 
 ### Create a Message
 
-`beta.messages.create(**kwargs)  -> BetaMessage`
+`beta.messages.create(**kwargs) -> BetaMessage`
 
 **POST** `/v1/messages`
 
@@ -9953,7 +9953,7 @@ print(beta_message.id)
 
 ### Count tokens in a Message
 
-`beta.messages.count_tokens(**kwargs)  -> BetaMessageTokensCount`
+`beta.messages.count_tokens(**kwargs) -> BetaMessageTokensCount`
 
 **POST** `/v1/messages/count_tokens`
 
@@ -14048,7 +14048,7 @@ print(beta_message_tokens_count.context_management)
 
 ### Create a Message Batch
 
-`beta.messages.batches.create(**kwargs)  -> BetaMessageBatch`
+`beta.messages.batches.create(**kwargs) -> BetaMessageBatch`
 
 **POST** `/v1/messages/batches`
 
@@ -18486,7 +18486,7 @@ print(beta_message_batch.id)
 
 ### Retrieve a Message Batch
 
-`beta.messages.batches.retrieve(message_batch_id, **kwargs)  -> BetaMessageBatch`
+`beta.messages.batches.retrieve(message_batch_id, **kwargs) -> BetaMessageBatch`
 
 **GET** `/v1/messages/batches/{message_batch_id}`
 
@@ -18768,7 +18768,7 @@ print(beta_message_batch.id)
 
 ### List Message Batches
 
-`beta.messages.batches.list(**kwargs)  -> SyncPage[BetaMessageBatch]`
+`beta.messages.batches.list(**kwargs) -> SyncPage[BetaMessageBatch]`
 
 **GET** `/v1/messages/batches`
 
@@ -19068,7 +19068,7 @@ print(page.id)
 
 ### Cancel a Message Batch
 
-`beta.messages.batches.cancel(message_batch_id, **kwargs)  -> BetaMessageBatch`
+`beta.messages.batches.cancel(message_batch_id, **kwargs) -> BetaMessageBatch`
 
 **POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
@@ -19352,7 +19352,7 @@ print(beta_message_batch.id)
 
 ### Delete a Message Batch
 
-`beta.messages.batches.delete(message_batch_id, **kwargs)  -> BetaDeletedMessageBatch`
+`beta.messages.batches.delete(message_batch_id, **kwargs) -> BetaDeletedMessageBatch`
 
 **DELETE** `/v1/messages/batches/{message_batch_id}`
 
@@ -19528,7 +19528,7 @@ print(beta_deleted_message_batch.id)
 
 ### Retrieve Message Batch results
 
-`beta.messages.batches.results(message_batch_id, **kwargs)  -> JSONLDecoder[BetaMessageBatchIndividualResponse]`
+`beta.messages.batches.results(message_batch_id, **kwargs) -> JSONLDecoder[BetaMessageBatchIndividualResponse]`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 
@@ -23678,7 +23678,7 @@ for batch in client.beta.messages.batches.results(
 
 ### Create Agent
 
-`beta.agents.create(**kwargs)  -> BetaManagedAgentsAgent`
+`beta.agents.create(**kwargs) -> BetaManagedAgentsAgent`
 
 **POST** `/v1/agents`
 
@@ -25656,7 +25656,7 @@ print(beta_managed_agents_agent.id)
 
 ### List Agents
 
-`beta.agents.list(**kwargs)  -> SyncPageCursor[BetaManagedAgentsAgent]`
+`beta.agents.list(**kwargs) -> SyncPageCursor[BetaManagedAgentsAgent]`
 
 **GET** `/v1/agents`
 
@@ -26719,7 +26719,7 @@ print(page.id)
 
 ### Get Agent
 
-`beta.agents.retrieve(agent_id, **kwargs)  -> BetaManagedAgentsAgent`
+`beta.agents.retrieve(agent_id, **kwargs) -> BetaManagedAgentsAgent`
 
 **GET** `/v1/agents/{agent_id}`
 
@@ -27762,7 +27762,7 @@ print(beta_managed_agents_agent.id)
 
 ### Update Agent
 
-`beta.agents.update(agent_id, **kwargs)  -> BetaManagedAgentsAgent`
+`beta.agents.update(agent_id, **kwargs) -> BetaManagedAgentsAgent`
 
 **POST** `/v1/agents/{agent_id}`
 
@@ -29750,7 +29750,7 @@ print(beta_managed_agents_agent.id)
 
 ### Archive Agent
 
-`beta.agents.archive(agent_id, **kwargs)  -> BetaManagedAgentsAgent`
+`beta.agents.archive(agent_id, **kwargs) -> BetaManagedAgentsAgent`
 
 **POST** `/v1/agents/{agent_id}/archive`
 
@@ -30789,7 +30789,7 @@ print(beta_managed_agents_agent.id)
 
 ### List Agent Versions
 
-`beta.agents.versions.list(agent_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsAgent]`
+`beta.agents.versions.list(agent_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsAgent]`
 
 **GET** `/v1/agents/{agent_id}/versions`
 
@@ -31844,7 +31844,7 @@ print(page.id)
 
 ### Create Environment
 
-`beta.environments.create(**kwargs)  -> BetaEnvironment`
+`beta.environments.create(**kwargs) -> BetaEnvironment`
 
 **POST** `/v1/environments`
 
@@ -32286,7 +32286,7 @@ print(beta_environment.id)
 
 ### List Environments
 
-`beta.environments.list(**kwargs)  -> SyncPageCursor[BetaEnvironment]`
+`beta.environments.list(**kwargs) -> SyncPageCursor[BetaEnvironment]`
 
 **GET** `/v1/environments`
 
@@ -32632,7 +32632,7 @@ print(page.id)
 
 ### Get Environment
 
-`beta.environments.retrieve(environment_id, **kwargs)  -> BetaEnvironment`
+`beta.environments.retrieve(environment_id, **kwargs) -> BetaEnvironment`
 
 **GET** `/v1/environments/{environment_id}`
 
@@ -32960,7 +32960,7 @@ print(beta_environment.id)
 
 ### Update Environment
 
-`beta.environments.update(environment_id, **kwargs)  -> BetaEnvironment`
+`beta.environments.update(environment_id, **kwargs) -> BetaEnvironment`
 
 **POST** `/v1/environments/{environment_id}`
 
@@ -33404,7 +33404,7 @@ print(beta_environment.id)
 
 ### Delete Environment
 
-`beta.environments.delete(environment_id, **kwargs)  -> BetaEnvironmentDeleteResponse`
+`beta.environments.delete(environment_id, **kwargs) -> BetaEnvironmentDeleteResponse`
 
 **DELETE** `/v1/environments/{environment_id}`
 
@@ -33574,7 +33574,7 @@ print(beta_environment_delete_response.id)
 
 ### Archive Environment
 
-`beta.environments.archive(environment_id, **kwargs)  -> BetaEnvironment`
+`beta.environments.archive(environment_id, **kwargs) -> BetaEnvironment`
 
 **POST** `/v1/environments/{environment_id}/archive`
 
@@ -33904,7 +33904,7 @@ print(beta_environment.id)
 
 ### Get Work Item
 
-`beta.environments.work.retrieve(work_id, **kwargs)  -> BetaSelfHostedWork`
+`beta.environments.work.retrieve(work_id, **kwargs) -> BetaSelfHostedWork`
 
 **GET** `/v1/environments/{environment_id}/work/{work_id}`
 
@@ -34161,7 +34161,7 @@ print(beta_self_hosted_work.id)
 
 ### Poll for Work
 
-`beta.environments.work.poll(environment_id, **kwargs)  -> BetaSelfHostedWork`
+`beta.environments.work.poll(environment_id, **kwargs) -> BetaSelfHostedWork`
 
 **GET** `/v1/environments/{environment_id}/work/poll`
 
@@ -34425,7 +34425,7 @@ print(beta_self_hosted_work.id)
 
 ### Acknowledge Work
 
-`beta.environments.work.ack(work_id, **kwargs)  -> BetaSelfHostedWork`
+`beta.environments.work.ack(work_id, **kwargs) -> BetaSelfHostedWork`
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}/ack`
 
@@ -34676,7 +34676,7 @@ print(beta_self_hosted_work.id)
 
 ### Record Heartbeat
 
-`beta.environments.work.heartbeat(work_id, **kwargs)  -> BetaSelfHostedWorkHeartbeatResponse`
+`beta.environments.work.heartbeat(work_id, **kwargs) -> BetaSelfHostedWorkHeartbeatResponse`
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}/heartbeat`
 
@@ -34878,7 +34878,7 @@ print(beta_self_hosted_work_heartbeat_response.last_heartbeat)
 
 ### Stop Work
 
-`beta.environments.work.stop(work_id, **kwargs)  -> BetaSelfHostedWork`
+`beta.environments.work.stop(work_id, **kwargs) -> BetaSelfHostedWork`
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
@@ -35141,7 +35141,7 @@ print(beta_self_hosted_work.id)
 
 ### List Work Items
 
-`beta.environments.work.list(environment_id, **kwargs)  -> SyncPageCursor[BetaSelfHostedWork]`
+`beta.environments.work.list(environment_id, **kwargs) -> SyncPageCursor[BetaSelfHostedWork]`
 
 **GET** `/v1/environments/{environment_id}/work`
 
@@ -35405,7 +35405,7 @@ print(page.id)
 
 ### Update Work Item
 
-`beta.environments.work.update(work_id, **kwargs)  -> BetaSelfHostedWork`
+`beta.environments.work.update(work_id, **kwargs) -> BetaSelfHostedWork`
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}`
 
@@ -35667,7 +35667,7 @@ print(beta_self_hosted_work.id)
 
 ### Get Queue Statistics
 
-`beta.environments.work.stats(environment_id, **kwargs)  -> BetaSelfHostedWorkQueueStats`
+`beta.environments.work.stats(environment_id, **kwargs) -> BetaSelfHostedWorkQueueStats`
 
 **GET** `/v1/environments/{environment_id}/work/stats`
 
@@ -35858,7 +35858,7 @@ print(beta_self_hosted_work_queue_stats.depth)
 
 ### Create Session
 
-`beta.sessions.create(**kwargs)  -> BetaManagedAgentsSession`
+`beta.sessions.create(**kwargs) -> BetaManagedAgentsSession`
 
 **POST** `/v1/sessions`
 
@@ -38477,7 +38477,7 @@ print(beta_managed_agents_session.id)
 
 ### List Sessions
 
-`beta.sessions.list(**kwargs)  -> SyncBidirectionalPageCursor[BetaManagedAgentsSession]`
+`beta.sessions.list(**kwargs) -> SyncBidirectionalPageCursor[BetaManagedAgentsSession]`
 
 **GET** `/v1/sessions`
 
@@ -40051,7 +40051,7 @@ print(page.id)
 
 ### Get Session
 
-`beta.sessions.retrieve(session_id, **kwargs)  -> BetaManagedAgentsSession`
+`beta.sessions.retrieve(session_id, **kwargs) -> BetaManagedAgentsSession`
 
 **GET** `/v1/sessions/{session_id}`
 
@@ -41538,7 +41538,7 @@ print(beta_managed_agents_session.id)
 
 ### Update Session
 
-`beta.sessions.update(session_id, **kwargs)  -> BetaManagedAgentsSession`
+`beta.sessions.update(session_id, **kwargs) -> BetaManagedAgentsSession`
 
 **POST** `/v1/sessions/{session_id}`
 
@@ -43605,7 +43605,7 @@ print(beta_managed_agents_session.id)
 
 ### Delete Session
 
-`beta.sessions.delete(session_id, **kwargs)  -> BetaManagedAgentsDeletedSession`
+`beta.sessions.delete(session_id, **kwargs) -> BetaManagedAgentsDeletedSession`
 
 **DELETE** `/v1/sessions/{session_id}`
 
@@ -43769,7 +43769,7 @@ print(beta_managed_agents_deleted_session.id)
 
 ### Archive Session
 
-`beta.sessions.archive(session_id, **kwargs)  -> BetaManagedAgentsSession`
+`beta.sessions.archive(session_id, **kwargs) -> BetaManagedAgentsSession`
 
 **POST** `/v1/sessions/{session_id}/archive`
 
@@ -45258,7 +45258,7 @@ print(beta_managed_agents_session.id)
 
 ### List Events
 
-`beta.sessions.events.list(session_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionEvent]`
+`beta.sessions.events.list(session_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsSessionEvent]`
 
 **GET** `/v1/sessions/{session_id}/events`
 
@@ -48488,7 +48488,7 @@ print(page)
 
 ### Send Events
 
-`beta.sessions.events.send(session_id, **kwargs)  -> BetaManagedAgentsSendSessionEvents`
+`beta.sessions.events.send(session_id, **kwargs) -> BetaManagedAgentsSendSessionEvents`
 
 **POST** `/v1/sessions/{session_id}/events`
 
@@ -49472,7 +49472,7 @@ print(beta_managed_agents_send_session_events.data)
 
 ### Stream Events
 
-`beta.sessions.events.stream(session_id, **kwargs)  -> Stream[BetaManagedAgentsStreamSessionEvents]`
+`beta.sessions.events.stream(session_id, **kwargs) -> Stream[BetaManagedAgentsStreamSessionEvents]`
 
 **GET** `/v1/sessions/{session_id}/events/stream`
 
@@ -52619,7 +52619,7 @@ for event in client.beta.sessions.events.stream(
 
 ### Add Session Resource
 
-`beta.sessions.resources.add(session_id, **kwargs)  -> BetaManagedAgentsFileResource`
+`beta.sessions.resources.add(session_id, **kwargs) -> BetaManagedAgentsFileResource`
 
 **POST** `/v1/sessions/{session_id}/resources`
 
@@ -52817,7 +52817,7 @@ print(beta_managed_agents_file_resource.id)
 
 ### List Session Resources
 
-`beta.sessions.resources.list(session_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionResource]`
+`beta.sessions.resources.list(session_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsSessionResource]`
 
 **GET** `/v1/sessions/{session_id}/resources`
 
@@ -53109,7 +53109,7 @@ print(page)
 
 ### Get Session Resource
 
-`beta.sessions.resources.retrieve(resource_id, **kwargs)  -> ResourceRetrieveResponse`
+`beta.sessions.resources.retrieve(resource_id, **kwargs) -> ResourceRetrieveResponse`
 
 **GET** `/v1/sessions/{session_id}/resources/{resource_id}`
 
@@ -53382,7 +53382,7 @@ print(resource)
 
 ### Update Session Resource
 
-`beta.sessions.resources.update(resource_id, **kwargs)  -> ResourceUpdateResponse`
+`beta.sessions.resources.update(resource_id, **kwargs) -> ResourceUpdateResponse`
 
 **POST** `/v1/sessions/{session_id}/resources/{resource_id}`
 
@@ -53662,7 +53662,7 @@ print(resource)
 
 ### Delete Session Resource
 
-`beta.sessions.resources.delete(resource_id, **kwargs)  -> BetaManagedAgentsDeleteSessionResource`
+`beta.sessions.resources.delete(resource_id, **kwargs) -> BetaManagedAgentsDeleteSessionResource`
 
 **DELETE** `/v1/sessions/{session_id}/resources/{resource_id}`
 
@@ -53831,7 +53831,7 @@ print(beta_managed_agents_delete_session_resource.id)
 
 ### List Session Threads
 
-`beta.sessions.threads.list(session_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionThread]`
+`beta.sessions.threads.list(session_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsSessionThread]`
 
 **GET** `/v1/sessions/{session_id}/threads`
 
@@ -54937,7 +54937,7 @@ print(page.id)
 
 ### Get Session Thread
 
-`beta.sessions.threads.retrieve(thread_id, **kwargs)  -> BetaManagedAgentsSessionThread`
+`beta.sessions.threads.retrieve(thread_id, **kwargs) -> BetaManagedAgentsSessionThread`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}`
 
@@ -56016,7 +56016,7 @@ print(beta_managed_agents_session_thread.id)
 
 ### Archive Session Thread
 
-`beta.sessions.threads.archive(thread_id, **kwargs)  -> BetaManagedAgentsSessionThread`
+`beta.sessions.threads.archive(thread_id, **kwargs) -> BetaManagedAgentsSessionThread`
 
 **POST** `/v1/sessions/{session_id}/threads/{thread_id}/archive`
 
@@ -57097,7 +57097,7 @@ print(beta_managed_agents_session_thread.id)
 
 ### List Session Thread Events
 
-`beta.sessions.threads.events.list(thread_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsSessionEvent]`
+`beta.sessions.threads.events.list(thread_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsSessionEvent]`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/events`
 
@@ -60210,7 +60210,7 @@ print(page)
 
 ### Stream Session Thread Events
 
-`beta.sessions.threads.events.stream(thread_id, **kwargs)  -> Stream[BetaManagedAgentsStreamSessionThreadEvents]`
+`beta.sessions.threads.events.stream(thread_id, **kwargs) -> Stream[BetaManagedAgentsStreamSessionThreadEvents]`
 
 **GET** `/v1/sessions/{session_id}/threads/{thread_id}/stream`
 
@@ -63360,7 +63360,7 @@ for event in client.beta.sessions.threads.events.stream(
 
 ### Create Deployment
 
-`beta.deployments.create(**kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.create(**kwargs) -> BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments`
 
@@ -64503,7 +64503,7 @@ print(beta_managed_agents_deployment.id)
 
 ### List Deployments
 
-`beta.deployments.list(**kwargs)  -> SyncPageCursor[BetaManagedAgentsDeployment]`
+`beta.deployments.list(**kwargs) -> SyncPageCursor[BetaManagedAgentsDeployment]`
 
 **GET** `/v1/deployments`
 
@@ -65279,7 +65279,7 @@ print(page.id)
 
 ### Get Deployment
 
-`beta.deployments.retrieve(deployment_id, **kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.retrieve(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
 
 **GET** `/v1/deployments/{deployment_id}`
 
@@ -66013,7 +66013,7 @@ print(beta_managed_agents_deployment.id)
 
 ### Update Deployment
 
-`beta.deployments.update(deployment_id, **kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.update(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments/{deployment_id}`
 
@@ -67147,7 +67147,7 @@ print(beta_managed_agents_deployment.id)
 
 ### Archive Deployment
 
-`beta.deployments.archive(deployment_id, **kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.archive(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments/{deployment_id}/archive`
 
@@ -67881,7 +67881,7 @@ print(beta_managed_agents_deployment.id)
 
 ### Run Deployment Now
 
-`beta.deployments.run(deployment_id, **kwargs)  -> BetaManagedAgentsDeploymentRun`
+`beta.deployments.run(deployment_id, **kwargs) -> BetaManagedAgentsDeploymentRun`
 
 **POST** `/v1/deployments/{deployment_id}/run`
 
@@ -68277,7 +68277,7 @@ print(beta_managed_agents_deployment_run.id)
 
 ### Pause Deployment
 
-`beta.deployments.pause(deployment_id, **kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.pause(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments/{deployment_id}/pause`
 
@@ -69011,7 +69011,7 @@ print(beta_managed_agents_deployment.id)
 
 ### Unpause Deployment
 
-`beta.deployments.unpause(deployment_id, **kwargs)  -> BetaManagedAgentsDeployment`
+`beta.deployments.unpause(deployment_id, **kwargs) -> BetaManagedAgentsDeployment`
 
 **POST** `/v1/deployments/{deployment_id}/unpause`
 
@@ -69747,7 +69747,7 @@ print(beta_managed_agents_deployment.id)
 
 ### List Deployment Runs
 
-`beta.deployment_runs.list(**kwargs)  -> SyncPageCursor[BetaManagedAgentsDeploymentRun]`
+`beta.deployment_runs.list(**kwargs) -> SyncPageCursor[BetaManagedAgentsDeploymentRun]`
 
 **GET** `/v1/deployment_runs`
 
@@ -70197,7 +70197,7 @@ print(page.id)
 
 ### Get Deployment Run
 
-`beta.deployment_runs.retrieve(deployment_run_id, **kwargs)  -> BetaManagedAgentsDeploymentRun`
+`beta.deployment_runs.retrieve(deployment_run_id, **kwargs) -> BetaManagedAgentsDeploymentRun`
 
 **GET** `/v1/deployment_runs/{deployment_run_id}`
 
@@ -70595,7 +70595,7 @@ print(beta_managed_agents_deployment_run.id)
 
 ### Create a Vault
 
-`beta.vaults.create(**kwargs)  -> BetaManagedAgentsVault`
+`beta.vaults.create(**kwargs) -> BetaManagedAgentsVault`
 
 **POST** `/v1/vaults`
 
@@ -70802,7 +70802,7 @@ print(beta_managed_agents_vault.id)
 
 ### List Vaults
 
-`beta.vaults.list(**kwargs)  -> SyncPageCursor[BetaManagedAgentsVault]`
+`beta.vaults.list(**kwargs) -> SyncPageCursor[BetaManagedAgentsVault]`
 
 **GET** `/v1/vaults`
 
@@ -71017,7 +71017,7 @@ print(page.id)
 
 ### Retrieve a Vault
 
-`beta.vaults.retrieve(vault_id, **kwargs)  -> BetaManagedAgentsVault`
+`beta.vaults.retrieve(vault_id, **kwargs) -> BetaManagedAgentsVault`
 
 **GET** `/v1/vaults/{vault_id}`
 
@@ -71218,7 +71218,7 @@ print(beta_managed_agents_vault.id)
 
 ### Update a Vault
 
-`beta.vaults.update(vault_id, **kwargs)  -> BetaManagedAgentsVault`
+`beta.vaults.update(vault_id, **kwargs) -> BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}`
 
@@ -71429,7 +71429,7 @@ print(beta_managed_agents_vault.id)
 
 ### Delete a Vault
 
-`beta.vaults.delete(vault_id, **kwargs)  -> BetaManagedAgentsDeletedVault`
+`beta.vaults.delete(vault_id, **kwargs) -> BetaManagedAgentsDeletedVault`
 
 **DELETE** `/v1/vaults/{vault_id}`
 
@@ -71597,7 +71597,7 @@ print(beta_managed_agents_deleted_vault.id)
 
 ### Archive a Vault
 
-`beta.vaults.archive(vault_id, **kwargs)  -> BetaManagedAgentsVault`
+`beta.vaults.archive(vault_id, **kwargs) -> BetaManagedAgentsVault`
 
 **POST** `/v1/vaults/{vault_id}/archive`
 
@@ -71800,7 +71800,7 @@ print(beta_managed_agents_vault.id)
 
 ### Create a Credential
 
-`beta.vaults.credentials.create(vault_id, **kwargs)  -> BetaManagedAgentsCredential`
+`beta.vaults.credentials.create(vault_id, **kwargs) -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials`
 
@@ -72305,7 +72305,7 @@ print(beta_managed_agents_credential.id)
 
 ### List Credentials
 
-`beta.vaults.credentials.list(vault_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsCredential]`
+`beta.vaults.credentials.list(vault_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsCredential]`
 
 **GET** `/v1/vaults/{vault_id}/credentials`
 
@@ -72649,7 +72649,7 @@ print(page.id)
 
 ### Retrieve a Credential
 
-`beta.vaults.credentials.retrieve(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
+`beta.vaults.credentials.retrieve(credential_id, **kwargs) -> BetaManagedAgentsCredential`
 
 **GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
@@ -72978,7 +72978,7 @@ print(beta_managed_agents_credential.id)
 
 ### Update a Credential
 
-`beta.vaults.credentials.update(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
+`beta.vaults.credentials.update(credential_id, **kwargs) -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
@@ -73447,7 +73447,7 @@ print(beta_managed_agents_credential.id)
 
 ### Delete a Credential
 
-`beta.vaults.credentials.delete(credential_id, **kwargs)  -> BetaManagedAgentsDeletedCredential`
+`beta.vaults.credentials.delete(credential_id, **kwargs) -> BetaManagedAgentsDeletedCredential`
 
 **DELETE** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
@@ -73620,7 +73620,7 @@ print(beta_managed_agents_deleted_credential.id)
 
 ### Archive a Credential
 
-`beta.vaults.credentials.archive(credential_id, **kwargs)  -> BetaManagedAgentsCredential`
+`beta.vaults.credentials.archive(credential_id, **kwargs) -> BetaManagedAgentsCredential`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/archive`
 
@@ -73949,7 +73949,7 @@ print(beta_managed_agents_credential.id)
 
 ### Validate an MCP OAuth Credential
 
-`beta.vaults.credentials.mcp_oauth_validate(credential_id, **kwargs)  -> BetaManagedAgentsCredentialValidation`
+`beta.vaults.credentials.mcp_oauth_validate(credential_id, **kwargs) -> BetaManagedAgentsCredentialValidation`
 
 **POST** `/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate`
 
@@ -74236,7 +74236,7 @@ print(beta_managed_agents_credential_validation.credential_id)
 
 ### Create a Memory Store
 
-`beta.memory_stores.create(**kwargs)  -> BetaManagedAgentsMemoryStore`
+`beta.memory_stores.create(**kwargs) -> BetaManagedAgentsMemoryStore`
 
 **POST** `/v1/memory_stores`
 
@@ -74468,7 +74468,7 @@ print(beta_managed_agents_memory_store.id)
 
 ### List Memory Stores
 
-`beta.memory_stores.list(**kwargs)  -> SyncPageCursor[BetaManagedAgentsMemoryStore]`
+`beta.memory_stores.list(**kwargs) -> SyncPageCursor[BetaManagedAgentsMemoryStore]`
 
 **GET** `/v1/memory_stores`
 
@@ -74706,7 +74706,7 @@ print(page.id)
 
 ### Retrieve a Memory Store
 
-`beta.memory_stores.retrieve(memory_store_id, **kwargs)  -> BetaManagedAgentsMemoryStore`
+`beta.memory_stores.retrieve(memory_store_id, **kwargs) -> BetaManagedAgentsMemoryStore`
 
 **GET** `/v1/memory_stores/{memory_store_id}`
 
@@ -74920,7 +74920,7 @@ print(beta_managed_agents_memory_store.id)
 
 ### Update a Memory Store
 
-`beta.memory_stores.update(memory_store_id, **kwargs)  -> BetaManagedAgentsMemoryStore`
+`beta.memory_stores.update(memory_store_id, **kwargs) -> BetaManagedAgentsMemoryStore`
 
 **POST** `/v1/memory_stores/{memory_store_id}`
 
@@ -75156,7 +75156,7 @@ print(beta_managed_agents_memory_store.id)
 
 ### Delete a Memory Store
 
-`beta.memory_stores.delete(memory_store_id, **kwargs)  -> BetaManagedAgentsDeletedMemoryStore`
+`beta.memory_stores.delete(memory_store_id, **kwargs) -> BetaManagedAgentsDeletedMemoryStore`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}`
 
@@ -75326,7 +75326,7 @@ print(beta_managed_agents_deleted_memory_store.id)
 
 ### Archive a Memory Store
 
-`beta.memory_stores.archive(memory_store_id, **kwargs)  -> BetaManagedAgentsMemoryStore`
+`beta.memory_stores.archive(memory_store_id, **kwargs) -> BetaManagedAgentsMemoryStore`
 
 **POST** `/v1/memory_stores/{memory_store_id}/archive`
 
@@ -75544,7 +75544,7 @@ print(beta_managed_agents_memory_store.id)
 
 ### Create a Memory
 
-`beta.memory_stores.memories.create(memory_store_id, **kwargs)  -> BetaManagedAgentsMemory`
+`beta.memory_stores.memories.create(memory_store_id, **kwargs) -> BetaManagedAgentsMemory`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories`
 
@@ -75802,7 +75802,7 @@ print(beta_managed_agents_memory.id)
 
 ### List Memories
 
-`beta.memory_stores.memories.list(memory_store_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsMemoryListItem]`
+`beta.memory_stores.memories.list(memory_store_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsMemoryListItem]`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories`
 
@@ -76092,7 +76092,7 @@ print(page)
 
 ### Retrieve a Memory
 
-`beta.memory_stores.memories.retrieve(memory_id, **kwargs)  -> BetaManagedAgentsMemory`
+`beta.memory_stores.memories.retrieve(memory_id, **kwargs) -> BetaManagedAgentsMemory`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
@@ -76339,7 +76339,7 @@ print(beta_managed_agents_memory.id)
 
 ### Update a Memory
 
-`beta.memory_stores.memories.update(memory_id, **kwargs)  -> BetaManagedAgentsMemory`
+`beta.memory_stores.memories.update(memory_id, **kwargs) -> BetaManagedAgentsMemory`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
@@ -76610,7 +76610,7 @@ print(beta_managed_agents_memory.id)
 
 ### Delete a Memory
 
-`beta.memory_stores.memories.delete(memory_id, **kwargs)  -> BetaManagedAgentsDeletedMemory`
+`beta.memory_stores.memories.delete(memory_id, **kwargs) -> BetaManagedAgentsDeletedMemory`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
@@ -76795,7 +76795,7 @@ print(beta_managed_agents_deleted_memory.id)
 
 ### List Memory Versions
 
-`beta.memory_stores.memory_versions.list(memory_store_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsMemoryVersion]`
+`beta.memory_stores.memory_versions.list(memory_store_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsMemoryVersion]`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions`
 
@@ -77184,7 +77184,7 @@ print(page.id)
 
 ### Retrieve a Memory Version
 
-`beta.memory_stores.memory_versions.retrieve(memory_version_id, **kwargs)  -> BetaManagedAgentsMemoryVersion`
+`beta.memory_stores.memory_versions.retrieve(memory_version_id, **kwargs) -> BetaManagedAgentsMemoryVersion`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}`
 
@@ -77514,7 +77514,7 @@ print(beta_managed_agents_memory_version.id)
 
 ### Redact a Memory Version
 
-`beta.memory_stores.memory_versions.redact(memory_version_id, **kwargs)  -> BetaManagedAgentsMemoryVersion`
+`beta.memory_stores.memory_versions.redact(memory_version_id, **kwargs) -> BetaManagedAgentsMemoryVersion`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memory_versions/{memory_version_id}/redact`
 
@@ -77832,7 +77832,7 @@ print(beta_managed_agents_memory_version.id)
 
 ### Upload File
 
-`beta.files.upload(**kwargs)  -> BetaFileMetadata`
+`beta.files.upload(**kwargs) -> BetaFileMetadata`
 
 **POST** `/v1/files`
 
@@ -78070,7 +78070,7 @@ print(beta_file_metadata.id)
 
 ### List Files
 
-`beta.files.list(**kwargs)  -> SyncPageCursor[BetaFileMetadata]`
+`beta.files.list(**kwargs) -> SyncPageCursor[BetaFileMetadata]`
 
 **GET** `/v1/files`
 
@@ -78320,7 +78320,7 @@ print(page.id)
 
 ### Download File
 
-`beta.files.download(file_id, **kwargs)  -> BinaryResponseContent`
+`beta.files.download(file_id, **kwargs) -> BinaryResponseContent`
 
 **GET** `/v1/files/{file_id}/content`
 
@@ -78473,7 +78473,7 @@ print(content)
 
 ### Get File Metadata
 
-`beta.files.retrieve_metadata(file_id, **kwargs)  -> BetaFileMetadata`
+`beta.files.retrieve_metadata(file_id, **kwargs) -> BetaFileMetadata`
 
 **GET** `/v1/files/{file_id}`
 
@@ -78703,7 +78703,7 @@ print(beta_file_metadata.id)
 
 ### Delete File
 
-`beta.files.delete(file_id, **kwargs)  -> BetaDeletedFile`
+`beta.files.delete(file_id, **kwargs) -> BetaDeletedFile`
 
 **DELETE** `/v1/files/{file_id}`
 
@@ -78877,7 +78877,7 @@ print(beta_deleted_file.id)
 
 ### Create Skill
 
-`beta.skills.create(**kwargs)  -> BetaSkill`
+`beta.skills.create(**kwargs) -> BetaSkill`
 
 **POST** `/v1/skills`
 
@@ -79118,7 +79118,7 @@ print(beta_skill.id)
 
 ### List Skills
 
-`beta.skills.list(**kwargs)  -> SyncPageCursor[BetaSkill]`
+`beta.skills.list(**kwargs) -> SyncPageCursor[BetaSkill]`
 
 **GET** `/v1/skills`
 
@@ -79374,7 +79374,7 @@ print(page.id)
 
 ### Get Skill
 
-`beta.skills.retrieve(skill_id, **kwargs)  -> BetaSkill`
+`beta.skills.retrieve(skill_id, **kwargs) -> BetaSkill`
 
 **GET** `/v1/skills/{skill_id}`
 
@@ -79609,7 +79609,7 @@ print(beta_skill.id)
 
 ### Delete Skill
 
-`beta.skills.delete(skill_id, **kwargs)  -> BetaDeletedSkill`
+`beta.skills.delete(skill_id, **kwargs) -> BetaDeletedSkill`
 
 **DELETE** `/v1/skills/{skill_id}`
 
@@ -79787,7 +79787,7 @@ print(beta_deleted_skill.id)
 
 ### Create Skill Version
 
-`beta.skills.versions.create(skill_id, **kwargs)  -> BetaSkillVersion`
+`beta.skills.versions.create(skill_id, **kwargs) -> BetaSkillVersion`
 
 **POST** `/v1/skills/{skill_id}/versions`
 
@@ -79998,7 +79998,7 @@ print(beta_skill_version.id)
 
 ### List Skill Versions
 
-`beta.skills.versions.list(skill_id, **kwargs)  -> SyncPageCursor[BetaSkillVersion]`
+`beta.skills.versions.list(skill_id, **kwargs) -> SyncPageCursor[BetaSkillVersion]`
 
 **GET** `/v1/skills/{skill_id}/versions`
 
@@ -80220,7 +80220,7 @@ print(page.id)
 
 ### Download Skill Version Content
 
-`beta.skills.versions.download(version, **kwargs)  -> BinaryResponseContent`
+`beta.skills.versions.download(version, **kwargs) -> BinaryResponseContent`
 
 **GET** `/v1/skills/{skill_id}/versions/{version}/content`
 
@@ -80382,7 +80382,7 @@ print(content)
 
 ### Get Skill Version
 
-`beta.skills.versions.retrieve(version, **kwargs)  -> BetaSkillVersion`
+`beta.skills.versions.retrieve(version, **kwargs) -> BetaSkillVersion`
 
 **GET** `/v1/skills/{skill_id}/versions/{version}`
 
@@ -80593,7 +80593,7 @@ print(beta_skill_version.id)
 
 ### Delete Skill Version
 
-`beta.skills.versions.delete(version, **kwargs)  -> BetaDeletedSkillVersion`
+`beta.skills.versions.delete(version, **kwargs) -> BetaDeletedSkillVersion`
 
 **DELETE** `/v1/skills/{skill_id}/versions/{version}`
 
@@ -80777,7 +80777,7 @@ print(beta_deleted_skill_version.id)
 
 ### Create User Profile
 
-`beta.user_profiles.create(**kwargs)  -> BetaUserProfile`
+`beta.user_profiles.create(**kwargs) -> BetaUserProfile`
 
 **POST** `/v1/user_profiles`
 
@@ -81168,7 +81168,7 @@ print(beta_user_profile.id)
 
 ### List User Profiles
 
-`beta.user_profiles.list(**kwargs)  -> SyncPageCursor[BetaUserProfile]`
+`beta.user_profiles.list(**kwargs) -> SyncPageCursor[BetaUserProfile]`
 
 **GET** `/v1/user_profiles`
 
@@ -81507,7 +81507,7 @@ print(page.id)
 
 ### Get User Profile
 
-`beta.user_profiles.retrieve(user_profile_id, **kwargs)  -> BetaUserProfile`
+`beta.user_profiles.retrieve(user_profile_id, **kwargs) -> BetaUserProfile`
 
 **GET** `/v1/user_profiles/{user_profile_id}`
 
@@ -81810,7 +81810,7 @@ print(beta_user_profile.id)
 
 ### Update User Profile
 
-`beta.user_profiles.update(user_profile_id, **kwargs)  -> BetaUserProfile`
+`beta.user_profiles.update(user_profile_id, **kwargs) -> BetaUserProfile`
 
 **POST** `/v1/user_profiles/{user_profile_id}`
 
@@ -82207,7 +82207,7 @@ print(beta_user_profile.id)
 
 ### Delete User Profile
 
-`beta.user_profiles.delete(user_profile_id, **kwargs)  -> BetaDeletedUserProfile`
+`beta.user_profiles.delete(user_profile_id, **kwargs) -> BetaDeletedUserProfile`
 
 **DELETE** `/v1/user_profiles/{user_profile_id}`
 
@@ -82375,7 +82375,7 @@ print(beta_deleted_user_profile.id)
 
 ### Create Enrollment URL
 
-`beta.user_profiles.create_enrollment_url(user_profile_id, **kwargs)  -> BetaUserProfileEnrollmentURL`
+`beta.user_profiles.create_enrollment_url(user_profile_id, **kwargs) -> BetaUserProfileEnrollmentURL`
 
 **POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
@@ -82554,7 +82554,7 @@ print(beta_user_profile_enrollment_url.expires_at)
 
 ### Create Action URL
 
-`beta.user_profiles.action_urls.create(user_profile_id, **kwargs)  -> BetaUserProfileActionURL`
+`beta.user_profiles.action_urls.create(user_profile_id, **kwargs) -> BetaUserProfileActionURL`
 
 **POST** `/v1/user_profiles/{user_profile_id}/action_urls`
 
@@ -82740,7 +82740,7 @@ print(beta_user_profile_action_url.expires_at)
 
 ### Create a Dream
 
-`beta.dreams.create(**kwargs)  -> BetaDream`
+`beta.dreams.create(**kwargs) -> BetaDream`
 
 **POST** `/v1/dreams`
 
@@ -83263,7 +83263,7 @@ print(beta_dream.id)
 
 ### List Dreams
 
-`beta.dreams.list(**kwargs)  -> SyncPageCursor[BetaDream]`
+`beta.dreams.list(**kwargs) -> SyncPageCursor[BetaDream]`
 
 **GET** `/v1/dreams`
 
@@ -83744,7 +83744,7 @@ print(page.id)
 
 ### Get a Dream
 
-`beta.dreams.retrieve(dream_id, **kwargs)  -> BetaDream`
+`beta.dreams.retrieve(dream_id, **kwargs) -> BetaDream`
 
 **GET** `/v1/dreams/{dream_id}`
 
@@ -84163,7 +84163,7 @@ print(beta_dream.id)
 
 ### Cancel a Dream
 
-`beta.dreams.cancel(dream_id, **kwargs)  -> BetaDream`
+`beta.dreams.cancel(dream_id, **kwargs) -> BetaDream`
 
 **POST** `/v1/dreams/{dream_id}/cancel`
 
@@ -84582,7 +84582,7 @@ print(beta_dream.id)
 
 ### Archive a Dream
 
-`beta.dreams.archive(dream_id, **kwargs)  -> BetaDream`
+`beta.dreams.archive(dream_id, **kwargs) -> BetaDream`
 
 **POST** `/v1/dreams/{dream_id}/archive`
 
@@ -85003,7 +85003,7 @@ print(beta_dream.id)
 
 ### Create Tunnel
 
-`beta.tunnels.create(**kwargs)  -> BetaTunnel`
+`beta.tunnels.create(**kwargs) -> BetaTunnel`
 
 **POST** `/v1/tunnels`
 
@@ -85197,7 +85197,7 @@ print(beta_tunnel.id)
 
 ### Get Tunnel
 
-`beta.tunnels.retrieve(tunnel_id, **kwargs)  -> BetaTunnel`
+`beta.tunnels.retrieve(tunnel_id, **kwargs) -> BetaTunnel`
 
 **GET** `/v1/tunnels/{tunnel_id}`
 
@@ -85391,7 +85391,7 @@ print(beta_tunnel.id)
 
 ### List Tunnels
 
-`beta.tunnels.list(**kwargs)  -> SyncPageCursor[BetaTunnel]`
+`beta.tunnels.list(**kwargs) -> SyncPageCursor[BetaTunnel]`
 
 **GET** `/v1/tunnels`
 
@@ -85599,7 +85599,7 @@ print(page.id)
 
 ### Archive Tunnel
 
-`beta.tunnels.archive(tunnel_id, **kwargs)  -> BetaTunnel`
+`beta.tunnels.archive(tunnel_id, **kwargs) -> BetaTunnel`
 
 **POST** `/v1/tunnels/{tunnel_id}/archive`
 
@@ -85793,7 +85793,7 @@ print(beta_tunnel.id)
 
 ### Reveal Tunnel Token
 
-`beta.tunnels.reveal_token(tunnel_id, **kwargs)  -> BetaTunnelToken`
+`beta.tunnels.reveal_token(tunnel_id, **kwargs) -> BetaTunnelToken`
 
 **POST** `/v1/tunnels/{tunnel_id}/reveal_token`
 
@@ -85968,7 +85968,7 @@ print(beta_tunnel_token.id)
 
 ### Rotate Tunnel Token
 
-`beta.tunnels.rotate_token(tunnel_id, **kwargs)  -> BetaTunnelToken`
+`beta.tunnels.rotate_token(tunnel_id, **kwargs) -> BetaTunnelToken`
 
 **POST** `/v1/tunnels/{tunnel_id}/rotate_token`
 
@@ -86151,7 +86151,7 @@ print(beta_tunnel_token.id)
 
 ### Create Tunnel Certificate
 
-`beta.tunnels.certificates.create(tunnel_id, **kwargs)  -> BetaTunnelCertificate`
+`beta.tunnels.certificates.create(tunnel_id, **kwargs) -> BetaTunnelCertificate`
 
 **POST** `/v1/tunnels/{tunnel_id}/certificates`
 
@@ -86359,7 +86359,7 @@ print(beta_tunnel_certificate.id)
 
 ### Get Tunnel Certificate
 
-`beta.tunnels.certificates.retrieve(certificate_id, **kwargs)  -> BetaTunnelCertificate`
+`beta.tunnels.certificates.retrieve(certificate_id, **kwargs) -> BetaTunnelCertificate`
 
 **GET** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}`
 
@@ -86565,7 +86565,7 @@ print(beta_tunnel_certificate.id)
 
 ### List Tunnel Certificates
 
-`beta.tunnels.certificates.list(tunnel_id, **kwargs)  -> SyncPageCursor[BetaTunnelCertificate]`
+`beta.tunnels.certificates.list(tunnel_id, **kwargs) -> SyncPageCursor[BetaTunnelCertificate]`
 
 **GET** `/v1/tunnels/{tunnel_id}/certificates`
 
@@ -86786,7 +86786,7 @@ print(page.id)
 
 ### Archive Tunnel Certificate
 
-`beta.tunnels.certificates.archive(certificate_id, **kwargs)  -> BetaTunnelCertificate`
+`beta.tunnels.certificates.archive(certificate_id, **kwargs) -> BetaTunnelCertificate`
 
 **POST** `/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive`
 
@@ -86994,7 +86994,7 @@ print(beta_tunnel_certificate.id)
 
 ### Get Current Organization
 
-`beta.organization.retrieve()  -> BetaOrganization`
+`beta.organization.retrieve() -> BetaOrganization`
 
 **GET** `/v1/organizations/me`
 
@@ -87051,7 +87051,7 @@ print(beta_organization.id)
 
 ### List API Keys
 
-`beta.organization.api_keys.list(**kwargs)  -> SyncPage[BetaAPIKey]`
+`beta.organization.api_keys.list(**kwargs) -> SyncPage[BetaAPIKey]`
 
 **GET** `/v1/organizations/api_keys`
 
@@ -87264,7 +87264,7 @@ print(page.id)
 
 ### Retrieve API Key (Admin API)
 
-`beta.organization.api_keys.retrieve(api_key_id)  -> BetaAPIKey`
+`beta.organization.api_keys.retrieve(api_key_id) -> BetaAPIKey`
 
 **GET** `/v1/organizations/api_keys/{api_key_id}`
 
@@ -87439,7 +87439,7 @@ print(beta_api_key.id)
 
 ### Update API Key
 
-`beta.organization.api_keys.update(api_key_id, **kwargs)  -> BetaAPIKey`
+`beta.organization.api_keys.update(api_key_id, **kwargs) -> BetaAPIKey`
 
 **POST** `/v1/organizations/api_keys/{api_key_id}`
 
@@ -87632,7 +87632,7 @@ print(beta_api_key.id)
 
 ### Create External Key
 
-`beta.organization.external_keys.create(**kwargs)  -> BetaExternalKey`
+`beta.organization.external_keys.create(**kwargs) -> BetaExternalKey`
 
 **POST** `/v1/organizations/external_keys`
 
@@ -87850,7 +87850,7 @@ print(beta_external_key.id)
 
 ### List External Keys
 
-`beta.organization.external_keys.list(**kwargs)  -> SyncPageCursor[BetaExternalKey]`
+`beta.organization.external_keys.list(**kwargs) -> SyncPageCursor[BetaExternalKey]`
 
 **GET** `/v1/organizations/external_keys`
 
@@ -88018,7 +88018,7 @@ print(page.id)
 
 ### Get External Key
 
-`beta.organization.external_keys.retrieve(external_key_id)  -> BetaExternalKey`
+`beta.organization.external_keys.retrieve(external_key_id) -> BetaExternalKey`
 
 **GET** `/v1/organizations/external_keys/{external_key_id}`
 
@@ -88175,7 +88175,7 @@ print(beta_external_key.id)
 
 ### Update External Key
 
-`beta.organization.external_keys.update(external_key_id, **kwargs)  -> BetaExternalKey`
+`beta.organization.external_keys.update(external_key_id, **kwargs) -> BetaExternalKey`
 
 **POST** `/v1/organizations/external_keys/{external_key_id}`
 
@@ -88400,7 +88400,7 @@ print(beta_external_key.id)
 
 ### Delete External Key
 
-`beta.organization.external_keys.delete(external_key_id)  -> ExternalKeyDeleteResponse`
+`beta.organization.external_keys.delete(external_key_id) -> ExternalKeyDeleteResponse`
 
 **DELETE** `/v1/organizations/external_keys/{external_key_id}`
 
@@ -88456,7 +88456,7 @@ print(external_key.id)
 
 ### Validate External Key
 
-`beta.organization.external_keys.validate(external_key_id)  -> ExternalKeyValidateResponse`
+`beta.organization.external_keys.validate(external_key_id) -> ExternalKeyValidateResponse`
 
 **POST** `/v1/organizations/external_keys/{external_key_id}/validate`
 
@@ -88531,7 +88531,7 @@ print(response.error)
 
 ### Create Federation Issuer
 
-`beta.organization.federation.issuers.create(**kwargs)  -> BetaFederationIssuer`
+`beta.organization.federation.issuers.create(**kwargs) -> BetaFederationIssuer`
 
 **POST** `/v1/organizations/federation_issuers`
 
@@ -88922,7 +88922,7 @@ print(beta_federation_issuer.id)
 
 ### List Federation Issuers
 
-`beta.organization.federation.issuers.list(**kwargs)  -> SyncPageCursor[BetaFederationIssuer]`
+`beta.organization.federation.issuers.list(**kwargs) -> SyncPageCursor[BetaFederationIssuer]`
 
 **GET** `/v1/organizations/federation_issuers`
 
@@ -89252,7 +89252,7 @@ print(page.id)
 
 ### Get Federation Issuer
 
-`beta.organization.federation.issuers.retrieve(federation_issuer_id, **kwargs)  -> BetaFederationIssuer`
+`beta.organization.federation.issuers.retrieve(federation_issuer_id, **kwargs) -> BetaFederationIssuer`
 
 **GET** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
@@ -89564,7 +89564,7 @@ print(beta_federation_issuer.id)
 
 ### Update Federation Issuer
 
-`beta.organization.federation.issuers.update(federation_issuer_id, **kwargs)  -> BetaFederationIssuer`
+`beta.organization.federation.issuers.update(federation_issuer_id, **kwargs) -> BetaFederationIssuer`
 
 **POST** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
@@ -89959,7 +89959,7 @@ print(beta_federation_issuer.id)
 
 ### Archive Federation Issuer
 
-`beta.organization.federation.issuers.archive(federation_issuer_id, **kwargs)  -> BetaFederationIssuer`
+`beta.organization.federation.issuers.archive(federation_issuer_id, **kwargs) -> BetaFederationIssuer`
 
 **POST** `/v1/organizations/federation_issuers/{federation_issuer_id}/archive`
 
@@ -90278,7 +90278,7 @@ print(beta_federation_issuer.id)
 
 ### Create Federation Rule
 
-`beta.organization.federation.rules.create(**kwargs)  -> BetaFederationRule`
+`beta.organization.federation.rules.create(**kwargs) -> BetaFederationRule`
 
 **POST** `/v1/organizations/federation_rules`
 
@@ -90693,7 +90693,7 @@ print(beta_federation_rule.id)
 
 ### List Federation Rules
 
-`beta.organization.federation.rules.list(**kwargs)  -> SyncPageCursor[BetaFederationRule]`
+`beta.organization.federation.rules.list(**kwargs) -> SyncPageCursor[BetaFederationRule]`
 
 **GET** `/v1/organizations/federation_rules`
 
@@ -91034,7 +91034,7 @@ print(page.id)
 
 ### Get Federation Rule
 
-`beta.organization.federation.rules.retrieve(federation_rule_id, **kwargs)  -> BetaFederationRule`
+`beta.organization.federation.rules.retrieve(federation_rule_id, **kwargs) -> BetaFederationRule`
 
 **GET** `/v1/organizations/federation_rules/{federation_rule_id}`
 
@@ -91352,7 +91352,7 @@ print(beta_federation_rule.id)
 
 ### Update Federation Rule
 
-`beta.organization.federation.rules.update(federation_rule_id, **kwargs)  -> BetaFederationRule`
+`beta.organization.federation.rules.update(federation_rule_id, **kwargs) -> BetaFederationRule`
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}`
 
@@ -91762,7 +91762,7 @@ print(beta_federation_rule.id)
 
 ### Archive Federation Rule
 
-`beta.organization.federation.rules.archive(federation_rule_id, **kwargs)  -> BetaFederationRule`
+`beta.organization.federation.rules.archive(federation_rule_id, **kwargs) -> BetaFederationRule`
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}/archive`
 
@@ -92090,7 +92090,7 @@ print(beta_federation_rule.id)
 
 ### Add Federation Rule Workspace
 
-`beta.organization.federation.rules.workspaces.add(federation_rule_id, **kwargs)  -> BetaFederationRuleWorkspace`
+`beta.organization.federation.rules.workspaces.add(federation_rule_id, **kwargs) -> BetaFederationRuleWorkspace`
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
@@ -92292,7 +92292,7 @@ print(beta_federation_rule_workspace.created_by_actor_id)
 
 ### List Federation Rule Workspaces
 
-`beta.organization.federation.rules.workspaces.list(federation_rule_id, **kwargs)  -> SyncPageCursor[BetaFederationRuleWorkspace]`
+`beta.organization.federation.rules.workspaces.list(federation_rule_id, **kwargs) -> SyncPageCursor[BetaFederationRuleWorkspace]`
 
 **GET** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
@@ -92500,7 +92500,7 @@ print(page.created_by_actor_id)
 
 ### Remove Federation Rule Workspace
 
-`beta.organization.federation.rules.workspaces.remove(workspace_id, **kwargs)  -> WorkspaceRemoveResponse`
+`beta.organization.federation.rules.workspaces.remove(workspace_id, **kwargs) -> WorkspaceRemoveResponse`
 
 **DELETE** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces/{workspace_id}`
 
@@ -92681,7 +92681,7 @@ print(workspace.federation_rule_id)
 
 ### Create Invite
 
-`beta.organization.invites.create(**kwargs)  -> BetaOrganizationInvite`
+`beta.organization.invites.create(**kwargs) -> BetaOrganizationInvite`
 
 **POST** `/v1/organizations/invites`
 
@@ -92833,7 +92833,7 @@ print(beta_organization_invite.id)
 
 ### List Invites
 
-`beta.organization.invites.list(**kwargs)  -> SyncPage[BetaOrganizationInvite]`
+`beta.organization.invites.list(**kwargs) -> SyncPage[BetaOrganizationInvite]`
 
 **GET** `/v1/organizations/invites`
 
@@ -92998,7 +92998,7 @@ print(page.id)
 
 ### Get Invite
 
-`beta.organization.invites.retrieve(invite_id)  -> BetaOrganizationInvite`
+`beta.organization.invites.retrieve(invite_id) -> BetaOrganizationInvite`
 
 **GET** `/v1/organizations/invites/{invite_id}`
 
@@ -93123,7 +93123,7 @@ print(beta_organization_invite.id)
 
 ### Delete Invite
 
-`beta.organization.invites.delete(invite_id)  -> InviteDeleteResponse`
+`beta.organization.invites.delete(invite_id) -> InviteDeleteResponse`
 
 **DELETE** `/v1/organizations/invites/{invite_id}`
 
@@ -93181,7 +93181,7 @@ print(invite.id)
 
 ### Create Service Account
 
-`beta.organization.service_accounts.create(**kwargs)  -> BetaServiceAccount`
+`beta.organization.service_accounts.create(**kwargs) -> BetaServiceAccount`
 
 **POST** `/v1/organizations/service_accounts`
 
@@ -93429,7 +93429,7 @@ print(beta_service_account.id)
 
 ### List Service Accounts
 
-`beta.organization.service_accounts.list(**kwargs)  -> SyncPageCursor[BetaServiceAccount]`
+`beta.organization.service_accounts.list(**kwargs) -> SyncPageCursor[BetaServiceAccount]`
 
 **GET** `/v1/organizations/service_accounts`
 
@@ -93673,7 +93673,7 @@ print(page.id)
 
 ### Get Service Account
 
-`beta.organization.service_accounts.retrieve(service_account_id, **kwargs)  -> BetaServiceAccount`
+`beta.organization.service_accounts.retrieve(service_account_id, **kwargs) -> BetaServiceAccount`
 
 **GET** `/v1/organizations/service_accounts/{service_account_id}`
 
@@ -93897,7 +93897,7 @@ print(beta_service_account.id)
 
 ### Update Service Account
 
-`beta.organization.service_accounts.update(service_account_id, **kwargs)  -> BetaServiceAccount`
+`beta.organization.service_accounts.update(service_account_id, **kwargs) -> BetaServiceAccount`
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}`
 
@@ -94140,7 +94140,7 @@ print(beta_service_account.id)
 
 ### Archive Service Account
 
-`beta.organization.service_accounts.archive(service_account_id, **kwargs)  -> BetaServiceAccount`
+`beta.organization.service_accounts.archive(service_account_id, **kwargs) -> BetaServiceAccount`
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/archive`
 
@@ -94371,7 +94371,7 @@ print(beta_service_account.id)
 
 ### Add Workspace To Service Account
 
-`beta.organization.service_accounts.workspaces.add(service_account_id, **kwargs)  -> BetaServiceAccountWorkspaceMember`
+`beta.organization.service_accounts.workspaces.add(service_account_id, **kwargs) -> BetaServiceAccountWorkspaceMember`
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
@@ -94592,7 +94592,7 @@ print(beta_service_account_workspace_member.created_by_actor_id)
 
 ### List Workspaces For Service Account
 
-`beta.organization.service_accounts.workspaces.list(service_account_id, **kwargs)  -> SyncPageCursor[BetaServiceAccountWorkspaceMember]`
+`beta.organization.service_accounts.workspaces.list(service_account_id, **kwargs) -> SyncPageCursor[BetaServiceAccountWorkspaceMember]`
 
 **GET** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
@@ -94816,7 +94816,7 @@ print(page.created_by_actor_id)
 
 ### Remove Workspace From Service Account
 
-`beta.organization.service_accounts.workspaces.remove(workspace_id, **kwargs)  -> WorkspaceRemoveResponse`
+`beta.organization.service_accounts.workspaces.remove(workspace_id, **kwargs) -> WorkspaceRemoveResponse`
 
 **DELETE** `/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}`
 
@@ -95000,7 +95000,7 @@ print(workspace.service_account_id)
 
 ### List Users
 
-`beta.organization.users.list(**kwargs)  -> SyncPage[BetaOrganizationUser]`
+`beta.organization.users.list(**kwargs) -> SyncPage[BetaOrganizationUser]`
 
 **GET** `/v1/organizations/users`
 
@@ -95126,7 +95126,7 @@ print(page.id)
 
 ### Get User
 
-`beta.organization.users.retrieve(user_id)  -> BetaOrganizationUser`
+`beta.organization.users.retrieve(user_id) -> BetaOrganizationUser`
 
 **GET** `/v1/organizations/users/{user_id}`
 
@@ -95222,7 +95222,7 @@ print(beta_organization_user.id)
 
 ### Update User
 
-`beta.organization.users.update(user_id, **kwargs)  -> BetaOrganizationUser`
+`beta.organization.users.update(user_id, **kwargs) -> BetaOrganizationUser`
 
 **POST** `/v1/organizations/users/{user_id}`
 
@@ -95335,7 +95335,7 @@ print(beta_organization_user.id)
 
 ### Remove User
 
-`beta.organization.users.remove(user_id)  -> UserRemoveResponse`
+`beta.organization.users.remove(user_id) -> UserRemoveResponse`
 
 **DELETE** `/v1/organizations/users/{user_id}`
 
@@ -95393,7 +95393,7 @@ print(user.id)
 
 ### List Workspaces
 
-`beta.organization.workspaces.list(**kwargs)  -> SyncPage[BetaWorkspace]`
+`beta.organization.workspaces.list(**kwargs) -> SyncPage[BetaWorkspace]`
 
 **GET** `/v1/organizations/workspaces`
 
@@ -95574,7 +95574,7 @@ print(page.id)
 
 ### Create Workspace
 
-`beta.organization.workspaces.create(**kwargs)  -> BetaWorkspace`
+`beta.organization.workspaces.create(**kwargs) -> BetaWorkspace`
 
 **POST** `/v1/organizations/workspaces`
 
@@ -95889,7 +95889,7 @@ print(beta_workspace.id)
 
 ### Get Workspace
 
-`beta.organization.workspaces.retrieve(workspace_id)  -> BetaWorkspace`
+`beta.organization.workspaces.retrieve(workspace_id) -> BetaWorkspace`
 
 **GET** `/v1/organizations/workspaces/{workspace_id}`
 
@@ -96040,7 +96040,7 @@ print(beta_workspace.id)
 
 ### Update Workspace
 
-`beta.organization.workspaces.update(workspace_id, **kwargs)  -> BetaWorkspace`
+`beta.organization.workspaces.update(workspace_id, **kwargs) -> BetaWorkspace`
 
 **POST** `/v1/organizations/workspaces/{workspace_id}`
 
@@ -96243,7 +96243,7 @@ print(beta_workspace.id)
 
 ### Archive Workspace
 
-`beta.organization.workspaces.archive(workspace_id)  -> BetaWorkspace`
+`beta.organization.workspaces.archive(workspace_id) -> BetaWorkspace`
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/archive`
 
@@ -96394,7 +96394,7 @@ print(beta_workspace.id)
 
 ### List Workspace Rate Limits
 
-`beta.organization.workspaces.rate_limits.list(workspace_id, **kwargs)  -> SyncPageCursor[BetaWorkspaceRateLimit]`
+`beta.organization.workspaces.rate_limits.list(workspace_id, **kwargs) -> SyncPageCursor[BetaWorkspaceRateLimit]`
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/rate_limits`
 
@@ -96641,7 +96641,7 @@ print(page.rate_limit_id)
 
 ### Set Workspace Rate Limits
 
-`beta.organization.workspaces.rate_limits.update(rate_limit_id, **kwargs)  -> BetaWorkspaceRateLimit`
+`beta.organization.workspaces.rate_limits.update(rate_limit_id, **kwargs) -> BetaWorkspaceRateLimit`
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/rate_limits/{rate_limit_id}`
 
@@ -96895,7 +96895,7 @@ print(beta_workspace_rate_limit.rate_limit_id)
 
 ### List Workspace Members
 
-`beta.organization.workspaces.members.list(workspace_id, **kwargs)  -> SyncPage[BetaWorkspaceMember]`
+`beta.organization.workspaces.members.list(workspace_id, **kwargs) -> SyncPage[BetaWorkspaceMember]`
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/members`
 
@@ -96995,7 +96995,7 @@ print(page.user_id)
 
 ### Create Workspace Member
 
-`beta.organization.workspaces.members.add(workspace_id, **kwargs)  -> BetaWorkspaceMember`
+`beta.organization.workspaces.members.add(workspace_id, **kwargs) -> BetaWorkspaceMember`
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/members`
 
@@ -97089,7 +97089,7 @@ print(beta_workspace_member.user_id)
 
 ### Get Workspace Member
 
-`beta.organization.workspaces.members.retrieve(user_id, **kwargs)  -> BetaWorkspaceMember`
+`beta.organization.workspaces.members.retrieve(user_id, **kwargs) -> BetaWorkspaceMember`
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
@@ -97170,7 +97170,7 @@ print(beta_workspace_member.user_id)
 
 ### Update Workspace Member
 
-`beta.organization.workspaces.members.update(user_id, **kwargs)  -> BetaWorkspaceMember`
+`beta.organization.workspaces.members.update(user_id, **kwargs) -> BetaWorkspaceMember`
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
@@ -97266,7 +97266,7 @@ print(beta_workspace_member.user_id)
 
 ### Delete Workspace Member
 
-`beta.organization.workspaces.members.remove(user_id, **kwargs)  -> MemberRemoveResponse`
+`beta.organization.workspaces.members.remove(user_id, **kwargs) -> MemberRemoveResponse`
 
 **DELETE** `/v1/organizations/workspaces/{workspace_id}/members/{user_id}`
 
@@ -97334,7 +97334,7 @@ print(member.user_id)
 
 ### List Service Account Workspace Members
 
-`beta.organization.workspaces.service_accounts.list(workspace_id, **kwargs)  -> SyncPageCursor[BetaServiceAccountWorkspaceMember]`
+`beta.organization.workspaces.service_accounts.list(workspace_id, **kwargs) -> SyncPageCursor[BetaServiceAccountWorkspaceMember]`
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
@@ -97551,7 +97551,7 @@ print(page.created_by_actor_id)
 
 ### Create Service Account Workspace Member
 
-`beta.organization.workspaces.service_accounts.add(workspace_id, **kwargs)  -> BetaServiceAccountWorkspaceMember`
+`beta.organization.workspaces.service_accounts.add(workspace_id, **kwargs) -> BetaServiceAccountWorkspaceMember`
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
@@ -97774,7 +97774,7 @@ print(beta_service_account_workspace_member.created_by_actor_id)
 
 ### Get Service Account Workspace Member
 
-`beta.organization.workspaces.service_accounts.retrieve(service_account_id, **kwargs)  -> BetaServiceAccountWorkspaceMember`
+`beta.organization.workspaces.service_accounts.retrieve(service_account_id, **kwargs) -> BetaServiceAccountWorkspaceMember`
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
@@ -97982,7 +97982,7 @@ print(beta_service_account_workspace_member.created_by_actor_id)
 
 ### Update Service Account Workspace Member
 
-`beta.organization.workspaces.service_accounts.update(service_account_id, **kwargs)  -> BetaServiceAccountWorkspaceMember`
+`beta.organization.workspaces.service_accounts.update(service_account_id, **kwargs) -> BetaServiceAccountWorkspaceMember`
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
@@ -98203,7 +98203,7 @@ print(beta_service_account_workspace_member.created_by_actor_id)
 
 ### Delete Service Account Workspace Member
 
-`beta.organization.workspaces.service_accounts.remove(service_account_id, **kwargs)  -> ServiceAccountRemoveResponse`
+`beta.organization.workspaces.service_accounts.remove(service_account_id, **kwargs) -> ServiceAccountRemoveResponse`
 
 **DELETE** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
@@ -98385,7 +98385,7 @@ print(service_account.service_account_id)
 
 ### List Organization Rate Limits
 
-`beta.organization.rate_limits.list(**kwargs)  -> SyncPageCursor[BetaOrganizationRateLimit]`
+`beta.organization.rate_limits.list(**kwargs) -> SyncPageCursor[BetaOrganizationRateLimit]`
 
 **GET** `/v1/organizations/rate_limits`
 
@@ -98591,7 +98591,7 @@ print(page.id)
 
 ### Get Compliance Settings
 
-`beta.organization.compliance_settings.retrieve()  -> BetaComplianceSettings`
+`beta.organization.compliance_settings.retrieve() -> BetaComplianceSettings`
 
 **GET** `/v1/organizations/compliance_settings`
 
@@ -98654,7 +98654,7 @@ print(beta_compliance_settings.state)
 
 ### Update Compliance Settings
 
-`beta.organization.compliance_settings.update(**kwargs)  -> BetaComplianceSettings`
+`beta.organization.compliance_settings.update(**kwargs) -> BetaComplianceSettings`
 
 **POST** `/v1/organizations/compliance_settings`
 
@@ -98743,7 +98743,7 @@ print(beta_compliance_settings.state)
 
 ### Get Activity Summaries
 
-`beta.organization.analytics.summaries.list(**kwargs)  -> SyncPageCursor[BetaAnalyticsSingleDayActivitySummary]`
+`beta.organization.analytics.summaries.list(**kwargs) -> SyncPageCursor[BetaAnalyticsSingleDayActivitySummary]`
 
 **GET** `/v1/organizations/analytics/summaries`
 
@@ -98995,7 +98995,7 @@ print(page.assigned_seat_count)
 
 ### List User Activity
 
-`beta.organization.analytics.users.list(**kwargs)  -> SyncPageCursor[BetaAnalyticsUserActivity]`
+`beta.organization.analytics.users.list(**kwargs) -> SyncPageCursor[BetaAnalyticsUserActivity]`
 
 **GET** `/v1/organizations/analytics/users`
 
@@ -99700,7 +99700,7 @@ print(page.rbac_group_id)
 
 ### Get Chat Project Usage
 
-`beta.organization.analytics.apps.chat.projects.list(**kwargs)  -> SyncPageCursor[BetaAnalyticsProjectActivity]`
+`beta.organization.analytics.apps.chat.projects.list(**kwargs) -> SyncPageCursor[BetaAnalyticsProjectActivity]`
 
 **GET** `/v1/organizations/analytics/apps/chat/projects`
 
@@ -99883,7 +99883,7 @@ print(page.project_id)
 
 ### Get Connector Usage
 
-`beta.organization.analytics.connectors.list(**kwargs)  -> SyncPageCursor[BetaAnalyticsConnectorActivity]`
+`beta.organization.analytics.connectors.list(**kwargs) -> SyncPageCursor[BetaAnalyticsConnectorActivity]`
 
 **GET** `/v1/organizations/analytics/connectors`
 
@@ -100157,7 +100157,7 @@ print(page.individual_auth_distinct_user_count)
 
 ### Get Plugin Usage
 
-`beta.organization.analytics.plugins.list(**kwargs)  -> SyncPageCursor[BetaAnalyticsPluginActivity]`
+`beta.organization.analytics.plugins.list(**kwargs) -> SyncPageCursor[BetaAnalyticsPluginActivity]`
 
 **GET** `/v1/organizations/analytics/plugins`
 
@@ -100357,7 +100357,7 @@ print(page.plugin_id)
 
 ### Get Skill Usage
 
-`beta.organization.analytics.skills.list(**kwargs)  -> SyncPageCursor[BetaAnalyticsSkillActivity]`
+`beta.organization.analytics.skills.list(**kwargs) -> SyncPageCursor[BetaAnalyticsSkillActivity]`
 
 **GET** `/v1/organizations/analytics/skills`
 
@@ -100640,7 +100640,7 @@ print(page.rbac_group_id)
 
 ### Get Artifact Activity
 
-`beta.organization.analytics.artifacts.list(**kwargs)  -> SyncPageCursor[BetaAnalyticsArtifactActivity]`
+`beta.organization.analytics.artifacts.list(**kwargs) -> SyncPageCursor[BetaAnalyticsArtifactActivity]`
 
 **GET** `/v1/organizations/analytics/artifacts`
 
@@ -100783,7 +100783,7 @@ print(page.rbac_group_id)
 
 ### Get Token Usage Over Time
 
-`beta.organization.analytics.usage_report.list(**kwargs)  -> SyncReportPageCursor[BetaAnalyticsUsageReportTimeBucket]`
+`beta.organization.analytics.usage_report.list(**kwargs) -> SyncReportPageCursor[BetaAnalyticsUsageReportTimeBucket]`
 
 **GET** `/v1/organizations/analytics/usage_report`
 
@@ -101136,7 +101136,7 @@ print(page.ending_at)
 
 ### Get Per-User Token Usage
 
-`beta.organization.analytics.user_usage_report.list(**kwargs)  -> SyncReportPageCursor[BetaAnalyticsUsageUsersItem]`
+`beta.organization.analytics.user_usage_report.list(**kwargs) -> SyncReportPageCursor[BetaAnalyticsUsageUsersItem]`
 
 **GET** `/v1/organizations/analytics/user_usage_report`
 
@@ -101548,7 +101548,7 @@ print(page.claude_tag_user_id)
 
 ### Get Cost Over Time
 
-`beta.organization.analytics.cost_report.list(**kwargs)  -> SyncReportPageCursor[BetaAnalyticsCostReportTimeBucket]`
+`beta.organization.analytics.cost_report.list(**kwargs) -> SyncReportPageCursor[BetaAnalyticsCostReportTimeBucket]`
 
 **GET** `/v1/organizations/analytics/cost_report`
 
@@ -101902,7 +101902,7 @@ print(page.ending_at)
 
 ### Get Per-User Cost
 
-`beta.organization.analytics.user_cost_report.list(**kwargs)  -> SyncReportPageCursor[BetaAnalyticsCostUsersItem]`
+`beta.organization.analytics.user_cost_report.list(**kwargs) -> SyncReportPageCursor[BetaAnalyticsCostUsersItem]`
 
 **GET** `/v1/organizations/analytics/user_cost_report`
 
@@ -102306,7 +102306,7 @@ print(page.claude_tag_user_id)
 
 ### Set Spend Limit
 
-`beta.organization.spend_limits.set(**kwargs)  -> BetaSpendLimit`
+`beta.organization.spend_limits.set(**kwargs) -> BetaSpendLimit`
 
 **POST** `/v1/organizations/spend_limits`
 
@@ -102650,7 +102650,7 @@ print(beta_spend_limit.id)
 
 ### Get Spend Limit
 
-`beta.organization.spend_limits.retrieve(spend_limit_id)  -> BetaSpendLimit`
+`beta.organization.spend_limits.retrieve(spend_limit_id) -> BetaSpendLimit`
 
 **GET** `/v1/organizations/spend_limits/{spend_limit_id}`
 
@@ -102826,7 +102826,7 @@ print(beta_spend_limit.id)
 
 ### Delete Spend Limit
 
-`beta.organization.spend_limits.delete(spend_limit_id)  -> SpendLimitDeleteResponse`
+`beta.organization.spend_limits.delete(spend_limit_id) -> SpendLimitDeleteResponse`
 
 **DELETE** `/v1/organizations/spend_limits/{spend_limit_id}`
 
@@ -102883,7 +102883,7 @@ print(spend_limit.id)
 
 ### List Spend Limits
 
-`beta.organization.spend_limits.list(**kwargs)  -> SyncPageCursor[BetaSpendLimit]`
+`beta.organization.spend_limits.list(**kwargs) -> SyncPageCursor[BetaSpendLimit]`
 
 **GET** `/v1/organizations/spend_limits`
 
@@ -103212,7 +103212,7 @@ print(page.id)
 
 ### List Effective Spend Limits
 
-`beta.organization.spend_limits.effective.list(**kwargs)  -> SyncPageCursor[BetaSpendSummary]`
+`beta.organization.spend_limits.effective.list(**kwargs) -> SyncPageCursor[BetaSpendSummary]`
 
 **GET** `/v1/organizations/spend_limits/effective`
 
@@ -103478,7 +103478,7 @@ print(page.spend_limit_id)
 
 ### List Spend Limit Increase Requests
 
-`beta.organization.spend_limits.increase_requests.list(**kwargs)  -> SyncPageCursor[BetaSpendLimitIncreaseRequest]`
+`beta.organization.spend_limits.increase_requests.list(**kwargs) -> SyncPageCursor[BetaSpendLimitIncreaseRequest]`
 
 **GET** `/v1/organizations/spend_limit_increase_requests`
 
@@ -103805,7 +103805,7 @@ print(page.id)
 
 ### Get Spend Limit Increase Request
 
-`beta.organization.spend_limits.increase_requests.retrieve(spend_limit_increase_request_id)  -> BetaSpendLimitIncreaseRequest`
+`beta.organization.spend_limits.increase_requests.retrieve(spend_limit_increase_request_id) -> BetaSpendLimitIncreaseRequest`
 
 **GET** `/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}`
 
@@ -104112,7 +104112,7 @@ print(beta_spend_limit_increase_request.id)
 
 ### Approve Spend Limit Increase Request
 
-`beta.organization.spend_limits.increase_requests.approve(spend_limit_increase_request_id, **kwargs)  -> IncreaseRequestApproveResponse`
+`beta.organization.spend_limits.increase_requests.approve(spend_limit_increase_request_id, **kwargs) -> IncreaseRequestApproveResponse`
 
 **POST** `/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}/approve`
 
@@ -104518,7 +104518,7 @@ print(response.id)
 
 ### Deny Spend Limit Increase Request
 
-`beta.organization.spend_limits.increase_requests.deny(spend_limit_increase_request_id, **kwargs)  -> BetaSpendLimitIncreaseRequest`
+`beta.organization.spend_limits.increase_requests.deny(spend_limit_increase_request_id, **kwargs) -> BetaSpendLimitIncreaseRequest`
 
 **POST** `/v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}/deny`
 
@@ -104829,7 +104829,7 @@ print(beta_spend_limit_increase_request.id)
 
 ### Create RBAC Group
 
-`beta.organization.rbac_groups.create(**kwargs)  -> BetaRBACGroup`
+`beta.organization.rbac_groups.create(**kwargs) -> BetaRBACGroup`
 
 **POST** `/v1/organizations/rbac_groups`
 
@@ -104924,7 +104924,7 @@ print(beta_rbac_group.id)
 
 ### List RBAC Groups
 
-`beta.organization.rbac_groups.list(**kwargs)  -> SyncPageCursor[BetaRBACGroup]`
+`beta.organization.rbac_groups.list(**kwargs) -> SyncPageCursor[BetaRBACGroup]`
 
 **GET** `/v1/organizations/rbac_groups`
 
@@ -105030,7 +105030,7 @@ print(page.id)
 
 ### Get RBAC Group
 
-`beta.organization.rbac_groups.retrieve(rbac_group_id)  -> BetaRBACGroup`
+`beta.organization.rbac_groups.retrieve(rbac_group_id) -> BetaRBACGroup`
 
 **GET** `/v1/organizations/rbac_groups/{rbac_group_id}`
 
@@ -105123,7 +105123,7 @@ print(beta_rbac_group.id)
 
 ### Update RBAC Group
 
-`beta.organization.rbac_groups.update(rbac_group_id, **kwargs)  -> BetaRBACGroup`
+`beta.organization.rbac_groups.update(rbac_group_id, **kwargs) -> BetaRBACGroup`
 
 **POST** `/v1/organizations/rbac_groups/{rbac_group_id}`
 
@@ -105222,7 +105222,7 @@ print(beta_rbac_group.id)
 
 ### Delete RBAC Group
 
-`beta.organization.rbac_groups.delete(rbac_group_id)  -> RBACGroupDeleteResponse`
+`beta.organization.rbac_groups.delete(rbac_group_id) -> RBACGroupDeleteResponse`
 
 **DELETE** `/v1/organizations/rbac_groups/{rbac_group_id}`
 
@@ -105282,7 +105282,7 @@ print(rbac_group.id)
 
 ### List RBAC Group Members
 
-`beta.organization.rbac_groups.members.list(rbac_group_id, **kwargs)  -> SyncPageCursor[BetaRBACGroupMember]`
+`beta.organization.rbac_groups.members.list(rbac_group_id, **kwargs) -> SyncPageCursor[BetaRBACGroupMember]`
 
 **GET** `/v1/organizations/rbac_groups/{rbac_group_id}/members`
 
@@ -105376,7 +105376,7 @@ print(page.rbac_group_id)
 
 ### Add RBAC Group Member
 
-`beta.organization.rbac_groups.members.add(rbac_group_id, **kwargs)  -> BetaRBACGroupMember`
+`beta.organization.rbac_groups.members.add(rbac_group_id, **kwargs) -> BetaRBACGroupMember`
 
 **POST** `/v1/organizations/rbac_groups/{rbac_group_id}/members`
 
@@ -105456,7 +105456,7 @@ print(beta_rbac_group_member.rbac_group_id)
 
 ### Remove RBAC Group Member
 
-`beta.organization.rbac_groups.members.remove(user_id, **kwargs)  -> MemberRemoveResponse`
+`beta.organization.rbac_groups.members.remove(user_id, **kwargs) -> MemberRemoveResponse`
 
 **DELETE** `/v1/organizations/rbac_groups/{rbac_group_id}/members/{user_id}`
 
@@ -105524,7 +105524,7 @@ print(member.rbac_group_id)
 
 ### List RBAC Roles
 
-`beta.organization.rbac_roles.list(**kwargs)  -> SyncPageCursor[BetaRBACRole]`
+`beta.organization.rbac_roles.list(**kwargs) -> SyncPageCursor[BetaRBACRole]`
 
 **GET** `/v1/organizations/rbac_roles`
 
@@ -105614,7 +105614,7 @@ print(page.id)
 
 ### Get RBAC Role
 
-`beta.organization.rbac_roles.retrieve(rbac_role_id)  -> BetaRBACRole`
+`beta.organization.rbac_roles.retrieve(rbac_role_id) -> BetaRBACRole`
 
 **GET** `/v1/organizations/rbac_roles/{rbac_role_id}`
 
@@ -105693,7 +105693,7 @@ print(beta_rbac_role.id)
 
 ### List RBAC Role Permissions
 
-`beta.organization.rbac_roles.permissions.list(rbac_role_id, **kwargs)  -> SyncPageCursor[BetaRBACRolePermission]`
+`beta.organization.rbac_roles.permissions.list(rbac_role_id, **kwargs) -> SyncPageCursor[BetaRBACRolePermission]`
 
 **GET** `/v1/organizations/rbac_roles/{rbac_role_id}/permissions`
 
@@ -105873,7 +105873,7 @@ print(page.action)
 
 ### Create Plugin
 
-`beta.organization.plugins.create(**kwargs)  -> BetaPlugin`
+`beta.organization.plugins.create(**kwargs) -> BetaPlugin`
 
 **POST** `/v1/organizations/plugins`
 
@@ -106298,7 +106298,7 @@ print(beta_plugin.id)
 
 ### Get Plugin
 
-`beta.organization.plugins.retrieve(plugin_id, **kwargs)  -> BetaPlugin`
+`beta.organization.plugins.retrieve(plugin_id, **kwargs) -> BetaPlugin`
 
 **GET** `/v1/organizations/plugins/{plugin_id}`
 
@@ -106691,7 +106691,7 @@ print(beta_plugin.id)
 
 ### Update Plugin
 
-`beta.organization.plugins.update(plugin_id, **kwargs)  -> BetaPlugin`
+`beta.organization.plugins.update(plugin_id, **kwargs) -> BetaPlugin`
 
 **POST** `/v1/organizations/plugins/{plugin_id}`
 
@@ -107108,7 +107108,7 @@ print(beta_plugin.id)
 
 ### List Plugins
 
-`beta.organization.plugins.list(**kwargs)  -> SyncPageCursor[BetaPlugin]`
+`beta.organization.plugins.list(**kwargs) -> SyncPageCursor[BetaPlugin]`
 
 **GET** `/v1/organizations/plugins`
 
@@ -107561,7 +107561,7 @@ print(page.id)
 
 ### Delete Plugin
 
-`beta.organization.plugins.delete(plugin_id, **kwargs)  -> BetaDeletedPlugin`
+`beta.organization.plugins.delete(plugin_id, **kwargs) -> BetaDeletedPlugin`
 
 **DELETE** `/v1/organizations/plugins/{plugin_id}`
 
@@ -107742,7 +107742,7 @@ print(beta_deleted_plugin.id)
 
 ### Create Plugin Version
 
-`beta.organization.plugins.versions.create(plugin_id, **kwargs)  -> BetaPluginVersion`
+`beta.organization.plugins.versions.create(plugin_id, **kwargs) -> BetaPluginVersion`
 
 **POST** `/v1/organizations/plugins/{plugin_id}/versions`
 
@@ -108090,7 +108090,7 @@ print(beta_plugin_version.id)
 
 ### List Plugin Versions
 
-`beta.organization.plugins.versions.list(plugin_id, **kwargs)  -> SyncPageCursor[BetaPluginVersion]`
+`beta.organization.plugins.versions.list(plugin_id, **kwargs) -> SyncPageCursor[BetaPluginVersion]`
 
 **GET** `/v1/organizations/plugins/{plugin_id}/versions`
 
@@ -108435,7 +108435,7 @@ print(page.id)
 
 ### Get Plugin Version
 
-`beta.organization.plugins.versions.retrieve(version, **kwargs)  -> BetaPluginVersion`
+`beta.organization.plugins.versions.retrieve(version, **kwargs) -> BetaPluginVersion`
 
 **GET** `/v1/organizations/plugins/{plugin_id}/versions/{version}`
 
@@ -108762,7 +108762,7 @@ print(beta_plugin_version.id)
 
 ### Download Plugin Version Archive
 
-`beta.organization.plugins.versions.download(version, **kwargs)  -> BinaryResponseContent`
+`beta.organization.plugins.versions.download(version, **kwargs) -> BinaryResponseContent`
 
 **GET** `/v1/organizations/plugins/{plugin_id}/versions/{version}/content`
 
@@ -108940,7 +108940,7 @@ print(content)
 
 ### List Plugin Installation Settings
 
-`beta.organization.plugins.installation_settings.list(plugin_id, **kwargs)  -> SyncPageCursor[BetaPluginInstallationSetting]`
+`beta.organization.plugins.installation_settings.list(plugin_id, **kwargs) -> SyncPageCursor[BetaPluginInstallationSetting]`
 
 **GET** `/v1/organizations/plugins/{plugin_id}/installation_settings`
 
@@ -109215,7 +109215,7 @@ print(page.plugin_id)
 
 ### Set Plugin Installation Setting
 
-`beta.organization.plugins.installation_settings.set(target, **kwargs)  -> BetaPluginInstallationSetting`
+`beta.organization.plugins.installation_settings.set(target, **kwargs) -> BetaPluginInstallationSetting`
 
 **POST** `/v1/organizations/plugins/{plugin_id}/installation_settings/{target}`
 
@@ -109485,7 +109485,7 @@ print(beta_plugin_installation_setting.plugin_id)
 
 ### Remove Plugin Installation Setting
 
-`beta.organization.plugins.installation_settings.remove(target, **kwargs)  -> BetaDeletedPluginInstallationSetting`
+`beta.organization.plugins.installation_settings.remove(target, **kwargs) -> BetaDeletedPluginInstallationSetting`
 
 **DELETE** `/v1/organizations/plugins/{plugin_id}/installation_settings/{target}`
 
@@ -109721,7 +109721,7 @@ print(beta_deleted_plugin_installation_setting.plugin_id)
 
 ### List Plugin Shares
 
-`beta.organization.plugins.shares.list(plugin_id, **kwargs)  -> SyncPageCursor[BetaPluginShare]`
+`beta.organization.plugins.shares.list(plugin_id, **kwargs) -> SyncPageCursor[BetaPluginShare]`
 
 **GET** `/v1/organizations/plugins/{plugin_id}/shares`
 
@@ -109981,7 +109981,7 @@ print(page.plugin_id)
 
 ### List Plugin Marketplaces
 
-`beta.organization.plugin_marketplaces.list(**kwargs)  -> SyncPageCursor[BetaPluginMarketplace]`
+`beta.organization.plugin_marketplaces.list(**kwargs) -> SyncPageCursor[BetaPluginMarketplace]`
 
 **GET** `/v1/organizations/plugin_marketplaces`
 
@@ -110291,7 +110291,7 @@ print(page.id)
 
 ### Get Plugin Marketplace
 
-`beta.organization.plugin_marketplaces.retrieve(marketplace_id, **kwargs)  -> BetaPluginMarketplace`
+`beta.organization.plugin_marketplaces.retrieve(marketplace_id, **kwargs) -> BetaPluginMarketplace`
 
 **GET** `/v1/organizations/plugin_marketplaces/{marketplace_id}`
 
@@ -110559,7 +110559,7 @@ print(beta_plugin_marketplace.id)
 
 ### Update Plugin Marketplace
 
-`beta.organization.plugin_marketplaces.update(marketplace_id, **kwargs)  -> BetaPluginMarketplace`
+`beta.organization.plugin_marketplaces.update(marketplace_id, **kwargs) -> BetaPluginMarketplace`
 
 **POST** `/v1/organizations/plugin_marketplaces/{marketplace_id}`
 
@@ -110841,7 +110841,7 @@ print(beta_plugin_marketplace.id)
 
 ### Validate Plugin Marketplace Repository
 
-`beta.organization.plugin_marketplaces.validate_repository(**kwargs)  -> BetaPluginMarketplaceValidationReport`
+`beta.organization.plugin_marketplaces.validate_repository(**kwargs) -> BetaPluginMarketplaceValidationReport`
 
 **POST** `/v1/organizations/plugin_marketplaces/validate_repository`
 
@@ -111116,7 +111116,7 @@ print(beta_plugin_marketplace_validation_report.valid)
 
 ### Validate Plugin Marketplace Archive
 
-`beta.organization.plugin_marketplaces.validate_archive(**kwargs)  -> BetaPluginMarketplaceValidationReport`
+`beta.organization.plugin_marketplaces.validate_archive(**kwargs) -> BetaPluginMarketplaceValidationReport`
 
 **POST** `/v1/organizations/plugin_marketplaces/validate_archive`
 
@@ -111387,7 +111387,7 @@ print(beta_plugin_marketplace_validation_report.valid)
 
 ### Create a Telemetry Destination
 
-`beta.organization.telemetry_destinations.create(**kwargs)  -> BetaTelemetryDestination`
+`beta.organization.telemetry_destinations.create(**kwargs) -> BetaTelemetryDestination`
 
 **POST** `/v1/organizations/telemetry_destinations`
 
@@ -111842,7 +111842,7 @@ print(beta_telemetry_destination.id)
 
 ### List Telemetry Destinations
 
-`beta.organization.telemetry_destinations.list(**kwargs)  -> SyncPageCursor[BetaTelemetryDestination]`
+`beta.organization.telemetry_destinations.list(**kwargs) -> SyncPageCursor[BetaTelemetryDestination]`
 
 **GET** `/v1/organizations/telemetry_destinations`
 
@@ -112204,7 +112204,7 @@ print(page.id)
 
 ### Retrieve a Telemetry Destination
 
-`beta.organization.telemetry_destinations.retrieve(destination_id, **kwargs)  -> BetaTelemetryDestination`
+`beta.organization.telemetry_destinations.retrieve(destination_id, **kwargs) -> BetaTelemetryDestination`
 
 **GET** `/v1/organizations/telemetry_destinations/{destination_id}`
 
@@ -112550,7 +112550,7 @@ print(beta_telemetry_destination.id)
 
 ### Update a Telemetry Destination
 
-`beta.organization.telemetry_destinations.update(destination_id, **kwargs)  -> BetaTelemetryDestination`
+`beta.organization.telemetry_destinations.update(destination_id, **kwargs) -> BetaTelemetryDestination`
 
 **POST** `/v1/organizations/telemetry_destinations/{destination_id}`
 
@@ -113032,7 +113032,7 @@ print(beta_telemetry_destination.id)
 
 ### Delete a Telemetry Destination
 
-`beta.organization.telemetry_destinations.delete(destination_id, **kwargs)  -> BetaDeletedTelemetryDestination`
+`beta.organization.telemetry_destinations.delete(destination_id, **kwargs) -> BetaDeletedTelemetryDestination`
 
 **DELETE** `/v1/organizations/telemetry_destinations/{destination_id}`
 
@@ -113200,7 +113200,7 @@ print(beta_deleted_telemetry_destination.id)
 
 ### Test a Telemetry Destination
 
-`beta.organization.telemetry_destinations.test(destination_id, **kwargs)  -> BetaTelemetryDestinationTestResponse`
+`beta.organization.telemetry_destinations.test(destination_id, **kwargs) -> BetaTelemetryDestinationTestResponse`
 
 **POST** `/v1/organizations/telemetry_destinations/{destination_id}/test`
 
@@ -113384,7 +113384,7 @@ print(beta_telemetry_destination_test_response.result)
 
 ### List Telemetry Destination Workspaces
 
-`beta.organization.telemetry_destinations.workspaces.list(destination_id, **kwargs)  -> SyncPageCursor[BetaTelemetryDestinationWorkspace]`
+`beta.organization.telemetry_destinations.workspaces.list(destination_id, **kwargs) -> SyncPageCursor[BetaTelemetryDestinationWorkspace]`
 
 **GET** `/v1/organizations/telemetry_destinations/{destination_id}/workspaces`
 
@@ -113580,7 +113580,7 @@ print(page.telemetry_destination_id)
 
 ### Add a Telemetry Destination Workspace
 
-`beta.organization.telemetry_destinations.workspaces.add(workspace_id, **kwargs)  -> BetaTelemetryDestinationWorkspace`
+`beta.organization.telemetry_destinations.workspaces.add(workspace_id, **kwargs) -> BetaTelemetryDestinationWorkspace`
 
 **POST** `/v1/organizations/telemetry_destinations/{destination_id}/workspaces/{workspace_id}`
 
@@ -113769,7 +113769,7 @@ print(beta_telemetry_destination_workspace.telemetry_destination_id)
 
 ### Remove a Telemetry Destination Workspace
 
-`beta.organization.telemetry_destinations.workspaces.remove(workspace_id, **kwargs)  -> BetaDeletedTelemetryDestinationWorkspace`
+`beta.organization.telemetry_destinations.workspaces.remove(workspace_id, **kwargs) -> BetaDeletedTelemetryDestinationWorkspace`
 
 **DELETE** `/v1/organizations/telemetry_destinations/{destination_id}/workspaces/{workspace_id}`
 
@@ -113951,7 +113951,7 @@ print(beta_deleted_telemetry_destination_workspace.telemetry_destination_id)
 
 ### Create Organization Webhook Endpoint
 
-`beta.organization.webhooks.create(**kwargs)  -> BetaNewOrganizationWebhookEndpoint`
+`beta.organization.webhooks.create(**kwargs) -> BetaNewOrganizationWebhookEndpoint`
 
 **POST** `/v1/organizations/webhooks`
 
@@ -114196,7 +114196,7 @@ print(beta_new_organization_webhook_endpoint.id)
 
 ### List Organization Webhook Endpoints
 
-`beta.organization.webhooks.list(**kwargs)  -> SyncPage[BetaOrganizationWebhookEndpoint]`
+`beta.organization.webhooks.list(**kwargs) -> SyncPage[BetaOrganizationWebhookEndpoint]`
 
 **GET** `/v1/organizations/webhooks`
 
@@ -114439,7 +114439,7 @@ print(page.id)
 
 ### Get Organization Webhook Endpoint
 
-`beta.organization.webhooks.retrieve(webhook_endpoint_id, **kwargs)  -> BetaOrganizationWebhookEndpoint`
+`beta.organization.webhooks.retrieve(webhook_endpoint_id, **kwargs) -> BetaOrganizationWebhookEndpoint`
 
 **GET** `/v1/organizations/webhooks/{webhook_endpoint_id}`
 
@@ -114657,7 +114657,7 @@ print(beta_organization_webhook_endpoint.id)
 
 ### Update Organization Webhook Endpoint
 
-`beta.organization.webhooks.update(webhook_endpoint_id, **kwargs)  -> BetaOrganizationWebhookEndpoint`
+`beta.organization.webhooks.update(webhook_endpoint_id, **kwargs) -> BetaOrganizationWebhookEndpoint`
 
 **POST** `/v1/organizations/webhooks/{webhook_endpoint_id}`
 
@@ -114905,7 +114905,7 @@ print(beta_organization_webhook_endpoint.id)
 
 ### Delete Organization Webhook Endpoint
 
-`beta.organization.webhooks.delete(webhook_endpoint_id, **kwargs)  -> BetaDeletedOrganizationWebhookEndpoint`
+`beta.organization.webhooks.delete(webhook_endpoint_id, **kwargs) -> BetaDeletedOrganizationWebhookEndpoint`
 
 **DELETE** `/v1/organizations/webhooks/{webhook_endpoint_id}`
 
@@ -115075,7 +115075,7 @@ print(beta_deleted_organization_webhook_endpoint.id)
 
 ### Regenerate Organization Webhook Endpoint Signing Secret
 
-`beta.organization.webhooks.regenerate_signing_secret(webhook_endpoint_id, **kwargs)  -> BetaOrganizationWebhookEndpointSigningSecret`
+`beta.organization.webhooks.regenerate_signing_secret(webhook_endpoint_id, **kwargs) -> BetaOrganizationWebhookEndpointSigningSecret`
 
 **POST** `/v1/organizations/webhooks/{webhook_endpoint_id}/regenerate_signing_secret`
 

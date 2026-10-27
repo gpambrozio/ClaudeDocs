@@ -35,13 +35,15 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
 ### Prerequisites
 
 * **An agent:** If you don't have one, complete [Get started with Claude Managed Agents](quickstart.md) first and note the agent ID.
-* **A Linux host:** The host needs `/bin/bash` at that exact path. The worker needs only outbound HTTPS.
+* **A Linux or macOS host:** The host needs `/bin/bash` at that exact path. The worker needs only outbound HTTPS.
 * **A Claude API key:** You use it from your own machine to create sessions and read queue stats. Keep it off the worker host, where agent tool calls could read it.
 * **The `ant` CLI or the SDK on your own machine:** The stats and session steps in this quickstart run there, not on the worker host. Install the CLI the same way the [install step](self-hosted-sandboxes.md#run-your-first-session) does for the worker, or install the [SDK](../cli-sdks-libraries/overview.md).
 
 On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](../build-with-claude/claude-platform-on-aws.md#api-key-authentication), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](../api/claude-platform-on-aws-iam-actions.md#managed-policies) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
 
 On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), the worker authenticates with [Google Cloud credentials](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#authentication), not an environment key. Grant the Google Cloud identity your worker uses `roles/claude.user` or `roles/claude.admin` on the project. Both roles include [`environments.processWork`](../api/claude-models-on-google-cloud-anthropic-managed-iam-permissions.md#environments), which the worker needs to poll for and manage work items, and the session and skill permissions it needs to run a session. Environment keys generated in the Claude Console don't work with the Claude Models on Google Cloud (Anthropic managed) endpoint. The pre-built workers in the `ant` CLI and in the Python, TypeScript, and Go SDKs don't support Claude Models on Google Cloud (Anthropic managed), so implement your own worker that calls the [Environments Work endpoints](../api/beta/environments/work.md) directly. See [Features not supported](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#features-not-supported).
+
+On macOS, the worker's bash tool runs the system Bash 3.2 at `/bin/bash`, even if you install a newer Bash with Homebrew. To use memory stores on macOS, first [prepare the macOS host](self-hosted-sandboxes-memory.md#prepare-a-macos-host).
 
 ### Run your first session
 
@@ -200,11 +202,24 @@ brew install anthropics/tap/ant
 
 **Start the worker**
 
-Create the working directory, then start the worker. `--workdir` defaults to the current directory, so pass `/workspace` to match the system default.
+Create the working directory, then start the worker with `--workdir` set to it. Without the flag, the worker uses the current directory.
+
+**Linux**
+
+Pass `/workspace` to match the system default.
 
 ```bash
 sudo mkdir -p /workspace && sudo chown "$USER" /workspace
 ant beta:worker poll --workdir /workspace
+```
+
+**macOS**
+
+The root volume is read-only, so `mkdir` can't create `/workspace`. Use a directory in your home directory instead. If the agent uses skills, add this directory's full path (`echo ~/workspace` prints it) to its system prompt, as [Sandbox filesystem](self-hosted-sandboxes-reference.md#sandbox-filesystem) describes.
+
+```bash
+mkdir -p ~/workspace
+ant beta:worker poll --workdir ~/workspace
 ```
 
 The worker reads the two variables you exported and polls until you stop it.
@@ -489,8 +504,16 @@ The session waits in the environment's queue until a worker claims it. If no wor
 
 On the worker host, read the file the agent wrote:
 
+**Linux**
+
 ```bash
 cat /workspace/hello.txt
+```
+
+**macOS**
+
+```bash
+cat ~/workspace/hello.txt
 ```
 
 The file describes your own host's kernel, so the agent's tool calls ran there. To follow the agent's work in real time, see [Session event stream](events-and-streaming.md).

@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/python/messages
 
 ## Create a Message
 
-`messages.create(**kwargs)  -> Message`
+`messages.create(**kwargs) -> Message`
 
 **POST** `/v1/messages`
 
@@ -4523,7 +4523,7 @@ print(message.id)
 
 ## Count tokens in a Message
 
-`messages.count_tokens(**kwargs)  -> MessageTokensCount`
+`messages.count_tokens(**kwargs) -> MessageTokensCount`
 
 **POST** `/v1/messages/count_tokens`
 
@@ -39503,7 +39503,7 @@ print(message_tokens_count.input_tokens)
 
 ### Create a Message Batch
 
-`messages.batches.create(**kwargs)  -> MessageBatch`
+`messages.batches.create(**kwargs) -> MessageBatch`
 
 **POST** `/v1/messages/batches`
 
@@ -42761,7 +42761,7 @@ print(message_batch.id)
 
 ### Retrieve a Message Batch
 
-`messages.batches.retrieve(message_batch_id, **kwargs)  -> MessageBatch`
+`messages.batches.retrieve(message_batch_id, **kwargs) -> MessageBatch`
 
 **GET** `/v1/messages/batches/{message_batch_id}`
 
@@ -42933,7 +42933,7 @@ print(message_batch.id)
 
 ### List Message Batches
 
-`messages.batches.list(**kwargs)  -> SyncPage[MessageBatch]`
+`messages.batches.list(**kwargs) -> SyncPage[MessageBatch]`
 
 **GET** `/v1/messages/batches`
 
@@ -43123,7 +43123,7 @@ print(page.id)
 
 ### Cancel a Message Batch
 
-`messages.batches.cancel(message_batch_id, **kwargs)  -> MessageBatch`
+`messages.batches.cancel(message_batch_id, **kwargs) -> MessageBatch`
 
 **POST** `/v1/messages/batches/{message_batch_id}/cancel`
 
@@ -43297,7 +43297,7 @@ print(message_batch.id)
 
 ### Delete a Message Batch
 
-`messages.batches.delete(message_batch_id, **kwargs)  -> DeletedMessageBatch`
+`messages.batches.delete(message_batch_id, **kwargs) -> DeletedMessageBatch`
 
 **DELETE** `/v1/messages/batches/{message_batch_id}`
 
@@ -43363,7 +43363,7 @@ print(deleted_message_batch.id)
 
 ### Retrieve Message Batch results
 
-`messages.batches.results(message_batch_id, **kwargs)  -> JSONLDecoder[MessageBatchIndividualResponse]`
+`messages.batches.results(message_batch_id, **kwargs) -> JSONLDecoder[MessageBatchIndividualResponse]`
 
 **GET** `/v1/messages/batches/{message_batch_id}/results`
 

@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/python/beta/memory_stores/memories
 
 ## Create a Memory
 
-`beta.memory_stores.memories.create(memory_store_id, **kwargs)  -> BetaManagedAgentsMemory`
+`beta.memory_stores.memories.create(memory_store_id, **kwargs) -> BetaManagedAgentsMemory`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories`
 
@@ -267,7 +267,7 @@ print(beta_managed_agents_memory.id)
 
 ## List Memories
 
-`beta.memory_stores.memories.list(memory_store_id, **kwargs)  -> SyncPageCursor[BetaManagedAgentsMemoryListItem]`
+`beta.memory_stores.memories.list(memory_store_id, **kwargs) -> SyncPageCursor[BetaManagedAgentsMemoryListItem]`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories`
 
@@ -557,7 +557,7 @@ print(page)
 
 ## Retrieve a Memory
 
-`beta.memory_stores.memories.retrieve(memory_id, **kwargs)  -> BetaManagedAgentsMemory`
+`beta.memory_stores.memories.retrieve(memory_id, **kwargs) -> BetaManagedAgentsMemory`
 
 **GET** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
@@ -804,7 +804,7 @@ print(beta_managed_agents_memory.id)
 
 ## Update a Memory
 
-`beta.memory_stores.memories.update(memory_id, **kwargs)  -> BetaManagedAgentsMemory`
+`beta.memory_stores.memories.update(memory_id, **kwargs) -> BetaManagedAgentsMemory`
 
 **POST** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 
@@ -1075,7 +1075,7 @@ print(beta_managed_agents_memory.id)
 
 ## Delete a Memory
 
-`beta.memory_stores.memories.delete(memory_id, **kwargs)  -> BetaManagedAgentsDeletedMemory`
+`beta.memory_stores.memories.delete(memory_id, **kwargs) -> BetaManagedAgentsDeletedMemory`
 
 **DELETE** `/v1/memory_stores/{memory_store_id}/memories/{memory_id}`
 

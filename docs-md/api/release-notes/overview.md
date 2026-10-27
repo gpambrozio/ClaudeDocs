@@ -12,6 +12,10 @@ For release notes on Claude Apps, see the [Release notes for Claude Apps in the 
 
 For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 
+### October 23, 2026
+
+* The [Claude Tag API](../manage-claude/claude-tag-api.md) is available in beta for Claude Enterprise organizations with the `experimental-claude-tag-2026-10-21` beta header. Its `/v1/organizations/claude_tag/` endpoints read and change [Claude Tag](https://claude.com/docs/claude-tag/overview) settings on Slack channels and Slack workspaces, show which settings apply in a channel and where each comes from, and attach Access bundles. Call it with an Admin API key that your primary owner creates in claude.ai with the `read:claude_tag` or `write:claude_tag` scope. It is not available to Claude Platform (Claude Console) organizations.
+
 ### October 22, 2026
 
 * We've launched [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), the Claude API operated by Anthropic and reached through your Google Cloud project. Google Cloud IAM controls access. Google Cloud Marketplace handles billing.
@@ -23,10 +27,6 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 * We've released new versions of the [client SDKs](../cli-sdks-libraries/overview.md) and the [`ant` CLI](../cli-sdks-libraries/cli/quickstart.md) that send API version `2026-10-21` by default: Python SDK 2.0.0, TypeScript SDK 1.0.0, C# SDK 13.0.0, Go SDK 2.0.0, Java SDK 3.0.0, PHP SDK 1.0.0, Ruby SDK 2.0.0, and `ant` CLI 2.0.0. See [Switch to 2026-10-21](../api/migration-2026-10-21.md#upgrade).
 * The new SDK and CLI versions also have breaking changes that don't depend on the API version, and they are licensed under Apache 2.0 instead of the MIT License. See [SDK and CLI changes](../api/migration-2026-10-21.md#sdk-changes).
 * We've added the `enforcement_status` and `enforcement_actions` fields to [user profiles](../manage-claude/user-profiles.md), so you can see whether Anthropic has restricted or banned one of your end customers. To find the profiles that have an open restriction or ban, [list your profiles](../api/user_profiles/list.md) with the new `enforcement_status[]` filter. See [Check whether Anthropic has restricted or banned a profile](../manage-claude/user-profiles.md#check-whether-anthropic-has-restricted-or-banned-a-profile).
-
-### October 20, 2026
-
-* The [Claude Tag API](../manage-claude/claude-tag-api.md) is available in beta for Claude Enterprise organizations with the `experimental-claude-tag-2026-10-21` beta header. Its `/v1/organizations/claude_tag/` endpoints read and change [Claude Tag](https://claude.com/docs/claude-tag/overview) settings on Slack channels and Slack workspaces, show which settings apply in a channel and where each comes from, and attach Access bundles. Call it with an Admin API key that your primary owner creates in claude.ai with the `read:claude_tag` or `write:claude_tag` scope. It is not available to Claude Platform (Claude Console) organizations.
 
 ### October 20, 2026
 

@@ -686,15 +686,11 @@ By default, deployment names match the model IDs shown in the preceding table. H
 
 [Claude Mythos Preview](https://anthropic.com/glasswing) is a research preview available to invited customers on Microsoft Foundry.
 
-Upgrading to a newer Claude model? The [Claude API skill](../agents-and-tools/agent-skills/claude-api-skill.md#migrating-to-a-newer-claude-model) in Claude Code applies model ID swaps and breaking parameter changes across your code base:
-
-Let Claude Code migrate your code for you
+Let Claude Code migrate your code to a newer model
 
 ```text
 /claude-api migrate this project to the latest Claude Opus model
 ```
-
-The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform.
 
 ## Billing
 

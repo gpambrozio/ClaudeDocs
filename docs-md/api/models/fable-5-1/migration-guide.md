@@ -8,15 +8,11 @@ description: Switch to Claude Fable 5.1 and Claude Mythos 5.1 from Claude Fable 
 
 This guide covers migrating [Messages API](../../build-with-claude/working-with-messages.md) code. If you use [Claude Managed Agents](../../managed-agents/overview.md), no changes beyond updating the model name are required.
 
-**Automate your migration with the [Claude API skill](../../agents-and-tools/agent-skills/claude-api-skill.md#migrating-to-a-newer-claude-model).** It comes bundled with Claude Code and works for any current Claude model as the target:
-
 Let Claude Code migrate your code for you
 
 ```text
 /claude-api migrate this project to claude-fable-5-1
 ```
-
-The skill applies the model ID swap and, as needed, breaking parameter changes, prefill replacement, and effort calibration for your target model across your code base, then produces a checklist of items to verify manually. It asks you to confirm the migration scope (entire working directory, a subdirectory, or a specific file list) before editing any files. The skill also detects Amazon Bedrock and Claude Platform on AWS clients and adjusts model ID formats and feature changes for those platforms.
 
 [Claude Fable 5.1](whats-new-fable-5-1.md) succeeds Claude Fable 5 at the same input and output prices, with cache reads at a quarter of the cost. It's available on the Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), and [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md). [Claude Mythos 5.1](../mythos-5-1/overview.md) shares the same capabilities and is available only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). For behavioral differences and prompting patterns, see [Prompting Claude Fable 5.1](../../build-with-claude/prompt-engineering/prompting-claude-fable-5-1.md).
 
