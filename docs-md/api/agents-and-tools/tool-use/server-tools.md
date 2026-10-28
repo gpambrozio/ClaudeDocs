@@ -10,7 +10,7 @@ Server-executed tools share these mechanics: the `server_tool_use` block, `pause
 
 ## The server\_tool\_use block
 
-The `server_tool_use` block appears in Claude's response when a server-executed tool runs. Its `id` field uses the `srvtoolu_` prefix to distinguish it from client tool calls:
+The `server_tool_use` block appears in Claude’s response when a server-executed tool runs. Its `id` field uses the `srvtoolu_` prefix to distinguish it from client tool calls:
 
 ```json
 {
@@ -21,13 +21,13 @@ The `server_tool_use` block appears in Claude's response when a server-executed 
 }
 ```
 
-The API runs the tool internally. You see the call and its result in the response, but you don't handle execution. Unlike client `tool_use` blocks, you don't need to respond with a `tool_result`. The tool's result block (for example, `web_search_tool_result` for web search) follows the `server_tool_use` block in the same assistant turn, paired by `tool_use_id`. If Claude calls one of your client tools at the same time, the `server_tool_use` block appears without its result, and the response ends with `stop_reason: "tool_use"`. The API runs the tool when you return the client `tool_result` blocks in your next request.
+The API runs the tool internally. You see the call and its result in the response, but you don’t handle execution. Unlike client `tool_use` blocks, you don’t need to respond with a `tool_result`. The tool’s result block (for example, `web_search_tool_result` for web search) follows the `server_tool_use` block in the same assistant turn, paired by `tool_use_id`. If Claude calls one of your client tools at the same time, the `server_tool_use` block appears without its result, and the response ends with `stop_reason: "tool_use"`. The API runs the tool when you return the client `tool_result` blocks in your next request.
 
 ## The server-side loop and pause\_turn
 
 When using server tools such as web search, the API executes tool calls in a server-side agentic loop. On a long-running turn, the API might pause that loop and return a `pause_turn` stop reason.
 
-Here's how to handle the `pause_turn` stop reason:
+Here’s how to handle the `pause_turn` stop reason:
 
 ```bash cURL
 # Initial request. If "stop_reason" in the response is "pause_turn", continue
@@ -404,7 +404,7 @@ Claude can call a server tool and a client tool in the same group of parallel to
 * `content` contains the `server_tool_use` block and the client `tool_use` block, but no result block for the server tool: that call is not complete.
 * There is no other marker. Detect the state by looking for a `server_tool_use` block whose `id` has no matching result block in the response. An `mcp_tool_use` block from the [MCP connector](../mcp-connector.md) behaves the same way. Server tool calls that already have their result block in the same response are complete and need nothing from you.
 
-With [programmatic tool calling](programmatic-tool-calling.md), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code completes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
+With [programmatic tool calling](programmatic-tool-calling.md), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block’s own result block arrives once the code completes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response’s `container` field, as that page shows.
 
 ```json
 {
@@ -445,7 +445,7 @@ To continue the turn, run the client tools and send a user message whose content
 }
 ```
 
-The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and then lets Claude continue. For a server tool Claude called directly, the next response starts with the result block that answers the previous response's `server_tool_use` `id`, followed by the newly generated content and a fresh `stop_reason`:
+The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and then lets Claude continue. For a server tool Claude called directly, the next response starts with the result block that answers the previous response’s `server_tool_use` `id`, followed by the newly generated content and a fresh `stop_reason`:
 
 ```json
 {
@@ -1024,7 +1024,7 @@ To use a `_20260209` or later server tool with ZDR, disable dynamic filtering by
 
 This restricts the tool to direct calls only, bypassing the internal code execution step.
 
-`allowed_callers` controls how a tool can be called: directly by Claude (`"direct"`), from inside a code execution container (for example, `"code_execution_20260120"`), or both. The `_20260209` versions of the web tools default to the code execution caller only; earlier versions default to `["direct"]`. On models that don't support programmatic tool calling, these versions require `allowed_callers: ["direct"]`; without it the API returns a validation error that says to set it.
+`allowed_callers` controls how a tool can be called: directly by Claude (`"direct"`), from inside a code execution container (for example, `"code_execution_20260120"`), or both. The `_20260209` versions of the web tools default to the code execution caller only; earlier versions default to `["direct"]`. On models that don’t support programmatic tool calling, these versions require `allowed_callers: ["direct"]`; without it the API returns a validation error that says to set it.
 
 Even when web fetch is used in a ZDR-eligible configuration, website publishers might retain any parameters passed to the URL if Claude fetches content from their site.
 
@@ -1061,13 +1061,13 @@ Request-level domain restrictions work together with any organization-level doma
 
 Unicode characters in domain names can bypass domain filters through homograph attacks: `аmazon.com` (with a Cyrillic `а`) looks identical to `amazon.com` but is a different domain. Use ASCII-only domain names in allow and block lists, and audit existing entries for non-ASCII characters.
 
-For domain lists and your organization's settings in Claude Managed Agents sessions, see [Restrict web search and web fetch domains](../../managed-agents/tools-web-restrictions.md).
+For domain lists and your organization’s settings in Claude Managed Agents sessions, see [Restrict web search and web fetch domains](../../managed-agents/tools-web-restrictions.md).
 
 ## Dynamic filtering with code execution
 
 The `_20260209` and later versions of web search and web fetch use code execution internally to apply dynamic filters against search results.
 
-You don't need to add a `code_execution` tool for these versions: when dynamic filtering runs, the API provisions code execution for the request automatically, and both tools share a single execution container. If you do include one, use `code_execution_20260120` or later; the API rejects older code execution versions alongside these web tool versions.
+You don’t need to add a `code_execution` tool for these versions: when dynamic filtering runs, the API provisions code execution for the request automatically, and both tools share a single execution container. If you do include one, use `code_execution_20260120` or later; the API rejects older code execution versions alongside these web tool versions.
 
 ## Streaming server-tool events
 
@@ -1093,7 +1093,7 @@ Search the web and cite results.
 
 **Web fetch tool**
 
-Fetch and read content from specific URLs to augment Claude's context with live web content.
+Fetch and read content from specific URLs to augment Claude’s context with live web content.
 
 **Code execution tool**
 

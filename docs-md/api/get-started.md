@@ -44,7 +44,7 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-Claude returns a JSON response containing the assistant's message:
+Claude returns a JSON response containing the assistant’s message:
 
 ```json Output
 {
@@ -459,7 +459,7 @@ Save this as `pom.xml`:
 
 **Create your code**
 
-Save this as `QuickStart.java` in your project's Java source directory (usually `src/main/java/`):
+Save this as `QuickStart.java` in your project’s Java source directory (usually `src/main/java/`):
 
 ```java Java
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
@@ -629,13 +629,13 @@ Here are some effective search strategies to find the latest developments in ren
 
 ## Next steps
 
-You made your first API call. Next, learn the Messages API patterns you'll use in every Claude integration.
+You made your first API call. Next, learn the Messages API patterns you’ll use in every Claude integration.
 
 **Working with the Messages API**
 
 Learn multi-turn conversations, system prompts, stop reasons, and other core patterns.
 
-Once you're comfortable with the basics, explore further:
+Once you’re comfortable with the basics, explore further:
 
 **Models overview**
 

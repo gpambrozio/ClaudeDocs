@@ -16,18 +16,18 @@ Let Claude Code migrate your code for you
 
 This page lists the code changes for moving to Claude Opus 5.5 from [Claude Opus 5](migration-guide.md#migrating-from-claude-opus-5), [Claude Opus 4.8](migration-guide.md#migrating-from-claude-opus-4-8), [Claude Opus 4.7](migration-guide.md#migrating-from-claude-opus-47), [Claude Opus 4.6 and earlier Opus models](migration-guide.md#migrating-from-claude-opus-46), or [Claude Sonnet 5](migration-guide.md#migrating-from-claude-sonnet-5). Every reader needs [What every request to Claude Opus 5.5 must satisfy](migration-guide.md#request-requirements) and [Handle thinking in every response](migration-guide.md#thinking-in-every-response). Then go to the section for your current model: its first sentence names the other sections that apply to you. The [migration checklist](migration-guide.md#migration-checklist) lists every change by starting model.
 
-Claude Opus 5.5 costs less than Claude Opus 5 ($4 / $20 USD per million input / output tokens, compared with $5 / $25 USD; see [Claude pricing](../../about-claude/pricing.md)). For feature support, see [What's new in Claude Opus 5.5](whats-new-opus-5-5.md#feature-support). For behavioral differences and model-specific prompting patterns, see [Prompting Claude Opus 5.5](../../build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md).
+Claude Opus 5.5 costs less than Claude Opus 5 ($4 / $20 USD per million input / output tokens, compared with $5 / $25 USD; see [Claude pricing](../../about-claude/pricing.md)). For feature support, see [What’s new in Claude Opus 5.5](whats-new-opus-5-5.md#feature-support). For behavioral differences and model-specific prompting patterns, see [Prompting Claude Opus 5.5](../../build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md).
 
 ## What every request to Claude Opus 5.5 must satisfy
 
 Whichever model you are coming from, a request to `claude-opus-5-5` must meet the following. Where an item says a setting is rejected, the API returns a 400 error.
 
-* **Model ID:** Use `claude-opus-5-5`, a fixed model ID with no date suffix. On Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Google managed), and Microsoft Foundry, use that platform's model ID; see [Availability](whats-new-opus-5-5.md#availability).
+* **Model ID:** Use `claude-opus-5-5`, a fixed model ID with no date suffix. On Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Google managed), and Microsoft Foundry, use that platform’s model ID; see [Availability](whats-new-opus-5-5.md#availability).
 * **Thinking:** Send no `thinking` field, or send `thinking: {"type": "adaptive"}`, which is equivalent: [adaptive thinking](../../build-with-claude/thinking.md) is always on. `thinking: {"type": "disabled"}` and manual thinking budgets (`thinking: {"type": "enabled", "budget_tokens": N}`) are rejected. See the [before and after for thinking](migration-guide.md#thinking-cant-be-disabled).
 * **Effort:** Control thinking depth with the [effort parameter](../../build-with-claude/effort.md), the only request parameter that controls it. All five levels (`low`, `medium`, `high`, `xhigh`, `max`) are supported, and the default is `medium`. See [Recommended effort levels for Claude Opus 5.5](../../build-with-claude/effort.md#recommended-effort-levels-for-claude-opus-5-5).
 * **Tool choice:** Use `tool_choice` `{"type": "auto"}` (the default) or `{"type": "none"}`. Forcing a tool call with `{"type": "any"}` or `{"type": "tool", "name": "..."}` is rejected. See the [before and after for tool choice](migration-guide.md#forced-tool-use).
-* **Sampling parameters:** Omit `temperature`, `top_p`, and `top_k`. Use prompting to guide the model's behavior.
-* **Prefill:** Don't end `messages` with a prefilled assistant turn: it is rejected. Use [structured outputs](../../build-with-claude/structured-outputs.md) or system prompt instructions instead.
+* **Sampling parameters:** Omit `temperature`, `top_p`, and `top_k`. Use prompting to guide the model’s behavior.
+* **Prefill:** Don’t end `messages` with a prefilled assistant turn: it is rejected. Use [structured outputs](../../build-with-claude/structured-outputs.md) or system prompt instructions instead.
 * **Computer use:** On the Claude API and Claude Models on Google Cloud (Google managed), declare computer use as the `computer_toolset_20260801` toolset; the earlier `computer_20251124` tool is rejected there. See the [computer use breaking change](migration-guide.md#computer-use-toolset).
 * **Context window:** No context-window beta header is needed. The [1M token context window](../../build-with-claude/context-windows.md) is the default, and a header sent for older models has no effect.
 
@@ -273,10 +273,10 @@ Work down the groups and stop after the one that names your current model: every
 
 * Update the model ID to `claude-opus-5-5`.
 * Remove `thinking: {"type": "disabled"}` and `thinking: {"type": "enabled", ...}`; choose an effort level instead.
-* Set `effort` explicitly: the default is `medium`, where Claude Opus 5's is `high`.
+* Set `effort` explicitly: the default is `medium`, where Claude Opus 5’s is `high`.
 * Replace `tool_choice` types `any` and `tool` with `auto` plus strict tool use or structured outputs.
-* If you use computer use on the Claude API or Claude Models on Google Cloud (Google managed), declare `computer_toolset_20260801` (no beta header) instead of `computer_20251124` and update your agent loop for the toolset. On Amazon Bedrock, keep `computer_20251124`; check the computer use tool's [Compatibility](../../agents-and-tools/tool-use/computer-use-tool.md#compatibility) section for other platforms.
-* If a router or fallback can move a conversation from Claude Opus 5.5 to another model, expect that model to run without Claude Opus 5.5's thinking blocks (Claude Fable 5.1 and Claude Mythos 5.1 on the Claude API are the exception and keep them). Claude Opus 5.5 itself reads thinking from Claude Opus 5, from earlier Opus, Sonnet, and Haiku models, and, on the Claude API and Claude Models on Google Cloud (Google managed), from Claude Sonnet 5.5 and Claude Haiku 5.5, but not from Claude Fable or Claude Mythos models.
+* If you use computer use on the Claude API or Claude Models on Google Cloud (Google managed), declare `computer_toolset_20260801` (no beta header) instead of `computer_20251124` and update your agent loop for the toolset. On Amazon Bedrock, keep `computer_20251124`; check the computer use tool’s [Compatibility](../../agents-and-tools/tool-use/computer-use-tool.md#compatibility) section for other platforms.
+* If a router or fallback can move a conversation from Claude Opus 5.5 to another model, expect that model to run without Claude Opus 5.5’s thinking blocks (Claude Fable 5.1 and Claude Mythos 5.1 on the Claude API are the exception and keep them). Claude Opus 5.5 itself reads thinking from Claude Opus 5, from earlier Opus, Sonnet, and Haiku models, and, on the Claude API and Claude Models on Google Cloud (Google managed), from Claude Sonnet 5.5 and Claude Haiku 5.5, but not from Claude Fable or Claude Mythos models.
 * Read content blocks by `type`, and pass `thinking` blocks back unmodified in tool-use loops.
 * If your interface renders text between tool calls, set `display: "updates"` (beta) or `"summarized"` and render the non-empty `thinking` blocks.
 * If your code edits earlier turns, the `system` prompt, or `tools` mid-conversation, follow [Preserved thinking](../../build-with-claude/preserved-thinking.md).
@@ -286,7 +286,7 @@ Work down the groups and stop after the one that names your current model: every
 
 ### Claude Opus 4.8 or earlier
 
-* Review workloads that ran without a `thinking` field: on Claude Opus 5.5 they run with thinking, and thinking can't be disabled. Revisit `max_tokens`, which remains a hard limit on total output (thinking plus response text), and lower `effort` where you want less thinking. Thinking tokens are billed as output tokens, so these workloads can produce more output tokens per request.
+* Review workloads that ran without a `thinking` field: on Claude Opus 5.5 they run with thinking, and thinking can’t be disabled. Revisit `max_tokens`, which remains a hard limit on total output (thinking plus response text), and lower `effort` where you want less thinking. Thinking tokens are billed as output tokens, so these workloads can produce more output tokens per request.
 * Verify any code that parses the `thinking` field treats it as display text only. Set `display: "summarized"` to receive readable summaries.
 * Review prompts near the caching minimum: prompts of 512 tokens or more can create cache entries.
 * If your organization has a [Priority Tier](../../api/service-tiers.md#supported-models) commitment, plan capacity separately: Priority Tier is not supported on Claude Opus 5.5.
@@ -299,7 +299,7 @@ Work down the groups and stop after the one that names your current model: every
 * Remove any context-window beta header.
 * If you rebuild conversation history to update instructions, consider switching to a mid-conversation system message to preserve prompt cache hits.
 * Verify your stop-reason handling reads `stop_details` on refusals.
-* If you want fast mode, which Claude Opus 4.7 rejects, set `speed: "fast"` on your Claude API requests. Claude Opus 5.5 doesn't need a beta header.
+* If you want fast mode, which Claude Opus 4.7 rejects, set `speed: "fast"` on your Claude API requests. Claude Opus 5.5 doesn’t need a beta header.
 
 ### Claude Opus 4.6 or earlier
 
@@ -349,15 +349,15 @@ model = "claude-opus-5"  # Before
 model = "claude-opus-5-5"  # After
 ```
 
-`claude-opus-5-5` is a fixed model ID with no date suffix, the same scheme as `claude-opus-5`. On Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Google managed), and Microsoft Foundry, use that platform's model ID; see [Availability](whats-new-opus-5-5.md#availability).
+`claude-opus-5-5` is a fixed model ID with no date suffix, the same scheme as `claude-opus-5`. On Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Google managed), and Microsoft Foundry, use that platform’s model ID; see [Availability](whats-new-opus-5-5.md#availability).
 
 ### Breaking changes
 
-Each change is explained under [Breaking changes](whats-new-opus-5-5.md#breaking-changes) in What's new in Claude Opus 5.5; this section gives the code change for each.
+Each change is explained under [Breaking changes](whats-new-opus-5-5.md#breaking-changes) in What’s new in Claude Opus 5.5; this section gives the code change for each.
 
-#### Thinking can't be disabled
+#### Thinking can’t be disabled
 
-`thinking: {"type": "disabled"}` and `thinking: {"type": "enabled", "budget_tokens": N}` both return a 400 error (`"thinking.type.disabled" is not supported for this model.` or `"thinking.type.enabled" is not supported for this model.`). Remove the `thinking` field and pick an [effort](../../build-with-claude/effort.md) level; where you disabled thinking to save tokens, use a lower one. Responses then start with `thinking` blocks, so select content blocks by `type` and pass `thinking` blocks back unmodified with tool results. See [Thinking can't be disabled](whats-new-opus-5-5.md#thinking-cant-be-disabled).
+`thinking: {"type": "disabled"}` and `thinking: {"type": "enabled", "budget_tokens": N}` both return a 400 error (`"thinking.type.disabled" is not supported for this model.` or `"thinking.type.enabled" is not supported for this model.`). Remove the `thinking` field and pick an [effort](../../build-with-claude/effort.md) level; where you disabled thinking to save tokens, use a lower one. Responses then start with `thinking` blocks, so select content blocks by `type` and pass `thinking` blocks back unmodified with tool results. See [Thinking can’t be disabled](whats-new-opus-5-5.md#thinking-cant-be-disabled).
 
 Before. Claude Opus 5 accepts this request, and Claude Opus 5.5 rejects it with a 400 error:
 
@@ -554,7 +554,7 @@ client.messages.create(
 
 #### Forced tool use is not supported
 
-`tool_choice` types `any` and `tool` return a 400 error (`tool_choice: type "tool" and "any" are not supported for this model.`), including on the token counting endpoint. Use `auto` with [strict tool use](../../agents-and-tools/tool-use/strict-tool-use.md) or [structured outputs](../../build-with-claude/structured-outputs.md), and say in the prompt when the tool applies. Strict tool use accepts a subset of JSON Schema, so check each tool's `input_schema` before you add `strict: true`. Every object in the schema must set `additionalProperties: false`; see [JSON Schema limitations](../../build-with-claude/structured-outputs.md#json-schema-limitations). See [Forced tool use is not supported](whats-new-opus-5-5.md#forced-tool-use-is-not-supported).
+`tool_choice` types `any` and `tool` return a 400 error (`tool_choice: type "tool" and "any" are not supported for this model.`), including on the token counting endpoint. Use `auto` with [strict tool use](../../agents-and-tools/tool-use/strict-tool-use.md) or [structured outputs](../../build-with-claude/structured-outputs.md), and say in the prompt when the tool applies. Strict tool use accepts a subset of JSON Schema, so check each tool’s `input_schema` before you add `strict: true`. Every object in the schema must set `additionalProperties: false`; see [JSON Schema limitations](../../build-with-claude/structured-outputs.md#json-schema-limitations). See [Forced tool use is not supported](whats-new-opus-5-5.md#forced-tool-use-is-not-supported).
 
 Before. Claude Opus 5 accepts this request, and Claude Opus 5.5 rejects it with a 400 error:
 
@@ -868,7 +868,7 @@ On the Claude API, Claude Fable 5.1 and Claude Mythos 5.1 read Claude Opus 5.5 t
 
 #### The `computer_20251124` computer use tool is not supported on the Claude API and Claude Models on Google Cloud (Google managed)
 
-On the Claude API and Claude Models on Google Cloud (Google managed), a `tools` entry of type `computer_20251124` returns a 400 error (`'claude-opus-5-5' does not support tool types: computer_20251124.`, followed by the tool types the model accepts). Declare the `computer_toolset_20260801` toolset instead: drop the beta header and send the entry with no `name` or display dimensions. In your agent loop, handle member `tool_use` blocks (the action is the block's `name`, not `input.action`), several of them per turn, and echo `toolset_name` on every result. The request change is shown below; the agent-loop changes are listed in [Migrate from `computer_20251124`](../../agents-and-tools/tool-use/computer-use-tool.md#migrate-from-computer-20251124). On Amazon Bedrock, the earlier `computer_20251124` tool continues to work on Claude Opus 5.5 as it does on Claude Opus 5, so no change is needed there; for other platforms, see the computer use tool's [Compatibility](../../agents-and-tools/tool-use/computer-use-tool.md#compatibility) section. See [The `computer_20251124` computer use tool is not supported on the Claude API and Claude Models on Google Cloud (Google managed)](whats-new-opus-5-5.md#computer-20251124-is-not-supported).
+On the Claude API and Claude Models on Google Cloud (Google managed), a `tools` entry of type `computer_20251124` returns a 400 error (`'claude-opus-5-5' does not support tool types: computer_20251124.`, followed by the tool types the model accepts). Declare the `computer_toolset_20260801` toolset instead: drop the beta header and send the entry with no `name` or display dimensions. In your agent loop, handle member `tool_use` blocks (the action is the block’s `name`, not `input.action`), several of them per turn, and echo `toolset_name` on every result. The request change is shown below; the agent-loop changes are listed in [Migrate from `computer_20251124`](../../agents-and-tools/tool-use/computer-use-tool.md#migrate-from-computer-20251124). On Amazon Bedrock, the earlier `computer_20251124` tool continues to work on Claude Opus 5.5 as it does on Claude Opus 5, so no change is needed there; for other platforms, see the computer use tool’s [Compatibility](../../agents-and-tools/tool-use/computer-use-tool.md#compatibility) section. See [The `computer_20251124` computer use tool is not supported on the Claude API and Claude Models on Google Cloud (Google managed)](whats-new-opus-5-5.md#computer-20251124-is-not-supported).
 
 Before. Claude Opus 5 accepts this request, and on the Claude API and Claude Models on Google Cloud (Google managed), Claude Opus 5.5 rejects it with a 400 error:
 
@@ -1128,12 +1128,12 @@ On Claude Opus 5, text the model writes between tool calls comes back as `text` 
 
 ### Safety classifiers and fallback
 
-Claude Opus 5.5 can return `stop_reason: "refusal"` with a `stop_details` category. Its classifiers cover a broader set of categories than Claude Opus 5's, so expect `stop_details.category` values such as `"bio"` in addition to `"cyber"` and `"reasoning_extraction"`; see the [refusal category table](../../build-with-claude/refusals-and-fallback.md#refusal-response). Handle refusals and configure [server-side fallback](../../build-with-claude/refusals-and-fallback.md#server-side-fallback) or your own retry (server-side fallback doesn't retry requests declined with `"reasoning_extraction"`; that refusal is returned to you); see [Refusals and fallback](../../build-with-claude/refusals-and-fallback.md) and [Safeguard refusals](../../build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md#safeguard-refusals).
+Claude Opus 5.5 can return `stop_reason: "refusal"` with a `stop_details` category. Its classifiers cover a broader set of categories than Claude Opus 5’s, so expect `stop_details.category` values such as `"bio"` in addition to `"cyber"` and `"reasoning_extraction"`; see the [refusal category table](../../build-with-claude/refusals-and-fallback.md#refusal-response). Handle refusals and configure [server-side fallback](../../build-with-claude/refusals-and-fallback.md#server-side-fallback) or your own retry (server-side fallback doesn’t retry requests declined with `"reasoning_extraction"`; that refusal is returned to you); see [Refusals and fallback](../../build-with-claude/refusals-and-fallback.md) and [Safeguard refusals](../../build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md#safeguard-refusals).
 
 ### Recommended changes
 
-1. **Re-run your effort sweep.** Effort is the only thinking control on Claude Opus 5.5, and its default is `medium` where Claude Opus 5's is `high`, so a request that omits `effort` now runs at `medium`. Step down where quality holds, and step up for the most demanding work. See [Effort](../../build-with-claude/effort.md).
-2. **Re-evaluate model-specific prompt instructions.** Instructions tuned for Claude Opus 5's behavior might no longer be needed; see [Prompting Claude Opus 5.5](../../build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md). If you ran with thinking disabled, also see [Prompts written for thinking disabled](../../build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md#prompts-written-for-thinking-disabled).
+1. **Re-run your effort sweep.** Effort is the only thinking control on Claude Opus 5.5, and its default is `medium` where Claude Opus 5’s is `high`, so a request that omits `effort` now runs at `medium`. Step down where quality holds, and step up for the most demanding work. See [Effort](../../build-with-claude/effort.md).
+2. **Re-evaluate model-specific prompt instructions.** Instructions tuned for Claude Opus 5’s behavior might no longer be needed; see [Prompting Claude Opus 5.5](../../build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md). If you ran with thinking disabled, also see [Prompts written for thinking disabled](../../build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md#prompts-written-for-thinking-disabled).
 3. **Test in a development environment** before switching production traffic.
 
 ## Migrating to Claude Opus 5.5 from Claude Opus 4.8
@@ -1172,17 +1172,17 @@ This section adds what changed after Claude Opus 4.7. If your code is on Claude 
 
 None of these items adds a breaking change to those in the earlier sections; they are worth checking after you swap the model ID.
 
-1. **Effort levels recalibrated:** The token allocation behind each effort level changes on Claude Opus 5.5 compared to Claude Opus 4.7. The default is `medium`, where Claude Opus 4.7's is `high`. Run a fresh effort sweep on your own evals rather than carrying over a setting tuned for Claude Opus 4.7. See [Effort](../../build-with-claude/effort.md).
+1. **Effort levels recalibrated:** The token allocation behind each effort level changes on Claude Opus 5.5 compared to Claude Opus 4.7. The default is `medium`, where Claude Opus 4.7’s is `high`. Run a fresh effort sweep on your own evals rather than carrying over a setting tuned for Claude Opus 4.7. See [Effort](../../build-with-claude/effort.md).
 
 2. **1M context window is the default:** Claude Opus 5.5 serves the full 1M token [context window](../../build-with-claude/context-windows.md) by default with no beta header. If your client passes a context-window beta header for compatibility with older models, remove it.
 
 3. **Mid-conversation system messages:** On the Claude API, Amazon Bedrock, and Claude Models on Google Cloud (Google managed), Claude Opus 5.5 accepts `role: "system"` messages immediately after a user turn in the `messages` array (subject to [placement rules](../../build-with-claude/mid-conversation-system-messages.md#limitations)). Use the top-level `system` field for instructions that apply from the start. Claude Opus 4.7 rejects `role: "system"` in `messages` with a 400 error. If you maintain code paths that rebuild the full message history to update instructions, you can simplify them and preserve [prompt cache](../../build-with-claude/prompt-caching.md) hits on earlier turns.
 
-4. **Refusal stop details:** When the model declines a request, Claude Opus 5.5 returns a `stop_details` object that names the category of refusal, alongside the `refusal` stop reason. Claude Opus 4.7 returns the same object, so this matters only if your stop-reason handling does not read it yet. No beta header is required, and there is no opt-out. If your stop-reason handling doesn't read it yet, see [Handling stop reasons](../../build-with-claude/handling-stop-reasons.md). Claude Opus 5.5 declines in more categories; see [Safety classifiers and fallback](migration-guide.md#safety-classifiers-and-fallback).
+4. **Refusal stop details:** When the model declines a request, Claude Opus 5.5 returns a `stop_details` object that names the category of refusal, alongside the `refusal` stop reason. Claude Opus 4.7 returns the same object, so this matters only if your stop-reason handling does not read it yet. No beta header is required, and there is no opt-out. If your stop-reason handling doesn’t read it yet, see [Handling stop reasons](../../build-with-claude/handling-stop-reasons.md). Claude Opus 5.5 declines in more categories; see [Safety classifiers and fallback](migration-guide.md#safety-classifiers-and-fallback).
 
-5. **Fast mode:** Claude Opus 5.5 supports [fast mode](../../build-with-claude/fast-mode.md) on the Claude API. Fast mode is not available on Claude Opus 4.7, where requests with `speed: "fast"` return an error. Set `speed: "fast"` on your requests. Claude Opus 5.5 doesn't need a beta header.
+5. **Fast mode:** Claude Opus 5.5 supports [fast mode](../../build-with-claude/fast-mode.md) on the Claude API. Fast mode is not available on Claude Opus 4.7, where requests with `speed: "fast"` return an error. Set `speed: "fast"` on your requests. Claude Opus 5.5 doesn’t need a beta header.
 
-6. **Computer use toolset and browser use tool:** On the Claude API and Claude Models on Google Cloud (Google managed), Claude Opus 5.5 supports [computer use](../../agents-and-tools/tool-use/computer-use-tool.md) as the `computer_toolset_20260801` toolset and the [browser use tool](../../agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages. Claude Opus 4.7 supports neither. On those platforms Claude Opus 5.5 doesn't accept the earlier `computer_20251124` tool; see the [computer use breaking change](migration-guide.md#computer-use-toolset).
+6. **Computer use toolset and browser use tool:** On the Claude API and Claude Models on Google Cloud (Google managed), Claude Opus 5.5 supports [computer use](../../agents-and-tools/tool-use/computer-use-tool.md) as the `computer_toolset_20260801` toolset and the [browser use tool](../../agents-and-tools/tool-use/browser-use-tool.md) for tasks inside webpages. Claude Opus 4.7 supports neither. On those platforms Claude Opus 5.5 doesn’t accept the earlier `computer_20251124` tool; see the [computer use breaking change](migration-guide.md#computer-use-toolset).
 
 ## Migrating to Claude Opus 5.5 from Claude Opus 4.6 and earlier Opus models
 
@@ -1489,7 +1489,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
 
 Claude Opus 4.7 introduced behavioral differences from Claude Opus 4.6 that are not API breaking changes. These three affect code or scaffolding:
 
-1. **Built-in progress updates in agentic traces:** Claude Opus 4.7 provides more regular, higher-quality updates to the user throughout long agentic traces. If you've added scaffolding to force interim status messages ("After every 3 tool calls, summarize progress"), try removing it. On Claude Opus 5.5 these updates arrive in `thinking` blocks, which are empty at the default `thinking.display`. To receive them, see [Text between tool calls is returned in thinking blocks](migration-guide.md#text-between-tool-calls). To shape their length and contents, see [User-facing progress updates](../../build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md#user-facing-progress-updates).
+1. **Built-in progress updates in agentic traces:** Claude Opus 4.7 provides more regular, higher-quality updates to the user throughout long agentic traces. If you’ve added scaffolding to force interim status messages (“After every 3 tool calls, summarize progress”), try removing it. On Claude Opus 5.5 these updates arrive in `thinking` blocks, which are empty at the default `thinking.display`. To receive them, see [Text between tool calls is returned in thinking blocks](migration-guide.md#text-between-tool-calls). To shape their length and contents, see [User-facing progress updates](../../build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md#user-facing-progress-updates).
 
 2. **Real-time cybersecurity safeguards:** These safeguards are new in Claude Opus 4.7: requests that involve prohibited or high-risk topics might lead to refusals. For legitimate security work such as penetration testing, vulnerability research, or red-teaming, apply to the [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude-opus-and-sonnet) to request reduced restrictions. The application route depends on how you access Claude.
 
@@ -1530,7 +1530,7 @@ The first item is required on Claude Opus 5.5; the rest are recommended.
 
 ### Migrating from Claude 4.1 or earlier
 
-If you're migrating from Claude Opus 4.1 or earlier models directly to Claude Opus 5.5, first apply everything in [Migrating from Claude Opus 4.5 or earlier](migration-guide.md#migrating-from-claude-opus-45). That subsection starts with every earlier section, so in effect you read this page from the top. Then apply the additional changes in this subsection.
+If you’re migrating from Claude Opus 4.1 or earlier models directly to Claude Opus 5.5, first apply everything in [Migrating from Claude Opus 4.5 or earlier](migration-guide.md#migrating-from-claude-opus-45). That subsection starts with every earlier section, so in effect you read this page from the top. Then apply the additional changes in this subsection.
 
 #### Additional breaking changes
 

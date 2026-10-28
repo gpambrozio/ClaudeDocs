@@ -43,13 +43,13 @@ Claude can handle sudden increases in query volume without the need for hiring a
 
 **Consistent brand voice**
 
-You can instruct Claude to consistently represent your brand's tone and values, whereas human agents might vary in their communication styles.
+You can instruct Claude to consistently represent your brand’s tone and values, whereas human agents might vary in their communication styles.
 
 Some considerations for choosing Claude over other LLMs:
 
-* You prioritize natural, nuanced conversation: Claude's sophisticated language understanding allows for more natural, context-aware conversations that feel more human-like than chats with other LLMs.
+* You prioritize natural, nuanced conversation: Claude’s sophisticated language understanding allows for more natural, context-aware conversations that feel more human-like than chats with other LLMs.
 * You often receive complex and open-ended queries: Claude can handle a wide range of topics and inquiries without generating scripted responses or requiring extensive programming of permutations of user utterances.
-* You need scalable multilingual support: Claude's multilingual capabilities allow it to engage in conversations in over 200 languages without the need for separate chatbots or extensive translation processes for each supported language.
+* You need scalable multilingual support: Claude’s multilingual capabilities allow it to engage in conversations in over 200 languages without the need for separate chatbots or extensive translation processes for each supported language.
 
 ### Define your ideal chat interaction
 
@@ -131,7 +131,7 @@ This metric evaluates how accurately Claude interprets customer inquiries across
 
 **Response relevance**
 
-This assesses how well Claude's response addresses the customer's specific question or issue. Evaluate a set of conversations and rate the relevance of each response (using LLM-based grading for scale). Target a relevance score of 90 percent or above.
+This assesses how well Claude’s response addresses the customer’s specific question or issue. Evaluate a set of conversations and rate the relevance of each response (using LLM-based grading for scale). Target a relevance score of 90 percent or above.
 
 **Response accuracy**
 
@@ -143,7 +143,7 @@ Track the frequency and relevance of links or sources offered. Target providing 
 
 **Topic adherence**
 
-Measure how well Claude stays on topic, such as the topic of car insurance in the example implementation. Aim for 95 percent of responses to be directly related to car insurance or the customer's specific query.
+Measure how well Claude stays on topic, such as the topic of car insurance in the example implementation. Aim for 95 percent of responses to be directly related to car insurance or the customer’s specific query.
 
 **Content generation effectiveness**
 
@@ -151,13 +151,13 @@ Measure how successful Claude is at determining when to generate informational c
 
 **Escalation efficiency**
 
-This measures Claude's ability to recognize when a query needs human intervention and escalate appropriately. Track the percentage of correctly escalated conversations versus those that should have been escalated but weren't. Aim for an escalation accuracy of 95 percent or higher.
+This measures Claude’s ability to recognize when a query needs human intervention and escalate appropriately. Track the percentage of correctly escalated conversations versus those that should have been escalated but weren’t. Aim for an escalation accuracy of 95 percent or higher.
 
 Here are criteria and benchmarks that can be used to evaluate the business impact of employing Claude for support:
 
 **Sentiment maintenance**
 
-This assesses Claude's ability to maintain or improve customer sentiment throughout the conversation. Use sentiment analysis tools to measure sentiment at the beginning and end of each conversation. Aim for maintained or improved sentiment in 90 percent of interactions.
+This assesses Claude’s ability to maintain or improve customer sentiment throughout the conversation. Use sentiment analysis tools to measure sentiment at the beginning and end of each conversation. Aim for maintained or improved sentiment in 90 percent of interactions.
 
 **Deflection rate**
 
@@ -202,7 +202,7 @@ Although you might be tempted to put all your information inside a system prompt
 
 .
 
-It's best to break down complex prompts into subsections and write one part at a time. For each task, you might find greater success by following a step-by-step process to define the parts of the prompt Claude would need to do the task well. For this car insurance customer support example, you'll be writing piecemeal all the parts for a prompt starting with the "Greeting and general guidance" task. This also makes debugging your prompt easier as you can more quickly adjust individual parts of the overall prompt.
+It’s best to break down complex prompts into subsections and write one part at a time. For each task, you might find greater success by following a step-by-step process to define the parts of the prompt Claude would need to do the task well. For this car insurance customer support example, you’ll be writing piecemeal all the parts for a prompt starting with the “Greeting and general guidance” task. This also makes debugging your prompt easier as you can more quickly adjust individual parts of the overall prompt.
 
 ```python
 STATIC_GREETINGS_AND_GENERAL = """
@@ -268,7 +268,7 @@ that gives you the confidence to enjoy every electron-powered mile.
 """
 ```
 
-Now that you have your static content, add at least 4–5 sample "good" interactions to guide Claude's responses. These examples should be representative of your ideal customer interaction and can include elements such as guardrails and tool calls.
+Now that you have your static content, add at least 4–5 sample “good” interactions to guide Claude’s responses. These examples should be representative of your ideal customer interaction and can include elements such as guardrails and tool calls.
 
 ```python
 EXAMPLES = """
@@ -337,7 +337,7 @@ Once you provide this information, I'll use our quoting tool to generate a perso
 """
 ```
 
-Also include any important instructions outlining dos and don'ts for how Claude should interact with the customer. This might draw from brand guardrails or support policies.
+Also include any important instructions outlining dos and don’ts for how Claude should interact with the customer. This might draw from brand guardrails or support policies.
 
 ```python
 ADDITIONAL_GUARDRAILS = """Please adhere to the following guardrails:
@@ -417,7 +417,7 @@ def get_quote(make, model, year, mileage, driver_age):
 
 ### Deploy your prompts
 
-It's hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](../../test-and-evaluate/develop-tests.md). Build a small application using the prompt, the Anthropic SDK, and Streamlit for a user interface.
+It’s hard to know how well your prompt works without deploying it in a test production setting and [running evaluations](../../test-and-evaluate/develop-tests.md). Build a small application using the prompt, the Anthropic SDK, and Streamlit for a user interface.
 
 In a file called `chatbot.py` (or the equivalent module in your language), set up the ChatBot class, which will encapsulate the interactions with the Anthropic SDK.
 
@@ -1121,19 +1121,19 @@ Implementing RAG for support use cases has been shown to increase accuracy, redu
 
 #### Integrate real-time data with tool use
 
-When dealing with queries that require real-time information, such as account balances or policy details, embedding-based RAG approaches are not sufficient. Instead, tool use can enhance your chatbot's ability to provide accurate, real-time responses. For example, you can use tool use to look up customer information, retrieve order details, and cancel orders on behalf of the customer.
+When dealing with queries that require real-time information, such as account balances or policy details, embedding-based RAG approaches are not sufficient. Instead, tool use can enhance your chatbot’s ability to provide accurate, real-time responses. For example, you can use tool use to look up customer information, retrieve order details, and cancel orders on behalf of the customer.
 
-This approach, outlined in the [tool use: customer service agent recipe](https://platform.claude.com/cookbook/tool-use-customer-service-agent), lets you integrate live data into Claude's responses and provide a more personalized and efficient customer experience.
+This approach, outlined in the [tool use: customer service agent recipe](https://platform.claude.com/cookbook/tool-use-customer-service-agent), lets you integrate live data into Claude’s responses and provide a more personalized and efficient customer experience.
 
 #### Strengthen input and output guardrails
 
-When deploying a chatbot, especially in customer service scenarios, it's important to prevent risks associated with misuse, out-of-scope queries, and inappropriate responses. Although Claude is inherently resilient to such scenarios, here are additional steps to strengthen your chatbot guardrails:
+When deploying a chatbot, especially in customer service scenarios, it’s important to prevent risks associated with misuse, out-of-scope queries, and inappropriate responses. Although Claude is inherently resilient to such scenarios, here are additional steps to strengthen your chatbot guardrails:
 
 * [Reduce hallucination](../../test-and-evaluate/strengthen-guardrails/reduce-hallucinations.md): Implement fact-checking mechanisms and [citations](https://platform.claude.com/cookbook/misc-using-citations) to ground responses in provided information.
-* Cross-check information: Verify that the agent's responses align with your company's policies and known facts.
-* Avoid contractual commitments: Ensure the agent doesn't make promises or enter into agreements it's not authorized to make.
+* Cross-check information: Verify that the agent’s responses align with your company’s policies and known facts.
+* Avoid contractual commitments: Ensure the agent doesn’t make promises or enter into agreements it’s not authorized to make.
 * [Mitigate jailbreaks](../../test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md): Use methods such as harmlessness screens and input validation to prevent users from exploiting model vulnerabilities to generate inappropriate content.
-* Avoid mentioning competitors: Implement a competitor mention filter to maintain brand focus and not mention any competitor's products or services.
+* Avoid mentioning competitors: Implement a competitor mention filter to maintain brand focus and not mention any competitor’s products or services.
 * [Increase output consistency](../../test-and-evaluate/strengthen-guardrails/increase-consistency.md): Prevent Claude from changing style or going out of character, even during long, complex interactions.
 * Remove personally identifiable information (PII): Unless explicitly required and authorized, strip out any PII from responses.
 
@@ -1163,7 +1163,7 @@ If your chatbot handles incredibly varied tasks, you might want to consider addi
 
 Although these examples have focused on Python functions callable within a Streamlit environment, deploying Claude for a real-time support chatbot requires an API service.
 
-Here's how you can approach this:
+Here’s how you can approach this:
 
 1. Create an API wrapper: Develop a simple API wrapper around your classification function. For example, you can use Flask or FastAPI to wrap your code into an HTTP service. Your HTTP service could accept the user input and return the Assistant response in its entirety. Thus, your service could have the following characteristics:
 

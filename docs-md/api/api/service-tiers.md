@@ -20,7 +20,7 @@ The standard tier is the default service tier for all API requests. The API prio
 
 ## Priority Tier
 
-The API prioritizes requests in this tier over all other requests. This prioritization helps minimize ["server overloaded" errors](errors.md#http-errors), even during peak times.
+The API prioritizes requests in this tier over all other requests. This prioritization helps minimize [“server overloaded” errors](errors.md#http-errors), even during peak times.
 
 For more information, see [Existing Priority Tier commitments](service-tiers.md#existing-priority-tier-commitments).
 
@@ -177,7 +177,7 @@ puts(message.usage.service_tier)
 The `service_tier` parameter accepts the following values:
 
 * `"auto"` (default) - Uses the Priority Tier capacity if available, falling back to your other capacity if not
-* `"standard_only"` - Uses only standard tier capacity, useful if you don't want to use your Priority Tier capacity
+* `"standard_only"` - Uses only standard tier capacity, useful if you don’t want to use your Priority Tier capacity
 
 The response `usage` object also includes the service tier assigned to the request:
 

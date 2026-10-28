@@ -12,7 +12,7 @@ When choosing a Claude model, consider first evaluating these factors:
 
 * **Capabilities:** What specific features or capabilities will you need the model to have to meet your needs?
 * **Speed:** How quickly does the model need to respond in your application? [Fast mode](../../build-with-claude/fast-mode.md) delivers up to 2.5x higher output speed at premium pricing on [supported models](../../build-with-claude/fast-mode.md#supported-models).
-* **Cost:** What's your budget for both development and production usage?
+* **Cost:** What’s your budget for both development and production usage?
 * **Effort:** Several Claude models support an [effort parameter](../../build-with-claude/effort.md) that trades intelligence for latency and cost within a single model. Tuning effort is often a better lever than switching models. On Claude Fable 5.1, Claude Opus 5, and Claude Sonnet 5.5, start with the default (`high`) and adjust up or down based on your evals. On Claude Opus 5.5 and Claude Haiku 5.5 the default is `medium`; start there and adjust the same way. On Claude Opus 4.8 and Claude Opus 4.7, the `xhigh` effort level, between `high` and `max`, is the best setting for most coding and agentic use cases.
 
 ***
@@ -57,7 +57,7 @@ This approach is best for:
 
 **Claude Opus 5.5** (`claude-opus-5-5`) is built for long-running agentic coding and knowledge work, with [adaptive thinking](../../build-with-claude/thinking.md) always on. If your integration forces tool use (`tool_choice` of type `any` or `tool`), turns thinking off, or uses the `computer_20251124` computer use tool, see [Breaking changes](../../models/opus-5-5/whats-new-opus-5-5.md#breaking-changes) before switching.
 
-**Claude Fable 5.1** (`claude-fable-5-1`) is Anthropic's most capable model open to all customers. It extends Claude Fable 5 with stronger long-running agentic coding, knowledge work, and research at the same input and output prices, with cache reads at a quarter of the cost. **Claude Mythos 5.1** (`claude-mythos-5-1`) offers the same capabilities only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). Both models use always-on [adaptive thinking](../../build-with-claude/thinking.md). See [What's new in Claude Fable 5.1](../../models/fable-5-1/whats-new-fable-5-1.md) for details.
+**Claude Fable 5.1** (`claude-fable-5-1`) is Anthropic’s most capable model open to all customers. It extends Claude Fable 5 with stronger long-running agentic coding, knowledge work, and research at the same input and output prices, with cache reads at a quarter of the cost. **Claude Mythos 5.1** (`claude-mythos-5-1`) offers the same capabilities only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). Both models use always-on [adaptive thinking](../../build-with-claude/thinking.md). See [What’s new in Claude Fable 5.1](../../models/fable-5-1/whats-new-fable-5-1.md) for details.
 
 For context windows, output limits, and prices, see the [model comparison table](../../models/overview.md#latest-models-comparison).
 
@@ -100,19 +100,19 @@ Multi-model strategies pair a lower-cost model with a frontier model so that mos
 
 See detailed specifications and pricing for the latest Claude models
 
-**What's new in Claude Fable 5.1**
+**What’s new in Claude Fable 5.1**
 
 Built for demanding reasoning and long-horizon agentic work
 
-**What's new in Claude Opus 5.5**
+**What’s new in Claude Opus 5.5**
 
 The latest Opus model: breaking changes, new features, and behavior differences
 
-**What's new in Claude Sonnet 5.5**
+**What’s new in Claude Sonnet 5.5**
 
 The latest Sonnet model: breaking changes, new features, and behavior differences
 
-**What's new in Claude Haiku 5.5**
+**What’s new in Claude Haiku 5.5**
 
 The latest Haiku model: breaking changes, new features, and behavior differences
 

@@ -6,11 +6,11 @@ url: https://platform.claude.com/docs/en/manage-claude/cmek-aws-kms-workspaces
 description: Add a key policy condition that names the workspaces allowed to use your AWS KMS key.
 ---
 
-The [key policy from setup](cmek-aws-kms.md#key-policy) lets every workspace in your organization use the key. With this optional condition, a workspace that isn't listed can't use it.
+The [key policy from setup](cmek-aws-kms.md#key-policy) lets every workspace in your organization use the key. With this optional condition, a workspace that isn’t listed can’t use it.
 
-Add a workspace's [compartment ID](cmek-how-it-works.md#what-one-key-protects) to the policy before you [attach the key](cmek-aws-kms.md#register-the-key-with-anthropic) to that workspace. For a new workspace, that means creating it without the key.
+Add a workspace’s [compartment ID](cmek-how-it-works.md#what-one-key-protects) to the policy before you [attach the key](cmek-aws-kms.md#register-the-key-with-anthropic) to that workspace. For a new workspace, that means creating it without the key.
 
-## Copy the workspace's compartment ID
+## Copy the workspace’s compartment ID
 
 In the Claude Console, open the [Data retention](https://platform.claude.com/settings/privacy) page and select the workspace from the dropdown menu at the top. Copy the **Compartment ID** under **Encryption key**. The [Get Workspace](../api/organization/workspaces/retrieve.md) endpoint returns it as `compartment_id`.
 

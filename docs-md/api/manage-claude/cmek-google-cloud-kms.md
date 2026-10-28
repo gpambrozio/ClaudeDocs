@@ -18,22 +18,22 @@ In Claude:
 
 * Customer-managed encryption keys (CMEK) are [turned on for your organization](cmek.md#availability).
 * You have your Anthropic organization ID, the UUID without the `org_` prefix. Copy it from [Organization](https://platform.claude.com/settings/organization) in the Claude Console, or from **Organization settings > Organization and access** on claude.ai. Whoever creates the key needs it.
-* You're an Organization Admin on Claude Platform, or an Owner or Primary Owner on Claude Enterprise.
-* On Claude Platform, you have a workspace that [retains data](cmek-data-retention.md#data-retention), ideally a new one, because [existing data stays under Anthropic's key](cmek-how-it-works.md#when-your-key-takes-effect).
+* You’re an Organization Admin on Claude Platform, or an Owner or Primary Owner on Claude Enterprise.
+* On Claude Platform, you have a workspace that [retains data](cmek-data-retention.md#data-retention), ideally a new one, because [existing data stays under Anthropic’s key](cmek-how-it-works.md#when-your-key-takes-effect).
 * On Claude Enterprise, you know [which features turn off or change](cmek-coverage-claude-enterprise.md#turned-off-or-changed).
 
 In Google Cloud:
 
 * The Cloud KMS API is turned on.
 * You can create key rings and keys, and set IAM policy on them (`roles/cloudkms.admin` or equivalent).
-* Cloud KMS [Data Access audit logs](https://docs.cloud.google.com/logging/docs/audit/configure-data-access) (Data Read and Data Write) are on, so Cloud Logging records Anthropic's use of your key. They're off by default.
-* If your Google Cloud organization enforces domain restricted sharing (`constraints/iam.allowedPolicyMemberDomains`), it blocks the grant to Anthropic's service account. Add a project-level exception, or allow Anthropic's Cloud Identity customer ID. Contact Anthropic for the ID.
+* Cloud KMS [Data Access audit logs](https://docs.cloud.google.com/logging/docs/audit/configure-data-access) (Data Read and Data Write) are on, so Cloud Logging records Anthropic’s use of your key. They’re off by default.
+* If your Google Cloud organization enforces domain restricted sharing (`constraints/iam.allowedPolicyMemberDomains`), it blocks the grant to Anthropic’s service account. Add a project-level exception, or allow Anthropic’s Cloud Identity customer ID. Contact Anthropic for the ID.
 
 ## In Google Cloud: create the key
 
 After a failed **Verify** or **Add**, see the [fixes for Google Cloud KMS](cmek-troubleshooting.md#google-cloud-kms).
 
-These steps label the key with your Anthropic organization ID in lowercase (`<ORGANIZATION_UUID>`) and grant access to Anthropic's service account:
+These steps label the key with your Anthropic organization ID in lowercase (`<ORGANIZATION_UUID>`) and grant access to Anthropic’s service account:
 
 ```text wrap
 anthropic-cmek-client-us@gcp-anthropic-cmek-clients.iam.gserviceaccount.com
@@ -71,11 +71,11 @@ Click **Create**.
 
 ![Google Cloud KMS Create key page with HSM protection, symmetric encrypt/decrypt, and the anthropic-org label set to true.](https://platform.claude.com/docs/images/cmek/gcp-create-key-label.png)
 
-**Open the key's permissions**
+**Open the key’s permissions**
 
 On the key ring details page, select the checkbox next to the key. Open the **Permissions** panel and click **Grant access**.
 
-**Grant Anthropic's service account access to the key**
+**Grant Anthropic’s service account access to the key**
 
 Check that **Resource** shows the key, not the key ring or project. Enter these values:
 
@@ -88,7 +88,7 @@ Click **Add another role** and select **Cloud KMS Viewer**. Click **Save**.
 
 **Copy the full key resource name**
 
-On the key ring details page, open the key's **Actions** menu and click **Copy resource name**.
+On the key ring details page, open the key’s **Actions** menu and click **Copy resource name**.
 
 ![Google Cloud key ring details with the Copy resource name action highlighted in the key's actions menu.](https://platform.claude.com/docs/images/cmek/gcp-copy-resource-name.png)
 
@@ -97,9 +97,9 @@ On the key ring details page, open the key's **Actions** menu and click **Copy r
 In each command, replace these placeholders:
 
 * **`<your-project-id>`:** your Google Cloud project ID
-* **`<region>`:** the key's location, such as `us-east5`
-* **`<your-keyring-name>`:** the key ring's name
-* **`<your-key-name>`:** the key's name
+* **`<region>`:** the key’s location, such as `us-east5`
+* **`<your-keyring-name>`:** the key ring’s name
+* **`<your-key-name>`:** the key’s name
 * **`<ORGANIZATION_UUID>`:** your Anthropic organization ID in lowercase
 
 **Create or choose a key ring**
@@ -126,7 +126,7 @@ gcloud kms keys create <your-key-name> \
 
 For software protection, omit `--protection-level=hsm`.
 
-**Grant Anthropic's service account access to the key**
+**Grant Anthropic’s service account access to the key**
 
 Run both commands:
 
@@ -176,7 +176,7 @@ gcloud kms keys update <your-key-name> \
   --update-labels=anthropic-org-<ORGANIZATION_UUID>=true
 ```
 
-The other values are in the key's full resource name, and the command keeps existing labels. Then skip to [the steps that grant access](cmek-google-cloud-kms.md#encryption-key-setup).
+The other values are in the key’s full resource name, and the command keeps existing labels. Then skip to [the steps that grant access](cmek-google-cloud-kms.md#encryption-key-setup).
 
 ## In Claude: add and attach the key
 
@@ -186,7 +186,7 @@ To script this part on Claude Platform, [use the Admin API](cmek-admin-api.md) i
 
 **Open the encryption key settings**
 
-In the Claude Console, open [Encryption keys](https://platform.claude.com/settings/privacy#encryption-keys) on the Data retention page. If the section isn't there, select **Organization** from the dropdown menu at the top.
+In the Claude Console, open [Encryption keys](https://platform.claude.com/settings/privacy#encryption-keys) on the Data retention page. If the section isn’t there, select **Organization** from the dropdown menu at the top.
 
 **Add the key**
 
@@ -194,7 +194,7 @@ Under **Encryption keys**, click **Add key**. Enter a **Display name**, select *
 
 **Enter the key resource name**
 
-Check that your key has the **Organization label** shown in the dialog box. Paste the key's full resource name into **Key resource name** and click **Add**.
+Check that your key has the **Organization label** shown in the dialog box. Paste the key’s full resource name into **Key resource name** and click **Add**.
 
 **Verify the key**
 
@@ -202,13 +202,13 @@ In the **Encryption keys** list, click **Verify** next to the key. **Connected**
 
 **Attach the key to a workspace**
 
-Attaching a key [can't be undone](cmek-key-lifecycle.md#what-each-action-does). You can't remove it from the workspace or replace it. If the key is deleted, Anthropic can't recover the data it protects.
+Attaching a key [can’t be undone](cmek-key-lifecycle.md#what-each-action-does). You can’t remove it from the workspace or replace it. If the key is deleted, Anthropic can’t recover the data it protects.
 
 1. At the top of the Data retention page, select the workspace from the dropdown menu.
 2. Under **Encryption key**, select the key and click **Save**.
 3. Select the checkbox to confirm that you have read the CMEK documentation, then click **Confirm**.
 
-You see **Workspace settings updated.** Once the key [takes effect](cmek-how-it-works.md#when-your-key-takes-effect), your cloud provider's audit log shows Anthropic's calls to the key.
+You see **Workspace settings updated.** Once the key [takes effect](cmek-how-it-works.md#when-your-key-takes-effect), your cloud provider’s audit log shows Anthropic’s calls to the key.
 
 In a [ZDR organization](cmek-data-retention.md#zdr-organizations), after you select the workspace, select **Standard data retention** so that **Encryption key** appears. After you click **Save**, click **Accept** on the data retention terms.
 
@@ -216,7 +216,7 @@ In a [ZDR organization](cmek-data-retention.md#zdr-organizations), after you sel
 
 On Claude Enterprise, CMEK applies to the whole organization, and you can add only one key.
 
-Adding a key [can't be undone](cmek-key-lifecycle.md#what-each-action-does). You can't remove it from the organization or replace it. If the key is deleted, Anthropic can't recover the data it protects.
+Adding a key [can’t be undone](cmek-key-lifecycle.md#what-each-action-does). You can’t remove it from the organization or replace it. If the key is deleted, Anthropic can’t recover the data it protects.
 
 Adding the key [turns off or changes some features](cmek-coverage-claude-enterprise.md#turned-off-or-changed) for every user. To try CMEK first, use a separate organization.
 
@@ -230,7 +230,7 @@ Click **Add key**. Enter a **Display name** and select **Google Cloud KMS**. Sel
 
 **Enter the key resource name**
 
-Check that your key has the **Organization label** shown in the dialog box. Paste the key's full resource name into **Key resource name** and click **Add**.
+Check that your key has the **Organization label** shown in the dialog box. Paste the key’s full resource name into **Key resource name** and click **Add**.
 
 **Confirm that the key was added**
 

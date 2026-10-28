@@ -28,7 +28,7 @@ Claude Sonnet 5.5 offers the best combination of speed and intelligence. Five br
 
 One more change alters the response shape without failing any request: [text between tool calls comes back in `thinking` blocks](whats-new-sonnet-5-5.md#text-between-tool-calls). An application that streams that text to its users goes quiet between tool calls until it sets a `display` value that returns the text, or turns off up-front thinking with `between_tools`.
 
-[What's new in Claude Sonnet 5.5](whats-new-sonnet-5-5.md)
+[What’s new in Claude Sonnet 5.5](whats-new-sonnet-5-5.md)
 
 ## How it compares
 
@@ -98,7 +98,7 @@ One more change alters the response shape without failing any request: [text bet
 
 ## Good to know
 
-* Adaptive thinking is on by default. The lowest thinking setting is `between_tools`, which turns off up-front thinking. It works at `high` effort or below. See [What's new in Claude Sonnet 5.5](whats-new-sonnet-5-5.md#turn-off-up-front-thinking).
+* Adaptive thinking is on by default. The lowest thinking setting is `between_tools`, which turns off up-front thinking. It works at `high` effort or below. See [What’s new in Claude Sonnet 5.5](whats-new-sonnet-5-5.md#turn-off-up-front-thinking).
 * Setting `temperature`, `top_p`, or `top_k` returns a 400 error.
 * The minimum cacheable prompt length is 512 tokens. See [Prompt caching](../../build-with-claude/prompt-caching.md#cache-limitations).
 * On the [Message Batches API](../../build-with-claude/batch-processing.md#extended-output-beta), Claude Sonnet 5.5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.

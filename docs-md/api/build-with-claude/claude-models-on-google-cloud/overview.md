@@ -9,7 +9,7 @@ description: Compare Claude Models on Google Cloud (Anthropic managed) and Claud
 You can use Claude through your Google Cloud project in two ways:
 
 * **[Claude Models on Google Cloud (Anthropic managed)](anthropic-managed.md):** Anthropic operates the [Claude API](../../api/overview.md).
-* **[Claude Models on Google Cloud (Google managed)](google-managed.md):** Google operates Claude models as part of Google Cloud's Agent Platform.
+* **[Claude Models on Google Cloud (Google managed)](google-managed.md):** Google operates Claude models as part of Google Cloud’s Agent Platform.
 
 ## How the two Google Cloud offerings differ
 
@@ -41,18 +41,18 @@ The following table compares Claude Models on Google Cloud (Anthropic managed) w
 
 * **Model IDs:** Claude 4.6 and later models use their Claude API IDs on both offerings. See [Model IDs and versioning](../../about-claude/models/model-ids-and-versions.md).
 
-* **SDKs:** Anthropic's [client SDKs](../../cli-sdks-libraries/overview.md) support both offerings.
+* **SDKs:** Anthropic’s [client SDKs](../../cli-sdks-libraries/overview.md) support both offerings.
 
 ## Moving between the two offerings
 
-Follow the steps for whichever offering you're moving to:
+Follow the steps for whichever offering you’re moving to:
 
 * [Steps for moving to Claude Models on Google Cloud (Anthropic managed)](anthropic-managed.md#migrating-from-google-managed)
 * [Steps for moving to Claude Models on Google Cloud (Google managed)](google-managed.md#migrating-from-anthropic-managed)
 
 ## Which offering are you using?
 
-The following table lists values that identify Claude Models on Google Cloud (Anthropic managed) and Claude Models on Google Cloud (Google managed). Find a value you already have. For example, look for the host in your request URLs or the SDK client in your code. The heading of that value's column is your offering.
+The following table lists values that identify Claude Models on Google Cloud (Anthropic managed) and Claude Models on Google Cloud (Google managed). Find a value you already have. For example, look for the host in your request URLs or the SDK client in your code. The heading of that value’s column is your offering.
 
 | What to check                                               | [Claude Models on Google Cloud (Anthropic managed)](anthropic-managed.md)                                                                                                                           | [Claude Models on Google Cloud (Google managed)](google-managed.md)                                                                                                                                                                      |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

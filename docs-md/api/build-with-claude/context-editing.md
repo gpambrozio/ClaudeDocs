@@ -41,7 +41,7 @@ The `clear_thinking_20251015` strategy manages `thinking` blocks from earlier as
 
 **Default behavior:** The default varies by model class.
 
-| Model class      | Keep all prior thinking     | Keep only the last turn's thinking         |
+| Model class      | Keep all prior thinking     | Keep only the last turn’s thinking         |
 | ---------------- | --------------------------- | ------------------------------------------ |
 | Opus             | Claude Opus 4.5 and later   | Claude Opus 4.1 and earlier                |
 | Sonnet           | Claude Sonnet 4.6 and later | Claude Sonnet 4.5 (deprecated) and earlier |
@@ -60,9 +60,9 @@ On Claude Fable 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5, s
 
 ### Context editing and prompt caching
 
-Context editing's interaction with [prompt caching](prompt-caching.md) varies by strategy:
+Context editing’s interaction with [prompt caching](prompt-caching.md) varies by strategy:
 
-* **Tool result clearing:** Invalidates cached prompt prefixes when content is cleared. To account for this, clear enough tokens to make the cache invalidation worthwhile. Use the `clear_at_least` parameter to ensure a minimum number of tokens is cleared each time. You'll incur cache write costs each time content is cleared, but subsequent requests can reuse the newly cached prefix.
+* **Tool result clearing:** Invalidates cached prompt prefixes when content is cleared. To account for this, clear enough tokens to make the cache invalidation worthwhile. Use the `clear_at_least` parameter to ensure a minimum number of tokens is cleared each time. You’ll incur cache write costs each time content is cleared, but subsequent requests can reuse the newly cached prefix.
 
 * **Thinking block clearing:** When thinking blocks are **kept** in context (not cleared), the prompt cache is preserved, allowing cache hits and reducing input token costs. When thinking blocks are **cleared**, the cache is invalidated at the point where clearing occurs. Configure the `keep` parameter based on whether you want to prioritize cache performance or context window availability.
 
@@ -1707,9 +1707,9 @@ puts response
 | -------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `trigger`            | 100,000 input tokens | Defines when the context editing strategy activates. Once the prompt exceeds this threshold, clearing starts. You can specify this value in either `input_tokens` or `tool_uses`.                                                                     |
 | `keep`               | 3 tool uses          | Defines how many recent tool use/result pairs to keep after clearing occurs. The API removes the oldest tool interactions first, preserving the most recent ones.                                                                                     |
-| `clear_at_least`     | None                 | Ensures a minimum number of tokens is cleared each time the strategy activates. If the API can't clear at least the specified amount, the strategy will not be applied. This helps determine if context clearing is worth breaking your prompt cache. |
+| `clear_at_least`     | None                 | Ensures a minimum number of tokens is cleared each time the strategy activates. If the API can’t clear at least the specified amount, the strategy will not be applied. This helps determine if context clearing is worth breaking your prompt cache. |
 | `exclude_tools`      | None                 | List of tool names whose tool uses and results should never be cleared. Useful for preserving important context.                                                                                                                                      |
-| `clear_tool_inputs`  | `false`              | Controls whether the tool call parameters are cleared along with the tool results. By default, only the tool results are cleared while keeping Claude's original tool calls visible.                                                                  |
+| `clear_tool_inputs`  | `false`              | Controls whether the tool call parameters are cleared along with the tool results. By default, only the tool results are cleared while keeping Claude’s original tool calls visible.                                                                  |
 
 ## Context editing response
 
@@ -2060,7 +2060,7 @@ The response shows both the final token count after context management is applie
 
 ## Using with the memory tool
 
-Context editing can be combined with the [memory tool](../agents-and-tools/tool-use/memory-tool.md). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This allows Claude to save tool results or context to its memory files before they're cleared from the conversation history.
+Context editing can be combined with the [memory tool](../agents-and-tools/tool-use/memory-tool.md). When your conversation context approaches the configured clearing threshold, Claude receives an automatic warning to preserve important information. This allows Claude to save tool results or context to its memory files before they’re cleared from the conversation history.
 
 This combination allows you to:
 
@@ -2282,7 +2282,7 @@ For the full memory tool reference including commands and examples, see [Memory 
 
 **Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](compaction.md) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
 
-The `compaction_control` parameter is deprecated in the TypeScript and Ruby SDKs and will be removed in a future version. The TypeScript and Ruby SDKs emit a deprecation warning when it is enabled. The Python SDK removed it in v1.0. To use server-side compaction with a tool runner, pass the `compact_20260112` edit in the request's `context_management` parameter.
+The `compaction_control` parameter is deprecated in the TypeScript and Ruby SDKs and will be removed in a future version. The TypeScript and Ruby SDKs emit a deprecation warning when it is enabled. The Python SDK removed it in v1.0. To use server-side compaction with a tool runner, pass the `compact_20260112` edit in the request’s `context_management` parameter.
 
 Compaction is available in the [TypeScript and Ruby SDKs](../cli-sdks-libraries/overview.md) when using the [`tool_runner` method](../agents-and-tools/tool-use/tool-runner.md).
 
@@ -2303,15 +2303,15 @@ Add `compaction_control` to your `tool_runner` call to enable automatic summariz
 
 **cURL**
 
-Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic's servers.
+Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic’s servers.
 
 **CLI**
 
-The CLI does not include a `tool_runner` helper. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic’s servers without SDK-side integration.
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK’s tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **TypeScript**
 
@@ -2333,19 +2333,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Ruby**
 
@@ -2419,15 +2419,15 @@ The threshold determines when compaction occurs. A lower threshold means more fr
 
 **cURL**
 
-Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic's servers.
+Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic’s servers.
 
 **CLI**
 
-The CLI does not include a `tool_runner` helper. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic’s servers without SDK-side integration.
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK’s tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **TypeScript**
 
@@ -2450,19 +2450,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Ruby**
 
@@ -2489,15 +2489,15 @@ You can use a faster or cheaper model for generating summaries:
 
 **cURL**
 
-Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic's servers.
+Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic’s servers.
 
 **CLI**
 
-The CLI does not include a `tool_runner` helper. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic’s servers without SDK-side integration.
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK’s tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **TypeScript**
 
@@ -2523,19 +2523,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Ruby**
 
@@ -2565,15 +2565,15 @@ You can provide a custom prompt for domain-specific needs. Your prompt should in
 
 **cURL**
 
-Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic's servers.
+Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic’s servers.
 
 **CLI**
 
-The CLI does not include a `tool_runner` helper. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic’s servers without SDK-side integration.
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+In v1.0 and later, the Python SDK’s tool runner does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **TypeScript**
 
@@ -2604,19 +2604,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The C# SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Go**
 
-The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Go SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Java**
 
-The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The Java SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **PHP**
 
-The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request's `context_management` parameter.
+The PHP SDK includes a tool runner, but it does not support client-side `compaction_control`. Use [server-side compaction at a token threshold](compaction-threshold.md) instead: it works with the tool runner by passing the `compact_20260112` edit in the request’s `context_management` parameter.
 
 **Ruby**
 
@@ -2651,7 +2651,7 @@ end
 
 The built-in summary prompt instructs Claude to create a structured continuation summary including:
 
-1. **Task Overview:** The user's core request, success criteria, and constraints.
+1. **Task Overview:** The user’s core request, success criteria, and constraints.
 2. **Current State:** What has been completed, files modified, and artifacts produced.
 3. **Important Discoveries:** Technical constraints, decisions made, errors resolved, and failed approaches.
 4. **Next Steps:** Specific actions needed, blockers, and priority order.
@@ -2732,19 +2732,19 @@ Understanding when compaction triggers helps you tune thresholds and verify expe
 
 **cURL**
 
-Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic's servers.
+Compaction runs client-side in the SDK `tool_runner` helpers, so it has no direct HTTP equivalent. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic’s servers.
 
 **CLI**
 
-The CLI does not include a `tool_runner` helper. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic's servers without SDK-side integration.
+The CLI does not include a `tool_runner` helper. Use [server-side compaction](compaction.md) instead, which handles compaction on Anthropic’s servers without SDK-side integration.
 
 **Python**
 
-In v1.0 and later, the Python SDK's tool runner does not support `compaction_control`. Use [server-side compaction](compaction.md) instead.
+In v1.0 and later, the Python SDK’s tool runner does not support `compaction_control`. Use [server-side compaction](compaction.md) instead.
 
 **TypeScript**
 
-The TypeScript SDK's `toolRunner` supports compaction but does not log events. Detect compaction by watching `runner.params.messages.length` shrink between turns:
+The TypeScript SDK’s `toolRunner` supports compaction but does not log events. Detect compaction by watching `runner.params.messages.length` shrink between turns:
 
 ```typescript TypeScript
 let prevMsgCount = 0;
@@ -2760,19 +2760,19 @@ for await (const message of runner) {
 
 **C#**
 
-The C# SDK's tool runner does not support `compaction_control`. Use [server-side compaction](compaction.md) instead.
+The C# SDK’s tool runner does not support `compaction_control`. Use [server-side compaction](compaction.md) instead.
 
 **Go**
 
-The Go SDK's tool runner does not support `compaction_control`. Use [server-side compaction](compaction.md) instead.
+The Go SDK’s tool runner does not support `compaction_control`. Use [server-side compaction](compaction.md) instead.
 
 **Java**
 
-The Java SDK's tool runner does not support `compaction_control`. Use [server-side compaction](compaction.md) instead.
+The Java SDK’s tool runner does not support `compaction_control`. Use [server-side compaction](compaction.md) instead.
 
 **PHP**
 
-The PHP SDK's tool runner does not support `compaction_control`. Use [server-side compaction](compaction.md) instead.
+The PHP SDK’s tool runner does not support `compaction_control`. Use [server-side compaction](compaction.md) instead.
 
 **Ruby**
 

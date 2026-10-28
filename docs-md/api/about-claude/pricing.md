@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/about-claude/pricing
 description: Learn about Anthropic's pricing structure for models and features
 ---
 
-This page provides detailed pricing information for Anthropic's models and features. All prices are in USD.
+This page provides detailed pricing information for Anthropic’s models and features. All prices are in USD.
 
 For the most current pricing information, visit [claude.com/pricing](https://claude.com/pricing).
 
@@ -95,7 +95,7 @@ For implementation details and code examples:
 | **Tax**             | Pre-tax metering; AWS Marketplace handles tax                                                                                                                                                                         |
 | **Cost visibility** | Real-time breakdown in the Claude Console (access through the AWS Console); AWS Cost Explorer shows aggregated CCU                                                                                                    |
 
-**CCU:** Claude Consumption Unit. A CCU is a unit of measure used solely for Marketplace Platform invoicing. If Customer accesses the Services through certain Marketplace Platforms (e.g., Claude Platform on AWS), usage will be invoiced in Claude Consumption Units ("CCU") rather than per MTok. One hundred (100) CCU represents $1.00 USD of fees owed for the Services, calculated at the applicable prices on [claude.com/pricing#api](https://claude.com/pricing#api), after application of any discounts.
+**CCU:** Claude Consumption Unit. A CCU is a unit of measure used solely for Marketplace Platform invoicing. If Customer accesses the Services through certain Marketplace Platforms (e.g., Claude Platform on AWS), usage will be invoiced in Claude Consumption Units (“CCU”) rather than per MTok. One hundred (100) CCU represents $1.00 USD of fees owed for the Services, calculated at the applicable prices on [claude.com/pricing#api](https://claude.com/pricing#api), after application of any discounts.
 
 ### Inference geography
 
@@ -122,7 +122,7 @@ If you have an existing Amazon Bedrock private offer, contact your Anthropic or 
 | **Tax**             | Pre-tax metering; Azure Marketplace handles tax                                                                                                                                                                       |
 | **Cost visibility** | Azure Cost Management shows aggregated CCU                                                                                                                                                                            |
 
-**CCU:** Claude Consumption Unit. A CCU is a unit of measure used solely for Marketplace Platform invoicing. If Customer accesses the Services through certain Marketplace Platforms (e.g., Claude Platform on AWS, Claude in Microsoft Foundry), usage will be invoiced in Claude Consumption Units ("CCU") rather than per MTok. One hundred (100) CCU represents $1.00 USD of fees owed for the Services, calculated at the applicable prices on [claude.com/pricing#api](https://claude.com/pricing#api), after application of any discounts.
+**CCU:** Claude Consumption Unit. A CCU is a unit of measure used solely for Marketplace Platform invoicing. If Customer accesses the Services through certain Marketplace Platforms (e.g., Claude Platform on AWS, Claude in Microsoft Foundry), usage will be invoiced in Claude Consumption Units (“CCU”) rather than per MTok. One hundred (100) CCU represents $1.00 USD of fees owed for the Services, calculated at the applicable prices on [claude.com/pricing#api](https://claude.com/pricing#api), after application of any discounts.
 
 ### Inference geography
 
@@ -217,7 +217,7 @@ For more information about batch processing, see [Batch processing](../build-wit
 
 Claude 4.6 and later models (except Claude Haiku 5.5) and [Claude Mythos Preview](https://anthropic.com/glasswing) include the full [1M token context window](../build-with-claude/context-windows.md) at standard pricing. (A 900k-token request is billed at the same per-token rate as a 9k-token request.) Prompt caching and batch processing discounts apply at standard rates across the full context window.
 
-Claude Haiku 5.5 is priced by prompt length: a request whose prompt is over 100,000 tokens pays higher prices. A request's prompt length counts all of its input tokens, including cache reads and cache writes. Each request is priced on its own: a request over the threshold pays the higher prices even when part of its prompt is a cache hit, and earlier requests keep the prices they were billed at. The [model pricing](pricing.md#model-pricing) and [batch processing pricing](pricing.md#batch-processing) sections list both sets of prices.
+Claude Haiku 5.5 is priced by prompt length: a request whose prompt is over 100,000 tokens pays higher prices. A request’s prompt length counts all of its input tokens, including cache reads and cache writes. Each request is priced on its own: a request over the threshold pays the higher prices even when part of its prompt is a cache hit, and earlier requests keep the prices they were billed at. The [model pricing](pricing.md#model-pricing) and [batch processing pricing](pricing.md#batch-processing) sections list both sets of prices.
 
 ### Tool use pricing
 
@@ -312,7 +312,7 @@ Code execution usage is tracked in the response:
 
 #### Text editor tool
 
-The text editor tool uses the same pricing structure as other tools used with Claude. It follows the standard input and output token pricing based on the Claude model you're using.
+The text editor tool uses the same pricing structure as other tools used with Claude. It follows the standard input and output token pricing based on the Claude model you’re using.
 
 In addition to the base tokens, the following additional input tokens are needed for the text editor tool:
 
@@ -389,7 +389,7 @@ Computer use follows the standard [tool use pricing](../agents-and-tools/tool-us
 * Screenshot and zoom images returned in tool results, billed as image input (see [Vision pricing](../build-with-claude/vision.md#evaluate-image-size))
 * Tool execution results returned to Claude
 
-If you're also using bash or text editor tools alongside computer use, those tools have their own token costs as documented in their respective pages.
+If you’re also using bash or text editor tools alongside computer use, those tools have their own token costs as documented in their respective pages.
 
 #### Browser use tool
 
@@ -410,13 +410,13 @@ If you also use the computer use tool, bash tool, text editor tool, or your own 
 
 ### Tokens
 
-All tokens consumed by a Claude Managed Agents session are billed at the rates shown in [Model pricing](pricing.md#model-pricing). [Prompt caching multipliers](pricing.md#prompt-caching) apply identically. Web search triggered inside a session incurs the standard $10 USD per 1,000 searches. On Claude Platform on AWS, session token and runtime charges convert to Claude Consumption Units at the standard rate (see [Claude Platform on AWS pricing](pricing.md#claude-platform-on-aws-pricing)). [Fast mode premium pricing](pricing.md#fast-mode-pricing) applies when an agent's `model.speed` is set to `"fast"`.
+All tokens consumed by a Claude Managed Agents session are billed at the rates shown in [Model pricing](pricing.md#model-pricing). [Prompt caching multipliers](pricing.md#prompt-caching) apply identically. Web search triggered inside a session incurs the standard $10 USD per 1,000 searches. On Claude Platform on AWS, session token and runtime charges convert to Claude Consumption Units at the standard rate (see [Claude Platform on AWS pricing](pricing.md#claude-platform-on-aws-pricing)). [Fast mode premium pricing](pricing.md#fast-mode-pricing) applies when an agent’s `model.speed` is set to `"fast"`.
 
-The [data residency multiplier](pricing.md#data-residency-pricing) also applies: when an agent's `model.inference_geo` is pinned to `"us"`, tokens consumed by sessions running that agent are billed at 1.1x the standard rates, the same multiplier that applies to US-only inference on the Messages API.
+The [data residency multiplier](pricing.md#data-residency-pricing) also applies: when an agent’s `model.inference_geo` is pinned to `"us"`, tokens consumed by sessions running that agent are billed at 1.1x the standard rates, the same multiplier that applies to US-only inference on the Messages API.
 
 The following Messages API modifiers do **not** apply to Claude Managed Agents sessions:
 
-| Modifier                                                                                                  | Why it doesn't apply                                           |
+| Modifier                                                                                                  | Why it doesn’t apply                                           |
 | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | [Batch API discount](pricing.md#batch-processing)           | Sessions are stateful and interactive. There is no batch mode. |
 | [Cloud platform pricing](pricing.md#cloud-platform-pricing) | Not available on partner-operated cloud platforms.             |
@@ -427,7 +427,7 @@ The following Messages API modifiers do **not** apply to Claude Managed Agents s
 | --------------- | -------------------------- | ------------------------- |
 | Session runtime | $0.08 USD per session-hour | `running` status duration |
 
-Runtime is measured to the millisecond and accrues only while the session's status is `running`. Time spent `idle` (waiting for your next message or a tool confirmation), `rescheduling`, or `terminated` does not count toward runtime.
+Runtime is measured to the millisecond and accrues only while the session’s status is `running`. Time spent `idle` (waiting for your next message or a tool confirmation), `rescheduling`, or `terminated` does not count toward runtime.
 
 Session runtime replaces the [code execution](pricing.md#code-execution-tool) container-hour billing model when using Claude Managed Agents. You are not separately billed for container hours on top of session runtime.
 
@@ -507,7 +507,7 @@ Contact the sales team at [sales@anthropic.com](mailto:sales@anthropic.com) or t
 
 ### How is token usage calculated?
 
-Tokens are pieces of text that models process. How many tokens the same text produces depends on the model's tokenizer, the language, and the type of content. Claude 4.7 and later models and Claude Mythos Preview use a newer tokenizer that produces approximately 30 percent more tokens for the same text than earlier models. To see how many tokens a request uses on a specific model, count it with [token counting](../build-with-claude/token-counting.md) and that model's ID.
+Tokens are pieces of text that models process. How many tokens the same text produces depends on the model’s tokenizer, the language, and the type of content. Claude 4.7 and later models and Claude Mythos Preview use a newer tokenizer that produces approximately 30 percent more tokens for the same text than earlier models. To see how many tokens a request uses on a specific model, count it with [token counting](../build-with-claude/token-counting.md) and that model’s ID.
 
 ### Are there free tiers or trials?
 

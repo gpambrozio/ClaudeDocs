@@ -312,7 +312,7 @@ Compared to prompting Claude to cite sources, the citations feature offers the f
 
 * **Cost savings:** If your prompt-based approach asks Claude to output direct quotes, you might see cost savings because `cited_text` does not count toward your output tokens.
 * **Better citation reliability:** Because the API parses citations into the response formats described in the following sections and extracts `cited_text` directly, citations are guaranteed to contain valid pointers to the provided documents.
-* **Improved citation quality:** In Anthropic's evaluations, the citations feature is significantly more likely to cite the most relevant quotes from documents than purely prompt-based approaches.
+* **Improved citation quality:** In Anthropic’s evaluations, the citations feature is significantly more likely to cite the most relevant quotes from documents than purely prompt-based approaches.
 
 ***
 
@@ -328,7 +328,7 @@ Integrate citations with Claude in these steps:
 
 **Documents get processed**
 
-* Document contents are "chunked" to define the minimum granularity of possible citations. For example, sentence chunking lets Claude cite a single sentence or chain together multiple consecutive sentences to cite a paragraph or longer passage.
+* Document contents are “chunked” to define the minimum granularity of possible citations. For example, sentence chunking lets Claude cite a single sentence or chain together multiple consecutive sentences to cite a paragraph or longer passage.
 
   * **For PDFs:** Text is extracted as described in [PDF support](pdf-support.md) and content is chunked into sentences. Citing images from PDFs is not currently supported.
   * **For plain text documents:** Content is chunked into sentences that can be cited from.
@@ -354,7 +354,7 @@ For example, if you want Claude to be able to cite specific sentences from your 
 
 ### Citable versus non-citable content
 
-* Text found within a document's `source` content can be cited from.
+* Text found within a document’s `source` content can be cited from.
 * `title` and `context` are optional fields that are passed to the model but not used toward cited content.
 * `title` is limited in length, so the `context` field is useful for storing document metadata as text or stringified JSON.
 
@@ -708,7 +708,7 @@ Three document types are supported for citations. Documents can be provided dire
 | PDF            | PDF files with text content                                     | Sentence               | Page numbers (1-indexed)      |
 | Custom content | Lists, transcripts, special formatting, more granular citations | No additional chunking | Block indices (0-indexed)     |
 
-For file types that the `document` block doesn't support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in message content. Files that are already plain text, such as .csv and .md files, can also be uploaded with an explicit `text/plain` content type. See [Working with other file formats](files.md#working-with-other-file-formats).
+For file types that the `document` block doesn’t support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in message content. Files that are already plain text, such as .csv and .md files, can also be uploaded with an explicit `text/plain` content type. See [Working with other file formats](files.md#working-with-other-file-formats).
 
 ### Plain text documents
 

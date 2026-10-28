@@ -12,7 +12,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-Use the session viewer in the Claude Console to inspect what an agent did in a session, without writing any code. Use the session's `usage` (csharp, go: `Usage`) totals to see what that work consumed. To see a session's turns, model requests, and tool uses in your observability platform, set up [OpenTelemetry tracing](../manage-claude/opentelemetry.md).
+Use the session viewer in the Claude Console to inspect what an agent did in a session, without writing any code. Use the session’s `usage` (csharp, go: `Usage`) totals to see what that work consumed. To see a session’s turns, model requests, and tool uses in your observability platform, set up [OpenTelemetry tracing](../manage-claude/opentelemetry.md).
 
 ## Inspect a session in the Console
 
@@ -20,16 +20,16 @@ The session viewer is only accessible to Developers and Admins. To open it, go t
 
 The session viewer shows:
 
-* **Timeline minimap:** A zoomable overview of the session's activity over time, with one lane for each thread in [multiagent](multiagent-orchestration.md) sessions. Select a lane to view that thread, or select a mark to jump to its event.
+* **Timeline minimap:** A zoomable overview of the session’s activity over time, with one lane for each thread in [multiagent](multiagent-orchestration.md) sessions. Select a lane to view that thread, or select a mark to jump to its event.
 * **Transcript:** The conversation grouped by model request, including thinking, tool calls with their inputs and results, and message text as it streams. You can filter the events and copy or download them as JSON.
 * **Inspector:** A resizable side panel with details about the session, in five tabs.
 
 | Inspector tab | What it shows                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Session**   | The session's details and metadata, its cumulative cost over time, and spend against the session's [budget](budgets.md) when one is set.                                                                                                                                                                                                                                                                                                                                |
+| **Session**   | The session’s details and metadata, its cumulative cost over time, and spend against the session’s [budget](budgets.md) when one is set.                                                                                                                                                                                                                                                                                                                                |
 | **Events**    | Every raw event on the current thread, in the order the server sent it. Select an event to see its JSON. A message that streamed while the page was open also has a **Deltas** view of its [event deltas](event-deltas.md).                                                                                                                                                                                                                                             |
-| **Tools**     | The tools the session's agents are configured with, along with call counts, failures, and median duration. Select a tool to see its calls and jump to one in the transcript.                                                                                                                                                                                                                                                                                                                                            |
-| **Resources** | Mounted [files](files.md), [repositories](github.md), and [memory stores](memory.md) at their container paths, including the memories in each store and the changes this session made to them. Also lists files the agent wrote to `/mnt/session/outputs` and the [skills](skills.md) attached to the session's agents. |
+| **Tools**     | The tools the session’s agents are configured with, along with call counts, failures, and median duration. Select a tool to see its calls and jump to one in the transcript.                                                                                                                                                                                                                                                                                                                                            |
+| **Resources** | Mounted [files](files.md), [repositories](github.md), and [memory stores](memory.md) at their container paths, including the memories in each store and the changes this session made to them. Also lists files the agent wrote to `/mnt/session/outputs` and the [skills](skills.md) attached to the session’s agents. |
 | **Threads**   | Every thread with its status, context size, and cost. Select a thread to view its details, such as the agent, model, context usage, and cost.                                                                                                                                                                                                                                                                                                                                                                           |
 
 Append `?event={event_id}` to a session URL to open the session at a specific event.
@@ -38,7 +38,7 @@ With `ant beta:sessions connect`, you can open the same viewer from the `ant` CL
 
 ## Track usage
 
-The session object includes a `usage` field with the session's cumulative usage: token counts, server tool use, active time, and the tracked list cost. Fetch the session after it goes idle to read the latest totals.
+The session object includes a `usage` field with the session’s cumulative usage: token counts, server tool use, active time, and the tracked list cost. Fetch the session after it goes idle to read the latest totals.
 
 ```json
 {
@@ -71,21 +71,21 @@ The session object includes a `usage` field with the session's cumulative usage:
 | `output_tokens`           | Total output tokens across all model calls in the session.                                                                                                                                                             |
 | `cache_read_input_tokens` | Tokens read from the prompt cache.                                                                                                                                                                                     |
 | `cache_creation`          | Cache-creation tokens, broken down by cache lifetime (`ephemeral_5m_input_tokens` and `ephemeral_1h_input_tokens`).                                                                                                    |
-| `list_cost`               | The session's cumulative consumption priced at public list rates, as a whole number of cents in a string, with a currency code.                                                                                        |
-| `active_seconds`          | The cumulative time during which the session had at least one thread running. Overlapping activity from concurrent threads is counted once. The session's runtime cost is priced on this duration.                     |
-| `server_tool_use`         | Counts of server-executed tool requests, for pricing. Web search requests are priced into list cost per request. Web fetch requests carry no per-request charge and aren't metered, so `web_fetch_requests` reads `0`. |
+| `list_cost`               | The session’s cumulative consumption priced at public list rates, as a whole number of cents in a string, with a currency code.                                                                                        |
+| `active_seconds`          | The cumulative time during which the session had at least one thread running. Overlapping activity from concurrent threads is counted once. The session’s runtime cost is priced on this duration.                     |
+| `server_tool_use`         | Counts of server-executed tool requests, for pricing. Web search requests are priced into list cost per request. Web fetch requests carry no per-request charge and aren’t metered, so `web_fetch_requests` reads `0`. |
 
 Cache entries use a 5-minute TTL by default, so back-to-back turns within that window benefit from cache reads, which reduce per-token cost.
 
-The session's `stats` object has its own `active_seconds`, which sums each thread's own active time instead of counting overlapping activity once.
+The session’s `stats` object has its own `active_seconds`, which sums each thread’s own active time instead of counting overlapping activity once.
 
 ### Per-thread usage
 
-Each [session thread](session-threads.md)'s own `usage` (csharp, go: `Usage`) carries `list_cost` (java, php: `listCost`; csharp, go: `ListCost`) and `active_seconds` (java, php: `activeSeconds`; csharp, go: `ActiveSeconds`) too. Per-thread figures are rounded independently and exclude the session's running-time cost, so they don't sum exactly to the session's `list_cost` (java, php: `listCost`; csharp, go: `ListCost`). The session figure is the authoritative one.
+Each [session thread](session-threads.md)’s own `usage` (csharp, go: `Usage`) carries `list_cost` (java, php: `listCost`; csharp, go: `ListCost`) and `active_seconds` (java, php: `activeSeconds`; csharp, go: `ActiveSeconds`) too. Per-thread figures are rounded independently and exclude the session’s running-time cost, so they don’t sum exactly to the session’s `list_cost` (java, php: `listCost`; csharp, go: `ListCost`). The session figure is the authoritative one.
 
 ### Read usage from the stream
 
-You don't have to poll the session to observe these totals. The `session.usage` event carries the same cumulative snapshot on the session stream and in the event history. The snapshot holds the `usage` (csharp, go: `Usage`) object, plus the session's `budget` (csharp, go: `Budget`) if the session has one.
+You don’t have to poll the session to observe these totals. The `session.usage` event carries the same cumulative snapshot on the session stream and in the event history. The snapshot holds the `usage` (csharp, go: `Usage`) object, plus the session’s `budget` (csharp, go: `Budget`) if the session has one.
 
 The event is emitted on idle transitions rather than on a timer:
 
@@ -94,14 +94,14 @@ The event is emitted on idle transitions rather than on a timer:
 
 ### Enforce a spend limit
 
-To enforce a spend limit, set a session budget rather than polling usage and stopping the session yourself. The platform prices the session's consumption continuously, and pauses each thread before its next model request once the list cost reaches the cap. See [When a session reaches its budget](budgets.md#when-a-session-reaches-its-budget) for what that looks like on the stream.
+To enforce a spend limit, set a session budget rather than polling usage and stopping the session yourself. The platform prices the session’s consumption continuously, and pauses each thread before its next model request once the list cost reaches the cap. See [When a session reaches its budget](budgets.md#when-a-session-reaches-its-budget) for what that looks like on the stream.
 
 ## Debugging tips
 
 * **Check session events:** The session reports errors through [`session.error`](reference.md#event-types) events.
-* **Review tool results:** Tool failures often explain unexpected agent behavior. The Inspector's **Tools** tab shows each tool's failures.
+* **Review tool results:** Tool failures often explain unexpected agent behavior. The Inspector’s **Tools** tab shows each tool’s failures.
 * **Use system prompts:** Add logging instructions to the system prompt so the agent summarizes what it did and what it found.
-* **Troubleshoot previews:** If a stream that opts in to event deltas doesn't behave as you expect, see [Troubleshoot previews](event-deltas.md#troubleshoot-previews).
+* **Troubleshoot previews:** If a stream that opts in to event deltas doesn’t behave as you expect, see [Troubleshoot previews](event-deltas.md#troubleshoot-previews).
 
 ## Next steps
 
@@ -111,7 +111,7 @@ Send events, stream responses, and interrupt or redirect your session while it r
 
 **Session budgets**
 
-Cap a session's spend with a hard dollar budget enforced at public list rates.
+Cap a session’s spend with a hard dollar budget enforced at public list rates.
 
 ---
 

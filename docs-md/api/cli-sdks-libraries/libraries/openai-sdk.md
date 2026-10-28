@@ -24,7 +24,7 @@ To use the OpenAI SDK compatibility feature, you need to:
 
    * Update your base URL to point to the Claude API.
    * Replace your API key with a [Claude API key](https://platform.claude.com/settings/keys) from the Claude Console.
-   * If your key is a [personal or service account key](../../manage-claude/authentication.md#key-types) that isn't scoped to a workspace, also send the `anthropic-workspace-id` header on every request (for example, `default_headers` in the Python SDK or `defaultHeaders` in TypeScript); see [Select a workspace](../../manage-claude/authentication.md#select-a-workspace).
+   * If your key is a [personal or service account key](../../manage-claude/authentication.md#key-types) that isn’t scoped to a workspace, also send the `anthropic-workspace-id` header on every request (for example, `default_headers` in the Python SDK or `defaultHeaders` in TypeScript); see [Select a workspace](../../manage-claude/authentication.md#select-a-workspace).
    * Update your model name to use a [Claude model](../../models/overview.md).
 
 3. Review the following sections for what features are supported.
@@ -194,7 +194,7 @@ Most of the inputs to the OpenAI SDK clearly map directly to Claude API paramete
 
 ### Thinking support
 
-You can enable [thinking](../../build-with-claude/thinking.md) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude determining when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. Although thinking improves Claude's reasoning for complex tasks, the OpenAI SDK doesn't return Claude's thinking. For full thinking features, including [summarized thinking](../../build-with-claude/thinking.md#summarized-thinking), use the native Claude API.
+You can enable [thinking](../../build-with-claude/thinking.md) by adding the `thinking` parameter. On current models thinking is adaptive, with Claude determining when and how deeply to think, and on Claude 5 models it is on by default; manually configured extended thinking is a legacy mode. Although thinking improves Claude’s reasoning for complex tasks, the OpenAI SDK doesn’t return Claude’s thinking. For full thinking features, including [summarized thinking](../../build-with-claude/thinking.md#summarized-thinking), use the native Claude API.
 
 ```python Python
 response = client.chat.completions.create(
@@ -265,7 +265,7 @@ response = openai.chat.completions.create(
 
 ## Rate limits
 
-Rate limits follow Anthropic's [standard limits](../../api/rate-limits.md) for the `/v1/messages` endpoint.
+Rate limits follow Anthropic’s [standard limits](../../api/rate-limits.md) for the `/v1/messages` endpoint.
 
 ## Detailed OpenAI compatible API support
 
@@ -392,7 +392,7 @@ Fields for `messages[n].role == "tool"`
 | `content`      | `string`                  | Fully supported                                                                                                                                                                                                                                                                                                                                           |
 |                | `array`, `type == "text"` | Fully supported                                                                                                                                                                                                                                                                                                                                           |
 | `tool_call_id` |                           | Fully supported                                                                                                                                                                                                                                                                                                                                           |
-| `tool_choice`  |                           | Supported. `"required"` and named-function values force a tool call; Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and Claude Mythos 5.1 don't support forced tool use and return an error, so use `"auto"` on those models. See [Forcing tool use](../../agents-and-tools/tool-use/define-tools.md#forcing-tool-use). |
+| `tool_choice`  |                           | Supported. `"required"` and named-function values force a tool call; Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and Claude Mythos 5.1 don’t support forced tool use and return an error, so use `"auto"` on those models. See [Forcing tool use](../../agents-and-tools/tool-use/define-tools.md#forcing-tool-use). |
 | `name`         |                           | Ignored                                                                                                                                                                                                                                                                                                                                                   |
 
 **Function role**
@@ -403,7 +403,7 @@ Fields for `messages[n].role == "function"`
 | ------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `content`     | `string`                  | Fully supported                                                                                                                                                                                                                                                                                                                                           |
 |               | `array`, `type == "text"` | Fully supported                                                                                                                                                                                                                                                                                                                                           |
-| `tool_choice` |                           | Supported. `"required"` and named-function values force a tool call; Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and Claude Mythos 5.1 don't support forced tool use and return an error, so use `"auto"` on those models. See [Forcing tool use](../../agents-and-tools/tool-use/define-tools.md#forcing-tool-use). |
+| `tool_choice` |                           | Supported. `"required"` and named-function values force a tool call; Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and Claude Mythos 5.1 don’t support forced tool use and return an error, so use `"auto"` on those models. See [Forcing tool use](../../agents-and-tools/tool-use/define-tools.md#forcing-tool-use). |
 | `name`        |                           | Ignored                                                                                                                                                                                                                                                                                                                                                   |
 
 ### Response fields

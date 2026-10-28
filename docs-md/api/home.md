@@ -286,7 +286,7 @@ description: Claude API Documentation
 
   Deployable starter apps.
 
-  **What's new**
+  **What’s new**
 
   Latest features and updates.
 

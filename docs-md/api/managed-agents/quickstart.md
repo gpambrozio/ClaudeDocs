@@ -47,7 +47,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=2.3.0
+VERSION=2.4.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -67,7 +67,7 @@ You can also install the CLI from source using `go install`. Requires Go 1.25 or
 go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
 ```
 
-The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn't already:
+The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn’t already:
 
 ```bash
 export PATH="$PATH:$(go env GOPATH)/bin"
@@ -151,7 +151,7 @@ curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
   }'
 ```
 
-Save the returned `agent.id`. You'll reference it in every session you create.
+Save the returned `agent.id`. You’ll reference it in every session you create.
 
 ```bash CLI
 ant apply coding-assistant.md
@@ -168,7 +168,7 @@ tools:
 You are a helpful coding assistant. Write clean, well-documented code.
 ```
 
-[`ant apply`](../cli-sdks-libraries/cli/apply.md) prints the agent's ID and records it in `claude-lock.json`. You'll reference it in every session you create.
+[`ant apply`](../cli-sdks-libraries/cli/apply.md) prints the agent’s ID and records it in `claude-lock.json`. You’ll reference it in every session you create.
 
 ```python Python
 from anthropic import Anthropic
@@ -187,7 +187,7 @@ agent = client.beta.agents.create(
 print(f"Agent ID: {agent.id}, version: {agent.version}")
 ```
 
-Save the returned `agent.id`. You'll reference it in every session you create.
+Save the returned `agent.id`. You’ll reference it in every session you create.
 
 ```typescript TypeScript
 import Anthropic from "@anthropic-ai/sdk";
@@ -204,7 +204,7 @@ const agent = await client.beta.agents.create({
 console.log(`Agent ID: ${agent.id}, version: ${agent.version}`);
 ```
 
-Save the returned `agent.id`. You'll reference it in every session you create.
+Save the returned `agent.id`. You’ll reference it in every session you create.
 
 ```csharp C#
 using Anthropic;
@@ -226,7 +226,7 @@ var agent = await client.Beta.Agents.Create(new()
 Console.WriteLine($"Agent ID: {agent.ID}, version: {agent.Version}");
 ```
 
-Save the returned `agent.id`. You'll reference it in every session you create.
+Save the returned `agent.id`. You’ll reference it in every session you create.
 
 ```go Go
 package main
@@ -259,7 +259,7 @@ func main() {
 	fmt.Printf("Agent ID: %s, version: %d\n", agent.ID, agent.Version)
 ```
 
-Save the returned `agent.id`. You'll reference it in every session you create.
+Save the returned `agent.id`. You’ll reference it in every session you create.
 
 ```java Java
 import com.anthropic.client.okhttp.AnthropicOkHttpClient;
@@ -287,7 +287,7 @@ void main() {
     IO.println("Agent ID: " + agent.id() + ", version: " + agent.version());
 ```
 
-Save the returned `agent.id`. You'll reference it in every session you create.
+Save the returned `agent.id`. You’ll reference it in every session you create.
 
 ```php PHP
 use Anthropic\Beta\Agents\BetaManagedAgentsModel;
@@ -307,7 +307,7 @@ $agent = $client->beta->agents->create(
 echo "Agent ID: {$agent->id}, version: {$agent->version}\n";
 ```
 
-Save the returned `agent.id`. You'll reference it in every session you create.
+Save the returned `agent.id`. You’ll reference it in every session you create.
 
 ```ruby Ruby
 require "anthropic"
@@ -324,7 +324,7 @@ agent = client.beta.agents.create(
 puts "Agent ID: #{agent.id}, version: #{agent.version}"
 ```
 
-Save the returned `agent.id`. You'll reference it in every session you create.
+Save the returned `agent.id`. You’ll reference it in every session you create.
 
 The `agent_toolset_20260401` tool type enables the full set of pre-built agent tools (bash, file operations, web search, and more). See [Tools](tools.md) for the complete list and per-tool configuration options.
 
@@ -363,7 +363,7 @@ config:
     allow_package_managers: true
 ```
 
-[`ant apply`](../cli-sdks-libraries/cli/apply.md) records the environment's ID in `claude-lock.json` too. To create the agent and the environment with one command, pass both files: `ant apply coding-assistant.md environment.yaml`.
+[`ant apply`](../cli-sdks-libraries/cli/apply.md) records the environment’s ID in `claude-lock.json` too. To create the agent and the environment with one command, pass both files: `ant apply coding-assistant.md environment.yaml`.
 
 ```python Python
 environment = client.beta.environments.create(
@@ -842,11 +842,11 @@ fibonacci.txt contains the first 20 Fibonacci numbers (0 through 4181).
 Agent finished.
 ```
 
-## What's happening
+## What’s happening
 
 When you send a user event, Claude Managed Agents:
 
-1. **Provisions a sandbox:** Your environment configuration determines how it's built.
+1. **Provisions a sandbox:** Your environment configuration determines how it’s built.
 2. **Runs the agent loop:** Claude determines which tools to use based on your message.
 3. **Runs tools:** File writes, bash commands, and other tool calls run inside the sandbox.
 4. **Streams events:** You receive real-time updates as the agent works.
@@ -858,7 +858,7 @@ Each of these quickstarts pairs Claude Managed Agents with a popular chat framew
 
 **Chat SDK**
 
-A research analyst in a browser chat built with Vercel's Chat SDK. Each conversation is one persistent session that streams its reply while a live feed shows the tool calls. Swapping the Chat SDK adapter moves the same handler to Slack, Teams, Discord, or WhatsApp.
+A research analyst in a browser chat built with Vercel’s Chat SDK. Each conversation is one persistent session that streams its reply while a live feed shows the tool calls. Swapping the Chat SDK adapter moves the same handler to Slack, Teams, Discord, or WhatsApp.
 
 **assistant-ui**
 

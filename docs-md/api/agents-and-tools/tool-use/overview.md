@@ -6,9 +6,9 @@ url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
 description: Connect Claude to external tools and APIs. See where tools run, when Claude calls them, and which tool fits your task.
 ---
 
-Tool use (also called function calling) lets Claude call functions that you define or that Anthropic provides. Claude determines when to call a tool based on the user's request and the tool's description. It then returns a structured call that your application runs (client tools) or that Anthropic runs (server tools).
+Tool use (also called function calling) lets Claude call functions that you define or that Anthropic provides. Claude determines when to call a tool based on the user’s request and the tool’s description. It then returns a structured call that your application runs (client tools) or that Anthropic runs (server tools).
 
-Here's a minimal example using a server tool, the [Web search tool](web-search-tool.md), which Anthropic runs for you:
+Here’s a minimal example using a server tool, the [Web search tool](web-search-tool.md), which Anthropic runs for you:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -134,13 +134,13 @@ message = client.messages.create(
 puts message.content
 ```
 
-Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then run the call when Claude returns a `tool_use` block. The [client tool example](overview.md#how-tool-use-works) shows that round trip end to end. Learn more about [defining tools](define-tools.md) and [handling tool calls](handle-tool-calls.md).
+Claude runs the search on Anthropic’s infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then run the call when Claude returns a `tool_use` block. The [client tool example](overview.md#how-tool-use-works) shows that round trip end to end. Learn more about [defining tools](define-tools.md) and [handling tool calls](handle-tool-calls.md).
 
 ## How tool use works
 
-Tools differ primarily by where the code runs. **Client tools** (including user-defined tools and tools with Anthropic-defined schemas, such as `bash` and `text_editor`) run in your application. Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks. Your code runs the operation and sends back a `tool_result`. **Server tools** (such as `web_search`, `web_fetch`, `code_execution`, and `tool_search`) run on Anthropic's infrastructure: you see the results directly without handling execution, unless Claude calls the tool in the same group of parallel tool calls as one of your client tools (see [Stop reasons and fallback](../../build-with-claude/handling-stop-reasons.md#tool-use)).
+Tools differ primarily by where the code runs. **Client tools** (including user-defined tools and tools with Anthropic-defined schemas, such as `bash` and `text_editor`) run in your application. Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks. Your code runs the operation and sends back a `tool_result`. **Server tools** (such as `web_search`, `web_fetch`, `code_execution`, and `tool_search`) run on Anthropic’s infrastructure: you see the results directly without handling execution, unless Claude calls the tool in the same group of parallel tool calls as one of your client tools (see [Stop reasons and fallback](../../build-with-claude/handling-stop-reasons.md#tool-use)).
 
-Here's that round trip in full for a client tool. The first request defines a `get_weather` tool, and Claude answers the question by calling it: the response carries a `tool_use` block, your code runs the lookup, and a second request sends the result back in a `tool_result` block so Claude can reply with the answer.
+Here’s that round trip in full for a client tool. The first request defines a `get_weather` tool, and Claude answers the question by calling it: the response carries a `tool_use` block, your code runs the lookup, and a second request sends the result back in a `tool_result` block so Claude can reply with the answer.
 
 This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
 
@@ -629,23 +629,23 @@ To connect to Model Context Protocol (MCP) servers, see the [MCP connector](../m
 
 ## When Claude uses tools
 
-With the default `tool_choice` of `{"type": "auto"}`, Claude determines on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool's described capability and the answer isn't already in context. It responds directly for stable knowledge, creative tasks, and conversational turns.
+With the default `tool_choice` of `{"type": "auto"}`, Claude determines on each turn whether to call a tool or respond directly. It calls a tool when the request maps to that tool’s described capability and the answer isn’t already in context. It responds directly for stable knowledge, creative tasks, and conversational turns.
 
-This boundary is steerable through your system prompt. If Claude isn't calling tools when you expect, a light instruction such as `"Use the tools to investigate before responding."` increases tool use. A stronger form such as `"Always call a tool first before responding."` pushes further. Conversely, `"Use your judgment about whether to call a tool or respond directly."` keeps triggering behavior conservative.
+This boundary is steerable through your system prompt. If Claude isn’t calling tools when you expect, a light instruction such as `"Use the tools to investigate before responding."` increases tool use. A stronger form such as `"Always call a tool first before responding."` pushes further. Conversely, `"Use your judgment about whether to call a tool or respond directly."` keeps triggering behavior conservative.
 
 To require a tool call rather than rely on prompting, set [`tool_choice`](define-tools.md#forcing-tool-use).
 
 **Guarantee schema conformance with strict tool use**
 
-Add `strict: true` to your custom tool definitions to ensure Claude's tool calls always match your schema exactly. See [Strict tool use](strict-tool-use.md).
+Add `strict: true` to your custom tool definitions to ensure Claude’s tool calls always match your schema exactly. See [Strict tool use](strict-tool-use.md).
 
-Each server tool's page describes its own trigger boundary in more detail.
+Each server tool’s page describes its own trigger boundary in more detail.
 
 **When required parameters are missing**
 
-If the user's prompt doesn't include enough information to fill all the required parameters for a tool, Claude Opus is much more likely to recognize that a parameter is missing and ask for it. Claude Sonnet might ask, especially when prompted to think before outputting a tool request. But it might also infer a reasonable value.
+If the user’s prompt doesn’t include enough information to fill all the required parameters for a tool, Claude Opus is much more likely to recognize that a parameter is missing and ask for it. Claude Sonnet might ask, especially when prompted to think before outputting a tool request. But it might also infer a reasonable value.
 
-For example, given a `get_weather` tool that requires a `location` parameter, if you ask Claude "What's the weather?" without specifying a location, Claude (particularly Claude Sonnet) might guess values you didn't supply:
+For example, given a `get_weather` tool that requires a `location` parameter, if you ask Claude “What’s the weather?” without specifying a location, Claude (particularly Claude Sonnet) might guess values you didn’t supply:
 
 ```json JSON
 {
@@ -700,7 +700,7 @@ Navigate, read, and interact with webpages in your own browser environment.
 
 ### Server tools
 
-Server tools run on Anthropic's infrastructure, with no handler code in your application. See [Server tools](server-tools.md) for the mechanics they share.
+Server tools run on Anthropic’s infrastructure, with no handler code in your application. See [Server tools](server-tools.md) for the mechanics they share.
 
 **Web search tool**
 

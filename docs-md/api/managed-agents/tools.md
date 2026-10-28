@@ -37,7 +37,7 @@ When a tool output exceeds 100,000 characters (about 25,000 tokens), it is autom
 
 Enable the full toolset with `agent_toolset_20260401` when creating an agent. Use the `configs` (csharp, go: `Configs`) array to disable specific tools or override their settings. Each entry is identified by its `name` (csharp, go: `Name`), which takes a value from the Name column in [Available tools](tools.md#available-tools). An entry also accepts an optional `type` (csharp, go: `Type`) field with the same value.
 
-Each config entry can also set a `permission_policy` (java, php: `permissionPolicy`; csharp, go: `PermissionPolicy`). The policy controls whether the tool's calls run without confirmation, require confirmation, or are evaluated individually by the server. See [Permission policies](permission-policies.md) for the available policy types.
+Each config entry can also set a `permission_policy` (java, php: `permissionPolicy`; csharp, go: `PermissionPolicy`). The policy controls whether the tool’s calls run without confirmation, require confirmation, or are evaluated individually by the server. See [Permission policies](permission-policies.md) for the available policy types.
 
 The following example enables the toolset and disables `web_fetch`:
 
@@ -463,7 +463,7 @@ agent = client.beta.agents.create(
 )
 ```
 
-A custom tool's name can't start with `mcp__` or `ant__`, or match the name of a built-in agent tool. A request that breaks this rule returns a 400 error. An agent that already has a custom tool whose name starts with `ant__` accepts an update only if the update sends `tools` (csharp, go: `Tools`) without that name, so rename or remove the tool in your next update. A new session is refused with a 400 error if such a tool is on its agent (after any [overrides](sessions.md#override-agent-configuration-for-a-session)), on an agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`), or on an agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `workflows` (csharp, go: `Workflows`). Sessions that already exist aren't affected.
+A custom tool’s name can’t start with `mcp__` or `ant__`, or match the name of a built-in agent tool. A request that breaks this rule returns a 400 error. An agent that already has a custom tool whose name starts with `ant__` accepts an update only if the update sends `tools` (csharp, go: `Tools`) without that name, so rename or remove the tool in your next update. A new session is refused with a 400 error if such a tool is on its agent (after any [overrides](sessions.md#override-agent-configuration-for-a-session)), on an agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`), or on an agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `workflows` (csharp, go: `Workflows`). Sessions that already exist aren’t affected.
 
 The agent calls its custom tools during a session. To receive the calls and return results, see [Answer tool calls that pause the session](events-and-streaming.md#handling-custom-tool-calls).
 
@@ -475,7 +475,7 @@ For sessions that run in a self-hosted sandbox, the environment worker can [serv
 
   * What the tool does
   * When to use it, and when not to
-  * What each parameter means and how it affects the tool's behavior
+  * What each parameter means and how it affects the tool’s behavior
   * Any important caveats or limitations
 
 * **Consolidate related operations into fewer tools.** Group actions such as `create_pr`, `review_pr`, and `merge_pr` into a single tool with an `action` parameter. Fewer, more capable tools reduce selection ambiguity and make your tool surface easier for Claude to navigate.

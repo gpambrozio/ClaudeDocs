@@ -13,7 +13,7 @@ The `ant` CLI provides access to the Claude API from your terminal. Every API re
   <source src="https://platform.claude.com/docs/videos/ant-cli-demo.mp4" type="video/mp4" />
 </video>
 
-Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML instead of hand-written JSON, and inlines file contents into string fields with an `@path` reference. It extracts response fields with a built-in `--transform` query, so you don't need a separate tool such as `jq`, and it paginates list endpoints automatically.
+Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML instead of hand-written JSON, and inlines file contents into string fields with an `@path` reference. It extracts response fields with a built-in `--transform` query, so you don’t need a separate tool such as `jq`, and it paginates list endpoints automatically.
 
 For endpoint-specific parameters and response schemas, see the [API reference](../../api/cli/messages/create.md). This page gets you to a working command. For everything else the CLI does, see [Using the CLI](using.md) and [CLI scripting and automation](scripting.md).
 
@@ -30,7 +30,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=2.3.0
+VERSION=2.4.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -50,7 +50,7 @@ You can also install the CLI from source using `go install`. Requires Go 1.25 or
 go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
 ```
 
-The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn't already:
+The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn’t already:
 
 ```bash
 export PATH="$PATH:$(go env GOPATH)/bin"

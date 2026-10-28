@@ -8,28 +8,28 @@ description: Install the tunnel stack on a Kubernetes cluster using the Anthropi
 
 MCP tunnels are in research preview. [Request access](https://claude.com/form/mcp-tunnels) to try them.
 
-The Anthropic Helm chart installs the [tunnel stack](concepts.md#components) as a single Deployment and attaches it to your tunnel: one the chart's setup hook creates for you, or an existing tunnel you created in the [Claude Console](console.md#create-a-tunnel).
+The Anthropic Helm chart installs the [tunnel stack](concepts.md#components) as a single Deployment and attaches it to your tunnel: one the chart’s setup hook creates for you, or an existing tunnel you created in the [Claude Console](console.md#create-a-tunnel).
 
 ## Before you start
 
 You need:
 
-* **A tunnel.** With programmatic access, the chart's setup hook creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Console](console.md#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel; you also need its tunnel token and tunnel domain.
+* **A tunnel.** With programmatic access, the chart’s setup hook creates one for you when you don’t supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Console](console.md#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel; you also need its tunnel token and tunnel domain.
 
 * **A way for the chart to authenticate to the Tunnels API.**
 
   * **[Programmatic access](concepts.md#credential-provisioning) (recommended).** The [setup component](concepts.md#components) authenticates through Workload Identity Federation, fetches the tunnel token, generates a CA, registers it with Anthropic, and stores everything in a Secret. You need a federation rule scoped to `workspace:manage_tunnels`.
-  * **[Manual](concepts.md#credential-provisioning).** Skip programmatic access. You'll [get the tunnel token from the Console](console.md#get-the-connection-details), generate a CA and server certificate yourself, [register the CA in the Console](console.md#add-a-ca-certificate), and supply the credentials to the cluster as Secrets.
+  * **[Manual](concepts.md#credential-provisioning).** Skip programmatic access. You’ll [get the tunnel token from the Console](console.md#get-the-connection-details), generate a CA and server certificate yourself, [register the CA in the Console](console.md#add-a-ca-certificate), and supply the credentials to the cluster as Secrets.
 
 * **A Kubernetes cluster** you can deploy to with `helm` and `kubectl`. The **Without programmatic access** tab also uses `openssl` (1.1.1 or later).
 
 * **Outbound network connectivity** from the cluster to `api.anthropic.com` (443 TCP) and the [tunnel edge](concepts.md#components) (7844 TCP and UDP). See the full [network requirements](overview.md#network-requirements).
 
-* **One or more MCP servers** running and reachable from the cluster on the addresses you'll configure under `gateway.config.routes`. If you don't have one yet, [use the sample server](deploy-helm.md#optional-use-a-sample-mcp-server).
+* **One or more MCP servers** running and reachable from the cluster on the addresses you’ll configure under `gateway.config.routes`. If you don’t have one yet, [use the sample server](deploy-helm.md#optional-use-a-sample-mcp-server).
 
 ## Optional: Use a sample MCP server
 
-If you don't have an MCP server available for testing, use this minimal one:
+If you don’t have an MCP server available for testing, use this minimal one:
 
 ```bash
 kubectl create namespace mcp-tunnel --dry-run=client -o yaml | kubectl apply -f -
@@ -93,23 +93,23 @@ The Install steps that follow note where to add the corresponding route.
 
 **With programmatic access**
 
-The setup component exchanges the cluster's projected ServiceAccount token through your federation rule, fetches the tunnel token, generates a CA and server certificate, and registers the CA with Anthropic. A daily CronJob renews the server certificate as needed, so you don't handle any secrets by hand.
+The setup component exchanges the cluster’s projected ServiceAccount token through your federation rule, fetches the tunnel token, generates a CA and server certificate, and registers the CA with Anthropic. A daily CronJob renews the server certificate as needed, so you don’t handle any secrets by hand.
 
 **Set up Workload Identity Federation for the cluster**
 
-Follow [Use WIF with Kubernetes](../../manage-claude/wif-providers/kubernetes.md) to register your cluster's OIDC issuer and create a federation rule. The setup component runs under its own ServiceAccount in the release namespace; the exact name follows Helm's `fullname` convention, so for any release name other than `mcp-tunnel`, run `helm template <release> ... | grep -A2 'kind: ServiceAccount'` to confirm it before creating the rule. The rest of this guide assumes release name `mcp-tunnel` in namespace `mcp-tunnel`, where the ServiceAccount is `mcp-tunnel-setup`.
+Follow [Use WIF with Kubernetes](../../manage-claude/wif-providers/kubernetes.md) to register your cluster’s OIDC issuer and create a federation rule. The setup component runs under its own ServiceAccount in the release namespace; the exact name follows Helm’s `fullname` convention, so for any release name other than `mcp-tunnel`, run `helm template <release> ... | grep -A2 'kind: ServiceAccount'` to confirm it before creating the rule. The rest of this guide assumes release name `mcp-tunnel` in namespace `mcp-tunnel`, where the ServiceAccount is `mcp-tunnel-setup`.
 
 | Field    | Value                                                |
 | -------- | ---------------------------------------------------- |
 | Subject  | `system:serviceaccount:mcp-tunnel:mcp-tunnel-setup`  |
-| Audience | `api.anthropic.com` (the chart's default; no scheme) |
+| Audience | `api.anthropic.com` (the chart’s default; no scheme) |
 | Scope    | `workspace:manage_tunnels`                           |
 
-The chart's default audience is `api.anthropic.com` with no scheme, but the Console's federation-rule form suggests `https://api.anthropic.com`. The two must match byte-for-byte or authentication fails. Either set the rule's audience to `api.anthropic.com`, or set `api.wif.audience` in `values.yaml` to `https://api.anthropic.com`.
+The chart’s default audience is `api.anthropic.com` with no scheme, but the Console’s federation-rule form suggests `https://api.anthropic.com`. The two must match byte-for-byte or authentication fails. Either set the rule’s audience to `api.anthropic.com`, or set `api.wif.audience` in `values.yaml` to `https://api.anthropic.com`.
 
-If the tunnel is in a workspace other than the organization's default, also [add the rule's service account to that workspace](../../manage-claude/workspaces.md#role-inheritance) (the Tunnels API authorizes against the service account's workspace memberships).
+If the tunnel is in a workspace other than the organization’s default, also [add the rule’s service account to that workspace](../../manage-claude/workspaces.md#role-inheritance) (the Tunnels API authorizes against the service account’s workspace memberships).
 
-Note the rule's ID (`fdrl_...`); you'll set it as `api.wif.federationRuleId`.
+Note the rule’s ID (`fdrl_...`); you’ll set it as `api.wif.federationRuleId`.
 
 The daily certificate-renewal CronJob uses a separate ServiceAccount (also derived from the Helm `fullname`) but does not call the Tunnels API; it renews the certificate locally and only needs Kubernetes RBAC, which the chart grants. The federation rule does not need to cover it.
 
@@ -151,11 +151,11 @@ gateway:
 
 With these routes, Claude reaches the servers at `docs.<your-tunnel-domain>` and `search.<your-tunnel-domain>`. Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here as described in [Upstream IP validation](troubleshooting.md#upstream-ip-validation).
 
-If you're using the [sample MCP server](deploy-helm.md#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
+If you’re using the [sample MCP server](deploy-helm.md#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
 
 **Review the rendered manifests**
 
-Render the chart and review the output according to your organization's vetting practices:
+Render the chart and review the output according to your organization’s vetting practices:
 
 ```bash
 helm template mcp-tunnel \
@@ -177,7 +177,7 @@ helm install mcp-tunnel \
 
 The setup component runs as a Helm pre-install hook Job, so `helm install` blocks until it completes. On success Helm deletes the Job automatically. If `helm install` fails with a hook error, see [Setup component authentication failures](troubleshooting.md#setup-component-authentication-failures).
 
-When `tunnel.id` is empty, the setup component creates the tunnel in the workspace your federation rule targets (the organization's default workspace unless you set `api.wif.workspaceId`) and stores its ID and domain in the `mcp-tunnel` Secret. Find the domain you'll need for [verification](deploy-helm.md#verify-the-deployment) on the tunnel's detail page, which you open from the [MCP tunnels](https://platform.claude.com/settings/workspaces/default/mcp-tunnels) page (`platform.claude.com/settings/workspaces/default/mcp-tunnels`) in the Console. In the workspace picker in the sidebar, select the workspace that holds the tunnel. You can also read the domain from the Secret:
+When `tunnel.id` is empty, the setup component creates the tunnel in the workspace your federation rule targets (the organization’s default workspace unless you set `api.wif.workspaceId`) and stores its ID and domain in the `mcp-tunnel` Secret. Find the domain you’ll need for [verification](deploy-helm.md#verify-the-deployment) on the tunnel’s detail page, which you open from the [MCP tunnels](https://platform.claude.com/settings/workspaces/default/mcp-tunnels) page (`platform.claude.com/settings/workspaces/default/mcp-tunnels`) in the Console. In the workspace picker in the sidebar, select the workspace that holds the tunnel. You can also read the domain from the Secret:
 
 ```bash
 kubectl -n mcp-tunnel get secret mcp-tunnel \
@@ -186,21 +186,21 @@ kubectl -n mcp-tunnel get secret mcp-tunnel \
 
 Re-running the setup component (during [upgrades](deploy-helm.md#upgrades) or [token rotation](deploy-helm.md#rotate-the-tunnel-token)) reuses the tunnel ID stored in this Secret; it never creates a second tunnel.
 
-The `api.wif.*` values are identifiers, not secrets, so storing them in Helm release-history Secrets is not a risk. The sensitive data at rest is the `mcp-tunnel` Secret the setup component creates, which holds the tunnel token and TLS private keys. Apply your organization's standard practices for protecting Kubernetes Secrets to this namespace.
+The `api.wif.*` values are identifiers, not secrets, so storing them in Helm release-history Secrets is not a risk. The sensitive data at rest is the `mcp-tunnel` Secret the setup component creates, which holds the tunnel token and TLS private keys. Apply your organization’s standard practices for protecting Kubernetes Secrets to this namespace.
 
 **Without programmatic access**
 
-In this mode (`setup.enabled: false`) the chart makes no API calls; the setup component does not run and there is no cert-renew CronJob. Use this path if you'd rather not set up Workload Identity Federation.
+In this mode (`setup.enabled: false`) the chart makes no API calls; the setup component does not run and there is no cert-renew CronJob. Use this path if you’d rather not set up Workload Identity Federation.
 
 **Get the tunnel token and domain**
 
 [Create the tunnel](console.md#create-a-tunnel) and [get the tunnel token from the Console](console.md#get-the-connection-details).
 
-Record the tunnel domain from the detail page. You'll set it as `gateway.config.tunnel_domain`.
+Record the tunnel domain from the detail page. You’ll set it as `gateway.config.tunnel_domain`.
 
 **Generate a CA and server certificate**
 
-The proxy listens on plain WebSocket, with [inner TLS](concepts.md#components) carried inside that stream using the certificate you generate here. The server certificate's SAN must include `*.<tunnel-domain>` as described in the [certificate requirements](reference.md#certificate-requirements).
+The proxy listens on plain WebSocket, with [inner TLS](concepts.md#components) carried inside that stream using the certificate you generate here. The server certificate’s SAN must include `*.<tunnel-domain>` as described in the [certificate requirements](reference.md#certificate-requirements).
 
 ```bash
 export TUNNEL_DOMAIN=YOUR_TUNNEL_DOMAIN_HERE
@@ -235,7 +235,7 @@ openssl x509 -req -in /tmp/server.csr \
   -extfile data/tls.ext
 ```
 
-[Register `data/ca.crt` in the Console](console.md#add-a-ca-certificate). Keep `data/ca.key` somewhere durable and secure; you'll need it to sign a fresh server certificate at renewal time.
+[Register `data/ca.crt` in the Console](console.md#add-a-ca-certificate). Keep `data/ca.key` somewhere durable and secure; you’ll need it to sign a fresh server certificate at renewal time.
 
 **Create the two Secrets**
 
@@ -284,7 +284,7 @@ gateway:
 
 Some managed Kubernetes distributions allocate the Service CIDR outside the standard private ranges; if your routes target in-cluster Services, add `gateway.config.upstream.allowed_ips` here as described in [Upstream IP validation](troubleshooting.md#upstream-ip-validation).
 
-If you're using the [sample MCP server](deploy-helm.md#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
+If you’re using the [sample MCP server](deploy-helm.md#optional-use-a-sample-mcp-server), set `routes` to `echo: http://hello-mcp:9000` instead.
 
 **Review the rendered manifests**
 
@@ -308,7 +308,7 @@ helm install mcp-tunnel \
 
 ## Verify the deployment
 
-Verify end to end from Anthropic's side: use `https://<route>.<your-tunnel-domain>/<path>` in a Managed Agent session or a Messages API request, where `<route>` is a key from `gateway.config.routes` and `<path>` is whatever the upstream MCP server serves at. With the [sample MCP server](deploy-helm.md#optional-use-a-sample-mcp-server), that's `https://echo.<your-tunnel-domain>/mcp`. See [Use the tunneled MCP servers](overview.md#use-the-tunneled-mcp-servers) for the request shapes.
+Verify end to end from Anthropic’s side: use `https://<route>.<your-tunnel-domain>/<path>` in a Managed Agent session or a Messages API request, where `<route>` is a key from `gateway.config.routes` and `<path>` is whatever the upstream MCP server serves at. With the [sample MCP server](deploy-helm.md#optional-use-a-sample-mcp-server), that’s `https://echo.<your-tunnel-domain>/mcp`. See [Use the tunneled MCP servers](overview.md#use-the-tunneled-mcp-servers) for the request shapes.
 
 If that fails, check the pod logs (`kubectl -n mcp-tunnel logs deploy/mcp-tunnel -c mcp-proxy` and `-c cloudflared`) and consult [Troubleshooting](troubleshooting.md).
 
@@ -328,11 +328,11 @@ By default the chart projects a Kubernetes ServiceAccount token for the setup co
 
 ## Upgrades
 
-Always pass `--version` to `helm upgrade` so you don't pull a newer chart unexpectedly.
+Always pass `--version` to `helm upgrade` so you don’t pull a newer chart unexpectedly.
 
 ### Upgrade from chart 1.x
 
-Chart 2.0.0 moves the tunnel ID from `api.wif.tunnelId` to `tunnel.id`. Before upgrading, edit your `values.yaml`: move the `tnl_...` value to `tunnel.id` and remove `api.wif.tunnelId`. Leaving `tunnel.id` unset is safe (the setup component reuses the tunnel ID already stored in the `mcp-tunnel` Secret on re-run), but the explicit move keeps your `values.yaml` accurate. Also update your federation rule's scope from `org:manage_tunnels` to `workspace:manage_tunnels` in the Console.
+Chart 2.0.0 moves the tunnel ID from `api.wif.tunnelId` to `tunnel.id`. Before upgrading, edit your `values.yaml`: move the `tnl_...` value to `tunnel.id` and remove `api.wif.tunnelId`. Leaving `tunnel.id` unset is safe (the setup component reuses the tunnel ID already stored in the `mcp-tunnel` Secret on re-run), but the explicit move keeps your `values.yaml` accurate. Also update your federation rule’s scope from `org:manage_tunnels` to `workspace:manage_tunnels` in the Console.
 
 ### Change configuration
 
@@ -346,7 +346,7 @@ helm upgrade mcp-tunnel \
   -f values.yaml
 ```
 
-Maintain a complete `values.yaml` rather than relying on `--reuse-values`. Helm's deep-merge behavior can silently fail to remove deleted routes.
+Maintain a complete `values.yaml` rather than relying on `--reuse-values`. Helm’s deep-merge behavior can silently fail to remove deleted routes.
 
 ### Rotate the tunnel token
 

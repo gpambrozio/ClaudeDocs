@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails
 description: Reduce the risk of prompt leaks by separating context from user queries, filtering Claude's outputs, and auditing prompts, without degrading task performance.
 ---
 
-Prompt leaks can expose sensitive information that you expect to be "hidden" in your prompt. Although no method is foolproof, the following strategies can significantly reduce the risk.
+Prompt leaks can expose sensitive information that you expect to be “hidden” in your prompt. Although no method is foolproof, the following strategies can significantly reduce the risk.
 
 ## Before you try to reduce prompt leak
 
@@ -49,12 +49,12 @@ Analyze AcmeCorp's financials. Revenue: $100M, COGS: $40M, SG&A: $30M, Stock Com
 Based on the provided financials for AcmeCorp, their EBITDA is $35 million. This indicates strong operational profitability.
 ```
 
-* **Use post-processing:** Filter Claude's outputs for keywords that might indicate a leak. Techniques include using regular expressions, keyword filtering, or other text processing methods.
+* **Use post-processing:** Filter Claude’s outputs for keywords that might indicate a leak. Techniques include using regular expressions, keyword filtering, or other text processing methods.
   You can also use a prompted LLM to filter outputs for more nuanced leaks.
-* **Avoid unnecessary proprietary details:** If Claude doesn't need it to perform the task, don't include it. Extra content reduces Claude's adherence to "no leak" instructions.
-* **Audit regularly:** Periodically review your prompts and Claude's outputs for potential leaks.
+* **Avoid unnecessary proprietary details:** If Claude doesn’t need it to perform the task, don’t include it. Extra content reduces Claude’s adherence to “no leak” instructions.
+* **Audit regularly:** Periodically review your prompts and Claude’s outputs for potential leaks.
 
-Remember, the goal is not just to prevent leaks but to maintain Claude's performance. Overly complex leak-prevention can degrade results. Balance is key.
+Remember, the goal is not just to prevent leaks but to maintain Claude’s performance. Overly complex leak-prevention can degrade results. Balance is key.
 
 ---
 

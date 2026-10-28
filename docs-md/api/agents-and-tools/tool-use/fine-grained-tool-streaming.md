@@ -8,9 +8,9 @@ description: Stream tool inputs without server-side JSON buffering for latency-s
 
 To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../../manage-claude/api-and-data-retention.md).
 
-Fine-grained tool streaming delivers a tool's input to your client as Claude generates it, without server-side buffering or JSON validation. Skipping the buffering step reduces the time to the first fragment of a large parameter, such as a document or a block of code, and the fragments arrive through the same [Streaming messages](../../build-with-claude/streaming.md) events as standard tool use.
+Fine-grained tool streaming delivers a tool’s input to your client as Claude generates it, without server-side buffering or JSON validation. Skipping the buffering step reduces the time to the first fragment of a large parameter, such as a document or a block of code, and the fragments arrive through the same [Streaming messages](../../build-with-claude/streaming.md) events as standard tool use.
 
-Because the API does not buffer or validate a tool's input before streaming it, you might receive partial or invalid JSON. A response that ends with the [stop reason](../../build-with-claude/handling-stop-reasons.md) `max_tokens` can also cut a parameter off midway. Accumulate the fragments, guard the parse, and see [Handling invalid JSON in tool responses](fine-grained-tool-streaming.md#handling-invalid-json-in-tool-responses) for how to return unparseable input to Claude.
+Because the API does not buffer or validate a tool’s input before streaming it, you might receive partial or invalid JSON. A response that ends with the [stop reason](../../build-with-claude/handling-stop-reasons.md) `max_tokens` can also cut a parameter off midway. Accumulate the fragments, guard the parse, and see [Handling invalid JSON in tool responses](fine-grained-tool-streaming.md#handling-invalid-json-in-tool-responses) for how to return unparseable input to Claude.
 
 ## How to use fine-grained tool streaming
 

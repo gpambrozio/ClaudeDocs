@@ -19,7 +19,7 @@ To learn how zero data retention (ZDR) applies to this feature, see [API and dat
 
 ## Basic request and response
 
-The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview, or on any model starting with [API version `2026-10-21`](../api/migration-2026-10-21.md#sampling-parameters). Setting them to a non-default value returns a 400 error, and starting with `2026-10-21` any value does. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [breaking changes in the migration guide](../models/opus-5-5/migration-guide.md#opus-46-breaking-changes).
+The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude 4.7 and later models and Claude Mythos Preview, or on any model starting with [API version `2026-10-21`](../api/migration-2026-10-21.md#sampling-parameters). Setting them to a non-default value returns a 400 error, and starting with `2026-10-21` any value does. Omit them from request payloads and use prompting to guide the model’s behavior instead. See the [breaking changes in the migration guide](../models/opus-5-5/migration-guide.md#opus-46-breaking-changes).
 
 ```bash cURL
 #!/bin/sh
@@ -154,7 +154,7 @@ Refusal responses (`stop_reason: "refusal"`) also include a `stop_details` objec
 
 ## Multiple conversational turns
 
-The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don't necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
+The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don’t necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
 
 ```bash cURL
 #!/bin/sh
@@ -323,9 +323,9 @@ A mid-conversation system message has the same authority as the top-level `syste
 
 See [Mid-conversation system messages](mid-conversation-system-messages.md) for the complete guide, including how to combine it with [prompt caching](prompt-caching.md).
 
-## Prefilling Claude's response
+## Prefilling Claude’s response
 
-You can prefill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
+You can prefill part of Claude’s response in the last position of the input messages list. Use this technique to shape Claude’s response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 Prefilling is not supported on Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). Requests using prefill with these models return a 400 error. Use [structured outputs](structured-outputs.md) on models that support it, or system prompt instructions, instead. See the [migration guide](../about-claude/models/migration-guide.md) for migration patterns.
 

@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/manage-claude/admin-api
 description: Manage organization members, workspaces, invites, and API keys programmatically with the Admin API, using an Admin API key, an `org:admin` OAuth token, or a personal or service account key.
 ---
 
-The [Admin API](../api/organization.md) lets you manage your organization's members, workspaces, invites, and API keys programmatically instead of by hand in the [Claude Console](https://platform.claude.com/).
+The [Admin API](../api/organization.md) lets you manage your organization’s members, workspaces, invites, and API keys programmatically instead of by hand in the [Claude Console](https://platform.claude.com/).
 
 ## Availability
 
@@ -20,7 +20,7 @@ On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), onl
 * The external key endpoints, for [CMEK](cmek-claude-platform-on-aws.md): register, get, list, update, and delete on `/v1/organizations/external_keys`. There is no validate endpoint, because keys are validated when attached to a workspace.
 * The [telemetry destination endpoints](../api/claude-platform-on-aws-iam-actions.md#telemetry-destinations).
 
-Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't available on Claude Platform on AWS.
+Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren’t available on Claude Platform on AWS.
 
 ## Authentication
 
@@ -28,15 +28,15 @@ The Admin API accepts any of these three credentials:
 
 * An **Admin API key** (starting with `sk-ant-admin...`) sent in the `x-api-key` header. Only organization members with the admin role can provision one. See [Create an Admin API key](admin-api-keys.md).
 * An **OAuth bearer token** with the `org:admin` scope sent in the `authorization: Bearer` header. Only members with the admin, owner, or primary owner role can obtain one. See [Obtain an OAuth bearer token](admin-api.md#oauth-bearer-token).
-* A **personal key** or **service account key** that isn't scoped to a specific workspace, sent in the `x-api-key` header. The key has the same permissions as the linked account. See [Key types](authentication.md#key-types).
+* A **personal key** or **service account key** that isn’t scoped to a specific workspace, sent in the `x-api-key` header. The key has the same permissions as the linked account. See [Key types](authentication.md#key-types).
 
 An Admin API key covers most endpoints. The service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. Send a personal key or service account key in the `x-api-key` header, as you would an Admin API key. The following examples call the [organization info endpoint](admin-api.md#accessing-organization-info) with an OAuth token and with an Admin API key.
 
-In Python, TypeScript, C#, Go, Java, PHP, and Ruby, the SDK exposes the endpoints on this page under `client.organization` (csharp, go: `client.Organization`; java: `client.organization()`; php: `$client->organization`), and the `ant` CLI under `ant organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint's parameters and responses, see the [Admin API reference](../api/organization.md).
+In Python, TypeScript, C#, Go, Java, PHP, and Ruby, the SDK exposes the endpoints on this page under `client.organization` (csharp, go: `client.Organization`; java: `client.organization()`; php: `$client->organization`), and the `ant` CLI under `ant organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint’s parameters and responses, see the [Admin API reference](../api/organization.md).
 
 ### OAuth bearer token
 
-Log in with the [`ant` CLI](../cli-sdks-libraries/cli/quickstart.md) under a dedicated profile with the `org:admin` scope (see [Admin access](../cli-sdks-libraries/cli/authentication.md#admin-access)), then export the bearer token. `--profile admin` stores the `org:admin` credential under its own profile and makes it the CLI's active profile. The exported variable applies to every SDK and CLI call in that shell. Use a shell you reserve for administration, unset the variable when you're done, and switch the CLI back with `ant profile activate default`:
+Log in with the [`ant` CLI](../cli-sdks-libraries/cli/quickstart.md) under a dedicated profile with the `org:admin` scope (see [Admin access](../cli-sdks-libraries/cli/authentication.md#admin-access)), then export the bearer token. `--profile admin` stores the `org:admin` credential under its own profile and makes it the CLI’s active profile. The exported variable applies to every SDK and CLI call in that shell. Use a shell you reserve for administration, unset the variable when you’re done, and switch the CLI back with `ant profile activate default`:
 
 ```bash CLI
 ant auth login --profile admin --scope "org:admin"
@@ -337,7 +337,7 @@ users.data.each do |user|
 end
 ```
 
-Update a member's role:
+Update a member’s role:
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/users/user_01WxYzAbCdEfGhJkMnPqRsTu" \
@@ -1085,7 +1085,7 @@ members.data.each do |member|
 end
 ```
 
-Update a workspace member's role:
+Update a workspace member’s role:
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/members/user_01WxYzAbCdEfGhJkMnPqRsTu" \
@@ -1320,7 +1320,7 @@ puts "user_id: #{removed_member.user_id}"
 
 ### API keys
 
-Monitor and manage [API keys](../api/organization/api_keys/list.md). Each key in the response includes its `expires_at` timestamp (`null` for keys without an [expiration](authentication.md#key-expiration)) and `principal`, the identity it acts as (see [Key types](authentication.md#key-types)). For a personal key, `principal` is `{"type": "user_actor", "user_id": "user_..."}`. For a service account key, it is `{"type": "service_account_actor", "service_account_id": "svac_..."}`. For a workspace key, it is `null`. Each key also has a `scope` object: `{"type": "workspace", "workspace_id": "wrkspc_..."}` for a key bound to one workspace, or `{"type": "organization"}` for a key that can work across any workspace the account has access to. Filtering the list by `workspace_id` with the Default Workspace's ID returns only keys bound to the Default Workspace; keys without a workspace scope aren't returned under any `workspace_id` filter.
+Monitor and manage [API keys](../api/organization/api_keys/list.md). Each key in the response includes its `expires_at` timestamp (`null` for keys without an [expiration](authentication.md#key-expiration)) and `principal`, the identity it acts as (see [Key types](authentication.md#key-types)). For a personal key, `principal` is `{"type": "user_actor", "user_id": "user_..."}`. For a service account key, it is `{"type": "service_account_actor", "service_account_id": "svac_..."}`. For a workspace key, it is `null`. Each key also has a `scope` object: `{"type": "workspace", "workspace_id": "wrkspc_..."}` for a key bound to one workspace, or `{"type": "organization"}` for a key that can work across any workspace the account has access to. Filtering the list by `workspace_id` with the Default Workspace’s ID returns only keys bound to the Default Workspace; keys without a workspace scope aren’t returned under any `workspace_id` filter.
 
 List the active API keys in a workspace:
 
@@ -1688,7 +1688,7 @@ For parameter details and response schemas, see the [Organization Info API refer
 
 ## Usage and cost reports
 
-Track your organization's usage and costs with the [Usage and Cost API](usage-cost-api.md).
+Track your organization’s usage and costs with the [Usage and Cost API](usage-cost-api.md).
 
 ## Claude Code analytics
 
@@ -1704,7 +1704,7 @@ Retrieve audit and activity data for your organization with the [Compliance API]
 
 ## Organization webhooks
 
-Register webhook endpoints for events about enforcement actions on your organization's user profiles with [organization webhooks](organization-webhooks.md).
+Register webhook endpoints for events about enforcement actions on your organization’s user profiles with [organization webhooks](organization-webhooks.md).
 
 ## Best practices
 
@@ -1712,13 +1712,13 @@ Register webhook endpoints for events about enforcement actions on your organiza
 * Handle errors from failed operations
 * Regularly audit member roles and permissions
 * Clean up unused workspaces and expired invites
-* Monitor API key usage, audit each key's [`expires_at`](authentication.md#key-expiration), and rotate keys periodically
+* Monitor API key usage, audit each key’s [`expires_at`](authentication.md#key-expiration), and rotate keys periodically
 
 ## FAQ
 
 **What permissions are needed to use the Admin API?**
 
-The Admin API accepts an Admin API key (starting with `sk-ant-admin`), an OAuth bearer token with the `org:admin` scope, or a personal key or service account key that isn't scoped to a specific workspace. Only organization members with the admin role can provision Admin API keys, and only members with the admin, owner, or primary owner role can obtain `org:admin` tokens. A personal key or service account key has the same permissions as the linked account. See [Authentication](admin-api.md#authentication).
+The Admin API accepts an Admin API key (starting with `sk-ant-admin`), an OAuth bearer token with the `org:admin` scope, or a personal key or service account key that isn’t scoped to a specific workspace. Only organization members with the admin role can provision Admin API keys, and only members with the admin, owner, or primary owner role can obtain `org:admin` tokens. A personal key or service account key has the same permissions as the linked account. See [Authentication](admin-api.md#authentication).
 
 **Can I create new API keys through the Admin API?**
 
@@ -1732,11 +1732,11 @@ Personal keys stop working when their user is removed from the organization. Ser
 
 **Can organization admins be removed through the API?**
 
-No. The API can't remove members with the admin role.
+No. The API can’t remove members with the admin role.
 
 **How long do organization invites last?**
 
-Invites expire after 21 days. The expiration period isn't configurable.
+Invites expire after 21 days. The expiration period isn’t configurable.
 
 For workspace-specific questions, see the [Workspaces FAQ](workspaces.md#faq).
 

@@ -22,7 +22,7 @@ Claude Haiku 5.5 is built for high-volume, latency-sensitive work such as classi
 
 For code changes, see the [migration guide](migration-guide.md). For model IDs, pricing, and limits, see the [Claude Haiku 5.5 overview](overview.md). For prompting guidance, see [Prompting Claude Haiku 5.5](../../build-with-claude/prompt-engineering/prompting-claude-haiku-5-5.md).
 
-[What's new in Claude Haiku 5.5](whats-new-haiku-5-5.md)
+[What’s new in Claude Haiku 5.5](whats-new-haiku-5-5.md)
 
 ## How it compares
 

@@ -12,7 +12,7 @@ If you need Claude to always output valid JSON that conforms to a specific schem
 
 The techniques below are useful for general output consistency or when you need flexibility beyond strict JSON schemas.
 
-Here's how to make Claude's responses more consistent:
+Here’s how to make Claude’s responses more consistent:
 
 ## Specify the output format you want
 
@@ -55,7 +55,7 @@ You're a Customer Insights AI. Analyze this feedback and output in JSON format w
 }
 ```
 
-## Prefill Claude's response
+## Prefill Claude’s response
 
 Prefilling is not supported on Claude 4.6 and later models and 
 
@@ -67,7 +67,7 @@ Prefilling is not supported on Claude 4.6 and later models and
 
  on models that support it, or system prompt instructions, instead.
 
-Prefill the `Assistant` turn with the format you want. This trick bypasses Claude's friendly preamble and enforces your structure.
+Prefill the `Assistant` turn with the format you want. This trick bypasses Claude’s friendly preamble and enforces your structure.
 
 **Example: Daily sales report**
 
@@ -247,7 +247,7 @@ Now, analyze AcmeGiant and AcmeDataCo using this format.
 
 ## Use retrieval for contextual consistency
 
-For tasks requiring consistent context (for example, chatbots, knowledge bases), use retrieval to ground Claude's responses in a fixed information set.
+For tasks requiring consistent context (for example, chatbots, knowledge bases), use retrieval to ground Claude’s responses in a fixed information set.
 
 **Example: Enhancing IT support consistency**
 
@@ -320,9 +320,9 @@ Break down complex tasks into smaller, consistent subtasks. Each prompt then cov
 
 For role-based applications, maintaining consistent character requires deliberate prompting.
 
-* **Use system prompts to set the role:** Use [system prompts](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role) to define Claude's role and personality. This sets a strong foundation for consistent responses.
-  When setting up the character, provide detailed information about the personality, background, and any specific traits or quirks. This helps the model better emulate and generalize the character's traits.
-* **Prepare Claude for possible scenarios:** Provide a list of common scenarios and expected responses in your prompts. This "trains" Claude to handle diverse situations without breaking character.
+* **Use system prompts to set the role:** Use [system prompts](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role) to define Claude’s role and personality. This sets a strong foundation for consistent responses.
+  When setting up the character, provide detailed information about the personality, background, and any specific traits or quirks. This helps the model better emulate and generalize the character’s traits.
+* **Prepare Claude for possible scenarios:** Provide a list of common scenarios and expected responses in your prompts. This “trains” Claude to handle diverse situations without breaking character.
 
 **Example: Enterprise chatbot for role prompting**
 

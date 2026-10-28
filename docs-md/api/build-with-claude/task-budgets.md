@@ -259,7 +259,7 @@ Claude receives a budget-countdown marker injected server-side throughout the co
 
 The budget covers one agentic turn, also called an agentic loop: everything Claude does in response to one user message that carries no tool results. A turn can span several requests.
 
-A user message that carries no tool results starts a new turn with a fresh budget. Today, the countdown still counts earlier turns' history while it remains in the context. A common case is a follow-up after Claude has ended its turn, for example because the budget ran out:
+A user message that carries no tool results starts a new turn with a fresh budget. Today, the countdown still counts earlier turns’ history while it remains in the context. A common case is a follow-up after Claude has ended its turn, for example because the budget ran out:
 
 ```json
 { "role": "user", "content": "Continue." }
@@ -288,11 +288,11 @@ That holds even when the message adds new content alongside the tool results:
 }
 ```
 
-Server-side [compaction](compaction-threshold.md) during a turn does not reset the budget: tokens the turn consumed before the compaction still count against it. Tokens from before the turn do not count, even when a compaction at the start of a turn summarizes them. Today, that exclusion applies only to the budget carried across a server-side compaction; earlier turns' history still counts while it remains in the context.
+Server-side [compaction](compaction-threshold.md) during a turn does not reset the budget: tokens the turn consumed before the compaction still count against it. Tokens from before the turn do not count, even when a compaction at the start of a turn summarizes them. Today, that exclusion applies only to the budget carried across a server-side compaction; earlier turns’ history still counts while it remains in the context.
 
 ### Worked example: budget counting across requests
 
-The task budget counts what Claude **sees** (thinking, tool calls and results, and text), not what's in your request payload. In an agentic loop your client resends the full conversation on every request, so the payload keeps growing, but the budget only decrements by what is new: the tokens Claude generates and the content it has not seen before. The following example is one [agentic turn](task-budgets.md#what-counts-as-a-turn) made of three requests: the first carries the user message, and the next two each resend the history with a tool result appended.
+The task budget counts what Claude **sees** (thinking, tool calls and results, and text), not what’s in your request payload. In an agentic loop your client resends the full conversation on every request, so the payload keeps growing, but the budget only decrements by what is new: the tokens Claude generates and the content it has not seen before. The following example is one [agentic turn](task-budgets.md#what-counts-as-a-turn) made of three requests: the first carries the user message, and the next two each resend the history with a tool result appended.
 
 Consider a loop with `task_budget: {type: "tokens", total: 100000}` and a single `bash` tool.
 
@@ -476,7 +476,7 @@ output_config = {
 }
 ```
 
-In this example, the tokens spent before compaction are the usage of all the messages you have removed from the history so far, measured as in [Measure your current usage](task-budgets.md#measure-your-current-usage). Leave out anything still present in the messages you send, including any summary you added, because the server counts those tokens itself. Update this figure only when you replace the history this way; don't decrement it on each request. Pass the resulting `remaining` on every request, not only the one that compacts.
+In this example, the tokens spent before compaction are the usage of all the messages you have removed from the history so far, measured as in [Measure your current usage](task-budgets.md#measure-your-current-usage). Leave out anything still present in the messages you send, including any summary you added, because the server counts those tokens itself. Update this figure only when you replace the history this way; don’t decrement it on each request. Pass the resulting `remaining` on every request, not only the one that compacts.
 
 For loops that resend the full uncompacted history on every request, omit `remaining` and let the server track the countdown.
 
@@ -635,7 +635,7 @@ response = client.messages.create(
 puts response.usage.output_tokens
 ```
 
-Run this across a representative set of tasks and record the distribution. Start with the p99 of your per-task token spend to understand how providing the model with a task budget might modify the model's behavior, then test up or down as needed.
+Run this across a representative set of tasks and record the distribution. Start with the p99 of your per-task token spend to understand how providing the model with a task budget might modify the model’s behavior, then test up or down as needed.
 
 The minimum accepted `task_budget.total` is **20,000 tokens** on every model that supports task budgets (see [Feature support](task-budgets.md#feature-support)). Smaller values return a 400 error.
 

@@ -18,12 +18,12 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTo
 
 ## Overview
 
-Claude Fable 5.1 extends Claude Fable 5 at the same input and output prices, with cache reads at a quarter of the cost, and brings stronger long-running agentic coding, multistep research, and document, spreadsheet, and slide work. For most workloads, start with Claude Opus 5.5 (see [Choosing a model](../../about-claude/models/choosing-a-model.md)). Use Claude Fable 5.1 for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5.5 at higher effort still don't meet your requirements. Claude Mythos 5.1 offers the same capabilities only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842).
+Claude Fable 5.1 extends Claude Fable 5 at the same input and output prices, with cache reads at a quarter of the cost, and brings stronger long-running agentic coding, multistep research, and document, spreadsheet, and slide work. For most workloads, start with Claude Opus 5.5 (see [Choosing a model](../../about-claude/models/choosing-a-model.md)). Use Claude Fable 5.1 for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5.5 at higher effort still don’t meet your requirements. Claude Mythos 5.1 offers the same capabilities only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842).
 
 If you already call Claude Fable 5, four changes are breaking:
 
 * [Forced tool use returns an error](whats-new-fable-5-1.md#forced-tool-use-is-not-supported).
-* Only Claude Fable 5.1 and Claude Mythos 5.1 can [read Claude Fable 5.1's thinking blocks](whats-new-fable-5-1.md#thinking-blocks-are-tied-to-the-model-that-produced-them).
+* Only Claude Fable 5.1 and Claude Mythos 5.1 can [read Claude Fable 5.1’s thinking blocks](whats-new-fable-5-1.md#thinking-blocks-are-tied-to-the-model-that-produced-them).
 * [Editing earlier turns invalidates thinking blocks](whats-new-fable-5-1.md#editing-earlier-turns-invalidates-thinking-blocks).
 * [Some advisor tool pairings are not supported](whats-new-fable-5-1.md#advisor-tool-pairings).
 
@@ -35,11 +35,11 @@ Five changes are additive:
 * A [lower cache read price](whats-new-fable-5-1.md#pricing)
 * [Content provenance](whats-new-fable-5-1.md#content-provenance)
 
-[What's new in Claude Fable 5.1](whats-new-fable-5-1.md)
+[What’s new in Claude Fable 5.1](whats-new-fable-5-1.md)
 
 ## Claude Fable 5.1 and Claude Mythos 5.1
 
-[Claude Mythos 5.1](../mythos-5-1/overview.md) offers the same capabilities only to organizations verified through Anthropic's verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). It shares Claude Fable 5.1's specifications and pricing. To request access, apply to the program that covers your use case, or contact your Anthropic, AWS, or Google Cloud account team.
+[Claude Mythos 5.1](../mythos-5-1/overview.md) offers the same capabilities only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). It shares Claude Fable 5.1’s specifications and pricing. To request access, apply to the program that covers your use case, or contact your Anthropic, AWS, or Google Cloud account team.
 
 ## How it compares
 
@@ -118,7 +118,7 @@ What changes when you move from Claude Fable 5, Claude Opus 5, or Claude Opus 4.
 
 **Preserved thinking**
 
-When this model's thinking blocks stay usable: across model switches and across changes to the conversation.
+When this model’s thinking blocks stay usable: across model switches and across changes to the conversation.
 
 **Per-message effort**
 

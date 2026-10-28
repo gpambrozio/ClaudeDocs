@@ -42,9 +42,9 @@ Place `cache_control: {"type": "ephemeral"}` on the last tool in your `tools` ar
 }
 ```
 
-For `mcp_toolset`, the `cache_control` breakpoint lands on the last tool in the set. You don't control tool order within an MCP toolset, so place the breakpoint on the `mcp_toolset` entry itself and the API applies it to the final expanded tool.
+For `mcp_toolset`, the `cache_control` breakpoint lands on the last tool in the set. You don’t control tool order within an MCP toolset, so place the breakpoint on the `mcp_toolset` entry itself and the API applies it to the final expanded tool.
 
-The [computer use](computer-use-tool.md) and [browser use](browser-use-tool.md) toolset entries follow the same rule: place `cache_control` on the toolset entry itself, and the breakpoint lands after the toolset's definition. It isn't accepted inside a member's `configs` entry, because the toolset's members load as one definition. Within a [batch action](computer-use-tool.md#batch-actions), a `cache_control` marker on any of the turn's member `tool_use` or `tool_result` blocks is accepted and takes effect at the end of that batch, so several markers in one batch act as a single breakpoint. Each marker still counts toward the request's limit of [four breakpoints](../../build-with-claude/prompt-caching.md#when-to-use-multiple-breakpoints), so use at most one in any turn.
+The [computer use](computer-use-tool.md) and [browser use](browser-use-tool.md) toolset entries follow the same rule: place `cache_control` on the toolset entry itself, and the breakpoint lands after the toolset’s definition. It isn’t accepted inside a member’s `configs` entry, because the toolset’s members load as one definition. Within a [batch action](computer-use-tool.md#batch-actions), a `cache_control` marker on any of the turn’s member `tool_use` or `tool_result` blocks is accepted and takes effect at the end of that batch, so several markers in one batch act as a single breakpoint. Each marker still counts toward the request’s limit of [four breakpoints](../../build-with-claude/prompt-caching.md#when-to-use-multiple-breakpoints), so use at most one in any turn.
 
 ## defer\_loading and cache preservation
 
@@ -66,7 +66,7 @@ The cache follows a prefix hierarchy (`tools` → `system` → `messages`), so a
 | Changing `disable_parallel_tool_use` | Messages cache                                                                                                                                                                                                           |
 | Toggling images present/absent       | Messages cache                                                                                                                                                                                                           |
 | Changing thinking parameters         | Messages cache always; tool and system caches too on models that render the thinking configuration ahead of them ([details](../../build-with-claude/thinking.md#thinking-and-prompt-caching)) |
-| Changing `output_config.effort`      | Same as thinking parameters; setting the model's default explicitly is equivalent to omitting it                                                                                                                         |
+| Changing `output_config.effort`      | Same as thinking parameters; setting the model’s default explicitly is equivalent to omitting it                                                                                                                         |
 
 If you need to vary `tool_choice` mid-conversation, consider placing cache breakpoints before the variation point.
 

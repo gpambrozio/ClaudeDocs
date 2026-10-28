@@ -22,7 +22,7 @@ Serving custom tools requires the SDK worker. The `ant` CLI worker has no way to
 
 **Declare the tool on the agent**
 
-Add a `custom` entry to the agent's `tools` whose `name` matches the tool your worker registers. See [Custom tools](tools.md#custom-tools) for the full declaration shape.
+Add a `custom` entry to the agent’s `tools` whose `name` matches the tool your worker registers. See [Custom tools](tools.md#custom-tools) for the full declaration shape.
 
 ```json
 {
@@ -41,7 +41,7 @@ Add a `custom` entry to the agent's `tools` whose `name` matches the tool your w
 
 **Register the implementation with the worker**
 
-Pass the tool through the worker's `tools` (go: `ToolsFunc`) factory (see [`EnvironmentWorker`](self-hosted-sandboxes-reference.md#environment-worker)), alongside the built-in toolset:
+Pass the tool through the worker’s `tools` (go: `ToolsFunc`) factory (see [`EnvironmentWorker`](self-hosted-sandboxes-reference.md#environment-worker)), alongside the built-in toolset:
 
 ```python Python
 import asyncio
@@ -105,7 +105,7 @@ await new EnvironmentWorker({
 }).run();
 ```
 
-The C# SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
+The C# SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session’s event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
 
 ```go Go
 package main
@@ -168,37 +168,37 @@ func main() {
 }
 ```
 
-The Java SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
+The Java SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session’s event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
 
-The PHP SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
+The PHP SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session’s event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
 
-The Ruby SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
+The Ruby SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session’s event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
 
 The worker answers only the tools registered with it. If a tool is declared on the agent but no worker or client serves it, the session pauses with a `requires_action` stop reason. It stays paused until something posts the result. See [Answer tool calls that pause the session](events-and-streaming.md#answer-tool-calls-that-pause-the-session) for the event flow.
 
 ## Wrap an MCP server as custom tools
 
-The [MCP connector](mcp-connector.md) connects to MCP servers from Anthropic's side. A server must therefore expose an HTTP endpoint that Anthropic can reach, directly or through an [MCP tunnel](../agents-and-tools/mcp-tunnels/overview.md).
+The [MCP connector](mcp-connector.md) connects to MCP servers from Anthropic’s side. A server must therefore expose an HTTP endpoint that Anthropic can reach, directly or through an [MCP tunnel](../agents-and-tools/mcp-tunnels/overview.md).
 
-To use a server that only your network can reach, make the worker the MCP client instead and declare the server's tools as custom tools. The MCP server needs no inbound connectivity from outside your network. Anthropic receives the tool definitions you declare on the agent, each call's input, and the result your worker posts back.
+To use a server that only your network can reach, make the worker the MCP client instead and declare the server’s tools as custom tools. The MCP server needs no inbound connectivity from outside your network. Anthropic receives the tool definitions you declare on the agent, each call’s input, and the result your worker posts back.
 
 At runtime the model calls a wrapped tool like any other custom tool:
 
 1. The agent emits an `agent.custom_tool_use` event.
 2. The worker, inside your sandbox, forwards the call over its open MCP session to the server on your network.
-3. The worker posts the server's response as the `user.custom_tool_result`.
+3. The worker posts the server’s response as the `user.custom_tool_result`.
 
 ### Install an MCP SDK
 
-The SDK's [Client-side MCP helpers](../agents-and-tools/mcp-connector.md#client-side-mcp-helpers) convert the server's tools into the runnable tools the worker accepts. Install an MCP SDK alongside the Anthropic SDK: `pip install "anthropic[mcp]" "mcp>=1.24"` (typescript: `npm install @modelcontextprotocol/sdk`; go: `go get github.com/modelcontextprotocol/go-sdk`; csharp: `dotnet add package ModelContextProtocol`; java: `com.anthropic:anthropic-java-mcp`; php: `composer require mcp/sdk`; ruby: `bundle add mcp faraday event_stream_parser`).
+The SDK’s [Client-side MCP helpers](../agents-and-tools/mcp-connector.md#client-side-mcp-helpers) convert the server’s tools into the runnable tools the worker accepts. Install an MCP SDK alongside the Anthropic SDK: `pip install "anthropic[mcp]" "mcp>=1.24"` (typescript: `npm install @modelcontextprotocol/sdk`; go: `go get github.com/modelcontextprotocol/go-sdk`; csharp: `dotnet add package ModelContextProtocol`; java: `com.anthropic:anthropic-java-mcp`; php: `composer require mcp/sdk`; ruby: `bundle add mcp faraday event_stream_parser`).
 
 The examples connect without authentication. To send credentials, configure the `http_client` (typescript: `requestInit`; go: `HTTPClient`; csharp: `AdditionalHeaders`; java: `.customizeRequest()`; php, ruby: `headers`) you hand to the MCP transport.
 
 ### Declare and serve the tools
 
-**Declare the server's tools on the agent**
+**Declare the server’s tools on the agent**
 
-List the MCP server's tools and declare each one as a `custom` tool. The MCP `name`, `description`, and `inputSchema` map one to one onto the custom tool's fields. If the server paginates its tool list, declare every page; the worker must list the same pages.
+List the MCP server’s tools and declare each one as a `custom` tool. The MCP `name`, `description`, and `inputSchema` map one to one onto the custom tool’s fields. If the server paginates its tool list, declare every page; the worker must list the same pages.
 
 ```python Python
 import asyncio
@@ -725,25 +725,25 @@ The Ruby SDK does not have `EnvironmentWorker`.
 
 ### Tools are declared, not discovered at runtime
 
-The worker lists the MCP server's tools once at startup and cannot add tools to a running session. When the server's tools change:
+The worker lists the MCP server’s tools once at startup and cannot add tools to a running session. When the server’s tools change:
 
 1. Declare them again, on the agent or on an idle session through [Updating the agent configuration](session-operations.md#updating-the-agent-configuration).
 2. Restart the worker.
 
 ### Declarations must fit the Managed Agents API
 
-The MCP helpers keep the server's names and descriptions, and most schemas pass through unchanged. Rename, trim, or inline where a declaration breaks one of these rules:
+The MCP helpers keep the server’s names and descriptions, and most schemas pass through unchanged. Rename, trim, or inline where a declaration breaks one of these rules:
 
 | Field                     | Rule                                                                                                                                                                                                                                                                                          |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`                    | Unique per agent. Letters, digits, underscores, and hyphens, 1–128 characters. Cannot match a built-in agent tool such as `bash` or `read`, or use the reserved `mcp__` prefix or `ant__` prefix.                                                                                             |
 | `description`             | Required and non-empty.                                                                                                                                                                                                                                                                       |
 | `input_schema`            | Accepts the JSON Schema keywords MCP servers commonly emit, such as `additionalProperties` and `title`. Rejects reference keywords such as `$ref` anywhere, and top-level `oneOf`, `anyOf`, and `allOf`. Property names use letters, digits, underscores, dots, and hyphens, 1–64 characters. |
-| The agent's `tools` array | At most 256 entries. Each wrapped tool is one entry, and the built-in toolset is one more.                                                                                                                                                                                                    |
+| The agent’s `tools` array | At most 256 entries. Each wrapped tool is one entry, and the built-in toolset is one more.                                                                                                                                                                                                    |
 
 Two cases need extra work:
 
-* **Two servers expose the same tool name:** Define the wrapper yourself under a prefixed name and have it call the server's original tool name.
+* **Two servers expose the same tool name:** Define the wrapper yourself under a prefixed name and have it call the server’s original tool name.
 * **A generator such as Pydantic factors schemas into `$defs`:** Inline those schemas before you declare the tool.
 
 ### Tool failures surface as error tool results
@@ -754,7 +754,7 @@ Set a timeout on the MCP client for a faster and clearer failure, as the Python 
 
 ### Wrap only servers you operate or trust
 
-A wrapped tool's name, description, and results enter the model's context like any other tool's. They are untrusted input that can influence what the agent does with its other tools, including `bash` on the worker host. Declare only the tools you intend the agent to use.
+A wrapped tool’s name, description, and results enter the model’s context like any other tool’s. They are untrusted input that can influence what the agent does with its other tools, including `bash` on the worker host. Declare only the tools you intend the agent to use.
 
 ### Permission policies do not apply
 

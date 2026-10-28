@@ -8,7 +8,7 @@ description: Let Claude request shell commands that your application runs in a p
 
 To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../../manage-claude/api-and-data-retention.md).
 
-The bash tool is a [client tool](how-tool-use-works.md): Claude doesn't run commands itself. When you include the tool in a request, Claude replies with a `tool_use` block that names the command to run. Your application runs that command in a bash session it owns and returns the output in a `tool_result` block.
+The bash tool is a [client tool](how-tool-use-works.md): Claude doesn’t run commands itself. When you include the tool in a request, Claude replies with a `tool_use` block that names the command to run. Your application runs that command in a bash session it owns and returns the output in a `tool_result` block.
 
 Your application keeps one bash process alive across tool calls, so state persists between commands. The working directory, environment variables, and any files a command creates are still there for the next command.
 
@@ -210,7 +210,7 @@ Each tool call is one round trip between Claude and your application:
 
 1. Claude returns a `tool_use` block containing the `command` to run.
 2. Your application runs the command in its bash session.
-3. Your application returns the command's output, stdout and stderr together, to Claude in a `tool_result` block.
+3. Your application returns the command’s output, stdout and stderr together, to Claude in a `tool_result` block.
 4. Claude either requests another command in the same session or responds with text.
 
 Claude can also return several `tool_use` blocks in one response. Run them in order in the same session and return all of the results in one `user` message. See [Parallel tool use](parallel-tool-use.md).
@@ -219,7 +219,7 @@ The API is stateless. Nothing about your shell session travels between requests,
 
 ## Parameters
 
-A bash tool definition has two required fields, `type` and `name`, and the `name` must be `bash`. The tool is schema-less: you don't provide an `input_schema`, because the schema is built into Claude's model and can't be modified. The following table lists the input fields Claude sets when it calls the tool.
+A bash tool definition has two required fields, `type` and `name`, and the `name` must be `bash`. The tool is schema-less: you don’t provide an `input_schema`, because the schema is built into Claude’s model and can’t be modified. The following table lists the input fields Claude sets when it calls the tool.
 
 | Parameter | Required | Description                               |
 | --------- | -------- | ----------------------------------------- |
@@ -282,7 +282,7 @@ Claude determines which command to run. Your application owns everything else: t
 
 **Create a persistent bash session**
 
-Start one long-lived bash process and run every command inside it. Because a pipe to a live process never reports end-of-file, the session prints a unique sentinel line after each command to mark where that command's output ends:
+Start one long-lived bash process and run every command inside it. Because a pipe to a live process never reports end-of-file, the session prints a unique sentinel line after each command to mark where that command’s output ends:
 
 ```python Python
 import subprocess
@@ -676,9 +676,9 @@ puts session.execute_command("pwd") # still /tmp: the session kept its state
 
 The session interleaves stderr with stdout, so error messages land where they occurred. The example leaves out what a complete implementation also needs: a timeout that kills the shell and every process it started when a command hangs, then restarts the session. The [Use command timeouts](bash-tool.md#follow-implementation-best-practices) best practice shows one way to add it.
 
-**Process Claude's tool calls**
+**Process Claude’s tool calls**
 
-Extract and run commands from Claude's responses:
+Extract and run commands from Claude’s responses:
 
 ```python Python
 tool_results = []
@@ -1176,7 +1176,7 @@ Repeat the run-and-return cycle while `stop_reason` is `tool_use`. For the full 
 
 **Implement safety measures**
 
-Add validation and restrictions. Use an allowlist rather than a blocklist: a blocklist misses any command it didn't anticipate. The example also rejects shell operators that appear as separate words:
+Add validation and restrictions. Use an allowlist rather than a blocklist: a blocklist misses any command it didn’t anticipate. The example also rejects shell operators that appear as separate words:
 
 ```python Python
 import shlex
@@ -1441,7 +1441,7 @@ If a command takes too long to run:
 
 **Command not found**
 
-If a command doesn't exist:
+If a command doesn’t exist:
 
 ```json
 {
@@ -1918,17 +1918,17 @@ For guidance on using Git as a checkpoint-and-recovery mechanism in long-running
 
 ## Limitations
 
-* **No interactive commands:** The session can't run `vim`, `less`, password prompts, or any command that waits for input on stdin.
+* **No interactive commands:** The session can’t run `vim`, `less`, password prompts, or any command that waits for input on stdin.
 * **No GUI applications:** The session is command-line only.
 * **Session scope:** Bash session state is client-side. Your application is responsible for maintaining the shell session between turns.
-* **Output limits:** The API doesn't truncate tool results (an oversized request is rejected). Truncate large outputs in your application before returning them to Claude.
+* **Output limits:** The API doesn’t truncate tool results (an oversized request is rejected). Truncate large outputs in your application before returning them to Claude.
 * **No streaming:** Output reaches Claude only when your application returns the `tool_result` in the next request.
 
 ## Combining with other tools
 
 The bash tool pairs well with the [Text editor tool](text-editor-tool.md): Claude edits a file with one tool and requests the command that runs it with the other.
 
-If you're also using the [Code execution tool](code-execution-tool.md), Claude has access to two separate execution environments: your local bash session and Anthropic's sandboxed container. State is not shared between them. See [Using code execution with other execution tools](code-execution-tool.md#using-code-execution-with-other-execution-tools) for guidance on prompting Claude to distinguish between environments.
+If you’re also using the [Code execution tool](code-execution-tool.md), Claude has access to two separate execution environments: your local bash session and Anthropic’s sandboxed container. State is not shared between them. See [Using code execution with other execution tools](code-execution-tool.md#using-code-execution-with-other-execution-tools) for guidance on prompting Claude to distinguish between environments.
 
 ## Next steps
 

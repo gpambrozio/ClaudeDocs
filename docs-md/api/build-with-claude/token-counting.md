@@ -27,7 +27,9 @@ Token counting lets you determine the number of tokens in a message before you s
 
 ## How to count message tokens
 
-The [token counting](../api/messages/count_tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](../agents-and-tools/tool-use/overview.md), [images](vision.md), and [PDFs](pdf-support.md). The response contains the total number of input tokens.
+The [token counting](../api/messages/count_tokens.md) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](../agents-and-tools/tool-use/overview.md), [images](vision.md), and [PDFs](pdf-support.md). The response contains the total number of [input tokens](../api/messages/count_tokens.md#message_tokens_count.input_tokens).
+
+(See the `messages/count_tokens` method in [the API reference](../api/messages/count_tokens.md).)
 
 This endpoint returns an `invalid_request_error` for a few inputs that the Messages API accepts:
 
@@ -35,7 +37,7 @@ This endpoint returns an `invalid_request_error` for a few inputs that the Messa
 * The [MCP connector](../agents-and-tools/mcp-connector.md)
 * `image` or `document` blocks with a `url` or `file` source
 
-Send images and PDFs as base64 to count them. For requests that use server tools or MCP servers, the Messages API response reports the tokens used in its `usage` object.
+Send images and PDFs as base64 to count them. For requests that use server tools or MCP servers, the Messages API response reports the tokens used in its [`usage`](../api/messages/create.md#message.usage) object.
 
 The token count is an **estimate**. In some cases, the actual number of input tokens used when creating a message might differ by a small amount.
 
@@ -194,7 +196,7 @@ puts response
 
 ### Count tokens in messages with tools
 
-Token counting supports client tools and the [advisor tool](../agents-and-tools/tool-use/advisor-tool.md). Requests that include other [server tools](../agents-and-tools/tool-use/server-tools.md) return an error. For the advisor tool, the count covers the executor's first sampling call only.
+Token counting supports client tools and the [advisor tool](../agents-and-tools/tool-use/advisor-tool.md). Requests that include other [server tools](../agents-and-tools/tool-use/server-tools.md) return an error. For the advisor tool, the count covers the executor’s first sampling call only.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages/count_tokens \
@@ -1101,7 +1103,7 @@ puts response
 
 ### Count tokens in messages with PDFs
 
-Token counting supports base64-encoded PDFs with the same [PDF requirements](pdf-support.md#check-pdf-requirements) as the Messages API. This endpoint doesn't support `url` or `file` document sources.
+Token counting supports base64-encoded PDFs with the same [PDF requirements](pdf-support.md#check-pdf-requirements) as the Messages API. This endpoint doesn’t support `url` or `file` document sources.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages/count_tokens \
@@ -1387,7 +1389,7 @@ puts response
 
 Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5 share the tokenizer introduced with Claude Opus 4.7. A prompt counts the same on all four, and roughly 30 percent higher than on models before Claude Opus 4.7 (the exact increase depends on the content). The token counting endpoint counts under the tokenizer of the `model` you pass. To measure the difference for your workload, count the same request twice, once with your current model and once with the model you plan to move to, and compare the two `input_tokens` values.
 
-**Billing and migration:** Usage and billing on these models reflect this tokenizer's counts. When migrating from a model before Claude Opus 4.7, don't reuse token counts measured on the older model to estimate costs or context window fit. Count your prompts with the `model` ID you plan to use (for example, `"claude-fable-5-1"`).
+**Billing and migration:** Usage and billing on these models reflect this tokenizer’s counts. When migrating from a model before Claude Opus 4.7, don’t reuse token counts measured on the older model to estimate costs or context window fit. Count your prompts with the `model` ID you plan to use (for example, `"claude-fable-5-1"`).
 
 ***
 
@@ -1421,7 +1423,7 @@ Read the full API reference for the token counting endpoint.
 
 **Context windows**
 
-Use token counts to keep prompts within a model's context window.
+Use token counts to keep prompts within a model’s context window.
 
 **Rate limits**
 

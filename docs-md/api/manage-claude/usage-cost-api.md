@@ -16,9 +16,9 @@ This API allows you to better monitor, analyze, and optimize your Claude impleme
 * **Cost reconciliation:** Match internal records with Anthropic billing for finance and accounting teams
 * **Product performance and improvement:** Monitor product performance while measuring if changes to the system have improved it, or set up alerting
 * **[Rate limit](../api/rate-limits.md) optimization:** Optimize features such as [prompt caching](../build-with-claude/prompt-caching.md) or specific prompts to use your allocated capacity efficiently.
-* **Advanced analysis:** Perform deeper data analysis than what's available in Console
+* **Advanced analysis:** Perform deeper data analysis than what’s available in Console
 
-**Admin API credentials required.** These endpoints are part of the Admin API. You can access them using an [Admin API key](admin-api-keys.md), an OAuth token with the `org:admin` scope, or a personal or service account key that isn't scoped to a workspace; workspace API keys don't work. See [Authentication](admin-api.md#authentication) for details.
+**Admin API credentials required.** These endpoints are part of the Admin API. You can access them using an [Admin API key](admin-api-keys.md), an OAuth token with the `org:admin` scope, or a personal or service account key that isn’t scoped to a workspace; workspace API keys don’t work. See [Authentication](admin-api.md#authentication) for details.
 
 Claude Enterprise organizations use an Analytics API key with a different API instead; see [Which API do you need?](usage-cost-api.md#which-api-do-you-need).
 
@@ -71,7 +71,7 @@ FinOps platform for LLM cost & usage observability
 
 ## Quick start
 
-Get your organization's daily usage for the last 7 days:
+Get your organization’s daily usage for the last 7 days:
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
@@ -84,7 +84,7 @@ bucket_width=1d" \
 
 **Set a User-Agent header for integrations**
 
-If you're building an integration, set your User-Agent header to help Anthropic understand usage patterns:
+If you’re building an integration, set your User-Agent header to help Anthropic understand usage patterns:
 
 ```text wrap
 User-Agent: YourApp/1.0.0 (https://yourapp.com)
@@ -146,9 +146,9 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-To retrieve your organization's API key IDs, use the [List API Keys](../api/organization/api_keys/list.md) endpoint.
+To retrieve your organization’s API key IDs, use the [List API Keys](../api/organization/api_keys/list.md) endpoint.
 
-To retrieve your organization's workspace IDs, use the [List Workspaces](../api/organization/workspaces/list.md) endpoint, or find your organization's workspace IDs in the Claude Console.
+To retrieve your organization’s workspace IDs, use the [List Workspaces](../api/organization/workspaces/list.md) endpoint, or find your organization’s workspace IDs in the Claude Console.
 
 #### Data residency
 
@@ -178,7 +178,7 @@ bucket_width=1d" \
   -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
-Models released before February 2026 (prior to Claude Opus 4.6 and Claude Sonnet 4.6) don't support the `inference_geo` request parameter, so their usage reports return `"not_available"` for this dimension. You can use `not_available` as a filter value in `inference_geos[]` to target those models.
+Models released before February 2026 (prior to Claude Opus 4.6 and Claude Sonnet 4.6) don’t support the `inference_geo` request parameter, so their usage reports return `"not_available"` for this dimension. You can use `not_available` as a filter value in `inference_geos[]` to target those models.
 
 #### Fast mode
 
@@ -288,7 +288,7 @@ Explore detailed implementations in the [Claude Cookbook](https://platform.claud
 
 Usage and cost data typically appears within 5 minutes of API request completion, though delays might occasionally be longer.
 
-### What's the recommended polling frequency?
+### What’s the recommended polling frequency?
 
 The API supports polling once per minute for sustained use. For short bursts (for example, downloading paginated data), more frequent polling is acceptable. Cache results for dashboards that need frequent updates.
 

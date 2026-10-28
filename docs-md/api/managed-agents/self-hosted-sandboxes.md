@@ -12,17 +12,17 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-Self-hosted sandboxes move the agent's tool execution from Anthropic-managed cloud sandboxes into infrastructure you control, while Anthropic keeps running the agent. To learn what that means and decide whether it fits your agent, see [Choosing an agent environment](choosing-an-environment.md).
+Self-hosted sandboxes move the agent’s tool execution from Anthropic-managed cloud sandboxes into infrastructure you control, while Anthropic keeps running the agent. To learn what that means and decide whether it fits your agent, see [Choosing an agent environment](choosing-an-environment.md).
 
 ## How it works
 
 A `self_hosted` environment acts as a work queue. You run an **environment worker**, a process on your own infrastructure that serves that queue:
 
 1. You create a [session](sessions.md) that targets the environment. Anthropic enqueues the session as a work item.
-2. Your worker claims the work item and downloads the agent's [skills](skills.md) and the session's [memory stores](memory.md).
-3. Claude runs on Anthropic's side and requests tool calls. Your worker runs each call locally and posts the result back.
+2. Your worker claims the work item and downloads the agent’s [skills](skills.md) and the session’s [memory stores](memory.md).
+3. Claude runs on Anthropic’s side and requests tool calls. Your worker runs each call locally and posts the result back.
 
-Tool inputs and outputs still flow to Anthropic's control plane, so the model can receive results and determine what to do next. Anthropic stores skills and memory stores. Your sandbox holds a copy for the session. See [Security model](self-hosted-sandboxes-security.md) for the full data-flow boundary.
+Tool inputs and outputs still flow to Anthropic’s control plane, so the model can receive results and determine what to do next. Anthropic stores skills and memory stores. Your sandbox holds a copy for the session. See [Security model](self-hosted-sandboxes-security.md) for the full data-flow boundary.
 
 Self-hosted sandboxes support every Claude model available in Managed Agents. The model is configured on the agent, not the environment.
 
@@ -30,20 +30,20 @@ The `ant` CLI and the Python, TypeScript, and Go SDKs ship pre-built workers. Sa
 
 ## Quickstart
 
-This quickstart runs one always-on worker with the `ant` CLI, sends it a session, and confirms that the agent's tool calls ran on your host.
+This quickstart runs one always-on worker with the `ant` CLI, sends it a session, and confirms that the agent’s tool calls ran on your host.
 
 ### Prerequisites
 
-* **An agent:** If you don't have one, complete [Get started with Claude Managed Agents](quickstart.md) first and note the agent ID.
+* **An agent:** If you don’t have one, complete [Get started with Claude Managed Agents](quickstart.md) first and note the agent ID.
 * **A Linux or macOS host:** The host needs `/bin/bash` at that exact path. The worker needs only outbound HTTPS.
 * **A Claude API key:** You use it from your own machine to create sessions and read queue stats. Keep it off the worker host, where agent tool calls could read it.
 * **The `ant` CLI or the SDK on your own machine:** The stats and session steps in this quickstart run there, not on the worker host. Install the CLI the same way the [install step](self-hosted-sandboxes.md#run-your-first-session) does for the worker, or install the [SDK](../cli-sdks-libraries/overview.md).
 
-On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](../build-with-claude/claude-platform-on-aws.md#api-key-authentication), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](../api/claude-platform-on-aws-iam-actions.md#managed-policies) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
+On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](../build-with-claude/claude-platform-on-aws.md#api-key-authentication), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](../api/claude-platform-on-aws-iam-actions.md#managed-policies) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don’t work with the Claude Platform on AWS endpoint.
 
-On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), the worker authenticates with [Google Cloud credentials](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#authentication), not an environment key. Grant the Google Cloud identity your worker uses `roles/claude.user` or `roles/claude.admin` on the project. Both roles include [`environments.processWork`](../api/claude-models-on-google-cloud-anthropic-managed-iam-permissions.md#environments), which the worker needs to poll for and manage work items, and the session and skill permissions it needs to run a session. Environment keys generated in the Claude Console don't work with the Claude Models on Google Cloud (Anthropic managed) endpoint. The pre-built workers in the `ant` CLI and in the Python, TypeScript, and Go SDKs don't support Claude Models on Google Cloud (Anthropic managed), so implement your own worker that calls the [Environments Work endpoints](../api/beta/environments/work.md) directly. See [Features not supported](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#features-not-supported).
+On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), the worker authenticates with [Google Cloud credentials](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#authentication), not an environment key. Grant the Google Cloud identity your worker uses `roles/claude.user` or `roles/claude.admin` on the project. Both roles include [`environments.processWork`](../api/claude-models-on-google-cloud-anthropic-managed-iam-permissions.md#environments), which the worker needs to poll for and manage work items, and the session and skill permissions it needs to run a session. Environment keys generated in the Claude Console don’t work with the Claude Models on Google Cloud (Anthropic managed) endpoint. The pre-built workers in the `ant` CLI and in the Python, TypeScript, and Go SDKs don’t support Claude Models on Google Cloud (Anthropic managed), so implement your own worker that calls the [Environments Work endpoints](../api/beta/environments/work.md) directly. See [Features not supported](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#features-not-supported).
 
-On macOS, the worker's bash tool runs the system Bash 3.2 at `/bin/bash`, even if you install a newer Bash with Homebrew. To use memory stores on macOS, first [prepare the macOS host](self-hosted-sandboxes-memory.md#prepare-a-macos-host).
+On macOS, the worker’s bash tool runs the system Bash 3.2 at `/bin/bash`, even if you install a newer Bash with Homebrew. To use memory stores on macOS, first [prepare the macOS host](self-hosted-sandboxes-memory.md#prepare-a-macos-host).
 
 ### Run your first session
 
@@ -177,12 +177,18 @@ export ANTHROPIC_ENVIRONMENT_ID="env_..."
 
 Run this on the worker host.
 
+**Homebrew (macOS)**
+
+```bash
+brew install anthropics/tap/ant
+```
+
 **curl (Linux/WSL)**
 
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=2.3.0
+VERSION=2.4.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -194,10 +200,24 @@ curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VER
 
 You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
 
-**Homebrew (macOS)**
+**Go**
+
+You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
 
 ```bash
-brew install anthropics/tap/ant
+go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
+```
+
+The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn’t already:
+
+```bash
+export PATH="$PATH:$(go env GOPATH)/bin"
+```
+
+Check the installation:
+
+```bash
+ant --version
 ```
 
 **Start the worker**
@@ -215,7 +235,7 @@ ant beta:worker poll --workdir /workspace
 
 **macOS**
 
-The root volume is read-only, so `mkdir` can't create `/workspace`. Use a directory in your home directory instead. If the agent uses skills, add this directory's full path (`echo ~/workspace` prints it) to its system prompt, as [Sandbox filesystem](self-hosted-sandboxes-reference.md#sandbox-filesystem) describes.
+The root volume is read-only, so `mkdir` can’t create `/workspace`. Use a directory in your home directory instead. If the agent uses skills, add this directory’s full path (`echo ~/workspace` prints it) to its system prompt, as [Sandbox filesystem](self-hosted-sandboxes-reference.md#sandbox-filesystem) describes.
 
 ```bash
 mkdir -p ~/workspace
@@ -305,7 +325,7 @@ If `workers_polling` (java, php: `workersPolling`; csharp, go: `WorkersPolling`)
 
 **Start a session**
 
-Set `AGENT_ID` (python, ruby: `agent_id`; typescript, java, csharp: `agentId`; go: `agentID`; php: `$agentId`) to your agent's ID. Create a session that targets the environment, then send it a task:
+Set `AGENT_ID` (python, ruby: `agent_id`; typescript, java, csharp: `agentId`; go: `agentID`; php: `$agentId`) to your agent’s ID. Create a session that targets the environment, then send it a task:
 
 ```bash cURL
 # Create a session
@@ -498,7 +518,7 @@ client.beta.sessions.events.send_(
 )
 ```
 
-The session waits in the environment's queue until a worker claims it. If no worker is connected, the session stays queued rather than failing.
+The session waits in the environment’s queue until a worker claims it. If no worker is connected, the session stays queued rather than failing.
 
 **Confirm the tools ran on your host**
 
@@ -516,7 +536,7 @@ cat /workspace/hello.txt
 cat ~/workspace/hello.txt
 ```
 
-The file describes your own host's kernel, so the agent's tool calls ran there. To follow the agent's work in real time, see [Session event stream](events-and-streaming.md).
+The file describes your own host’s kernel, so the agent’s tool calls ran there. To follow the agent’s work in real time, see [Session event stream](events-and-streaming.md).
 
 ## Session resources
 
@@ -530,9 +550,9 @@ Environment env_... is a self-hosted environment. `resources` are not supported 
 
 ## Self-hosted sandboxes and MCP tunnels
 
-Self-hosting controls *where the agent's code runs*. [MCP tunnels](../agents-and-tools/mcp-tunnels/overview.md) control *how Anthropic reaches MCP servers in your network*. The two are independent:
+Self-hosting controls *where the agent’s code runs*. [MCP tunnels](../agents-and-tools/mcp-tunnels/overview.md) control *how Anthropic reaches MCP servers in your network*. The two are independent:
 
-* A session in Anthropic's cloud sandboxes can reach private MCP servers through a tunnel. For example, a private MCP server might sit in front of a database or an internal API behind your firewall.
+* A session in Anthropic’s cloud sandboxes can reach private MCP servers through a tunnel. For example, a private MCP server might sit in front of a database or an internal API behind your firewall.
 * A self-hosted session can use either tunneled or public MCP servers.
 
 Use both when you want execution and tool access to stay inside your boundary. To skip the tunnel, [wrap the MCP server as custom tools](self-hosted-sandboxes-custom-tools.md#wrap-an-mcp-server-as-custom-tools) that your worker serves.

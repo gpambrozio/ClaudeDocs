@@ -73,7 +73,7 @@ Open a new terminal for the change to take effect.
 
 To override the key for a single run, pass [`--api-key-stdin`](using.md#global-flags) and pipe the key to the command. To point at a different API host, set `ANTHROPIC_BASE_URL` or pass `--base-url`.
 
-If you are using a [personal or service account key](../../manage-claude/authentication.md#key-types) that isn't scoped to a workspace, you must [specify the workspace](../../manage-claude/authentication.md#select-a-workspace) to run your command in. Do this by setting an `ANTHROPIC_WORKSPACE_ID` environment variable, which the CLI reads automatically, or by using the [`--workspace-id` flag](using.md#global-flags). The value must be a `wrkspc_...` ID.
+If you are using a [personal or service account key](../../manage-claude/authentication.md#key-types) that isn’t scoped to a workspace, you must [specify the workspace](../../manage-claude/authentication.md#select-a-workspace) to run your command in. Do this by setting an `ANTHROPIC_WORKSPACE_ID` environment variable, which the CLI reads automatically, or by using the [`--workspace-id` flag](using.md#global-flags). The value must be a `wrkspc_...` ID.
 
 ```bash CLI
 ant messages create \
@@ -105,7 +105,7 @@ Workspace
   (active) * Workspace                                      wrkspc_01... (Engineering)
 ```
 
-Read the `(active)` rows to see which credential source and workspace won. The command reports status rather than performing a health check, so don't script against the exit status. For the full ordering of credential sources, see [Credential precedence](../../manage-claude/wif-reference.md#credential-precedence).
+Read the `(active)` rows to see which credential source and workspace won. The command reports status rather than performing a health check, so don’t script against the exit status. For the full ordering of credential sources, see [Credential precedence](../../manage-claude/wif-reference.md#credential-precedence).
 
 ## Switch between workspaces
 

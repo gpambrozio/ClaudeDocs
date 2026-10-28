@@ -18,9 +18,9 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $4 / MTok
 
 ## Overview
 
-Claude Opus 5.5 is built for long-running agentic coding and knowledge work, priced at $4 / $20 USD per million input / output tokens. Four breaking changes affect code already running on Claude Opus 5: [thinking can't be disabled](whats-new-opus-5-5.md#thinking-cant-be-disabled), [forced tool use returns an error](whats-new-opus-5-5.md#forced-tool-use-is-not-supported), [thinking blocks are tied to the model and the conversation](whats-new-opus-5-5.md#thinking-blocks-are-tied-to-the-model-that-produced-them), and, on the Claude API and Claude Models on Google Cloud (Google managed), [the earlier `computer_20251124` computer use tool is not accepted](whats-new-opus-5-5.md#computer-20251124-is-not-supported). The first three also apply on Claude Fable 5.1. A further change alters the response shape without failing any request: [text between tool calls comes back in `thinking` blocks](whats-new-opus-5-5.md#text-between-tool-calls) whose text is empty at the default `display` setting. An application that streams that text to its users as progress updates goes quiet between tool calls until it sets a `display` value that returns the text.
+Claude Opus 5.5 is built for long-running agentic coding and knowledge work, priced at $4 / $20 USD per million input / output tokens. Four breaking changes affect code already running on Claude Opus 5: [thinking can’t be disabled](whats-new-opus-5-5.md#thinking-cant-be-disabled), [forced tool use returns an error](whats-new-opus-5-5.md#forced-tool-use-is-not-supported), [thinking blocks are tied to the model and the conversation](whats-new-opus-5-5.md#thinking-blocks-are-tied-to-the-model-that-produced-them), and, on the Claude API and Claude Models on Google Cloud (Google managed), [the earlier `computer_20251124` computer use tool is not accepted](whats-new-opus-5-5.md#computer-20251124-is-not-supported). The first three also apply on Claude Fable 5.1. A further change alters the response shape without failing any request: [text between tool calls comes back in `thinking` blocks](whats-new-opus-5-5.md#text-between-tool-calls) whose text is empty at the default `display` setting. An application that streams that text to its users as progress updates goes quiet between tool calls until it sets a `display` value that returns the text.
 
-[What's new in Claude Opus 5.5](whats-new-opus-5-5.md)
+[What’s new in Claude Opus 5.5](whats-new-opus-5-5.md)
 
 ## How it compares
 
@@ -90,7 +90,7 @@ Claude Opus 5.5 is built for long-running agentic coding and knowledge work, pri
 
 ## Good to know
 
-* Adaptive thinking is always on and can't be turned off. Control thinking depth with the [effort parameter](../../build-with-claude/effort.md).
+* Adaptive thinking is always on and can’t be turned off. Control thinking depth with the [effort parameter](../../build-with-claude/effort.md).
 * On the [Message Batches API](../../build-with-claude/batch-processing.md#extended-output-beta), Claude Opus 5.5 supports up to 300k output tokens with the `output-300k-2026-03-24` beta header.
 * The minimum cacheable prompt length is 512 tokens. See [Prompt caching](../../build-with-claude/prompt-caching.md#cache-limitations).
 * Query limits and capabilities programmatically with the [Models API](../../api/models/list.md).

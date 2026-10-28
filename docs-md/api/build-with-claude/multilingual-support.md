@@ -36,7 +36,7 @@ The following table shows zero-shot chain-of-thought evaluation scores for Claud
 
 1 With [extended thinking](extended-thinking.md).
 
-These metrics are based on [MMLU (Massive Multitask Language Understanding)](https://en.wikipedia.org/wiki/MMLU) English test sets that were translated into 14 additional languages by professional human translators, as documented in [OpenAI's simple-evals repository](https://github.com/openai/simple-evals/blob/main/multilingual_mmlu_benchmark_results.md). The use of human translators for this evaluation ensures high-quality translations, particularly important for languages with fewer digital resources.
+These metrics are based on [MMLU (Massive Multitask Language Understanding)](https://en.wikipedia.org/wiki/MMLU) English test sets that were translated into 14 additional languages by professional human translators, as documented in [OpenAI’s simple-evals repository](https://github.com/openai/simple-evals/blob/main/multilingual_mmlu_benchmark_results.md). The use of human translators for this evaluation ensures high-quality translations, particularly important for languages with fewer digital resources.
 
 ***
 
@@ -171,7 +171,7 @@ message = client.messages.create(
 puts message.content
 ```
 
-If your application lets users pick a language at runtime, interpolate that choice into the system prompt rather than relying on Claude to infer it from the user's message. To translate between two specific languages, name both: `Translate the user's message from German to Korean. Respond with only the translation.`
+If your application lets users pick a language at runtime, interpolate that choice into the system prompt rather than relying on Claude to infer it from the user’s message. To translate between two specific languages, name both: `Translate the user's message from German to Korean. Respond with only the translation.`
 
 ***
 
@@ -179,7 +179,7 @@ If your application lets users pick a language at runtime, interpolate that choi
 
 When working with multilingual content:
 
-1. **Provide clear language context:** Although Claude can detect the target language automatically, explicitly stating the input and output languages you want improves reliability. For enhanced fluency, you can prompt Claude to use "idiomatic speech as if it were a native speaker."
+1. **Provide clear language context:** Although Claude can detect the target language automatically, explicitly stating the input and output languages you want improves reliability. For enhanced fluency, you can prompt Claude to use “idiomatic speech as if it were a native speaker.”
 2. **Use native scripts:** Submit text in its native script rather than transliteration for optimal results.
 3. **Consider cultural context:** Effective communication often requires cultural and regional awareness beyond pure translation.
 

@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/manage-claude/cmek-troubleshooting
 description: Find the cause and fix for a CMEK error message, a failed verification, or an unexpected log entry.
 ---
 
-**Verify** in the Claude Console, **Add** on claude.ai, and the Admin API's validate call all run the same check. When it fails (**Connection failed** in the Claude Console), see the causes for [AWS KMS](cmek-troubleshooting.md#aws-kms), [Google Cloud KMS](cmek-troubleshooting.md#google-cloud-kms), or [Azure Key Vault](cmek-troubleshooting.md#azure-key-vault).
+**Verify** in the Claude Console, **Add** on claude.ai, and the Admin API’s validate call all run the same check. When it fails (**Connection failed** in the Claude Console), see the causes for [AWS KMS](cmek-troubleshooting.md#aws-kms), [Google Cloud KMS](cmek-troubleshooting.md#google-cloud-kms), or [Azure Key Vault](cmek-troubleshooting.md#azure-key-vault).
 
 If a feature stopped working, it might be one that customer-managed encryption keys (CMEK) turn off. Check the [Claude Platform list](cmek-coverage-claude-platform.md#turned-off-or-changed) or [Claude Enterprise list](cmek-coverage-claude-enterprise.md#turned-off-or-changed).
 
@@ -20,12 +20,12 @@ If nothing here fits, contact your Anthropic account team.
 Customer-managed encryption key is disabled or revoked. Re-enable the key to restore access.
 ```
 
-This 400 error means your key management service refused Anthropic's call. Check these causes in order:
+This 400 error means your key management service refused Anthropic’s call. Check these causes in order:
 
 1. The key is disabled.
-2. Anthropic's access to the key was removed. [Your setup page](cmek.md#set-it-up) shows the access Anthropic needs.
+2. Anthropic’s access to the key was removed. [Your setup page](cmek.md#set-it-up) shows the access Anthropic needs.
 3. On AWS KMS, the key policy [lists workspaces](cmek-aws-kms-workspaces.md) but not this one.
-4. On AWS KMS, an IP condition blocks [Anthropic's outbound IP addresses](../api/ip-addresses.md#outbound-ip-addresses).
+4. On AWS KMS, an IP condition blocks [Anthropic’s outbound IP addresses](../api/ip-addresses.md#outbound-ip-addresses).
 
 Fix the cause. [Two limits apply](cmek-key-lifecycle.md#restore-access) when access returns.
 
@@ -35,7 +35,7 @@ Fix the cause. [Two limits apply](cmek-key-lifecycle.md#restore-access) when acc
 The request to your key management service was blocked by its network access controls (for example, a KMS firewall or IP allowlist). Verify that your KMS network rules allow requests from Anthropic's published IP addresses, or contact Anthropic support if your configuration looks correct.
 ```
 
-This is a 400 error. The key itself might be healthy. Allow [Anthropic's published IP addresses](../api/ip-addresses.md) in your key management service's network rules.
+This is a 400 error. The key itself might be healthy. Allow [Anthropic’s published IP addresses](../api/ip-addresses.md) in your key management service’s network rules.
 
 ### `cmek_key_unreachable`
 
@@ -43,7 +43,7 @@ This is a 400 error. The key itself might be healthy. Allow [Anthropic's publish
 The workspace's customer-managed encryption key could not be reached. Try again shortly. If this continues, check that the key is available in your key management service, or contact Anthropic support.
 ```
 
-This 503 error means [Anthropic couldn't reach your key](cmek-key-lifecycle.md#unreachable-key). Retry the request.
+This 503 error means [Anthropic couldn’t reach your key](cmek-key-lifecycle.md#unreachable-key). Retry the request.
 
 ## Verification fails: AWS KMS
 
@@ -51,7 +51,7 @@ This 503 error means [Anthropic couldn't reach your key](cmek-key-lifecycle.md#u
 | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Wrong organization ID                                | The `org_uuid` condition must list [your Anthropic organization ID](cmek-aws-kms.md#prerequisites), the UUID without the `org_` prefix. |
 | A workspace is missing from the policy               | A `compartment_uuid` condition must [list the compartment ID](cmek-aws-kms-workspaces.md) of each workspace the key is attached to.     |
-| Access granted through IAM instead of the key policy | Anthropic's role needs access in [the key policy itself](cmek-aws-kms.md#key-policy).                                                   |
+| Access granted through IAM instead of the key policy | Anthropic’s role needs access in [the key policy itself](cmek-aws-kms.md#key-policy).                                                   |
 
 To print the key policy, run:
 
@@ -64,7 +64,7 @@ aws kms get-key-policy \
 
 ### A key that already protects data
 
-If you're [replacing the policy on a key](cmek-aws-kms-workspaces.md#replace-the-key-policy) that already protects data, add this statement so Anthropic can still decrypt that data. In its condition, list the compartment ID of every workspace the key is or was attached to.
+If you’re [replacing the policy on a key](cmek-aws-kms-workspaces.md#replace-the-key-policy) that already protects data, add this statement so Anthropic can still decrypt that data. In its condition, list the compartment ID of every workspace the key is or was attached to.
 
 ```json
 {
@@ -88,8 +88,8 @@ If you're [replacing the policy on a key](cmek-aws-kms-workspaces.md#replace-the
 | Cause                             | Fix                                                                                                                                                                                   |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Wrong organization label          | The key needs the [organization label](cmek-google-cloud-kms.md#organization-label), with your Anthropic organization ID in lowercase. |
-| Domain restricted sharing         | This organization policy blocks the grant to Anthropic's service account. [Add an exception](cmek-google-cloud-kms.md#prerequisites).  |
-| Disabled or destroyed key version | The key's primary version must be enabled.                                                                                                                                            |
+| Domain restricted sharing         | This organization policy blocks the grant to Anthropic’s service account. [Add an exception](cmek-google-cloud-kms.md#prerequisites).  |
+| Disabled or destroyed key version | The key’s primary version must be enabled.                                                                                                                                            |
 
 To check the grant, run:
 
@@ -104,9 +104,9 @@ gcloud kms keys get-iam-policy <your-key-name> \
 
 | Cause                                     | Fix                                                                                                                                                                  |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Wrong organization tag                    | The key's current version needs the [organization tag](cmek-azure-key-vault.md#organization-tag).                     |
+| Wrong organization tag                    | The key’s current version needs the [organization tag](cmek-azure-key-vault.md#organization-tag).                     |
 | Role assignment not yet in effect         | A new role assignment can take a few minutes. Wait, then try again.                                                                                                  |
-| The vault's network rules block Anthropic | Check the rules against the [vault settings Anthropic needs](cmek-azure-key-vault.md#check-your-vault-configuration). |
+| The vault’s network rules block Anthropic | Check the rules against the [vault settings Anthropic needs](cmek-azure-key-vault.md#check-your-vault-configuration). |
 
 ## Attaching fails on Claude Platform on AWS
 
@@ -117,13 +117,13 @@ Claude Platform on AWS has no **Verify** step, so a problem with the key shows w
 | Key policy mismatch   | Print the key policy with the [`get-key-policy` command](cmek-troubleshooting.md#aws-kms) and compare it with the [policy on the setup page](cmek-claude-platform-on-aws.md#prepare-the-key-policy). |
 | Condition mismatch    | Any `EncryptionContext` or `aws:SourceArn` condition must include this workspace.                                                                                                                                                                                                                  |
 | Key state or location | The key must be enabled, single-Region, and in the same AWS account and region as the workspace.                                                                                                                                                                                                   |
-| Missing permissions   | The principal you're signed in as needs `kms:DescribeKey`, `kms:Encrypt`, and `kms:Decrypt` on the key.                                                                                                                                                                                            |
+| Missing permissions   | The principal you’re signed in as needs `kms:DescribeKey`, `kms:Encrypt`, and `kms:Decrypt` on the key.                                                                                                                                                                                            |
 
-If attaching still fails, find the denied `kms:` event in CloudTrail in the key's account. It shows the calling principal and, for cryptographic calls, the encryption context. Fix the cause, then click **Save** again.
+If attaching still fails, find the denied `kms:` event in CloudTrail in the key’s account. It shows the calling principal and, for cryptographic calls, the encryption context. Fix the cause, then click **Save** again.
 
 ## Attaching or adding a key is refused
 
-### The workspace doesn't retain data
+### The workspace doesn’t retain data
 
 ```text wrap
 CMEK keys can only be attached to workspaces in this organization that have inference data retention enabled.
@@ -133,11 +133,11 @@ CMEK keys can only be attached to workspaces in this organization that have infe
 
 ### The workspace has no Encryption key setting
 
-Only [a workspace that retains data](cmek-data-retention.md#data-retention) has this setting, so select **Standard data retention** for the workspace first. A ZDR organization's default workspace can't be switched, so use another.
+Only [a workspace that retains data](cmek-data-retention.md#data-retention) has this setting, so select **Standard data retention** for the workspace first. A ZDR organization’s default workspace can’t be switched, so use another.
 
 ### There is no Encryption keys section
 
-In the Claude Console, select **Organization** from the dropdown menu at the top of the Data retention page. If the section is still missing, your role doesn't include it or CMEK isn't turned on for your organization. Your Anthropic account team turns CMEK on.
+In the Claude Console, select **Organization** from the dropdown menu at the top of the Data retention page. If the section is still missing, your role doesn’t include it or CMEK isn’t turned on for your organization. Your Anthropic account team turns CMEK on.
 
 ### The workspace already has a key
 
@@ -145,7 +145,7 @@ In the Claude Console, select **Organization** from the dropdown menu at the top
 This workspace already has a different external key attached.
 ```
 
-A workspace's key can't be replaced, so [create a new workspace](cmek-key-lifecycle.md#change-keys) for a different key.
+A workspace’s key can’t be replaced, so [create a new workspace](cmek-key-lifecycle.md#change-keys) for a different key.
 
 ### Adding a key on claude.ai fails
 
@@ -165,7 +165,7 @@ To filter them out, match all three values:
 * `userIdentity.accountId`: `915198916910`
 * `resources.ARN`: `arn:aws:kms:<REGION>:<AWS_ACCOUNT_ID>:key/<KEY_ID>`
 
-The first value alone isn't enough, because any caller can set it.
+The first value alone isn’t enough, because any caller can set it.
 
 ---
 

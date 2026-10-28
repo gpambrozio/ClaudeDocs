@@ -14,8 +14,8 @@ Creating an external key is what **Add key** does in the Claude Console, and val
 
 * Customer-managed encryption keys (CMEK) are [turned on for your organization](cmek.md#availability).
 * You have an [Admin API key](admin-api-keys.md). The samples read it from `ANTHROPIC_API_KEY`.
-* You've created your key in [AWS KMS](cmek-aws-kms.md#encryption-key-setup), [Google Cloud KMS](cmek-google-cloud-kms.md#encryption-key-setup), or [Azure Key Vault](cmek-azure-key-vault.md#encryption-key-setup), and kept the values the setup steps tell you to copy.
-* You have a workspace that [retains data](cmek-data-retention.md#data-retention), ideally a new one, because [existing data stays under Anthropic's key](cmek-how-it-works.md#when-your-key-takes-effect).
+* You’ve created your key in [AWS KMS](cmek-aws-kms.md#encryption-key-setup), [Google Cloud KMS](cmek-google-cloud-kms.md#encryption-key-setup), or [Azure Key Vault](cmek-azure-key-vault.md#encryption-key-setup), and kept the values the setup steps tell you to copy.
+* You have a workspace that [retains data](cmek-data-retention.md#data-retention), ideally a new one, because [existing data stays under Anthropic’s key](cmek-how-it-works.md#when-your-key-takes-effect).
 
 ## Create, validate, and attach the key
 
@@ -335,7 +335,7 @@ Replace the placeholders:
 * `<friendly-name>`: a display name
 * `https://<your-vault-name>.vault.azure.net/`: the vault URI
 * `<your-key-name>`: the key name
-* `<your-tenant-id>`: the vault's tenant ID
+* `<your-tenant-id>`: the vault’s tenant ID
 
 ```bash cURL
 curl -sS "https://api.anthropic.com/v1/organizations/external_keys" \
@@ -610,7 +610,7 @@ If `status` is `failure`, the `error` field says why. See [Troubleshoot CMEK](cm
 
 **Attach the key to a workspace**
 
-Attaching a key [can't be undone](cmek-key-lifecycle.md#what-each-action-does). If the key is deleted, Anthropic can't recover the data it protects.
+Attaching a key [can’t be undone](cmek-key-lifecycle.md#what-each-action-does). If the key is deleted, Anthropic can’t recover the data it protects.
 
 Replace `<workspace-id>` with the workspace ID, which starts with `wrkspc_`, and `ekey_<id>` with the external key ID.
 
@@ -723,7 +723,7 @@ puts "id: #{workspace.id}"
 puts "external_key_id: #{workspace.external_key_id}"
 ```
 
-The response shows the attached key's ID in `external_key_id`. If the request is refused, [look up the error](cmek-troubleshooting.md#refused).
+The response shows the attached key’s ID in `external_key_id`. If the request is refused, [look up the error](cmek-troubleshooting.md#refused).
 
 ---
 
