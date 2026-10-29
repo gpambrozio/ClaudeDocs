@@ -335,7 +335,7 @@ puts "stop_reason=#{response.stop_reason}, blocks=#{response.content.length}"
 
 The request includes the following parts:
 
-* **`model`:** A [model that supports the code execution tool](../tool-use/code-execution-tool.md#compatibility)
+* **`model`:** A [model that supports the code execution tool](../tool-use/code-execution-tool.md#availability-feature-support)
 * **`container.skills`:** Specifies which Skills Claude can use
 * **`type: "anthropic"`:** Indicates this is an Anthropic-managed Skill
 * **`skill_id: "pptx"`:** The PowerPoint Skill identifier

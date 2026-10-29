@@ -4,6 +4,33 @@
 title: Batch processing
 url: https://platform.claude.com/docs/en/build-with-claude/batch-processing
 description: Process large volumes of Messages requests asynchronously with the Message Batches API, cutting costs by 50 percent and increasing throughput.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: not-eligible
+    note: 29-day retention; async storage required.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Claude Models on Google Cloud (Anthropic managed): ga
 ---
 
 Batch processing is a powerful approach for handling large volumes of requests efficiently. Instead of processing requests one at a time with immediate responses, batch processing allows you to submit multiple requests together for asynchronous processing. This pattern is particularly useful when:
@@ -14,8 +41,6 @@ Batch processing is a powerful approach for handling large volumes of requests e
 * You’re running large-scale evaluations or analyses
 
 The Message Batches API is Anthropic’s first implementation of this pattern.
-
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/api-and-data-retention.md).
 
 # Message Batches API
 
@@ -1794,12 +1819,6 @@ Note that the failure of one request in a batch does not affect the processing o
 
 * **Result availability:** Batch results are available for 29 days after the batch is created, allowing ample time for retrieval and processing.
 
-## Data retention
-
-Batch processing stores request and response data for up to 29 days after batch creation. You can delete a message batch at any time after processing using the [`DELETE /v1/messages/batches/{batch_id}`](../api/messages/batches/delete.md) endpoint. To delete an in-progress batch, cancel it first. Asynchronous processing requires server-side storage of both inputs and outputs until batch completion and result retrieval.
-
-For ZDR eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md).
-
 ## FAQ
 
 **How long does it take for a batch to process?**
@@ -1842,6 +1861,39 @@ The Message Batches API is designed with strong privacy and data separation meas
 **Can I use prompt caching in the Message Batches API?**
 
 Yes, it is possible to use prompt caching with the Message Batches API. However, because asynchronous batch requests can be processed concurrently and in any order, cache hits are provided on a best-effort basis.
+
+## Availability
+
+Batch processing is available on every model.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Available
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md) |
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Not available
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                           | HIPAA        |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Status  | Not eligible                                                                                                                                  | Not eligible |
+| Details | 29-day retention; async storage required. [Learn more](batch-processing.md#data-retention) | —            |
+
+Applicable endpoints:
+
+* `/v1/messages/batches`
+
+Batch processing stores request and response data for up to 29 days after batch creation. You can delete a message batch at any time after processing using the [`DELETE /v1/messages/batches/{batch_id}`](../api/messages/batches/delete.md) endpoint. To delete an in-progress batch, cancel it first. Asynchronous processing requires server-side storage of both inputs and outputs until batch completion and result retrieval.
 
 ## Next steps
 

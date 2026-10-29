@@ -4,9 +4,30 @@
 title: Dreams
 url: https://platform.claude.com/docs/en/managed-agents/dreams
 description: Let Claude review past sessions to curate an agent's memory and surface new insights.
+featureMetadata:
+  status: research-preview
+  betaHeader: managed-agents-2026-04-01, dreaming-2026-04-21
+  zdr:
+    eligibility: not-eligible
+    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-fable-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-sonnet-4-6
+  supportedPlatforms:
+    Claude API: research-preview
 ---
 
-Dreaming is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+Dreams are in research preview.
+
+* [Request access](https://claude.com/form/claude-managed-agents)
 
 Agents write to their [memory stores](memory.md) as they work, but these writes are local and incremental: over many sessions a memory store accumulates duplicates, contradictions, and stale entries.
 
@@ -615,6 +636,44 @@ Dreams are billed at standard API token rates for the model you select; `usage` 
 | Supported models                                   | `claude-opus-5-5`, `claude-fable-5-1`, `claude-opus-5`, `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5-5`, `claude-sonnet-5`, `claude-sonnet-4-6` |
 
 Default rate limits apply to dream creation while this feature is in research preview. [Contact support](https://support.claude.com) if you need higher limits.
+
+## Availability
+
+Dreams are in research preview on select models.
+
+### API support
+
+#### [Managed Agents](overview.md)
+
+* Availability: Available
+
+| Status           | Cloud platforms | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ---------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Research preview | Claude API      | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md) |
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+* `managed-agents-2026-04-01`
+* `dreaming-2026-04-21`
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                      | HIPAA                                                                        |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Status  | Not eligible                                                                                                                                             | Not eligible                                                                 |
+| Details | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes. | Applies to all Managed Agents sub-features, including Self-hosted sandboxes. |
+
+Applicable endpoints:
+
+* `/v1/agents`
+* `/v1/sessions`
+* `/v1/environments`
 
 ---
 

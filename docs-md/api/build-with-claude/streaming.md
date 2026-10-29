@@ -4,6 +4,36 @@
 title: Streaming messages
 url: https://platform.claude.com/docs/en/build-with-claude/streaming
 description: Stream Messages API responses incrementally with server-sent events, including text, tool use, and thinking deltas.
+featureMetadata:
+  status: ga
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Claude Models on Google Cloud (Anthropic managed): ga
+    Amazon Bedrock: ga
+    Amazon Bedrock (InvokeModel):
+      availability: ga
+      note: The older Amazon Bedrock InvokeModel integration does not stream plain server-sent events.
+    Claude Models on Google Cloud (Google managed): ga
+    Microsoft Foundry: ga
 ---
 
 When creating a Message, you can set `"stream": true` to incrementally stream the response using [server-sent events](https://developer.mozilla.org/en-US/Web/API/Server-sent%5Fevents/Using%5Fserver-sent%5Fevents) (SSE).
@@ -1514,6 +1544,23 @@ Use the official SDKs, which handle streaming, accumulation, and reconnection fo
 **Batch processing**
 
 Process large volumes of requests asynchronously when you don’t need real-time responses.
+
+## Availability
+
+Message streaming is available on every model.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Available
+
+| Status                | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available             | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md), [Amazon Bedrock](claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) |
+| Available<sup>1</sup> | [Amazon Bedrock (InvokeModel)](claude-on-amazon-bedrock-legacy.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+
+1. The older Amazon Bedrock InvokeModel integration does not stream plain server-sent events.
 
 ---
 

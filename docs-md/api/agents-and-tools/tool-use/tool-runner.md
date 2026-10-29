@@ -4,6 +4,33 @@
 title: Tool runner (SDK)
 url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner
 description: Use the SDK's tool runner to handle the agentic loop, error wrapping, and type safety automatically.
+featureMetadata:
+  status: beta
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: beta
+    Claude Platform on AWS: beta
+    Amazon Bedrock: beta
+    Amazon Bedrock (InvokeModel): beta
+    Claude Models on Google Cloud (Google managed): beta
+    Microsoft Foundry: beta
 ---
 
 The tool runner handles the agentic loop, error wrapping, and type safety so you don’t have to. When you need human-in-the-loop approval, custom logging, or conditional execution, use the [manual loop](handle-tool-calls.md) instead.
@@ -1748,6 +1775,29 @@ Enable, format, and disable parallel tool calls, with message-history guidance a
 **Define tools**
 
 Specify tool schemas, write effective descriptions, and control when Claude calls your tools.
+
+## Availability
+
+Tool runner is in beta on every model.
+
+### API support
+
+#### [Messages API](../../build-with-claude/working-with-messages.md)
+
+* Availability: Available
+
+| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta   | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |
+
+#### [Managed Agents](../../managed-agents/overview.md)
+
+* Availability: Available
+* Usage: The Python, TypeScript and Go SDKs have a session tool runner that runs your tools for a session’s custom tool calls. The session itself runs the agent loop.
+
+| Status | Cloud platforms                                                                                                    |
+| ------ | ------------------------------------------------------------------------------------------------------------------ |
+| Beta   | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) |
 
 ---
 

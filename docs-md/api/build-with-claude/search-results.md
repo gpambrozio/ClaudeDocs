@@ -4,9 +4,42 @@
 title: Search results
 url: https://platform.claude.com/docs/en/build-with-claude/search-results
 description: Get natural citations for RAG applications by providing search results with source attribution
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements).
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Amazon Bedrock: ga
+    Amazon Bedrock (InvokeModel): ga
+    Claude Models on Google Cloud (Google managed): ga
+    Microsoft Foundry: ga
 ---
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/api-and-data-retention.md).
+**API support**: Usage differs by product.
+
+* **Messages API**: Always on. Send `search_result` blocks in a tool result or directly in a user message.
+* **Managed Agents**: Always on. Accepted only in tool results, such as a `user.custom_tool_result` event, not in `user.message` events.
 
 Search result content blocks let Claude cite your own content the same way it cites web search results: each citation carries the source and title you provided. Use them in RAG (Retrieval-Augmented Generation) applications where Claude needs to attribute answers to your documents.
 
@@ -2140,6 +2173,42 @@ See the complete Messages API documentation, including content block types.
 **Prompt caching**
 
 Cache search results with `cache_control` to reduce cost and latency on repeated requests.
+
+## Availability
+
+Search results are available on every model and eligible for zero data retention and HIPAA readiness.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Always on
+* Usage: Send `search_result` blocks in a tool result or directly in a user message.
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Amazon Bedrock](claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) |
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Always on
+* Usage: Accepted only in tool results, such as a `user.custom_tool_result` event, not in `user.message` events.
+
+| Status    | Cloud platforms                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md) |
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item   | Zero data retention                                                                                                                                       | HIPAA    |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Status | Eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
+
+Applicable endpoints:
+
+* `/v1/messages` with `search_results` source
 
 ---
 

@@ -15,13 +15,13 @@ featureMetadata:
     - claude-mythos-preview
     - claude-opus-5-5
     - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
     - claude-opus-4-8
     - claude-opus-4-7
     - claude-opus-4-6
-    - claude-sonnet-5-5
-    - claude-sonnet-5
     - claude-sonnet-4-6
-    - claude-haiku-5-5
   supportedPlatforms:
     Claude API: beta
     Claude Platform on AWS: beta
@@ -539,6 +539,28 @@ The `stop_reason` check is unchanged from the loop: a response without a block l
 ## Keep thinking valid while the summary is built
 
 Turns that arrive while the summary is being written are kept turns. If you send thinking blocks back on a model with [preserved thinking](preserved-thinking.md), the thinking in those turns stays valid only while the [conditions for kept thinking](compaction-thinking-blocks.md#conditions-for-kept-thinking-to-stay-valid) hold.
+
+## Availability
+
+Background compaction is in beta on select models.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Available
+
+| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                  | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta   | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md) |
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+* `compact-2026-09-04`
 
 ---
 

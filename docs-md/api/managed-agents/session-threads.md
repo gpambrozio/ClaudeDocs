@@ -8,8 +8,28 @@ featureMetadata:
   topic:
     title: Managed Agents
     url: https://platform.claude.com/docs/en/managed-agents/overview
-  status: beta
   betaHeader: managed-agents-2026-04-01
+  zdr:
+    eligibility: not-eligible
+    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
 ---
 
 In a [multiagent session](multiagent-orchestration.md), each agent works in its own **session thread**. This page covers how to list, interrupt, and archive threads, the events they send, and how tool permissions work across them. A [workflow run](workflow-runs.md) creates session threads too.
@@ -760,6 +780,43 @@ end
 ```
 
 The previous pattern answers the calls that an idle event lists. On the primary stream, a subagent’s `session.thread_status_idle` event can arrive before the `agent.tool_use` or `agent.mcp_tool_use` events that its `stop_reason.event_ids` lists. A `user.tool_confirmation` for a call whose event hasn’t arrived yet can return 400. To avoid that, answer each call whose [`evaluated_permission` (java, php: `evaluatedPermission`; csharp, go: `EvaluatedPermission`)](permission-policies.md#see-how-each-call-was-evaluated) is `ask` when its own event arrives on the primary stream.
+
+## Availability
+
+Session threads are available on every model.
+
+### API support
+
+#### [Managed Agents](overview.md)
+
+* Availability: Always on
+
+| Status    | Cloud platforms         |
+| --------- | ----------------------- |
+| Available | All supported platforms |
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+* `managed-agents-2026-04-01`
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                      | HIPAA                                                                        |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Status  | Not eligible                                                                                                                                             | Not eligible                                                                 |
+| Details | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes. | Applies to all Managed Agents sub-features, including Self-hosted sandboxes. |
+
+Applicable endpoints:
+
+* `/v1/agents`
+* `/v1/sessions`
+* `/v1/environments`
 
 ---
 

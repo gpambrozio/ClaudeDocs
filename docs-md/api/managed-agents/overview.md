@@ -10,6 +10,31 @@ featureMetadata:
     url: https://platform.claude.com/docs/en/managed-agents/overview
   status: beta
   betaHeader: managed-agents-2026-04-01
+  zdr:
+    eligibility: not-eligible
+    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: beta
+    Claude Platform on AWS: beta
+    Claude Models on Google Cloud (Anthropic managed): beta
 ---
 
 Anthropic offers two ways to build with Claude, each suited to different use cases:
@@ -105,6 +130,39 @@ Within the beta, [MCP tunnels](../agents-and-tools/mcp-tunnels/overview.md) and 
 Claude Managed Agents is stateful by design: sessions are long-running, resume cleanly after pauses, and store conversation history, sandbox state, and outputs server-side. Because of this, Managed Agents is not currently eligible for [Zero Data Retention](../manage-claude/api-and-data-retention.md#zero-data-retention-zdr-scope) or HIPAA Business Associate Agreement (BAA) coverage. You retain control over this data: you can [delete sessions](session-operations.md#deleting-a-session), and separately delete any [files](../build-with-claude/files.md#delete-a-file) you uploaded, at any time through the API. For eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md#feature-eligibility).
 
 See [Rate limits](reference.md#rate-limits) and [Branding guidelines](reference.md#branding-guidelines) in the reference.
+
+## Availability
+
+Managed Agents are in beta on every model.
+
+### API support
+
+| Status | Cloud platforms                                                                                                                                                                                                                                                                | Models                                                            |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Beta   | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | [All models](../models/overview.md) |
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+* `managed-agents-2026-04-01`
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                      | HIPAA                                                                        |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Status  | Not eligible                                                                                                                                             | Not eligible                                                                 |
+| Details | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes. | Applies to all Managed Agents sub-features, including Self-hosted sandboxes. |
+
+Applicable endpoints:
+
+* `/v1/agents`
+* `/v1/sessions`
+* `/v1/environments`
 
 ---
 

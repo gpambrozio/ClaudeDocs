@@ -8,8 +8,28 @@ featureMetadata:
   topic:
     title: Managed Agents
     url: https://platform.claude.com/docs/en/managed-agents/overview
-  status: beta
   betaHeader: managed-agents-2026-04-01
+  zdr:
+    eligibility: not-eligible
+    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
 ---
 
 Environments define the sandbox configuration where your agent runs. You create an environment once, then reference its ID each time you start a session. Multiple sessions can share the same environment, but each session gets its own isolated sandbox (a fresh Linux container).
@@ -772,6 +792,43 @@ Pre-installed packages, databases, and utilities available in cloud sandboxes.
 **Start a session**
 
 Create a session to run your agent and start running tasks.
+
+## Availability
+
+Cloud sandboxes are available on every model.
+
+### API support
+
+#### [Managed Agents](overview.md)
+
+* Availability: Available
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                | Models                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Available | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | [All models](../models/overview.md) |
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+* `managed-agents-2026-04-01`
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                      | HIPAA                                                                        |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Status  | Not eligible                                                                                                                                             | Not eligible                                                                 |
+| Details | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes. | Applies to all Managed Agents sub-features, including Self-hosted sandboxes. |
+
+Applicable endpoints:
+
+* `/v1/agents`
+* `/v1/sessions`
+* `/v1/environments`
 
 ---
 

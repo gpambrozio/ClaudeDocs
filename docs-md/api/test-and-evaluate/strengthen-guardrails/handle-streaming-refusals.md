@@ -4,7 +4,38 @@
 title: Handle streaming refusals
 url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals
 description: Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.
+featureMetadata:
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Amazon Bedrock: ga
+    Amazon Bedrock (InvokeModel): ga
+    Claude Models on Google Cloud (Google managed): ga
+    Microsoft Foundry: ga
 ---
+
+**API support**: Usage differs by product.
+
+* **Messages API**: Always on. The stream ends with `stop_reason` `"refusal"`, and `stop_details` (`category` and `explanation`) arrives on the `message_delta` event.
+* **Managed Agents**: Always on. A refused turn ends, and the session goes idle with `stop_reason.type` `"refusal"`.
 
 Starting with Claude 4 models, streaming responses from Claude’s API return **`stop_reason`: `"refusal"`** when streaming classifiers intervene to handle potential policy violations. This safety feature helps maintain content compliance during real-time streaming.
 
@@ -322,6 +353,30 @@ Stream responses and read `stop_reason` from `message_delta` events as they arri
 **Multilingual support**
 
 Serve users across languages with Claude’s cross-lingual capabilities.
+
+## Availability
+
+Streaming refusals are available or in beta, depending on the API.
+
+### API support
+
+#### [Messages API](../../build-with-claude/working-with-messages.md)
+
+* Availability: Always on
+* Usage: The stream ends with `stop_reason` `"refusal"`, and `stop_details` (`category` and `explanation`) arrives on the `message_delta` event.
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |
+
+#### [Managed Agents](../../managed-agents/overview.md)
+
+* Availability: Always on
+* Usage: A refused turn ends, and the session goes idle with `stop_reason.type` `"refusal"` and `stop_details` (`category` and `explanation`) on the `session.status_idle` event.
+
+| Status | Cloud platforms                                                                                                    |
+| ------ | ------------------------------------------------------------------------------------------------------------------ |
+| Beta   | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) |
 
 ---
 

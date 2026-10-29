@@ -42,16 +42,16 @@ When receiving a [streaming](../build-with-claude/streaming.md) response over se
 
 ## Request size limits
 
-The API enforces request size limits:
+The first-party Claude API enforces these request size limits. For other platforms, see the [API overview](overview.md#request-size-limits).
 
 | Endpoint type                                                                       | Maximum request size |
 | ----------------------------------------------------------------------------------- | -------------------- |
-| Messages API                                                                        | 32 MB                |
-| Token Counting API                                                                  | 32 MB                |
+| Messages API                                                                        | 128 MB               |
+| Token Counting API                                                                  | 128 MB               |
 | [Batch API](../build-with-claude/batch-processing.md) | 256 MB               |
 | [Files API](../build-with-claude/files.md)            | 500 MB               |
 
-If you exceed these limits, you’ll receive a 413 `request_too_large` error. On the direct Claude API, Cloudflare returns this error before the request reaches the API servers.
+If you exceed these limits, you’ll receive a 413 `request_too_large` error. On the first-party Claude API, Cloudflare returns this error before the request reaches the API servers.
 
 ## Error shapes
 

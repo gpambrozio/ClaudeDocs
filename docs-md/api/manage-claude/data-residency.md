@@ -4,7 +4,40 @@
 title: Data residency
 url: https://platform.claude.com/docs/en/manage-claude/data-residency
 description: Manage where model inference runs and where data is stored with geographic controls.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](api-and-data-retention.md#model-specific-data-retention-requirements).
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS:
+      availability: ga
+      note: Workspace geo is not configurable; Managed Agents sessions there run with workspace geo "us".
+    Claude Models on Google Cloud (Anthropic managed):
+      availability: ga
+      note: Workspace geo is not configurable.
 ---
+
+**API support**: Usage differs by product.
+
+* **Messages API**: Set `inference_geo` on each request, or set a default for the workspace.
+* **Managed Agents**: Pin `inference_geo` in the agent’s model configuration; override it at session creation.
 
 Data residency controls let you manage where your data is processed and stored. Two independent settings govern this:
 
@@ -14,8 +47,6 @@ Data residency controls let you manage where your data is processed and stored. 
 [Claude Managed Agents](../managed-agents/overview.md) supports geographic pinning at the agent level: `inference_geo` on an [agent’s model configuration](../managed-agents/agent-setup.md#pin-the-inference-geo) pins the geography that serves model requests for sessions running that agent, with [per-session overrides](../managed-agents/sessions.md#pin-the-inference-geo-for-a-session) at session create. Agents without a pin follow the workspace’s default inference geo on each request. Managed Agents also respects the Workspace geo configured in Console, and with [self-hosted sandboxes](../managed-agents/self-hosted-sandboxes.md), tool execution and the sandbox filesystem stay on infrastructure you control; the contents of attached [memory stores](../managed-agents/self-hosted-sandboxes-memory.md) remain stored by Anthropic and are copied to your sandbox for the session.
 
 ## Inference geo
-
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](api-and-data-retention.md).
 
 The `inference_geo` parameter controls where model inference runs for a specific API request. Add it to any `POST /v1/messages` call.
 
@@ -311,6 +342,49 @@ Learn about workspace configuration.
 **Usage and Cost API**
 
 Track usage and costs by data residency.
+
+## Availability
+
+Data residency is available on select models and eligible for zero data retention and HIPAA readiness.
+
+### API support
+
+#### [Messages API](../build-with-claude/working-with-messages.md)
+
+* Availability: Available
+* Usage: Set `inference_geo` on each request, or set a default for the workspace.
+
+| Status                | Cloud platforms                                                                                                                                            | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available             | Claude API                                                                                                                                                 | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md) |
+| Available<sup>1</sup> | [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md)                                                     | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md)                                                                                                                                                                                              |
+| Available<sup>1</sup> | [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md)                                                                                                                                                                                              |
+
+1. Workspace geo is not configurable.
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Available
+* Usage: Pin `inference_geo` in the agent’s model configuration, and override it per session at session creation. An agent with no pin follows the workspace default.
+
+| Status                | Cloud platforms                                                                                        | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available             | Claude API                                                                                             | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md) |
+| Available<sup>1</sup> | [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md) | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md)                                                                                                                                                                                              |
+
+1. Workspace geo is not configurable; Managed Agents sessions there run with workspace geo “us”.
+
+### Data handling
+
+[Data handling overview](api-and-data-retention.md#feature-eligibility)
+
+| Item   | Zero data retention                                                                                                                                       | HIPAA    |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Status | Eligible (excludes [Covered Models](api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
+
+Applicable endpoints:
+
+* `/v1/messages` with `inference_geo`
 
 ---
 

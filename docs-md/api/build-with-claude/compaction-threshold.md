@@ -9,7 +9,7 @@ featureMetadata:
   betaHeader: compact-2026-01-12
   zdr:
     eligibility: eligible
-    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements).
+    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Server-side compaction results are returned and round-tripped statelessly through the API response.
   supportedModels:
     - claude-fable-5-1
     - claude-mythos-5-1
@@ -18,20 +18,26 @@ featureMetadata:
     - claude-mythos-preview
     - claude-opus-5-5
     - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
     - claude-opus-4-8
     - claude-opus-4-7
     - claude-opus-4-6
-    - claude-sonnet-5-5
-    - claude-sonnet-5
     - claude-sonnet-4-6
-    - claude-haiku-5-5
   supportedPlatforms:
     Claude API: beta
     Claude Platform on AWS: beta
     Amazon Bedrock: beta
+    Amazon Bedrock (InvokeModel): beta
     Claude Models on Google Cloud (Google managed): beta
     Microsoft Foundry: beta
 ---
+
+**API support**: Usage differs by product.
+
+* **Messages API**: Opt in with a `compact_20260112` edit; compaction starts at 150,000 input tokens by default.
+* **Managed Agents**: Always on. It compacts the session’s conversation history to fit the context window.
 
 Threshold compaction is the automatic kind of compaction: you set a token threshold on your ordinary requests, and the API summarizes older context partway through a request once the threshold is reached. It is supported alongside on-demand compaction, where you decide when the summary is written (see [Compaction on demand](compaction-on-demand.md)). To choose between them, see [Choose how to compact](compaction.md#choose-how-to-compact).
 
@@ -3340,6 +3346,53 @@ Learn about context window sizes and management strategies.
 **Session memory compaction recipe (Claude Cookbook)**
 
 Explore a practical implementation that manages long-running conversations with instant session memory compaction using background threading and prompt caching.
+
+## Availability
+
+Threshold compaction is in beta on select models and eligible for zero data retention.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Available
+* Usage: Opt in with a `compact_20260112` edit in `context_management.edits`. Compaction starts when input tokens reach the trigger, 150,000 by default and at least 50,000.
+
+| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta   | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Amazon Bedrock](claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md) |
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Always on
+* Usage: It compacts the session’s conversation history to fit the context window, and each compaction emits an `agent.thread_context_compacted` event.
+
+| Status | Cloud platforms                                                                                                    | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------ | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta   | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md) | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md) |
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+| Header               | APIs                                                                                        |
+| -------------------- | ------------------------------------------------------------------------------------------- |
+| `compact-2026-01-12` | [Messages API](working-with-messages.md) |
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                       | HIPAA        |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Status  | Eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Not eligible |
+| Details | Server-side compaction results are returned and round-tripped statelessly through the API response.                                                       | —            |
+
+Applicable endpoints:
+
+* `/v1/messages` with `context_management`
 
 ---
 

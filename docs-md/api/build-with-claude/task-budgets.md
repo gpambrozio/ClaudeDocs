@@ -12,12 +12,18 @@ featureMetadata:
     - claude-mythos-5-1
     - claude-fable-5
     - claude-mythos-5
+    - claude-mythos-preview
     - claude-opus-5-5
     - claude-opus-5
-    - claude-opus-4-8
-    - claude-opus-4-7
     - claude-sonnet-5-5
     - claude-haiku-5-5
+    - claude-opus-4-8
+    - claude-opus-4-7
+  supportedPlatforms:
+    Claude API: beta
+    Claude Platform on AWS: beta
+    Claude Models on Google Cloud (Google managed): beta
+    Microsoft Foundry: beta
 ---
 
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model receives a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
@@ -684,6 +690,34 @@ Manage context in long-running conversations with server-side compaction.
 **Prompt caching**
 
 Reduce cost and latency on repeated prompts by caching prompt prefixes.
+
+## Availability
+
+Task budgets are in beta on select models.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Available
+* Usage: Advisory: set in `output_config.task_budget`. The API does not stop Claude at the budget.
+
+| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                  | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta   | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md) |
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Not available
+* Usage: Use [Session budgets](../managed-agents/budgets.md) instead.
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+* `task-budgets-2026-03-13`
 
 ---
 

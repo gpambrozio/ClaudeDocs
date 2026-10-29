@@ -5,23 +5,26 @@ title: Fast mode
 url: https://platform.claude.com/docs/en/build-with-claude/fast-mode
 description: Get up to 2.5x higher output tokens per second from supported Claude models.
 featureMetadata:
+  betaHeader: fast-mode-2026-02-01
   zdr:
     eligibility: eligible
-    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements).
+    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting.
   supportedModels:
     - claude-opus-5-5
     - claude-opus-5
     - claude-opus-4-8
   supportedPlatforms:
-    Claude API:
-      availability: ga
-      note: Includes [Claude Managed Agents](../managed-agents/overview.md).
-    Microsoft Foundry:
-      availability: ga
-      note: Available for Claude Opus 5.5 on deployments hosted on Azure, not on deployments [hosted on Anthropic](claude-in-microsoft-foundry.md#hosting-options).
+    Claude API: ga
+    Claude Models on Google Cloud (Anthropic managed): ga
+    Microsoft Foundry (hosted on Azure): ga
   details:
     - Fast mode on Claude Opus 5 and Claude Opus 4.8 is in research preview and needs the `fast-mode-2026-02-01` beta header.
 ---
+
+**API support**: Usage differs by product.
+
+* **Messages API**: Set `speed: "fast"` on the request.
+* **Managed Agents**: Set `speed` on the agent’s model object, for example `{"id": "claude-opus-5-5", "speed": "fast"}`.
 
 Fast mode delivers up to 2.5x higher output tokens per second at premium pricing. Set `speed: "fast"` on your request to opt in. Fast mode is available on Claude Opus 5.5 and in research preview on Claude Opus 5 and Claude Opus 4.8.
 
@@ -35,7 +38,7 @@ Fast mode runs the same model with a faster inference configuration. There is no
 
 ## Basic usage
 
-Fast mode works only on supported models. See [Model availability](fast-mode.md#supported-models) for details, including which models need a beta header.
+Fast mode works only on supported models. See [Availability](fast-mode.md#feature-availability) for details, including which models need a beta header.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -193,42 +196,6 @@ response.content.each do |block|
 end
 ```
 
-## Supported platforms
-
-Fast mode is available on the Claude API, including [Claude Managed Agents](../managed-agents/overview.md).
-
-Fast mode on Claude Opus 5.5 is also available on [Claude in Microsoft Foundry](claude-in-microsoft-foundry.md) for deployments hosted on Azure. It is not available for deployments [hosted on Anthropic](claude-in-microsoft-foundry.md#hosting-options).
-
-Fast mode on Claude Opus 5.5 is also available on [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md).
-
-## Model availability
-
-Fast mode is available only on the following models. If you were using fast mode on an earlier model, [migrate to a model that supports fast mode](../models/opus-5-5/migration-guide.md).
-
-### Claude Opus 5.5
-
-Fast mode is available on Claude Opus 5.5. It doesn’t need a beta header or an access request.
-
-### Claude Opus 5 and Claude Opus 4.8
-
-Fast mode on Claude Opus 5 and Claude Opus 4.8 is in research preview. Requests that set `speed` must send the `fast-mode-2026-02-01` [beta header](../api/beta-headers.md); without it, they return a `400` error. To access fast mode on Claude Opus 5 or Claude Opus 4.8, contact your account manager or [join the waitlist](https://claude.com/fast-mode).
-
-## Pricing
-
-Fast mode is priced at a multiplier on standard rates across the full context window, including requests over 200k input tokens.
-
-| Model                           | Input          | Output         |
-| ------------------------------- | -------------- | -------------- |
-| Claude Opus 5.5                 | $8 USD / MTok  | $40 USD / MTok |
-| Claude Opus 5 / Claude Opus 4.8 | $10 USD / MTok | $50 USD / MTok |
-
-Fast mode pricing stacks with other pricing modifiers:
-
-* [Prompt caching multipliers](../about-claude/pricing.md#prompt-caching) apply on top of fast mode pricing.
-* [Data residency](../manage-claude/data-residency.md) multipliers apply on top of fast mode pricing.
-
-For complete pricing details, see the [Pricing](../about-claude/pricing.md#fast-mode-pricing) page.
-
 ## Rate limits
 
 Fast mode has a dedicated rate limit that is separate from standard Opus rate limits. When your fast mode rate limit is exceeded, the API returns a `429` error with a `retry-after` header indicating when capacity will be available.
@@ -250,7 +217,7 @@ To see your fast mode rate limits, go to the [Rate limits](https://platform.clau
 
 ## Checking which speed was used
 
-The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`. Requesting `speed: "fast"` on a [model that doesn’t support fast mode](fast-mode.md#supported-models) returns an error, and so does exceeding fast mode’s rate limits or capacity (a `429` or `529`). When a request with `speed: "fast"` succeeds, `usage.speed` is `"fast"`. Claude Opus 4.6 is an exception: instead of returning an error, a request with `speed: "fast"` and the `fast-mode-2026-02-01` beta header succeeds, but runs at standard speed. This behavior is correctly reflected in `usage.speed`, which shows `"standard"` in this situation. On Claude Models on Google Cloud (Anthropic managed), a Claude Opus 4.6 request with `speed: "fast"` returns a `400` error even with the header.
+The response `usage` object includes a `speed` field that indicates which speed was used, either `"fast"` or `"standard"`. Requesting `speed: "fast"` on a [model that doesn’t support fast mode](fast-mode.md#availability-feature-support) returns an error, and so does exceeding fast mode’s rate limits or capacity (a `429` or `529`). When a request with `speed: "fast"` succeeds, `usage.speed` is `"fast"`. Claude Opus 4.6 is an exception: instead of returning an error, a request with `speed: "fast"` and the `fast-mode-2026-02-01` beta header succeeds, but runs at standard speed. This behavior is correctly reflected in `usage.speed`, which shows `"standard"` in this situation. On Claude Models on Google Cloud (Anthropic managed), a Claude Opus 4.6 request with `speed: "fast"` returns a `400` error even with the header.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -688,6 +655,75 @@ message = create_message_with_fast_fallback(
 
 * **Batch API:** Fast mode is not available with the [Batch API](batch-processing.md).
 * **Priority Tier:** Fast mode is not available with a [Priority Tier](../api/service-tiers.md) commitment.
+
+## Pricing
+
+Fast mode is priced at a multiplier on standard rates across the full context window, including requests over 200k input tokens.
+
+| Model                           | Input          | Output         |
+| ------------------------------- | -------------- | -------------- |
+| Claude Opus 5.5                 | $8 USD / MTok  | $40 USD / MTok |
+| Claude Opus 5 / Claude Opus 4.8 | $10 USD / MTok | $50 USD / MTok |
+
+Fast mode pricing stacks with other pricing modifiers:
+
+* [Prompt caching multipliers](../about-claude/pricing.md#prompt-caching) apply on top of fast mode pricing.
+* [Data residency](../manage-claude/data-residency.md) multipliers apply on top of fast mode pricing.
+
+For complete pricing details, see the [Pricing](../about-claude/pricing.md#fast-mode-pricing) page.
+
+## Availability
+
+Fast mode is available or in research preview on select models and eligible for zero data retention and HIPAA readiness.
+
+### API support
+
+Fast mode is available only on the following models. If you were using fast mode on an earlier model, [migrate to a model that supports fast mode](../models/opus-5-5/migration-guide.md).
+
+To access fast mode on Claude Opus 5 or Claude Opus 4.8, contact your account manager or [join the waitlist](https://claude.com/fast-mode).
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Available
+* Usage: Set `speed: "fast"` on the request.
+
+| Status           | Cloud platforms                                                                                                                                                                                                                                                                                  | Models                                                                                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available        | Claude API, [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md), [Microsoft Foundry (hosted on Azure)](claude-in-microsoft-foundry.md) | [Claude Opus 5.5](../models/opus-5-5/overview.md)                                                                              |
+| Research preview | Claude API                                                                                                                                                                                                                                                                                       | [Claude Opus 5](../models/opus-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md) |
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Available
+* Usage: Set `speed` on the agent’s model object, for example `{"id": "claude-opus-5-5", "speed": "fast"}`.
+
+| Status           | Cloud platforms | Models                                                                                                                                                       |
+| ---------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available        | Claude API      | [Claude Opus 5.5](../models/opus-5-5/overview.md)                                                                              |
+| Research preview | Claude API      | [Claude Opus 5](../models/opus-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md) |
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+| Header                 | Models                                                                                                                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `fast-mode-2026-02-01` | [Claude Opus 5](../models/opus-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md) |
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                       | HIPAA    |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Status  | Eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
+| Details | Same Messages API endpoint with faster inference. ZDR applies regardless of speed setting.                                                                | —        |
+
+Applicable endpoints:
+
+* `/v1/messages` with `speed: "fast"`
 
 ## Next steps
 

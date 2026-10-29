@@ -7,8 +7,26 @@ description: Diagnose unexpected prompt cache misses by comparing consecutive re
 featureMetadata:
   status: ga
   zdr:
-    eligibility: eligible
-    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements).
+    eligibility: qualified
+    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Your prompts and Claude's outputs are not stored. A fingerprint of cryptographic hashes and token-count estimates is retained briefly to allow comparison against the next request.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: ga
 ---
@@ -1028,12 +1046,41 @@ Cache diagnostics is ZDR eligible (qualified). Anthropic does not store the raw 
 
 The API stores a fingerprint only for requests that include the `diagnostics` object. The fingerprint consists only of cryptographic hashes and token-count estimates, keyed by the response `id` and scoped to your organization and workspace. Fingerprints expire after a short period and are not used for any other purpose.
 
-For ZDR eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md).
-
 ## See also
 
 * [Prompt caching](prompt-caching.md)
 * [Token counting](token-counting.md)
+
+## Availability
+
+Cache diagnostics are available on every model.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Available
+
+| Status    | Cloud platforms |
+| --------- | --------------- |
+| Available | Claude API      |
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Not available
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                                                                                                                                                      | HIPAA        |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Status  | Eligible (qualified; excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements))                                                                                                                     | Not eligible |
+| Details | Your prompts and Claude’s outputs are not stored. A fingerprint of cryptographic hashes and token-count estimates is retained briefly to allow comparison against the next request. [Learn more](cache-diagnostics.md#data-retention) | —            |
+
+Applicable endpoints:
+
+* `/v1/messages` with `diagnostics`
 
 ---
 

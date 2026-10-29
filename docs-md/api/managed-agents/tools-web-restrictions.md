@@ -8,9 +8,35 @@ featureMetadata:
   topic:
     title: Managed Agents
     url: https://platform.claude.com/docs/en/managed-agents/overview
-  status: beta
   betaHeader: managed-agents-2026-04-01
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: beta
+    Claude Models on Google Cloud (Anthropic managed): beta
 ---
+
+**API support**: Usage differs by product.
+
+* **Messages API**: Set `allowed_domains` or `blocked_domains` on the `web_search` or `web_fetch` tool in the request.
+* **Managed Agents**: Set the same fields on the agent toolset; each list holds at most 64 domains.
 
 To control which sites the agent’s web tools can reach, set a domain list on the `web_search` and `web_fetch` entries of the [agent toolset](tools.md#configuring-the-toolset). Each of these `configs` (csharp, go: `Configs`) entries takes one of two lists:
 
@@ -510,6 +536,40 @@ Control the sandbox’s own outbound network access.
 **Multiagent orchestration**
 
 Coordinate multiple agents within a single session.
+
+## Availability
+
+Web domain restrictions are available or in beta, depending on the API.
+
+### API support
+
+#### [Messages API](../build-with-claude/working-with-messages.md)
+
+* Availability: Available
+* Usage: Set `allowed_domains` or `blocked_domains` on the `web_search` or `web_fetch` tool in the request.
+
+| Status    | Cloud platforms |
+| --------- | --------------- |
+| Available | Claude API      |
+
+#### [Managed Agents](overview.md)
+
+* Availability: Available
+* Usage: Set the same fields on the `web_search` and `web_fetch` entries of the agent toolset. Unlike the Messages API, each list holds at most 64 ASCII domains, and `web_fetch` domains cannot include a path.
+
+| Status | Cloud platforms         | Models                                                            |
+| ------ | ----------------------- | ----------------------------------------------------------------- |
+| Beta   | All supported platforms | [All models](../models/overview.md) |
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+| Header                      | APIs                                                                          |
+| --------------------------- | ----------------------------------------------------------------------------- |
+| `managed-agents-2026-04-01` | [Managed Agents](overview.md) |
 
 ---
 

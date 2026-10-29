@@ -4,9 +4,42 @@
 title: Web fetch tool
 url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool
 description: Fetch and read content from specific URLs to augment Claude's context with live web content.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Fetched web content returned in the API response. Dynamic filtering for web fetch is not eligible for ZDR or HIPAA. Website publishers might retain request data (such as fetched URLs and request metadata) according to their own policies.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Claude Models on Google Cloud (Anthropic managed): ga
+    Microsoft Foundry:
+      availability: ga
+      note: "Deployments hosted on Azure support only `web_fetch_20250910`: no dynamic filtering, response inclusion or cache bypass."
 ---
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../../manage-claude/api-and-data-retention.md).
+**API support**: Usage differs by product.
+
+* **Messages API**: Add a `web_fetch` tool to the request’s `tools`.
+* **Managed Agents**: On by default in the agent toolset, without `max_uses`, `citations` or `cache_control`.
 
 The web fetch tool allows Claude to retrieve full content from specified webpages and PDF documents.
 
@@ -1002,6 +1035,46 @@ Work with tools that Anthropic runs: `server_tool_use` blocks, `pause_turn` cont
 **Tool reference**
 
 Directory of Anthropic-provided tools and reference for optional tool definition properties.
+
+## Availability
+
+Web fetch tool is available on every model and eligible for zero data retention.
+
+### API support
+
+#### [Messages API](../../build-with-claude/working-with-messages.md)
+
+* Availability: Available
+* Usage: Add a `web_fetch` tool to the request’s `tools`. Settings such as `max_uses`, domain lists, `citations` and `max_content_tokens` go on that tool.
+
+| Status                | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                              |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available             | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), [Microsoft Foundry (hosted on Anthropic)](../../build-with-claude/claude-in-microsoft-foundry.md) |
+| Available<sup>1</sup> | [Microsoft Foundry (hosted on Azure)](../../build-with-claude/claude-in-microsoft-foundry.md)                                                                                                                                                                                                                                                                                     |
+
+1. Deployments hosted on Azure support only `web_fetch_20250910`: no dynamic filtering, response inclusion or cache bypass.
+
+#### [Managed Agents](../../managed-agents/overview.md)
+
+* Availability: Available
+* Usage: Part of the agent toolset, and on by default once the toolset is added. Domain lists (with no paths) and `max_content_tokens` go on the toolset’s `web_fetch` entry; `max_uses`, `citations` and `cache_control` are not available.
+
+| Status    | Cloud platforms                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) |
+
+### Data handling
+
+[Data handling overview](../../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                                                                                                           | HIPAA        |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Status  | Eligible (excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements))                                                                                     | Not eligible |
+| Details | Fetched web content returned in the API response. Dynamic filtering for web fetch is not eligible for ZDR or HIPAA. Website publishers might retain request data (such as fetched URLs and request metadata) according to their own policies. | —            |
+
+Applicable endpoints:
+
+* `/v1/messages` with `web_fetch` tool
 
 ---
 

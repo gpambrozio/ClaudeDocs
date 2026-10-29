@@ -4,6 +4,36 @@
 title: Strict tool use
 url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use
 description: Enforce JSON Schema compliance on Claude's tool inputs with grammar-constrained sampling.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: qualified
+    note: "Excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Your prompts and Claude's outputs are not stored. Only the JSON schema is cached, for up to 24 hours since last use. This also covers strict tool use (`strict: true` on tools), which uses the same grammar pipeline."
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Amazon Bedrock: ga
+    Amazon Bedrock (InvokeModel): ga
+    Claude Models on Google Cloud (Google managed): ga
+    Microsoft Foundry: ga
 ---
 
 Setting `strict: true` on a tool definition guarantees Claude’s tool inputs match your JSON Schema by constraining the model’s token sampling to schema-valid outputs (a technique called grammar-constrained sampling). This page covers why strict mode matters for agents, how to enable it, and common use cases. For the supported JSON Schema subset, see [JSON Schema limitations](../../build-with-claude/structured-outputs.md#json-schema-limitations). For non-strict schema guidance, see [Define tools](define-tools.md).
@@ -1113,8 +1143,6 @@ Strict tool use compiles tool `input_schema` definitions into grammars using the
 
 Strict tool use is HIPAA eligible, but **protected health information (PHI) must not be included in tool schema definitions**. The API caches compiled schemas separately from message content, and these cached schemas do not receive the same PHI protections as prompts and responses. Do not include PHI in `input_schema` property names, `enum` values, `const` values, or `pattern` regular expressions. PHI should only appear in message content (prompts and responses), where it is protected under HIPAA safeguards.
 
-For ZDR and HIPAA eligibility across all features, see [API and data retention](../../manage-claude/api-and-data-retention.md).
-
 ## Next steps
 
 **Web fetch tool**
@@ -1132,6 +1160,33 @@ Get validated JSON responses using the same grammar-constrained sampling.
 **Define tools**
 
 Specify tool schemas, write effective descriptions, and control when Claude calls your tools.
+
+## Availability
+
+Strict tool use is available on every model and eligible for HIPAA readiness.
+
+### API support
+
+#### [Messages API](../../build-with-claude/working-with-messages.md)
+
+* Availability: Available
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Models                                                            |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Available | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) | [All models](../../models/overview.md) |
+
+### Data handling
+
+[Data handling overview](../../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                                                                                                                                                                                          | HIPAA                                                                                                                                                                                            |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Status  | Eligible (qualified; excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements))                                                                                                                                                         | Eligible                                                                                                                                                                                         |
+| Details | Your prompts and Claude’s outputs are not stored. Only the JSON schema is cached, for up to 24 hours since last use. This also covers strict tool use (`strict: true` on tools), which uses the same grammar pipeline. [Learn more](../../build-with-claude/structured-outputs.md#data-retention) | PHI must not be included in JSON schema definitions; see PHI handling guidelines. [Learn more](../../manage-claude/api-and-data-retention.md#phi-handling-guidelines) |
+
+Applicable endpoints:
+
+* `/v1/messages`
 
 ---
 

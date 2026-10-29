@@ -74,7 +74,7 @@ For a list of client SDKs, see [SDKs, CLI, and libraries](../cli-sdks-libraries/
 
 ## Claude API versus cloud platforms
 
-Claude is available through the direct Claude API and through cloud platforms. Choose based on your infrastructure, feature availability, compliance requirements, and pricing preferences.
+Claude is available through the first-party Claude API and through cloud platforms. Choose based on your infrastructure, feature availability, compliance requirements, and pricing preferences.
 
 ### Claude API
 
@@ -98,22 +98,24 @@ Access Claude through AWS, Google Cloud, or Microsoft Azure:
 | Claude Models on Google Cloud (Anthropic managed) | Google Cloud (Anthropic-operated)    | [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) |
 | Microsoft Foundry                                 | Microsoft Azure (Anthropic-operated) | [Claude in Microsoft Foundry](../build-with-claude/claude-in-microsoft-foundry.md)                                           |
 
-Claude Managed Agents is available through the direct Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), and [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md). For feature availability across platforms, see the [Features overview](../build-with-claude/overview.md).
+Claude Managed Agents is available through the first-party Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), and [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md). For feature availability across platforms, see the [Features overview](../build-with-claude/overview.md).
 
 ## Request and response format
 
 ### Request size limits
 
+The first-party Claude API enforces these request size limits:
+
 | Endpoint                                                                                                             | Maximum request size |
 | -------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| Messages, Token Counting                                                                                             | 32 MB                |
+| Messages, Token Counting                                                                                             | 128 MB               |
 | Message Batches API (see [Batch processing](../build-with-claude/batch-processing.md)) | 256 MB               |
 | [Files API](../build-with-claude/files.md)                                             | 500 MB               |
 | Sessions, Agents, Environments                                                                                       | 32 MB                |
 
 If you exceed these limits, you’ll receive a 413 `request_too_large` error.
 
-Partner-operated platforms have their own request size limits: Bedrock limits requests to 20 MB, and Claude Models on Google Cloud (Google managed) limits requests to 30 MB. Claude Platform on AWS uses the same limits as the direct Claude API. Consult your platform’s documentation for current values.
+Partner-operated platforms have their own request size limits: Bedrock limits requests to 20 MB, and Claude Models on Google Cloud (Google managed) limits requests to 30 MB. Claude Platform on AWS, Claude Models on Google Cloud (Anthropic managed), and Microsoft Foundry support Messages and Token Counting requests of up to 32 MB. Consult your platform’s documentation for current values.
 
 ### Response headers
 

@@ -4,9 +4,33 @@
 title: Mid-conversation system messages and tool changes
 url: https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages
 description: Change system instructions or tool availability partway through a conversation without invalidating the cached prefix that came before them.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Request-shape capability of the Messages API; mid-conversation system messages flow through the standard inference path and nothing is stored server-side after the response.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-haiku-5-5
+    - claude-opus-4-8
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Amazon Bedrock: ga
+    Claude Models on Google Cloud (Google managed): ga
 ---
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/api-and-data-retention.md).
+**API support**: Usage differs by product.
+
+* **Messages API**: Append a message with `role` `"system"` to `messages` at the point where the instruction starts to apply.
+* **Managed Agents**: Send a `system.message` event. It applies to that turn and all later turns; the agent’s own `system` field cannot change during a session.
 
 System instructions normally live in the top-level `system` field, ahead of every message in the conversation. That position is great for [prompt caching](prompt-caching.md): the system prompt is part of the stable prefix, so subsequent turns hit the cache. It is a poor position for instructions you only discover you need partway through a session, because editing the top-level `system` field changes the very beginning of the prompt and invalidates the cache for everything that follows.
 
@@ -2349,6 +2373,43 @@ Writing effective prompts and system instructions.
 **Tool use with Claude**
 
 How `tool_use` and `tool_result` blocks are structured in the `messages` array.
+
+## Availability
+
+Mid-conversation system messages are available on select models and eligible for zero data retention and HIPAA readiness.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Available
+* Usage: Append a message with `role` `"system"` to `messages` at the point where the instruction starts to apply.
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                            | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Amazon Bedrock](claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md) | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md) |
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Available
+* Usage: Send a `system.message` event. It applies to that turn and all later turns; the agent’s own `system` field cannot change during a session.
+
+| Status    | Cloud platforms                                                                                                    | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md) | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md) |
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                                           | HIPAA    |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Status  | Eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements))                     | Eligible |
+| Details | Request-shape capability of the Messages API; mid-conversation system messages flow through the standard inference path and nothing is stored server-side after the response. | —        |
+
+Applicable endpoints:
+
+* `/v1/messages` with `role: "system"` messages
 
 ---
 

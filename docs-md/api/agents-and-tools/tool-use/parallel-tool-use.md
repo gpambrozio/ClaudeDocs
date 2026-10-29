@@ -4,6 +4,32 @@
 title: Parallel tool use
 url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use
 description: Enable, format, and disable parallel tool calls, with message-history guidance and troubleshooting.
+featureMetadata:
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Amazon Bedrock: ga
+    Amazon Bedrock (InvokeModel): ga
+    Claude Models on Google Cloud (Google managed): ga
+    Microsoft Foundry: ga
 ---
 
 By default, Claude may call multiple tools in a single response. This page covers how to run those calls, how to format the message history so parallelism keeps working, and how to disable parallel tool use when you need to. For the single-call flow, see [Handle tool calls](handle-tool-calls.md).
@@ -1569,6 +1595,29 @@ Parse `tool_use` blocks, format `tool_result` responses, and handle errors with 
 **Define tools**
 
 Specify tool schemas, write effective descriptions, and control when Claude calls your tools.
+
+## Availability
+
+Parallel tool use is available or in beta, depending on the API.
+
+### API support
+
+#### [Messages API](../../build-with-claude/working-with-messages.md)
+
+* Availability: On by default
+* Usage: To turn it off, set `disable_parallel_tool_use: true` inside `tool_choice`.
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |
+
+#### [Managed Agents](../../managed-agents/overview.md)
+
+* Availability: Always on
+
+| Status | Cloud platforms                                                                                                    |
+| ------ | ------------------------------------------------------------------------------------------------------------------ |
+| Beta   | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) |
 
 ---
 

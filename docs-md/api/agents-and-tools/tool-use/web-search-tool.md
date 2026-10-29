@@ -4,9 +4,45 @@
 title: Web search tool
 url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool
 description: Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Real-time web search results returned in the API response. Dynamic filtering for web search is not eligible for ZDR or HIPAA.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Claude Models on Google Cloud (Anthropic managed): ga
+    Claude Models on Google Cloud (Google managed):
+      availability: ga
+      note: Only the basic web search tool (`web_search_20250305`), without dynamic filtering.
+    Microsoft Foundry:
+      availability: ga
+      note: Only the basic web search tool (`web_search_20250305`), without dynamic filtering.
 ---
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../../manage-claude/api-and-data-retention.md).
+**API support**: Usage differs by product.
+
+* **Messages API**: Add a `web_search` tool to the request’s `tools`. Settings such as `max_uses`, domain lists and `user_location` go on that tool.
+* **Managed Agents**: On by default in the agent toolset, without `max_uses`, `citations` or `cache_control`.
 
 The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response includes citations for sources drawn from search results.
 
@@ -673,6 +709,46 @@ Work with tools that Anthropic runs: `server_tool_use` blocks, `pause_turn` cont
 **Tool reference**
 
 Directory of Anthropic-provided tools and reference for optional tool definition properties.
+
+## Availability
+
+Web search tool is available on every model and eligible for zero data retention and HIPAA readiness.
+
+### API support
+
+#### [Messages API](../../build-with-claude/working-with-messages.md)
+
+* Availability: Available
+* Usage: Add a `web_search` tool to the request’s `tools`. Settings such as `max_uses`, domain lists and `user_location` go on that tool.
+
+| Status                | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                              |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available             | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), [Microsoft Foundry (hosted on Anthropic)](../../build-with-claude/claude-in-microsoft-foundry.md) |
+| Available<sup>1</sup> | [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry (hosted on Azure)](../../build-with-claude/claude-in-microsoft-foundry.md)                                                                                                                               |
+
+1. Only the basic web search tool (`web_search_20250305`), without dynamic filtering.
+
+#### [Managed Agents](../../managed-agents/overview.md)
+
+* Availability: Available
+* Usage: Part of the agent toolset, and on by default once the toolset is added. Domain lists and `user_location` go on the toolset’s `web_search` entry; `max_uses`, `citations` and `cache_control` are not available.
+
+| Status    | Cloud platforms                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) |
+
+### Data handling
+
+[Data handling overview](../../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                       | HIPAA                                                              |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Status  | Eligible (excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible                                                           |
+| Details | Real-time web search results returned in the API response. Dynamic filtering for web search is not eligible for ZDR or HIPAA.                             | Dynamic filtering for web search is not eligible for ZDR or HIPAA. |
+
+Applicable endpoints:
+
+* `/v1/messages` with `web_search` tool
 
 ---
 

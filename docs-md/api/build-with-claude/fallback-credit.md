@@ -4,6 +4,26 @@
 title: Fallback credit
 url: https://platform.claude.com/docs/en/build-with-claude/fallback-credit
 description: Avoid paying the prompt-cache cost twice when you retry a refused request on another model.
+featureMetadata:
+  status: beta
+  betaHeader: fallback-credit-2026-07-01, server-side-fallback-2026-07-01, fallback-credit-2026-06-01
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+  supportedPlatforms:
+    Claude API: beta
+    Claude Platform on AWS: beta
+    Amazon Bedrock:
+      availability: beta
+      note: On Amazon Bedrock and Google Cloud the token is bound to your caller identity (there are no workspaces), and `allowed_fallback_models` is not exposed.
+    Claude Models on Google Cloud (Google managed):
+      availability: beta
+      note: On Amazon Bedrock and Google Cloud the token is bound to your caller identity (there are no workspaces), and `allowed_fallback_models` is not exposed.
+    Microsoft Foundry: beta
 ---
 
 Prompt caches are per-model. When a model declines a request and you retry on another model, the conversation prefix already cached for the first model must be written into the new model’s cache in full. Cache writes cost more than cache reads. Fallback credit removes that extra cost. The refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model from the start.
@@ -605,6 +625,39 @@ Every `stop_reason` value and how to handle it.
 **SDK middleware**
 
 The SDK helper that applies fallback credit automatically.
+
+## Availability
+
+Fallback credit is in beta on select models.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Available
+* Usage: Needed only when you write the retry yourself: send the `fallback-credit-2026-07-01` beta header and put the refusal’s `fallback_credit_token` on the retry.
+
+| Status           | Cloud platforms                                                                                                                                                                                                                                        | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta             | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Microsoft Foundry](claude-in-microsoft-foundry.md)                             | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
+| Beta<sup>1</sup> | [Amazon Bedrock](claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md) | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
+
+1. On Amazon Bedrock and Google Cloud the token is bound to your caller identity (there are no workspaces), and `allowed_fallback_models` is not exposed.
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Not available
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+| Header                                                                                            | Cloud platforms                                                                                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `fallback-credit-2026-07-01` or `server-side-fallback-2026-07-01` or `fallback-credit-2026-06-01` | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Microsoft Foundry](claude-in-microsoft-foundry.md)                             |
+| `fallback-credit-2026-07-01` or `fallback-credit-2026-06-01`                                      | [Amazon Bedrock](claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md) |
 
 ---
 

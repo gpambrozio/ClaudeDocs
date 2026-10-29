@@ -4,6 +4,33 @@
 title: Multilingual support
 url: https://platform.claude.com/docs/en/build-with-claude/multilingual-support
 description: Claude excels at tasks across multiple languages, maintaining strong cross-lingual performance relative to English.
+featureMetadata:
+  status: ga
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Amazon Bedrock: ga
+    Amazon Bedrock (InvokeModel): ga
+    Claude Models on Google Cloud (Google managed): ga
+    Microsoft Foundry: ga
 ---
 
 ## Overview
@@ -210,6 +237,28 @@ Compare model tiers to balance multilingual quality against cost and latency.
 **Define success criteria and build evaluations**
 
 Evaluate translation and localization quality before you ship.
+
+## Availability
+
+Multilingual support is available on every model.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Always on
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Amazon Bedrock](claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) |
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Always on
+
+| Status    | Cloud platforms                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md) |
 
 ---
 

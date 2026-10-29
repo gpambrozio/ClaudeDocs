@@ -4,9 +4,43 @@
 title: Thinking
 url: https://platform.claude.com/docs/en/build-with-claude/thinking
 description: "Understand how Claude's thinking works: turn it on, read thinking output, steer thinking depth with effort, and use thinking with tools, caching, and streaming."
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements).
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Claude Models on Google Cloud (Anthropic managed): ga
+    Amazon Bedrock: ga
+    Amazon Bedrock (InvokeModel): ga
+    Claude Models on Google Cloud (Google managed): ga
+    Microsoft Foundry: ga
 ---
 
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/api-and-data-retention.md).
+**API support**: Usage differs by product.
+
+* **Messages API**: On by default. Turn it off with `thinking: {"type": "disabled"}`. Where it is off by default, set `thinking` to turn it on.
+* **Managed Agents**: Always on. Managed Agents sets the thinking configuration; the agent definition has no `thinking` field.
 
 A model that answers in a single pass has to get everything right on the first try: no scratch work, no checking, no changing approach halfway through. For a proof, a tricky bug, or a long agentic task, the first approach is often not the best one.
 
@@ -1216,6 +1250,42 @@ Diagnose and fix the most common thinking failures: configuration 400 errors, em
 **Effort**
 
 Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.
+
+## Availability
+
+Thinking is available on every model and eligible for zero data retention and HIPAA readiness.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: On by default
+* Usage: Turn it off with `thinking: {"type": "disabled"}`. Where it is off by default, set `thinking` to turn it on.
+
+| Status    | Cloud platforms         |
+| --------- | ----------------------- |
+| Available | All supported platforms |
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Always on
+* Usage: Managed Agents sets the thinking configuration; the agent definition has no `thinking` field.
+
+| Status    | Cloud platforms         |
+| --------- | ----------------------- |
+| Available | All supported platforms |
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item   | Zero data retention                                                                                                                                       | HIPAA    |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Status | Eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
+
+Applicable endpoints:
+
+* `/v1/messages` with `thinking`
 
 ---
 

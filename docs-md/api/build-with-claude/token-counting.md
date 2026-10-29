@@ -8,11 +8,30 @@ featureMetadata:
   status: ga
   zdr:
     eligibility: eligible
-    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements).
+    note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Count tokens before sending requests.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
   supportedPlatforms:
     Claude API: ga
     Claude Platform on AWS: ga
+    Claude Models on Google Cloud (Anthropic managed): ga
     Amazon Bedrock: ga
+    Amazon Bedrock (InvokeModel): ga
     Claude Models on Google Cloud (Google managed): ga
     Microsoft Foundry: ga
 ---
@@ -1432,6 +1451,37 @@ Check token counts before you send a request to stay within your usage tier.
 **Prompt caching**
 
 Reduce cost and latency on repeated prompts by caching prompt prefixes.
+
+## Availability
+
+Token counting is available on select models and eligible for zero data retention and HIPAA readiness.
+
+### API support
+
+#### [Messages API](working-with-messages.md)
+
+* Availability: Available
+
+| Status    | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Haiku 4.5](../models/haiku-4-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md), [Claude Opus 4.5](../models/opus-4-5/overview.md) |
+
+#### [Managed Agents](../managed-agents/overview.md)
+
+* Availability: Not available
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                       | HIPAA    |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Status  | Eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
+| Details | Count tokens before sending requests.                                                                                                                     | —        |
+
+Applicable endpoints:
+
+* `/v1/messages/count_tokens`
 
 ---
 

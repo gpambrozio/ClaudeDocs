@@ -284,7 +284,7 @@ For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/a
 
 ### June 18, 2026
 
-* The Python, TypeScript, Go, Java, Ruby, PHP, and C# SDKs now include support for `code_execution_20260120`, the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md) version that adds REPL state persistence and is the minimum version for [programmatic tool calling](../agents-and-tools/tool-use/programmatic-tool-calling.md). To adopt it, set the tool’s `type` to `code_execution_20260120`; no beta header is required. It’s available on Claude Fable 5, Claude Mythos 5, Claude Opus 4.5 and newer, and Claude Sonnet 4.5 and newer; see the code execution tool’s [Compatibility](../agents-and-tools/tool-use/code-execution-tool.md#compatibility) section.
+* The Python, TypeScript, Go, Java, Ruby, PHP, and C# SDKs now include support for `code_execution_20260120`, the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md) version that adds REPL state persistence and is the minimum version for [programmatic tool calling](../agents-and-tools/tool-use/programmatic-tool-calling.md). To adopt it, set the tool’s `type` to `code_execution_20260120`; no beta header is required. It’s available on Claude Fable 5, Claude Mythos 5, Claude Opus 4.5 and newer, and Claude Sonnet 4.5 and newer; see the code execution tool’s [API support](../agents-and-tools/tool-use/code-execution-tool.md#availability-feature-support) section.
 
 ### June 15, 2026
 

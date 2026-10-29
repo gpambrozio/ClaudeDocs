@@ -4,6 +4,37 @@
 title: Memory tool
 url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
 description: Let Claude store and retrieve information across conversations by implementing the memory tool's file operations in your application.
+featureMetadata:
+  status: ga
+  zdr:
+    eligibility: eligible
+    note: Excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Client-side memory storage where you control data retention.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: ga
+    Claude Platform on AWS: ga
+    Claude Models on Google Cloud (Anthropic managed): ga
+    Amazon Bedrock: ga
+    Amazon Bedrock (InvokeModel): ga
+    Claude Models on Google Cloud (Google managed): ga
+    Microsoft Foundry: ga
 ---
 
 The memory tool lets Claude store and retrieve information across conversations in a directory of memory files. Claude can create, read, update, and delete files that persist between sessions, building up knowledge over time without keeping everything in the context window.
@@ -13,8 +44,6 @@ Memory supports just-in-time context retrieval. Rather than loading all relevant
 The memory tool operates client-side: Claude requests file operations, and your application runs them. You control where and how the data is stored through your own infrastructure.
 
 Use the [feedback form](https://forms.gle/YXC2EKGMhjN1c4L88) to share your feedback on this feature.
-
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../../manage-claude/api-and-data-retention.md).
 
 ## Use cases
 
@@ -1007,6 +1036,33 @@ Server-side context compaction for managing long conversations that approach con
 **Tool reference**
 
 Directory of Anthropic-provided tools and reference for optional tool definition properties.
+
+## Availability
+
+Memory tool is available on every model and eligible for zero data retention and HIPAA readiness.
+
+### API support
+
+#### [Messages API](../../build-with-claude/working-with-messages.md)
+
+* Availability: Available
+
+| Status    | Models                                                            |
+| --------- | ----------------------------------------------------------------- |
+| Available | [All models](../../models/overview.md) |
+
+### Data handling
+
+[Data handling overview](../../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                       | HIPAA    |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Status  | Eligible (excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
+| Details | Client-side memory storage where you control data retention.                                                                                              | —        |
+
+Applicable endpoints:
+
+* `/v1/messages` with `memory` tool
 
 ---
 
