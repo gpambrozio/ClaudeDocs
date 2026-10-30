@@ -127,6 +127,10 @@ Create Session
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2812,6 +2816,10 @@ List Sessions
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4307,6 +4315,10 @@ Get Session
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5795,6 +5807,10 @@ Update Session
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -7307,6 +7323,10 @@ Delete Session
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -7474,6 +7494,10 @@ Archive Session
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -19254,6 +19278,10 @@ List Events
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -22359,6 +22387,10 @@ Send Events
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -23349,6 +23381,10 @@ Stream Events
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -26492,6 +26528,10 @@ Add Session Resource
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -26696,6 +26736,10 @@ List Session Resources
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -26984,6 +27028,10 @@ Get Session Resource
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -27263,6 +27311,10 @@ Update Session Resource
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -27551,6 +27603,10 @@ Delete Session Resource
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -27748,6 +27804,10 @@ List Session Threads
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -28834,6 +28894,10 @@ Get Session Thread
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -29917,6 +29981,10 @@ Archive Session Thread
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -31009,6 +31077,10 @@ List Session Thread Events
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -34128,6 +34200,10 @@ Stream Session Thread Events
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 

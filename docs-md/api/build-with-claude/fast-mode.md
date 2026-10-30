@@ -354,7 +354,7 @@ puts(response.usage.speed)  # "fast" or "standard"
 }
 ```
 
-To track fast mode usage and costs across your organization, see the [Usage and Cost API](../manage-claude/usage-cost-api.md).
+To track fast mode usage and costs across your organization, see the [Usage and Cost Analytics API](../manage-claude/usage-cost-analytics-api.md).
 
 ## Retries and fallbacks
 

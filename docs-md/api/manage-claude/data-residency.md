@@ -339,9 +339,9 @@ View data residency pricing details.
 
 Learn about workspace configuration.
 
-**Usage and Cost API**
+**Usage and Cost Analytics API**
 
-Track usage and costs by data residency.
+Track usage and costs by inference geo.
 
 ## Availability
 

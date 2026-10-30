@@ -139,6 +139,10 @@ Retrieve detailed information about a specific work item.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -405,6 +409,10 @@ Long poll for work items in the queue.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 - `"Anthropic-Worker-ID": optional string`
 
   Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -656,6 +664,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 ### Returns
 
@@ -916,6 +928,10 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 ### Returns
 
 - `BetaSelfHostedWorkHeartbeatResponse object`
@@ -1107,6 +1123,10 @@ Stop a work item, initiating graceful or forced shutdown.
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1382,6 +1402,10 @@ List work items in an environment.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 ### Returns
 
 - `BetaSelfHostedWorkListResponse object`
@@ -1638,6 +1662,10 @@ Update work item metadata with merge semantics.
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1900,6 +1928,10 @@ Get statistics about the work queue for an environment.
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 - `"anthropic-workspace-id": optional string`
 

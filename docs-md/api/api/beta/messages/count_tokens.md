@@ -133,6 +133,10 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 - `"anthropic-user-profile-id": optional string`
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.

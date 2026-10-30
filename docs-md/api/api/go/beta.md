@@ -117,6 +117,10 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
   - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+  - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+  - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 ### Beta API Error
 
 - `type BetaAPIError`
@@ -591,6 +595,10 @@ The Models API response can be used to determine which models are available for 
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -934,7 +942,7 @@ func main() {
       "deprecated_at": "2019-12-27T18:11:19.117Z",
       "display_name": "Claude Opus 5.5",
       "lifecycle": "active",
-      "line": "haiku",
+      "line": "opus",
       "max_input_tokens": 0,
       "max_tokens": 0,
       "retires_at": "2019-12-27T18:11:19.117Z",
@@ -1072,6 +1080,10 @@ The Models API response can be used to determine information about a specific mo
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -1418,7 +1430,7 @@ func main() {
   "deprecated_at": "2019-12-27T18:11:19.117Z",
   "display_name": "Claude Opus 5.5",
   "lifecycle": "active",
-  "line": "haiku",
+  "line": "opus",
   "max_input_tokens": 0,
   "max_tokens": 0,
   "retires_at": "2019-12-27T18:11:19.117Z",
@@ -5067,6 +5079,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](../../build-with-claude/thinking.md#configuring-thinking) for each model's behavior.
 
+  - `Thread BetaMessageThreadParamUnion Optional`
+
+    Server-held conversation state (a Thread). `{"type": "create"}` asks the server to hold this conversation's state under the response's `id`; `{"type": "continue", "previous_message_id": ...}` resumes from a previous response so only the new turn's messages are sent. The response shape is unchanged.
+
   - `ToolChoice BetaToolChoiceUnionParam Optional`
 
     How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -5323,6 +5339,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `UserProfileID param.Opt[string] Optional` (header parameter)
 
@@ -13404,6 +13424,10 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `UserProfileID param.Opt[string] Optional` (header parameter)
 
     The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
@@ -17438,6 +17462,26 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `type BetaThinkingConfigAdaptiveParam`
 
+      - `Thread BetaMessageThreadParamUnion Optional`
+
+        Server-held conversation state (a Thread). `{"type": "create"}` asks the server to hold this conversation's state under the response's `id`; `{"type": "continue", "previous_message_id": ...}` resumes from a previous response so only the new turn's messages are sent. The response shape is unchanged.
+
+        - `type BetaThreadCreateParams`
+
+          Start holding conversation state under this response's `id`.
+
+          - `Type Create`
+
+        - `type BetaThreadContinueParams`
+
+          Resume from the response named by `previous_message_id`.
+
+          - `Type Continue`
+
+          - `PreviousMessageID string`
+
+            The `id` of the previous response in this Thread.
+
       - `ToolChoice BetaToolChoiceUnionParam Optional`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -17748,6 +17792,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `UserProfileID param.Opt[string] Optional` (header parameter)
 
@@ -18060,6 +18108,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18366,6 +18418,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18665,6 +18721,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18961,6 +19021,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -19148,6 +19212,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -24070,6 +24138,10 @@ Create Agent
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -25140,6 +25212,10 @@ List Agents
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -26193,6 +26269,10 @@ Get Agent
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -28013,6 +28093,10 @@ Update Agent
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -29061,6 +29145,10 @@ Archive Agent
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -30120,6 +30208,10 @@ List Agent Versions
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -31287,6 +31379,10 @@ Create a new environment with the specified configuration.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -31637,6 +31733,10 @@ List environments with pagination support.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -31977,6 +32077,10 @@ Retrieve a specific environment by ID.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -32434,6 +32538,10 @@ Update an existing environment's configuration.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -32774,6 +32882,10 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -32955,6 +33067,10 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -33302,6 +33418,10 @@ Retrieve detailed information about a specific work item.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -33582,6 +33702,10 @@ Long poll for work items in the queue.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `AnthropicWorkerID param.Opt[string] Optional` (header parameter)
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -33847,6 +33971,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -34120,6 +34248,10 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaSelfHostedWorkHeartbeatResponse`
@@ -34330,6 +34462,10 @@ Stop a work item, initiating graceful or forced shutdown.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -34610,6 +34746,10 @@ List work items in an environment.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaSelfHostedWork`
@@ -34881,6 +35021,10 @@ Update work item metadata with merge semantics.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -35151,6 +35295,10 @@ Get statistics about the work queue for an environment.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -36456,6 +36604,10 @@ Create Session
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -38046,6 +38198,10 @@ List Sessions
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -39544,6 +39700,10 @@ Get Session
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -41064,6 +41224,10 @@ Update Session
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -42561,6 +42725,10 @@ Delete Session
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -42736,6 +42904,10 @@ Archive Session
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -44361,6 +44533,10 @@ List Events
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -47837,6 +48013,10 @@ Send Events
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -48477,6 +48657,10 @@ Stream Events
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -51634,6 +51818,10 @@ Add Session Resource
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -51841,6 +52029,10 @@ List Session Resources
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -52137,6 +52329,10 @@ Get Session Resource
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -52429,6 +52625,10 @@ Update Session Resource
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -52716,6 +52916,10 @@ Delete Session Resource
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -52919,6 +53123,10 @@ List Session Threads
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -54013,6 +54221,10 @@ Get Session Thread
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -55102,6 +55314,10 @@ Archive Session Thread
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -56200,6 +56416,10 @@ List Session Thread Events
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -59325,6 +59545,10 @@ Stream Session Thread Events
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -62850,6 +63074,10 @@ Create Deployment
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -63637,6 +63865,10 @@ List Deployments
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -64383,6 +64615,10 @@ Get Deployment
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -65502,6 +65738,10 @@ Update Deployment
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -66247,6 +66487,10 @@ Archive Deployment
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -66994,6 +67238,10 @@ Run Deployment Now
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -67401,6 +67649,10 @@ Pause Deployment
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -68147,6 +68399,10 @@ Unpause Deployment
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -68938,6 +69194,10 @@ List Deployment Runs
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69346,6 +69606,10 @@ Get Deployment Run
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -69763,6 +70027,10 @@ Create a Vault
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69984,6 +70252,10 @@ List Vaults
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70197,6 +70469,10 @@ Retrieve a Vault
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -70421,6 +70697,10 @@ Update a Vault
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70634,6 +70914,10 @@ Delete a Vault
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70813,6 +71097,10 @@ Archive a Vault
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -71205,6 +71493,10 @@ Create a Credential
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71562,6 +71854,10 @@ List Credentials
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71906,6 +72202,10 @@ Retrieve a Credential
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -72389,6 +72689,10 @@ Update a Credential
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72731,6 +73035,10 @@ Delete a Credential
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72916,6 +73224,10 @@ Archive a Credential
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -73259,6 +73571,10 @@ Validate an MCP OAuth Credential
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73571,6 +73887,10 @@ Create a Memory Store
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73817,6 +74137,10 @@ List Memory Stores
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74041,6 +74365,10 @@ Retrieve a Memory Store
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -74290,6 +74618,10 @@ Update a Memory Store
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74518,6 +74850,10 @@ Delete a Memory Store
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74699,6 +75035,10 @@ Archive a Memory Store
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -74947,6 +75287,10 @@ Create a Memory
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -75223,6 +75567,10 @@ List Memories
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75494,6 +75842,10 @@ Retrieve a Memory
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75764,6 +76116,10 @@ Update a Memory
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76016,6 +76372,10 @@ Delete a Memory
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76255,6 +76615,10 @@ List Memory Versions
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -76594,6 +76958,10 @@ Retrieve a Memory Version
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76922,6 +77290,10 @@ Redact a Memory Version
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -77258,6 +77630,10 @@ Upload File
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77516,6 +77892,10 @@ List Files
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77759,6 +78139,10 @@ Download File
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77921,6 +78305,10 @@ Get File Metadata
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -78164,6 +78552,10 @@ Delete File
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78357,6 +78749,10 @@ Create Skill
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -78622,6 +79018,10 @@ List Skills
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78870,6 +79270,10 @@ Get Skill
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79117,6 +79521,10 @@ Delete Skill
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79312,6 +79720,10 @@ Create Skill Version
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -79545,6 +79957,10 @@ List Skill Versions
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79772,6 +80188,10 @@ Download a skill version's content as a zip archive.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79944,6 +80364,10 @@ Get Skill Version
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -80169,6 +80593,10 @@ Delete Skill Version
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -80391,6 +80819,10 @@ Create User Profile
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -80735,6 +81167,10 @@ List User Profiles
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81050,6 +81486,10 @@ Get User Profile
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -81404,6 +81844,10 @@ Update User Profile
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81719,6 +82163,10 @@ Delete User Profile
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81898,6 +82346,10 @@ Create Enrollment URL
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -82093,6 +82545,10 @@ Create Action URL
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -82368,6 +82824,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -82863,6 +83323,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -83295,6 +83759,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -83726,6 +84194,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -84156,6 +84628,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -84590,6 +85066,10 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -84791,6 +85271,10 @@ Fetches a tunnel by ID.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -85008,6 +85492,10 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -85215,6 +85703,10 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -85421,6 +85913,10 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -85613,6 +86109,10 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -85808,6 +86308,10 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -86027,6 +86531,10 @@ Fetches a tunnel certificate by ID.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -86257,6 +86765,10 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -86478,6 +86990,10 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
   - `WorkspaceID param.Opt[string] Optional` (header parameter)
 
@@ -88420,6 +88936,10 @@ matched as the JWT's `iss` claim and is not fetched.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaFederationIssuer`
@@ -88755,6 +89275,10 @@ Archived issuers are excluded unless `include_archived=true`.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaFederationIssuer`
@@ -89079,6 +89603,10 @@ Retrieve a federation issuer by its ID (`fdis_...`).
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -89487,6 +90015,10 @@ session.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaFederationIssuer`
@@ -89815,6 +90347,10 @@ issuer cannot be changed), or recreate them against another issuer.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -90200,6 +90736,10 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaFederationRule`
@@ -90551,6 +91091,10 @@ unless `include_archived=true`.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaFederationRule`
@@ -90881,6 +91425,10 @@ Retrieve a federation rule by its ID (`fdrl_...`).
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -91272,6 +91820,10 @@ Console session.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaFederationRule`
@@ -91609,6 +92161,10 @@ other scopes require a Console session.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -91955,6 +92511,10 @@ other scopes require a Console session.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaFederationRuleWorkspace`
@@ -92171,6 +92731,10 @@ rules with `applies_to_all_workspaces` or a legacy single
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaFederationRuleWorkspace`
@@ -92382,6 +92946,10 @@ Console session.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -93131,6 +93699,10 @@ accounts.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaServiceAccount`
@@ -93379,6 +93951,10 @@ archived service accounts.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaServiceAccount`
@@ -93615,6 +94191,10 @@ Retrieve a service account by its ID (`svac_...`).
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -93871,6 +94451,10 @@ interactive credential (a user OAuth token or a Console session).
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaServiceAccount`
@@ -94111,6 +94695,10 @@ those rules first or change their target to another service account.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -94365,6 +94953,10 @@ rejected.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaServiceAccountWorkspaceMember`
@@ -94598,6 +95190,10 @@ page to recover.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaServiceAccountWorkspaceMember`
@@ -94820,6 +95416,10 @@ to the implicit `workspace_user` membership. Archived workspaces return
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -95656,6 +96256,10 @@ Create Workspace
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -97481,6 +98085,10 @@ omitted from the results.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaServiceAccountWorkspaceMember`
@@ -97709,6 +98317,10 @@ accounts cannot be added and are rejected.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaServiceAccountWorkspaceMember`
@@ -97928,6 +98540,10 @@ account returns 404.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -98152,6 +98768,10 @@ rejected.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaServiceAccountWorkspaceMember`
@@ -98370,6 +98990,10 @@ membership. Archived workspaces return 400.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -100932,6 +101556,1514 @@ func main() {
 }
 ```
 
+## Beta › Organization › Analytics › Usage
+
+### Get Token Usage By Dimension
+
+`client.Beta.Organization.Analytics.Usage.List(ctx, params) (*ReportPageCursor[BetaAnalyticsUsageItem], error)`
+
+**GET** `/v1/organizations/analytics/usage`
+
+Get token usage across a date range, broken out by dimension.
+
+Returns one row per combination of the requested `group_by[]`
+dimensions (and time bucket, when `time_bucket_width` is set) that has
+usage in the range, ranked by the `order_by` metric or ordered by time
+bucket; every combination is returned across pages. With no `group_by[]`
+and no `time_bucket_width`, a single row aggregates the whole range.
+Includes all usage, whether or not it is attributable to a seat user.
+Requires an API key with the `read:analytics` scope, or an Admin API key.
+
+#### Parameters
+
+- `params BetaOrganizationAnalyticsUsageListParams`
+
+  - `StartingAt Time` (query parameter)
+
+    Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
+
+    format: date-time
+
+  - `ActorIDs []string Optional` (query parameter)
+
+    Filter to usage attributed to specific identities, by tagged ID: a `user_...`, `svac_...` (service account), or `apikey_...` ID. An `apikey_` entry matches only usage attributed to the key itself, not usage on that key attributed to a user or service account (use `api_key_ids[]` for every request a key authenticated). Federated identities have no tagged ID; select them with `actor_types[]`. Use `group_by[]=actor` to break out per-identity values.
+
+    maxItems: 100
+
+  - `ActorTypes []BetaAnalyticsActorType Optional` (query parameter)
+
+    Filter to usage attributed to specific kinds of identity. Use `group_by[]=actor_type` to break out per-kind values.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsActorTypeAPIActor BetaAnalyticsActorType = "api_actor"`
+
+    - `const BetaAnalyticsActorTypeFederatedActor BetaAnalyticsActorType = "federated_actor"`
+
+    - `const BetaAnalyticsActorTypeServiceAccountActor BetaAnalyticsActorType = "service_account_actor"`
+
+    - `const BetaAnalyticsActorTypeUserActor BetaAnalyticsActorType = "user_actor"`
+
+  - `AgentIDs []string Optional` (query parameter)
+
+    Filter to usage incurred by sessions of specific Claude Managed Agents agents. Use `group_by[]=agent_id` to break out per-agent values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `APIKeyIDs []string Optional` (query parameter)
+
+    Filter to usage authenticated by specific API keys, by tagged API key ID (`apikey_...`), whichever identity the usage is attributed to. Include an empty entry (`api_key_ids[]=`) to also match usage that no API key authenticated. Use `group_by[]=api_key_id` to break out per-key values; usage without a key has a null `api_key_id`. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `ClaudeTagCategories []BetaAnalyticsClaudeTagCategory Optional` (query parameter)
+
+    Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude_tag`, so combining this filter with `products[]=claude_tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsClaudeTagCategoryDm BetaAnalyticsClaudeTagCategory = "dm"`
+
+    - `const BetaAnalyticsClaudeTagCategoryEngaged BetaAnalyticsClaudeTagCategory = "engaged"`
+
+    - `const BetaAnalyticsClaudeTagCategoryMonitoring BetaAnalyticsClaudeTagCategory = "monitoring"`
+
+    - `const BetaAnalyticsClaudeTagCategoryProactive BetaAnalyticsClaudeTagCategory = "proactive"`
+
+    - `const BetaAnalyticsClaudeTagCategoryScheduled BetaAnalyticsClaudeTagCategory = "scheduled"`
+
+  - `ClaudeTagUserIDs []string Optional` (query parameter)
+
+    Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
+
+    maxItems: 100
+
+  - `ContextWindows []BetaAnalyticsContextWindow Optional` (query parameter)
+
+    Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsContextWindowFrom0To200k BetaAnalyticsContextWindow = "0-200k"`
+
+    - `const BetaAnalyticsContextWindowFrom200kTo1M BetaAnalyticsContextWindow = "200k-1M"`
+
+  - `DeploymentIDs []string Optional` (query parameter)
+
+    Filter to usage incurred by Claude Managed Agents sessions that specific deployments started. Use `group_by[]=deployment_id` to break out per-deployment values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `EndingAt param.Opt[Time] Optional` (query parameter)
+
+    End of range, exclusive. Required when `time_bucket_width` is set. Without `time_bucket_width`, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
+
+    format: date-time
+
+  - `EnvironmentIDs []string Optional` (query parameter)
+
+    Filter to usage incurred by Claude Managed Agents sessions that ran in specific environments. Use `group_by[]=environment_id` to break out per-environment values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `ExcludeDeletedUsers param.Opt[bool] Optional` (query parameter)
+
+    If true, omit rows whose `actor` is a `user_actor` with `deleted: true`. Requires `group_by[]=actor`. Rows for other actor types, and rows whose `actor` is null, are always kept. A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
+
+  - `GroupBy []BetaAnalyticsUsageGroupBy Optional` (query parameter)
+
+    Dimensions to break usage out by (at most 5): one row per combination of their values with usage in the range (and per time bucket, when `time_bucket_width` is set), every combination returned across pages rather than a capped top set. When omitted, a single row aggregates the whole range.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsUsageGroupByActor BetaAnalyticsUsageGroupBy = "actor"`
+
+    - `const BetaAnalyticsUsageGroupByActorType BetaAnalyticsUsageGroupBy = "actor_type"`
+
+    - `const BetaAnalyticsUsageGroupByAgentID BetaAnalyticsUsageGroupBy = "agent_id"`
+
+    - `const BetaAnalyticsUsageGroupByAPIKeyID BetaAnalyticsUsageGroupBy = "api_key_id"`
+
+    - `const BetaAnalyticsUsageGroupByClaudeTagCategory BetaAnalyticsUsageGroupBy = "claude_tag_category"`
+
+    - `const BetaAnalyticsUsageGroupByClaudeTagUserID BetaAnalyticsUsageGroupBy = "claude_tag_user_id"`
+
+    - `const BetaAnalyticsUsageGroupByContextWindow BetaAnalyticsUsageGroupBy = "context_window"`
+
+    - `const BetaAnalyticsUsageGroupByDeploymentID BetaAnalyticsUsageGroupBy = "deployment_id"`
+
+    - `const BetaAnalyticsUsageGroupByEnvironmentID BetaAnalyticsUsageGroupBy = "environment_id"`
+
+    - `const BetaAnalyticsUsageGroupByInferenceGeo BetaAnalyticsUsageGroupBy = "inference_geo"`
+
+    - `const BetaAnalyticsUsageGroupByModel BetaAnalyticsUsageGroupBy = "model"`
+
+    - `const BetaAnalyticsUsageGroupByProduct BetaAnalyticsUsageGroupBy = "product"`
+
+    - `const BetaAnalyticsUsageGroupByRBACGroupID BetaAnalyticsUsageGroupBy = "rbac_group_id"`
+
+    - `const BetaAnalyticsUsageGroupByServiceTier BetaAnalyticsUsageGroupBy = "service_tier"`
+
+    - `const BetaAnalyticsUsageGroupBySessionID BetaAnalyticsUsageGroupBy = "session_id"`
+
+    - `const BetaAnalyticsUsageGroupBySlackChannelID BetaAnalyticsUsageGroupBy = "slack_channel_id"`
+
+    - `const BetaAnalyticsUsageGroupBySpeed BetaAnalyticsUsageGroupBy = "speed"`
+
+    - `const BetaAnalyticsUsageGroupByUserProfileID BetaAnalyticsUsageGroupBy = "user_profile_id"`
+
+    - `const BetaAnalyticsUsageGroupByWorkspaceID BetaAnalyticsUsageGroupBy = "workspace_id"`
+
+  - `InferenceGeos []BetaAnalyticsInferenceGeoFilter Optional` (query parameter)
+
+    Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsInferenceGeoFilterGlobal BetaAnalyticsInferenceGeoFilter = "global"`
+
+    - `const BetaAnalyticsInferenceGeoFilterNotAvailable BetaAnalyticsInferenceGeoFilter = "not_available"`
+
+    - `const BetaAnalyticsInferenceGeoFilterUs BetaAnalyticsInferenceGeoFilter = "us"`
+
+  - `Limit param.Opt[int64] Optional` (query parameter)
+
+    Number of rows per page (1-1000, default 20). `cost_type`/`token_type` fan-out rows (cost endpoint only) do not count toward this limit, so `data` can exceed it.
+
+    minimum: 1, maximum: 1000
+
+  - `Models []string Optional` (query parameter)
+
+    Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
+
+    maxItems: 100
+
+  - `Order BetaAnalyticsUsageCostSortOrder Optional` (query parameter)
+
+    Sort direction of the `order_by` metric, or of the time buckets when `order_by` is `time` and `time_bucket_width` is set. Defaults to `desc`.
+
+  - `OrderBy BetaAnalyticsUsageOrderBy Optional` (query parameter)
+
+    Row order. A metric ranks rows by that metric in the `order` direction. `time` orders rows by time bucket in the `order` direction (newest first by default) and, within a bucket, by `total_tokens`, highest first. `time` takes effect only with `time_bucket_width`; without it, `time` is the same as `total_tokens`. Defaults to `total_tokens`.
+
+  - `Page param.Opt[string] Optional` (query parameter)
+
+    Opaque cursor from a previous response's `next_page` field.
+
+  - `Products []BetaAnalyticsUsageCostProductFilter Optional` (query parameter)
+
+    Product surfaces to include. Defaults to all products.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsUsageCostProductFilterChat BetaAnalyticsUsageCostProductFilter = "chat"`
+
+    - `const BetaAnalyticsUsageCostProductFilterChatCoworkUnified BetaAnalyticsUsageCostProductFilter = "chat_cowork_unified"`
+
+    - `const BetaAnalyticsUsageCostProductFilterClaudeCode BetaAnalyticsUsageCostProductFilter = "claude_code"`
+
+    - `const BetaAnalyticsUsageCostProductFilterClaudeConsole BetaAnalyticsUsageCostProductFilter = "claude_console"`
+
+    - `const BetaAnalyticsUsageCostProductFilterClaudeDesign BetaAnalyticsUsageCostProductFilter = "claude_design"`
+
+    - `const BetaAnalyticsUsageCostProductFilterClaudeInChrome BetaAnalyticsUsageCostProductFilter = "claude_in_chrome"`
+
+    - `const BetaAnalyticsUsageCostProductFilterClaudeTag BetaAnalyticsUsageCostProductFilter = "claude_tag"`
+
+    - `const BetaAnalyticsUsageCostProductFilterCowork BetaAnalyticsUsageCostProductFilter = "cowork"`
+
+    - `const BetaAnalyticsUsageCostProductFilterManagedAgentsAPI BetaAnalyticsUsageCostProductFilter = "managed_agents_api"`
+
+    - `const BetaAnalyticsUsageCostProductFilterMessageBatchesAPI BetaAnalyticsUsageCostProductFilter = "message_batches_api"`
+
+    - `const BetaAnalyticsUsageCostProductFilterMessagesAPI BetaAnalyticsUsageCostProductFilter = "messages_api"`
+
+    - `const BetaAnalyticsUsageCostProductFilterOfficeAgent BetaAnalyticsUsageCostProductFilter = "office_agent"`
+
+  - `RBACGroupIDs []string Optional` (query parameter)
+
+    Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
+
+    maxItems: 100
+
+  - `ServiceTiers []BetaAnalyticsServiceTier Optional` (query parameter)
+
+    Filter to specific service tiers. Use `group_by[]=service_tier` to break out per-tier values. Claude Developer Platform organizations only; matches nothing for a Claude Enterprise organization.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsServiceTierBatch BetaAnalyticsServiceTier = "batch"`
+
+    - `const BetaAnalyticsServiceTierFlex BetaAnalyticsServiceTier = "flex"`
+
+    - `const BetaAnalyticsServiceTierFlexDiscount BetaAnalyticsServiceTier = "flex_discount"`
+
+    - `const BetaAnalyticsServiceTierPriority BetaAnalyticsServiceTier = "priority"`
+
+    - `const BetaAnalyticsServiceTierPriorityOnDemand BetaAnalyticsServiceTier = "priority_on_demand"`
+
+    - `const BetaAnalyticsServiceTierStandard BetaAnalyticsServiceTier = "standard"`
+
+  - `SessionIDs []string Optional` (query parameter)
+
+    Filter to usage incurred by specific Claude Managed Agents sessions, by tagged session ID (`sesn_...`). Use `group_by[]=session_id` to break out per-session values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `SlackChannelIDs []string Optional` (query parameter)
+
+    Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
+
+    maxItems: 100
+
+  - `Speeds []BetaAnalyticsSpeed Optional` (query parameter)
+
+    Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsSpeedFast BetaAnalyticsSpeed = "fast"`
+
+    - `const BetaAnalyticsSpeedStandard BetaAnalyticsSpeed = "standard"`
+
+  - `TimeBucketWidth BetaAnalyticsTimeBucketWidth Optional` (query parameter)
+
+    Time-bucket granularity. When set, rows are returned per time bucket (one per bucket and dimension combination with usage) and each row's `starting_at` and `ending_at` are that bucket's bounds; the time bucket counts toward `limit`. `ending_at` is required when `time_bucket_width` is set, and with `time_bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the requested range with `starting_at` and `ending_at` each rounded down to the hour.
+
+  - `UserProfileIDs []string Optional` (query parameter)
+
+    Filter to usage attributed to specific user profiles, by tagged user profile ID (`uprof_...`). Use `group_by[]=user_profile_id` to break out per-profile values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `WorkspaceIDs []string Optional` (query parameter)
+
+    Filter to usage in specific workspaces, by tagged workspace ID (`wrkspc_...`). Use `group_by[]=workspace_id` to break out per-workspace values. Claude Developer Platform organizations only; matches nothing for a Claude Enterprise organization.
+
+    maxItems: 100
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    This endpoint is in beta: requests must send `analytics-usage-cost-2026-08-24` in this header.
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
+#### Returns
+
+- `type BetaAnalyticsUsageItem`
+
+  - `EndingAt Time`
+
+    End of the period this row covers (exclusive), as an RFC 3339 UTC timestamp: the end of the row's time bucket when a time-bucket width is set; otherwise the requested `ending_at` (or, when omitted, the earlier of now and `starting_at` plus 31 days) rounded down to the hour, because without a time bucket the report covers whole hours.
+
+    format: date-time
+
+  - `Group BetaAnalyticsUsageGroup`
+
+    The dimension values this row's usage is broken out by.
+
+    - `Actor BetaAnalyticsActorUnion`
+
+      The identity the usage is attributed to: the user if one is attributed, else the service account, else the federated (cloud-platform) identity, else the API key. Populated only when `actor` is in `group_by[]`; null for usage with no attributable identity, and for users' and federated identities' usage when the reader is a member who can see only some workspaces. Distinct identities the server cannot render also read null, each as its own row.
+
+      - `type BetaAnalyticsReportUserActor`
+
+        - `Type UserActor`
+
+          Actor type. Always `"user_actor"`.
+
+        - `Deleted bool`
+
+          True when the account has been deleted, or when the user is no longer a member of the organization or its associated organizations (for example, their membership was removed or they were deprovisioned via your identity provider). `email_address` stays populated for removed users and is null when the account has been deleted. `name` follows the rules described on that field. The `user_id` is still populated for reconciliation.
+
+        - `EmailAddress string`
+
+          The user's current email address, including for users who are no longer members of the organization. Null when the account has been deleted and for system-minted service accounts.
+
+        - `Name string`
+
+          The user's current full name. Null when the user has not set one. `"Deleted User"` when the account has been deleted, or when the user is no longer a member and the organization hides removed users' names.
+
+        - `UserID string`
+
+          Tagged user ID.
+
+      - `type BetaAnalyticsServiceAccountActor`
+
+        - `Type ServiceAccountActor`
+
+        - `ServiceAccountID string`
+
+          Tagged service account ID.
+
+      - `type BetaAnalyticsFederatedActor`
+
+        - `Type FederatedActor`
+
+        - `Provider BetaAnalyticsFederatedActorProviderUnion`
+
+          The trusted provider that asserted the caller's identity.
+
+          - `type BetaAnalyticsFederatedActorAWSProvider`
+
+            - `Type AWS`
+
+            - `AccountID string`
+
+              The AWS account the organization is bound to.
+
+            - `SignedPrincipal string`
+
+              The AWS-signed ARN of the IAM principal that made the requests.
+
+          - `type BetaAnalyticsFederatedActorAzureProvider`
+
+            - `Type Azure`
+
+            - `SubscriptionID string`
+
+              The Azure subscription the organization is bound to.
+
+          - `type BetaAnalyticsFederatedActorGCPProvider`
+
+            - `Type GCP`
+
+            - `ProjectNumber string`
+
+              The Google Cloud project the organization is bound to.
+
+          - `type BetaAnalyticsFederatedActorOIDCProvider`
+
+            - `Type OIDC`
+
+            - `Issuer string`
+
+              The federation issuer's URL.
+
+        - `Subject string`
+
+          The provider's identifier for the caller: on `aws`, the IAM principal ARN (one role is one actor across its sessions); on `gcp`, the caller's IAM principal identifier as Google Cloud reports it, such as `serviceAccount:<email>`, `user:<email>`, or a `principal://...` URI.
+
+      - `type BetaAnalyticsAPIActor`
+
+        - `Type APIActor`
+
+        - `APIKeyID string`
+
+          Tagged API key ID.
+
+    - `ActorType BetaAnalyticsActorType`
+
+      Kind of identity the usage is attributed to; matches `actor.type` when `actor` is set. Populated only when `actor_type` is in `group_by[]`.
+
+      - `const BetaAnalyticsActorTypeAPIActor BetaAnalyticsActorType = "api_actor"`
+
+      - `const BetaAnalyticsActorTypeFederatedActor BetaAnalyticsActorType = "federated_actor"`
+
+      - `const BetaAnalyticsActorTypeServiceAccountActor BetaAnalyticsActorType = "service_account_actor"`
+
+      - `const BetaAnalyticsActorTypeUserActor BetaAnalyticsActorType = "user_actor"`
+
+    - `AgentID string`
+
+      Claude Managed Agents agent whose session incurred the usage. Populated only when `agent_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `APIKeyID string`
+
+      API key that authenticated the requests, as a tagged API key ID, whichever identity `actor` resolves to. Populated only when `api_key_id` is in `group_by[]`; null for usage not authenticated by an API key.
+
+    - `ClaudeTagCategory BetaAnalyticsClaudeTagCategory`
+
+      Claude Tag (Claude in Slack) spend category: `engaged` (a person addressed Claude in a channel or thread), `proactive` (Claude responded without being addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching a channel it was asked to monitor), or `dm` (direct messages with Claude). Populated only when `claude_tag_category` is in `group_by[]`; null for usage that is not Claude Tag. Direct-message usage is billed to the individual user and is reported under that user's product, not under `claude_tag`. New categories may be added over time.
+
+      - `const BetaAnalyticsClaudeTagCategoryDm BetaAnalyticsClaudeTagCategory = "dm"`
+
+      - `const BetaAnalyticsClaudeTagCategoryEngaged BetaAnalyticsClaudeTagCategory = "engaged"`
+
+      - `const BetaAnalyticsClaudeTagCategoryMonitoring BetaAnalyticsClaudeTagCategory = "monitoring"`
+
+      - `const BetaAnalyticsClaudeTagCategoryProactive BetaAnalyticsClaudeTagCategory = "proactive"`
+
+      - `const BetaAnalyticsClaudeTagCategoryScheduled BetaAnalyticsClaudeTagCategory = "scheduled"`
+
+    - `ClaudeTagUserID string`
+
+      Slack user ID (for example `U0123ABCDEF`) of the member the Claude Tag (Claude in Slack) usage is attributed to, not a claude.ai user ID. Populated only when `claude_tag_user_id` is in `group_by[]`; null for usage that is not Claude Tag and for Claude Tag usage that is not attributed to a single user (for example `monitoring`, and `proactive` usage Claude initiated), so per-user rows can sum to less than the Claude Tag total. Cannot be combined with `group_by[]=rbac_group_id` or the `rbac_group_ids[]` filter.
+
+    - `ContextWindow BetaAnalyticsContextWindow`
+
+      Context-window pricing tier of the usage or cost. Null unless `context_window` is in `group_by[]`; it can also be null on grouped rows with no context-window tier, such as code execution.
+
+      - `const BetaAnalyticsContextWindowFrom0To200k BetaAnalyticsContextWindow = "0-200k"`
+
+      - `const BetaAnalyticsContextWindowFrom200kTo1M BetaAnalyticsContextWindow = "200k-1M"`
+
+    - `DeploymentID string`
+
+      Deployment that started the Claude Managed Agents session. Populated only when `deployment_id` is in `group_by[]`; null for usage outside a managed session and for sessions no deployment started.
+
+    - `EnvironmentID string`
+
+      Claude Managed Agents environment the session ran in. Populated only when `environment_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `InferenceGeo BetaAnalyticsUsageCostInferenceGeo`
+
+      Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
+
+      - `const BetaAnalyticsUsageCostInferenceGeoGlobal BetaAnalyticsUsageCostInferenceGeo = "global"`
+
+      - `const BetaAnalyticsUsageCostInferenceGeoUs BetaAnalyticsUsageCostInferenceGeo = "us"`
+
+    - `Model string`
+
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+
+    - `Product string`
+
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
+
+    - `RBACGroupID string`
+
+      RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has one id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query without `group_by[]`.
+
+    - `ServiceTier BetaAnalyticsServiceTier`
+
+      Service tier the usage was served at. Populated only when `service_tier` is in `group_by[]`; null for usage with no service tier (for example, code execution) and for Claude Enterprise usage.
+
+      - `const BetaAnalyticsServiceTierBatch BetaAnalyticsServiceTier = "batch"`
+
+      - `const BetaAnalyticsServiceTierFlex BetaAnalyticsServiceTier = "flex"`
+
+      - `const BetaAnalyticsServiceTierFlexDiscount BetaAnalyticsServiceTier = "flex_discount"`
+
+      - `const BetaAnalyticsServiceTierPriority BetaAnalyticsServiceTier = "priority"`
+
+      - `const BetaAnalyticsServiceTierPriorityOnDemand BetaAnalyticsServiceTier = "priority_on_demand"`
+
+      - `const BetaAnalyticsServiceTierStandard BetaAnalyticsServiceTier = "standard"`
+
+    - `SessionID string`
+
+      Claude Managed Agents session that incurred the usage. Populated only when `session_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `SlackChannelID string`
+
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
+    - `Speed BetaAnalyticsSpeed`
+
+      Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `speed` is in `group_by[]`.
+
+      - `const BetaAnalyticsSpeedFast BetaAnalyticsSpeed = "fast"`
+
+      - `const BetaAnalyticsSpeedStandard BetaAnalyticsSpeed = "standard"`
+
+    - `UserProfileID string`
+
+      User profile the usage was attributed to, as a tagged `uprof_` ID. Populated only when `user_profile_id` is in `group_by[]`; null for usage that named no profile and for Claude Enterprise usage.
+
+    - `WorkspaceID string`
+
+      Workspace the usage occurred in, as a tagged workspace ID, including the organization's default workspace. Populated only when `workspace_id` is in `group_by[]`; null for Claude Enterprise usage.
+
+  - `StartingAt Time`
+
+    Start of the period this row covers (inclusive), as an RFC 3339 UTC timestamp: the start of the row's time bucket when a time-bucket width is set, otherwise the requested `starting_at` rounded down to the hour.
+
+    format: date-time
+
+  - `Usage BetaAnalyticsUsageMetrics`
+
+    Token usage for this row.
+
+    - `CacheCreation BetaCacheCreation`
+
+      The number of input tokens for cache creation.
+
+      - `Ephemeral1hInputTokens int64`
+
+        The number of input tokens used to create the 1 hour cache entry.
+
+        default: 0, minimum: 0
+
+      - `Ephemeral5mInputTokens int64`
+
+        The number of input tokens used to create the 5 minute cache entry.
+
+        default: 0, minimum: 0
+
+    - `CacheReadInputTokens int64`
+
+      The number of input tokens read from the cache.
+
+    - `OutputTokens int64`
+
+      The number of output tokens generated.
+
+    - `Requests int64`
+
+      Number of API requests in this row's scope. For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+    - `ServerToolUse BetaAnalyticsServerToolUse`
+
+      Server-side tool usage metrics.
+
+      - `WebSearchRequests int64`
+
+        The number of web search requests made.
+
+    - `TotalTokens int64`
+
+      Total token count across all token types. This is the value the default `order_by` (`total_tokens`) sorts on.
+
+    - `UncachedInputTokens int64`
+
+      The number of uncached input tokens processed.
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"time"
+
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
+)
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	page, err := client.Beta.Organization.Analytics.Usage.List(context.TODO(), anthropic.BetaOrganizationAnalyticsUsageListParams{
+		StartingAt: time.Now(),
+	})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", page)
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "ending_at": "2026-10-01T00:00:00Z",
+      "group": {
+        "actor": {
+          "deleted": false,
+          "email_address": "user@emaildomain.com",
+          "name": "Jane Doe",
+          "type": "user_actor",
+          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        },
+        "actor_type": "user_actor",
+        "agent_id": "agent_01VHd3EAGJ6PLkP9LM7DDu3f",
+        "api_key_id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+        "claude_tag_category": "dm",
+        "claude_tag_user_id": "U0123ABCDEF",
+        "context_window": "0-200k",
+        "deployment_id": "depl_01JFC6ihzZHtAuyHsaENdJhY",
+        "environment_id": "env_017oTjuGedHtjhJauVC5xGJD",
+        "inference_geo": "global",
+        "model": "claude-opus-5-5",
+        "product": "chat",
+        "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+        "service_tier": "standard",
+        "session_id": "sesn_0187kPDyNCwibNNvfaPEApCJ",
+        "slack_channel_id": "C0123ABCDEF",
+        "speed": "fast",
+        "user_profile_id": "uprof_01M33NeYUQK2WV9PpYcsPHLi",
+        "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+      },
+      "starting_at": "2026-09-01T00:00:00Z",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_read_input_tokens": 3200000,
+        "output_tokens": 891000,
+        "requests": 128,
+        "server_tool_use": {
+          "web_search_requests": 10
+        },
+        "total_tokens": 5377000,
+        "uncached_input_tokens": 1284500
+      }
+    }
+  ],
+  "data_refreshed_at": "2019-12-27T18:11:19.117Z",
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
+
+## Beta › Organization › Analytics › Cost
+
+### Get Cost By Dimension
+
+`client.Beta.Organization.Analytics.Cost.List(ctx, params) (*ReportPageCursor[BetaAnalyticsCostItem], error)`
+
+**GET** `/v1/organizations/analytics/cost`
+
+Get cost in USD across a date range, broken out by dimension.
+
+Returns one row per combination of the requested `group_by[]`
+dimensions (and time bucket, when `time_bucket_width` is set) that has
+cost in the range, ranked by spend or ordered by time bucket; every
+combination is returned across pages. With no `group_by[]` and no
+`time_bucket_width`, a single row aggregates the whole range. Includes
+all cost, whether or not it is attributable to a seat user. Requires an
+API key with the `read:analytics` scope, or an Admin API key.
+
+#### Parameters
+
+- `params BetaOrganizationAnalyticsCostListParams`
+
+  - `StartingAt Time` (query parameter)
+
+    Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
+
+    format: date-time
+
+  - `ActorIDs []string Optional` (query parameter)
+
+    Filter to usage attributed to specific identities, by tagged ID: a `user_...`, `svac_...` (service account), or `apikey_...` ID. An `apikey_` entry matches only usage attributed to the key itself, not usage on that key attributed to a user or service account (use `api_key_ids[]` for every request a key authenticated). Federated identities have no tagged ID; select them with `actor_types[]`. Use `group_by[]=actor` to break out per-identity values.
+
+    maxItems: 100
+
+  - `ActorTypes []BetaAnalyticsActorType Optional` (query parameter)
+
+    Filter to usage attributed to specific kinds of identity. Use `group_by[]=actor_type` to break out per-kind values.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsActorTypeAPIActor BetaAnalyticsActorType = "api_actor"`
+
+    - `const BetaAnalyticsActorTypeFederatedActor BetaAnalyticsActorType = "federated_actor"`
+
+    - `const BetaAnalyticsActorTypeServiceAccountActor BetaAnalyticsActorType = "service_account_actor"`
+
+    - `const BetaAnalyticsActorTypeUserActor BetaAnalyticsActorType = "user_actor"`
+
+  - `AgentIDs []string Optional` (query parameter)
+
+    Filter to usage incurred by sessions of specific Claude Managed Agents agents. Use `group_by[]=agent_id` to break out per-agent values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `APIKeyIDs []string Optional` (query parameter)
+
+    Filter to usage authenticated by specific API keys, by tagged API key ID (`apikey_...`), whichever identity the usage is attributed to. Include an empty entry (`api_key_ids[]=`) to also match usage that no API key authenticated. Use `group_by[]=api_key_id` to break out per-key values; usage without a key has a null `api_key_id`. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `ClaudeTagCategories []BetaAnalyticsClaudeTagCategory Optional` (query parameter)
+
+    Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude_tag`, so combining this filter with `products[]=claude_tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsClaudeTagCategoryDm BetaAnalyticsClaudeTagCategory = "dm"`
+
+    - `const BetaAnalyticsClaudeTagCategoryEngaged BetaAnalyticsClaudeTagCategory = "engaged"`
+
+    - `const BetaAnalyticsClaudeTagCategoryMonitoring BetaAnalyticsClaudeTagCategory = "monitoring"`
+
+    - `const BetaAnalyticsClaudeTagCategoryProactive BetaAnalyticsClaudeTagCategory = "proactive"`
+
+    - `const BetaAnalyticsClaudeTagCategoryScheduled BetaAnalyticsClaudeTagCategory = "scheduled"`
+
+  - `ClaudeTagUserIDs []string Optional` (query parameter)
+
+    Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
+
+    maxItems: 100
+
+  - `ContextWindows []BetaAnalyticsContextWindow Optional` (query parameter)
+
+    Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsContextWindowFrom0To200k BetaAnalyticsContextWindow = "0-200k"`
+
+    - `const BetaAnalyticsContextWindowFrom200kTo1M BetaAnalyticsContextWindow = "200k-1M"`
+
+  - `DeploymentIDs []string Optional` (query parameter)
+
+    Filter to usage incurred by Claude Managed Agents sessions that specific deployments started. Use `group_by[]=deployment_id` to break out per-deployment values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `EndingAt param.Opt[Time] Optional` (query parameter)
+
+    End of range, exclusive. Required when `time_bucket_width` is set. Without `time_bucket_width`, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
+
+    format: date-time
+
+  - `EnvironmentIDs []string Optional` (query parameter)
+
+    Filter to usage incurred by Claude Managed Agents sessions that ran in specific environments. Use `group_by[]=environment_id` to break out per-environment values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `ExcludeDeletedUsers param.Opt[bool] Optional` (query parameter)
+
+    If true, omit rows whose `actor` is a `user_actor` with `deleted: true`. Requires `group_by[]=actor`. Rows for other actor types, and rows whose `actor` is null, are always kept. A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
+
+  - `GroupBy []BetaAnalyticsCostGroupBy Optional` (query parameter)
+
+    Dimensions to break cost out by (at most 5, not counting `cost_type` and `token_type`): one row per combination of their values with cost in the range (and per time bucket, when `time_bucket_width` is set), every combination returned across pages rather than a capped top set. `cost_type` and `token_type` do not count toward `limit`: `cost_type` returns one row per cost component (tokens, web search, code execution, and `session_usage`, Claude Managed Agents session time); `token_type` returns one row per token type, each with `cost_type: "tokens"`; combining both returns the per-token-type rows plus the web-search, code-execution and session-usage rows. When omitted, a single row aggregates the whole range.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsCostGroupByActor BetaAnalyticsCostGroupBy = "actor"`
+
+    - `const BetaAnalyticsCostGroupByActorType BetaAnalyticsCostGroupBy = "actor_type"`
+
+    - `const BetaAnalyticsCostGroupByAgentID BetaAnalyticsCostGroupBy = "agent_id"`
+
+    - `const BetaAnalyticsCostGroupByAPIKeyID BetaAnalyticsCostGroupBy = "api_key_id"`
+
+    - `const BetaAnalyticsCostGroupByClaudeTagCategory BetaAnalyticsCostGroupBy = "claude_tag_category"`
+
+    - `const BetaAnalyticsCostGroupByClaudeTagUserID BetaAnalyticsCostGroupBy = "claude_tag_user_id"`
+
+    - `const BetaAnalyticsCostGroupByContextWindow BetaAnalyticsCostGroupBy = "context_window"`
+
+    - `const BetaAnalyticsCostGroupByCostType BetaAnalyticsCostGroupBy = "cost_type"`
+
+    - `const BetaAnalyticsCostGroupByDeploymentID BetaAnalyticsCostGroupBy = "deployment_id"`
+
+    - `const BetaAnalyticsCostGroupByEnvironmentID BetaAnalyticsCostGroupBy = "environment_id"`
+
+    - `const BetaAnalyticsCostGroupByInferenceGeo BetaAnalyticsCostGroupBy = "inference_geo"`
+
+    - `const BetaAnalyticsCostGroupByModel BetaAnalyticsCostGroupBy = "model"`
+
+    - `const BetaAnalyticsCostGroupByProduct BetaAnalyticsCostGroupBy = "product"`
+
+    - `const BetaAnalyticsCostGroupByRBACGroupID BetaAnalyticsCostGroupBy = "rbac_group_id"`
+
+    - `const BetaAnalyticsCostGroupByServiceTier BetaAnalyticsCostGroupBy = "service_tier"`
+
+    - `const BetaAnalyticsCostGroupBySessionID BetaAnalyticsCostGroupBy = "session_id"`
+
+    - `const BetaAnalyticsCostGroupBySlackChannelID BetaAnalyticsCostGroupBy = "slack_channel_id"`
+
+    - `const BetaAnalyticsCostGroupBySpeed BetaAnalyticsCostGroupBy = "speed"`
+
+    - `const BetaAnalyticsCostGroupByTokenType BetaAnalyticsCostGroupBy = "token_type"`
+
+    - `const BetaAnalyticsCostGroupByUserProfileID BetaAnalyticsCostGroupBy = "user_profile_id"`
+
+    - `const BetaAnalyticsCostGroupByWorkspaceID BetaAnalyticsCostGroupBy = "workspace_id"`
+
+  - `InferenceGeos []BetaAnalyticsInferenceGeoFilter Optional` (query parameter)
+
+    Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsInferenceGeoFilterGlobal BetaAnalyticsInferenceGeoFilter = "global"`
+
+    - `const BetaAnalyticsInferenceGeoFilterNotAvailable BetaAnalyticsInferenceGeoFilter = "not_available"`
+
+    - `const BetaAnalyticsInferenceGeoFilterUs BetaAnalyticsInferenceGeoFilter = "us"`
+
+  - `Limit param.Opt[int64] Optional` (query parameter)
+
+    Number of rows per page (1-1000, default 20). `cost_type`/`token_type` fan-out rows (cost endpoint only) do not count toward this limit, so `data` can exceed it.
+
+    minimum: 1, maximum: 1000
+
+  - `Models []string Optional` (query parameter)
+
+    Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
+
+    maxItems: 100
+
+  - `Order BetaAnalyticsUsageCostSortOrder Optional` (query parameter)
+
+    Sort direction of the `order_by` metric, or of the time buckets when `order_by` is `time` and `time_bucket_width` is set. Defaults to `desc`.
+
+  - `OrderBy BetaAnalyticsCostOrderBy Optional` (query parameter)
+
+    Row order. A metric ranks rows by that metric in the `order` direction. `time` orders rows by time bucket in the `order` direction (newest first by default) and, within a bucket, by `amount`, highest first. `time` takes effect only with `time_bucket_width`; without it, `time` is the same as `amount`. Defaults to `amount`.
+
+  - `Page param.Opt[string] Optional` (query parameter)
+
+    Opaque cursor from a previous response's `next_page` field.
+
+  - `Products []BetaAnalyticsUsageCostProductFilter Optional` (query parameter)
+
+    Product surfaces to include. Defaults to all products.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsUsageCostProductFilterChat BetaAnalyticsUsageCostProductFilter = "chat"`
+
+    - `const BetaAnalyticsUsageCostProductFilterChatCoworkUnified BetaAnalyticsUsageCostProductFilter = "chat_cowork_unified"`
+
+    - `const BetaAnalyticsUsageCostProductFilterClaudeCode BetaAnalyticsUsageCostProductFilter = "claude_code"`
+
+    - `const BetaAnalyticsUsageCostProductFilterClaudeConsole BetaAnalyticsUsageCostProductFilter = "claude_console"`
+
+    - `const BetaAnalyticsUsageCostProductFilterClaudeDesign BetaAnalyticsUsageCostProductFilter = "claude_design"`
+
+    - `const BetaAnalyticsUsageCostProductFilterClaudeInChrome BetaAnalyticsUsageCostProductFilter = "claude_in_chrome"`
+
+    - `const BetaAnalyticsUsageCostProductFilterClaudeTag BetaAnalyticsUsageCostProductFilter = "claude_tag"`
+
+    - `const BetaAnalyticsUsageCostProductFilterCowork BetaAnalyticsUsageCostProductFilter = "cowork"`
+
+    - `const BetaAnalyticsUsageCostProductFilterManagedAgentsAPI BetaAnalyticsUsageCostProductFilter = "managed_agents_api"`
+
+    - `const BetaAnalyticsUsageCostProductFilterMessageBatchesAPI BetaAnalyticsUsageCostProductFilter = "message_batches_api"`
+
+    - `const BetaAnalyticsUsageCostProductFilterMessagesAPI BetaAnalyticsUsageCostProductFilter = "messages_api"`
+
+    - `const BetaAnalyticsUsageCostProductFilterOfficeAgent BetaAnalyticsUsageCostProductFilter = "office_agent"`
+
+  - `RBACGroupIDs []string Optional` (query parameter)
+
+    Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
+
+    maxItems: 100
+
+  - `ServiceTiers []BetaAnalyticsServiceTier Optional` (query parameter)
+
+    Filter to specific service tiers. Use `group_by[]=service_tier` to break out per-tier values. Claude Developer Platform organizations only; matches nothing for a Claude Enterprise organization.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsServiceTierBatch BetaAnalyticsServiceTier = "batch"`
+
+    - `const BetaAnalyticsServiceTierFlex BetaAnalyticsServiceTier = "flex"`
+
+    - `const BetaAnalyticsServiceTierFlexDiscount BetaAnalyticsServiceTier = "flex_discount"`
+
+    - `const BetaAnalyticsServiceTierPriority BetaAnalyticsServiceTier = "priority"`
+
+    - `const BetaAnalyticsServiceTierPriorityOnDemand BetaAnalyticsServiceTier = "priority_on_demand"`
+
+    - `const BetaAnalyticsServiceTierStandard BetaAnalyticsServiceTier = "standard"`
+
+  - `SessionIDs []string Optional` (query parameter)
+
+    Filter to usage incurred by specific Claude Managed Agents sessions, by tagged session ID (`sesn_...`). Use `group_by[]=session_id` to break out per-session values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `SlackChannelIDs []string Optional` (query parameter)
+
+    Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
+
+    maxItems: 100
+
+  - `Speeds []BetaAnalyticsSpeed Optional` (query parameter)
+
+    Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
+
+    maxItems: 100
+
+    - `const BetaAnalyticsSpeedFast BetaAnalyticsSpeed = "fast"`
+
+    - `const BetaAnalyticsSpeedStandard BetaAnalyticsSpeed = "standard"`
+
+  - `TimeBucketWidth BetaAnalyticsTimeBucketWidth Optional` (query parameter)
+
+    Time-bucket granularity. When set, rows are returned per time bucket (one per bucket and dimension combination with usage) and each row's `starting_at` and `ending_at` are that bucket's bounds; the time bucket counts toward `limit`. `ending_at` is required when `time_bucket_width` is set, and with `time_bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the requested range with `starting_at` and `ending_at` each rounded down to the hour.
+
+  - `UserProfileIDs []string Optional` (query parameter)
+
+    Filter to usage attributed to specific user profiles, by tagged user profile ID (`uprof_...`). Use `group_by[]=user_profile_id` to break out per-profile values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `WorkspaceIDs []string Optional` (query parameter)
+
+    Filter to usage in specific workspaces, by tagged workspace ID (`wrkspc_...`). Use `group_by[]=workspace_id` to break out per-workspace values. Claude Developer Platform organizations only; matches nothing for a Claude Enterprise organization.
+
+    maxItems: 100
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    This endpoint is in beta: requests must send `analytics-usage-cost-2026-08-24` in this header.
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
+#### Returns
+
+- `type BetaAnalyticsCostItem`
+
+  - `Cost BetaAnalyticsCostMetrics`
+
+    Cost for this row.
+
+    - `Amount string`
+
+      Amount (post-discount, pre-credit) in fractional cents (minor units).
+
+    - `Currency string`
+
+      Currency code for the cost amount. Currently always `"USD"`.
+
+      default: USD
+
+    - `ListAmount string`
+
+      List-price amount (pre-discount) in fractional cents.
+
+    - `Requests int64`
+
+      Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+  - `EndingAt Time`
+
+    End of the period this row covers (exclusive), as an RFC 3339 UTC timestamp: the end of the row's time bucket when a time-bucket width is set; otherwise the requested `ending_at` (or, when omitted, the earlier of now and `starting_at` plus 31 days) rounded down to the hour, because without a time bucket the report covers whole hours.
+
+    format: date-time
+
+  - `Group BetaAnalyticsCostGroup`
+
+    The dimension values this row's cost is broken out by.
+
+    - `Actor BetaAnalyticsActorUnion`
+
+      The identity the usage is attributed to: the user if one is attributed, else the service account, else the federated (cloud-platform) identity, else the API key. Populated only when `actor` is in `group_by[]`; null for usage with no attributable identity, and for users' and federated identities' usage when the reader is a member who can see only some workspaces. Distinct identities the server cannot render also read null, each as its own row.
+
+      - `type BetaAnalyticsReportUserActor`
+
+        - `Type UserActor`
+
+          Actor type. Always `"user_actor"`.
+
+        - `Deleted bool`
+
+          True when the account has been deleted, or when the user is no longer a member of the organization or its associated organizations (for example, their membership was removed or they were deprovisioned via your identity provider). `email_address` stays populated for removed users and is null when the account has been deleted. `name` follows the rules described on that field. The `user_id` is still populated for reconciliation.
+
+        - `EmailAddress string`
+
+          The user's current email address, including for users who are no longer members of the organization. Null when the account has been deleted and for system-minted service accounts.
+
+        - `Name string`
+
+          The user's current full name. Null when the user has not set one. `"Deleted User"` when the account has been deleted, or when the user is no longer a member and the organization hides removed users' names.
+
+        - `UserID string`
+
+          Tagged user ID.
+
+      - `type BetaAnalyticsServiceAccountActor`
+
+        - `Type ServiceAccountActor`
+
+        - `ServiceAccountID string`
+
+          Tagged service account ID.
+
+      - `type BetaAnalyticsFederatedActor`
+
+        - `Type FederatedActor`
+
+        - `Provider BetaAnalyticsFederatedActorProviderUnion`
+
+          The trusted provider that asserted the caller's identity.
+
+          - `type BetaAnalyticsFederatedActorAWSProvider`
+
+            - `Type AWS`
+
+            - `AccountID string`
+
+              The AWS account the organization is bound to.
+
+            - `SignedPrincipal string`
+
+              The AWS-signed ARN of the IAM principal that made the requests.
+
+          - `type BetaAnalyticsFederatedActorAzureProvider`
+
+            - `Type Azure`
+
+            - `SubscriptionID string`
+
+              The Azure subscription the organization is bound to.
+
+          - `type BetaAnalyticsFederatedActorGCPProvider`
+
+            - `Type GCP`
+
+            - `ProjectNumber string`
+
+              The Google Cloud project the organization is bound to.
+
+          - `type BetaAnalyticsFederatedActorOIDCProvider`
+
+            - `Type OIDC`
+
+            - `Issuer string`
+
+              The federation issuer's URL.
+
+        - `Subject string`
+
+          The provider's identifier for the caller: on `aws`, the IAM principal ARN (one role is one actor across its sessions); on `gcp`, the caller's IAM principal identifier as Google Cloud reports it, such as `serviceAccount:<email>`, `user:<email>`, or a `principal://...` URI.
+
+      - `type BetaAnalyticsAPIActor`
+
+        - `Type APIActor`
+
+        - `APIKeyID string`
+
+          Tagged API key ID.
+
+    - `ActorType BetaAnalyticsActorType`
+
+      Kind of identity the usage is attributed to; matches `actor.type` when `actor` is set. Populated only when `actor_type` is in `group_by[]`.
+
+      - `const BetaAnalyticsActorTypeAPIActor BetaAnalyticsActorType = "api_actor"`
+
+      - `const BetaAnalyticsActorTypeFederatedActor BetaAnalyticsActorType = "federated_actor"`
+
+      - `const BetaAnalyticsActorTypeServiceAccountActor BetaAnalyticsActorType = "service_account_actor"`
+
+      - `const BetaAnalyticsActorTypeUserActor BetaAnalyticsActorType = "user_actor"`
+
+    - `AgentID string`
+
+      Claude Managed Agents agent whose session incurred the usage. Populated only when `agent_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `APIKeyID string`
+
+      API key that authenticated the requests, as a tagged API key ID, whichever identity `actor` resolves to. Populated only when `api_key_id` is in `group_by[]`; null for usage not authenticated by an API key.
+
+    - `ClaudeTagCategory BetaAnalyticsClaudeTagCategory`
+
+      Claude Tag (Claude in Slack) spend category: `engaged` (a person addressed Claude in a channel or thread), `proactive` (Claude responded without being addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching a channel it was asked to monitor), or `dm` (direct messages with Claude). Populated only when `claude_tag_category` is in `group_by[]`; null for usage that is not Claude Tag. Direct-message usage is billed to the individual user and is reported under that user's product, not under `claude_tag`. New categories may be added over time.
+
+      - `const BetaAnalyticsClaudeTagCategoryDm BetaAnalyticsClaudeTagCategory = "dm"`
+
+      - `const BetaAnalyticsClaudeTagCategoryEngaged BetaAnalyticsClaudeTagCategory = "engaged"`
+
+      - `const BetaAnalyticsClaudeTagCategoryMonitoring BetaAnalyticsClaudeTagCategory = "monitoring"`
+
+      - `const BetaAnalyticsClaudeTagCategoryProactive BetaAnalyticsClaudeTagCategory = "proactive"`
+
+      - `const BetaAnalyticsClaudeTagCategoryScheduled BetaAnalyticsClaudeTagCategory = "scheduled"`
+
+    - `ClaudeTagUserID string`
+
+      Slack user ID (for example `U0123ABCDEF`) of the member the Claude Tag (Claude in Slack) usage is attributed to, not a claude.ai user ID. Populated only when `claude_tag_user_id` is in `group_by[]`; null for usage that is not Claude Tag and for Claude Tag usage that is not attributed to a single user (for example `monitoring`, and `proactive` usage Claude initiated), so per-user rows can sum to less than the Claude Tag total. Cannot be combined with `group_by[]=rbac_group_id` or the `rbac_group_ids[]` filter.
+
+    - `ContextWindow BetaAnalyticsContextWindow`
+
+      Context-window pricing tier of the usage or cost. Null unless `context_window` is in `group_by[]`; it can also be null on grouped rows with no context-window tier, such as code execution.
+
+      - `const BetaAnalyticsContextWindowFrom0To200k BetaAnalyticsContextWindow = "0-200k"`
+
+      - `const BetaAnalyticsContextWindowFrom200kTo1M BetaAnalyticsContextWindow = "200k-1M"`
+
+    - `CostType BetaAnalyticsGroupedCostType`
+
+      Cost component breakdown; null when returning the combined total.
+
+      - `const BetaAnalyticsGroupedCostTypeCodeExecution BetaAnalyticsGroupedCostType = "code_execution"`
+
+      - `const BetaAnalyticsGroupedCostTypeSessionUsage BetaAnalyticsGroupedCostType = "session_usage"`
+
+      - `const BetaAnalyticsGroupedCostTypeTokens BetaAnalyticsGroupedCostType = "tokens"`
+
+      - `const BetaAnalyticsGroupedCostTypeWebSearch BetaAnalyticsGroupedCostType = "web_search"`
+
+    - `DeploymentID string`
+
+      Deployment that started the Claude Managed Agents session. Populated only when `deployment_id` is in `group_by[]`; null for usage outside a managed session and for sessions no deployment started.
+
+    - `EnvironmentID string`
+
+      Claude Managed Agents environment the session ran in. Populated only when `environment_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `InferenceGeo BetaAnalyticsUsageCostInferenceGeo`
+
+      Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
+
+      - `const BetaAnalyticsUsageCostInferenceGeoGlobal BetaAnalyticsUsageCostInferenceGeo = "global"`
+
+      - `const BetaAnalyticsUsageCostInferenceGeoUs BetaAnalyticsUsageCostInferenceGeo = "us"`
+
+    - `Model string`
+
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+
+    - `Product string`
+
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
+
+    - `RBACGroupID string`
+
+      RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has one id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query without `group_by[]`.
+
+    - `ServiceTier BetaAnalyticsServiceTier`
+
+      Service tier the usage was served at. Populated only when `service_tier` is in `group_by[]`; null for usage with no service tier (for example, code execution) and for Claude Enterprise usage.
+
+      - `const BetaAnalyticsServiceTierBatch BetaAnalyticsServiceTier = "batch"`
+
+      - `const BetaAnalyticsServiceTierFlex BetaAnalyticsServiceTier = "flex"`
+
+      - `const BetaAnalyticsServiceTierFlexDiscount BetaAnalyticsServiceTier = "flex_discount"`
+
+      - `const BetaAnalyticsServiceTierPriority BetaAnalyticsServiceTier = "priority"`
+
+      - `const BetaAnalyticsServiceTierPriorityOnDemand BetaAnalyticsServiceTier = "priority_on_demand"`
+
+      - `const BetaAnalyticsServiceTierStandard BetaAnalyticsServiceTier = "standard"`
+
+    - `SessionID string`
+
+      Claude Managed Agents session that incurred the usage. Populated only when `session_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `SlackChannelID string`
+
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
+    - `Speed BetaAnalyticsSpeed`
+
+      Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `speed` is in `group_by[]`.
+
+      - `const BetaAnalyticsSpeedFast BetaAnalyticsSpeed = "fast"`
+
+      - `const BetaAnalyticsSpeedStandard BetaAnalyticsSpeed = "standard"`
+
+    - `TokenType BetaAnalyticsTokenType`
+
+      Token type when `cost_type` is `tokens`; null otherwise.
+
+      - `const BetaAnalyticsTokenTypeCacheCreationEphemeral1hInputTokens BetaAnalyticsTokenType = "cache_creation.ephemeral_1h_input_tokens"`
+
+      - `const BetaAnalyticsTokenTypeCacheCreationEphemeral5mInputTokens BetaAnalyticsTokenType = "cache_creation.ephemeral_5m_input_tokens"`
+
+      - `const BetaAnalyticsTokenTypeCacheReadInputTokens BetaAnalyticsTokenType = "cache_read_input_tokens"`
+
+      - `const BetaAnalyticsTokenTypeOutputTokens BetaAnalyticsTokenType = "output_tokens"`
+
+      - `const BetaAnalyticsTokenTypeUncachedInputTokens BetaAnalyticsTokenType = "uncached_input_tokens"`
+
+    - `UserProfileID string`
+
+      User profile the usage was attributed to, as a tagged `uprof_` ID. Populated only when `user_profile_id` is in `group_by[]`; null for usage that named no profile and for Claude Enterprise usage.
+
+    - `WorkspaceID string`
+
+      Workspace the usage occurred in, as a tagged workspace ID, including the organization's default workspace. Populated only when `workspace_id` is in `group_by[]`; null for Claude Enterprise usage.
+
+  - `StartingAt Time`
+
+    Start of the period this row covers (inclusive), as an RFC 3339 UTC timestamp: the start of the row's time bucket when a time-bucket width is set, otherwise the requested `starting_at` rounded down to the hour.
+
+    format: date-time
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"time"
+
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
+)
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	page, err := client.Beta.Organization.Analytics.Cost.List(context.TODO(), anthropic.BetaOrganizationAnalyticsCostListParams{
+		StartingAt: time.Now(),
+	})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", page)
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "cost": {
+        "amount": "41280.000000",
+        "currency": "USD",
+        "list_amount": "51600.000000",
+        "requests": 128
+      },
+      "ending_at": "2026-10-01T00:00:00Z",
+      "group": {
+        "actor": {
+          "deleted": false,
+          "email_address": "user@emaildomain.com",
+          "name": "Jane Doe",
+          "type": "user_actor",
+          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        },
+        "actor_type": "user_actor",
+        "agent_id": "agent_01VHd3EAGJ6PLkP9LM7DDu3f",
+        "api_key_id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+        "claude_tag_category": "dm",
+        "claude_tag_user_id": "U0123ABCDEF",
+        "context_window": "0-200k",
+        "cost_type": "tokens",
+        "deployment_id": "depl_01JFC6ihzZHtAuyHsaENdJhY",
+        "environment_id": "env_017oTjuGedHtjhJauVC5xGJD",
+        "inference_geo": "global",
+        "model": "claude-opus-5-5",
+        "product": "chat",
+        "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+        "service_tier": "standard",
+        "session_id": "sesn_0187kPDyNCwibNNvfaPEApCJ",
+        "slack_channel_id": "C0123ABCDEF",
+        "speed": "fast",
+        "token_type": "cache_creation.ephemeral_1h_input_tokens",
+        "user_profile_id": "uprof_01M33NeYUQK2WV9PpYcsPHLi",
+        "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+      },
+      "starting_at": "2026-09-01T00:00:00Z"
+    }
+  ],
+  "data_refreshed_at": "2019-12-27T18:11:19.117Z",
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
+
 ## Beta › Organization › Analytics › Usage Report
 
 ### Get Token Usage Over Time
@@ -100940,12 +103072,11 @@ func main() {
 
 **GET** `/v1/organizations/analytics/usage_report`
 
-Get token usage over time across a date range.
+[Legacy] Get token usage over time across a date range.
 
-Returns token usage bucketed by minute, hour, or day, optionally broken
-down by product, model, context window, inference region, or speed.
-Available to organizations on a Claude Enterprise plan. Requires an API
-key with the `read:analytics` scope.
+Returns token usage bucketed by minute, hour, or day, optionally broken down by one or more `group_by[]` dimensions, such as product or model. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+
+This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/usage`](../beta/organization/analytics/usage/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
 #### Parameters
 
@@ -101302,15 +103433,11 @@ func main() {
 
 **GET** `/v1/organizations/analytics/user_usage_report`
 
-Get per-user token usage across a date range.
+[Legacy] Get per-user token usage across a date range.
 
-Returns one row per user, ranked by the chosen token metric. Use this to
-see which users consume the most tokens. Only usage attributable to a
-seat user is included; for organization-wide totals including direct
-API-key and automation traffic, use the bucketed
-`/v1/organizations/analytics/usage_report` endpoint. Available to
-organizations on a Claude Enterprise plan. Requires an API key with the
-`read:analytics` scope.
+Returns usage per user, ranked by the chosen token metric; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users consume the most tokens. Only usage attributed to a user account is included; usage with no user attributed to it, such as requests attributed only to an API key, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+
+This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/usage`](../beta/organization/analytics/usage/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
 #### Parameters
 
@@ -101719,12 +103846,11 @@ func main() {
 
 **GET** `/v1/organizations/analytics/cost_report`
 
-Get cost in USD over time across a date range.
+[Legacy] Get cost in USD over time across a date range.
 
-Returns cost bucketed by minute, hour, or day, optionally broken down by
-product, model, context window, inference region, speed, cost type, or
-token type. Available to organizations on a Claude Enterprise plan.
-Requires an API key with the `read:analytics` scope.
+Returns cost bucketed by minute, hour, or day, optionally broken down by one or more `group_by[]` dimensions, such as model or cost type. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+
+This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/cost`](../beta/organization/analytics/cost/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
 #### Parameters
 
@@ -102082,15 +104208,11 @@ func main() {
 
 **GET** `/v1/organizations/analytics/user_cost_report`
 
-Get per-user cost in USD across a date range.
+[Legacy] Get per-user cost in USD across a date range.
 
-Returns one row per user, ranked by spend. Use this to see which users
-account for the most cost. Only cost attributable to a seat user is
-included; for organization-wide totals including direct API-key and
-automation traffic, use the bucketed
-`/v1/organizations/analytics/cost_report` endpoint. Available to
-organizations on a Claude Enterprise plan. Requires an API key with the
-`read:analytics` scope.
+Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users account for the most cost. Only cost attributed to a user account is included; cost with no user attributed to it, such as requests attributed only to an API key, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+
+This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/cost`](../beta/organization/analytics/cost/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
 #### Parameters
 
@@ -102656,6 +104778,10 @@ Anthropic account team.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -103243,6 +105369,10 @@ come in a fixed order that is not creation order.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -106423,6 +108553,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaPlugin`
@@ -106827,6 +108961,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -107255,6 +109393,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -107719,6 +109861,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaPlugin`
@@ -108132,6 +110278,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaDeletedPlugin`
@@ -108342,6 +110492,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -108698,6 +110852,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaPluginVersion`
@@ -109040,6 +111198,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -109397,6 +111559,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaOrganizationPluginVersionDownloadResponse interface{…}`
@@ -109592,6 +111758,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -109876,6 +112046,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaPluginInstallationSetting`
@@ -110149,6 +112323,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaDeletedPluginInstallationSetting`
@@ -110409,6 +112587,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -110688,6 +112870,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -110969,6 +113155,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -111262,6 +113452,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -111564,6 +113758,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaPluginMarketplaceValidationReport`
@@ -111840,6 +114038,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -112132,6 +114334,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -112504,6 +114710,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaTelemetryDestination`
@@ -112862,6 +115072,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -113263,6 +115477,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaTelemetryDestination`
@@ -113623,6 +115841,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaDeletedTelemetryDestination`
@@ -113796,6 +116018,10 @@ Send one test span, named `anthropic.test`, to the destination with its register
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -114005,6 +116231,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaTelemetryDestinationWorkspace`
@@ -114208,6 +116438,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaTelemetryDestinationWorkspace`
@@ -114407,6 +116641,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -114616,6 +116854,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -114869,6 +117111,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaOrganizationWebhookEndpoint`
@@ -115101,6 +117347,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -115362,6 +117612,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaOrganizationWebhookEndpoint`
@@ -115592,6 +117846,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type BetaDeletedOrganizationWebhookEndpoint`
@@ -115774,6 +118032,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
 #### Returns
 

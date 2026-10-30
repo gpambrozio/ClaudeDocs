@@ -1071,6 +1071,10 @@ Create Agent
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2131,6 +2135,10 @@ List Agents
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3177,6 +3185,10 @@ Get Agent
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 - `workspace_id: Optional[str]` (header parameter)
 
@@ -5165,6 +5177,10 @@ Update Agent
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -6202,6 +6218,10 @@ Archive Agent
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 - `workspace_id: Optional[str]` (header parameter)
 
@@ -13633,6 +13653,10 @@ List Agent Versions
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 - `workspace_id: Optional[str]` (header parameter)
 

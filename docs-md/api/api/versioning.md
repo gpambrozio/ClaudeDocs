@@ -49,7 +49,7 @@ Anthropic recommends using the latest API version whenever possible.
     * The per-user [usage](beta/organization/analytics/user_usage_report/list.md) and [cost](beta/organization/analytics/user_cost_report/list.md) reports no longer have `actor.email`. Use `actor.email_address` instead.
     * The [activity summaries](beta/organization/analytics/summaries/list.md) response no longer has `summaries`. Use `data` instead.
 
-- `2023-06-01`
+* `2023-06-01`
 
   * New format for [streaming](../build-with-claude/streaming.md) server-sent events (SSE):
 
@@ -59,7 +59,7 @@ Anthropic recommends using the latest API version whenever possible.
 
   * Removed legacy `exception` and `truncated` values in responses.
 
-- `2023-01-01`: Initial release.
+* `2023-01-01`: Initial release.
 
 ---
 

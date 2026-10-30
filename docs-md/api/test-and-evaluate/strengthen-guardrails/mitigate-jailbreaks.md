@@ -205,7 +205,7 @@ Step by step instructions:
 Evaluate if this query violates SEC rules, FINRA guidelines, or client privacy.
 ```
 
-Use [structured outputs](../../build-with-claude/structured-outputs.md) to constrain the response to a Boolean classification.
+Use [structured outputs](../../build-with-claude/structured-outputs.md) to constrain the response to a boolean classification.
 
 By layering these strategies, you create a robust defense against jailbreaking and prompt injections, ensuring your Claude-powered applications maintain the highest standards of safety and compliance.
 

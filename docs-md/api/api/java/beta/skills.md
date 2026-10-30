@@ -127,6 +127,10 @@ Create Skill
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -397,6 +401,10 @@ List Skills
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -639,6 +647,10 @@ Get Skill
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -875,6 +887,10 @@ Delete Skill
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1165,6 +1181,10 @@ Create Skill Version
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1394,6 +1414,10 @@ List Skill Versions
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1611,6 +1635,10 @@ Download a skill version's content as a zip archive.
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1773,6 +1801,10 @@ Get Skill Version
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1989,6 +2021,10 @@ Delete Skill Version
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 

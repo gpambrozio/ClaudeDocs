@@ -3652,6 +3652,10 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
     Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](../../../../build-with-claude/thinking.md#configuring-thinking) for each model's behavior.
 
+  - `BetaMessageThreadParam? thread`
+
+    Server-held conversation state (a Thread). `{"type": "create"}` asks the server to hold this conversation's state under the response's `id`; `{"type": "continue", "previous_message_id": ...}` resumes from a previous response so only the new turn's messages are sent. The response shape is unchanged.
+
   - `BetaToolChoice toolChoice`
 
     How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -3908,6 +3912,10 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+    - `MessageThreads2026_08_12("message-threads-2026-08-12")`
+
+    - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `string userProfileID` (header parameter)
 

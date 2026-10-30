@@ -11,7 +11,9 @@ url: https://platform.claude.com/docs/en/api/beta/organization/cost_report
 
 **GET** `/v1/organizations/cost_report`
 
-Get Cost Report
+[Legacy] Get a report of your organization's Claude API costs in USD, aggregated into daily buckets.
+
+This endpoint is part of the legacy Usage and Cost API. For new integrations, use [`GET /v1/organizations/analytics/cost`](analytics/cost/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Usage and Cost API](../../../manage-claude/usage-cost-analytics-api.md#migrate-from-usage-cost-api).
 
 ### Query parameters
 
@@ -169,6 +171,10 @@ Get Cost Report
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 ### Returns
 

@@ -131,6 +131,10 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> userProfileId` (header parameter)
 
     The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
@@ -3771,6 +3775,10 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
     With `{"type": "adaptive"}`, Claude decides when and how much to think. With `{"type": "enabled"}` (manual extended thinking), you set a `budget_tokens` of at least 1,024. Thinking tokens count toward your `max_tokens` limit.
 
     Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](../../../build-with-claude/thinking.md#configuring-thinking) for each model's behavior.
+
+  - `Optional<BetaMessageThreadParam> thread`
+
+    Server-held conversation state (a Thread). `{"type": "create"}` asks the server to hold this conversation's state under the response's `id`; `{"type": "continue", "previous_message_id": ...}` resumes from a previous response so only the new turn's messages are sent. The response shape is unchanged.
 
   - `Optional<BetaToolChoice> toolChoice`
 
@@ -8190,6 +8198,10 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> userProfileId` (header parameter)
 
@@ -49660,6 +49672,28 @@ public final class Main {
 
         - `MAX("max")`
 
+### Beta Message Thread Param
+
+- `class BetaMessageThreadParam: union`
+
+  Server-held conversation state (a Thread). `{"type": "create"}` asks the server to hold this conversation's state under the response's `id`; `{"type": "continue", "previous_message_id": ...}` resumes from a previous response so only the new turn's messages are sent. The response shape is unchanged.
+
+  - `class BetaThreadCreateParams`
+
+    Start holding conversation state under this response's `id`.
+
+    - `JsonValue type = "create"`
+
+  - `class BetaThreadContinueParams`
+
+    Resume from the response named by `previous_message_id`.
+
+    - `JsonValue type = "continue"`
+
+    - `String previousMessageId`
+
+      The `id` of the previous response in this Thread.
+
 ### Beta Message Tokens Count
 
 - `class BetaMessageTokensCount`
@@ -72291,6 +72325,26 @@ public final class Main {
 
     minimum: 1
 
+### Beta Thread Continue Params
+
+- `class BetaThreadContinueParams`
+
+  Resume from the response named by `previous_message_id`.
+
+  - `JsonValue type = "continue"`
+
+  - `String previousMessageId`
+
+    The `id` of the previous response in this Thread.
+
+### Beta Thread Create Params
+
+- `class BetaThreadCreateParams`
+
+  Start holding conversation state under this response's `id`.
+
+  - `JsonValue type = "create"`
+
 ### Beta Token Task Budget
 
 - `class BetaTokenTaskBudget`
@@ -87853,6 +87907,10 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> userProfileId` (header parameter)
 
     The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -91806,6 +91864,26 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `class BetaThinkingConfigAdaptive`
 
+      - `Optional<BetaMessageThreadParam> thread`
+
+        Server-held conversation state (a Thread). `{"type": "create"}` asks the server to hold this conversation's state under the response's `id`; `{"type": "continue", "previous_message_id": ...}` resumes from a previous response so only the new turn's messages are sent. The response shape is unchanged.
+
+        - `class BetaThreadCreateParams`
+
+          Start holding conversation state under this response's `id`.
+
+          - `JsonValue type = "create"`
+
+        - `class BetaThreadContinueParams`
+
+          Resume from the response named by `previous_message_id`.
+
+          - `JsonValue type = "continue"`
+
+          - `String previousMessageId`
+
+            The `id` of the previous response in this Thread.
+
       - `Optional<BetaToolChoice> toolChoice`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -92288,6 +92366,10 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -92574,6 +92656,10 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -92857,6 +92943,10 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -93133,6 +93223,10 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -93310,6 +93404,10 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
+
+    - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
   - `Optional<String> workspaceId` (header parameter)
 

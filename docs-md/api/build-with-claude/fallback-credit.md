@@ -43,7 +43,7 @@ Send the request that may be refused with the `anthropic-beta: fallback-credit-2
 On a refusal, `stop_details` includes two fields:
 
 * **`fallback_credit_token`:** an opaque string that represents the credit
-* **`fallback_has_prefill_claim`:** a Boolean that tells you which retry body shape to use
+* **`fallback_has_prefill_claim`:** a boolean that tells you which retry body shape to use
 
 Both are `null` when no credit is available for the refusal.
 

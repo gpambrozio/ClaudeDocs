@@ -11,7 +11,7 @@ url: https://platform.claude.com/docs/en/api/typescript/beta
 
 ### Anthropic Beta
 
-- `type AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 49 more`
+- `type AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 51 more`
 
   - `(string & {})`
 
@@ -118,6 +118,10 @@ url: https://platform.claude.com/docs/en/api/typescript/beta
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 ### Beta API Error
 
@@ -595,6 +599,10 @@ The Models API response can be used to determine which models are available for 
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -928,7 +936,7 @@ for await (const betaModelInfo of client.beta.models.list()) {
       "deprecated_at": "2019-12-27T18:11:19.117Z",
       "display_name": "Claude Opus 5.5",
       "lifecycle": "active",
-      "line": "haiku",
+      "line": "opus",
       "max_input_tokens": 0,
       "max_tokens": 0,
       "retires_at": "2019-12-27T18:11:19.117Z",
@@ -1068,6 +1076,10 @@ The Models API response can be used to determine information about a specific mo
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -1399,7 +1411,7 @@ console.log(betaModelInfo.id);
   "deprecated_at": "2019-12-27T18:11:19.117Z",
   "display_name": "Claude Opus 5.5",
   "lifecycle": "active",
-  "line": "haiku",
+  "line": "opus",
   "max_input_tokens": 0,
   "max_tokens": 0,
   "retires_at": "2019-12-27T18:11:19.117Z",
@@ -5350,6 +5362,26 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `interface BetaThinkingConfigAdaptive`
 
+  - `thread?: BetaMessageThreadParam | null`
+
+    Server-held conversation state (a Thread). `{"type": "create"}` asks the server to hold this conversation's state under the response's `id`; `{"type": "continue", "previous_message_id": ...}` resumes from a previous response so only the new turn's messages are sent. The response shape is unchanged.
+
+    - `interface BetaThreadCreateParams`
+
+      Start holding conversation state under this response's `id`.
+
+      - `type: "create"`
+
+    - `interface BetaThreadContinueParams`
+
+      Resume from the response named by `previous_message_id`.
+
+      - `type: "continue"`
+
+      - `previous_message_id: string`
+
+        The `id` of the previous response in this Thread.
+
   - `tool_choice?: BetaToolChoice`
 
     How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -5654,6 +5686,10 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `user_profile_id?: string` (header parameter)
 
@@ -13990,6 +14026,10 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `user_profile_id?: string` (header parameter)
 
     The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
@@ -18015,6 +18055,26 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `interface BetaThinkingConfigAdaptive`
 
+      - `thread?: BetaMessageThreadParam | null`
+
+        Server-held conversation state (a Thread). `{"type": "create"}` asks the server to hold this conversation's state under the response's `id`; `{"type": "continue", "previous_message_id": ...}` resumes from a previous response so only the new turn's messages are sent. The response shape is unchanged.
+
+        - `interface BetaThreadCreateParams`
+
+          Start holding conversation state under this response's `id`.
+
+          - `type: "create"`
+
+        - `interface BetaThreadContinueParams`
+
+          Resume from the response named by `previous_message_id`.
+
+          - `type: "continue"`
+
+          - `previous_message_id: string`
+
+            The `id` of the previous response in this Thread.
+
       - `tool_choice?: BetaToolChoice`
 
         How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
@@ -18328,6 +18388,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `user_profile_id?: string` (header parameter)
 
     The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
@@ -18624,6 +18688,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -18917,6 +18985,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -19208,6 +19280,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -19491,6 +19567,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -19665,6 +19745,10 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -24752,6 +24836,10 @@ Create Agent
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -25813,6 +25901,10 @@ List Agents
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -26860,6 +26952,10 @@ Get Agent
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -28849,6 +28945,10 @@ Update Agent
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -29887,6 +29987,10 @@ Archive Agent
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -30937,6 +31041,10 @@ List Agent Versions
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -32096,6 +32204,10 @@ Create a new environment with the specified configuration.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -32437,6 +32549,10 @@ List environments with pagination support.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -32769,6 +32885,10 @@ Retrieve a specific environment by ID.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -33215,6 +33335,10 @@ Update an existing environment's configuration.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -33542,6 +33666,10 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -33712,6 +33840,10 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -34046,6 +34178,10 @@ Retrieve detailed information about a specific work item.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -34313,6 +34449,10 @@ Long poll for work items in the queue.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `"Anthropic-Worker-ID"?: string` (header parameter)
 
     Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -34561,6 +34701,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -34821,6 +34965,10 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaSelfHostedWorkHeartbeatResponse`
@@ -35019,6 +35167,10 @@ Stop a work item, initiating graceful or forced shutdown.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -35285,6 +35437,10 @@ List work items in an environment.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaSelfHostedWork`
@@ -35546,6 +35702,10 @@ Update work item metadata with merge semantics.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -35799,6 +35959,10 @@ Get statistics about the work queue for an environment.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -37111,6 +37275,10 @@ Create Session
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -38686,6 +38854,10 @@ List Sessions
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -40178,6 +40350,10 @@ Get Session
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -42247,6 +42423,10 @@ Update Session
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -43735,6 +43915,10 @@ Delete Session
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -43899,6 +44083,10 @@ Archive Session
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -45515,6 +45703,10 @@ List Events
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -48983,6 +49175,10 @@ Send Events
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -49607,6 +49803,10 @@ Stream Events
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -52761,6 +52961,10 @@ Add Session Resource
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -52954,6 +53158,10 @@ List Session Resources
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -53240,6 +53448,10 @@ Get Session Resource
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -53520,6 +53732,10 @@ Update Session Resource
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -53794,6 +54010,10 @@ Delete Session Resource
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -53985,6 +54205,10 @@ List Session Threads
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -55071,6 +55295,10 @@ Get Session Thread
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -56150,6 +56378,10 @@ Archive Session Thread
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -57238,6 +57470,10 @@ List Session Thread Events
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -60354,6 +60590,10 @@ Stream Session Thread Events
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -63895,6 +64135,10 @@ Create Deployment
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -64673,6 +64917,10 @@ List Deployments
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -65411,6 +65659,10 @@ Get Deployment
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -66547,6 +66799,10 @@ Update Deployment
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -67281,6 +67537,10 @@ Archive Deployment
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -68017,6 +68277,10 @@ Run Deployment Now
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68413,6 +68677,10 @@ Pause Deployment
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -69148,6 +69416,10 @@ Unpause Deployment
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -69936,6 +70208,10 @@ List Deployment Runs
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70336,6 +70612,10 @@ Get Deployment Run
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -70742,6 +71022,10 @@ Create a Vault
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70954,6 +71238,10 @@ List Vaults
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71159,6 +71447,10 @@ Retrieve a Vault
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -71372,6 +71664,10 @@ Update a Vault
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71572,6 +71868,10 @@ Delete a Vault
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -71740,6 +72040,10 @@ Archive a Vault
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -72121,6 +72425,10 @@ Create a Credential
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72467,6 +72775,10 @@ List Credentials
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72801,6 +73113,10 @@ Retrieve a Credential
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -73272,6 +73588,10 @@ Update a Credential
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73602,6 +73922,10 @@ Delete a Credential
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -73775,6 +74099,10 @@ Archive a Credential
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -74106,6 +74434,10 @@ Validate an MCP OAuth Credential
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74406,6 +74738,10 @@ Create a Memory Store
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74641,6 +74977,10 @@ List Memory Stores
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74857,6 +75197,10 @@ Retrieve a Memory Store
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -75095,6 +75439,10 @@ Update a Memory Store
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75310,6 +75658,10 @@ Delete a Memory Store
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75480,6 +75832,10 @@ Archive a Memory Store
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -75723,6 +76079,10 @@ Create a Memory
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -75994,6 +76354,10 @@ List Memories
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76262,6 +76626,10 @@ Retrieve a Memory
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -76534,6 +76902,10 @@ Update a Memory
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76772,6 +77144,10 @@ Delete a Memory
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -77020,6 +77396,10 @@ List Memory Versions
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -77357,6 +77737,10 @@ Retrieve a Memory Version
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77673,6 +78057,10 @@ Redact a Memory Version
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -77997,6 +78385,10 @@ Upload File
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78245,6 +78637,10 @@ List Files
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78480,6 +78876,10 @@ Download File
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78632,6 +79032,10 @@ Get File Metadata
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -78862,6 +79266,10 @@ Delete File
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79042,6 +79450,10 @@ Create Skill
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -79296,6 +79708,10 @@ List Skills
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79536,6 +79952,10 @@ Get Skill
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79770,6 +80190,10 @@ Delete Skill
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79952,6 +80376,10 @@ Create Skill Version
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -80170,6 +80598,10 @@ List Skill Versions
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -80385,6 +80817,10 @@ Download a skill version's content as a zip archive.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -80547,6 +80983,10 @@ Get Skill Version
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -80758,6 +81198,10 @@ Delete Skill Version
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -81024,6 +81468,10 @@ Create User Profile
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -81359,6 +81807,10 @@ List User Profiles
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81666,6 +82118,10 @@ Get User Profile
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -82065,6 +82521,10 @@ Update User Profile
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82369,6 +82829,10 @@ Delete User Profile
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82537,6 +83001,10 @@ Create Enrollment URL
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -82723,6 +83191,10 @@ Create Action URL
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -83006,6 +83478,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -83486,6 +83962,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -83910,6 +84390,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -84328,6 +84812,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -84745,6 +85233,10 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -85166,6 +85658,10 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -85358,6 +85854,10 @@ Fetches a tunnel by ID.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -85562,6 +86062,10 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -85761,6 +86265,10 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -85954,6 +86462,10 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -86133,6 +86645,10 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -86315,6 +86831,10 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -86521,6 +87041,10 @@ Fetches a tunnel certificate by ID.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -86739,6 +87263,10 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
   - `workspace_id?: string` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -86948,6 +87476,10 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
   - `workspace_id?: string` (header parameter)
 
@@ -88759,6 +89291,10 @@ matched as the JWT's `iss` claim and is not fetched.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaFederationIssuer`
@@ -89085,6 +89621,10 @@ Archived issuers are excluded unless `include_archived=true`.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaFederationIssuer`
@@ -89401,6 +89941,10 @@ Retrieve a federation issuer by its ID (`fdis_...`).
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -89798,6 +90342,10 @@ session.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaFederationIssuer`
@@ -90115,6 +90663,10 @@ issuer cannot be changed), or recreate them against another issuer.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -90521,6 +91073,10 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaFederationRule`
@@ -90861,6 +91417,10 @@ unless `include_archived=true`.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaFederationRule`
@@ -91183,6 +91743,10 @@ Retrieve a federation rule by its ID (`fdrl_...`).
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -91595,6 +92159,10 @@ Console session.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaFederationRule`
@@ -91921,6 +92489,10 @@ other scopes require a Console session.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -92256,6 +92828,10 @@ other scopes require a Console session.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaFederationRuleWorkspace`
@@ -92460,6 +93036,10 @@ rules with `applies_to_all_workspaces` or a legacy single
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaFederationRuleWorkspace`
@@ -92661,6 +93241,10 @@ Console session.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -93355,6 +93939,10 @@ accounts.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaServiceAccount`
@@ -93594,6 +94182,10 @@ archived service accounts.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaServiceAccount`
@@ -93822,6 +94414,10 @@ Retrieve a service account by its ID (`svac_...`).
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -94067,6 +94663,10 @@ interactive credential (a user OAuth token or a Console session).
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaServiceAccount`
@@ -94296,6 +94896,10 @@ those rules first or change their target to another service account.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -94547,6 +95151,10 @@ rejected.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaServiceAccountWorkspaceMember`
@@ -94768,6 +95376,10 @@ page to recover.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaServiceAccountWorkspaceMember`
@@ -94980,6 +95592,10 @@ to the implicit `workspace_user` membership. Archived workspaces return
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -95771,6 +96387,10 @@ Create Workspace
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -97485,6 +98105,10 @@ omitted from the results.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaServiceAccountWorkspaceMember`
@@ -97711,6 +98335,10 @@ accounts cannot be added and are rejected.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaServiceAccountWorkspaceMember`
@@ -97918,6 +98546,10 @@ account returns 404.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -98138,6 +98770,10 @@ rejected.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaServiceAccountWorkspaceMember`
@@ -98344,6 +98980,10 @@ membership. Archived workspaces return 400.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -100792,6 +101432,1532 @@ for await (const betaAnalyticsArtifactActivity of client.beta.organization.analy
 }
 ```
 
+## Beta › Organization › Analytics › Usage
+
+### Get Token Usage By Dimension
+
+`client.beta.organization.analytics.usage.list(params, options?): ReportPageCursor<BetaAnalyticsUsageItem>`
+
+**GET** `/v1/organizations/analytics/usage`
+
+Get token usage across a date range, broken out by dimension.
+
+Returns one row per combination of the requested `group_by[]`
+dimensions (and time bucket, when `time_bucket_width` is set) that has
+usage in the range, ranked by the `order_by` metric or ordered by time
+bucket; every combination is returned across pages. With no `group_by[]`
+and no `time_bucket_width`, a single row aggregates the whole range.
+Includes all usage, whether or not it is attributable to a seat user.
+Requires an API key with the `read:analytics` scope, or an Admin API key.
+
+#### Parameters
+
+- `params: UsageListParams`
+
+  - `starting_at: string` (query parameter)
+
+    Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
+
+    format: date-time
+
+  - `actor_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage attributed to specific identities, by tagged ID: a `user_...`, `svac_...` (service account), or `apikey_...` ID. An `apikey_` entry matches only usage attributed to the key itself, not usage on that key attributed to a user or service account (use `api_key_ids[]` for every request a key authenticated). Federated identities have no tagged ID; select them with `actor_types[]`. Use `group_by[]=actor` to break out per-identity values.
+
+    maxItems: 100
+
+  - `actor_types?: Array<BetaAnalyticsActorType> | null` (query parameter)
+
+    Filter to usage attributed to specific kinds of identity. Use `group_by[]=actor_type` to break out per-kind values.
+
+    maxItems: 100
+
+    - `"api_actor"`
+
+    - `"federated_actor"`
+
+    - `"service_account_actor"`
+
+    - `"user_actor"`
+
+  - `agent_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage incurred by sessions of specific Claude Managed Agents agents. Use `group_by[]=agent_id` to break out per-agent values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `api_key_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage authenticated by specific API keys, by tagged API key ID (`apikey_...`), whichever identity the usage is attributed to. Include an empty entry (`api_key_ids[]=`) to also match usage that no API key authenticated. Use `group_by[]=api_key_id` to break out per-key values; usage without a key has a null `api_key_id`. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `claude_tag_categories?: Array<BetaAnalyticsClaudeTagCategory> | null` (query parameter)
+
+    Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude_tag`, so combining this filter with `products[]=claude_tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
+
+    maxItems: 100
+
+    - `"dm"`
+
+    - `"engaged"`
+
+    - `"monitoring"`
+
+    - `"proactive"`
+
+    - `"scheduled"`
+
+  - `claude_tag_user_ids?: Array<string> | null` (query parameter)
+
+    Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
+
+    maxItems: 100
+
+  - `context_windows?: Array<BetaAnalyticsContextWindow> | null` (query parameter)
+
+    Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
+
+    maxItems: 100
+
+    - `"0-200k"`
+
+    - `"200k-1M"`
+
+  - `deployment_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage incurred by Claude Managed Agents sessions that specific deployments started. Use `group_by[]=deployment_id` to break out per-deployment values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `ending_at?: string | null` (query parameter)
+
+    End of range, exclusive. Required when `time_bucket_width` is set. Without `time_bucket_width`, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
+
+    format: date-time
+
+  - `environment_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage incurred by Claude Managed Agents sessions that ran in specific environments. Use `group_by[]=environment_id` to break out per-environment values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `exclude_deleted_users?: boolean` (query parameter)
+
+    If true, omit rows whose `actor` is a `user_actor` with `deleted: true`. Requires `group_by[]=actor`. Rows for other actor types, and rows whose `actor` is null, are always kept. A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
+
+  - `group_by?: Array<BetaAnalyticsUsageGroupBy> | null` (query parameter)
+
+    Dimensions to break usage out by (at most 5): one row per combination of their values with usage in the range (and per time bucket, when `time_bucket_width` is set), every combination returned across pages rather than a capped top set. When omitted, a single row aggregates the whole range.
+
+    maxItems: 100
+
+    - `"actor"`
+
+    - `"actor_type"`
+
+    - `"agent_id"`
+
+    - `"api_key_id"`
+
+    - `"claude_tag_category"`
+
+    - `"claude_tag_user_id"`
+
+    - `"context_window"`
+
+    - `"deployment_id"`
+
+    - `"environment_id"`
+
+    - `"inference_geo"`
+
+    - `"model"`
+
+    - `"product"`
+
+    - `"rbac_group_id"`
+
+    - `"service_tier"`
+
+    - `"session_id"`
+
+    - `"slack_channel_id"`
+
+    - `"speed"`
+
+    - `"user_profile_id"`
+
+    - `"workspace_id"`
+
+  - `inference_geos?: Array<BetaAnalyticsInferenceGeoFilter> | null` (query parameter)
+
+    Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
+
+    maxItems: 100
+
+    - `"global"`
+
+    - `"not_available"`
+
+    - `"us"`
+
+  - `limit?: number` (query parameter)
+
+    Number of rows per page (1-1000, default 20). `cost_type`/`token_type` fan-out rows (cost endpoint only) do not count toward this limit, so `data` can exceed it.
+
+    minimum: 1, maximum: 1000
+
+  - `models?: Array<string> | null` (query parameter)
+
+    Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
+
+    maxItems: 100
+
+  - `order?: BetaAnalyticsUsageCostSortOrder` (query parameter)
+
+    Sort direction of the `order_by` metric, or of the time buckets when `order_by` is `time` and `time_bucket_width` is set. Defaults to `desc`.
+
+    - `"asc"`
+
+    - `"desc"`
+
+  - `order_by?: BetaAnalyticsUsageOrderBy` (query parameter)
+
+    Row order. A metric ranks rows by that metric in the `order` direction. `time` orders rows by time bucket in the `order` direction (newest first by default) and, within a bucket, by `total_tokens`, highest first. `time` takes effect only with `time_bucket_width`; without it, `time` is the same as `total_tokens`. Defaults to `total_tokens`.
+
+    - `"output_tokens"`
+
+    - `"requests"`
+
+    - `"time"`
+
+    - `"total_tokens"`
+
+    - `"uncached_input_tokens"`
+
+  - `page?: string | null` (query parameter)
+
+    Opaque cursor from a previous response's `next_page` field.
+
+  - `products?: Array<BetaAnalyticsUsageCostProductFilter> | null` (query parameter)
+
+    Product surfaces to include. Defaults to all products.
+
+    maxItems: 100
+
+    - `"chat"`
+
+    - `"chat_cowork_unified"`
+
+    - `"claude_code"`
+
+    - `"claude_console"`
+
+    - `"claude_design"`
+
+    - `"claude_in_chrome"`
+
+    - `"claude_tag"`
+
+    - `"cowork"`
+
+    - `"managed_agents_api"`
+
+    - `"message_batches_api"`
+
+    - `"messages_api"`
+
+    - `"office_agent"`
+
+  - `rbac_group_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
+
+    maxItems: 100
+
+  - `service_tiers?: Array<BetaAnalyticsServiceTier> | null` (query parameter)
+
+    Filter to specific service tiers. Use `group_by[]=service_tier` to break out per-tier values. Claude Developer Platform organizations only; matches nothing for a Claude Enterprise organization.
+
+    maxItems: 100
+
+    - `"batch"`
+
+    - `"flex"`
+
+    - `"flex_discount"`
+
+    - `"priority"`
+
+    - `"priority_on_demand"`
+
+    - `"standard"`
+
+  - `session_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage incurred by specific Claude Managed Agents sessions, by tagged session ID (`sesn_...`). Use `group_by[]=session_id` to break out per-session values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `slack_channel_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
+
+    maxItems: 100
+
+  - `speeds?: Array<BetaAnalyticsSpeed> | null` (query parameter)
+
+    Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
+
+    maxItems: 100
+
+    - `"fast"`
+
+    - `"standard"`
+
+  - `time_bucket_width?: BetaAnalyticsTimeBucketWidth | null` (query parameter)
+
+    Time-bucket granularity. When set, rows are returned per time bucket (one per bucket and dimension combination with usage) and each row's `starting_at` and `ending_at` are that bucket's bounds; the time bucket counts toward `limit`. `ending_at` is required when `time_bucket_width` is set, and with `time_bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the requested range with `starting_at` and `ending_at` each rounded down to the hour.
+
+    - `"1d"`
+
+    - `"1h"`
+
+    - `"1m"`
+
+  - `user_profile_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage attributed to specific user profiles, by tagged user profile ID (`uprof_...`). Use `group_by[]=user_profile_id` to break out per-profile values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `workspace_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage in specific workspaces, by tagged workspace ID (`wrkspc_...`). Use `group_by[]=workspace_id` to break out per-workspace values. Claude Developer Platform organizations only; matches nothing for a Claude Enterprise organization.
+
+    maxItems: 100
+
+  - `betas?: Array<AnthropicBeta>` (header parameter)
+
+    This endpoint is in beta: requests must send `analytics-usage-cost-2026-08-24` in this header.
+
+    - `(string & {})`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
+
+    - `"ce-plugins-2026-09-01"`
+
+    - `"spend-limit-reads-2026-09-26"`
+
+    - `"telemetry-destinations-2026-08-11"`
+
+    - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
+#### Returns
+
+- `interface BetaAnalyticsUsageItem`
+
+  - `ending_at: string`
+
+    End of the period this row covers (exclusive), as an RFC 3339 UTC timestamp: the end of the row's time bucket when a time-bucket width is set; otherwise the requested `ending_at` (or, when omitted, the earlier of now and `starting_at` plus 31 days) rounded down to the hour, because without a time bucket the report covers whole hours.
+
+    format: date-time
+
+  - `group: BetaAnalyticsUsageGroup`
+
+    The dimension values this row's usage is broken out by.
+
+    - `actor: BetaAnalyticsActor | null`
+
+      The identity the usage is attributed to: the user if one is attributed, else the service account, else the federated (cloud-platform) identity, else the API key. Populated only when `actor` is in `group_by[]`; null for usage with no attributable identity, and for users' and federated identities' usage when the reader is a member who can see only some workspaces. Distinct identities the server cannot render also read null, each as its own row.
+
+      - `interface BetaAnalyticsReportUserActor`
+
+        - `type: "user_actor"`
+
+          Actor type. Always `"user_actor"`.
+
+        - `deleted: boolean`
+
+          True when the account has been deleted, or when the user is no longer a member of the organization or its associated organizations (for example, their membership was removed or they were deprovisioned via your identity provider). `email_address` stays populated for removed users and is null when the account has been deleted. `name` follows the rules described on that field. The `user_id` is still populated for reconciliation.
+
+        - `email_address: string | null`
+
+          The user's current email address, including for users who are no longer members of the organization. Null when the account has been deleted and for system-minted service accounts.
+
+        - `name: string | null`
+
+          The user's current full name. Null when the user has not set one. `"Deleted User"` when the account has been deleted, or when the user is no longer a member and the organization hides removed users' names.
+
+        - `user_id: string`
+
+          Tagged user ID.
+
+      - `interface BetaAnalyticsServiceAccountActor`
+
+        - `type: "service_account_actor"`
+
+        - `service_account_id: string`
+
+          Tagged service account ID.
+
+      - `interface BetaAnalyticsFederatedActor`
+
+        - `type: "federated_actor"`
+
+        - `provider: BetaAnalyticsFederatedActorProvider`
+
+          The trusted provider that asserted the caller's identity.
+
+          - `interface BetaAnalyticsFederatedActorAWSProvider`
+
+            - `type: "aws"`
+
+            - `account_id: string`
+
+              The AWS account the organization is bound to.
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that made the requests.
+
+          - `interface BetaAnalyticsFederatedActorAzureProvider`
+
+            - `type: "azure"`
+
+            - `subscription_id: string`
+
+              The Azure subscription the organization is bound to.
+
+          - `interface BetaAnalyticsFederatedActorGCPProvider`
+
+            - `type: "gcp"`
+
+            - `project_number: string`
+
+              The Google Cloud project the organization is bound to.
+
+          - `interface BetaAnalyticsFederatedActorOIDCProvider`
+
+            - `type: "oidc"`
+
+            - `issuer: string | null`
+
+              The federation issuer's URL.
+
+        - `subject: string | null`
+
+          The provider's identifier for the caller: on `aws`, the IAM principal ARN (one role is one actor across its sessions); on `gcp`, the caller's IAM principal identifier as Google Cloud reports it, such as `serviceAccount:<email>`, `user:<email>`, or a `principal://...` URI.
+
+      - `interface BetaAnalyticsAPIActor`
+
+        - `type: "api_actor"`
+
+        - `api_key_id: string`
+
+          Tagged API key ID.
+
+    - `actor_type: BetaAnalyticsActorType | null`
+
+      Kind of identity the usage is attributed to; matches `actor.type` when `actor` is set. Populated only when `actor_type` is in `group_by[]`.
+
+      - `"api_actor"`
+
+      - `"federated_actor"`
+
+      - `"service_account_actor"`
+
+      - `"user_actor"`
+
+    - `agent_id: string | null`
+
+      Claude Managed Agents agent whose session incurred the usage. Populated only when `agent_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `api_key_id: string | null`
+
+      API key that authenticated the requests, as a tagged API key ID, whichever identity `actor` resolves to. Populated only when `api_key_id` is in `group_by[]`; null for usage not authenticated by an API key.
+
+    - `claude_tag_category: BetaAnalyticsClaudeTagCategory | null`
+
+      Claude Tag (Claude in Slack) spend category: `engaged` (a person addressed Claude in a channel or thread), `proactive` (Claude responded without being addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching a channel it was asked to monitor), or `dm` (direct messages with Claude). Populated only when `claude_tag_category` is in `group_by[]`; null for usage that is not Claude Tag. Direct-message usage is billed to the individual user and is reported under that user's product, not under `claude_tag`. New categories may be added over time.
+
+      - `"dm"`
+
+      - `"engaged"`
+
+      - `"monitoring"`
+
+      - `"proactive"`
+
+      - `"scheduled"`
+
+    - `claude_tag_user_id: string | null`
+
+      Slack user ID (for example `U0123ABCDEF`) of the member the Claude Tag (Claude in Slack) usage is attributed to, not a claude.ai user ID. Populated only when `claude_tag_user_id` is in `group_by[]`; null for usage that is not Claude Tag and for Claude Tag usage that is not attributed to a single user (for example `monitoring`, and `proactive` usage Claude initiated), so per-user rows can sum to less than the Claude Tag total. Cannot be combined with `group_by[]=rbac_group_id` or the `rbac_group_ids[]` filter.
+
+    - `context_window: BetaAnalyticsContextWindow | null`
+
+      Context-window pricing tier of the usage or cost. Null unless `context_window` is in `group_by[]`; it can also be null on grouped rows with no context-window tier, such as code execution.
+
+      - `"0-200k"`
+
+      - `"200k-1M"`
+
+    - `deployment_id: string | null`
+
+      Deployment that started the Claude Managed Agents session. Populated only when `deployment_id` is in `group_by[]`; null for usage outside a managed session and for sessions no deployment started.
+
+    - `environment_id: string | null`
+
+      Claude Managed Agents environment the session ran in. Populated only when `environment_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `inference_geo: BetaAnalyticsUsageCostInferenceGeo | null`
+
+      Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
+
+      - `"global"`
+
+      - `"us"`
+
+    - `model: string | null`
+
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+
+    - `product: string | null`
+
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
+
+    - `rbac_group_id: string | null`
+
+      RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has one id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query without `group_by[]`.
+
+    - `service_tier: BetaAnalyticsServiceTier | null`
+
+      Service tier the usage was served at. Populated only when `service_tier` is in `group_by[]`; null for usage with no service tier (for example, code execution) and for Claude Enterprise usage.
+
+      - `"batch"`
+
+      - `"flex"`
+
+      - `"flex_discount"`
+
+      - `"priority"`
+
+      - `"priority_on_demand"`
+
+      - `"standard"`
+
+    - `session_id: string | null`
+
+      Claude Managed Agents session that incurred the usage. Populated only when `session_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `slack_channel_id: string | null`
+
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
+    - `speed: BetaAnalyticsSpeed | null`
+
+      Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `speed` is in `group_by[]`.
+
+      - `"fast"`
+
+      - `"standard"`
+
+    - `user_profile_id: string | null`
+
+      User profile the usage was attributed to, as a tagged `uprof_` ID. Populated only when `user_profile_id` is in `group_by[]`; null for usage that named no profile and for Claude Enterprise usage.
+
+    - `workspace_id: string | null`
+
+      Workspace the usage occurred in, as a tagged workspace ID, including the organization's default workspace. Populated only when `workspace_id` is in `group_by[]`; null for Claude Enterprise usage.
+
+  - `starting_at: string`
+
+    Start of the period this row covers (inclusive), as an RFC 3339 UTC timestamp: the start of the row's time bucket when a time-bucket width is set, otherwise the requested `starting_at` rounded down to the hour.
+
+    format: date-time
+
+  - `usage: BetaAnalyticsUsageMetrics`
+
+    Token usage for this row.
+
+    - `cache_creation: BetaCacheCreation`
+
+      The number of input tokens for cache creation.
+
+      - `ephemeral_1h_input_tokens: number`
+
+        The number of input tokens used to create the 1 hour cache entry.
+
+        default: 0, minimum: 0
+
+      - `ephemeral_5m_input_tokens: number`
+
+        The number of input tokens used to create the 5 minute cache entry.
+
+        default: 0, minimum: 0
+
+    - `cache_read_input_tokens: number`
+
+      The number of input tokens read from the cache.
+
+    - `output_tokens: number`
+
+      The number of output tokens generated.
+
+    - `requests: number | null`
+
+      Number of API requests in this row's scope. For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+    - `server_tool_use: BetaAnalyticsServerToolUse`
+
+      Server-side tool usage metrics.
+
+      - `web_search_requests: number`
+
+        The number of web search requests made.
+
+    - `total_tokens: number`
+
+      Total token count across all token types. This is the value the default `order_by` (`total_tokens`) sorts on.
+
+    - `uncached_input_tokens: number`
+
+      The number of uncached input tokens processed.
+
+#### Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic({
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
+});
+
+// Automatically fetches more pages as needed.
+for await (const betaAnalyticsUsageItem of client.beta.organization.analytics.usage.list({
+  starting_at: "2026-09-01T00:00:00Z"
+})) {
+  console.log(betaAnalyticsUsageItem.ending_at);
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "ending_at": "2026-10-01T00:00:00Z",
+      "group": {
+        "actor": {
+          "deleted": false,
+          "email_address": "user@emaildomain.com",
+          "name": "Jane Doe",
+          "type": "user_actor",
+          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        },
+        "actor_type": "user_actor",
+        "agent_id": "agent_01VHd3EAGJ6PLkP9LM7DDu3f",
+        "api_key_id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+        "claude_tag_category": "dm",
+        "claude_tag_user_id": "U0123ABCDEF",
+        "context_window": "0-200k",
+        "deployment_id": "depl_01JFC6ihzZHtAuyHsaENdJhY",
+        "environment_id": "env_017oTjuGedHtjhJauVC5xGJD",
+        "inference_geo": "global",
+        "model": "claude-opus-5-5",
+        "product": "chat",
+        "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+        "service_tier": "standard",
+        "session_id": "sesn_0187kPDyNCwibNNvfaPEApCJ",
+        "slack_channel_id": "C0123ABCDEF",
+        "speed": "fast",
+        "user_profile_id": "uprof_01M33NeYUQK2WV9PpYcsPHLi",
+        "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+      },
+      "starting_at": "2026-09-01T00:00:00Z",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_read_input_tokens": 3200000,
+        "output_tokens": 891000,
+        "requests": 128,
+        "server_tool_use": {
+          "web_search_requests": 10
+        },
+        "total_tokens": 5377000,
+        "uncached_input_tokens": 1284500
+      }
+    }
+  ],
+  "data_refreshed_at": "2019-12-27T18:11:19.117Z",
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
+
+## Beta › Organization › Analytics › Cost
+
+### Get Cost By Dimension
+
+`client.beta.organization.analytics.cost.list(params, options?): ReportPageCursor<BetaAnalyticsCostItem>`
+
+**GET** `/v1/organizations/analytics/cost`
+
+Get cost in USD across a date range, broken out by dimension.
+
+Returns one row per combination of the requested `group_by[]`
+dimensions (and time bucket, when `time_bucket_width` is set) that has
+cost in the range, ranked by spend or ordered by time bucket; every
+combination is returned across pages. With no `group_by[]` and no
+`time_bucket_width`, a single row aggregates the whole range. Includes
+all cost, whether or not it is attributable to a seat user. Requires an
+API key with the `read:analytics` scope, or an Admin API key.
+
+#### Parameters
+
+- `params: CostListParams`
+
+  - `starting_at: string` (query parameter)
+
+    Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
+
+    format: date-time
+
+  - `actor_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage attributed to specific identities, by tagged ID: a `user_...`, `svac_...` (service account), or `apikey_...` ID. An `apikey_` entry matches only usage attributed to the key itself, not usage on that key attributed to a user or service account (use `api_key_ids[]` for every request a key authenticated). Federated identities have no tagged ID; select them with `actor_types[]`. Use `group_by[]=actor` to break out per-identity values.
+
+    maxItems: 100
+
+  - `actor_types?: Array<BetaAnalyticsActorType> | null` (query parameter)
+
+    Filter to usage attributed to specific kinds of identity. Use `group_by[]=actor_type` to break out per-kind values.
+
+    maxItems: 100
+
+    - `"api_actor"`
+
+    - `"federated_actor"`
+
+    - `"service_account_actor"`
+
+    - `"user_actor"`
+
+  - `agent_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage incurred by sessions of specific Claude Managed Agents agents. Use `group_by[]=agent_id` to break out per-agent values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `api_key_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage authenticated by specific API keys, by tagged API key ID (`apikey_...`), whichever identity the usage is attributed to. Include an empty entry (`api_key_ids[]=`) to also match usage that no API key authenticated. Use `group_by[]=api_key_id` to break out per-key values; usage without a key has a null `api_key_id`. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `claude_tag_categories?: Array<BetaAnalyticsClaudeTagCategory> | null` (query parameter)
+
+    Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude_tag`, so combining this filter with `products[]=claude_tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
+
+    maxItems: 100
+
+    - `"dm"`
+
+    - `"engaged"`
+
+    - `"monitoring"`
+
+    - `"proactive"`
+
+    - `"scheduled"`
+
+  - `claude_tag_user_ids?: Array<string> | null` (query parameter)
+
+    Filter to Claude Tag (Claude in Slack) usage attributed to specific Slack users, by Slack user ID (for example `U0123ABCDEF`), not claude.ai user ID. Usage that is not Claude Tag, and Claude Tag usage not attributed to a single user, never matches. Use `group_by[]=claude_tag_user_id` to break out per-user values.
+
+    maxItems: 100
+
+  - `context_windows?: Array<BetaAnalyticsContextWindow> | null` (query parameter)
+
+    Filter to specific context-window pricing tiers. Use `group_by[]=context_window` to break out per-tier values.
+
+    maxItems: 100
+
+    - `"0-200k"`
+
+    - `"200k-1M"`
+
+  - `deployment_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage incurred by Claude Managed Agents sessions that specific deployments started. Use `group_by[]=deployment_id` to break out per-deployment values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `ending_at?: string | null` (query parameter)
+
+    End of range, exclusive. Required when `time_bucket_width` is set. Without `time_bucket_width`, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
+
+    format: date-time
+
+  - `environment_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage incurred by Claude Managed Agents sessions that ran in specific environments. Use `group_by[]=environment_id` to break out per-environment values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `exclude_deleted_users?: boolean` (query parameter)
+
+    If true, omit rows whose `actor` is a `user_actor` with `deleted: true`. Requires `group_by[]=actor`. Rows for other actor types, and rows whose `actor` is null, are always kept. A page may contain fewer than `limit` rows; use `has_more` and `next_page` to paginate as usual.
+
+  - `group_by?: Array<BetaAnalyticsCostGroupBy> | null` (query parameter)
+
+    Dimensions to break cost out by (at most 5, not counting `cost_type` and `token_type`): one row per combination of their values with cost in the range (and per time bucket, when `time_bucket_width` is set), every combination returned across pages rather than a capped top set. `cost_type` and `token_type` do not count toward `limit`: `cost_type` returns one row per cost component (tokens, web search, code execution, and `session_usage`, Claude Managed Agents session time); `token_type` returns one row per token type, each with `cost_type: "tokens"`; combining both returns the per-token-type rows plus the web-search, code-execution and session-usage rows. When omitted, a single row aggregates the whole range.
+
+    maxItems: 100
+
+    - `"actor"`
+
+    - `"actor_type"`
+
+    - `"agent_id"`
+
+    - `"api_key_id"`
+
+    - `"claude_tag_category"`
+
+    - `"claude_tag_user_id"`
+
+    - `"context_window"`
+
+    - `"cost_type"`
+
+    - `"deployment_id"`
+
+    - `"environment_id"`
+
+    - `"inference_geo"`
+
+    - `"model"`
+
+    - `"product"`
+
+    - `"rbac_group_id"`
+
+    - `"service_tier"`
+
+    - `"session_id"`
+
+    - `"slack_channel_id"`
+
+    - `"speed"`
+
+    - `"token_type"`
+
+    - `"user_profile_id"`
+
+    - `"workspace_id"`
+
+  - `inference_geos?: Array<BetaAnalyticsInferenceGeoFilter> | null` (query parameter)
+
+    Filter to specific inference regions. `not_available` matches rows where the region is unset. Use `group_by[]=inference_geo` to break out per-region values.
+
+    maxItems: 100
+
+    - `"global"`
+
+    - `"not_available"`
+
+    - `"us"`
+
+  - `limit?: number` (query parameter)
+
+    Number of rows per page (1-1000, default 20). `cost_type`/`token_type` fan-out rows (cost endpoint only) do not count toward this limit, so `data` can exceed it.
+
+    minimum: 1, maximum: 1000
+
+  - `models?: Array<string> | null` (query parameter)
+
+    Models to include. Defaults to all models. Use `group_by[]=model` to break out per-model values.
+
+    maxItems: 100
+
+  - `order?: BetaAnalyticsUsageCostSortOrder` (query parameter)
+
+    Sort direction of the `order_by` metric, or of the time buckets when `order_by` is `time` and `time_bucket_width` is set. Defaults to `desc`.
+
+    - `"asc"`
+
+    - `"desc"`
+
+  - `order_by?: BetaAnalyticsCostOrderBy` (query parameter)
+
+    Row order. A metric ranks rows by that metric in the `order` direction. `time` orders rows by time bucket in the `order` direction (newest first by default) and, within a bucket, by `amount`, highest first. `time` takes effect only with `time_bucket_width`; without it, `time` is the same as `amount`. Defaults to `amount`.
+
+    - `"amount"`
+
+    - `"list_amount"`
+
+    - `"time"`
+
+  - `page?: string | null` (query parameter)
+
+    Opaque cursor from a previous response's `next_page` field.
+
+  - `products?: Array<BetaAnalyticsUsageCostProductFilter> | null` (query parameter)
+
+    Product surfaces to include. Defaults to all products.
+
+    maxItems: 100
+
+    - `"chat"`
+
+    - `"chat_cowork_unified"`
+
+    - `"claude_code"`
+
+    - `"claude_console"`
+
+    - `"claude_design"`
+
+    - `"claude_in_chrome"`
+
+    - `"claude_tag"`
+
+    - `"cowork"`
+
+    - `"managed_agents_api"`
+
+    - `"message_batches_api"`
+
+    - `"messages_api"`
+
+    - `"office_agent"`
+
+  - `rbac_group_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
+
+    maxItems: 100
+
+  - `service_tiers?: Array<BetaAnalyticsServiceTier> | null` (query parameter)
+
+    Filter to specific service tiers. Use `group_by[]=service_tier` to break out per-tier values. Claude Developer Platform organizations only; matches nothing for a Claude Enterprise organization.
+
+    maxItems: 100
+
+    - `"batch"`
+
+    - `"flex"`
+
+    - `"flex_discount"`
+
+    - `"priority"`
+
+    - `"priority_on_demand"`
+
+    - `"standard"`
+
+  - `session_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage incurred by specific Claude Managed Agents sessions, by tagged session ID (`sesn_...`). Use `group_by[]=session_id` to break out per-session values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `slack_channel_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
+
+    maxItems: 100
+
+  - `speeds?: Array<BetaAnalyticsSpeed> | null` (query parameter)
+
+    Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
+
+    maxItems: 100
+
+    - `"fast"`
+
+    - `"standard"`
+
+  - `time_bucket_width?: BetaAnalyticsTimeBucketWidth | null` (query parameter)
+
+    Time-bucket granularity. When set, rows are returned per time bucket (one per bucket and dimension combination with usage) and each row's `starting_at` and `ending_at` are that bucket's bounds; the time bucket counts toward `limit`. `ending_at` is required when `time_bucket_width` is set, and with `time_bucket_width="1m"` the range may span at most 24 hours. When omitted, each row aggregates the requested range with `starting_at` and `ending_at` each rounded down to the hour.
+
+    - `"1d"`
+
+    - `"1h"`
+
+    - `"1m"`
+
+  - `user_profile_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage attributed to specific user profiles, by tagged user profile ID (`uprof_...`). Use `group_by[]=user_profile_id` to break out per-profile values. Claude Developer Platform organizations only.
+
+    maxItems: 100
+
+  - `workspace_ids?: Array<string> | null` (query parameter)
+
+    Filter to usage in specific workspaces, by tagged workspace ID (`wrkspc_...`). Use `group_by[]=workspace_id` to break out per-workspace values. Claude Developer Platform organizations only; matches nothing for a Claude Enterprise organization.
+
+    maxItems: 100
+
+  - `betas?: Array<AnthropicBeta>` (header parameter)
+
+    This endpoint is in beta: requests must send `analytics-usage-cost-2026-08-24` in this header.
+
+    - `(string & {})`
+
+    - `"message-batches-2024-09-24"`
+
+    - `"prompt-caching-2024-07-31"`
+
+    - `"computer-use-2024-10-22"`
+
+    - `"computer-use-2025-01-24"`
+
+    - `"pdfs-2024-09-25"`
+
+    - `"token-counting-2024-11-01"`
+
+    - `"token-efficient-tools-2025-02-19"`
+
+    - `"output-128k-2025-02-19"`
+
+    - `"files-api-2025-04-14"`
+
+    - `"mcp-client-2025-04-04"`
+
+    - `"mcp-client-2025-11-20"`
+
+    - `"dev-full-thinking-2025-05-14"`
+
+    - `"interleaved-thinking-2025-05-14"`
+
+    - `"code-execution-2025-05-22"`
+
+    - `"extended-cache-ttl-2025-04-11"`
+
+    - `"context-1m-2025-08-07"`
+
+    - `"context-management-2025-06-27"`
+
+    - `"model-context-window-exceeded-2025-08-26"`
+
+    - `"skills-2025-10-02"`
+
+    - `"fast-mode-2026-02-01"`
+
+    - `"output-300k-2026-03-24"`
+
+    - `"user-profiles-2026-03-24"`
+
+    - `"user-profiles-2026-08-18"`
+
+    - `"user-profiles-2026-09-04"`
+
+    - `"advisor-tool-2026-03-01"`
+
+    - `"managed-agents-2026-04-01"`
+
+    - `"cache-diagnosis-2026-04-07"`
+
+    - `"dreaming-2026-04-21"`
+
+    - `"thinking-token-count-2026-05-13"`
+
+    - `"server-side-fallback-2026-06-01"`
+
+    - `"server-side-fallback-2026-07-01"`
+
+    - `"fallback-credit-2026-06-01"`
+
+    - `"fallback-credit-2026-07-01"`
+
+    - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
+    - `"compact-2026-01-12"`
+
+    - `"computer-use-2025-11-24"`
+
+    - `"mcp-tunnels-2026-06-22"`
+
+    - `"structured-outputs-2025-11-13"`
+
+    - `"task-budgets-2026-03-13"`
+
+    - `"thinking-display-updates-2026-08-18"`
+
+    - `"ce-user-management-2026-07-13"`
+
+    - `"mid-conversation-output-config-2026-07-01"`
+
+    - `"thinking-binding-controls-2026-08-01"`
+
+    - `"mid-conversation-system-clear-at-2026-08-21"`
+
+    - `"compact-2026-09-04"`
+
+    - `"inline-tools-2026-09-15"`
+
+    - `"mcp-client-2026-09-15"`
+
+    - `"ce-plugins-2026-09-01"`
+
+    - `"spend-limit-reads-2026-09-26"`
+
+    - `"telemetry-destinations-2026-08-11"`
+
+    - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
+#### Returns
+
+- `interface BetaAnalyticsCostItem`
+
+  - `cost: BetaAnalyticsCostMetrics`
+
+    Cost for this row.
+
+    - `amount: string`
+
+      Amount (post-discount, pre-credit) in fractional cents (minor units).
+
+    - `currency: string`
+
+      Currency code for the cost amount. Currently always `"USD"`.
+
+      default: USD
+
+    - `list_amount: string`
+
+      List-price amount (pre-discount) in fractional cents.
+
+    - `requests: number | null`
+
+      Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+  - `ending_at: string`
+
+    End of the period this row covers (exclusive), as an RFC 3339 UTC timestamp: the end of the row's time bucket when a time-bucket width is set; otherwise the requested `ending_at` (or, when omitted, the earlier of now and `starting_at` plus 31 days) rounded down to the hour, because without a time bucket the report covers whole hours.
+
+    format: date-time
+
+  - `group: BetaAnalyticsCostGroup`
+
+    The dimension values this row's cost is broken out by.
+
+    - `actor: BetaAnalyticsActor | null`
+
+      The identity the usage is attributed to: the user if one is attributed, else the service account, else the federated (cloud-platform) identity, else the API key. Populated only when `actor` is in `group_by[]`; null for usage with no attributable identity, and for users' and federated identities' usage when the reader is a member who can see only some workspaces. Distinct identities the server cannot render also read null, each as its own row.
+
+      - `interface BetaAnalyticsReportUserActor`
+
+        - `type: "user_actor"`
+
+          Actor type. Always `"user_actor"`.
+
+        - `deleted: boolean`
+
+          True when the account has been deleted, or when the user is no longer a member of the organization or its associated organizations (for example, their membership was removed or they were deprovisioned via your identity provider). `email_address` stays populated for removed users and is null when the account has been deleted. `name` follows the rules described on that field. The `user_id` is still populated for reconciliation.
+
+        - `email_address: string | null`
+
+          The user's current email address, including for users who are no longer members of the organization. Null when the account has been deleted and for system-minted service accounts.
+
+        - `name: string | null`
+
+          The user's current full name. Null when the user has not set one. `"Deleted User"` when the account has been deleted, or when the user is no longer a member and the organization hides removed users' names.
+
+        - `user_id: string`
+
+          Tagged user ID.
+
+      - `interface BetaAnalyticsServiceAccountActor`
+
+        - `type: "service_account_actor"`
+
+        - `service_account_id: string`
+
+          Tagged service account ID.
+
+      - `interface BetaAnalyticsFederatedActor`
+
+        - `type: "federated_actor"`
+
+        - `provider: BetaAnalyticsFederatedActorProvider`
+
+          The trusted provider that asserted the caller's identity.
+
+          - `interface BetaAnalyticsFederatedActorAWSProvider`
+
+            - `type: "aws"`
+
+            - `account_id: string`
+
+              The AWS account the organization is bound to.
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that made the requests.
+
+          - `interface BetaAnalyticsFederatedActorAzureProvider`
+
+            - `type: "azure"`
+
+            - `subscription_id: string`
+
+              The Azure subscription the organization is bound to.
+
+          - `interface BetaAnalyticsFederatedActorGCPProvider`
+
+            - `type: "gcp"`
+
+            - `project_number: string`
+
+              The Google Cloud project the organization is bound to.
+
+          - `interface BetaAnalyticsFederatedActorOIDCProvider`
+
+            - `type: "oidc"`
+
+            - `issuer: string | null`
+
+              The federation issuer's URL.
+
+        - `subject: string | null`
+
+          The provider's identifier for the caller: on `aws`, the IAM principal ARN (one role is one actor across its sessions); on `gcp`, the caller's IAM principal identifier as Google Cloud reports it, such as `serviceAccount:<email>`, `user:<email>`, or a `principal://...` URI.
+
+      - `interface BetaAnalyticsAPIActor`
+
+        - `type: "api_actor"`
+
+        - `api_key_id: string`
+
+          Tagged API key ID.
+
+    - `actor_type: BetaAnalyticsActorType | null`
+
+      Kind of identity the usage is attributed to; matches `actor.type` when `actor` is set. Populated only when `actor_type` is in `group_by[]`.
+
+      - `"api_actor"`
+
+      - `"federated_actor"`
+
+      - `"service_account_actor"`
+
+      - `"user_actor"`
+
+    - `agent_id: string | null`
+
+      Claude Managed Agents agent whose session incurred the usage. Populated only when `agent_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `api_key_id: string | null`
+
+      API key that authenticated the requests, as a tagged API key ID, whichever identity `actor` resolves to. Populated only when `api_key_id` is in `group_by[]`; null for usage not authenticated by an API key.
+
+    - `claude_tag_category: BetaAnalyticsClaudeTagCategory | null`
+
+      Claude Tag (Claude in Slack) spend category: `engaged` (a person addressed Claude in a channel or thread), `proactive` (Claude responded without being addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching a channel it was asked to monitor), or `dm` (direct messages with Claude). Populated only when `claude_tag_category` is in `group_by[]`; null for usage that is not Claude Tag. Direct-message usage is billed to the individual user and is reported under that user's product, not under `claude_tag`. New categories may be added over time.
+
+      - `"dm"`
+
+      - `"engaged"`
+
+      - `"monitoring"`
+
+      - `"proactive"`
+
+      - `"scheduled"`
+
+    - `claude_tag_user_id: string | null`
+
+      Slack user ID (for example `U0123ABCDEF`) of the member the Claude Tag (Claude in Slack) usage is attributed to, not a claude.ai user ID. Populated only when `claude_tag_user_id` is in `group_by[]`; null for usage that is not Claude Tag and for Claude Tag usage that is not attributed to a single user (for example `monitoring`, and `proactive` usage Claude initiated), so per-user rows can sum to less than the Claude Tag total. Cannot be combined with `group_by[]=rbac_group_id` or the `rbac_group_ids[]` filter.
+
+    - `context_window: BetaAnalyticsContextWindow | null`
+
+      Context-window pricing tier of the usage or cost. Null unless `context_window` is in `group_by[]`; it can also be null on grouped rows with no context-window tier, such as code execution.
+
+      - `"0-200k"`
+
+      - `"200k-1M"`
+
+    - `cost_type: BetaAnalyticsGroupedCostType | null`
+
+      Cost component breakdown; null when returning the combined total.
+
+      - `"code_execution"`
+
+      - `"session_usage"`
+
+      - `"tokens"`
+
+      - `"web_search"`
+
+    - `deployment_id: string | null`
+
+      Deployment that started the Claude Managed Agents session. Populated only when `deployment_id` is in `group_by[]`; null for usage outside a managed session and for sessions no deployment started.
+
+    - `environment_id: string | null`
+
+      Claude Managed Agents environment the session ran in. Populated only when `environment_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `inference_geo: BetaAnalyticsUsageCostInferenceGeo | null`
+
+      Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
+
+      - `"global"`
+
+      - `"us"`
+
+    - `model: string | null`
+
+      Model that produced the usage or cost, as a model name in the form the `models[]` filter accepts (for example, `claude-opus-5-5`). Null unless `model` is in `group_by[]`; it can also be null on grouped rows whose usage or cost is not attributed to a specific model, such as code execution.
+
+    - `product: string | null`
+
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
+
+    - `rbac_group_id: string | null`
+
+      RBAC group (team) the usage is attributed to, in the public tagged `rbac_group_...` spelling — the same spelling the activity resources use for this key, so the same team has one id across resources and it round-trips as an `rbac_group_ids[]` filter value. Populated only when `rbac_group_id` is in `group_by[]`. Any-membership semantics: a user in several groups contributes their full usage to each of those groups' rows, so the named-group rows overlap and their sum can exceed the org total. A null value is the single unassigned row: users in no group on that (UTC) day. For the true org total, run the same query without `group_by[]`.
+
+    - `service_tier: BetaAnalyticsServiceTier | null`
+
+      Service tier the usage was served at. Populated only when `service_tier` is in `group_by[]`; null for usage with no service tier (for example, code execution) and for Claude Enterprise usage.
+
+      - `"batch"`
+
+      - `"flex"`
+
+      - `"flex_discount"`
+
+      - `"priority"`
+
+      - `"priority_on_demand"`
+
+      - `"standard"`
+
+    - `session_id: string | null`
+
+      Claude Managed Agents session that incurred the usage. Populated only when `session_id` is in `group_by[]`; null for usage outside a managed session.
+
+    - `slack_channel_id: string | null`
+
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
+    - `speed: BetaAnalyticsSpeed | null`
+
+      Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `speed` is in `group_by[]`.
+
+      - `"fast"`
+
+      - `"standard"`
+
+    - `token_type: BetaAnalyticsTokenType | null`
+
+      Token type when `cost_type` is `tokens`; null otherwise.
+
+      - `"cache_creation.ephemeral_1h_input_tokens"`
+
+      - `"cache_creation.ephemeral_5m_input_tokens"`
+
+      - `"cache_read_input_tokens"`
+
+      - `"output_tokens"`
+
+      - `"uncached_input_tokens"`
+
+    - `user_profile_id: string | null`
+
+      User profile the usage was attributed to, as a tagged `uprof_` ID. Populated only when `user_profile_id` is in `group_by[]`; null for usage that named no profile and for Claude Enterprise usage.
+
+    - `workspace_id: string | null`
+
+      Workspace the usage occurred in, as a tagged workspace ID, including the organization's default workspace. Populated only when `workspace_id` is in `group_by[]`; null for Claude Enterprise usage.
+
+  - `starting_at: string`
+
+    Start of the period this row covers (inclusive), as an RFC 3339 UTC timestamp: the start of the row's time bucket when a time-bucket width is set, otherwise the requested `starting_at` rounded down to the hour.
+
+    format: date-time
+
+#### Example
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic({
+  apiKey: process.env["ANTHROPIC_API_KEY"] // This is the default and can be omitted
+});
+
+// Automatically fetches more pages as needed.
+for await (const betaAnalyticsCostItem of client.beta.organization.analytics.cost.list({
+  starting_at: "2026-09-01T00:00:00Z"
+})) {
+  console.log(betaAnalyticsCostItem.cost);
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "cost": {
+        "amount": "41280.000000",
+        "currency": "USD",
+        "list_amount": "51600.000000",
+        "requests": 128
+      },
+      "ending_at": "2026-10-01T00:00:00Z",
+      "group": {
+        "actor": {
+          "deleted": false,
+          "email_address": "user@emaildomain.com",
+          "name": "Jane Doe",
+          "type": "user_actor",
+          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        },
+        "actor_type": "user_actor",
+        "agent_id": "agent_01VHd3EAGJ6PLkP9LM7DDu3f",
+        "api_key_id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
+        "claude_tag_category": "dm",
+        "claude_tag_user_id": "U0123ABCDEF",
+        "context_window": "0-200k",
+        "cost_type": "tokens",
+        "deployment_id": "depl_01JFC6ihzZHtAuyHsaENdJhY",
+        "environment_id": "env_017oTjuGedHtjhJauVC5xGJD",
+        "inference_geo": "global",
+        "model": "claude-opus-5-5",
+        "product": "chat",
+        "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+        "service_tier": "standard",
+        "session_id": "sesn_0187kPDyNCwibNNvfaPEApCJ",
+        "slack_channel_id": "C0123ABCDEF",
+        "speed": "fast",
+        "token_type": "cache_creation.ephemeral_1h_input_tokens",
+        "user_profile_id": "uprof_01M33NeYUQK2WV9PpYcsPHLi",
+        "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+      },
+      "starting_at": "2026-09-01T00:00:00Z"
+    }
+  ],
+  "data_refreshed_at": "2019-12-27T18:11:19.117Z",
+  "has_more": true,
+  "next_page": "next_page"
+}
+```
+
 ## Beta › Organization › Analytics › Usage Report
 
 ### Get Token Usage Over Time
@@ -100800,12 +102966,11 @@ for await (const betaAnalyticsArtifactActivity of client.beta.organization.analy
 
 **GET** `/v1/organizations/analytics/usage_report`
 
-Get token usage over time across a date range.
+[Legacy] Get token usage over time across a date range.
 
-Returns token usage bucketed by minute, hour, or day, optionally broken
-down by product, model, context window, inference region, or speed.
-Available to organizations on a Claude Enterprise plan. Requires an API
-key with the `read:analytics` scope.
+Returns token usage bucketed by minute, hour, or day, optionally broken down by one or more `group_by[]` dimensions, such as product or model. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+
+This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/usage`](../beta/organization/analytics/usage/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
 #### Parameters
 
@@ -101151,15 +103316,11 @@ for await (const betaAnalyticsUsageReportTimeBucket of client.beta.organization.
 
 **GET** `/v1/organizations/analytics/user_usage_report`
 
-Get per-user token usage across a date range.
+[Legacy] Get per-user token usage across a date range.
 
-Returns one row per user, ranked by the chosen token metric. Use this to
-see which users consume the most tokens. Only usage attributable to a
-seat user is included; for organization-wide totals including direct
-API-key and automation traffic, use the bucketed
-`/v1/organizations/analytics/usage_report` endpoint. Available to
-organizations on a Claude Enterprise plan. Requires an API key with the
-`read:analytics` scope.
+Returns usage per user, ranked by the chosen token metric; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users consume the most tokens. Only usage attributed to a user account is included; usage with no user attributed to it, such as requests attributed only to an API key, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+
+This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/usage`](../beta/organization/analytics/usage/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
 #### Parameters
 
@@ -101557,12 +103718,11 @@ for await (const betaAnalyticsUsageUsersItem of client.beta.organization.analyti
 
 **GET** `/v1/organizations/analytics/cost_report`
 
-Get cost in USD over time across a date range.
+[Legacy] Get cost in USD over time across a date range.
 
-Returns cost bucketed by minute, hour, or day, optionally broken down by
-product, model, context window, inference region, speed, cost type, or
-token type. Available to organizations on a Claude Enterprise plan.
-Requires an API key with the `read:analytics` scope.
+Returns cost bucketed by minute, hour, or day, optionally broken down by one or more `group_by[]` dimensions, such as model or cost type. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+
+This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/cost`](../beta/organization/analytics/cost/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
 #### Parameters
 
@@ -101909,15 +104069,11 @@ for await (const betaAnalyticsCostReportTimeBucket of client.beta.organization.a
 
 **GET** `/v1/organizations/analytics/user_cost_report`
 
-Get per-user cost in USD across a date range.
+[Legacy] Get per-user cost in USD across a date range.
 
-Returns one row per user, ranked by spend. Use this to see which users
-account for the most cost. Only cost attributable to a seat user is
-included; for organization-wide totals including direct API-key and
-automation traffic, use the bucketed
-`/v1/organizations/analytics/cost_report` endpoint. Available to
-organizations on a Claude Enterprise plan. Requires an API key with the
-`read:analytics` scope.
+Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users account for the most cost. Only cost attributed to a user account is included; cost with no user attributed to it, such as requests attributed only to an API key, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+
+This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/cost`](../beta/organization/analytics/cost/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
 #### Parameters
 
@@ -102481,6 +104637,10 @@ Anthropic account team.
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaSpendLimit`
@@ -103032,6 +105192,10 @@ come in a fixed order that is not creation order.
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -106024,6 +108188,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaPlugin`
@@ -106417,6 +108585,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -106832,6 +109004,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -107283,6 +109459,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaPlugin`
@@ -107688,6 +109868,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaDeletedPlugin`
@@ -107885,6 +110069,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -108226,6 +110414,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaPluginVersion`
@@ -108558,6 +110750,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -108902,6 +111098,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `type unnamed_schema_3 = Response`
@@ -109087,6 +111287,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -109361,6 +111565,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaPluginInstallationSetting`
@@ -109622,6 +111830,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaDeletedPluginInstallationSetting`
@@ -109870,6 +112082,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -110139,6 +112355,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -110412,6 +112632,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -110694,6 +112918,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -110984,6 +113212,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaPluginMarketplaceValidationReport`
@@ -111252,6 +113484,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -111614,6 +113850,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaTelemetryDestination`
@@ -111974,6 +114214,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaTelemetryDestination`
@@ -112324,6 +114568,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -112808,6 +115056,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaTelemetryDestination`
@@ -113157,6 +115409,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaDeletedTelemetryDestination`
@@ -113318,6 +115574,10 @@ Send one test span, named `anthropic.test`, to the destination with its register
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -113515,6 +115775,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaTelemetryDestinationWorkspace`
@@ -113708,6 +115972,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaTelemetryDestinationWorkspace`
@@ -113895,6 +116163,10 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -114092,6 +116364,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -114336,6 +116612,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaOrganizationWebhookEndpoint`
@@ -114560,6 +116840,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 
@@ -114810,6 +117094,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaOrganizationWebhookEndpoint`
@@ -115029,6 +117317,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `"webhooks-2026-10-07"`
 
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `interface BetaDeletedOrganizationWebhookEndpoint`
@@ -115200,6 +117492,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
     - `"telemetry-destinations-2026-08-11"`
 
     - `"webhooks-2026-10-07"`
+
+    - `"message-threads-2026-08-12"`
+
+    - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 

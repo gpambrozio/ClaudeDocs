@@ -147,6 +147,10 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 ### Body parameters
 
 - `issuer_id: string`
@@ -574,6 +578,10 @@ unless `include_archived=true`.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 ### Returns
 
 - `data: array of BetaFederationRule`
@@ -886,6 +894,10 @@ Retrieve a federation rule by its ID (`fdrl_...`).
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 ### Returns
 
@@ -1217,6 +1229,10 @@ Console session.
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 ### Body parameters
 
@@ -1620,6 +1636,10 @@ other scopes require a Console session.
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 ### Returns
 
@@ -2161,6 +2181,10 @@ other scopes require a Console session.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 #### Body parameters
 
 - `workspace_id: string`
@@ -2372,6 +2396,10 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 #### Returns
 
 - `data: array of BetaFederationRuleWorkspace`
@@ -2572,6 +2600,10 @@ Console session.
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 #### Returns
 

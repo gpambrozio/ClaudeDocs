@@ -139,6 +139,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 ### Body parameters
 
 - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved"`
@@ -409,6 +413,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 ### Returns
 
 - `data: array of BetaOrganizationWebhookEndpoint`
@@ -643,6 +651,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 ### Returns
 
 - `BetaOrganizationWebhookEndpoint object`
@@ -858,6 +870,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 ### Body parameters
 
@@ -1109,6 +1125,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
 ### Returns
 
 - `BetaDeletedOrganizationWebhookEndpoint object`
@@ -1278,6 +1298,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
 
 ### Returns
 

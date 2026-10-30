@@ -12,15 +12,16 @@ The [Admin API](../api/organization.md) lets you manage your organization’s me
 
 The Admin API is unavailable for individual accounts. To collaborate with teammates and add members, set up your organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
 
-Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](spend-limits-api.md). The [Plugins API](plugins-api.md), also Enterprise-only, is in beta. So is the [Claude Tag API](claude-tag-api.md). See [User management](user-management.md).
+Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They can also call the [Usage and Cost Analytics API](usage-cost-analytics-api.md), which is in beta and takes a key with the `read:analytics` scope. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](spend-limits-api.md). The [Plugins API](plugins-api.md), also Enterprise-only, is in beta. So is the [Claude Tag API](claude-tag-api.md). See [User management](user-management.md).
 
 On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), only these Admin API endpoints are available:
 
 * The workspace endpoints: create, get, list, update, and archive on `/v1/organizations/workspaces`.
 * The external key endpoints, for [CMEK](cmek-claude-platform-on-aws.md): register, get, list, update, and delete on `/v1/organizations/external_keys`. There is no validate endpoint, because keys are validated when attached to a workspace.
 * The [telemetry destination endpoints](../api/claude-platform-on-aws-iam-actions.md#telemetry-destinations).
+* The [Usage and Cost Analytics API](usage-cost-analytics-api.md) endpoints: `/v1/organizations/analytics/usage` and `/v1/organizations/analytics/cost`.
 
-Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren’t available on Claude Platform on AWS.
+Organization members, workspace members, invites, API keys, the legacy [Usage and Cost API](usage-cost-api.md), and the rate limit reports aren’t available on Claude Platform on AWS.
 
 ## Authentication
 
@@ -1688,7 +1689,7 @@ For parameter details and response schemas, see the [Organization Info API refer
 
 ## Usage and cost reports
 
-Track your organization’s usage and costs with the [Usage and Cost API](usage-cost-api.md).
+Track your organization’s usage and costs with the [Usage and Cost Analytics API](usage-cost-analytics-api.md). The [Usage and Cost API](usage-cost-api.md) is the legacy API for this data.
 
 ## Claude Code analytics
 

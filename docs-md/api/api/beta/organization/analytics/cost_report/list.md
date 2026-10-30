@@ -9,12 +9,11 @@ url: https://platform.claude.com/docs/en/api/beta/organization/analytics/cost_re
 
 **GET** `/v1/organizations/analytics/cost_report`
 
-Get cost in USD over time across a date range.
+[Legacy] Get cost in USD over time across a date range.
 
-Returns cost bucketed by minute, hour, or day, optionally broken down by
-product, model, context window, inference region, speed, cost type, or
-token type. Available to organizations on a Claude Enterprise plan.
-Requires an API key with the `read:analytics` scope.
+Returns cost bucketed by minute, hour, or day, optionally broken down by one or more `group_by[]` dimensions, such as model or cost type. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+
+This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/cost`](../cost/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../../../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
 ## Query parameters
 

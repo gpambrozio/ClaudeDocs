@@ -681,9 +681,9 @@ To get an event when Anthropic restricts or bans one of your end customers, or w
 
 Choose how your services authenticate to the Claude API.
 
-**Usage and Cost API**
+**Usage and Cost Analytics API**
 
-Track API token usage and costs for your organization.
+Track token usage and costs for your organization.
 
 **Data residency**
 

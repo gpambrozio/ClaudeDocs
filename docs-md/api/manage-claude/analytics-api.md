@@ -20,13 +20,9 @@ The two APIs use different key types, created in different places by different r
 | **Claude Code Analytics API**       | Admin API key (`sk-ant-admin01-...`) | [Admin keys](https://platform.claude.com/settings/admin-keys) page (`platform.claude.com/settings/admin-keys`) in the Claude Console | Organization admin | Daily Claude Code metrics per user: sessions, lines of code, commits, pull requests, tool acceptance, and estimated cost by model                  |
 | **Claude Enterprise Analytics API** | Analytics API key                    | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)                                               | Primary owner      | Organization-wide engagement and adoption (user activity, active-user summaries, project, skill, and connector usage), plus cost and usage reports |
 
-The key types are not interchangeable: an Admin API key cannot call the Claude Enterprise Analytics API, and an Analytics API key cannot call the Admin API. Both APIs appear under the [Admin API reference](../api/beta/organization.md), but they are separate APIs with separate key types. If your organization uses both the Claude Platform and Claude Enterprise, you can provision both keys and use each API for its own data.
+The key types are not interchangeable: an Admin API key cannot call the Claude Enterprise Analytics API, and an Analytics API key cannot call the Admin API. The one exception is the [Usage and Cost Analytics API](usage-cost-analytics-api.md), which Claude Enterprise organizations call with their Analytics API key. Both APIs appear under the [Admin API reference](../api/beta/organization.md), but they are separate APIs with separate key types. If your organization uses both the Claude Platform and Claude Enterprise, you can provision both keys and use each API for its own data.
 
-Looking for API usage and cost data rather than product analytics? See the 
-
-[Usage and Cost API](usage-cost-api.md)
-
-, which explains the right path for both Claude Console and Claude Enterprise organizations.
+Looking for token usage and cost data rather than product analytics? See the [Usage and Cost Analytics API](usage-cost-analytics-api.md), which serves both Claude Console and Claude Enterprise organizations.
 
 If you want to view engagement and adoption data in the product rather than programmatically, use the [Analytics dashboard](https://claude.ai/analytics/activity) in claude.ai. For governance and auditing use cases (individual user actions, raw activity events, conversation content), see the [Compliance API](compliance-api-access.md).
 
@@ -72,6 +68,8 @@ The Claude Enterprise Analytics API provides:
 * **Activity summaries:** organization-level daily, weekly, and monthly active users, seat counts, and pending invites
 * **Project, skill, and connector usage:** adoption breakdowns for chat projects, skills, and connectors
 * **Cost and usage reports:** per-user and organization-level token usage and cost over time (usage-based Enterprise plans)
+
+The cost and usage report endpoints under `/v1/organizations/analytics/` (`usage_report`, `cost_report`, `user_usage_report`, and `user_cost_report`) are legacy and remain supported. For new integrations, use the [Usage and Cost Analytics API](usage-cost-analytics-api.md). To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports). The other Claude Enterprise Analytics API endpoints are not legacy.
 
 For endpoint details, parameters, and response schemas, see the [Claude Enterprise Analytics API reference](../api/beta/organization/analytics.md). The following sections cover data freshness, metric definitions, and operational guidance that apply across those endpoints.
 
@@ -144,9 +142,9 @@ For other analytics changes with customer-managed encryption keys, see [What CME
 
 Track Claude Code sessions, code changes, and tool usage with an Admin API key.
 
-**Usage and Cost API**
+**Usage and Cost Analytics API**
 
-Track API token usage and costs for your organization.
+Track token usage and costs for your organization.
 
 **Claude Enterprise Analytics API reference**
 
