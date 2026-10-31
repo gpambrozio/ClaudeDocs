@@ -162,6 +162,8 @@ omitted from the results.
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Returns
 
 - `data: array of BetaServiceAccountWorkspaceMember`
@@ -374,6 +376,8 @@ accounts cannot be added and are rejected.
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ### Body parameters
 
@@ -604,6 +608,8 @@ account returns 404.
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Returns
 
 - `BetaServiceAccountWorkspaceMember object`
@@ -809,6 +815,8 @@ rejected.
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ### Body parameters
 
@@ -1032,6 +1040,8 @@ membership. Archived workspaces return 400.
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ### Returns
 

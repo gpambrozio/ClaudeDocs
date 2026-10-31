@@ -11,7 +11,11 @@ url: https://platform.claude.com/docs/en/api/ruby/beta
 
 ### Anthropic Beta
 
-- `type AnthropicBeta = String | :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 51 more`
+- `type AnthropicBeta = String | :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 52 more`
+
+  Beta names you can send in the `anthropic-beta` header.
+
+  See [Beta headers](../beta-headers.md) for how to send them and where to find the name a feature needs.
 
   - `String = String`
 
@@ -122,6 +126,8 @@ url: https://platform.claude.com/docs/en/api/ruby/beta
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 ### Beta API Error
 
@@ -490,6 +496,8 @@ The Models API response can be used to determine which models are available for 
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -959,6 +967,8 @@ The Models API response can be used to determine information about a specific mo
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -2195,7 +2205,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `class BetaEncryptedCodeExecutionResultBlockParam`
 
-              Code execution result with encrypted stdout for PFC + web_search results.
+              The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form, sent back in a later request.
 
               - `type: :encrypted_code_execution_result`
 
@@ -2731,7 +2741,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     - `class BetaCodeExecutionTool20260120`
 
-                      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                      A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                      REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                      See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                       - `type: :code_execution_20260120`
 
@@ -5379,7 +5393,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
   - `class BetaCodeExecutionTool20260120`
 
-    Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+    A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+    REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+    See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
   - `class BetaCodeExecutionTool20260521`
 
@@ -5561,6 +5579,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `user_profile_id: String` (header parameter)
 
@@ -6145,7 +6165,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `class BetaEncryptedCodeExecutionResultBlock`
 
-          Code execution result with encrypted stdout for PFC + web_search results.
+          The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+          The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+          See the [programmatic tool calling guide](../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
           - `type: :encrypted_code_execution_result`
 
@@ -6655,7 +6679,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `class BetaCodeExecutionTool20260120`
 
-                  Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                  A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                  REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                  See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                   - `type: :code_execution_20260120`
 
@@ -10575,7 +10603,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `class BetaEncryptedCodeExecutionResultBlockParam`
 
-              Code execution result with encrypted stdout for PFC + web_search results.
+              The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form, sent back in a later request.
 
               - `type: :encrypted_code_execution_result`
 
@@ -11111,7 +11139,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                     - `class BetaCodeExecutionTool20260120`
 
-                      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                      A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                      REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                      See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                       - `type: :code_execution_20260120`
 
@@ -13540,7 +13572,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
   - `class BetaCodeExecutionTool20260120`
 
-    Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+    A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+    REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+    See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
   - `class BetaCodeExecutionTool20260521`
 
@@ -13722,6 +13758,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `user_profile_id: String` (header parameter)
 
@@ -14678,7 +14716,7 @@ Streams a message like `stream_raw` and returns a MessageStream, which accumulat
 
             - `class BetaEncryptedCodeExecutionResultBlockParam`
 
-              Code execution result with encrypted stdout for PFC + web_search results.
+              The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form, sent back in a later request.
 
               - `type: :encrypted_code_execution_result`
 
@@ -15214,7 +15252,11 @@ Streams a message like `stream_raw` and returns a MessageStream, which accumulat
 
                     - `class BetaCodeExecutionTool20260120`
 
-                      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                      A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                      REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                      See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                       - `type: :code_execution_20260120`
 
@@ -17856,7 +17898,11 @@ Streams a message like `stream_raw` and returns a MessageStream, which accumulat
 
   - `class BetaCodeExecutionTool20260120`
 
-    Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+    A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+    REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+    See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
   - `class BetaCodeExecutionTool20260521`
 
@@ -18038,6 +18084,8 @@ Streams a message like `stream_raw` and returns a MessageStream, which accumulat
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `user_profile_id: String` (header parameter)
 
@@ -18996,7 +19044,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `class BetaEncryptedCodeExecutionResultBlockParam`
 
-                  Code execution result with encrypted stdout for PFC + web_search results.
+                  The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form, sent back in a later request.
 
                   - `type: :encrypted_code_execution_result`
 
@@ -19532,7 +19580,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                         - `class BetaCodeExecutionTool20260120`
 
-                          Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                          A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                          REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                          See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                           - `type: :code_execution_20260120`
 
@@ -22180,7 +22232,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `class BetaCodeExecutionTool20260120`
 
-        Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+        A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+        REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+        See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
       - `class BetaCodeExecutionTool20260521`
 
@@ -22370,6 +22426,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `user_profile_id: String` (header parameter)
 
@@ -22650,6 +22708,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -22932,6 +22992,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -23210,6 +23272,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -23481,6 +23545,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -23653,6 +23719,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -24245,7 +24313,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `class BetaEncryptedCodeExecutionResultBlock`
 
-                Code execution result with encrypted stdout for PFC + web_search results.
+                The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+                The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+                See the [programmatic tool calling guide](../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
                 - `type: :encrypted_code_execution_result`
 
@@ -24755,7 +24827,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       - `class BetaCodeExecutionTool20260120`
 
-                        Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                        A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                        REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                        See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                         - `type: :code_execution_20260120`
 
@@ -28549,6 +28625,8 @@ Create Agent
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -29610,6 +29688,8 @@ List Agents
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -30656,6 +30736,8 @@ Get Agent
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -32647,6 +32729,8 @@ Update Agent
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -33682,6 +33766,8 @@ Archive Agent
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -34730,6 +34816,8 @@ List Agent Versions
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -35884,6 +35972,8 @@ Create a new environment with the specified configuration.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -36219,6 +36309,8 @@ List environments with pagination support.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -36546,6 +36638,8 @@ Retrieve a specific environment by ID.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -36984,6 +37078,8 @@ Update an existing environment's configuration.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -37307,6 +37403,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -37473,6 +37571,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -37803,6 +37903,8 @@ Retrieve detailed information about a specific work item.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -38066,6 +38168,8 @@ Long poll for work items in the queue.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `anthropic_worker_id: String` (header parameter)
 
   Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
@@ -38316,6 +38420,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -38572,6 +38678,8 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaSelfHostedWorkHeartbeatResponse`
@@ -38584,7 +38692,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `last_heartbeat: String`
 
-    RFC 3339 timestamp of the actual heartbeat from DB
+    RFC 3339 timestamp of the most recent heartbeat recorded for this work item, or an empty string if none has been recorded
 
   - `lease_extended: bool`
 
@@ -38765,6 +38873,8 @@ Stop a work item, initiating graceful or forced shutdown.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -39027,6 +39137,8 @@ List work items in an environment.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaSelfHostedWork`
@@ -39283,6 +39395,8 @@ Update work item metadata with merge semantics.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -39536,6 +39650,8 @@ Get statistics about the work queue for an environment.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -39548,15 +39664,13 @@ Get statistics about the work queue for an environment.
 
   Statistics about the work queue for an environment.
 
-  Uses Redis Stream consumer group metrics for O(1) queries.
-
   - `type: :work_queue_stats`
 
     The type of object
 
   - `depth: Integer`
 
-    Number of work items waiting to be picked up (lag from consumer group)
+    Number of work items waiting to be picked up
 
   - `oldest_queued_at: String`
 
@@ -40845,6 +40959,8 @@ Create Session
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -42417,6 +42533,8 @@ List Sessions
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -43908,6 +44026,8 @@ Get Session
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -45975,6 +46095,8 @@ Update Session
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -47461,6 +47583,8 @@ Delete Session
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -47623,6 +47747,8 @@ Archive Session
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -49237,6 +49363,8 @@ List Events
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -52702,6 +52830,8 @@ Send Events
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -53322,6 +53452,8 @@ Stream Events
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -56477,6 +56609,8 @@ Add Session Resource
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -56671,6 +56805,8 @@ List Session Resources
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -56954,6 +57090,8 @@ Get Session Resource
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -57234,6 +57372,8 @@ Update Session Resource
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -57509,6 +57649,8 @@ Delete Session Resource
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -57700,6 +57842,8 @@ List Session Threads
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -58783,6 +58927,8 @@ Get Session Thread
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -59862,6 +60008,8 @@ Archive Session Thread
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -60950,6 +61098,8 @@ List Session Thread Events
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -64065,6 +64215,8 @@ Stream Session Thread Events
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -67607,6 +67759,8 @@ Create Deployment
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -68383,6 +68537,8 @@ List Deployments
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -69120,6 +69276,8 @@ Get Deployment
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -70254,6 +70412,8 @@ Update Deployment
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -70986,6 +71146,8 @@ Archive Deployment
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -71720,6 +71882,8 @@ Run Deployment Now
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -72114,6 +72278,8 @@ Pause Deployment
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -72847,6 +73013,8 @@ Unpause Deployment
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -73633,6 +73801,8 @@ List Deployment Runs
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74032,6 +74202,8 @@ Get Deployment Run
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -74436,6 +74608,8 @@ Create a Vault
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74646,6 +74820,8 @@ List Vaults
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -74850,6 +75026,8 @@ Retrieve a Vault
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -75061,6 +75239,8 @@ Update a Vault
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75261,6 +75441,8 @@ Delete a Vault
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -75427,6 +75609,8 @@ Archive a Vault
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -75806,6 +75990,8 @@ Create a Credential
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76150,6 +76336,8 @@ List Credentials
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -76481,6 +76669,8 @@ Retrieve a Credential
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -76952,6 +77142,8 @@ Update a Credential
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77282,6 +77474,8 @@ Delete a Credential
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -77455,6 +77649,8 @@ Archive a Credential
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -77786,6 +77982,8 @@ Validate an MCP OAuth Credential
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78086,6 +78284,8 @@ Create a Memory Store
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78321,6 +78521,8 @@ List Memory Stores
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78536,6 +78738,8 @@ Retrieve a Memory Store
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -78772,6 +78976,8 @@ Update a Memory Store
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -78987,6 +79193,8 @@ Delete a Memory Store
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79155,6 +79363,8 @@ Archive a Memory Store
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -79398,6 +79608,8 @@ Create a Memory
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -79666,6 +79878,8 @@ List Memories
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -79931,6 +80145,8 @@ Retrieve a Memory
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -80201,6 +80417,8 @@ Update a Memory
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -80437,6 +80655,8 @@ Delete a Memory
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -80682,6 +80902,8 @@ List Memory Versions
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -81016,6 +81238,8 @@ Retrieve a Memory Version
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81332,6 +81556,8 @@ Redact a Memory Version
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -81656,6 +81882,8 @@ Upload File
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -81899,6 +82127,8 @@ List Files
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82131,6 +82361,8 @@ Download File
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82280,6 +82512,8 @@ Get File Metadata
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -82508,6 +82742,8 @@ Delete File
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -82686,6 +82922,8 @@ Create Skill
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -82936,6 +83174,8 @@ List Skills
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -83173,6 +83413,8 @@ Get Skill
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -83405,6 +83647,8 @@ Delete Skill
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -83585,6 +83829,8 @@ Create Skill Version
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -83799,6 +84045,8 @@ List Skill Versions
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -84011,6 +84259,8 @@ Download a skill version's content as a zip archive.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -84168,6 +84418,8 @@ Get Skill Version
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -84375,6 +84627,8 @@ Delete Skill Version
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -84637,6 +84891,8 @@ Create User Profile
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -84972,6 +85228,8 @@ List User Profiles
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -85278,6 +85536,8 @@ Get User Profile
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -85675,6 +85935,8 @@ Update User Profile
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -85977,6 +86239,8 @@ Delete User Profile
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -86143,6 +86407,8 @@ Create Enrollment URL
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -86327,6 +86593,8 @@ Create Action URL
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -86610,6 +86878,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -87087,6 +87357,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -87510,6 +87782,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -87928,6 +88202,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -88345,6 +88621,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -88766,6 +89044,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -88958,6 +89238,8 @@ Fetches a tunnel by ID.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -89162,6 +89444,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -89360,6 +89644,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -89553,6 +89839,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -89732,6 +90020,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -89914,6 +90204,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -90118,6 +90410,8 @@ Fetches a tunnel certificate by ID.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -90333,6 +90627,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -90541,6 +90837,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: String` (header parameter)
 
@@ -90841,7 +91139,7 @@ puts(page)
       "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
       "created_at": "2024-10-30T23:58:27.427722Z",
       "created_by": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
         "type": "user"
       },
       "expires_at": "2024-10-30T23:58:27.427722Z",
@@ -90849,7 +91147,7 @@ puts(page)
       "partial_key_hint": "sk-ant-api03-R2D...igAA",
       "principal": {
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "scope": {
         "type": "workspace",
@@ -91006,7 +91304,7 @@ puts(beta_api_key)
   "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
   "created_at": "2024-10-30T23:58:27.427722Z",
   "created_by": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
     "type": "user"
   },
   "expires_at": "2024-10-30T23:58:27.427722Z",
@@ -91014,7 +91312,7 @@ puts(beta_api_key)
   "partial_key_hint": "sk-ant-api03-R2D...igAA",
   "principal": {
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "scope": {
     "type": "workspace",
@@ -91182,7 +91480,7 @@ puts(beta_api_key)
   "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
   "created_at": "2024-10-30T23:58:27.427722Z",
   "created_by": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
     "type": "user"
   },
   "expires_at": "2024-10-30T23:58:27.427722Z",
@@ -91190,7 +91488,7 @@ puts(beta_api_key)
   "partial_key_hint": "sk-ant-api03-R2D...igAA",
   "principal": {
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "scope": {
     "type": "workspace",
@@ -91223,7 +91521,7 @@ Create an external key config owned by the caller's organization.
 
     - `kms_arn: String`
 
-      Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
+      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
 
       maxLength: 2048
 
@@ -91235,7 +91533,7 @@ Create an external key config owned by the caller's organization.
 
       **Deprecated**
 
-      IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
+      IAM role ARN. Deprecated; this field is ignored.
 
   - `class BetaGCPExternalKeyConfig`
 
@@ -91277,6 +91575,10 @@ Create an external key config owned by the caller's organization.
 
   Data residency geo. Only `us` is supported.
 
+- `user_profile_id: String`
+
+  ID of a user profile to bind the key to. Omit this field for a key that isn't bound to a user profile. Such a key can be attached to a Workspace whatever its user profile. The binding cannot be changed later. A key bound to a user profile can only be attached to a Workspace that has the same user profile.
+
 #### Returns
 
 - `class BetaExternalKey`
@@ -91291,7 +91593,7 @@ Create an external key config owned by the caller's organization.
 
   - `id: String`
 
-    Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+    Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on Claude Platform on AWS, an AWS KMS key's ARN.
 
   - `attachment: BetaExternalKeyAttachedAttachment | BetaExternalKeyUnattachedAttachment`
 
@@ -91315,7 +91617,7 @@ Create an external key config owned by the caller's organization.
 
   - `geo: String`
 
-    Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
 
   - `provider_config: BetaAWSExternalKeyConfig | BetaGCPExternalKeyConfig | BetaAzureExternalKeyConfig`
 
@@ -91327,7 +91629,7 @@ Create an external key config owned by the caller's organization.
 
       - `kms_arn: String`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
 
         maxLength: 2048
 
@@ -91339,7 +91641,7 @@ Create an external key config owned by the caller's organization.
 
         **Deprecated**
 
-        IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
+        IAM role ARN. Deprecated; this field is ignored.
 
     - `class BetaGCPExternalKeyConfig`
 
@@ -91373,6 +91675,10 @@ Create an external key config owned by the caller's organization.
 
     format: date-time
 
+  - `user_profile_id: String`
+
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+
 #### Example
 
 ```ruby
@@ -91405,7 +91711,8 @@ puts(beta_external_key)
     "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
+  "updated_at": "2024-10-30T23:58:27.427722Z",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -91446,7 +91753,7 @@ Results are ordered by creation time (newest first). Use the
 
   - `id: String`
 
-    Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+    Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on Claude Platform on AWS, an AWS KMS key's ARN.
 
   - `attachment: BetaExternalKeyAttachedAttachment | BetaExternalKeyUnattachedAttachment`
 
@@ -91470,7 +91777,7 @@ Results are ordered by creation time (newest first). Use the
 
   - `geo: String`
 
-    Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
 
   - `provider_config: BetaAWSExternalKeyConfig | BetaGCPExternalKeyConfig | BetaAzureExternalKeyConfig`
 
@@ -91482,7 +91789,7 @@ Results are ordered by creation time (newest first). Use the
 
       - `kms_arn: String`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
 
         maxLength: 2048
 
@@ -91494,7 +91801,7 @@ Results are ordered by creation time (newest first). Use the
 
         **Deprecated**
 
-        IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
+        IAM role ARN. Deprecated; this field is ignored.
 
     - `class BetaGCPExternalKeyConfig`
 
@@ -91528,6 +91835,10 @@ Results are ordered by creation time (newest first). Use the
 
     format: date-time
 
+  - `user_profile_id: String`
+
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+
 #### Example
 
 ```ruby
@@ -91560,7 +91871,8 @@ puts(page)
         "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
       },
       "type": "external_key",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
+      "updated_at": "2024-10-30T23:58:27.427722Z",
+      "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
     }
   ],
   "next_page": "next_page"
@@ -91597,7 +91909,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
   - `id: String`
 
-    Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+    Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on Claude Platform on AWS, an AWS KMS key's ARN.
 
   - `attachment: BetaExternalKeyAttachedAttachment | BetaExternalKeyUnattachedAttachment`
 
@@ -91621,7 +91933,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
   - `geo: String`
 
-    Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
 
   - `provider_config: BetaAWSExternalKeyConfig | BetaGCPExternalKeyConfig | BetaAzureExternalKeyConfig`
 
@@ -91633,7 +91945,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
       - `kms_arn: String`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
 
         maxLength: 2048
 
@@ -91645,7 +91957,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
         **Deprecated**
 
-        IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
+        IAM role ARN. Deprecated; this field is ignored.
 
     - `class BetaGCPExternalKeyConfig`
 
@@ -91679,6 +91991,10 @@ Retrieve a single external key config in the caller's organization by ID.
 
     format: date-time
 
+  - `user_profile_id: String`
+
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+
 #### Example
 
 ```ruby
@@ -91709,7 +92025,8 @@ puts(beta_external_key)
     "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
+  "updated_at": "2024-10-30T23:58:27.427722Z",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -91753,7 +92070,7 @@ encrypted data requires the original key identity to decrypt.
 
     - `kms_arn: String`
 
-      Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
+      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
 
       maxLength: 2048
 
@@ -91765,7 +92082,7 @@ encrypted data requires the original key identity to decrypt.
 
       **Deprecated**
 
-      IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
+      IAM role ARN. Deprecated; this field is ignored.
 
   - `class BetaGCPExternalKeyConfig`
 
@@ -91811,7 +92128,7 @@ encrypted data requires the original key identity to decrypt.
 
   - `id: String`
 
-    Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+    Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on Claude Platform on AWS, an AWS KMS key's ARN.
 
   - `attachment: BetaExternalKeyAttachedAttachment | BetaExternalKeyUnattachedAttachment`
 
@@ -91835,7 +92152,7 @@ encrypted data requires the original key identity to decrypt.
 
   - `geo: String`
 
-    Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
 
   - `provider_config: BetaAWSExternalKeyConfig | BetaGCPExternalKeyConfig | BetaAzureExternalKeyConfig`
 
@@ -91847,7 +92164,7 @@ encrypted data requires the original key identity to decrypt.
 
       - `kms_arn: String`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS the key must be a single-Region key in your organization's own AWS account; cross-account keys, multi-Region keys, and alias ARNs are rejected.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
 
         maxLength: 2048
 
@@ -91859,7 +92176,7 @@ encrypted data requires the original key identity to decrypt.
 
         **Deprecated**
 
-        IAM role ARN. Deprecated — Anthropic reaches the KMS key through its own intermediate role (or, on Claude Platform on AWS, with credentials AWS issues for the Workspace); this field is ignored.
+        IAM role ARN. Deprecated; this field is ignored.
 
     - `class BetaGCPExternalKeyConfig`
 
@@ -91893,6 +92210,10 @@ encrypted data requires the original key identity to decrypt.
 
     format: date-time
 
+  - `user_profile_id: String`
+
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+
 #### Example
 
 ```ruby
@@ -91923,7 +92244,8 @@ puts(beta_external_key)
     "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
+  "updated_at": "2024-10-30T23:58:27.427722Z",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -92252,6 +92574,8 @@ matched as the JWT's `iss` claim and is not fetched.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaFederationIssuer`
@@ -92573,6 +92897,8 @@ Archived issuers are excluded unless `include_archived=true`.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaFederationIssuer`
@@ -92886,6 +93212,8 @@ Retrieve a federation issuer by its ID (`fdis_...`).
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -93279,6 +93607,8 @@ session.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaFederationIssuer`
@@ -93592,6 +93922,8 @@ issuer cannot be changed), or recreate them against another issuer.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -93994,6 +94326,8 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaFederationRule`
@@ -94332,6 +94666,8 @@ unless `include_archived=true`.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaFederationRule`
@@ -94651,6 +94987,8 @@ Retrieve a federation rule by its ID (`fdrl_...`).
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -95059,6 +95397,8 @@ Console session.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaFederationRule`
@@ -95381,6 +95721,8 @@ other scopes require a Console session.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -95712,6 +96054,8 @@ other scopes require a Console session.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaFederationRuleWorkspace`
@@ -95914,6 +96258,8 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaFederationRuleWorkspace`
@@ -96110,6 +96456,8 @@ Console session.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -96778,6 +97126,8 @@ accounts.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -97013,6 +97363,8 @@ archived service accounts.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -97238,6 +97590,8 @@ Retrieve a service account by its ID (`svac_...`).
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -97479,6 +97833,8 @@ interactive credential (a user OAuth token or a Console session).
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaServiceAccount`
@@ -97704,6 +98060,8 @@ those rules first or change their target to another service account.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -97951,6 +98309,8 @@ rejected.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -98170,6 +98530,8 @@ page to recover.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -98378,6 +98740,8 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class WorkspaceRemoveResponse`
@@ -98525,7 +98889,7 @@ puts(page)
 {
   "data": [
     {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "added_at": "2024-10-30T23:58:27.427722Z",
       "email": "user@emaildomain.com",
       "name": "Jane Doe",
@@ -98619,7 +98983,7 @@ puts(beta_organization_user)
 
 ```json
 {
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "added_at": "2024-10-30T23:58:27.427722Z",
   "email": "user@emaildomain.com",
   "name": "Jane Doe",
@@ -98724,7 +99088,7 @@ puts(beta_organization_user)
 
 ```json
 {
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "added_at": "2024-10-30T23:58:27.427722Z",
   "email": "user@emaildomain.com",
   "name": "Jane Doe",
@@ -98777,7 +99141,7 @@ puts(user)
 
 ```json
 {
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "type": "user_deleted"
 }
 ```
@@ -98840,17 +99204,17 @@ List Workspaces
 
   - `compartment_id: String`
 
-    Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK) on AWS, reference this value in your
-    KMS key-policy condition so the key is scoped to this compartment. On GCP and
-    Azure, Anthropic enforces the compartment binding automatically; you do not
-    need to reference this value in your key configuration. See the CMEK
-    integration guide for the required key configuration; unless your organization
-    is on Claude Platform on AWS, it includes a separate value used during key
-    validation. On Claude Platform on AWS there is no separate validation value:
-    the key is validated against this Workspace's own value when it is attached, so
-    if your key policy uses the compartment condition, add this value to it before
-    attaching the key.
+    Identifier for this Workspace's encryption compartment. When you configure an
+    AWS KMS customer-managed encryption key (CMEK) that isn't bound to a user
+    profile, reference this value in your KMS key-policy condition so the key is
+    scoped to this compartment. On GCP and Azure, Anthropic enforces the compartment
+    binding automatically; you do not need to reference this value in your key
+    configuration. See the CMEK integration guide for the required key
+    configuration; unless your organization is on Claude Platform on AWS, it
+    includes a separate value used during key validation. On Claude Platform on AWS
+    there is no separate validation value: your organization's own key is validated
+    against this Workspace's own value when it is attached, so if its key policy
+    uses the compartment condition, add this value to it before attaching the key.
 
   - `created_at: Time`
 
@@ -98896,13 +99260,13 @@ List Workspaces
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
-    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-    single-Region key in the same AWS account and Region as the Workspace. On that
-    platform the key is validated against this Workspace when it is attached, so a
-    key-policy problem is reported as an error on this request. This field is write-once:
-    once a key is attached to a Workspace it cannot be detached or replaced. To
-    rotate key material, rotate the underlying key on your cloud KMS; the
-    `external_key_id` stays the same.
+    Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+    organization's own key must be a single-Region key in the same AWS account and
+    Region as the Workspace. On that platform the key is validated against this
+    Workspace when it is attached, so a key-policy problem is reported as an error
+    on this request. This field is write-once: once a key is attached to a Workspace
+    it cannot be detached or replaced. To rotate key material, rotate the underlying
+    key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: String`
 
@@ -98911,6 +99275,10 @@ List Workspaces
   - `tags: Hash[Symbol, String]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `user_profile_id: String`
+
+    ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
 #### Example
 
@@ -98946,7 +99314,8 @@ puts(page)
         "env": "prod",
         "team": "platform"
       },
-      "type": "workspace"
+      "type": "workspace",
+      "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
     }
   ],
   "first_id": "first_id",
@@ -99011,17 +99380,21 @@ Create Workspace
   Workspace. Setting this field requires CMEK to be enabled for your
   organization. When set, data stored for this Workspace is encrypted with the
   referenced key. Create key configurations with the External Keys API. On
-  Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-  single-Region key in the same AWS account and Region as the Workspace. On that
-  platform the key is validated against this Workspace when it is attached, so a
-  key-policy problem is reported as an error on this request. This field is write-once:
-  once a key is attached to a Workspace it cannot be detached or replaced. To
-  rotate key material, rotate the underlying key on your cloud KMS; the
-  `external_key_id` stays the same.
+  Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+  organization's own key must be a single-Region key in the same AWS account and
+  Region as the Workspace. On that platform the key is validated against this
+  Workspace when it is attached, so a key-policy problem is reported as an error
+  on this request. This field is write-once: once a key is attached to a Workspace
+  it cannot be detached or replaced. To rotate key material, rotate the underlying
+  key on your cloud KMS; the `external_key_id` stays the same.
 
 - `tags: Hash[Symbol, String]`
 
   User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+- `user_profile_id: String`
+
+  ID of a user profile to attach to the Workspace. Every inference request through the Workspace must then name this user profile; the API rejects a request that names none or a different one. The user profile can't be replaced or removed later; only deleting the user profile clears it.
 
 - `betas: Array[AnthropicBeta]` (header parameter)
 
@@ -99137,6 +99510,8 @@ Create Workspace
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaWorkspace`
@@ -99159,17 +99534,17 @@ Create Workspace
 
   - `compartment_id: String`
 
-    Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK) on AWS, reference this value in your
-    KMS key-policy condition so the key is scoped to this compartment. On GCP and
-    Azure, Anthropic enforces the compartment binding automatically; you do not
-    need to reference this value in your key configuration. See the CMEK
-    integration guide for the required key configuration; unless your organization
-    is on Claude Platform on AWS, it includes a separate value used during key
-    validation. On Claude Platform on AWS there is no separate validation value:
-    the key is validated against this Workspace's own value when it is attached, so
-    if your key policy uses the compartment condition, add this value to it before
-    attaching the key.
+    Identifier for this Workspace's encryption compartment. When you configure an
+    AWS KMS customer-managed encryption key (CMEK) that isn't bound to a user
+    profile, reference this value in your KMS key-policy condition so the key is
+    scoped to this compartment. On GCP and Azure, Anthropic enforces the compartment
+    binding automatically; you do not need to reference this value in your key
+    configuration. See the CMEK integration guide for the required key
+    configuration; unless your organization is on Claude Platform on AWS, it
+    includes a separate value used during key validation. On Claude Platform on AWS
+    there is no separate validation value: your organization's own key is validated
+    against this Workspace's own value when it is attached, so if its key policy
+    uses the compartment condition, add this value to it before attaching the key.
 
   - `created_at: Time`
 
@@ -99215,13 +99590,13 @@ Create Workspace
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
-    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-    single-Region key in the same AWS account and Region as the Workspace. On that
-    platform the key is validated against this Workspace when it is attached, so a
-    key-policy problem is reported as an error on this request. This field is write-once:
-    once a key is attached to a Workspace it cannot be detached or replaced. To
-    rotate key material, rotate the underlying key on your cloud KMS; the
-    `external_key_id` stays the same.
+    Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+    organization's own key must be a single-Region key in the same AWS account and
+    Region as the Workspace. On that platform the key is validated against this
+    Workspace when it is attached, so a key-policy problem is reported as an error
+    on this request. This field is write-once: once a key is attached to a Workspace
+    it cannot be detached or replaced. To rotate key material, rotate the underlying
+    key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: String`
 
@@ -99230,6 +99605,10 @@ Create Workspace
   - `tags: Hash[Symbol, String]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `user_profile_id: String`
+
+    ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
 #### Example
 
@@ -99263,7 +99642,8 @@ puts(beta_workspace)
     "env": "prod",
     "team": "platform"
   },
-  "type": "workspace"
+  "type": "workspace",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -99303,17 +99683,17 @@ Get Workspace
 
   - `compartment_id: String`
 
-    Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK) on AWS, reference this value in your
-    KMS key-policy condition so the key is scoped to this compartment. On GCP and
-    Azure, Anthropic enforces the compartment binding automatically; you do not
-    need to reference this value in your key configuration. See the CMEK
-    integration guide for the required key configuration; unless your organization
-    is on Claude Platform on AWS, it includes a separate value used during key
-    validation. On Claude Platform on AWS there is no separate validation value:
-    the key is validated against this Workspace's own value when it is attached, so
-    if your key policy uses the compartment condition, add this value to it before
-    attaching the key.
+    Identifier for this Workspace's encryption compartment. When you configure an
+    AWS KMS customer-managed encryption key (CMEK) that isn't bound to a user
+    profile, reference this value in your KMS key-policy condition so the key is
+    scoped to this compartment. On GCP and Azure, Anthropic enforces the compartment
+    binding automatically; you do not need to reference this value in your key
+    configuration. See the CMEK integration guide for the required key
+    configuration; unless your organization is on Claude Platform on AWS, it
+    includes a separate value used during key validation. On Claude Platform on AWS
+    there is no separate validation value: your organization's own key is validated
+    against this Workspace's own value when it is attached, so if its key policy
+    uses the compartment condition, add this value to it before attaching the key.
 
   - `created_at: Time`
 
@@ -99359,13 +99739,13 @@ Get Workspace
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
-    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-    single-Region key in the same AWS account and Region as the Workspace. On that
-    platform the key is validated against this Workspace when it is attached, so a
-    key-policy problem is reported as an error on this request. This field is write-once:
-    once a key is attached to a Workspace it cannot be detached or replaced. To
-    rotate key material, rotate the underlying key on your cloud KMS; the
-    `external_key_id` stays the same.
+    Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+    organization's own key must be a single-Region key in the same AWS account and
+    Region as the Workspace. On that platform the key is validated against this
+    Workspace when it is attached, so a key-policy problem is reported as an error
+    on this request. This field is write-once: once a key is attached to a Workspace
+    it cannot be detached or replaced. To rotate key material, rotate the underlying
+    key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: String`
 
@@ -99374,6 +99754,10 @@ Get Workspace
   - `tags: Hash[Symbol, String]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `user_profile_id: String`
+
+    ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
 #### Example
 
@@ -99407,7 +99791,8 @@ puts(beta_workspace)
     "env": "prod",
     "team": "platform"
   },
-  "type": "workspace"
+  "type": "workspace",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -99459,13 +99844,13 @@ Update Workspace
   Workspace. Setting this field requires CMEK to be enabled for your
   organization. When set, data stored for this Workspace is encrypted with the
   referenced key. Create key configurations with the External Keys API. On
-  Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-  single-Region key in the same AWS account and Region as the Workspace. On that
-  platform the key is validated against this Workspace when it is attached, so a
-  key-policy problem is reported as an error on this request. This field is write-once:
-  once a key is attached to a Workspace it cannot be detached or replaced. To
-  rotate key material, rotate the underlying key on your cloud KMS; the
-  `external_key_id` stays the same.
+  Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+  organization's own key must be a single-Region key in the same AWS account and
+  Region as the Workspace. On that platform the key is validated against this
+  Workspace when it is attached, so a key-policy problem is reported as an error
+  on this request. This field is write-once: once a key is attached to a Workspace
+  it cannot be detached or replaced. To rotate key material, rotate the underlying
+  key on your cloud KMS; the `external_key_id` stays the same.
 
 - `name: String`
 
@@ -99476,6 +99861,10 @@ Update Workspace
 - `tags: Hash[Symbol, String]`
 
   User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+- `user_profile_id: String`
+
+  ID of a user profile to attach to the Workspace. Every inference request through the Workspace must then name this user profile; the API rejects a request that names none or a different one. Once set, it can't be replaced or removed (sending the same ID again changes nothing); only deleting the user profile clears it. The default Workspace can't have a user profile.
 
 #### Returns
 
@@ -99499,17 +99888,17 @@ Update Workspace
 
   - `compartment_id: String`
 
-    Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK) on AWS, reference this value in your
-    KMS key-policy condition so the key is scoped to this compartment. On GCP and
-    Azure, Anthropic enforces the compartment binding automatically; you do not
-    need to reference this value in your key configuration. See the CMEK
-    integration guide for the required key configuration; unless your organization
-    is on Claude Platform on AWS, it includes a separate value used during key
-    validation. On Claude Platform on AWS there is no separate validation value:
-    the key is validated against this Workspace's own value when it is attached, so
-    if your key policy uses the compartment condition, add this value to it before
-    attaching the key.
+    Identifier for this Workspace's encryption compartment. When you configure an
+    AWS KMS customer-managed encryption key (CMEK) that isn't bound to a user
+    profile, reference this value in your KMS key-policy condition so the key is
+    scoped to this compartment. On GCP and Azure, Anthropic enforces the compartment
+    binding automatically; you do not need to reference this value in your key
+    configuration. See the CMEK integration guide for the required key
+    configuration; unless your organization is on Claude Platform on AWS, it
+    includes a separate value used during key validation. On Claude Platform on AWS
+    there is no separate validation value: your organization's own key is validated
+    against this Workspace's own value when it is attached, so if its key policy
+    uses the compartment condition, add this value to it before attaching the key.
 
   - `created_at: Time`
 
@@ -99555,13 +99944,13 @@ Update Workspace
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
-    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-    single-Region key in the same AWS account and Region as the Workspace. On that
-    platform the key is validated against this Workspace when it is attached, so a
-    key-policy problem is reported as an error on this request. This field is write-once:
-    once a key is attached to a Workspace it cannot be detached or replaced. To
-    rotate key material, rotate the underlying key on your cloud KMS; the
-    `external_key_id` stays the same.
+    Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+    organization's own key must be a single-Region key in the same AWS account and
+    Region as the Workspace. On that platform the key is validated against this
+    Workspace when it is attached, so a key-policy problem is reported as an error
+    on this request. This field is write-once: once a key is attached to a Workspace
+    it cannot be detached or replaced. To rotate key material, rotate the underlying
+    key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: String`
 
@@ -99570,6 +99959,10 @@ Update Workspace
   - `tags: Hash[Symbol, String]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `user_profile_id: String`
+
+    ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
 #### Example
 
@@ -99603,7 +99996,8 @@ puts(beta_workspace)
     "env": "prod",
     "team": "platform"
   },
-  "type": "workspace"
+  "type": "workspace",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -99641,17 +100035,17 @@ Archive Workspace
 
   - `compartment_id: String`
 
-    Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK) on AWS, reference this value in your
-    KMS key-policy condition so the key is scoped to this compartment. On GCP and
-    Azure, Anthropic enforces the compartment binding automatically; you do not
-    need to reference this value in your key configuration. See the CMEK
-    integration guide for the required key configuration; unless your organization
-    is on Claude Platform on AWS, it includes a separate value used during key
-    validation. On Claude Platform on AWS there is no separate validation value:
-    the key is validated against this Workspace's own value when it is attached, so
-    if your key policy uses the compartment condition, add this value to it before
-    attaching the key.
+    Identifier for this Workspace's encryption compartment. When you configure an
+    AWS KMS customer-managed encryption key (CMEK) that isn't bound to a user
+    profile, reference this value in your KMS key-policy condition so the key is
+    scoped to this compartment. On GCP and Azure, Anthropic enforces the compartment
+    binding automatically; you do not need to reference this value in your key
+    configuration. See the CMEK integration guide for the required key
+    configuration; unless your organization is on Claude Platform on AWS, it
+    includes a separate value used during key validation. On Claude Platform on AWS
+    there is no separate validation value: your organization's own key is validated
+    against this Workspace's own value when it is attached, so if its key policy
+    uses the compartment condition, add this value to it before attaching the key.
 
   - `created_at: Time`
 
@@ -99697,13 +100091,13 @@ Archive Workspace
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
-    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-    single-Region key in the same AWS account and Region as the Workspace. On that
-    platform the key is validated against this Workspace when it is attached, so a
-    key-policy problem is reported as an error on this request. This field is write-once:
-    once a key is attached to a Workspace it cannot be detached or replaced. To
-    rotate key material, rotate the underlying key on your cloud KMS; the
-    `external_key_id` stays the same.
+    Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+    organization's own key must be a single-Region key in the same AWS account and
+    Region as the Workspace. On that platform the key is validated against this
+    Workspace when it is attached, so a key-policy problem is reported as an error
+    on this request. This field is write-once: once a key is attached to a Workspace
+    it cannot be detached or replaced. To rotate key material, rotate the underlying
+    key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: String`
 
@@ -99712,6 +100106,10 @@ Archive Workspace
   - `tags: Hash[Symbol, String]`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `user_profile_id: String`
+
+    ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
 #### Example
 
@@ -99745,7 +100143,8 @@ puts(beta_workspace)
     "env": "prod",
     "team": "platform"
   },
-  "type": "workspace"
+  "type": "workspace",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -100281,7 +100680,7 @@ puts(page)
   "data": [
     {
       "type": "workspace_member",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
       "workspace_role": "workspace_admin"
     }
@@ -100363,7 +100762,7 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
 beta_workspace_member = anthropic.beta.organization.workspaces.members.add(
   "workspace_id",
-  user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu",
   workspace_role: :workspace_admin
 )
 
@@ -100375,7 +100774,7 @@ puts(beta_workspace_member)
 ```json
 {
   "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   "workspace_role": "workspace_admin"
 }
@@ -100448,7 +100847,7 @@ puts(beta_workspace_member)
 ```json
 {
   "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   "workspace_role": "workspace_admin"
 }
@@ -100539,7 +100938,7 @@ puts(beta_workspace_member)
 ```json
 {
   "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   "workspace_role": "workspace_admin"
 }
@@ -100598,7 +100997,7 @@ puts(member)
 ```json
 {
   "type": "workspace_member_deleted",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 }
 ```
@@ -100751,6 +101150,8 @@ omitted from the results.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -100973,6 +101374,8 @@ accounts cannot be added and are rejected.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -101178,6 +101581,8 @@ account returns 404.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -101396,6 +101801,8 @@ rejected.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaServiceAccountWorkspaceMember`
@@ -101600,6 +102007,8 @@ membership. Archived workspaces return 400.
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -101894,7 +102303,10 @@ Update your organization's Compliance Settings.
 
 Setting `state` to `enabled` turns on the Compliance API and begins
 capturing organization activity events. Setting it to `disabled` turns
-both off. `state` reflects whether the Compliance API is enabled.
+both off. Access Transparency events are an exception: they are still
+captured while the Compliance API is disabled, and the Compliance API
+activity feed returns them once it is enabled again. `state` reflects
+whether the Compliance API is enabled.
 
 A request that sets `state` to its current value succeeds and leaves the
 resource unchanged. A `disabled` request stays in effect until a later
@@ -104380,6 +104792,8 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaAnalyticsUsageItem`
@@ -104677,7 +105091,7 @@ puts(page)
           "email_address": "user@emaildomain.com",
           "name": "Jane Doe",
           "type": "user_actor",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+          "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
         },
         "actor_type": "user_actor",
         "agent_id": "agent_01VHd3EAGJ6PLkP9LM7DDu3f",
@@ -104710,12 +105124,12 @@ puts(page)
         "server_tool_use": {
           "web_search_requests": 10
         },
-        "total_tokens": 5377000,
+        "total_tokens": 5375500,
         "uncached_input_tokens": 1284500
       }
     }
   ],
-  "data_refreshed_at": "2019-12-27T18:11:19.117Z",
+  "data_refreshed_at": "2026-10-01T04:02:11Z",
   "has_more": true,
   "next_page": "next_page"
 }
@@ -105139,6 +105553,8 @@ API key with the `read:analytics` scope, or an Admin API key.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaAnalyticsCostItem`
@@ -105440,7 +105856,7 @@ puts(page)
           "email_address": "user@emaildomain.com",
           "name": "Jane Doe",
           "type": "user_actor",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+          "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
         },
         "actor_type": "user_actor",
         "agent_id": "agent_01VHd3EAGJ6PLkP9LM7DDu3f",
@@ -105466,7 +105882,7 @@ puts(page)
       "starting_at": "2026-09-01T00:00:00Z"
     }
   ],
-  "data_refreshed_at": "2019-12-27T18:11:19.117Z",
+  "data_refreshed_at": "2026-10-01T04:02:11Z",
   "has_more": true,
   "next_page": "next_page"
 }
@@ -105825,7 +106241,7 @@ puts(page)
 
 [Legacy] Get per-user token usage across a date range.
 
-Returns usage per user, ranked by the chosen token metric; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users consume the most tokens. Only usage attributed to a user account is included; usage with no user attributed to it, such as requests attributed only to an API key, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+Returns usage per user, ranked by the chosen token metric; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users consume the most tokens. Only usage attributed to a user account is included; usage with no user attributed to it, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/usage`](../beta/organization/analytics/usage/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
@@ -106562,7 +106978,7 @@ puts(page)
 
 [Legacy] Get per-user cost in USD across a date range.
 
-Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users account for the most cost. Only cost attributed to a user account is included; cost with no user attributed to it, such as requests attributed only to an API key, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users account for the most cost. Only cost attributed to a user account is included; cost with no user attributed to it, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/cost`](../beta/organization/analytics/cost/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
@@ -107115,6 +107531,8 @@ Anthropic account team.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaSpendLimit`
@@ -107234,7 +107652,7 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
 beta_spend_limit = anthropic.beta.organization.spend_limits.set(
   amount: "50000",
-  scope: {type: :user, user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q"}
+  scope: {type: :user, user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu"}
 )
 
 puts(beta_spend_limit)
@@ -107252,7 +107670,7 @@ puts(beta_spend_limit)
   "period": "daily",
   "scope": {
     "type": "user",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "type": "spend_limit",
   "updated_at": "2019-12-27T18:11:19.117Z"
@@ -107407,7 +107825,7 @@ puts(beta_spend_limit)
   "period": "daily",
   "scope": {
     "type": "user",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "type": "spend_limit",
   "updated_at": "2019-12-27T18:11:19.117Z"
@@ -107629,6 +108047,8 @@ come in a fixed order that is not creation order.
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaSpendLimit`
@@ -107765,7 +108185,7 @@ puts(page)
       "period": "daily",
       "scope": {
         "type": "user",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "type": "spend_limit",
       "updated_at": "2019-12-27T18:11:19.117Z"
@@ -107996,7 +108416,7 @@ puts(page)
         "email_address": "email_address",
         "name": "name",
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "amount": "50000",
       "currency": "USD",
@@ -108004,11 +108424,11 @@ puts(page)
       "period_to_date_spend": "12050.5",
       "scope": {
         "type": "user",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "source": {
         "type": "user",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "spend_limit_id": "spend_limit_id"
     }
@@ -108278,7 +108698,7 @@ puts(page)
         "email_address": "email_address",
         "name": "name",
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "created_at": "2019-12-27T18:11:19.117Z",
       "period": "daily",
@@ -108288,7 +108708,7 @@ puts(page)
         "email_address": "email_address",
         "name": "name",
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "spend_summary": {
         "actor": {
@@ -108296,7 +108716,7 @@ puts(page)
           "email_address": "email_address",
           "name": "name",
           "type": "user_actor",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+          "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
         },
         "amount": "50000",
         "currency": "USD",
@@ -108304,11 +108724,11 @@ puts(page)
         "period_to_date_spend": "12050.5",
         "scope": {
           "type": "user",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+          "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
         },
         "source": {
           "type": "user",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+          "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
         },
         "spend_limit_id": "spend_limit_id"
       },
@@ -108559,7 +108979,7 @@ puts(beta_spend_limit_increase_request)
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "created_at": "2019-12-27T18:11:19.117Z",
   "period": "daily",
@@ -108569,7 +108989,7 @@ puts(beta_spend_limit_increase_request)
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "spend_summary": {
     "actor": {
@@ -108577,7 +108997,7 @@ puts(beta_spend_limit_increase_request)
       "email_address": "email_address",
       "name": "name",
       "type": "user_actor",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "amount": "50000",
     "currency": "USD",
@@ -108585,11 +109005,11 @@ puts(beta_spend_limit_increase_request)
     "period_to_date_spend": "12050.5",
     "scope": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "source": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "spend_limit_id": "spend_limit_id"
   },
@@ -108924,7 +109344,7 @@ puts(response)
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "created_at": "2019-12-27T18:11:19.117Z",
   "period": "daily",
@@ -108934,7 +109354,7 @@ puts(response)
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "spend_limit": {
     "id": "id",
@@ -108945,7 +109365,7 @@ puts(response)
     "period": "daily",
     "scope": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "type": "spend_limit",
     "updated_at": "2019-12-27T18:11:19.117Z"
@@ -108956,7 +109376,7 @@ puts(response)
       "email_address": "email_address",
       "name": "name",
       "type": "user_actor",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "amount": "50000",
     "currency": "USD",
@@ -108964,11 +109384,11 @@ puts(response)
     "period_to_date_spend": "12050.5",
     "scope": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "source": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "spend_limit_id": "spend_limit_id"
   },
@@ -109218,7 +109638,7 @@ puts(beta_spend_limit_increase_request)
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "created_at": "2019-12-27T18:11:19.117Z",
   "period": "daily",
@@ -109228,7 +109648,7 @@ puts(beta_spend_limit_increase_request)
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "spend_summary": {
     "actor": {
@@ -109236,7 +109656,7 @@ puts(beta_spend_limit_increase_request)
       "email_address": "email_address",
       "name": "name",
       "type": "user_actor",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "amount": "50000",
     "currency": "USD",
@@ -109244,11 +109664,11 @@ puts(beta_spend_limit_increase_request)
     "period_to_date_spend": "12050.5",
     "scope": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "source": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "spend_limit_id": "spend_limit_id"
   },
@@ -109756,7 +110176,7 @@ puts(page)
       "email": "user@emaildomain.com",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "type": "rbac_group_member",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     }
   ],
   "has_more": false,
@@ -109821,7 +110241,7 @@ anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
 beta_rbac_group_member = anthropic.beta.organization.rbac_groups.members.add(
   "rbac_group_id",
-  user_id: "user_01WCz1FkmYMm4gnmykNKUu3Q"
+  user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu"
 )
 
 puts(beta_rbac_group_member)
@@ -109835,7 +110255,7 @@ puts(beta_rbac_group_member)
   "email": "user@emaildomain.com",
   "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "type": "rbac_group_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
 }
 ```
 
@@ -109893,7 +110313,7 @@ puts(member)
 {
   "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "type": "rbac_group_member_deleted",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
 }
 ```
 
@@ -110100,10 +110520,11 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
     The vocabulary follows the resource: an `organization` grant carries a
     product-feature entitlement (for example `chat`), an admin-panel
     permission entitlement (`permission_*`), or a blanket capability-access
-    mode — `capability_access_all` grants every product-feature entitlement,
-    and `capability_access_all_ga` grants the generally-available subset as
-    it stands at permission-check time; neither mode grants model-access
-    entitlements. A consumer enumerating a role's per-feature grants should
+    mode — `capability_access_all` grants every product-feature entitlement
+    except `inference_hooks_inspection`, which a role holds only through its
+    own row, and `capability_access_all_ga` grants the generally-available
+    subset of those as it stands at permission-check time; neither mode grants
+    model-access entitlements. A consumer enumerating a role's per-feature grants should
     treat a blanket row as granting every product-feature entitlement it
     covers, or it will under-report the role's effective access. A `connector_tool` grant carries
     a tool-access action (`use` or `always_allow`); a `connector_scope` grant
@@ -110385,6 +110806,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaPlugin`
@@ -110610,7 +111033,7 @@ puts(beta_plugin)
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",
@@ -110766,6 +111189,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -110992,7 +111417,7 @@ puts(beta_plugin)
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",
@@ -111171,6 +111596,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -111400,7 +111827,7 @@ puts(beta_plugin)
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",
@@ -111612,6 +112039,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -111840,7 +112269,7 @@ puts(page)
       "created_by": {
         "email_address": "user@example.com",
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "description": "Reviews pull requests against your team's conventions.",
       "display_name": "Code Review Helper",
@@ -112006,6 +112435,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -112203,6 +112634,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaPluginVersion`
@@ -112370,7 +112803,7 @@ puts(beta_plugin_version)
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",
@@ -112534,6 +112967,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -112704,7 +113139,7 @@ puts(page)
       "created_by": {
         "email_address": "user@example.com",
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "description": "Reviews pull requests against your team's conventions.",
       "display_name": "Code Review Helper",
@@ -112858,6 +113293,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -113026,7 +113463,7 @@ puts(beta_plugin_version)
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",
@@ -113193,6 +113630,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -113374,6 +113813,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -113637,6 +114078,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaPluginInstallationSetting`
@@ -113890,6 +114333,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaDeletedPluginInstallationSetting`
@@ -114127,6 +114572,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -114385,6 +114832,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -114651,6 +115100,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -114925,6 +115376,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -115209,6 +115662,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaPluginMarketplaceValidationReport`
@@ -115474,6 +115929,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -115829,6 +116286,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -116187,6 +116646,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaTelemetryDestination`
@@ -116536,6 +116997,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -117018,6 +117481,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaTelemetryDestination`
@@ -117365,6 +117830,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaDeletedTelemetryDestination`
@@ -117525,6 +117992,8 @@ Send one test span, named `anthropic.test`, to the destination with its register
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -117721,6 +118190,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaTelemetryDestinationWorkspace`
@@ -117911,6 +118382,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaTelemetryDestinationWorkspace`
@@ -118098,6 +118571,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -118295,6 +118770,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -118539,6 +119016,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaOrganizationWebhookEndpoint`
@@ -118762,6 +119241,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 
@@ -119010,6 +119491,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaOrganizationWebhookEndpoint`
@@ -119227,6 +119710,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaDeletedOrganizationWebhookEndpoint`
@@ -119395,6 +119880,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `:"analytics-usage-cost-2026-08-24"`
 
+  - `:"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `class BetaOrganizationWebhookEndpointSigningSecret`
@@ -119422,6 +119909,4201 @@ puts(beta_organization_webhook_endpoint_signing_secret)
 ```json
 {
   "signing_secret": "signing_secret"
+}
+```
+
+## Beta › Organization › Claude Tag › Slack Channels
+
+### Set Up Slack Channel
+
+`beta.organization.claude_tag.slack_channels.create(**kwargs) -> BetaClaudeTagSlackChannel`
+
+**POST** `/v1/organizations/claude_tag/slack_channels`
+
+Set a Slack channel up for Claude Tag and return it with its identifier. If the channel is already set up, whether in claude.ai, by Claude's first use in it or by an earlier request, the existing channel is returned, so the request can be repeated. `settings`, when sent, is applied as an update applies it. Before a channel is set up, Claude's Slack app confirms with Slack that the channel is in the workspace, is not archived and is visible to the app; a channel that fails the confirmation returns 404. Setting the channel up and applying `settings` are two steps: when the second is refused, the response is the refusal, the channel stays set up with every setting unset, and the error's `details.slack_channel_id` holds the channel's identifier.
+
+#### Parameters
+
+- `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+  Slack's own identifiers for the channel to set up. The organization must own the workspace.
+
+  - `channel_id: String`
+
+    Slack's identifier for the channel, starting with `C` or `G`, such as `C0456EFGH`.
+
+    minLength: 2, maxLength: 32
+
+  - `workspace_id: String`
+
+    Slack's identifier for the workspace the channel is in, starting with `T`, such as `T0123ABCD`.
+
+    minLength: 2, maxLength: 32
+
+- `settings: BetaClaudeTagSettingsCreate`
+
+  Settings to store on the channel, applied as Update Slack Channel applies them.
+
+  - `enabled: bool`
+
+    Whether Claude is on. `true` on a channel turns Claude on in it even when its workspace stores `false`. Null clears it.
+
+  - `environment_id: String`
+
+    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`. Null clears it.
+
+    minLength: 1, maxLength: 64
+
+  - `guest_policy: BetaClaudeTagGuestPolicy`
+
+    What Claude does in a channel while a Slack guest is in it. Null clears it.
+
+    - `class BetaClaudeTagGuestPolicyAllow`
+
+      Claude answers in the channel.
+
+      - `type: :allow`
+
+    - `class BetaClaudeTagGuestPolicyRestrict`
+
+      Claude does not answer in the channel.
+
+      - `type: :restrict`
+
+    - `class BetaClaudeTagGuestPolicyChannelOnly`
+
+      Claude answers with only the Bundles attached to the channel itself.
+
+      - `type: :channel_only`
+
+  - `instructions: String`
+
+    Instructions for Claude, up to 8,192 characters after leading and trailing white space is trimmed. Null or blank text clears them.
+
+  - `model: String`
+
+    The model Claude uses: the identifier of a model, or the name of a model line, that the organization is entitled to for Claude Tag. Null clears it.
+
+    minLength: 1, maxLength: 128
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagSlackChannel`
+
+  A Slack channel set up for Claude Tag, with the settings it stores or, with `include_inherited`, the settings that apply in it.
+
+  - `type: :slack_channel`
+
+  - `id: String`
+
+    The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured gets a new one when claude.ai replaces its record, which happens only while the organization's read-only mode is off. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
+
+  - `created_at: Time`
+
+    Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
+
+    format: date-time
+
+  - `settings: BetaClaudeTagSettings`
+
+    What the channel itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+    - `enabled: bool`
+
+      Whether Claude is on. The nearest settings level that sets it decides.
+
+    - `environment_id: String`
+
+      The environment Claude's sessions run in, starting with `env_`, or the identifier of a self-hosted runner pool, starting with `ccpool_`. The nearest settings level that sets it decides.
+
+    - `guest_policy: BetaClaudeTagGuestPolicy`
+
+      What Claude does in a channel while a Slack guest is in it. The nearest settings level that sets it decides.
+
+      - `class BetaClaudeTagGuestPolicyAllow`
+
+        Claude answers in the channel.
+
+        - `type: :allow`
+
+      - `class BetaClaudeTagGuestPolicyRestrict`
+
+        Claude does not answer in the channel.
+
+        - `type: :restrict`
+
+      - `class BetaClaudeTagGuestPolicyChannelOnly`
+
+        Claude answers with only the Bundles attached to the channel itself.
+
+        - `type: :channel_only`
+
+    - `instructions: String`
+
+      Instructions for Claude. Instructions add up: the text of every settings level that sets it is joined, broadest first.
+
+    - `model: String`
+
+      The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+  - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+    Slack's own identifiers for the channel.
+
+    - `channel_id: String`
+
+      Slack's identifier for the channel, starting with `C` or `G`, such as `C0456EFGH`.
+
+      minLength: 2, maxLength: 32
+
+    - `workspace_id: String`
+
+      Slack's identifier for the workspace the channel is in, starting with `T`, such as `T0123ABCD`.
+
+      minLength: 2, maxLength: 32
+
+  - `sources: BetaClaudeTagSettingSources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+    - `enabled: BetaClaudeTagSettingSource`
+
+      The settings level `enabled` comes from.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+        - `type: :slack_channel`
+
+        - `slack_channel_id: String`
+
+          The channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+        - `type: :slack_workspace`
+
+        - `slack_workspace_id: String`
+
+          The workspace's identifier, starting with `slws_`.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+        - `type: :slack_parent_channel`
+
+        - `slack_channel_id: String`
+
+          The parent channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+        - `type: :slack_default`
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+        - `type: :default`
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+        - `type: :slack_grid_channel`
+
+        - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+          Slack's own identifiers for the channel under that other workspace.
+
+    - `environment_id: BetaClaudeTagSettingSource`
+
+      The settings level `environment_id` comes from.
+
+    - `guest_policy: BetaClaudeTagSettingSource`
+
+      The settings level `guest_policy` comes from.
+
+    - `instructions: Array[BetaClaudeTagSettingSource]`
+
+      Every settings level that contributes text to `instructions`, broadest first, in the order their text is joined. Empty when none does.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+    - `model: BetaClaudeTagSettingSource`
+
+      The settings level `model` comes from.
+
+  - `updated_at: Time`
+
+    Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+    format: date-time
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_claude_tag_slack_channel = anthropic.beta.organization.claude_tag.slack_channels.create(
+  slack: {channel_id: "xx", workspace_id: "xx"}
+)
+
+puts(beta_claude_tag_slack_channel)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "settings": {
+    "enabled": true,
+    "environment_id": "environment_id",
+    "guest_policy": {
+      "type": "allow"
+    },
+    "instructions": "instructions",
+    "model": "model"
+  },
+  "slack": {
+    "channel_id": "xx",
+    "workspace_id": "xx"
+  },
+  "sources": {
+    "enabled": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "environment_id": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "guest_policy": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "instructions": [
+      {
+        "slack_channel_id": "slack_channel_id",
+        "type": "slack_channel"
+      }
+    ],
+    "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  },
+  "type": "slack_channel",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### List Slack Channels
+
+`beta.organization.claude_tag.slack_channels.list(**kwargs) -> PageCursor<BetaClaudeTagSlackChannel>`
+
+**GET** `/v1/organizations/claude_tag/slack_channels`
+
+List the set-up Slack channels of one Slack workspace, newest first by `created_at`. A channel that is not set up is not listed: Slack holds the full list of a workspace's channels. Pass `slack_channel_id` as well to look one channel up by its Slack identifiers: `data` then holds that channel, or is empty when it is not set up, and `limit` and `page` are ignored. A workspace that the organization owns only through a Slack Enterprise Grid returns 404 until it is set up. With `include_inherited=true` each channel's `settings` holds what applies in it, and the request fails with 503 rather than resolve against a settings level that could not be read. A `page` cursor resumes only a request with the same `include_inherited`.
+
+#### Parameters
+
+- `slack_workspace_id: String` (query parameter)
+
+  The Slack workspace whose channels to list: Slack's identifier for it, as in the channel object's `slack.workspace_id`, not the workspace object's `id`.
+
+- `include_inherited: bool` (query parameter)
+
+  When `true`, `settings` holds what applies in each channel once the settings levels above it are taken into account, and every member of `sources` names the level a value comes from. When `false` or left out, `settings` holds what each channel itself stores.
+
+- `limit: Integer` (query parameter)
+
+  Number of items to return per page, between 1 and 100. Defaults to 20.
+
+  format: int32
+
+- `page: String` (query parameter)
+
+  Opaque cursor from a previous response's `next_page`.
+
+- `slack_channel_id: String` (query parameter)
+
+  Slack's identifier for one channel of that workspace, as in the channel object's `slack.channel_id`. It is not the channel object's `id`. With it `data` holds that channel alone, or nothing when the channel is not set up.
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagSlackChannel`
+
+  A Slack channel set up for Claude Tag, with the settings it stores or, with `include_inherited`, the settings that apply in it.
+
+  - `type: :slack_channel`
+
+  - `id: String`
+
+    The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured gets a new one when claude.ai replaces its record, which happens only while the organization's read-only mode is off. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
+
+  - `created_at: Time`
+
+    Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
+
+    format: date-time
+
+  - `settings: BetaClaudeTagSettings`
+
+    What the channel itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+    - `enabled: bool`
+
+      Whether Claude is on. The nearest settings level that sets it decides.
+
+    - `environment_id: String`
+
+      The environment Claude's sessions run in, starting with `env_`, or the identifier of a self-hosted runner pool, starting with `ccpool_`. The nearest settings level that sets it decides.
+
+    - `guest_policy: BetaClaudeTagGuestPolicy`
+
+      What Claude does in a channel while a Slack guest is in it. The nearest settings level that sets it decides.
+
+      - `class BetaClaudeTagGuestPolicyAllow`
+
+        Claude answers in the channel.
+
+        - `type: :allow`
+
+      - `class BetaClaudeTagGuestPolicyRestrict`
+
+        Claude does not answer in the channel.
+
+        - `type: :restrict`
+
+      - `class BetaClaudeTagGuestPolicyChannelOnly`
+
+        Claude answers with only the Bundles attached to the channel itself.
+
+        - `type: :channel_only`
+
+    - `instructions: String`
+
+      Instructions for Claude. Instructions add up: the text of every settings level that sets it is joined, broadest first.
+
+    - `model: String`
+
+      The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+  - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+    Slack's own identifiers for the channel.
+
+    - `channel_id: String`
+
+      Slack's identifier for the channel, starting with `C` or `G`, such as `C0456EFGH`.
+
+      minLength: 2, maxLength: 32
+
+    - `workspace_id: String`
+
+      Slack's identifier for the workspace the channel is in, starting with `T`, such as `T0123ABCD`.
+
+      minLength: 2, maxLength: 32
+
+  - `sources: BetaClaudeTagSettingSources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+    - `enabled: BetaClaudeTagSettingSource`
+
+      The settings level `enabled` comes from.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+        - `type: :slack_channel`
+
+        - `slack_channel_id: String`
+
+          The channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+        - `type: :slack_workspace`
+
+        - `slack_workspace_id: String`
+
+          The workspace's identifier, starting with `slws_`.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+        - `type: :slack_parent_channel`
+
+        - `slack_channel_id: String`
+
+          The parent channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+        - `type: :slack_default`
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+        - `type: :default`
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+        - `type: :slack_grid_channel`
+
+        - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+          Slack's own identifiers for the channel under that other workspace.
+
+    - `environment_id: BetaClaudeTagSettingSource`
+
+      The settings level `environment_id` comes from.
+
+    - `guest_policy: BetaClaudeTagSettingSource`
+
+      The settings level `guest_policy` comes from.
+
+    - `instructions: Array[BetaClaudeTagSettingSource]`
+
+      Every settings level that contributes text to `instructions`, broadest first, in the order their text is joined. Empty when none does.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+    - `model: BetaClaudeTagSettingSource`
+
+      The settings level `model` comes from.
+
+  - `updated_at: Time`
+
+    Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+    format: date-time
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+page = anthropic.beta.organization.claude_tag.slack_channels.list(slack_workspace_id: "slack_workspace_id")
+
+puts(page)
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "settings": {
+        "enabled": true,
+        "environment_id": "environment_id",
+        "guest_policy": {
+          "type": "allow"
+        },
+        "instructions": "instructions",
+        "model": "model"
+      },
+      "slack": {
+        "channel_id": "xx",
+        "workspace_id": "xx"
+      },
+      "sources": {
+        "enabled": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "environment_id": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "guest_policy": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "instructions": [
+          {
+            "slack_channel_id": "slack_channel_id",
+            "type": "slack_channel"
+          }
+        ],
+        "model": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        }
+      },
+      "type": "slack_channel",
+      "updated_at": "2019-12-27T18:11:19.117Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Get Slack Channel
+
+`beta.organization.claude_tag.slack_channels.retrieve(id, **kwargs) -> BetaClaudeTagSlackChannel`
+
+**GET** `/v1/organizations/claude_tag/slack_channels/{id}`
+
+Get one Slack channel and its settings. By default `settings` holds what the channel itself stores: a setting that is null there is not set on the channel and is inherited. With `include_inherited=true`, `settings` holds what applies in the channel once the settings levels above it are taken into account, and the request fails with 503 rather than resolve against a settings level that could not be read. Either way `sources` names the settings level each value comes from, so a caller tells the channel's own value from an inherited one by its source, not by whether it is null.
+
+#### Parameters
+
+- `id: String` (path parameter)
+
+  The channel's identifier, starting with `slch_`.
+
+- `include_inherited: bool` (query parameter)
+
+  When `true`, `settings` holds what applies in the channel once the settings levels above it are taken into account, and every member of `sources` names the level a value comes from. When `false` or left out, `settings` holds what the channel itself stores.
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagSlackChannel`
+
+  A Slack channel set up for Claude Tag, with the settings it stores or, with `include_inherited`, the settings that apply in it.
+
+  - `type: :slack_channel`
+
+  - `id: String`
+
+    The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured gets a new one when claude.ai replaces its record, which happens only while the organization's read-only mode is off. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
+
+  - `created_at: Time`
+
+    Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
+
+    format: date-time
+
+  - `settings: BetaClaudeTagSettings`
+
+    What the channel itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+    - `enabled: bool`
+
+      Whether Claude is on. The nearest settings level that sets it decides.
+
+    - `environment_id: String`
+
+      The environment Claude's sessions run in, starting with `env_`, or the identifier of a self-hosted runner pool, starting with `ccpool_`. The nearest settings level that sets it decides.
+
+    - `guest_policy: BetaClaudeTagGuestPolicy`
+
+      What Claude does in a channel while a Slack guest is in it. The nearest settings level that sets it decides.
+
+      - `class BetaClaudeTagGuestPolicyAllow`
+
+        Claude answers in the channel.
+
+        - `type: :allow`
+
+      - `class BetaClaudeTagGuestPolicyRestrict`
+
+        Claude does not answer in the channel.
+
+        - `type: :restrict`
+
+      - `class BetaClaudeTagGuestPolicyChannelOnly`
+
+        Claude answers with only the Bundles attached to the channel itself.
+
+        - `type: :channel_only`
+
+    - `instructions: String`
+
+      Instructions for Claude. Instructions add up: the text of every settings level that sets it is joined, broadest first.
+
+    - `model: String`
+
+      The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+  - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+    Slack's own identifiers for the channel.
+
+    - `channel_id: String`
+
+      Slack's identifier for the channel, starting with `C` or `G`, such as `C0456EFGH`.
+
+      minLength: 2, maxLength: 32
+
+    - `workspace_id: String`
+
+      Slack's identifier for the workspace the channel is in, starting with `T`, such as `T0123ABCD`.
+
+      minLength: 2, maxLength: 32
+
+  - `sources: BetaClaudeTagSettingSources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+    - `enabled: BetaClaudeTagSettingSource`
+
+      The settings level `enabled` comes from.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+        - `type: :slack_channel`
+
+        - `slack_channel_id: String`
+
+          The channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+        - `type: :slack_workspace`
+
+        - `slack_workspace_id: String`
+
+          The workspace's identifier, starting with `slws_`.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+        - `type: :slack_parent_channel`
+
+        - `slack_channel_id: String`
+
+          The parent channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+        - `type: :slack_default`
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+        - `type: :default`
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+        - `type: :slack_grid_channel`
+
+        - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+          Slack's own identifiers for the channel under that other workspace.
+
+    - `environment_id: BetaClaudeTagSettingSource`
+
+      The settings level `environment_id` comes from.
+
+    - `guest_policy: BetaClaudeTagSettingSource`
+
+      The settings level `guest_policy` comes from.
+
+    - `instructions: Array[BetaClaudeTagSettingSource]`
+
+      Every settings level that contributes text to `instructions`, broadest first, in the order their text is joined. Empty when none does.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+    - `model: BetaClaudeTagSettingSource`
+
+      The settings level `model` comes from.
+
+  - `updated_at: Time`
+
+    Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+    format: date-time
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_claude_tag_slack_channel = anthropic.beta.organization.claude_tag.slack_channels.retrieve("slch_01SvpyRQK3nN6eH9uhRA7n1q")
+
+puts(beta_claude_tag_slack_channel)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "settings": {
+    "enabled": true,
+    "environment_id": "environment_id",
+    "guest_policy": {
+      "type": "allow"
+    },
+    "instructions": "instructions",
+    "model": "model"
+  },
+  "slack": {
+    "channel_id": "xx",
+    "workspace_id": "xx"
+  },
+  "sources": {
+    "enabled": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "environment_id": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "guest_policy": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "instructions": [
+      {
+        "slack_channel_id": "slack_channel_id",
+        "type": "slack_channel"
+      }
+    ],
+    "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  },
+  "type": "slack_channel",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Update Slack Channel
+
+`beta.organization.claude_tag.slack_channels.update(id, **kwargs) -> BetaClaudeTagSlackChannel`
+
+**POST** `/v1/organizations/claude_tag/slack_channels/{id}`
+
+Change the settings a Slack channel stores. The update is partial: a setting left out is unchanged, and a setting sent as null is cleared, so the channel inherits it. If any value is refused, no setting in the request is stored. A group direct message takes no settings and returns 400.
+
+#### Parameters
+
+- `id: String` (path parameter)
+
+  The channel's identifier, starting with `slch_`.
+
+- `settings: BetaClaudeTagSettingsUpdate`
+
+  The settings to change.
+
+  - `enabled: bool`
+
+    Whether Claude is on. `true` on a channel turns Claude on in it even when its workspace stores `false`. Null clears it.
+
+  - `environment_id: String`
+
+    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`. Null clears it.
+
+    minLength: 1, maxLength: 64
+
+  - `guest_policy: BetaClaudeTagGuestPolicy`
+
+    What Claude does in a channel while a Slack guest is in it. Null clears it.
+
+    - `class BetaClaudeTagGuestPolicyAllow`
+
+      Claude answers in the channel.
+
+      - `type: :allow`
+
+    - `class BetaClaudeTagGuestPolicyRestrict`
+
+      Claude does not answer in the channel.
+
+      - `type: :restrict`
+
+    - `class BetaClaudeTagGuestPolicyChannelOnly`
+
+      Claude answers with only the Bundles attached to the channel itself.
+
+      - `type: :channel_only`
+
+  - `instructions: String`
+
+    Instructions for Claude, up to 8,192 characters after leading and trailing white space is trimmed. Null or blank text clears them.
+
+  - `model: String`
+
+    The model Claude uses: the identifier of a model, or the name of a model line, that the organization is entitled to for Claude Tag. Null clears it.
+
+    minLength: 1, maxLength: 128
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagSlackChannel`
+
+  A Slack channel set up for Claude Tag, with the settings it stores or, with `include_inherited`, the settings that apply in it.
+
+  - `type: :slack_channel`
+
+  - `id: String`
+
+    The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured gets a new one when claude.ai replaces its record, which happens only while the organization's read-only mode is off. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
+
+  - `created_at: Time`
+
+    Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
+
+    format: date-time
+
+  - `settings: BetaClaudeTagSettings`
+
+    What the channel itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+    - `enabled: bool`
+
+      Whether Claude is on. The nearest settings level that sets it decides.
+
+    - `environment_id: String`
+
+      The environment Claude's sessions run in, starting with `env_`, or the identifier of a self-hosted runner pool, starting with `ccpool_`. The nearest settings level that sets it decides.
+
+    - `guest_policy: BetaClaudeTagGuestPolicy`
+
+      What Claude does in a channel while a Slack guest is in it. The nearest settings level that sets it decides.
+
+      - `class BetaClaudeTagGuestPolicyAllow`
+
+        Claude answers in the channel.
+
+        - `type: :allow`
+
+      - `class BetaClaudeTagGuestPolicyRestrict`
+
+        Claude does not answer in the channel.
+
+        - `type: :restrict`
+
+      - `class BetaClaudeTagGuestPolicyChannelOnly`
+
+        Claude answers with only the Bundles attached to the channel itself.
+
+        - `type: :channel_only`
+
+    - `instructions: String`
+
+      Instructions for Claude. Instructions add up: the text of every settings level that sets it is joined, broadest first.
+
+    - `model: String`
+
+      The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+  - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+    Slack's own identifiers for the channel.
+
+    - `channel_id: String`
+
+      Slack's identifier for the channel, starting with `C` or `G`, such as `C0456EFGH`.
+
+      minLength: 2, maxLength: 32
+
+    - `workspace_id: String`
+
+      Slack's identifier for the workspace the channel is in, starting with `T`, such as `T0123ABCD`.
+
+      minLength: 2, maxLength: 32
+
+  - `sources: BetaClaudeTagSettingSources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+    - `enabled: BetaClaudeTagSettingSource`
+
+      The settings level `enabled` comes from.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+        - `type: :slack_channel`
+
+        - `slack_channel_id: String`
+
+          The channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+        - `type: :slack_workspace`
+
+        - `slack_workspace_id: String`
+
+          The workspace's identifier, starting with `slws_`.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+        - `type: :slack_parent_channel`
+
+        - `slack_channel_id: String`
+
+          The parent channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+        - `type: :slack_default`
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+        - `type: :default`
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+        - `type: :slack_grid_channel`
+
+        - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+          Slack's own identifiers for the channel under that other workspace.
+
+    - `environment_id: BetaClaudeTagSettingSource`
+
+      The settings level `environment_id` comes from.
+
+    - `guest_policy: BetaClaudeTagSettingSource`
+
+      The settings level `guest_policy` comes from.
+
+    - `instructions: Array[BetaClaudeTagSettingSource]`
+
+      Every settings level that contributes text to `instructions`, broadest first, in the order their text is joined. Empty when none does.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+    - `model: BetaClaudeTagSettingSource`
+
+      The settings level `model` comes from.
+
+  - `updated_at: Time`
+
+    Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+    format: date-time
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_claude_tag_slack_channel = anthropic.beta.organization.claude_tag.slack_channels.update(
+  "slch_01SvpyRQK3nN6eH9uhRA7n1q",
+  settings: {}
+)
+
+puts(beta_claude_tag_slack_channel)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "settings": {
+    "enabled": true,
+    "environment_id": "environment_id",
+    "guest_policy": {
+      "type": "allow"
+    },
+    "instructions": "instructions",
+    "model": "model"
+  },
+  "slack": {
+    "channel_id": "xx",
+    "workspace_id": "xx"
+  },
+  "sources": {
+    "enabled": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "environment_id": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "guest_policy": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "instructions": [
+      {
+        "slack_channel_id": "slack_channel_id",
+        "type": "slack_channel"
+      }
+    ],
+    "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  },
+  "type": "slack_channel",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Remove Slack Channel
+
+`beta.organization.claude_tag.slack_channels.delete(id, **kwargs) -> BetaClaudeTagDeletedSlackChannel`
+
+**DELETE** `/v1/organizations/claude_tag/slack_channels/{id}`
+
+Remove a Slack channel from Claude Tag. This deletes the channel's stored settings and its Bundle Targets at once, and then, in the background, the channel's sessions and their transcripts, its memory, its routines and the artifacts published from it. None of it can be restored. The channel in Slack and its messages are unchanged. The request is refused with 400 and `error.details.error_code` `slack_channel_enabled` while `enabled` resolves to `true` for the channel, as a read with `include_inherited=true` returns it: set `enabled` to `false` on the channel first. This guards against removing a channel in use by mistake; it is not a way to keep Claude out, because the removal deletes the channel's own `enabled: false` with its other settings, after which the channel inherits again and Claude's next use of it can set it up anew with a new identifier. The identifier returns 404 as soon as the request returns, so a repeated removal returns 404. A group direct message returns 400, and so does a channel that holds configuration this API does not manage.
+
+#### Parameters
+
+- `id: String` (path parameter)
+
+  The channel's identifier, starting with `slch_`.
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagDeletedSlackChannel`
+
+  Confirms that a Slack channel was removed from Claude Tag.
+
+  - `type: :slack_channel_deleted`
+
+  - `id: String`
+
+    The removed channel's identifier.
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_claude_tag_deleted_slack_channel = anthropic.beta.organization.claude_tag.slack_channels.delete("slch_01SvpyRQK3nN6eH9uhRA7n1q")
+
+puts(beta_claude_tag_deleted_slack_channel)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "slack_channel_deleted"
+}
+```
+
+## Beta › Organization › Claude Tag › Slack Workspaces
+
+### List Slack Workspaces
+
+`beta.organization.claude_tag.slack_workspaces.list(**kwargs) -> PageCursor<BetaClaudeTagSlackWorkspace>`
+
+**GET** `/v1/organizations/claude_tag/slack_workspaces`
+
+List the set-up Slack workspaces the organization owns, newest first by `created_at`. Pass `slack_workspace_id` to look one workspace up by its Slack identifier: `data` then holds that workspace, or is empty when it is not set up. A workspace of a Slack Enterprise Grid the organization has connected returns 404 until it is set up. With `include_inherited=true` each workspace's `settings` holds what applies in it, and the request fails with 503 rather than resolve against a settings level that could not be read. A `page` cursor resumes only a request with the same `include_inherited`.
+
+#### Parameters
+
+- `include_inherited: bool` (query parameter)
+
+  When `true`, `settings` holds what applies in each workspace once the organization's Slack defaults are taken into account, and every member of `sources` names the level a value comes from. When `false` or left out, `settings` holds what each workspace itself stores.
+
+- `limit: Integer` (query parameter)
+
+  Number of items to return per page, between 1 and 100. Defaults to 20.
+
+  format: int32
+
+- `page: String` (query parameter)
+
+  Opaque cursor from a previous response's `next_page`.
+
+- `slack_workspace_id: String` (query parameter)
+
+  Slack's identifier for one workspace, as in the workspace object's `slack.workspace_id`, not its `id`. With it `data` holds that workspace alone, or nothing when it is not set up.
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagSlackWorkspace`
+
+  A Slack workspace the organization has connected, itself or through its Slack Enterprise Grid, with the settings it stores or, with `include_inherited`, the settings that apply in it.
+
+  - `type: :slack_workspace`
+
+  - `id: String`
+
+    The workspace's identifier. Starts with `slws_`. It does not change for as long as the workspace is set up. A workspace that is removed and set up again has a new one, and the old one keeps returning 404; look the workspace up by its Slack identifier for the new one.
+
+  - `created_at: Time`
+
+    Time the workspace was set up, by whichever route. It does not change for as long as `id` does not.
+
+    format: date-time
+
+  - `settings: BetaClaudeTagSettings`
+
+    What the workspace itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+    - `enabled: bool`
+
+      Whether Claude is on. The nearest settings level that sets it decides.
+
+    - `environment_id: String`
+
+      The environment Claude's sessions run in, starting with `env_`, or the identifier of a self-hosted runner pool, starting with `ccpool_`. The nearest settings level that sets it decides.
+
+    - `guest_policy: BetaClaudeTagGuestPolicy`
+
+      What Claude does in a channel while a Slack guest is in it. The nearest settings level that sets it decides.
+
+      - `class BetaClaudeTagGuestPolicyAllow`
+
+        Claude answers in the channel.
+
+        - `type: :allow`
+
+      - `class BetaClaudeTagGuestPolicyRestrict`
+
+        Claude does not answer in the channel.
+
+        - `type: :restrict`
+
+      - `class BetaClaudeTagGuestPolicyChannelOnly`
+
+        Claude answers with only the Bundles attached to the channel itself.
+
+        - `type: :channel_only`
+
+    - `instructions: String`
+
+      Instructions for Claude. Instructions add up: the text of every settings level that sets it is joined, broadest first.
+
+    - `model: String`
+
+      The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+  - `slack: BetaClaudeTagSlackWorkspaceIdentifiers`
+
+    Slack's own identifier for the workspace.
+
+    - `workspace_id: String`
+
+      Slack's identifier for the workspace, starting with `T`, such as `T0123ABCD`.
+
+  - `sources: BetaClaudeTagSettingSources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+    - `enabled: BetaClaudeTagSettingSource`
+
+      The settings level `enabled` comes from.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+        - `type: :slack_channel`
+
+        - `slack_channel_id: String`
+
+          The channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+        - `type: :slack_workspace`
+
+        - `slack_workspace_id: String`
+
+          The workspace's identifier, starting with `slws_`.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+        - `type: :slack_parent_channel`
+
+        - `slack_channel_id: String`
+
+          The parent channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+        - `type: :slack_default`
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+        - `type: :default`
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+        - `type: :slack_grid_channel`
+
+        - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+          Slack's own identifiers for the channel under that other workspace.
+
+          - `channel_id: String`
+
+            Slack's identifier for the channel, starting with `C` or `G`, such as `C0456EFGH`.
+
+            minLength: 2, maxLength: 32
+
+          - `workspace_id: String`
+
+            Slack's identifier for the workspace the channel is in, starting with `T`, such as `T0123ABCD`.
+
+            minLength: 2, maxLength: 32
+
+    - `environment_id: BetaClaudeTagSettingSource`
+
+      The settings level `environment_id` comes from.
+
+    - `guest_policy: BetaClaudeTagSettingSource`
+
+      The settings level `guest_policy` comes from.
+
+    - `instructions: Array[BetaClaudeTagSettingSource]`
+
+      Every settings level that contributes text to `instructions`, broadest first, in the order their text is joined. Empty when none does.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+    - `model: BetaClaudeTagSettingSource`
+
+      The settings level `model` comes from.
+
+  - `updated_at: Time`
+
+    Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+    format: date-time
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+page = anthropic.beta.organization.claude_tag.slack_workspaces.list
+
+puts(page)
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "settings": {
+        "enabled": true,
+        "environment_id": "environment_id",
+        "guest_policy": {
+          "type": "allow"
+        },
+        "instructions": "instructions",
+        "model": "model"
+      },
+      "slack": {
+        "workspace_id": "workspace_id"
+      },
+      "sources": {
+        "enabled": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "environment_id": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "guest_policy": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "instructions": [
+          {
+            "slack_channel_id": "slack_channel_id",
+            "type": "slack_channel"
+          }
+        ],
+        "model": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        }
+      },
+      "type": "slack_workspace",
+      "updated_at": "2019-12-27T18:11:19.117Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Get Slack Workspace
+
+`beta.organization.claude_tag.slack_workspaces.retrieve(id, **kwargs) -> BetaClaudeTagSlackWorkspace`
+
+**GET** `/v1/organizations/claude_tag/slack_workspaces/{id}`
+
+Get one Slack workspace and its settings. By default `settings` holds what the workspace itself stores: a setting that is null there is not set on the workspace and is inherited. With `include_inherited=true`, `settings` holds what applies in the workspace once the organization's Slack defaults are taken into account, and the request fails with 503 rather than resolve against a settings level that could not be read. Either way `sources` names the settings level each value comes from.
+
+#### Parameters
+
+- `id: String` (path parameter)
+
+  The workspace's identifier, starting with `slws_`.
+
+- `include_inherited: bool` (query parameter)
+
+  When `true`, `settings` holds what applies in the workspace once the organization's Slack defaults are taken into account, and every member of `sources` names the level a value comes from. When `false` or left out, `settings` holds what the workspace itself stores.
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagSlackWorkspace`
+
+  A Slack workspace the organization has connected, itself or through its Slack Enterprise Grid, with the settings it stores or, with `include_inherited`, the settings that apply in it.
+
+  - `type: :slack_workspace`
+
+  - `id: String`
+
+    The workspace's identifier. Starts with `slws_`. It does not change for as long as the workspace is set up. A workspace that is removed and set up again has a new one, and the old one keeps returning 404; look the workspace up by its Slack identifier for the new one.
+
+  - `created_at: Time`
+
+    Time the workspace was set up, by whichever route. It does not change for as long as `id` does not.
+
+    format: date-time
+
+  - `settings: BetaClaudeTagSettings`
+
+    What the workspace itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+    - `enabled: bool`
+
+      Whether Claude is on. The nearest settings level that sets it decides.
+
+    - `environment_id: String`
+
+      The environment Claude's sessions run in, starting with `env_`, or the identifier of a self-hosted runner pool, starting with `ccpool_`. The nearest settings level that sets it decides.
+
+    - `guest_policy: BetaClaudeTagGuestPolicy`
+
+      What Claude does in a channel while a Slack guest is in it. The nearest settings level that sets it decides.
+
+      - `class BetaClaudeTagGuestPolicyAllow`
+
+        Claude answers in the channel.
+
+        - `type: :allow`
+
+      - `class BetaClaudeTagGuestPolicyRestrict`
+
+        Claude does not answer in the channel.
+
+        - `type: :restrict`
+
+      - `class BetaClaudeTagGuestPolicyChannelOnly`
+
+        Claude answers with only the Bundles attached to the channel itself.
+
+        - `type: :channel_only`
+
+    - `instructions: String`
+
+      Instructions for Claude. Instructions add up: the text of every settings level that sets it is joined, broadest first.
+
+    - `model: String`
+
+      The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+  - `slack: BetaClaudeTagSlackWorkspaceIdentifiers`
+
+    Slack's own identifier for the workspace.
+
+    - `workspace_id: String`
+
+      Slack's identifier for the workspace, starting with `T`, such as `T0123ABCD`.
+
+  - `sources: BetaClaudeTagSettingSources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+    - `enabled: BetaClaudeTagSettingSource`
+
+      The settings level `enabled` comes from.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+        - `type: :slack_channel`
+
+        - `slack_channel_id: String`
+
+          The channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+        - `type: :slack_workspace`
+
+        - `slack_workspace_id: String`
+
+          The workspace's identifier, starting with `slws_`.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+        - `type: :slack_parent_channel`
+
+        - `slack_channel_id: String`
+
+          The parent channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+        - `type: :slack_default`
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+        - `type: :default`
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+        - `type: :slack_grid_channel`
+
+        - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+          Slack's own identifiers for the channel under that other workspace.
+
+          - `channel_id: String`
+
+            Slack's identifier for the channel, starting with `C` or `G`, such as `C0456EFGH`.
+
+            minLength: 2, maxLength: 32
+
+          - `workspace_id: String`
+
+            Slack's identifier for the workspace the channel is in, starting with `T`, such as `T0123ABCD`.
+
+            minLength: 2, maxLength: 32
+
+    - `environment_id: BetaClaudeTagSettingSource`
+
+      The settings level `environment_id` comes from.
+
+    - `guest_policy: BetaClaudeTagSettingSource`
+
+      The settings level `guest_policy` comes from.
+
+    - `instructions: Array[BetaClaudeTagSettingSource]`
+
+      Every settings level that contributes text to `instructions`, broadest first, in the order their text is joined. Empty when none does.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+    - `model: BetaClaudeTagSettingSource`
+
+      The settings level `model` comes from.
+
+  - `updated_at: Time`
+
+    Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+    format: date-time
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_claude_tag_slack_workspace = anthropic.beta.organization.claude_tag.slack_workspaces.retrieve("slws_01Hq8TzW5mKc2YbX7vNd4RfJ")
+
+puts(beta_claude_tag_slack_workspace)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "settings": {
+    "enabled": true,
+    "environment_id": "environment_id",
+    "guest_policy": {
+      "type": "allow"
+    },
+    "instructions": "instructions",
+    "model": "model"
+  },
+  "slack": {
+    "workspace_id": "workspace_id"
+  },
+  "sources": {
+    "enabled": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "environment_id": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "guest_policy": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "instructions": [
+      {
+        "slack_channel_id": "slack_channel_id",
+        "type": "slack_channel"
+      }
+    ],
+    "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  },
+  "type": "slack_workspace",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Update Slack Workspace
+
+`beta.organization.claude_tag.slack_workspaces.update(id, **kwargs) -> BetaClaudeTagSlackWorkspace`
+
+**POST** `/v1/organizations/claude_tag/slack_workspaces/{id}`
+
+Change the settings a Slack workspace stores. The update is partial: a setting left out is unchanged, and a setting sent as null is cleared, so the workspace inherits it. If any value is refused, no setting in the request is stored.
+
+#### Parameters
+
+- `id: String` (path parameter)
+
+  The workspace's identifier, starting with `slws_`.
+
+- `settings: BetaClaudeTagSettingsUpdate`
+
+  The settings to change.
+
+  - `enabled: bool`
+
+    Whether Claude is on. `true` on a channel turns Claude on in it even when its workspace stores `false`. Null clears it.
+
+  - `environment_id: String`
+
+    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`. Null clears it.
+
+    minLength: 1, maxLength: 64
+
+  - `guest_policy: BetaClaudeTagGuestPolicy`
+
+    What Claude does in a channel while a Slack guest is in it. Null clears it.
+
+    - `class BetaClaudeTagGuestPolicyAllow`
+
+      Claude answers in the channel.
+
+      - `type: :allow`
+
+    - `class BetaClaudeTagGuestPolicyRestrict`
+
+      Claude does not answer in the channel.
+
+      - `type: :restrict`
+
+    - `class BetaClaudeTagGuestPolicyChannelOnly`
+
+      Claude answers with only the Bundles attached to the channel itself.
+
+      - `type: :channel_only`
+
+  - `instructions: String`
+
+    Instructions for Claude, up to 8,192 characters after leading and trailing white space is trimmed. Null or blank text clears them.
+
+  - `model: String`
+
+    The model Claude uses: the identifier of a model, or the name of a model line, that the organization is entitled to for Claude Tag. Null clears it.
+
+    minLength: 1, maxLength: 128
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagSlackWorkspace`
+
+  A Slack workspace the organization has connected, itself or through its Slack Enterprise Grid, with the settings it stores or, with `include_inherited`, the settings that apply in it.
+
+  - `type: :slack_workspace`
+
+  - `id: String`
+
+    The workspace's identifier. Starts with `slws_`. It does not change for as long as the workspace is set up. A workspace that is removed and set up again has a new one, and the old one keeps returning 404; look the workspace up by its Slack identifier for the new one.
+
+  - `created_at: Time`
+
+    Time the workspace was set up, by whichever route. It does not change for as long as `id` does not.
+
+    format: date-time
+
+  - `settings: BetaClaudeTagSettings`
+
+    What the workspace itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+    - `enabled: bool`
+
+      Whether Claude is on. The nearest settings level that sets it decides.
+
+    - `environment_id: String`
+
+      The environment Claude's sessions run in, starting with `env_`, or the identifier of a self-hosted runner pool, starting with `ccpool_`. The nearest settings level that sets it decides.
+
+    - `guest_policy: BetaClaudeTagGuestPolicy`
+
+      What Claude does in a channel while a Slack guest is in it. The nearest settings level that sets it decides.
+
+      - `class BetaClaudeTagGuestPolicyAllow`
+
+        Claude answers in the channel.
+
+        - `type: :allow`
+
+      - `class BetaClaudeTagGuestPolicyRestrict`
+
+        Claude does not answer in the channel.
+
+        - `type: :restrict`
+
+      - `class BetaClaudeTagGuestPolicyChannelOnly`
+
+        Claude answers with only the Bundles attached to the channel itself.
+
+        - `type: :channel_only`
+
+    - `instructions: String`
+
+      Instructions for Claude. Instructions add up: the text of every settings level that sets it is joined, broadest first.
+
+    - `model: String`
+
+      The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+  - `slack: BetaClaudeTagSlackWorkspaceIdentifiers`
+
+    Slack's own identifier for the workspace.
+
+    - `workspace_id: String`
+
+      Slack's identifier for the workspace, starting with `T`, such as `T0123ABCD`.
+
+  - `sources: BetaClaudeTagSettingSources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+    - `enabled: BetaClaudeTagSettingSource`
+
+      The settings level `enabled` comes from.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+        - `type: :slack_channel`
+
+        - `slack_channel_id: String`
+
+          The channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+        - `type: :slack_workspace`
+
+        - `slack_workspace_id: String`
+
+          The workspace's identifier, starting with `slws_`.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+        - `type: :slack_parent_channel`
+
+        - `slack_channel_id: String`
+
+          The parent channel's identifier, starting with `slch_`.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+        - `type: :slack_default`
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+        - `type: :default`
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+        - `type: :slack_grid_channel`
+
+        - `slack: BetaClaudeTagSlackChannelIdentifiers`
+
+          Slack's own identifiers for the channel under that other workspace.
+
+          - `channel_id: String`
+
+            Slack's identifier for the channel, starting with `C` or `G`, such as `C0456EFGH`.
+
+            minLength: 2, maxLength: 32
+
+          - `workspace_id: String`
+
+            Slack's identifier for the workspace the channel is in, starting with `T`, such as `T0123ABCD`.
+
+            minLength: 2, maxLength: 32
+
+    - `environment_id: BetaClaudeTagSettingSource`
+
+      The settings level `environment_id` comes from.
+
+    - `guest_policy: BetaClaudeTagSettingSource`
+
+      The settings level `guest_policy` comes from.
+
+    - `instructions: Array[BetaClaudeTagSettingSource]`
+
+      Every settings level that contributes text to `instructions`, broadest first, in the order their text is joined. Empty when none does.
+
+      - `class BetaClaudeTagSlackChannelSettingSource`
+
+        The value comes from the addressed Slack channel itself.
+
+      - `class BetaClaudeTagSlackWorkspaceSettingSource`
+
+        The value comes from a Slack workspace of the organization.
+
+      - `class BetaClaudeTagSlackParentChannelSettingSource`
+
+        The value comes from the channel that a code channel was started from. A parent channel contributes `instructions` and `environment_id` only.
+
+      - `class BetaClaudeTagSlackDefaultSettingSource`
+
+        The value comes from the organization's Slack defaults, which have no identifier.
+
+      - `class BetaClaudeTagDefaultSettingSource`
+
+        No settings level sets a value, and the built-in default applies.
+
+      - `class BetaClaudeTagSlackGridChannelSettingSource`
+
+        The value comes from the addressed channel as it is set up under another workspace of its Enterprise Grid: a channel shared across the Grid keeps one Slack channel identifier in every workspace that sees it.
+
+    - `model: BetaClaudeTagSettingSource`
+
+      The settings level `model` comes from.
+
+  - `updated_at: Time`
+
+    Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+    format: date-time
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_claude_tag_slack_workspace = anthropic.beta.organization.claude_tag.slack_workspaces.update(
+  "slws_01Hq8TzW5mKc2YbX7vNd4RfJ",
+  settings: {}
+)
+
+puts(beta_claude_tag_slack_workspace)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "settings": {
+    "enabled": true,
+    "environment_id": "environment_id",
+    "guest_policy": {
+      "type": "allow"
+    },
+    "instructions": "instructions",
+    "model": "model"
+  },
+  "slack": {
+    "workspace_id": "workspace_id"
+  },
+  "sources": {
+    "enabled": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "environment_id": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "guest_policy": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "instructions": [
+      {
+        "slack_channel_id": "slack_channel_id",
+        "type": "slack_channel"
+      }
+    ],
+    "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  },
+  "type": "slack_workspace",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+## Beta › Organization › Claude Tag › Bundles
+
+### List Bundles
+
+`beta.organization.claude_tag.bundles.list(**kwargs) -> PageCursor<BetaClaudeTagBundle>`
+
+**GET** `/v1/organizations/claude_tag/bundles`
+
+List the organization's Bundles, newest first by `created_at`. A Bundle that Claude Tag manages for itself is not listed.
+
+#### Parameters
+
+- `limit: Integer` (query parameter)
+
+  Number of items to return per page, between 1 and 100. Defaults to 20.
+
+  format: int32
+
+- `page: String` (query parameter)
+
+  Opaque cursor from a previous response's `next_page`.
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagBundle`
+
+  A named set of access that Claude can use in a Slack channel or a Slack workspace: connectors, repositories and credentials. Created and edited in claude.ai.
+
+  - `type: :bundle`
+
+  - `id: String`
+
+    The Bundle's identifier. Starts with `capp_`.
+
+  - `created_at: Time`
+
+    Time the Bundle was created.
+
+    format: date-time
+
+  - `description: String`
+
+    What the Bundle is for. Null when it has none. Read-only.
+
+  - `display_name: String`
+
+    The Bundle's name. Always set. Read-only.
+
+  - `updated_at: Time`
+
+    Time of the last change to the Bundle.
+
+    format: date-time
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+page = anthropic.beta.organization.claude_tag.bundles.list
+
+puts(page)
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "description": "description",
+      "display_name": "display_name",
+      "type": "bundle",
+      "updated_at": "2019-12-27T18:11:19.117Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Get Bundle
+
+`beta.organization.claude_tag.bundles.retrieve(bundle_id, **kwargs) -> BetaClaudeTagBundle`
+
+**GET** `/v1/organizations/claude_tag/bundles/{bundle_id}`
+
+Get one Bundle. What the Bundle grants (connectors, repositories and credentials) is never returned.
+
+#### Parameters
+
+- `bundle_id: String` (path parameter)
+
+  The Bundle's identifier, starting with `capp_`.
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagBundle`
+
+  A named set of access that Claude can use in a Slack channel or a Slack workspace: connectors, repositories and credentials. Created and edited in claude.ai.
+
+  - `type: :bundle`
+
+  - `id: String`
+
+    The Bundle's identifier. Starts with `capp_`.
+
+  - `created_at: Time`
+
+    Time the Bundle was created.
+
+    format: date-time
+
+  - `description: String`
+
+    What the Bundle is for. Null when it has none. Read-only.
+
+  - `display_name: String`
+
+    The Bundle's name. Always set. Read-only.
+
+  - `updated_at: Time`
+
+    Time of the last change to the Bundle.
+
+    format: date-time
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_claude_tag_bundle = anthropic.beta.organization.claude_tag.bundles.retrieve("capp_011CZkZjLP1cWxj5EtMmdgbq")
+
+puts(beta_claude_tag_bundle)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "display_name": "display_name",
+  "type": "bundle",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+## Beta › Organization › Claude Tag › Bundles › Targets
+
+### List Bundle Targets
+
+`beta.organization.claude_tag.bundles.targets.list(bundle_id, **kwargs) -> PageCursor<BetaClaudeTagBundleTarget>`
+
+**GET** `/v1/organizations/claude_tag/bundles/{bundle_id}/targets`
+
+List the Slack channels and Slack workspaces a Bundle is attached to, newest first by `created_at`. Only channels and workspaces the organization owns are listed; a Bundle that is attached to anything else has no Bundle Target for it.
+
+#### Parameters
+
+- `bundle_id: String` (path parameter)
+
+  The Bundle's identifier, starting with `capp_`.
+
+- `limit: Integer` (query parameter)
+
+  Number of items to return per page, between 1 and 100. Defaults to 20.
+
+  format: int32
+
+- `page: String` (query parameter)
+
+  Opaque cursor from a previous response's `next_page`.
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `type BetaClaudeTagBundleTarget = BetaClaudeTagSlackChannelBundleTarget | BetaClaudeTagSlackWorkspaceBundleTarget`
+
+  One Bundle attached to one Slack channel or one Slack workspace. More types of target can be added.
+
+  - `class BetaClaudeTagSlackChannelBundleTarget`
+
+    One Bundle attached to one Slack channel. The Bundle can be used in that channel only.
+
+    - `type: :slack_channel`
+
+    - `id: String`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `created_at: Time`
+
+      Time the Bundle was attached.
+
+      format: date-time
+
+    - `slack_channel_id: String`
+
+      The identifier of the Slack channel the Bundle is attached to, starting with `slch_`. It is the channel object's `id`, not Slack's `channel_id`.
+
+  - `class BetaClaudeTagSlackWorkspaceBundleTarget`
+
+    One Bundle attached to one Slack workspace. The Bundle can be used in the workspace and in every channel in it.
+
+    - `type: :slack_workspace`
+
+    - `id: String`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `created_at: Time`
+
+      Time the Bundle was attached.
+
+      format: date-time
+
+    - `slack_workspace_id: String`
+
+      The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+page = anthropic.beta.organization.claude_tag.bundles.targets.list("capp_011CZkZjLP1cWxj5EtMmdgbq")
+
+puts(page)
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Attach Bundle
+
+`beta.organization.claude_tag.bundles.targets.create(bundle_id, **kwargs) -> BetaClaudeTagBundleTarget`
+
+**POST** `/v1/organizations/claude_tag/bundles/{bundle_id}/targets`
+
+Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a workspace can be used in the workspace and in every channel in it. Attaching a Bundle to a channel or workspace it is already attached to returns the existing Bundle Target. The channel or workspace must be set up: attaching never sets a channel up. A group direct message takes no Bundle and returns 400.
+
+#### Parameters
+
+- `bundle_id: String` (path parameter)
+
+  The Bundle's identifier, starting with `capp_`.
+
+- `target: BetaClaudeTagBundleTargetCreate`
+
+  - `class BetaClaudeTagSlackChannelBundleTargetCreate`
+
+    Attach the Bundle to a Slack channel.
+
+    - `type: :slack_channel`
+
+    - `slack_channel_id: String`
+
+      The identifier of the Slack channel to attach the Bundle to, starting with `slch_`. It is the channel object's `id`, not Slack's `channel_id`.
+
+      minLength: 8, maxLength: 64
+
+  - `class BetaClaudeTagSlackWorkspaceBundleTargetCreate`
+
+    Attach the Bundle to a Slack workspace.
+
+    - `type: :slack_workspace`
+
+    - `slack_workspace_id: String`
+
+      The identifier of the Slack workspace to attach the Bundle to, starting with `slws_`.
+
+      minLength: 8, maxLength: 64
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `type BetaClaudeTagBundleTarget = BetaClaudeTagSlackChannelBundleTarget | BetaClaudeTagSlackWorkspaceBundleTarget`
+
+  One Bundle attached to one Slack channel or one Slack workspace. More types of target can be added.
+
+  - `class BetaClaudeTagSlackChannelBundleTarget`
+
+    One Bundle attached to one Slack channel. The Bundle can be used in that channel only.
+
+    - `type: :slack_channel`
+
+    - `id: String`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `created_at: Time`
+
+      Time the Bundle was attached.
+
+      format: date-time
+
+    - `slack_channel_id: String`
+
+      The identifier of the Slack channel the Bundle is attached to, starting with `slch_`. It is the channel object's `id`, not Slack's `channel_id`.
+
+  - `class BetaClaudeTagSlackWorkspaceBundleTarget`
+
+    One Bundle attached to one Slack workspace. The Bundle can be used in the workspace and in every channel in it.
+
+    - `type: :slack_workspace`
+
+    - `id: String`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `created_at: Time`
+
+      Time the Bundle was attached.
+
+      format: date-time
+
+    - `slack_workspace_id: String`
+
+      The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_claude_tag_bundle_target = anthropic.beta.organization.claude_tag.bundles.targets.create(
+  "capp_011CZkZjLP1cWxj5EtMmdgbq",
+  target: {slack_channel_id: "xxxxxxxx", type: :slack_channel}
+)
+
+puts(beta_claude_tag_bundle_target)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "slack_channel_id": "slack_channel_id",
+  "type": "slack_channel"
+}
+```
+
+### Get Bundle Target
+
+`beta.organization.claude_tag.bundles.targets.retrieve(target_id, **kwargs) -> BetaClaudeTagBundleTarget`
+
+**GET** `/v1/organizations/claude_tag/bundles/{bundle_id}/targets/{target_id}`
+
+Get one Bundle Target. Returns 404 when `target_id` is the identifier of another Bundle's Bundle Target, or the Bundle Target was detached.
+
+#### Parameters
+
+- `bundle_id: String` (path parameter)
+
+  The Bundle's identifier, starting with `capp_`.
+
+- `target_id: String` (path parameter)
+
+  The Bundle Target's identifier, starting with `btgt_`. Attach Bundle and List Bundle Targets return it. It is never the identifier of the channel or workspace.
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `type BetaClaudeTagBundleTarget = BetaClaudeTagSlackChannelBundleTarget | BetaClaudeTagSlackWorkspaceBundleTarget`
+
+  One Bundle attached to one Slack channel or one Slack workspace. More types of target can be added.
+
+  - `class BetaClaudeTagSlackChannelBundleTarget`
+
+    One Bundle attached to one Slack channel. The Bundle can be used in that channel only.
+
+    - `type: :slack_channel`
+
+    - `id: String`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `created_at: Time`
+
+      Time the Bundle was attached.
+
+      format: date-time
+
+    - `slack_channel_id: String`
+
+      The identifier of the Slack channel the Bundle is attached to, starting with `slch_`. It is the channel object's `id`, not Slack's `channel_id`.
+
+  - `class BetaClaudeTagSlackWorkspaceBundleTarget`
+
+    One Bundle attached to one Slack workspace. The Bundle can be used in the workspace and in every channel in it.
+
+    - `type: :slack_workspace`
+
+    - `id: String`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `created_at: Time`
+
+      Time the Bundle was attached.
+
+      format: date-time
+
+    - `slack_workspace_id: String`
+
+      The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_claude_tag_bundle_target = anthropic.beta.organization.claude_tag.bundles.targets.retrieve(
+  "btgt_01SvpyRQK3nN6eH9uhRA7n1qHq8TzW5mKc2YbX7vNd4RfJ",
+  bundle_id: "capp_011CZkZjLP1cWxj5EtMmdgbq"
+)
+
+puts(beta_claude_tag_bundle_target)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "slack_channel_id": "slack_channel_id",
+  "type": "slack_channel"
+}
+```
+
+### Detach Bundle
+
+`beta.organization.claude_tag.bundles.targets.delete(target_id, **kwargs) -> BetaClaudeTagDeletedBundleTarget`
+
+**DELETE** `/v1/organizations/claude_tag/bundles/{bundle_id}/targets/{target_id}`
+
+Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach returns 404.
+
+#### Parameters
+
+- `bundle_id: String` (path parameter)
+
+  The Bundle's identifier, starting with `capp_`.
+
+- `target_id: String` (path parameter)
+
+  The Bundle Target's identifier, starting with `btgt_`. Attach Bundle and List Bundle Targets return it. It is never the identifier of the channel or workspace.
+
+- `betas: Array[AnthropicBeta]` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `String = String`
+
+  - `:"message-batches-2024-09-24"`
+
+  - `:"prompt-caching-2024-07-31"`
+
+  - `:"computer-use-2024-10-22"`
+
+  - `:"computer-use-2025-01-24"`
+
+  - `:"pdfs-2024-09-25"`
+
+  - `:"token-counting-2024-11-01"`
+
+  - `:"token-efficient-tools-2025-02-19"`
+
+  - `:"output-128k-2025-02-19"`
+
+  - `:"files-api-2025-04-14"`
+
+  - `:"mcp-client-2025-04-04"`
+
+  - `:"mcp-client-2025-11-20"`
+
+  - `:"dev-full-thinking-2025-05-14"`
+
+  - `:"interleaved-thinking-2025-05-14"`
+
+  - `:"code-execution-2025-05-22"`
+
+  - `:"extended-cache-ttl-2025-04-11"`
+
+  - `:"context-1m-2025-08-07"`
+
+  - `:"context-management-2025-06-27"`
+
+  - `:"model-context-window-exceeded-2025-08-26"`
+
+  - `:"skills-2025-10-02"`
+
+  - `:"fast-mode-2026-02-01"`
+
+  - `:"output-300k-2026-03-24"`
+
+  - `:"user-profiles-2026-03-24"`
+
+  - `:"user-profiles-2026-08-18"`
+
+  - `:"user-profiles-2026-09-04"`
+
+  - `:"advisor-tool-2026-03-01"`
+
+  - `:"managed-agents-2026-04-01"`
+
+  - `:"cache-diagnosis-2026-04-07"`
+
+  - `:"dreaming-2026-04-21"`
+
+  - `:"thinking-token-count-2026-05-13"`
+
+  - `:"server-side-fallback-2026-06-01"`
+
+  - `:"server-side-fallback-2026-07-01"`
+
+  - `:"fallback-credit-2026-06-01"`
+
+  - `:"fallback-credit-2026-07-01"`
+
+  - `:"agent-memory-2026-07-22"`
+
+  - `:"mid-conversation-tool-changes-2026-07-01"`
+
+  - `:"compact-2026-01-12"`
+
+  - `:"computer-use-2025-11-24"`
+
+  - `:"mcp-tunnels-2026-06-22"`
+
+  - `:"structured-outputs-2025-11-13"`
+
+  - `:"task-budgets-2026-03-13"`
+
+  - `:"thinking-display-updates-2026-08-18"`
+
+  - `:"ce-user-management-2026-07-13"`
+
+  - `:"mid-conversation-output-config-2026-07-01"`
+
+  - `:"thinking-binding-controls-2026-08-01"`
+
+  - `:"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `:"compact-2026-09-04"`
+
+  - `:"inline-tools-2026-09-15"`
+
+  - `:"mcp-client-2026-09-15"`
+
+  - `:"ce-plugins-2026-09-01"`
+
+  - `:"spend-limit-reads-2026-09-26"`
+
+  - `:"telemetry-destinations-2026-08-11"`
+
+  - `:"webhooks-2026-10-07"`
+
+  - `:"message-threads-2026-08-12"`
+
+  - `:"analytics-usage-cost-2026-08-24"`
+
+  - `:"experimental-claude-tag-2026-10-21"`
+
+#### Returns
+
+- `class BetaClaudeTagDeletedBundleTarget`
+
+  Confirms that a Bundle was detached.
+
+  - `type: :bundle_target_deleted`
+
+  - `id: String`
+
+    The identifier the Bundle Target had.
+
+#### Example
+
+```ruby
+require "anthropic"
+
+anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
+
+beta_claude_tag_deleted_bundle_target = anthropic.beta.organization.claude_tag.bundles.targets.delete(
+  "btgt_01SvpyRQK3nN6eH9uhRA7n1qHq8TzW5mKc2YbX7vNd4RfJ",
+  bundle_id: "capp_011CZkZjLP1cWxj5EtMmdgbq"
+)
+
+puts(beta_claude_tag_deleted_bundle_target)
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "bundle_target_deleted"
 }
 ```
 

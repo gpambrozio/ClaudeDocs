@@ -123,6 +123,8 @@ url: https://platform.claude.com/docs/en/api/php/beta
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Beta API Error
 
 - `class BetaAPIError`
@@ -5206,7 +5208,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `string lastHeartbeat`
 
-    RFC 3339 timestamp of the actual heartbeat from DB
+    RFC 3339 timestamp of the most recent heartbeat recorded for this work item, or an empty string if none has been recorded
 
   - `bool leaseExtended`
 
@@ -5697,7 +5699,7 @@ Get statistics about the work queue for an environment.
 
   - `int depth`
 
-    Number of work items waiting to be picked up (lag from consumer group)
+    Number of work items waiting to be picked up
 
   - `?string oldestQueuedAt`
 
@@ -21766,7 +21768,7 @@ var_dump($page);
       "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
       "created_at": "2024-10-30T23:58:27.427722Z",
       "created_by": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
         "type": "user"
       },
       "expires_at": "2024-10-30T23:58:27.427722Z",
@@ -21774,7 +21776,7 @@ var_dump($page);
       "partial_key_hint": "sk-ant-api03-R2D...igAA",
       "principal": {
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "scope": {
         "type": "workspace",
@@ -21875,7 +21877,7 @@ var_dump($betaAPIKey);
   "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
   "created_at": "2024-10-30T23:58:27.427722Z",
   "created_by": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
     "type": "user"
   },
   "expires_at": "2024-10-30T23:58:27.427722Z",
@@ -21883,7 +21885,7 @@ var_dump($betaAPIKey);
   "partial_key_hint": "sk-ant-api03-R2D...igAA",
   "principal": {
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "scope": {
     "type": "workspace",
@@ -21989,7 +21991,7 @@ var_dump($betaAPIKey);
   "id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
   "created_at": "2024-10-30T23:58:27.427722Z",
   "created_by": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
     "type": "user"
   },
   "expires_at": "2024-10-30T23:58:27.427722Z",
@@ -21997,7 +21999,7 @@ var_dump($betaAPIKey);
   "partial_key_hint": "sk-ant-api03-R2D...igAA",
   "principal": {
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "scope": {
     "type": "workspace",
@@ -22012,7 +22014,7 @@ var_dump($betaAPIKey);
 
 ### Create External Key
 
-`$client->beta->organization->externalKeys->create(ProviderConfig providerConfig, ?string displayName, ?Geo geo): ExternalKey`
+`$client->beta->organization->externalKeys->create(ProviderConfig providerConfig, ?string displayName, ?Geo geo, ?string userProfileID): ExternalKey`
 
 **POST** `/v1/organizations/external_keys`
 
@@ -22032,6 +22034,10 @@ Create an external key config owned by the caller's organization.
 
   Data residency geo. Only `us` is supported.
 
+- `userProfileID?:optional string`
+
+  ID of a user profile to bind the key to. Omit this field for a key that isn't bound to a user profile. Such a key can be attached to a Workspace whatever its user profile. The binding cannot be changed later. A key bound to a user profile can only be attached to a Workspace that has the same user profile.
+
 #### Returns
 
 - `class ExternalKey`
@@ -22040,7 +22046,7 @@ Create an external key config owned by the caller's organization.
 
   - `string id`
 
-    Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+    Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on Claude Platform on AWS, an AWS KMS key's ARN.
 
   - `Attachment attachment`
 
@@ -22054,13 +22060,17 @@ Create an external key config owned by the caller's organization.
 
   - `string geo`
 
-    Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
 
   - `ProviderConfig providerConfig`
 
     KMS provider identity and auth coordinates.
 
   - `\Datetime updatedAt`
+
+  - `?string userProfileID`
+
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
 
 #### Example
 
@@ -22082,6 +22092,7 @@ $betaExternalKey = $client->beta->organization->externalKeys->create(
   ],
   displayName: 'x',
   geo: 'us',
+  userProfileID: 'uprof_01SDCCSbTxrXDpWc1phhtcfK',
 );
 
 var_dump($betaExternalKey);
@@ -22105,7 +22116,8 @@ var_dump($betaExternalKey);
     "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
+  "updated_at": "2024-10-30T23:58:27.427722Z",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -22140,7 +22152,7 @@ Results are ordered by creation time (newest first). Use the
 
   - `string id`
 
-    Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+    Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on Claude Platform on AWS, an AWS KMS key's ARN.
 
   - `Attachment attachment`
 
@@ -22154,13 +22166,17 @@ Results are ordered by creation time (newest first). Use the
 
   - `string geo`
 
-    Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
 
   - `ProviderConfig providerConfig`
 
     KMS provider identity and auth coordinates.
 
   - `\Datetime updatedAt`
+
+  - `?string userProfileID`
+
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
 
 #### Example
 
@@ -22198,7 +22214,8 @@ var_dump($page);
         "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
       },
       "type": "external_key",
-      "updated_at": "2024-10-30T23:58:27.427722Z"
+      "updated_at": "2024-10-30T23:58:27.427722Z",
+      "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
     }
   ],
   "next_page": "next_page"
@@ -22227,7 +22244,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
   - `string id`
 
-    Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+    Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on Claude Platform on AWS, an AWS KMS key's ARN.
 
   - `Attachment attachment`
 
@@ -22241,13 +22258,17 @@ Retrieve a single external key config in the caller's organization by ID.
 
   - `string geo`
 
-    Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
 
   - `ProviderConfig providerConfig`
 
     KMS provider identity and auth coordinates.
 
   - `\Datetime updatedAt`
+
+  - `?string userProfileID`
+
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
 
 #### Example
 
@@ -22285,7 +22306,8 @@ var_dump($betaExternalKey);
     "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
+  "updated_at": "2024-10-30T23:58:27.427722Z",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -22327,7 +22349,7 @@ encrypted data requires the original key identity to decrypt.
 
   - `string id`
 
-    Identifier of the external key config. A tagged ID prefixed `ekey_`, or — for organizations on the Claude Platform on AWS — the AWS KMS key ARN.
+    Identifier of the external key config: a tagged ID prefixed `ekey_`, or, on Claude Platform on AWS, an AWS KMS key's ARN.
 
   - `Attachment attachment`
 
@@ -22341,13 +22363,17 @@ encrypted data requires the original key identity to decrypt.
 
   - `string geo`
 
-    Data residency geo. Selects which regional validator handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
 
   - `ProviderConfig providerConfig`
 
     KMS provider identity and auth coordinates.
 
   - `\Datetime updatedAt`
+
+  - `?string userProfileID`
+
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
 
 #### Example
 
@@ -22393,7 +22419,8 @@ var_dump($betaExternalKey);
     "role_arn": "arn:aws:iam::111122223333:role/anthropic-cmek"
   },
   "type": "external_key",
-  "updated_at": "2024-10-30T23:58:27.427722Z"
+  "updated_at": "2024-10-30T23:58:27.427722Z",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -25911,7 +25938,7 @@ var_dump($page);
 {
   "data": [
     {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "added_at": "2024-10-30T23:58:27.427722Z",
       "email": "user@emaildomain.com",
       "name": "Jane Doe",
@@ -25989,7 +26016,7 @@ var_dump($betaOrganizationUser);
 
 ```json
 {
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "added_at": "2024-10-30T23:58:27.427722Z",
   "email": "user@emaildomain.com",
   "name": "Jane Doe",
@@ -26070,7 +26097,7 @@ var_dump($betaOrganizationUser);
 
 ```json
 {
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "added_at": "2024-10-30T23:58:27.427722Z",
   "email": "user@emaildomain.com",
   "name": "Jane Doe",
@@ -26127,7 +26154,7 @@ var_dump($user);
 
 ```json
 {
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "type": "user_deleted"
 }
 ```
@@ -26192,17 +26219,17 @@ List Workspaces
 
   - `string compartmentID`
 
-    Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK) on AWS, reference this value in your
-    KMS key-policy condition so the key is scoped to this compartment. On GCP and
-    Azure, Anthropic enforces the compartment binding automatically; you do not
-    need to reference this value in your key configuration. See the CMEK
-    integration guide for the required key configuration; unless your organization
-    is on Claude Platform on AWS, it includes a separate value used during key
-    validation. On Claude Platform on AWS there is no separate validation value:
-    the key is validated against this Workspace's own value when it is attached, so
-    if your key policy uses the compartment condition, add this value to it before
-    attaching the key.
+    Identifier for this Workspace's encryption compartment. When you configure an
+    AWS KMS customer-managed encryption key (CMEK) that isn't bound to a user
+    profile, reference this value in your KMS key-policy condition so the key is
+    scoped to this compartment. On GCP and Azure, Anthropic enforces the compartment
+    binding automatically; you do not need to reference this value in your key
+    configuration. See the CMEK integration guide for the required key
+    configuration; unless your organization is on Claude Platform on AWS, it
+    includes a separate value used during key validation. On Claude Platform on AWS
+    there is no separate validation value: your organization's own key is validated
+    against this Workspace's own value when it is attached, so if its key policy
+    uses the compartment condition, add this value to it before attaching the key.
 
   - `\Datetime createdAt`
 
@@ -26222,13 +26249,13 @@ List Workspaces
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
-    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-    single-Region key in the same AWS account and Region as the Workspace. On that
-    platform the key is validated against this Workspace when it is attached, so a
-    key-policy problem is reported as an error on this request. This field is write-once:
-    once a key is attached to a Workspace it cannot be detached or replaced. To
-    rotate key material, rotate the underlying key on your cloud KMS; the
-    `external_key_id` stays the same.
+    Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+    organization's own key must be a single-Region key in the same AWS account and
+    Region as the Workspace. On that platform the key is validated against this
+    Workspace when it is attached, so a key-policy problem is reported as an error
+    on this request. This field is write-once: once a key is attached to a Workspace
+    it cannot be detached or replaced. To rotate key material, rotate the underlying
+    key on your cloud KMS; the `external_key_id` stays the same.
 
   - `string name`
 
@@ -26237,6 +26264,10 @@ List Workspaces
   - `array<string,string> tags`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `?string userProfileID`
+
+    ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
 #### Example
 
@@ -26282,7 +26313,8 @@ var_dump($page);
         "env": "prod",
         "team": "platform"
       },
-      "type": "workspace"
+      "type": "workspace",
+      "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
     }
   ],
   "first_id": "first_id",
@@ -26293,7 +26325,7 @@ var_dump($page);
 
 ### Create Workspace
 
-`$client->beta->organization->workspaces->create(string name, ?DataResidencyCreateConfig dataResidency, ?string displayColor, ?string externalKeyID, ?array<string,string> tags, ?list<AnthropicBeta> betas): Workspace`
+`$client->beta->organization->workspaces->create(string name, ?DataResidencyCreateConfig dataResidency, ?string displayColor, ?string externalKeyID, ?array<string,string> tags, ?string userProfileID, ?list<AnthropicBeta> betas): Workspace`
 
 **POST** `/v1/organizations/workspaces`
 
@@ -26319,17 +26351,21 @@ Create Workspace
   Workspace. Setting this field requires CMEK to be enabled for your
   organization. When set, data stored for this Workspace is encrypted with the
   referenced key. Create key configurations with the External Keys API. On
-  Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-  single-Region key in the same AWS account and Region as the Workspace. On that
-  platform the key is validated against this Workspace when it is attached, so a
-  key-policy problem is reported as an error on this request. This field is write-once:
-  once a key is attached to a Workspace it cannot be detached or replaced. To
-  rotate key material, rotate the underlying key on your cloud KMS; the
-  `external_key_id` stays the same.
+  Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+  organization's own key must be a single-Region key in the same AWS account and
+  Region as the Workspace. On that platform the key is validated against this
+  Workspace when it is attached, so a key-policy problem is reported as an error
+  on this request. This field is write-once: once a key is attached to a Workspace
+  it cannot be detached or replaced. To rotate key material, rotate the underlying
+  key on your cloud KMS; the `external_key_id` stays the same.
 
 - `tags?:optional array<string,string>`
 
   User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+- `userProfileID?:optional string`
+
+  ID of a user profile to attach to the Workspace. Every inference request through the Workspace must then name this user profile; the API rejects a request that names none or a different one. The user profile can't be replaced or removed later; only deleting the user profile clears it.
 
 - `betas?:optional list<AnthropicBeta>` (header parameter)
 
@@ -26355,17 +26391,17 @@ Create Workspace
 
   - `string compartmentID`
 
-    Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK) on AWS, reference this value in your
-    KMS key-policy condition so the key is scoped to this compartment. On GCP and
-    Azure, Anthropic enforces the compartment binding automatically; you do not
-    need to reference this value in your key configuration. See the CMEK
-    integration guide for the required key configuration; unless your organization
-    is on Claude Platform on AWS, it includes a separate value used during key
-    validation. On Claude Platform on AWS there is no separate validation value:
-    the key is validated against this Workspace's own value when it is attached, so
-    if your key policy uses the compartment condition, add this value to it before
-    attaching the key.
+    Identifier for this Workspace's encryption compartment. When you configure an
+    AWS KMS customer-managed encryption key (CMEK) that isn't bound to a user
+    profile, reference this value in your KMS key-policy condition so the key is
+    scoped to this compartment. On GCP and Azure, Anthropic enforces the compartment
+    binding automatically; you do not need to reference this value in your key
+    configuration. See the CMEK integration guide for the required key
+    configuration; unless your organization is on Claude Platform on AWS, it
+    includes a separate value used during key validation. On Claude Platform on AWS
+    there is no separate validation value: your organization's own key is validated
+    against this Workspace's own value when it is attached, so if its key policy
+    uses the compartment condition, add this value to it before attaching the key.
 
   - `\Datetime createdAt`
 
@@ -26385,13 +26421,13 @@ Create Workspace
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
-    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-    single-Region key in the same AWS account and Region as the Workspace. On that
-    platform the key is validated against this Workspace when it is attached, so a
-    key-policy problem is reported as an error on this request. This field is write-once:
-    once a key is attached to a Workspace it cannot be detached or replaced. To
-    rotate key material, rotate the underlying key on your cloud KMS; the
-    `external_key_id` stays the same.
+    Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+    organization's own key must be a single-Region key in the same AWS account and
+    Region as the Workspace. On that platform the key is validated against this
+    Workspace when it is attached, so a key-policy problem is reported as an error
+    on this request. This field is write-once: once a key is attached to a Workspace
+    it cannot be detached or replaced. To rotate key material, rotate the underlying
+    key on your cloud KMS; the `external_key_id` stays the same.
 
   - `string name`
 
@@ -26400,6 +26436,10 @@ Create Workspace
   - `array<string,string> tags`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `?string userProfileID`
+
+    ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
 #### Example
 
@@ -26423,6 +26463,7 @@ $betaWorkspace = $client->beta->organization->workspaces->create(
   displayColor: '#6C5BB9',
   externalKeyID: 'ekey_01SDCCSbTxrXDpWc1phhtcfK',
   tags: ['env' => 'prod', 'team' => 'platform'],
+  userProfileID: 'uprof_01SDCCSbTxrXDpWc1phhtcfK',
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
 
@@ -26449,7 +26490,8 @@ var_dump($betaWorkspace);
     "env": "prod",
     "team": "platform"
   },
-  "type": "workspace"
+  "type": "workspace",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -26487,17 +26529,17 @@ Get Workspace
 
   - `string compartmentID`
 
-    Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK) on AWS, reference this value in your
-    KMS key-policy condition so the key is scoped to this compartment. On GCP and
-    Azure, Anthropic enforces the compartment binding automatically; you do not
-    need to reference this value in your key configuration. See the CMEK
-    integration guide for the required key configuration; unless your organization
-    is on Claude Platform on AWS, it includes a separate value used during key
-    validation. On Claude Platform on AWS there is no separate validation value:
-    the key is validated against this Workspace's own value when it is attached, so
-    if your key policy uses the compartment condition, add this value to it before
-    attaching the key.
+    Identifier for this Workspace's encryption compartment. When you configure an
+    AWS KMS customer-managed encryption key (CMEK) that isn't bound to a user
+    profile, reference this value in your KMS key-policy condition so the key is
+    scoped to this compartment. On GCP and Azure, Anthropic enforces the compartment
+    binding automatically; you do not need to reference this value in your key
+    configuration. See the CMEK integration guide for the required key
+    configuration; unless your organization is on Claude Platform on AWS, it
+    includes a separate value used during key validation. On Claude Platform on AWS
+    there is no separate validation value: your organization's own key is validated
+    against this Workspace's own value when it is attached, so if its key policy
+    uses the compartment condition, add this value to it before attaching the key.
 
   - `\Datetime createdAt`
 
@@ -26517,13 +26559,13 @@ Get Workspace
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
-    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-    single-Region key in the same AWS account and Region as the Workspace. On that
-    platform the key is validated against this Workspace when it is attached, so a
-    key-policy problem is reported as an error on this request. This field is write-once:
-    once a key is attached to a Workspace it cannot be detached or replaced. To
-    rotate key material, rotate the underlying key on your cloud KMS; the
-    `external_key_id` stays the same.
+    Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+    organization's own key must be a single-Region key in the same AWS account and
+    Region as the Workspace. On that platform the key is validated against this
+    Workspace when it is attached, so a key-policy problem is reported as an error
+    on this request. This field is write-once: once a key is attached to a Workspace
+    it cannot be detached or replaced. To rotate key material, rotate the underlying
+    key on your cloud KMS; the `external_key_id` stays the same.
 
   - `string name`
 
@@ -26532,6 +26574,10 @@ Get Workspace
   - `array<string,string> tags`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `?string userProfileID`
+
+    ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
 #### Example
 
@@ -26571,13 +26617,14 @@ var_dump($betaWorkspace);
     "env": "prod",
     "team": "platform"
   },
-  "type": "workspace"
+  "type": "workspace",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
 ### Update Workspace
 
-`$client->beta->organization->workspaces->update(string workspaceID, ?DataResidencyUpdateConfig dataResidency, ?string displayColor, ?string externalKeyID, ?string name, ?array<string,string> tags): Workspace`
+`$client->beta->organization->workspaces->update(string workspaceID, ?DataResidencyUpdateConfig dataResidency, ?string displayColor, ?string externalKeyID, ?string name, ?array<string,string> tags, ?string userProfileID): Workspace`
 
 **POST** `/v1/organizations/workspaces/{workspace_id}`
 
@@ -26601,13 +26648,13 @@ Update Workspace
   Workspace. Setting this field requires CMEK to be enabled for your
   organization. When set, data stored for this Workspace is encrypted with the
   referenced key. Create key configurations with the External Keys API. On
-  Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-  single-Region key in the same AWS account and Region as the Workspace. On that
-  platform the key is validated against this Workspace when it is attached, so a
-  key-policy problem is reported as an error on this request. This field is write-once:
-  once a key is attached to a Workspace it cannot be detached or replaced. To
-  rotate key material, rotate the underlying key on your cloud KMS; the
-  `external_key_id` stays the same.
+  Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+  organization's own key must be a single-Region key in the same AWS account and
+  Region as the Workspace. On that platform the key is validated against this
+  Workspace when it is attached, so a key-policy problem is reported as an error
+  on this request. This field is write-once: once a key is attached to a Workspace
+  it cannot be detached or replaced. To rotate key material, rotate the underlying
+  key on your cloud KMS; the `external_key_id` stays the same.
 
 - `name?:optional string`
 
@@ -26616,6 +26663,10 @@ Update Workspace
 - `tags?:optional array<string,string>`
 
   User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+- `userProfileID?:optional string`
+
+  ID of a user profile to attach to the Workspace. Every inference request through the Workspace must then name this user profile; the API rejects a request that names none or a different one. Once set, it can't be replaced or removed (sending the same ID again changes nothing); only deleting the user profile clears it. The default Workspace can't have a user profile.
 
 #### Returns
 
@@ -26637,17 +26688,17 @@ Update Workspace
 
   - `string compartmentID`
 
-    Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK) on AWS, reference this value in your
-    KMS key-policy condition so the key is scoped to this compartment. On GCP and
-    Azure, Anthropic enforces the compartment binding automatically; you do not
-    need to reference this value in your key configuration. See the CMEK
-    integration guide for the required key configuration; unless your organization
-    is on Claude Platform on AWS, it includes a separate value used during key
-    validation. On Claude Platform on AWS there is no separate validation value:
-    the key is validated against this Workspace's own value when it is attached, so
-    if your key policy uses the compartment condition, add this value to it before
-    attaching the key.
+    Identifier for this Workspace's encryption compartment. When you configure an
+    AWS KMS customer-managed encryption key (CMEK) that isn't bound to a user
+    profile, reference this value in your KMS key-policy condition so the key is
+    scoped to this compartment. On GCP and Azure, Anthropic enforces the compartment
+    binding automatically; you do not need to reference this value in your key
+    configuration. See the CMEK integration guide for the required key
+    configuration; unless your organization is on Claude Platform on AWS, it
+    includes a separate value used during key validation. On Claude Platform on AWS
+    there is no separate validation value: your organization's own key is validated
+    against this Workspace's own value when it is attached, so if its key policy
+    uses the compartment condition, add this value to it before attaching the key.
 
   - `\Datetime createdAt`
 
@@ -26667,13 +26718,13 @@ Update Workspace
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
-    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-    single-Region key in the same AWS account and Region as the Workspace. On that
-    platform the key is validated against this Workspace when it is attached, so a
-    key-policy problem is reported as an error on this request. This field is write-once:
-    once a key is attached to a Workspace it cannot be detached or replaced. To
-    rotate key material, rotate the underlying key on your cloud KMS; the
-    `external_key_id` stays the same.
+    Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+    organization's own key must be a single-Region key in the same AWS account and
+    Region as the Workspace. On that platform the key is validated against this
+    Workspace when it is attached, so a key-policy problem is reported as an error
+    on this request. This field is write-once: once a key is attached to a Workspace
+    it cannot be detached or replaced. To rotate key material, rotate the underlying
+    key on your cloud KMS; the `external_key_id` stays the same.
 
   - `string name`
 
@@ -26682,6 +26733,10 @@ Update Workspace
   - `array<string,string> tags`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `?string userProfileID`
+
+    ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
 #### Example
 
@@ -26703,6 +26758,7 @@ $betaWorkspace = $client->beta->organization->workspaces->update(
   externalKeyID: 'ekey_01SDCCSbTxrXDpWc1phhtcfK',
   name: 'x',
   tags: ['env' => 'prod', 'team' => 'platform'],
+  userProfileID: 'uprof_01SDCCSbTxrXDpWc1phhtcfK',
 );
 
 var_dump($betaWorkspace);
@@ -26728,7 +26784,8 @@ var_dump($betaWorkspace);
     "env": "prod",
     "team": "platform"
   },
-  "type": "workspace"
+  "type": "workspace",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -26764,17 +26821,17 @@ Archive Workspace
 
   - `string compartmentID`
 
-    Identifier for this Workspace's encryption compartment. When you configure a
-    customer-managed encryption key (CMEK) on AWS, reference this value in your
-    KMS key-policy condition so the key is scoped to this compartment. On GCP and
-    Azure, Anthropic enforces the compartment binding automatically; you do not
-    need to reference this value in your key configuration. See the CMEK
-    integration guide for the required key configuration; unless your organization
-    is on Claude Platform on AWS, it includes a separate value used during key
-    validation. On Claude Platform on AWS there is no separate validation value:
-    the key is validated against this Workspace's own value when it is attached, so
-    if your key policy uses the compartment condition, add this value to it before
-    attaching the key.
+    Identifier for this Workspace's encryption compartment. When you configure an
+    AWS KMS customer-managed encryption key (CMEK) that isn't bound to a user
+    profile, reference this value in your KMS key-policy condition so the key is
+    scoped to this compartment. On GCP and Azure, Anthropic enforces the compartment
+    binding automatically; you do not need to reference this value in your key
+    configuration. See the CMEK integration guide for the required key
+    configuration; unless your organization is on Claude Platform on AWS, it
+    includes a separate value used during key validation. On Claude Platform on AWS
+    there is no separate validation value: your organization's own key is validated
+    against this Workspace's own value when it is attached, so if its key policy
+    uses the compartment condition, add this value to it before attaching the key.
 
   - `\Datetime createdAt`
 
@@ -26794,13 +26851,13 @@ Archive Workspace
     Workspace. Setting this field requires CMEK to be enabled for your
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
-    Claude Platform on AWS the value is the AWS KMS key ARN, and the key must be a
-    single-Region key in the same AWS account and Region as the Workspace. On that
-    platform the key is validated against this Workspace when it is attached, so a
-    key-policy problem is reported as an error on this request. This field is write-once:
-    once a key is attached to a Workspace it cannot be detached or replaced. To
-    rotate key material, rotate the underlying key on your cloud KMS; the
-    `external_key_id` stays the same.
+    Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
+    organization's own key must be a single-Region key in the same AWS account and
+    Region as the Workspace. On that platform the key is validated against this
+    Workspace when it is attached, so a key-policy problem is reported as an error
+    on this request. This field is write-once: once a key is attached to a Workspace
+    it cannot be detached or replaced. To rotate key material, rotate the underlying
+    key on your cloud KMS; the `external_key_id` stays the same.
 
   - `string name`
 
@@ -26809,6 +26866,10 @@ Archive Workspace
   - `array<string,string> tags`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
+
+  - `?string userProfileID`
+
+    ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
 #### Example
 
@@ -26848,7 +26909,8 @@ var_dump($betaWorkspace);
     "env": "prod",
     "team": "platform"
   },
-  "type": "workspace"
+  "type": "workspace",
+  "user_profile_id": "uprof_01SDCCSbTxrXDpWc1phhtcfK"
 }
 ```
 
@@ -27174,7 +27236,7 @@ var_dump($page);
   "data": [
     {
       "type": "workspace_member",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
       "workspace_role": "workspace_admin"
     }
@@ -27243,7 +27305,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaWorkspaceMember = $client->beta->organization->workspaces->members->add(
   'workspace_id',
-  userID: 'user_01WCz1FkmYMm4gnmykNKUu3Q',
+  userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
   workspaceRole: NoBillingWorkspaceRole::WORKSPACE_ADMIN,
 );
 
@@ -27255,7 +27317,7 @@ var_dump($betaWorkspaceMember);
 ```json
 {
   "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   "workspace_role": "workspace_admin"
 }
@@ -27327,7 +27389,7 @@ var_dump($betaWorkspaceMember);
 ```json
 {
   "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   "workspace_role": "workspace_admin"
 }
@@ -27403,7 +27465,7 @@ var_dump($betaWorkspaceMember);
 ```json
 {
   "type": "workspace_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   "workspace_role": "workspace_admin"
 }
@@ -27468,7 +27530,7 @@ var_dump($member);
 ```json
 {
   "type": "workspace_member_deleted",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
 }
 ```
@@ -28134,7 +28196,10 @@ Update your organization's Compliance Settings.
 
 Setting `state` to `enabled` turns on the Compliance API and begins
 capturing organization activity events. Setting it to `disabled` turns
-both off. `state` reflects whether the Compliance API is enabled.
+both off. Access Transparency events are an exception: they are still
+captured while the Compliance API is disabled, and the Compliance API
+activity feed returns them once it is enabled again. `state` reflects
+whether the Compliance API is enabled.
 
 A request that sets `state` to its current value succeeds and leaves the
 resource unchanged. A `disabled` request stays in effect until a later
@@ -29788,7 +29853,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->analytics->usage->list(
   startingAt: new \DateTimeImmutable('2026-09-01T00:00:00Z'),
-  actorIDs: ['user_01WCz1FkmYMm4gnmykNKUu3Q'],
+  actorIDs: ['user_01WxYzAbCdEfGhJkMnPqRsTu'],
   actorTypes: [AnalyticsActorType::SERVICE_ACCOUNT_ACTOR],
   agentIDs: ['agent_01VHd3EAGJ6PLkP9LM7DDu3f'],
   apiKeyIDs: ['apikey_01Rj2N8SVvo6BePZj99NhmiT'],
@@ -29834,7 +29899,7 @@ var_dump($page);
           "email_address": "user@emaildomain.com",
           "name": "Jane Doe",
           "type": "user_actor",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+          "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
         },
         "actor_type": "user_actor",
         "agent_id": "agent_01VHd3EAGJ6PLkP9LM7DDu3f",
@@ -29867,12 +29932,12 @@ var_dump($page);
         "server_tool_use": {
           "web_search_requests": 10
         },
-        "total_tokens": 5377000,
+        "total_tokens": 5375500,
         "uncached_input_tokens": 1284500
       }
     }
   ],
-  "data_refreshed_at": "2019-12-27T18:11:19.117Z",
+  "data_refreshed_at": "2026-10-01T04:02:11Z",
   "has_more": true,
   "next_page": "next_page"
 }
@@ -30063,7 +30128,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $page = $client->beta->organization->analytics->cost->list(
   startingAt: new \DateTimeImmutable('2026-09-01T00:00:00Z'),
-  actorIDs: ['user_01WCz1FkmYMm4gnmykNKUu3Q'],
+  actorIDs: ['user_01WxYzAbCdEfGhJkMnPqRsTu'],
   actorTypes: [AnalyticsActorType::SERVICE_ACCOUNT_ACTOR],
   agentIDs: ['agent_01VHd3EAGJ6PLkP9LM7DDu3f'],
   apiKeyIDs: ['apikey_01Rj2N8SVvo6BePZj99NhmiT'],
@@ -30115,7 +30180,7 @@ var_dump($page);
           "email_address": "user@emaildomain.com",
           "name": "Jane Doe",
           "type": "user_actor",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+          "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
         },
         "actor_type": "user_actor",
         "agent_id": "agent_01VHd3EAGJ6PLkP9LM7DDu3f",
@@ -30141,7 +30206,7 @@ var_dump($page);
       "starting_at": "2026-09-01T00:00:00Z"
     }
   ],
-  "data_refreshed_at": "2019-12-27T18:11:19.117Z",
+  "data_refreshed_at": "2026-10-01T04:02:11Z",
   "has_more": true,
   "next_page": "next_page"
 }
@@ -30333,7 +30398,7 @@ var_dump($page);
 
 [Legacy] Get per-user token usage across a date range.
 
-Returns usage per user, ranked by the chosen token metric; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users consume the most tokens. Only usage attributed to a user account is included; usage with no user attributed to it, such as requests attributed only to an API key, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+Returns usage per user, ranked by the chosen token metric; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users consume the most tokens. Only usage attributed to a user account is included; usage with no user attributed to it, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/usage`](../beta/organization/analytics/usage/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
@@ -30769,7 +30834,7 @@ var_dump($page);
 
 [Legacy] Get per-user cost in USD across a date range.
 
-Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users account for the most cost. Only cost attributed to a user account is included; cost with no user attributed to it, such as requests attributed only to an API key, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users account for the most cost. Only cost attributed to a user account is included; cost with no user attributed to it, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/cost`](../beta/organization/analytics/cost/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
@@ -31103,7 +31168,7 @@ $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaSpendLimit = $client->beta->organization->spendLimits->set(
   amount: '50000',
-  scope: ['type' => 'user', 'userID' => 'user_01WCz1FkmYMm4gnmykNKUu3Q'],
+  scope: ['type' => 'user', 'userID' => 'user_01WxYzAbCdEfGhJkMnPqRsTu'],
   period: SpendLimitPeriod::MONTHLY,
   betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
 );
@@ -31123,7 +31188,7 @@ var_dump($betaSpendLimit);
   "period": "daily",
   "scope": {
     "type": "user",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "type": "spend_limit",
   "updated_at": "2019-12-27T18:11:19.117Z"
@@ -31214,7 +31279,7 @@ var_dump($betaSpendLimit);
   "period": "daily",
   "scope": {
     "type": "user",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "type": "spend_limit",
   "updated_at": "2019-12-27T18:11:19.117Z"
@@ -31393,7 +31458,7 @@ var_dump($page);
       "period": "daily",
       "scope": {
         "type": "user",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "type": "spend_limit",
       "updated_at": "2019-12-27T18:11:19.117Z"
@@ -31496,7 +31561,7 @@ var_dump($page);
         "email_address": "email_address",
         "name": "name",
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "amount": "50000",
       "currency": "USD",
@@ -31504,11 +31569,11 @@ var_dump($page);
       "period_to_date_spend": "12050.5",
       "scope": {
         "type": "user",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "source": {
         "type": "user",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "spend_limit_id": "spend_limit_id"
     }
@@ -31606,7 +31671,7 @@ var_dump($page);
         "email_address": "email_address",
         "name": "name",
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "created_at": "2019-12-27T18:11:19.117Z",
       "period": "daily",
@@ -31616,7 +31681,7 @@ var_dump($page);
         "email_address": "email_address",
         "name": "name",
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "spend_summary": {
         "actor": {
@@ -31624,7 +31689,7 @@ var_dump($page);
           "email_address": "email_address",
           "name": "name",
           "type": "user_actor",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+          "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
         },
         "amount": "50000",
         "currency": "USD",
@@ -31632,11 +31697,11 @@ var_dump($page);
         "period_to_date_spend": "12050.5",
         "scope": {
           "type": "user",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+          "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
         },
         "source": {
           "type": "user",
-          "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+          "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
         },
         "spend_limit_id": "spend_limit_id"
       },
@@ -31720,7 +31785,7 @@ var_dump($betaSpendLimitIncreaseRequest);
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "created_at": "2019-12-27T18:11:19.117Z",
   "period": "daily",
@@ -31730,7 +31795,7 @@ var_dump($betaSpendLimitIncreaseRequest);
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "spend_summary": {
     "actor": {
@@ -31738,7 +31803,7 @@ var_dump($betaSpendLimitIncreaseRequest);
       "email_address": "email_address",
       "name": "name",
       "type": "user_actor",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "amount": "50000",
     "currency": "USD",
@@ -31746,11 +31811,11 @@ var_dump($betaSpendLimitIncreaseRequest);
     "period_to_date_spend": "12050.5",
     "scope": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "source": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "spend_limit_id": "spend_limit_id"
   },
@@ -31846,7 +31911,7 @@ var_dump($response);
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "created_at": "2019-12-27T18:11:19.117Z",
   "period": "daily",
@@ -31856,7 +31921,7 @@ var_dump($response);
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "spend_limit": {
     "id": "id",
@@ -31867,7 +31932,7 @@ var_dump($response);
     "period": "daily",
     "scope": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "type": "spend_limit",
     "updated_at": "2019-12-27T18:11:19.117Z"
@@ -31878,7 +31943,7 @@ var_dump($response);
       "email_address": "email_address",
       "name": "name",
       "type": "user_actor",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "amount": "50000",
     "currency": "USD",
@@ -31886,11 +31951,11 @@ var_dump($response);
     "period_to_date_spend": "12050.5",
     "scope": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "source": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "spend_limit_id": "spend_limit_id"
   },
@@ -31973,7 +32038,7 @@ var_dump($betaSpendLimitIncreaseRequest);
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "created_at": "2019-12-27T18:11:19.117Z",
   "period": "daily",
@@ -31983,7 +32048,7 @@ var_dump($betaSpendLimitIncreaseRequest);
     "email_address": "email_address",
     "name": "name",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "spend_summary": {
     "actor": {
@@ -31991,7 +32056,7 @@ var_dump($betaSpendLimitIncreaseRequest);
       "email_address": "email_address",
       "name": "name",
       "type": "user_actor",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "amount": "50000",
     "currency": "USD",
@@ -31999,11 +32064,11 @@ var_dump($betaSpendLimitIncreaseRequest);
     "period_to_date_spend": "12050.5",
     "scope": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "source": {
       "type": "user",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     },
     "spend_limit_id": "spend_limit_id"
   },
@@ -32507,7 +32572,7 @@ var_dump($page);
       "email": "user@emaildomain.com",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "type": "rbac_group_member",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     }
   ],
   "has_more": false,
@@ -32573,7 +32638,7 @@ use Anthropic\Client;
 $client = new Client(apiKey: 'my-anthropic-api-key');
 
 $betaRBACGroupMember = $client->beta->organization->rbacGroups->members->add(
-  'rbac_group_id', userID: 'user_01WCz1FkmYMm4gnmykNKUu3Q'
+  'rbac_group_id', userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu'
 );
 
 var_dump($betaRBACGroupMember);
@@ -32587,7 +32652,7 @@ var_dump($betaRBACGroupMember);
   "email": "user@emaildomain.com",
   "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "type": "rbac_group_member",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
 }
 ```
 
@@ -32651,7 +32716,7 @@ var_dump($member);
 {
   "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
   "type": "rbac_group_member_deleted",
-  "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+  "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
 }
 ```
 
@@ -32862,10 +32927,11 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
     The vocabulary follows the resource: an `organization` grant carries a
     product-feature entitlement (for example `chat`), an admin-panel
     permission entitlement (`permission_*`), or a blanket capability-access
-    mode — `capability_access_all` grants every product-feature entitlement,
-    and `capability_access_all_ga` grants the generally-available subset as
-    it stands at permission-check time; neither mode grants model-access
-    entitlements. A consumer enumerating a role's per-feature grants should
+    mode — `capability_access_all` grants every product-feature entitlement
+    except `inference_hooks_inspection`, which a role holds only through its
+    own row, and `capability_access_all_ga` grants the generally-available
+    subset of those as it stands at permission-check time; neither mode grants
+    model-access entitlements. A consumer enumerating a role's per-feature grants should
     treat a blanket row as granting every product-feature entitlement it
     covers, or it will under-report the role's effective access. A `connector_tool` grant carries
     a tool-access action (`use` or `always_allow`); a `connector_scope` grant
@@ -33106,7 +33172,7 @@ var_dump($betaPlugin);
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",
@@ -33279,7 +33345,7 @@ var_dump($betaPlugin);
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",
@@ -33475,7 +33541,7 @@ var_dump($betaPlugin);
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",
@@ -33700,7 +33766,7 @@ var_dump($page);
       "created_by": {
         "email_address": "user@example.com",
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "description": "Reviews pull requests against your team's conventions.",
       "display_name": "Code Review Helper",
@@ -33946,7 +34012,7 @@ var_dump($betaPluginVersion);
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",
@@ -34097,7 +34163,7 @@ var_dump($page);
       "created_by": {
         "email_address": "user@example.com",
         "type": "user_actor",
-        "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+        "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
       },
       "description": "Reviews pull requests against your team's conventions.",
       "display_name": "Code Review Helper",
@@ -34237,7 +34303,7 @@ var_dump($betaPluginVersion);
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",
@@ -36999,6 +37065,1523 @@ var_dump($betaOrganizationWebhookEndpointSigningSecret);
 ```json
 {
   "signing_secret": "signing_secret"
+}
+```
+
+## Beta › Organization › Claude Tag › Slack Channels
+
+### Set Up Slack Channel
+
+`$client->beta->organization->claudeTag->slackChannels->create(ClaudeTagSlackChannelIdentifiers slack, ?ClaudeTagSettingsCreate settings, ?list<AnthropicBeta> betas): BetaClaudeTagSlackChannel`
+
+**POST** `/v1/organizations/claude_tag/slack_channels`
+
+Set a Slack channel up for Claude Tag and return it with its identifier. If the channel is already set up, whether in claude.ai, by Claude's first use in it or by an earlier request, the existing channel is returned, so the request can be repeated. `settings`, when sent, is applied as an update applies it. Before a channel is set up, Claude's Slack app confirms with Slack that the channel is in the workspace, is not archived and is visible to the app; a channel that fails the confirmation returns 404. Setting the channel up and applying `settings` are two steps: when the second is refused, the response is the refusal, the channel stays set up with every setting unset, and the error's `details.slack_channel_id` holds the channel's identifier.
+
+#### Parameters
+
+- `slack: ClaudeTagSlackChannelIdentifiers`
+
+  Slack's own identifiers for the channel to set up. The organization must own the workspace.
+
+- `settings?:optional ClaudeTagSettingsCreate`
+
+  Settings to store on the channel, applied as Update Slack Channel applies them.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagSlackChannel`
+
+  - `"slack_channel" type`
+
+  - `string id`
+
+    The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured gets a new one when claude.ai replaces its record, which happens only while the organization's read-only mode is off. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
+
+  - `\Datetime createdAt`
+
+    Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
+
+  - `ClaudeTagSettings settings`
+
+    What the channel itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+  - `ClaudeTagSlackChannelIdentifiers slack`
+
+    Slack's own identifiers for the channel.
+
+  - `ClaudeTagSettingSources sources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+  - `\Datetime updatedAt`
+
+    Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaClaudeTagSlackChannel = $client
+  ->beta
+  ->organization
+  ->claudeTag
+  ->slackChannels
+  ->create(
+  slack: ['channelID' => 'xx', 'workspaceID' => 'xx'],
+  settings: [
+    'enabled' => true,
+    'environmentID' => 'x',
+    'guestPolicy' => ['type' => 'allow'],
+    'instructions' => 'instructions',
+    'model' => 'x',
+  ],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaClaudeTagSlackChannel);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "settings": {
+    "enabled": true,
+    "environment_id": "environment_id",
+    "guest_policy": {
+      "type": "allow"
+    },
+    "instructions": "instructions",
+    "model": "model"
+  },
+  "slack": {
+    "channel_id": "xx",
+    "workspace_id": "xx"
+  },
+  "sources": {
+    "enabled": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "environment_id": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "guest_policy": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "instructions": [
+      {
+        "slack_channel_id": "slack_channel_id",
+        "type": "slack_channel"
+      }
+    ],
+    "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  },
+  "type": "slack_channel",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### List Slack Channels
+
+`$client->beta->organization->claudeTag->slackChannels->list(string slackWorkspaceID, ?bool includeInherited, ?int limit, ?string page, ?string slackChannelID, ?list<AnthropicBeta> betas): PageCursor<BetaClaudeTagSlackChannel>`
+
+**GET** `/v1/organizations/claude_tag/slack_channels`
+
+List the set-up Slack channels of one Slack workspace, newest first by `created_at`. A channel that is not set up is not listed: Slack holds the full list of a workspace's channels. Pass `slack_channel_id` as well to look one channel up by its Slack identifiers: `data` then holds that channel, or is empty when it is not set up, and `limit` and `page` are ignored. A workspace that the organization owns only through a Slack Enterprise Grid returns 404 until it is set up. With `include_inherited=true` each channel's `settings` holds what applies in it, and the request fails with 503 rather than resolve against a settings level that could not be read. A `page` cursor resumes only a request with the same `include_inherited`.
+
+#### Parameters
+
+- `slackWorkspaceID: string` (query parameter)
+
+  The Slack workspace whose channels to list: Slack's identifier for it, as in the channel object's `slack.workspace_id`, not the workspace object's `id`.
+
+- `includeInherited?:optional bool` (query parameter)
+
+  When `true`, `settings` holds what applies in each channel once the settings levels above it are taken into account, and every member of `sources` names the level a value comes from. When `false` or left out, `settings` holds what each channel itself stores.
+
+- `limit?:optional int` (query parameter)
+
+  Number of items to return per page, between 1 and 100. Defaults to 20.
+
+- `page?:optional string` (query parameter)
+
+  Opaque cursor from a previous response's `next_page`.
+
+- `slackChannelID?:optional string` (query parameter)
+
+  Slack's identifier for one channel of that workspace, as in the channel object's `slack.channel_id`. It is not the channel object's `id`. With it `data` holds that channel alone, or nothing when the channel is not set up.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagSlackChannel`
+
+  - `"slack_channel" type`
+
+  - `string id`
+
+    The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured gets a new one when claude.ai replaces its record, which happens only while the organization's read-only mode is off. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
+
+  - `\Datetime createdAt`
+
+    Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
+
+  - `ClaudeTagSettings settings`
+
+    What the channel itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+  - `ClaudeTagSlackChannelIdentifiers slack`
+
+    Slack's own identifiers for the channel.
+
+  - `ClaudeTagSettingSources sources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+  - `\Datetime updatedAt`
+
+    Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->organization->claudeTag->slackChannels->list(
+  slackWorkspaceID: 'slack_workspace_id',
+  includeInherited: true,
+  limit: 0,
+  page: 'page',
+  slackChannelID: 'slack_channel_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "settings": {
+        "enabled": true,
+        "environment_id": "environment_id",
+        "guest_policy": {
+          "type": "allow"
+        },
+        "instructions": "instructions",
+        "model": "model"
+      },
+      "slack": {
+        "channel_id": "xx",
+        "workspace_id": "xx"
+      },
+      "sources": {
+        "enabled": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "environment_id": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "guest_policy": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "instructions": [
+          {
+            "slack_channel_id": "slack_channel_id",
+            "type": "slack_channel"
+          }
+        ],
+        "model": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        }
+      },
+      "type": "slack_channel",
+      "updated_at": "2019-12-27T18:11:19.117Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Get Slack Channel
+
+`$client->beta->organization->claudeTag->slackChannels->retrieve(string id, ?bool includeInherited, ?list<AnthropicBeta> betas): BetaClaudeTagSlackChannel`
+
+**GET** `/v1/organizations/claude_tag/slack_channels/{id}`
+
+Get one Slack channel and its settings. By default `settings` holds what the channel itself stores: a setting that is null there is not set on the channel and is inherited. With `include_inherited=true`, `settings` holds what applies in the channel once the settings levels above it are taken into account, and the request fails with 503 rather than resolve against a settings level that could not be read. Either way `sources` names the settings level each value comes from, so a caller tells the channel's own value from an inherited one by its source, not by whether it is null.
+
+#### Parameters
+
+- `id: string` (path parameter)
+
+  The channel's identifier, starting with `slch_`.
+
+- `includeInherited?:optional bool` (query parameter)
+
+  When `true`, `settings` holds what applies in the channel once the settings levels above it are taken into account, and every member of `sources` names the level a value comes from. When `false` or left out, `settings` holds what the channel itself stores.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagSlackChannel`
+
+  - `"slack_channel" type`
+
+  - `string id`
+
+    The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured gets a new one when claude.ai replaces its record, which happens only while the organization's read-only mode is off. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
+
+  - `\Datetime createdAt`
+
+    Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
+
+  - `ClaudeTagSettings settings`
+
+    What the channel itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+  - `ClaudeTagSlackChannelIdentifiers slack`
+
+    Slack's own identifiers for the channel.
+
+  - `ClaudeTagSettingSources sources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+  - `\Datetime updatedAt`
+
+    Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaClaudeTagSlackChannel = $client
+  ->beta
+  ->organization
+  ->claudeTag
+  ->slackChannels
+  ->retrieve(
+  'slch_01SvpyRQK3nN6eH9uhRA7n1q',
+  includeInherited: true,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaClaudeTagSlackChannel);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "settings": {
+    "enabled": true,
+    "environment_id": "environment_id",
+    "guest_policy": {
+      "type": "allow"
+    },
+    "instructions": "instructions",
+    "model": "model"
+  },
+  "slack": {
+    "channel_id": "xx",
+    "workspace_id": "xx"
+  },
+  "sources": {
+    "enabled": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "environment_id": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "guest_policy": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "instructions": [
+      {
+        "slack_channel_id": "slack_channel_id",
+        "type": "slack_channel"
+      }
+    ],
+    "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  },
+  "type": "slack_channel",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Update Slack Channel
+
+`$client->beta->organization->claudeTag->slackChannels->update(string id, ClaudeTagSettingsUpdate settings, ?list<AnthropicBeta> betas): BetaClaudeTagSlackChannel`
+
+**POST** `/v1/organizations/claude_tag/slack_channels/{id}`
+
+Change the settings a Slack channel stores. The update is partial: a setting left out is unchanged, and a setting sent as null is cleared, so the channel inherits it. If any value is refused, no setting in the request is stored. A group direct message takes no settings and returns 400.
+
+#### Parameters
+
+- `id: string` (path parameter)
+
+  The channel's identifier, starting with `slch_`.
+
+- `settings: ClaudeTagSettingsUpdate`
+
+  The settings to change.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagSlackChannel`
+
+  - `"slack_channel" type`
+
+  - `string id`
+
+    The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured gets a new one when claude.ai replaces its record, which happens only while the organization's read-only mode is off. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
+
+  - `\Datetime createdAt`
+
+    Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
+
+  - `ClaudeTagSettings settings`
+
+    What the channel itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+  - `ClaudeTagSlackChannelIdentifiers slack`
+
+    Slack's own identifiers for the channel.
+
+  - `ClaudeTagSettingSources sources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+  - `\Datetime updatedAt`
+
+    Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaClaudeTagSlackChannel = $client
+  ->beta
+  ->organization
+  ->claudeTag
+  ->slackChannels
+  ->update(
+  'slch_01SvpyRQK3nN6eH9uhRA7n1q',
+  settings: [
+    'enabled' => true,
+    'environmentID' => 'x',
+    'guestPolicy' => ['type' => 'allow'],
+    'instructions' => 'instructions',
+    'model' => 'x',
+  ],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaClaudeTagSlackChannel);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "settings": {
+    "enabled": true,
+    "environment_id": "environment_id",
+    "guest_policy": {
+      "type": "allow"
+    },
+    "instructions": "instructions",
+    "model": "model"
+  },
+  "slack": {
+    "channel_id": "xx",
+    "workspace_id": "xx"
+  },
+  "sources": {
+    "enabled": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "environment_id": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "guest_policy": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "instructions": [
+      {
+        "slack_channel_id": "slack_channel_id",
+        "type": "slack_channel"
+      }
+    ],
+    "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  },
+  "type": "slack_channel",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Remove Slack Channel
+
+`$client->beta->organization->claudeTag->slackChannels->delete(string id, ?list<AnthropicBeta> betas): BetaClaudeTagDeletedSlackChannel`
+
+**DELETE** `/v1/organizations/claude_tag/slack_channels/{id}`
+
+Remove a Slack channel from Claude Tag. This deletes the channel's stored settings and its Bundle Targets at once, and then, in the background, the channel's sessions and their transcripts, its memory, its routines and the artifacts published from it. None of it can be restored. The channel in Slack and its messages are unchanged. The request is refused with 400 and `error.details.error_code` `slack_channel_enabled` while `enabled` resolves to `true` for the channel, as a read with `include_inherited=true` returns it: set `enabled` to `false` on the channel first. This guards against removing a channel in use by mistake; it is not a way to keep Claude out, because the removal deletes the channel's own `enabled: false` with its other settings, after which the channel inherits again and Claude's next use of it can set it up anew with a new identifier. The identifier returns 404 as soon as the request returns, so a repeated removal returns 404. A group direct message returns 400, and so does a channel that holds configuration this API does not manage.
+
+#### Parameters
+
+- `id: string` (path parameter)
+
+  The channel's identifier, starting with `slch_`.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagDeletedSlackChannel`
+
+  - `"slack_channel_deleted" type`
+
+  - `string id`
+
+    The removed channel's identifier.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaClaudeTagDeletedSlackChannel = $client
+  ->beta
+  ->organization
+  ->claudeTag
+  ->slackChannels
+  ->delete(
+  'slch_01SvpyRQK3nN6eH9uhRA7n1q',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaClaudeTagDeletedSlackChannel);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "slack_channel_deleted"
+}
+```
+
+## Beta › Organization › Claude Tag › Slack Workspaces
+
+### List Slack Workspaces
+
+`$client->beta->organization->claudeTag->slackWorkspaces->list(?bool includeInherited, ?int limit, ?string page, ?string slackWorkspaceID, ?list<AnthropicBeta> betas): PageCursor<BetaClaudeTagSlackWorkspace>`
+
+**GET** `/v1/organizations/claude_tag/slack_workspaces`
+
+List the set-up Slack workspaces the organization owns, newest first by `created_at`. Pass `slack_workspace_id` to look one workspace up by its Slack identifier: `data` then holds that workspace, or is empty when it is not set up. A workspace of a Slack Enterprise Grid the organization has connected returns 404 until it is set up. With `include_inherited=true` each workspace's `settings` holds what applies in it, and the request fails with 503 rather than resolve against a settings level that could not be read. A `page` cursor resumes only a request with the same `include_inherited`.
+
+#### Parameters
+
+- `includeInherited?:optional bool` (query parameter)
+
+  When `true`, `settings` holds what applies in each workspace once the organization's Slack defaults are taken into account, and every member of `sources` names the level a value comes from. When `false` or left out, `settings` holds what each workspace itself stores.
+
+- `limit?:optional int` (query parameter)
+
+  Number of items to return per page, between 1 and 100. Defaults to 20.
+
+- `page?:optional string` (query parameter)
+
+  Opaque cursor from a previous response's `next_page`.
+
+- `slackWorkspaceID?:optional string` (query parameter)
+
+  Slack's identifier for one workspace, as in the workspace object's `slack.workspace_id`, not its `id`. With it `data` holds that workspace alone, or nothing when it is not set up.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagSlackWorkspace`
+
+  - `"slack_workspace" type`
+
+  - `string id`
+
+    The workspace's identifier. Starts with `slws_`. It does not change for as long as the workspace is set up. A workspace that is removed and set up again has a new one, and the old one keeps returning 404; look the workspace up by its Slack identifier for the new one.
+
+  - `\Datetime createdAt`
+
+    Time the workspace was set up, by whichever route. It does not change for as long as `id` does not.
+
+  - `ClaudeTagSettings settings`
+
+    What the workspace itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+  - `ClaudeTagSlackWorkspaceIdentifiers slack`
+
+    Slack's own identifier for the workspace.
+
+  - `ClaudeTagSettingSources sources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+  - `\Datetime updatedAt`
+
+    Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->organization->claudeTag->slackWorkspaces->list(
+  includeInherited: true,
+  limit: 0,
+  page: 'page',
+  slackWorkspaceID: 'slack_workspace_id',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "settings": {
+        "enabled": true,
+        "environment_id": "environment_id",
+        "guest_policy": {
+          "type": "allow"
+        },
+        "instructions": "instructions",
+        "model": "model"
+      },
+      "slack": {
+        "workspace_id": "workspace_id"
+      },
+      "sources": {
+        "enabled": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "environment_id": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "guest_policy": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "instructions": [
+          {
+            "slack_channel_id": "slack_channel_id",
+            "type": "slack_channel"
+          }
+        ],
+        "model": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        }
+      },
+      "type": "slack_workspace",
+      "updated_at": "2019-12-27T18:11:19.117Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Get Slack Workspace
+
+`$client->beta->organization->claudeTag->slackWorkspaces->retrieve(string id, ?bool includeInherited, ?list<AnthropicBeta> betas): BetaClaudeTagSlackWorkspace`
+
+**GET** `/v1/organizations/claude_tag/slack_workspaces/{id}`
+
+Get one Slack workspace and its settings. By default `settings` holds what the workspace itself stores: a setting that is null there is not set on the workspace and is inherited. With `include_inherited=true`, `settings` holds what applies in the workspace once the organization's Slack defaults are taken into account, and the request fails with 503 rather than resolve against a settings level that could not be read. Either way `sources` names the settings level each value comes from.
+
+#### Parameters
+
+- `id: string` (path parameter)
+
+  The workspace's identifier, starting with `slws_`.
+
+- `includeInherited?:optional bool` (query parameter)
+
+  When `true`, `settings` holds what applies in the workspace once the organization's Slack defaults are taken into account, and every member of `sources` names the level a value comes from. When `false` or left out, `settings` holds what the workspace itself stores.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagSlackWorkspace`
+
+  - `"slack_workspace" type`
+
+  - `string id`
+
+    The workspace's identifier. Starts with `slws_`. It does not change for as long as the workspace is set up. A workspace that is removed and set up again has a new one, and the old one keeps returning 404; look the workspace up by its Slack identifier for the new one.
+
+  - `\Datetime createdAt`
+
+    Time the workspace was set up, by whichever route. It does not change for as long as `id` does not.
+
+  - `ClaudeTagSettings settings`
+
+    What the workspace itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+  - `ClaudeTagSlackWorkspaceIdentifiers slack`
+
+    Slack's own identifier for the workspace.
+
+  - `ClaudeTagSettingSources sources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+  - `\Datetime updatedAt`
+
+    Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaClaudeTagSlackWorkspace = $client
+  ->beta
+  ->organization
+  ->claudeTag
+  ->slackWorkspaces
+  ->retrieve(
+  'slws_01Hq8TzW5mKc2YbX7vNd4RfJ',
+  includeInherited: true,
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaClaudeTagSlackWorkspace);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "settings": {
+    "enabled": true,
+    "environment_id": "environment_id",
+    "guest_policy": {
+      "type": "allow"
+    },
+    "instructions": "instructions",
+    "model": "model"
+  },
+  "slack": {
+    "workspace_id": "workspace_id"
+  },
+  "sources": {
+    "enabled": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "environment_id": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "guest_policy": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "instructions": [
+      {
+        "slack_channel_id": "slack_channel_id",
+        "type": "slack_channel"
+      }
+    ],
+    "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  },
+  "type": "slack_workspace",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Update Slack Workspace
+
+`$client->beta->organization->claudeTag->slackWorkspaces->update(string id, ClaudeTagSettingsUpdate settings, ?list<AnthropicBeta> betas): BetaClaudeTagSlackWorkspace`
+
+**POST** `/v1/organizations/claude_tag/slack_workspaces/{id}`
+
+Change the settings a Slack workspace stores. The update is partial: a setting left out is unchanged, and a setting sent as null is cleared, so the workspace inherits it. If any value is refused, no setting in the request is stored.
+
+#### Parameters
+
+- `id: string` (path parameter)
+
+  The workspace's identifier, starting with `slws_`.
+
+- `settings: ClaudeTagSettingsUpdate`
+
+  The settings to change.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagSlackWorkspace`
+
+  - `"slack_workspace" type`
+
+  - `string id`
+
+    The workspace's identifier. Starts with `slws_`. It does not change for as long as the workspace is set up. A workspace that is removed and set up again has a new one, and the old one keeps returning 404; look the workspace up by its Slack identifier for the new one.
+
+  - `\Datetime createdAt`
+
+    Time the workspace was set up, by whichever route. It does not change for as long as `id` does not.
+
+  - `ClaudeTagSettings settings`
+
+    What the workspace itself stores or, with `include_inherited`, what applies in it. `sources` says which.
+
+  - `ClaudeTagSlackWorkspaceIdentifiers slack`
+
+    Slack's own identifier for the workspace.
+
+  - `ClaudeTagSettingSources sources`
+
+    For each setting, the settings level its value in `settings` comes from.
+
+  - `\Datetime updatedAt`
+
+    Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaClaudeTagSlackWorkspace = $client
+  ->beta
+  ->organization
+  ->claudeTag
+  ->slackWorkspaces
+  ->update(
+  'slws_01Hq8TzW5mKc2YbX7vNd4RfJ',
+  settings: [
+    'enabled' => true,
+    'environmentID' => 'x',
+    'guestPolicy' => ['type' => 'allow'],
+    'instructions' => 'instructions',
+    'model' => 'x',
+  ],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaClaudeTagSlackWorkspace);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "settings": {
+    "enabled": true,
+    "environment_id": "environment_id",
+    "guest_policy": {
+      "type": "allow"
+    },
+    "instructions": "instructions",
+    "model": "model"
+  },
+  "slack": {
+    "workspace_id": "workspace_id"
+  },
+  "sources": {
+    "enabled": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "environment_id": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "guest_policy": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "instructions": [
+      {
+        "slack_channel_id": "slack_channel_id",
+        "type": "slack_channel"
+      }
+    ],
+    "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  },
+  "type": "slack_workspace",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+## Beta › Organization › Claude Tag › Bundles
+
+### List Bundles
+
+`$client->beta->organization->claudeTag->bundles->list(?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaClaudeTagBundle>`
+
+**GET** `/v1/organizations/claude_tag/bundles`
+
+List the organization's Bundles, newest first by `created_at`. A Bundle that Claude Tag manages for itself is not listed.
+
+#### Parameters
+
+- `limit?:optional int` (query parameter)
+
+  Number of items to return per page, between 1 and 100. Defaults to 20.
+
+- `page?:optional string` (query parameter)
+
+  Opaque cursor from a previous response's `next_page`.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagBundle`
+
+  - `"bundle" type`
+
+  - `string id`
+
+    The Bundle's identifier. Starts with `capp_`.
+
+  - `\Datetime createdAt`
+
+    Time the Bundle was created.
+
+  - `?string description`
+
+    What the Bundle is for. Null when it has none. Read-only.
+
+  - `string displayName`
+
+    The Bundle's name. Always set. Read-only.
+
+  - `\Datetime updatedAt`
+
+    Time of the last change to the Bundle.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->organization->claudeTag->bundles->list(
+  limit: 0, page: 'page', betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24]
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "description": "description",
+      "display_name": "display_name",
+      "type": "bundle",
+      "updated_at": "2019-12-27T18:11:19.117Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Get Bundle
+
+`$client->beta->organization->claudeTag->bundles->retrieve(string bundleID, ?list<AnthropicBeta> betas): BetaClaudeTagBundle`
+
+**GET** `/v1/organizations/claude_tag/bundles/{bundle_id}`
+
+Get one Bundle. What the Bundle grants (connectors, repositories and credentials) is never returned.
+
+#### Parameters
+
+- `bundleID: string` (path parameter)
+
+  The Bundle's identifier, starting with `capp_`.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagBundle`
+
+  - `"bundle" type`
+
+  - `string id`
+
+    The Bundle's identifier. Starts with `capp_`.
+
+  - `\Datetime createdAt`
+
+    Time the Bundle was created.
+
+  - `?string description`
+
+    What the Bundle is for. Null when it has none. Read-only.
+
+  - `string displayName`
+
+    The Bundle's name. Always set. Read-only.
+
+  - `\Datetime updatedAt`
+
+    Time of the last change to the Bundle.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaClaudeTagBundle = $client
+  ->beta
+  ->organization
+  ->claudeTag
+  ->bundles
+  ->retrieve(
+  'capp_011CZkZjLP1cWxj5EtMmdgbq',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaClaudeTagBundle);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "display_name": "display_name",
+  "type": "bundle",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+## Beta › Organization › Claude Tag › Bundles › Targets
+
+### List Bundle Targets
+
+`$client->beta->organization->claudeTag->bundles->targets->list(string bundleID, ?int limit, ?string page, ?list<AnthropicBeta> betas): PageCursor<BetaClaudeTagBundleTarget>`
+
+**GET** `/v1/organizations/claude_tag/bundles/{bundle_id}/targets`
+
+List the Slack channels and Slack workspaces a Bundle is attached to, newest first by `created_at`. Only channels and workspaces the organization owns are listed; a Bundle that is attached to anything else has no Bundle Target for it.
+
+#### Parameters
+
+- `bundleID: string` (path parameter)
+
+  The Bundle's identifier, starting with `capp_`.
+
+- `limit?:optional int` (query parameter)
+
+  Number of items to return per page, between 1 and 100. Defaults to 20.
+
+- `page?:optional string` (query parameter)
+
+  Opaque cursor from a previous response's `next_page`.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagBundleTarget`
+
+  - `class BetaClaudeTagSlackChannelBundleTarget`
+
+    - `"slack_channel" type`
+
+    - `string id`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `\Datetime createdAt`
+
+      Time the Bundle was attached.
+
+    - `string slackChannelID`
+
+      The identifier of the Slack channel the Bundle is attached to, starting with `slch_`. It is the channel object's `id`, not Slack's `channel_id`.
+
+  - `class BetaClaudeTagSlackWorkspaceBundleTarget`
+
+    - `"slack_workspace" type`
+
+    - `string id`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `\Datetime createdAt`
+
+      Time the Bundle was attached.
+
+    - `string slackWorkspaceID`
+
+      The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->organization->claudeTag->bundles->targets->list(
+  'capp_011CZkZjLP1cWxj5EtMmdgbq',
+  limit: 0,
+  page: 'page',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($page);
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "id": "id",
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Attach Bundle
+
+`$client->beta->organization->claudeTag->bundles->targets->create(string bundleID, BetaClaudeTagBundleTargetCreate target, ?list<AnthropicBeta> betas): BetaClaudeTagBundleTarget`
+
+**POST** `/v1/organizations/claude_tag/bundles/{bundle_id}/targets`
+
+Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a workspace can be used in the workspace and in every channel in it. Attaching a Bundle to a channel or workspace it is already attached to returns the existing Bundle Target. The channel or workspace must be set up: attaching never sets a channel up. A group direct message takes no Bundle and returns 400.
+
+#### Parameters
+
+- `bundleID: string` (path parameter)
+
+  The Bundle's identifier, starting with `capp_`.
+
+- `target: BetaClaudeTagBundleTargetCreate`
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagBundleTarget`
+
+  - `class BetaClaudeTagSlackChannelBundleTarget`
+
+    - `"slack_channel" type`
+
+    - `string id`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `\Datetime createdAt`
+
+      Time the Bundle was attached.
+
+    - `string slackChannelID`
+
+      The identifier of the Slack channel the Bundle is attached to, starting with `slch_`. It is the channel object's `id`, not Slack's `channel_id`.
+
+  - `class BetaClaudeTagSlackWorkspaceBundleTarget`
+
+    - `"slack_workspace" type`
+
+    - `string id`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `\Datetime createdAt`
+
+      Time the Bundle was attached.
+
+    - `string slackWorkspaceID`
+
+      The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaClaudeTagBundleTarget = $client
+  ->beta
+  ->organization
+  ->claudeTag
+  ->bundles
+  ->targets
+  ->create(
+  'capp_011CZkZjLP1cWxj5EtMmdgbq',
+  target: ['slackChannelID' => 'xxxxxxxx', 'type' => 'slack_channel'],
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaClaudeTagBundleTarget);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "slack_channel_id": "slack_channel_id",
+  "type": "slack_channel"
+}
+```
+
+### Get Bundle Target
+
+`$client->beta->organization->claudeTag->bundles->targets->retrieve(string targetID, string bundleID, ?list<AnthropicBeta> betas): BetaClaudeTagBundleTarget`
+
+**GET** `/v1/organizations/claude_tag/bundles/{bundle_id}/targets/{target_id}`
+
+Get one Bundle Target. Returns 404 when `target_id` is the identifier of another Bundle's Bundle Target, or the Bundle Target was detached.
+
+#### Parameters
+
+- `bundleID: string` (path parameter)
+
+  The Bundle's identifier, starting with `capp_`.
+
+- `targetID: string` (path parameter)
+
+  The Bundle Target's identifier, starting with `btgt_`. Attach Bundle and List Bundle Targets return it. It is never the identifier of the channel or workspace.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagBundleTarget`
+
+  - `class BetaClaudeTagSlackChannelBundleTarget`
+
+    - `"slack_channel" type`
+
+    - `string id`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `\Datetime createdAt`
+
+      Time the Bundle was attached.
+
+    - `string slackChannelID`
+
+      The identifier of the Slack channel the Bundle is attached to, starting with `slch_`. It is the channel object's `id`, not Slack's `channel_id`.
+
+  - `class BetaClaudeTagSlackWorkspaceBundleTarget`
+
+    - `"slack_workspace" type`
+
+    - `string id`
+
+      The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
+
+    - `\Datetime createdAt`
+
+      Time the Bundle was attached.
+
+    - `string slackWorkspaceID`
+
+      The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaClaudeTagBundleTarget = $client
+  ->beta
+  ->organization
+  ->claudeTag
+  ->bundles
+  ->targets
+  ->retrieve(
+  'btgt_01SvpyRQK3nN6eH9uhRA7n1qHq8TzW5mKc2YbX7vNd4RfJ',
+  bundleID: 'capp_011CZkZjLP1cWxj5EtMmdgbq',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaClaudeTagBundleTarget);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "slack_channel_id": "slack_channel_id",
+  "type": "slack_channel"
+}
+```
+
+### Detach Bundle
+
+`$client->beta->organization->claudeTag->bundles->targets->delete(string targetID, string bundleID, ?list<AnthropicBeta> betas): BetaClaudeTagDeletedBundleTarget`
+
+**DELETE** `/v1/organizations/claude_tag/bundles/{bundle_id}/targets/{target_id}`
+
+Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach returns 404.
+
+#### Parameters
+
+- `bundleID: string` (path parameter)
+
+  The Bundle's identifier, starting with `capp_`.
+
+- `targetID: string` (path parameter)
+
+  The Bundle Target's identifier, starting with `btgt_`. Attach Bundle and List Bundle Targets return it. It is never the identifier of the channel or workspace.
+
+- `betas?:optional list<AnthropicBeta>` (header parameter)
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+#### Returns
+
+- `class BetaClaudeTagDeletedBundleTarget`
+
+  - `"bundle_target_deleted" type`
+
+  - `string id`
+
+    The identifier the Bundle Target had.
+
+#### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use Anthropic\Client;
+use Anthropic\Beta\AnthropicBeta;
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$betaClaudeTagDeletedBundleTarget = $client
+  ->beta
+  ->organization
+  ->claudeTag
+  ->bundles
+  ->targets
+  ->delete(
+  'btgt_01SvpyRQK3nN6eH9uhRA7n1qHq8TzW5mKc2YbX7vNd4RfJ',
+  bundleID: 'capp_011CZkZjLP1cWxj5EtMmdgbq',
+  betas: [AnthropicBeta::MESSAGE_BATCHES_2024_09_24],
+);
+
+var_dump($betaClaudeTagDeletedBundleTarget);
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "type": "bundle_target_deleted"
 }
 ```
 

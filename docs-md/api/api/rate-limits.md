@@ -118,7 +118,7 @@ To get the highest throughput within your rate limits, cache repeated content su
 
 OTPM rate limits are evaluated in real time as output tokens are produced, counting only the actual tokens generated. The `max_tokens` parameter does not factor into OTPM rate limit calculations, so there is no rate limit downside to setting a higher `max_tokens` value.
 
-Each row in the following tables has its own RPM, ITPM, and OTPM limits. Some rows cover several models that share one limit; see the notes under the tables. You can check your current rate limits and behavior on the [Rate limits](https://platform.claude.com/usage/limits) page in the Claude Console, or read the configured limits programmatically with the [Rate Limits API](../manage-claude/rate-limits-api.md).
+Each row in the following tables has its own RPM, ITPM, and OTPM limits. Some rows cover several models that share one limit; see the notes under the tables. You can check your current rate limits and behavior on the [Rate limits](https://platform.claude.com/usage/limits) page in the Claude Console, or read the configured limits and set workspace limits programmatically with the [Rate Limits API](../manage-claude/rate-limits-api.md).
 
 Rate limits are currently shared across all `inference_geo` values. Requests with `inference_geo: "us"` and `inference_geo: "global"` draw from the same rate limit pool.
 
@@ -126,58 +126,58 @@ Rate limits are currently shared across all `inference_geo` values. Requests wit
 
 | Model                                                                                                                                                       | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
-| Claude Fable 5.x1                                                                                                                                           | 1,000                             | 500,000                                | 100,000                                 |
-| Claude Opus 5.5                                                                                                                                             | 1,000                             | 2,000,000                              | 400,000                                 |
+| Claude Fable 5.x<sup>1</sup>                                                                                                                                | 4,000                             | 500,000                                | 100,000                                 |
+| Claude Opus 5.5                                                                                                                                             | 4,000                             | 2,000,000                              | 400,000                                 |
 | Claude Opus 5                                                                                                                                               | 1,000                             | 2,000,000                              | 400,000                                 |
-| Claude Opus 4.x2                                                                                                                                            | 1,000                             | 2,000,000                              | 400,000                                 |
-| Claude Sonnet 5.5                                                                                                                                           | 1,000                             | 2,000,000                              | 400,000                                 |
+| Claude Opus 4.x<sup>2</sup>                                                                                                                                 | 1,000                             | 2,000,000                              | 400,000                                 |
+| Claude Sonnet 5.5                                                                                                                                           | 4,000                             | 2,000,000                              | 400,000                                 |
 | Claude Sonnet 5                                                                                                                                             | 1,000                             | 2,000,000                              | 400,000                                 |
-| Claude Sonnet 4.x3                                                                                                                                          | 1,000                             | 2,000,000                              | 400,000                                 |
-| Claude Haiku 5.5                                                                                                                                            | 1,000                             | 2,000,000                              | 400,000                                 |
+| Claude Sonnet 4.x<sup>3</sup>                                                                                                                               | 1,000                             | 2,000,000                              | 400,000                                 |
+| Claude Haiku 5.5                                                                                                                                            | 4,000                             | 2,000,000                              | 400,000                                 |
 | Claude Haiku 4.5                                                                                                                                            | 1,000                             | 2,000,000                              | 400,000                                 |
-| Claude Haiku 3.5 ([retired, except on Claude Models on Google Cloud (Google managed)](../about-claude/model-deprecations.md)) | 1,000                             | 100,0004                               | 20,000                                  |
+| Claude Haiku 3.5 ([retired, except on Claude Models on Google Cloud (Google managed)](../about-claude/model-deprecations.md)) | 1,000                             | 100,000<sup>4</sup>                    | 20,000                                  |
 
 **Build tier**
 
 | Model                                                                                                                                                       | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
-| Claude Fable 5.x1                                                                                                                                           | 2,000                             | 1,500,000                              | 300,000                                 |
-| Claude Opus 5.5                                                                                                                                             | 5,000                             | 5,000,000                              | 1,000,000                               |
+| Claude Fable 5.x<sup>1</sup>                                                                                                                                | 10,000                            | 1,500,000                              | 300,000                                 |
+| Claude Opus 5.5                                                                                                                                             | 10,000                            | 5,000,000                              | 1,000,000                               |
 | Claude Opus 5                                                                                                                                               | 5,000                             | 5,000,000                              | 1,000,000                               |
-| Claude Opus 4.x2                                                                                                                                            | 5,000                             | 5,000,000                              | 1,000,000                               |
-| Claude Sonnet 5.5                                                                                                                                           | 5,000                             | 5,000,000                              | 1,000,000                               |
+| Claude Opus 4.x<sup>2</sup>                                                                                                                                 | 5,000                             | 5,000,000                              | 1,000,000                               |
+| Claude Sonnet 5.5                                                                                                                                           | 10,000                            | 5,000,000                              | 1,000,000                               |
 | Claude Sonnet 5                                                                                                                                             | 5,000                             | 5,000,000                              | 1,000,000                               |
-| Claude Sonnet 4.x3                                                                                                                                          | 5,000                             | 5,000,000                              | 1,000,000                               |
-| Claude Haiku 5.5                                                                                                                                            | 5,000                             | 5,000,000                              | 1,000,000                               |
+| Claude Sonnet 4.x<sup>3</sup>                                                                                                                               | 5,000                             | 5,000,000                              | 1,000,000                               |
+| Claude Haiku 5.5                                                                                                                                            | 10,000                            | 5,000,000                              | 1,000,000                               |
 | Claude Haiku 4.5                                                                                                                                            | 5,000                             | 5,000,000                              | 1,000,000                               |
-| Claude Haiku 3.5 ([retired, except on Claude Models on Google Cloud (Google managed)](../about-claude/model-deprecations.md)) | 2,000                             | 200,0004                               | 40,000                                  |
+| Claude Haiku 3.5 ([retired, except on Claude Models on Google Cloud (Google managed)](../about-claude/model-deprecations.md)) | 2,000                             | 200,000<sup>4</sup>                    | 40,000                                  |
 
 **Scale tier**
 
 | Model                                                                                                                                                       | Maximum requests per minute (RPM) | Maximum input tokens per minute (ITPM) | Maximum output tokens per minute (OTPM) |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------- | --------------------------------------- |
-| Claude Fable 5.x1                                                                                                                                           | 4,000                             | 4,000,000                              | 800,000                                 |
-| Claude Opus 5.5                                                                                                                                             | 10,000                            | 10,000,000                             | 2,000,000                               |
+| Claude Fable 5.x<sup>1</sup>                                                                                                                                | 13,000                            | 4,000,000                              | 800,000                                 |
+| Claude Opus 5.5                                                                                                                                             | 13,000                            | 10,000,000                             | 2,000,000                               |
 | Claude Opus 5                                                                                                                                               | 10,000                            | 10,000,000                             | 2,000,000                               |
-| Claude Opus 4.x2                                                                                                                                            | 10,000                            | 10,000,000                             | 2,000,000                               |
-| Claude Sonnet 5.5                                                                                                                                           | 10,000                            | 10,000,000                             | 2,000,000                               |
+| Claude Opus 4.x<sup>2</sup>                                                                                                                                 | 10,000                            | 10,000,000                             | 2,000,000                               |
+| Claude Sonnet 5.5                                                                                                                                           | 13,000                            | 10,000,000                             | 2,000,000                               |
 | Claude Sonnet 5                                                                                                                                             | 10,000                            | 10,000,000                             | 2,000,000                               |
-| Claude Sonnet 4.x3                                                                                                                                          | 10,000                            | 10,000,000                             | 2,000,000                               |
-| Claude Haiku 5.5                                                                                                                                            | 10,000                            | 10,000,000                             | 2,000,000                               |
+| Claude Sonnet 4.x<sup>3</sup>                                                                                                                               | 10,000                            | 10,000,000                             | 2,000,000                               |
+| Claude Haiku 5.5                                                                                                                                            | 13,000                            | 10,000,000                             | 2,000,000                               |
 | Claude Haiku 4.5                                                                                                                                            | 10,000                            | 10,000,000                             | 2,000,000                               |
-| Claude Haiku 3.5 ([retired, except on Claude Models on Google Cloud (Google managed)](../about-claude/model-deprecations.md)) | 4,000                             | 400,0004                               | 80,000                                  |
+| Claude Haiku 3.5 ([retired, except on Claude Models on Google Cloud (Google managed)](../about-claude/model-deprecations.md)) | 4,000                             | 400,000<sup>4</sup>                    | 80,000                                  |
 
 **Custom tier**
 
 If you need limits higher than the Scale tier, contact sales through the [Rate limits](https://platform.claude.com/usage/limits) page in the Claude Console.
 
-*1 Fable rate limit is a total limit that applies to combined traffic across Claude Fable 5.1 and Claude Fable 5. Claude Mythos 5.1 and Claude Mythos 5 share a separate combined limit on the same terms.*
+*<sup>1 Fable rate limit is a total limit that applies to combined traffic across Claude Fable 5.1 and Claude Fable 5. Claude Mythos 5.1 and Claude Mythos 5 share a separate combined limit on the same terms.</sup>*
 
-*2 Opus rate limit is a total limit that applies to combined traffic across Claude Opus 4.8, Opus 4.7, Opus 4.6, and Opus 4.5. Claude Opus 5.5 and Claude Opus 5 each have a separate rate limit and are not part of this combined bucket.*
+*<sup>2 Opus rate limit is a total limit that applies to combined traffic across Claude Opus 4.8, Opus 4.7, Opus 4.6, and Opus 4.5. Claude Opus 5.5 and Claude Opus 5 each have a separate rate limit and are not part of this combined bucket.</sup>*
 
-*3 Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6 and Sonnet 4.5 ([deprecated](../about-claude/model-deprecations.md)). Claude Sonnet 5.5 and Claude Sonnet 5 each have a separate rate limit and are not part of this combined bucket.*
+*<sup>3 Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6 and Sonnet 4.5 ([deprecated](../about-claude/model-deprecations.md)). Claude Sonnet 5.5 and Claude Sonnet 5 each have a separate rate limit and are not part of this combined bucket.</sup>*
 
-*4 Limit counts `cache_read_input_tokens` toward ITPM usage.*
+*<sup>4 Limit counts `cache_read_input_tokens` toward ITPM usage.</sup>*
 
 ### Message Batches API
 
@@ -262,7 +262,7 @@ Note:
 * Workspace limits are set for each limiter type (such as requests per minute, input tokens per minute, or output tokens per minute).
 * Organization-wide limits always apply, even if Workspace limits add up to more.
 
-To read your current organization and workspace rate limits programmatically, use the [Rate Limits API](../manage-claude/rate-limits-api.md).
+To read your current organization and workspace rate limits or set workspace rate limits programmatically, use the [Rate Limits API](../manage-claude/rate-limits-api.md).
 
 ## Response headers
 

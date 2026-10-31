@@ -329,7 +329,7 @@ Use the Usage and Cost APIs to deliver a better experience for your users, manag
 * [Prompt caching](../build-with-claude/prompt-caching.md) - Optimize costs with caching
 * [Batch processing](../build-with-claude/batch-processing.md) - 50 percent discount on batch requests
 * [Rate limits](../api/rate-limits.md) - Understand usage tiers
-* [Rate Limits API](rate-limits-api.md) - Read your configured rate limits
+* [Rate Limits API](rate-limits-api.md) - Read your configured rate limits and set workspace rate limits
 * [Data residency](data-residency.md) - Control inference geography
 
 ---

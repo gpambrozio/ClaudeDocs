@@ -850,7 +850,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               - `type EncryptedCodeExecutionResultBlockParam`
 
-                Code execution result with encrypted stdout for PFC + web_search results.
+                The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form, sent back in a later request.
 
                 - `Type EncryptedCodeExecutionResult`
 
@@ -1391,7 +1391,11 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
     - `type CodeExecutionTool20260120Param`
 
-      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+      A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+      REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+      See the [code execution tool guide](../../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
       - `Type CodeExecution20260120`
 
@@ -3384,7 +3388,11 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         - `type EncryptedCodeExecutionResultBlock`
 
-          Code execution result with encrypted stdout for PFC + web_search results.
+          The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+          The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+          See the [programmatic tool calling guide](../../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
           - `Type EncryptedCodeExecutionResult`
 

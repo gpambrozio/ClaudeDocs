@@ -157,6 +157,8 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Returns
 
 - `data: array of BetaTelemetryDestinationWorkspace`
@@ -352,6 +354,8 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Returns
 
 - `BetaTelemetryDestinationWorkspace object`
@@ -540,6 +544,8 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ### Returns
 

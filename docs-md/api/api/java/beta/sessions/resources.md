@@ -133,6 +133,8 @@ Add Session Resource
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
+    - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -341,6 +343,8 @@ List Session Resources
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
+    - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -633,6 +637,8 @@ Get Session Resource
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
+    - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
   - `Optional<String> workspaceId` (header parameter)
 
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -916,6 +922,8 @@ Update Session Resource
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
+    - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1207,6 +1215,8 @@ Delete Session Resource
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
+
+    - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
   - `Optional<String> workspaceId` (header parameter)
 

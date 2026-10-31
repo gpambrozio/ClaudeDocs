@@ -129,7 +129,7 @@ curl https://api.anthropic.com/v1/organizations/users \
 {
   "data": [
     {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "added_at": "2024-10-30T23:58:27.427722Z",
       "email": "user@emaildomain.com",
       "name": "Jane Doe",
@@ -227,7 +227,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
 ```json
 {
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "added_at": "2024-10-30T23:58:27.427722Z",
   "email": "user@emaildomain.com",
   "name": "Jane Doe",
@@ -342,7 +342,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
 ```json
 {
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "added_at": "2024-10-30T23:58:27.427722Z",
   "email": "user@emaildomain.com",
   "name": "Jane Doe",
@@ -398,7 +398,7 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 
 ```json
 {
-  "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+  "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
   "type": "user_deleted"
 }
 ```

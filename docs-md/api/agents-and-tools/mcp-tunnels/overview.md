@@ -47,7 +47,7 @@ The [tunnel stack](concepts.md#components) is two components that run inside you
 * **[cloudflared](concepts.md#components):** Cloudflare’s open-source tunnel connector. It initiates outbound-only connections to the [tunnel edge](concepts.md#components) and carries encrypted traffic from Anthropic to your proxy.
 * **[Proxy](concepts.md#components):** Anthropic’s routing component. It terminates [inner TLS](concepts.md#components), validates that upstream IPs fall within an allowed range, and routes each request to the correct [upstream MCP server](concepts.md#components) based on hostname.
 
-Each MCP server you expose gets a hostname under your tunnel domain (for example, `docs.<your-tunnel-domain>`). You attach these hostnames to a Managed Agent session in the Claude Console, or pass them to the Messages API through the [MCP connector](../mcp-connector.md).
+Each MCP server you expose gets a hostname under your tunnel domain (for example, `docs.<your-tunnel-domain>`). You attach these hostnames to an agent in the Claude Console, or pass them to the Messages API through the [MCP connector](../mcp-connector.md).
 
 ## Prerequisites
 
@@ -152,8 +152,10 @@ In both cases, the tunnel carries encrypted traffic to your MCP server but does 
 ### Managed Agents (Console)
 
 1. On the [Sessions](https://platform.claude.com/sessions) page (`platform.claude.com/sessions`) in the Claude Console, create a session and select **Create new agent** so you can edit the MCP server list.
-2. Click **+ MCP Server** and open the dropdown menu. Tunnels in the session’s workspace that have at least one active certificate appear at the top of the list, above the public connector catalog.
+2. Under **MCP servers**, click **MCP server** and open the dropdown menu. Tunnels in the session’s workspace that have at least one active certificate appear at the top of the list, above the public connector catalog.
 3. Select the tunnel and supply the **Subdomain** that your proxy routes to a specific MCP server, and the **Path** the upstream MCP server expects. The **Resolves to** line shows the exact URL.
+
+For the full procedure, see [Use the tunnel in an agent](console.md#use-the-tunnel-in-an-agent).
 
 ### Messages API
 

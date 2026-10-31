@@ -13,7 +13,6 @@ featureMetadata:
   supportedModels:
     - claude-fable-5-1
     - claude-fable-5
-    - claude-mythos-preview
     - claude-opus-5-5
     - claude-opus-5
     - claude-sonnet-5-5
@@ -34,8 +33,6 @@ Agents write to their [memory stores](memory.md) as they work, but these writes 
 **Dreams** let Claude clean that up. A dream reads an existing memory store alongside past session transcripts, then produces a new, reorganized memory store: duplicates merged, stale or contradicted entries replaced with the latest value, and new insights surfaced.
 
 The input store is never modified, so you can review the output and discard it if you don’t like the result.
-
-Dream endpoints are gated by the `dreaming-2026-04-21` beta header; the `managed-agents-2026-04-01` header on its own doesn’t grant access to dreams. The dream-endpoint examples on this page send both headers; session and memory-store calls need only `managed-agents-2026-04-01`. The SDK sets these automatically.
 
 ## How it works
 
@@ -167,7 +164,7 @@ dream = client.beta.dreams.create(
 puts dream.id # drm_01...
 ```
 
-Dreaming inputs include the pre-existing memory store and an array of sessions. The selected model runs the dreaming pipeline. During the research preview, `claude-opus-5-5`, `claude-fable-5-1`, `claude-opus-5`, `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5-5`, `claude-sonnet-5`, and `claude-sonnet-4-6` are supported. You can optionally pass `instructions` (csharp, go: `Instructions`) to steer the dreaming process. See [Steer with instructions](dreams.md#steer-with-instructions).
+Dreaming inputs include the pre-existing memory store and an array of sessions. The model you choose runs the dreaming pipeline. Only [select models](dreams.md#feature-availability) are supported. You can optionally pass `instructions` (csharp, go: `Instructions`) to steer the dreaming process. See [Steer with instructions](dreams.md#steer-with-instructions).
 
 The response is the full `dream` resource with `status: "pending"`:
 
@@ -629,12 +626,6 @@ Dreams are billed at standard API token rates for the model you select; `usage` 
 
 ## Limits
 
-| Limit                                              | Value                                                                                                                                                                       |
-| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sessions per dream                                 | 100                                                                                                                                                                         |
-| `instructions` (csharp, go: `Instructions`) length | 4,096 characters                                                                                                                                                            |
-| Supported models                                   | `claude-opus-5-5`, `claude-fable-5-1`, `claude-opus-5`, `claude-fable-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-5-5`, `claude-sonnet-5`, `claude-sonnet-4-6` |
-
 Default rate limits apply to dream creation while this feature is in research preview. [Contact support](https://support.claude.com) if you need higher limits.
 
 ## Availability
@@ -647,9 +638,9 @@ Dreams are in research preview on select models.
 
 * Availability: Available
 
-| Status           | Cloud platforms | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| ---------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Research preview | Claude API      | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md) |
+| Status           | Cloud platforms | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ---------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Research preview | Claude API      | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md) |
 
 ### Required beta headers
 
@@ -659,6 +650,8 @@ Beta headers allow you to access experimental features and new model capabilitie
 
 * `managed-agents-2026-04-01`
 * `dreaming-2026-04-21`
+
+Dream endpoints require the `dreaming-2026-04-21` beta header. The `managed-agents-2026-04-01` header on its own doesn’t grant access to dreams. Session calls use `managed-agents-2026-04-01`, and memory store calls use `agent-memory-2026-07-22`. The SDK sets the right header on each call.
 
 ### Data handling
 

@@ -143,6 +143,8 @@ Retrieve a single tunnel in the caller's organization by ID.
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ## Returns
 
 - `BetaOrganizationTunnel object`

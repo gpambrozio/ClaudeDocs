@@ -22,7 +22,7 @@ Claude Opus 5.5 costs less than Claude Opus 5 ($4 / $20 USD per million input / 
 
 Whichever model you are coming from, a request to `claude-opus-5-5` must meet the following. Where an item says a setting is rejected, the API returns a 400 error.
 
-* **Model ID:** Use `claude-opus-5-5`, a fixed model ID with no date suffix. On Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Google managed), and Microsoft Foundry, use that platform’s model ID; see [Availability](whats-new-opus-5-5.md#availability).
+* **Model ID:** Use `claude-opus-5-5`, a fixed model ID with no date suffix. On Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Anthropic managed), Claude Models on Google Cloud (Google managed), and Microsoft Foundry, use that platform’s model ID; see [Availability](whats-new-opus-5-5.md#availability).
 * **Thinking:** Send no `thinking` field, or send `thinking: {"type": "adaptive"}`, which is equivalent: [adaptive thinking](../../build-with-claude/thinking.md) is always on. `thinking: {"type": "disabled"}` and manual thinking budgets (`thinking: {"type": "enabled", "budget_tokens": N}`) are rejected. See the [before and after for thinking](migration-guide.md#thinking-cant-be-disabled).
 * **Effort:** Control thinking depth with the [effort parameter](../../build-with-claude/effort.md), the only request parameter that controls it. All five levels (`low`, `medium`, `high`, `xhigh`, `max`) are supported, and the default is `medium`. See [Recommended effort levels for Claude Opus 5.5](../../build-with-claude/effort.md#recommended-effort-levels-for-claude-opus-5-5).
 * **Tool choice:** Use `tool_choice` `{"type": "auto"}` (the default) or `{"type": "none"}`. Forcing a tool call with `{"type": "any"}` or `{"type": "tool", "name": "..."}` is rejected. See the [before and after for tool choice](migration-guide.md#forced-tool-use).
@@ -349,7 +349,7 @@ model = "claude-opus-5"  # Before
 model = "claude-opus-5-5"  # After
 ```
 
-`claude-opus-5-5` is a fixed model ID with no date suffix, the same scheme as `claude-opus-5`. On Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Google managed), and Microsoft Foundry, use that platform’s model ID; see [Availability](whats-new-opus-5-5.md#availability).
+`claude-opus-5-5` is a fixed model ID with no date suffix, the same scheme as `claude-opus-5`. On Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Anthropic managed), Claude Models on Google Cloud (Google managed), and Microsoft Foundry, use that platform’s model ID; see [Availability](whats-new-opus-5-5.md#availability).
 
 ### Breaking changes
 

@@ -890,7 +890,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `EncryptedCodeExecutionResultBlockParam object`
 
-                  Code execution result with encrypted stdout for PFC + web_search results.
+                  The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form, sent back in a later request.
 
                   - `type: "encrypted_code_execution_result"`
 
@@ -1689,7 +1689,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `CodeExecutionTool20260120 object`
 
-        Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+        A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+        REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+        See the [code execution tool guide](../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
         - `type: "code_execution_20260120"`
 
@@ -4488,7 +4492,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `EncryptedCodeExecutionResultBlock object`
 
-                Code execution result with encrypted stdout for PFC + web_search results.
+                The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+                The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+                See the [programmatic tool calling guide](../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
                 - `type: "encrypted_code_execution_result"`
 
@@ -6037,7 +6045,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               - `EncryptedCodeExecutionResultBlock object`
 
-                Code execution result with encrypted stdout for PFC + web_search results.
+                The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+                The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+                See the [programmatic tool calling guide](../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
                 - `type: "encrypted_code_execution_result"`
 
@@ -7358,7 +7370,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `EncryptedCodeExecutionResultBlock object`
 
-              Code execution result with encrypted stdout for PFC + web_search results.
+              The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+              The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+              See the [programmatic tool calling guide](../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
               - `type: "encrypted_code_execution_result"`
 
@@ -8631,7 +8647,11 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `EncryptedCodeExecutionResultBlock object`
 
-            Code execution result with encrypted stdout for PFC + web_search results.
+            The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+            The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+            See the [programmatic tool calling guide](../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
             - `type: "encrypted_code_execution_result"`
 

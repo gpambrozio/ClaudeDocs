@@ -139,6 +139,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#add
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Body parameters
 
 - `endpoint_url: string`
@@ -618,6 +620,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#set
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Returns
 
 - `data: array of BetaTelemetryDestination`
@@ -975,6 +979,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#del
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Returns
 
 - `BetaTelemetryDestination object`
@@ -1326,6 +1332,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#del
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ### Body parameters
 
@@ -1813,6 +1821,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#del
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Returns
 
 - `BetaDeletedTelemetryDestination object`
@@ -1977,6 +1987,8 @@ Send one test span, named `anthropic.test`, to the destination with its register
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ### Returns
 
@@ -2913,6 +2925,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#cho
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `data: array of BetaTelemetryDestinationWorkspace`
@@ -3108,6 +3122,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#cho
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `BetaTelemetryDestinationWorkspace object`
@@ -3296,6 +3312,8 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#cho
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 

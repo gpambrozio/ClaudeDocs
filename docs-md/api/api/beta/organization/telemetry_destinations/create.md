@@ -137,6 +137,8 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 ## Body parameters
 
 - `endpoint_url: string`

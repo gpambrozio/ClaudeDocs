@@ -928,7 +928,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `class BetaEncryptedCodeExecutionResultBlockParam`
 
-                  Code execution result with encrypted stdout for PFC + web_search results.
+                  The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form, sent back in a later request.
 
                   - `type: Literal["encrypted_code_execution_result"]`
 
@@ -1464,7 +1464,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                         - `class BetaCodeExecutionTool20260120`
 
-                          Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                          A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                          REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                          See the [code execution tool guide](../../../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                           - `type: Literal["code_execution_20260120"]`
 
@@ -4112,7 +4116,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
       - `class BetaCodeExecutionTool20260120`
 
-        Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+        A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+        REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+        See the [code execution tool guide](../../../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
       - `class BetaCodeExecutionTool20260521`
 
@@ -4294,6 +4302,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 - `user_profile_id: Optional[str]` (header parameter)
 
@@ -4599,6 +4609,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -4897,6 +4909,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5191,6 +5205,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5479,6 +5495,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 - `workspace_id: Optional[str]` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -5658,6 +5676,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 - `workspace_id: Optional[str]` (header parameter)
 
@@ -6306,7 +6326,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `class BetaEncryptedCodeExecutionResultBlock`
 
-                Code execution result with encrypted stdout for PFC + web_search results.
+                The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+                The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+                See the [programmatic tool calling guide](../../../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
                 - `type: Literal["encrypted_code_execution_result"]`
 
@@ -6868,7 +6892,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                       - `class BetaCodeExecutionTool20260120`
 
-                        Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                        A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                        REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                        See the [code execution tool guide](../../../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                         - `type: Literal["code_execution_20260120"]`
 
@@ -10572,7 +10600,11 @@ for batch in client.beta.messages.batches.results(
 
               - `class BetaEncryptedCodeExecutionResultBlock`
 
-                Code execution result with encrypted stdout for PFC + web_search results.
+                The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+                The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+                See the [programmatic tool calling guide](../../../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
                 - `type: Literal["encrypted_code_execution_result"]`
 
@@ -11134,7 +11166,11 @@ for batch in client.beta.messages.batches.results(
 
                       - `class BetaCodeExecutionTool20260120`
 
-                        Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                        A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                        REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                        See the [code execution tool guide](../../../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                         - `type: Literal["code_execution_20260120"]`
 
@@ -14601,7 +14637,11 @@ for batch in client.beta.messages.batches.results(
 
             - `class BetaEncryptedCodeExecutionResultBlock`
 
-              Code execution result with encrypted stdout for PFC + web_search results.
+              The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+              The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+              See the [programmatic tool calling guide](../../../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
               - `type: Literal["encrypted_code_execution_result"]`
 
@@ -15163,7 +15203,11 @@ for batch in client.beta.messages.batches.results(
 
                     - `class BetaCodeExecutionTool20260120`
 
-                      Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                      A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                      REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                      See the [code execution tool guide](../../../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                       - `type: Literal["code_execution_20260120"]`
 
@@ -18582,7 +18626,11 @@ for batch in client.beta.messages.batches.results(
 
           - `class BetaEncryptedCodeExecutionResultBlock`
 
-            Code execution result with encrypted stdout for PFC + web_search results.
+            The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form.
+
+            The API returns this block in place of `code_execution_result` when the code called the web search tool.
+
+            See the [programmatic tool calling guide](../../../../agents-and-tools/tool-use/programmatic-tool-calling.md) to learn more about programmatic tool calling.
 
             - `type: Literal["encrypted_code_execution_result"]`
 
@@ -19144,7 +19192,11 @@ for batch in client.beta.messages.batches.results(
 
                   - `class BetaCodeExecutionTool20260120`
 
-                    Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+                    A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+                    REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+                    See the [code execution tool guide](../../../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
                     - `type: Literal["code_execution_20260120"]`
 

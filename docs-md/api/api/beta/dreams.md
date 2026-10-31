@@ -139,6 +139,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -732,6 +734,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1158,6 +1162,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
   - `"analytics-usage-cost-2026-08-24"`
 
+  - `"experimental-claude-tag-2026-10-21"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1578,6 +1584,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -2000,6 +2008,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 - `"anthropic-workspace-id": optional string`
 

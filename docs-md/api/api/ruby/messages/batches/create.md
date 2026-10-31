@@ -872,7 +872,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `class EncryptedCodeExecutionResultBlockParam`
 
-                  Code execution result with encrypted stdout for PFC + web_search results.
+                  The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form, sent back in a later request.
 
                   - `type: :encrypted_code_execution_result`
 
@@ -1671,7 +1671,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
       - `class CodeExecutionTool20260120`
 
-        Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+        A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+        REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+        See the [code execution tool guide](../../../../agents-and-tools/tool-use/code-execution-tool.md#tool-versions) to learn what each tool version adds.
 
         - `type: :code_execution_20260120`
 
