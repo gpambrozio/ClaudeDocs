@@ -313,7 +313,7 @@ Two more considerations for interleaved thinking in manual mode:
 * `budget_tokens` can exceed `max_tokens` here; the [budget rules](extended-thinking.md#budget-rules-and-tuning) explain this exception.
 * Interleaved thinking is only supported for [tools used through the Messages API](../agents-and-tools/tool-use/overview.md).
 
-How platforms treat the beta header differs. The Claude API and [Claude Platform on AWS](claude-platform-on-aws.md) accept `interleaved-thinking-2025-05-14` on any model and ignore it where unsupported. Acceptance is not the same as effect: on models that reject `type: "enabled"` (4.7 and later) or lack manual-mode interleaving (Claude Opus 4.6), the header has no manual-mode effect; adaptive thinking interleaves automatically there.
+How platforms treat the beta header differs. The Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), and [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md) accept `interleaved-thinking-2025-05-14` on any model and ignore it where unsupported. Acceptance is not the same as effect: on models that reject `type: "enabled"` (4.7 and later) or lack manual-mode interleaving (Claude Opus 4.6), the header has no manual-mode effect; adaptive thinking interleaves automatically there.
 
 Partner-operated platforms, [Amazon Bedrock](claude-in-amazon-bedrock.md) and [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), likewise accept the header on any model without returning an error, and ignore it on models that don’t support interleaved thinking.
 

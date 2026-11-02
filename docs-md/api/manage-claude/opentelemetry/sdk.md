@@ -99,14 +99,14 @@ go get go.opentelemetry.io/otel/sdk go.opentelemetry.io/otel/exporters/stdout/st
 Add the Claude SDK to your dependencies, or update it to at least the following version if your build file already declares it:
 
 ```kotlin Gradle
-implementation("com.anthropic:anthropic-java:3.3.0")
+implementation("com.anthropic:anthropic-java:3.4.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.3.0</version>
+    <version>3.4.0</version>
 </dependency>
 ```
 

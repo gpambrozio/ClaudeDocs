@@ -1365,7 +1365,7 @@ No, Claude does not parse or receive any metadata from images passed to it.
 
 **Can I delete images I’ve uploaded?**
 
-No. Image uploads are ephemeral and not stored beyond the duration of the API request. Uploaded images are automatically deleted after they have been processed.
+No. See [API and data retention](../manage-claude/api-and-data-retention.md) for how long images are kept. If you upload images with the [Files API](files.md), you can delete them there.
 
 **Where can I find details on data privacy for image uploads?**
 
