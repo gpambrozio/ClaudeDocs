@@ -256,7 +256,13 @@ async def main() -> None:
             name="Internal tools agent",
             model="claude-opus-5-5",
             tools=[
-                {"type": "agent_toolset_20260401"},
+                {
+                    "type": "agent_toolset_20260401",
+                    "configs": [
+                        {"name": "web_search", "enabled": False},
+                        {"name": "web_fetch", "enabled": False},
+                    ],
+                },
                 *[to_custom_tool(tool) for tool in listed.tools],
             ],
         )
@@ -284,7 +290,13 @@ const agent = await client.beta.agents.create({
   name: "Internal tools agent",
   model: "claude-opus-5-5",
   tools: [
-    { type: "agent_toolset_20260401" },
+    {
+      type: "agent_toolset_20260401",
+      configs: [
+        { name: "web_search", enabled: false },
+        { name: "web_fetch", enabled: false }
+      ]
+    },
     // The MCP fields map one to one onto a custom tool declaration.
     ...tools.map((tool) => ({
       type: "custom" as const,
@@ -316,7 +328,17 @@ await using var mcpClient = await McpClient.CreateAsync(
 );
 var mcpTools = await mcpClient.ListToolsAsync();
 
-List<Tool> tools = [new BetaManagedAgentsAgentToolset20260401Params()];
+List<Tool> tools =
+[
+    new BetaManagedAgentsAgentToolset20260401Params
+    {
+        Configs =
+        [
+            new BetaManagedAgentsWebSearchToolConfigParams { Enabled = false },
+            new BetaManagedAgentsWebFetchToolConfigParams { Enabled = false },
+        ],
+    },
+];
 foreach (var tool in mcpTools)
 {
     var description = tool.Description;
@@ -430,7 +452,16 @@ func main() {
 	}
 
 	tools := []anthropic.BetaAgentNewParamsToolUnion{
-		{OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{}},
+		{OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
+			Configs: []anthropic.BetaManagedAgentsAgentToolConfigParamsUnion{
+				{OfWebSearch: &anthropic.BetaManagedAgentsWebSearchToolConfigParams{
+					Enabled: anthropic.Bool(false),
+				}},
+				{OfWebFetch: &anthropic.BetaManagedAgentsWebFetchToolConfigParams{
+					Enabled: anthropic.Bool(false),
+				}},
+			},
+		}},
 	}
 	for _, tool := range listed.Tools {
 		custom, err := toCustomTool(tool)
@@ -460,6 +491,8 @@ import com.anthropic.models.beta.agents.BetaManagedAgentsAgentToolset20260401Par
 import com.anthropic.models.beta.agents.BetaManagedAgentsCustomToolInputSchema;
 import com.anthropic.models.beta.agents.BetaManagedAgentsCustomToolParams;
 import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
+import com.anthropic.models.beta.agents.BetaManagedAgentsWebFetchToolConfigParams;
+import com.anthropic.models.beta.agents.BetaManagedAgentsWebSearchToolConfigParams;
 import io.modelcontextprotocol.client.McpClient;
 import io.modelcontextprotocol.client.transport.HttpClientStreamableHttpTransport;
 import io.modelcontextprotocol.spec.McpSchema;
@@ -498,7 +531,14 @@ void main() {
         var params = AgentCreateParams.builder()
             .name("Internal tools agent")
             .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
-            .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build());
+            .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
+                .addConfig(BetaManagedAgentsWebSearchToolConfigParams.builder()
+                    .enabled(false)
+                    .build())
+                .addConfig(BetaManagedAgentsWebFetchToolConfigParams.builder()
+                    .enabled(false)
+                    .build())
+                .build());
         for (var tool : mcpClient.listTools().tools()) {
             params.addTool(toCustomTool(tool));
         }
@@ -510,7 +550,10 @@ void main() {
 ```
 
 ```php PHP
+use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
 use Anthropic\Beta\Agents\BetaManagedAgentsModel;
+use Anthropic\Beta\Agents\BetaManagedAgentsWebFetchToolConfigParams;
+use Anthropic\Beta\Agents\BetaManagedAgentsWebSearchToolConfigParams;
 use Anthropic\Client as Anthropic;
 use Mcp\Client as McpClient;
 use Mcp\Client\Transport\HttpTransport;
@@ -524,7 +567,14 @@ $client = new Anthropic();
 $mcpClient = McpClient::builder()->build();
 $mcpClient->connect(new HttpTransport($mcpServerUrl));
 
-$tools = [['type' => 'agent_toolset_20260401']];
+$tools = [
+    BetaManagedAgentsAgentToolset20260401Params::with(
+        configs: [
+            BetaManagedAgentsWebSearchToolConfigParams::with(enabled: false),
+            BetaManagedAgentsWebFetchToolConfigParams::with(enabled: false),
+        ],
+    ),
+];
 foreach ($mcpClient->listTools()->tools as $tool) {
     // The MCP fields map one to one onto a custom tool declaration. The
     // schema's keywords pass to the SDK unchanged.
@@ -577,7 +627,16 @@ end
 agent = client.beta.agents.create(
   name: "Internal tools agent",
   model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
-  tools: [{type: :agent_toolset_20260401}, *custom_tools]
+  tools: [
+    {
+      type: :agent_toolset_20260401,
+      configs: [
+        {name: :web_search, enabled: false},
+        {name: :web_fetch, enabled: false}
+      ]
+    },
+    *custom_tools
+  ]
 )
 puts agent.id
 

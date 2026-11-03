@@ -171,7 +171,13 @@ curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
     "model": "claude-opus-5-5",
     "system": "You are a helpful coding assistant. Write clean, well-documented code.",
     "tools": [
-      {"type": "agent_toolset_20260401"}
+      {
+        "type": "agent_toolset_20260401",
+        "configs": [
+          {"name": "web_search", "enabled": false},
+          {"name": "web_fetch", "enabled": false}
+        ]
+      }
     ]
   }'
 ```
@@ -188,6 +194,11 @@ name: Coding Assistant
 model: claude-opus-5-5
 tools:
   - type: agent_toolset_20260401
+    configs:
+      - name: web_search
+        enabled: false
+      - name: web_fetch
+        enabled: false
 ---
 
 You are a helpful coding assistant. Write clean, well-documented code.
@@ -205,7 +216,13 @@ agent = client.beta.agents.create(
     model="claude-opus-5-5",
     system="You are a helpful coding assistant. Write clean, well-documented code.",
     tools=[
-        {"type": "agent_toolset_20260401"},
+        {
+            "type": "agent_toolset_20260401",
+            "configs": [
+                {"name": "web_search", "enabled": False},
+                {"name": "web_fetch", "enabled": False},
+            ],
+        },
     ],
 )
 
@@ -223,7 +240,15 @@ const agent = await client.beta.agents.create({
   name: "Coding Assistant",
   model: "claude-opus-5-5",
   system: "You are a helpful coding assistant. Write clean, well-documented code.",
-  tools: [{ type: "agent_toolset_20260401" }]
+  tools: [
+    {
+      type: "agent_toolset_20260401",
+      configs: [
+        { name: "web_search", enabled: false },
+        { name: "web_fetch", enabled: false }
+      ]
+    }
+  ]
 });
 
 console.log(`Agent ID: ${agent.id}, version: ${agent.version}`);
@@ -245,7 +270,17 @@ var agent = await client.Beta.Agents.Create(new()
     Name = "Coding Assistant",
     Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     System = "You are a helpful coding assistant. Write clean, well-documented code.",
-    Tools = [new BetaManagedAgentsAgentToolset20260401Params()],
+    Tools =
+    [
+        new BetaManagedAgentsAgentToolset20260401Params
+        {
+            Configs =
+            [
+                new BetaManagedAgentsWebSearchToolConfigParams { Enabled = false },
+                new BetaManagedAgentsWebFetchToolConfigParams { Enabled = false },
+            ],
+        },
+    ],
 });
 
 Console.WriteLine($"Agent ID: {agent.ID}, version: {agent.Version}");
@@ -274,7 +309,16 @@ func main() {
 		},
 		System: anthropic.String("You are a helpful coding assistant. Write clean, well-documented code."),
 		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
+			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
+				Configs: []anthropic.BetaManagedAgentsAgentToolConfigParamsUnion{
+					{OfWebSearch: &anthropic.BetaManagedAgentsWebSearchToolConfigParams{
+						Enabled: anthropic.Bool(false),
+					}},
+					{OfWebFetch: &anthropic.BetaManagedAgentsWebFetchToolConfigParams{
+						Enabled: anthropic.Bool(false),
+					}},
+				},
+			},
 		}},
 	})
 	if err != nil {
@@ -291,6 +335,8 @@ import com.anthropic.client.okhttp.AnthropicOkHttpClient;
 import com.anthropic.models.beta.agents.AgentCreateParams;
 import com.anthropic.models.beta.agents.BetaManagedAgentsAgentToolset20260401Params;
 import com.anthropic.models.beta.agents.BetaManagedAgentsModel;
+import com.anthropic.models.beta.agents.BetaManagedAgentsWebFetchToolConfigParams;
+import com.anthropic.models.beta.agents.BetaManagedAgentsWebSearchToolConfigParams;
 import com.anthropic.models.beta.environments.BetaCloudConfigParams;
 import com.anthropic.models.beta.environments.BetaLimitedNetworkParams;
 import com.anthropic.models.beta.environments.EnvironmentCreateParams;
@@ -306,7 +352,14 @@ void main() {
         .name("Coding Assistant")
         .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
         .system("You are a helpful coding assistant. Write clean, well-documented code.")
-        .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
+        .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
+            .addConfig(BetaManagedAgentsWebSearchToolConfigParams.builder()
+                .enabled(false)
+                .build())
+            .addConfig(BetaManagedAgentsWebFetchToolConfigParams.builder()
+                .enabled(false)
+                .build())
+            .build())
         .build());
 
     IO.println("Agent ID: " + agent.id() + ", version: " + agent.version());
@@ -315,7 +368,10 @@ void main() {
 Save the returned `agent.id`. You’ll reference it in every session you create.
 
 ```php PHP
+use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
 use Anthropic\Beta\Agents\BetaManagedAgentsModel;
+use Anthropic\Beta\Agents\BetaManagedAgentsWebFetchToolConfigParams;
+use Anthropic\Beta\Agents\BetaManagedAgentsWebSearchToolConfigParams;
 use Anthropic\Client;
 
 $client = new Client();
@@ -325,7 +381,12 @@ $agent = $client->beta->agents->create(
     model: BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
     system: 'You are a helpful coding assistant. Write clean, well-documented code.',
     tools: [
-        ['type' => 'agent_toolset_20260401'],
+        BetaManagedAgentsAgentToolset20260401Params::with(
+            configs: [
+                BetaManagedAgentsWebSearchToolConfigParams::with(enabled: false),
+                BetaManagedAgentsWebFetchToolConfigParams::with(enabled: false),
+            ],
+        ),
     ],
 );
 
@@ -343,7 +404,15 @@ agent = client.beta.agents.create(
   name: "Coding Assistant",
   model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
   system_: "You are a helpful coding assistant. Write clean, well-documented code.",
-  tools: [{type: "agent_toolset_20260401"}]
+  tools: [
+    {
+      type: "agent_toolset_20260401",
+      configs: [
+        {name: "web_search", enabled: false},
+        {name: "web_fetch", enabled: false}
+      ]
+    }
+  ]
 )
 
 puts "Agent ID: #{agent.id}, version: #{agent.version}"
@@ -351,11 +420,11 @@ puts "Agent ID: #{agent.id}, version: #{agent.version}"
 
 Save the returned `agent.id`. You’ll reference it in every session you create.
 
-The `agent_toolset_20260401` tool type enables the full set of pre-built agent tools (bash, file operations, web search, and more). See [Tools](tools.md) for the complete list and per-tool configuration options.
+The `agent_toolset_20260401` tool type enables the prebuilt agent tools (bash, file operations, web search, and more). This example disables web search and web fetch because the task in this guide, writing a short Python script, doesn’t use the web. Give an agent [only the tools it needs](secure-deployment.md#give-the-agent-the-smallest-tool-set). See [Tools](tools.md) for the complete list and per-tool configuration options.
 
 **Create an environment**
 
-An environment defines the sandbox where your agent runs. This one uses `limited` [networking](environments.md#networking) with package managers allowed, so code running in the sandbox can reach public [package registries and code hosts](environments.md#package-manager-hosts). Web search and web fetch run outside the sandbox, and this quickstart does not need them. With `limited` networking, the [`allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) list](environments.md#networking) applies to them too. They return no pages or search results in this environment, because it lists no hosts. For your own agent, list the hosts it needs in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`).
+An environment defines the sandbox where your agent runs. This one uses `limited` [networking](environments.md#networking) with package managers allowed, so code running in the sandbox can reach public [package registries and code hosts](environments.md#package-manager-hosts). With `limited` networking, the [`allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) list](environments.md#networking) also applies to web search and web fetch, even though they run outside the sandbox. With no hosts listed, as in this environment, they return no pages or search results. If your own agent uses these tools, add the hosts it needs to that list.
 
 ```bash cURL
 curl -sS --fail-with-body https://api.anthropic.com/v1/environments \

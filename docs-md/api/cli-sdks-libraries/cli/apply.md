@@ -22,8 +22,6 @@ ant apply agents/summarizer.md
 ---
 name: Summarizer
 model: claude-opus-5-5
-tools:
-  - type: agent_toolset_20260401
 ---
 
 You are a helpful assistant that writes concise summaries.
@@ -111,6 +109,11 @@ name: Code reviewer
 model: claude-opus-5-5
 tools:
   - type: agent_toolset_20260401
+    configs:
+      - name: web_search
+        enabled: false
+      - name: web_fetch
+        enabled: false
 skills:
   - ../skills/pr-summary
 ---
@@ -198,6 +201,11 @@ name: Code reviewer
 model: claude-opus-5-5
 tools:
   - type: agent_toolset_20260401
+    configs:
+      - name: web_search
+        enabled: false
+      - name: web_fetch
+        enabled: false
   - ./tools/*.json # the tools in these files are inserted here
 skills:
   - ../skills/* # every skill under skills/

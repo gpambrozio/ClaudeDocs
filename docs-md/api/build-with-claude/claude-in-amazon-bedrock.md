@@ -351,7 +351,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * [Messages API](../api/messages/create.md) (`/anthropic/v1/messages`)
 * [Prompt caching](prompt-caching.md)
 * [Thinking](thinking.md)
-* [Tool use](../agents-and-tools/tool-use/overview.md), including the [Bash tool](../agents-and-tools/tool-use/bash-tool.md), [Computer use tool](../agents-and-tools/tool-use/computer-use-tool.md), [Memory tool](../agents-and-tools/tool-use/memory-tool.md), and [Text editor tool](../agents-and-tools/tool-use/text-editor-tool.md)
+* [Tool use](../agents-and-tools/tool-use/overview.md), including the [Bash tool](../agents-and-tools/tool-use/bash-tool.md), [Browser use tool](../agents-and-tools/tool-use/browser-use-tool.md), [Computer use tool](../agents-and-tools/tool-use/computer-use-tool.md), [Memory tool](../agents-and-tools/tool-use/memory-tool.md), and [Text editor tool](../agents-and-tools/tool-use/text-editor-tool.md)
 * [Citations](citations.md)
 * [Structured outputs](structured-outputs.md)
 
@@ -363,7 +363,6 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 * Claude Managed Agents
 * Server-side fallback (the [`fallbacks` parameter](refusals-and-fallback.md#server-side-fallback); use the [client-side fallback pattern](refusals-and-fallback.md#client-side-fallback) instead)
-* [Computer use](../agents-and-tools/tool-use/computer-use-tool.md) and [browser use](../agents-and-tools/tool-use/browser-use-tool.md) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Amazon Bedrock; the beta computer use tool versions remain available)
 
 ## Regions
 

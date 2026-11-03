@@ -78,7 +78,7 @@ for await (const thread of client.beta.sessions.threads.list(session.id)) {
 ```csharp C#
 await foreach (var sessionThread in (await client.Beta.Sessions.Threads.List(session.ID)).Paginate())
 {
-    var label = sessionThread.Agent.Name ?? sessionThread.Agent.Json.GetProperty("type").GetString();
+    var label = sessionThread.Agent.Name ?? sessionThread.Agent.Type.Raw();
     Console.WriteLine($"[{label}] {sessionThread.Status.Raw()}");
 }
 ```
@@ -605,7 +605,7 @@ for await (const event of client.beta.sessions.threads.events.list(thread.id, {
 var page = await client.Beta.Sessions.Threads.Events.List(thread.ID, new() { SessionID = session.ID });
 await foreach (var evt in page.Paginate())
 {
-    Console.WriteLine($"[{evt.Json.GetProperty("type").GetString()}] {evt.ProcessedAt}");
+    Console.WriteLine($"[{evt.Type.Raw()}] {evt.ProcessedAt}");
 }
 ```
 
@@ -629,11 +629,8 @@ for (var event : client.beta().sessions().threads().events().list(
             .sessionId(session.id())
             .build()
 ).autoPager()) {
-    var type = event._json().orElseThrow() instanceof JsonObject json
-        ? json.values().get("type").asStringOrThrow()
-        : "unknown";
     var processedAt = event.processedAt().map(OffsetDateTime::toString).orElse("pending");
-    IO.println("[" + type + "] " + processedAt);
+    IO.println("[" + event.type().asString() + "] " + processedAt);
 }
 ```
 

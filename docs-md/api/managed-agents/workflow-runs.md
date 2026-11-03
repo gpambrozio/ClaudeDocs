@@ -432,7 +432,7 @@ await foreach (var streamEvent in stream.Enumerate())
         // On any other stop reason, print it and stop.
         if (!finished && idle.StopReason?.Value is not BetaManagedAgentsSessionRequiresAction)
         {
-            var reason = idle.StopReason?.Json.GetProperty("type").GetString();
+            var reason = idle.StopReason?.Type.Raw();
             Console.WriteLine($"Session idle: {reason}");
             break;
         }

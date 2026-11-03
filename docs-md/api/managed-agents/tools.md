@@ -186,11 +186,12 @@ var agent = client.beta().agents().create(AgentCreateParams.builder()
 
 ```php PHP
 use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
+use Anthropic\Beta\Agents\BetaManagedAgentsModel;
 use Anthropic\Beta\Agents\BetaManagedAgentsWebFetchToolConfigParams;
 
 $agent = $client->beta->agents->create(
     name: 'Coding Assistant',
-    model: 'claude-opus-5-5',
+    model: BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
     tools: [
         BetaManagedAgentsAgentToolset20260401Params::with(
             configs: [
@@ -204,7 +205,7 @@ $agent = $client->beta->agents->create(
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "Coding Assistant",
-  model: "claude-opus-5-5",
+  model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
   tools: [
     {
       type: :agent_toolset_20260401,
@@ -264,7 +265,7 @@ Custom tools are analogous to [user-defined client tools](../agents-and-tools/to
 
 Claude does not run a custom tool itself. It emits a structured request, your code runs the operation, and you return the result to the session.
 
-The following example creates an agent with the built-in toolset and one custom tool, `get_weather`:
+The following example creates an agent with one custom tool, `get_weather`, and no built-in tools:
 
 ```bash cURL
 curl -fsSL https://api.anthropic.com/v1/agents \
@@ -276,9 +277,6 @@ curl -fsSL https://api.anthropic.com/v1/agents \
     "name": "Weather Agent",
     "model": "claude-opus-5-5",
     "tools": [
-      {
-        "type": "agent_toolset_20260401"
-      },
       {
         "type": "custom",
         "name": "get_weather",
@@ -304,7 +302,6 @@ ant apply agent.md
 name: Weather Agent
 model: claude-opus-5-5
 tools:
-  - type: agent_toolset_20260401
   - type: custom
     name: get_weather
     description: Get current weather for a location
@@ -324,9 +321,6 @@ agent = client.beta.agents.create(
     name="Weather Agent",
     model="claude-opus-5-5",
     tools=[
-        {
-            "type": "agent_toolset_20260401",
-        },
         {
             "type": "custom",
             "name": "get_weather",
@@ -348,7 +342,6 @@ const agent = await client.beta.agents.create({
   name: "Weather Agent",
   model: "claude-opus-5-5",
   tools: [
-    { type: "agent_toolset_20260401" },
     {
       type: "custom",
       name: "get_weather",
@@ -373,7 +366,6 @@ var agent = await client.Beta.Agents.Create(new()
     Model = BetaManagedAgentsModel.ClaudeOpus5_5,
     Tools =
     [
-        new BetaManagedAgentsAgentToolset20260401Params(),
         new BetaManagedAgentsCustomToolParams
         {
             Name = "get_weather",
@@ -400,8 +392,6 @@ agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
 		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},
 	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
-	}, {
 		OfCustom: &anthropic.BetaManagedAgentsCustomToolParams{
 			Name:        "get_weather",
 			Description: "Get current weather for a location",
@@ -429,7 +419,6 @@ import java.util.Map;
 var agent = client.beta().agents().create(AgentCreateParams.builder()
     .name("Weather Agent")
     .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
-    .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
     .addTool(BetaManagedAgentsCustomToolParams.builder()
         .name("get_weather")
         .description("Get current weather for a location")
@@ -446,15 +435,14 @@ var agent = client.beta().agents().create(AgentCreateParams.builder()
 ```
 
 ```php PHP
-use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
 use Anthropic\Beta\Agents\BetaManagedAgentsCustomToolInputSchema;
 use Anthropic\Beta\Agents\BetaManagedAgentsCustomToolParams;
+use Anthropic\Beta\Agents\BetaManagedAgentsModel;
 
 $agent = $client->beta->agents->create(
     name: 'Weather Agent',
-    model: 'claude-opus-5-5',
+    model: BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
     tools: [
-        BetaManagedAgentsAgentToolset20260401Params::with(),
         BetaManagedAgentsCustomToolParams::with(
             name: 'get_weather',
             description: 'Get current weather for a location',
@@ -470,9 +458,8 @@ $agent = $client->beta->agents->create(
 ```ruby Ruby
 agent = client.beta.agents.create(
   name: "Weather Agent",
-  model: "claude-opus-5-5",
+  model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
   tools: [
-    {type: :agent_toolset_20260401},
     {
       type: :custom,
       name: "get_weather",

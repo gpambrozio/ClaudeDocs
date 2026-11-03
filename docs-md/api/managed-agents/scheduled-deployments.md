@@ -437,9 +437,7 @@ var runs = await client.Beta.DeploymentRuns.List(
 );
 await foreach (var run in runs.Paginate())
 {
-    // The Error union exposes .Message directly; the discriminator is read
-    // from .Json until a common .Type accessor is added.
-    var outcome = run.SessionID ?? run.Error!.Json.GetProperty("type").GetString();
+    var outcome = run.SessionID ?? run.Error!.Type.Raw();
     Console.WriteLine($"{run.CreatedAt} {outcome}");
 }
 ```
@@ -466,10 +464,8 @@ for (var run : client.beta().deploymentRuns().list(
         DeploymentRunListParams.builder()
             .deploymentId(deployment.id())
             .build()).autoPager()) {
-    // The Error union does not yet expose common .type()/.message()
-    // accessors; .toString() includes both.
     IO.println(run.createdAt() + " "
-        + run.sessionId().orElseGet(() -> run.error().orElseThrow().toString()));
+        + run.sessionId().orElseGet(() -> run.error().orElseThrow().type().asString()));
 }
 ```
 
@@ -527,7 +523,7 @@ var failedRuns = await client.Beta.DeploymentRuns.List(
 await foreach (var failedRun in failedRuns.Paginate())
 {
     var error = failedRun.Error!;
-    var errorType = error.Json.GetProperty("type").GetString();
+    var errorType = error.Type.Raw();
     Console.WriteLine($"{failedRun.CreatedAt} {errorType} {error.Message}");
 }
 ```
@@ -552,7 +548,8 @@ for (var run : client.beta().deploymentRuns().list(
             .deploymentId(deployment.id())
             .hasError(true)
             .build()).autoPager()) {
-    IO.println(run.createdAt() + " " + run.error().orElseThrow());
+    var error = run.error().orElseThrow();
+    IO.println(run.createdAt() + " " + error.type().asString() + " " + error.message());
 }
 ```
 

@@ -455,7 +455,7 @@ Features supported on Claude Models on Google Cloud (Google managed) include the
 
 * [Structured outputs](../structured-outputs.md)
 
-[Features overview](../overview.md) lists every feature and whether Claude Models on Google Cloud (Google managed) supports it.
+[Features overview](../overview.md) lists every feature. Each feature’s page shows whether Claude Models on Google Cloud (Google managed) supports it.
 
 ### Features not supported
 

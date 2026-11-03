@@ -528,7 +528,7 @@ Claude Platform on AWS uses Claude API endpoints directly, which means you get f
 * **Beta features:** Pass the standard `anthropic-beta` header to access beta features, just as you would with the Claude API.
 * **Agent Skills:** Use pre-built and custom [Agent Skills](../agents-and-tools/agent-skills/overview.md) with the same `container.skills` parameter as the Claude API. All pre-built Skills (PowerPoint, Excel, Word, PDF) work out of the box.
 * **Code execution:** Run code in Anthropic’s managed sandbox using the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md).
-* **Tool use:** All [tool use capabilities](../agents-and-tools/tool-use/overview.md) are available except the computer use and browser use toolsets; see [Features not supported](claude-platform-on-aws.md#features-not-supported).
+* **Tool use:** All [tool use capabilities](../agents-and-tools/tool-use/overview.md) are available.
 * **Thinking:** [Adaptive thinking](thinking.md), the [effort parameter](effort.md), and, on the models that support it, [extended thinking](extended-thinking.md) work with the same parameters as the Claude API.
 * **Streaming:** Full SSE streaming support for real-time responses.
 * **Batch processing:** Submit batch requests for high-throughput workloads.
@@ -554,7 +554,6 @@ Sessions and self-hosted workers on Claude Platform on AWS differ from first-par
 The following capabilities are not currently available on Claude Platform on AWS:
 
 * **HIPAA readiness:** Anthropic’s HIPAA-ready program is not available. See [API and data retention](../manage-claude/api-and-data-retention.md).
-* **Computer use and browser use toolsets:** `computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Claude Platform on AWS. The beta computer use tool versions remain available for the models listed under [Earlier tool versions](../agents-and-tools/tool-use/computer-use-tool.md#earlier-tool-versions).
 
 - **Admin API:** Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`), external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](../manage-claude/cmek.md); keys are validated when attached to a workspace rather than through a validate endpoint), the [telemetry destination endpoints](../api/claude-platform-on-aws-iam-actions.md#telemetry-destinations), and the [Usage and Cost Analytics API](../manage-claude/usage-cost-analytics-api.md) endpoints are available. Other Admin API endpoints (organization members, workspace members, invites, API keys, the legacy [Usage and Cost API](../manage-claude/usage-cost-api.md), and rate limit reports) are not available. AWS IAM manages organization membership.
 - **Workspace member management:** Adding or removing users from individual workspaces is not available. AWS IAM policies on workspace ARNs control access.
