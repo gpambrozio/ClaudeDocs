@@ -77,7 +77,7 @@ The list endpoint returns session metadata, with no transcript content, for ever
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/apps/sessions/local" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   --data-urlencode "created_at.gte=2026-07-01T00:00:00Z" \
   --data-urlencode "limit=100"
 ```
@@ -169,7 +169,7 @@ Project instruction files such as `CLAUDE.md` appear as ordinary user-role conte
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/apps/sessions/local/clls_01HxKpLmNoPqRsTuVwXyZaBc/messages" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```json Response
@@ -319,7 +319,7 @@ The list endpoint defaults to organization-wide scope: leave off `organization_i
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/apps/sessions/remote" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   --data-urlencode "created_at.gte=2026-06-01T00:00:00Z" \
   --data-urlencode "limit=100"
 ```
@@ -384,7 +384,7 @@ The messages endpoint returns the session’s transcript: user prompts, assistan
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/apps/sessions/remote/cse_01WpQrStUvXyZaBcDeFgHjK6/messages" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```json Response

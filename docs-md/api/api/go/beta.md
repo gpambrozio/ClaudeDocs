@@ -1862,7 +1862,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -2101,7 +2101,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name BetaServerToolUseBlockParamName`
 
@@ -2545,7 +2545,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -2705,7 +2705,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           - `Type Object`
 
-                          - `Properties map[string, any] Optional`
+                          - `Properties map[string]any Optional`
 
                           - `Required []string Optional`
 
@@ -2745,7 +2745,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2779,7 +2779,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2813,7 +2813,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -3390,7 +3390,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -3424,7 +3424,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -3476,7 +3476,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -3510,7 +3510,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -3566,7 +3566,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -3825,7 +3825,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -3859,7 +3859,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -3893,7 +3893,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `MaxCharacters int64 Optional`
 
@@ -4656,7 +4656,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           Create a cache control breakpoint at this content block.
 
-                        - `Configs map[string, BetaMCPToolConfig] Optional`
+                        - `Configs map[string]BetaMCPToolConfig Optional`
 
                           Configuration overrides for specific tools, keyed by tool name
 
@@ -4676,7 +4676,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                          - `InputSchema map[string, any]`
+                          - `InputSchema map[string]any`
 
                             The tool's input schema as the MCP server lists it, verbatim.
 
@@ -4766,7 +4766,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               The server's tools, exactly as the response listed them.
 
-              - `InputSchema map[string, any]`
+              - `InputSchema map[string]any`
 
                 The tool's input schema as the MCP server lists it, verbatim.
 
@@ -5653,7 +5653,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name string`
 
@@ -5701,7 +5701,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name BetaServerToolUseBlockName`
 
@@ -6213,7 +6213,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name string`
 
@@ -6374,7 +6374,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -6410,7 +6410,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -6461,7 +6461,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -6495,7 +6495,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -7072,7 +7072,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     minimum: 0
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -7106,7 +7106,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -7158,7 +7158,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     minimum: 0
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -7192,7 +7192,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -7248,7 +7248,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -7507,7 +7507,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -7541,7 +7541,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -7575,7 +7575,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `MaxCharacters int64 Optional`
 
@@ -8340,7 +8340,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     Create a cache control breakpoint at this content block.
 
-                  - `Configs map[string, BetaMCPToolConfig] Optional`
+                  - `Configs map[string]BetaMCPToolConfig Optional`
 
                     Configuration overrides for specific tools, keyed by tool name
 
@@ -8360,7 +8360,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                    - `InputSchema map[string, any]`
+                    - `InputSchema map[string]any`
 
                       The tool's input schema as the MCP server lists it, verbatim.
 
@@ -8486,7 +8486,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Tools []BetaMCPTool`
 
-        - `InputSchema map[string, any]`
+        - `InputSchema map[string]any`
 
         - `Name string`
 
@@ -9561,9 +9561,9 @@ func main() {
 	)
 	betaMessage, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
 		MaxTokens: 1024,
-		Messages: []anthropic.BetaMessageParam{anthropic.BetaMessageParam{
+		Messages: []anthropic.BetaMessageParam{{
 			OfUser: &anthropic.BetaUserMessageParam{
-				Content: []anthropic.BetaContentBlockParamUnion{anthropic.BetaContentBlockParamUnion{
+				Content: []anthropic.BetaContentBlockParamUnion{{
 					OfText: &anthropic.BetaTextBlockParam{
 						Text: "x",
 					},
@@ -10089,7 +10089,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -10328,7 +10328,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name BetaServerToolUseBlockParamName`
 
@@ -10772,7 +10772,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -10932,7 +10932,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           - `Type Object`
 
-                          - `Properties map[string, any] Optional`
+                          - `Properties map[string]any Optional`
 
                           - `Required []string Optional`
 
@@ -10972,7 +10972,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -11006,7 +11006,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -11040,7 +11040,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -11617,7 +11617,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -11651,7 +11651,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -11703,7 +11703,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -11737,7 +11737,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -11793,7 +11793,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -12052,7 +12052,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -12086,7 +12086,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -12120,7 +12120,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `MaxCharacters int64 Optional`
 
@@ -12883,7 +12883,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           Create a cache control breakpoint at this content block.
 
-                        - `Configs map[string, BetaMCPToolConfig] Optional`
+                        - `Configs map[string]BetaMCPToolConfig Optional`
 
                           Configuration overrides for specific tools, keyed by tool name
 
@@ -12903,7 +12903,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                          - `InputSchema map[string, any]`
+                          - `InputSchema map[string]any`
 
                             The tool's input schema as the MCP server lists it, verbatim.
 
@@ -12993,7 +12993,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               The server's tools, exactly as the response listed them.
 
-              - `InputSchema map[string, any]`
+              - `InputSchema map[string]any`
 
                 The tool's input schema as the MCP server lists it, verbatim.
 
@@ -13518,9 +13518,9 @@ func main() {
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
 	betaMessageTokensCount, err := client.Beta.Messages.CountTokens(context.TODO(), anthropic.BetaMessageCountTokensParams{
-		Messages: []anthropic.BetaMessageParam{anthropic.BetaMessageParam{
+		Messages: []anthropic.BetaMessageParam{{
 			OfUser: &anthropic.BetaUserMessageParam{
-				Content: []anthropic.BetaContentBlockParamUnion{anthropic.BetaContentBlockParamUnion{
+				Content: []anthropic.BetaContentBlockParamUnion{{
 					OfText: &anthropic.BetaTextBlockParam{
 						Text: "x",
 					},
@@ -13981,7 +13981,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   pattern: ^[a-zA-Z0-9_-]+$
 
-                - `Input map[string, any]`
+                - `Input map[string]any`
 
                 - `Name string`
 
@@ -14220,7 +14220,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `Input map[string, any]`
+                - `Input map[string]any`
 
                 - `Name BetaServerToolUseBlockParamName`
 
@@ -14664,7 +14664,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   pattern: ^[a-zA-Z0-9_-]+$
 
-                - `Input map[string, any]`
+                - `Input map[string]any`
 
                 - `Name string`
 
@@ -14824,7 +14824,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               - `Type Object`
 
-                              - `Properties map[string, any] Optional`
+                              - `Properties map[string]any Optional`
 
                               - `Required []string Optional`
 
@@ -14864,7 +14864,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -14898,7 +14898,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -14932,7 +14932,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -15509,7 +15509,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               minimum: 0
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -15543,7 +15543,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -15595,7 +15595,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               minimum: 0
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -15629,7 +15629,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -15685,7 +15685,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -15944,7 +15944,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -15978,7 +15978,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -16012,7 +16012,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `MaxCharacters int64 Optional`
 
@@ -16775,7 +16775,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               Create a cache control breakpoint at this content block.
 
-                            - `Configs map[string, BetaMCPToolConfig] Optional`
+                            - `Configs map[string]BetaMCPToolConfig Optional`
 
                               Configuration overrides for specific tools, keyed by tool name
 
@@ -16795,7 +16795,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                              - `InputSchema map[string, any]`
+                              - `InputSchema map[string]any`
 
                                 The tool's input schema as the MCP server lists it, verbatim.
 
@@ -16885,7 +16885,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   The server's tools, exactly as the response listed them.
 
-                  - `InputSchema map[string, any]`
+                  - `InputSchema map[string]any`
 
                     The tool's input schema as the MCP server lists it, verbatim.
 
@@ -17286,7 +17286,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               - `Type JSONSchema`
 
-              - `Schema map[string, any]`
+              - `Schema map[string]any`
 
                 The JSON schema of the format
 
@@ -17983,13 +17983,13 @@ func main() {
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
 	betaMessageBatch, err := client.Beta.Messages.Batches.New(context.TODO(), anthropic.BetaMessageBatchNewParams{
-		Requests: []anthropic.BetaMessageBatchNewParamsRequest{anthropic.BetaMessageBatchNewParamsRequest{
+		Requests: []anthropic.BetaMessageBatchNewParamsRequest{{
 			CustomID: "my-custom-id-1",
 			Params: anthropic.BetaMessageBatchNewParamsRequestParams{
 				MaxTokens: 1024,
-				Messages: []anthropic.BetaMessageParam{anthropic.BetaMessageParam{
+				Messages: []anthropic.BetaMessageParam{{
 					OfUser: &anthropic.BetaUserMessageParam{
-						Content: []anthropic.BetaContentBlockParamUnion{anthropic.BetaContentBlockParamUnion{
+						Content: []anthropic.BetaContentBlockParamUnion{{
 							OfText: &anthropic.BetaTextBlockParam{
 								Text: "x",
 							},
@@ -19574,7 +19574,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -19622,7 +19622,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name BetaServerToolUseBlockName`
 
@@ -20134,7 +20134,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -20295,7 +20295,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           - `Type Object`
 
-                          - `Properties map[string, any] Optional`
+                          - `Properties map[string]any Optional`
 
                           - `Required []string Optional`
 
@@ -20331,7 +20331,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -20382,7 +20382,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -20416,7 +20416,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -20993,7 +20993,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -21027,7 +21027,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -21079,7 +21079,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -21113,7 +21113,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -21169,7 +21169,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -21428,7 +21428,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -21462,7 +21462,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -21496,7 +21496,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `MaxCharacters int64 Optional`
 
@@ -22261,7 +22261,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           Create a cache control breakpoint at this content block.
 
-                        - `Configs map[string, BetaMCPToolConfig] Optional`
+                        - `Configs map[string]BetaMCPToolConfig Optional`
 
                           Configuration overrides for specific tools, keyed by tool name
 
@@ -22281,7 +22281,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                          - `InputSchema map[string, any]`
+                          - `InputSchema map[string]any`
 
                             The tool's input schema as the MCP server lists it, verbatim.
 
@@ -22407,7 +22407,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Tools []BetaMCPTool`
 
-              - `InputSchema map[string, any]`
+              - `InputSchema map[string]any`
 
               - `Name string`
 
@@ -23516,7 +23516,7 @@ Create Agent
 
       maxLength: 2048
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -24086,7 +24086,7 @@ Create Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -24268,7 +24268,7 @@ Create Agent
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -24984,7 +24984,7 @@ Create Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -25344,7 +25344,7 @@ List Agents
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -26060,7 +26060,7 @@ List Agents
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -26404,7 +26404,7 @@ Get Agent
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -27120,7 +27120,7 @@ Get Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -27313,7 +27313,7 @@ Update Agent
 
       maxLength: 2048
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
@@ -28041,7 +28041,7 @@ Update Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -28229,7 +28229,7 @@ Update Agent
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -28945,7 +28945,7 @@ Update Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -29284,7 +29284,7 @@ Archive Agent
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -30000,7 +30000,7 @@ Archive Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -30349,7 +30349,7 @@ List Agent Versions
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -31065,7 +31065,7 @@ List Agent Versions
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -31337,7 +31337,7 @@ Create a new environment with the specified configuration.
 
     maxLength: 1024
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     User-provided metadata key-value pairs
 
@@ -31583,7 +31583,7 @@ Create a new environment with the specified configuration.
 
     User-provided description for the environment; null when unset
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs
 
@@ -31939,7 +31939,7 @@ List environments with pagination support.
 
     User-provided description for the environment; null when unset
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs
 
@@ -32286,7 +32286,7 @@ Retrieve a specific environment by ID.
 
     User-provided description for the environment; null when unset
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs
 
@@ -32496,7 +32496,7 @@ Update an existing environment's configuration.
 
     maxLength: 1024
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
@@ -32748,7 +32748,7 @@ Update an existing environment's configuration.
 
     User-provided description for the environment; null when unset
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs
 
@@ -33282,7 +33282,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     User-provided description for the environment; null when unset
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs
 
@@ -33568,7 +33568,7 @@ Retrieve detailed information about a specific work item.
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -33852,7 +33852,7 @@ Long poll for work items in the queue.
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -34120,7 +34120,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -34621,7 +34621,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -34900,7 +34900,7 @@ List work items in an environment.
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -35183,7 +35183,7 @@ Update work item metadata with merge semantics.
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -36265,7 +36265,7 @@ Create Session
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -36493,7 +36493,7 @@ Create Session
 
         format: int32
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -37385,7 +37385,7 @@ Create Session
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -37607,7 +37607,7 @@ Create Session
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -37883,9 +37883,9 @@ func main() {
 			OfString: anthropic.String("agent_011CZkYpogX7uDKUyvBTophP"),
 		},
 		EnvironmentID: "env_011CZkZ9X2dpNyB7HsEFoRfW",
-		InitialEvents: []anthropic.BetaSessionNewParamsInitialEventUnion{anthropic.BetaSessionNewParamsInitialEventUnion{
+		InitialEvents: []anthropic.BetaSessionNewParamsInitialEventUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
+				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
 						Text: "Where is my order #1234?",
 					},
@@ -38980,7 +38980,7 @@ List Sessions
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -39202,7 +39202,7 @@ List Sessions
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -40485,7 +40485,7 @@ Get Session
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -40707,7 +40707,7 @@ Get Session
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -41212,7 +41212,7 @@ Update Session
 
     Enforced spend ceiling for the session. Set an object to replace the budget of a session that was created with one, or `null` to remove it; omit to preserve. A budget cannot be added to a session created without one (rejected with reason `budget_create_only`), and a removed budget cannot be re-added. Allowed in any non-terminated status. Lowering `max_list_cost` to at or below the session's consumed list cost is rejected with reason `budget_not_raised`, and every model the session can run must have a public list price or the request is rejected with reason `model_not_budgetable`.
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
 
@@ -42010,7 +42010,7 @@ Update Session
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -42232,7 +42232,7 @@ Update Session
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -43695,7 +43695,7 @@ Archive Session
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -43917,7 +43917,7 @@ Archive Session
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -44984,7 +44984,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -45056,7 +45056,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -45198,7 +45198,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -47002,7 +47002,7 @@ List Events
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -47210,7 +47210,7 @@ List Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -48610,9 +48610,9 @@ func main() {
 		context.TODO(),
 		"sesn_011CZkZAtmR3yMPDzynEDxu7",
 		anthropic.BetaSessionEventSendParams{
-			Events: []anthropic.BetaManagedAgentsEventParamsUnion{anthropic.BetaManagedAgentsEventParamsUnion{
+			Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 				OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-					Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
+					Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 						OfText: &anthropic.BetaManagedAgentsTextBlockParam{
 							Text: "Where is my order #1234?",
 						},
@@ -49112,7 +49112,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -49184,7 +49184,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -49326,7 +49326,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -51130,7 +51130,7 @@ Stream Events
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -51338,7 +51338,7 @@ Stream Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -53898,7 +53898,7 @@ List Session Threads
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -54997,7 +54997,7 @@ Get Session Thread
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -56093,7 +56093,7 @@ Archive Session Thread
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -56889,7 +56889,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -56961,7 +56961,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -57103,7 +57103,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -58907,7 +58907,7 @@ List Session Thread Events
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -59115,7 +59115,7 @@ List Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -60020,7 +60020,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -60092,7 +60092,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -60234,7 +60234,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -62038,7 +62038,7 @@ Stream Session Thread Events
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -62246,7 +62246,7 @@ Stream Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -63002,7 +63002,7 @@ Create Deployment
 
     maxLength: 2048
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -63490,7 +63490,7 @@ Create Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -63770,9 +63770,9 @@ func main() {
 			OfString: anthropic.String("string"),
 		},
 		EnvironmentID: "x",
-		InitialEvents: []anthropic.BetaManagedAgentsDeploymentInitialEventParamsUnion{anthropic.BetaManagedAgentsDeploymentInitialEventParamsUnion{
+		InitialEvents: []anthropic.BetaManagedAgentsDeploymentInitialEventParamsUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
+				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
 						Text: "Where is my order #1234?",
 					},
@@ -64283,7 +64283,7 @@ List Deployments
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -65036,7 +65036,7 @@ Get Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -65666,7 +65666,7 @@ Update Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
@@ -66160,7 +66160,7 @@ Update Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -66912,7 +66912,7 @@ Archive Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -68078,7 +68078,7 @@ Pause Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -68830,7 +68830,7 @@ Unpause Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -70077,7 +70077,7 @@ Create a Vault
 
     minLength: 1, maxLength: 255
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -70229,7 +70229,7 @@ Create a Vault
 
     Human-readable name for the vault.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the vault.
 
@@ -70456,7 +70456,7 @@ List Vaults
 
     Human-readable name for the vault.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the vault.
 
@@ -70676,7 +70676,7 @@ Retrieve a Vault
 
     Human-readable name for the vault.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the vault.
 
@@ -70753,7 +70753,7 @@ Update a Vault
 
     minLength: 1, maxLength: 255
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
@@ -70905,7 +70905,7 @@ Update a Vault
 
     Human-readable name for the vault.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the vault.
 
@@ -71310,7 +71310,7 @@ Archive a Vault
 
     Human-readable name for the vault.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the vault.
 
@@ -71555,7 +71555,7 @@ Create a Credential
 
     maxLength: 255
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -71817,7 +71817,7 @@ Create a Credential
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the credential.
 
@@ -72180,7 +72180,7 @@ List Credentials
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the credential.
 
@@ -72531,7 +72531,7 @@ Retrieve a Credential
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the credential.
 
@@ -72757,7 +72757,7 @@ Update a Credential
 
     minLength: 1, maxLength: 255
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
@@ -73019,7 +73019,7 @@ Update a Credential
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the credential.
 
@@ -73559,7 +73559,7 @@ Archive a Credential
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the credential.
 
@@ -73961,7 +73961,7 @@ Create a Memory Store
 
     maxLength: 1024
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Key-value pairs for your own use, such as the end user that the store belongs to. The agent doesn't see them.
 
@@ -74119,7 +74119,7 @@ Create a Memory Store
 
     Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Key-value pairs for your own use, such as the end user that the store belongs to.
 
@@ -74371,7 +74371,7 @@ List Memory Stores
 
     Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Key-value pairs for your own use, such as the end user that the store belongs to.
 
@@ -74602,7 +74602,7 @@ Retrieve a Memory Store
 
     Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Key-value pairs for your own use, such as the end user that the store belongs to.
 
@@ -74690,7 +74690,7 @@ Update a Memory Store
 
     maxLength: 1024
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Changes to apply to the memory store's metadata. Keys you leave out keep their values.
 
@@ -74856,7 +74856,7 @@ Update a Memory Store
 
     Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Key-value pairs for your own use, such as the end user that the store belongs to.
 
@@ -75278,7 +75278,7 @@ Archive a Memory Store
 
     Free-text description of what the store contains, up to 1,024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Key-value pairs for your own use, such as the end user that the store belongs to.
 
@@ -80946,7 +80946,7 @@ Create User Profile
 
     format: date-time
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
@@ -81098,7 +81098,7 @@ Create User Profile
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -81106,7 +81106,7 @@ Create User Profile
 
     Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
 
-  - `TrustGrants map[string, BetaUserProfileTrustGrant]`
+  - `TrustGrants map[string]BetaUserProfileTrustGrant`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
@@ -81447,7 +81447,7 @@ List User Profiles
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -81455,7 +81455,7 @@ List User Profiles
 
     Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
 
-  - `TrustGrants map[string, BetaUserProfileTrustGrant]`
+  - `TrustGrants map[string]BetaUserProfileTrustGrant`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
@@ -81769,7 +81769,7 @@ Get User Profile
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -81777,7 +81777,7 @@ Get User Profile
 
     Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
 
-  - `TrustGrants map[string, BetaUserProfileTrustGrant]`
+  - `TrustGrants map[string]BetaUserProfileTrustGrant`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
@@ -81976,7 +81976,7 @@ Update User Profile
 
     format: date-time
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
@@ -82128,7 +82128,7 @@ Update User Profile
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -82136,7 +82136,7 @@ Update User Profile
 
     Real-world name of the entity this profile represents (company or individual). For a company the platform resells Claude access to (`access_type` `passthrough`) this is that company's name. `null` until the platform supplies one.
 
-  - `TrustGrants map[string, BetaUserProfileTrustGrant]`
+  - `TrustGrants map[string]BetaUserProfileTrustGrant`
 
     Trust grants for this profile, keyed by grant name. Key omitted when no grant is active or in flight.
 
@@ -83337,7 +83337,7 @@ func main() {
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
 	betaDream, err := client.Beta.Dreams.New(context.TODO(), anthropic.BetaDreamNewParams{
-		Inputs: []anthropic.BetaDreamInputUnionParam{anthropic.BetaDreamInputUnionParam{
+		Inputs: []anthropic.BetaDreamInputUnionParam{{
 			OfMemoryStore: &anthropic.BetaDreamMemoryStoreInputParam{
 				MemoryStoreID: "x",
 			},
@@ -89128,7 +89128,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
       - `Type Inline`
 
-      - `Keys []map[string, any]`
+      - `Keys []map[string]any`
 
         Inline JWK objects.
 
@@ -89343,7 +89343,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
       - `Type Inline`
 
-      - `Keys []map[string, any]`
+      - `Keys []map[string]any`
 
         Inline JWK objects.
 
@@ -89684,7 +89684,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
       - `Type Inline`
 
-      - `Keys []map[string, any]`
+      - `Keys []map[string]any`
 
         Inline JWK objects.
 
@@ -90015,7 +90015,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
       - `Type Inline`
 
-      - `Keys []map[string, any]`
+      - `Keys []map[string]any`
 
         Inline JWK objects.
 
@@ -90203,7 +90203,7 @@ session.
 
       - `Type Inline`
 
-      - `Keys []map[string, any]`
+      - `Keys []map[string]any`
 
         Inline JWK objects.
 
@@ -90428,7 +90428,7 @@ session.
 
       - `Type Inline`
 
-      - `Keys []map[string, any]`
+      - `Keys []map[string]any`
 
         Inline JWK objects.
 
@@ -90763,7 +90763,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
       - `Type Inline`
 
-      - `Keys []map[string, any]`
+      - `Keys []map[string]any`
 
         Inline JWK objects.
 
@@ -90930,7 +90930,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     When true, enable this rule for every workspace in the org (including workspaces created later).
 
-  - `Attributes map[string, string] Optional`
+  - `Attributes map[string]string Optional`
 
     CEL expressions `{name: expr}` extracting named values from claims. Not yet supported; any non-empty value is rejected with 400.
 
@@ -91101,7 +91101,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this rule.
 
-  - `Attributes map[string, string]`
+  - `Attributes map[string]string`
 
     CEL expressions extracting named values from claims. Not yet supported; always null.
 
@@ -91137,7 +91137,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
       maxLength: 1024
 
-    - `Claims map[string, string] Optional`
+    - `Claims map[string]string Optional`
 
       Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
@@ -91458,7 +91458,7 @@ unless `include_archived=true`.
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this rule.
 
-  - `Attributes map[string, string]`
+  - `Attributes map[string]string`
 
     CEL expressions extracting named values from claims. Not yet supported; always null.
 
@@ -91494,7 +91494,7 @@ unless `include_archived=true`.
 
       maxLength: 1024
 
-    - `Claims map[string, string] Optional`
+    - `Claims map[string]string Optional`
 
       Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
@@ -91795,7 +91795,7 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this rule.
 
-  - `Attributes map[string, string]`
+  - `Attributes map[string]string`
 
     CEL expressions extracting named values from claims. Not yet supported; always null.
 
@@ -91831,7 +91831,7 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
       maxLength: 1024
 
-    - `Claims map[string, string] Optional`
+    - `Claims map[string]string Optional`
 
       Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
@@ -92000,7 +92000,7 @@ Console session.
 
     When true, enables this rule for every workspace in the org (including workspaces created later). Setting `false` is rejected with 400 if no workspace would remain enabled; a rule with only a legacy `workspace_id` binding continues to mint.
 
-  - `Attributes map[string, string] Optional`
+  - `Attributes map[string]string Optional`
 
     Replaces the CEL expressions `{name: expr}` extracting named values from claims. Send null to clear them. Not yet supported; any non-empty value is rejected with 400.
 
@@ -92191,7 +92191,7 @@ Console session.
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this rule.
 
-  - `Attributes map[string, string]`
+  - `Attributes map[string]string`
 
     CEL expressions extracting named values from claims. Not yet supported; always null.
 
@@ -92227,7 +92227,7 @@ Console session.
 
       maxLength: 1024
 
-    - `Claims map[string, string] Optional`
+    - `Claims map[string]string Optional`
 
       Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
@@ -92535,7 +92535,7 @@ other scopes require a Console session.
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this rule.
 
-  - `Attributes map[string, string]`
+  - `Attributes map[string]string`
 
     CEL expressions extracting named values from claims. Not yet supported; always null.
 
@@ -92571,7 +92571,7 @@ other scopes require a Console session.
 
       maxLength: 1024
 
-    - `Claims map[string, string] Optional`
+    - `Claims map[string]string Optional`
 
       Exact-match `{claim: value}` pairs against top-level claims. Only string-valued claims can be matched; use `condition` for non-string claims.
 
@@ -96397,7 +96397,7 @@ List Workspaces
 
     Name of the Workspace.
 
-  - `Tags map[string, string]`
+  - `Tags map[string]string`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -96504,7 +96504,7 @@ Create Workspace
     it cannot be detached or replaced. To rotate key material, rotate the underlying
     key on your cloud KMS; the `external_key_id` stays the same.
 
-  - `Tags map[string, string] Optional`
+  - `Tags map[string]string Optional`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -96718,7 +96718,7 @@ Create Workspace
 
     Name of the Workspace.
 
-  - `Tags map[string, string]`
+  - `Tags map[string]string`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -96884,7 +96884,7 @@ Get Workspace
 
     Name of the Workspace.
 
-  - `Tags map[string, string]`
+  - `Tags map[string]string`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -96986,7 +96986,7 @@ Update Workspace
 
     minLength: 1, maxLength: 255
 
-  - `Tags map[string, string] Optional`
+  - `Tags map[string]string Optional`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -97086,7 +97086,7 @@ Update Workspace
 
     Name of the Workspace.
 
-  - `Tags map[string, string]`
+  - `Tags map[string]string`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -97252,7 +97252,7 @@ Archive Workspace
 
     Name of the Workspace.
 
-  - `Tags map[string, string]`
+  - `Tags map[string]string`
 
     User-defined tags as string key-value pairs. Keys may not begin with `anthropic`.
 
@@ -97794,7 +97794,7 @@ func main() {
 		"rate_limit_id",
 		anthropic.BetaOrganizationWorkspaceRateLimitUpdateParams{
 			WorkspaceID: "workspace_id",
-			Limits: []anthropic.BetaWorkspaceRateLimitUpdateValueParam{anthropic.BetaWorkspaceRateLimitUpdateValueParam{
+			Limits: []anthropic.BetaWorkspaceRateLimitUpdateValueParam{{
 				Type:  anthropic.BetaWorkspaceRateLimitTypeFastItpmca,
 				Value: anthropic.Int(0),
 			}},
@@ -114660,7 +114660,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 
     Human-readable name for the destination. Optional. 1 to 255 characters.
 
-  - `Headers map[string, string] Optional`
+  - `Headers map[string]string Optional`
 
     Request headers that the API sends with every delivery, typically your collector's authentication header (for example `authorization`).
 
@@ -115796,7 +115796,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     maxLength: 2048
 
-  - `Headers map[string, string] Optional`
+  - `Headers map[string]string Optional`
 
     Headers to set or remove. The API merges them into the destination's headers by name.
 

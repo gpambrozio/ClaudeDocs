@@ -43,7 +43,7 @@ featureMetadata:
 
 The web fetch tool allows Claude to retrieve full content from specified webpages and PDF documents.
 
-The latest web fetch tool version (`web_fetch_20260318`) supports **dynamic filtering**: Claude can write and execute code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. Dynamic filtering is available with Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). `web_fetch_20260318` also adds [response inclusion](web-fetch-tool.md#response-inclusion) control for agentic workflows. The previous versions (`web_fetch_20260309` for dynamic filtering and [cache bypass](web-fetch-tool.md#cache-bypass), `web_fetch_20260209` for dynamic filtering only, `web_fetch_20250910` for basic fetch) remain available.
+The latest web fetch tool version (`web_fetch_20260318`) supports **dynamic filtering**: Claude can write and run code to filter fetched content before it reaches the context window, keeping only relevant information and discarding the rest. This reduces token consumption while maintaining response quality. Dynamic filtering is available with Claude 4.6 and later models and [Claude Mythos Preview](https://anthropic.com/glasswing). `web_fetch_20260318` also adds [response inclusion](web-fetch-tool.md#response-inclusion) control for agentic workflows. The other versions (`web_fetch_20260309` for dynamic filtering and [cache bypass](web-fetch-tool.md#cache-bypass), `web_fetch_20260209` for dynamic filtering only, `web_fetch_20250910` for basic fetch) are available.
 
 Web fetch (with and without dynamic filtering) is available on the Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), and [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md). On Microsoft Foundry, deployments [hosted on Azure](../../build-with-claude/claude-in-microsoft-foundry.md#additional-features-not-supported-when-hosted-on-azure) support only the basic web fetch tool (`web_fetch_20250910`, without dynamic filtering). Deployments hosted on Anthropic support all versions.
 
@@ -108,7 +108,7 @@ To enable dynamic filtering, use `web_fetch_20260209` or any later version. The 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -274,7 +274,7 @@ Provide the web fetch tool in your API request:
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -727,7 +727,7 @@ When both the web search and web fetch tools are enabled, and the user names a s
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",

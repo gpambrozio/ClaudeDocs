@@ -61,7 +61,7 @@ Give the store a `name` (csharp, go: `Name`) and a `description` (csharp, go: `D
 ```bash cURL
 curl -s https://api.anthropic.com/v1/memory_stores \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22" \
   -H "content-type: application/json" \
   -d '{
@@ -159,7 +159,7 @@ Pre-load a store with reference material before any agent runs:
 ```bash cURL
 curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22" \
   -H "content-type: application/json" \
   -d '{
@@ -247,7 +247,7 @@ You can configure `access` (csharp, go: `Access`) as well. It defaults to `read_
 ```bash cURL
 curl -s https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -422,7 +422,7 @@ List the memories in a store. Results are returned in a stable, server-defined o
 ```bash cURL
 curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories?path_prefix=/" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 
@@ -518,7 +518,7 @@ Fetching an individual memory returns the full content.
 ```bash cURL
 curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 
@@ -593,7 +593,7 @@ See the [Retrieve a memory](../api/beta/memory_stores/memories/retrieve.md) refe
 ```bash cURL
 curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22" \
   -H "content-type: application/json" \
   -d '{
@@ -677,7 +677,7 @@ See the [Create a memory](../api/beta/memory_stores/memories/create.md) referenc
 ```bash cURL
 curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22" \
   -H "content-type: application/json" \
   -d '{"path": "/archive/2026_q1_formatting.md"}'
@@ -758,7 +758,7 @@ To avoid overwriting a concurrent write, pass a `content_sha256` precondition. T
 ```bash cURL
 curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22" \
   -H "content-type: application/json" \
   -d '{
@@ -852,7 +852,7 @@ client.beta.memory_stores.memories.update(
 ```bash cURL
 curl -s -X DELETE "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 
@@ -930,7 +930,7 @@ List version history for a store, newest first. The example filters to a single 
 ```bash cURL
 curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions?memory_id=$mem_id" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 
@@ -1046,7 +1046,7 @@ Fetching an individual version returns the same fields as the list response plus
 ```bash cURL
 curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions/$version_id" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 
@@ -1126,7 +1126,7 @@ A version that is the current head of a live memory cannot be redacted. Write a 
 ```bash cURL
 curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions/$version_id/redact" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22" \
   -H "content-type: application/json" \
   -d '{}'
@@ -1203,7 +1203,7 @@ List stores in the workspace. Archived stores are excluded by default; set `incl
 ```bash cURL
 curl -s "https://api.anthropic.com/v1/memory_stores?include_archived=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 
@@ -1276,7 +1276,7 @@ Archiving makes a store read-only and prevents it from being attached to new ses
 ```bash cURL
 curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/archive" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: agent-memory-2026-07-22"
 ```
 

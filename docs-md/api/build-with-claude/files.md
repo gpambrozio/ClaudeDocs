@@ -67,7 +67,7 @@ Upload a file to reference in future API calls:
 ```bash cURL
 curl -X POST https://api.anthropic.com/v1/files \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -F "file=@/path/to/document.pdf"
 ```
 
@@ -191,7 +191,7 @@ Once uploaded, reference the file by passing the `id` from the upload response a
 ```bash cURL
 curl -X POST https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -462,7 +462,7 @@ TEXT_CONTENT=$(cat document.txt)
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d @- <<EOF
 {
   "model": "claude-opus-5-5",
@@ -693,7 +693,7 @@ Retrieve a list of your uploaded files. The endpoint is paginated: each request 
 ```bash cURL
 curl https://api.anthropic.com/v1/files \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI
@@ -764,7 +764,7 @@ Retrieve information about a specific file:
 ```bash cURL
 curl "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI
@@ -818,7 +818,7 @@ Delete a file from your workspace:
 ```bash cURL
 curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI
@@ -863,7 +863,7 @@ Download files that were created by [skills](skills-guide.md) or the [code execu
 ```bash cURL
 curl -X GET "https://api.anthropic.com/v1/files/$FILE_ID/content" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -o downloaded_file.txt
 ```
 
@@ -972,7 +972,7 @@ If your organization has the [Compliance API](../manage-claude/compliance-api.md
 
 ## Migrate from `files-api-2025-04-14`
 
-The Files API is out of beta and needs no beta header. Migrating off `files-api-2025-04-14` is optional: requests that still send it keep working and keep returning the beta response shapes, so an existing integration keeps working until you change it. Removing the header switches those requests to the shapes documented on this page:
+The Files API is out of beta and needs no beta header. Migrating off `files-api-2025-04-14` is optional: requests that send it keep working and keep returning the beta response shapes, so an existing integration keeps working until you change it. Removing the header switches those requests to the shapes documented on this page:
 
 |                                          | With `files-api-2025-04-14`             | Without the header                                                           |
 | ---------------------------------------- | --------------------------------------- | ---------------------------------------------------------------------------- |

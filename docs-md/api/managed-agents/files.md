@@ -46,7 +46,7 @@ First, upload a file using the [Files API](../build-with-claude/files.md):
 ```bash cURL
 curl --fail-with-body -sS https://api.anthropic.com/v1/files \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -F file=@data.csv
 ```
@@ -119,7 +119,7 @@ The `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) is optional, 
 ```bash cURL
 curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -261,7 +261,7 @@ Mount multiple files by adding entries to the `resources` (csharp, go: `Resource
 ```bash cURL
 curl -fsSL https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -384,7 +384,7 @@ You can add or remove files from a session after creation using the session reso
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/resources" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -476,12 +476,12 @@ List all resources on a session with `GET /v1/sessions/{session_id}/resources` (
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/resources" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 
 curl --fail-with-body -sS -X DELETE "https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 
@@ -589,13 +589,13 @@ Filtering by `scope_id` (java: `scopeId`; php: `scopeID`; csharp, go: `ScopeID`)
 # List files associated with a session
 curl -fsSL "https://api.anthropic.com/v1/files?scope_id=sesn_abc123" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 
 # Download a file
 curl -fsSL "https://api.anthropic.com/v1/files/$FILE_ID/content" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -o output.txt
 ```
 

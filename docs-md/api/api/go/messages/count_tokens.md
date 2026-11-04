@@ -405,7 +405,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -644,7 +644,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name ServerToolUseBlockParamName`
 
@@ -1201,7 +1201,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -1241,7 +1241,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -1275,7 +1275,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -1834,7 +1834,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -2093,7 +2093,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -2127,7 +2127,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -2161,7 +2161,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `MaxCharacters int64 Optional`
 
@@ -2805,9 +2805,9 @@ func main() {
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
 	messageTokensCount, err := client.Messages.CountTokens(context.TODO(), anthropic.MessageCountTokensParams{
-		Messages: []anthropic.MessageParam{anthropic.MessageParam{
+		Messages: []anthropic.MessageParam{{
 			OfUser: &anthropic.UserMessageParam{
-				Content: []anthropic.ContentBlockParamUnion{anthropic.ContentBlockParamUnion{
+				Content: []anthropic.ContentBlockParamUnion{{
 					OfText: &anthropic.TextBlockParam{
 						Text: "x",
 					},

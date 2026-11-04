@@ -45,7 +45,7 @@ A vault is the collection of `credentials` associated with an end user. Give it 
 ```bash cURL
 curl --fail-with-body -sS https://api.anthropic.com/v1/vaults \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -167,7 +167,7 @@ The `refresh.token_endpoint_auth.type` field indicates how to authenticate the r
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d @- <<'EOF'
@@ -378,7 +378,7 @@ Use `static_bearer` when the MCP server accepts a fixed bearer token (API key, p
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d @- <<'EOF'
@@ -502,7 +502,7 @@ The optional `injection_location` (java, php: `injectionLocation`; csharp, go: `
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d @- <<'EOF'
@@ -725,7 +725,7 @@ Pass `vault_ids` (java: `vaultIds`; php: `vaultIDs`; csharp: `VaultIds`; go: `Va
 ```bash cURL
 curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -827,7 +827,7 @@ Secret values, `display_name` (java, php: `displayName`; csharp, go: `DisplayNam
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d @- <<'EOF'
@@ -984,7 +984,7 @@ The top-level `status` (csharp, go: `Status`) tells you what to do next:
 curl --fail-with-body -sS -X POST \
   "https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mcp_oauth_validate?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 

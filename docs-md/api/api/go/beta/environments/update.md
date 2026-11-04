@@ -117,7 +117,7 @@ Update an existing environment's configuration.
 
     maxLength: 1024
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
@@ -369,7 +369,7 @@ Update an existing environment's configuration.
 
     User-provided description for the environment; null when unset
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs
 

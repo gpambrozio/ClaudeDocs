@@ -58,7 +58,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
 2. A URL reference to an image hosted online
 3. A `file_id` returned by the [Files API](files.md) (upload once, reference many times)
 
-On Amazon Bedrock and Claude Models on Google Cloud (Google managed), only base64-encoded sources are currently available.
+On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, only base64-encoded sources are available.
 
 Just as [placing long documents before your query](prompt-engineering/claude-prompting-best-practices.md#long-context-prompting) improves results in text prompts, Claude works best when images come before text. Images placed after text or interpolated with text still perform well, but if your use case allows it, prefer an image-then-text structure.
 
@@ -67,7 +67,7 @@ Just as [placing long documents before your query](prompt-engineering/claude-pro
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d @- <<EOF
 {
@@ -327,7 +327,7 @@ puts message
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -525,7 +525,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
@@ -535,7 +535,7 @@ echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     {
@@ -567,13 +567,13 @@ In multi-turn conversations and agentic workflows, each request resends the full
 # First, upload your image to the Files API
 curl -sS -X POST https://api.anthropic.com/v1/files \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -F "file=@vision-example.jpg"
 
 # Then use the file_id from the upload response in your message
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -818,6 +818,7 @@ import com.anthropic.models.files.FileUploadParams;
 
 ```php PHP
 use Anthropic\Core\FileParam;
+use Anthropic\Messages\Model;
 
 $client = new Client();
 
@@ -841,7 +842,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
@@ -860,7 +861,7 @@ file_upload = client.files.upload(
 
 # Use the uploaded file in a message
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     {
@@ -888,7 +889,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1262,7 +1263,7 @@ The maximum number of images for each message or request is:
 
 The maximum dimensions for each image are 8000x8000 px.
 
-If a single API request contains more than 20 images, a stricter per-image dimension limit applies to every image in that request. All `image` blocks in the request count toward this threshold, including images from earlier conversation turns that you resend and images nested inside `tool_result` content (for example, screenshots returned to the computer use tool). On Amazon Bedrock and Claude Models on Google Cloud (Google managed), document blocks such as PDFs also count toward this threshold. Images exceeding the stricter limit are rejected with an `invalid_request_error` whose message references “many-image requests” and states the current limit in pixels. To stay under the limit on all platforms, either resize each image so that neither dimension exceeds 3,000 px, or keep the request to 20 or fewer image and document blocks.
+If a single API request contains more than 20 images, a stricter per-image dimension limit applies to every image in that request. All `image` blocks in the request count toward this threshold, including images from earlier conversation turns that you resend and images nested inside `tool_result` content (for example, screenshots returned to the computer use tool). On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, document blocks such as PDFs also count toward this threshold. Images exceeding the stricter limit are rejected with an `invalid_request_error` whose message references “many-image requests” and states the current limit in pixels. To stay under the limit on all platforms, either resize each image so that neither dimension exceeds 3,000 px, or keep the request to 20 or fewer image and document blocks.
 
 The maximum size per image is:
 

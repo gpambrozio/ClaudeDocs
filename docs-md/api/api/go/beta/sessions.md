@@ -787,7 +787,7 @@ Create Session
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -1015,7 +1015,7 @@ Create Session
 
         format: int32
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Arbitrary key-value metadata attached to the session. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -1907,7 +1907,7 @@ Create Session
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -2129,7 +2129,7 @@ Create Session
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -2405,9 +2405,9 @@ func main() {
 			OfString: anthropic.String("agent_011CZkYpogX7uDKUyvBTophP"),
 		},
 		EnvironmentID: "env_011CZkZ9X2dpNyB7HsEFoRfW",
-		InitialEvents: []anthropic.BetaSessionNewParamsInitialEventUnion{anthropic.BetaSessionNewParamsInitialEventUnion{
+		InitialEvents: []anthropic.BetaSessionNewParamsInitialEventUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
+				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
 						Text: "Where is my order #1234?",
 					},
@@ -3502,7 +3502,7 @@ List Sessions
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -3724,7 +3724,7 @@ List Sessions
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -5007,7 +5007,7 @@ Get Session
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -5229,7 +5229,7 @@ Get Session
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -5734,7 +5734,7 @@ Update Session
 
     Enforced spend ceiling for the session. Set an object to replace the budget of a session that was created with one, or `null` to remove it; omit to preserve. A budget cannot be added to a session created without one (rejected with reason `budget_create_only`), and a removed budget cannot be re-added. Allowed in any non-terminated status. Lowering `max_list_cost` to at or below the session's consumed list cost is rejected with reason `budget_not_raised`, and every model the session can run must have a public list price or the request is rejected with reason `model_not_budgetable`.
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve.
 
@@ -6532,7 +6532,7 @@ Update Session
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -6754,7 +6754,7 @@ Update Session
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -8217,7 +8217,7 @@ Archive Session
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -8439,7 +8439,7 @@ Archive Session
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -9724,7 +9724,7 @@ func main() {
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -11036,7 +11036,7 @@ func main() {
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -11258,7 +11258,7 @@ func main() {
 
   - `EnvironmentID string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `OutcomeEvaluations []BetaManagedAgentsOutcomeEvaluationResource`
 
@@ -12168,7 +12168,7 @@ func main() {
 
                 - `Type Object`
 
-                - `Properties map[string, any] Optional`
+                - `Properties map[string]any Optional`
 
                 - `Required []string Optional`
 
@@ -12898,7 +12898,7 @@ func main() {
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -13538,7 +13538,7 @@ func main() {
 
               - `Type Object`
 
-              - `Properties map[string, any] Optional`
+              - `Properties map[string]any Optional`
 
               - `Required []string Optional`
 
@@ -14326,7 +14326,7 @@ func main() {
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -14988,7 +14988,7 @@ func main() {
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -15642,7 +15642,7 @@ func main() {
 
           - `Type Object`
 
-          - `Properties map[string, any] Optional`
+          - `Properties map[string]any Optional`
 
           - `Required []string Optional`
 
@@ -16294,7 +16294,7 @@ func main() {
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -16948,7 +16948,7 @@ func main() {
 
           - `Type Object`
 
-          - `Properties map[string, any] Optional`
+          - `Properties map[string]any Optional`
 
           - `Required []string Optional`
 
@@ -17626,7 +17626,7 @@ func main() {
 
               - `Type Object`
 
-              - `Properties map[string, any] Optional`
+              - `Properties map[string]any Optional`
 
               - `Required []string Optional`
 
@@ -18384,7 +18384,7 @@ func main() {
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -18592,7 +18592,7 @@ func main() {
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -19662,7 +19662,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -19734,7 +19734,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -19876,7 +19876,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -21680,7 +21680,7 @@ List Events
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -21888,7 +21888,7 @@ List Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -23288,9 +23288,9 @@ func main() {
 		context.TODO(),
 		"sesn_011CZkZAtmR3yMPDzynEDxu7",
 		anthropic.BetaSessionEventSendParams{
-			Events: []anthropic.BetaManagedAgentsEventParamsUnion{anthropic.BetaManagedAgentsEventParamsUnion{
+			Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 				OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-					Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
+					Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 						OfText: &anthropic.BetaManagedAgentsTextBlockParam{
 							Text: "Where is my order #1234?",
 						},
@@ -23790,7 +23790,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -23862,7 +23862,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -24004,7 +24004,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -25808,7 +25808,7 @@ Stream Events
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -26016,7 +26016,7 @@ Stream Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -28576,7 +28576,7 @@ List Session Threads
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -29675,7 +29675,7 @@ Get Session Thread
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -30771,7 +30771,7 @@ Archive Session Thread
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -31567,7 +31567,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -31639,7 +31639,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -31781,7 +31781,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -33585,7 +33585,7 @@ List Session Thread Events
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -33793,7 +33793,7 @@ List Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -34698,7 +34698,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -34770,7 +34770,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -34912,7 +34912,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -36716,7 +36716,7 @@ Stream Session Thread Events
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -36924,7 +36924,7 @@ Stream Session Thread Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 

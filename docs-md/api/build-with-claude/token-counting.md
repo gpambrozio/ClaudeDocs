@@ -26,6 +26,7 @@ featureMetadata:
     - claude-opus-4-6
     - claude-sonnet-4-6
     - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
     Claude Platform on AWS: stable
@@ -74,7 +75,7 @@ Claude 4.7 and later models and Claude Mythos Preview use a newer tokenizer. The
 curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "content-type: application/json" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "system": "You are a scientist",
@@ -221,7 +222,7 @@ Token counting supports client tools and the [advisor tool](../agents-and-tools/
 curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "content-type: application/json" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "tools": [
@@ -501,7 +502,7 @@ IMAGE_BASE64=$(curl -s "https://platform.claude.com/docs/images/vision-example.j
 
 curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d @- <<EOF
 {
@@ -812,7 +813,7 @@ See [Thinking and the context window](thinking.md#thinking-and-the-context-windo
 curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "content-type: application/json" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "thinking": {
@@ -1128,7 +1129,7 @@ Token counting supports base64-encoded PDFs with the same [PDF requirements](pdf
 curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "content-type: application/json" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d @- <<EOF
 {
   "model": "claude-opus-5-5",
@@ -1454,7 +1455,7 @@ Reduce cost and latency on repeated prompts by caching prompt prefixes.
 
 ## Availability
 
-Token counting is available on select models and eligible for zero data retention and HIPAA readiness.
+Token counting is available on every model and eligible for zero data retention and HIPAA readiness.
 
 ### API support
 
@@ -1462,9 +1463,9 @@ Token counting is available on select models and eligible for zero data retentio
 
 * Availability: Available
 
-| Status    | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Available | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Haiku 4.5](../models/haiku-4-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md), [Claude Opus 4.5](../models/opus-4-5/overview.md) |
+| Status    | Models                                                            |
+| --------- | ----------------------------------------------------------------- |
+| Available | [All models](../models/overview.md) |
 
 #### [Managed Agents](../managed-agents/overview.md)
 

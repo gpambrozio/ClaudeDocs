@@ -23,7 +23,7 @@ Update a Memory
 
   The ID of the memory to update (`mem_...`).
 
-- `view: BetaManagedAgentsMemoryView` (query parameter)
+- `view: optional BetaManagedAgentsMemoryView` (query parameter)
 
   Whether a `memory` or `memory_version` in the response includes its `content`. Defaults to `full` on retrieve operations and to `basic` on list, create, and update operations.
 
@@ -37,11 +37,11 @@ Update a Memory
 
     Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
-- `content: String`
+- `content: optional String`
 
   New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).
 
-- `path: String`
+- `path: optional String`
 
   The new path of the memory, which renames it. Omit it to keep the current path.
 
@@ -49,7 +49,7 @@ Update a Memory
 
   minLength: 2, maxLength: 1024
 
-- `precondition: BetaManagedAgentsPrecondition`
+- `precondition: optional BetaManagedAgentsPrecondition`
 
   The condition that the memory must meet for the update to apply. Omit it to update unconditionally.
 
@@ -57,11 +57,11 @@ Update a Memory
 
   - `type: :content_sha256`
 
-  - `content_sha256: String`
+  - `content_sha256: optional String`
 
     Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
 
@@ -177,7 +177,7 @@ Update a Memory
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -241,7 +241,7 @@ Update a Memory
 
     format: date-time
 
-  - `content: String`
+  - `content: optional String`
 
     The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
 

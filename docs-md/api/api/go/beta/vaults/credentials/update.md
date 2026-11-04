@@ -161,7 +161,7 @@ Update a Credential
 
     minLength: 1, maxLength: 255
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
@@ -423,7 +423,7 @@ Update a Credential
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the credential.
 

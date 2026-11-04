@@ -42,7 +42,7 @@ curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VER
 
 You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
 
-**Go**
+**go install**
 
 You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
 

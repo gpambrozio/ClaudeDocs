@@ -82,7 +82,7 @@ Occasionally, infrastructure updates produce minor differences in observable beh
 
 ## Current model IDs
 
-For the full list of current model IDs and their Amazon Bedrock and Claude Models on Google Cloud (Google managed) equivalents, see [Models overview](../../models/overview.md).
+For the full list of current model IDs and their equivalents on Claude Models on Google Cloud (Google managed) and Amazon Bedrock, see [Models overview](../../models/overview.md).
 
 ---
 

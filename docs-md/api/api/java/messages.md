@@ -12002,7 +12002,7 @@ public final class Main {
       inspection — useful for small icons, buttons, or text. Coordinates are in the
       same viewport-pixel space as a full screenshot.
 
-      - `List<long> region`
+      - `List<Long> region`
 
         [x0, y0, x1, y1] in viewport pixels.
 
@@ -13691,7 +13691,7 @@ public final class Main {
   inspection — useful for small icons, buttons, or text. Coordinates are in the
   same viewport-pixel space as a full screenshot.
 
-  - `List<long> region`
+  - `List<Long> region`
 
     [x0, y0, x1, y1] in viewport pixels.
 
@@ -13745,7 +13745,7 @@ public final class Main {
     inspection — useful for small icons, buttons, or text. Coordinates are in the
     same viewport-pixel space as a full screenshot.
 
-    - `List<long> region`
+    - `List<Long> region`
 
       [x0, y0, x1, y1] in viewport pixels.
 
@@ -15275,13 +15275,13 @@ public final class Main {
 
   Click and drag the cursor from `start_coordinate` to `coordinate`.
 
-  - `List<long> coordinate`
+  - `List<Long> coordinate`
 
     (x, y): x pixels from the left edge, y pixels from the top edge.
 
     minItems: 2, maxItems: 2
 
-  - `List<long> startCoordinate`
+  - `List<Long> startCoordinate`
 
     (x, y): x pixels from the left edge, y pixels from the top edge.
 
@@ -15333,13 +15333,13 @@ public final class Main {
 
     Click and drag the cursor from `start_coordinate` to `coordinate`.
 
-    - `List<long> coordinate`
+    - `List<Long> coordinate`
 
       (x, y): x pixels from the left edge, y pixels from the top edge.
 
       minItems: 2, maxItems: 2
 
-    - `List<long> startCoordinate`
+    - `List<Long> startCoordinate`
 
       (x, y): x pixels from the left edge, y pixels from the top edge.
 
@@ -15668,7 +15668,7 @@ public final class Main {
   Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
   without clicking; otherwise use a click action directly.
 
-  - `List<long> coordinate`
+  - `List<Long> coordinate`
 
     (x, y): x pixels from the left edge, y pixels from the top edge.
 
@@ -15717,7 +15717,7 @@ public final class Main {
     Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
     without clicking; otherwise use a click action directly.
 
-    - `List<long> coordinate`
+    - `List<Long> coordinate`
 
       (x, y): x pixels from the left edge, y pixels from the top edge.
 
@@ -16163,7 +16163,7 @@ public final class Main {
       Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
       without clicking; otherwise use a click action directly.
 
-      - `List<long> coordinate`
+      - `List<Long> coordinate`
 
         (x, y): x pixels from the left edge, y pixels from the top edge.
 
@@ -16260,13 +16260,13 @@ public final class Main {
 
       Click and drag the cursor from `start_coordinate` to `coordinate`.
 
-      - `List<long> coordinate`
+      - `List<Long> coordinate`
 
         (x, y): x pixels from the left edge, y pixels from the top edge.
 
         minItems: 2, maxItems: 2
 
-      - `List<long> startCoordinate`
+      - `List<Long> startCoordinate`
 
         (x, y): x pixels from the left edge, y pixels from the top edge.
 
@@ -16513,7 +16513,7 @@ public final class Main {
       full-screenshot space (not physical display pixels). The crop is scaled up to
       fill the image budget so fine details become legible.
 
-      - `List<long> region`
+      - `List<Long> region`
 
         (x0, y0, x1, y1): The region to capture.
 
@@ -17244,7 +17244,7 @@ public final class Main {
   full-screenshot space (not physical display pixels). The crop is scaled up to
   fill the image budget so fine details become legible.
 
-  - `List<long> region`
+  - `List<Long> region`
 
     (x0, y0, x1, y1): The region to capture.
 
@@ -17294,7 +17294,7 @@ public final class Main {
     full-screenshot space (not physical display pixels). The crop is scaled up to
     fill the image budget so fine details become legible.
 
-    - `List<long> region`
+    - `List<Long> region`
 
       (x0, y0, x1, y1): The region to capture.
 
@@ -33422,7 +33422,7 @@ public final class Main {
         inspection — useful for small icons, buttons, or text. Coordinates are in the
         same viewport-pixel space as a full screenshot.
 
-        - `List<long> region`
+        - `List<Long> region`
 
           [x0, y0, x1, y1] in viewport pixels.
 
@@ -34104,7 +34104,7 @@ public final class Main {
         Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
         without clicking; otherwise use a click action directly.
 
-        - `List<long> coordinate`
+        - `List<Long> coordinate`
 
           (x, y): x pixels from the left edge, y pixels from the top edge.
 
@@ -34201,13 +34201,13 @@ public final class Main {
 
         Click and drag the cursor from `start_coordinate` to `coordinate`.
 
-        - `List<long> coordinate`
+        - `List<Long> coordinate`
 
           (x, y): x pixels from the left edge, y pixels from the top edge.
 
           minItems: 2, maxItems: 2
 
-        - `List<long> startCoordinate`
+        - `List<Long> startCoordinate`
 
           (x, y): x pixels from the left edge, y pixels from the top edge.
 
@@ -34454,7 +34454,7 @@ public final class Main {
         full-screenshot space (not physical display pixels). The crop is scaled up to
         fill the image budget so fine details become legible.
 
-        - `List<long> region`
+        - `List<Long> region`
 
           (x0, y0, x1, y1): The region to capture.
 

@@ -285,7 +285,7 @@ Create Deployment
 
     maxLength: 2048
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -773,7 +773,7 @@ Create Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -1053,9 +1053,9 @@ func main() {
 			OfString: anthropic.String("string"),
 		},
 		EnvironmentID: "x",
-		InitialEvents: []anthropic.BetaManagedAgentsDeploymentInitialEventParamsUnion{anthropic.BetaManagedAgentsDeploymentInitialEventParamsUnion{
+		InitialEvents: []anthropic.BetaManagedAgentsDeploymentInitialEventParamsUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
+				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
 						Text: "Where is my order #1234?",
 					},
@@ -1566,7 +1566,7 @@ List Deployments
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -2319,7 +2319,7 @@ Get Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -2949,7 +2949,7 @@ Update Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
@@ -3443,7 +3443,7 @@ Update Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -4195,7 +4195,7 @@ Archive Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -5361,7 +5361,7 @@ Pause Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -6113,7 +6113,7 @@ Unpause Deployment
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 
@@ -6789,7 +6789,7 @@ func main() {
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 

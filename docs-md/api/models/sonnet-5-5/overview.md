@@ -18,17 +18,7 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $2 / MTok
 
 ## Overview
 
-Claude Sonnet 5.5 offers the best combination of speed and intelligence. Five breaking changes can affect code already running on Claude Sonnet 5:
-
-* [Turn off up-front thinking with `between_tools`](whats-new-sonnet-5-5.md#turn-off-up-front-thinking).
-* [Forced tool use returns an error](whats-new-sonnet-5-5.md#forced-tool-use-is-not-supported).
-* [Thinking blocks are tied to the model and the conversation](whats-new-sonnet-5-5.md#thinking-blocks-are-tied-to-the-model-that-produced-them).
-* [Some computer use tool versions are not supported](whats-new-sonnet-5-5.md#computer-20251124-is-not-supported).
-* [The advisor tool rejects four models as advisors](whats-new-sonnet-5-5.md#advisor-tool-pairings): Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, and Claude Haiku 5.5.
-
-One more change alters the response shape without failing any request: [text between tool calls comes back in `thinking` blocks](whats-new-sonnet-5-5.md#text-between-tool-calls). An application that streams that text to its users goes quiet between tool calls until it sets a `display` value that returns the text, or turns off up-front thinking with `between_tools`.
-
-[What’s new in Claude Sonnet 5.5](whats-new-sonnet-5-5.md)
+Claude Sonnet 5.5 offers the best combination of speed and intelligence. It’s built for everyday coding, agent, and enterprise workloads, such as code generation, data analysis, content creation, visual understanding, and agentic tool use.
 
 ## How it compares
 

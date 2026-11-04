@@ -77,7 +77,7 @@ You can also add a destination with the [Admin API](../admin-api.md) instead of 
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/organizations/telemetry_destinations" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: telemetry-destinations-2026-08-11" \
   -H "content-type: application/json" \
   -d '{
@@ -383,7 +383,7 @@ Copy the current span’s trace context into the request headers, for example wh
 # for example 00-<trace-id>-<span-id>-01.
 curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -H "traceparent: $TRACEPARENT" \
@@ -404,7 +404,7 @@ from opentelemetry.trace.propagation.tracecontext import TraceContextTextMapProp
 
 headers = {
     "x-api-key": os.environ["ANTHROPIC_API_KEY"],
-    "anthropic-version": "2023-06-01",
+    "anthropic-version": "2026-10-21",
     "anthropic-beta": "managed-agents-2026-04-01",
     "content-type": "application/json",
 }
@@ -431,7 +431,7 @@ import { W3CTraceContextPropagator } from "@opentelemetry/core";
 
 const headers: Record<string, string> = {
   "x-api-key": process.env.ANTHROPIC_API_KEY!,
-  "anthropic-version": "2023-06-01",
+  "anthropic-version": "2026-10-21",
   "anthropic-beta": "managed-agents-2026-04-01",
   "content-type": "application/json"
 };
@@ -477,7 +477,7 @@ using var request = new HttpRequestMessage(
     }),
 };
 request.Headers.Add("x-api-key", Environment.GetEnvironmentVariable("ANTHROPIC_API_KEY"));
-request.Headers.Add("anthropic-version", "2023-06-01");
+request.Headers.Add("anthropic-version", "2026-10-21");
 request.Headers.Add("anthropic-beta", "managed-agents-2026-04-01");
 
 // Copy the active span's trace context into the request headers.
@@ -514,7 +514,7 @@ func sendMessage(ctx context.Context) error {
 		return err
 	}
 	req.Header.Set("x-api-key", os.Getenv("ANTHROPIC_API_KEY"))
-	req.Header.Set("anthropic-version", "2023-06-01")
+	req.Header.Set("anthropic-version", "2026-10-21")
 	req.Header.Set("anthropic-beta", "managed-agents-2026-04-01")
 	req.Header.Set("content-type", "application/json")
 
@@ -541,7 +541,7 @@ void main() throws Exception {
     var request = HttpRequest.newBuilder(URI.create(
             "https://api.anthropic.com/v1/sessions/" + System.getenv("SESSION_ID") + "/events"))
         .header("x-api-key", System.getenv("ANTHROPIC_API_KEY"))
-        .header("anthropic-version", "2023-06-01")
+        .header("anthropic-version", "2026-10-21")
         .header("anthropic-beta", "managed-agents-2026-04-01")
         .header("content-type", "application/json")
         .POST(HttpRequest.BodyPublishers.ofString("""
@@ -568,7 +568,7 @@ use OpenTelemetry\API\Trace\Propagation\TraceContextPropagator;
 
 $headers = [
     'x-api-key' => getenv('ANTHROPIC_API_KEY'),
-    'anthropic-version' => '2023-06-01',
+    'anthropic-version' => '2026-10-21',
     'anthropic-beta' => 'managed-agents-2026-04-01',
     'content-type' => 'application/json',
 ];
@@ -604,7 +604,7 @@ require "opentelemetry"
 
 headers = {
   "x-api-key" => ENV.fetch("ANTHROPIC_API_KEY"),
-  "anthropic-version" => "2023-06-01",
+  "anthropic-version" => "2026-10-21",
   "anthropic-beta" => "managed-agents-2026-04-01",
   "content-type" => "application/json"
 }
@@ -664,7 +664,7 @@ The API disables a destination when:
 
 While a destination is disabled, the API drops the spans for it, and they aren’t sent after you enable it again. To resume export, fix the cause and check the fix with **Test** in the destination’s **More actions** menu. Then, on the [OpenTelemetry settings page](https://platform.claude.com/settings/telemetry-destinations) in the Console, click **Enable** in the same menu while the **Workspace** filter shows **All**. Export starts again within about a minute. Until the next delivery, the **Delivery** column can still show **Failing** with the old error.
 
-To change a destination, open its **More actions** menu while the **Workspace** filter shows **All**. Then click **Edit**, **Disable**, **Enable**, or **Delete**. If you change the host of the **OTLP endpoint URL**, enter the header values again. If the destination has an **OTLP traces endpoint URL**, give it the same new host, or clear it.
+To change a destination, open its **More actions** menu while the **Workspace** filter shows **All**. Then click **Edit**, **Disable**, **Enable**, or **Delete**. Deliveries stop within about a minute after you disable or delete a destination. If you change the host of the **OTLP endpoint URL**, enter the header values again. If the destination has an **OTLP traces endpoint URL**, give it the same new host, or clear it.
 
 ## Limits
 

@@ -589,7 +589,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -661,7 +661,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -803,7 +803,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -2607,7 +2607,7 @@ List Events
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -2815,7 +2815,7 @@ List Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -4215,9 +4215,9 @@ func main() {
 		context.TODO(),
 		"sesn_011CZkZAtmR3yMPDzynEDxu7",
 		anthropic.BetaSessionEventSendParams{
-			Events: []anthropic.BetaManagedAgentsEventParamsUnion{anthropic.BetaManagedAgentsEventParamsUnion{
+			Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
 				OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-					Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{
+					Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 						OfText: &anthropic.BetaManagedAgentsTextBlockParam{
 							Text: "Where is my order #1234?",
 						},
@@ -4717,7 +4717,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -4789,7 +4789,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -4931,7 +4931,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -6735,7 +6735,7 @@ Stream Events
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -6943,7 +6943,7 @@ Stream Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -7503,7 +7503,7 @@ func main() {
 
     Unique identifier for this event.
 
-  - `Input map[string, any]`
+  - `Input map[string]any`
 
     Input parameters for the tool call.
 
@@ -7751,7 +7751,7 @@ func main() {
 
     Unique identifier for this event.
 
-  - `Input map[string, any]`
+  - `Input map[string]any`
 
     Input parameters for the tool call.
 
@@ -8603,7 +8603,7 @@ func main() {
 
     Unique identifier for this event.
 
-  - `Input map[string, any]`
+  - `Input map[string]any`
 
     Input parameters for the tool call.
 
@@ -11059,7 +11059,7 @@ func main() {
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -11131,7 +11131,7 @@ func main() {
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -11273,7 +11273,7 @@ func main() {
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -13077,7 +13077,7 @@ func main() {
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -13285,7 +13285,7 @@ func main() {
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
@@ -14775,7 +14775,7 @@ func main() {
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -14847,7 +14847,7 @@ func main() {
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -14989,7 +14989,7 @@ func main() {
 
       Unique identifier for this event.
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
       Input parameters for the tool call.
 
@@ -16793,7 +16793,7 @@ func main() {
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -17001,7 +17001,7 @@ func main() {
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Metadata map[string, string] Optional`
+    - `Metadata map[string]string Optional`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 

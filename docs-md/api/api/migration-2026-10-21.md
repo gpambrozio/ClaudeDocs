@@ -8,6 +8,12 @@ description: "Upgrade a Claude API integration from API version 2023-06-01 to 20
 
 This guide lists the code changes for moving from API version `2023-06-01` to `2026-10-21`. The [upgrade steps](migration-2026-10-21.md#migration-checklist) say what to do, in order.
 
+The easiest way to upgrade your code
+
+```text
+/claude-api api-version
+```
+
 ## Upgrade steps
 
 **Switch to 2026-10-21**
@@ -60,6 +66,8 @@ v1 of `@anthropic-ai/bedrock-sdk`, `@anthropic-ai/vertex-sdk`, `@anthropic-ai/fo
 
 Upgrade the `Anthropic` package to version 13.0.0.
 
+Version 1.0.0 of `Anthropic.Bedrock`, `Anthropic.Vertex`, `Anthropic.Foundry`, `Anthropic.Aws`, `Anthropic.GoogleCloud`, and `Anthropic.Mcp` needs version 13.0.0 of `Anthropic`. If you use one of them, move it to 1.0.0 in the same upgrade. An earlier version still installs next to 13.0.0, but it can fail when it runs.
+
 **Go**
 
 Upgrade to version 2.0.0 of the Go SDK, whose module path is `github.com/anthropics/anthropic-sdk-go/v2`. A new major version of a Go module has a new import path, so change each import of `github.com/anthropics/anthropic-sdk-go`, and of its packages such as `github.com/anthropics/anthropic-sdk-go/option`, to start with `github.com/anthropics/anthropic-sdk-go/v2`. Then run `go get github.com/anthropics/anthropic-sdk-go/v2`.
@@ -67,6 +75,8 @@ Upgrade to version 2.0.0 of the Go SDK, whose module path is `github.com/anthrop
 **Java**
 
 Upgrade the `com.anthropic:anthropic-java` artifact to version 3.0.0.
+
+Version 3.0.0 of `anthropic-java-bedrock`, `anthropic-java-vertex`, `anthropic-java-aws`, `anthropic-java-foundry`, `anthropic-java-google-cloud`, and `anthropic-java-mcp` goes with `anthropic-java` 3.0.0. If you use one of them, move it to 3.0.0 in the same upgrade.
 
 **PHP**
 
@@ -126,13 +136,13 @@ In `2026-10-21`, responses from the Admin API and the [Claude Enterprise Analyti
 
 Admin API:
 
-| Endpoints                                                                                                                                                                                                                                                        | Old name       | New name                                                                                                                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [RBAC groups](beta/organization/rbac_groups/list.md): create, list, retrieve, and update                                                                                                                                    | `roles`        | `role_ids`                                                                                                                                      |
-| [RBAC group members](beta/organization/rbac_groups/members/list.md): list and add, and the response to [removing a member](beta/organization/rbac_groups/members/remove.md)            | `group_id`     | `rbac_group_id`                                                                                                                                 |
-| [RBAC roles](beta/organization/rbac_roles/list.md): list and retrieve                                                                                                                                                       | `name`         | `display_name`                                                                                                                                  |
-| [Organization](organization/rate_limits/list.md) and [workspace](organization/workspaces/rate_limits/list.md) rate limits: list, and the response to setting a workspace’s rate limits | `group_type`   | `group.type`                                                                                                                                    |
-| [API keys](organization/api_keys/list.md): list, retrieve, and update                                                                                                                                                       | `workspace_id` | `scope` (different values; see [`workspace_id` on API keys](migration-2026-10-21.md#api-key-workspace-id)) |
+| Endpoints                                                                                                                                                                                                                                                                                                                                              | Old name       | New name                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [RBAC groups](beta/organization/rbac_groups/list.md): create, list, retrieve, and update                                                                                                                                                                                                                          | `roles`        | `role_ids`                                                                                                                                      |
+| [RBAC group members](beta/organization/rbac_groups/members/list.md): list and add, and the response to [removing a member](beta/organization/rbac_groups/members/remove.md)                                                                                                  | `group_id`     | `rbac_group_id`                                                                                                                                 |
+| [RBAC roles](beta/organization/rbac_roles/list.md): list and retrieve                                                                                                                                                                                                                                             | `name`         | `display_name`                                                                                                                                  |
+| [Organization](organization/rate_limits/list.md) and [workspace](organization/workspaces/rate_limits/list.md) rate limits: list, and the response to [setting a workspace’s rate limits](organization/workspaces/rate_limits/update.md) | `group_type`   | `group.type`                                                                                                                                    |
+| [API keys](organization/api_keys/list.md): list, retrieve, and update                                                                                                                                                                                                                                             | `workspace_id` | `scope` (different values; see [`workspace_id` on API keys](migration-2026-10-21.md#api-key-workspace-id)) |
 
 Claude Enterprise Analytics API:
 
@@ -1151,7 +1161,7 @@ If you relied on sending both, for example a token for a gateway and a key for t
 
 The credential arguments of `Anthropic::Client.new` are `api_key:`, `auth_token:`, `credentials:`, and `config:`. A `nil` argument counts as not passed. The platform clients keep their own rules.
 
-* **Two or more passed:** `Anthropic::Client.new` raises `ArgumentError`. Earlier versions raised only for `credentials:` with `config:`, and otherwise sent the key if there was one, then the token.
+* **Two or more passed:** `Anthropic::Client.new` raises `ArgumentError`. Earlier versions raised only for `credentials:` with `config:`, and otherwise sent the key if there was one, or the token if not.
 * **One passed:** The client uses it, and does not fall back to a credential from the environment or from a profile on disk.
 * **None passed:** The client uses the first of these it finds: `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, `ANTHROPIC_PROFILE`, the workload identity federation variables, the active profile on disk. The order has not changed, but with both `ANTHROPIC_API_KEY` and `ANTHROPIC_AUTH_TOKEN` set, `client.auth_token` is now `nil`. An empty `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` now counts as unset, where earlier versions let an empty `ANTHROPIC_API_KEY` hide the token and everything after it.
 

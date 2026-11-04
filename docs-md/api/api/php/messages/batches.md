@@ -25,11 +25,11 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   List of requests for prompt completion. Each is an individual request to create a Message.
 
-- `userProfileID?:optional string` (header parameter)
+- `userProfileID?: optional string` (header parameter)
 
   The user profile ID to attribute the requests in this batch to. Use when acting on behalf of a party other than your organization. Applies to every request in the batch; an individual request whose `user_profile_id` body field conflicts with this header is errored.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -213,7 +213,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   ID of the Message Batch.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -326,15 +326,15 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
 ### Parameters
 
-- `afterID?:optional string` (query parameter)
+- `afterID?: optional string` (query parameter)
 
   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-- `beforeID?:optional string` (query parameter)
+- `beforeID?: optional string` (query parameter)
 
   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-- `limit?:optional int` (query parameter)
+- `limit?: optional int` (query parameter)
 
   Number of items to return per page.
 
@@ -342,7 +342,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   default: 20
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -471,7 +471,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   ID of the Message Batch.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -590,7 +590,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   ID of the Message Batch.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -655,7 +655,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   ID of the Message Batch.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

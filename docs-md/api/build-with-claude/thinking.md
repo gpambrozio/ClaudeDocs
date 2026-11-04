@@ -109,7 +109,7 @@ On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thi
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -358,7 +358,7 @@ On Claude Sonnet 5, where thinking is on by default, you can turn it off:
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-sonnet-5",
@@ -563,7 +563,7 @@ The following examples stream a response with adaptive thinking, printing thinki
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1223,7 +1223,7 @@ Each model accepts `max_tokens` up to the ceiling listed here. On the [Message B
 | Claude Haiku 5.5      | 128K              | 300K                 |
 | Claude Haiku 4.5      | 64K               | Not available        |
 
-See the [models overview](../models/overview.md) for limits on legacy models.
+To read a model’s limits programmatically, see [Using the Models API](../models/overview.md#using-the-models-api).
 
 ### Long requests
 

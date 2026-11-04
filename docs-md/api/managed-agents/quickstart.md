@@ -54,12 +54,21 @@ Let Claude Code set up your agent for you
 | **Session**     | A running agent instance within an environment, performing a specific task and generating outputs                             |
 | **Events**      | Messages exchanged between your application and the agent (user turns, tool results, status updates)                          |
 
-## Prerequisites
+## Before you begin
 
-* A [Claude Console account](https://platform.claude.com/)
-* An [API key](https://platform.claude.com/settings/keys) from the Console
+**Create a Claude Console account**
 
-## Install the CLI
+[Sign up](https://platform.claude.com/) for a Claude Console account, or sign in to the one you have.
+
+**Choose how to authenticate**
+
+Signing in with the CLI is recommended for local development.
+
+Follow the steps for one of the following options.
+
+**CLI**
+
+**Install the CLI**
 
 **Homebrew (macOS)**
 
@@ -84,7 +93,7 @@ curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VER
 
 You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
 
-**Go**
+**go install**
 
 You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
 
@@ -98,10 +107,67 @@ The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isnâ
 export PATH="$PATH:$(go env GOPATH)/bin"
 ```
 
-Check the installation:
+**Sign in**
 
 ```bash
-ant --version
+ant auth login
+```
+
+Once login is completed, the SDKs and CLI will pick up your credentials automatically.
+
+**API key**
+
+**Create an API key**
+
+Create an [API key](https://platform.claude.com/settings/keys) in the Claude Console.
+
+**Set the environment variable**
+
+The SDKs and CLI read your key from `ANTHROPIC_API_KEY`:
+
+```bash
+export ANTHROPIC_API_KEY="your-api-key-here"
+```
+
+**API key**
+
+To run the CLI examples, install the CLI:
+
+**Homebrew (macOS)**
+
+```bash
+brew install anthropics/tap/ant
+```
+
+**curl (Linux/WSL)**
+
+For Linux environments, download the release binary directly.
+
+```bash
+VERSION=2.5.0
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+case $(uname -m) in
+  x86_64) ARCH=amd64 ;;
+  aarch64) ARCH=arm64 ;;
+esac
+curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
+  | sudo tar -xz -C /usr/local/bin ant
+```
+
+You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
+
+**go install**
+
+You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
+
+```bash
+go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
+```
+
+The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isnâ€™t already:
+
+```bash
+export PATH="$PATH:$(go env GOPATH)/bin"
 ```
 
 ## Install the SDK
@@ -120,8 +186,20 @@ npm install @anthropic-ai/sdk
 
 **Java**
 
-```groovy Gradle
+**Gradle**
+
+```kotlin
 implementation("com.anthropic:anthropic-java:3.4.0")
+```
+
+**Maven**
+
+```xml
+<dependency>
+    <groupId>com.anthropic</groupId>
+    <artifactId>anthropic-java</artifactId>
+    <version>3.4.0</version>
+</dependency>
 ```
 
 **Go**
@@ -148,12 +226,6 @@ bundle add anthropic
 composer require "anthropic-ai/sdk" "guzzlehttp/guzzle:^7"
 ```
 
-Set your API key as an environment variable:
-
-```bash
-export ANTHROPIC_API_KEY="your-api-key-here"
-```
-
 ## Create your first session
 
 **Create an agent**
@@ -163,7 +235,7 @@ Create an agent that defines the model, system prompt, and available tools.
 ```bash cURL
 curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -429,7 +501,7 @@ An environment defines the sandbox where your agent runs. This one uses `limited
 ```bash cURL
 curl -sS --fail-with-body https://api.anthropic.com/v1/environments \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -581,7 +653,7 @@ Create a session that references your agent and environment.
 ```bash cURL
 curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{

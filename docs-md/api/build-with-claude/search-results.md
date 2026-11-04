@@ -38,12 +38,10 @@ featureMetadata:
 
 **API support**: Usage differs by product.
 
-* **Messages API**: Always on. Send `search_result` blocks in a tool result or directly in a user message.
-* **Managed Agents**: Always on. Accepted only in tool results, such as a `user.custom_tool_result` event, not in `user.message` events.
+* **Messages API**: Send `search_result` blocks in a tool result or directly in a user message.
+* **Managed Agents**: Accepted only in tool results, such as a `user.custom_tool_result` event, not in `user.message` events.
 
 Search result content blocks let Claude cite your own content the same way it cites web search results: each citation carries the source and title you provided. Use them in RAG (Retrieval-Augmented Generation) applications where Claude needs to attribute answers to your documents.
-
-All [active models](../models/overview.md) support search results with citations, with the exception of Claude Haiku 3. No beta header is required: search results are part of the standard Messages API.
 
 ## How it works
 
@@ -172,7 +170,11 @@ response = client.messages.create(
     model="claude-opus-5",
     max_tokens=1024,
     tools=[knowledge_base_tool],
-    tool_choice={"type": "tool", "name": "search_knowledge_base"},
+    tool_choice={
+        "type": "tool",
+        "name": "search_knowledge_base",
+        "disable_parallel_tool_use": True,
+    },
     messages=messages,
 )
 
@@ -267,7 +269,11 @@ const response = await client.messages.create({
   model: "claude-opus-5",
   max_tokens: 1024,
   tools: [knowledgeBaseTool],
-  tool_choice: { type: "tool", name: "search_knowledge_base" },
+  tool_choice: {
+    type: "tool",
+    name: "search_knowledge_base",
+    disable_parallel_tool_use: true
+  },
   messages
 });
 
@@ -354,7 +360,11 @@ var response = await client.Messages.Create(new()
     Model = Model.ClaudeOpus5,
     MaxTokens = 1024,
     Tools = tools,
-    ToolChoice = new ToolChoiceTool { Name = "search_knowledge_base" },
+    ToolChoice = new ToolChoiceTool
+    {
+        Name = "search_knowledge_base",
+        DisableParallelToolUse = true,
+    },
     Messages = messages,
 });
 
@@ -414,11 +424,16 @@ foreach (var block in response.Content)
 	}
 
 	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-		Model:      anthropic.ModelClaudeOpus5,
-		MaxTokens:  1024,
-		Tools:      []anthropic.ToolUnionParam{knowledgeBaseTool},
-		ToolChoice: anthropic.ToolChoiceUnionParam{OfTool: &anthropic.ToolChoiceToolParam{Name: "search_knowledge_base"}},
-		Messages:   messages,
+		Model:     anthropic.ModelClaudeOpus5,
+		MaxTokens: 1024,
+		Tools:     []anthropic.ToolUnionParam{knowledgeBaseTool},
+		ToolChoice: anthropic.ToolChoiceUnionParam{
+			OfTool: &anthropic.ToolChoiceToolParam{
+				Name:                   "search_knowledge_base",
+				DisableParallelToolUse: anthropic.Bool(true),
+			},
+		},
+		Messages: messages,
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -527,6 +542,7 @@ void main() {
         .addTool(knowledgeBaseTool)
         .toolChoice(ToolChoice.ofTool(ToolChoiceTool.builder()
             .name("search_knowledge_base")
+            .disableParallelToolUse(true)
             .build()))
         .messages(messages)
         .build();
@@ -660,7 +676,11 @@ $response = $client->messages->create(
     maxTokens: 1024,
     messages: $messages,
     model: 'claude-opus-5',
-    toolChoice: ['type' => 'tool', 'name' => 'search_knowledge_base'],
+    toolChoice: [
+        'type' => 'tool',
+        'name' => 'search_knowledge_base',
+        'disableParallelToolUse' => true,
+    ],
     tools: [$knowledgeBaseTool],
 );
 
@@ -753,7 +773,7 @@ response = client.messages.create(
   model: "claude-opus-5",
   max_tokens: 1024,
   tools: [knowledge_base_tool],
-  tool_choice: { type: "tool", name: "search_knowledge_base" },
+  tool_choice: { type: "tool", name: "search_knowledge_base", disable_parallel_tool_use: true },
   messages: messages
 )
 
@@ -800,7 +820,7 @@ You can also provide search results directly in user messages. This is useful fo
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1314,7 +1334,7 @@ The following example replays a complete conversation. The first user message ca
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -2147,7 +2167,6 @@ Citations are all-or-nothing: either all search results in a request must have c
 
 ## Limitations
 
-* Search result content blocks are available on the Claude API, Amazon Bedrock, and Claude Models on Google Cloud (Google managed).
 * Only text content is supported within search results (no images or other media).
 * `search_result` blocks can only appear in user messages (including inside tool results). Assistant messages with search results are rejected.
 * When the [web search tool](../agents-and-tools/tool-use/web-search-tool.md) is enabled in the same request, citations must be enabled on all `search_result` blocks.
@@ -2182,7 +2201,7 @@ Search results are available on every model and eligible for zero data retention
 
 #### [Messages API](working-with-messages.md)
 
-* Availability: Always on
+* Availability: Available
 * Usage: Send `search_result` blocks in a tool result or directly in a user message.
 
 | Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
@@ -2191,7 +2210,7 @@ Search results are available on every model and eligible for zero data retention
 
 #### [Managed Agents](../managed-agents/overview.md)
 
-* Availability: Always on
+* Availability: Available
 * Usage: Accepted only in tool results, such as a `user.custom_tool_result` event, not in `user.message` events.
 
 | Status    | Cloud platforms                                                                                                    |

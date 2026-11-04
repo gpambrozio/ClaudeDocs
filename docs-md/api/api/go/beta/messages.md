@@ -419,7 +419,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -658,7 +658,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name BetaServerToolUseBlockParamName`
 
@@ -1102,7 +1102,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -1262,7 +1262,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           - `Type Object`
 
-                          - `Properties map[string, any] Optional`
+                          - `Properties map[string]any Optional`
 
                           - `Required []string Optional`
 
@@ -1302,7 +1302,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -1336,7 +1336,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -1370,7 +1370,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -1947,7 +1947,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -1981,7 +1981,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2033,7 +2033,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2067,7 +2067,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2123,7 +2123,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2382,7 +2382,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2416,7 +2416,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2450,7 +2450,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `MaxCharacters int64 Optional`
 
@@ -3213,7 +3213,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           Create a cache control breakpoint at this content block.
 
-                        - `Configs map[string, BetaMCPToolConfig] Optional`
+                        - `Configs map[string]BetaMCPToolConfig Optional`
 
                           Configuration overrides for specific tools, keyed by tool name
 
@@ -3233,7 +3233,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                           The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                          - `InputSchema map[string, any]`
+                          - `InputSchema map[string]any`
 
                             The tool's input schema as the MCP server lists it, verbatim.
 
@@ -3323,7 +3323,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
               The server's tools, exactly as the response listed them.
 
-              - `InputSchema map[string, any]`
+              - `InputSchema map[string]any`
 
                 The tool's input schema as the MCP server lists it, verbatim.
 
@@ -4210,7 +4210,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name string`
 
@@ -4258,7 +4258,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name BetaServerToolUseBlockName`
 
@@ -4770,7 +4770,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name string`
 
@@ -4931,7 +4931,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -4967,7 +4967,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -5018,7 +5018,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -5052,7 +5052,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -5629,7 +5629,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     minimum: 0
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -5663,7 +5663,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -5715,7 +5715,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     minimum: 0
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -5749,7 +5749,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -5805,7 +5805,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -6064,7 +6064,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -6098,7 +6098,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -6132,7 +6132,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `MaxCharacters int64 Optional`
 
@@ -6897,7 +6897,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     Create a cache control breakpoint at this content block.
 
-                  - `Configs map[string, BetaMCPToolConfig] Optional`
+                  - `Configs map[string]BetaMCPToolConfig Optional`
 
                     Configuration overrides for specific tools, keyed by tool name
 
@@ -6917,7 +6917,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
                     The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                    - `InputSchema map[string, any]`
+                    - `InputSchema map[string]any`
 
                       The tool's input schema as the MCP server lists it, verbatim.
 
@@ -7043,7 +7043,7 @@ Learn more about the Messages API in our [user guide](../../../get-started.md)
 
       - `Tools []BetaMCPTool`
 
-        - `InputSchema map[string, any]`
+        - `InputSchema map[string]any`
 
         - `Name string`
 
@@ -8118,9 +8118,9 @@ func main() {
 	)
 	betaMessage, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
 		MaxTokens: 1024,
-		Messages: []anthropic.BetaMessageParam{anthropic.BetaMessageParam{
+		Messages: []anthropic.BetaMessageParam{{
 			OfUser: &anthropic.BetaUserMessageParam{
-				Content: []anthropic.BetaContentBlockParamUnion{anthropic.BetaContentBlockParamUnion{
+				Content: []anthropic.BetaContentBlockParamUnion{{
 					OfText: &anthropic.BetaTextBlockParam{
 						Text: "x",
 					},
@@ -8646,7 +8646,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -8885,7 +8885,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name BetaServerToolUseBlockParamName`
 
@@ -9329,7 +9329,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -9489,7 +9489,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           - `Type Object`
 
-                          - `Properties map[string, any] Optional`
+                          - `Properties map[string]any Optional`
 
                           - `Required []string Optional`
 
@@ -9529,7 +9529,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -9563,7 +9563,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -9597,7 +9597,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -10174,7 +10174,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -10208,7 +10208,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -10260,7 +10260,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -10294,7 +10294,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -10350,7 +10350,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -10609,7 +10609,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -10643,7 +10643,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -10677,7 +10677,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `MaxCharacters int64 Optional`
 
@@ -11440,7 +11440,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           Create a cache control breakpoint at this content block.
 
-                        - `Configs map[string, BetaMCPToolConfig] Optional`
+                        - `Configs map[string]BetaMCPToolConfig Optional`
 
                           Configuration overrides for specific tools, keyed by tool name
 
@@ -11460,7 +11460,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                           The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                          - `InputSchema map[string, any]`
+                          - `InputSchema map[string]any`
 
                             The tool's input schema as the MCP server lists it, verbatim.
 
@@ -11550,7 +11550,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
               The server's tools, exactly as the response listed them.
 
-              - `InputSchema map[string, any]`
+              - `InputSchema map[string]any`
 
                 The tool's input schema as the MCP server lists it, verbatim.
 
@@ -12075,9 +12075,9 @@ func main() {
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
 	betaMessageTokensCount, err := client.Beta.Messages.CountTokens(context.TODO(), anthropic.BetaMessageCountTokensParams{
-		Messages: []anthropic.BetaMessageParam{anthropic.BetaMessageParam{
+		Messages: []anthropic.BetaMessageParam{{
 			OfUser: &anthropic.BetaUserMessageParam{
-				Content: []anthropic.BetaContentBlockParamUnion{anthropic.BetaContentBlockParamUnion{
+				Content: []anthropic.BetaContentBlockParamUnion{{
 					OfText: &anthropic.BetaTextBlockParam{
 						Text: "x",
 					},
@@ -12973,7 +12973,7 @@ func main() {
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `Input map[string, any]`
+        - `Input map[string]any`
 
         - `Name string`
 
@@ -13212,7 +13212,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `Input map[string, any]`
+        - `Input map[string]any`
 
         - `Name BetaServerToolUseBlockParamName`
 
@@ -13656,7 +13656,7 @@ func main() {
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `Input map[string, any]`
+        - `Input map[string]any`
 
         - `Name string`
 
@@ -13816,7 +13816,7 @@ func main() {
 
                       - `Type Object`
 
-                      - `Properties map[string, any] Optional`
+                      - `Properties map[string]any Optional`
 
                       - `Required []string Optional`
 
@@ -13856,7 +13856,7 @@ func main() {
 
                       Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -13890,7 +13890,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -13924,7 +13924,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -14501,7 +14501,7 @@ func main() {
 
                       minimum: 0
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -14535,7 +14535,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -14587,7 +14587,7 @@ func main() {
 
                       minimum: 0
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -14621,7 +14621,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -14677,7 +14677,7 @@ func main() {
 
                       Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -14936,7 +14936,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -14970,7 +14970,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -15004,7 +15004,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `MaxCharacters int64 Optional`
 
@@ -15767,7 +15767,7 @@ func main() {
 
                       Create a cache control breakpoint at this content block.
 
-                    - `Configs map[string, BetaMCPToolConfig] Optional`
+                    - `Configs map[string]BetaMCPToolConfig Optional`
 
                       Configuration overrides for specific tools, keyed by tool name
 
@@ -15787,7 +15787,7 @@ func main() {
 
                       The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                      - `InputSchema map[string, any]`
+                      - `InputSchema map[string]any`
 
                         The tool's input schema as the MCP server lists it, verbatim.
 
@@ -15877,7 +15877,7 @@ func main() {
 
           The server's tools, exactly as the response listed them.
 
-          - `InputSchema map[string, any]`
+          - `InputSchema map[string]any`
 
             The tool's input schema as the MCP server lists it, verbatim.
 
@@ -23348,7 +23348,7 @@ func main() {
 
                 - `Type Object`
 
-                - `Properties map[string, any] Optional`
+                - `Properties map[string]any Optional`
 
                 - `Required []string Optional`
 
@@ -23384,7 +23384,7 @@ func main() {
 
                 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -23435,7 +23435,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -23469,7 +23469,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -24046,7 +24046,7 @@ func main() {
 
                 minimum: 0
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -24080,7 +24080,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -24132,7 +24132,7 @@ func main() {
 
                 minimum: 0
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -24166,7 +24166,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -24222,7 +24222,7 @@ func main() {
 
                 Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -24481,7 +24481,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -24515,7 +24515,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -24549,7 +24549,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `MaxCharacters int64 Optional`
 
@@ -25314,7 +25314,7 @@ func main() {
 
                 Create a cache control breakpoint at this content block.
 
-              - `Configs map[string, BetaMCPToolConfig] Optional`
+              - `Configs map[string]BetaMCPToolConfig Optional`
 
                 Configuration overrides for specific tools, keyed by tool name
 
@@ -25334,7 +25334,7 @@ func main() {
 
                 The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                - `InputSchema map[string, any]`
+                - `InputSchema map[string]any`
 
                   The tool's input schema as the MCP server lists it, verbatim.
 
@@ -25503,7 +25503,7 @@ func main() {
 
                 - `Type Object`
 
-                - `Properties map[string, any] Optional`
+                - `Properties map[string]any Optional`
 
                 - `Required []string Optional`
 
@@ -25543,7 +25543,7 @@ func main() {
 
                 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -25577,7 +25577,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -25611,7 +25611,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -26188,7 +26188,7 @@ func main() {
 
                 minimum: 0
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -26222,7 +26222,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -26274,7 +26274,7 @@ func main() {
 
                 minimum: 0
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -26308,7 +26308,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -26364,7 +26364,7 @@ func main() {
 
                 Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -26623,7 +26623,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -26657,7 +26657,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `Strict bool Optional`
 
@@ -26691,7 +26691,7 @@ func main() {
 
                 If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-              - `InputExamples []map[string, any] Optional`
+              - `InputExamples []map[string]any Optional`
 
               - `MaxCharacters int64 Optional`
 
@@ -27456,7 +27456,7 @@ func main() {
 
                 Create a cache control breakpoint at this content block.
 
-              - `Configs map[string, BetaMCPToolConfig] Optional`
+              - `Configs map[string]BetaMCPToolConfig Optional`
 
                 Configuration overrides for specific tools, keyed by tool name
 
@@ -27476,7 +27476,7 @@ func main() {
 
                 The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                - `InputSchema map[string, any]`
+                - `InputSchema map[string]any`
 
                   The tool's input schema as the MCP server lists it, verbatim.
 
@@ -30415,7 +30415,7 @@ func main() {
 
       pattern: ^[a-zA-Z0-9_-]+$
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
     - `Name string`
 
@@ -30463,7 +30463,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
     - `Name BetaServerToolUseBlockName`
 
@@ -30975,7 +30975,7 @@ func main() {
 
       pattern: ^[a-zA-Z0-9_-]+$
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
     - `Name string`
 
@@ -31136,7 +31136,7 @@ func main() {
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -31172,7 +31172,7 @@ func main() {
 
                   Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -31223,7 +31223,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -31257,7 +31257,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -31834,7 +31834,7 @@ func main() {
 
                   minimum: 0
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -31868,7 +31868,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -31920,7 +31920,7 @@ func main() {
 
                   minimum: 0
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -31954,7 +31954,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -32010,7 +32010,7 @@ func main() {
 
                   Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -32269,7 +32269,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -32303,7 +32303,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -32337,7 +32337,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `MaxCharacters int64 Optional`
 
@@ -33102,7 +33102,7 @@ func main() {
 
                   Create a cache control breakpoint at this content block.
 
-                - `Configs map[string, BetaMCPToolConfig] Optional`
+                - `Configs map[string]BetaMCPToolConfig Optional`
 
                   Configuration overrides for specific tools, keyed by tool name
 
@@ -33122,7 +33122,7 @@ func main() {
 
                   The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                  - `InputSchema map[string, any]`
+                  - `InputSchema map[string]any`
 
                     The tool's input schema as the MCP server lists it, verbatim.
 
@@ -33248,7 +33248,7 @@ func main() {
 
     - `Tools []BetaMCPTool`
 
-      - `InputSchema map[string, any]`
+      - `InputSchema map[string]any`
 
       - `Name string`
 
@@ -33585,7 +33585,7 @@ func main() {
 
       pattern: ^[a-zA-Z0-9_-]+$
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
     - `Name string`
 
@@ -33824,7 +33824,7 @@ func main() {
 
       pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
     - `Name BetaServerToolUseBlockParamName`
 
@@ -34268,7 +34268,7 @@ func main() {
 
       pattern: ^[a-zA-Z0-9_-]+$
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
     - `Name string`
 
@@ -34428,7 +34428,7 @@ func main() {
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -34468,7 +34468,7 @@ func main() {
 
                   Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -34502,7 +34502,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -34536,7 +34536,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -35113,7 +35113,7 @@ func main() {
 
                   minimum: 0
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -35147,7 +35147,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -35199,7 +35199,7 @@ func main() {
 
                   minimum: 0
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -35233,7 +35233,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -35289,7 +35289,7 @@ func main() {
 
                   Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -35548,7 +35548,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -35582,7 +35582,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -35616,7 +35616,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `MaxCharacters int64 Optional`
 
@@ -36379,7 +36379,7 @@ func main() {
 
                   Create a cache control breakpoint at this content block.
 
-                - `Configs map[string, BetaMCPToolConfig] Optional`
+                - `Configs map[string]BetaMCPToolConfig Optional`
 
                   Configuration overrides for specific tools, keyed by tool name
 
@@ -36399,7 +36399,7 @@ func main() {
 
                   The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                  - `InputSchema map[string, any]`
+                  - `InputSchema map[string]any`
 
                     The tool's input schema as the MCP server lists it, verbatim.
 
@@ -36489,7 +36489,7 @@ func main() {
 
       The server's tools, exactly as the response listed them.
 
-      - `InputSchema map[string, any]`
+      - `InputSchema map[string]any`
 
         The tool's input schema as the MCP server lists it, verbatim.
 
@@ -38226,7 +38226,7 @@ func main() {
 
       - `Type JSONSchema`
 
-      - `Schema map[string, any]`
+      - `Schema map[string]any`
 
         The JSON schema of the format
 
@@ -38502,7 +38502,7 @@ func main() {
 
         - `Type JSONSchema`
 
-        - `Schema map[string, any]`
+        - `Schema map[string]any`
 
           The JSON schema of the format
 
@@ -39112,7 +39112,7 @@ func main() {
 
   - `Type JSONSchema`
 
-  - `Schema map[string, any]`
+  - `Schema map[string]any`
 
     The JSON schema of the format
 
@@ -39123,7 +39123,7 @@ func main() {
   A tool as an MCP server lists it: its name on that server, its
   description, and its input schema.
 
-  - `InputSchema map[string, any]`
+  - `InputSchema map[string]any`
 
   - `Name string`
 
@@ -39166,7 +39166,7 @@ func main() {
 
   - `Tools []BetaMCPTool`
 
-    - `InputSchema map[string, any]`
+    - `InputSchema map[string]any`
 
     - `Name string`
 
@@ -39193,7 +39193,7 @@ func main() {
 
     The server's tools, exactly as the response listed them.
 
-    - `InputSchema map[string, any]`
+    - `InputSchema map[string]any`
 
       The tool's input schema as the MCP server lists it, verbatim.
 
@@ -39214,7 +39214,7 @@ func main() {
   A tool as an MCP server lists it: its name on that server, its
   description, and its input schema.
 
-  - `InputSchema map[string, any]`
+  - `InputSchema map[string]any`
 
     The tool's input schema as the MCP server lists it, verbatim.
 
@@ -39402,7 +39402,7 @@ func main() {
 
     pattern: ^[a-zA-Z0-9_-]+$
 
-  - `Input map[string, any]`
+  - `Input map[string]any`
 
   - `Name string`
 
@@ -39422,7 +39422,7 @@ func main() {
 
     pattern: ^[a-zA-Z0-9_-]+$
 
-  - `Input map[string, any]`
+  - `Input map[string]any`
 
   - `Name string`
 
@@ -39489,7 +39489,7 @@ func main() {
 
       - `const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"`
 
-  - `Configs map[string, BetaMCPToolConfig] Optional`
+  - `Configs map[string]BetaMCPToolConfig Optional`
 
     Configuration overrides for specific tools, keyed by tool name
 
@@ -39509,7 +39509,7 @@ func main() {
 
     The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-    - `InputSchema map[string, any]`
+    - `InputSchema map[string]any`
 
       The tool's input schema as the MCP server lists it, verbatim.
 
@@ -39570,7 +39570,7 @@ func main() {
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -40071,7 +40071,7 @@ func main() {
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name string`
 
@@ -40119,7 +40119,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name BetaServerToolUseBlockName`
 
@@ -40631,7 +40631,7 @@ func main() {
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name string`
 
@@ -40792,7 +40792,7 @@ func main() {
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -40828,7 +40828,7 @@ func main() {
 
                     Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -40879,7 +40879,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -40913,7 +40913,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -41490,7 +41490,7 @@ func main() {
 
                     minimum: 0
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -41524,7 +41524,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -41576,7 +41576,7 @@ func main() {
 
                     minimum: 0
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -41610,7 +41610,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -41666,7 +41666,7 @@ func main() {
 
                     Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -41925,7 +41925,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -41959,7 +41959,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -41993,7 +41993,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `MaxCharacters int64 Optional`
 
@@ -42758,7 +42758,7 @@ func main() {
 
                     Create a cache control breakpoint at this content block.
 
-                  - `Configs map[string, BetaMCPToolConfig] Optional`
+                  - `Configs map[string]BetaMCPToolConfig Optional`
 
                     Configuration overrides for specific tools, keyed by tool name
 
@@ -42778,7 +42778,7 @@ func main() {
 
                     The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                    - `InputSchema map[string, any]`
+                    - `InputSchema map[string]any`
 
                       The tool's input schema as the MCP server lists it, verbatim.
 
@@ -42904,7 +42904,7 @@ func main() {
 
       - `Tools []BetaMCPTool`
 
-        - `InputSchema map[string, any]`
+        - `InputSchema map[string]any`
 
         - `Name string`
 
@@ -43996,7 +43996,7 @@ func main() {
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name string`
 
@@ -44235,7 +44235,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name BetaServerToolUseBlockParamName`
 
@@ -44679,7 +44679,7 @@ func main() {
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name string`
 
@@ -44839,7 +44839,7 @@ func main() {
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -44879,7 +44879,7 @@ func main() {
 
                     Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -44913,7 +44913,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -44947,7 +44947,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -45524,7 +45524,7 @@ func main() {
 
                     minimum: 0
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -45558,7 +45558,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -45610,7 +45610,7 @@ func main() {
 
                     minimum: 0
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -45644,7 +45644,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -45700,7 +45700,7 @@ func main() {
 
                     Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -45959,7 +45959,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -45993,7 +45993,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -46027,7 +46027,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `MaxCharacters int64 Optional`
 
@@ -46790,7 +46790,7 @@ func main() {
 
                     Create a cache control breakpoint at this content block.
 
-                  - `Configs map[string, BetaMCPToolConfig] Optional`
+                  - `Configs map[string]BetaMCPToolConfig Optional`
 
                     Configuration overrides for specific tools, keyed by tool name
 
@@ -46810,7 +46810,7 @@ func main() {
 
                     The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                    - `InputSchema map[string, any]`
+                    - `InputSchema map[string]any`
 
                       The tool's input schema as the MCP server lists it, verbatim.
 
@@ -46900,7 +46900,7 @@ func main() {
 
         The server's tools, exactly as the response listed them.
 
-        - `InputSchema map[string, any]`
+        - `InputSchema map[string]any`
 
           The tool's input schema as the MCP server lists it, verbatim.
 
@@ -47849,7 +47849,7 @@ func main() {
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `Input map[string, any]`
+          - `Input map[string]any`
 
           - `Name string`
 
@@ -48088,7 +48088,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `Input map[string, any]`
+          - `Input map[string]any`
 
           - `Name BetaServerToolUseBlockParamName`
 
@@ -48532,7 +48532,7 @@ func main() {
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `Input map[string, any]`
+          - `Input map[string]any`
 
           - `Name string`
 
@@ -48692,7 +48692,7 @@ func main() {
 
                         - `Type Object`
 
-                        - `Properties map[string, any] Optional`
+                        - `Properties map[string]any Optional`
 
                         - `Required []string Optional`
 
@@ -48732,7 +48732,7 @@ func main() {
 
                         Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -48766,7 +48766,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -48800,7 +48800,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -49377,7 +49377,7 @@ func main() {
 
                         minimum: 0
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -49411,7 +49411,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -49463,7 +49463,7 @@ func main() {
 
                         minimum: 0
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -49497,7 +49497,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -49553,7 +49553,7 @@ func main() {
 
                         Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -49812,7 +49812,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -49846,7 +49846,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -49880,7 +49880,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `MaxCharacters int64 Optional`
 
@@ -50643,7 +50643,7 @@ func main() {
 
                         Create a cache control breakpoint at this content block.
 
-                      - `Configs map[string, BetaMCPToolConfig] Optional`
+                      - `Configs map[string]BetaMCPToolConfig Optional`
 
                         Configuration overrides for specific tools, keyed by tool name
 
@@ -50663,7 +50663,7 @@ func main() {
 
                         The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                        - `InputSchema map[string, any]`
+                        - `InputSchema map[string]any`
 
                           The tool's input schema as the MCP server lists it, verbatim.
 
@@ -50753,7 +50753,7 @@ func main() {
 
             The server's tools, exactly as the response listed them.
 
-            - `InputSchema map[string, any]`
+            - `InputSchema map[string]any`
 
               The tool's input schema as the MCP server lists it, verbatim.
 
@@ -50949,7 +50949,7 @@ func main() {
 
     - `Type JSONSchema`
 
-    - `Schema map[string, any]`
+    - `Schema map[string]any`
 
       The JSON schema of the format
 
@@ -51586,7 +51586,7 @@ func main() {
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name string`
 
@@ -51634,7 +51634,7 @@ func main() {
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name BetaServerToolUseBlockName`
 
@@ -52146,7 +52146,7 @@ func main() {
 
         pattern: ^[a-zA-Z0-9_-]+$
 
-      - `Input map[string, any]`
+      - `Input map[string]any`
 
       - `Name string`
 
@@ -52307,7 +52307,7 @@ func main() {
 
                     - `Type Object`
 
-                    - `Properties map[string, any] Optional`
+                    - `Properties map[string]any Optional`
 
                     - `Required []string Optional`
 
@@ -52343,7 +52343,7 @@ func main() {
 
                     Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -52394,7 +52394,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -52428,7 +52428,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -53005,7 +53005,7 @@ func main() {
 
                     minimum: 0
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -53039,7 +53039,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -53091,7 +53091,7 @@ func main() {
 
                     minimum: 0
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -53125,7 +53125,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -53181,7 +53181,7 @@ func main() {
 
                     Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -53440,7 +53440,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -53474,7 +53474,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `Strict bool Optional`
 
@@ -53508,7 +53508,7 @@ func main() {
 
                     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                  - `InputExamples []map[string, any] Optional`
+                  - `InputExamples []map[string]any Optional`
 
                   - `MaxCharacters int64 Optional`
 
@@ -54273,7 +54273,7 @@ func main() {
 
                     Create a cache control breakpoint at this content block.
 
-                  - `Configs map[string, BetaMCPToolConfig] Optional`
+                  - `Configs map[string]BetaMCPToolConfig Optional`
 
                     Configuration overrides for specific tools, keyed by tool name
 
@@ -54293,7 +54293,7 @@ func main() {
 
                     The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                    - `InputSchema map[string, any]`
+                    - `InputSchema map[string]any`
 
                       The tool's input schema as the MCP server lists it, verbatim.
 
@@ -54419,7 +54419,7 @@ func main() {
 
       - `Tools []BetaMCPTool`
 
-        - `InputSchema map[string, any]`
+        - `InputSchema map[string]any`
 
         - `Name string`
 
@@ -55449,7 +55449,7 @@ func main() {
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `Input map[string, any]`
+        - `Input map[string]any`
 
         - `Name string`
 
@@ -55497,7 +55497,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `Input map[string, any]`
+        - `Input map[string]any`
 
         - `Name BetaServerToolUseBlockName`
 
@@ -56009,7 +56009,7 @@ func main() {
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `Input map[string, any]`
+        - `Input map[string]any`
 
         - `Name string`
 
@@ -56170,7 +56170,7 @@ func main() {
 
                       - `Type Object`
 
-                      - `Properties map[string, any] Optional`
+                      - `Properties map[string]any Optional`
 
                       - `Required []string Optional`
 
@@ -56206,7 +56206,7 @@ func main() {
 
                       Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -56257,7 +56257,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -56291,7 +56291,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -56868,7 +56868,7 @@ func main() {
 
                       minimum: 0
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -56902,7 +56902,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -56954,7 +56954,7 @@ func main() {
 
                       minimum: 0
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -56988,7 +56988,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -57044,7 +57044,7 @@ func main() {
 
                       Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -57303,7 +57303,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -57337,7 +57337,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -57371,7 +57371,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `MaxCharacters int64 Optional`
 
@@ -58136,7 +58136,7 @@ func main() {
 
                       Create a cache control breakpoint at this content block.
 
-                    - `Configs map[string, BetaMCPToolConfig] Optional`
+                    - `Configs map[string]BetaMCPToolConfig Optional`
 
                       Configuration overrides for specific tools, keyed by tool name
 
@@ -58156,7 +58156,7 @@ func main() {
 
                       The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                      - `InputSchema map[string, any]`
+                      - `InputSchema map[string]any`
 
                         The tool's input schema as the MCP server lists it, verbatim.
 
@@ -58282,7 +58282,7 @@ func main() {
 
         - `Tools []BetaMCPTool`
 
-          - `InputSchema map[string, any]`
+          - `InputSchema map[string]any`
 
           - `Name string`
 
@@ -59328,7 +59328,7 @@ func main() {
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `Input map[string, any]`
+          - `Input map[string]any`
 
           - `Name string`
 
@@ -59376,7 +59376,7 @@ func main() {
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `Input map[string, any]`
+          - `Input map[string]any`
 
           - `Name BetaServerToolUseBlockName`
 
@@ -59888,7 +59888,7 @@ func main() {
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `Input map[string, any]`
+          - `Input map[string]any`
 
           - `Name string`
 
@@ -60049,7 +60049,7 @@ func main() {
 
                         - `Type Object`
 
-                        - `Properties map[string, any] Optional`
+                        - `Properties map[string]any Optional`
 
                         - `Required []string Optional`
 
@@ -60085,7 +60085,7 @@ func main() {
 
                         Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -60136,7 +60136,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -60170,7 +60170,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -60747,7 +60747,7 @@ func main() {
 
                         minimum: 0
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -60781,7 +60781,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -60833,7 +60833,7 @@ func main() {
 
                         minimum: 0
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -60867,7 +60867,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -60923,7 +60923,7 @@ func main() {
 
                         Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -61182,7 +61182,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -61216,7 +61216,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `Strict bool Optional`
 
@@ -61250,7 +61250,7 @@ func main() {
 
                         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                      - `InputExamples []map[string, any] Optional`
+                      - `InputExamples []map[string]any Optional`
 
                       - `MaxCharacters int64 Optional`
 
@@ -62015,7 +62015,7 @@ func main() {
 
                         Create a cache control breakpoint at this content block.
 
-                      - `Configs map[string, BetaMCPToolConfig] Optional`
+                      - `Configs map[string]BetaMCPToolConfig Optional`
 
                         Configuration overrides for specific tools, keyed by tool name
 
@@ -62035,7 +62035,7 @@ func main() {
 
                         The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                        - `InputSchema map[string, any]`
+                        - `InputSchema map[string]any`
 
                           The tool's input schema as the MCP server lists it, verbatim.
 
@@ -62161,7 +62161,7 @@ func main() {
 
           - `Tools []BetaMCPTool`
 
-            - `InputSchema map[string, any]`
+            - `InputSchema map[string]any`
 
             - `Name string`
 
@@ -63861,7 +63861,7 @@ func main() {
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -63918,7 +63918,7 @@ func main() {
 
             Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -63952,7 +63952,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -63986,7 +63986,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -64563,7 +64563,7 @@ func main() {
 
             minimum: 0
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -64597,7 +64597,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -64649,7 +64649,7 @@ func main() {
 
             minimum: 0
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -64683,7 +64683,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -64739,7 +64739,7 @@ func main() {
 
             Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -64998,7 +64998,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -65032,7 +65032,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -65066,7 +65066,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `MaxCharacters int64 Optional`
 
@@ -65831,7 +65831,7 @@ func main() {
 
             Create a cache control breakpoint at this content block.
 
-          - `Configs map[string, BetaMCPToolConfig] Optional`
+          - `Configs map[string]BetaMCPToolConfig Optional`
 
             Configuration overrides for specific tools, keyed by tool name
 
@@ -65851,7 +65851,7 @@ func main() {
 
             The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-            - `InputSchema map[string, any]`
+            - `InputSchema map[string]any`
 
               The tool's input schema as the MCP server lists it, verbatim.
 
@@ -65953,7 +65953,7 @@ func main() {
 
     - `Type Object`
 
-    - `Properties map[string, any] Optional`
+    - `Properties map[string]any Optional`
 
     - `Required []string Optional`
 
@@ -65989,7 +65989,7 @@ func main() {
 
     Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -66078,7 +66078,7 @@ func main() {
 
             - `Type Object`
 
-            - `Properties map[string, any] Optional`
+            - `Properties map[string]any Optional`
 
             - `Required []string Optional`
 
@@ -66114,7 +66114,7 @@ func main() {
 
             Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -66165,7 +66165,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -66199,7 +66199,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -66776,7 +66776,7 @@ func main() {
 
             minimum: 0
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -66810,7 +66810,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -66862,7 +66862,7 @@ func main() {
 
             minimum: 0
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -66896,7 +66896,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -66952,7 +66952,7 @@ func main() {
 
             Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -67211,7 +67211,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -67245,7 +67245,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `Strict bool Optional`
 
@@ -67279,7 +67279,7 @@ func main() {
 
             If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-          - `InputExamples []map[string, any] Optional`
+          - `InputExamples []map[string]any Optional`
 
           - `MaxCharacters int64 Optional`
 
@@ -68044,7 +68044,7 @@ func main() {
 
             Create a cache control breakpoint at this content block.
 
-          - `Configs map[string, BetaMCPToolConfig] Optional`
+          - `Configs map[string]BetaMCPToolConfig Optional`
 
             Configuration overrides for specific tools, keyed by tool name
 
@@ -68064,7 +68064,7 @@ func main() {
 
             The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-            - `InputSchema map[string, any]`
+            - `InputSchema map[string]any`
 
               The tool's input schema as the MCP server lists it, verbatim.
 
@@ -68133,7 +68133,7 @@ func main() {
 
   - `Type Object`
 
-  - `Properties map[string, any] Optional`
+  - `Properties map[string]any Optional`
 
   - `Required []string Optional`
 
@@ -68210,7 +68210,7 @@ func main() {
 
       - `Type Object`
 
-      - `Properties map[string, any] Optional`
+      - `Properties map[string]any Optional`
 
       - `Required []string Optional`
 
@@ -68246,7 +68246,7 @@ func main() {
 
       Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -68297,7 +68297,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -68331,7 +68331,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -68908,7 +68908,7 @@ func main() {
 
       minimum: 0
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -68942,7 +68942,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -68994,7 +68994,7 @@ func main() {
 
       minimum: 0
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -69028,7 +69028,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -69084,7 +69084,7 @@ func main() {
 
       Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -69343,7 +69343,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -69377,7 +69377,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -69411,7 +69411,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `MaxCharacters int64 Optional`
 
@@ -70176,7 +70176,7 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-    - `Configs map[string, BetaMCPToolConfig] Optional`
+    - `Configs map[string]BetaMCPToolConfig Optional`
 
       Configuration overrides for specific tools, keyed by tool name
 
@@ -70196,7 +70196,7 @@ func main() {
 
       The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-      - `InputSchema map[string, any]`
+      - `InputSchema map[string]any`
 
         The tool's input schema as the MCP server lists it, verbatim.
 
@@ -70429,7 +70429,7 @@ func main() {
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `Input map[string, any]`
+  - `Input map[string]any`
 
   - `Name BetaServerToolUseBlockName`
 
@@ -70485,7 +70485,7 @@ func main() {
 
     pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-  - `Input map[string, any]`
+  - `Input map[string]any`
 
   - `Name BetaServerToolUseBlockParamName`
 
@@ -70897,7 +70897,7 @@ func main() {
 
                   - `Type Object`
 
-                  - `Properties map[string, any] Optional`
+                  - `Properties map[string]any Optional`
 
                   - `Required []string Optional`
 
@@ -70937,7 +70937,7 @@ func main() {
 
                   Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -70971,7 +70971,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -71005,7 +71005,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -71582,7 +71582,7 @@ func main() {
 
                   minimum: 0
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -71616,7 +71616,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -71668,7 +71668,7 @@ func main() {
 
                   minimum: 0
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -71702,7 +71702,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -71758,7 +71758,7 @@ func main() {
 
                   Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -72017,7 +72017,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -72051,7 +72051,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `Strict bool Optional`
 
@@ -72085,7 +72085,7 @@ func main() {
 
                   If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                - `InputExamples []map[string, any] Optional`
+                - `InputExamples []map[string]any Optional`
 
                 - `MaxCharacters int64 Optional`
 
@@ -72850,7 +72850,7 @@ func main() {
 
                   Create a cache control breakpoint at this content block.
 
-                - `Configs map[string, BetaMCPToolConfig] Optional`
+                - `Configs map[string]BetaMCPToolConfig Optional`
 
                   Configuration overrides for specific tools, keyed by tool name
 
@@ -72870,7 +72870,7 @@ func main() {
 
                   The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                  - `InputSchema map[string, any]`
+                  - `InputSchema map[string]any`
 
                     The tool's input schema as the MCP server lists it, verbatim.
 
@@ -74193,7 +74193,7 @@ func main() {
 
     - `Type Object`
 
-    - `Properties map[string, any] Optional`
+    - `Properties map[string]any Optional`
 
     - `Required []string Optional`
 
@@ -74250,7 +74250,7 @@ func main() {
 
     Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -74303,7 +74303,7 @@ func main() {
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -74356,7 +74356,7 @@ func main() {
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -74414,7 +74414,7 @@ func main() {
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -74450,7 +74450,7 @@ func main() {
 
         Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -74501,7 +74501,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -74535,7 +74535,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -75112,7 +75112,7 @@ func main() {
 
         minimum: 0
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -75146,7 +75146,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -75198,7 +75198,7 @@ func main() {
 
         minimum: 0
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -75232,7 +75232,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -75288,7 +75288,7 @@ func main() {
 
         Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -75547,7 +75547,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -75581,7 +75581,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -75615,7 +75615,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `MaxCharacters int64 Optional`
 
@@ -76380,7 +76380,7 @@ func main() {
 
         Create a cache control breakpoint at this content block.
 
-      - `Configs map[string, BetaMCPToolConfig] Optional`
+      - `Configs map[string]BetaMCPToolConfig Optional`
 
         Configuration overrides for specific tools, keyed by tool name
 
@@ -76400,7 +76400,7 @@ func main() {
 
         The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-        - `InputSchema map[string, any]`
+        - `InputSchema map[string]any`
 
           The tool's input schema as the MCP server lists it, verbatim.
 
@@ -76438,7 +76438,7 @@ func main() {
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -76495,7 +76495,7 @@ func main() {
 
         Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -76529,7 +76529,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -76563,7 +76563,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -77140,7 +77140,7 @@ func main() {
 
         minimum: 0
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -77174,7 +77174,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -77226,7 +77226,7 @@ func main() {
 
         minimum: 0
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -77260,7 +77260,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -77316,7 +77316,7 @@ func main() {
 
         Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -77575,7 +77575,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -77609,7 +77609,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `Strict bool Optional`
 
@@ -77643,7 +77643,7 @@ func main() {
 
         If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-      - `InputExamples []map[string, any] Optional`
+      - `InputExamples []map[string]any Optional`
 
       - `MaxCharacters int64 Optional`
 
@@ -78408,7 +78408,7 @@ func main() {
 
         Create a cache control breakpoint at this content block.
 
-      - `Configs map[string, BetaMCPToolConfig] Optional`
+      - `Configs map[string]BetaMCPToolConfig Optional`
 
         Configuration overrides for specific tools, keyed by tool name
 
@@ -78428,7 +78428,7 @@ func main() {
 
         The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-        - `InputSchema map[string, any]`
+        - `InputSchema map[string]any`
 
           The tool's input schema as the MCP server lists it, verbatim.
 
@@ -78629,7 +78629,7 @@ func main() {
 
     minimum: 0
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -78700,7 +78700,7 @@ func main() {
 
     minimum: 0
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -78775,7 +78775,7 @@ func main() {
 
     Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -79667,7 +79667,7 @@ func main() {
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -79720,7 +79720,7 @@ func main() {
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -79773,7 +79773,7 @@ func main() {
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `Strict bool Optional`
 
@@ -79826,7 +79826,7 @@ func main() {
 
     If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-  - `InputExamples []map[string, any] Optional`
+  - `InputExamples []map[string]any Optional`
 
   - `MaxCharacters int64 Optional`
 
@@ -79854,7 +79854,7 @@ func main() {
 
       - `Type Object`
 
-      - `Properties map[string, any] Optional`
+      - `Properties map[string]any Optional`
 
       - `Required []string Optional`
 
@@ -79911,7 +79911,7 @@ func main() {
 
       Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -79945,7 +79945,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -79979,7 +79979,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -80556,7 +80556,7 @@ func main() {
 
       minimum: 0
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -80590,7 +80590,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -80642,7 +80642,7 @@ func main() {
 
       minimum: 0
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -80676,7 +80676,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -80732,7 +80732,7 @@ func main() {
 
       Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -80991,7 +80991,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -81025,7 +81025,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `Strict bool Optional`
 
@@ -81059,7 +81059,7 @@ func main() {
 
       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-    - `InputExamples []map[string, any] Optional`
+    - `InputExamples []map[string]any Optional`
 
     - `MaxCharacters int64 Optional`
 
@@ -81824,7 +81824,7 @@ func main() {
 
       Create a cache control breakpoint at this content block.
 
-    - `Configs map[string, BetaMCPToolConfig] Optional`
+    - `Configs map[string]BetaMCPToolConfig Optional`
 
       Configuration overrides for specific tools, keyed by tool name
 
@@ -81844,7 +81844,7 @@ func main() {
 
       The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-      - `InputSchema map[string, any]`
+      - `InputSchema map[string]any`
 
         The tool's input schema as the MCP server lists it, verbatim.
 
@@ -81870,7 +81870,7 @@ func main() {
 
     pattern: ^[a-zA-Z0-9_-]+$
 
-  - `Input map[string, any]`
+  - `Input map[string]any`
 
   - `Name string`
 
@@ -81918,7 +81918,7 @@ func main() {
 
     pattern: ^[a-zA-Z0-9_-]+$
 
-  - `Input map[string, any]`
+  - `Input map[string]any`
 
   - `Name string`
 
@@ -83636,7 +83636,7 @@ func main() {
 
       pattern: ^[a-zA-Z0-9_-]+$
 
-    - `Input map[string, any]`
+    - `Input map[string]any`
 
     - `Name string`
 
@@ -84491,7 +84491,7 @@ func main() {
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `Input map[string, any]`
+        - `Input map[string]any`
 
         - `Name string`
 
@@ -84730,7 +84730,7 @@ func main() {
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `Input map[string, any]`
+        - `Input map[string]any`
 
         - `Name BetaServerToolUseBlockParamName`
 
@@ -85174,7 +85174,7 @@ func main() {
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `Input map[string, any]`
+        - `Input map[string]any`
 
         - `Name string`
 
@@ -85334,7 +85334,7 @@ func main() {
 
                       - `Type Object`
 
-                      - `Properties map[string, any] Optional`
+                      - `Properties map[string]any Optional`
 
                       - `Required []string Optional`
 
@@ -85374,7 +85374,7 @@ func main() {
 
                       Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -85408,7 +85408,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -85442,7 +85442,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -86019,7 +86019,7 @@ func main() {
 
                       minimum: 0
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -86053,7 +86053,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -86105,7 +86105,7 @@ func main() {
 
                       minimum: 0
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -86139,7 +86139,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -86195,7 +86195,7 @@ func main() {
 
                       Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -86454,7 +86454,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -86488,7 +86488,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `Strict bool Optional`
 
@@ -86522,7 +86522,7 @@ func main() {
 
                       If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                    - `InputExamples []map[string, any] Optional`
+                    - `InputExamples []map[string]any Optional`
 
                     - `MaxCharacters int64 Optional`
 
@@ -87285,7 +87285,7 @@ func main() {
 
                       Create a cache control breakpoint at this content block.
 
-                    - `Configs map[string, BetaMCPToolConfig] Optional`
+                    - `Configs map[string]BetaMCPToolConfig Optional`
 
                       Configuration overrides for specific tools, keyed by tool name
 
@@ -87305,7 +87305,7 @@ func main() {
 
                       The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                      - `InputSchema map[string, any]`
+                      - `InputSchema map[string]any`
 
                         The tool's input schema as the MCP server lists it, verbatim.
 
@@ -87395,7 +87395,7 @@ func main() {
 
           The server's tools, exactly as the response listed them.
 
-          - `InputSchema map[string, any]`
+          - `InputSchema map[string]any`
 
             The tool's input schema as the MCP server lists it, verbatim.
 
@@ -90199,7 +90199,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   pattern: ^[a-zA-Z0-9_-]+$
 
-                - `Input map[string, any]`
+                - `Input map[string]any`
 
                 - `Name string`
 
@@ -90438,7 +90438,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-                - `Input map[string, any]`
+                - `Input map[string]any`
 
                 - `Name BetaServerToolUseBlockParamName`
 
@@ -90882,7 +90882,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   pattern: ^[a-zA-Z0-9_-]+$
 
-                - `Input map[string, any]`
+                - `Input map[string]any`
 
                 - `Name string`
 
@@ -91042,7 +91042,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               - `Type Object`
 
-                              - `Properties map[string, any] Optional`
+                              - `Properties map[string]any Optional`
 
                               - `Required []string Optional`
 
@@ -91082,7 +91082,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -91116,7 +91116,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -91150,7 +91150,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -91727,7 +91727,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               minimum: 0
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -91761,7 +91761,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -91813,7 +91813,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               minimum: 0
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -91847,7 +91847,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -91903,7 +91903,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -92162,7 +92162,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -92196,7 +92196,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `Strict bool Optional`
 
@@ -92230,7 +92230,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                            - `InputExamples []map[string, any] Optional`
+                            - `InputExamples []map[string]any Optional`
 
                             - `MaxCharacters int64 Optional`
 
@@ -92993,7 +92993,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               Create a cache control breakpoint at this content block.
 
-                            - `Configs map[string, BetaMCPToolConfig] Optional`
+                            - `Configs map[string]BetaMCPToolConfig Optional`
 
                               Configuration overrides for specific tools, keyed by tool name
 
@@ -93013,7 +93013,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                               The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                              - `InputSchema map[string, any]`
+                              - `InputSchema map[string]any`
 
                                 The tool's input schema as the MCP server lists it, verbatim.
 
@@ -93103,7 +93103,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   The server's tools, exactly as the response listed them.
 
-                  - `InputSchema map[string, any]`
+                  - `InputSchema map[string]any`
 
                     The tool's input schema as the MCP server lists it, verbatim.
 
@@ -93504,7 +93504,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `Type JSONSchema`
 
-              - `Schema map[string, any]`
+              - `Schema map[string]any`
 
                 The JSON schema of the format
 
@@ -94201,13 +94201,13 @@ func main() {
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
 	betaMessageBatch, err := client.Beta.Messages.Batches.New(context.TODO(), anthropic.BetaMessageBatchNewParams{
-		Requests: []anthropic.BetaMessageBatchNewParamsRequest{anthropic.BetaMessageBatchNewParamsRequest{
+		Requests: []anthropic.BetaMessageBatchNewParamsRequest{{
 			CustomID: "my-custom-id-1",
 			Params: anthropic.BetaMessageBatchNewParamsRequestParams{
 				MaxTokens: 1024,
-				Messages: []anthropic.BetaMessageParam{anthropic.BetaMessageParam{
+				Messages: []anthropic.BetaMessageParam{{
 					OfUser: &anthropic.BetaUserMessageParam{
-						Content: []anthropic.BetaContentBlockParamUnion{anthropic.BetaContentBlockParamUnion{
+						Content: []anthropic.BetaContentBlockParamUnion{{
 							OfText: &anthropic.BetaTextBlockParam{
 								Text: "x",
 							},
@@ -95792,7 +95792,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -95840,7 +95840,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name BetaServerToolUseBlockName`
 
@@ -96352,7 +96352,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -96513,7 +96513,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           - `Type Object`
 
-                          - `Properties map[string, any] Optional`
+                          - `Properties map[string]any Optional`
 
                           - `Required []string Optional`
 
@@ -96549,7 +96549,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -96600,7 +96600,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -96634,7 +96634,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -97211,7 +97211,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -97245,7 +97245,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -97297,7 +97297,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -97331,7 +97331,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -97387,7 +97387,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -97646,7 +97646,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -97680,7 +97680,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -97714,7 +97714,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `MaxCharacters int64 Optional`
 
@@ -98479,7 +98479,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           Create a cache control breakpoint at this content block.
 
-                        - `Configs map[string, BetaMCPToolConfig] Optional`
+                        - `Configs map[string]BetaMCPToolConfig Optional`
 
                           Configuration overrides for specific tools, keyed by tool name
 
@@ -98499,7 +98499,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                           The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                          - `InputSchema map[string, any]`
+                          - `InputSchema map[string]any`
 
                             The tool's input schema as the MCP server lists it, verbatim.
 
@@ -98625,7 +98625,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Tools []BetaMCPTool`
 
-              - `InputSchema map[string, any]`
+              - `InputSchema map[string]any`
 
               - `Name string`
 

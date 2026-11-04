@@ -25,7 +25,7 @@ Google issues identity tokens automatically to any workload with an attached ser
 
 Attach a dedicated service account to your service or instance:
 
-```bash CLI
+```bash
 gcloud run deploy my-service \
   --service-account inference-worker@my-project.iam.gserviceaccount.com
 ```
@@ -39,7 +39,7 @@ Metadata-Flavor: Google
 
 Or, with the gcloud CLI:
 
-```bash CLI
+```bash
 gcloud auth print-identity-token \
   --audiences="https://api.anthropic.com" \
   --include-email
@@ -150,7 +150,7 @@ ACCESS_TOKEN=$(jq -r .access_token <<<"$RESPONSE")
 # Call the Claude API
 curl -sS https://api.anthropic.com/v1/messages \
   -H "authorization: Bearer $ACCESS_TOKEN" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -430,7 +430,7 @@ require "net/http"
 
 METADATA_URL = "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://api.anthropic.com&format=full"
 
-credentials = Anthropic::WorkloadIdentityCredentials.new(
+credentials = Anthropic::Credentials::WorkloadIdentity.new(
   identity_token_provider: -> { Net::HTTP.get(URI(METADATA_URL), {"Metadata-Flavor" => "Google"}) },
   federation_rule_id: ENV.fetch("ANTHROPIC_FEDERATION_RULE_ID"),
   organization_id: ENV.fetch("ANTHROPIC_ORGANIZATION_ID"),

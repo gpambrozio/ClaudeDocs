@@ -41,7 +41,7 @@ Anthropic recommends using the latest API version whenever possible.
     * [RBAC groups](beta/organization/rbac_groups/list.md) no longer return `roles`. Use `role_ids` instead.
     * [RBAC group members](beta/organization/rbac_groups/members/list.md), and the response to removing one, no longer return `group_id`. Use `rbac_group_id` instead.
     * [RBAC roles](beta/organization/rbac_roles/list.md) no longer return `name`. Use `display_name` instead.
-    * [Organization](organization/rate_limits/list.md) and [workspace](organization/workspaces/rate_limits/list.md) rate-limit entries no longer return `group_type`. Use `group.type` instead.
+    * [Organization](organization/rate_limits/list.md) and [workspace](organization/workspaces/rate_limits/list.md) rate-limit entries, and the response to [setting a workspace’s rate limits](organization/workspaces/rate_limits/update.md), no longer return `group_type`. Use `group.type` instead.
     * [API keys](organization/api_keys/list.md) no longer return `workspace_id`. Use `scope.workspace_id` instead, which gives the workspace’s real ID even for the Default Workspace (an all-workspaces key has no `workspace_id` in `scope`).
 
   * Claude Enterprise Analytics API:

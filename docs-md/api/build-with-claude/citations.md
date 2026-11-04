@@ -48,7 +48,7 @@ The following example shows how to enable citations on a plain text document wit
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
@@ -469,7 +469,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
@@ -817,7 +817,7 @@ These examples reference a file uploaded through the [Files API](files.md) as a 
 ```bash cURL
 curl -X POST https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1066,7 +1066,7 @@ PDF_BASE64=$(base64 /path/to/document.pdf | tr -d '\n')
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
@@ -1363,7 +1363,7 @@ puts response
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
@@ -1637,7 +1637,7 @@ These examples reference a file uploaded through the [Files API](files.md) as a 
 ```bash cURL
 curl -X POST https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1882,7 +1882,7 @@ Custom content documents give you control over citation granularity. No addition
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
@@ -2316,7 +2316,7 @@ data: {"type": "message_stop"}
 
 **Streaming messages**
 
-Handle the `citations_delta` delta type alongside text deltas to render cited responses as they stream.
+Learn the event flow and the other content block delta types that arrive alongside `citations_delta`.
 
 **Search results**
 

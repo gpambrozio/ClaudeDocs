@@ -193,7 +193,7 @@ Archive Agent
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -909,7 +909,7 @@ Archive Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 

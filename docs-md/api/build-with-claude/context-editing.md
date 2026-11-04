@@ -106,7 +106,7 @@ The simplest way to enable tool result clearing is to specify only the strategy 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -H "anthropic-beta: context-management-2025-06-27" \
   -d '{
@@ -317,7 +317,7 @@ You can customize the tool result clearing behavior with additional parameters:
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -H "anthropic-beta: context-management-2025-06-27" \
   -d '{
@@ -718,7 +718,7 @@ Use thinking block clearing to manage context and prompt caching in conversation
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -H "anthropic-beta: context-management-2025-06-27" \
   -d '{
@@ -945,7 +945,7 @@ Keep thinking blocks from the last 3 assistant turns:
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -H "anthropic-beta: context-management-2025-06-27" \
   -d '{
@@ -1155,7 +1155,7 @@ Keep all thinking blocks (maximizes cache hits):
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -H "anthropic-beta: context-management-2025-06-27" \
   -d '{
@@ -1351,7 +1351,7 @@ When using multiple strategies, you must list the `clear_thinking_20251015` stra
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -H "anthropic-beta: context-management-2025-06-27" \
   -d '{
@@ -1801,7 +1801,7 @@ The [token counting](token-counting.md) endpoint supports context management, al
 ```bash cURL
 curl https://api.anthropic.com/v1/messages/count_tokens \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -H "anthropic-beta: context-management-2025-06-27" \
   -d '{
@@ -2104,7 +2104,7 @@ To use both features together, enable them in your API request:
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -H "anthropic-beta: context-management-2025-06-27" \
   -d '{

@@ -27,13 +27,13 @@ Add Session Resource
 
 - `type: :file`
 
-- `mount_path: String`
+- `mount_path: optional String`
 
   Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
   minLength: 1, maxLength: 4096
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -149,7 +149,7 @@ Add Session Resource
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -220,17 +220,17 @@ List Session Resources
 
 - `session_id: String` (path parameter)
 
-- `limit: Integer` (query parameter)
+- `limit: optional Integer` (query parameter)
 
   Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
   format: int32
 
-- `page: String` (query parameter)
+- `page: optional String` (query parameter)
 
   Opaque cursor from a previous response's `next_page` field.
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -346,7 +346,7 @@ List Session Resources
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -378,7 +378,7 @@ List Session Resources
 
     - `url: String`
 
-    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
       - `class BetaManagedAgentsBranchCheckout`
 
@@ -432,7 +432,7 @@ List Session Resources
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-    - `access: :read_write | :read_only`
+    - `access: optional :read_write | :read_only`
 
       Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -440,21 +440,21 @@ List Session Resources
 
       - `:read_only`
 
-    - `description: String`
+    - `description: optional String`
 
       Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-    - `instructions: String`
+    - `instructions: optional String`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
       maxLength: 4096
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-    - `name: String`
+    - `name: optional String`
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -514,7 +514,7 @@ Get Session Resource
 
 - `resource_id: String` (path parameter)
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -630,7 +630,7 @@ Get Session Resource
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -664,7 +664,7 @@ Get Session Resource
 
     - `url: String`
 
-    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
       - `class BetaManagedAgentsBranchCheckout`
 
@@ -718,7 +718,7 @@ Get Session Resource
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-    - `access: :read_write | :read_only`
+    - `access: optional :read_write | :read_only`
 
       Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -726,21 +726,21 @@ Get Session Resource
 
       - `:read_only`
 
-    - `description: String`
+    - `description: optional String`
 
       Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-    - `instructions: String`
+    - `instructions: optional String`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
       maxLength: 4096
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-    - `name: String`
+    - `name: optional String`
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -796,7 +796,7 @@ Update Session Resource
 
   minLength: 1, maxLength: 4096
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -912,7 +912,7 @@ Update Session Resource
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -946,7 +946,7 @@ Update Session Resource
 
     - `url: String`
 
-    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
       - `class BetaManagedAgentsBranchCheckout`
 
@@ -1000,7 +1000,7 @@ Update Session Resource
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-    - `access: :read_write | :read_only`
+    - `access: optional :read_write | :read_only`
 
       Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -1008,21 +1008,21 @@ Update Session Resource
 
       - `:read_only`
 
-    - `description: String`
+    - `description: optional String`
 
       Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-    - `instructions: String`
+    - `instructions: optional String`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
       maxLength: 4096
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-    - `name: String`
+    - `name: optional String`
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -1073,7 +1073,7 @@ Delete Session Resource
 
 - `resource_id: String` (path parameter)
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -1189,7 +1189,7 @@ Delete Session Resource
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1289,7 +1289,7 @@ puts(beta_managed_agents_delete_session_resource)
 
   - `url: String`
 
-  - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+  - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
     - `class BetaManagedAgentsBranchCheckout`
 
@@ -1323,7 +1323,7 @@ puts(beta_managed_agents_delete_session_resource)
 
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-  - `access: :read_write | :read_only`
+  - `access: optional :read_write | :read_only`
 
     Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -1331,21 +1331,21 @@ puts(beta_managed_agents_delete_session_resource)
 
     - `:read_only`
 
-  - `description: String`
+  - `description: optional String`
 
     Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-  - `instructions: String`
+  - `instructions: optional String`
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
     maxLength: 4096
 
-  - `mount_path: String`
+  - `mount_path: optional String`
 
     Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-  - `name: String`
+  - `name: optional String`
 
     Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -1375,7 +1375,7 @@ puts(beta_managed_agents_delete_session_resource)
 
     - `url: String`
 
-    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
       - `class BetaManagedAgentsBranchCheckout`
 
@@ -1429,7 +1429,7 @@ puts(beta_managed_agents_delete_session_resource)
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-    - `access: :read_write | :read_only`
+    - `access: optional :read_write | :read_only`
 
       Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -1437,21 +1437,21 @@ puts(beta_managed_agents_delete_session_resource)
 
       - `:read_only`
 
-    - `description: String`
+    - `description: optional String`
 
       Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-    - `instructions: String`
+    - `instructions: optional String`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
       maxLength: 4096
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-    - `name: String`
+    - `name: optional String`
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -1483,7 +1483,7 @@ puts(beta_managed_agents_delete_session_resource)
 
     - `url: String`
 
-    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
       - `class BetaManagedAgentsBranchCheckout`
 
@@ -1537,7 +1537,7 @@ puts(beta_managed_agents_delete_session_resource)
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-    - `access: :read_write | :read_only`
+    - `access: optional :read_write | :read_only`
 
       Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -1545,21 +1545,21 @@ puts(beta_managed_agents_delete_session_resource)
 
       - `:read_only`
 
-    - `description: String`
+    - `description: optional String`
 
       Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-    - `instructions: String`
+    - `instructions: optional String`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
       maxLength: 4096
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-    - `name: String`
+    - `name: optional String`
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -1591,7 +1591,7 @@ puts(beta_managed_agents_delete_session_resource)
 
     - `url: String`
 
-    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
       - `class BetaManagedAgentsBranchCheckout`
 
@@ -1645,7 +1645,7 @@ puts(beta_managed_agents_delete_session_resource)
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-    - `access: :read_write | :read_only`
+    - `access: optional :read_write | :read_only`
 
       Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -1653,21 +1653,21 @@ puts(beta_managed_agents_delete_session_resource)
 
       - `:read_only`
 
-    - `description: String`
+    - `description: optional String`
 
       Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-    - `instructions: String`
+    - `instructions: optional String`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
       maxLength: 4096
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-    - `name: String`
+    - `name: optional String`
 
       Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 

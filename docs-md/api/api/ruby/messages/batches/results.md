@@ -23,7 +23,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
   ID of the Message Batch.
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -332,7 +332,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               minLength: 1
 
-            - `toolset_name: String`
+            - `toolset_name: optional String`
 
               For a toolset member tool_use, the toolset family.
 

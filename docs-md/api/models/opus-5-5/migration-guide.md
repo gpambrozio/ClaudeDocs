@@ -36,7 +36,7 @@ The following request satisfies every item in the list: effort is set, and there
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -330,7 +330,7 @@ Work down the groups and stop after the one that names your current model: every
 * Handle the `refusal` stop reason.
 * Handle the `model_context_window_exceeded` stop reason.
 * Verify tool string parameter handling for trailing newlines.
-* Remove legacy beta headers (`token-efficient-tools-2025-02-19`, `output-128k-2025-02-19`).
+* Remove the `token-efficient-tools-2025-02-19` and `output-128k-2025-02-19` beta headers.
 * Review and update prompts following [prompting best practices](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md).
 
 ### Claude Sonnet 5 only
@@ -364,7 +364,7 @@ Before. Claude Opus 5 accepts this request, and Claude Opus 5.5 rejects it with 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5",
@@ -458,7 +458,7 @@ After:
 # thinking is always on; effort is the control
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -561,7 +561,7 @@ Before. Claude Opus 5 accepts this request, and Claude Opus 5.5 rejects it with 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5",
@@ -691,7 +691,7 @@ After:
 # strict tool use: every call matches the tool's input_schema
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -877,7 +877,7 @@ Before. Claude Opus 5 accepts this request, and Claude Opus 5.5 rejects it with 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: computer-use-2025-11-24" \
   -H "content-type: application/json" \
   -d '{
@@ -1028,7 +1028,7 @@ After:
 # no beta header; the toolset entry takes no name or display size
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1162,7 +1162,7 @@ These are not required but will improve your experience:
 
 1. **Consider task budgets (beta):** For agentic workloads, [task budgets](../../build-with-claude/task-budgets.md) tell the model how many tokens it has for a full agentic loop. They require the `task-budgets-2026-03-13` beta header.
 
-2. **Consider mid-conversation tool changes (beta):** Mid-conversation tool changes let you add or remove tools between turns of a conversation without invalidating [prompt cache](../../build-with-claude/prompt-caching.md) hits on earlier turns. Changing the `tools` array itself invalidates the cached prefix. On the Claude API, send the `inline-tools-2026-09-15` beta header. The older `mid-conversation-tool-changes-2026-07-01` header still works for changes that name a tool by reference, on the Claude API, Amazon Bedrock, and Claude Models on Google Cloud (Google managed).
+2. **Consider mid-conversation tool changes (beta):** Mid-conversation tool changes let you add or remove tools between turns of a conversation without invalidating [prompt cache](../../build-with-claude/prompt-caching.md) hits on earlier turns. Changing the `tools` array itself invalidates the cached prefix. On the Claude API, Claude Platform on AWS, and Claude Models on Google Cloud (Anthropic managed), send the `inline-tools-2026-09-15` beta header. The `mid-conversation-tool-changes-2026-07-01` header works for changes that name a tool by reference, on the Claude API, Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Anthropic managed), and Claude Models on Google Cloud (Google managed).
 
 ## Migrating to Claude Opus 5.5 from Claude Opus 4.7
 
@@ -1178,7 +1178,7 @@ None of these items adds a breaking change to those in the earlier sections; the
 
 2. **1M context window is the default:** Claude Opus 5.5 serves the full 1M token [context window](../../build-with-claude/context-windows.md) by default with no beta header. If your client passes a context-window beta header for compatibility with older models, remove it.
 
-3. **Mid-conversation system messages:** On the Claude API, Amazon Bedrock, and Claude Models on Google Cloud (Google managed), Claude Opus 5.5 accepts `role: "system"` messages immediately after a user turn in the `messages` array (subject to [placement rules](../../build-with-claude/mid-conversation-system-messages.md#limitations)). Use the top-level `system` field for instructions that apply from the start. Claude Opus 4.7 rejects `role: "system"` in `messages` with a 400 error. If you maintain code paths that rebuild the full message history to update instructions, you can simplify them and preserve [prompt cache](../../build-with-claude/prompt-caching.md) hits on earlier turns.
+3. **Mid-conversation system messages:** On the Claude API, Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Anthropic managed), and Claude Models on Google Cloud (Google managed), Claude Opus 5.5 accepts `role: "system"` messages immediately after a user turn in the `messages` array (subject to [placement rules](../../build-with-claude/mid-conversation-system-messages.md#limitations)). Use the top-level `system` field for instructions that apply from the start. Claude Opus 4.7 rejects `role: "system"` in `messages` with a 400 error. If you maintain code paths that rebuild the full message history to update instructions, you can simplify them and preserve [prompt cache](../../build-with-claude/prompt-caching.md) hits on earlier turns.
 
 4. **Refusal stop details:** When the model declines a request, Claude Opus 5.5 returns a `stop_details` object that names the category of refusal, alongside the `refusal` stop reason. Claude Opus 4.7 returns the same object, so this matters only if your stop-reason handling does not read it yet. No beta header is required, and there is no opt-out. If your stop-reason handling doesn’t read it yet, see [Handling stop reasons](../../build-with-claude/handling-stop-reasons.md). Claude Opus 5.5 declines in more categories; see [Safety classifiers and fallback](migration-guide.md#safety-classifiers-and-fallback).
 
@@ -1201,7 +1201,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
    ```bash cURL
    curl https://api.anthropic.com/v1/messages \
      -H "x-api-key: $ANTHROPIC_API_KEY" \
-     -H "anthropic-version: 2023-06-01" \
+     -H "anthropic-version: 2026-10-21" \
      -H "content-type: application/json" \
      -d '{
        "model": "claude-opus-4-6",
@@ -1331,7 +1331,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
    ```bash cURL
    curl https://api.anthropic.com/v1/messages \
      -H "x-api-key: $ANTHROPIC_API_KEY" \
-     -H "anthropic-version: 2023-06-01" \
+     -H "anthropic-version: 2026-10-21" \
      -H "content-type: application/json" \
      -d '{
        "model": "claude-opus-5-5",
@@ -1745,7 +1745,7 @@ If you’re migrating from Claude Opus 4.1 or earlier models directly to Claude 
 
 #### Additional recommended changes
 
-* **Remove legacy beta headers:** Remove `token-efficient-tools-2025-02-19` and `output-128k-2025-02-19`. All Claude 4 and later models have built-in token-efficient tool use and these headers have no effect.
+* **Beta headers:** Remove `token-efficient-tools-2025-02-19` and `output-128k-2025-02-19`. All Claude 4 and later models have built-in token-efficient tool use and these headers have no effect.
 
 ## Migrating to Claude Opus 5.5 from Claude Sonnet 5
 
@@ -1760,7 +1760,7 @@ Manual extended thinking, sampling parameters, and assistant prefill return a 40
 
 ### What changed
 
-1. **Mid-conversation system messages:** On the Claude API, Amazon Bedrock, and Claude Models on Google Cloud (Google managed), Claude Opus 5.5 accepts `role: "system"` messages immediately after a user turn in the `messages` array (subject to [placement rules](../../build-with-claude/mid-conversation-system-messages.md#limitations)). This feature is not available on Claude Sonnet 5. If you maintain code paths that rebuild the full message history to update instructions, you can simplify them and preserve [prompt cache](../../build-with-claude/prompt-caching.md) hits on earlier turns.
+1. **Mid-conversation system messages:** On the Claude API, Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Anthropic managed), and Claude Models on Google Cloud (Google managed), Claude Opus 5.5 accepts `role: "system"` messages immediately after a user turn in the `messages` array (subject to [placement rules](../../build-with-claude/mid-conversation-system-messages.md#limitations)). This feature is not available on Claude Sonnet 5. If you maintain code paths that rebuild the full message history to update instructions, you can simplify them and preserve [prompt cache](../../build-with-claude/prompt-caching.md) hits on earlier turns.
 
 2. **Lower prompt caching minimum:** The minimum cacheable prompt length on Claude Opus 5.5 is 512 tokens, down from 1,024 tokens on Claude Sonnet 5. Prompts that were too short to cache on Claude Sonnet 5 can create cache entries, with no code changes required. See [Prompt caching](../../build-with-claude/prompt-caching.md#cache-limitations) for per-model minimums.
 

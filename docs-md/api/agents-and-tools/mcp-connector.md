@@ -81,7 +81,7 @@ This example enables all tools from an MCP server with default configuration:
 curl https://api.anthropic.com/v1/messages \
   -H "Content-Type: application/json" \
   -H "X-API-Key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: mcp-client-2025-11-20" \
   -d '{
     "model": "claude-opus-5-5",
@@ -604,7 +604,7 @@ The following example sends one request with an unpinned toolset, copies the ret
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: mcp-client-2026-09-15" \
   -d '{
     "model": "claude-opus-5-5",
@@ -637,7 +637,7 @@ curl https://api.anthropic.com/v1/messages \
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: mcp-client-2026-09-15" \
   -d '{
     "model": "claude-opus-5-5",

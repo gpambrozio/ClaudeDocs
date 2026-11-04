@@ -55,7 +55,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
@@ -280,7 +280,7 @@ Restart the session:
 
 `bash_20250124` is the current version of the tool, and it requires no beta header. Every model from Claude Sonnet 3.7 ([retired](../../about-claude/model-deprecations.md)) onward accepts it, including all current Claude models.
 
-The original `bash_20241022` version works only with the October 2024 Claude Sonnet 3.5 model ([retired](../../about-claude/model-deprecations.md)). Requests that use it need the `anthropic-beta: computer-use-2024-10-22` header, and the SDK exposes it only in its beta namespace. New integrations should use `bash_20250124`.
+The `bash_20241022` version works only with the October 2024 Claude Sonnet 3.5 model ([retired](../../about-claude/model-deprecations.md)). Requests that use it need the `anthropic-beta: computer-use-2024-10-22` header, and the SDK exposes it only in its beta namespace. New integrations should use `bash_20250124`.
 
 ## Example: Multistep automation
 
@@ -855,7 +855,7 @@ Send the `tool_result` back in a `user` message that continues the same conversa
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,

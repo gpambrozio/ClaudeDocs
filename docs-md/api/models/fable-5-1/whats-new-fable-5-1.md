@@ -96,7 +96,7 @@ On Claude Fable 5.1 you can change the [effort](../../build-with-claude/effort.m
 # Effort-only system message: the new level takes effect from the next user turn.
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: mid-conversation-output-config-2026-07-01" \
   -H "content-type: application/json" \
   -d '{

@@ -46,7 +46,7 @@ Pass the optional `budget` (csharp, go: `Budget`) field when you create the sess
 ```bash cURL
 curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -222,7 +222,7 @@ Update the session with a new `max_list_cost` (java, php: `maxListCost`; csharp,
 ```bash cURL
 curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -327,7 +327,7 @@ Pass `"budget": null` (python: `budget=None`; typescript: `budget: null`; ruby: 
 ```bash cURL
 curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{"budget": null}'

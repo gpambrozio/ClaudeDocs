@@ -103,7 +103,7 @@ JSON
 # 3. Call the Claude API.
 curl https://api.anthropic.com/v1/messages \
   -H "authorization: Bearer $ACCESS_TOKEN" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -471,7 +471,7 @@ def fetch_okta_token
 end
 
 client = Anthropic::Client.new(
-  credentials: Anthropic::WorkloadIdentityCredentials.new(
+  credentials: Anthropic::Credentials::WorkloadIdentity.new(
     identity_token_provider: -> { fetch_okta_token },
     federation_rule_id: ENV.fetch("ANTHROPIC_FEDERATION_RULE_ID"),
     organization_id: ENV.fetch("ANTHROPIC_ORGANIZATION_ID"),

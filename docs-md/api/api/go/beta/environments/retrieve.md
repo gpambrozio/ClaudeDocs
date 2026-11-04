@@ -253,7 +253,7 @@ Retrieve a specific environment by ID.
 
     User-provided description for the environment; null when unset
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs
 

@@ -1246,7 +1246,7 @@ When a new Claude model is released, migrating a Claude Managed Agents integrati
 ```bash cURL
 curl -sS --fail-with-body "https://api.anthropic.com/v1/agents/$AGENT_ID?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -1295,7 +1295,7 @@ await client.Beta.Agents.Update(agent.ID, new()
 
 ```go Go
 _, err = client.Beta.Agents.Update(ctx, agent.ID, anthropic.BetaAgentUpdateParams{
-	Version: agent.Version,
+	Version: anthropic.Int(agent.Version),
 	Model: anthropic.BetaManagedAgentsModelConfigParams{
 		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
 	},

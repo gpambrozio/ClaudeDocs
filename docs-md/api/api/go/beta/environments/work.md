@@ -193,7 +193,7 @@ Retrieve detailed information about a specific work item.
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -477,7 +477,7 @@ Long poll for work items in the queue.
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -745,7 +745,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -1246,7 +1246,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -1525,7 +1525,7 @@ List work items in an environment.
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -1808,7 +1808,7 @@ Update work item metadata with merge semantics.
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -2158,7 +2158,7 @@ func main() {
 
     RFC 3339 timestamp of the most recent heartbeat
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     User-provided metadata key-value pairs associated with this work item
 
@@ -2278,7 +2278,7 @@ func main() {
 
       RFC 3339 timestamp of the most recent heartbeat
 
-    - `Metadata map[string, string]`
+    - `Metadata map[string]string`
 
       User-provided metadata key-value pairs associated with this work item
 
@@ -2364,7 +2364,7 @@ func main() {
 
   Request to update work item metadata.
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 

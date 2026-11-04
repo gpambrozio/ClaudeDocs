@@ -60,7 +60,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -249,7 +249,7 @@ The response `usage` object includes an `inference_geo` field indicating where i
 
 The `inference_geo` parameter is supported on Claude 4.6 and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5 (deprecated), Claude Haiku 4.5, or earlier models return a 400 error.
 
-The `inference_geo` parameter is available on the Claude API (first-party), [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), and [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md). On Amazon Bedrock and Claude Models on Google Cloud (Google managed), the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. On [Claude in Microsoft Foundry](../build-with-claude/claude-in-microsoft-foundry.md), `inference_geo` is likewise not applicable: deployments hosted on Azure can instead use the US Data Zone Standard deployment type, which keeps inference within the United States. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](../cli-sdks-libraries/libraries/openai-sdk.md).
+The `inference_geo` parameter is available on the Claude API (first-party), [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), and [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md). On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. On [Claude in Microsoft Foundry](../build-with-claude/claude-in-microsoft-foundry.md), `inference_geo` is likewise not applicable: deployments hosted on Azure can instead use the US Data Zone Standard deployment type, which keeps inference within the United States. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](../cli-sdks-libraries/libraries/openai-sdk.md).
 
 ### Workspace-level restrictions
 
@@ -284,7 +284,7 @@ Data residency pricing varies by model generation:
 * **Global routing (`inference_geo: "global"`):** Standard pricing applies.
 * **Older models:** Don’t support `inference_geo` (see [Model availability](data-residency.md#model-availability)). Standard pricing applies. Requests that include the parameter return a 400 error.
 
-This pricing applies to the Claude API (first-party), Claude Platform on AWS, and Claude Models on Google Cloud (Anthropic managed). On Claude in Microsoft Foundry, the same 1.1x multiplier applies to deployments hosted on Azure that use the US Data Zone Standard deployment type. Partner-operated platforms, Bedrock and Claude Models on Google Cloud (Google managed), have their own regional pricing. See [Data residency pricing](../about-claude/pricing.md#data-residency-pricing) for details.
+This pricing applies to the Claude API (first-party), Claude Platform on AWS, and Claude Models on Google Cloud (Anthropic managed). On Claude in Microsoft Foundry, the same 1.1x multiplier applies to deployments hosted on Azure that use the US Data Zone Standard deployment type. Partner-operated platforms, Claude Models on Google Cloud (Google managed) and Bedrock, have their own regional pricing. See [Data residency pricing](../about-claude/pricing.md#data-residency-pricing) for details.
 
 The same multiplier applies to [Claude Managed Agents](../managed-agents/overview.md): when an agent’s [model configuration](../managed-agents/agent-setup.md) pins `inference_geo` to `"us"`, model requests in sessions running that agent are priced at 1.1x the standard rate.
 

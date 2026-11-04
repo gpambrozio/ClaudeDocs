@@ -123,7 +123,7 @@ JSON
 
 curl https://api.anthropic.com/v1/messages \
   -H "authorization: Bearer $ACCESS_TOKEN" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -284,7 +284,7 @@ stsClient := sts.NewFromConfig(cfg)
 getStsToken := option.IdentityTokenFunc(func(ctx context.Context) (string, error) {
 	out, err := stsClient.GetWebIdentityToken(ctx, &sts.GetWebIdentityTokenInput{
 		Audience:         []string{"https://api.anthropic.com"},
-		SigningAlgorithm: "RS256",
+		SigningAlgorithm: aws.String("RS256"),
 		DurationSeconds:  aws.Int32(900),
 	})
 	if err != nil {
@@ -425,7 +425,7 @@ require "aws-sdk-sts"
 
 sts = Aws::STS::Client.new(region: "us-east-1")
 client = Anthropic::Client.new(
-  credentials: Anthropic::WorkloadIdentityCredentials.new(
+  credentials: Anthropic::Credentials::WorkloadIdentity.new(
     identity_token_provider: -> {
       sts.get_web_identity_token(
         audience: ["https://api.anthropic.com"],
@@ -488,7 +488,7 @@ This path additionally requires an EKS cluster with an [IAM OIDC provider enable
 
 Each EKS cluster has a unique OIDC issuer. Retrieve it with the AWS CLI:
 
-```bash CLI
+```bash
 aws eks describe-cluster \
   --name <cluster-name> \
   --query "cluster.identity.oidc.issuer" \
@@ -625,7 +625,7 @@ JSON
 
 curl https://api.anthropic.com/v1/messages \
   -H "authorization: Bearer $ACCESS_TOKEN" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",

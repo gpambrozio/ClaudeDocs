@@ -13,7 +13,7 @@ The Rate Limits API provides programmatic access to the rate limits configured f
 Use this API to:
 
 * **Keep gateways and proxies in sync:** Read your current limits at startup and on a schedule instead of hardcoding values that drift when Anthropic adjusts them.
-* **Power internal alerting:** Compare usage data from the [Usage and Cost Analytics API](usage-cost-analytics-api.md) against your configured limits.
+* **Review headroom:** Compare past usage from the [Usage and Cost Analytics API](usage-cost-analytics-api.md) against your configured limits.
 * **Audit workspace configuration:** Verify that workspace overrides match what your provisioning automation expects.
 * **Manage workspace limits from code:** Set and clear each workspace’s limits from your provisioning automation instead of editing them in the Console.
 
@@ -28,7 +28,7 @@ List the rate limits configured for your organization:
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rate_limits" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI
@@ -163,7 +163,7 @@ For complete parameter details and response schemas, see the [Organization Rate 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rate_limits" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI
@@ -283,7 +283,6 @@ end
     {
       "id": "rlt_01NwFawrTvAijwqn8AjKVBPS",
       "type": "rate_limit",
-      "group_type": "model_group",
       "group": {
         "type": "model_group",
         "id": "rlg_01Hq7YkP3mZ9dTwRx4cVbN2s",
@@ -299,7 +298,6 @@ end
     {
       "id": "rlt_016qriyigbdebqkzhMujdHkX",
       "type": "rate_limit",
-      "group_type": "model_group",
       "group": {
         "type": "model_group",
         "id": "rlg_01Kd5wMv8nSq2LcXy6tRfJ4b",
@@ -321,7 +319,6 @@ end
     {
       "id": "rlt_01EyY8kq14eviKJPgepbgBH4",
       "type": "rate_limit",
-      "group_type": "batch",
       "group": { "type": "batch", "id": "rlg_01Wn3pBz6kCg9vHtQ7mLxD5a" },
       "models": null,
       "limits": [{ "type": "enqueued_batch_requests", "value": 500000 }]
@@ -338,7 +335,7 @@ Pass any model ID or alias as the `model` query parameter to return only the ent
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rate_limits?model=claude-opus-5-5" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI
@@ -490,7 +487,7 @@ To retrieve your organization’s workspace IDs, use the [List Workspaces](../ap
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/rate_limits" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI
@@ -626,7 +623,6 @@ end
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
       "rate_limit_id": "rlt_01NwFawrTvAijwqn8AjKVBPS",
       "type": "workspace_rate_limit",
-      "group_type": "model_group",
       "group": {
         "type": "model_group",
         "id": "rlg_01Hq7YkP3mZ9dTwRx4cVbN2s",
@@ -652,7 +648,6 @@ end
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
       "rate_limit_id": "rlt_016qriyigbdebqkzhMujdHkX",
       "type": "workspace_rate_limit",
-      "group_type": "model_group",
       "group": {
         "type": "model_group",
         "id": "rlg_01Kd5wMv8nSq2LcXy6tRfJ4b",
@@ -696,7 +691,7 @@ To read a workspace’s applicable limits in one request, add the optional `incl
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/rate_limits?include_inherited=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI
@@ -847,7 +842,6 @@ end
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
       "rate_limit_id": "rlt_01NwFawrTvAijwqn8AjKVBPS",
       "type": "workspace_rate_limit",
-      "group_type": "model_group",
       "group": {
         "type": "model_group",
         "id": "rlg_01Hq7YkP3mZ9dTwRx4cVbN2s",
@@ -879,7 +873,6 @@ end
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
       "rate_limit_id": "rlt_016qriyigbdebqkzhMujdHkX",
       "type": "workspace_rate_limit",
-      "group_type": "model_group",
       "group": {
         "type": "model_group",
         "id": "rlg_01Kd5wMv8nSq2LcXy6tRfJ4b",
@@ -917,7 +910,6 @@ end
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
       "rate_limit_id": "rlt_01EyY8kq14eviKJPgepbgBH4",
       "type": "workspace_rate_limit",
-      "group_type": "batch",
       "group": { "type": "batch", "id": "rlg_01Wn3pBz6kCg9vHtQ7mLxD5a" },
       "models": null,
       "limits": [
@@ -965,7 +957,7 @@ Raise the workspace’s requests per minute for the Claude Opus 5.5 group to 2,0
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/rate_limits/rlt_01NwFawrTvAijwqn8AjKVBPS" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "limits": [
@@ -1140,7 +1132,6 @@ The response is the group’s entry, in the shape of one entry in the workspace 
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   "rate_limit_id": "rlt_01NwFawrTvAijwqn8AjKVBPS",
   "type": "workspace_rate_limit",
-  "group_type": "model_group",
   "group": {
     "type": "model_group",
     "id": "rlg_01Hq7YkP3mZ9dTwRx4cVbN2s",
@@ -1167,7 +1158,7 @@ Both list endpoints accept an optional `group_type` query parameter that restric
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/rate_limits?group_type=batch" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI

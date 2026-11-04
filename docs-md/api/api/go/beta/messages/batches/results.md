@@ -438,7 +438,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -486,7 +486,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name BetaServerToolUseBlockName`
 
@@ -998,7 +998,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -1159,7 +1159,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           - `Type Object`
 
-                          - `Properties map[string, any] Optional`
+                          - `Properties map[string]any Optional`
 
                           - `Required []string Optional`
 
@@ -1195,7 +1195,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -1246,7 +1246,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -1280,7 +1280,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -1857,7 +1857,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -1891,7 +1891,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -1943,7 +1943,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           minimum: 0
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -1977,7 +1977,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2033,7 +2033,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2292,7 +2292,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2326,7 +2326,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `Strict bool Optional`
 
@@ -2360,7 +2360,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           If true, tool will not be included in initial system prompt. Only loaded when returned via tool_reference from tool search.
 
-                        - `InputExamples []map[string, any] Optional`
+                        - `InputExamples []map[string]any Optional`
 
                         - `MaxCharacters int64 Optional`
 
@@ -3125,7 +3125,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           Create a cache control breakpoint at this content block.
 
-                        - `Configs map[string, BetaMCPToolConfig] Optional`
+                        - `Configs map[string]BetaMCPToolConfig Optional`
 
                           Configuration overrides for specific tools, keyed by tool name
 
@@ -3145,7 +3145,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
                           The server's tool listing, pinned: when present, the server is not asked for its tools before sampling and exactly these entries, with `default_config` and `configs` applied, are the toolset's tools. Copy it from the `mcp_tool_listing` block of an earlier response.
 
-                          - `InputSchema map[string, any]`
+                          - `InputSchema map[string]any`
 
                             The tool's input schema as the MCP server lists it, verbatim.
 
@@ -3271,7 +3271,7 @@ Learn more about the Message Batches API in our [user guide](../../../../../buil
 
             - `Tools []BetaMCPTool`
 
-              - `InputSchema map[string, any]`
+              - `InputSchema map[string]any`
 
               - `Name string`
 

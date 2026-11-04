@@ -53,7 +53,7 @@ List all threads associated with a session as follows:
 ```bash cURL
 curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 
@@ -131,7 +131,7 @@ Send `user.interrupt` with `session_thread_id` (java: `sessionThreadId`; php: `s
 ```bash cURL
 curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -214,7 +214,7 @@ Optionally archive a session thread when it has completed its work. Archiving a 
 ```bash cURL
 curl -fsS -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archive" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 
@@ -276,7 +276,7 @@ Archive only succeeds if the thread is `idle`. A thread parked on `requires_acti
 # Interrupt the thread, then archive it
 curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01" \
   -H "content-type: application/json" \
   -d '{
@@ -287,7 +287,7 @@ curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
 
 curl -fsS -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archive" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 
@@ -421,7 +421,7 @@ A thread’s stream doesn’t replay earlier events. Right after `session.thread
 ```bash cURL
 curl -fsSN "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 
@@ -575,7 +575,7 @@ List all past session thread events to pull a complete history.
 ```bash cURL
 curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/events" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 ```
 

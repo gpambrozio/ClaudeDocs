@@ -76,12 +76,12 @@ The advisor tool is in beta. Include the beta header `advisor-tool-2026-03-01` i
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: advisor-tool-2026-03-01" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-sonnet-5",
-    "max_tokens": 4096,
+    "max_tokens": 16000,
     "tools": [
       {
         "type": "advisor_20260301",
@@ -91,7 +91,7 @@ curl https://api.anthropic.com/v1/messages \
     ],
     "messages": [{
       "role": "user",
-      "content": "Build a concurrent worker pool in Go with graceful shutdown."
+      "content": "Build a concurrent worker pool in Go with graceful shutdown. Keep it brief."
     }]
   }'
 ```
@@ -99,14 +99,14 @@ curl https://api.anthropic.com/v1/messages \
 ```bash CLI
 ant beta:messages create --beta advisor-tool-2026-03-01 <<'YAML'
 model: claude-sonnet-5
-max_tokens: 4096
+max_tokens: 16000
 tools:
   - type: advisor_20260301
     name: advisor
     model: claude-opus-5-5
 messages:
   - role: user
-    content: Build a concurrent worker pool in Go with graceful shutdown.
+    content: Build a concurrent worker pool in Go with graceful shutdown. Keep it brief.
 YAML
 ```
 
@@ -115,7 +115,7 @@ client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
     model="claude-sonnet-5",
-    max_tokens=4096,
+    max_tokens=16000,
     betas=["advisor-tool-2026-03-01"],
     tools=[
         {
@@ -127,7 +127,7 @@ response = client.beta.messages.create(
     messages=[
         {
             "role": "user",
-            "content": "Build a concurrent worker pool in Go with graceful shutdown.",
+            "content": "Build a concurrent worker pool in Go with graceful shutdown. Keep it brief.",
         }
     ],
 )
@@ -140,7 +140,7 @@ const client = new Anthropic();
 
 const response = await client.beta.messages.create({
   model: "claude-sonnet-5",
-  max_tokens: 4096,
+  max_tokens: 16000,
   betas: ["advisor-tool-2026-03-01"],
   tools: [
     {
@@ -152,7 +152,7 @@ const response = await client.beta.messages.create({
   messages: [
     {
       role: "user",
-      content: "Build a concurrent worker pool in Go with graceful shutdown."
+      content: "Build a concurrent worker pool in Go with graceful shutdown. Keep it brief."
     }
   ]
 });
@@ -169,7 +169,7 @@ var client = new AnthropicClient();
 var parameters = new MessageCreateParams
 {
     Model = Messages::Model.ClaudeSonnet5,
-    MaxTokens = 4096,
+    MaxTokens = 16000,
     Tools = new BetaToolUnion[]
     {
         new BetaAdvisorTool20260301
@@ -181,7 +181,7 @@ var parameters = new MessageCreateParams
     [
         new BetaUserMessageParam
         {
-            Content = "Build a concurrent worker pool in Go with graceful shutdown."
+            Content = "Build a concurrent worker pool in Go with graceful shutdown. Keep it brief."
         }
     ],
     Betas = ["advisor-tool-2026-03-01"]
@@ -196,14 +196,14 @@ client := anthropic.NewClient()
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
 	Model:     anthropic.ModelClaudeSonnet5,
-	MaxTokens: 4096,
+	MaxTokens: 16000,
 	Tools: []anthropic.BetaToolUnionParam{
 		{OfAdvisorTool20260301: &anthropic.BetaAdvisorTool20260301Param{
 			Model: anthropic.ModelClaudeOpus5_5,
 		}},
 	},
 	Messages: []anthropic.BetaMessageParam{
-		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Build a concurrent worker pool in Go with graceful shutdown.")),
+		anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Build a concurrent worker pool in Go with graceful shutdown. Keep it brief.")),
 	},
 	Betas: []anthropic.AnthropicBeta{
 		anthropic.AnthropicBetaAdvisorTool2026_03_01,
@@ -226,11 +226,11 @@ void main() {
 
     MessageCreateParams params = MessageCreateParams.builder()
         .model(Model.CLAUDE_SONNET_5)
-        .maxTokens(4096L)
+        .maxTokens(16000L)
         .addTool(BetaAdvisorTool20260301.builder()
             .model(Model.CLAUDE_OPUS_5_5)
             .build())
-        .addUserMessage("Build a concurrent worker pool in Go with graceful shutdown.")
+        .addUserMessage("Build a concurrent worker pool in Go with graceful shutdown. Keep it brief.")
         .addBeta("advisor-tool-2026-03-01")
         .build();
 
@@ -243,11 +243,11 @@ void main() {
 $client = new Client();
 
 $response = $client->beta->messages->create(
-    maxTokens: 4096,
+    maxTokens: 16000,
     messages: [
         [
             'role' => 'user',
-            'content' => 'Build a concurrent worker pool in Go with graceful shutdown.',
+            'content' => 'Build a concurrent worker pool in Go with graceful shutdown. Keep it brief.',
         ],
     ],
     model: Model::CLAUDE_SONNET_5,
@@ -269,7 +269,7 @@ client = Anthropic::Client.new
 
 response = client.beta.messages.create(
   model: "claude-sonnet-5",
-  max_tokens: 4096,
+  max_tokens: 16000,
   tools: [
     {
       type: "advisor_20260301",
@@ -280,7 +280,7 @@ response = client.beta.messages.create(
   messages: [
     {
       role: "user",
-      content: "Build a concurrent worker pool in Go with graceful shutdown."
+      content: "Build a concurrent worker pool in Go with graceful shutdown. Keep it brief."
     }
   ],
   betas: ["advisor-tool-2026-03-01"]
@@ -449,13 +449,13 @@ tools = [
 messages = [
     {
         "role": "user",
-        "content": "Build a concurrent worker pool in Go with graceful shutdown.",
+        "content": "Build a concurrent worker pool in Go with graceful shutdown. Keep it brief.",
     }
 ]
 
 response = client.beta.messages.create(
     model="claude-sonnet-5",
-    max_tokens=1024,
+    max_tokens=16000,
     betas=["advisor-tool-2026-03-01"],
     tools=tools,
     messages=messages,
@@ -469,7 +469,7 @@ messages.append({"role": "user", "content": "Now add a max-in-flight limit of 10
 
 response = client.beta.messages.create(
     model="claude-sonnet-5",
-    max_tokens=1024,
+    max_tokens=16000,
     betas=["advisor-tool-2026-03-01"],
     tools=tools,
     messages=messages,
@@ -490,13 +490,13 @@ const tools: Anthropic.Beta.Messages.BetaToolUnion[] = [
 const messages: Anthropic.Beta.Messages.BetaMessageParam[] = [
   {
     role: "user",
-    content: "Build a concurrent worker pool in Go with graceful shutdown."
+    content: "Build a concurrent worker pool in Go with graceful shutdown. Keep it brief."
   }
 ];
 
 const response = await client.beta.messages.create({
   model: "claude-sonnet-5",
-  max_tokens: 1024,
+  max_tokens: 16000,
   betas: ["advisor-tool-2026-03-01"],
   tools,
   messages
@@ -510,7 +510,7 @@ messages.push({ role: "user", content: "Now add a max-in-flight limit of 10." })
 
 const followUp = await client.beta.messages.create({
   model: "claude-sonnet-5",
-  max_tokens: 1024,
+  max_tokens: 16000,
   betas: ["advisor-tool-2026-03-01"],
   tools,
   messages
@@ -521,9 +521,7 @@ const followUp = await client.beta.messages.create({
 using Anthropic.Models.Beta.Messages;
 using Messages = Anthropic.Models.Messages;
 
-// Advisor calls run a second model inside the request, so allow more than the
-// C# SDK's default non-streaming timeout, which it sizes from max_tokens.
-var client = new AnthropicClient { Timeout = TimeSpan.FromMinutes(5) };
+var client = new AnthropicClient();
 
 var tools = new BetaToolUnion[]
 {
@@ -532,13 +530,13 @@ var tools = new BetaToolUnion[]
 
 var messages = new List<BetaMessageParam>
 {
-    new BetaUserMessageParam { Content = "Build a concurrent worker pool in Go with graceful shutdown." }
+    new BetaUserMessageParam { Content = "Build a concurrent worker pool in Go with graceful shutdown. Keep it brief." }
 };
 
 var response = await client.Beta.Messages.Create(new MessageCreateParams
 {
     Model = Messages::Model.ClaudeSonnet5,
-    MaxTokens = 1024,
+    MaxTokens = 16000,
     Tools = tools,
     Messages = messages,
     Betas = ["advisor-tool-2026-03-01"]
@@ -556,7 +554,7 @@ messages.Add(new BetaUserMessageParam { Content = "Now add a max-in-flight limit
 var followUp = await client.Beta.Messages.Create(new MessageCreateParams
 {
     Model = Messages::Model.ClaudeSonnet5,
-    MaxTokens = 1024,
+    MaxTokens = 16000,
     Tools = tools,
     Messages = messages,
     Betas = ["advisor-tool-2026-03-01"]
@@ -573,12 +571,12 @@ tools := []anthropic.BetaToolUnionParam{
 }
 
 messages := []anthropic.BetaMessageParam{
-	anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Build a concurrent worker pool in Go with graceful shutdown.")),
+	anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock("Build a concurrent worker pool in Go with graceful shutdown. Keep it brief.")),
 }
 
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
 	Model:     anthropic.ModelClaudeSonnet5,
-	MaxTokens: 1024,
+	MaxTokens: 16000,
 	Tools:     tools,
 	Messages:  messages,
 	Betas: []anthropic.AnthropicBeta{
@@ -597,7 +595,7 @@ messages = append(messages, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBl
 
 response, err = client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
 	Model:     anthropic.ModelClaudeSonnet5,
-	MaxTokens: 1024,
+	MaxTokens: 16000,
 	Tools:     tools,
 	Messages:  messages,
 	Betas: []anthropic.AnthropicBeta{
@@ -628,11 +626,11 @@ void main() {
 
     List<BetaMessageParam> messages = new ArrayList<>();
     messages.add(BetaMessageParam.ofUser(
-        "Build a concurrent worker pool in Go with graceful shutdown."));
+        "Build a concurrent worker pool in Go with graceful shutdown. Keep it brief."));
 
     BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
         .model(Model.CLAUDE_SONNET_5)
-        .maxTokens(1024L)
+        .maxTokens(16000L)
         .tools(tools)
         .messages(messages)
         .addBeta("advisor-tool-2026-03-01")
@@ -646,7 +644,7 @@ void main() {
 
     BetaMessage followUp = client.beta().messages().create(MessageCreateParams.builder()
         .model(Model.CLAUDE_SONNET_5)
-        .maxTokens(1024L)
+        .maxTokens(16000L)
         .tools(tools)
         .messages(messages)
         .addBeta("advisor-tool-2026-03-01")
@@ -668,12 +666,12 @@ $tools = [
 $messages = [
     [
         'role' => 'user',
-        'content' => 'Build a concurrent worker pool in Go with graceful shutdown.',
+        'content' => 'Build a concurrent worker pool in Go with graceful shutdown. Keep it brief.',
     ],
 ];
 
 $response = $client->beta->messages->create(
-    maxTokens: 1024,
+    maxTokens: 16000,
     messages: $messages,
     model: 'claude-sonnet-5',
     tools: $tools,
@@ -687,7 +685,7 @@ $messages[] = ['role' => 'assistant', 'content' => $response->content];
 $messages[] = ['role' => 'user', 'content' => 'Now add a max-in-flight limit of 10.'];
 
 $response = $client->beta->messages->create(
-    maxTokens: 1024,
+    maxTokens: 16000,
     messages: $messages,
     model: 'claude-sonnet-5',
     tools: $tools,
@@ -709,13 +707,13 @@ tools = [
 messages = [
   {
     role: "user",
-    content: "Build a concurrent worker pool in Go with graceful shutdown."
+    content: "Build a concurrent worker pool in Go with graceful shutdown. Keep it brief."
   }
 ]
 
 response = client.beta.messages.create(
   model: "claude-sonnet-5",
-  max_tokens: 1024,
+  max_tokens: 16000,
   tools: tools,
   messages: messages,
   betas: ["advisor-tool-2026-03-01"]
@@ -729,7 +727,7 @@ messages << { role: "user", content: "Now add a max-in-flight limit of 10." }
 
 response = client.beta.messages.create(
   model: "claude-sonnet-5",
-  max_tokens: 1024,
+  max_tokens: 16000,
   tools: tools,
   messages: messages,
   betas: ["advisor-tool-2026-03-01"]

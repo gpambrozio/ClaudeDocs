@@ -36,7 +36,7 @@ featureMetadata:
     Microsoft Foundry: stable
   details:
     - Claude 5.5 and later models support computer use through the `computer_toolset_20260801` toolset. They return a 400 error for any computer use tool version they don't accept, such as `computer_20251124` on the Claude API. To move a `computer_20251124` integration to the toolset, see [Migrate from `computer_20251124`](computer-use-tool.md#migrate-from-computer-20251124). To move from `computer_20250124`, see [Move computer use to the toolset](../../models/haiku-5-5/migration-guide.md#computer-use-toolset) in the Claude Haiku 5.5 migration guide.
-    - Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 support computer use only through the earlier `computer_20251124` tool version, which requires a beta header; see [Earlier tool versions](computer-use-tool.md#earlier-tool-versions).
+    - Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 support computer use only through the `computer_20251124` tool version, which requires a beta header; see [Earlier tool versions](computer-use-tool.md#earlier-tool-versions).
 ---
 
 **Start with the SDK toolsets:** For `computer_toolset_20260801`, the Python and TypeScript SDKs have a computer toolset class, in beta. Start from [a partner’s integration](browser-use-sdk.md#partner-integrations), or see the [computer toolset](browser-use-sdk.md#computer-toolset) section of the SDK toolsets page. Use this page as the tool reference, or when you handle the tool calls yourself.
@@ -76,7 +76,7 @@ Add the computer use toolset to the `tools` array of a [Messages API](../../api/
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
@@ -864,7 +864,7 @@ The entry also can’t be declared in the same request as a `computer_20251124` 
 
 To combine computer use with thinking, see [Thinking](../../build-with-claude/thinking.md).
 
-For the earlier `computer_20251124` tool, internal benchmarking on the models that use it suggests these `effort` settings:
+For the `computer_20251124` tool, internal benchmarking on the models that use it suggests these `effort` settings:
 
 * **Claude Opus 4.7:** use `high` as the default; use `low` for high-throughput or cost-sensitive workloads.
 * **Claude Sonnet 4.6 and Claude Opus 4.6:** use `medium` as the default (best accuracy-to-cost ratio). Avoid `max`, which adds token cost without improving accuracy on UI tasks. On these models, `low` uses *fewer* output tokens than disabling thinking entirely (fewer mistakes mean fewer retries), making it a strong option for cost-sensitive loops.
@@ -1805,7 +1805,7 @@ If clicks miss their targets, the cause is usually one of the following:
 | Claude clicks the wrong element entirely          | Ambiguous instruction, or visually similar elements nearby                                                                                           | Use positional prompts (“the blue Submit button in the bottom-right”); break the interaction into smaller steps                                                                                                                                                                                                                                |
 | Accuracy is consistently poor                     | Resolution too low                                                                                                                                   | Try 1280x720 as a baseline                                                                                                                                                                                                                                                                                                                     |
 
-**Model choice affects click precision.** Among the models that use the earlier `computer_20251124` tool, Claude Sonnet 4.6 is more mechanically precise at clicking than Claude Opus 4.6 and is more robust when screenshots require heavy downscaling. Claude Opus 4.7 narrows that gap: its click precision is roughly comparable to Sonnet 4.6, and its higher resolution limit means less downscaling is needed.
+**Model choice affects click precision.** Among the models that use the `computer_20251124` tool, Claude Sonnet 4.6 is more mechanically precise at clicking than Claude Opus 4.6 and is more robust when screenshots require heavy downscaling. Claude Opus 4.7 narrows that gap: its click precision is roughly comparable to Sonnet 4.6, and its higher resolution limit means less downscaling is needed.
 
 ### Follow implementation best practices
 
@@ -2132,7 +2132,7 @@ Two earlier versions of the computer use tool are available in beta. Each requir
 | Tool version        | Beta header               | Use with                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Parameters                                                                    |
 | ------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | `computer_20251124` | `computer-use-2025-11-24` | Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5                                                                                                                                                                                                                                                                                                                                                                                                                                       | [API reference](../../api/beta/messages/create.md) |
-| `computer_20250124` | `computer-use-2025-01-24` | Claude Sonnet 4.5 ([deprecated](../../about-claude/model-deprecations.md)), Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](../../about-claude/model-deprecations.md)), Claude Sonnet 4 ([retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](../../about-claude/model-deprecations.md)), and Claude Opus 4 ([retired, except on Claude Models on Google Cloud (Google managed)](../../about-claude/model-deprecations.md)) | [API reference](../../api/beta/messages/create.md) |
+| `computer_20250124` | `computer-use-2025-01-24` | Claude Sonnet 4.5 ([deprecated](../../about-claude/model-deprecations.md)), Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](../../about-claude/model-deprecations.md)), Claude Sonnet 4 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](../../about-claude/model-deprecations.md)), and Claude Opus 4 ([retired, except on Claude Models on Google Cloud (Google managed)](../../about-claude/model-deprecations.md)) | [API reference](../../api/beta/messages/create.md) |
 
 On Amazon Bedrock, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 also accept the `computer_20251124` tool with the `computer-use-2025-11-24` beta header.
 

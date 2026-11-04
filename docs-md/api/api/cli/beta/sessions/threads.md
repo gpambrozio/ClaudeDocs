@@ -35,9 +35,127 @@ List Session Threads
 
   Repeat the parameter to give more than one status. Leave it out to return threads of every status.
 
+  - `"running"`
+
+  - `"idle"`
+
+  - `"rescheduling"`
+
+  - `"terminated"`
+
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
+
+  - `"message-batches-2024-09-24"`
+
+  - `"prompt-caching-2024-07-31"`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"pdfs-2024-09-25"`
+
+  - `"token-counting-2024-11-01"`
+
+  - `"token-efficient-tools-2025-02-19"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"files-api-2025-04-14"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"skills-2025-10-02"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"cache-diagnosis-2026-04-07"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"ce-user-management-2026-07-13"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -513,22 +631,6 @@ List Session Threads
 
                     Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
 
-                    - `beta_managed_agents_web_fetch_url_source_all: object`
-
-                      Every URL from this source may be fetched. This is the default.
-
-                    - `beta_managed_agents_web_fetch_url_source_none: object`
-
-                      This source contributes no URLs that may be fetched.
-
-                    - `beta_managed_agents_web_fetch_url_source_only: object`
-
-                      Only the named tools' results contribute URLs that may be fetched.
-
-                    - `beta_managed_agents_web_fetch_url_source_except: object`
-
-                      Every tool's results contribute URLs that may be fetched, except the named tools' results.
-
                   - `user_input: BetaManagedAgentsWebFetchURLSourceAll or BetaManagedAgentsWebFetchURLSourceNone`
 
                     Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
@@ -537,13 +639,9 @@ List Session Threads
 
                       Every URL from this source may be fetched. This is the default.
 
-                      - `type: "all"`
-
                     - `beta_managed_agents_web_fetch_url_source_none: object`
 
                       This source contributes no URLs that may be fetched.
-
-                      - `type: "none"`
 
                 - `allowed_domains: optional array of string`
 
@@ -731,14 +829,6 @@ List Session Threads
 
           The session's execution principal.
 
-          - `beta_managed_agents_aws_role_execution_identity: object`
-
-            An AWS IAM role principal as returned in API responses.
-
-          - `beta_managed_agents_service_account_execution_identity: object`
-
-            The Anthropic-managed service account as returned in API responses.
-
         - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
           - `type: "url"`
@@ -750,24 +840,6 @@ List Session Threads
         - `model: object`
 
           Model identifier and configuration.
-
-          - `id: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string`
-
-            The model that will power your agent.
-
-            See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-          - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
-
-            How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
-
-          - `inference_geo: optional string`
-
-            Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
-
-          - `speed: optional "standard" or "fast"`
-
-            Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `name: string`
 
@@ -1058,6 +1130,116 @@ Get Session Thread
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
+  - `"message-batches-2024-09-24"`
+
+  - `"prompt-caching-2024-07-31"`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"pdfs-2024-09-25"`
+
+  - `"token-counting-2024-11-01"`
+
+  - `"token-efficient-tools-2025-02-19"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"files-api-2025-04-14"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"skills-2025-10-02"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"cache-diagnosis-2026-04-07"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"ce-user-management-2026-07-13"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
 - `--workspace-id: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1528,22 +1710,6 @@ Get Session Thread
 
                   Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
 
-                  - `beta_managed_agents_web_fetch_url_source_all: object`
-
-                    Every URL from this source may be fetched. This is the default.
-
-                  - `beta_managed_agents_web_fetch_url_source_none: object`
-
-                    This source contributes no URLs that may be fetched.
-
-                  - `beta_managed_agents_web_fetch_url_source_only: object`
-
-                    Only the named tools' results contribute URLs that may be fetched.
-
-                  - `beta_managed_agents_web_fetch_url_source_except: object`
-
-                    Every tool's results contribute URLs that may be fetched, except the named tools' results.
-
                 - `user_input: BetaManagedAgentsWebFetchURLSourceAll or BetaManagedAgentsWebFetchURLSourceNone`
 
                   Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
@@ -1552,13 +1718,9 @@ Get Session Thread
 
                     Every URL from this source may be fetched. This is the default.
 
-                    - `type: "all"`
-
                   - `beta_managed_agents_web_fetch_url_source_none: object`
 
                     This source contributes no URLs that may be fetched.
-
-                    - `type: "none"`
 
               - `allowed_domains: optional array of string`
 
@@ -1746,14 +1908,6 @@ Get Session Thread
 
         The session's execution principal.
 
-        - `beta_managed_agents_aws_role_execution_identity: object`
-
-          An AWS IAM role principal as returned in API responses.
-
-        - `beta_managed_agents_service_account_execution_identity: object`
-
-          The Anthropic-managed service account as returned in API responses.
-
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
         - `type: "url"`
@@ -1765,24 +1919,6 @@ Get Session Thread
       - `model: object`
 
         Model identifier and configuration.
-
-        - `id: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string`
-
-          The model that will power your agent.
-
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
-
-          How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
-
-        - `inference_geo: optional string`
-
-          Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
-
-        - `speed: optional "standard" or "fast"`
-
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `name: string`
 
@@ -2065,6 +2201,116 @@ Archive Session Thread
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
+  - `"message-batches-2024-09-24"`
+
+  - `"prompt-caching-2024-07-31"`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"pdfs-2024-09-25"`
+
+  - `"token-counting-2024-11-01"`
+
+  - `"token-efficient-tools-2025-02-19"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"files-api-2025-04-14"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"skills-2025-10-02"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"cache-diagnosis-2026-04-07"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"ce-user-management-2026-07-13"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
 - `--workspace-id: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2535,22 +2781,6 @@ Archive Session Thread
 
                   Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
 
-                  - `beta_managed_agents_web_fetch_url_source_all: object`
-
-                    Every URL from this source may be fetched. This is the default.
-
-                  - `beta_managed_agents_web_fetch_url_source_none: object`
-
-                    This source contributes no URLs that may be fetched.
-
-                  - `beta_managed_agents_web_fetch_url_source_only: object`
-
-                    Only the named tools' results contribute URLs that may be fetched.
-
-                  - `beta_managed_agents_web_fetch_url_source_except: object`
-
-                    Every tool's results contribute URLs that may be fetched, except the named tools' results.
-
                 - `user_input: BetaManagedAgentsWebFetchURLSourceAll or BetaManagedAgentsWebFetchURLSourceNone`
 
                   Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
@@ -2559,13 +2789,9 @@ Archive Session Thread
 
                     Every URL from this source may be fetched. This is the default.
 
-                    - `type: "all"`
-
                   - `beta_managed_agents_web_fetch_url_source_none: object`
 
                     This source contributes no URLs that may be fetched.
-
-                    - `type: "none"`
 
               - `allowed_domains: optional array of string`
 
@@ -2753,14 +2979,6 @@ Archive Session Thread
 
         The session's execution principal.
 
-        - `beta_managed_agents_aws_role_execution_identity: object`
-
-          An AWS IAM role principal as returned in API responses.
-
-        - `beta_managed_agents_service_account_execution_identity: object`
-
-          The Anthropic-managed service account as returned in API responses.
-
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
         - `type: "url"`
@@ -2772,24 +2990,6 @@ Archive Session Thread
       - `model: object`
 
         Model identifier and configuration.
-
-        - `id: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string`
-
-          The model that will power your agent.
-
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
-
-          How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
-
-        - `inference_geo: optional string`
-
-          Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
-
-        - `speed: optional "standard" or "fast"`
-
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `name: string`
 
@@ -3506,22 +3706,6 @@ ant beta:sessions:threads archive \
 
               Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
 
-              - `beta_managed_agents_web_fetch_url_source_all: object`
-
-                Every URL from this source may be fetched. This is the default.
-
-              - `beta_managed_agents_web_fetch_url_source_none: object`
-
-                This source contributes no URLs that may be fetched.
-
-              - `beta_managed_agents_web_fetch_url_source_only: object`
-
-                Only the named tools' results contribute URLs that may be fetched.
-
-              - `beta_managed_agents_web_fetch_url_source_except: object`
-
-                Every tool's results contribute URLs that may be fetched, except the named tools' results.
-
             - `user_input: BetaManagedAgentsWebFetchURLSourceAll or BetaManagedAgentsWebFetchURLSourceNone`
 
               Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
@@ -3530,13 +3714,9 @@ ant beta:sessions:threads archive \
 
                 Every URL from this source may be fetched. This is the default.
 
-                - `type: "all"`
-
               - `beta_managed_agents_web_fetch_url_source_none: object`
 
                 This source contributes no URLs that may be fetched.
-
-                - `type: "none"`
 
           - `allowed_domains: optional array of string`
 
@@ -4162,22 +4342,6 @@ ant beta:sessions:threads archive \
 
                   Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
 
-                  - `beta_managed_agents_web_fetch_url_source_all: object`
-
-                    Every URL from this source may be fetched. This is the default.
-
-                  - `beta_managed_agents_web_fetch_url_source_none: object`
-
-                    This source contributes no URLs that may be fetched.
-
-                  - `beta_managed_agents_web_fetch_url_source_only: object`
-
-                    Only the named tools' results contribute URLs that may be fetched.
-
-                  - `beta_managed_agents_web_fetch_url_source_except: object`
-
-                    Every tool's results contribute URLs that may be fetched, except the named tools' results.
-
                 - `user_input: BetaManagedAgentsWebFetchURLSourceAll or BetaManagedAgentsWebFetchURLSourceNone`
 
                   Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
@@ -4186,13 +4350,9 @@ ant beta:sessions:threads archive \
 
                     Every URL from this source may be fetched. This is the default.
 
-                    - `type: "all"`
-
                   - `beta_managed_agents_web_fetch_url_source_none: object`
 
                     This source contributes no URLs that may be fetched.
-
-                    - `type: "none"`
 
               - `allowed_domains: optional array of string`
 
@@ -4380,14 +4540,6 @@ ant beta:sessions:threads archive \
 
         The session's execution principal.
 
-        - `beta_managed_agents_aws_role_execution_identity: object`
-
-          An AWS IAM role principal as returned in API responses.
-
-        - `beta_managed_agents_service_account_execution_identity: object`
-
-          The Anthropic-managed service account as returned in API responses.
-
       - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
         - `type: "url"`
@@ -4399,24 +4551,6 @@ ant beta:sessions:threads archive \
       - `model: object`
 
         Model identifier and configuration.
-
-        - `id: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string`
-
-          The model that will power your agent.
-
-          See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-        - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
-
-          How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
-
-        - `inference_geo: optional string`
-
-          Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
-
-        - `speed: optional "standard" or "fast"`
-
-          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `name: string`
 
@@ -5244,27 +5378,9 @@ ant beta:sessions:threads archive \
 
       The evaluated permission policy for this tool invocation.
 
-      - `"allow"`
-
-      - `"ask"`
-
-      - `"deny"`
-
     - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
-
-      - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
-
-        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
-
-      - `beta_managed_agents_agent_tool_evaluation_always_ask: object`
-
-        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
-
-      - `beta_managed_agents_agent_tool_evaluation_auto: object`
-
-        The resolved permission_policy was auto: the server judged this invocation individually.
 
     - `session_thread_id: optional string`
 
@@ -6106,34 +6222,6 @@ ant beta:sessions:threads archive \
 
       Token usage for this model request.
 
-      - `cache_creation_input_tokens: number`
-
-        Tokens used to create prompt cache in this request.
-
-        format: int32
-
-      - `cache_read_input_tokens: number`
-
-        Tokens read from prompt cache in this request.
-
-        format: int32
-
-      - `input_tokens: number`
-
-        Input tokens consumed by this request.
-
-        format: int32
-
-      - `output_tokens: number`
-
-        Output tokens generated by this request.
-
-        format: int32
-
-      - `speed: optional "standard" or "fast"`
-
-        Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
-
     - `processed_at: string`
 
       Timestamp when the model request completed.
@@ -6287,16 +6375,6 @@ ant beta:sessions:threads archive \
     - `stop_details: object`
 
       Structured information about why the thread stopped. `null` when there is nothing more to report.
-
-      - `type: "refusal"`
-
-      - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
-
-        The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
-
-      - `explanation: string`
-
-        Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
 
     - `stop_reason: BetaManagedAgentsSessionEndTurn or BetaManagedAgentsSessionRequiresAction or BetaManagedAgentsSessionRetriesExhausted or 2 more`
 
@@ -6622,14 +6700,6 @@ ant beta:sessions:threads archive \
 
                 Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
-                - `beta_managed_agents_aws_role_execution_identity: object`
-
-                  An AWS IAM role principal as returned in API responses.
-
-                - `beta_managed_agents_service_account_execution_identity: object`
-
-                  The Anthropic-managed service account as returned in API responses.
-
               - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
                 - `type: "url"`
@@ -6641,24 +6711,6 @@ ant beta:sessions:threads archive \
               - `model: object`
 
                 Model identifier and configuration.
-
-                - `id: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string`
-
-                  The model that will power your agent.
-
-                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
-
-                  How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
-
-                - `inference_geo: optional string`
-
-                  Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
-
-                - `speed: optional "standard" or "fast"`
-
-                  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
               - `name: string`
 
@@ -6946,22 +6998,6 @@ ant beta:sessions:threads archive \
 
                           Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
 
-                          - `beta_managed_agents_web_fetch_url_source_all: object`
-
-                            Every URL from this source may be fetched. This is the default.
-
-                          - `beta_managed_agents_web_fetch_url_source_none: object`
-
-                            This source contributes no URLs that may be fetched.
-
-                          - `beta_managed_agents_web_fetch_url_source_only: object`
-
-                            Only the named tools' results contribute URLs that may be fetched.
-
-                          - `beta_managed_agents_web_fetch_url_source_except: object`
-
-                            Every tool's results contribute URLs that may be fetched, except the named tools' results.
-
                         - `user_input: BetaManagedAgentsWebFetchURLSourceAll or BetaManagedAgentsWebFetchURLSourceNone`
 
                           Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
@@ -6970,13 +7006,9 @@ ant beta:sessions:threads archive \
 
                             Every URL from this source may be fetched. This is the default.
 
-                            - `type: "all"`
-
                           - `beta_managed_agents_web_fetch_url_source_none: object`
 
                             This source contributes no URLs that may be fetched.
-
-                            - `type: "none"`
 
                       - `allowed_domains: optional array of string`
 
@@ -7256,14 +7288,6 @@ ant beta:sessions:threads archive \
 
                 Whether a run's plan can define inline agents, which are not saved.
 
-                - `beta_managed_agents_multiagent_inline_agents_enabled: object`
-
-                  The agent can define inline agents.
-
-                - `beta_managed_agents_multiagent_inline_agents_disabled: object`
-
-                  The agent cannot define inline agents.
-
               - `predefined_agents: array of BetaManagedAgentsSessionThreadAgent`
 
                 Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
@@ -7398,14 +7422,6 @@ ant beta:sessions:threads archive \
 
         A partial element of the content array at index, typed like the element itself — the same shape the buffered agent.message carries in content.
 
-        - `type: "text"`
-
-        - `text: string`
-
-          The text content.
-
-          minLength: 1
-
       - `index: optional number`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
@@ -7500,14 +7516,6 @@ ant beta:sessions:threads archive \
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-        - `amount: string`
-
-          Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
-
-        - `currency: "USD"`
-
-          Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
       - `output_tokens: optional number`
 
         Total output tokens generated across all turns.
@@ -7533,12 +7541,6 @@ ant beta:sessions:threads archive \
     - `budget: optional object`
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
-
-      - `type: "limit"`
-
-      - `max_list_cost: object`
-
-        Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
   - `beta_managed_agents_workflow_run_created_event: object`
 
@@ -7786,26 +7788,6 @@ ant beta:sessions:threads archive \
 
       Why the run did not finish, or was not created.
 
-      - `beta_managed_agents_timeout_workflow_run_error: object`
-
-        The run reached its time limit.
-
-      - `beta_managed_agents_program_workflow_run_error: object`
-
-        The plan, a program that the agent wrote, failed, or the server refused it.
-
-      - `beta_managed_agents_unknown_workflow_run_error: object`
-
-        A failure that has no type of its own.
-
-      - `beta_managed_agents_thread_limit_workflow_run_error: object`
-
-        The run exceeded the limit on the number of threads that a run can create.
-
-      - `beta_managed_agents_max_workflow_runs_workflow_run_error: object`
-
-        No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
-
     - `processed_at: string`
 
       Timestamp when this event was processed.
@@ -7841,6 +7823,116 @@ List Session Thread Events
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
+
+  - `"message-batches-2024-09-24"`
+
+  - `"prompt-caching-2024-07-31"`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"pdfs-2024-09-25"`
+
+  - `"token-counting-2024-11-01"`
+
+  - `"token-efficient-tools-2025-02-19"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"files-api-2025-04-14"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"skills-2025-10-02"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"cache-diagnosis-2026-04-07"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"ce-user-management-2026-07-13"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -8406,27 +8498,9 @@ List Session Thread Events
 
         The evaluated permission policy for this tool invocation.
 
-        - `"allow"`
-
-        - `"ask"`
-
-        - `"deny"`
-
       - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
         Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
-
-        - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
-
-          The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
-
-        - `beta_managed_agents_agent_tool_evaluation_always_ask: object`
-
-          The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
-
-        - `beta_managed_agents_agent_tool_evaluation_auto: object`
-
-          The resolved permission_policy was auto: the server judged this invocation individually.
 
       - `session_thread_id: optional string`
 
@@ -9268,34 +9342,6 @@ List Session Thread Events
 
         Token usage for this model request.
 
-        - `cache_creation_input_tokens: number`
-
-          Tokens used to create prompt cache in this request.
-
-          format: int32
-
-        - `cache_read_input_tokens: number`
-
-          Tokens read from prompt cache in this request.
-
-          format: int32
-
-        - `input_tokens: number`
-
-          Input tokens consumed by this request.
-
-          format: int32
-
-        - `output_tokens: number`
-
-          Output tokens generated by this request.
-
-          format: int32
-
-        - `speed: optional "standard" or "fast"`
-
-          Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
-
       - `processed_at: string`
 
         Timestamp when the model request completed.
@@ -9449,16 +9495,6 @@ List Session Thread Events
       - `stop_details: object`
 
         Structured information about why the thread stopped. `null` when there is nothing more to report.
-
-        - `type: "refusal"`
-
-        - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
-
-          The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
-
-        - `explanation: string`
-
-          Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
 
       - `stop_reason: BetaManagedAgentsSessionEndTurn or BetaManagedAgentsSessionRequiresAction or BetaManagedAgentsSessionRetriesExhausted or 2 more`
 
@@ -9784,14 +9820,6 @@ List Session Thread Events
 
                   Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
-                  - `beta_managed_agents_aws_role_execution_identity: object`
-
-                    An AWS IAM role principal as returned in API responses.
-
-                  - `beta_managed_agents_service_account_execution_identity: object`
-
-                    The Anthropic-managed service account as returned in API responses.
-
                 - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
                   - `type: "url"`
@@ -9803,24 +9831,6 @@ List Session Thread Events
                 - `model: object`
 
                   Model identifier and configuration.
-
-                  - `id: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string`
-
-                    The model that will power your agent.
-
-                    See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                  - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
-
-                    How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
-
-                  - `inference_geo: optional string`
-
-                    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
-
-                  - `speed: optional "standard" or "fast"`
-
-                    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
                 - `name: string`
 
@@ -10108,22 +10118,6 @@ List Session Thread Events
 
                             Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
 
-                            - `beta_managed_agents_web_fetch_url_source_all: object`
-
-                              Every URL from this source may be fetched. This is the default.
-
-                            - `beta_managed_agents_web_fetch_url_source_none: object`
-
-                              This source contributes no URLs that may be fetched.
-
-                            - `beta_managed_agents_web_fetch_url_source_only: object`
-
-                              Only the named tools' results contribute URLs that may be fetched.
-
-                            - `beta_managed_agents_web_fetch_url_source_except: object`
-
-                              Every tool's results contribute URLs that may be fetched, except the named tools' results.
-
                           - `user_input: BetaManagedAgentsWebFetchURLSourceAll or BetaManagedAgentsWebFetchURLSourceNone`
 
                             Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
@@ -10132,13 +10126,9 @@ List Session Thread Events
 
                               Every URL from this source may be fetched. This is the default.
 
-                              - `type: "all"`
-
                             - `beta_managed_agents_web_fetch_url_source_none: object`
 
                               This source contributes no URLs that may be fetched.
-
-                              - `type: "none"`
 
                         - `allowed_domains: optional array of string`
 
@@ -10418,14 +10408,6 @@ List Session Thread Events
 
                   Whether a run's plan can define inline agents, which are not saved.
 
-                  - `beta_managed_agents_multiagent_inline_agents_enabled: object`
-
-                    The agent can define inline agents.
-
-                  - `beta_managed_agents_multiagent_inline_agents_disabled: object`
-
-                    The agent cannot define inline agents.
-
                 - `predefined_agents: array of BetaManagedAgentsSessionThreadAgent`
 
                   Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
@@ -10604,14 +10586,6 @@ List Session Thread Events
 
           Cumulative list cost of the session across all turns, priced at public list rates.
 
-          - `amount: string`
-
-            Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
-
-          - `currency: "USD"`
-
-            Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
         - `output_tokens: optional number`
 
           Total output tokens generated across all turns.
@@ -10637,12 +10611,6 @@ List Session Thread Events
       - `budget: optional object`
 
         The session's configured budget at the snapshot time, or null when the session has no budget.
-
-        - `type: "limit"`
-
-        - `max_list_cost: object`
-
-          Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
     - `beta_managed_agents_workflow_run_created_event: object`
 
@@ -10890,26 +10858,6 @@ List Session Thread Events
 
         Why the run did not finish, or was not created.
 
-        - `beta_managed_agents_timeout_workflow_run_error: object`
-
-          The run reached its time limit.
-
-        - `beta_managed_agents_program_workflow_run_error: object`
-
-          The plan, a program that the agent wrote, failed, or the server refused it.
-
-        - `beta_managed_agents_unknown_workflow_run_error: object`
-
-          A failure that has no type of its own.
-
-        - `beta_managed_agents_thread_limit_workflow_run_error: object`
-
-          The run exceeded the limit on the number of threads that a run can create.
-
-        - `beta_managed_agents_max_workflow_runs_workflow_run_error: object`
-
-          No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
-
       - `processed_at: string`
 
         Timestamp when this event was processed.
@@ -10982,9 +10930,123 @@ Stream Session Thread Events
 
   When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
 
+  - `"agent.message"`
+
+  - `"agent.thinking"`
+
 - `--beta: optional array of AnthropicBeta` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
+
+  - `"message-batches-2024-09-24"`
+
+  - `"prompt-caching-2024-07-31"`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"pdfs-2024-09-25"`
+
+  - `"token-counting-2024-11-01"`
+
+  - `"token-efficient-tools-2025-02-19"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"files-api-2025-04-14"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"skills-2025-10-02"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"cache-diagnosis-2026-04-07"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"ce-user-management-2026-07-13"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 - `--workspace-id: optional string` (header parameter)
 
@@ -11546,27 +11608,9 @@ Stream Session Thread Events
 
       The evaluated permission policy for this tool invocation.
 
-      - `"allow"`
-
-      - `"ask"`
-
-      - `"deny"`
-
     - `evaluation: optional BetaManagedAgentsAgentToolEvaluationAlwaysAllow or BetaManagedAgentsAgentToolEvaluationAlwaysAsk or BetaManagedAgentsAgentToolEvaluationAuto`
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
-
-      - `beta_managed_agents_agent_tool_evaluation_always_allow: object`
-
-        The resolved permission_policy was always_allow; accompanies evaluated_permission "allow".
-
-      - `beta_managed_agents_agent_tool_evaluation_always_ask: object`
-
-        The resolved permission_policy was always_ask; accompanies evaluated_permission "ask".
-
-      - `beta_managed_agents_agent_tool_evaluation_auto: object`
-
-        The resolved permission_policy was auto: the server judged this invocation individually.
 
     - `session_thread_id: optional string`
 
@@ -12408,34 +12452,6 @@ Stream Session Thread Events
 
       Token usage for this model request.
 
-      - `cache_creation_input_tokens: number`
-
-        Tokens used to create prompt cache in this request.
-
-        format: int32
-
-      - `cache_read_input_tokens: number`
-
-        Tokens read from prompt cache in this request.
-
-        format: int32
-
-      - `input_tokens: number`
-
-        Input tokens consumed by this request.
-
-        format: int32
-
-      - `output_tokens: number`
-
-        Output tokens generated by this request.
-
-        format: int32
-
-      - `speed: optional "standard" or "fast"`
-
-        Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
-
     - `processed_at: string`
 
       Timestamp when the model request completed.
@@ -12589,16 +12605,6 @@ Stream Session Thread Events
     - `stop_details: object`
 
       Structured information about why the thread stopped. `null` when there is nothing more to report.
-
-      - `type: "refusal"`
-
-      - `category: "cyber" or "bio" or "frontier_llm" or 2 more`
-
-        The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
-
-      - `explanation: string`
-
-        Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
 
     - `stop_reason: BetaManagedAgentsSessionEndTurn or BetaManagedAgentsSessionRequiresAction or BetaManagedAgentsSessionRetriesExhausted or 2 more`
 
@@ -12924,14 +12930,6 @@ Stream Session Thread Events
 
                 Execution principal snapshotted from the agent at session creation. Always present; `{"type": "service_account"}` when runs carry no customer-named principal.
 
-                - `beta_managed_agents_aws_role_execution_identity: object`
-
-                  An AWS IAM role principal as returned in API responses.
-
-                - `beta_managed_agents_service_account_execution_identity: object`
-
-                  The Anthropic-managed service account as returned in API responses.
-
               - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
                 - `type: "url"`
@@ -12943,24 +12941,6 @@ Stream Session Thread Events
               - `model: object`
 
                 Model identifier and configuration.
-
-                - `id: "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-opus-5-5" or 14 more or string`
-
-                  The model that will power your agent.
-
-                  See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
-
-                - `effort: optional BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or BetaManagedAgentsEffortHigh or 2 more`
-
-                  How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
-
-                - `inference_geo: optional string`
-
-                  Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
-
-                - `speed: optional "standard" or "fast"`
-
-                  Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
               - `name: string`
 
@@ -13248,22 +13228,6 @@ Stream Session Thread Events
 
                           Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
 
-                          - `beta_managed_agents_web_fetch_url_source_all: object`
-
-                            Every URL from this source may be fetched. This is the default.
-
-                          - `beta_managed_agents_web_fetch_url_source_none: object`
-
-                            This source contributes no URLs that may be fetched.
-
-                          - `beta_managed_agents_web_fetch_url_source_only: object`
-
-                            Only the named tools' results contribute URLs that may be fetched.
-
-                          - `beta_managed_agents_web_fetch_url_source_except: object`
-
-                            Every tool's results contribute URLs that may be fetched, except the named tools' results.
-
                         - `user_input: BetaManagedAgentsWebFetchURLSourceAll or BetaManagedAgentsWebFetchURLSourceNone`
 
                           Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
@@ -13272,13 +13236,9 @@ Stream Session Thread Events
 
                             Every URL from this source may be fetched. This is the default.
 
-                            - `type: "all"`
-
                           - `beta_managed_agents_web_fetch_url_source_none: object`
 
                             This source contributes no URLs that may be fetched.
-
-                            - `type: "none"`
 
                       - `allowed_domains: optional array of string`
 
@@ -13558,14 +13518,6 @@ Stream Session Thread Events
 
                 Whether a run's plan can define inline agents, which are not saved.
 
-                - `beta_managed_agents_multiagent_inline_agents_enabled: object`
-
-                  The agent can define inline agents.
-
-                - `beta_managed_agents_multiagent_inline_agents_disabled: object`
-
-                  The agent cannot define inline agents.
-
               - `predefined_agents: array of BetaManagedAgentsSessionThreadAgent`
 
                 Full `agent` definitions of the predefined agents, which are saved agents that a run's plan can use.
@@ -13700,14 +13652,6 @@ Stream Session Thread Events
 
         A partial element of the content array at index, typed like the element itself — the same shape the buffered agent.message carries in content.
 
-        - `type: "text"`
-
-        - `text: string`
-
-          The text content.
-
-          minLength: 1
-
       - `index: optional number`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
@@ -13802,14 +13746,6 @@ Stream Session Thread Events
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-        - `amount: string`
-
-          Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
-
-        - `currency: "USD"`
-
-          Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
-
       - `output_tokens: optional number`
 
         Total output tokens generated across all turns.
@@ -13835,12 +13771,6 @@ Stream Session Thread Events
     - `budget: optional object`
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
-
-      - `type: "limit"`
-
-      - `max_list_cost: object`
-
-        Maximum list cost the session may accrue. List price is used regardless of any negotiated discount, so the cap fires at or before the actual charge.
 
   - `beta_managed_agents_workflow_run_created_event: object`
 
@@ -14087,26 +14017,6 @@ Stream Session Thread Events
     - `error: BetaManagedAgentsTimeoutWorkflowRunError or BetaManagedAgentsProgramWorkflowRunError or BetaManagedAgentsUnknownWorkflowRunError or 2 more`
 
       Why the run did not finish, or was not created.
-
-      - `beta_managed_agents_timeout_workflow_run_error: object`
-
-        The run reached its time limit.
-
-      - `beta_managed_agents_program_workflow_run_error: object`
-
-        The plan, a program that the agent wrote, failed, or the server refused it.
-
-      - `beta_managed_agents_unknown_workflow_run_error: object`
-
-        A failure that has no type of its own.
-
-      - `beta_managed_agents_thread_limit_workflow_run_error: object`
-
-        The run exceeded the limit on the number of threads that a run can create.
-
-      - `beta_managed_agents_max_workflow_runs_workflow_run_error: object`
-
-        No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
 
     - `processed_at: string`
 

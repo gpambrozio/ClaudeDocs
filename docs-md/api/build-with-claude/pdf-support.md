@@ -86,7 +86,7 @@ Start with a simple example using the Messages API. You can provide PDFs to Clau
 2. As a base64-encoded PDF in `document` content blocks
 3. By a `file_id` from the [Files API](files.md)
 
-On Amazon Bedrock and Claude Models on Google Cloud (Google managed), only base64-encoded sources are currently available. On Microsoft Foundry, the Files API is not supported for deployments hosted on Azure.
+On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, only base64-encoded sources are available. On Microsoft Foundry, the Files API is not supported for deployments hosted on Azure.
 
 #### Option 1: URL-based PDF document
 
@@ -96,7 +96,7 @@ The simplest approach is to reference a PDF directly from a URL:
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
@@ -389,7 +389,7 @@ jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d @request.json
 ```
 
@@ -700,14 +700,14 @@ For PDFs you’ll use repeatedly, or when you want to avoid encoding overhead, u
 # First, upload your PDF to the Files API
 curl -sS -X POST https://api.anthropic.com/v1/files \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -F "file=@document.pdf"
 
 # Then use the file_id from the upload response in your message
 curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
@@ -1067,7 +1067,7 @@ curl -sL "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Mode
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d @-
 ```
 
@@ -1422,7 +1422,7 @@ jq -n --rawfile PDF_BASE64 pdf_base64.txt '{
 curl https://api.anthropic.com/v1/messages/batches \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d @request.json
 ```
 

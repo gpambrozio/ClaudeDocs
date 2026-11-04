@@ -293,7 +293,7 @@ List Credentials
 
     format: date-time
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata attached to the credential.
 

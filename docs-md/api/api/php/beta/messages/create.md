@@ -86,31 +86,31 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-- `cacheControl?:optional BetaCacheControlEphemeral`
+- `cacheControl?: optional BetaCacheControlEphemeral`
 
   Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
 
-- `compaction?:optional BetaCompactionConfig`
+- `compaction?: optional BetaCompactionConfig`
 
   Compaction configuration.
 
   When set on `POST /v1/messages`, the request is a compaction request: the conversation in `messages` is summarized and the response holds only the resulting `compaction` block (`stop_reason` `"compaction"`), which later requests send first in `messages` in place of the messages it summarizes. `POST /v1/messages/count_tokens` accepts this parameter and ignores it: the count it returns is for the conversation in `messages` as sent. Cannot be combined with `context_management`.
 
-- `container?:optional Container`
+- `container?: optional Container`
 
   Container identifier for reuse across requests.
 
-- `contextManagement?:optional BetaContextManagementConfig`
+- `contextManagement?: optional BetaContextManagementConfig`
 
   Context management configuration.
 
   This allows you to control how Claude manages context across multiple requests, such as whether to clear function results or not.
 
-- `diagnostics?:optional BetaDiagnosticsParam`
+- `diagnostics?: optional BetaDiagnosticsParam`
 
   Request-level diagnostics. Supply `previous_message_id` to have the response include `diagnostics.cache_miss_reason` explaining any prompt-cache divergence from that prior request.
 
-- `fallbackCreditToken?:optional FallbackCreditToken`
+- `fallbackCreditToken?: optional FallbackCreditToken`
 
   The `fallback_credit_token` from a prior refusal's `stop_details`.
 
@@ -133,39 +133,39 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
   When the appended-assistant form is used on a model that otherwise disallows
   assistant-turn prefill, this token also authorizes that one prefill.
 
-- `fallbacks?:optional BetaFallbacksParam`
+- `fallbacks?: optional BetaFallbacksParam`
 
   Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on. Some models don't support fallbacks; on those models, a list of fallback models returns a 400 error. See [Server-side fallback](../../../../build-with-claude/refusals-and-fallback.md#server-side-fallback). The string "default" requests the requested model's server-defined default fallback configuration. On a model that doesn't support fallbacks, the request runs on the requested model alone, so a declined request stays declined.
 
-- `inferenceGeo?:optional string`
+- `inferenceGeo?: optional string`
 
   Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-- `mcpServers?:optional list<BetaRequestMCPServerURLDefinition>`
+- `mcpServers?: optional list<BetaRequestMCPServerURLDefinition>`
 
   MCP servers to be utilized in this request
 
-- `metadata?:optional BetaMetadata`
+- `metadata?: optional BetaMetadata`
 
   An object describing metadata about the request.
 
-- `outputConfig?:optional BetaOutputConfig`
+- `outputConfig?: optional BetaOutputConfig`
 
   Configuration options for the model's output, such as the output format.
 
-- `serviceTier?:optional ServiceTier`
+- `serviceTier?: optional ServiceTier`
 
   Determines whether to use priority capacity (if available) or standard capacity for this request.
 
   Anthropic offers different levels of service for your API requests. See [service-tiers](../../../service-tiers.md) for details.
 
-- `speed?:optional Speed`
+- `speed?: optional Speed`
 
   The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
   Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](../../../../build-with-claude/fast-mode.md) for which models.
 
-- `stopSequences?:optional list<string>`
+- `stopSequences?: optional list<string>`
 
   Custom text sequences that will cause the model to stop generating.
 
@@ -173,19 +173,19 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
   If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-- `stream?:optional bool`
+- `stream?: optional bool`
 
   Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
   In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../../../../build-with-claude/streaming.md#streaming-with-sdks) for an example in each language.
 
-- `system?:optional System`
+- `system?: optional System`
 
   System prompt.
 
   A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](../../../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role).
 
-- `thinking?:optional BetaThinkingConfigParam`
+- `thinking?: optional BetaThinkingConfigParam`
 
   Configuration for Claude's thinking.
 
@@ -193,15 +193,15 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
   Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](../../../../build-with-claude/thinking.md#configuring-thinking) for each model's behavior.
 
-- `thread?:optional BetaMessageThreadParam`
+- `thread?: optional BetaMessageThreadParam`
 
   Server-held conversation state (a Thread). `{"type": "create"}` asks the server to hold this conversation's state under the response's `id`; `{"type": "continue", "previous_message_id": ...}` resumes from a previous response so only the new turn's messages are sent. The response shape is unchanged.
 
-- `toolChoice?:optional BetaToolChoice`
+- `toolChoice?: optional BetaToolChoice`
 
   How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-- `tools?:optional list<BetaToolUnion>`
+- `tools?: optional list<BetaToolUnion>`
 
   Definitions of tools that the model may use.
 
@@ -265,21 +265,21 @@ Learn more about the Messages API in our [user guide](../../../../get-started.md
 
   See our [guide](../../../../agents-and-tools/tool-use/overview.md) for more details.
 
-- `betas?:optional list<AnthropicBeta>` (header parameter)
+- `betas?: optional list<AnthropicBeta>` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
-- `userProfileID?:optional string` (header parameter)
+- `userProfileID?: optional string` (header parameter)
 
   The user profile ID to attribute this request to. Use when acting on behalf of a party other than your organization.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
   Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
 
-- `outputFormat?:optional BetaJSONOutputFormat`
+- `outputFormat?: optional BetaJSONOutputFormat`
 
   **Deprecated**
 

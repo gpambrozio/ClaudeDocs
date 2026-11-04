@@ -8,11 +8,123 @@ description: Learn how to use Agent Skills to create documents with the Claude A
 
 This tutorial shows you how to use Agent Skills to create a PowerPoint presentation. You’ll learn how to enable Skills, make a request, and access the generated file.
 
-## Prerequisites
+## Before you begin
 
-* A [Claude API key](https://platform.claude.com/settings/keys) from the Claude Console, or a logged-in [ant CLI](../../cli-sdks-libraries/cli/authentication.md)
-* A [client SDK](../../cli-sdks-libraries/overview.md) for your language, or `curl` and `jq`
-* Basic familiarity with making API requests
+You need a [client SDK](../../cli-sdks-libraries/overview.md) for your language, or `curl` and `jq`, and basic familiarity with making API requests.
+
+**Create a Claude Console account**
+
+[Sign up](https://platform.claude.com/) for a Claude Console account, or sign in to the one you have.
+
+**Choose how to authenticate**
+
+Signing in with the CLI is recommended for local development.
+
+Follow the steps for one of the following options.
+
+**CLI**
+
+**Install the CLI**
+
+**Homebrew (macOS)**
+
+```bash
+brew install anthropics/tap/ant
+```
+
+**curl (Linux/WSL)**
+
+For Linux environments, download the release binary directly.
+
+```bash
+VERSION=2.5.0
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+case $(uname -m) in
+  x86_64) ARCH=amd64 ;;
+  aarch64) ARCH=arm64 ;;
+esac
+curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
+  | sudo tar -xz -C /usr/local/bin ant
+```
+
+You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
+
+**go install**
+
+You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
+
+```bash
+go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
+```
+
+The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn’t already:
+
+```bash
+export PATH="$PATH:$(go env GOPATH)/bin"
+```
+
+**Sign in**
+
+```bash
+ant auth login
+```
+
+Once login is completed, the SDKs and CLI will pick up your credentials automatically.
+
+**API key**
+
+**Create an API key**
+
+Create an [API key](https://platform.claude.com/settings/keys) in the Claude Console.
+
+**Set the environment variable**
+
+The SDKs and CLI read your key from `ANTHROPIC_API_KEY`:
+
+```bash
+export ANTHROPIC_API_KEY="your-api-key-here"
+```
+
+**API key**
+
+To run the CLI examples, install the CLI:
+
+**Homebrew (macOS)**
+
+```bash
+brew install anthropics/tap/ant
+```
+
+**curl (Linux/WSL)**
+
+For Linux environments, download the release binary directly.
+
+```bash
+VERSION=2.5.0
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+case $(uname -m) in
+  x86_64) ARCH=amd64 ;;
+  aarch64) ARCH=arm64 ;;
+esac
+curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
+  | sudo tar -xz -C /usr/local/bin ant
+```
+
+You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
+
+**go install**
+
+You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
+
+```bash
+go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
+```
+
+The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn’t already:
+
+```bash
+export PATH="$PATH:$(go env GOPATH)/bin"
+```
 
 ## Agent Skills overview
 
@@ -33,7 +145,7 @@ First, check what Skills are available. Use the Skills API to list all Anthropic
 # List Anthropic-managed Skills
 curl --fail-with-body -sS "https://api.anthropic.com/v1/skills?source=anthropic" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI
@@ -127,7 +239,7 @@ response=$(
   curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 16000,
@@ -342,7 +454,7 @@ The request includes the following parts:
 * **`version: "latest"`:** The Skill version set to the most recently published
 * **`tools`:** Enables code execution (required for Skills)
 
-The examples use the `code_execution_20260521` tool version, and the Step 3 code parses the result types that current tool versions return. Skills also work with older [code execution tool](../tool-use/code-execution-tool.md) versions such as `code_execution_20250825`: any current code execution tool version satisfies the Skills requirement. If you use a different version, use the tool `type` listed on the code execution tool page.
+The examples use the `code_execution_20260521` tool version, and the Step 3 code parses the result types that current tool versions return. Skills also work with other [code execution tool](../tool-use/code-execution-tool.md) versions such as `code_execution_20250825`: any current code execution tool version satisfies the Skills requirement. If you use a different version, use the tool `type` listed on the code execution tool page.
 
 When you make this request, Claude automatically matches your task to the relevant Skill. Because you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude runs the Skill’s code to create your presentation.
 
@@ -368,7 +480,7 @@ if [[ -n "$file_id" ]]; then
   # Download the file and save it
   curl --fail-with-body -sS "https://api.anthropic.com/v1/files/$file_id/content" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -o "${TMPDIR:-/tmp}/renewable_energy.pptx"
 fi
 ```
@@ -591,7 +703,7 @@ Try these variations:
 curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 16000,
@@ -781,7 +893,7 @@ response = client.messages.create(
 curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 16000,
@@ -971,7 +1083,7 @@ response = client.messages.create(
 curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 16000,

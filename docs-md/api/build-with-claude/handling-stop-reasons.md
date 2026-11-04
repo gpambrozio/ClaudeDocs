@@ -56,7 +56,7 @@ The most common stop reason. Indicates Claude completed its response naturally.
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -735,7 +735,7 @@ Claude stopped because it reached the [`max_tokens`](../api/messages/create.md#c
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1039,7 +1039,7 @@ Claude encountered one of your custom [stop sequences](../api/messages/create.md
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1179,7 +1179,7 @@ For most tool use implementations, use the [tool runner](../agents-and-tools/too
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1516,7 +1516,7 @@ When this occurs, the response might contain a `server_tool_use` block without a
 # on the response and re-POST with the assistant content appended.
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1730,7 +1730,7 @@ Claude declined to generate a response. Safety classifiers return this stop reas
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1865,7 +1865,7 @@ if response.stop_reason == :refusal
 end
 ```
 
-If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 ([deprecated](../about-claude/model-deprecations.md)) or Claude Opus 4.1 (the latter [retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](../about-claude/model-deprecations.md)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5’s API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 ([deprecated](../about-claude/model-deprecations.md)) or Claude Opus 4.1 (the latter [retired, except on Claude Models on Google Cloud (Google managed) and Amazon Bedrock](../about-claude/model-deprecations.md)), you can try updating your API calls to use Claude Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5’s API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 
 On a refusal, the [`stop_details`](../api/messages/create.md#message.stop_details) object identifies the policy category that triggered it. The categories and the full refusal response shape are covered in [What a refusal looks like](refusals-and-fallback.md#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
 
@@ -1880,7 +1880,7 @@ This stop reason is currently typed only in the SDK’s `beta` (csharp, go: `Bet
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -1897,6 +1897,8 @@ ant messages create \
 ```
 
 ```python Python
+client = anthropic.Anthropic()
+
 # Request with maximum tokens to get as much as possible
 response = client.beta.messages.create(
     model="claude-opus-5-5",
@@ -1913,6 +1915,8 @@ if response.stop_reason == "model_context_window_exceeded":
 ```
 
 ```typescript TypeScript
+const client = new Anthropic();
+
 // Request with maximum tokens to get as much as possible
 const response = await client.beta.messages.create({
   model: "claude-opus-5-5",
@@ -1928,8 +1932,7 @@ if (response.stop_reason === "model_context_window_exceeded") {
 ```
 
 ```csharp C#
-using Anthropic.Models.Beta.Messages;
-using Model = Anthropic.Models.Messages.Model;
+AnthropicClient client = new();
 
 // Request with maximum tokens to get as much as possible
 var response = await client.Beta.Messages.Create(new MessageCreateParams
@@ -1948,6 +1951,8 @@ if (response.StopReason?.Value() == BetaStopReason.ModelContextWindowExceeded)
 ```
 
 ```go Go
+client := anthropic.NewClient()
+
 // Request with maximum tokens to get as much as possible
 response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
 	Model:     anthropic.ModelClaudeOpus5_5,
@@ -1968,9 +1973,7 @@ if response.StopReason == anthropic.BetaStopReasonModelContextWindowExceeded {
 ```
 
 ```java Java
-import com.anthropic.models.beta.messages.BetaMessage;
-import com.anthropic.models.beta.messages.BetaStopReason;
-import com.anthropic.models.beta.messages.MessageCreateParams;
+AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
 // Request with maximum tokens to get as much as possible
 BetaMessage response = client.beta().messages().create(
@@ -1989,6 +1992,8 @@ if (response.stopReason().map(BetaStopReason.MODEL_CONTEXT_WINDOW_EXCEEDED::equa
 ```
 
 ```php PHP
+$client = new Client();
+
 // Request with maximum tokens to get as much as possible
 $response = $client->beta->messages->create(
     maxTokens: 20000,
@@ -2004,6 +2009,8 @@ if ($response->stopReason === 'model_context_window_exceeded') {
 ```
 
 ```ruby Ruby
+client = Anthropic::Client.new
+
 # Request with maximum tokens to get as much as possible
 response = client.beta.messages.create(
   model: "claude-opus-5-5",
@@ -2656,7 +2663,7 @@ It’s important to distinguish between `stop_reason` values and actual errors:
 # $? for errors and stop_reason for successful responses.
 curl --fail-with-body https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
@@ -2868,7 +2875,7 @@ When using streaming, `stop_reason` is:
 # The message_delta event in the SSE stream carries stop_reason.
 curl -N https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",

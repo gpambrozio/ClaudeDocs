@@ -31,7 +31,7 @@ Send a request with adaptive thinking enabled and the tool defined. Apart from t
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -d '{

@@ -352,7 +352,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name string`
 
@@ -388,7 +388,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `type ServerToolCaller20260120`
 
-            - `Input map[string, any]`
+            - `Input map[string]any`
 
             - `Name ServerToolUseBlockName`
 

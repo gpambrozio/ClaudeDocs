@@ -57,43 +57,7 @@ When you receive a tool use response for a client tool, you should:
    * `content` (optional): The result of the tool, as a string (for example, `"content": "15 degrees"`), a list of nested content blocks (for example, `"content": [{"type": "text", "text": "15 degrees"}]`), or a list of document blocks (for example, `"content": [{"type": "document", "source": {"type": "text", "media_type": "text/plain", "data": "15 degrees"}}]`). These content blocks can use the `text`, `image`, `document`, or [`search_result`](../../build-with-claude/search-results.md) types.
    * `is_error` (optional): Set to `true` if the tool execution resulted in an error.
 
-A `tool_result` that answers a computer use or browser use member block must also echo the same `toolset_name` value as the `tool_use` block; a member result that omits it is rejected. Its `content` is also narrower: a member result may contain only `text` and `image` blocks, and a browser use result may add one [`browser_state`](browser-use-tool.md#track-tabs-and-page-state) block (the [tab-management members](browser-use-tool.md#tab-management-results) return only that block).
-
-**Important formatting requirements:**
-
-* Tool result blocks must immediately follow their corresponding tool use blocks in the message history. You cannot include any messages between the assistant’s tool use message and the user’s tool result message.
-* In the user message containing tool results, the `tool_result` blocks must come FIRST in the content array. Any text must come AFTER all tool results.
-* If the assistant turn also called a [server tool](server-tools.md) that has no result block yet, the user message must contain only `tool_result` blocks. Text after the results ends the turn early; for a server tool Claude called directly, the request then fails with a 400 error that names the unresolved server tool. See [Stop reasons and fallback](../../build-with-claude/handling-stop-reasons.md#tool-use).
-
-For example, this causes a 400 error:
-
-```json
-{
-  "role": "user",
-  "content": [
-    { "type": "text", "text": "Here are the results:" }, // ❌ Text before tool_result
-    { "type": "tool_result", "tool_use_id": "toolu_01" /* ... */ }
-  ]
-}
-```
-
-This is correct when the assistant turn calls only client tools:
-
-```json
-{
-  "role": "user",
-  "content": [
-    { "type": "tool_result", "tool_use_id": "toolu_01" /* ... */ },
-    { "type": "text", "text": "What should I do next?" } // ✅ Text after tool_result
-  ]
-}
-```
-
-If you receive an error such as “tool\_use ids were found without tool\_result blocks immediately after”, check that your tool results are formatted correctly.
-
-Tool results often carry content from sources outside your control: webpages, inbound email, user uploads, third-party APIs. Treat that content as untrusted: an attacker who can influence it might embed instructions that try to redirect Claude (indirect prompt injection). Keep untrusted content inside `tool_result` blocks rather than `system` prompts or plain user `text` blocks, and see [Mitigate jailbreaks and prompt injections](../../test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md#indirect-prompt-injection) for further hardening.
-
-**Example of successful tool result**
+For example, a successful tool result looks like this:
 
 ```json JSON
 {
@@ -107,6 +71,18 @@ Tool results often carry content from sources outside your control: webpages, in
   ]
 }
 ```
+
+A `tool_result` that answers a computer use or browser use member block must also echo the same `toolset_name` value as the `tool_use` block; a member result that omits it is rejected. Its `content` is also narrower: a member result may contain only `text` and `image` blocks, and a browser use result may add one [`browser_state`](browser-use-tool.md#track-tabs-and-page-state) block (the [tab-management members](browser-use-tool.md#tab-management-results) return only that block).
+
+**Important formatting requirements:**
+
+* Tool result blocks must immediately follow their corresponding tool use blocks in the message history. You cannot include any messages between the assistant’s tool use message and the user’s tool result message.
+* In the user message containing tool results, the `tool_result` blocks must come FIRST in the content array. Any text must come AFTER all tool results.
+* If the assistant turn also called a [server tool](server-tools.md) that has no result block yet, the user message must contain only `tool_result` blocks. Text after the results ends the turn early; for a server tool Claude called directly, the request then fails with a 400 error that names the unresolved server tool. See [Stop reasons and fallback](../../build-with-claude/handling-stop-reasons.md#tool-use).
+
+If you receive an error such as “tool\_use ids were found without tool\_result blocks immediately after”, check that your tool results are formatted correctly.
+
+Tool results often carry content from sources outside your control: webpages, inbound email, user uploads, third-party APIs. Treat that content as untrusted: an attacker who can influence it might embed instructions that try to redirect Claude (indirect prompt injection). Keep untrusted content inside `tool_result` blocks rather than `system` prompts or plain user `text` blocks, and see [Mitigate jailbreaks and prompt injections](../../test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks.md#indirect-prompt-injection) for further hardening.
 
 **Example of tool result with images**
 
@@ -168,6 +144,32 @@ Tool results often carry content from sources outside your control: webpages, in
         }
       ]
     }
+  ]
+}
+```
+
+**Example of text before and after a tool result**
+
+For example, this causes a 400 error:
+
+```json
+{
+  "role": "user",
+  "content": [
+    { "type": "text", "text": "Here are the results:" }, // ❌ Text before tool_result
+    { "type": "tool_result", "tool_use_id": "toolu_01" /* ... */ }
+  ]
+}
+```
+
+This is correct when the assistant turn calls only client tools:
+
+```json
+{
+  "role": "user",
+  "content": [
+    { "type": "tool_result", "tool_use_id": "toolu_01" /* ... */ },
+    { "type": "text", "text": "What should I do next?" } // ✅ Text after tool_result
   ]
 }
 ```

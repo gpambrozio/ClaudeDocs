@@ -205,7 +205,7 @@ Create Agent
 
       maxLength: 2048
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
@@ -775,7 +775,7 @@ Create Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -957,7 +957,7 @@ Create Agent
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -1673,7 +1673,7 @@ Create Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -2033,7 +2033,7 @@ List Agents
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -2749,7 +2749,7 @@ List Agents
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -3093,7 +3093,7 @@ Get Agent
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -3809,7 +3809,7 @@ Get Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -4002,7 +4002,7 @@ Update Agent
 
       maxLength: 2048
 
-  - `Metadata map[string, string] Optional`
+  - `Metadata map[string]string Optional`
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
@@ -4730,7 +4730,7 @@ Update Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -4918,7 +4918,7 @@ Update Agent
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -5634,7 +5634,7 @@ Update Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -5973,7 +5973,7 @@ Archive Agent
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -6689,7 +6689,7 @@ Archive Agent
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -6904,7 +6904,7 @@ func main() {
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -7620,7 +7620,7 @@ func main() {
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -9566,7 +9566,7 @@ func main() {
 
     - `Type Object`
 
-    - `Properties map[string, any] Optional`
+    - `Properties map[string]any Optional`
 
     - `Required []string Optional`
 
@@ -9580,7 +9580,7 @@ func main() {
 
   - `Type Object`
 
-  - `Properties map[string, any] Optional`
+  - `Properties map[string]any Optional`
 
   - `Required []string Optional`
 
@@ -9604,7 +9604,7 @@ func main() {
 
     - `Type Object`
 
-    - `Properties map[string, any] Optional`
+    - `Properties map[string]any Optional`
 
     - `Required []string Optional`
 
@@ -12190,7 +12190,7 @@ func main() {
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 
@@ -13414,7 +13414,7 @@ List Agent Versions
 
     - `URL string`
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
   - `Model BetaManagedAgentsModelConfig`
 
@@ -14130,7 +14130,7 @@ List Agent Versions
 
         - `Type Object`
 
-        - `Properties map[string, any] Optional`
+        - `Properties map[string]any Optional`
 
         - `Required []string Optional`
 

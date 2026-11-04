@@ -36,7 +36,7 @@ You need this page only when you build the retry yourself: over raw HTTP or with
 
 **Opt in with the beta header**
 
-Send the request that may be refused with the `anthropic-beta: fallback-credit-2026-07-01` header. The `server-side-fallback-2026-07-01` header also grants the same fields, except on Amazon Bedrock and Claude Models on Google Cloud (Google managed), which return a 400 error for that header. The earlier `fallback-credit-2026-06-01` header remains accepted and grants the same fields.
+Send the request that might be refused with the `anthropic-beta: fallback-credit-2026-07-01` header. The `server-side-fallback-2026-07-01` header also grants the same fields, except on Claude Models on Google Cloud (Google managed) and Amazon Bedrock, which return a 400 error for that header. The `fallback-credit-2026-06-01` header is accepted and grants the same fields.
 
 **Read two fields from the refusal**
 
@@ -593,7 +593,7 @@ If the echoed content includes a `fallback` block from an earlier [server-side f
 
 **Token scope and lifetime**
 
-The token redeems only from the organization and workspace that received the refusal, including on Microsoft Foundry. On Amazon Bedrock and Claude Models on Google Cloud (Google managed), which do not have workspaces, the token is bound to the platform’s caller identity instead.
+The token redeems only from the organization and workspace that received the refusal, including on Microsoft Foundry. On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, which do not have workspaces, the token is bound to the platform’s caller identity instead.
 
 The token expires 5 minutes after the refusal. After that, send the retry without it. The token is also stateless: the server stores nothing about it, and there is no endpoint to inspect or revoke it.
 

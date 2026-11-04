@@ -19,35 +19,35 @@ List Events
 
 - `session_id: String` (path parameter)
 
-- `created_at_gt: Time` (query parameter)
+- `created_at_gt: optional Time` (query parameter)
 
   Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
   format: date-time
 
-- `created_at_gte: Time` (query parameter)
+- `created_at_gte: optional Time` (query parameter)
 
   Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
 
   format: date-time
 
-- `created_at_lt: Time` (query parameter)
+- `created_at_lt: optional Time` (query parameter)
 
   Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
   format: date-time
 
-- `created_at_lte: Time` (query parameter)
+- `created_at_lte: optional Time` (query parameter)
 
   Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
 
   format: date-time
 
-- `limit: Integer` (query parameter)
+- `limit: optional Integer` (query parameter)
 
   format: int32
 
-- `order: :asc | :desc` (query parameter)
+- `order: optional :asc | :desc` (query parameter)
 
   Sort direction for results, ordered by the event's `processed_at`. Defaults to `asc` (chronological).
 
@@ -55,11 +55,11 @@ List Events
 
   - `:desc`
 
-- `page: String` (query parameter)
+- `page: optional String` (query parameter)
 
   Opaque pagination cursor from a previous response's `next_page`.
 
-- `types: Array[BetaManagedAgentsSessionEventType]` (query parameter)
+- `types: optional Array[BetaManagedAgentsSessionEventType]` (query parameter)
 
   Filter by event type. Values match the `type` field on returned events (for example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
@@ -145,7 +145,7 @@ List Events
 
   - `:"workflow_run.phase_ended"`
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -261,7 +261,7 @@ List Events
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -419,11 +419,11 @@ List Events
 
               minLength: 1
 
-        - `context: String`
+        - `context: optional String`
 
           Additional context about the document for the model.
 
-        - `title: String`
+        - `title: optional String`
 
           The title of the document.
 
@@ -433,7 +433,7 @@ List Events
 
         - `type: :redacted`
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the agent finished processing this message.
 
@@ -449,13 +449,13 @@ List Events
 
       Unique identifier for this event.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the interrupt was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -481,19 +481,19 @@ List Events
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `deny_message: String`
+    - `deny_message: optional String`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
       maxLength: 10000
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the confirmation was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
@@ -511,7 +511,7 @@ List Events
 
       The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -565,17 +565,17 @@ List Events
 
           minLength: 1
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this result was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -603,7 +603,7 @@ List Events
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
@@ -679,7 +679,7 @@ List Events
 
       format: date-time
 
-    - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
+    - `evaluated_permission: optional BetaManagedAgentsAgentEvaluatedPermission`
 
       The evaluated permission policy for this tool invocation.
 
@@ -689,7 +689,7 @@ List Events
 
       - `:deny`
 
-    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+    - `evaluation: optional BetaManagedAgentsAgentToolEvaluation`
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
@@ -745,7 +745,7 @@ List Events
 
               maxLength: 64
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
@@ -769,7 +769,7 @@ List Events
 
       format: date-time
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -789,7 +789,7 @@ List Events
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -817,15 +817,15 @@ List Events
 
       format: date-time
 
-    - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
+    - `evaluated_permission: optional BetaManagedAgentsAgentEvaluatedPermission`
 
       The evaluated permission policy for this tool invocation.
 
-    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+    - `evaluation: optional BetaManagedAgentsAgentToolEvaluation`
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
@@ -849,7 +849,7 @@ List Events
 
       The id of the `agent.tool_use` event this result corresponds to.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -869,7 +869,7 @@ List Events
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -913,7 +913,7 @@ List Events
 
       format: date-time
 
-    - `from_agent_name: String`
+    - `from_agent_name: optional String`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -957,7 +957,7 @@ List Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `to_agent_name: String`
+    - `to_agent_name: optional String`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -1619,7 +1619,7 @@ List Events
 
         format: int32
 
-      - `speed: :standard | :fast`
+      - `speed: optional :standard | :fast`
 
         Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
@@ -1879,7 +1879,7 @@ List Events
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -1899,17 +1899,17 @@ List Events
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this result was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -1953,7 +1953,7 @@ List Events
 
       format: date-time
 
-    - `agent: BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent`
 
       The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
@@ -2071,7 +2071,7 @@ List Events
 
           - `String = String`
 
-        - `effort: BetaManagedAgentsEffortLow | BetaManagedAgentsEffortMedium | BetaManagedAgentsEffortHigh | 2 more`
+        - `effort: optional BetaManagedAgentsEffortLow | BetaManagedAgentsEffortMedium | BetaManagedAgentsEffortHigh | 2 more`
 
           How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
@@ -2105,11 +2105,11 @@ List Events
 
             - `type: :max`
 
-        - `inference_geo: String`
+        - `inference_geo: optional String`
 
           Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-        - `speed: :standard | :fast`
+        - `speed: optional :standard | :fast`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -2455,11 +2455,11 @@ List Events
 
                             This source contributes no URLs that may be fetched.
 
-                      - `allowed_domains: Array[String]`
+                      - `allowed_domains: optional Array[String]`
 
-                      - `blocked_domains: Array[String]`
+                      - `blocked_domains: optional Array[String]`
 
-                      - `max_content_tokens: Integer`
+                      - `max_content_tokens: optional Integer`
 
                         format: int32
 
@@ -2489,11 +2489,11 @@ List Events
 
                           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                      - `allowed_domains: Array[String]`
+                      - `allowed_domains: optional Array[String]`
 
-                      - `blocked_domains: Array[String]`
+                      - `blocked_domains: optional Array[String]`
 
-                      - `user_location: BetaManagedAgentsUserLocation`
+                      - `user_location: optional BetaManagedAgentsUserLocation`
 
                         Approximate user location for search result localization.
 
@@ -2501,23 +2501,23 @@ List Events
 
                           Location precision. Only "approximate" is supported.
 
-                        - `city: String`
+                        - `city: optional String`
 
                           City name.
 
                           minLength: 1, maxLength: 255
 
-                        - `country: String`
+                        - `country: optional String`
 
                           Two-letter ISO 3166-1 country code, uppercase.
 
-                        - `region: String`
+                        - `region: optional String`
 
                           Region or state name.
 
                           minLength: 1, maxLength: 255
 
-                        - `timezone: String`
+                        - `timezone: optional String`
 
                           IANA timezone identifier, e.g. "America/Los_Angeles".
 
@@ -2609,9 +2609,9 @@ List Events
 
                     - `type: :object`
 
-                    - `properties: Hash[Symbol, untyped]`
+                    - `properties: optional Hash[Symbol, untyped]`
 
-                    - `required: Array[String]`
+                    - `required: optional Array[String]`
 
                   - `name: String`
 
@@ -2799,7 +2799,7 @@ List Events
 
         format: int32
 
-    - `budget: BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit`
 
       The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
@@ -2817,11 +2817,11 @@ List Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `metadata: Hash[Symbol, String]`
+    - `metadata: optional Hash[Symbol, String]`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: String`
+    - `title: optional String`
 
       The session's new title. Present only when the update changed it.
 
@@ -2847,7 +2847,7 @@ List Events
 
         minLength: 1
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this system message was processed.
 
@@ -2873,67 +2873,67 @@ List Events
 
       The session's cumulative usage at the snapshot time.
 
-      - `active_seconds: Float`
+      - `active_seconds: optional Float`
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
         format: double
 
-      - `cache_creation: BetaManagedAgentsCacheCreationUsage`
+      - `cache_creation: optional BetaManagedAgentsCacheCreationUsage`
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `ephemeral_1h_input_tokens: Integer`
+        - `ephemeral_1h_input_tokens: optional Integer`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `ephemeral_5m_input_tokens: Integer`
+        - `ephemeral_5m_input_tokens: optional Integer`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `cache_read_input_tokens: Integer`
+      - `cache_read_input_tokens: optional Integer`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `input_tokens: Integer`
+      - `input_tokens: optional Integer`
 
         Total input tokens consumed across all turns.
 
         format: int32
 
-      - `list_cost: BetaMonetaryAmount`
+      - `list_cost: optional BetaMonetaryAmount`
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `output_tokens: Integer`
+      - `output_tokens: optional Integer`
 
         Total output tokens generated across all turns.
 
         format: int32
 
-      - `server_tool_use: BetaManagedAgentsServerToolUsage`
+      - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
 
         Cumulative server-executed tool usage across all turns.
 
-        - `web_fetch_requests: Integer`
+        - `web_fetch_requests: optional Integer`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `web_search_requests: Integer`
+        - `web_search_requests: optional Integer`
 
           Number of server-executed web search requests.
 
           format: int32
 
-    - `budget: BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit`
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
 
@@ -3395,11 +3395,11 @@ Send Events
 
               minLength: 1
 
-        - `context: String`
+        - `context: optional String`
 
           Additional context about the document for the model.
 
-        - `title: String`
+        - `title: optional String`
 
           The title of the document.
 
@@ -3415,7 +3415,7 @@ Send Events
 
     - `type: :"user.interrupt"`
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -3439,7 +3439,7 @@ Send Events
 
       minLength: 1, maxLength: 128
 
-    - `deny_message: String`
+    - `deny_message: optional String`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
@@ -3457,7 +3457,7 @@ Send Events
 
       minLength: 1, maxLength: 128
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -3511,7 +3511,7 @@ Send Events
 
           minLength: 1
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -3551,7 +3551,7 @@ Send Events
 
           maxLength: 262144
 
-    - `max_iterations: Integer`
+    - `max_iterations: optional Integer`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -3569,7 +3569,7 @@ Send Events
 
       minLength: 1, maxLength: 128
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -3589,7 +3589,7 @@ Send Events
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -3611,7 +3611,7 @@ Send Events
 
         minLength: 1
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -3727,7 +3727,7 @@ Send Events
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3739,7 +3739,7 @@ Send Events
 
   Events that were successfully sent to the session.
 
-  - `data: Array[BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 4 more]`
+  - `data: optional Array[BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 4 more]`
 
     Sent events
 
@@ -3889,11 +3889,11 @@ Send Events
 
                 minLength: 1
 
-          - `context: String`
+          - `context: optional String`
 
             Additional context about the document for the model.
 
-          - `title: String`
+          - `title: optional String`
 
             The title of the document.
 
@@ -3903,7 +3903,7 @@ Send Events
 
           - `type: :redacted`
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when the agent finished processing this message.
 
@@ -3919,13 +3919,13 @@ Send Events
 
         Unique identifier for this event.
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when the interrupt was processed.
 
         format: date-time
 
-      - `session_thread_id: String`
+      - `session_thread_id: optional String`
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -3951,19 +3951,19 @@ Send Events
 
         The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-      - `deny_message: String`
+      - `deny_message: optional String`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
         maxLength: 10000
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when the confirmation was processed.
 
         format: date-time
 
-      - `session_thread_id: String`
+      - `session_thread_id: optional String`
 
         Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
@@ -3981,7 +3981,7 @@ Send Events
 
         The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+      - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
         The result content returned by the tool.
 
@@ -4035,17 +4035,17 @@ Send Events
 
             minLength: 1
 
-      - `is_error: bool`
+      - `is_error: optional bool`
 
         Whether the tool execution resulted in an error.
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when this result was processed.
 
         format: date-time
 
-      - `session_thread_id: String`
+      - `session_thread_id: optional String`
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -4117,7 +4117,7 @@ Send Events
 
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+      - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
         The result content returned by the tool.
 
@@ -4137,17 +4137,17 @@ Send Events
 
           A block containing a web search result.
 
-      - `is_error: bool`
+      - `is_error: optional bool`
 
         Whether the tool execution resulted in an error.
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when this result was processed.
 
         format: date-time
 
-      - `session_thread_id: String`
+      - `session_thread_id: optional String`
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -4173,7 +4173,7 @@ Send Events
 
           minLength: 1
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when this system message was processed.
 
@@ -4226,7 +4226,7 @@ Stream Events
 
 - `session_id: String` (path parameter)
 
-- `event_deltas: Array[BetaManagedAgentsDeltaType]` (query parameter)
+- `event_deltas: optional Array[BetaManagedAgentsDeltaType]` (query parameter)
 
   When set, this connection also receives streaming deltas (`event_start`, `event_delta`) while an event is being produced, before the event itself arrives. Deltas are best-effort; when the final event is produced it carries the complete content. A model request that ends early (an error or interrupt) produces no final event — its terminal `span.model_request_end` closes the preview. Accepts one or more event types to preview and may be repeated: `agent.message` streams `content_delta` fragments; `agent.thinking` is start-only — a signal that the agent has begun extended thinking, concluded by the `agent.thinking` event itself. Only previews of the requested event types are sent.
 
@@ -4234,7 +4234,7 @@ Stream Events
 
   - `:"agent.thinking"`
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -4350,7 +4350,7 @@ Stream Events
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -4508,11 +4508,11 @@ Stream Events
 
               minLength: 1
 
-        - `context: String`
+        - `context: optional String`
 
           Additional context about the document for the model.
 
-        - `title: String`
+        - `title: optional String`
 
           The title of the document.
 
@@ -4522,7 +4522,7 @@ Stream Events
 
         - `type: :redacted`
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the agent finished processing this message.
 
@@ -4538,13 +4538,13 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the interrupt was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -4570,19 +4570,19 @@ Stream Events
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `deny_message: String`
+    - `deny_message: optional String`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
       maxLength: 10000
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the confirmation was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
@@ -4600,7 +4600,7 @@ Stream Events
 
       The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -4654,17 +4654,17 @@ Stream Events
 
           minLength: 1
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this result was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -4692,7 +4692,7 @@ Stream Events
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
@@ -4768,7 +4768,7 @@ Stream Events
 
       format: date-time
 
-    - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
+    - `evaluated_permission: optional BetaManagedAgentsAgentEvaluatedPermission`
 
       The evaluated permission policy for this tool invocation.
 
@@ -4778,7 +4778,7 @@ Stream Events
 
       - `:deny`
 
-    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+    - `evaluation: optional BetaManagedAgentsAgentToolEvaluation`
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
@@ -4834,7 +4834,7 @@ Stream Events
 
               maxLength: 64
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
@@ -4858,7 +4858,7 @@ Stream Events
 
       format: date-time
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -4878,7 +4878,7 @@ Stream Events
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -4906,15 +4906,15 @@ Stream Events
 
       format: date-time
 
-    - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
+    - `evaluated_permission: optional BetaManagedAgentsAgentEvaluatedPermission`
 
       The evaluated permission policy for this tool invocation.
 
-    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+    - `evaluation: optional BetaManagedAgentsAgentToolEvaluation`
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
@@ -4938,7 +4938,7 @@ Stream Events
 
       The id of the `agent.tool_use` event this result corresponds to.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -4958,7 +4958,7 @@ Stream Events
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -5002,7 +5002,7 @@ Stream Events
 
       format: date-time
 
-    - `from_agent_name: String`
+    - `from_agent_name: optional String`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -5046,7 +5046,7 @@ Stream Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `to_agent_name: String`
+    - `to_agent_name: optional String`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -5708,7 +5708,7 @@ Stream Events
 
         format: int32
 
-      - `speed: :standard | :fast`
+      - `speed: optional :standard | :fast`
 
         Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
@@ -5968,7 +5968,7 @@ Stream Events
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -5988,17 +5988,17 @@ Stream Events
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this result was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -6042,7 +6042,7 @@ Stream Events
 
       format: date-time
 
-    - `agent: BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent`
 
       The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
@@ -6160,7 +6160,7 @@ Stream Events
 
           - `String = String`
 
-        - `effort: BetaManagedAgentsEffortLow | BetaManagedAgentsEffortMedium | BetaManagedAgentsEffortHigh | 2 more`
+        - `effort: optional BetaManagedAgentsEffortLow | BetaManagedAgentsEffortMedium | BetaManagedAgentsEffortHigh | 2 more`
 
           How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
@@ -6194,11 +6194,11 @@ Stream Events
 
             - `type: :max`
 
-        - `inference_geo: String`
+        - `inference_geo: optional String`
 
           Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-        - `speed: :standard | :fast`
+        - `speed: optional :standard | :fast`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -6544,11 +6544,11 @@ Stream Events
 
                             This source contributes no URLs that may be fetched.
 
-                      - `allowed_domains: Array[String]`
+                      - `allowed_domains: optional Array[String]`
 
-                      - `blocked_domains: Array[String]`
+                      - `blocked_domains: optional Array[String]`
 
-                      - `max_content_tokens: Integer`
+                      - `max_content_tokens: optional Integer`
 
                         format: int32
 
@@ -6578,11 +6578,11 @@ Stream Events
 
                           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                      - `allowed_domains: Array[String]`
+                      - `allowed_domains: optional Array[String]`
 
-                      - `blocked_domains: Array[String]`
+                      - `blocked_domains: optional Array[String]`
 
-                      - `user_location: BetaManagedAgentsUserLocation`
+                      - `user_location: optional BetaManagedAgentsUserLocation`
 
                         Approximate user location for search result localization.
 
@@ -6590,23 +6590,23 @@ Stream Events
 
                           Location precision. Only "approximate" is supported.
 
-                        - `city: String`
+                        - `city: optional String`
 
                           City name.
 
                           minLength: 1, maxLength: 255
 
-                        - `country: String`
+                        - `country: optional String`
 
                           Two-letter ISO 3166-1 country code, uppercase.
 
-                        - `region: String`
+                        - `region: optional String`
 
                           Region or state name.
 
                           minLength: 1, maxLength: 255
 
-                        - `timezone: String`
+                        - `timezone: optional String`
 
                           IANA timezone identifier, e.g. "America/Los_Angeles".
 
@@ -6698,9 +6698,9 @@ Stream Events
 
                     - `type: :object`
 
-                    - `properties: Hash[Symbol, untyped]`
+                    - `properties: optional Hash[Symbol, untyped]`
 
-                    - `required: Array[String]`
+                    - `required: optional Array[String]`
 
                   - `name: String`
 
@@ -6888,7 +6888,7 @@ Stream Events
 
         format: int32
 
-    - `budget: BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit`
 
       The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
@@ -6906,11 +6906,11 @@ Stream Events
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `metadata: Hash[Symbol, String]`
+    - `metadata: optional Hash[Symbol, String]`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: String`
+    - `title: optional String`
 
       The session's new title. Present only when the update changed it.
 
@@ -6956,7 +6956,7 @@ Stream Events
 
         A partial element of the content array at index, typed like the element itself — the same shape the buffered agent.message carries in content.
 
-      - `index: Integer`
+      - `index: optional Integer`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
 
@@ -6986,7 +6986,7 @@ Stream Events
 
         minLength: 1
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this system message was processed.
 
@@ -7012,67 +7012,67 @@ Stream Events
 
       The session's cumulative usage at the snapshot time.
 
-      - `active_seconds: Float`
+      - `active_seconds: optional Float`
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
         format: double
 
-      - `cache_creation: BetaManagedAgentsCacheCreationUsage`
+      - `cache_creation: optional BetaManagedAgentsCacheCreationUsage`
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `ephemeral_1h_input_tokens: Integer`
+        - `ephemeral_1h_input_tokens: optional Integer`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `ephemeral_5m_input_tokens: Integer`
+        - `ephemeral_5m_input_tokens: optional Integer`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `cache_read_input_tokens: Integer`
+      - `cache_read_input_tokens: optional Integer`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `input_tokens: Integer`
+      - `input_tokens: optional Integer`
 
         Total input tokens consumed across all turns.
 
         format: int32
 
-      - `list_cost: BetaMonetaryAmount`
+      - `list_cost: optional BetaMonetaryAmount`
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `output_tokens: Integer`
+      - `output_tokens: optional Integer`
 
         Total output tokens generated across all turns.
 
         format: int32
 
-      - `server_tool_use: BetaManagedAgentsServerToolUsage`
+      - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
 
         Cumulative server-executed tool usage across all turns.
 
-        - `web_fetch_requests: Integer`
+        - `web_fetch_requests: optional Integer`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `web_search_requests: Integer`
+        - `web_search_requests: optional Integer`
 
           Number of server-executed web search requests.
 
           format: int32
 
-    - `budget: BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit`
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
 
@@ -7462,7 +7462,7 @@ end
 
     format: date-time
 
-  - `session_thread_id: String`
+  - `session_thread_id: optional String`
 
     When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
@@ -7498,7 +7498,7 @@ end
 
     format: date-time
 
-  - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+  - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
     The result content returned by the tool.
 
@@ -7634,11 +7634,11 @@ end
 
             minLength: 1
 
-      - `context: String`
+      - `context: optional String`
 
         Additional context about the document for the model.
 
-      - `title: String`
+      - `title: optional String`
 
         The title of the document.
 
@@ -7680,7 +7680,7 @@ end
 
         minLength: 1
 
-  - `is_error: bool`
+  - `is_error: optional bool`
 
     Whether the tool execution resulted in an error.
 
@@ -7714,7 +7714,7 @@ end
 
     format: date-time
 
-  - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
+  - `evaluated_permission: optional BetaManagedAgentsAgentEvaluatedPermission`
 
     The evaluated permission policy for this tool invocation.
 
@@ -7724,7 +7724,7 @@ end
 
     - `:deny`
 
-  - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+  - `evaluation: optional BetaManagedAgentsAgentToolEvaluation`
 
     Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
@@ -7780,7 +7780,7 @@ end
 
             maxLength: 64
 
-  - `session_thread_id: String`
+  - `session_thread_id: optional String`
 
     When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
@@ -8008,11 +8008,11 @@ end
 
             minLength: 1
 
-      - `context: String`
+      - `context: optional String`
 
         Additional context about the document for the model.
 
-      - `title: String`
+      - `title: optional String`
 
         The title of the document.
 
@@ -8032,7 +8032,7 @@ end
 
     format: date-time
 
-  - `from_agent_name: String`
+  - `from_agent_name: optional String`
 
     Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -8184,11 +8184,11 @@ end
 
             minLength: 1
 
-      - `context: String`
+      - `context: optional String`
 
         Additional context about the document for the model.
 
-      - `title: String`
+      - `title: optional String`
 
         The title of the document.
 
@@ -8208,7 +8208,7 @@ end
 
     Public `sthr_` ID of the thread the message was sent to.
 
-  - `to_agent_name: String`
+  - `to_agent_name: optional String`
 
     Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -8350,7 +8350,7 @@ end
 
     The id of the `agent.tool_use` event this result corresponds to.
 
-  - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+  - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
     The result content returned by the tool.
 
@@ -8486,11 +8486,11 @@ end
 
             minLength: 1
 
-      - `context: String`
+      - `context: optional String`
 
         Additional context about the document for the model.
 
-      - `title: String`
+      - `title: optional String`
 
         The title of the document.
 
@@ -8532,7 +8532,7 @@ end
 
         minLength: 1
 
-  - `is_error: bool`
+  - `is_error: optional bool`
 
     Whether the tool execution resulted in an error.
 
@@ -8562,7 +8562,7 @@ end
 
     format: date-time
 
-  - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
+  - `evaluated_permission: optional BetaManagedAgentsAgentEvaluatedPermission`
 
     The evaluated permission policy for this tool invocation.
 
@@ -8572,7 +8572,7 @@ end
 
     - `:deny`
 
-  - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+  - `evaluation: optional BetaManagedAgentsAgentToolEvaluation`
 
     Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
@@ -8628,7 +8628,7 @@ end
 
             maxLength: 64
 
-  - `session_thread_id: String`
+  - `session_thread_id: optional String`
 
     When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
@@ -8818,11 +8818,11 @@ end
 
         minLength: 1
 
-  - `context: String`
+  - `context: optional String`
 
     Additional context about the document for the model.
 
-  - `title: String`
+  - `title: optional String`
 
     The title of the document.
 
@@ -8974,11 +8974,11 @@ end
 
               minLength: 1
 
-        - `context: String`
+        - `context: optional String`
 
           Additional context about the document for the model.
 
-        - `title: String`
+        - `title: optional String`
 
           The title of the document.
 
@@ -8994,7 +8994,7 @@ end
 
     - `type: :"user.interrupt"`
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -9018,7 +9018,7 @@ end
 
       minLength: 1, maxLength: 128
 
-    - `deny_message: String`
+    - `deny_message: optional String`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
@@ -9036,7 +9036,7 @@ end
 
       minLength: 1, maxLength: 128
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -9090,7 +9090,7 @@ end
 
           minLength: 1
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -9130,7 +9130,7 @@ end
 
           maxLength: 262144
 
-    - `max_iterations: Integer`
+    - `max_iterations: optional Integer`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -9148,7 +9148,7 @@ end
 
       minLength: 1, maxLength: 128
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -9168,7 +9168,7 @@ end
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -9808,7 +9808,7 @@ end
 
   Events that were successfully sent to the session.
 
-  - `data: Array[BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 4 more]`
+  - `data: optional Array[BetaManagedAgentsUserMessageEvent | BetaManagedAgentsUserInterruptEvent | BetaManagedAgentsUserToolConfirmationEvent | 4 more]`
 
     Sent events
 
@@ -9958,11 +9958,11 @@ end
 
                 minLength: 1
 
-          - `context: String`
+          - `context: optional String`
 
             Additional context about the document for the model.
 
-          - `title: String`
+          - `title: optional String`
 
             The title of the document.
 
@@ -9972,7 +9972,7 @@ end
 
           - `type: :redacted`
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when the agent finished processing this message.
 
@@ -9988,13 +9988,13 @@ end
 
         Unique identifier for this event.
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when the interrupt was processed.
 
         format: date-time
 
-      - `session_thread_id: String`
+      - `session_thread_id: optional String`
 
         If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -10020,19 +10020,19 @@ end
 
         The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-      - `deny_message: String`
+      - `deny_message: optional String`
 
         Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
         maxLength: 10000
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when the confirmation was processed.
 
         format: date-time
 
-      - `session_thread_id: String`
+      - `session_thread_id: optional String`
 
         Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
@@ -10050,7 +10050,7 @@ end
 
         The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+      - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
         The result content returned by the tool.
 
@@ -10104,17 +10104,17 @@ end
 
             minLength: 1
 
-      - `is_error: bool`
+      - `is_error: optional bool`
 
         Whether the tool execution resulted in an error.
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when this result was processed.
 
         format: date-time
 
-      - `session_thread_id: String`
+      - `session_thread_id: optional String`
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -10186,7 +10186,7 @@ end
 
         The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-      - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+      - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
         The result content returned by the tool.
 
@@ -10206,17 +10206,17 @@ end
 
           A block containing a web search result.
 
-      - `is_error: bool`
+      - `is_error: optional bool`
 
         Whether the tool execution resulted in an error.
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when this result was processed.
 
         format: date-time
 
-      - `session_thread_id: String`
+      - `session_thread_id: optional String`
 
         Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -10242,7 +10242,7 @@ end
 
           minLength: 1
 
-      - `processed_at: Time`
+      - `processed_at: optional Time`
 
         Timestamp when this system message was processed.
 
@@ -10834,11 +10834,11 @@ end
 
               minLength: 1
 
-        - `context: String`
+        - `context: optional String`
 
           Additional context about the document for the model.
 
-        - `title: String`
+        - `title: optional String`
 
           The title of the document.
 
@@ -10848,7 +10848,7 @@ end
 
         - `type: :redacted`
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the agent finished processing this message.
 
@@ -10864,13 +10864,13 @@ end
 
       Unique identifier for this event.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the interrupt was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -10896,19 +10896,19 @@ end
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `deny_message: String`
+    - `deny_message: optional String`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
       maxLength: 10000
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the confirmation was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
@@ -10926,7 +10926,7 @@ end
 
       The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -10980,17 +10980,17 @@ end
 
           minLength: 1
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this result was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -11018,7 +11018,7 @@ end
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
@@ -11094,7 +11094,7 @@ end
 
       format: date-time
 
-    - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
+    - `evaluated_permission: optional BetaManagedAgentsAgentEvaluatedPermission`
 
       The evaluated permission policy for this tool invocation.
 
@@ -11104,7 +11104,7 @@ end
 
       - `:deny`
 
-    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+    - `evaluation: optional BetaManagedAgentsAgentToolEvaluation`
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
@@ -11160,7 +11160,7 @@ end
 
               maxLength: 64
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
@@ -11184,7 +11184,7 @@ end
 
       format: date-time
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -11204,7 +11204,7 @@ end
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -11232,15 +11232,15 @@ end
 
       format: date-time
 
-    - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
+    - `evaluated_permission: optional BetaManagedAgentsAgentEvaluatedPermission`
 
       The evaluated permission policy for this tool invocation.
 
-    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+    - `evaluation: optional BetaManagedAgentsAgentToolEvaluation`
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
@@ -11264,7 +11264,7 @@ end
 
       The id of the `agent.tool_use` event this result corresponds to.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -11284,7 +11284,7 @@ end
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -11328,7 +11328,7 @@ end
 
       format: date-time
 
-    - `from_agent_name: String`
+    - `from_agent_name: optional String`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -11372,7 +11372,7 @@ end
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `to_agent_name: String`
+    - `to_agent_name: optional String`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -12034,7 +12034,7 @@ end
 
         format: int32
 
-      - `speed: :standard | :fast`
+      - `speed: optional :standard | :fast`
 
         Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
@@ -12294,7 +12294,7 @@ end
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -12314,17 +12314,17 @@ end
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this result was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -12368,7 +12368,7 @@ end
 
       format: date-time
 
-    - `agent: BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent`
 
       The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
@@ -12486,7 +12486,7 @@ end
 
           - `String = String`
 
-        - `effort: BetaManagedAgentsEffortLow | BetaManagedAgentsEffortMedium | BetaManagedAgentsEffortHigh | 2 more`
+        - `effort: optional BetaManagedAgentsEffortLow | BetaManagedAgentsEffortMedium | BetaManagedAgentsEffortHigh | 2 more`
 
           How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
@@ -12520,11 +12520,11 @@ end
 
             - `type: :max`
 
-        - `inference_geo: String`
+        - `inference_geo: optional String`
 
           Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-        - `speed: :standard | :fast`
+        - `speed: optional :standard | :fast`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -12870,11 +12870,11 @@ end
 
                             This source contributes no URLs that may be fetched.
 
-                      - `allowed_domains: Array[String]`
+                      - `allowed_domains: optional Array[String]`
 
-                      - `blocked_domains: Array[String]`
+                      - `blocked_domains: optional Array[String]`
 
-                      - `max_content_tokens: Integer`
+                      - `max_content_tokens: optional Integer`
 
                         format: int32
 
@@ -12904,11 +12904,11 @@ end
 
                           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                      - `allowed_domains: Array[String]`
+                      - `allowed_domains: optional Array[String]`
 
-                      - `blocked_domains: Array[String]`
+                      - `blocked_domains: optional Array[String]`
 
-                      - `user_location: BetaManagedAgentsUserLocation`
+                      - `user_location: optional BetaManagedAgentsUserLocation`
 
                         Approximate user location for search result localization.
 
@@ -12916,23 +12916,23 @@ end
 
                           Location precision. Only "approximate" is supported.
 
-                        - `city: String`
+                        - `city: optional String`
 
                           City name.
 
                           minLength: 1, maxLength: 255
 
-                        - `country: String`
+                        - `country: optional String`
 
                           Two-letter ISO 3166-1 country code, uppercase.
 
-                        - `region: String`
+                        - `region: optional String`
 
                           Region or state name.
 
                           minLength: 1, maxLength: 255
 
-                        - `timezone: String`
+                        - `timezone: optional String`
 
                           IANA timezone identifier, e.g. "America/Los_Angeles".
 
@@ -13024,9 +13024,9 @@ end
 
                     - `type: :object`
 
-                    - `properties: Hash[Symbol, untyped]`
+                    - `properties: optional Hash[Symbol, untyped]`
 
-                    - `required: Array[String]`
+                    - `required: optional Array[String]`
 
                   - `name: String`
 
@@ -13214,7 +13214,7 @@ end
 
         format: int32
 
-    - `budget: BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit`
 
       The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
@@ -13232,11 +13232,11 @@ end
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `metadata: Hash[Symbol, String]`
+    - `metadata: optional Hash[Symbol, String]`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: String`
+    - `title: optional String`
 
       The session's new title. Present only when the update changed it.
 
@@ -13262,7 +13262,7 @@ end
 
         minLength: 1
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this system message was processed.
 
@@ -13288,67 +13288,67 @@ end
 
       The session's cumulative usage at the snapshot time.
 
-      - `active_seconds: Float`
+      - `active_seconds: optional Float`
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
         format: double
 
-      - `cache_creation: BetaManagedAgentsCacheCreationUsage`
+      - `cache_creation: optional BetaManagedAgentsCacheCreationUsage`
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `ephemeral_1h_input_tokens: Integer`
+        - `ephemeral_1h_input_tokens: optional Integer`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `ephemeral_5m_input_tokens: Integer`
+        - `ephemeral_5m_input_tokens: optional Integer`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `cache_read_input_tokens: Integer`
+      - `cache_read_input_tokens: optional Integer`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `input_tokens: Integer`
+      - `input_tokens: optional Integer`
 
         Total input tokens consumed across all turns.
 
         format: int32
 
-      - `list_cost: BetaMonetaryAmount`
+      - `list_cost: optional BetaMonetaryAmount`
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `output_tokens: Integer`
+      - `output_tokens: optional Integer`
 
         Total output tokens generated across all turns.
 
         format: int32
 
-      - `server_tool_use: BetaManagedAgentsServerToolUsage`
+      - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
 
         Cumulative server-executed tool usage across all turns.
 
-        - `web_fetch_requests: Integer`
+        - `web_fetch_requests: optional Integer`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `web_search_requests: Integer`
+        - `web_search_requests: optional Integer`
 
           Number of server-executed web search requests.
 
           format: int32
 
-    - `budget: BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit`
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
 
@@ -14082,41 +14082,41 @@ end
 
   Point-in-time snapshot of a session's cumulative usage.
 
-  - `active_seconds: Float`
+  - `active_seconds: optional Float`
 
     Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
     format: double
 
-  - `cache_creation: BetaManagedAgentsCacheCreationUsage`
+  - `cache_creation: optional BetaManagedAgentsCacheCreationUsage`
 
     Tokens used to create prompt cache entries, broken down by cache TTL.
 
-    - `ephemeral_1h_input_tokens: Integer`
+    - `ephemeral_1h_input_tokens: optional Integer`
 
       Tokens used to create 1-hour ephemeral cache entries.
 
       format: int32
 
-    - `ephemeral_5m_input_tokens: Integer`
+    - `ephemeral_5m_input_tokens: optional Integer`
 
       Tokens used to create 5-minute ephemeral cache entries.
 
       format: int32
 
-  - `cache_read_input_tokens: Integer`
+  - `cache_read_input_tokens: optional Integer`
 
     Total tokens read from prompt cache.
 
     format: int32
 
-  - `input_tokens: Integer`
+  - `input_tokens: optional Integer`
 
     Total input tokens consumed across all turns.
 
     format: int32
 
-  - `list_cost: BetaMonetaryAmount`
+  - `list_cost: optional BetaMonetaryAmount`
 
     Cumulative list cost of the session across all turns, priced at public list rates.
 
@@ -14128,23 +14128,23 @@ end
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-  - `output_tokens: Integer`
+  - `output_tokens: optional Integer`
 
     Total output tokens generated across all turns.
 
     format: int32
 
-  - `server_tool_use: BetaManagedAgentsServerToolUsage`
+  - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
 
     Cumulative server-executed tool usage across all turns.
 
-    - `web_fetch_requests: Integer`
+    - `web_fetch_requests: optional Integer`
 
       Number of server-executed web fetch requests.
 
       format: int32
 
-    - `web_search_requests: Integer`
+    - `web_search_requests: optional Integer`
 
       Number of server-executed web search requests.
 
@@ -14198,7 +14198,7 @@ end
 
       format: int32
 
-    - `speed: :standard | :fast`
+    - `speed: optional :standard | :fast`
 
       Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
@@ -14260,7 +14260,7 @@ end
 
     format: int32
 
-  - `speed: :standard | :fast`
+  - `speed: optional :standard | :fast`
 
     Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
@@ -14336,7 +14336,7 @@ end
 
       format: int32
 
-    - `speed: :standard | :fast`
+    - `speed: optional :standard | :fast`
 
       Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
@@ -14552,11 +14552,11 @@ end
 
               minLength: 1
 
-        - `context: String`
+        - `context: optional String`
 
           Additional context about the document for the model.
 
-        - `title: String`
+        - `title: optional String`
 
           The title of the document.
 
@@ -14566,7 +14566,7 @@ end
 
         - `type: :redacted`
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the agent finished processing this message.
 
@@ -14582,13 +14582,13 @@ end
 
       Unique identifier for this event.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the interrupt was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -14614,19 +14614,19 @@ end
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `deny_message: String`
+    - `deny_message: optional String`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
       maxLength: 10000
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when the confirmation was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
@@ -14644,7 +14644,7 @@ end
 
       The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -14698,17 +14698,17 @@ end
 
           minLength: 1
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this result was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -14736,7 +14736,7 @@ end
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
@@ -14812,7 +14812,7 @@ end
 
       format: date-time
 
-    - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
+    - `evaluated_permission: optional BetaManagedAgentsAgentEvaluatedPermission`
 
       The evaluated permission policy for this tool invocation.
 
@@ -14822,7 +14822,7 @@ end
 
       - `:deny`
 
-    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+    - `evaluation: optional BetaManagedAgentsAgentToolEvaluation`
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
@@ -14878,7 +14878,7 @@ end
 
               maxLength: 64
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
@@ -14902,7 +14902,7 @@ end
 
       format: date-time
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -14922,7 +14922,7 @@ end
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -14950,15 +14950,15 @@ end
 
       format: date-time
 
-    - `evaluated_permission: BetaManagedAgentsAgentEvaluatedPermission`
+    - `evaluated_permission: optional BetaManagedAgentsAgentEvaluatedPermission`
 
       The evaluated permission policy for this tool invocation.
 
-    - `evaluation: BetaManagedAgentsAgentToolEvaluation`
+    - `evaluation: optional BetaManagedAgentsAgentToolEvaluation`
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
@@ -14982,7 +14982,7 @@ end
 
       The id of the `agent.tool_use` event this result corresponds to.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -15002,7 +15002,7 @@ end
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
@@ -15046,7 +15046,7 @@ end
 
       format: date-time
 
-    - `from_agent_name: String`
+    - `from_agent_name: optional String`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -15090,7 +15090,7 @@ end
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `to_agent_name: String`
+    - `to_agent_name: optional String`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -15752,7 +15752,7 @@ end
 
         format: int32
 
-      - `speed: :standard | :fast`
+      - `speed: optional :standard | :fast`
 
         Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
@@ -16012,7 +16012,7 @@ end
 
       The id of the `agent.tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+    - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
       The result content returned by the tool.
 
@@ -16032,17 +16032,17 @@ end
 
         A block containing a web search result.
 
-    - `is_error: bool`
+    - `is_error: optional bool`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this result was processed.
 
       format: date-time
 
-    - `session_thread_id: String`
+    - `session_thread_id: optional String`
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -16086,7 +16086,7 @@ end
 
       format: date-time
 
-    - `agent: BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent`
 
       The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
@@ -16204,7 +16204,7 @@ end
 
           - `String = String`
 
-        - `effort: BetaManagedAgentsEffortLow | BetaManagedAgentsEffortMedium | BetaManagedAgentsEffortHigh | 2 more`
+        - `effort: optional BetaManagedAgentsEffortLow | BetaManagedAgentsEffortMedium | BetaManagedAgentsEffortHigh | 2 more`
 
           How hard Claude works on each inference call. One of `low`, `medium`, `high`, `xhigh`, `max`. Always present; resolved to the per-model default at save time when not supplied.
 
@@ -16238,11 +16238,11 @@ end
 
             - `type: :max`
 
-        - `inference_geo: String`
+        - `inference_geo: optional String`
 
           Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
 
-        - `speed: :standard | :fast`
+        - `speed: optional :standard | :fast`
 
           Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -16588,11 +16588,11 @@ end
 
                             This source contributes no URLs that may be fetched.
 
-                      - `allowed_domains: Array[String]`
+                      - `allowed_domains: optional Array[String]`
 
-                      - `blocked_domains: Array[String]`
+                      - `blocked_domains: optional Array[String]`
 
-                      - `max_content_tokens: Integer`
+                      - `max_content_tokens: optional Integer`
 
                         format: int32
 
@@ -16622,11 +16622,11 @@ end
 
                           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                      - `allowed_domains: Array[String]`
+                      - `allowed_domains: optional Array[String]`
 
-                      - `blocked_domains: Array[String]`
+                      - `blocked_domains: optional Array[String]`
 
-                      - `user_location: BetaManagedAgentsUserLocation`
+                      - `user_location: optional BetaManagedAgentsUserLocation`
 
                         Approximate user location for search result localization.
 
@@ -16634,23 +16634,23 @@ end
 
                           Location precision. Only "approximate" is supported.
 
-                        - `city: String`
+                        - `city: optional String`
 
                           City name.
 
                           minLength: 1, maxLength: 255
 
-                        - `country: String`
+                        - `country: optional String`
 
                           Two-letter ISO 3166-1 country code, uppercase.
 
-                        - `region: String`
+                        - `region: optional String`
 
                           Region or state name.
 
                           minLength: 1, maxLength: 255
 
-                        - `timezone: String`
+                        - `timezone: optional String`
 
                           IANA timezone identifier, e.g. "America/Los_Angeles".
 
@@ -16742,9 +16742,9 @@ end
 
                     - `type: :object`
 
-                    - `properties: Hash[Symbol, untyped]`
+                    - `properties: optional Hash[Symbol, untyped]`
 
-                    - `required: Array[String]`
+                    - `required: optional Array[String]`
 
                   - `name: String`
 
@@ -16932,7 +16932,7 @@ end
 
         format: int32
 
-    - `budget: BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit`
 
       The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
@@ -16950,11 +16950,11 @@ end
 
           Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `metadata: Hash[Symbol, String]`
+    - `metadata: optional Hash[Symbol, String]`
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: String`
+    - `title: optional String`
 
       The session's new title. Present only when the update changed it.
 
@@ -17000,7 +17000,7 @@ end
 
         A partial element of the content array at index, typed like the element itself — the same shape the buffered agent.message carries in content.
 
-      - `index: Integer`
+      - `index: optional Integer`
 
         Which entry in the previewed event's content array this fragment lands in. Insert content as that entry when the index is new; append to the existing entry otherwise.
 
@@ -17030,7 +17030,7 @@ end
 
         minLength: 1
 
-    - `processed_at: Time`
+    - `processed_at: optional Time`
 
       Timestamp when this system message was processed.
 
@@ -17056,67 +17056,67 @@ end
 
       The session's cumulative usage at the snapshot time.
 
-      - `active_seconds: Float`
+      - `active_seconds: optional Float`
 
         Cumulative time in seconds during which the session had at least one thread in running status. Overlapping activity from concurrent threads is counted once. This is the duration the session's runtime cost is priced on.
 
         format: double
 
-      - `cache_creation: BetaManagedAgentsCacheCreationUsage`
+      - `cache_creation: optional BetaManagedAgentsCacheCreationUsage`
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `ephemeral_1h_input_tokens: Integer`
+        - `ephemeral_1h_input_tokens: optional Integer`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `ephemeral_5m_input_tokens: Integer`
+        - `ephemeral_5m_input_tokens: optional Integer`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `cache_read_input_tokens: Integer`
+      - `cache_read_input_tokens: optional Integer`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `input_tokens: Integer`
+      - `input_tokens: optional Integer`
 
         Total input tokens consumed across all turns.
 
         format: int32
 
-      - `list_cost: BetaMonetaryAmount`
+      - `list_cost: optional BetaMonetaryAmount`
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `output_tokens: Integer`
+      - `output_tokens: optional Integer`
 
         Total output tokens generated across all turns.
 
         format: int32
 
-      - `server_tool_use: BetaManagedAgentsServerToolUsage`
+      - `server_tool_use: optional BetaManagedAgentsServerToolUsage`
 
         Cumulative server-executed tool usage across all turns.
 
-        - `web_fetch_requests: Integer`
+        - `web_fetch_requests: optional Integer`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `web_search_requests: Integer`
+        - `web_search_requests: optional Integer`
 
           Number of server-executed web search requests.
 
           format: int32
 
-    - `budget: BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit`
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
 
@@ -17550,7 +17550,7 @@ end
 
     The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-  - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+  - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
     The result content returned by the tool.
 
@@ -17686,11 +17686,11 @@ end
 
             minLength: 1
 
-      - `context: String`
+      - `context: optional String`
 
         Additional context about the document for the model.
 
-      - `title: String`
+      - `title: optional String`
 
         The title of the document.
 
@@ -17732,17 +17732,17 @@ end
 
         minLength: 1
 
-  - `is_error: bool`
+  - `is_error: optional bool`
 
     Whether the tool execution resulted in an error.
 
-  - `processed_at: Time`
+  - `processed_at: optional Time`
 
     Timestamp when this result was processed.
 
     format: date-time
 
-  - `session_thread_id: String`
+  - `session_thread_id: optional String`
 
     Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -17760,7 +17760,7 @@ end
 
     minLength: 1, maxLength: 128
 
-  - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+  - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
     The result content returned by the tool.
 
@@ -17896,11 +17896,11 @@ end
 
             minLength: 1
 
-      - `context: String`
+      - `context: optional String`
 
         Additional context about the document for the model.
 
-      - `title: String`
+      - `title: optional String`
 
         The title of the document.
 
@@ -17942,7 +17942,7 @@ end
 
         minLength: 1
 
-  - `is_error: bool`
+  - `is_error: optional bool`
 
     Whether the tool execution resulted in an error.
 
@@ -18040,7 +18040,7 @@ end
 
         maxLength: 262144
 
-  - `max_iterations: Integer`
+  - `max_iterations: optional Integer`
 
     Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -18058,13 +18058,13 @@ end
 
     Unique identifier for this event.
 
-  - `processed_at: Time`
+  - `processed_at: optional Time`
 
     Timestamp when the interrupt was processed.
 
     format: date-time
 
-  - `session_thread_id: String`
+  - `session_thread_id: optional String`
 
     If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -18076,7 +18076,7 @@ end
 
   - `type: :"user.interrupt"`
 
-  - `session_thread_id: String`
+  - `session_thread_id: optional String`
 
     If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -18228,11 +18228,11 @@ end
 
             minLength: 1
 
-      - `context: String`
+      - `context: optional String`
 
         Additional context about the document for the model.
 
-      - `title: String`
+      - `title: optional String`
 
         The title of the document.
 
@@ -18242,7 +18242,7 @@ end
 
       - `type: :redacted`
 
-  - `processed_at: Time`
+  - `processed_at: optional Time`
 
     Timestamp when the agent finished processing this message.
 
@@ -18392,11 +18392,11 @@ end
 
             minLength: 1
 
-      - `context: String`
+      - `context: optional String`
 
         Additional context about the document for the model.
 
-      - `title: String`
+      - `title: optional String`
 
         The title of the document.
 
@@ -18430,19 +18430,19 @@ end
 
     The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-  - `deny_message: String`
+  - `deny_message: optional String`
 
     Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
     maxLength: 10000
 
-  - `processed_at: Time`
+  - `processed_at: optional Time`
 
     Timestamp when the confirmation was processed.
 
     format: date-time
 
-  - `session_thread_id: String`
+  - `session_thread_id: optional String`
 
     Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
@@ -18468,7 +18468,7 @@ end
 
     minLength: 1, maxLength: 128
 
-  - `deny_message: String`
+  - `deny_message: optional String`
 
     Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
@@ -18488,7 +18488,7 @@ end
 
     minLength: 1, maxLength: 128
 
-  - `content: Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
+  - `content: optional Array[BetaManagedAgentsTextBlock | BetaManagedAgentsImageBlock | BetaManagedAgentsDocumentBlock | BetaManagedAgentsSearchResultBlock]`
 
     The result content returned by the tool.
 
@@ -18624,11 +18624,11 @@ end
 
             minLength: 1
 
-      - `context: String`
+      - `context: optional String`
 
         Additional context about the document for the model.
 
-      - `title: String`
+      - `title: optional String`
 
         The title of the document.
 
@@ -18670,7 +18670,7 @@ end
 
         minLength: 1
 
-  - `is_error: bool`
+  - `is_error: optional bool`
 
     Whether the tool execution resulted in an error.
 

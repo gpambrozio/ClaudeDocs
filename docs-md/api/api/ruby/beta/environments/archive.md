@@ -17,7 +17,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
 - `environment_id: String` (path parameter)
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   Optional header to specify the beta version(s) you want to use.
 
@@ -133,7 +133,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -205,7 +205,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
         Package manager configuration.
 
-        - `type: :packages`
+        - `type: optional :packages`
 
           Package configuration type
 
@@ -261,7 +261,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     RFC 3339 timestamp when environment was last updated
 
-  - `scope: :organization | :account`
+  - `scope: optional :organization | :account`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 

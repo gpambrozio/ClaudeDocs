@@ -35,7 +35,7 @@ Create Deployment
 
       minLength: 1, maxLength: 128
 
-    - `version: Integer`
+    - `version: optional Integer`
 
       The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -193,11 +193,11 @@ Create Deployment
 
               minLength: 1
 
-        - `context: String`
+        - `context: optional String`
 
           Additional context about the document for the model.
 
-        - `title: String`
+        - `title: optional String`
 
           The title of the document.
 
@@ -243,7 +243,7 @@ Create Deployment
 
           maxLength: 262144
 
-    - `max_iterations: Integer`
+    - `max_iterations: optional Integer`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -273,7 +273,7 @@ Create Deployment
 
   minLength: 1, maxLength: 256
 
-- `budget: BetaManagedAgentsBudgetLimit`
+- `budget: optional BetaManagedAgentsBudgetLimit`
 
   Enforced spend ceiling stamped onto each session created from this deployment, copied at session-creation time. Omit to leave sessions uncapped. The deployment agent's model must have a public list price, or the request is rejected; a multiagent roster is re-validated in full when each fire copies the cap, which fails closed the same way.
 
@@ -291,17 +291,17 @@ Create Deployment
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-- `description: String`
+- `description: optional String`
 
   Description of what the deployment does.
 
   maxLength: 2048
 
-- `metadata: Hash[Symbol, String]`
+- `metadata: optional Hash[Symbol, String]`
 
   Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-- `resources: Array[BetaManagedAgentsGitHubRepositoryResourceParams | BetaManagedAgentsFileResourceParams | BetaManagedAgentsMemoryStoreResourceParam]`
+- `resources: optional Array[BetaManagedAgentsGitHubRepositoryResourceParams | BetaManagedAgentsFileResourceParams | BetaManagedAgentsMemoryStoreResourceParam]`
 
   Resources (e.g. repositories, files) to mount into each session's container. Maximum 500.
 
@@ -317,13 +317,13 @@ Create Deployment
 
       minLength: 1, maxLength: 2048
 
-    - `authorization_token: String`
+    - `authorization_token: optional String`
 
       GitHub authorization token used to clone the repository. Required for private repositories; optional for public ones.
 
       minLength: 1, maxLength: 4096
 
-    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
       Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -347,7 +347,7 @@ Create Deployment
 
           minLength: 7, maxLength: 64
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -365,7 +365,7 @@ Create Deployment
 
       minLength: 1, maxLength: 128
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -381,7 +381,7 @@ Create Deployment
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-    - `access: :read_write | :read_only`
+    - `access: optional :read_write | :read_only`
 
       Access mode for the mounted store. Defaults to read_write. read_only mounts the store as a read-only filesystem.
 
@@ -389,13 +389,13 @@ Create Deployment
 
       - `:read_only`
 
-    - `instructions: String`
+    - `instructions: optional String`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
       maxLength: 4096
 
-- `schedule: BetaManagedAgentsScheduleParams`
+- `schedule: optional BetaManagedAgentsScheduleParams`
 
   Optional recurring cron schedule. When present, the deployment fires automatically. Both expression and timezone are required when schedule is set.
 
@@ -413,11 +413,11 @@ Create Deployment
 
     minLength: 1
 
-- `vault_ids: Array[String]`
+- `vault_ids: optional Array[String]`
 
   Vault IDs for stored credentials the agent can use during sessions created from this deployment. Maximum 50.
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -533,7 +533,7 @@ Create Deployment
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -729,11 +729,11 @@ Create Deployment
 
                 minLength: 1
 
-          - `context: String`
+          - `context: optional String`
 
             Additional context about the document for the model.
 
-          - `title: String`
+          - `title: optional String`
 
             The title of the document.
 
@@ -777,7 +777,7 @@ Create Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `max_iterations: Integer`
+      - `max_iterations: optional Integer`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -927,7 +927,7 @@ Create Deployment
 
         Github URL of the repository
 
-      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -951,7 +951,7 @@ Create Deployment
 
             minLength: 7, maxLength: 64
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -965,7 +965,7 @@ Create Deployment
 
         ID of a previously uploaded file.
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -979,7 +979,7 @@ Create Deployment
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-      - `access: :read_write | :read_only`
+      - `access: optional :read_write | :read_only`
 
         Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -987,7 +987,7 @@ Create Deployment
 
         - `:read_only`
 
-      - `instructions: String`
+      - `instructions: optional String`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -1009,13 +1009,13 @@ Create Deployment
 
       minLength: 1
 
-    - `last_run_at: Time`
+    - `last_run_at: optional Time`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `upcoming_runs_at: Array[Time]`
+    - `upcoming_runs_at: optional Array[Time]`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -1041,7 +1041,7 @@ Create Deployment
 
     Vault IDs supplying stored credentials for sessions created from this deployment.
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit`
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
@@ -1153,37 +1153,37 @@ List Deployments
 
 ### Parameters
 
-- `agent_id: String` (query parameter)
+- `agent_id: optional String` (query parameter)
 
   Filter by agent ID.
 
-- `created_at_gte: Time` (query parameter)
+- `created_at_gte: optional Time` (query parameter)
 
   Return deployments created at or after this time (inclusive).
 
   format: date-time
 
-- `created_at_lte: Time` (query parameter)
+- `created_at_lte: optional Time` (query parameter)
 
   Return deployments created at or before this time (inclusive).
 
   format: date-time
 
-- `include_archived: bool` (query parameter)
+- `include_archived: optional bool` (query parameter)
 
   When true, includes archived deployments. Default: false (exclude archived).
 
-- `limit: Integer` (query parameter)
+- `limit: optional Integer` (query parameter)
 
   Maximum results per page. Default 20, maximum 100.
 
   format: int32
 
-- `page: String` (query parameter)
+- `page: optional String` (query parameter)
 
   Opaque pagination cursor.
 
-- `status: BetaManagedAgentsDeploymentStatus` (query parameter)
+- `status: optional BetaManagedAgentsDeploymentStatus` (query parameter)
 
   Filter by status: `active` or `paused`. Omit for both. To include archived deployments, use `include_archived` instead; the two cannot be combined.
 
@@ -1195,7 +1195,7 @@ List Deployments
 
     The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -1311,7 +1311,7 @@ List Deployments
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -1507,11 +1507,11 @@ List Deployments
 
                 minLength: 1
 
-          - `context: String`
+          - `context: optional String`
 
             Additional context about the document for the model.
 
-          - `title: String`
+          - `title: optional String`
 
             The title of the document.
 
@@ -1555,7 +1555,7 @@ List Deployments
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `max_iterations: Integer`
+      - `max_iterations: optional Integer`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -1705,7 +1705,7 @@ List Deployments
 
         Github URL of the repository
 
-      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -1729,7 +1729,7 @@ List Deployments
 
             minLength: 7, maxLength: 64
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -1743,7 +1743,7 @@ List Deployments
 
         ID of a previously uploaded file.
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -1757,7 +1757,7 @@ List Deployments
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-      - `access: :read_write | :read_only`
+      - `access: optional :read_write | :read_only`
 
         Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -1765,7 +1765,7 @@ List Deployments
 
         - `:read_only`
 
-      - `instructions: String`
+      - `instructions: optional String`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -1787,13 +1787,13 @@ List Deployments
 
       minLength: 1
 
-    - `last_run_at: Time`
+    - `last_run_at: optional Time`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `upcoming_runs_at: Array[Time]`
+    - `upcoming_runs_at: optional Array[Time]`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -1819,7 +1819,7 @@ List Deployments
 
     Vault IDs supplying stored credentials for sessions created from this deployment.
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit`
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
@@ -1935,7 +1935,7 @@ Get Deployment
 
   Unique identifier of the deployment.
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -2051,7 +2051,7 @@ Get Deployment
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -2247,11 +2247,11 @@ Get Deployment
 
                 minLength: 1
 
-          - `context: String`
+          - `context: optional String`
 
             Additional context about the document for the model.
 
-          - `title: String`
+          - `title: optional String`
 
             The title of the document.
 
@@ -2295,7 +2295,7 @@ Get Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `max_iterations: Integer`
+      - `max_iterations: optional Integer`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -2445,7 +2445,7 @@ Get Deployment
 
         Github URL of the repository
 
-      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -2469,7 +2469,7 @@ Get Deployment
 
             minLength: 7, maxLength: 64
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -2483,7 +2483,7 @@ Get Deployment
 
         ID of a previously uploaded file.
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -2497,7 +2497,7 @@ Get Deployment
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-      - `access: :read_write | :read_only`
+      - `access: optional :read_write | :read_only`
 
         Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -2505,7 +2505,7 @@ Get Deployment
 
         - `:read_only`
 
-      - `instructions: String`
+      - `instructions: optional String`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -2527,13 +2527,13 @@ Get Deployment
 
       minLength: 1
 
-    - `last_run_at: Time`
+    - `last_run_at: optional Time`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `upcoming_runs_at: Array[Time]`
+    - `upcoming_runs_at: optional Array[Time]`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -2559,7 +2559,7 @@ Get Deployment
 
     Vault IDs supplying stored credentials for sessions created from this deployment.
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit`
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
@@ -2670,7 +2670,7 @@ Update Deployment
 
   Unique identifier of the deployment to update.
 
-- `agent: String | BetaManagedAgentsAgentParams`
+- `agent: optional String | BetaManagedAgentsAgentParams`
 
   Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
 
@@ -2688,13 +2688,13 @@ Update Deployment
 
       minLength: 1, maxLength: 128
 
-    - `version: Integer`
+    - `version: optional Integer`
 
       The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
       format: int32
 
-- `budget: BetaManagedAgentsBudgetLimit`
+- `budget: optional BetaManagedAgentsBudgetLimit`
 
   Spend ceiling for future sessions. Full replacement. Omit to preserve; send null to clear (sessions created afterwards are uncapped). The deployment agent's model must have a public list price, or the request is rejected; a multiagent roster is re-validated in full when each fire copies the cap, which fails closed the same way.
 
@@ -2712,19 +2712,19 @@ Update Deployment
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-- `description: String`
+- `description: optional String`
 
   Description. Omit to preserve; send empty string or null to clear.
 
   maxLength: 2048
 
-- `environment_id: String`
+- `environment_id: optional String`
 
   ID of the `environment` where sessions run. Omit to preserve. Cannot be cleared.
 
   maxLength: 128
 
-- `initial_events: Array[BetaManagedAgentsDeploymentInitialEventParams]`
+- `initial_events: optional Array[BetaManagedAgentsDeploymentInitialEventParams]`
 
   Initial events. Full replacement. Omit to preserve. Cannot be cleared. At least 1, maximum 50.
 
@@ -2870,11 +2870,11 @@ Update Deployment
 
               minLength: 1
 
-        - `context: String`
+        - `context: optional String`
 
           Additional context about the document for the model.
 
-        - `title: String`
+        - `title: optional String`
 
           The title of the document.
 
@@ -2920,7 +2920,7 @@ Update Deployment
 
           maxLength: 262144
 
-    - `max_iterations: Integer`
+    - `max_iterations: optional Integer`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -2944,17 +2944,17 @@ Update Deployment
 
         minLength: 1
 
-- `metadata: Hash[Symbol, String]`
+- `metadata: optional Hash[Symbol, String]`
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-- `name: String`
+- `name: optional String`
 
   Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
   maxLength: 256
 
-- `resources: Array[BetaManagedAgentsGitHubRepositoryResourceParams | BetaManagedAgentsFileResourceParams | BetaManagedAgentsMemoryStoreResourceParam]`
+- `resources: optional Array[BetaManagedAgentsGitHubRepositoryResourceParams | BetaManagedAgentsFileResourceParams | BetaManagedAgentsMemoryStoreResourceParam]`
 
   Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
@@ -2970,13 +2970,13 @@ Update Deployment
 
       minLength: 1, maxLength: 2048
 
-    - `authorization_token: String`
+    - `authorization_token: optional String`
 
       GitHub authorization token used to clone the repository. Required for private repositories; optional for public ones.
 
       minLength: 1, maxLength: 4096
 
-    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
       Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -3000,7 +3000,7 @@ Update Deployment
 
           minLength: 7, maxLength: 64
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -3018,7 +3018,7 @@ Update Deployment
 
       minLength: 1, maxLength: 128
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -3034,7 +3034,7 @@ Update Deployment
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-    - `access: :read_write | :read_only`
+    - `access: optional :read_write | :read_only`
 
       Access mode for the mounted store. Defaults to read_write. read_only mounts the store as a read-only filesystem.
 
@@ -3042,13 +3042,13 @@ Update Deployment
 
       - `:read_only`
 
-    - `instructions: String`
+    - `instructions: optional String`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
       maxLength: 4096
 
-- `schedule: BetaManagedAgentsScheduleParams`
+- `schedule: optional BetaManagedAgentsScheduleParams`
 
   Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to manual-only).
 
@@ -3066,11 +3066,11 @@ Update Deployment
 
     minLength: 1
 
-- `vault_ids: Array[String]`
+- `vault_ids: optional Array[String]`
 
   Vault IDs. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 50.
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -3186,7 +3186,7 @@ Update Deployment
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -3382,11 +3382,11 @@ Update Deployment
 
                 minLength: 1
 
-          - `context: String`
+          - `context: optional String`
 
             Additional context about the document for the model.
 
-          - `title: String`
+          - `title: optional String`
 
             The title of the document.
 
@@ -3430,7 +3430,7 @@ Update Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `max_iterations: Integer`
+      - `max_iterations: optional Integer`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -3580,7 +3580,7 @@ Update Deployment
 
         Github URL of the repository
 
-      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -3604,7 +3604,7 @@ Update Deployment
 
             minLength: 7, maxLength: 64
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -3618,7 +3618,7 @@ Update Deployment
 
         ID of a previously uploaded file.
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -3632,7 +3632,7 @@ Update Deployment
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-      - `access: :read_write | :read_only`
+      - `access: optional :read_write | :read_only`
 
         Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -3640,7 +3640,7 @@ Update Deployment
 
         - `:read_only`
 
-      - `instructions: String`
+      - `instructions: optional String`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -3662,13 +3662,13 @@ Update Deployment
 
       minLength: 1
 
-    - `last_run_at: Time`
+    - `last_run_at: optional Time`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `upcoming_runs_at: Array[Time]`
+    - `upcoming_runs_at: optional Array[Time]`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -3694,7 +3694,7 @@ Update Deployment
 
     Vault IDs supplying stored credentials for sessions created from this deployment.
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit`
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
@@ -3805,7 +3805,7 @@ Archive Deployment
 
   Unique identifier of the deployment to archive.
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -3921,7 +3921,7 @@ Archive Deployment
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -4117,11 +4117,11 @@ Archive Deployment
 
                 minLength: 1
 
-          - `context: String`
+          - `context: optional String`
 
             Additional context about the document for the model.
 
-          - `title: String`
+          - `title: optional String`
 
             The title of the document.
 
@@ -4165,7 +4165,7 @@ Archive Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `max_iterations: Integer`
+      - `max_iterations: optional Integer`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -4315,7 +4315,7 @@ Archive Deployment
 
         Github URL of the repository
 
-      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -4339,7 +4339,7 @@ Archive Deployment
 
             minLength: 7, maxLength: 64
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -4353,7 +4353,7 @@ Archive Deployment
 
         ID of a previously uploaded file.
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -4367,7 +4367,7 @@ Archive Deployment
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-      - `access: :read_write | :read_only`
+      - `access: optional :read_write | :read_only`
 
         Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -4375,7 +4375,7 @@ Archive Deployment
 
         - `:read_only`
 
-      - `instructions: String`
+      - `instructions: optional String`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -4397,13 +4397,13 @@ Archive Deployment
 
       minLength: 1
 
-    - `last_run_at: Time`
+    - `last_run_at: optional Time`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `upcoming_runs_at: Array[Time]`
+    - `upcoming_runs_at: optional Array[Time]`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -4429,7 +4429,7 @@ Archive Deployment
 
     Vault IDs supplying stored credentials for sessions created from this deployment.
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit`
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
@@ -4540,7 +4540,7 @@ Run Deployment Now
 
   Unique identifier of the deployment to run.
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -4656,7 +4656,7 @@ Run Deployment Now
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -4937,7 +4937,7 @@ Pause Deployment
 
   Unique identifier of the deployment to pause.
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -5053,7 +5053,7 @@ Pause Deployment
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -5249,11 +5249,11 @@ Pause Deployment
 
                 minLength: 1
 
-          - `context: String`
+          - `context: optional String`
 
             Additional context about the document for the model.
 
-          - `title: String`
+          - `title: optional String`
 
             The title of the document.
 
@@ -5297,7 +5297,7 @@ Pause Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `max_iterations: Integer`
+      - `max_iterations: optional Integer`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -5447,7 +5447,7 @@ Pause Deployment
 
         Github URL of the repository
 
-      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -5471,7 +5471,7 @@ Pause Deployment
 
             minLength: 7, maxLength: 64
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -5485,7 +5485,7 @@ Pause Deployment
 
         ID of a previously uploaded file.
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -5499,7 +5499,7 @@ Pause Deployment
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-      - `access: :read_write | :read_only`
+      - `access: optional :read_write | :read_only`
 
         Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -5507,7 +5507,7 @@ Pause Deployment
 
         - `:read_only`
 
-      - `instructions: String`
+      - `instructions: optional String`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -5529,13 +5529,13 @@ Pause Deployment
 
       minLength: 1
 
-    - `last_run_at: Time`
+    - `last_run_at: optional Time`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `upcoming_runs_at: Array[Time]`
+    - `upcoming_runs_at: optional Array[Time]`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -5561,7 +5561,7 @@ Pause Deployment
 
     Vault IDs supplying stored credentials for sessions created from this deployment.
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit`
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
@@ -5672,7 +5672,7 @@ Unpause Deployment
 
   Unique identifier of the deployment to unpause.
 
-- `betas: Array[AnthropicBeta]` (header parameter)
+- `betas: optional Array[AnthropicBeta]` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
@@ -5788,7 +5788,7 @@ Unpause Deployment
 
   - `:"experimental-claude-tag-2026-10-21"`
 
-- `workspace_id: String` (header parameter)
+- `workspace_id: optional String` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -5984,11 +5984,11 @@ Unpause Deployment
 
                 minLength: 1
 
-          - `context: String`
+          - `context: optional String`
 
             Additional context about the document for the model.
 
-          - `title: String`
+          - `title: optional String`
 
             The title of the document.
 
@@ -6032,7 +6032,7 @@ Unpause Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `max_iterations: Integer`
+      - `max_iterations: optional Integer`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -6182,7 +6182,7 @@ Unpause Deployment
 
         Github URL of the repository
 
-      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -6206,7 +6206,7 @@ Unpause Deployment
 
             minLength: 7, maxLength: 64
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -6220,7 +6220,7 @@ Unpause Deployment
 
         ID of a previously uploaded file.
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -6234,7 +6234,7 @@ Unpause Deployment
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-      - `access: :read_write | :read_only`
+      - `access: optional :read_write | :read_only`
 
         Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -6242,7 +6242,7 @@ Unpause Deployment
 
         - `:read_only`
 
-      - `instructions: String`
+      - `instructions: optional String`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -6264,13 +6264,13 @@ Unpause Deployment
 
       minLength: 1
 
-    - `last_run_at: Time`
+    - `last_run_at: optional Time`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `upcoming_runs_at: Array[Time]`
+    - `upcoming_runs_at: optional Array[Time]`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -6296,7 +6296,7 @@ Unpause Deployment
 
     Vault IDs supplying stored credentials for sessions created from this deployment.
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit`
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
@@ -6423,13 +6423,13 @@ puts(beta_managed_agents_deployment)
 
     minLength: 1
 
-  - `last_run_at: Time`
+  - `last_run_at: optional Time`
 
     Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
     format: date-time
 
-  - `upcoming_runs_at: Array[Time]`
+  - `upcoming_runs_at: optional Array[Time]`
 
     Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -6643,11 +6643,11 @@ puts(beta_managed_agents_deployment)
 
                 minLength: 1
 
-          - `context: String`
+          - `context: optional String`
 
             Additional context about the document for the model.
 
-          - `title: String`
+          - `title: optional String`
 
             The title of the document.
 
@@ -6691,7 +6691,7 @@ puts(beta_managed_agents_deployment)
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `max_iterations: Integer`
+      - `max_iterations: optional Integer`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -6841,7 +6841,7 @@ puts(beta_managed_agents_deployment)
 
         Github URL of the repository
 
-      - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -6865,7 +6865,7 @@ puts(beta_managed_agents_deployment)
 
             minLength: 7, maxLength: 64
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -6879,7 +6879,7 @@ puts(beta_managed_agents_deployment)
 
         ID of a previously uploaded file.
 
-      - `mount_path: String`
+      - `mount_path: optional String`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -6893,7 +6893,7 @@ puts(beta_managed_agents_deployment)
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-      - `access: :read_write | :read_only`
+      - `access: optional :read_write | :read_only`
 
         Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -6901,7 +6901,7 @@ puts(beta_managed_agents_deployment)
 
         - `:read_only`
 
-      - `instructions: String`
+      - `instructions: optional String`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -6923,13 +6923,13 @@ puts(beta_managed_agents_deployment)
 
       minLength: 1
 
-    - `last_run_at: Time`
+    - `last_run_at: optional Time`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `upcoming_runs_at: Array[Time]`
+    - `upcoming_runs_at: optional Array[Time]`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -6955,7 +6955,7 @@ puts(beta_managed_agents_deployment)
 
     Vault IDs supplying stored credentials for sessions created from this deployment.
 
-  - `budget: BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit`
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 
@@ -7121,11 +7121,11 @@ puts(beta_managed_agents_deployment)
 
               minLength: 1
 
-        - `context: String`
+        - `context: optional String`
 
           Additional context about the document for the model.
 
-        - `title: String`
+        - `title: optional String`
 
           The title of the document.
 
@@ -7169,7 +7169,7 @@ puts(beta_managed_agents_deployment)
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-    - `max_iterations: Integer`
+    - `max_iterations: optional Integer`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -7341,11 +7341,11 @@ puts(beta_managed_agents_deployment)
 
               minLength: 1
 
-        - `context: String`
+        - `context: optional String`
 
           Additional context about the document for the model.
 
-        - `title: String`
+        - `title: optional String`
 
           The title of the document.
 
@@ -7391,7 +7391,7 @@ puts(beta_managed_agents_deployment)
 
           maxLength: 262144
 
-    - `max_iterations: Integer`
+    - `max_iterations: optional Integer`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -7681,7 +7681,7 @@ puts(beta_managed_agents_deployment)
 
         Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-  - `max_iterations: Integer`
+  - `max_iterations: optional Integer`
 
     Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -7831,11 +7831,11 @@ puts(beta_managed_agents_deployment)
 
             minLength: 1
 
-      - `context: String`
+      - `context: optional String`
 
         Additional context about the document for the model.
 
-      - `title: String`
+      - `title: optional String`
 
         The title of the document.
 
@@ -7977,7 +7977,7 @@ puts(beta_managed_agents_deployment)
 
     ID of a previously uploaded file.
 
-  - `mount_path: String`
+  - `mount_path: optional String`
 
     Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -7993,7 +7993,7 @@ puts(beta_managed_agents_deployment)
 
     Github URL of the repository
 
-  - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+  - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
     Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -8017,7 +8017,7 @@ puts(beta_managed_agents_deployment)
 
         minLength: 7, maxLength: 64
 
-  - `mount_path: String`
+  - `mount_path: optional String`
 
     Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -8057,7 +8057,7 @@ puts(beta_managed_agents_deployment)
 
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-  - `access: :read_write | :read_only`
+  - `access: optional :read_write | :read_only`
 
     Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -8065,7 +8065,7 @@ puts(beta_managed_agents_deployment)
 
     - `:read_only`
 
-  - `instructions: String`
+  - `instructions: optional String`
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -8097,13 +8097,13 @@ puts(beta_managed_agents_deployment)
 
     minLength: 1
 
-  - `last_run_at: Time`
+  - `last_run_at: optional Time`
 
     Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
     format: date-time
 
-  - `upcoming_runs_at: Array[Time]`
+  - `upcoming_runs_at: optional Array[Time]`
 
     Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -8151,7 +8151,7 @@ puts(beta_managed_agents_deployment)
 
       Github URL of the repository
 
-    - `checkout: BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+    - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
 
       Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -8175,7 +8175,7 @@ puts(beta_managed_agents_deployment)
 
           minLength: 7, maxLength: 64
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -8189,7 +8189,7 @@ puts(beta_managed_agents_deployment)
 
       ID of a previously uploaded file.
 
-    - `mount_path: String`
+    - `mount_path: optional String`
 
       Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -8203,7 +8203,7 @@ puts(beta_managed_agents_deployment)
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-    - `access: :read_write | :read_only`
+    - `access: optional :read_write | :read_only`
 
       Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -8211,7 +8211,7 @@ puts(beta_managed_agents_deployment)
 
       - `:read_only`
 
-    - `instructions: String`
+    - `instructions: optional String`
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 

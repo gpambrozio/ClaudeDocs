@@ -28,7 +28,7 @@ Replace `<friendly-name>` with a display name and `<key-arn-from-create-key-step
 ```bash cURL
 curl -sS "https://api.anthropic.com/v1/organizations/external_keys" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "display_name": "<friendly-name>",
@@ -181,7 +181,7 @@ Replace `<friendly-name>` with a display name. Replace the value that starts wit
 ```bash cURL
 curl -sS "https://api.anthropic.com/v1/organizations/external_keys" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "display_name": "<friendly-name>",
@@ -340,7 +340,7 @@ Replace the placeholders:
 ```bash cURL
 curl -sS "https://api.anthropic.com/v1/organizations/external_keys" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "display_name": "<friendly-name>",
@@ -524,7 +524,7 @@ Replace `ekey_<id>` with the external key ID.
 ```bash cURL
 curl -sS -X POST "https://api.anthropic.com/v1/organizations/external_keys/ekey_<id>/validate" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```bash CLI
@@ -617,7 +617,7 @@ Replace `<workspace-id>` with the workspace ID, which starts with `wrkspc_`, and
 ```bash cURL
 curl -sS -X POST "https://api.anthropic.com/v1/organizations/workspaces/<workspace-id>" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "external_key_id": "ekey_<id>"

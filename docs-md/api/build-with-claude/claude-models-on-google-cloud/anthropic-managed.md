@@ -167,26 +167,30 @@ dotnet add package Anthropic.GoogleCloud
 **Go**
 
 ```bash
-go get github.com/anthropics/anthropic-sdk-go/v2
+go get github.com/anthropics/anthropic-sdk-go/v2/googlecloud
 ```
 
 **Java**
 
-```kotlin Gradle
+**Gradle**
+
+```kotlin
 implementation("com.anthropic:anthropic-java:3.4.0")
 implementation("com.anthropic:anthropic-java-google-cloud:3.4.0")
 ```
 
-```xml Maven
+**Maven**
+
+```xml
 <dependency>
-  <groupId>com.anthropic</groupId>
-  <artifactId>anthropic-java</artifactId>
-  <version>3.4.0</version>
+    <groupId>com.anthropic</groupId>
+    <artifactId>anthropic-java</artifactId>
+    <version>3.4.0</version>
 </dependency>
 <dependency>
-  <groupId>com.anthropic</groupId>
-  <artifactId>anthropic-java-google-cloud</artifactId>
-  <version>3.4.0</version>
+    <groupId>com.anthropic</groupId>
+    <artifactId>anthropic-java-google-cloud</artifactId>
+    <version>3.4.0</version>
 </dependency>
 ```
 
@@ -244,7 +248,7 @@ Before running these examples, complete the steps in [Before making API calls](a
 curl "https://claude.googleapis.com/v1/projects/$ANTHROPIC_GOOGLE_CLOUD_PROJECT/locations/global/workspaces/$ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID/invoke/v1/messages" \
   -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
   -H "content-type: application/json" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,
@@ -494,35 +498,51 @@ Like the SDK client, the CLI doesn’t send requests for Claude Models on Google
 
 This section lists features that work on Claude Models on Google Cloud (Anthropic managed) and features that aren’t supported there. It doesn’t list every Claude API feature, and it doesn’t say whether an unlisted feature works.
 
-The following features work on Claude Models on Google Cloud (Anthropic managed) as they do on the Claude API:
+The Models API and the following features are available on Claude Models on Google Cloud (Anthropic managed):
 
-* **Fast mode:** [Fast mode](../fast-mode.md) for Claude Opus 5.5.
+* [Advisor tool](../../agents-and-tools/tool-use/advisor-tool.md) (Beta)
+* [Agent Skills](../../agents-and-tools/agent-skills/overview.md)
+  * [Custom Skills](../skills-guide.md#managing-custom-skills)
+  * [Pre-built Agent Skills](../../agents-and-tools/agent-skills/overview.md#pre-built-agent-skills)
+* [Batch processing](../batch-processing.md)
+* [Classifier refusals](../refusals-and-fallback.md)
+  * [Client-side fallback](../refusals-and-fallback.md#client-side-fallback) (Beta)
+  * [Server-side fallback](../refusals-and-fallback.md#server-side-fallback) (Beta)
+* [Code execution tool](../../agents-and-tools/tool-use/code-execution-tool.md)
+* [Custom tools](../../agents-and-tools/tool-use/define-tools.md)
+* [Data residency](../../manage-claude/data-residency.md)
+* [Effort](../effort.md)
+  * [Per-message effort](../effort.md#change-effort-mid-conversation-beta) (Beta)
+* [Fast mode](../fast-mode.md)
+* [Files API](../files.md)
+* [MCP connector](../../agents-and-tools/mcp-connector.md) (Beta)
+  * [Client-side MCP helpers](../../agents-and-tools/mcp-connector.md#client-side-mcp-helpers) (Beta)
+* [Memory tool](../../agents-and-tools/tool-use/memory-tool.md)
+  * [Memory tool helpers](../../agents-and-tools/tool-use/memory-tool.md#implement-the-memory-handler) (Beta)
+* [Message streaming](../streaming.md)
+* [Message threads](../message-threads.md) (Beta)
+* [Mid-conversation system messages](../mid-conversation-system-messages.md)
+  * [Mid-conversation tool changes](../mid-conversation-system-messages.md#mid-conversation-tool-changes) (Beta)
+  * [Turn-scoped system messages](../mid-conversation-system-messages.md#turn-scoped-system-messages) (Beta)
+* [OpenTelemetry](../../manage-claude/opentelemetry.md) (Beta)
+* [PDF support](../pdf-support.md)
+* [Prompt caching](../prompt-caching.md)
+  * [1-hour duration](../prompt-caching.md#1-hour-cache-duration)
+  * [5-minute duration (default)](../prompt-caching.md#how-prompt-caching-works)
+  * [Automatic caching](../prompt-caching.md#automatic-caching)
+* [SDK middleware](../../cli-sdks-libraries/middleware.md)
+* [Structured outputs](../structured-outputs.md)
+  * [Typed structured output helpers](../structured-outputs.md#usage)
+* [Thinking](../thinking.md)
+  * [Adaptive thinking](../thinking-steering-and-cost.md)
+  * [Extended thinking](../extended-thinking.md)
+* [Token counting](../token-counting.md)
+* [Tool runner](../../agents-and-tools/tool-use/tool-runner.md) (Beta)
+* [Vision (images)](../vision.md)
+* [Web fetch tool](../../agents-and-tools/tool-use/web-fetch-tool.md)
+* [Web search tool](../../agents-and-tools/tool-use/web-search-tool.md)
 
-* **Beta features:** If a beta is limited to selected organizations on the Claude API, the Anthropic organization that setup creates needs the same access.
-
-* **Tools:** [Tool use](../../agents-and-tools/tool-use/overview.md), including:
-
-  * Web search
-  * Web fetch
-  * Code execution
-  * The memory tool
-  * The advisor tool
-  * The MCP connector
-
-* **Skills and files:** [Agent Skills](../../agents-and-tools/agent-skills/overview.md) and the [Files API](../files.md).
-
-* **Model capabilities:**
-
-  * [Prompt caching](../prompt-caching.md)
-  * [Extended thinking](../thinking.md)
-  * [Adaptive thinking](../thinking.md#configuring-thinking)
-  * [Effort](../effort.md)
-  * [Server-side fallback](../refusals-and-fallback.md#server-side-fallback)
-  * [Streaming](../streaming.md)
-  * [Structured outputs](../structured-outputs.md)
-  * [Token counting](../token-counting.md)
-
-* **Batches and models:** The [Message Batches API](../batch-processing.md) and the Models API.
+If a beta feature is limited to selected organizations on the Claude API, the Anthropic organization that setup creates needs the same access.
 
 To turn the [Compliance API](../../manage-claude/compliance-api.md) on or off for the Anthropic organization that setup creates, [open the Claude Console](anthropic-managed.md#using-the-claude-console), go to **Settings > Compliance**, and use the **Compliance API** toggle.
 
@@ -530,15 +550,24 @@ Customer-managed encryption keys (CMEK) are available with Google Cloud KMS keys
 
 ### Claude Managed Agents
 
-[Claude Managed Agents](../../managed-agents/overview.md) is available through Claude Models on Google Cloud (Anthropic managed), including the following:
+[Claude Managed Agents](../../managed-agents/overview.md) is available through Claude Models on Google Cloud (Anthropic managed), including [sessions](../../managed-agents/sessions.md) and the following features:
 
-* [Agents](../../managed-agents/agent-setup.md)
-* [Environments](../../managed-agents/environments.md)
-* [Sessions](../../managed-agents/sessions.md)
-* [Credential vaults](../../managed-agents/vaults.md)
-* [Memory stores](../../managed-agents/memory.md)
-* [Scheduled deployments](../../managed-agents/scheduled-deployments.md)
-* [Self-hosted sandboxes](../../managed-agents/self-hosted-sandboxes.md)
+* [Agent configurations](../../managed-agents/agent-setup.md) (Beta)
+* [Cloud sandboxes](../../managed-agents/environments.md) (Beta)
+* [Event deltas](../../managed-agents/event-deltas.md) (Beta)
+* [GitHub access](../../managed-agents/github.md) (Beta)
+* [Memory stores](../../managed-agents/memory.md) (Beta)
+* [Multiagent orchestration](../../managed-agents/multiagent-orchestration.md) (Beta)
+  * [Dynamic workflows](../../managed-agents/workflow-runs.md) (Beta)
+  * [Session threads](../../managed-agents/session-threads.md) (Beta)
+* [Outcomes](../../managed-agents/define-outcomes.md) (Beta)
+* [Permission policies](../../managed-agents/permission-policies.md) (Beta)
+* [Preserved thinking](../preserved-thinking.md)
+* [Scheduled deployments](../../managed-agents/scheduled-deployments.md) (Beta)
+* [Self-hosted sandboxes](../../managed-agents/self-hosted-sandboxes.md) (Beta)
+* [Session budgets](../../managed-agents/budgets.md) (Beta)
+* [Vaults](../../managed-agents/vaults.md) (Beta)
+* [Web domain restrictions](../../managed-agents/tools-web-restrictions.md) (Beta)
 
 Access is checked when a session or a deployment is created, not while it runs:
 
@@ -634,7 +663,7 @@ curl https://aiplatform.googleapis.com/v1/projects/MY_PROJECT_ID/locations/globa
   -H "Authorization: Bearer $(gcloud auth print-access-token)" \
   -H "Content-Type: application/json" \
   -d '{
-    "anthropic_version": "vertex-2023-10-16",
+    "anthropic_version": "2026-10-21",
     "messages": [{"role": "user", "content": "Hey Claude!"}],
     "max_tokens": 100
   }'
@@ -729,7 +758,7 @@ The following code creates the client for Claude Models on Google Cloud (Anthrop
 curl "https://claude.googleapis.com/v1/projects/$ANTHROPIC_GOOGLE_CLOUD_PROJECT/locations/global/workspaces/$ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID/invoke/v1/messages" \
   -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
   -H "content-type: application/json" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -d '{
     "model": "claude-opus-5-5",
     "max_tokens": 1024,

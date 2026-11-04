@@ -49,7 +49,7 @@ ending_at=2026-09-08T00:00:00Z&\
 time_bucket_width=1d&\
 group_by[]=model&\
 limit=10" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: analytics-usage-cost-2026-08-24" \
   -H "x-api-key: $ANTHROPIC_API_KEY"
 ```
@@ -268,9 +268,15 @@ Dimensions such as `model` and `actor` apply to every organization. Some, such a
 
 The `actor` dimension is who a request is attributed to: a user, a service account, a federated cloud identity (an AWS or Google Cloud principal, for organizations that access Claude through their cloud platform), or, when none of those is behind the request, the API key itself. When you group by `actor`, each row’s `actor` is an object whose `type` says which kind it is. Usage that can’t be attributed to any identity has `actor: null`.
 
-[Personal keys and service account keys](authentication.md#key-types) act as the user or service account they’re linked to, so their requests show that identity as the `actor` and the key in `api_key_id`. Legacy workspace keys aren’t linked to an identity, so the key appears as both the `actor` and the `api_key_id`. The exception is a key that Claude Code creates for a member at sign-in: it lives in the [Claude Code workspace](workspaces.md#claude-code-workspace), and its usage is attributed to that member. Requests made without an API key, such as from the Claude Console, from Claude Code after a [sign-in without an API key](../../claude-code/authentication.md#sign-in-without-an-api-key), or with a [Workload Identity Federation](workload-identity-federation.md) token, have `api_key_id: null`. After a sign-in without an API key, the `actor` is the member who signed in; a federated workload’s `actor` is its service account. To include usage with no API key in an `api_key_ids[]` filter, add an empty entry: `api_key_ids[]=`.
+[Personal keys and service account keys](authentication.md#key-types) act as the user or service account they’re linked to, so their requests show that identity as the `actor` and the key in `api_key_id`. Legacy workspace keys aren’t linked to an identity, so the key appears as both the `actor` and the `api_key_id`.
 
-The `api_key_ids[]` and `actor_ids[]` filters answer different questions. `api_key_ids[]=apikey_...` matches every request the key authenticated, whoever it is attributed to. `actor_ids[]=apikey_...` matches only requests attributed to the key itself.
+Requests made without an API key, such as from the Claude Console or with a [Workload Identity Federation](workload-identity-federation.md) token, have `api_key_id: null`. With a Workload Identity Federation token, the `actor` is the service account the token acts as.
+
+Whichever way a member signs in to Claude Code with their Claude Console account, the `actor` is that member. If Claude Code creates an API key at sign-in, `api_key_id` is that key, which lives in the [Claude Code workspace](workspaces.md#claude-code-workspace). After a [sign-in without an API key](../../claude-code/authentication.md#sign-in-without-an-api-key), `api_key_id` is `null`.
+
+Token usage from some [Claude Managed Agents](../managed-agents/overview.md) sessions is attributed to an Anthropic-managed service account (`svac_...`). For this usage, `api_key_id` is `null`. The account isn’t listed with the service accounts that you create. See [Find session usage across your organization](../managed-agents/session-observability.md#find-session-usage-across-your-organization).
+
+The `api_key_ids[]` and `actor_ids[]` filters answer different questions. `api_key_ids[]=apikey_...` matches every request the key authenticated, whoever it is attributed to. `actor_ids[]=apikey_...` matches only requests attributed to the key itself. To include usage with no API key in an `api_key_ids[]` filter, add an empty entry: `api_key_ids[]=`.
 
 ## Usage endpoint
 
@@ -285,7 +291,7 @@ ending_at=2026-09-08T00:00:00Z&\
 workspace_ids[]=wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ&\
 api_key_ids[]=apikey_01Rj2N8SVvo6BePZj99NhmiT&\
 group_by[]=service_tier" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: analytics-usage-cost-2026-08-24" \
   -H "x-api-key: $ANTHROPIC_API_KEY"
 ```
@@ -438,7 +444,7 @@ ending_at=2026-10-01T00:00:00Z&\
 group_by[]=actor&\
 order_by=requests&\
 limit=25" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: analytics-usage-cost-2026-08-24" \
   -H "x-api-key: $ANTHROPIC_API_KEY"
 ```
@@ -595,7 +601,7 @@ ending_at=2026-10-01T00:00:00Z&\
 group_by[]=model&\
 group_by[]=cost_type&\
 group_by[]=token_type" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: analytics-usage-cost-2026-08-24" \
   -H "x-api-key: $ANTHROPIC_API_KEY"
 ```
@@ -802,7 +808,7 @@ starting_at=2026-09-01T00:00:00Z&\
 ending_at=2026-09-08T00:00:00Z&\
 group_by[]=model&\
 bucket_width=1d" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "x-api-key: $ANTHROPIC_API_KEY"
 ```
 
@@ -815,7 +821,7 @@ ending_at=2026-09-08T00:00:00Z&\
 group_by[]=model&\
 time_bucket_width=1d&\
 limit=1000" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: analytics-usage-cost-2026-08-24" \
   -H "x-api-key: $ANTHROPIC_API_KEY"
 ```
@@ -975,7 +981,7 @@ group_by[]=inference_geo&\
 group_by[]=cost_type&\
 group_by[]=token_type&\
 limit=1000" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: analytics-usage-cost-2026-08-24" \
   -H "x-api-key: $ANTHROPIC_API_KEY"
 ```
@@ -1240,7 +1246,7 @@ curl "https://api.anthropic.com/v1/organizations/analytics/user_cost_report?\
 starting_at=2026-09-01T00:00:00Z&\
 ending_at=2026-10-01T00:00:00Z&\
 limit=100" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "x-api-key: $ANTHROPIC_API_KEY"
 ```
 
@@ -1372,7 +1378,7 @@ group_by[]=actor&\
 group_by[]=product&\
 actor_types[]=user_actor&\
 limit=100" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: analytics-usage-cost-2026-08-24" \
   -H "x-api-key: $ANTHROPIC_API_KEY"
 ```

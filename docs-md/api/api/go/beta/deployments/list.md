@@ -433,7 +433,7 @@ List Deployments
 
           minLength: 1
 
-  - `Metadata map[string, string]`
+  - `Metadata map[string]string`
 
     Arbitrary key-value metadata. Maximum 16 pairs.
 

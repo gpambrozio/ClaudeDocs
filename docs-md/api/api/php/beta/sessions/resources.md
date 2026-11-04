@@ -25,15 +25,15 @@ Add Session Resource
 
 - `type: "file"`
 
-- `mountPath?:optional string`
+- `mountPath?: optional string`
 
   Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-- `betas?:optional list<AnthropicBeta>` (header parameter)
+- `betas?: optional list<AnthropicBeta>` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -108,19 +108,19 @@ List Session Resources
 
 - `sessionID: string` (path parameter)
 
-- `limit?:optional int` (query parameter)
+- `limit?: optional int` (query parameter)
 
   Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
-- `page?:optional string` (query parameter)
+- `page?: optional string` (query parameter)
 
   Opaque cursor from a previous response's `next_page` field.
 
-- `betas?:optional list<AnthropicBeta>` (header parameter)
+- `betas?: optional list<AnthropicBeta>` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -263,11 +263,11 @@ Get Session Resource
 
 - `resourceID: string` (path parameter)
 
-- `betas?:optional list<AnthropicBeta>` (header parameter)
+- `betas?: optional list<AnthropicBeta>` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -400,11 +400,11 @@ Update Session Resource
 
   New authorization token for the resource. Currently only `github_repository` resources support token rotation.
 
-- `betas?:optional list<AnthropicBeta>` (header parameter)
+- `betas?: optional list<AnthropicBeta>` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
@@ -534,11 +534,11 @@ Delete Session Resource
 
 - `resourceID: string` (path parameter)
 
-- `betas?:optional list<AnthropicBeta>` (header parameter)
+- `betas?: optional list<AnthropicBeta>` (header parameter)
 
   This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-- `workspaceID?:optional string` (header parameter)
+- `workspaceID?: optional string` (header parameter)
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 

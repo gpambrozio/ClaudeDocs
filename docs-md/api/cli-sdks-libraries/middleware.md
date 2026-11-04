@@ -26,6 +26,7 @@ featureMetadata:
   supportedPlatforms:
     Claude API: stable
     Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
     Amazon Bedrock: stable
     Amazon Bedrock (InvokeModel): stable
     Claude Models on Google Cloud (Google managed): stable
@@ -216,9 +217,9 @@ SDK middleware is available or in beta, depending on the API.
 
 * Availability: Available
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Available | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../build-with-claude/claude-in-microsoft-foundry.md) |
+| Status    | Cloud platforms         |
+| --------- | ----------------------- |
+| Available | All supported platforms |
 
 #### [Managed Agents](../managed-agents/overview.md)
 
