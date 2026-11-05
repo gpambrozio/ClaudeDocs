@@ -181,15 +181,13 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
       Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-      The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
-
 - `model: string or BetaDreamModelConfigParam`
 
   The model that runs a dream, given as a model ID or as an object with `id` and `speed`.
 
   In the object form, `speed` can only be `standard`.
 
-  The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists the supported models.
+  The [Availability section of the Dreams guide](../../managed-agents/dreams.md#feature-availability) lists the supported models.
 
   - `string`
 
@@ -203,7 +201,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
       The ID can be 1 to 256 characters long.
 
-      The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists the supported models.
+      The [Availability section of the Dreams guide](../../managed-agents/dreams.md#feature-availability) lists the supported models.
 
       minLength: 1, maxLength: 256
 
@@ -334,8 +332,6 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
         The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
-
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -820,8 +816,6 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
-
   - `instructions: string or null`
 
     The guidance given when the dream was created, or `null` if none was given.
@@ -1254,8 +1248,6 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
-
   - `instructions: string or null`
 
     The guidance given when the dream was created, or `null` if none was given.
@@ -1676,8 +1668,6 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
         The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
-
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -2101,8 +2091,6 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
-
   - `instructions: string or null`
 
     The guidance given when the dream was created, or `null` if none was given.
@@ -2381,8 +2369,6 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
-
   - `instructions: string or null`
 
     The guidance given when the dream was created, or `null` if none was given.
@@ -2571,8 +2557,6 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
       Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-      The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
-
 ### Beta Dream Memory Store Input
 
 - `BetaDreamMemoryStoreInput object`
@@ -2639,7 +2623,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     The ID can be 1 to 256 characters long.
 
-    The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists the supported models.
+    The [Availability section of the Dreams guide](../../managed-agents/dreams.md#feature-availability) lists the supported models.
 
     minLength: 1, maxLength: 256
 
@@ -2680,8 +2664,6 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
     The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
 
     Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
-
-    The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
 ### Beta Dream Status
 

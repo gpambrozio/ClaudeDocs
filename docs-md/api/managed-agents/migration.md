@@ -977,7 +977,6 @@ import com.anthropic.models.beta.environments.BetaLimitedNetworkParams;
 import com.anthropic.models.beta.environments.EnvironmentCreateParams;
 import com.anthropic.models.beta.sessions.BetaManagedAgentsAgentParams;
 import com.anthropic.models.beta.sessions.SessionCreateParams;
-import com.anthropic.models.beta.sessions.events.BetaManagedAgentsStreamSessionEvents;
 import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserCustomToolResultEventParams;
 import com.anthropic.models.beta.sessions.events.BetaManagedAgentsUserMessageEventParams;
 import com.anthropic.models.beta.sessions.events.EventSendParams;
@@ -1028,7 +1027,7 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
             .build());
 
     loop:
-    for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
+    for (var event : stream) {
         switch (event.type().value()) {
             case AGENT_MESSAGE -> {
                 for (var block : event.asAgentMessage().content()) {

@@ -159,7 +159,7 @@ Update a Credential
 
         The new OAuth access token to replace the stored one.
 
-        minLength: 1, maxLength: 8192
+        minLength: 1, maxLength: 8192, pattern: ^[^\x00-\x1f\x7f]*$
 
       - `Optional<LocalDateTime> expiresAt`
 
@@ -227,7 +227,7 @@ Update a Credential
 
         The new static bearer token to replace the stored one.
 
-        minLength: 1, maxLength: 8192
+        minLength: 1, maxLength: 8192, pattern: ^[^\x00-\x1f\x7f]*$
 
     - `class BetaManagedAgentsEnvironmentVariableUpdateParams`
 
@@ -273,7 +273,7 @@ Update a Credential
 
         The new secret value to replace the stored one.
 
-        minLength: 1, maxLength: 4096
+        minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f]*$
 
   - `Optional<String> displayName`
 

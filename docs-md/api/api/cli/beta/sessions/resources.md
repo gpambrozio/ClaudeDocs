@@ -393,7 +393,7 @@ List Session Resources
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
     - `beta_managed_agents_file_resource: object`
 
@@ -426,6 +426,8 @@ List Session Resources
       - `memory_store_id: string`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+        pattern: ^memstore_[a-zA-Z0-9_]+$
 
       - `access: optional "read_write" or "read_only"`
 
@@ -676,7 +678,7 @@ Get Session Resource
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `beta_managed_agents_file_resource: object`
 
@@ -709,6 +711,8 @@ Get Session Resource
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access: optional "read_write" or "read_only"`
 
@@ -949,7 +953,7 @@ Update Session Resource
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `beta_managed_agents_file_resource: object`
 
@@ -982,6 +986,8 @@ Update Session Resource
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access: optional "read_write" or "read_only"`
 
@@ -1276,7 +1282,7 @@ ant beta:sessions:resources delete \
 
         Full commit SHA to check out.
 
-        minLength: 7, maxLength: 64
+        minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
 ### Beta Managed Agents Memory Store Resource
 
@@ -1289,6 +1295,8 @@ ant beta:sessions:resources delete \
   - `memory_store_id: string`
 
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    pattern: ^memstore_[a-zA-Z0-9_]+$
 
   - `access: optional "read_write" or "read_only"`
 
@@ -1362,7 +1370,7 @@ ant beta:sessions:resources delete \
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `beta_managed_agents_file_resource: object`
 
@@ -1395,6 +1403,8 @@ ant beta:sessions:resources delete \
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access: optional "read_write" or "read_only"`
 

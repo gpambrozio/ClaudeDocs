@@ -397,6 +397,7 @@ For detailed platform setup guides with code examples, see:
 * [Amazon Bedrock (Opus 4.6 and earlier)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
 * [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)
 * [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md)
+* [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)
 
 See also [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md).
 
@@ -405,7 +406,7 @@ The Ruby SDK supports the following platforms:
 * **Claude Models on Google Cloud (Google managed):** `Anthropic::VertexClient`. Requires the `googleauth` gem.
 * **Bedrock:** `Anthropic::BedrockMantleClient`, or `Anthropic::BedrockClient` for the `bedrock-runtime` path. `Anthropic::BedrockMantleClient` requires the `aws-sdk-core` gem; `Anthropic::BedrockClient` requires the `aws-sdk-bedrockruntime` gem.
 * **Claude Platform on AWS:** Part of the main `anthropic` gem (requires the `aws-sdk-core` gem). Provides `Anthropic::AWSClient`. Pass `workspace_id:` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable (see [Workspaces](../../build-with-claude/claude-platform-on-aws.md#workspaces)). Available in beta.
-* **Foundry:** Not currently supported in the Ruby SDK. See [Claude in Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) for supported SDKs.
+* **Foundry:** Part of the main `anthropic` gem. Provides `Anthropic::FoundryClient`. Pass `resource:` and `api_key:` (or `azure_ad_token_provider:` for Microsoft Entra ID) to the constructor, or set the `ANTHROPIC_FOUNDRY_RESOURCE` and `ANTHROPIC_FOUNDRY_API_KEY` environment variables.
 
 Use `Anthropic::BedrockMantleClient` for new projects; `Anthropic::BedrockClient` remains for existing applications using the Bedrock `InvokeModel` API.
 

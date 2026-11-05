@@ -453,7 +453,7 @@ Create Deployment
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `Optional<String> mountPath`
 
@@ -488,6 +488,8 @@ Create Deployment
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+        pattern: ^memstore_[a-zA-Z0-9_]+$
 
       - `Optional<Access> access`
 
@@ -921,7 +923,7 @@ Create Deployment
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `Optional<String> mountPath`
 
@@ -1026,6 +1028,8 @@ Create Deployment
       - `String amount`
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        pattern: ^(0|[1-9]\d*)$
 
       - `BetaCurrency currency`
 
@@ -1703,7 +1707,7 @@ List Deployments
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `Optional<String> mountPath`
 
@@ -1808,6 +1812,8 @@ List Deployments
       - `String amount`
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        pattern: ^(0|[1-9]\d*)$
 
       - `BetaCurrency currency`
 
@@ -2452,7 +2458,7 @@ Get Deployment
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `Optional<String> mountPath`
 
@@ -2557,6 +2563,8 @@ Get Deployment
       - `String amount`
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        pattern: ^(0|[1-9]\d*)$
 
       - `BetaCurrency currency`
 
@@ -3100,7 +3108,7 @@ Update Deployment
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `Optional<String> mountPath`
 
@@ -3135,6 +3143,8 @@ Update Deployment
       - `String memoryStoreId`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+        pattern: ^memstore_[a-zA-Z0-9_]+$
 
       - `Optional<Access> access`
 
@@ -3568,7 +3578,7 @@ Update Deployment
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `Optional<String> mountPath`
 
@@ -3673,6 +3683,8 @@ Update Deployment
       - `String amount`
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        pattern: ^(0|[1-9]\d*)$
 
       - `BetaCurrency currency`
 
@@ -4312,7 +4324,7 @@ Archive Deployment
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `Optional<String> mountPath`
 
@@ -4417,6 +4429,8 @@ Archive Deployment
       - `String amount`
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        pattern: ^(0|[1-9]\d*)$
 
       - `BetaCurrency currency`
 
@@ -5462,7 +5476,7 @@ Pause Deployment
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `Optional<String> mountPath`
 
@@ -5567,6 +5581,8 @@ Pause Deployment
       - `String amount`
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        pattern: ^(0|[1-9]\d*)$
 
       - `BetaCurrency currency`
 
@@ -6206,7 +6222,7 @@ Unpause Deployment
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `Optional<String> mountPath`
 
@@ -6311,6 +6327,8 @@ Unpause Deployment
       - `String amount`
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        pattern: ^(0|[1-9]\d*)$
 
       - `BetaCurrency currency`
 
@@ -6874,7 +6892,7 @@ public final class Main {
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `Optional<String> mountPath`
 
@@ -6979,6 +6997,8 @@ public final class Main {
       - `String amount`
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        pattern: ^(0|[1-9]\d*)$
 
       - `BetaCurrency currency`
 
@@ -8026,7 +8046,7 @@ public final class Main {
 
         Full commit SHA to check out.
 
-        minLength: 7, maxLength: 64
+        minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `Optional<String> mountPath`
 
@@ -8184,7 +8204,7 @@ public final class Main {
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
     - `Optional<String> mountPath`
 

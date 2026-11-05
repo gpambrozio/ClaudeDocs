@@ -347,7 +347,7 @@ Create Session
 
         - `speed: optional "standard" or "fast" or null`
 
-          Inference speed mode. Defaults to `standard`.
+          Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
           - `"standard"`
 
@@ -795,6 +795,8 @@ Create Session
 
                 Two-letter ISO 3166-1 country code, uppercase.
 
+                pattern: ^[A-Z]{2}$
+
               - `region: optional string or null`
 
                 Region or state name.
@@ -923,7 +925,7 @@ Create Session
 
           Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-          minLength: 1, maxLength: 128
+          minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
     - `version: optional number`
 
@@ -950,6 +952,8 @@ Create Session
     - `amount: string`
 
       Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+      pattern: ^(0|[1-9]\d*)$
 
     - `currency: BetaCurrency`
 
@@ -1205,7 +1209,7 @@ Create Session
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
     - `mount_path: optional string or null`
 
@@ -1240,6 +1244,8 @@ Create Session
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access: optional "read_write" or "read_only" or null`
 
@@ -1833,6 +1839,8 @@ Create Session
 
                         Two-letter ISO 3166-1 country code, uppercase.
 
+                        pattern: ^[A-Z]{2}$
+
                       - `region: optional string or null`
 
                         Region or state name.
@@ -2141,6 +2149,8 @@ Create Session
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
 
+        pattern: ^(0|[1-9]\d*)$
+
       - `currency: BetaCurrency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
@@ -2233,7 +2243,7 @@ Create Session
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
     - `BetaManagedAgentsFileResource object`
 
@@ -2266,6 +2276,8 @@ Create Session
       - `memory_store_id: string`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+        pattern: ^memstore_[a-zA-Z0-9_]+$
 
       - `access: optional "read_write" or "read_only" or null`
 

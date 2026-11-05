@@ -401,7 +401,7 @@ List Session Resources
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `class BetaManagedAgentsFileResource`
 
@@ -434,6 +434,8 @@ List Session Resources
     - `required string MemoryStoreID`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `Access? Access`
 
@@ -693,7 +695,7 @@ Get Session Resource
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `class BetaManagedAgentsFileResource`
 
@@ -726,6 +728,8 @@ Get Session Resource
     - `required string MemoryStoreID`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `Access? Access`
 
@@ -977,7 +981,7 @@ Update Session Resource
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `class BetaManagedAgentsFileResource`
 
@@ -1010,6 +1014,8 @@ Update Session Resource
     - `required string MemoryStoreID`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `Access? Access`
 
@@ -1324,7 +1330,7 @@ Console.WriteLine(betaManagedAgentsDeleteSessionResource);
 
         Full commit SHA to check out.
 
-        minLength: 7, maxLength: 64
+        minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
 ### Beta Managed Agents Memory Store Resource
 
@@ -1337,6 +1343,8 @@ Console.WriteLine(betaManagedAgentsDeleteSessionResource);
   - `required string MemoryStoreID`
 
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    pattern: ^memstore_[a-zA-Z0-9_]+$
 
   - `Access? Access`
 
@@ -1410,7 +1418,7 @@ Console.WriteLine(betaManagedAgentsDeleteSessionResource);
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `class BetaManagedAgentsFileResource`
 
@@ -1443,6 +1451,8 @@ Console.WriteLine(betaManagedAgentsDeleteSessionResource);
     - `required string MemoryStoreID`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `Access? Access`
 

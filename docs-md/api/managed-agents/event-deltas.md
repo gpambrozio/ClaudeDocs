@@ -403,9 +403,8 @@ try (var stream = client.beta().sessions().events().streamStreaming(
             .build()
     );
 
-    Iterable<BetaManagedAgentsStreamSessionEvents> events = stream.stream()::iterator;
     deltas:
-    for (var event : events) {
+    for (var event : stream) {
         switch (event.type().value()) {
             case EVENT_START -> {
                 if (event.asEventStart().event().isAgentMessage()) {
@@ -774,9 +773,8 @@ try (var stream = client.beta().sessions().threads().events().streamStreaming(
             .addEventDelta(BetaManagedAgentsDeltaType.AGENT_MESSAGE)
             .build()
 )) {
-    Iterable<BetaManagedAgentsStreamSessionThreadEvents> events = stream.stream()::iterator;
     threadDeltas:
-    for (var event : events) {
+    for (var event : stream) {
         switch (event.type().value()) {
             case EVENT_DELTA -> IO.print(event.asEventDelta().delta().content().text());
             case AGENT_MESSAGE -> {

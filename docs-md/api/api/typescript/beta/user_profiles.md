@@ -61,6 +61,8 @@ Create User Profile
 
       The country of the entity (not of the platform), as the platform determines it: an ISO 3166-1 alpha-2 code in upper case, for example `US`. Only the form, two uppercase ASCII letters, is checked.
 
+      pattern: ^[A-Z]{2}$
+
     - `email_hash?: string | null`
 
       A hash of the entity's email address, computed by the platform. Anthropic treats it as an opaque string and does not prescribe the hash function. 1 to 255 characters.
@@ -1119,6 +1121,8 @@ Update User Profile
 
       The country of the entity (not of the platform), as the platform determines it: an ISO 3166-1 alpha-2 code in upper case, for example `US`. Only the form, two uppercase ASCII letters, is checked.
 
+      pattern: ^[A-Z]{2}$
+
     - `email_hash?: string | null`
 
       A hash of the entity's email address, computed by the platform. Anthropic treats it as an opaque string and does not prescribe the hash function. 1 to 255 characters.
@@ -2064,6 +2068,8 @@ console.log(betaUserProfileEnrollmentURL.expires_at);
   - `country?: string | null`
 
     The country of the entity (not of the platform), as the platform determines it: an ISO 3166-1 alpha-2 code in upper case, for example `US`. Only the form, two uppercase ASCII letters, is checked.
+
+    pattern: ^[A-Z]{2}$
 
   - `email_hash?: string | null`
 

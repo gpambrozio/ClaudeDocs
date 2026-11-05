@@ -295,7 +295,7 @@ Create Agent
 
     - `speed: optional "standard" or "fast" or null`
 
-      Inference speed mode. Defaults to `standard`.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `"standard"`
 
@@ -327,7 +327,7 @@ Create Agent
 
       The IAM role's ARN, e.g. "arn:aws:iam::123456789012:role/my-agent-runner". Maximum 2048 characters.
 
-      maxLength: 2048
+      maxLength: 2048, pattern: ^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/[\w+=,.@/-]+$
 
   - `BetaManagedAgentsServiceAccountExecutionIdentityParams object`
 
@@ -959,6 +959,8 @@ Create Agent
 
             Two-letter ISO 3166-1 country code, uppercase.
 
+            pattern: ^[A-Z]{2}$
+
           - `region: optional string or null`
 
             Region or state name.
@@ -1087,7 +1089,7 @@ Create Agent
 
       Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-      minLength: 1, maxLength: 128
+      minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
 ### Returns
 
@@ -1760,6 +1762,8 @@ Create Agent
             - `country: optional string or null`
 
               Two-letter ISO 3166-1 country code, uppercase.
+
+              pattern: ^[A-Z]{2}$
 
             - `region: optional string or null`
 
@@ -2839,6 +2843,8 @@ List Agents
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `region: optional string or null`
 
               Region or state name.
@@ -3897,6 +3903,8 @@ Get Agent
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `region: optional string or null`
 
               Region or state name.
@@ -4288,7 +4296,7 @@ Update Agent
 
       The IAM role's ARN, e.g. "arn:aws:iam::123456789012:role/my-agent-runner". Maximum 2048 characters.
 
-      maxLength: 2048
+      maxLength: 2048, pattern: ^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/[\w+=,.@/-]+$
 
   - `BetaManagedAgentsServiceAccountExecutionIdentityParams object`
 
@@ -4468,7 +4476,7 @@ Update Agent
 
     - `speed: optional "standard" or "fast" or null`
 
-      Inference speed mode. Defaults to `standard`.
+      Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
       - `"standard"`
 
@@ -5082,6 +5090,8 @@ Update Agent
 
             Two-letter ISO 3166-1 country code, uppercase.
 
+            pattern: ^[A-Z]{2}$
+
           - `region: optional string or null`
 
             Region or state name.
@@ -5210,7 +5220,7 @@ Update Agent
 
       Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-      minLength: 1, maxLength: 128
+      minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
 - `version: optional number`
 
@@ -5889,6 +5899,8 @@ Update Agent
             - `country: optional string or null`
 
               Two-letter ISO 3166-1 country code, uppercase.
+
+              pattern: ^[A-Z]{2}$
 
             - `region: optional string or null`
 
@@ -6937,6 +6949,8 @@ Archive Agent
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `region: optional string or null`
 
               Region or state name.
@@ -7851,6 +7865,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `region: optional string or null`
 
               Region or state name.
@@ -8307,6 +8323,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
         Two-letter ISO 3166-1 country code, uppercase.
 
+        pattern: ^[A-Z]{2}$
+
       - `region: optional string or null`
 
         Region or state name.
@@ -8706,6 +8724,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
       - `country: optional string or null`
 
         Two-letter ISO 3166-1 country code, uppercase.
+
+        pattern: ^[A-Z]{2}$
 
       - `region: optional string or null`
 
@@ -9108,6 +9128,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
         - `country: optional string or null`
 
           Two-letter ISO 3166-1 country code, uppercase.
+
+          pattern: ^[A-Z]{2}$
 
         - `region: optional string or null`
 
@@ -9622,6 +9644,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
           Two-letter ISO 3166-1 country code, uppercase.
 
+          pattern: ^[A-Z]{2}$
+
         - `region: optional string or null`
 
           Region or state name.
@@ -9773,7 +9797,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     The IAM role's ARN, e.g. "arn:aws:iam::123456789012:role/my-agent-runner". Maximum 2048 characters.
 
-    maxLength: 2048
+    maxLength: 2048, pattern: ^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/[\w+=,.@/-]+$
 
 ### Beta Managed Agents Bash Tool Config
 
@@ -9941,7 +9965,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-    minLength: 1, maxLength: 128
+    minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
 ### Beta Managed Agents Edit Tool Config
 
@@ -10093,7 +10117,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       The IAM role's ARN, e.g. "arn:aws:iam::123456789012:role/my-agent-runner". Maximum 2048 characters.
 
-      maxLength: 2048
+      maxLength: 2048, pattern: ^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/[\w+=,.@/-]+$
 
   - `BetaManagedAgentsServiceAccountExecutionIdentityParams object`
 
@@ -10869,7 +10893,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
   - `speed: optional "standard" or "fast" or null`
 
-    Inference speed mode. Defaults to `standard`.
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
     - `"standard"`
 
@@ -12425,6 +12449,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `region: optional string or null`
 
               Region or state name.
@@ -12614,6 +12640,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
   - `country: optional string or null`
 
     Two-letter ISO 3166-1 country code, uppercase.
+
+    pattern: ^[A-Z]{2}$
 
   - `region: optional string or null`
 
@@ -13387,6 +13415,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       Two-letter ISO 3166-1 country code, uppercase.
 
+      pattern: ^[A-Z]{2}$
+
     - `region: optional string or null`
 
       Region or state name.
@@ -13462,6 +13492,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
     - `country: optional string or null`
 
       Two-letter ISO 3166-1 country code, uppercase.
+
+      pattern: ^[A-Z]{2}$
 
     - `region: optional string or null`
 
@@ -14374,6 +14406,8 @@ List Agent Versions
             - `country: optional string or null`
 
               Two-letter ISO 3166-1 country code, uppercase.
+
+              pattern: ^[A-Z]{2}$
 
             - `region: optional string or null`
 

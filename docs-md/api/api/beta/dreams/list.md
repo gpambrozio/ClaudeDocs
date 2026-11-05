@@ -287,8 +287,6 @@ See the [Dreams guide](../../../managed-agents/dreams.md#list-dreams) for how to
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../../managed-agents/dreams.md#limits) lists all the limits on a dream.
-
   - `instructions: string or null`
 
     The guidance given when the dream was created, or `null` if none was given.

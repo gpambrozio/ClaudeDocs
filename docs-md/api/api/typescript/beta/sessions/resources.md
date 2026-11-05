@@ -403,7 +403,7 @@ List Session Resources
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `interface BetaManagedAgentsFileResource`
 
@@ -436,6 +436,8 @@ List Session Resources
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -696,7 +698,7 @@ Get Session Resource
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `interface BetaManagedAgentsFileResource`
 
@@ -729,6 +731,8 @@ Get Session Resource
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -982,7 +986,7 @@ Update Session Resource
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `interface BetaManagedAgentsFileResource`
 
@@ -1015,6 +1019,8 @@ Update Session Resource
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -1330,7 +1336,7 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
         Full commit SHA to check out.
 
-        minLength: 7, maxLength: 64
+        minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
 ### Beta Managed Agents Memory Store Resource
 
@@ -1343,6 +1349,8 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
   - `memory_store_id: string`
 
     The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+    pattern: ^memstore_[a-zA-Z0-9_]+$
 
   - `access?: "read_write" | "read_only" | null`
 
@@ -1416,7 +1424,7 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `interface BetaManagedAgentsFileResource`
 
@@ -1449,6 +1457,8 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -1524,7 +1534,7 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `interface BetaManagedAgentsFileResource`
 
@@ -1557,6 +1567,8 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access?: "read_write" | "read_only" | null`
 
@@ -1632,7 +1644,7 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
   - `interface BetaManagedAgentsFileResource`
 
@@ -1665,6 +1677,8 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access?: "read_write" | "read_only" | null`
 

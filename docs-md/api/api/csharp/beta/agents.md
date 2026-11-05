@@ -239,7 +239,7 @@ Create Agent
 
       - `Speed? Speed`
 
-        Inference speed mode. Defaults to `standard`.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `Standard("standard")`
 
@@ -729,6 +729,8 @@ Create Agent
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `string? Region`
 
               Region or state name.
@@ -857,7 +859,7 @@ Create Agent
 
         Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-        minLength: 1, maxLength: 128
+        minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -1648,6 +1650,8 @@ Create Agent
             - `string? Country`
 
               Two-letter ISO 3166-1 country code, uppercase.
+
+              pattern: ^[A-Z]{2}$
 
             - `string? Region`
 
@@ -2712,6 +2716,8 @@ List Agents
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `string? Region`
 
               Region or state name.
@@ -3762,6 +3768,8 @@ Get Agent
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `string? Region`
 
               Region or state name.
@@ -4264,7 +4272,7 @@ Update Agent
 
       - `Speed? Speed`
 
-        Inference speed mode. Defaults to `standard`.
+        Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
         - `Standard("standard")`
 
@@ -4722,6 +4730,8 @@ Update Agent
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `string? Region`
 
               Region or state name.
@@ -4850,7 +4860,7 @@ Update Agent
 
         Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-        minLength: 1, maxLength: 128
+        minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
   - `int version`
 
@@ -5647,6 +5657,8 @@ Update Agent
             - `string? Country`
 
               Two-letter ISO 3166-1 country code, uppercase.
+
+              pattern: ^[A-Z]{2}$
 
             - `string? Region`
 
@@ -6688,6 +6700,8 @@ Archive Agent
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `string? Region`
 
               Region or state name.
@@ -7606,6 +7620,8 @@ Console.WriteLine(betaManagedAgentsAgent);
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `string? Region`
 
               Region or state name.
@@ -8062,6 +8078,8 @@ Console.WriteLine(betaManagedAgentsAgent);
 
         Two-letter ISO 3166-1 country code, uppercase.
 
+        pattern: ^[A-Z]{2}$
+
       - `string? Region`
 
         Region or state name.
@@ -8461,6 +8479,8 @@ Console.WriteLine(betaManagedAgentsAgent);
       - `string? Country`
 
         Two-letter ISO 3166-1 country code, uppercase.
+
+        pattern: ^[A-Z]{2}$
 
       - `string? Region`
 
@@ -8863,6 +8883,8 @@ Console.WriteLine(betaManagedAgentsAgent);
         - `string? Country`
 
           Two-letter ISO 3166-1 country code, uppercase.
+
+          pattern: ^[A-Z]{2}$
 
         - `string? Region`
 
@@ -9377,6 +9399,8 @@ Console.WriteLine(betaManagedAgentsAgent);
 
           Two-letter ISO 3166-1 country code, uppercase.
 
+          pattern: ^[A-Z]{2}$
+
         - `string? Region`
 
           Region or state name.
@@ -9528,7 +9552,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     The IAM role's ARN, e.g. "arn:aws:iam::123456789012:role/my-agent-runner". Maximum 2048 characters.
 
-    maxLength: 2048
+    maxLength: 2048, pattern: ^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/[\w+=,.@/-]+$
 
 ### Beta Managed Agents Bash Tool Config
 
@@ -9696,7 +9720,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
     Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-    minLength: 1, maxLength: 128
+    minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
 ### Beta Managed Agents Edit Tool Config
 
@@ -9848,7 +9872,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       The IAM role's ARN, e.g. "arn:aws:iam::123456789012:role/my-agent-runner". Maximum 2048 characters.
 
-      maxLength: 2048
+      maxLength: 2048, pattern: ^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/[\w+=,.@/-]+$
 
   - `class BetaManagedAgentsServiceAccountExecutionIdentityParams`
 
@@ -10546,7 +10570,7 @@ Console.WriteLine(betaManagedAgentsAgent);
 
   - `Speed? Speed`
 
-    Inference speed mode. Defaults to `standard`.
+    Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
     - `Standard("standard")`
 
@@ -12100,6 +12124,8 @@ Console.WriteLine(betaManagedAgentsAgent);
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `string? Region`
 
               Region or state name.
@@ -12289,6 +12315,8 @@ Console.WriteLine(betaManagedAgentsAgent);
   - `string? Country`
 
     Two-letter ISO 3166-1 country code, uppercase.
+
+    pattern: ^[A-Z]{2}$
 
   - `string? Region`
 
@@ -13062,6 +13090,8 @@ Console.WriteLine(betaManagedAgentsAgent);
 
       Two-letter ISO 3166-1 country code, uppercase.
 
+      pattern: ^[A-Z]{2}$
+
     - `string? Region`
 
       Region or state name.
@@ -13137,6 +13167,8 @@ Console.WriteLine(betaManagedAgentsAgent);
     - `string? Country`
 
       Two-letter ISO 3166-1 country code, uppercase.
+
+      pattern: ^[A-Z]{2}$
 
     - `string? Region`
 
@@ -14039,6 +14071,8 @@ List Agent Versions
             - `string? Country`
 
               Two-letter ISO 3166-1 country code, uppercase.
+
+              pattern: ^[A-Z]{2}$
 
             - `string? Region`
 

@@ -550,9 +550,8 @@ try (var stream = client.beta().sessions().events().streamStreaming(sessionId)) 
             .build()
     );
 
-    Iterable<BetaManagedAgentsStreamSessionEvents> events = stream.stream()::iterator;
     events:
-    for (var event : events) {
+    for (var event : stream) {
         switch (event.type().value()) {
             case WORKFLOW_RUN_CREATED -> {
                 var created = event.asWorkflowRunCreated();

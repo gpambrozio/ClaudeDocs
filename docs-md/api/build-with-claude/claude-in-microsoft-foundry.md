@@ -31,14 +31,12 @@ Before you start, ensure you have:
 
 * An active Azure subscription
 * Access to the [Foundry portal](https://ai.azure.com/)
-* The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed (required for the Entra ID cURL and CLI examples, optional otherwise)
+* The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed (required for the Entra ID examples in cURL, CLI, and Ruby, optional otherwise)
 * An Azure RBAC role that allows you to use the resource, such as **Foundry User** (formerly Azure AI User) or **Cognitive Services User**
 
 ## Install an SDK
 
 Anthropic’s [client SDKs](../cli-sdks-libraries/overview.md) support Foundry through a platform-specific package or client class. The examples on this page also show requests with cURL and the `ant` CLI. To set up the CLI, see [CLI quickstart](../cli-sdks-libraries/cli/quickstart.md).
-
-Foundry is supported by the C#, Go, Java, PHP, Python, and TypeScript SDKs. Foundry is not currently available in the Ruby SDK.
 
 **Python**
 
@@ -78,8 +76,8 @@ go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.4.0")
-implementation("com.anthropic:anthropic-java-foundry:3.4.0")
+implementation("com.anthropic:anthropic-java:3.5.0")
+implementation("com.anthropic:anthropic-java-foundry:3.5.0")
 ```
 
 **Maven**
@@ -88,12 +86,12 @@ implementation("com.anthropic:anthropic-java-foundry:3.4.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.4.0</version>
+    <version>3.5.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-foundry</artifactId>
-    <version>3.4.0</version>
+    <version>3.5.0</version>
 </dependency>
 ```
 
@@ -108,8 +106,6 @@ composer require "anthropic-ai/sdk" "guzzlehttp/guzzle:^7"
 **Ruby**
 
 ```bash
-# The Ruby SDK does not yet support Foundry natively (see the Authentication
-# examples for using the standard Ruby SDK as a workaround)
 # Gemfile
 gem "anthropic"
 ```
@@ -342,18 +338,11 @@ echo array_find($message->content, fn ($block) => $block->type === 'text')->text
 ```
 
 ```ruby Ruby
-# The Ruby SDK does not yet support Foundry natively. This example uses the
-# standard Ruby SDK as a workaround. Pass credentials explicitly: without
-# them, the client falls back to the ANTHROPIC_API_KEY or
-# ANTHROPIC_AUTH_TOKEN environment variables and could send a Claude API
-# credential to your Foundry endpoint. Features that Foundry
-# does not support fail server-side rather than client-side. For full
-# Foundry support, use the C#, Go, Java, PHP, Python, or TypeScript SDKs.
 require "anthropic"
 
-client = Anthropic::Client.new(
-  base_url: "https://example-resource.services.ai.azure.com/anthropic",
-  api_key: ENV.fetch("ANTHROPIC_FOUNDRY_API_KEY")
+client = Anthropic::FoundryClient.new(
+  api_key: ENV.fetch("ANTHROPIC_FOUNDRY_API_KEY"),
+  resource: "example-resource" # your resource name
 )
 
 message = client.messages.create(
@@ -583,21 +572,18 @@ echo array_find($message->content, fn ($block) => $block->type === 'text')->text
 ```
 
 ```ruby Ruby
-# The Ruby SDK does not yet support Foundry natively. This example uses the
-# standard Ruby SDK as a workaround, with a static Entra ID token: automatic
-# token refresh is not built in, so your application must refresh tokens
-# itself (they typically expire after 1 hour). Pass credentials explicitly:
-# without them, the client falls back to the ANTHROPIC_API_KEY or
-# ANTHROPIC_AUTH_TOKEN environment variables. For full Foundry support, use
-# the C#, Go, Java, PHP, Python, or TypeScript SDKs.
 require "anthropic"
 
-# Obtain an Entra ID access token, for example using the Azure CLI:
-#   az account get-access-token --resource https://ai.azure.com \
-#     --query accessToken -o tsv
-client = Anthropic::Client.new(
-  base_url: "https://example-resource.services.ai.azure.com/anthropic",
-  auth_token: ENV.fetch("AZURE_ACCESS_TOKEN")
+# Get a Microsoft Entra ID token from the Azure CLI. The client calls this
+# lambda for every request and retry, so in production, cache the token
+# until it is close to expiry.
+token_provider = lambda do
+  `az account get-access-token --resource https://ai.azure.com --query accessToken -o tsv`
+end
+
+client = Anthropic::FoundryClient.new(
+  resource: "example-resource", # your resource name
+  azure_ad_token_provider: token_provider
 )
 
 message = client.messages.create(

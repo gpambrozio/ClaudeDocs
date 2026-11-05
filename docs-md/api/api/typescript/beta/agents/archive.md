@@ -815,6 +815,8 @@ Archive Agent
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `region?: string | null`
 
               Region or state name.

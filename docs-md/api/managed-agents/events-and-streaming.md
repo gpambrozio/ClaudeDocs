@@ -215,9 +215,8 @@ try (var stream = client.beta().sessions().events().streamStreaming(session.id()
             .build()
     );
 
-    Iterable<BetaManagedAgentsStreamSessionEvents> events = stream.stream()::iterator;
     events:
-    for (var event : events) {
+    for (var event : stream) {
         switch (event.type().value()) {
             case AGENT_MESSAGE -> event.asAgentMessage().content().forEach(block -> block.text().ifPresent(textBlock -> IO.print(textBlock.text())));
             case SESSION_STATUS_IDLE -> {
@@ -804,7 +803,7 @@ loop:
 ```java Java
 try (var stream = client.beta().sessions().events().streamStreaming(session.id())) {
     loop:
-    for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
+    for (var event : stream) {
         switch (event.type().value()) {
             case AGENT_CUSTOM_TOOL_USE -> {
                 var toolUse = event.asAgentCustomToolUse();
