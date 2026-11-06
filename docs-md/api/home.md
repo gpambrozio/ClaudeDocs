@@ -278,7 +278,7 @@ description: Claude API Documentation
 
   Interactive courses to master Claude.
 
-  **Cookbook**
+  **Claude Cookbook**
 
   Code samples and patterns.
 

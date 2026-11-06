@@ -76,8 +76,8 @@ go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.5.0")
-implementation("com.anthropic:anthropic-java-foundry:3.5.0")
+implementation("com.anthropic:anthropic-java:3.6.0")
+implementation("com.anthropic:anthropic-java-foundry:3.6.0")
 ```
 
 **Maven**
@@ -86,12 +86,12 @@ implementation("com.anthropic:anthropic-java-foundry:3.5.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.5.0</version>
+    <version>3.6.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-foundry</artifactId>
-    <version>3.5.0</version>
+    <version>3.6.0</version>
 </dependency>
 ```
 
@@ -616,6 +616,7 @@ Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.
 * Models API
 * Message Batches API
 * Server-side fallback (the [`fallbacks` parameter](refusals-and-fallback.md#server-side-fallback); use the [client-side fallback pattern](refusals-and-fallback.md#client-side-fallback) instead)
+* User profile endpoints (`/v1/user_profiles`; [create profiles on the Claude API](../manage-claude/user-profiles.md#before-you-begin) instead)
 
 ### Additional features not supported when hosted on Azure
 

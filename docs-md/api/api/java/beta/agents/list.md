@@ -17,13 +17,13 @@ List Agents
 
 - `AgentListParams params`
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return agents created at or after this time (inclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return agents created at or before this time (inclusive).
 
@@ -33,7 +33,7 @@ List Agents
 
     Include archived agents in results. Defaults to false.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum results per page. Default 20, maximum 100.
 
@@ -173,13 +173,13 @@ List Agents
 
   - `String id`
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the agent was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -363,7 +363,7 @@ List Agents
 
           - `String id`
 
-          - `long version`
+          - `int version`
 
             format: int32
 
@@ -437,7 +437,7 @@ List Agents
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -469,7 +469,7 @@ List Agents
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -781,7 +781,7 @@ List Agents
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -939,13 +939,13 @@ List Agents
 
       - `String name`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
     format: date-time
 
-  - `long version`
+  - `int version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 

@@ -167,7 +167,7 @@ List Credentials
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `archived_at: Time`
+  - `archived_at: Time | nil`
 
     When the credential was archived. Null if not archived.
 
@@ -187,13 +187,13 @@ List Credentials
 
         URL of the MCP server this credential authenticates against.
 
-      - `expires_at: optional Time`
+      - `expires_at: optional Time | nil`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
-      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse`
+      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse | nil`
 
         Refresh token configuration, if the credential supports token refresh.
 
@@ -225,11 +225,11 @@ List Credentials
 
             - `type: :client_secret_post`
 
-        - `resource: optional String`
+        - `resource: optional String | nil`
 
           OAuth resource indicator.
 
-        - `scope: optional String`
+        - `scope: optional String | nil`
 
           OAuth scope for the refresh request.
 
@@ -307,7 +307,7 @@ List Credentials
 
     Identifier of the vault this credential belongs to.
 
-  - `display_name: optional String`
+  - `display_name: optional String | nil`
 
     Human-readable name for the credential.
 

@@ -263,7 +263,7 @@ for message in runner:
     print(message)
 ```
 
-On every iteration, an API request is made. If the response includes a call to one of the given tools, the tool is automatically called, and the result is returned directly to the model in the next iteration.
+On every iteration, the runner sends an API request. If the response includes a call to one of the given tools, the runner calls the tool and returns the result to the model in the next iteration.
 
 To run the browser use tool or the computer use tool with this SDK, see [Browser and computer use with the SDK toolsets](../../agents-and-tools/tool-use/browser-use-sdk.md).
 
@@ -340,7 +340,7 @@ The async client uses the exact same interface. If you pass a `PathLike` instanc
 
 ## Handling errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (that is, a 4xx or 5xx response), a subclass of `APIError` is raised:
+The SDK raises a subclass of `APIError` when it can’t connect to the API or when the API returns a 4xx or 5xx status code:
 
 ```python
 import anthropic
@@ -360,7 +360,7 @@ except anthropic.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx2
 except anthropic.RateLimitError as e:
-    print("A 429 status code was received; we should back off a bit.")
+    print("A 429 status code was received; wait before retrying.")
 except anthropic.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
@@ -400,7 +400,7 @@ Unlike other properties that use an `_` prefix, the `_request_id` property is pu
 
 ## Retries
 
-Certain errors are automatically retried 2 times by default, with a short exponential backoff. Connection errors (for example, because of a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, and >=500 Internal errors are all retried by default.
+By default, the SDK retries certain errors twice, with a short exponential backoff. It retries connection errors (for example, a network problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, and >=500 Internal errors.
 
 You can use the `max_retries` option to configure or disable this:
 
@@ -444,7 +444,7 @@ client.with_options(timeout=5.0).messages.create(
 )
 ```
 
-On timeout, the SDK throws an `APITimeoutError`.
+On timeout, the SDK raises an `APITimeoutError`.
 
 Note that requests that time out are [retried twice by default](python.md#retries).
 
@@ -454,7 +454,7 @@ Consider using the [streaming Messages API](python.md#streaming-responses) for l
 
 Avoid setting a large `max_tokens` value without using streaming. Some networks might drop idle connections after a certain period of time, which can cause the request to fail or [time out](python.md#timeouts) without receiving a response from Anthropic.
 
-The SDK will throw a `ValueError` if a non-streaming request is expected to take longer than approximately 10 minutes. Passing `stream=True` or overriding the `timeout` option at the client or request level disables this error.
+The SDK raises a `ValueError` if a non-streaming request is expected to take longer than approximately 10 minutes. Passing `stream=True` or overriding the `timeout` option at the client or request level disables this error.
 
 An expected request latency longer than the [timeout](python.md#timeouts) for a non-streaming request will result in the client ending the connection and retrying without receiving a response.
 
@@ -496,7 +496,7 @@ if first_page.has_next_page():
         f"will fetch next page using these details: {first_page.next_page_info()}"
     )
     next_page = await first_page.get_next_page()
-    print(f"number of items we just fetched: {len(next_page.data)}")
+    print(f"number of items on the next page: {len(next_page.data)}")
 
 # Remove `await` for non-async usage.
 ```
@@ -579,7 +579,7 @@ if response.my_field is None:
 
 ### Accessing raw response data (for example, headers)
 
-The “raw” `Response` returned by `httpx2` can be accessed through the `.with_raw_response` property on the client. This is useful for accessing response headers or other metadata:
+To access the raw HTTP response, call a method through the `.with_raw_response` property of a resource or of the client. This is useful for accessing response headers or other metadata:
 
 ```python
 client = Anthropic()
@@ -597,7 +597,7 @@ message = (
 print(message.content)
 ```
 
-These methods return an `APIResponse` object. On the async client they return an `AsyncAPIResponse`, and you must await `.parse()`, `.read()`, `.text()`, and `.json()`.
+These methods return an `APIResponse` object, whose `.http_response` attribute holds the `httpx2.Response`. On the async client they return an `AsyncAPIResponse`, and you must await `.parse()`, `.read()`, `.text()`, and `.json()`.
 
 ### Streaming response body
 
@@ -702,7 +702,7 @@ with Anthropic() as client:
 
 ## Beta features
 
-Beta features are available before general release to get early feedback and test new functionality. You can check the availability of all of Claude’s capabilities and tools in the [Features overview](../../build-with-claude/overview.md).
+Beta features let you try new functionality and give early feedback. You can check the availability of all of Claude’s capabilities and tools in the [Features overview](../../build-with-claude/overview.md).
 
 You can access most beta API features through the `beta` property of the client. To enable a particular beta feature, you need to add the appropriate [beta header](../../api/beta-headers.md) to the `betas` field when creating a message.
 
@@ -768,7 +768,7 @@ print(anthropic.__version__)
 
 * [GitHub repository](https://github.com/anthropics/anthropic-sdk-python)
 * [API reference](../../api/overview.md)
-* [Streaming Messages](../../build-with-claude/streaming.md)
+* [Streaming messages](../../build-with-claude/streaming.md)
 * [Tool use with Claude](../../agents-and-tools/tool-use/overview.md)
 
 ---

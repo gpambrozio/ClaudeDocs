@@ -621,7 +621,7 @@ Archive Session Thread
 
               - `Optional<List<String>> blockedDomains`
 
-              - `Optional<Long> maxContentTokens`
+              - `Optional<Integer> maxContentTokens`
 
                 format: int32
 
@@ -779,7 +779,7 @@ Archive Session Thread
 
           - `String name`
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -843,13 +843,13 @@ Archive Session Thread
 
           A custom tool as returned in API responses.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the thread was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the thread was created.
 
@@ -897,7 +897,7 @@ Archive Session Thread
 
     - `TERMINATED("terminated")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the thread was last updated.
 
@@ -917,25 +917,25 @@ Archive Session Thread
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -955,7 +955,7 @@ Archive Session Thread
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -965,13 +965,13 @@ Archive Session Thread
 
       Cumulative server-executed tool usage across all turns of this thread. Absent until server-tool tracking is available for the thread.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 

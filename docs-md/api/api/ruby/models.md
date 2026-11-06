@@ -67,7 +67,7 @@ The Models API response can be used to determine which models are available for 
 
     Unique model identifier.
 
-  - `capabilities: ModelCapabilities`
+  - `capabilities: ModelCapabilities | nil`
 
     Object mapping capability names to their support details. Keys are always present for all known capabilities.
 
@@ -91,15 +91,15 @@ The Models API response can be used to determine which models are available for 
 
       Context management support and available strategies.
 
-      - `clear_thinking_20251015: CapabilitySupport`
+      - `clear_thinking_20251015: CapabilitySupport | nil`
 
         Whether the clear_thinking_20251015 strategy is supported.
 
-      - `clear_tool_uses_20250919: CapabilitySupport`
+      - `clear_tool_uses_20250919: CapabilitySupport | nil`
 
         Whether the clear_tool_uses_20250919 strategy is supported.
 
-      - `compact_20260112: CapabilitySupport`
+      - `compact_20260112: CapabilitySupport | nil`
 
         Whether the compact_20260112 strategy is supported.
 
@@ -131,7 +131,7 @@ The Models API response can be used to determine which models are available for 
 
         Whether this capability is supported by the model.
 
-      - `xhigh: CapabilitySupport`
+      - `xhigh: CapabilitySupport | nil`
 
         Whether the model supports xhigh effort level.
 
@@ -197,7 +197,7 @@ The Models API response can be used to determine which models are available for 
 
     format: date-time
 
-  - `deprecated_at: Time`
+  - `deprecated_at: Time | nil`
 
     RFC 3339 datetime string representing the time of the model's most recent deprecation. Populated for `deprecated` and `retired` models; `null` while the model is `active`.
 
@@ -221,7 +221,7 @@ The Models API response can be used to determine which models are available for 
 
     - `:retired`
 
-  - `line: ModelLine`
+  - `line: ModelLine | nil`
 
     The model line this model belongs to, such as `opus` for both Claude Opus 4.5 and Claude Opus 4.6. More lines may be added. `null` when the model belongs to no line; do not infer a line from the `id`.
 
@@ -235,15 +235,15 @@ The Models API response can be used to determine which models are available for 
 
     - `:mythos`
 
-  - `max_input_tokens: Integer`
+  - `max_input_tokens: Integer | nil`
 
     Maximum input context window size in tokens for this model.
 
-  - `max_tokens: Integer`
+  - `max_tokens: Integer | nil`
 
     Maximum value for the `max_tokens` parameter when using this model.
 
-  - `retires_at: Time`
+  - `retires_at: Time | nil`
 
     RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
 
@@ -397,7 +397,7 @@ The Models API response can be used to determine information about a specific mo
 
     Unique model identifier.
 
-  - `capabilities: ModelCapabilities`
+  - `capabilities: ModelCapabilities | nil`
 
     Object mapping capability names to their support details. Keys are always present for all known capabilities.
 
@@ -421,15 +421,15 @@ The Models API response can be used to determine information about a specific mo
 
       Context management support and available strategies.
 
-      - `clear_thinking_20251015: CapabilitySupport`
+      - `clear_thinking_20251015: CapabilitySupport | nil`
 
         Whether the clear_thinking_20251015 strategy is supported.
 
-      - `clear_tool_uses_20250919: CapabilitySupport`
+      - `clear_tool_uses_20250919: CapabilitySupport | nil`
 
         Whether the clear_tool_uses_20250919 strategy is supported.
 
-      - `compact_20260112: CapabilitySupport`
+      - `compact_20260112: CapabilitySupport | nil`
 
         Whether the compact_20260112 strategy is supported.
 
@@ -461,7 +461,7 @@ The Models API response can be used to determine information about a specific mo
 
         Whether this capability is supported by the model.
 
-      - `xhigh: CapabilitySupport`
+      - `xhigh: CapabilitySupport | nil`
 
         Whether the model supports xhigh effort level.
 
@@ -527,7 +527,7 @@ The Models API response can be used to determine information about a specific mo
 
     format: date-time
 
-  - `deprecated_at: Time`
+  - `deprecated_at: Time | nil`
 
     RFC 3339 datetime string representing the time of the model's most recent deprecation. Populated for `deprecated` and `retired` models; `null` while the model is `active`.
 
@@ -551,7 +551,7 @@ The Models API response can be used to determine information about a specific mo
 
     - `:retired`
 
-  - `line: ModelLine`
+  - `line: ModelLine | nil`
 
     The model line this model belongs to, such as `opus` for both Claude Opus 4.5 and Claude Opus 4.6. More lines may be added. `null` when the model belongs to no line; do not infer a line from the `id`.
 
@@ -565,15 +565,15 @@ The Models API response can be used to determine information about a specific mo
 
     - `:mythos`
 
-  - `max_input_tokens: Integer`
+  - `max_input_tokens: Integer | nil`
 
     Maximum input context window size in tokens for this model.
 
-  - `max_tokens: Integer`
+  - `max_tokens: Integer | nil`
 
     Maximum value for the `max_tokens` parameter when using this model.
 
-  - `retires_at: Time`
+  - `retires_at: Time | nil`
 
     RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
 
@@ -702,7 +702,7 @@ puts(model_info)
 
   Context management capability details.
 
-  - `clear_thinking_20251015: CapabilitySupport`
+  - `clear_thinking_20251015: CapabilitySupport | nil`
 
     Whether the clear_thinking_20251015 strategy is supported.
 
@@ -710,11 +710,11 @@ puts(model_info)
 
       Whether this capability is supported by the model.
 
-  - `clear_tool_uses_20250919: CapabilitySupport`
+  - `clear_tool_uses_20250919: CapabilitySupport | nil`
 
     Whether the clear_tool_uses_20250919 strategy is supported.
 
-  - `compact_20260112: CapabilitySupport`
+  - `compact_20260112: CapabilitySupport | nil`
 
     Whether the compact_20260112 strategy is supported.
 
@@ -752,7 +752,7 @@ puts(model_info)
 
     Whether this capability is supported by the model.
 
-  - `xhigh: CapabilitySupport`
+  - `xhigh: CapabilitySupport | nil`
 
     Whether the model supports xhigh effort level.
 
@@ -782,15 +782,15 @@ puts(model_info)
 
     Context management support and available strategies.
 
-    - `clear_thinking_20251015: CapabilitySupport`
+    - `clear_thinking_20251015: CapabilitySupport | nil`
 
       Whether the clear_thinking_20251015 strategy is supported.
 
-    - `clear_tool_uses_20250919: CapabilitySupport`
+    - `clear_tool_uses_20250919: CapabilitySupport | nil`
 
       Whether the clear_tool_uses_20250919 strategy is supported.
 
-    - `compact_20260112: CapabilitySupport`
+    - `compact_20260112: CapabilitySupport | nil`
 
       Whether the compact_20260112 strategy is supported.
 
@@ -822,7 +822,7 @@ puts(model_info)
 
       Whether this capability is supported by the model.
 
-    - `xhigh: CapabilitySupport`
+    - `xhigh: CapabilitySupport | nil`
 
       Whether the model supports xhigh effort level.
 
@@ -896,7 +896,7 @@ puts(model_info)
 
     Unique model identifier.
 
-  - `capabilities: ModelCapabilities`
+  - `capabilities: ModelCapabilities | nil`
 
     Object mapping capability names to their support details. Keys are always present for all known capabilities.
 
@@ -920,15 +920,15 @@ puts(model_info)
 
       Context management support and available strategies.
 
-      - `clear_thinking_20251015: CapabilitySupport`
+      - `clear_thinking_20251015: CapabilitySupport | nil`
 
         Whether the clear_thinking_20251015 strategy is supported.
 
-      - `clear_tool_uses_20250919: CapabilitySupport`
+      - `clear_tool_uses_20250919: CapabilitySupport | nil`
 
         Whether the clear_tool_uses_20250919 strategy is supported.
 
-      - `compact_20260112: CapabilitySupport`
+      - `compact_20260112: CapabilitySupport | nil`
 
         Whether the compact_20260112 strategy is supported.
 
@@ -960,7 +960,7 @@ puts(model_info)
 
         Whether this capability is supported by the model.
 
-      - `xhigh: CapabilitySupport`
+      - `xhigh: CapabilitySupport | nil`
 
         Whether the model supports xhigh effort level.
 
@@ -1026,7 +1026,7 @@ puts(model_info)
 
     format: date-time
 
-  - `deprecated_at: Time`
+  - `deprecated_at: Time | nil`
 
     RFC 3339 datetime string representing the time of the model's most recent deprecation. Populated for `deprecated` and `retired` models; `null` while the model is `active`.
 
@@ -1050,7 +1050,7 @@ puts(model_info)
 
     - `:retired`
 
-  - `line: ModelLine`
+  - `line: ModelLine | nil`
 
     The model line this model belongs to, such as `opus` for both Claude Opus 4.5 and Claude Opus 4.6. More lines may be added. `null` when the model belongs to no line; do not infer a line from the `id`.
 
@@ -1064,15 +1064,15 @@ puts(model_info)
 
     - `:mythos`
 
-  - `max_input_tokens: Integer`
+  - `max_input_tokens: Integer | nil`
 
     Maximum input context window size in tokens for this model.
 
-  - `max_tokens: Integer`
+  - `max_tokens: Integer | nil`
 
     Maximum value for the `max_tokens` parameter when using this model.
 
-  - `retires_at: Time`
+  - `retires_at: Time | nil`
 
     RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
 

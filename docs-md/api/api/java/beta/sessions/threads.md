@@ -21,7 +21,7 @@ List Session Threads
 
   - `Optional<String> sessionId` (path parameter)
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum results per page. Defaults to 1000.
 
@@ -645,7 +645,7 @@ List Session Threads
 
               - `Optional<List<String>> blockedDomains`
 
-              - `Optional<Long> maxContentTokens`
+              - `Optional<Integer> maxContentTokens`
 
                 format: int32
 
@@ -803,7 +803,7 @@ List Session Threads
 
           - `String name`
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -867,13 +867,13 @@ List Session Threads
 
           A custom tool as returned in API responses.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the thread was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the thread was created.
 
@@ -921,7 +921,7 @@ List Session Threads
 
     - `TERMINATED("terminated")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the thread was last updated.
 
@@ -941,25 +941,25 @@ List Session Threads
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -979,7 +979,7 @@ List Session Threads
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -989,13 +989,13 @@ List Session Threads
 
       Cumulative server-executed tool usage across all turns of this thread. Absent until server-tool tracking is available for the thread.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -1740,7 +1740,7 @@ Get Session Thread
 
               - `Optional<List<String>> blockedDomains`
 
-              - `Optional<Long> maxContentTokens`
+              - `Optional<Integer> maxContentTokens`
 
                 format: int32
 
@@ -1898,7 +1898,7 @@ Get Session Thread
 
           - `String name`
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -1962,13 +1962,13 @@ Get Session Thread
 
           A custom tool as returned in API responses.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the thread was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the thread was created.
 
@@ -2016,7 +2016,7 @@ Get Session Thread
 
     - `TERMINATED("terminated")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the thread was last updated.
 
@@ -2036,25 +2036,25 @@ Get Session Thread
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -2074,7 +2074,7 @@ Get Session Thread
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -2084,13 +2084,13 @@ Get Session Thread
 
       Cumulative server-executed tool usage across all turns of this thread. Absent until server-tool tracking is available for the thread.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -2834,7 +2834,7 @@ Archive Session Thread
 
               - `Optional<List<String>> blockedDomains`
 
-              - `Optional<Long> maxContentTokens`
+              - `Optional<Integer> maxContentTokens`
 
                 format: int32
 
@@ -2992,7 +2992,7 @@ Archive Session Thread
 
           - `String name`
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -3056,13 +3056,13 @@ Archive Session Thread
 
           A custom tool as returned in API responses.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the thread was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the thread was created.
 
@@ -3110,7 +3110,7 @@ Archive Session Thread
 
     - `TERMINATED("terminated")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the thread was last updated.
 
@@ -3130,25 +3130,25 @@ Archive Session Thread
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -3168,7 +3168,7 @@ Archive Session Thread
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -3178,13 +3178,13 @@ Archive Session Thread
 
       Cumulative server-executed tool usage across all turns of this thread. Absent until server-tool tracking is available for the thread.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -3780,7 +3780,7 @@ public final class Main {
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -4418,7 +4418,7 @@ public final class Main {
 
               - `Optional<List<String>> blockedDomains`
 
-              - `Optional<Long> maxContentTokens`
+              - `Optional<Integer> maxContentTokens`
 
                 format: int32
 
@@ -4576,7 +4576,7 @@ public final class Main {
 
           - `String name`
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -4640,13 +4640,13 @@ public final class Main {
 
           A custom tool as returned in API responses.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the thread was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the thread was created.
 
@@ -4694,7 +4694,7 @@ public final class Main {
 
     - `TERMINATED("terminated")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the thread was last updated.
 
@@ -4714,25 +4714,25 @@ public final class Main {
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -4752,7 +4752,7 @@ public final class Main {
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -4762,13 +4762,13 @@ public final class Main {
 
       Cumulative server-executed tool usage across all turns of this thread. Absent until server-tool tracking is available for the thread.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -4830,25 +4830,25 @@ public final class Main {
 
     Tokens used to create prompt cache entries, broken down by cache TTL.
 
-    - `Optional<Long> ephemeral1hInputTokens`
+    - `Optional<Integer> ephemeral1hInputTokens`
 
       Tokens used to create 1-hour ephemeral cache entries.
 
       format: int32
 
-    - `Optional<Long> ephemeral5mInputTokens`
+    - `Optional<Integer> ephemeral5mInputTokens`
 
       Tokens used to create 5-minute ephemeral cache entries.
 
       format: int32
 
-  - `Optional<Long> cacheReadInputTokens`
+  - `Optional<Integer> cacheReadInputTokens`
 
     Total tokens read from prompt cache.
 
     format: int32
 
-  - `Optional<Long> inputTokens`
+  - `Optional<Integer> inputTokens`
 
     Total input tokens consumed across all turns.
 
@@ -4868,7 +4868,7 @@ public final class Main {
 
       Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-  - `Optional<Long> outputTokens`
+  - `Optional<Integer> outputTokens`
 
     Total output tokens generated across all turns.
 
@@ -4878,13 +4878,13 @@ public final class Main {
 
     Cumulative server-executed tool usage across all turns of this thread. Absent until server-tool tracking is available for the thread.
 
-    - `Optional<Long> webFetchRequests`
+    - `Optional<Integer> webFetchRequests`
 
       Number of server-executed web fetch requests.
 
       format: int32
 
-    - `Optional<Long> webSearchRequests`
+    - `Optional<Integer> webSearchRequests`
 
       Number of server-executed web search requests.
 
@@ -5056,7 +5056,7 @@ public final class Main {
 
         - `JsonValue type = "redacted"`
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the agent finished processing this message.
 
@@ -5072,7 +5072,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the interrupt was processed.
 
@@ -5110,7 +5110,7 @@ public final class Main {
 
       maxLength: 10000
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the confirmation was processed.
 
@@ -5192,7 +5192,7 @@ public final class Main {
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -5220,7 +5220,7 @@ public final class Main {
 
       Name of the custom tool being called.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this tool use was processed.
 
@@ -5252,7 +5252,7 @@ public final class Main {
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this response was generated.
 
@@ -5268,7 +5268,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this thinking was produced.
 
@@ -5296,7 +5296,7 @@ public final class Main {
 
       Name of the MCP tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -5386,7 +5386,7 @@ public final class Main {
 
       The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -5434,7 +5434,7 @@ public final class Main {
 
       Name of the agent tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -5462,7 +5462,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -5530,7 +5530,7 @@ public final class Main {
 
       Public `sthr_` ID of the thread that sent the message.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was received.
 
@@ -5570,7 +5570,7 @@ public final class Main {
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was sent.
 
@@ -5594,7 +5594,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when compaction was processed.
 
@@ -6044,7 +6044,7 @@ public final class Main {
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the error occurred.
 
@@ -6060,7 +6060,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -6076,7 +6076,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -6092,7 +6092,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -6168,7 +6168,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -6188,7 +6188,7 @@ public final class Main {
 
       Name of the callable agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the thread was created.
 
@@ -6212,7 +6212,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
@@ -6222,7 +6222,7 @@ public final class Main {
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation started.
 
@@ -6242,7 +6242,7 @@ public final class Main {
 
       Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -6256,7 +6256,7 @@ public final class Main {
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation ended.
 
@@ -6270,25 +6270,25 @@ public final class Main {
 
       Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
-      - `long cacheCreationInputTokens`
+      - `int cacheCreationInputTokens`
 
         Tokens used to create prompt cache in this request.
 
         format: int32
 
-      - `long cacheReadInputTokens`
+      - `int cacheReadInputTokens`
 
         Tokens read from prompt cache in this request.
 
         format: int32
 
-      - `long inputTokens`
+      - `int inputTokens`
 
         Input tokens consumed by this request.
 
         format: int32
 
-      - `long outputTokens`
+      - `int outputTokens`
 
         Output tokens generated by this request.
 
@@ -6312,7 +6312,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request started.
 
@@ -6340,7 +6340,7 @@ public final class Main {
 
       Token usage for this model request.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request completed.
 
@@ -6356,7 +6356,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -6366,7 +6366,7 @@ public final class Main {
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this heartbeat was emitted.
 
@@ -6386,7 +6386,7 @@ public final class Main {
 
       What the agent should produce. Copied from the input event.
 
-    - `Optional<Long> maxIterations`
+    - `Optional<Integer> maxIterations`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -6396,7 +6396,7 @@ public final class Main {
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the outcome was accepted.
 
@@ -6436,7 +6436,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the session was deleted.
 
@@ -6456,7 +6456,7 @@ public final class Main {
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -6480,7 +6480,7 @@ public final class Main {
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -6530,7 +6530,7 @@ public final class Main {
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -6578,7 +6578,7 @@ public final class Main {
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -6602,7 +6602,7 @@ public final class Main {
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -6622,7 +6622,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the update was applied.
 
@@ -7132,7 +7132,7 @@ public final class Main {
 
                       - `Optional<List<String>> blockedDomains`
 
-                      - `Optional<Long> maxContentTokens`
+                      - `Optional<Integer> maxContentTokens`
 
                         format: int32
 
@@ -7290,7 +7290,7 @@ public final class Main {
 
                   - `String name`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -7384,7 +7384,7 @@ public final class Main {
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -7436,7 +7436,7 @@ public final class Main {
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -7470,7 +7470,7 @@ public final class Main {
 
           A custom tool as returned in API responses.
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -7574,7 +7574,7 @@ public final class Main {
 
         minLength: 1
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this system message was processed.
 
@@ -7590,7 +7590,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the snapshot was taken.
 
@@ -7610,25 +7610,25 @@ public final class Main {
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `Optional<Long> ephemeral1hInputTokens`
+        - `Optional<Integer> ephemeral1hInputTokens`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `Optional<Long> ephemeral5mInputTokens`
+        - `Optional<Integer> ephemeral5mInputTokens`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `Optional<Long> cacheReadInputTokens`
+      - `Optional<Integer> cacheReadInputTokens`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `Optional<Long> inputTokens`
+      - `Optional<Integer> inputTokens`
 
         Total input tokens consumed across all turns.
 
@@ -7638,7 +7638,7 @@ public final class Main {
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `Optional<Long> outputTokens`
+      - `Optional<Integer> outputTokens`
 
         Total output tokens generated across all turns.
 
@@ -7648,13 +7648,13 @@ public final class Main {
 
         Cumulative server-executed tool usage across all turns.
 
-        - `Optional<Long> webFetchRequests`
+        - `Optional<Integer> webFetchRequests`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `Optional<Long> webSearchRequests`
+        - `Optional<Integer> webSearchRequests`
 
           Number of server-executed web search requests.
 
@@ -7698,7 +7698,7 @@ public final class Main {
 
         Name that the agent gave the phase, passed on as written.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -7718,7 +7718,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -7814,7 +7814,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -7842,7 +7842,7 @@ public final class Main {
 
       Identifier of the `workflow_run.phase_started` event that opened the phase.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -7866,7 +7866,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -7886,7 +7886,7 @@ public final class Main {
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -7910,7 +7910,7 @@ public final class Main {
 
       Why the run did not finish, or was not created.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -7938,7 +7938,7 @@ List Session Thread Events
 
   - `Optional<String> threadId` (path parameter)
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     format: int32
 
@@ -8230,7 +8230,7 @@ List Session Thread Events
 
         - `JsonValue type = "redacted"`
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the agent finished processing this message.
 
@@ -8246,7 +8246,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the interrupt was processed.
 
@@ -8284,7 +8284,7 @@ List Session Thread Events
 
       maxLength: 10000
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the confirmation was processed.
 
@@ -8366,7 +8366,7 @@ List Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -8394,7 +8394,7 @@ List Session Thread Events
 
       Name of the custom tool being called.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this tool use was processed.
 
@@ -8426,7 +8426,7 @@ List Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this response was generated.
 
@@ -8442,7 +8442,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this thinking was produced.
 
@@ -8470,7 +8470,7 @@ List Session Thread Events
 
       Name of the MCP tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -8560,7 +8560,7 @@ List Session Thread Events
 
       The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -8608,7 +8608,7 @@ List Session Thread Events
 
       Name of the agent tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -8636,7 +8636,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -8704,7 +8704,7 @@ List Session Thread Events
 
       Public `sthr_` ID of the thread that sent the message.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was received.
 
@@ -8744,7 +8744,7 @@ List Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was sent.
 
@@ -8768,7 +8768,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when compaction was processed.
 
@@ -9218,7 +9218,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the error occurred.
 
@@ -9234,7 +9234,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -9250,7 +9250,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -9266,7 +9266,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -9342,7 +9342,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -9362,7 +9362,7 @@ List Session Thread Events
 
       Name of the callable agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the thread was created.
 
@@ -9386,7 +9386,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
@@ -9396,7 +9396,7 @@ List Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation started.
 
@@ -9416,7 +9416,7 @@ List Session Thread Events
 
       Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -9430,7 +9430,7 @@ List Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation ended.
 
@@ -9444,25 +9444,25 @@ List Session Thread Events
 
       Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
-      - `long cacheCreationInputTokens`
+      - `int cacheCreationInputTokens`
 
         Tokens used to create prompt cache in this request.
 
         format: int32
 
-      - `long cacheReadInputTokens`
+      - `int cacheReadInputTokens`
 
         Tokens read from prompt cache in this request.
 
         format: int32
 
-      - `long inputTokens`
+      - `int inputTokens`
 
         Input tokens consumed by this request.
 
         format: int32
 
-      - `long outputTokens`
+      - `int outputTokens`
 
         Output tokens generated by this request.
 
@@ -9486,7 +9486,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request started.
 
@@ -9514,7 +9514,7 @@ List Session Thread Events
 
       Token usage for this model request.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request completed.
 
@@ -9530,7 +9530,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -9540,7 +9540,7 @@ List Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this heartbeat was emitted.
 
@@ -9560,7 +9560,7 @@ List Session Thread Events
 
       What the agent should produce. Copied from the input event.
 
-    - `Optional<Long> maxIterations`
+    - `Optional<Integer> maxIterations`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -9570,7 +9570,7 @@ List Session Thread Events
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the outcome was accepted.
 
@@ -9610,7 +9610,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the session was deleted.
 
@@ -9630,7 +9630,7 @@ List Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -9654,7 +9654,7 @@ List Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -9704,7 +9704,7 @@ List Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -9752,7 +9752,7 @@ List Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -9776,7 +9776,7 @@ List Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -9796,7 +9796,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the update was applied.
 
@@ -10306,7 +10306,7 @@ List Session Thread Events
 
                       - `Optional<List<String>> blockedDomains`
 
-                      - `Optional<Long> maxContentTokens`
+                      - `Optional<Integer> maxContentTokens`
 
                         format: int32
 
@@ -10464,7 +10464,7 @@ List Session Thread Events
 
                   - `String name`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -10558,7 +10558,7 @@ List Session Thread Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -10610,7 +10610,7 @@ List Session Thread Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -10644,7 +10644,7 @@ List Session Thread Events
 
           A custom tool as returned in API responses.
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -10698,7 +10698,7 @@ List Session Thread Events
 
         minLength: 1
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this system message was processed.
 
@@ -10714,7 +10714,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the snapshot was taken.
 
@@ -10734,25 +10734,25 @@ List Session Thread Events
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `Optional<Long> ephemeral1hInputTokens`
+        - `Optional<Integer> ephemeral1hInputTokens`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `Optional<Long> ephemeral5mInputTokens`
+        - `Optional<Integer> ephemeral5mInputTokens`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `Optional<Long> cacheReadInputTokens`
+      - `Optional<Integer> cacheReadInputTokens`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `Optional<Long> inputTokens`
+      - `Optional<Integer> inputTokens`
 
         Total input tokens consumed across all turns.
 
@@ -10762,7 +10762,7 @@ List Session Thread Events
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `Optional<Long> outputTokens`
+      - `Optional<Integer> outputTokens`
 
         Total output tokens generated across all turns.
 
@@ -10772,13 +10772,13 @@ List Session Thread Events
 
         Cumulative server-executed tool usage across all turns.
 
-        - `Optional<Long> webFetchRequests`
+        - `Optional<Integer> webFetchRequests`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `Optional<Long> webSearchRequests`
+        - `Optional<Integer> webSearchRequests`
 
           Number of server-executed web search requests.
 
@@ -10822,7 +10822,7 @@ List Session Thread Events
 
         Name that the agent gave the phase, passed on as written.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -10842,7 +10842,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -10938,7 +10938,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -10966,7 +10966,7 @@ List Session Thread Events
 
       Identifier of the `workflow_run.phase_started` event that opened the phase.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -10990,7 +10990,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -11010,7 +11010,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -11034,7 +11034,7 @@ List Session Thread Events
 
       Why the run did not finish, or was not created.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -11411,7 +11411,7 @@ Stream Session Thread Events
 
         - `JsonValue type = "redacted"`
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the agent finished processing this message.
 
@@ -11427,7 +11427,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the interrupt was processed.
 
@@ -11465,7 +11465,7 @@ Stream Session Thread Events
 
       maxLength: 10000
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the confirmation was processed.
 
@@ -11547,7 +11547,7 @@ Stream Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -11575,7 +11575,7 @@ Stream Session Thread Events
 
       Name of the custom tool being called.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this tool use was processed.
 
@@ -11607,7 +11607,7 @@ Stream Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this response was generated.
 
@@ -11623,7 +11623,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this thinking was produced.
 
@@ -11651,7 +11651,7 @@ Stream Session Thread Events
 
       Name of the MCP tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -11741,7 +11741,7 @@ Stream Session Thread Events
 
       The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -11789,7 +11789,7 @@ Stream Session Thread Events
 
       Name of the agent tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -11817,7 +11817,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -11885,7 +11885,7 @@ Stream Session Thread Events
 
       Public `sthr_` ID of the thread that sent the message.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was received.
 
@@ -11925,7 +11925,7 @@ Stream Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was sent.
 
@@ -11949,7 +11949,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when compaction was processed.
 
@@ -12399,7 +12399,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the error occurred.
 
@@ -12415,7 +12415,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -12431,7 +12431,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -12447,7 +12447,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -12523,7 +12523,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -12543,7 +12543,7 @@ Stream Session Thread Events
 
       Name of the callable agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the thread was created.
 
@@ -12567,7 +12567,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
@@ -12577,7 +12577,7 @@ Stream Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation started.
 
@@ -12597,7 +12597,7 @@ Stream Session Thread Events
 
       Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -12611,7 +12611,7 @@ Stream Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation ended.
 
@@ -12625,25 +12625,25 @@ Stream Session Thread Events
 
       Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
-      - `long cacheCreationInputTokens`
+      - `int cacheCreationInputTokens`
 
         Tokens used to create prompt cache in this request.
 
         format: int32
 
-      - `long cacheReadInputTokens`
+      - `int cacheReadInputTokens`
 
         Tokens read from prompt cache in this request.
 
         format: int32
 
-      - `long inputTokens`
+      - `int inputTokens`
 
         Input tokens consumed by this request.
 
         format: int32
 
-      - `long outputTokens`
+      - `int outputTokens`
 
         Output tokens generated by this request.
 
@@ -12667,7 +12667,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request started.
 
@@ -12695,7 +12695,7 @@ Stream Session Thread Events
 
       Token usage for this model request.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request completed.
 
@@ -12711,7 +12711,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -12721,7 +12721,7 @@ Stream Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this heartbeat was emitted.
 
@@ -12741,7 +12741,7 @@ Stream Session Thread Events
 
       What the agent should produce. Copied from the input event.
 
-    - `Optional<Long> maxIterations`
+    - `Optional<Integer> maxIterations`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -12751,7 +12751,7 @@ Stream Session Thread Events
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the outcome was accepted.
 
@@ -12791,7 +12791,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the session was deleted.
 
@@ -12811,7 +12811,7 @@ Stream Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -12835,7 +12835,7 @@ Stream Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -12885,7 +12885,7 @@ Stream Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -12933,7 +12933,7 @@ Stream Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -12957,7 +12957,7 @@ Stream Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -12977,7 +12977,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the update was applied.
 
@@ -13487,7 +13487,7 @@ Stream Session Thread Events
 
                       - `Optional<List<String>> blockedDomains`
 
-                      - `Optional<Long> maxContentTokens`
+                      - `Optional<Integer> maxContentTokens`
 
                         format: int32
 
@@ -13645,7 +13645,7 @@ Stream Session Thread Events
 
                   - `String name`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -13739,7 +13739,7 @@ Stream Session Thread Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -13791,7 +13791,7 @@ Stream Session Thread Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -13825,7 +13825,7 @@ Stream Session Thread Events
 
           A custom tool as returned in API responses.
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -13929,7 +13929,7 @@ Stream Session Thread Events
 
         minLength: 1
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this system message was processed.
 
@@ -13945,7 +13945,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the snapshot was taken.
 
@@ -13965,25 +13965,25 @@ Stream Session Thread Events
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `Optional<Long> ephemeral1hInputTokens`
+        - `Optional<Integer> ephemeral1hInputTokens`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `Optional<Long> ephemeral5mInputTokens`
+        - `Optional<Integer> ephemeral5mInputTokens`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `Optional<Long> cacheReadInputTokens`
+      - `Optional<Integer> cacheReadInputTokens`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `Optional<Long> inputTokens`
+      - `Optional<Integer> inputTokens`
 
         Total input tokens consumed across all turns.
 
@@ -13993,7 +13993,7 @@ Stream Session Thread Events
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `Optional<Long> outputTokens`
+      - `Optional<Integer> outputTokens`
 
         Total output tokens generated across all turns.
 
@@ -14003,13 +14003,13 @@ Stream Session Thread Events
 
         Cumulative server-executed tool usage across all turns.
 
-        - `Optional<Long> webFetchRequests`
+        - `Optional<Integer> webFetchRequests`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `Optional<Long> webSearchRequests`
+        - `Optional<Integer> webSearchRequests`
 
           Number of server-executed web search requests.
 
@@ -14053,7 +14053,7 @@ Stream Session Thread Events
 
         Name that the agent gave the phase, passed on as written.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -14073,7 +14073,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -14169,7 +14169,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -14197,7 +14197,7 @@ Stream Session Thread Events
 
       Identifier of the `workflow_run.phase_started` event that opened the phase.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -14221,7 +14221,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -14241,7 +14241,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -14265,7 +14265,7 @@ Stream Session Thread Events
 
       Why the run did not finish, or was not created.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 

@@ -417,11 +417,11 @@ List Events
 
               minLength: 1
 
-        - `context: optional String`
+        - `context: optional String | nil`
 
           Additional context about the document for the model.
 
-        - `title: optional String`
+        - `title: optional String | nil`
 
           The title of the document.
 
@@ -431,7 +431,7 @@ List Events
 
         - `type: :redacted`
 
-    - `processed_at: optional Time`
+    - `processed_at: optional Time | nil`
 
       Timestamp when the agent finished processing this message.
 
@@ -447,13 +447,13 @@ List Events
 
       Unique identifier for this event.
 
-    - `processed_at: optional Time`
+    - `processed_at: optional Time | nil`
 
       Timestamp when the interrupt was processed.
 
       format: date-time
 
-    - `session_thread_id: optional String`
+    - `session_thread_id: optional String | nil`
 
       If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -479,19 +479,19 @@ List Events
 
       The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresponds to, which can be found in the last `session.status_idle` [event's](../../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `deny_message: optional String`
+    - `deny_message: optional String | nil`
 
       Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
       maxLength: 10000
 
-    - `processed_at: optional Time`
+    - `processed_at: optional Time | nil`
 
       Timestamp when the confirmation was processed.
 
       format: date-time
 
-    - `session_thread_id: optional String`
+    - `session_thread_id: optional String | nil`
 
       Set by the server to the subagent thread this confirmation was routed to. Omitted when it was routed to the primary thread.
 
@@ -563,17 +563,17 @@ List Events
 
           minLength: 1
 
-    - `is_error: optional bool`
+    - `is_error: optional bool | nil`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional Time`
+    - `processed_at: optional Time | nil`
 
       Timestamp when this result was processed.
 
       format: date-time
 
-    - `session_thread_id: optional String`
+    - `session_thread_id: optional String | nil`
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -601,7 +601,7 @@ List Events
 
       format: date-time
 
-    - `session_thread_id: optional String`
+    - `session_thread_id: optional String | nil`
 
       When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.custom_tool_result` by `custom_tool_use_id`, so clients do not send it back.
 
@@ -743,7 +743,7 @@ List Events
 
               maxLength: 64
 
-    - `session_thread_id: optional String`
+    - `session_thread_id: optional String | nil`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` by `tool_use_id`, so clients do not send it back.
 
@@ -787,7 +787,7 @@ List Events
 
         A block containing a web search result.
 
-    - `is_error: optional bool`
+    - `is_error: optional bool | nil`
 
       Whether the tool execution resulted in an error.
 
@@ -823,7 +823,7 @@ List Events
 
       Which resolved permission_policy produced evaluated_permission: always_allow, always_ask, or auto (with the server's per-invocation judgement). Absent only when the server refused the call before any policy applied (for example, the named tool is not enabled in the session); such a refusal has evaluated_permission deny. An event recorded before this field existed reads as the arm its evaluated_permission implies (always_allow for allow, always_ask for ask).
 
-    - `session_thread_id: optional String`
+    - `session_thread_id: optional String | nil`
 
       When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Informational only: the server routes the matching `user.tool_confirmation` or `user.tool_result` by `tool_use_id`, so clients do not send it back.
 
@@ -867,7 +867,7 @@ List Events
 
         A block containing a web search result.
 
-    - `is_error: optional bool`
+    - `is_error: optional bool | nil`
 
       Whether the tool execution resulted in an error.
 
@@ -911,7 +911,7 @@ List Events
 
       format: date-time
 
-    - `from_agent_name: optional String`
+    - `from_agent_name: optional String | nil`
 
       Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -955,7 +955,7 @@ List Events
 
       Public `sthr_` ID of the thread the message was sent to.
 
-    - `to_agent_name: optional String`
+    - `to_agent_name: optional String | nil`
 
       Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -1279,7 +1279,7 @@ List Events
 
           Human-readable error description.
 
-        - `repository_url: String`
+        - `repository_url: String | nil`
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
@@ -1309,7 +1309,7 @@ List Events
 
           Human-readable error description.
 
-        - `repository_url: String`
+        - `repository_url: String | nil`
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
@@ -1339,7 +1339,7 @@ List Events
 
           Human-readable error description.
 
-        - `repository_url: String`
+        - `repository_url: String | nil`
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
@@ -1369,7 +1369,7 @@ List Events
 
           Human-readable error description.
 
-        - `repository_url: String`
+        - `repository_url: String | nil`
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
@@ -1399,7 +1399,7 @@ List Events
 
           Human-readable error description.
 
-        - `repository_url: String`
+        - `repository_url: String | nil`
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
@@ -1473,13 +1473,13 @@ List Events
 
       format: date-time
 
-    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails | nil`
 
       Structured information about why the session stopped. `null` when there is nothing more to report.
 
       - `type: :refusal`
 
-      - `category: :cyber | :bio | :frontier_llm | 2 more`
+      - `category: :cyber | :bio | :frontier_llm | 2 more | nil`
 
         The policy category that triggered the refusal, or `null` when there is no named category. New values can be added over time.
 
@@ -1493,7 +1493,7 @@ List Events
 
         - `:general_harms`
 
-      - `explanation: String`
+      - `explanation: String | nil`
 
         Human-readable explanation of the refusal, or `null` when none is available. The wording can change, so do not parse it.
 
@@ -1573,7 +1573,7 @@ List Events
 
       Public `sthr_` ID of the newly created thread.
 
-    - `workflow_run_id: String`
+    - `workflow_run_id: String | nil`
 
       Identifier of the workflow run that created the thread, or `null` for any other thread.
 
@@ -1669,7 +1669,7 @@ List Events
 
         format: int32
 
-      - `speed: optional :standard | :fast`
+      - `speed: optional :standard | :fast | nil`
 
         Inference speed tier this request actually ran at. Mirrors `usage.speed` on /v1/messages. Only present when the fast-mode beta is active.
 
@@ -1703,7 +1703,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `is_error: bool`
+    - `is_error: bool | nil`
 
       Whether the model request resulted in an error.
 
@@ -1761,7 +1761,7 @@ List Events
 
       What the agent should produce. Copied from the input event.
 
-    - `max_iterations: Integer`
+    - `max_iterations: Integer | nil`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -1865,7 +1865,7 @@ List Events
 
       Public sthr_ ID of the thread that went idle.
 
-    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails`
+    - `stop_details: BetaManagedAgentsSessionRefusalStopDetails | nil`
 
       Structured information about why the thread stopped. `null` when there is nothing more to report.
 
@@ -1949,17 +1949,17 @@ List Events
 
         A block containing a web search result.
 
-    - `is_error: optional bool`
+    - `is_error: optional bool | nil`
 
       Whether the tool execution resulted in an error.
 
-    - `processed_at: optional Time`
+    - `processed_at: optional Time | nil`
 
       Timestamp when this result was processed.
 
       format: date-time
 
-    - `session_thread_id: optional String`
+    - `session_thread_id: optional String | nil`
 
       Set by the server to the subagent thread this result was routed to. Omitted when it was routed to the primary thread.
 
@@ -2003,7 +2003,7 @@ List Events
 
       format: date-time
 
-    - `agent: optional BetaManagedAgentsSessionAgent`
+    - `agent: optional BetaManagedAgentsSessionAgent | nil`
 
       The session's effective agent configuration after the update. Present only when the update changed `agent` (tools or mcp_servers); when present it is the full materialised snapshot, not a diff.
 
@@ -2011,7 +2011,7 @@ List Events
 
       - `id: String`
 
-      - `description: String`
+      - `description: String | nil`
 
       - `execution_identity: BetaManagedAgentsExecutionIdentity`
 
@@ -2167,7 +2167,7 @@ List Events
 
           - `:fast`
 
-      - `multiagent: BetaManagedAgentsSessionMultiagent`
+      - `multiagent: BetaManagedAgentsSessionMultiagent | nil`
 
         Resolved multiagent orchestration configuration. Null when the agent is single-threaded.
 
@@ -2189,7 +2189,7 @@ List Events
 
               - `id: String`
 
-              - `description: String`
+              - `description: String | nil`
 
               - `execution_identity: BetaManagedAgentsExecutionIdentity`
 
@@ -2231,7 +2231,7 @@ List Events
 
                   - `version: String`
 
-              - `system_: String`
+              - `system_: String | nil`
 
               - `tools: Array[BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool]`
 
@@ -2429,11 +2429,11 @@ List Events
 
                           The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
-                      - `url_sources: BetaManagedAgentsWebFetchURLSources`
+                      - `url_sources: BetaManagedAgentsWebFetchURLSources | nil`
 
                         Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
 
-                        - `client_tool_results: BetaManagedAgentsWebFetchURLSourceToolFilter`
+                        - `client_tool_results: BetaManagedAgentsWebFetchURLSourceToolFilter | nil`
 
                           Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
 
@@ -2489,11 +2489,11 @@ List Events
 
                                 minLength: 1, maxLength: 128
 
-                        - `server_tool_results: BetaManagedAgentsWebFetchURLSourceToolFilter`
+                        - `server_tool_results: BetaManagedAgentsWebFetchURLSourceToolFilter | nil`
 
                           Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
 
-                        - `user_input: BetaManagedAgentsWebFetchURLSourceUserInput`
+                        - `user_input: BetaManagedAgentsWebFetchURLSourceUserInput | nil`
 
                           Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
 
@@ -2509,7 +2509,7 @@ List Events
 
                       - `blocked_domains: optional Array[String]`
 
-                      - `max_content_tokens: optional Integer`
+                      - `max_content_tokens: optional Integer | nil`
 
                         format: int32
 
@@ -2543,7 +2543,7 @@ List Events
 
                       - `blocked_domains: optional Array[String]`
 
-                      - `user_location: optional BetaManagedAgentsUserLocation`
+                      - `user_location: optional BetaManagedAgentsUserLocation | nil`
 
                         Approximate user location for search result localization.
 
@@ -2551,25 +2551,25 @@ List Events
 
                           Location precision. Only "approximate" is supported.
 
-                        - `city: optional String`
+                        - `city: optional String | nil`
 
                           City name.
 
                           minLength: 1, maxLength: 255
 
-                        - `country: optional String`
+                        - `country: optional String | nil`
 
                           Two-letter ISO 3166-1 country code, uppercase.
 
                           pattern: ^[A-Z]{2}$
 
-                        - `region: optional String`
+                        - `region: optional String | nil`
 
                           Region or state name.
 
                           minLength: 1, maxLength: 255
 
-                        - `timezone: optional String`
+                        - `timezone: optional String | nil`
 
                           IANA timezone identifier, e.g. "America/Los_Angeles".
 
@@ -2661,9 +2661,9 @@ List Events
 
                     - `type: :object`
 
-                    - `properties: optional Hash[Symbol, untyped]`
+                    - `properties: optional Hash[Symbol, untyped] | nil`
 
-                    - `required: optional Array[String]`
+                    - `required: optional Array[String] | nil`
 
                   - `name: String`
 
@@ -2741,7 +2741,7 @@ List Events
 
                 - `id: String`
 
-                - `description: String`
+                - `description: String | nil`
 
                 - `execution_identity: BetaManagedAgentsExecutionIdentity`
 
@@ -2757,7 +2757,7 @@ List Events
 
                 - `skills: Array[BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill]`
 
-                - `system_: String`
+                - `system_: String | nil`
 
                 - `tools: Array[BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool]`
 
@@ -2793,7 +2793,7 @@ List Events
 
                 - `id: String`
 
-                - `description: String`
+                - `description: String | nil`
 
                 - `execution_identity: BetaManagedAgentsExecutionIdentity`
 
@@ -2809,7 +2809,7 @@ List Events
 
                 - `skills: Array[BetaManagedAgentsAnthropicSkill | BetaManagedAgentsCustomSkill]`
 
-                - `system_: String`
+                - `system_: String | nil`
 
                 - `tools: Array[BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool]`
 
@@ -2835,7 +2835,7 @@ List Events
 
           A resolved user-created custom skill.
 
-      - `system_: String`
+      - `system_: String | nil`
 
       - `tools: Array[BetaManagedAgentsAgentToolset20260401 | BetaManagedAgentsMCPToolset | BetaManagedAgentsCustomTool]`
 
@@ -2851,7 +2851,7 @@ List Events
 
         format: int32
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit | nil`
 
       The session's budget after the update: the new budget when set or replaced, or null when the update removed it. Present only when the update changed the budget.
 
@@ -2875,7 +2875,7 @@ List Events
 
       The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-    - `title: optional String`
+    - `title: optional String | nil`
 
       The session's new title. Present only when the update changed it.
 
@@ -2901,7 +2901,7 @@ List Events
 
         minLength: 1
 
-    - `processed_at: optional Time`
+    - `processed_at: optional Time | nil`
 
       Timestamp when this system message was processed.
 
@@ -2987,7 +2987,7 @@ List Events
 
           format: int32
 
-    - `budget: optional BetaManagedAgentsBudgetLimit`
+    - `budget: optional BetaManagedAgentsBudgetLimit | nil`
 
       The session's configured budget at the snapshot time, or null when the session has no budget.
 
@@ -3001,7 +3001,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `description: String`
+    - `description: String | nil`
 
       Description that the agent gave the run, passed on as written, or `null` if it gave none.
 
@@ -3017,7 +3017,7 @@ List Events
 
         Unique identifier for the phase.
 
-      - `description: String`
+      - `description: String | nil`
 
         Description that the agent gave the phase, passed on as written, or `null` if it gave none.
 
@@ -3243,7 +3243,7 @@ List Events
 
       format: date-time
 
-    - `workflow_run_id: String`
+    - `workflow_run_id: String | nil`
 
       Identifier of the run that met the error, or `null` when the error kept a run from being created.
 

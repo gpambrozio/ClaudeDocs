@@ -33,7 +33,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=2.6.0
+VERSION=2.7.1
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -47,13 +47,13 @@ You can find all releases on the [GitHub releases page](https://github.com/anthr
 
 **go install**
 
-You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
+You can also install the CLI from source with `go install`, which requires Go 1.26.10 or later.
 
 ```bash
 go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
 ```
 
-The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn’t already:
+`go install` places the binary in `$(go env GOPATH)/bin`. Add that directory to your `PATH` if it isn’t already there:
 
 ```bash
 export PATH="$PATH:$(go env GOPATH)/bin"
@@ -172,7 +172,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=2.6.0
+VERSION=2.7.1
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -186,13 +186,13 @@ You can find all releases on the [GitHub releases page](https://github.com/anthr
 
 **go install**
 
-You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
+You can also install the CLI from source with `go install`, which requires Go 1.26.10 or later.
 
 ```bash
 go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
 ```
 
-The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn’t already:
+`go install` places the binary in `$(go env GOPATH)/bin`. Add that directory to your `PATH` if it isn’t already there:
 
 ```bash
 export PATH="$PATH:$(go env GOPATH)/bin"
@@ -485,7 +485,7 @@ java {
 }
 
 dependencies {
-    implementation("com.anthropic:anthropic-java:3.5.0")
+    implementation("com.anthropic:anthropic-java:3.6.0")
 }
 
 application {
@@ -511,7 +511,7 @@ Save this as `pom.xml`:
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>3.5.0</version>
+      <version>3.6.0</version>
     </dependency>
   </dependencies>
 </project>

@@ -62,7 +62,7 @@ However, there is still residual risk that you should carefully consider when us
 If data exfiltration is a concern, consider:
 
 * Disabling the web fetch tool entirely
-* Using the `max_uses` parameter to limit the number of requests
+* Using the [`max_uses`](web-fetch-tool.md#max-uses) parameter to limit the number of fetches in a turn
 * Using the `allowed_domains` parameter to restrict to known safe domains
 * Using the `url_sources` parameter to stop client-side tool results from counting as a source (see [URL sources](web-fetch-tool.md#url-sources))
 
@@ -127,18 +127,11 @@ curl https://api.anthropic.com/v1/messages \
 ```
 
 ```bash CLI
-ant messages create <<'YAML'
-model: claude-opus-5-5
-max_tokens: 4096
-messages:
-  - role: user
-    content: >-
-      Fetch the content at https://example.com/research-paper
-      and extract the key findings.
-tools:
-  - type: web_fetch_20260318
-    name: web_fetch
-YAML
+ant messages create \
+  --model claude-opus-5-5 \
+  --max-tokens 4096 \
+  --message '{role: user, content: "Fetch the content at https://example.com/research-paper and extract the key findings."}' \
+  --tool '{type: web_fetch_20260318, name: web_fetch}'
 ```
 
 ```python Python
@@ -237,7 +230,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Fetch the content at https://example.com/research-paper and extract the key findings.']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [[
         'type' => 'web_fetch_20260318',
         'name' => 'web_fetch',
@@ -250,7 +243,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 4096,
   messages: [
     { role: "user", content: "Fetch the content at https://example.com/research-paper and extract the key findings." }
@@ -278,7 +271,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
-    "max_tokens": 1024,
+    "max_tokens": 4096,
     "messages": [
       {
         "role": "user",
@@ -296,7 +289,7 @@ curl https://api.anthropic.com/v1/messages \
 ```bash CLI
 ant messages create \
   --model claude-opus-5-5 \
-  --max-tokens 1024 \
+  --max-tokens 4096 \
   --message '{role: user, content: "Please analyze the content at https://example.com/article"}' \
   --tool '{type: web_fetch_20250910, name: web_fetch, max_uses: 5}'
 ```
@@ -306,7 +299,7 @@ client = anthropic.Anthropic()
 
 response = client.messages.create(
     model="claude-opus-5-5",
-    max_tokens=1024,
+    max_tokens=4096,
     messages=[
         {
             "role": "user",
@@ -323,7 +316,7 @@ const client = new Anthropic();
 
 const response = await client.messages.create({
   model: "claude-opus-5-5",
-  max_tokens: 1024,
+  max_tokens: 4096,
   messages: [
     {
       role: "user",
@@ -348,7 +341,7 @@ AnthropicClient client = new();
 var parameters = new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
-    MaxTokens = 1024,
+    MaxTokens = 4096,
     Messages = [new UserMessageParam { Content = "Please analyze the content at https://example.com/article" }],
     Tools = [new ToolUnion(new WebFetchTool20250910() { MaxUses = 5 })]
 };
@@ -362,7 +355,7 @@ client := anthropic.NewClient()
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Model:     anthropic.ModelClaudeOpus5_5,
-	MaxTokens: 1024,
+	MaxTokens: 4096,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Please analyze the content at https://example.com/article")),
 	},
@@ -386,7 +379,7 @@ void main() {
 
     MessageCreateParams params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
-        .maxTokens(1024L)
+        .maxTokens(4096L)
         .addUserMessage("Please analyze the content at https://example.com/article")
         .addTool(WebFetchTool20250910.builder()
             .maxUses(5L)
@@ -402,11 +395,11 @@ void main() {
 $client = new Client();
 
 $message = $client->messages->create(
-    maxTokens: 1024,
+    maxTokens: 4096,
     messages: [
         ['role' => 'user', 'content' => 'Please analyze the content at https://example.com/article']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [[
         'type' => 'web_fetch_20250910',
         'name' => 'web_fetch',
@@ -420,8 +413,8 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
-  max_tokens: 1024,
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
+  max_tokens: 4096,
   messages: [
     { role: "user", content: "Please analyze the content at https://example.com/article" }
   ],
@@ -443,7 +436,7 @@ The web fetch tool supports the following parameters:
   "type": "web_fetch_20250910",
   "name": "web_fetch",
 
-  // Optional: Limit the number of fetches for each request
+  // Optional: Limit the number of fetches
   "max_uses": 10,
 
   // Optional: Only fetch from these domains
@@ -471,7 +464,9 @@ Later tool versions add two more optional parameters: `use_cache` requires `web_
 
 ### Max uses
 
-The `max_uses` parameter limits the number of web fetches performed. Failed fetches count against the limit. If Claude attempts more fetches than allowed, the `web_fetch_tool_result` is an error with the `max_uses_exceeded` error code. There is currently no default limit.
+The `max_uses` parameter limits the number of web fetches in a single turn. Failed fetches count against the limit. If Claude calls web fetch directly more times than allowed, the `web_fetch_tool_result` is an error with the `max_uses_exceeded` error code. If Claude calls web fetch from code execution more times than allowed, the code execution run ends with an error. There is no default limit.
+
+A turn can span several requests. A request continues a turn when it resumes after [`pause_turn`](server-tools.md#the-server-side-loop-and-pause-turn) or when its last message contains only `tool_result` blocks. Fetches from earlier requests in that turn count against the limit, unless Claude ran them from code execution through [dynamic filtering](web-fetch-tool.md#dynamic-filtering).
 
 ### Domain filtering
 
@@ -509,7 +504,7 @@ The `use_cache` parameter controls whether cached content may be returned. Set `
 
 Requires `web_fetch_20260318` or later.
 
-The `response_inclusion` parameter controls how fetch result blocks appear in the API response when the result was consumed by a completed [code execution](code-execution-tool.md) call in the same turn. Set `"response_inclusion": "excluded"` to drop those nested `server_tool_use` and result block pairs entirely from the response, reducing output token costs for agentic workflows that don’t need to echo raw page content back to the client. The default is `"full"`. Results from direct calls, or from code execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
+The `response_inclusion` parameter controls how fetch result blocks appear in the API response when a completed [code execution](code-execution-tool.md) call in the same response consumed the result. Set `"response_inclusion": "excluded"` to drop those nested `server_tool_use` and result block pairs entirely from the response, for agentic workflows that don’t need the raw page content. Token usage is unaffected, because Claude reads the code’s output rather than these blocks. The default is `"full"`. The API always returns results from direct calls, or from code execution calls that paused before completing, in full so that you can send them back in the next request.
 
 ```json
 {
@@ -907,7 +902,7 @@ $message = $client->messages->create(
     messages: [
         ['role' => 'user', 'content' => 'Find recent articles about quantum computing and analyze the most relevant one in detail']
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
     tools: [
         [
             'type' => 'web_search_20250305',
@@ -929,7 +924,7 @@ echo $message;
 client = Anthropic::Client.new
 
 message = client.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 4096,
   messages: [
     { role: "user", content: "Find recent articles about quantum computing and analyze the most relevant one in detail" }
@@ -993,7 +988,7 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "web
 
 ## Batch requests
 
-You can include the web fetch tool in the [Messages Batches API](../../build-with-claude/batch-processing.md). Web fetch tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
+You can include the web fetch tool in the [Message Batches API](../../build-with-claude/batch-processing.md). Web fetch tool calls through the Message Batches API are priced the same as those in regular Messages API requests.
 
 ## Usage and pricing
 

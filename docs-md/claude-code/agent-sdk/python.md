@@ -2473,7 +2473,7 @@ class AsyncHookJSONOutput(TypedDict):
 
 ### Hook Usage Example
 
-This example registers two hooks: one that blocks dangerous Bash commands like `rm -rf /`, and another that logs all tool usage for auditing. The security hook only runs on Bash commands (via the `matcher`), while the logging hook runs on all tools.
+This example registers two hooks: one that blocks dangerous Bash commands like `rm -rf /`, and another that logs all tool usage for auditing. With its [`Bash` matcher](hooks.md#matchers), the security hook runs on Bash tool calls. The logging hook has no matcher, so it runs on every tool call.
 
 ```python
 import asyncio
@@ -3613,18 +3613,11 @@ class SandboxNetworkConfig(TypedDict, total=False):
 
 ### `SandboxIgnoreViolations`
 
-Configuration for ignoring specific sandbox violations.
+Violations to leave out of the sandbox's violation report. Each key matches part of a command, or `*` for every command, and each value lists text to match in a violation line: `{"*": ["/etc/hosts"]}` hides violations that mention `/etc/hosts`. A matching access is still blocked. See [`sandbox.ignoreViolations`](../settings-reference.md#sandbox-ignoreviolations).
 
 ```python
-class SandboxIgnoreViolations(TypedDict, total=False):
-    file: list[str]
-    network: list[str]
+SandboxIgnoreViolations = dict[str, list[str]]
 ```
-
-| Property | Type | Default | Description |
-| :- | :- | :- | :- |
-| `file` | `list[str]` | `[]` | File path patterns to ignore violations for |
-| `network` | `list[str]` | `[]` | Network patterns to ignore violations for |
 
 ### Permissions Fallback for Unsandboxed Commands
 

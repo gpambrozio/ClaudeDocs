@@ -101,7 +101,7 @@ Add the Claude SDK to your dependencies, or update it to at least the following 
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.5.0")
+implementation("com.anthropic:anthropic-java:3.6.0")
 ```
 
 **Maven**
@@ -110,7 +110,7 @@ implementation("com.anthropic:anthropic-java:3.5.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.5.0</version>
+    <version>3.6.0</version>
 </dependency>
 ```
 

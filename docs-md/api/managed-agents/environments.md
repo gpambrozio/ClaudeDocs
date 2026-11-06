@@ -657,13 +657,13 @@ curl -fsS "https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID" \
   -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 
-# Archive an environment (read-only, existing sessions continue)
+# Archive an environment (read-only, no new sessions)
 curl -fsS -X POST "https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/archive" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2026-10-21" \
   -H "anthropic-beta: managed-agents-2026-04-01"
 
-# Delete an environment (only if no sessions reference it)
+# Delete an environment
 curl -fsS -X DELETE "https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2026-10-21" \
@@ -677,10 +677,10 @@ ant beta:environments list
 # Retrieve a specific environment
 ant beta:environments retrieve --environment-id "$ENVIRONMENT_ID"
 
-# Archive an environment (read-only, existing sessions continue)
+# Archive an environment (read-only, no new sessions)
 ant beta:environments archive --environment-id "$ENVIRONMENT_ID"
 
-# Delete an environment (only if no sessions reference it)
+# Delete an environment
 ant beta:environments delete --environment-id "$ENVIRONMENT_ID"
 ```
 
@@ -691,10 +691,10 @@ environments = client.beta.environments.list()
 # Retrieve a specific environment
 env = client.beta.environments.retrieve(environment.id)
 
-# Archive an environment (read-only, existing sessions continue)
+# Archive an environment (read-only, no new sessions)
 client.beta.environments.archive(environment.id)
 
-# Delete an environment (only if no sessions reference it)
+# Delete an environment
 client.beta.environments.delete(environment.id)
 ```
 
@@ -705,10 +705,10 @@ const environments = await client.beta.environments.list();
 // Retrieve a specific environment
 const env = await client.beta.environments.retrieve(environment.id);
 
-// Archive an environment (read-only, existing sessions continue)
+// Archive an environment (read-only, no new sessions)
 await client.beta.environments.archive(environment.id);
 
-// Delete an environment (only if no sessions reference it)
+// Delete an environment
 await client.beta.environments.delete(environment.id);
 ```
 
@@ -719,10 +719,10 @@ var environments = await client.Beta.Environments.List();
 // Retrieve a specific environment
 var env = await client.Beta.Environments.Retrieve(environment.ID);
 
-// Archive an environment (read-only, existing sessions continue)
+// Archive an environment (read-only, no new sessions)
 await client.Beta.Environments.Archive(environment.ID);
 
-// Delete an environment (only if no sessions reference it)
+// Delete an environment
 await client.Beta.Environments.Delete(environment.ID);
 ```
 
@@ -735,11 +735,11 @@ environments, err := client.Beta.Environments.List(ctx, anthropic.BetaEnvironmen
 env, err := client.Beta.Environments.Get(ctx, environment.ID, anthropic.BetaEnvironmentGetParams{})
 // ...
 
-// Archive an environment (read-only, existing sessions continue)
+// Archive an environment (read-only, no new sessions)
 _, err = client.Beta.Environments.Archive(ctx, environment.ID, anthropic.BetaEnvironmentArchiveParams{})
 // ...
 
-// Delete an environment (only if no sessions reference it)
+// Delete an environment
 _, err = client.Beta.Environments.Delete(ctx, environment.ID, anthropic.BetaEnvironmentDeleteParams{})
 ```
 
@@ -748,9 +748,9 @@ _, err = client.Beta.Environments.Delete(ctx, environment.ID, anthropic.BetaEnvi
 var environments = client.beta().environments().list();
 // Retrieve a specific environment
 var env = client.beta().environments().retrieve(environment.id());
-// Archive an environment (read-only, existing sessions continue)
+// Archive an environment (read-only, no new sessions)
 client.beta().environments().archive(environment.id());
-// Delete an environment (only if no sessions reference it)
+// Delete an environment
 client.beta().environments().delete(environment.id());
 ```
 
@@ -759,9 +759,9 @@ client.beta().environments().delete(environment.id());
 $environments = $client->beta->environments->list();
 // Retrieve a specific environment
 $env = $client->beta->environments->retrieve($environment->id);
-// Archive an environment (read-only, existing sessions continue)
+// Archive an environment (read-only, no new sessions)
 $client->beta->environments->archive($environment->id);
-// Delete an environment (only if no sessions reference it)
+// Delete an environment
 $client->beta->environments->delete($environment->id);
 ```
 
@@ -772,10 +772,10 @@ environments = client.beta.environments.list
 # Retrieve a specific environment
 env = client.beta.environments.retrieve(environment.id)
 
-# Archive an environment (read-only, existing sessions continue)
+# Archive an environment (read-only, no new sessions)
 client.beta.environments.archive(environment.id)
 
-# Delete an environment (only if no sessions reference it)
+# Delete an environment
 client.beta.environments.delete(environment.id)
 ```
 

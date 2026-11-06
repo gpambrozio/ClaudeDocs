@@ -64,6 +64,10 @@ Plugin paths can be:
 >
 > The path should point to the plugin's root directory: the parent of `skills/`, `agents/`, `hooks/`, `commands/`, or `.claude-plugin/`.
 
+### Reload plugins in a running session
+
+To apply a change to a plugin's skills, commands, agents, or hooks without starting a new session, call [`reloadPlugins()`](typescript.md#query-object) on the TypeScript SDK's `Query` object. The Python SDK doesn't expose an equivalent method; send [`/reload-plugins`](../plugins/cli-reference.md#reload-plugins) as a prompt in the session instead.
+
 ### Add plugins to a running session
 
 In the TypeScript SDK, call [`reloadPlugins()`](typescript.md#load-more-plugin-folders-with-addplugins) on the `Query` object that `query()` returned, and list the plugin directory in that call's `addPlugins` option. Each `addPlugins` entry is a `{ type: "local", path }` object with an absolute `path`. Requires TypeScript Agent SDK v0.3.301 or later.

@@ -167,7 +167,7 @@ Create Skill
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -213,7 +213,7 @@ Create Skill
 
       - `PLUGIN("plugin")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
 
@@ -431,7 +431,7 @@ List Skills
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -477,7 +477,7 @@ List Skills
 
       - `PLUGIN("plugin")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
 
@@ -679,7 +679,7 @@ Get Skill
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -725,7 +725,7 @@ Get Skill
 
       - `PLUGIN("plugin")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
 
@@ -986,7 +986,7 @@ public final class Main {
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -1032,7 +1032,7 @@ public final class Main {
 
       - `PLUGIN("plugin")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
 
@@ -1222,7 +1222,7 @@ Create Skill Version
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -1451,7 +1451,7 @@ List Skill Versions
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -1843,7 +1843,7 @@ Get Skill Version
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 

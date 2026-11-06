@@ -3121,25 +3121,25 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     The format and length of IDs may change over time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
     format: date-time
 
-  - `Optional<LocalDateTime> cancelInitiatedAt`
+  - `Optional<OffsetDateTime> cancelInitiatedAt`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -3147,7 +3147,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     format: date-time
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
@@ -3298,25 +3298,25 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     The format and length of IDs may change over time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
     format: date-time
 
-  - `Optional<LocalDateTime> cancelInitiatedAt`
+  - `Optional<OffsetDateTime> cancelInitiatedAt`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -3324,7 +3324,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     format: date-time
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
@@ -3476,25 +3476,25 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     The format and length of IDs may change over time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
     format: date-time
 
-  - `Optional<LocalDateTime> cancelInitiatedAt`
+  - `Optional<OffsetDateTime> cancelInitiatedAt`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -3502,7 +3502,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     format: date-time
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
@@ -3651,25 +3651,25 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     The format and length of IDs may change over time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
     format: date-time
 
-  - `Optional<LocalDateTime> cancelInitiatedAt`
+  - `Optional<OffsetDateTime> cancelInitiatedAt`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -3677,7 +3677,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     format: date-time
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
@@ -3919,7 +3919,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             Identifier for the container used in this request
 
-          - `LocalDateTime expiresAt`
+          - `OffsetDateTime expiresAt`
 
             The time at which the container will expire.
 
@@ -4901,8 +4901,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
               the thinking-block delimiter tokens.
 
               Reflects the raw reasoning the model produced, not the (possibly shorter)
-              summarized thinking text returned in the response body. Computed by
-              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              summarized thinking text returned in the response body. It may differ from the model's exact
               generation count by a small number of tokens. Always ≤ `output_tokens`;
               `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -5070,25 +5069,25 @@ public final class Main {
 
     The format and length of IDs may change over time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
     format: date-time
 
-  - `Optional<LocalDateTime> cancelInitiatedAt`
+  - `Optional<OffsetDateTime> cancelInitiatedAt`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -5096,7 +5095,7 @@ public final class Main {
 
     format: date-time
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
@@ -5278,7 +5277,7 @@ public final class Main {
 
             Identifier for the container used in this request
 
-          - `LocalDateTime expiresAt`
+          - `OffsetDateTime expiresAt`
 
             The time at which the container will expire.
 
@@ -6260,8 +6259,7 @@ public final class Main {
               the thinking-block delimiter tokens.
 
               Reflects the raw reasoning the model produced, not the (possibly shorter)
-              summarized thinking text returned in the response body. Computed by
-              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              summarized thinking text returned in the response body. It may differ from the model's exact
               generation count by a small number of tokens. Always ≤ `output_tokens`;
               `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -6443,7 +6441,7 @@ public final class Main {
 
           Identifier for the container used in this request
 
-        - `LocalDateTime expiresAt`
+        - `OffsetDateTime expiresAt`
 
           The time at which the container will expire.
 
@@ -7425,8 +7423,7 @@ public final class Main {
             the thinking-block delimiter tokens.
 
             Reflects the raw reasoning the model produced, not the (possibly shorter)
-            summarized thinking text returned in the response body. Computed by
-            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            summarized thinking text returned in the response body. It may differ from the model's exact
             generation count by a small number of tokens. Always ≤ `output_tokens`;
             `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -7570,7 +7567,7 @@ public final class Main {
 
         Identifier for the container used in this request
 
-      - `LocalDateTime expiresAt`
+      - `OffsetDateTime expiresAt`
 
         The time at which the container will expire.
 
@@ -8552,8 +8549,7 @@ public final class Main {
           the thinking-block delimiter tokens.
 
           Reflects the raw reasoning the model produced, not the (possibly shorter)
-          summarized thinking text returned in the response body. Computed by
-          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          summarized thinking text returned in the response body. It may differ from the model's exact
           generation count by a small number of tokens. Always ≤ `output_tokens`;
           `output_tokens - thinking_tokens` approximates the non-reasoning output.
 

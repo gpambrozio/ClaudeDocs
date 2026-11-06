@@ -161,7 +161,7 @@ Create User Profile
 
     Details about the entity this profile represents, as the platform states them. Every field is optional. Not accepted under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which take the top-level `external_id` (and, under `user-profiles-2026-08-18`, `external_user_onboarded_at`) instead.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Legacy field, accepted only under the `user-profiles-2026-08-18` beta header; without a legacy header, send `external_user_details.onboarded_at`.
 
@@ -193,7 +193,7 @@ Create User Profile
 
     Unique identifier for this user profile, prefixed `uprof_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this user profile was created, in RFC 3339 format.
 
@@ -221,7 +221,7 @@ Create User Profile
 
       - `REJECTED("rejected")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
@@ -287,7 +287,7 @@ Create User Profile
 
       The platform-computed hash of the entity's name. `null` until the platform supplies one.
 
-    - `Optional<LocalDateTime> onboardedAt`
+    - `Optional<OffsetDateTime> onboardedAt`
 
       When the entity opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one.
 
@@ -297,7 +297,7 @@ Create User Profile
 
       The platform's own reference for the entity. `null` until the platform supplies one.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
@@ -366,7 +366,7 @@ List User Profiles
 
 - `UserProfileListParams params`
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
 
@@ -538,7 +538,7 @@ List User Profiles
 
     Unique identifier for this user profile, prefixed `uprof_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this user profile was created, in RFC 3339 format.
 
@@ -566,7 +566,7 @@ List User Profiles
 
       - `REJECTED("rejected")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
@@ -632,7 +632,7 @@ List User Profiles
 
       The platform-computed hash of the entity's name. `null` until the platform supplies one.
 
-    - `Optional<LocalDateTime> onboardedAt`
+    - `Optional<OffsetDateTime> onboardedAt`
 
       When the entity opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one.
 
@@ -642,7 +642,7 @@ List User Profiles
 
       The platform's own reference for the entity. `null` until the platform supplies one.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
@@ -856,7 +856,7 @@ Get User Profile
 
     Unique identifier for this user profile, prefixed `uprof_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this user profile was created, in RFC 3339 format.
 
@@ -884,7 +884,7 @@ Get User Profile
 
       - `REJECTED("rejected")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
@@ -950,7 +950,7 @@ Get User Profile
 
       The platform-computed hash of the entity's name. `null` until the platform supplies one.
 
-    - `Optional<LocalDateTime> onboardedAt`
+    - `Optional<OffsetDateTime> onboardedAt`
 
       When the entity opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one.
 
@@ -960,7 +960,7 @@ Get User Profile
 
       The platform's own reference for the entity. `null` until the platform supplies one.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
@@ -1175,7 +1175,7 @@ Update User Profile
 
     Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Not accepted under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Legacy field, accepted only under the `user-profiles-2026-08-18` beta header; without a legacy header, send `external_user_details.onboarded_at`.
 
@@ -1207,7 +1207,7 @@ Update User Profile
 
     Unique identifier for this user profile, prefixed `uprof_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this user profile was created, in RFC 3339 format.
 
@@ -1235,7 +1235,7 @@ Update User Profile
 
       - `REJECTED("rejected")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
@@ -1301,7 +1301,7 @@ Update User Profile
 
       The platform-computed hash of the entity's name. `null` until the platform supplies one.
 
-    - `Optional<LocalDateTime> onboardedAt`
+    - `Optional<OffsetDateTime> onboardedAt`
 
       When the entity opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one.
 
@@ -1311,7 +1311,7 @@ Update User Profile
 
       The platform's own reference for the entity. `null` until the platform supplies one.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
@@ -1692,7 +1692,7 @@ Create Enrollment URL
 
     Object type. Always `enrollment_url`.
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     When this enrollment URL expires, in RFC 3339 format.
 
@@ -1763,7 +1763,7 @@ public final class Main {
 
     Unique identifier for this user profile, prefixed `uprof_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this user profile was created, in RFC 3339 format.
 
@@ -1791,7 +1791,7 @@ public final class Main {
 
       - `REJECTED("rejected")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
@@ -1857,7 +1857,7 @@ public final class Main {
 
       The platform-computed hash of the entity's name. `null` until the platform supplies one.
 
-    - `Optional<LocalDateTime> onboardedAt`
+    - `Optional<OffsetDateTime> onboardedAt`
 
       When the entity opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one.
 
@@ -1867,7 +1867,7 @@ public final class Main {
 
       The platform's own reference for the entity. `null` until the platform supplies one.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
@@ -1883,7 +1883,7 @@ public final class Main {
 
     Object type. Always `enrollment_url`.
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     When this enrollment URL expires, in RFC 3339 format.
 
@@ -1939,7 +1939,7 @@ public final class Main {
 
     The platform-computed hash of the entity's name. `null` until the platform supplies one.
 
-  - `Optional<LocalDateTime> onboardedAt`
+  - `Optional<OffsetDateTime> onboardedAt`
 
     When the entity opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one.
 
@@ -1999,7 +1999,7 @@ public final class Main {
 
     minLength: 1, maxLength: 255
 
-  - `Optional<LocalDateTime> onboardedAt`
+  - `Optional<OffsetDateTime> onboardedAt`
 
     When the entity opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future.
 
@@ -2179,7 +2179,7 @@ Create Action URL
 
     Object type. Always `user_profile_action_url`.
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     When the URL stops working, in RFC 3339 format.
 

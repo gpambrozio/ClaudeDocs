@@ -153,7 +153,7 @@ Retrieve a specific environment by ID.
 
     Environment identifier (e.g., 'env_...')
 
-  - `archived_at: String`
+  - `archived_at: String | nil`
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
@@ -245,7 +245,7 @@ Retrieve a specific environment by ID.
 
     RFC 3339 timestamp when environment was created
 
-  - `description: String`
+  - `description: String | nil`
 
     User-provided description for the environment; null when unset
 

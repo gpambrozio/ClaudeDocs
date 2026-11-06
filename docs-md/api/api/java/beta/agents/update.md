@@ -609,7 +609,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
@@ -915,7 +915,7 @@ Update Agent
 
         minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-  - `Optional<Long> version`
+  - `Optional<Integer> version`
 
     The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
 
@@ -931,13 +931,13 @@ Update Agent
 
   - `String id`
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the agent was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -1121,7 +1121,7 @@ Update Agent
 
           - `String id`
 
-          - `long version`
+          - `int version`
 
             format: int32
 
@@ -1195,7 +1195,7 @@ Update Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -1227,7 +1227,7 @@ Update Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -1539,7 +1539,7 @@ Update Agent
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -1697,13 +1697,13 @@ Update Agent
 
       - `String name`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
     format: date-time
 
-  - `long version`
+  - `int version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 

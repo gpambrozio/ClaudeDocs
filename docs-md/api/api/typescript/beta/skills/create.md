@@ -224,6 +224,7 @@ Create Skill
 ## Example
 
 ```typescript
+import fs from "fs";
 import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({

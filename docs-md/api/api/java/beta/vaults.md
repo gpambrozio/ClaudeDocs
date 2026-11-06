@@ -161,13 +161,13 @@ Create a Vault
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -181,7 +181,7 @@ Create a Vault
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -243,7 +243,7 @@ List Vaults
 
     Whether to include archived vaults in the results. Defaults to `false`.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
@@ -385,13 +385,13 @@ List Vaults
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -405,7 +405,7 @@ List Vaults
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -601,13 +601,13 @@ Retrieve a Vault
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -621,7 +621,7 @@ Retrieve a Vault
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -822,13 +822,13 @@ Update a Vault
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -842,7 +842,7 @@ Update a Vault
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -1211,13 +1211,13 @@ Archive a Vault
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -1231,7 +1231,7 @@ Archive a Vault
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -1300,13 +1300,13 @@ public final class Main {
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -1320,7 +1320,7 @@ public final class Main {
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -1486,7 +1486,7 @@ Create a Credential
 
         minLength: 1, maxLength: 2047
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When `access_token` expires, in RFC 3339.
 
@@ -1652,7 +1652,7 @@ Create a Credential
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -1672,7 +1672,7 @@ Create a Credential
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -1772,7 +1772,7 @@ Create a Credential
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -1782,7 +1782,7 @@ Create a Credential
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -1866,7 +1866,7 @@ List Credentials
 
     Whether to include archived credentials in the results. Defaults to `false`.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
@@ -2008,7 +2008,7 @@ List Credentials
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -2028,7 +2028,7 @@ List Credentials
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -2128,7 +2128,7 @@ List Credentials
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -2138,7 +2138,7 @@ List Credentials
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -2351,7 +2351,7 @@ Retrieve a Credential
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -2371,7 +2371,7 @@ Retrieve a Credential
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -2471,7 +2471,7 @@ Retrieve a Credential
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -2481,7 +2481,7 @@ Retrieve a Credential
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -2697,7 +2697,7 @@ Update a Credential
 
         minLength: 1, maxLength: 8192, pattern: ^[^\x00-\x1f\x7f]*$
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Leave it out to keep the stored expiry.
 
@@ -2833,7 +2833,7 @@ Update a Credential
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -2853,7 +2853,7 @@ Update a Credential
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -2953,7 +2953,7 @@ Update a Credential
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -2963,7 +2963,7 @@ Update a Credential
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -3361,7 +3361,7 @@ Archive a Credential
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -3381,7 +3381,7 @@ Archive a Credential
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -3481,7 +3481,7 @@ Archive a Credential
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -3491,7 +3491,7 @@ Archive a Credential
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -3727,7 +3727,7 @@ Validate an MCP OAuth Credential
 
         Value of the `Content-Type` response header.
 
-      - `long statusCode`
+      - `int statusCode`
 
         HTTP status code.
 
@@ -3781,7 +3781,7 @@ Validate an MCP OAuth Credential
 
       The probe couldn't tell whether the credential works, for example because of a network error or because a refresh succeeded but the new access token wasn't tested. Validate the credential again to find out.
 
-  - `LocalDateTime validatedAt`
+  - `OffsetDateTime validatedAt`
 
     When the validation probe was performed.
 

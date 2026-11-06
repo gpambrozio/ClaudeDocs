@@ -675,7 +675,7 @@ Update Session
 
                     - `Optional<List<String>> blockedDomains`
 
-                    - `Optional<Long> maxContentTokens`
+                    - `Optional<Integer> maxContentTokens`
 
                       format: int32
 
@@ -833,7 +833,7 @@ Update Session
 
                 - `String name`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -927,7 +927,7 @@ Update Session
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -979,7 +979,7 @@ Update Session
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -1013,11 +1013,11 @@ Update Session
 
         A custom tool as returned in API responses.
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the session was archived. Null if not archived.
 
@@ -1043,7 +1043,7 @@ Update Session
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -1059,7 +1059,7 @@ Update Session
 
     - `JsonValue type = "outcome_evaluation"`
 
-    - `Optional<LocalDateTime> completedAt`
+    - `Optional<OffsetDateTime> completedAt`
 
       When the outcome reached a terminal result. Null while `pending`/`running`/`evaluating`.
 
@@ -1073,7 +1073,7 @@ Update Session
 
       Grader's verdict text from the most recent evaluation. For `satisfied`, explains why criteria are met; for `needs_revision` (intermediate), what's missing; for `failed`, why unrecoverable.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle the outcome is currently on.
 
@@ -1095,7 +1095,7 @@ Update Session
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -1103,7 +1103,7 @@ Update Session
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -1139,7 +1139,7 @@ Update Session
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -1149,7 +1149,7 @@ Update Session
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -1229,7 +1229,7 @@ Update Session
 
   - `Optional<String> title`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -1249,25 +1249,25 @@ Update Session
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -1277,7 +1277,7 @@ Update Session
 
       Cumulative list cost of the session across all turns, priced at public list rates. Absent until cost tracking is available for the session.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -1287,13 +1287,13 @@ Update Session
 
       Cumulative server-executed tool usage across all turns. Absent until server-tool tracking is available for the session.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 

@@ -161,11 +161,11 @@ Get Deployment Run
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time this run record was persisted.
 
@@ -353,7 +353,7 @@ Get Deployment Run
 
       - `JsonValue type = "schedule"`
 
-      - `LocalDateTime scheduledAt`
+      - `OffsetDateTime scheduledAt`
 
         The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 

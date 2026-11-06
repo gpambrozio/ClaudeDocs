@@ -157,7 +157,7 @@ Create Deployment
 
         minLength: 1, maxLength: 128
 
-      - `Optional<Long> version`
+      - `Optional<Integer> version`
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -365,7 +365,7 @@ Create Deployment
 
             maxLength: 262144
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -533,17 +533,17 @@ Create Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -751,7 +751,7 @@ Create Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -983,13 +983,13 @@ Create Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -1005,7 +1005,7 @@ Create Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -1147,13 +1147,13 @@ List Deployments
 
     Filter by agent ID.
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return deployments created at or after this time (inclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return deployments created at or before this time (inclusive).
 
@@ -1163,7 +1163,7 @@ List Deployments
 
     When true, includes archived deployments. Default: false (exclude archived).
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum results per page. Default 20, maximum 100.
 
@@ -1317,17 +1317,17 @@ List Deployments
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -1535,7 +1535,7 @@ List Deployments
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -1767,13 +1767,13 @@ List Deployments
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -1789,7 +1789,7 @@ List Deployments
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -2068,17 +2068,17 @@ Get Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -2286,7 +2286,7 @@ Get Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -2518,13 +2518,13 @@ Get Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -2540,7 +2540,7 @@ Get Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -2812,7 +2812,7 @@ Update Deployment
 
         minLength: 1, maxLength: 128
 
-      - `Optional<Long> version`
+      - `Optional<Integer> version`
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -3030,7 +3030,7 @@ Update Deployment
 
             maxLength: 262144
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -3188,17 +3188,17 @@ Update Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -3406,7 +3406,7 @@ Update Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -3638,13 +3638,13 @@ Update Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -3660,7 +3660,7 @@ Update Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -3934,17 +3934,17 @@ Archive Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -4152,7 +4152,7 @@ Archive Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -4384,13 +4384,13 @@ Archive Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -4406,7 +4406,7 @@ Archive Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -4680,11 +4680,11 @@ Run Deployment Now
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time this run record was persisted.
 
@@ -4872,7 +4872,7 @@ Run Deployment Now
 
       - `JsonValue type = "schedule"`
 
-      - `LocalDateTime scheduledAt`
+      - `OffsetDateTime scheduledAt`
 
         The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
@@ -5086,17 +5086,17 @@ Pause Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -5304,7 +5304,7 @@ Pause Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -5536,13 +5536,13 @@ Pause Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -5558,7 +5558,7 @@ Pause Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -5832,17 +5832,17 @@ Unpause Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -6050,7 +6050,7 @@ Unpause Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -6282,13 +6282,13 @@ Unpause Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -6304,7 +6304,7 @@ Unpause Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -6452,13 +6452,13 @@ public final class Main {
 
     minLength: 1
 
-  - `Optional<LocalDateTime> lastRunAt`
+  - `Optional<OffsetDateTime> lastRunAt`
 
     Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
     format: date-time
 
-  - `Optional<List<LocalDateTime>> upcomingRunsAt`
+  - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
     Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -6502,17 +6502,17 @@ public final class Main {
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -6720,7 +6720,7 @@ public final class Main {
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -6952,13 +6952,13 @@ public final class Main {
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -6974,7 +6974,7 @@ public final class Main {
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -7200,7 +7200,7 @@ public final class Main {
 
           Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-    - `Optional<Long> maxIterations`
+    - `Optional<Integer> maxIterations`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -7422,7 +7422,7 @@ public final class Main {
 
           maxLength: 262144
 
-    - `Optional<Long> maxIterations`
+    - `Optional<Integer> maxIterations`
 
       Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -7712,7 +7712,7 @@ public final class Main {
 
         Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-  - `Optional<Long> maxIterations`
+  - `Optional<Integer> maxIterations`
 
     Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -8128,13 +8128,13 @@ public final class Main {
 
     minLength: 1
 
-  - `Optional<LocalDateTime> lastRunAt`
+  - `Optional<OffsetDateTime> lastRunAt`
 
     Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
     format: date-time
 
-  - `Optional<List<LocalDateTime>> upcomingRunsAt`
+  - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
     Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 

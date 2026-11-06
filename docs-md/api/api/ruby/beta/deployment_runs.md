@@ -227,7 +227,7 @@ List Deployment Runs
 
     ID of the deployment that produced this run.
 
-  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more`
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more | nil`
 
     Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
@@ -391,7 +391,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-  - `session_id: String`
+  - `session_id: String | nil`
 
     Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
@@ -629,7 +629,7 @@ Get Deployment Run
 
     ID of the deployment that produced this run.
 
-  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more`
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more | nil`
 
     Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
@@ -793,7 +793,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-  - `session_id: String`
+  - `session_id: String | nil`
 
     Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 
@@ -904,7 +904,7 @@ puts(beta_managed_agents_deployment_run)
 
     ID of the deployment that produced this run.
 
-  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more`
+  - `error: BetaManagedAgentsEnvironmentArchivedRunError | BetaManagedAgentsAgentArchivedRunError | BetaManagedAgentsEnvironmentNotFoundRunError | 13 more | nil`
 
     Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
@@ -1068,7 +1068,7 @@ puts(beta_managed_agents_deployment_run)
 
         Human-readable error description.
 
-  - `session_id: String`
+  - `session_id: String | nil`
 
     Populated on success. Null on creation failure. Exactly one of `session_id` or `error` is non-null.
 

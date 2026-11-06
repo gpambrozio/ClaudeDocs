@@ -661,13 +661,13 @@ The Models API response can be used to determine which models are available for 
 
           Whether the model accepts thinking with type 'enabled' (extended thinking with a caller-set `budget_tokens`).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
     format: date-time
 
-  - `Optional<LocalDateTime> deprecatedAt`
+  - `Optional<OffsetDateTime> deprecatedAt`
 
     RFC 3339 datetime string representing the time of the model's most recent deprecation. Populated for `deprecated` and `retired` models; `null` while the model is `active`.
 
@@ -713,7 +713,7 @@ The Models API response can be used to determine which models are available for 
 
     Maximum value for the `max_tokens` parameter when using this model.
 
-  - `Optional<LocalDateTime> retiresAt`
+  - `Optional<OffsetDateTime> retiresAt`
 
     RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
 
@@ -1141,13 +1141,13 @@ The Models API response can be used to determine information about a specific mo
 
           Whether the model accepts thinking with type 'enabled' (extended thinking with a caller-set `budget_tokens`).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the model was released. May be set to an epoch value if the release date is unknown.
 
     format: date-time
 
-  - `Optional<LocalDateTime> deprecatedAt`
+  - `Optional<OffsetDateTime> deprecatedAt`
 
     RFC 3339 datetime string representing the time of the model's most recent deprecation. Populated for `deprecated` and `retired` models; `null` while the model is `active`.
 
@@ -1193,7 +1193,7 @@ The Models API response can be used to determine information about a specific mo
 
     Maximum value for the `max_tokens` parameter when using this model.
 
-  - `Optional<LocalDateTime> retiresAt`
+  - `Optional<OffsetDateTime> retiresAt`
 
     RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
 
@@ -4553,7 +4553,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                         - `Optional<Long> maxTokens`
 
-                          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                           minimum: 1024
 
@@ -5290,7 +5290,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       Identifier for the container used in this request
 
-    - `LocalDateTime expiresAt`
+    - `OffsetDateTime expiresAt`
 
       The time at which the container will expire.
 
@@ -8011,7 +8011,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   - `Optional<Long> maxTokens`
 
-                    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                     minimum: 1024
 
@@ -8844,8 +8844,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
         the thinking-block delimiter tokens.
 
         Reflects the raw reasoning the model produced, not the (possibly shorter)
-        summarized thinking text returned in the response body. Computed by
-        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        summarized thinking text returned in the response body. It may differ from the model's exact
         generation count by a small number of tokens. Always ≤ `output_tokens`;
         `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -12627,7 +12626,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                         - `Optional<Long> maxTokens`
 
-                          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                           minimum: 1024
 
@@ -16515,7 +16514,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                             - `Optional<Long> maxTokens`
 
-                              Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                              Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                               minimum: 1024
 
@@ -17596,25 +17595,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     The format and length of IDs may change over time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
     format: date-time
 
-  - `Optional<LocalDateTime> cancelInitiatedAt`
+  - `Optional<OffsetDateTime> cancelInitiatedAt`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -17622,7 +17621,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     format: date-time
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
@@ -17887,25 +17886,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     The format and length of IDs may change over time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
     format: date-time
 
-  - `Optional<LocalDateTime> cancelInitiatedAt`
+  - `Optional<OffsetDateTime> cancelInitiatedAt`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -17913,7 +17912,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     format: date-time
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
@@ -18179,25 +18178,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     The format and length of IDs may change over time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
     format: date-time
 
-  - `Optional<LocalDateTime> cancelInitiatedAt`
+  - `Optional<OffsetDateTime> cancelInitiatedAt`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -18205,7 +18204,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     format: date-time
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
@@ -18468,25 +18467,25 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     The format and length of IDs may change over time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was archived and its results became unavailable.
 
     format: date-time
 
-  - `Optional<LocalDateTime> cancelInitiatedAt`
+  - `Optional<OffsetDateTime> cancelInitiatedAt`
 
     RFC 3339 datetime string representing the time at which cancellation was initiated for the Message Batch. Specified only if cancellation was initiated.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch was created.
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     RFC 3339 datetime string representing the time at which processing for the Message Batch ended. Specified only once processing ends.
 
@@ -18494,7 +18493,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     format: date-time
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string representing the time at which the Message Batch will expire and end processing, which is 24 hours after creation.
 
@@ -18964,7 +18963,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             Identifier for the container used in this request
 
-          - `LocalDateTime expiresAt`
+          - `OffsetDateTime expiresAt`
 
             The time at which the container will expire.
 
@@ -21685,7 +21684,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                         - `Optional<Long> maxTokens`
 
-                          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                           minimum: 1024
 
@@ -22518,8 +22517,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               the thinking-block delimiter tokens.
 
               Reflects the raw reasoning the model produced, not the (possibly shorter)
-              summarized thinking text returned in the response body. Computed by
-              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              summarized thinking text returned in the response body. It may differ from the model's exact
               generation count by a small number of tokens. Always ≤ `output_tokens`;
               `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -23349,7 +23347,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
@@ -23665,13 +23663,13 @@ Create Agent
 
   - `String id`
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the agent was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -23855,7 +23853,7 @@ Create Agent
 
           - `String id`
 
-          - `long version`
+          - `int version`
 
             format: int32
 
@@ -23929,7 +23927,7 @@ Create Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -23961,7 +23959,7 @@ Create Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -24273,7 +24271,7 @@ Create Agent
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -24431,13 +24429,13 @@ Create Agent
 
       - `String name`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
     format: date-time
 
-  - `long version`
+  - `int version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
@@ -24583,13 +24581,13 @@ List Agents
 
 - `AgentListParams params`
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return agents created at or after this time (inclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return agents created at or before this time (inclusive).
 
@@ -24599,7 +24597,7 @@ List Agents
 
     Include archived agents in results. Defaults to false.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum results per page. Default 20, maximum 100.
 
@@ -24739,13 +24737,13 @@ List Agents
 
   - `String id`
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the agent was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -24929,7 +24927,7 @@ List Agents
 
           - `String id`
 
-          - `long version`
+          - `int version`
 
             format: int32
 
@@ -25003,7 +25001,7 @@ List Agents
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -25035,7 +25033,7 @@ List Agents
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -25347,7 +25345,7 @@ List Agents
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -25505,13 +25503,13 @@ List Agents
 
       - `String name`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
     format: date-time
 
-  - `long version`
+  - `int version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
@@ -25661,7 +25659,7 @@ Get Agent
 
     Unique identifier of the agent to retrieve.
 
-  - `Optional<Long> version` (query parameter)
+  - `Optional<Integer> version` (query parameter)
 
     Agent version. Omit for the most recent version. Must be at least 1 if specified.
 
@@ -25797,13 +25795,13 @@ Get Agent
 
   - `String id`
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the agent was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -25987,7 +25985,7 @@ Get Agent
 
           - `String id`
 
-          - `long version`
+          - `int version`
 
             format: int32
 
@@ -26061,7 +26059,7 @@ Get Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -26093,7 +26091,7 @@ Get Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -26405,7 +26403,7 @@ Get Agent
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -26563,13 +26561,13 @@ Get Agent
 
       - `String name`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
     format: date-time
 
-  - `long version`
+  - `int version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
@@ -27302,7 +27300,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
@@ -27608,7 +27606,7 @@ Update Agent
 
         minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-  - `Optional<Long> version`
+  - `Optional<Integer> version`
 
     The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. Must be at least 1 if specified. When supplied, the request fails if it does not match the server's current version; omit to apply the update unconditionally.
 
@@ -27624,13 +27622,13 @@ Update Agent
 
   - `String id`
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the agent was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -27814,7 +27812,7 @@ Update Agent
 
           - `String id`
 
-          - `long version`
+          - `int version`
 
             format: int32
 
@@ -27888,7 +27886,7 @@ Update Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -27920,7 +27918,7 @@ Update Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -28232,7 +28230,7 @@ Update Agent
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -28390,13 +28388,13 @@ Update Agent
 
       - `String name`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
     format: date-time
 
-  - `long version`
+  - `int version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
@@ -28671,13 +28669,13 @@ Archive Agent
 
   - `String id`
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the agent was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -28861,7 +28859,7 @@ Archive Agent
 
           - `String id`
 
-          - `long version`
+          - `int version`
 
             format: int32
 
@@ -28935,7 +28933,7 @@ Archive Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -28967,7 +28965,7 @@ Archive Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -29279,7 +29277,7 @@ Archive Agent
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -29437,13 +29435,13 @@ Archive Agent
 
       - `String name`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
     format: date-time
 
-  - `long version`
+  - `int version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
@@ -29590,7 +29588,7 @@ List Agent Versions
 
     Agent ID to list versions for.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum results per page. Default 20, maximum 100.
 
@@ -29730,13 +29728,13 @@ List Agent Versions
 
   - `String id`
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the agent was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -29920,7 +29918,7 @@ List Agent Versions
 
           - `String id`
 
-          - `long version`
+          - `int version`
 
             format: int32
 
@@ -29994,7 +29992,7 @@ List Agent Versions
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -30026,7 +30024,7 @@ List Agent Versions
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -30338,7 +30336,7 @@ List Agent Versions
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -30496,13 +30494,13 @@ List Agent Versions
 
       - `String name`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
     format: date-time
 
-  - `long version`
+  - `int version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
@@ -34917,7 +34915,7 @@ Create Session
 
         minLength: 1, maxLength: 128
 
-      - `Optional<Long> version`
+      - `Optional<Integer> version`
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -35379,7 +35377,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `Optional<Long> maxContentTokens`
+              - `Optional<Integer> maxContentTokens`
 
                 Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
@@ -35685,7 +35683,7 @@ Create Session
 
             minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-      - `Optional<Long> version`
+      - `Optional<Integer> version`
 
         The specific `agent` version to use. Omit to use the latest version.
 
@@ -35897,7 +35895,7 @@ Create Session
 
             maxLength: 262144
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -36527,7 +36525,7 @@ Create Session
 
                     - `Optional<List<String>> blockedDomains`
 
-                    - `Optional<Long> maxContentTokens`
+                    - `Optional<Integer> maxContentTokens`
 
                       format: int32
 
@@ -36685,7 +36683,7 @@ Create Session
 
                 - `String name`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -36779,7 +36777,7 @@ Create Session
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -36831,7 +36829,7 @@ Create Session
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -36865,11 +36863,11 @@ Create Session
 
         A custom tool as returned in API responses.
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the session was archived. Null if not archived.
 
@@ -36895,7 +36893,7 @@ Create Session
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -36911,7 +36909,7 @@ Create Session
 
     - `JsonValue type = "outcome_evaluation"`
 
-    - `Optional<LocalDateTime> completedAt`
+    - `Optional<OffsetDateTime> completedAt`
 
       When the outcome reached a terminal result. Null while `pending`/`running`/`evaluating`.
 
@@ -36925,7 +36923,7 @@ Create Session
 
       Grader's verdict text from the most recent evaluation. For `satisfied`, explains why criteria are met; for `needs_revision` (intermediate), what's missing; for `failed`, why unrecoverable.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle the outcome is currently on.
 
@@ -36947,7 +36945,7 @@ Create Session
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -36955,7 +36953,7 @@ Create Session
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -36991,7 +36989,7 @@ Create Session
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -37001,7 +36999,7 @@ Create Session
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -37081,7 +37079,7 @@ Create Session
 
   - `Optional<String> title`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -37101,25 +37099,25 @@ Create Session
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -37129,7 +37127,7 @@ Create Session
 
       Cumulative list cost of the session across all turns, priced at public list rates. Absent until cost tracking is available for the session.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -37139,13 +37137,13 @@ Create Session
 
       Cumulative server-executed tool usage across all turns. Absent until server-tool tracking is available for the session.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -37400,31 +37398,31 @@ List Sessions
 
     Filter sessions created with this agent ID.
 
-  - `Optional<Long> agentVersion` (query parameter)
+  - `Optional<Integer> agentVersion` (query parameter)
 
     Filter by agent version. Only applies when `agent_id` is also set.
 
     format: int32
 
-  - `Optional<LocalDateTime> createdAtGt` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGt` (query parameter)
 
     Return sessions created after this time (exclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return sessions created at or after this time (inclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLt` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLt` (query parameter)
 
     Return sessions created before this time (exclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return sessions created at or before this time (inclusive).
 
@@ -37438,7 +37436,7 @@ List Sessions
 
     When true, includes archived sessions. Default: false (exclude archived).
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum number of results to return.
 
@@ -38114,7 +38112,7 @@ List Sessions
 
                     - `Optional<List<String>> blockedDomains`
 
-                    - `Optional<Long> maxContentTokens`
+                    - `Optional<Integer> maxContentTokens`
 
                       format: int32
 
@@ -38272,7 +38270,7 @@ List Sessions
 
                 - `String name`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -38366,7 +38364,7 @@ List Sessions
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -38418,7 +38416,7 @@ List Sessions
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -38452,11 +38450,11 @@ List Sessions
 
         A custom tool as returned in API responses.
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the session was archived. Null if not archived.
 
@@ -38482,7 +38480,7 @@ List Sessions
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -38498,7 +38496,7 @@ List Sessions
 
     - `JsonValue type = "outcome_evaluation"`
 
-    - `Optional<LocalDateTime> completedAt`
+    - `Optional<OffsetDateTime> completedAt`
 
       When the outcome reached a terminal result. Null while `pending`/`running`/`evaluating`.
 
@@ -38512,7 +38510,7 @@ List Sessions
 
       Grader's verdict text from the most recent evaluation. For `satisfied`, explains why criteria are met; for `needs_revision` (intermediate), what's missing; for `failed`, why unrecoverable.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle the outcome is currently on.
 
@@ -38534,7 +38532,7 @@ List Sessions
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -38542,7 +38540,7 @@ List Sessions
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -38578,7 +38576,7 @@ List Sessions
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -38588,7 +38586,7 @@ List Sessions
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -38668,7 +38666,7 @@ List Sessions
 
   - `Optional<String> title`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -38688,25 +38686,25 @@ List Sessions
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -38716,7 +38714,7 @@ List Sessions
 
       Cumulative list cost of the session across all turns, priced at public list rates. Absent until cost tracking is available for the session.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -38726,13 +38724,13 @@ List Sessions
 
       Cumulative server-executed tool usage across all turns. Absent until server-tool tracking is available for the session.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -39621,7 +39619,7 @@ Get Session
 
                     - `Optional<List<String>> blockedDomains`
 
-                    - `Optional<Long> maxContentTokens`
+                    - `Optional<Integer> maxContentTokens`
 
                       format: int32
 
@@ -39779,7 +39777,7 @@ Get Session
 
                 - `String name`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -39873,7 +39871,7 @@ Get Session
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -39925,7 +39923,7 @@ Get Session
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -39959,11 +39957,11 @@ Get Session
 
         A custom tool as returned in API responses.
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the session was archived. Null if not archived.
 
@@ -39989,7 +39987,7 @@ Get Session
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -40005,7 +40003,7 @@ Get Session
 
     - `JsonValue type = "outcome_evaluation"`
 
-    - `Optional<LocalDateTime> completedAt`
+    - `Optional<OffsetDateTime> completedAt`
 
       When the outcome reached a terminal result. Null while `pending`/`running`/`evaluating`.
 
@@ -40019,7 +40017,7 @@ Get Session
 
       Grader's verdict text from the most recent evaluation. For `satisfied`, explains why criteria are met; for `needs_revision` (intermediate), what's missing; for `failed`, why unrecoverable.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle the outcome is currently on.
 
@@ -40041,7 +40039,7 @@ Get Session
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -40049,7 +40047,7 @@ Get Session
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -40085,7 +40083,7 @@ Get Session
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -40095,7 +40093,7 @@ Get Session
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -40175,7 +40173,7 @@ Get Session
 
   - `Optional<String> title`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -40195,25 +40193,25 @@ Get Session
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -40223,7 +40221,7 @@ Get Session
 
       Cumulative list cost of the session across all turns, priced at public list rates. Absent until cost tracking is available for the session.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -40233,13 +40231,13 @@ Get Session
 
       Cumulative server-executed tool usage across all turns. Absent until server-tool tracking is available for the session.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -41144,7 +41142,7 @@ Update Session
 
                     - `Optional<List<String>> blockedDomains`
 
-                    - `Optional<Long> maxContentTokens`
+                    - `Optional<Integer> maxContentTokens`
 
                       format: int32
 
@@ -41302,7 +41300,7 @@ Update Session
 
                 - `String name`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -41396,7 +41394,7 @@ Update Session
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -41448,7 +41446,7 @@ Update Session
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -41482,11 +41480,11 @@ Update Session
 
         A custom tool as returned in API responses.
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the session was archived. Null if not archived.
 
@@ -41512,7 +41510,7 @@ Update Session
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -41528,7 +41526,7 @@ Update Session
 
     - `JsonValue type = "outcome_evaluation"`
 
-    - `Optional<LocalDateTime> completedAt`
+    - `Optional<OffsetDateTime> completedAt`
 
       When the outcome reached a terminal result. Null while `pending`/`running`/`evaluating`.
 
@@ -41542,7 +41540,7 @@ Update Session
 
       Grader's verdict text from the most recent evaluation. For `satisfied`, explains why criteria are met; for `needs_revision` (intermediate), what's missing; for `failed`, why unrecoverable.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle the outcome is currently on.
 
@@ -41564,7 +41562,7 @@ Update Session
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -41572,7 +41570,7 @@ Update Session
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -41608,7 +41606,7 @@ Update Session
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -41618,7 +41616,7 @@ Update Session
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -41698,7 +41696,7 @@ Update Session
 
   - `Optional<String> title`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -41718,25 +41716,25 @@ Update Session
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -41746,7 +41744,7 @@ Update Session
 
       Cumulative list cost of the session across all turns, priced at public list rates. Absent until cost tracking is available for the session.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -41756,13 +41754,13 @@ Update Session
 
       Cumulative server-executed tool usage across all turns. Absent until server-tool tracking is available for the session.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -42819,7 +42817,7 @@ Archive Session
 
                     - `Optional<List<String>> blockedDomains`
 
-                    - `Optional<Long> maxContentTokens`
+                    - `Optional<Integer> maxContentTokens`
 
                       format: int32
 
@@ -42977,7 +42975,7 @@ Archive Session
 
                 - `String name`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -43071,7 +43069,7 @@ Archive Session
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -43123,7 +43121,7 @@ Archive Session
 
               - `List<Tool> tools`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -43157,11 +43155,11 @@ Archive Session
 
         A custom tool as returned in API responses.
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the session was archived. Null if not archived.
 
@@ -43187,7 +43185,7 @@ Archive Session
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -43203,7 +43201,7 @@ Archive Session
 
     - `JsonValue type = "outcome_evaluation"`
 
-    - `Optional<LocalDateTime> completedAt`
+    - `Optional<OffsetDateTime> completedAt`
 
       When the outcome reached a terminal result. Null while `pending`/`running`/`evaluating`.
 
@@ -43217,7 +43215,7 @@ Archive Session
 
       Grader's verdict text from the most recent evaluation. For `satisfied`, explains why criteria are met; for `needs_revision` (intermediate), what's missing; for `failed`, why unrecoverable.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle the outcome is currently on.
 
@@ -43239,7 +43237,7 @@ Archive Session
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -43247,7 +43245,7 @@ Archive Session
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -43283,7 +43281,7 @@ Archive Session
 
       - `String id`
 
-      - `LocalDateTime createdAt`
+      - `OffsetDateTime createdAt`
 
         A timestamp in RFC 3339 format
 
@@ -43293,7 +43291,7 @@ Archive Session
 
       - `String mountPath`
 
-      - `LocalDateTime updatedAt`
+      - `OffsetDateTime updatedAt`
 
         A timestamp in RFC 3339 format
 
@@ -43373,7 +43371,7 @@ Archive Session
 
   - `Optional<String> title`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -43393,25 +43391,25 @@ Archive Session
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -43421,7 +43419,7 @@ Archive Session
 
       Cumulative list cost of the session across all turns, priced at public list rates. Absent until cost tracking is available for the session.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -43431,13 +43429,13 @@ Archive Session
 
       Cumulative server-executed tool usage across all turns. Absent until server-tool tracking is available for the session.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -43688,31 +43686,31 @@ List Events
 
   - `Optional<String> sessionId` (path parameter)
 
-  - `Optional<LocalDateTime> createdAtGt` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGt` (query parameter)
 
     Return events created after this time (exclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return events created at or after this time (inclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLt` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLt` (query parameter)
 
     Return events created before this time (exclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return events created at or before this time (inclusive). Compared against the event's `processed_at` value.
 
     format: date-time
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     format: int32
 
@@ -44100,7 +44098,7 @@ List Events
 
         - `JsonValue type = "redacted"`
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the agent finished processing this message.
 
@@ -44116,7 +44114,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the interrupt was processed.
 
@@ -44154,7 +44152,7 @@ List Events
 
       maxLength: 10000
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the confirmation was processed.
 
@@ -44236,7 +44234,7 @@ List Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -44264,7 +44262,7 @@ List Events
 
       Name of the custom tool being called.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this tool use was processed.
 
@@ -44296,7 +44294,7 @@ List Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this response was generated.
 
@@ -44312,7 +44310,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this thinking was produced.
 
@@ -44340,7 +44338,7 @@ List Events
 
       Name of the MCP tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -44430,7 +44428,7 @@ List Events
 
       The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -44478,7 +44476,7 @@ List Events
 
       Name of the agent tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -44506,7 +44504,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -44574,7 +44572,7 @@ List Events
 
       Public `sthr_` ID of the thread that sent the message.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was received.
 
@@ -44614,7 +44612,7 @@ List Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was sent.
 
@@ -44638,7 +44636,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when compaction was processed.
 
@@ -45088,7 +45086,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the error occurred.
 
@@ -45104,7 +45102,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -45120,7 +45118,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -45136,7 +45134,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -45212,7 +45210,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -45232,7 +45230,7 @@ List Events
 
       Name of the callable agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the thread was created.
 
@@ -45256,7 +45254,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
@@ -45266,7 +45264,7 @@ List Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation started.
 
@@ -45286,7 +45284,7 @@ List Events
 
       Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -45300,7 +45298,7 @@ List Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation ended.
 
@@ -45314,25 +45312,25 @@ List Events
 
       Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
-      - `long cacheCreationInputTokens`
+      - `int cacheCreationInputTokens`
 
         Tokens used to create prompt cache in this request.
 
         format: int32
 
-      - `long cacheReadInputTokens`
+      - `int cacheReadInputTokens`
 
         Tokens read from prompt cache in this request.
 
         format: int32
 
-      - `long inputTokens`
+      - `int inputTokens`
 
         Input tokens consumed by this request.
 
         format: int32
 
-      - `long outputTokens`
+      - `int outputTokens`
 
         Output tokens generated by this request.
 
@@ -45356,7 +45354,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request started.
 
@@ -45384,7 +45382,7 @@ List Events
 
       Token usage for this model request.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request completed.
 
@@ -45400,7 +45398,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -45410,7 +45408,7 @@ List Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this heartbeat was emitted.
 
@@ -45430,7 +45428,7 @@ List Events
 
       What the agent should produce. Copied from the input event.
 
-    - `Optional<Long> maxIterations`
+    - `Optional<Integer> maxIterations`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -45440,7 +45438,7 @@ List Events
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the outcome was accepted.
 
@@ -45480,7 +45478,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the session was deleted.
 
@@ -45500,7 +45498,7 @@ List Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -45524,7 +45522,7 @@ List Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -45574,7 +45572,7 @@ List Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -45622,7 +45620,7 @@ List Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -45646,7 +45644,7 @@ List Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -45666,7 +45664,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the update was applied.
 
@@ -46176,7 +46174,7 @@ List Events
 
                       - `Optional<List<String>> blockedDomains`
 
-                      - `Optional<Long> maxContentTokens`
+                      - `Optional<Integer> maxContentTokens`
 
                         format: int32
 
@@ -46334,7 +46332,7 @@ List Events
 
                   - `String name`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -46428,7 +46426,7 @@ List Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -46480,7 +46478,7 @@ List Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -46514,7 +46512,7 @@ List Events
 
           A custom tool as returned in API responses.
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -46568,7 +46566,7 @@ List Events
 
         minLength: 1
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this system message was processed.
 
@@ -46584,7 +46582,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the snapshot was taken.
 
@@ -46604,25 +46602,25 @@ List Events
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `Optional<Long> ephemeral1hInputTokens`
+        - `Optional<Integer> ephemeral1hInputTokens`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `Optional<Long> ephemeral5mInputTokens`
+        - `Optional<Integer> ephemeral5mInputTokens`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `Optional<Long> cacheReadInputTokens`
+      - `Optional<Integer> cacheReadInputTokens`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `Optional<Long> inputTokens`
+      - `Optional<Integer> inputTokens`
 
         Total input tokens consumed across all turns.
 
@@ -46632,7 +46630,7 @@ List Events
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `Optional<Long> outputTokens`
+      - `Optional<Integer> outputTokens`
 
         Total output tokens generated across all turns.
 
@@ -46642,13 +46640,13 @@ List Events
 
         Cumulative server-executed tool usage across all turns.
 
-        - `Optional<Long> webFetchRequests`
+        - `Optional<Integer> webFetchRequests`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `Optional<Long> webSearchRequests`
+        - `Optional<Integer> webSearchRequests`
 
           Number of server-executed web search requests.
 
@@ -46692,7 +46690,7 @@ List Events
 
         Name that the agent gave the phase, passed on as written.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -46712,7 +46710,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -46808,7 +46806,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -46836,7 +46834,7 @@ List Events
 
       Identifier of the `workflow_run.phase_started` event that opened the phase.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -46860,7 +46858,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -46880,7 +46878,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -46904,7 +46902,7 @@ List Events
 
       Why the run did not finish, or was not created.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -47403,7 +47401,7 @@ Send Events
 
             maxLength: 262144
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -47633,7 +47631,7 @@ Send Events
 
           - `JsonValue type = "redacted"`
 
-      - `Optional<LocalDateTime> processedAt`
+      - `Optional<OffsetDateTime> processedAt`
 
         Timestamp when the agent finished processing this message.
 
@@ -47649,7 +47647,7 @@ Send Events
 
         Unique identifier for this event.
 
-      - `Optional<LocalDateTime> processedAt`
+      - `Optional<OffsetDateTime> processedAt`
 
         Timestamp when the interrupt was processed.
 
@@ -47687,7 +47685,7 @@ Send Events
 
         maxLength: 10000
 
-      - `Optional<LocalDateTime> processedAt`
+      - `Optional<OffsetDateTime> processedAt`
 
         Timestamp when the confirmation was processed.
 
@@ -47769,7 +47767,7 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
-      - `Optional<LocalDateTime> processedAt`
+      - `Optional<OffsetDateTime> processedAt`
 
         Timestamp when this result was processed.
 
@@ -47793,7 +47791,7 @@ Send Events
 
         What the agent should produce. Copied from the input event.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -47803,7 +47801,7 @@ Send Events
 
         Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-      - `LocalDateTime processedAt`
+      - `OffsetDateTime processedAt`
 
         Timestamp when the outcome was accepted.
 
@@ -47871,7 +47869,7 @@ Send Events
 
         Whether the tool execution resulted in an error.
 
-      - `Optional<LocalDateTime> processedAt`
+      - `Optional<OffsetDateTime> processedAt`
 
         Timestamp when this result was processed.
 
@@ -47903,7 +47901,7 @@ Send Events
 
           minLength: 1
 
-      - `Optional<LocalDateTime> processedAt`
+      - `Optional<OffsetDateTime> processedAt`
 
         Timestamp when this system message was processed.
 
@@ -48264,7 +48262,7 @@ Stream Events
 
         - `JsonValue type = "redacted"`
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the agent finished processing this message.
 
@@ -48280,7 +48278,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the interrupt was processed.
 
@@ -48318,7 +48316,7 @@ Stream Events
 
       maxLength: 10000
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the confirmation was processed.
 
@@ -48400,7 +48398,7 @@ Stream Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -48428,7 +48426,7 @@ Stream Events
 
       Name of the custom tool being called.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this tool use was processed.
 
@@ -48460,7 +48458,7 @@ Stream Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this response was generated.
 
@@ -48476,7 +48474,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this thinking was produced.
 
@@ -48504,7 +48502,7 @@ Stream Events
 
       Name of the MCP tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -48594,7 +48592,7 @@ Stream Events
 
       The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -48642,7 +48640,7 @@ Stream Events
 
       Name of the agent tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -48670,7 +48668,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -48738,7 +48736,7 @@ Stream Events
 
       Public `sthr_` ID of the thread that sent the message.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was received.
 
@@ -48778,7 +48776,7 @@ Stream Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was sent.
 
@@ -48802,7 +48800,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when compaction was processed.
 
@@ -49252,7 +49250,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the error occurred.
 
@@ -49268,7 +49266,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -49284,7 +49282,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -49300,7 +49298,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -49376,7 +49374,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -49396,7 +49394,7 @@ Stream Events
 
       Name of the callable agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the thread was created.
 
@@ -49420,7 +49418,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
@@ -49430,7 +49428,7 @@ Stream Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation started.
 
@@ -49450,7 +49448,7 @@ Stream Events
 
       Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -49464,7 +49462,7 @@ Stream Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation ended.
 
@@ -49478,25 +49476,25 @@ Stream Events
 
       Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
-      - `long cacheCreationInputTokens`
+      - `int cacheCreationInputTokens`
 
         Tokens used to create prompt cache in this request.
 
         format: int32
 
-      - `long cacheReadInputTokens`
+      - `int cacheReadInputTokens`
 
         Tokens read from prompt cache in this request.
 
         format: int32
 
-      - `long inputTokens`
+      - `int inputTokens`
 
         Input tokens consumed by this request.
 
         format: int32
 
-      - `long outputTokens`
+      - `int outputTokens`
 
         Output tokens generated by this request.
 
@@ -49520,7 +49518,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request started.
 
@@ -49548,7 +49546,7 @@ Stream Events
 
       Token usage for this model request.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request completed.
 
@@ -49564,7 +49562,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -49574,7 +49572,7 @@ Stream Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this heartbeat was emitted.
 
@@ -49594,7 +49592,7 @@ Stream Events
 
       What the agent should produce. Copied from the input event.
 
-    - `Optional<Long> maxIterations`
+    - `Optional<Integer> maxIterations`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -49604,7 +49602,7 @@ Stream Events
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the outcome was accepted.
 
@@ -49644,7 +49642,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the session was deleted.
 
@@ -49664,7 +49662,7 @@ Stream Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -49688,7 +49686,7 @@ Stream Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -49738,7 +49736,7 @@ Stream Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -49786,7 +49784,7 @@ Stream Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -49810,7 +49808,7 @@ Stream Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -49830,7 +49828,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the update was applied.
 
@@ -50340,7 +50338,7 @@ Stream Events
 
                       - `Optional<List<String>> blockedDomains`
 
-                      - `Optional<Long> maxContentTokens`
+                      - `Optional<Integer> maxContentTokens`
 
                         format: int32
 
@@ -50498,7 +50496,7 @@ Stream Events
 
                   - `String name`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -50592,7 +50590,7 @@ Stream Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -50644,7 +50642,7 @@ Stream Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -50678,7 +50676,7 @@ Stream Events
 
           A custom tool as returned in API responses.
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -50782,7 +50780,7 @@ Stream Events
 
         minLength: 1
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this system message was processed.
 
@@ -50798,7 +50796,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the snapshot was taken.
 
@@ -50818,25 +50816,25 @@ Stream Events
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `Optional<Long> ephemeral1hInputTokens`
+        - `Optional<Integer> ephemeral1hInputTokens`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `Optional<Long> ephemeral5mInputTokens`
+        - `Optional<Integer> ephemeral5mInputTokens`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `Optional<Long> cacheReadInputTokens`
+      - `Optional<Integer> cacheReadInputTokens`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `Optional<Long> inputTokens`
+      - `Optional<Integer> inputTokens`
 
         Total input tokens consumed across all turns.
 
@@ -50846,7 +50844,7 @@ Stream Events
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `Optional<Long> outputTokens`
+      - `Optional<Integer> outputTokens`
 
         Total output tokens generated across all turns.
 
@@ -50856,13 +50854,13 @@ Stream Events
 
         Cumulative server-executed tool usage across all turns.
 
-        - `Optional<Long> webFetchRequests`
+        - `Optional<Integer> webFetchRequests`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `Optional<Long> webSearchRequests`
+        - `Optional<Integer> webSearchRequests`
 
           Number of server-executed web search requests.
 
@@ -50906,7 +50904,7 @@ Stream Events
 
         Name that the agent gave the phase, passed on as written.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -50926,7 +50924,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -51022,7 +51020,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -51050,7 +51048,7 @@ Stream Events
 
       Identifier of the `workflow_run.phase_started` event that opened the phase.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -51074,7 +51072,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -51094,7 +51092,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -51118,7 +51116,7 @@ Stream Events
 
       Why the run did not finish, or was not created.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -51314,7 +51312,7 @@ Add Session Resource
 
   - `String id`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -51324,7 +51322,7 @@ Add Session Resource
 
   - `String mountPath`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -51383,7 +51381,7 @@ List Session Resources
 
   - `Optional<String> sessionId` (path parameter)
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum number of resources to return per page (max 1000). If omitted, returns all resources.
 
@@ -51523,7 +51521,7 @@ List Session Resources
 
     - `String id`
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       A timestamp in RFC 3339 format
 
@@ -51531,7 +51529,7 @@ List Session Resources
 
     - `String mountPath`
 
-    - `LocalDateTime updatedAt`
+    - `OffsetDateTime updatedAt`
 
       A timestamp in RFC 3339 format
 
@@ -51567,7 +51565,7 @@ List Session Resources
 
     - `String id`
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       A timestamp in RFC 3339 format
 
@@ -51577,7 +51575,7 @@ List Session Resources
 
     - `String mountPath`
 
-    - `LocalDateTime updatedAt`
+    - `OffsetDateTime updatedAt`
 
       A timestamp in RFC 3339 format
 
@@ -51820,7 +51818,7 @@ Get Session Resource
 
     - `String id`
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       A timestamp in RFC 3339 format
 
@@ -51828,7 +51826,7 @@ Get Session Resource
 
     - `String mountPath`
 
-    - `LocalDateTime updatedAt`
+    - `OffsetDateTime updatedAt`
 
       A timestamp in RFC 3339 format
 
@@ -51864,7 +51862,7 @@ Get Session Resource
 
     - `String id`
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       A timestamp in RFC 3339 format
 
@@ -51874,7 +51872,7 @@ Get Session Resource
 
     - `String mountPath`
 
-    - `LocalDateTime updatedAt`
+    - `OffsetDateTime updatedAt`
 
       A timestamp in RFC 3339 format
 
@@ -52114,7 +52112,7 @@ Update Session Resource
 
     - `String id`
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       A timestamp in RFC 3339 format
 
@@ -52122,7 +52120,7 @@ Update Session Resource
 
     - `String mountPath`
 
-    - `LocalDateTime updatedAt`
+    - `OffsetDateTime updatedAt`
 
       A timestamp in RFC 3339 format
 
@@ -52158,7 +52156,7 @@ Update Session Resource
 
     - `String id`
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       A timestamp in RFC 3339 format
 
@@ -52168,7 +52166,7 @@ Update Session Resource
 
     - `String mountPath`
 
-    - `LocalDateTime updatedAt`
+    - `OffsetDateTime updatedAt`
 
       A timestamp in RFC 3339 format
 
@@ -52451,7 +52449,7 @@ List Session Threads
 
   - `Optional<String> sessionId` (path parameter)
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum results per page. Defaults to 1000.
 
@@ -53075,7 +53073,7 @@ List Session Threads
 
               - `Optional<List<String>> blockedDomains`
 
-              - `Optional<Long> maxContentTokens`
+              - `Optional<Integer> maxContentTokens`
 
                 format: int32
 
@@ -53233,7 +53231,7 @@ List Session Threads
 
           - `String name`
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -53297,13 +53295,13 @@ List Session Threads
 
           A custom tool as returned in API responses.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the thread was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the thread was created.
 
@@ -53351,7 +53349,7 @@ List Session Threads
 
     - `TERMINATED("terminated")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the thread was last updated.
 
@@ -53371,25 +53369,25 @@ List Session Threads
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -53409,7 +53407,7 @@ List Session Threads
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -53419,13 +53417,13 @@ List Session Threads
 
       Cumulative server-executed tool usage across all turns of this thread. Absent until server-tool tracking is available for the thread.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -54170,7 +54168,7 @@ Get Session Thread
 
               - `Optional<List<String>> blockedDomains`
 
-              - `Optional<Long> maxContentTokens`
+              - `Optional<Integer> maxContentTokens`
 
                 format: int32
 
@@ -54328,7 +54326,7 @@ Get Session Thread
 
           - `String name`
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -54392,13 +54390,13 @@ Get Session Thread
 
           A custom tool as returned in API responses.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the thread was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the thread was created.
 
@@ -54446,7 +54444,7 @@ Get Session Thread
 
     - `TERMINATED("terminated")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the thread was last updated.
 
@@ -54466,25 +54464,25 @@ Get Session Thread
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -54504,7 +54502,7 @@ Get Session Thread
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -54514,13 +54512,13 @@ Get Session Thread
 
       Cumulative server-executed tool usage across all turns of this thread. Absent until server-tool tracking is available for the thread.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -55264,7 +55262,7 @@ Archive Session Thread
 
               - `Optional<List<String>> blockedDomains`
 
-              - `Optional<Long> maxContentTokens`
+              - `Optional<Integer> maxContentTokens`
 
                 format: int32
 
@@ -55422,7 +55420,7 @@ Archive Session Thread
 
           - `String name`
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -55486,13 +55484,13 @@ Archive Session Thread
 
           A custom tool as returned in API responses.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the thread was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the thread was created.
 
@@ -55540,7 +55538,7 @@ Archive Session Thread
 
     - `TERMINATED("terminated")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the thread was last updated.
 
@@ -55560,25 +55558,25 @@ Archive Session Thread
 
       Tokens used to create prompt cache entries, broken down by cache TTL.
 
-      - `Optional<Long> ephemeral1hInputTokens`
+      - `Optional<Integer> ephemeral1hInputTokens`
 
         Tokens used to create 1-hour ephemeral cache entries.
 
         format: int32
 
-      - `Optional<Long> ephemeral5mInputTokens`
+      - `Optional<Integer> ephemeral5mInputTokens`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
         format: int32
 
-    - `Optional<Long> cacheReadInputTokens`
+    - `Optional<Integer> cacheReadInputTokens`
 
       Total tokens read from prompt cache.
 
       format: int32
 
-    - `Optional<Long> inputTokens`
+    - `Optional<Integer> inputTokens`
 
       Total input tokens consumed across all turns.
 
@@ -55598,7 +55596,7 @@ Archive Session Thread
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-    - `Optional<Long> outputTokens`
+    - `Optional<Integer> outputTokens`
 
       Total output tokens generated across all turns.
 
@@ -55608,13 +55606,13 @@ Archive Session Thread
 
       Cumulative server-executed tool usage across all turns of this thread. Absent until server-tool tracking is available for the thread.
 
-      - `Optional<Long> webFetchRequests`
+      - `Optional<Integer> webFetchRequests`
 
         Number of server-executed web fetch requests.
 
         format: int32
 
-      - `Optional<Long> webSearchRequests`
+      - `Optional<Integer> webSearchRequests`
 
         Number of server-executed web search requests.
 
@@ -55760,7 +55758,7 @@ List Session Thread Events
 
   - `Optional<String> threadId` (path parameter)
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     format: int32
 
@@ -56052,7 +56050,7 @@ List Session Thread Events
 
         - `JsonValue type = "redacted"`
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the agent finished processing this message.
 
@@ -56068,7 +56066,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the interrupt was processed.
 
@@ -56106,7 +56104,7 @@ List Session Thread Events
 
       maxLength: 10000
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the confirmation was processed.
 
@@ -56188,7 +56186,7 @@ List Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -56216,7 +56214,7 @@ List Session Thread Events
 
       Name of the custom tool being called.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this tool use was processed.
 
@@ -56248,7 +56246,7 @@ List Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this response was generated.
 
@@ -56264,7 +56262,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this thinking was produced.
 
@@ -56292,7 +56290,7 @@ List Session Thread Events
 
       Name of the MCP tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -56382,7 +56380,7 @@ List Session Thread Events
 
       The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -56430,7 +56428,7 @@ List Session Thread Events
 
       Name of the agent tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -56458,7 +56456,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -56526,7 +56524,7 @@ List Session Thread Events
 
       Public `sthr_` ID of the thread that sent the message.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was received.
 
@@ -56566,7 +56564,7 @@ List Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was sent.
 
@@ -56590,7 +56588,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when compaction was processed.
 
@@ -57040,7 +57038,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the error occurred.
 
@@ -57056,7 +57054,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -57072,7 +57070,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -57088,7 +57086,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -57164,7 +57162,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -57184,7 +57182,7 @@ List Session Thread Events
 
       Name of the callable agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the thread was created.
 
@@ -57208,7 +57206,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
@@ -57218,7 +57216,7 @@ List Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation started.
 
@@ -57238,7 +57236,7 @@ List Session Thread Events
 
       Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -57252,7 +57250,7 @@ List Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation ended.
 
@@ -57266,25 +57264,25 @@ List Session Thread Events
 
       Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
-      - `long cacheCreationInputTokens`
+      - `int cacheCreationInputTokens`
 
         Tokens used to create prompt cache in this request.
 
         format: int32
 
-      - `long cacheReadInputTokens`
+      - `int cacheReadInputTokens`
 
         Tokens read from prompt cache in this request.
 
         format: int32
 
-      - `long inputTokens`
+      - `int inputTokens`
 
         Input tokens consumed by this request.
 
         format: int32
 
-      - `long outputTokens`
+      - `int outputTokens`
 
         Output tokens generated by this request.
 
@@ -57308,7 +57306,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request started.
 
@@ -57336,7 +57334,7 @@ List Session Thread Events
 
       Token usage for this model request.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request completed.
 
@@ -57352,7 +57350,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -57362,7 +57360,7 @@ List Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this heartbeat was emitted.
 
@@ -57382,7 +57380,7 @@ List Session Thread Events
 
       What the agent should produce. Copied from the input event.
 
-    - `Optional<Long> maxIterations`
+    - `Optional<Integer> maxIterations`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -57392,7 +57390,7 @@ List Session Thread Events
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the outcome was accepted.
 
@@ -57432,7 +57430,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the session was deleted.
 
@@ -57452,7 +57450,7 @@ List Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -57476,7 +57474,7 @@ List Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -57526,7 +57524,7 @@ List Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -57574,7 +57572,7 @@ List Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -57598,7 +57596,7 @@ List Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -57618,7 +57616,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the update was applied.
 
@@ -58128,7 +58126,7 @@ List Session Thread Events
 
                       - `Optional<List<String>> blockedDomains`
 
-                      - `Optional<Long> maxContentTokens`
+                      - `Optional<Integer> maxContentTokens`
 
                         format: int32
 
@@ -58286,7 +58284,7 @@ List Session Thread Events
 
                   - `String name`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -58380,7 +58378,7 @@ List Session Thread Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -58432,7 +58430,7 @@ List Session Thread Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -58466,7 +58464,7 @@ List Session Thread Events
 
           A custom tool as returned in API responses.
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -58520,7 +58518,7 @@ List Session Thread Events
 
         minLength: 1
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this system message was processed.
 
@@ -58536,7 +58534,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the snapshot was taken.
 
@@ -58556,25 +58554,25 @@ List Session Thread Events
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `Optional<Long> ephemeral1hInputTokens`
+        - `Optional<Integer> ephemeral1hInputTokens`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `Optional<Long> ephemeral5mInputTokens`
+        - `Optional<Integer> ephemeral5mInputTokens`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `Optional<Long> cacheReadInputTokens`
+      - `Optional<Integer> cacheReadInputTokens`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `Optional<Long> inputTokens`
+      - `Optional<Integer> inputTokens`
 
         Total input tokens consumed across all turns.
 
@@ -58584,7 +58582,7 @@ List Session Thread Events
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `Optional<Long> outputTokens`
+      - `Optional<Integer> outputTokens`
 
         Total output tokens generated across all turns.
 
@@ -58594,13 +58592,13 @@ List Session Thread Events
 
         Cumulative server-executed tool usage across all turns.
 
-        - `Optional<Long> webFetchRequests`
+        - `Optional<Integer> webFetchRequests`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `Optional<Long> webSearchRequests`
+        - `Optional<Integer> webSearchRequests`
 
           Number of server-executed web search requests.
 
@@ -58644,7 +58642,7 @@ List Session Thread Events
 
         Name that the agent gave the phase, passed on as written.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -58664,7 +58662,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -58760,7 +58758,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -58788,7 +58786,7 @@ List Session Thread Events
 
       Identifier of the `workflow_run.phase_started` event that opened the phase.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -58812,7 +58810,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -58832,7 +58830,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -58856,7 +58854,7 @@ List Session Thread Events
 
       Why the run did not finish, or was not created.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -59233,7 +59231,7 @@ Stream Session Thread Events
 
         - `JsonValue type = "redacted"`
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the agent finished processing this message.
 
@@ -59249,7 +59247,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the interrupt was processed.
 
@@ -59287,7 +59285,7 @@ Stream Session Thread Events
 
       maxLength: 10000
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when the confirmation was processed.
 
@@ -59369,7 +59367,7 @@ Stream Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -59397,7 +59395,7 @@ Stream Session Thread Events
 
       Name of the custom tool being called.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this tool use was processed.
 
@@ -59429,7 +59427,7 @@ Stream Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this response was generated.
 
@@ -59445,7 +59443,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this thinking was produced.
 
@@ -59473,7 +59471,7 @@ Stream Session Thread Events
 
       Name of the MCP tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -59563,7 +59561,7 @@ Stream Session Thread Events
 
       The id of the `agent.mcp_tool_use` event this result corresponds to.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -59611,7 +59609,7 @@ Stream Session Thread Events
 
       Name of the agent tool being used.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -59639,7 +59637,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -59707,7 +59705,7 @@ Stream Session Thread Events
 
       Public `sthr_` ID of the thread that sent the message.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was received.
 
@@ -59747,7 +59745,7 @@ Stream Session Thread Events
 
         Placeholder for content withheld by Anthropic model policy.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the message was sent.
 
@@ -59771,7 +59769,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when compaction was processed.
 
@@ -60221,7 +60219,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the error occurred.
 
@@ -60237,7 +60235,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -60253,7 +60251,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -60269,7 +60267,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -60345,7 +60343,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of status change.
 
@@ -60365,7 +60363,7 @@ Stream Session Thread Events
 
       Name of the callable agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the thread was created.
 
@@ -60389,7 +60387,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle. 0 is the first evaluation; 1 is the re-evaluation after the first revision; etc.
 
@@ -60399,7 +60397,7 @@ Stream Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation started.
 
@@ -60419,7 +60417,7 @@ Stream Session Thread Events
 
       Human-readable explanation of the verdict. For `needs_revision`, describes which criteria failed and why.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -60433,7 +60431,7 @@ Stream Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when outcome evaluation ended.
 
@@ -60447,25 +60445,25 @@ Stream Session Thread Events
 
       Aggregate token usage for this evaluation cycle. Sums across all grader model requests within the cycle.
 
-      - `long cacheCreationInputTokens`
+      - `int cacheCreationInputTokens`
 
         Tokens used to create prompt cache in this request.
 
         format: int32
 
-      - `long cacheReadInputTokens`
+      - `int cacheReadInputTokens`
 
         Tokens read from prompt cache in this request.
 
         format: int32
 
-      - `long inputTokens`
+      - `int inputTokens`
 
         Input tokens consumed by this request.
 
         format: int32
 
-      - `long outputTokens`
+      - `int outputTokens`
 
         Output tokens generated by this request.
 
@@ -60489,7 +60487,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request started.
 
@@ -60517,7 +60515,7 @@ Stream Session Thread Events
 
       Token usage for this model request.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the model request completed.
 
@@ -60533,7 +60531,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `long iteration`
+    - `int iteration`
 
       0-indexed revision cycle, matching the corresponding `span.outcome_evaluation_start`.
 
@@ -60543,7 +60541,7 @@ Stream Session Thread Events
 
       The `outc_` ID of the outcome being evaluated.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this heartbeat was emitted.
 
@@ -60563,7 +60561,7 @@ Stream Session Thread Events
 
       What the agent should produce. Copied from the input event.
 
-    - `Optional<Long> maxIterations`
+    - `Optional<Integer> maxIterations`
 
       Evaluate-then-revise cycles before giving up. Default 3, max 20.
 
@@ -60573,7 +60571,7 @@ Stream Session Thread Events
 
       Server-generated `outc_` ID for this outcome. Referenced by `span.outcome_evaluation_*` events and the session's `outcome_evaluations` list.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the outcome was accepted.
 
@@ -60613,7 +60611,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the session was deleted.
 
@@ -60633,7 +60631,7 @@ Stream Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -60657,7 +60655,7 @@ Stream Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -60707,7 +60705,7 @@ Stream Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -60755,7 +60753,7 @@ Stream Session Thread Events
 
       Whether the tool execution resulted in an error.
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this result was processed.
 
@@ -60779,7 +60777,7 @@ Stream Session Thread Events
 
       Name of the agent the thread runs.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp of the status transition.
 
@@ -60799,7 +60797,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the update was applied.
 
@@ -61309,7 +61307,7 @@ Stream Session Thread Events
 
                       - `Optional<List<String>> blockedDomains`
 
-                      - `Optional<Long> maxContentTokens`
+                      - `Optional<Integer> maxContentTokens`
 
                         format: int32
 
@@ -61467,7 +61465,7 @@ Stream Session Thread Events
 
                   - `String name`
 
-              - `long version`
+              - `int version`
 
                 format: int32
 
@@ -61561,7 +61559,7 @@ Stream Session Thread Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -61613,7 +61611,7 @@ Stream Session Thread Events
 
                 - `List<Tool> tools`
 
-                - `long version`
+                - `int version`
 
                   format: int32
 
@@ -61647,7 +61645,7 @@ Stream Session Thread Events
 
           A custom tool as returned in API responses.
 
-      - `long version`
+      - `int version`
 
         format: int32
 
@@ -61751,7 +61749,7 @@ Stream Session Thread Events
 
         minLength: 1
 
-    - `Optional<LocalDateTime> processedAt`
+    - `Optional<OffsetDateTime> processedAt`
 
       Timestamp when this system message was processed.
 
@@ -61767,7 +61765,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when the snapshot was taken.
 
@@ -61787,25 +61785,25 @@ Stream Session Thread Events
 
         Tokens used to create prompt cache entries, broken down by cache TTL.
 
-        - `Optional<Long> ephemeral1hInputTokens`
+        - `Optional<Integer> ephemeral1hInputTokens`
 
           Tokens used to create 1-hour ephemeral cache entries.
 
           format: int32
 
-        - `Optional<Long> ephemeral5mInputTokens`
+        - `Optional<Integer> ephemeral5mInputTokens`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
           format: int32
 
-      - `Optional<Long> cacheReadInputTokens`
+      - `Optional<Integer> cacheReadInputTokens`
 
         Total tokens read from prompt cache.
 
         format: int32
 
-      - `Optional<Long> inputTokens`
+      - `Optional<Integer> inputTokens`
 
         Total input tokens consumed across all turns.
 
@@ -61815,7 +61813,7 @@ Stream Session Thread Events
 
         Cumulative list cost of the session across all turns, priced at public list rates.
 
-      - `Optional<Long> outputTokens`
+      - `Optional<Integer> outputTokens`
 
         Total output tokens generated across all turns.
 
@@ -61825,13 +61823,13 @@ Stream Session Thread Events
 
         Cumulative server-executed tool usage across all turns.
 
-        - `Optional<Long> webFetchRequests`
+        - `Optional<Integer> webFetchRequests`
 
           Number of server-executed web fetch requests.
 
           format: int32
 
-        - `Optional<Long> webSearchRequests`
+        - `Optional<Integer> webSearchRequests`
 
           Number of server-executed web search requests.
 
@@ -61875,7 +61873,7 @@ Stream Session Thread Events
 
         Name that the agent gave the phase, passed on as written.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -61895,7 +61893,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -61991,7 +61989,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -62019,7 +62017,7 @@ Stream Session Thread Events
 
       Identifier of the `workflow_run.phase_started` event that opened the phase.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -62043,7 +62041,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -62063,7 +62061,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -62087,7 +62085,7 @@ Stream Session Thread Events
 
       Why the run did not finish, or was not created.
 
-    - `LocalDateTime processedAt`
+    - `OffsetDateTime processedAt`
 
       Timestamp when this event was processed.
 
@@ -62291,7 +62289,7 @@ Create Deployment
 
         minLength: 1, maxLength: 128
 
-      - `Optional<Long> version`
+      - `Optional<Integer> version`
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -62499,7 +62497,7 @@ Create Deployment
 
             maxLength: 262144
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -62667,17 +62665,17 @@ Create Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -62885,7 +62883,7 @@ Create Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -63117,13 +63115,13 @@ Create Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -63139,7 +63137,7 @@ Create Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -63281,13 +63279,13 @@ List Deployments
 
     Filter by agent ID.
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return deployments created at or after this time (inclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return deployments created at or before this time (inclusive).
 
@@ -63297,7 +63295,7 @@ List Deployments
 
     When true, includes archived deployments. Default: false (exclude archived).
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum results per page. Default 20, maximum 100.
 
@@ -63451,17 +63449,17 @@ List Deployments
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -63669,7 +63667,7 @@ List Deployments
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -63901,13 +63899,13 @@ List Deployments
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -63923,7 +63921,7 @@ List Deployments
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -64202,17 +64200,17 @@ Get Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -64420,7 +64418,7 @@ Get Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -64652,13 +64650,13 @@ Get Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -64674,7 +64672,7 @@ Get Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -64946,7 +64944,7 @@ Update Deployment
 
         minLength: 1, maxLength: 128
 
-      - `Optional<Long> version`
+      - `Optional<Integer> version`
 
         The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -65164,7 +65162,7 @@ Update Deployment
 
             maxLength: 262144
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -65322,17 +65320,17 @@ Update Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -65540,7 +65538,7 @@ Update Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -65772,13 +65770,13 @@ Update Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -65794,7 +65792,7 @@ Update Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -66068,17 +66066,17 @@ Archive Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -66286,7 +66284,7 @@ Archive Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -66518,13 +66516,13 @@ Archive Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -66540,7 +66538,7 @@ Archive Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -66814,11 +66812,11 @@ Run Deployment Now
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time this run record was persisted.
 
@@ -67006,7 +67004,7 @@ Run Deployment Now
 
       - `JsonValue type = "schedule"`
 
-      - `LocalDateTime scheduledAt`
+      - `OffsetDateTime scheduledAt`
 
         The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
@@ -67220,17 +67218,17 @@ Pause Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -67438,7 +67436,7 @@ Pause Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -67670,13 +67668,13 @@ Pause Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -67692,7 +67690,7 @@ Pause Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -67966,17 +67964,17 @@ Unpause Deployment
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     Time the deployment was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the deployment was created.
 
@@ -68184,7 +68182,7 @@ Unpause Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `Optional<Long> maxIterations`
+      - `Optional<Integer> maxIterations`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -68416,13 +68414,13 @@ Unpause Deployment
 
       minLength: 1
 
-    - `Optional<LocalDateTime> lastRunAt`
+    - `Optional<OffsetDateTime> lastRunAt`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
       format: date-time
 
-    - `Optional<List<LocalDateTime>> upcomingRunsAt`
+    - `Optional<List<OffsetDateTime>> upcomingRunsAt`
 
       Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
 
@@ -68438,7 +68436,7 @@ Unpause Deployment
 
       The deployment is paused. Autonomous triggers are suppressed; manual runs are still permitted.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time the deployment was last updated.
 
@@ -68570,25 +68568,25 @@ List Deployment Runs
 
 - `DeploymentRunListParams params`
 
-  - `Optional<LocalDateTime> createdAtGt` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGt` (query parameter)
 
     Return runs created strictly after this time (exclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return runs created at or after this time (inclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLt` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLt` (query parameter)
 
     Return runs created strictly before this time (exclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return runs created at or before this time (inclusive).
 
@@ -68602,7 +68600,7 @@ List Deployment Runs
 
     Filter: true for runs with non-null `error`, false for runs with non-null `session_id`. Omit for all.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum results per page. Default 20, maximum 1000.
 
@@ -68756,11 +68754,11 @@ List Deployment Runs
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time this run record was persisted.
 
@@ -68948,7 +68946,7 @@ List Deployment Runs
 
       - `JsonValue type = "schedule"`
 
-      - `LocalDateTime scheduledAt`
+      - `OffsetDateTime scheduledAt`
 
         The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
@@ -69167,11 +69165,11 @@ Get Deployment Run
 
     - `String id`
 
-    - `long version`
+    - `int version`
 
       format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time this run record was persisted.
 
@@ -69359,7 +69357,7 @@ Get Deployment Run
 
       - `JsonValue type = "schedule"`
 
-      - `LocalDateTime scheduledAt`
+      - `OffsetDateTime scheduledAt`
 
         The UTC instant at which the cron expression matched in the configured timezone, before jitter is applied. At most one run is recorded per (`deployment_id`, `scheduled_at`) pair.
 
@@ -69573,13 +69571,13 @@ Create a Vault
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -69593,7 +69591,7 @@ Create a Vault
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -69655,7 +69653,7 @@ List Vaults
 
     Whether to include archived vaults in the results. Defaults to `false`.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
@@ -69797,13 +69795,13 @@ List Vaults
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -69817,7 +69815,7 @@ List Vaults
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -70013,13 +70011,13 @@ Retrieve a Vault
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -70033,7 +70031,7 @@ Retrieve a Vault
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -70234,13 +70232,13 @@ Update a Vault
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -70254,7 +70252,7 @@ Update a Vault
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -70623,13 +70621,13 @@ Archive a Vault
 
     The unique ID of the vault (`vlt_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the vault was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -70643,7 +70641,7 @@ Archive a Vault
 
     Arbitrary key-value metadata attached to the vault.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -70846,7 +70844,7 @@ Create a Credential
 
         minLength: 1, maxLength: 2047
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When `access_token` expires, in RFC 3339.
 
@@ -71012,7 +71010,7 @@ Create a Credential
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -71032,7 +71030,7 @@ Create a Credential
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -71132,7 +71130,7 @@ Create a Credential
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -71142,7 +71140,7 @@ Create a Credential
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -71226,7 +71224,7 @@ List Credentials
 
     Whether to include archived credentials in the results. Defaults to `false`.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
@@ -71368,7 +71366,7 @@ List Credentials
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -71388,7 +71386,7 @@ List Credentials
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -71488,7 +71486,7 @@ List Credentials
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -71498,7 +71496,7 @@ List Credentials
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -71711,7 +71709,7 @@ Retrieve a Credential
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -71731,7 +71729,7 @@ Retrieve a Credential
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -71831,7 +71829,7 @@ Retrieve a Credential
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -71841,7 +71839,7 @@ Retrieve a Credential
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -72057,7 +72055,7 @@ Update a Credential
 
         minLength: 1, maxLength: 8192, pattern: ^[^\x00-\x1f\x7f]*$
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Leave it out to keep the stored expiry.
 
@@ -72193,7 +72191,7 @@ Update a Credential
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -72213,7 +72211,7 @@ Update a Credential
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -72313,7 +72311,7 @@ Update a Credential
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -72323,7 +72321,7 @@ Update a Credential
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -72721,7 +72719,7 @@ Archive a Credential
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -72741,7 +72739,7 @@ Archive a Credential
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -72841,7 +72839,7 @@ Archive a Credential
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -72851,7 +72849,7 @@ Archive a Credential
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
@@ -73087,7 +73085,7 @@ Validate an MCP OAuth Credential
 
         Value of the `Content-Type` response header.
 
-      - `long statusCode`
+      - `int statusCode`
 
         HTTP status code.
 
@@ -73141,7 +73139,7 @@ Validate an MCP OAuth Credential
 
       The probe couldn't tell whether the credential works, for example because of a network error or because a refresh succeeded but the new access token wasn't tested. Validate the credential again to find out.
 
-  - `LocalDateTime validatedAt`
+  - `OffsetDateTime validatedAt`
 
     When the validation probe was performed.
 
@@ -73375,7 +73373,7 @@ Create a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -73385,7 +73383,7 @@ Create a Memory Store
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -73405,7 +73403,7 @@ Create a Memory Store
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -73466,13 +73464,13 @@ List Memory Stores
 
 - `MemoryStoreListParams params`
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return only memory stores created at or after this time (inclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return only memory stores created at or before this time (inclusive).
 
@@ -73482,7 +73480,7 @@ List Memory Stores
 
     When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
@@ -73624,7 +73622,7 @@ List Memory Stores
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -73634,7 +73632,7 @@ List Memory Stores
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -73654,7 +73652,7 @@ List Memory Stores
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -73851,7 +73849,7 @@ Retrieve a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -73861,7 +73859,7 @@ Retrieve a Memory Store
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -73881,7 +73879,7 @@ Retrieve a Memory Store
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -74097,7 +74095,7 @@ Update a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -74107,7 +74105,7 @@ Update a Memory Store
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -74127,7 +74125,7 @@ Update a Memory Store
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -74503,7 +74501,7 @@ Archive a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -74513,7 +74511,7 @@ Archive a Memory Store
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -74533,7 +74531,7 @@ Archive a Memory Store
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -74759,13 +74757,13 @@ Create a Memory
 
     Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-  - `long contentSizeBytes`
+  - `int contentSizeBytes`
 
     The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this memory was created, in RFC 3339 format.
 
@@ -74787,7 +74785,7 @@ Create a Memory
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory was last changed, in RFC 3339.
 
@@ -74860,7 +74858,7 @@ List Memories
 
     The ID of the memory store to list memories from (`memstore_...`).
 
-  - `Optional<Long> depth` (query parameter)
+  - `Optional<Integer> depth` (query parameter)
 
     How far below `path_prefix` to list. Defaults to `0`, which lists every memory below the prefix.
 
@@ -74868,7 +74866,7 @@ List Memories
 
     format: int32
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     The maximum number of items to return per page, from 1 to 100. Defaults to 20.
 
@@ -75038,13 +75036,13 @@ List Memories
 
       Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-    - `long contentSizeBytes`
+    - `int contentSizeBytes`
 
       The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
       format: int32
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       When this memory was created, in RFC 3339 format.
 
@@ -75066,7 +75064,7 @@ List Memories
 
       Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-    - `LocalDateTime updatedAt`
+    - `OffsetDateTime updatedAt`
 
       When the memory was last changed, in RFC 3339.
 
@@ -75303,13 +75301,13 @@ Retrieve a Memory
 
     Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-  - `long contentSizeBytes`
+  - `int contentSizeBytes`
 
     The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this memory was created, in RFC 3339 format.
 
@@ -75331,7 +75329,7 @@ Retrieve a Memory
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory was last changed, in RFC 3339.
 
@@ -75573,13 +75571,13 @@ Update a Memory
 
     Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-  - `long contentSizeBytes`
+  - `int contentSizeBytes`
 
     The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this memory was created, in RFC 3339 format.
 
@@ -75601,7 +75599,7 @@ Update a Memory
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory was last changed, in RFC 3339.
 
@@ -75875,19 +75873,19 @@ List Memory Versions
 
     Return only versions written with the API key that has this ID.
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return versions created at or after this time (inclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return versions created at or before this time (inclusive).
 
     format: date-time
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     The maximum number of versions to return per page, from 1 to 100. Defaults to 20.
 
@@ -76061,7 +76059,7 @@ List Memory Versions
 
     Unique identifier for this version (a `memver_...` value).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this version was written, in RFC 3339 format.
 
@@ -76101,7 +76099,7 @@ List Memory Versions
 
     Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-  - `Optional<Long> contentSizeBytes`
+  - `Optional<Integer> contentSizeBytes`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -76167,7 +76165,7 @@ List Memory Versions
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-  - `Optional<LocalDateTime> redactedAt`
+  - `Optional<OffsetDateTime> redactedAt`
 
     When the version was redacted, in RFC 3339, or `null` if it hasn't been.
 
@@ -76397,7 +76395,7 @@ Retrieve a Memory Version
 
     Unique identifier for this version (a `memver_...` value).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this version was written, in RFC 3339 format.
 
@@ -76437,7 +76435,7 @@ Retrieve a Memory Version
 
     Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-  - `Optional<Long> contentSizeBytes`
+  - `Optional<Integer> contentSizeBytes`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -76503,7 +76501,7 @@ Retrieve a Memory Version
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-  - `Optional<LocalDateTime> redactedAt`
+  - `Optional<OffsetDateTime> redactedAt`
 
     When the version was redacted, in RFC 3339, or `null` if it hasn't been.
 
@@ -76726,7 +76724,7 @@ Redact a Memory Version
 
     Unique identifier for this version (a `memver_...` value).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this version was written, in RFC 3339 format.
 
@@ -76766,7 +76764,7 @@ Redact a Memory Version
 
     Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-  - `Optional<Long> contentSizeBytes`
+  - `Optional<Integer> contentSizeBytes`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -76832,7 +76830,7 @@ Redact a Memory Version
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-  - `Optional<LocalDateTime> redactedAt`
+  - `Optional<OffsetDateTime> redactedAt`
 
     When the version was redacted, in RFC 3339, or `null` if it hasn't been.
 
@@ -77059,7 +77057,7 @@ Upload File
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing when the file was created.
 
@@ -77087,7 +77085,7 @@ Upload File
 
     Whether the file can be downloaded.
 
-  - `Optional<LocalDateTime> expiresAt`
+  - `Optional<OffsetDateTime> expiresAt`
 
     RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
@@ -77317,7 +77315,7 @@ List Files
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing when the file was created.
 
@@ -77345,7 +77343,7 @@ List Files
 
     Whether the file can be downloaded.
 
-  - `Optional<LocalDateTime> expiresAt`
+  - `Optional<OffsetDateTime> expiresAt`
 
     RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
@@ -77717,7 +77715,7 @@ Get File Metadata
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string representing when the file was created.
 
@@ -77745,7 +77743,7 @@ Get File Metadata
 
     Whether the file can be downloaded.
 
-  - `Optional<LocalDateTime> expiresAt`
+  - `Optional<OffsetDateTime> expiresAt`
 
     RFC 3339 datetime string representing when the file will expire and become unavailable for download. Null if the file does not expire. For files uploaded with `expires_in_seconds`, this is the upload time plus that value.
 
@@ -78145,7 +78143,7 @@ Create Skill
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -78191,7 +78189,7 @@ Create Skill
 
       - `PLUGIN("plugin")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
 
@@ -78409,7 +78407,7 @@ List Skills
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -78455,7 +78453,7 @@ List Skills
 
       - `PLUGIN("plugin")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
 
@@ -78657,7 +78655,7 @@ Get Skill
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -78703,7 +78701,7 @@ Get Skill
 
       - `PLUGIN("plugin")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
 
@@ -79091,7 +79089,7 @@ Create Skill Version
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -79320,7 +79318,7 @@ List Skill Versions
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -79712,7 +79710,7 @@ Get Skill Version
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -80006,7 +80004,7 @@ signature is missing or invalid.
 
     Unique event identifier for idempotency.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 timestamp when the event occurred.
 
@@ -80649,7 +80647,7 @@ you have already verified the signature yourself.
 
     Unique event identifier for idempotency.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 timestamp when the event occurred.
 
@@ -81418,7 +81416,7 @@ Create User Profile
 
     Details about the entity this profile represents, as the platform states them. Every field is optional. Not accepted under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers, which take the top-level `external_id` (and, under `user-profiles-2026-08-18`, `external_user_onboarded_at`) instead.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, in RFC 3339 format: for an `application` profile, when the end-user signed up; for a `passthrough` profile, when the company became the platform's customer. Must be a complete timestamp no more than 1 minute in the future. Optional. Legacy field, accepted only under the `user-profiles-2026-08-18` beta header; without a legacy header, send `external_user_details.onboarded_at`.
 
@@ -81450,7 +81448,7 @@ Create User Profile
 
     Unique identifier for this user profile, prefixed `uprof_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this user profile was created, in RFC 3339 format.
 
@@ -81478,7 +81476,7 @@ Create User Profile
 
       - `REJECTED("rejected")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
@@ -81544,7 +81542,7 @@ Create User Profile
 
       The platform-computed hash of the entity's name. `null` until the platform supplies one.
 
-    - `Optional<LocalDateTime> onboardedAt`
+    - `Optional<OffsetDateTime> onboardedAt`
 
       When the entity opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one.
 
@@ -81554,7 +81552,7 @@ Create User Profile
 
       The platform's own reference for the entity. `null` until the platform supplies one.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
@@ -81623,7 +81621,7 @@ List User Profiles
 
 - `UserProfileListParams params`
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     The maximum number of user profiles to return, from 1 to 100. Defaults to 20.
 
@@ -81795,7 +81793,7 @@ List User Profiles
 
     Unique identifier for this user profile, prefixed `uprof_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this user profile was created, in RFC 3339 format.
 
@@ -81823,7 +81821,7 @@ List User Profiles
 
       - `REJECTED("rejected")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
@@ -81889,7 +81887,7 @@ List User Profiles
 
       The platform-computed hash of the entity's name. `null` until the platform supplies one.
 
-    - `Optional<LocalDateTime> onboardedAt`
+    - `Optional<OffsetDateTime> onboardedAt`
 
       When the entity opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one.
 
@@ -81899,7 +81897,7 @@ List User Profiles
 
       The platform's own reference for the entity. `null` until the platform supplies one.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
@@ -82113,7 +82111,7 @@ Get User Profile
 
     Unique identifier for this user profile, prefixed `uprof_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this user profile was created, in RFC 3339 format.
 
@@ -82141,7 +82139,7 @@ Get User Profile
 
       - `REJECTED("rejected")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
@@ -82207,7 +82205,7 @@ Get User Profile
 
       The platform-computed hash of the entity's name. `null` until the platform supplies one.
 
-    - `Optional<LocalDateTime> onboardedAt`
+    - `Optional<OffsetDateTime> onboardedAt`
 
       When the entity opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one.
 
@@ -82217,7 +82215,7 @@ Get User Profile
 
       The platform's own reference for the entity. `null` until the platform supplies one.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
@@ -82432,7 +82430,7 @@ Update User Profile
 
     Details about the entity this profile represents, as the platform states them. Each field sent replaces the stored value; omit a field to leave it unchanged. Once set, a value cannot be cleared and `null` is rejected. Not accepted under the legacy `user-profiles-2026-03-24` and `user-profiles-2026-08-18` beta headers.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     If present, replaces the stored account creation time. Omit to leave unchanged; once set, the value cannot be cleared and `null` is rejected. Must be a complete RFC 3339 timestamp no more than 1 minute in the future. Legacy field, accepted only under the `user-profiles-2026-08-18` beta header; without a legacy header, send `external_user_details.onboarded_at`.
 
@@ -82464,7 +82462,7 @@ Update User Profile
 
     Unique identifier for this user profile, prefixed `uprof_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this user profile was created, in RFC 3339 format.
 
@@ -82492,7 +82490,7 @@ Update User Profile
 
       - `REJECTED("rejected")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this user profile was last modified, in RFC 3339 format. It normally also updates shortly after Anthropic gives the profile an approval or withdraws one. Other changes to the statuses that Anthropic reports do not always update it, so read the status itself rather than watching this timestamp.
 
@@ -82558,7 +82556,7 @@ Update User Profile
 
       The platform-computed hash of the entity's name. `null` until the platform supplies one.
 
-    - `Optional<LocalDateTime> onboardedAt`
+    - `Optional<OffsetDateTime> onboardedAt`
 
       When the entity opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one.
 
@@ -82568,7 +82566,7 @@ Update User Profile
 
       The platform's own reference for the entity. `null` until the platform supplies one.
 
-  - `Optional<LocalDateTime> externalUserOnboardedAt`
+  - `Optional<OffsetDateTime> externalUserOnboardedAt`
 
     When the entity this profile represents opened its account with the platform, as stated by the platform, in RFC 3339 format (UTC). `null` until the platform supplies one. Legacy field, present only under the `user-profiles-2026-08-18` beta header; without a legacy header, the value is `external_user_details.onboarded_at`.
 
@@ -82949,7 +82947,7 @@ Create Enrollment URL
 
     Object type. Always `enrollment_url`.
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     When this enrollment URL expires, in RFC 3339 format.
 
@@ -83142,7 +83140,7 @@ Create Action URL
 
     Object type. Always `user_profile_action_url`.
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     When the URL stops working, in RFC 3339 format.
 
@@ -83422,13 +83420,13 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
     The unique ID of the dream (`drm_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the dream was archived, in RFC 3339, or `null` if it hasn't been archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the dream was created, in RFC 3339.
 
@@ -83436,7 +83434,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or `null` if it is still `pending` or `running`.
 
@@ -83602,25 +83600,25 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
     The dream's token counts, which stop changing once its `status` is `completed` or `failed`. After a cancel, they can keep changing.
 
-    - `long cacheCreationInputTokens`
+    - `int cacheCreationInputTokens`
 
       The dream's input tokens that were written to the prompt cache, for both the 5-minute and 1-hour cache durations.
 
       format: int32
 
-    - `long cacheReadInputTokens`
+    - `int cacheReadInputTokens`
 
       The dream's input tokens that were read from the prompt cache.
 
       format: int32
 
-    - `long inputTokens`
+    - `int inputTokens`
 
       The dream's input tokens that weren't read from or written to the prompt cache.
 
       format: int32
 
-    - `long outputTokens`
+    - `int outputTokens`
 
       The tokens that the model generated for the dream.
 
@@ -83711,13 +83709,13 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
 - `DreamListParams params`
 
-  - `Optional<LocalDateTime> createdAtGt` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGt` (query parameter)
 
     Return only dreams created after this time (exclusive), in RFC 3339.
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLt` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLt` (query parameter)
 
     Return only dreams created before this time (exclusive), in RFC 3339.
 
@@ -83727,7 +83725,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     Whether to include archived dreams. Defaults to `false`.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     The maximum number of dreams to return, from 1 to 100. Defaults to 20.
 
@@ -83911,13 +83909,13 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     The unique ID of the dream (`drm_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the dream was archived, in RFC 3339, or `null` if it hasn't been archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the dream was created, in RFC 3339.
 
@@ -83925,7 +83923,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or `null` if it is still `pending` or `running`.
 
@@ -84091,25 +84089,25 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     The dream's token counts, which stop changing once its `status` is `completed` or `failed`. After a cancel, they can keep changing.
 
-    - `long cacheCreationInputTokens`
+    - `int cacheCreationInputTokens`
 
       The dream's input tokens that were written to the prompt cache, for both the 5-minute and 1-hour cache durations.
 
       format: int32
 
-    - `long cacheReadInputTokens`
+    - `int cacheReadInputTokens`
 
       The dream's input tokens that were read from the prompt cache.
 
       format: int32
 
-    - `long inputTokens`
+    - `int inputTokens`
 
       The dream's input tokens that weren't read from or written to the prompt cache.
 
       format: int32
 
-    - `long outputTokens`
+    - `int outputTokens`
 
       The tokens that the model generated for the dream.
 
@@ -84343,13 +84341,13 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     The unique ID of the dream (`drm_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the dream was archived, in RFC 3339, or `null` if it hasn't been archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the dream was created, in RFC 3339.
 
@@ -84357,7 +84355,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or `null` if it is still `pending` or `running`.
 
@@ -84523,25 +84521,25 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     The dream's token counts, which stop changing once its `status` is `completed` or `failed`. After a cancel, they can keep changing.
 
-    - `long cacheCreationInputTokens`
+    - `int cacheCreationInputTokens`
 
       The dream's input tokens that were written to the prompt cache, for both the 5-minute and 1-hour cache durations.
 
       format: int32
 
-    - `long cacheReadInputTokens`
+    - `int cacheReadInputTokens`
 
       The dream's input tokens that were read from the prompt cache.
 
       format: int32
 
-    - `long inputTokens`
+    - `int inputTokens`
 
       The dream's input tokens that weren't read from or written to the prompt cache.
 
       format: int32
 
-    - `long outputTokens`
+    - `int outputTokens`
 
       The tokens that the model generated for the dream.
 
@@ -84770,13 +84768,13 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
     The unique ID of the dream (`drm_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the dream was archived, in RFC 3339, or `null` if it hasn't been archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the dream was created, in RFC 3339.
 
@@ -84784,7 +84782,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or `null` if it is still `pending` or `running`.
 
@@ -84950,25 +84948,25 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
     The dream's token counts, which stop changing once its `status` is `completed` or `failed`. After a cancel, they can keep changing.
 
-    - `long cacheCreationInputTokens`
+    - `int cacheCreationInputTokens`
 
       The dream's input tokens that were written to the prompt cache, for both the 5-minute and 1-hour cache durations.
 
       format: int32
 
-    - `long cacheReadInputTokens`
+    - `int cacheReadInputTokens`
 
       The dream's input tokens that were read from the prompt cache.
 
       format: int32
 
-    - `long inputTokens`
+    - `int inputTokens`
 
       The dream's input tokens that weren't read from or written to the prompt cache.
 
       format: int32
 
-    - `long outputTokens`
+    - `int outputTokens`
 
       The tokens that the model generated for the dream.
 
@@ -85197,13 +85195,13 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
     The unique ID of the dream (`drm_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the dream was archived, in RFC 3339, or `null` if it hasn't been archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the dream was created, in RFC 3339.
 
@@ -85211,7 +85209,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
     format: date-time
 
-  - `Optional<LocalDateTime> endedAt`
+  - `Optional<OffsetDateTime> endedAt`
 
     When the dream reached `completed`, `failed`, or `canceled`, in RFC 3339, or `null` if it is still `pending` or `running`.
 
@@ -85377,25 +85375,25 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
     The dream's token counts, which stop changing once its `status` is `completed` or `failed`. After a cancel, they can keep changing.
 
-    - `long cacheCreationInputTokens`
+    - `int cacheCreationInputTokens`
 
       The dream's input tokens that were written to the prompt cache, for both the 5-minute and 1-hour cache durations.
 
       format: int32
 
-    - `long cacheReadInputTokens`
+    - `int cacheReadInputTokens`
 
       The dream's input tokens that were read from the prompt cache.
 
       format: int32
 
-    - `long inputTokens`
+    - `int inputTokens`
 
       The dream's input tokens that weren't read from or written to the prompt cache.
 
       format: int32
 
-    - `long outputTokens`
+    - `int outputTokens`
 
       The tokens that the model generated for the dream.
 
@@ -85620,13 +85618,13 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     Unique identifier for the tunnel, prefixed with `tnl_`.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the tunnel was archived. Null if it is not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the tunnel was created.
 
@@ -85824,13 +85822,13 @@ Fetches a tunnel by ID.
 
     Unique identifier for the tunnel, prefixed with `tnl_`.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the tunnel was archived. Null if it is not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the tunnel was created.
 
@@ -85896,7 +85894,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     Whether to include archived tunnels in the results. Defaults to false.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum number of tunnels to return per page. Defaults to 20, maximum 1000.
 
@@ -86038,13 +86036,13 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     Unique identifier for the tunnel, prefixed with `tnl_`.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the tunnel was archived. Null if it is not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the tunnel was created.
 
@@ -86247,13 +86245,13 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     Unique identifier for the tunnel, prefixed with `tnl_`.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the tunnel was archived. Null if it is not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the tunnel was created.
 
@@ -86835,19 +86833,19 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
     Unique identifier for the certificate, prefixed with `tcrt_`.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the certificate was registered.
 
     format: date-time
 
-  - `Optional<LocalDateTime> expiresAt`
+  - `Optional<OffsetDateTime> expiresAt`
 
     RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
@@ -87054,19 +87052,19 @@ Fetches a tunnel certificate by ID.
 
     Unique identifier for the certificate, prefixed with `tcrt_`.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the certificate was registered.
 
     format: date-time
 
-  - `Optional<LocalDateTime> expiresAt`
+  - `Optional<OffsetDateTime> expiresAt`
 
     RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
@@ -87141,7 +87139,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     Whether to include archived certificates in the results. Defaults to false.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum number of certificates to return per page. Defaults to 20, maximum 1000.
 
@@ -87283,19 +87281,19 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     Unique identifier for the certificate, prefixed with `tcrt_`.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the certificate was registered.
 
     format: date-time
 
-  - `Optional<LocalDateTime> expiresAt`
+  - `Optional<OffsetDateTime> expiresAt`
 
     RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
@@ -87503,19 +87501,19 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
     Unique identifier for the certificate, prefixed with `tcrt_`.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the certificate was archived. Null if it is still in the trusted set.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the certificate was registered.
 
     format: date-time
 
-  - `Optional<LocalDateTime> expiresAt`
+  - `Optional<OffsetDateTime> expiresAt`
 
     RFC 3339 datetime string indicating when the certificate expires, or `null` if it does not expire.
 
@@ -87697,7 +87695,7 @@ List API Keys
 
     ID of the API key.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the API Key was created.
 
@@ -87721,7 +87719,7 @@ List API Keys
 
       ID of the actor that created the object.
 
-  - `Optional<LocalDateTime> expiresAt`
+  - `Optional<OffsetDateTime> expiresAt`
 
     RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
 
@@ -87875,7 +87873,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
     ID of the API key.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the API Key was created.
 
@@ -87899,7 +87897,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
       ID of the actor that created the object.
 
-  - `Optional<LocalDateTime> expiresAt`
+  - `Optional<OffsetDateTime> expiresAt`
 
     RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
 
@@ -88062,7 +88060,7 @@ Update API Key
 
     ID of the API key.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the API Key was created.
 
@@ -88086,7 +88084,7 @@ Update API Key
 
       ID of the actor that created the object.
 
-  - `Optional<LocalDateTime> expiresAt`
+  - `Optional<OffsetDateTime> expiresAt`
 
     RFC 3339 datetime string indicating when the API Key expires, or `null` if it never expires.
 
@@ -88315,7 +88313,7 @@ Create an external key config owned by the caller's organization.
 
       - `JsonValue type = "unattached"`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     format: date-time
 
@@ -88325,7 +88323,7 @@ Create an external key config owned by the caller's organization.
 
   - `String geo`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `ProviderConfig providerConfig`
 
@@ -88379,7 +88377,7 @@ Create an external key config owned by the caller's organization.
 
         Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     format: date-time
 
@@ -88487,7 +88485,7 @@ Results are ordered by creation time (newest first). Use the
 
       - `JsonValue type = "unattached"`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     format: date-time
 
@@ -88497,7 +88495,7 @@ Results are ordered by creation time (newest first). Use the
 
   - `String geo`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `ProviderConfig providerConfig`
 
@@ -88551,7 +88549,7 @@ Results are ordered by creation time (newest first). Use the
 
         Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     format: date-time
 
@@ -88654,7 +88652,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
       - `JsonValue type = "unattached"`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     format: date-time
 
@@ -88664,7 +88662,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
   - `String geo`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `ProviderConfig providerConfig`
 
@@ -88718,7 +88716,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
         Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     format: date-time
 
@@ -88886,7 +88884,7 @@ encrypted data requires the original key identity to decrypt.
 
       - `JsonValue type = "unattached"`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     format: date-time
 
@@ -88896,7 +88894,7 @@ encrypted data requires the original key identity to decrypt.
 
   - `String geo`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `ProviderConfig providerConfig`
 
@@ -88950,7 +88948,7 @@ encrypted data requires the original key identity to decrypt.
 
         Azure AD application (client) ID. Omit to use Anthropic's multitenant app. Provide only if using a single-tenant app registration in the customer's directory.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     format: date-time
 
@@ -89366,7 +89364,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
     Tagged ID of the federation issuer.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, all rules referencing this issuer reject token exchange.
 
@@ -89380,7 +89378,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
     Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this issuer was created.
 
@@ -89444,7 +89442,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
         minItems: 1
 
-  - `Optional<LocalDateTime> jwksPollingDisabledAt`
+  - `Optional<OffsetDateTime> jwksPollingDisabledAt`
 
     If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
 
@@ -89466,19 +89464,19 @@ matched as the JWT's `iss` claim and is not fetched.
 
       Consecutive fetch failures since the last success.
 
-    - `Optional<LocalDateTime> lastFetchedAt`
+    - `Optional<OffsetDateTime> lastFetchedAt`
 
       When the last successful fetch completed.
 
       format: date-time
 
-    - `Optional<LocalDateTime> nextPollAt`
+    - `Optional<OffsetDateTime> nextPollAt`
 
       When the next fetch is scheduled. Null if paused.
 
       format: date-time
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this issuer was last updated.
 
@@ -89702,7 +89700,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
     Tagged ID of the federation issuer.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, all rules referencing this issuer reject token exchange.
 
@@ -89716,7 +89714,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
     Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this issuer was created.
 
@@ -89780,7 +89778,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
         minItems: 1
 
-  - `Optional<LocalDateTime> jwksPollingDisabledAt`
+  - `Optional<OffsetDateTime> jwksPollingDisabledAt`
 
     If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
 
@@ -89802,19 +89800,19 @@ Archived issuers are excluded unless `include_archived=true`.
 
       Consecutive fetch failures since the last success.
 
-    - `Optional<LocalDateTime> lastFetchedAt`
+    - `Optional<OffsetDateTime> lastFetchedAt`
 
       When the last successful fetch completed.
 
       format: date-time
 
-    - `Optional<LocalDateTime> nextPollAt`
+    - `Optional<OffsetDateTime> nextPollAt`
 
       When the next fetch is scheduled. Null if paused.
 
       format: date-time
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this issuer was last updated.
 
@@ -90027,7 +90025,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
     Tagged ID of the federation issuer.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, all rules referencing this issuer reject token exchange.
 
@@ -90041,7 +90039,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
     Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this issuer was created.
 
@@ -90105,7 +90103,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
         minItems: 1
 
-  - `Optional<LocalDateTime> jwksPollingDisabledAt`
+  - `Optional<OffsetDateTime> jwksPollingDisabledAt`
 
     If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
 
@@ -90127,19 +90125,19 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
       Consecutive fetch failures since the last success.
 
-    - `Optional<LocalDateTime> lastFetchedAt`
+    - `Optional<OffsetDateTime> lastFetchedAt`
 
       When the last successful fetch completed.
 
       format: date-time
 
-    - `Optional<LocalDateTime> nextPollAt`
+    - `Optional<OffsetDateTime> nextPollAt`
 
       When the next fetch is scheduled. Null if paused.
 
       format: date-time
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this issuer was last updated.
 
@@ -90430,7 +90428,7 @@ session.
 
     Tagged ID of the federation issuer.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, all rules referencing this issuer reject token exchange.
 
@@ -90444,7 +90442,7 @@ session.
 
     Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this issuer was created.
 
@@ -90508,7 +90506,7 @@ session.
 
         minItems: 1
 
-  - `Optional<LocalDateTime> jwksPollingDisabledAt`
+  - `Optional<OffsetDateTime> jwksPollingDisabledAt`
 
     If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
 
@@ -90530,19 +90528,19 @@ session.
 
       Consecutive fetch failures since the last success.
 
-    - `Optional<LocalDateTime> lastFetchedAt`
+    - `Optional<OffsetDateTime> lastFetchedAt`
 
       When the last successful fetch completed.
 
       format: date-time
 
-    - `Optional<LocalDateTime> nextPollAt`
+    - `Optional<OffsetDateTime> nextPollAt`
 
       When the next fetch is scheduled. Null if paused.
 
       format: date-time
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this issuer was last updated.
 
@@ -90755,7 +90753,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
     Tagged ID of the federation issuer.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, all rules referencing this issuer reject token exchange.
 
@@ -90769,7 +90767,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
     Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this issuer was created.
 
@@ -90833,7 +90831,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
         minItems: 1
 
-  - `Optional<LocalDateTime> jwksPollingDisabledAt`
+  - `Optional<OffsetDateTime> jwksPollingDisabledAt`
 
     If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
 
@@ -90855,19 +90853,19 @@ issuer cannot be changed), or recreate them against another issuer.
 
       Consecutive fetch failures since the last success.
 
-    - `Optional<LocalDateTime> lastFetchedAt`
+    - `Optional<OffsetDateTime> lastFetchedAt`
 
       When the last successful fetch completed.
 
       format: date-time
 
-    - `Optional<LocalDateTime> nextPollAt`
+    - `Optional<OffsetDateTime> nextPollAt`
 
       When the next fetch is scheduled. Null if paused.
 
       format: date-time
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this issuer was last updated.
 
@@ -91145,7 +91143,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     When true, this rule is enabled for every workspace in the org (including ones created after the rule). `workspace_ids` is ignored at exchange time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, this rule is archived and rejects token exchange.
 
@@ -91159,7 +91157,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     CEL expressions extracting named values from claims. Not yet supported; always null.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this rule was created.
 
@@ -91233,7 +91231,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     Lifetime in seconds of access tokens minted via this rule. Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this rule was last updated.
 
@@ -91497,7 +91495,7 @@ unless `include_archived=true`.
 
     When true, this rule is enabled for every workspace in the org (including ones created after the rule). `workspace_ids` is ignored at exchange time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, this rule is archived and rejects token exchange.
 
@@ -91511,7 +91509,7 @@ unless `include_archived=true`.
 
     CEL expressions extracting named values from claims. Not yet supported; always null.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this rule was created.
 
@@ -91585,7 +91583,7 @@ unless `include_archived=true`.
 
     Lifetime in seconds of access tokens minted via this rule. Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this rule was last updated.
 
@@ -91828,7 +91826,7 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
     When true, this rule is enabled for every workspace in the org (including ones created after the rule). `workspace_ids` is ignored at exchange time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, this rule is archived and rejects token exchange.
 
@@ -91842,7 +91840,7 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
     CEL expressions extracting named values from claims. Not yet supported; always null.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this rule was created.
 
@@ -91916,7 +91914,7 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
     Lifetime in seconds of access tokens minted via this rule. Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this rule was last updated.
 
@@ -92214,7 +92212,7 @@ Console session.
 
     When true, this rule is enabled for every workspace in the org (including ones created after the rule). `workspace_ids` is ignored at exchange time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, this rule is archived and rejects token exchange.
 
@@ -92228,7 +92226,7 @@ Console session.
 
     CEL expressions extracting named values from claims. Not yet supported; always null.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this rule was created.
 
@@ -92302,7 +92300,7 @@ Console session.
 
     Lifetime in seconds of access tokens minted via this rule. Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this rule was last updated.
 
@@ -92548,7 +92546,7 @@ other scopes require a Console session.
 
     When true, this rule is enabled for every workspace in the org (including ones created after the rule). `workspace_ids` is ignored at exchange time.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, this rule is archived and rejects token exchange.
 
@@ -92562,7 +92560,7 @@ other scopes require a Console session.
 
     CEL expressions extracting named values from claims. Not yet supported; always null.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this rule was created.
 
@@ -92636,7 +92634,7 @@ other scopes require a Console session.
 
     Lifetime in seconds of access tokens minted via this rule. Minted tokens are capped at `max(60, min(this value, 2 × remaining assertion validity))` seconds.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this rule was last updated.
 
@@ -92870,7 +92868,7 @@ other scopes require a Console session.
 
   - `JsonValue type = "federation_rule_workspace"`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this workspace was enabled for the rule.
 
@@ -93084,7 +93082,7 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `JsonValue type = "federation_rule_workspace"`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this workspace was enabled for the rule.
 
@@ -93393,7 +93391,7 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
     ID of the Invite.
 
-  - `Optional<LocalDateTime> acceptedAt`
+  - `Optional<OffsetDateTime> acceptedAt`
 
     RFC 3339 datetime string indicating when the Invite was accepted, or null.
 
@@ -93403,13 +93401,13 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
     Email of the User being invited.
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string indicating when the Invite expires.
 
     format: date-time
 
-  - `LocalDateTime invitedAt`
+  - `OffsetDateTime invitedAt`
 
     RFC 3339 datetime string indicating when the Invite was created.
 
@@ -93560,7 +93558,7 @@ List the organization's invites.
 
     ID of the Invite.
 
-  - `Optional<LocalDateTime> acceptedAt`
+  - `Optional<OffsetDateTime> acceptedAt`
 
     RFC 3339 datetime string indicating when the Invite was accepted, or null.
 
@@ -93570,13 +93568,13 @@ List the organization's invites.
 
     Email of the User being invited.
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string indicating when the Invite expires.
 
     format: date-time
 
-  - `LocalDateTime invitedAt`
+  - `OffsetDateTime invitedAt`
 
     RFC 3339 datetime string indicating when the Invite was created.
 
@@ -93696,7 +93694,7 @@ Retrieve an invite by ID.
 
     ID of the Invite.
 
-  - `Optional<LocalDateTime> acceptedAt`
+  - `Optional<OffsetDateTime> acceptedAt`
 
     RFC 3339 datetime string indicating when the Invite was accepted, or null.
 
@@ -93706,13 +93704,13 @@ Retrieve an invite by ID.
 
     Email of the User being invited.
 
-  - `LocalDateTime expiresAt`
+  - `OffsetDateTime expiresAt`
 
     RFC 3339 datetime string indicating when the Invite expires.
 
     format: date-time
 
-  - `LocalDateTime invitedAt`
+  - `OffsetDateTime invitedAt`
 
     RFC 3339 datetime string indicating when the Invite was created.
 
@@ -94028,7 +94026,7 @@ accounts.
 
     Tagged ID of the service account.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, this service account is archived.
 
@@ -94038,7 +94036,7 @@ accounts.
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this service account was created.
 
@@ -94064,7 +94062,7 @@ accounts.
 
     - `DEVELOPER("developer")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this service account was last updated.
 
@@ -94277,7 +94275,7 @@ archived service accounts.
 
     Tagged ID of the service account.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, this service account is archived.
 
@@ -94287,7 +94285,7 @@ archived service accounts.
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this service account was created.
 
@@ -94313,7 +94311,7 @@ archived service accounts.
 
     - `DEVELOPER("developer")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this service account was last updated.
 
@@ -94514,7 +94512,7 @@ Retrieve a service account by its ID (`svac_...`).
 
     Tagged ID of the service account.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, this service account is archived.
 
@@ -94524,7 +94522,7 @@ Retrieve a service account by its ID (`svac_...`).
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this service account was created.
 
@@ -94550,7 +94548,7 @@ Retrieve a service account by its ID (`svac_...`).
 
     - `DEVELOPER("developer")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this service account was last updated.
 
@@ -94765,7 +94763,7 @@ interactive credential (a user OAuth token or a Console session).
 
     Tagged ID of the service account.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, this service account is archived.
 
@@ -94775,7 +94773,7 @@ interactive credential (a user OAuth token or a Console session).
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this service account was created.
 
@@ -94801,7 +94799,7 @@ interactive credential (a user OAuth token or a Console session).
 
     - `DEVELOPER("developer")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this service account was last updated.
 
@@ -95002,7 +95000,7 @@ those rules first or change their target to another service account.
 
     Tagged ID of the service account.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     If set, this service account is archived.
 
@@ -95012,7 +95010,7 @@ those rules first or change their target to another service account.
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this service account.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this service account was created.
 
@@ -95038,7 +95036,7 @@ those rules first or change their target to another service account.
 
     - `DEVELOPER("developer")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When this service account was last updated.
 
@@ -95792,7 +95790,7 @@ List the organization's members.
 
     ID of the User.
 
-  - `LocalDateTime addedAt`
+  - `OffsetDateTime addedAt`
 
     RFC 3339 datetime string indicating when the User joined the Organization.
 
@@ -95899,7 +95897,7 @@ Retrieve a member of the organization by user ID.
 
     ID of the User.
 
-  - `LocalDateTime addedAt`
+  - `OffsetDateTime addedAt`
 
     RFC 3339 datetime string indicating when the User joined the Organization.
 
@@ -96015,7 +96013,7 @@ Update a member's organization role.
 
     ID of the User.
 
-  - `LocalDateTime addedAt`
+  - `OffsetDateTime addedAt`
 
     RFC 3339 datetime string indicating when the User joined the Organization.
 
@@ -96201,7 +96199,7 @@ List Workspaces
 
     ID of the Workspace.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
@@ -96221,7 +96219,7 @@ List Workspaces
     against this Workspace's own value when it is attached, so if its key policy
     uses the compartment condition, add this value to it before attaching the key.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the Workspace was created.
 
@@ -96516,7 +96514,7 @@ Create Workspace
 
     ID of the Workspace.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
@@ -96536,7 +96534,7 @@ Create Workspace
     against this Workspace's own value when it is attached, so if its key policy
     uses the compartment condition, add this value to it before attaching the key.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the Workspace was created.
 
@@ -96679,7 +96677,7 @@ Get Workspace
 
     ID of the Workspace.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
@@ -96699,7 +96697,7 @@ Get Workspace
     against this Workspace's own value when it is attached, so if its key policy
     uses the compartment condition, add this value to it before attaching the key.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the Workspace was created.
 
@@ -96875,7 +96873,7 @@ Update Workspace
 
     ID of the Workspace.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
@@ -96895,7 +96893,7 @@ Update Workspace
     against this Workspace's own value when it is attached, so if its key policy
     uses the compartment condition, add this value to it before attaching the key.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the Workspace was created.
 
@@ -97033,7 +97031,7 @@ Archive Workspace
 
     ID of the Workspace.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
@@ -97053,7 +97051,7 @@ Archive Workspace
     against this Workspace's own value when it is attached, so if its key policy
     uses the compartment condition, add this value to it before attaching the key.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the Workspace was created.
 
@@ -99613,7 +99611,7 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
     Percentage of assigned seats with activity on the requested day (`DAU / assigned_seat_count * 100`). Null when the response is scoped to an RBAC group.
 
-  - `LocalDateTime endingAt`
+  - `OffsetDateTime endingAt`
 
     End of the aggregation period (exclusive), UTC midnight in RFC 3339 format (e.g. `2026-01-16T00:00:00Z`).
 
@@ -99631,7 +99629,7 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
     Number of pending invitations to join the organization. Null when the response is scoped to an RBAC group.
 
-  - `LocalDateTime startingAt`
+  - `OffsetDateTime startingAt`
 
     Start of the aggregation period (inclusive), UTC midnight in RFC 3339 format (e.g. `2026-01-15T00:00:00Z`).
 
@@ -99647,15 +99645,15 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
   - `Optional<Long> chatCoworkUnifiedDailyActiveUserCount`
 
-    Number of users with activity in Chat and Cowork unified on the requested day. Omitted from the response on deployments that do not offer Chat and Cowork unified.
+    Number of users with activity in Chat and Cowork unified on the requested day. Omitted from the response where Chat and Cowork unified is not available.
 
   - `Optional<Long> chatCoworkUnifiedMonthlyActiveUserCount`
 
-    Number of users with activity in Chat and Cowork unified in the 28-day rolling window (30 days when the request filters by `rbac_group_id`). Omitted from the response on deployments that do not offer Chat and Cowork unified.
+    Number of users with activity in Chat and Cowork unified in the 28-day rolling window (30 days when the request filters by `rbac_group_id`). Omitted from the response where Chat and Cowork unified is not available.
 
   - `Optional<Long> chatCoworkUnifiedWeeklyActiveUserCount`
 
-    Number of users with activity in Chat and Cowork unified in the 7-day rolling window. Omitted from the response on deployments that do not offer Chat and Cowork unified.
+    Number of users with activity in Chat and Cowork unified in the 7-day rolling window. Omitted from the response where Chat and Cowork unified is not available.
 
   - `Optional<Long> chatDailyActiveUserCount`
 
@@ -100168,7 +100166,7 @@ the `read:analytics` scope.
 
   - `Optional<BetaAnalyticsChatCoworkUnifiedMetrics> chatCoworkUnifiedMetrics`
 
-    Activity recorded while the member had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on, split into `chat` (chat activity) and `sessions` (Cowork activity). Omitted from the response on deployments that do not offer Chat and Cowork unified.
+    Activity recorded while the member had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on, split into `chat` (chat activity) and `sessions` (Cowork activity). Omitted from the response where Chat and Cowork unified is not available.
 
     - `BetaAnalyticsChatCoworkUnifiedChatMetrics chat`
 
@@ -100576,7 +100574,7 @@ plan. Requires an API key with the `read:analytics` scope.
 
   Per-project activity data for a given day.
 
-  - `Optional<LocalDateTime> createdAt`
+  - `Optional<OffsetDateTime> createdAt`
 
     Project creation timestamp in RFC 3339 format. Null if the project was deleted before attribution was recorded.
 
@@ -100714,7 +100712,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `Optional<List<String>> filter` (query parameter)
 
-    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `connector_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `connector_name` matches case-insensitively, a display name such as 'GitHub MCP' also matches its normalized stored form ('github'), and for rows whose `connector_name` is an opaque connector id the connector's display name (`connector_display_name`) also matches; `product` is one of `chat_cowork_unified`, `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only on deployments that offer Chat and Cowork unified.
+    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `connector_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `connector_name` matches case-insensitively, a display name such as 'GitHub MCP' also matches its normalized stored form ('github'), and for rows whose `connector_name` is an opaque connector id the connector's display name (`connector_display_name`) also matches; `product` is one of `chat_cowork_unified`, `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only where Chat and Cowork unified is available.
 
     maxItems: 100
 
@@ -100842,7 +100840,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   - `Optional<BetaAnalyticsConnectorChatCoworkUnifiedMetrics> chatCoworkUnifiedMetrics`
 
-    Connector use recorded while members had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on, split into chat conversations and Cowork sessions. A count is null in date-range mode where it cannot be computed. Omitted from the response on deployments that do not offer Chat and Cowork unified.
+    Connector use recorded while members had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on, split into chat conversations and Cowork sessions. A count is null in date-range mode where it cannot be computed. Omitted from the response where Chat and Cowork unified is not available.
 
     - `BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics chat`
 
@@ -100994,7 +100992,7 @@ range-rollup mode like `/skills`.
 
   - `Optional<List<String>> filter` (query parameter)
 
-    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `plugin_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `plugin_name` matches case-insensitively; `product` is `chat_cowork_unified`, `claude_code`, or `cowork` (the only surfaces with plugin attribution); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only on deployments that offer Chat and Cowork unified.
+    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `plugin_name`, `product`, `rbac_group_id`, `user_id`. Value forms: `plugin_name` matches case-insensitively; `product` is `chat_cowork_unified`, `claude_code`, or `cowork` (the only surfaces with plugin attribution); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only where Chat and Cowork unified is available.
 
     maxItems: 100
 
@@ -101084,7 +101082,7 @@ range-rollup mode like `/skills`.
 
   - `Optional<BetaAnalyticsPluginChatCoworkUnifiedMetrics> chatCoworkUnifiedMetrics`
 
-    Plugin use recorded while members had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on. A count is null in date-range mode where it cannot be computed. Omitted from the response on deployments that do not offer Chat and Cowork unified.
+    Plugin use recorded while members had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on. A count is null in date-range mode where it cannot be computed. Omitted from the response where Chat and Cowork unified is not available.
 
     - `Optional<Long> distinctSessionPluginUsedCount`
 
@@ -101192,7 +101190,7 @@ on a Claude Enterprise plan. Requires an API key with the
 
   - `Optional<List<String>> filter` (query parameter)
 
-    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `product`, `rbac_group_id`, `share_status`, `skill_name`, `user_id`. Value forms: `product` is one of `chat_cowork_unified`, `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `share_status` is one of `organization`, `private`, or `public`; `skill_name` matches case-insensitively; `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only on deployments that offer Chat and Cowork unified.
+    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `product`, `rbac_group_id`, `share_status`, `skill_name`, `user_id`. Value forms: `product` is one of `chat_cowork_unified`, `chat`, `claude_code`, `cowork`, or `office_agent`; `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `share_status` is one of `organization`, `private`, or `public`; `skill_name` matches case-insensitively; `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only where Chat and Cowork unified is available.
 
     maxItems: 100
 
@@ -101330,7 +101328,7 @@ on a Claude Enterprise plan. Requires an API key with the
 
   - `Optional<BetaAnalyticsSkillChatCoworkUnifiedMetrics> chatCoworkUnifiedMetrics`
 
-    Skill use recorded while members had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on, split into chat conversations and Cowork sessions. A count is null in date-range mode where it cannot be computed. Omitted from the response on deployments that do not offer Chat and Cowork unified.
+    Skill use recorded while members had Chat and Cowork unified (Cowork's features inside claude.ai chat) turned on, split into chat conversations and Cowork sessions. A count is null in date-range mode where it cannot be computed. Omitted from the response where Chat and Cowork unified is not available.
 
     - `BetaAnalyticsSkillChatCoworkUnifiedChatMetrics chat`
 
@@ -101471,7 +101469,7 @@ can be broken out per product, per member, or per RBAC group via
 
   - `Optional<List<String>> filter` (query parameter)
 
-    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `artifact_type`, `is_shared`, `product`, `rbac_group_id`, `user_id`. Value forms: `artifact_type` is a canonical artifact MIME type (e.g. `text/markdown`) or `other`; `is_shared` is `true` or `false`; `product` is `chat_cowork_unified`, `chat`, `claude_code`, or `cowork` (the surfaces that create artifacts); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only on deployments that offer Chat and Cowork unified.
+    Filters as `dimension:value`, e.g. `filter[]=rbac_group_id:{id}`. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: `artifact_type`, `is_shared`, `product`, `rbac_group_id`, `user_id`. Value forms: `artifact_type` is a canonical artifact MIME type (e.g. `text/markdown`) or `other`; `is_shared` is `true` or `false`; `product` is `chat_cowork_unified`, `chat`, `claude_code`, or `cowork` (the surfaces that create artifacts); `rbac_group_id` takes the tagged id (`rbac_group_...`, as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); `user_id` takes a tagged user id (`user_...`), as emitted in responses. An unsupported dimension returns 400. At most 100 entries. `chat_cowork_unified` is accepted as a `product` value only where Chat and Cowork unified is available.
 
     maxItems: 100
 
@@ -101616,7 +101614,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
 - `UsageListParams params`
 
-  - `LocalDateTime startingAt` (query parameter)
+  - `OffsetDateTime startingAt` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
@@ -101692,7 +101690,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
     maxItems: 100
 
-  - `Optional<LocalDateTime> endingAt` (query parameter)
+  - `Optional<OffsetDateTime> endingAt` (query parameter)
 
     End of range, exclusive. Required when `time_bucket_width` is set. Without `time_bucket_width`, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
@@ -101998,7 +101996,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
 - `class BetaAnalyticsUsageItem`
 
-  - `LocalDateTime endingAt`
+  - `OffsetDateTime endingAt`
 
     End of the period this row covers (exclusive), as an RFC 3339 UTC timestamp: the end of the row's time bucket when a time-bucket width is set; otherwise the requested `ending_at` (or, when omitted, the earlier of now and `starting_at` plus 31 days) rounded down to the hour, because without a time bucket the report covers whole hours.
 
@@ -102166,7 +102164,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
     - `Optional<String> product`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
 
     - `Optional<String> rbacGroupId`
 
@@ -102212,7 +102210,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
       Workspace the usage occurred in, as a tagged workspace ID, including the organization's default workspace. Populated only when `workspace_id` is in `group_by[]`; null for Claude Enterprise usage.
 
-  - `LocalDateTime startingAt`
+  - `OffsetDateTime startingAt`
 
     Start of the period this row covers (inclusive), as an RFC 3339 UTC timestamp: the start of the row's time bucket when a time-bucket width is set, otherwise the requested `starting_at` rounded down to the hour.
 
@@ -102370,7 +102368,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
 - `CostListParams params`
 
-  - `LocalDateTime startingAt` (query parameter)
+  - `OffsetDateTime startingAt` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
@@ -102446,7 +102444,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
     maxItems: 100
 
-  - `Optional<LocalDateTime> endingAt` (query parameter)
+  - `Optional<OffsetDateTime> endingAt` (query parameter)
 
     End of range, exclusive. Required when `time_bucket_width` is set. Without `time_bucket_width`, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
@@ -102776,7 +102774,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
       Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
 
-  - `LocalDateTime endingAt`
+  - `OffsetDateTime endingAt`
 
     End of the period this row covers (exclusive), as an RFC 3339 UTC timestamp: the end of the row's time bucket when a time-bucket width is set; otherwise the requested `ending_at` (or, when omitted, the earlier of now and `starting_at` plus 31 days) rounded down to the hour, because without a time bucket the report covers whole hours.
 
@@ -102956,7 +102954,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
     - `Optional<String> product`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
 
     - `Optional<String> rbacGroupId`
 
@@ -103016,7 +103014,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
       Workspace the usage occurred in, as a tagged workspace ID, including the organization's default workspace. Populated only when `workspace_id` is in `group_by[]`; null for Claude Enterprise usage.
 
-  - `LocalDateTime startingAt`
+  - `OffsetDateTime startingAt`
 
     Start of the period this row covers (inclusive), as an RFC 3339 UTC timestamp: the start of the row's time bucket when a time-bucket width is set, otherwise the requested `starting_at` rounded down to the hour.
 
@@ -103116,7 +103114,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
 - `UsageReportListParams params`
 
-  - `LocalDateTime startingAt` (query parameter)
+  - `OffsetDateTime startingAt` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
@@ -103164,7 +103162,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `FROM_200K_TO_1_M("200k-1M")`
 
-  - `Optional<LocalDateTime> endingAt` (query parameter)
+  - `Optional<OffsetDateTime> endingAt` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
@@ -103276,7 +103274,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
 - `class BetaAnalyticsUsageReportTimeBucket`
 
-  - `LocalDateTime endingAt`
+  - `OffsetDateTime endingAt`
 
     End of the time bucket (exclusive) in RFC 3339 format.
 
@@ -103350,7 +103348,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `Optional<String> product`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
 
     - `Optional<String> rbacGroupId`
 
@@ -103384,7 +103382,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
       The number of uncached input tokens processed.
 
-  - `LocalDateTime startingAt`
+  - `OffsetDateTime startingAt`
 
     Start of the time bucket (inclusive) in RFC 3339 format.
 
@@ -103474,7 +103472,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
 - `UserUsageReportListParams params`
 
-  - `LocalDateTime startingAt` (query parameter)
+  - `OffsetDateTime startingAt` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
@@ -103522,7 +103520,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `FROM_200K_TO_1_M("200k-1M")`
 
-  - `Optional<LocalDateTime> endingAt` (query parameter)
+  - `Optional<OffsetDateTime> endingAt` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
@@ -103676,7 +103674,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `Optional<String> name`
 
-      The user's full name. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted, or when the user is no longer a member of the organization or its associated organizations and the organization has chosen to hide the names of removed users. Otherwise, the name stays populated for removed users. Rows for system-minted service accounts render the service name (for example, `"Claude Security"` for usage by Anthropic's security-patching service) or null.
+      The user's full name. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted, or when the user is no longer a member of the organization or its associated organizations and the organization has chosen to hide the names of removed users. Otherwise, the name stays populated for removed users. Rows for system-minted service accounts render the service name (for example, `"Claude Security"`) or null.
 
     - `String userId`
 
@@ -103728,7 +103726,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `FROM_200K_TO_1_M("200k-1M")`
 
-  - `Optional<LocalDateTime> endingAt`
+  - `Optional<OffsetDateTime> endingAt`
 
     End of the row's UTC time bucket (exclusive), as an RFC 3339 timestamp; equal to `starting_at` plus one `bucket_width`. Null unless `bucket_width` is set.
 
@@ -103752,7 +103750,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
   - `Optional<String> product`
 
-    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
+    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
 
   - `Optional<String> rbacGroupId`
 
@@ -103782,7 +103780,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `STANDARD("standard")`
 
-  - `Optional<LocalDateTime> startingAt`
+  - `Optional<OffsetDateTime> startingAt`
 
     Start of the row's UTC time bucket (inclusive), as an RFC 3339 timestamp. Null unless `bucket_width` is set; without `bucket_width`, each row aggregates the full requested range.
 
@@ -103884,7 +103882,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
 - `CostReportListParams params`
 
-  - `LocalDateTime startingAt` (query parameter)
+  - `OffsetDateTime startingAt` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
@@ -103932,7 +103930,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `FROM_200K_TO_1_M("200k-1M")`
 
-  - `Optional<LocalDateTime> endingAt` (query parameter)
+  - `Optional<OffsetDateTime> endingAt` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
@@ -104048,7 +104046,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
 - `class BetaAnalyticsCostReportTimeBucket`
 
-  - `LocalDateTime endingAt`
+  - `OffsetDateTime endingAt`
 
     End of the time bucket (exclusive) in RFC 3339 format.
 
@@ -104120,7 +104118,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `Optional<String> product`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
 
     - `Optional<String> rbacGroupId`
 
@@ -104156,7 +104154,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
       - `UNCACHED_INPUT_TOKENS("uncached_input_tokens")`
 
-  - `LocalDateTime startingAt`
+  - `OffsetDateTime startingAt`
 
     Start of the time bucket (inclusive) in RFC 3339 format.
 
@@ -104241,7 +104239,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
 - `UserCostReportListParams params`
 
-  - `LocalDateTime startingAt` (query parameter)
+  - `OffsetDateTime startingAt` (query parameter)
 
     Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days and no earlier than 2026-01-01T00:00:00Z.
 
@@ -104289,7 +104287,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `FROM_200K_TO_1_M("200k-1M")`
 
-  - `Optional<LocalDateTime> endingAt` (query parameter)
+  - `Optional<OffsetDateTime> endingAt` (query parameter)
 
     End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
@@ -104443,7 +104441,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `Optional<String> name`
 
-      The user's full name. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted, or when the user is no longer a member of the organization or its associated organizations and the organization has chosen to hide the names of removed users. Otherwise, the name stays populated for removed users. Rows for system-minted service accounts render the service name (for example, `"Claude Security"` for usage by Anthropic's security-patching service) or null.
+      The user's full name. Null when the user has not set a name. Returns `"Deleted User"` when the account itself has been deleted, or when the user is no longer a member of the organization or its associated organizations and the organization has chosen to hide the names of removed users. Otherwise, the name stays populated for removed users. Rows for system-minted service accounts render the service name (for example, `"Claude Security"`) or null.
 
     - `String userId`
 
@@ -104493,7 +104491,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     Currency code for the cost amount. Currently always `"USD"`.
 
-  - `Optional<LocalDateTime> endingAt`
+  - `Optional<OffsetDateTime> endingAt`
 
     End of the row's UTC time bucket (exclusive), as an RFC 3339 timestamp; equal to `starting_at` plus one `bucket_width`. Null unless `bucket_width` is set.
 
@@ -104517,7 +104515,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
   - `Optional<String> product`
 
-    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only on deployments that offer Chat and Cowork unified. Some unattributed usage is reported as "other".
+    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
 
   - `Optional<String> rbacGroupId`
 
@@ -104539,7 +104537,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `STANDARD("standard")`
 
-  - `Optional<LocalDateTime> startingAt`
+  - `Optional<OffsetDateTime> startingAt`
 
     Start of the row's UTC time bucket (inclusive), as an RFC 3339 timestamp. Null unless `bucket_width` is set; without `bucket_width`, each row aggregates the full requested range.
 
@@ -104815,7 +104813,7 @@ Anthropic account team.
 
     Limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD): "50000" is $500.00. `null` means no numeric cap is configured at this scope — see the effective report for whether a limit applies.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime at which the spend limit was created.
 
@@ -104901,7 +104899,7 @@ Anthropic account team.
 
         Scope type. Always `usage_tier` for this scope.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339 datetime at which the spend limit was last modified.
 
@@ -104985,7 +104983,7 @@ Retrieve a spend limit by ID.
 
     Limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD): "50000" is $500.00. `null` means no numeric cap is configured at this scope — see the effective report for whether a limit applies.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime at which the spend limit was created.
 
@@ -105071,7 +105069,7 @@ Retrieve a spend limit by ID.
 
         Scope type. Always `usage_tier` for this scope.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339 datetime at which the spend limit was last modified.
 
@@ -105363,7 +105361,7 @@ come in a fixed order that is not creation order.
 
     Limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD): "50000" is $500.00. `null` means no numeric cap is configured at this scope — see the effective report for whether a limit applies.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime at which the spend limit was created.
 
@@ -105449,7 +105447,7 @@ come in a fixed order that is not creation order.
 
         Scope type. Always `usage_tier` for this scope.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339 datetime at which the spend limit was last modified.
 
@@ -105838,7 +105836,7 @@ Requests whose requester is no longer a member are excluded.
 
       - `String scopedApiKeyId`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     format: date-time
 
@@ -105850,7 +105848,7 @@ Requests whose requester is no longer a member are excluded.
 
     - `WEEKLY("weekly")`
 
-  - `Optional<LocalDateTime> resolvedAt`
+  - `Optional<OffsetDateTime> resolvedAt`
 
     format: date-time
 
@@ -106136,7 +106134,7 @@ requester at the request's period.
 
       - `String scopedApiKeyId`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     format: date-time
 
@@ -106148,7 +106146,7 @@ requester at the request's period.
 
     - `WEEKLY("weekly")`
 
-  - `Optional<LocalDateTime> resolvedAt`
+  - `Optional<OffsetDateTime> resolvedAt`
 
     format: date-time
 
@@ -106439,7 +106437,7 @@ the member was blocked on. Anthropic emails the requester unless
 
       - `String scopedApiKeyId`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     format: date-time
 
@@ -106451,7 +106449,7 @@ the member was blocked on. Anthropic emails the requester unless
 
     - `WEEKLY("weekly")`
 
-  - `Optional<LocalDateTime> resolvedAt`
+  - `Optional<OffsetDateTime> resolvedAt`
 
     format: date-time
 
@@ -106485,7 +106483,7 @@ the member was blocked on. Anthropic emails the requester unless
 
       Limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD): "50000" is $500.00. `null` means no numeric cap is configured at this scope — see the effective report for whether a limit applies.
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       RFC 3339 datetime at which the spend limit was created.
 
@@ -106565,7 +106563,7 @@ the member was blocked on. Anthropic emails the requester unless
 
           Scope type. Always `usage_tier` for this scope.
 
-    - `LocalDateTime updatedAt`
+    - `OffsetDateTime updatedAt`
 
       RFC 3339 datetime at which the spend limit was last modified.
 
@@ -106820,7 +106818,7 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
       - `String scopedApiKeyId`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     format: date-time
 
@@ -106832,7 +106830,7 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     - `WEEKLY("weekly")`
 
-  - `Optional<LocalDateTime> resolvedAt`
+  - `Optional<OffsetDateTime> resolvedAt`
 
     format: date-time
 
@@ -107084,7 +107082,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the RBAC Group.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 timestamp of when the RBAC Group was created.
 
@@ -107106,7 +107104,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     - `SCIM("scim")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
@@ -107192,7 +107190,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the RBAC Group.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 timestamp of when the RBAC Group was created.
 
@@ -107214,7 +107212,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     - `SCIM("scim")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
@@ -107295,7 +107293,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the RBAC Group.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 timestamp of when the RBAC Group was created.
 
@@ -107317,7 +107315,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     - `SCIM("scim")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
@@ -107398,7 +107396,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the RBAC Group.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 timestamp of when the RBAC Group was created.
 
@@ -107420,7 +107418,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     - `SCIM("scim")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
@@ -107567,7 +107565,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     For RBAC Group Members, this is always `"rbac_group_member"`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 timestamp of when the User was added to the RBAC Group.
 
@@ -107656,7 +107654,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     For RBAC Group Members, this is always `"rbac_group_member"`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 timestamp of when the User was added to the RBAC Group.
 
@@ -107826,7 +107824,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     ID of the RBAC Role.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the RBAC Role was created.
 
@@ -107836,7 +107834,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     Name of the RBAC Role. For a role created by Anthropic, this name can differ from the label claude.ai shows, and Anthropic may change the name. To keep a lasting reference to a role, store its `id`.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
@@ -107913,7 +107911,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     ID of the RBAC Role.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339 datetime string indicating when the RBAC Role was created.
 
@@ -107923,7 +107921,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     Name of the RBAC Role. For a role created by Anthropic, this name can differ from the label claude.ai shows, and Anthropic may change the name. To keep a lasting reference to a role, store its `id`.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
@@ -108378,7 +108376,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
       - `PROCESSING("processing")`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339.
 
@@ -108494,7 +108492,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     True once the served version has been pinned, through Update Plugin or in claude.ai. While false, a new version normally becomes the served version when it is stored. While the newest version is not the served version, as when a version saved in claude.ai is waiting for its content scan, `served_version_id` differs from `latest_version_id`.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
@@ -108775,7 +108773,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
       - `PROCESSING("processing")`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339.
 
@@ -108891,7 +108889,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     True once the served version has been pinned, through Update Plugin or in claude.ai. While false, a new version normally becomes the served version when it is stored. While the newest version is not the served version, as when a version saved in claude.ai is waiting for its content scan, `served_version_id` differs from `latest_version_id`.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
@@ -109191,7 +109189,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
       - `PROCESSING("processing")`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339.
 
@@ -109307,7 +109305,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     True once the served version has been pinned, through Update Plugin or in claude.ai. While false, a new version normally becomes the served version when it is stored. While the newest version is not the served version, as when a version saved in claude.ai is waiting for its content scan, `served_version_id` differs from `latest_version_id`.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
@@ -109402,25 +109400,25 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 - `PluginListParams params`
 
-  - `Optional<LocalDateTime> createdAtGt` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGt` (query parameter)
 
     RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLt` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLt` (query parameter)
 
     RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     RFC 3339 timestamp bound; combine [gte], [gt], [lte], [lt].
 
@@ -109644,7 +109642,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
       - `PROCESSING("processing")`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339.
 
@@ -109760,7 +109758,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     True once the served version has been pinned, through Update Plugin or in claude.ai. While false, a new version normally becomes the served version when it is stored. While the newest version is not the served version, as when a version saved in claude.ai is waiting for its content scan, `served_version_id` differs from `latest_version_id`.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
@@ -110256,7 +110254,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
       - `PROCESSING("processing")`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339.
 
@@ -110604,7 +110602,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
       - `PROCESSING("processing")`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339.
 
@@ -110939,7 +110937,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
       - `PROCESSING("processing")`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339.
 
@@ -111423,7 +111421,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     Always `plugin_installation_setting`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the target was first given a setting for this Plugin.
 
@@ -111475,7 +111473,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
         The member's User ID.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When its setting last changed.
 
@@ -111696,7 +111694,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     Always `plugin_installation_setting`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the target was first given a setting for this Plugin.
 
@@ -111748,7 +111746,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
         The member's User ID.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When its setting last changed.
 
@@ -112214,7 +112212,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     Always `plugin_share`.
 
-  - `LocalDateTime grantedAt`
+  - `OffsetDateTime grantedAt`
 
     When the share was given; a share whose role is later changed in claude.ai is re-granted and carries the time of that change.
 
@@ -112483,7 +112481,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     The plugin marketplace's ID, prefixed `marketplace_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339.
 
@@ -112501,7 +112499,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `REQUIRED("required")`
 
-  - `Optional<LocalDateTime> lastSyncEndedAt`
+  - `Optional<OffsetDateTime> lastSyncEndedAt`
 
     RFC 3339. When the most recent synchronization attempt to finish did so, whatever its outcome; for a repository plugin marketplace no synchronization has run on yet, when it was created. Null for a plugin marketplace that is not synchronized from a repository.
 
@@ -112760,7 +112758,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     The plugin marketplace's ID, prefixed `marketplace_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339.
 
@@ -112778,7 +112776,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `REQUIRED("required")`
 
-  - `Optional<LocalDateTime> lastSyncEndedAt`
+  - `Optional<OffsetDateTime> lastSyncEndedAt`
 
     RFC 3339. When the most recent synchronization attempt to finish did so, whatever its outcome; for a repository plugin marketplace no synchronization has run on yet, when it was created. Null for a plugin marketplace that is not synchronized from a repository.
 
@@ -113045,7 +113043,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     The plugin marketplace's ID, prefixed `marketplace_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     RFC 3339.
 
@@ -113063,7 +113061,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `REQUIRED("required")`
 
-  - `Optional<LocalDateTime> lastSyncEndedAt`
+  - `Optional<OffsetDateTime> lastSyncEndedAt`
 
     RFC 3339. When the most recent synchronization attempt to finish did so, whatever its outcome; for a repository plugin marketplace no synchronization has run on yet, when it was created. Null for a plugin marketplace that is not synchronized from a repository.
 
@@ -113888,7 +113886,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 
     Request headers that the API sends with every delivery, typically your collector's authentication header (for example `authorization`).
 
-    The API stores the values encrypted and never returns them. Reads show only `header_names`.
+    The API never returns the values. Reads show only `header_names`.
 
     At most 20 headers. Names are at most 128 characters. Two names can't differ only in case. Values are printable ASCII, at most 4,096 characters, and can't begin or end with a space. Names and values together are at most 16,384 bytes.
 
@@ -113910,7 +113908,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 
     The unique ID of the destination (`tdst_...`).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the destination was created.
 
@@ -113930,13 +113928,13 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 
       See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
-    - `Optional<LocalDateTime> lastErrorAt`
+    - `Optional<OffsetDateTime> lastErrorAt`
 
       Time of the failure that `last_error` describes. Changes together with `last_error`. Null until a delivery first fails.
 
       format: date-time
 
-    - `Optional<LocalDateTime> lastSuccessAt`
+    - `Optional<OffsetDateTime> lastSuccessAt`
 
       Time of the most recent successful delivery to the destination, or `null` if no delivery has succeeded yet.
 
@@ -114030,7 +114028,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 
       When it is `null`, the API posts traces to `endpoint_url` with `/v1/traces` appended.
 
-    - `Optional<Long> maxContentBytes`
+    - `Optional<Integer> maxContentBytes`
 
       The most bytes of content that one exported span can contain, or `null` if only the API's maximum applies.
 
@@ -114038,7 +114036,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
 
       format: int32
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time of the last change to the destination's configuration or state. Changes to `delivery_health` don't change it.
 
@@ -114141,7 +114139,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
 - `TelemetryDestinationListParams params`
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Number of destinations to return per page, between 1 and 1,000. Defaults to 20.
 
@@ -114283,7 +114281,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
     The unique ID of the destination (`tdst_...`).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the destination was created.
 
@@ -114303,13 +114301,13 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
       See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
-    - `Optional<LocalDateTime> lastErrorAt`
+    - `Optional<OffsetDateTime> lastErrorAt`
 
       Time of the failure that `last_error` describes. Changes together with `last_error`. Null until a delivery first fails.
 
       format: date-time
 
-    - `Optional<LocalDateTime> lastSuccessAt`
+    - `Optional<OffsetDateTime> lastSuccessAt`
 
       Time of the most recent successful delivery to the destination, or `null` if no delivery has succeeded yet.
 
@@ -114403,7 +114401,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
       When it is `null`, the API posts traces to `endpoint_url` with `/v1/traces` appended.
 
-    - `Optional<Long> maxContentBytes`
+    - `Optional<Integer> maxContentBytes`
 
       The most bytes of content that one exported span can contain, or `null` if only the API's maximum applies.
 
@@ -114411,7 +114409,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
       format: int32
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time of the last change to the destination's configuration or state. Changes to `delivery_health` don't change it.
 
@@ -114644,7 +114642,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     The unique ID of the destination (`tdst_...`).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the destination was created.
 
@@ -114664,13 +114662,13 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
       See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
-    - `Optional<LocalDateTime> lastErrorAt`
+    - `Optional<OffsetDateTime> lastErrorAt`
 
       Time of the failure that `last_error` describes. Changes together with `last_error`. Null until a delivery first fails.
 
       format: date-time
 
-    - `Optional<LocalDateTime> lastSuccessAt`
+    - `Optional<OffsetDateTime> lastSuccessAt`
 
       Time of the most recent successful delivery to the destination, or `null` if no delivery has succeeded yet.
 
@@ -114764,7 +114762,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
       When it is `null`, the API posts traces to `endpoint_url` with `/v1/traces` appended.
 
-    - `Optional<Long> maxContentBytes`
+    - `Optional<Integer> maxContentBytes`
 
       The most bytes of content that one exported span can contain, or `null` if only the API's maximum applies.
 
@@ -114772,7 +114770,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
       format: int32
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time of the last change to the destination's configuration or state. Changes to `delivery_health` don't change it.
 
@@ -115042,7 +115040,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     The unique ID of the destination (`tdst_...`).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the destination was created.
 
@@ -115062,13 +115060,13 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
       See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
-    - `Optional<LocalDateTime> lastErrorAt`
+    - `Optional<OffsetDateTime> lastErrorAt`
 
       Time of the failure that `last_error` describes. Changes together with `last_error`. Null until a delivery first fails.
 
       format: date-time
 
-    - `Optional<LocalDateTime> lastSuccessAt`
+    - `Optional<OffsetDateTime> lastSuccessAt`
 
       Time of the most recent successful delivery to the destination, or `null` if no delivery has succeeded yet.
 
@@ -115162,7 +115160,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
       When it is `null`, the API posts traces to `endpoint_url` with `/v1/traces` appended.
 
-    - `Optional<Long> maxContentBytes`
+    - `Optional<Integer> maxContentBytes`
 
       The most bytes of content that one exported span can contain, or `null` if only the API's maximum applies.
 
@@ -115170,7 +115168,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
       format: int32
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time of the last change to the destination's configuration or state. Changes to `delivery_health` don't change it.
 
@@ -115642,7 +115640,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
     ID of the destination (`tdst_...`).
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Number of entries to return per page, between 1 and 1,000. Defaults to 20.
 
@@ -115776,7 +115774,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
   - `JsonValue type = "telemetry_destination_workspace"`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the workspace was added to the list.
 
@@ -115977,7 +115975,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
   - `JsonValue type = "telemetry_destination_workspace"`
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the workspace was added to the list.
 
@@ -116386,7 +116384,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     ID of the webhook endpoint.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the endpoint was created, in RFC 3339 format.
 
@@ -116424,7 +116422,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `ENABLED("enabled")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the endpoint was last changed, in RFC 3339 format.
 
@@ -116642,7 +116640,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     ID of the webhook endpoint.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the endpoint was created, in RFC 3339 format.
 
@@ -116676,7 +116674,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `ENABLED("enabled")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the endpoint was last changed, in RFC 3339 format.
 
@@ -116877,7 +116875,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     ID of the webhook endpoint.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the endpoint was created, in RFC 3339 format.
 
@@ -116911,7 +116909,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `ENABLED("enabled")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the endpoint was last changed, in RFC 3339 format.
 
@@ -117135,7 +117133,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     ID of the webhook endpoint.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the endpoint was created, in RFC 3339 format.
 
@@ -117169,7 +117167,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `ENABLED("enabled")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the endpoint was last changed, in RFC 3339 format.
 
@@ -117718,7 +117716,7 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
     The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured can get a new one. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
 
@@ -117882,7 +117880,7 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
       The settings level `model` comes from.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
@@ -117984,7 +117982,7 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
     When `true`, `settings` holds what applies in each channel once the settings levels above it are taken into account, and every member of `sources` names the level a value comes from. When `false` or left out, `settings` holds what each channel itself stores.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Number of items to return per page, between 1 and 100. Defaults to 20.
 
@@ -118124,7 +118122,7 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
     The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured can get a new one. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
 
@@ -118288,7 +118286,7 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
       The settings level `model` comes from.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
@@ -118517,7 +118515,7 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
 
     The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured can get a new one. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
 
@@ -118681,7 +118679,7 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
 
       The settings level `model` comes from.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
@@ -118902,7 +118900,7 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
     The channel's identifier. Starts with `slch_`. It does not change for as long as the channel is set up, with one exception: a channel that is not configured can get a new one. A channel that is removed and set up again also has a new one. The old one keeps returning 404; look the channel up by its Slack identifiers for the new one.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the channel was set up, by whichever route. It does not change for as long as `id` does not.
 
@@ -119066,7 +119064,7 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
       The settings level `model` comes from.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
@@ -119336,7 +119334,7 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 
     When `true`, `settings` holds what applies in each workspace once the organization's Slack defaults are taken into account, and every member of `sources` names the level a value comes from. When `false` or left out, `settings` holds what each workspace itself stores.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Number of items to return per page, between 1 and 100. Defaults to 20.
 
@@ -119476,7 +119474,7 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 
     The workspace's identifier. Starts with `slws_`. It does not change for as long as the workspace is set up. A workspace that is removed and set up again has a new one, and the old one keeps returning 404; look the workspace up by its Slack identifier for the new one.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the workspace was set up, by whichever route. It does not change for as long as `id` does not.
 
@@ -119644,7 +119642,7 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 
       The settings level `model` comes from.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
@@ -119869,7 +119867,7 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
 
     The workspace's identifier. Starts with `slws_`. It does not change for as long as the workspace is set up. A workspace that is removed and set up again has a new one, and the old one keeps returning 404; look the workspace up by its Slack identifier for the new one.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the workspace was set up, by whichever route. It does not change for as long as `id` does not.
 
@@ -120037,7 +120035,7 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
 
       The settings level `model` comes from.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
@@ -120257,7 +120255,7 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
     The workspace's identifier. Starts with `slws_`. It does not change for as long as the workspace is set up. A workspace that is removed and set up again has a new one, and the old one keeps returning 404; look the workspace up by its Slack identifier for the new one.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the workspace was set up, by whichever route. It does not change for as long as `id` does not.
 
@@ -120425,7 +120423,7 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
       The settings level `model` comes from.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
@@ -120518,7 +120516,7 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
 - `BundleListParams params`
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Number of items to return per page, between 1 and 100. Defaults to 20.
 
@@ -120654,7 +120652,7 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
     The Bundle's identifier. Starts with `capp_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the Bundle was created.
 
@@ -120668,7 +120666,7 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
     The Bundle's name. Always set. Read-only.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time of the last change to the Bundle.
 
@@ -120855,7 +120853,7 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
 
     The Bundle's identifier. Starts with `capp_`.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     Time the Bundle was created.
 
@@ -120869,7 +120867,7 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
 
     The Bundle's name. Always set. Read-only.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     Time of the last change to the Bundle.
 
@@ -120927,7 +120925,7 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 
     The Bundle's identifier, starting with `capp_`.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Number of items to return per page, between 1 and 100. Defaults to 20.
 
@@ -121067,7 +121065,7 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 
       The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       Time the Bundle was attached.
 
@@ -121087,7 +121085,7 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 
       The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       Time the Bundle was attached.
 
@@ -121282,7 +121280,7 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
 
       The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       Time the Bundle was attached.
 
@@ -121302,7 +121300,7 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
 
       The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       Time the Bundle was attached.
 
@@ -121498,7 +121496,7 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
       The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       Time the Bundle was attached.
 
@@ -121518,7 +121516,7 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
       The Bundle Target's identifier. Starts with `btgt_`. No two Bundle Targets have the same one, and the same Bundle and target always give the same one, also after a detach and a new attach. It is opaque.
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       Time the Bundle was attached.
 

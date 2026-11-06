@@ -84,7 +84,7 @@ You also give up these cloud environment features:
 * [`file` and `github_repository` session resources](self-hosted-sandboxes.md#session-resources). You [stage input files yourself](self-hosted-sandboxes-workers.md#stage-files-for-a-session), and you are responsible for mounting your own GitHub repository too.
 * [Repository skill discovery](skills.md#load-skills-from-a-github-repository).
 * [Environment variable credentials](vaults.md#add-a-credential) in vaults.
-* The [pre-installed runtimes and packages](cloud-sandboxes-reference.md) of a cloud sandbox. A self-hosted sandbox has whatever your worker provides.
+* The [preinstalled runtimes and packages](cloud-sandboxes-reference.md) of a cloud sandbox. A self-hosted sandbox has whatever your worker provides.
 
 ## Differences on Claude Platform on AWS
 
@@ -92,7 +92,7 @@ If you use Claude Managed Agents through Claude Platform on AWS, Anthropic still
 
 ## Differences on Claude Models on Google Cloud (Anthropic managed)
 
-If you use Claude Managed Agents through Claude Models on Google Cloud (Anthropic managed), Anthropic still operates the service. There, memory stores aren’t supported in a self-hosted sandbox, and MCP tunnels aren’t available. Workers authenticate with Google Cloud credentials, not an environment key, and you write your own, because the pre-built workers in the `ant` CLI and the Python, TypeScript, and Go SDKs don’t work there. See [Feature support](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#feature-support) in the Claude Models on Google Cloud (Anthropic managed) guide.
+If you use Claude Managed Agents through Claude Models on Google Cloud (Anthropic managed), Anthropic still operates the service. There, memory stores aren’t available in a self-hosted sandbox, and MCP tunnels aren’t available. Workers authenticate with Google Cloud credentials, not an environment key. You write your own worker, because the prebuilt workers in the `ant` CLI and the Python, TypeScript, and Go SDKs don’t work there. See [Feature support](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#feature-support) in the Claude Models on Google Cloud (Anthropic managed) guide.
 
 ## Switch from a cloud environment to a self-hosted sandbox
 
@@ -104,7 +104,7 @@ To switch to a self-hosted sandbox, you keep the agent, create a `self_hosted` e
 
 On Claude Platform on AWS, memory stores don’t carry over to a self-hosted sandbox, and the worker doesn’t use an environment key. See [Differences on Claude Platform on AWS](choosing-an-environment.md#differences-on-claude-platform-on-aws).
 
-On Claude Models on Google Cloud (Anthropic managed), memory stores aren’t supported in a self-hosted sandbox, and you write your own worker, which doesn’t use an environment key. See [Differences on Claude Models on Google Cloud (Anthropic managed)](choosing-an-environment.md#differences-on-claude-models-on-google-cloud-anthropic-managed).
+On Claude Models on Google Cloud (Anthropic managed), memory stores aren’t available in a self-hosted sandbox, and you write your own worker, which doesn’t use an environment key. See [Differences on Claude Models on Google Cloud (Anthropic managed)](choosing-an-environment.md#differences-on-claude-models-on-google-cloud-anthropic-managed).
 
 ---
 

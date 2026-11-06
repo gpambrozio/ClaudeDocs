@@ -605,7 +605,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             Maximum number of tokens of fetched text content to include in context per call. Does not apply to binary content such as PDFs.
 
@@ -921,13 +921,13 @@ Create Agent
 
   - `String id`
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the agent was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -1111,7 +1111,7 @@ Create Agent
 
           - `String id`
 
-          - `long version`
+          - `int version`
 
             format: int32
 
@@ -1185,7 +1185,7 @@ Create Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -1217,7 +1217,7 @@ Create Agent
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -1529,7 +1529,7 @@ Create Agent
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -1687,13 +1687,13 @@ Create Agent
 
       - `String name`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
     format: date-time
 
-  - `long version`
+  - `int version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 

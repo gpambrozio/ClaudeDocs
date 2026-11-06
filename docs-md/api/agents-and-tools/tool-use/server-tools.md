@@ -38,7 +38,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
-    "max_tokens": 1024,
+    "max_tokens": 4096,
     "messages": [
       {
         "role": "user",
@@ -51,10 +51,10 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 # Initial request. If "stop_reason" in the output is "pause_turn", re-run with
-# the assistant content appended to messages (see the SDK tabs).
+# the assistant content appended to messages.
 ant messages create <<'YAML'
 model: claude-opus-5-5
-max_tokens: 1024
+max_tokens: 4096
 tools:
   - {type: web_search_20250305, name: web_search, max_uses: 10}
 messages:
@@ -68,7 +68,7 @@ client = anthropic.Anthropic()
 # Initial request with web search
 response = client.messages.create(
     model="claude-opus-5-5",
-    max_tokens=1024,
+    max_tokens=4096,
     messages=[
         {
             "role": "user",
@@ -92,7 +92,7 @@ if response.stop_reason == "pause_turn":
     # Send the continuation request
     continuation = client.messages.create(
         model="claude-opus-5-5",
-        max_tokens=1024,
+        max_tokens=4096,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 10}],
     )
@@ -108,7 +108,7 @@ const client = new Anthropic();
 // Initial request with web search
 const response = await client.messages.create({
   model: "claude-opus-5-5",
-  max_tokens: 1024,
+  max_tokens: 4096,
   messages: [
     {
       role: "user",
@@ -140,7 +140,7 @@ if (response.stop_reason === "pause_turn") {
   // Send the continuation request
   const continuation = await client.messages.create({
     model: "claude-opus-5-5",
-    max_tokens: 1024,
+    max_tokens: 4096,
     messages,
     tools: [
       {
@@ -163,7 +163,7 @@ AnthropicClient client = new();
 var parameters = new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
-    MaxTokens = 1024,
+    MaxTokens = 4096,
     Messages = [
         new UserMessageParam
         {
@@ -181,7 +181,7 @@ if (response.StopReason?.Value() == StopReason.PauseTurn)
     var continuationParams = new MessageCreateParams
     {
         Model = Model.ClaudeOpus5_5,
-        MaxTokens = 1024,
+        MaxTokens = 4096,
         Messages = [
             new UserMessageParam
             {
@@ -215,7 +215,7 @@ webSearchTool := []anthropic.ToolUnionParam{
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Model:     anthropic.ModelClaudeOpus5_5,
-	MaxTokens: 1024,
+	MaxTokens: 4096,
 	Messages: []anthropic.MessageParam{
 		anthropic.NewUserMessage(anthropic.NewTextBlock("Search for comprehensive information about quantum computing breakthroughs in 2025")),
 	},
@@ -229,7 +229,7 @@ if response.StopReason == anthropic.StopReasonPauseTurn {
 	// Pass the paused response back as-is so Claude can continue the turn
 	continuation, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeOpus5_5,
-		MaxTokens: 1024,
+		MaxTokens: 4096,
 		Messages: []anthropic.MessageParam{
 			anthropic.NewUserMessage(anthropic.NewTextBlock("Search for comprehensive information about quantum computing breakthroughs in 2025")),
 			response.ToParam(),
@@ -254,7 +254,7 @@ void main() {
 
     MessageCreateParams params = MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
-        .maxTokens(1024L)
+        .maxTokens(4096L)
         .addUserMessage("Search for comprehensive information about quantum computing breakthroughs in 2025")
         .addTool(WebSearchTool20250305.builder()
             .maxUses(10L)
@@ -267,7 +267,7 @@ void main() {
             && response.stopReason().get().equals(StopReason.PAUSE_TURN)) {
         MessageCreateParams continuationParams = MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_5_5)
-            .maxTokens(1024L)
+            .maxTokens(4096L)
             .addUserMessage("Search for comprehensive information about quantum computing breakthroughs in 2025")
             .addMessage(response)
             .addTool(WebSearchTool20250305.builder()
@@ -287,7 +287,7 @@ void main() {
 $client = new Client();
 
 $response = $client->messages->create(
-    maxTokens: 1024,
+    maxTokens: 4096,
     messages: [
         [
             'role' => 'user',
@@ -317,7 +317,7 @@ if ($response->stopReason === 'pause_turn') {
     ];
 
     $continuation = $client->messages->create(
-        maxTokens: 1024,
+        maxTokens: 4096,
         messages: $messages,
         model: 'claude-opus-5-5',
         tools: [
@@ -340,7 +340,7 @@ client = Anthropic::Client.new
 
 response = client.messages.create(
   model: Anthropic::Model::CLAUDE_OPUS_5_5,
-  max_tokens: 1024,
+  max_tokens: 4096,
   messages: [
     {
       role: "user",
@@ -371,7 +371,7 @@ if response.stop_reason == :pause_turn
 
   continuation = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
-    max_tokens: 1024,
+    max_tokens: 4096,
     messages: messages,
     tools: [
       {
@@ -492,22 +492,22 @@ A follow-up that puts content before the results, answers only some of the clien
 
 To give Claude more input, send it as a separate user message after the turn completes.
 
-**How this differs from `pause_turn`:** A [`pause_turn` response](server-tools.md#the-server-side-loop-and-pause-turn) can also end with a `server_tool_use` block that has not run, but it never leaves a client `tool_use` block waiting on you, so you continue it by re-sending the assistant content as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is `tool_use`, and you continue it by sending the client `tool_result` blocks rather than by re-sending the response. In both cases the API runs the pending server tool at the start of the next request.
+**How this differs from `pause_turn`:** A [`pause_turn` response](server-tools.md#the-server-side-loop-and-pause-turn) can also end with a `server_tool_use` block that has not run, but it never leaves a client `tool_use` block waiting on you, so you continue it by re-sending the assistant content as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is `tool_use`, and you continue it by sending the response back with a new user message that holds the client `tool_result` blocks. In both cases the API runs the pending server tool at the start of the next request.
 
 The following example enables web fetch together with a user-defined `run_command` tool and handles the mixed response:
 
 ```bash cURL
 # If "stop_reason" is "tool_use" and a server_tool_use block has no matching
 # result block, that call is not finished. Run the client tools, then POST
-# again with one more user message containing only their tool_result blocks
-# and the same tools array (see the SDK tabs).
+# again with the assistant content, one more user message containing only their
+# tool_result blocks, and the same tools array.
 curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",
-    "max_tokens": 1024,
+    "max_tokens": 4096,
     "messages": [
       {
         "role": "user",
@@ -531,11 +531,11 @@ curl https://api.anthropic.com/v1/messages \
 
 ```bash CLI
 # If "stop_reason" is "tool_use" and a server_tool_use block has no matching
-# result block, run the client tools and re-run with a user message of only
-# their tool_result blocks appended (see the SDK tabs).
+# result block, run the client tools and re-run with the assistant content and
+# a user message of only their tool_result blocks appended.
 ant messages create <<'YAML'
 model: claude-opus-5-5
-max_tokens: 1024
+max_tokens: 4096
 messages:
   - role: user
     content: "Summarize https://example.com/article and run uname -a to tell me what system this is on."
@@ -576,7 +576,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-5-5", max_tokens=1024, tools=tools, messages=messages
+    model="claude-opus-5-5", max_tokens=4096, tools=tools, messages=messages
 )
 
 tool_results = [
@@ -595,7 +595,7 @@ if response.stop_reason == "tool_use" and tool_results:
     # Send back only the client tool_result blocks, with the same tools.
     continuation = client.messages.create(
         model="claude-opus-5-5",
-        max_tokens=1024,
+        max_tokens=4096,
         tools=tools,
         messages=[
             *messages,
@@ -639,7 +639,7 @@ const messages: Anthropic.MessageParam[] = [
 
 const response = await client.messages.create({
   model: "claude-opus-5-5",
-  max_tokens: 1024,
+  max_tokens: 4096,
   tools: [webFetchTool, runCommandTool],
   messages
 });
@@ -661,7 +661,7 @@ if (response.stop_reason === "tool_use" && toolResults.length > 0) {
   // Send back only the client tool_result blocks, with the same tools.
   const continuation = await client.messages.create({
     model: "claude-opus-5-5",
-    max_tokens: 1024,
+    max_tokens: 4096,
     tools: [webFetchTool, runCommandTool],
     messages: [
       ...messages,
@@ -707,7 +707,7 @@ MessageParam userMessage = new UserMessageParam
 var response = await client.Messages.Create(new MessageCreateParams
 {
     Model = Model.ClaudeOpus5_5,
-    MaxTokens = 1024,
+    MaxTokens = 4096,
     Tools = tools,
     Messages = [userMessage]
 });
@@ -733,7 +733,7 @@ if (response.StopReason?.Value() == StopReason.ToolUse && toolResults.Count > 0)
     var continuation = await client.Messages.Create(new MessageCreateParams
     {
         Model = Model.ClaudeOpus5_5,
-        MaxTokens = 1024,
+        MaxTokens = 4096,
         Tools = tools,
         Messages =
         [
@@ -780,7 +780,7 @@ userMessage := anthropic.NewUserMessage(anthropic.NewTextBlock("Summarize https:
 
 response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 	Model:     anthropic.ModelClaudeOpus5_5,
-	MaxTokens: 1024,
+	MaxTokens: 4096,
 	Tools:     tools,
 	Messages:  []anthropic.MessageParam{userMessage},
 })
@@ -802,7 +802,7 @@ if response.StopReason == anthropic.StopReasonToolUse && len(toolResults) > 0 {
 	// Send back only the client tool_result blocks, with the same tools.
 	continuation, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
 		Model:     anthropic.ModelClaudeOpus5_5,
-		MaxTokens: 1024,
+		MaxTokens: 4096,
 		Tools:     tools,
 		Messages: []anthropic.MessageParam{
 			userMessage,
@@ -839,7 +839,7 @@ void main() {
 
     Message response = client.messages().create(MessageCreateParams.builder()
         .model(Model.CLAUDE_OPUS_5_5)
-        .maxTokens(1024L)
+        .maxTokens(4096L)
         .addTool(WebFetchTool20250910.builder()
             .maxUses(5L)
             .build())
@@ -866,7 +866,7 @@ void main() {
         // Send back only the client tool_result blocks, with the same tools.
         Message continuation = client.messages().create(MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_5_5)
-            .maxTokens(1024L)
+            .maxTokens(4096L)
             .addTool(WebFetchTool20250910.builder()
                 .maxUses(5L)
                 .build())
@@ -904,7 +904,7 @@ $tools = [
 $userMessage = ['role' => 'user', 'content' => 'Summarize https://example.com/article and run uname -a to tell me what system this is on.'];
 
 $response = $client->messages->create(
-    maxTokens: 1024,
+    maxTokens: 4096,
     messages: [$userMessage],
     model: 'claude-opus-5-5',
     tools: $tools,
@@ -926,7 +926,7 @@ if ($response->stopReason === 'tool_use' && count($toolResults) > 0) {
     // A server_tool_use block with no result block in this response is not finished; its result arrives in a later response.
     // Send back only the client tool_result blocks, with the same tools.
     $continuation = $client->messages->create(
-        maxTokens: 1024,
+        maxTokens: 4096,
         messages: [
             $userMessage,
             ['role' => 'assistant', 'content' => $response->content],
@@ -966,8 +966,8 @@ user_message = {
 }
 
 response = client.messages.create(
-  model: "claude-opus-5-5",
-  max_tokens: 1024,
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
+  max_tokens: 4096,
   tools: tools,
   messages: [user_message]
 )
@@ -988,8 +988,8 @@ if response.stop_reason == :tool_use && !tool_results.empty?
   # A server_tool_use block with no result block in this response is not finished; its result arrives in a later response.
   # Send back only the client tool_result blocks, with the same tools.
   continuation = client.messages.create(
-    model: "claude-opus-5-5",
-    max_tokens: 1024,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
+    max_tokens: 4096,
     tools: tools,
     messages: [
       user_message,
@@ -1074,7 +1074,7 @@ You don’t need to add a `code_execution` tool for these versions: when dynamic
 
 Server-tool events stream as part of the normal server-sent events (SSE) flow. A `server_tool_use` block that Claude calls directly streams like a client `tool_use` block: a `content_block_start` event followed by `input_json_delta` events. The result block arrives complete in a single `content_block_start` event, with no deltas.
 
-See [Streaming](../../build-with-claude/streaming.md) for the full event reference. Individual tool pages document tool-specific event names where they differ.
+See [Streaming messages](../../build-with-claude/streaming.md) for the full event reference. Individual tool pages document tool-specific event names where they differ.
 
 ## Batch requests
 

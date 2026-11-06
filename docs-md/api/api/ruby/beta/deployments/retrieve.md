@@ -165,7 +165,7 @@ Get Deployment
 
       format: int32
 
-  - `archived_at: Time`
+  - `archived_at: Time | nil`
 
     Time the deployment was archived. Null if not archived.
 
@@ -177,7 +177,7 @@ Get Deployment
 
     format: date-time
 
-  - `description: String`
+  - `description: String | nil`
 
     Description of what the deployment does.
 
@@ -331,11 +331,11 @@ Get Deployment
 
                 minLength: 1
 
-          - `context: optional String`
+          - `context: optional String | nil`
 
             Additional context about the document for the model.
 
-          - `title: optional String`
+          - `title: optional String | nil`
 
             The title of the document.
 
@@ -379,7 +379,7 @@ Get Deployment
 
             Rubric content. Plain text or markdown — the grader treats it as freeform text.
 
-      - `max_iterations: optional Integer`
+      - `max_iterations: optional Integer | nil`
 
         Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -411,7 +411,7 @@ Get Deployment
 
     Human-readable name.
 
-  - `paused_reason: BetaManagedAgentsDeploymentPausedReason`
+  - `paused_reason: BetaManagedAgentsDeploymentPausedReason | nil`
 
     Why the deployment is `paused`. Non-null exactly when `status` is `paused`; null otherwise.
 
@@ -529,7 +529,7 @@ Get Deployment
 
         Github URL of the repository
 
-      - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout`
+      - `checkout: optional BetaManagedAgentsBranchCheckout | BetaManagedAgentsCommitCheckout | nil`
 
         Branch or commit to check out. Defaults to the repository's default branch.
 
@@ -553,7 +553,7 @@ Get Deployment
 
             minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
-      - `mount_path: optional String`
+      - `mount_path: optional String | nil`
 
         Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -567,7 +567,7 @@ Get Deployment
 
         ID of a previously uploaded file.
 
-      - `mount_path: optional String`
+      - `mount_path: optional String | nil`
 
         Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -581,7 +581,7 @@ Get Deployment
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
 
-      - `access: optional :read_write | :read_only`
+      - `access: optional :read_write | :read_only | nil`
 
         Access mode for the mounted store. Defaults to `read_write`. `read_only` mounts the store as a read-only filesystem.
 
@@ -589,11 +589,11 @@ Get Deployment
 
         - `:read_only`
 
-      - `instructions: optional String`
+      - `instructions: optional String | nil`
 
         Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-  - `schedule: BetaManagedAgentsSchedule`
+  - `schedule: BetaManagedAgentsSchedule | nil`
 
     Recurring cron schedule. Presence enables scheduled execution; null means manual-only. Includes computed timestamps (next fire times, last run) on the cron variant.
 
@@ -611,7 +611,7 @@ Get Deployment
 
       minLength: 1
 
-    - `last_run_at: optional Time`
+    - `last_run_at: optional Time | nil`
 
       Time the most recent scheduled run actually started. Null until one completes; preserved after the deployment is archived. Manual runs do not update this.
 
@@ -643,7 +643,7 @@ Get Deployment
 
     Vault IDs supplying stored credentials for sessions created from this deployment.
 
-  - `budget: optional BetaManagedAgentsBudgetLimit`
+  - `budget: optional BetaManagedAgentsBudgetLimit | nil`
 
     Spend ceiling stamped onto each session created from this deployment. Absent when no budget is set.
 

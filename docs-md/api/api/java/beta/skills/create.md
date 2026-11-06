@@ -165,7 +165,7 @@ Create Skill
 
     The format and length of IDs may change over time.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     ISO 8601 timestamp of when the skill was created.
 
@@ -211,7 +211,7 @@ Create Skill
 
       - `PLUGIN("plugin")`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     ISO 8601 timestamp of when the skill was last updated.
 

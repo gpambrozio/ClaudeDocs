@@ -173,7 +173,7 @@ Create a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -183,7 +183,7 @@ Create a Memory Store
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -203,7 +203,7 @@ Create a Memory Store
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -264,13 +264,13 @@ List Memory Stores
 
 - `MemoryStoreListParams params`
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return only memory stores created at or after this time (inclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return only memory stores created at or before this time (inclusive).
 
@@ -280,7 +280,7 @@ List Memory Stores
 
     When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
@@ -422,7 +422,7 @@ List Memory Stores
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -432,7 +432,7 @@ List Memory Stores
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -452,7 +452,7 @@ List Memory Stores
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -649,7 +649,7 @@ Retrieve a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -659,7 +659,7 @@ Retrieve a Memory Store
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -679,7 +679,7 @@ Retrieve a Memory Store
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -895,7 +895,7 @@ Update a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -905,7 +905,7 @@ Update a Memory Store
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -925,7 +925,7 @@ Update a Memory Store
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -1301,7 +1301,7 @@ Archive a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -1311,7 +1311,7 @@ Archive a Memory Store
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -1331,7 +1331,7 @@ Archive a Memory Store
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -1403,7 +1403,7 @@ public final class Main {
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -1413,7 +1413,7 @@ public final class Main {
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When the memory store was created, in RFC 3339.
 
@@ -1433,7 +1433,7 @@ public final class Main {
 
     Human-readable name for the store. 1–255 characters. The store's mount-path slug under `/mnt/memory/` is derived from this name.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory store was last changed, in RFC 3339.
 
@@ -1597,7 +1597,7 @@ Create a Memory
 
     A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long.
 
-    minLength: 2, maxLength: 1024
+    minLength: 2, maxLength: 1024, pattern: ^(/[^/ ]+)+$
 
 #### Returns
 
@@ -1621,13 +1621,13 @@ Create a Memory
 
     Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-  - `long contentSizeBytes`
+  - `int contentSizeBytes`
 
     The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this memory was created, in RFC 3339 format.
 
@@ -1649,7 +1649,7 @@ Create a Memory
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory was last changed, in RFC 3339.
 
@@ -1682,7 +1682,7 @@ public final class Main {
         MemoryCreateParams params = MemoryCreateParams.builder()
             .memoryStoreId("memory_store_id")
             .content("content")
-            .path("xx")
+            .path("/P")
             .build();
         BetaManagedAgentsMemory betaManagedAgentsMemory = client.beta().memoryStores().memories().create(params);
     }
@@ -1722,7 +1722,7 @@ List Memories
 
     The ID of the memory store to list memories from (`memstore_...`).
 
-  - `Optional<Long> depth` (query parameter)
+  - `Optional<Integer> depth` (query parameter)
 
     How far below `path_prefix` to list. Defaults to `0`, which lists every memory below the prefix.
 
@@ -1730,7 +1730,7 @@ List Memories
 
     format: int32
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     The maximum number of items to return per page, from 1 to 100. Defaults to 20.
 
@@ -1900,13 +1900,13 @@ List Memories
 
       Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-    - `long contentSizeBytes`
+    - `int contentSizeBytes`
 
       The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
       format: int32
 
-    - `LocalDateTime createdAt`
+    - `OffsetDateTime createdAt`
 
       When this memory was created, in RFC 3339 format.
 
@@ -1928,7 +1928,7 @@ List Memories
 
       Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-    - `LocalDateTime updatedAt`
+    - `OffsetDateTime updatedAt`
 
       When the memory was last changed, in RFC 3339.
 
@@ -2165,13 +2165,13 @@ Retrieve a Memory
 
     Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-  - `long contentSizeBytes`
+  - `int contentSizeBytes`
 
     The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this memory was created, in RFC 3339 format.
 
@@ -2193,7 +2193,7 @@ Retrieve a Memory
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory was last changed, in RFC 3339.
 
@@ -2405,7 +2405,7 @@ Update a Memory
 
     The memory keeps its `id`. A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long. Paths are case-sensitive.
 
-    minLength: 2, maxLength: 1024
+    minLength: 2, maxLength: 1024, pattern: ^(/[^/ ]+)+$
 
   - `Optional<BetaManagedAgentsPrecondition> precondition`
 
@@ -2435,13 +2435,13 @@ Update a Memory
 
     Lowercase hex SHA-256 digest of the UTF-8 `content` bytes (64 characters). The server applies no normalization, so clients can compute the same hash locally for staleness checks and as the value for a `content_sha256` precondition on update. Always populated, regardless of `view`.
 
-  - `long contentSizeBytes`
+  - `int contentSizeBytes`
 
     The size of the memory's `content` in UTF-8 bytes. It is set regardless of `view`.
 
     format: int32
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this memory was created, in RFC 3339 format.
 
@@ -2463,7 +2463,7 @@ Update a Memory
 
     Hierarchical path of the memory within the store, e.g. `/projects/foo/notes.md`. Always starts with `/`. Paths are case-sensitive and unique within a store. Maximum 1,024 bytes.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     When the memory was last changed, in RFC 3339.
 
@@ -2737,19 +2737,19 @@ List Memory Versions
 
     Return only versions written with the API key that has this ID.
 
-  - `Optional<LocalDateTime> createdAtGte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtGte` (query parameter)
 
     Return versions created at or after this time (inclusive).
 
     format: date-time
 
-  - `Optional<LocalDateTime> createdAtLte` (query parameter)
+  - `Optional<OffsetDateTime> createdAtLte` (query parameter)
 
     Return versions created at or before this time (inclusive).
 
     format: date-time
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     The maximum number of versions to return per page, from 1 to 100. Defaults to 20.
 
@@ -2923,7 +2923,7 @@ List Memory Versions
 
     Unique identifier for this version (a `memver_...` value).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this version was written, in RFC 3339 format.
 
@@ -2963,7 +2963,7 @@ List Memory Versions
 
     Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-  - `Optional<Long> contentSizeBytes`
+  - `Optional<Integer> contentSizeBytes`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -3029,7 +3029,7 @@ List Memory Versions
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-  - `Optional<LocalDateTime> redactedAt`
+  - `Optional<OffsetDateTime> redactedAt`
 
     When the version was redacted, in RFC 3339, or `null` if it hasn't been.
 
@@ -3259,7 +3259,7 @@ Retrieve a Memory Version
 
     Unique identifier for this version (a `memver_...` value).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this version was written, in RFC 3339 format.
 
@@ -3299,7 +3299,7 @@ Retrieve a Memory Version
 
     Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-  - `Optional<Long> contentSizeBytes`
+  - `Optional<Integer> contentSizeBytes`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -3365,7 +3365,7 @@ Retrieve a Memory Version
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-  - `Optional<LocalDateTime> redactedAt`
+  - `Optional<OffsetDateTime> redactedAt`
 
     When the version was redacted, in RFC 3339, or `null` if it hasn't been.
 
@@ -3588,7 +3588,7 @@ Redact a Memory Version
 
     Unique identifier for this version (a `memver_...` value).
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     When this version was written, in RFC 3339 format.
 
@@ -3628,7 +3628,7 @@ Redact a Memory Version
 
     Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-  - `Optional<Long> contentSizeBytes`
+  - `Optional<Integer> contentSizeBytes`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -3694,7 +3694,7 @@ Redact a Memory Version
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-  - `Optional<LocalDateTime> redactedAt`
+  - `Optional<OffsetDateTime> redactedAt`
 
     When the version was redacted, in RFC 3339, or `null` if it hasn't been.
 

@@ -28,6 +28,8 @@ Dreams are in research preview.
 
 * [Request access](https://claude.com/form/claude-managed-agents)
 
+Want more control over dreaming? The [Dreaming with a dynamic workflow](https://platform.claude.com/cookbook/managed-agents-cma-dreaming-with-a-dynamic-workflow) recipe in the Claude Cookbook shows how to build your own dream with prompts and models you choose. You decide when it runs, which transcripts it reads, and what it does with them.
+
 Agents write to their [memory stores](memory.md) as they work, but these writes are local and incremental: over many sessions a memory store accumulates duplicates, contradictions, and stale entries.
 
 **Dreams** let Claude clean that up. A dream reads an existing memory store alongside past session transcripts, then produces a new, reorganized memory store: duplicates merged, stale or contradicted entries replaced with the latest value, and new insights surfaced.

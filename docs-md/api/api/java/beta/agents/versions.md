@@ -23,7 +23,7 @@ List Agent Versions
 
     Agent ID to list versions for.
 
-  - `Optional<Long> limit` (query parameter)
+  - `Optional<Integer> limit` (query parameter)
 
     Maximum results per page. Default 20, maximum 100.
 
@@ -163,13 +163,13 @@ List Agent Versions
 
   - `String id`
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the agent was archived. Null if not archived.
 
     format: date-time
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -353,7 +353,7 @@ List Agent Versions
 
           - `String id`
 
-          - `long version`
+          - `int version`
 
             format: int32
 
@@ -427,7 +427,7 @@ List Agent Versions
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -459,7 +459,7 @@ List Agent Versions
 
             - `String id`
 
-            - `long version`
+            - `int version`
 
               format: int32
 
@@ -771,7 +771,7 @@ List Agent Versions
 
           - `Optional<List<String>> blockedDomains`
 
-          - `Optional<Long> maxContentTokens`
+          - `Optional<Integer> maxContentTokens`
 
             format: int32
 
@@ -929,13 +929,13 @@ List Agent Versions
 
       - `String name`
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 
     format: date-time
 
-  - `long version`
+  - `int version`
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 

@@ -161,7 +161,7 @@ Update a Credential
 
         minLength: 1, maxLength: 8192, pattern: ^[^\x00-\x1f\x7f]*$
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Leave it out to keep the stored expiry.
 
@@ -297,7 +297,7 @@ Update a Credential
 
     The unique ID of the credential (`vcrd_...`).
 
-  - `Optional<LocalDateTime> archivedAt`
+  - `Optional<OffsetDateTime> archivedAt`
 
     When the credential was archived. Null if not archived.
 
@@ -317,7 +317,7 @@ Update a Credential
 
         URL of the MCP server this credential authenticates against.
 
-      - `Optional<LocalDateTime> expiresAt`
+      - `Optional<OffsetDateTime> expiresAt`
 
         When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
@@ -417,7 +417,7 @@ Update a Credential
 
         Name of the environment variable.
 
-  - `LocalDateTime createdAt`
+  - `OffsetDateTime createdAt`
 
     A timestamp in RFC 3339 format
 
@@ -427,7 +427,7 @@ Update a Credential
 
     Arbitrary key-value metadata attached to the credential.
 
-  - `LocalDateTime updatedAt`
+  - `OffsetDateTime updatedAt`
 
     A timestamp in RFC 3339 format
 

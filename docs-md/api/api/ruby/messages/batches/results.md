@@ -65,7 +65,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           The format and length of IDs may change over time.
 
-        - `container: Container`
+        - `container: Container | nil`
 
           Information about the container used in this request.
 
@@ -81,7 +81,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             format: date-time
 
-          - `skills: Array[ContainerSkill]`
+          - `skills: Array[ContainerSkill] | nil`
 
             Skills loaded in the container
 
@@ -138,7 +138,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `type: :text`
 
-            - `citations: Array[TextCitation]`
+            - `citations: Array[TextCitation] | nil`
 
               Citations supporting the text block.
 
@@ -154,11 +154,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   minimum: 0
 
-                - `document_title: String`
+                - `document_title: String | nil`
 
                 - `end_char_index: Integer`
 
-                - `file_id: String`
+                - `file_id: String | nil`
 
                 - `start_char_index: Integer`
 
@@ -174,11 +174,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   minimum: 0
 
-                - `document_title: String`
+                - `document_title: String | nil`
 
                 - `end_page_number: Integer`
 
-                - `file_id: String`
+                - `file_id: String | nil`
 
                 - `start_page_number: Integer`
 
@@ -198,7 +198,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   minimum: 0
 
-                - `document_title: String`
+                - `document_title: String | nil`
 
                 - `end_block_index: Integer`
 
@@ -206,7 +206,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
 
-                - `file_id: String`
+                - `file_id: String | nil`
 
                 - `start_block_index: Integer`
 
@@ -222,7 +222,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `encrypted_index: String`
 
-                - `title: String`
+                - `title: String | nil`
 
                   maxLength: 512
 
@@ -260,7 +260,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   minimum: 0
 
-                - `title: String`
+                - `title: String | nil`
 
             - `text: String`
 
@@ -332,7 +332,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               minLength: 1
 
-            - `toolset_name: optional String`
+            - `toolset_name: optional String | nil`
 
               For a toolset member tool_use, the toolset family.
 
@@ -418,7 +418,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `encrypted_content: String`
 
-                - `page_age: String`
+                - `page_age: String | nil`
 
                 - `title: String`
 
@@ -480,7 +480,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `type: :document`
 
-                  - `citations: CitationsConfig`
+                  - `citations: CitationsConfig | nil`
 
                     Citation configuration for the document
 
@@ -506,11 +506,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                       - `media_type: :"text/plain"`
 
-                  - `title: String`
+                  - `title: String | nil`
 
                     The title of the document
 
-                - `retrieved_at: String`
+                - `retrieved_at: String | nil`
 
                   ISO 8601 timestamp when the content was retrieved
 
@@ -648,7 +648,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `:file_not_found`
 
-                - `error_message: String`
+                - `error_message: String | nil`
 
               - `class TextEditorCodeExecutionViewResultBlock`
 
@@ -664,11 +664,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `:pdf`
 
-                - `num_lines: Integer`
+                - `num_lines: Integer | nil`
 
-                - `start_line: Integer`
+                - `start_line: Integer | nil`
 
-                - `total_lines: Integer`
+                - `total_lines: Integer | nil`
 
               - `class TextEditorCodeExecutionCreateResultBlock`
 
@@ -680,15 +680,15 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `type: :text_editor_code_execution_str_replace_result`
 
-                - `lines: Array[String]`
+                - `lines: Array[String] | nil`
 
-                - `new_lines: Integer`
+                - `new_lines: Integer | nil`
 
-                - `new_start: Integer`
+                - `new_start: Integer | nil`
 
-                - `old_lines: Integer`
+                - `old_lines: Integer | nil`
 
-                - `old_start: Integer`
+                - `old_start: Integer | nil`
 
             - `tool_use_id: String`
 
@@ -714,7 +714,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `:execution_time_exceeded`
 
-                - `error_message: String`
+                - `error_message: String | nil`
 
               - `class ToolSearchToolSearchResultBlock`
 
@@ -740,11 +740,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `file_id: String`
 
-        - `diagnostics: Diagnostics`
+        - `diagnostics: Diagnostics | nil`
 
           Request-level diagnostics. `null` when the request did not supply `diagnostics`, or when it did and no prompt-cache divergence was detected.
 
-          - `cache_miss_reason: CacheMissReason`
+          - `cache_miss_reason: CacheMissReason | nil`
 
             Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
@@ -912,7 +912,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           This will always be `"assistant"`.
 
-        - `stop_details: RefusalStopDetails`
+        - `stop_details: RefusalStopDetails | nil`
 
           Structured information about why model output stopped.
 
@@ -920,7 +920,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           - `type: :refusal`
 
-          - `category: :cyber | :bio | :frontier_llm | 2 more`
+          - `category: :cyber | :bio | :frontier_llm | 2 more | nil`
 
             The policy category that triggered the refusal.
 
@@ -946,13 +946,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               The request could be related to an area that was determined as harmful. Benign work might sometimes trigger this category.
 
-          - `explanation: String`
+          - `explanation: String | nil`
 
             Human-readable explanation of the refusal.
 
             This text is not guaranteed to be stable. `null` when no explanation is available for the category.
 
-        - `stop_reason: StopReason`
+        - `stop_reason: StopReason | nil`
 
           The reason that we stopped.
 
@@ -982,7 +982,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           - `:model_context_window_exceeded`
 
-        - `stop_sequence: String`
+        - `stop_sequence: String | nil`
 
           Which custom stop sequence was generated, if any.
 
@@ -1000,7 +1000,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
           Total input tokens in a request is the summation of `input_tokens`, `cache_creation_input_tokens`, and `cache_read_input_tokens`.
 
-          - `cache_creation: CacheCreation`
+          - `cache_creation: CacheCreation | nil`
 
             Breakdown of cached tokens by TTL
 
@@ -1016,19 +1016,19 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               minimum: 0
 
-          - `cache_creation_input_tokens: Integer`
+          - `cache_creation_input_tokens: Integer | nil`
 
             The number of input tokens used to create the cache entry.
 
             minimum: 0
 
-          - `cache_read_input_tokens: Integer`
+          - `cache_read_input_tokens: Integer | nil`
 
             The number of input tokens read from the cache.
 
             minimum: 0
 
-          - `inference_geo: String`
+          - `inference_geo: String | nil`
 
             The geographic region where inference was performed for this request.
 
@@ -1044,7 +1044,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             minimum: 0
 
-          - `output_tokens_details: OutputTokensDetails`
+          - `output_tokens_details: OutputTokensDetails | nil`
 
             Breakdown of output tokens by category.
 
@@ -1059,14 +1059,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
               the thinking-block delimiter tokens.
 
               Reflects the raw reasoning the model produced, not the (possibly shorter)
-              summarized thinking text returned in the response body. Computed by
-              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              summarized thinking text returned in the response body. It may differ from the model's exact
               generation count by a small number of tokens. Always ≤ `output_tokens`;
               `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
               minimum: 0
 
-          - `server_tool_use: ServerToolUsage`
+          - `server_tool_use: ServerToolUsage | nil`
 
             The number of server tool requests.
 
@@ -1082,7 +1081,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               minimum: 0
 
-          - `service_tier: :standard | :priority | :batch`
+          - `service_tier: :standard | :priority | :batch | nil`
 
             If the request used the priority, standard, or batch tier.
 
@@ -1092,7 +1091,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `:batch`
 
-          - `speed: :standard | :fast`
+          - `speed: :standard | :fast | nil`
 
             The inference speed mode used for this request.
 
@@ -1164,7 +1163,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `message: String`
 
-        - `request_id: String`
+        - `request_id: String | nil`
 
     - `class MessageBatchCanceledResult`
 
