@@ -657,7 +657,7 @@ def classify_support_request(ticket_contents)
 end
 ```
 
-This prompt is written for Claude Haiku 5.5, which runs here at `low` effort. On Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5, ask for the intent and a one-sentence summary of the request instead. See [Keep reasoning in thinking blocks](../../build-with-claude/refusals-and-fallback.md#keep-reasoning-in-thinking-blocks).
+This prompt is written for Claude Haiku 5.5, which runs here at `low` effort. On Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5, ask for the intent and a one-sentence summary of the request instead. See [Keep reasoning in thinking blocks](../../build-with-claude/refusals-and-fallback.md#keep-reasoning-in-thinking-blocks).
 
 Here are the key components of this prompt:
 

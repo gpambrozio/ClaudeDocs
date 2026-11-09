@@ -15,7 +15,7 @@ For API feature documentation with code examples, see the [API reference](../../
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.6.0")
+implementation("com.anthropic:anthropic-java:3.7.0")
 ```
 
 **Maven**
@@ -24,7 +24,7 @@ implementation("com.anthropic:anthropic-java:3.6.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.6.0</version>
+    <version>3.7.0</version>
 </dependency>
 ```
 
@@ -35,8 +35,8 @@ Cloud platform integrations and the client-side MCP helpers ship as separate add
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.6.0")
-implementation("com.anthropic:anthropic-java-mcp:3.6.0")
+implementation("com.anthropic:anthropic-java:3.7.0")
+implementation("com.anthropic:anthropic-java-mcp:3.7.0")
 ```
 
 **Maven**
@@ -45,12 +45,12 @@ implementation("com.anthropic:anthropic-java-mcp:3.6.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.6.0</version>
+    <version>3.7.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-mcp</artifactId>
-    <version>3.6.0</version>
+    <version>3.7.0</version>
 </dependency>
 ```
 

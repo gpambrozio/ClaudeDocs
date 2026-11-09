@@ -94,8 +94,8 @@ go get github.com/anthropics/anthropic-sdk-go/v2/bedrock
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.6.0")
-implementation("com.anthropic:anthropic-java-bedrock:3.6.0")
+implementation("com.anthropic:anthropic-java:3.7.0")
+implementation("com.anthropic:anthropic-java-bedrock:3.7.0")
 ```
 
 **Maven**
@@ -104,12 +104,12 @@ implementation("com.anthropic:anthropic-java-bedrock:3.6.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.6.0</version>
+    <version>3.7.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>3.6.0</version>
+    <version>3.7.0</version>
 </dependency>
 ```
 
@@ -320,6 +320,8 @@ Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Mod
 
 | Model                                                                                       | Model ID                      | Access                                                                                              |
 | :------------------------------------------------------------------------------------------ | :---------------------------- | :-------------------------------------------------------------------------------------------------- |
+| Claude Fable 5.2                                                                            | `anthropic.claude-fable-5-2`  | [See Access](claude-in-amazon-bedrock.md#access) |
+| Claude Mythos 5.2 ([limited availability](https://support.claude.com/en/articles/14604842)) | `anthropic.claude-mythos-5-2` | Active (verification required)                                                                      |
 | Claude Fable 5.1                                                                            | `anthropic.claude-fable-5-1`  | Open                                                                                                |
 | Claude Mythos 5.1 ([limited availability](https://support.claude.com/en/articles/14604842)) | `anthropic.claude-mythos-5-1` | Active (verification required)                                                                      |
 | Claude Fable 5                                                                              | `anthropic.claude-fable-5`    | Open                                                                                                |
@@ -370,7 +372,7 @@ Claude in Amazon Bedrock is available in the following AWS regions. Amazon Bedro
 * **Global:** dynamic routing across all available regions for maximum availability. No pricing premium.
 * **Regional:** the endpoint resolves to the single AWS region you specify, for data-residency requirements. Regional endpoints carry a 10 percent pricing premium over global endpoints. To route across multiple regions within a geography, use an [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html) (US, EU, JP, or AU). Regions marked **In-region only** in the table support direct single-region routing without an inference profile.
 
-The global endpoint is available for Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, and Claude Haiku 4.5. For Claude Fable 5.1, regional endpoints are available in `us-east-1` only.
+The global endpoint is available for Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, and Claude Haiku 4.5.
 
 | AWS region       | Location                  | Endpoint types             |
 | ---------------- | ------------------------- | -------------------------- |

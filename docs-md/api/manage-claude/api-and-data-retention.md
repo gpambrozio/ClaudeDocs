@@ -40,7 +40,7 @@ Organizations with a ZDR arrangement cannot call the Claude API directly from a 
 * **Claude consumer products:** Claude Free, Pro, Max, and Ultra plans, including when customers on those plans use Claude’s web, desktop, or mobile apps or Claude Code.
 * **Claude Teams and Claude Enterprise product interfaces:** These interfaces are not ZDR-eligible. The one exception is Claude Code on Claude Enterprise, which has its own ZDR offering, separate from the ZDR arrangement described on this page. That offering is available only to qualified accounts on Claude Enterprise and requires separate enablement by Anthropic. See the [Claude Code ZDR documentation](../../claude-code/zero-data-retention.md), which applies to Claude Enterprise organizations only.
 * **Claude for Excel:** Not currently ZDR-eligible.
-* **Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5:** These models require 30-day data retention and are not available under ZDR unless expressly authorized by Anthropic. See [Model-specific data retention requirements](api-and-data-retention.md#model-specific-data-retention-requirements).
+* **Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5:** These models require 30-day data retention and are not available under ZDR unless expressly authorized by Anthropic. See [Model-specific data retention requirements](api-and-data-retention.md#model-specific-data-retention-requirements).
 * **Third-party integrations:** Data processed by third-party websites, tools, or other integrations is not covered, though some may have similar offerings. Review each service’s data handling practices.
 * **Flagged content and legal holds:** See [Retention regardless of arrangement](api-and-data-retention.md#retention-regardless-of-arrangement).
 
@@ -120,7 +120,7 @@ HIPAA readiness is enforced at the organization level. If you need both HIPAA-re
 
 ## Model-specific data retention requirements
 
-Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5 are designated Covered Models (see the [Covered Models support article](https://support.claude.com/en/articles/15425695)) and require 30-day data retention; ZDR is therefore not available for any of them unless expressly authorized by Anthropic. On the Claude API, requests to Claude Fable 5 from an organization whose data retention configuration does not meet this requirement return a `400 invalid_request_error`:
+Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5 are designated Covered Models (see the [Covered Models support article](https://support.claude.com/en/articles/15425695)) and require 30-day data retention; ZDR is therefore not available for any of them unless expressly authorized by Anthropic. On the Claude API, requests to Claude Fable 5 from an organization whose data retention configuration does not meet this requirement return a `400 invalid_request_error`:
 
 ```json
 {

@@ -10,6 +10,8 @@ featureMetadata:
     eligibility: eligible
     note: Excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Client-side memory storage where you control data retention.
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5

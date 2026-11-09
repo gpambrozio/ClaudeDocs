@@ -33,7 +33,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=2.7.1
+VERSION=2.8.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -172,7 +172,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=2.7.1
+VERSION=2.8.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;
@@ -485,7 +485,7 @@ java {
 }
 
 dependencies {
-    implementation("com.anthropic:anthropic-java:3.6.0")
+    implementation("com.anthropic:anthropic-java:3.7.0")
 }
 
 application {
@@ -511,7 +511,7 @@ Save this as `pom.xml`:
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>3.6.0</version>
+      <version>3.7.0</version>
     </dependency>
   </dependencies>
 </project>

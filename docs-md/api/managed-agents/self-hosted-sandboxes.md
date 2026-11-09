@@ -13,6 +13,8 @@ featureMetadata:
     eligibility: not-eligible
     note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -208,7 +210,7 @@ brew install anthropics/tap/ant
 For Linux environments, download the release binary directly.
 
 ```bash
-VERSION=2.7.1
+VERSION=2.8.0
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 case $(uname -m) in
   x86_64) ARCH=amd64 ;;

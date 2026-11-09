@@ -3,57 +3,38 @@
 ---
 title: Claude Fable 5.1
 url: https://platform.claude.com/docs/en/models/fable-5-1/overview
-description: "An overview of Claude Fable 5.1: what it's for, model IDs on every platform, context window, output limits, pricing, availability, and resources for building with it."
+description: "Claude Fable 5.1 reference: lifecycle status, model IDs on every platform, context window, output limits, pricing, and migration resources. Claude Fable 5.1 is a legacy model, and Claude Fable 5.2 is the current Fable model."
 ---
 
-**Latest.** Released September 1, 2026.
+**Legacy.** Released September 1, 2026.
 
 For demanding reasoning and long-horizon agentic work
+
+Although Claude Fable 5.1 is still available, you should consider migrating to Claude Fable 5.2. [See Claude Fable 5.2](../fable-5-2/overview.md) · [Migrate to Claude Fable 5.2](../fable-5-2/migration-guide.md)
 
 Model ID: `claude-fable-5-1`
 
 Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTok · Output pricing: $50 / MTok
 
-[Announcement](https://www.anthropic.com/claude-fable-and-mythos-5-1) · [What’s new](whats-new-fable-5-1.md) · [Migration guide](migration-guide.md)
-
-## Overview
-
-Claude Fable 5.1 extends Claude Fable 5 at the same input and output prices, with cache reads at a quarter of the cost, and brings stronger long-running agentic coding, multistep research, and document, spreadsheet, and slide work. For most workloads, start with Claude Opus 5.5 (see [Choosing a model](../../about-claude/models/choosing-a-model.md)). Use Claude Fable 5.1 for demanding reasoning and long-horizon agentic work, or when your evals on Claude Opus 5.5 at higher effort still don’t meet your requirements. Claude Mythos 5.1 offers the same capabilities only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842).
-
-If you already call Claude Fable 5, four changes are breaking:
-
-* [Forced tool use returns an error](whats-new-fable-5-1.md#forced-tool-use-is-not-supported).
-* Only Claude Fable 5.1 and Claude Mythos 5.1 can [read Claude Fable 5.1’s thinking blocks](whats-new-fable-5-1.md#thinking-blocks-are-tied-to-the-model-that-produced-them).
-* [Editing earlier turns invalidates thinking blocks](whats-new-fable-5-1.md#editing-earlier-turns-invalidates-thinking-blocks).
-* [Some advisor tool pairings are not supported](whats-new-fable-5-1.md#advisor-tool-pairings).
-
-Five changes are additive:
-
-* [Mid-conversation effort changes](whats-new-fable-5-1.md#change-effort-mid-conversation-beta) (beta)
-* [Turn-scoped system messages](whats-new-fable-5-1.md#turn-scoped-system-messages-beta) (beta)
-* [Readable progress updates between tool calls](whats-new-fable-5-1.md#progress-updates-between-tool-calls-beta) (`display: "updates"`, beta)
-* A [lower cache read price](whats-new-fable-5-1.md#pricing)
-* [Content provenance](whats-new-fable-5-1.md#content-provenance)
-
-[What’s new in Claude Fable 5.1](whats-new-fable-5-1.md)
+[Announcement](https://www.anthropic.com/claude-fable-and-mythos-5-1)
 
 ## Claude Fable 5.1 and Claude Mythos 5.1
 
 [Claude Mythos 5.1](../mythos-5-1/overview.md) offers the same capabilities only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). It shares Claude Fable 5.1’s specifications and pricing. To request access, apply to the program that covers your use case, or contact your Anthropic, AWS, or Google Cloud account team.
 
-## How it compares
+## How it compares to the current lineup
 
-| Model                                                                               | Context | Max output | Price / MTok       | Latency  | Thinking             | Default effort | Knowledge cutoff |
-| :---------------------------------------------------------------------------------- | :------ | :--------- | :----------------- | :------- | :------------------- | :------------- | :--------------- |
-| **Claude Fable 5.1** (this model)                                                   | 1M      | 128K       | $10 / $50          | Slower   | Adaptive (always on) | `high`         | Jun 2026         |
-| [Claude Opus 5.5](../opus-5-5/overview.md)     | 1M      | 128K       | $4 / $20           | Moderate | Adaptive (always on) | `medium`       | Jun 2026         |
-| [Claude Sonnet 5.5](../sonnet-5-5/overview.md) | 1M      | 128K       | $2 / $10           | Fast     | Adaptive             | `high`         | Jun 2026         |
-| [Claude Haiku 5.5](../haiku-5-5/overview.md)   | 1M      | 128K       | From $0.10 / $0.50 | Fastest  | Adaptive             | `medium`       | Jun 2026         |
+| Model                                                                               | Context | Max output | Price / MTok       | Thinking             | Default effort | Knowledge cutoff |
+| :---------------------------------------------------------------------------------- | :------ | :--------- | :----------------- | :------------------- | :------------- | :--------------- |
+| [Claude Fable 5.2](../fable-5-2/overview.md)   | 1M      | 128K       | $8 / $40           | Adaptive (always on) | `high`         | Jun 2026         |
+| **Claude Fable 5.1** (this model)                                                   | 1M      | 128K       | $10 / $50          | Adaptive (always on) | `high`         | Jun 2026         |
+| [Claude Opus 5.5](../opus-5-5/overview.md)     | 1M      | 128K       | $4 / $20           | Adaptive (always on) | `medium`       | Jun 2026         |
+| [Claude Sonnet 5.5](../sonnet-5-5/overview.md) | 1M      | 128K       | $2 / $10           | Adaptive             | `high`         | Jun 2026         |
+| [Claude Haiku 5.5](../haiku-5-5/overview.md)   | 1M      | 128K       | From $0.10 / $0.50 | Adaptive             | `medium`       | Jun 2026         |
 
 * **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
 * **Max output:** Synchronous Messages API limit. On the Message Batches API, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 300k output tokens with the output-300k-2026-03-24 beta header.
-* **Price / MTok:** Input / output, base price per million tokens. Batch API requests are 50% off; prompt caching reads cost 10% of the base input price (2.5% on Claude Fable 5.1 and Claude Mythos 5.1, 5% on Claude Opus 5.5 and Claude Sonnet 5.5). See Pricing for the full list.
-* **Latency:** Comparative latency, relative to the current lineup, as published in the models overview. Actual latency depends on prompt length, output length, and thinking effort.
+* **Price / MTok:** Input / output, base price per million tokens. Batch API requests are 50% off; prompt caching reads cost 10% of the base input price (2.5% on Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, and Claude Mythos 5.1, 5% on Claude Opus 5.5 and Claude Sonnet 5.5). See Pricing for the full list.
 * **Thinking:** Adaptive thinking lets the model decide how much to think, steered by effort. Extended thinking is the manual budget\_tokens mode on earlier models.
 * **Default effort:** The effort parameter’s default on the Claude API. Models without a value don’t support the parameter.
 * **Knowledge cutoff:** Reliable knowledge cutoff: the date through which the model’s knowledge is most extensive and reliable.
@@ -92,7 +73,6 @@ Five changes are additive:
 | Max output                                                                              | 128K tokens            |
 | [Thinking](../../build-with-claude/thinking.md)              | Adaptive (always on)   |
 | [Default effort](../../build-with-claude/effort.md)          | `high`                 |
-| Comparative latency                                                                     | Slower                 |
 | Input → output                                                                          | Text and images → text |
 | Reliable knowledge cutoff                                                               | Jun 2026               |
 | Training data cutoff                                                                    | Jun 2026               |
@@ -101,20 +81,24 @@ Five changes are additive:
 
 | Feature                                                                       | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | :---------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Status](../../about-claude/model-deprecations.md) | Active (latest)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| [Status](../../about-claude/model-deprecations.md) | Active (legacy)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Released                                                                      | September 1, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | Retirement                                                                    | Not sooner than September 1, 2027                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | Platforms                                                                     | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) |
 
 ## Resources
 
+**Migrate to Claude Fable 5.2**
+
+What changes when moving from Claude Fable 5.1 to Claude Fable 5.2.
+
+**Claude Fable 5.2**
+
+The current Fable model: overview, specs, and resources.
+
 **Prompting Claude Fable 5.1**
 
 Model-specific prompting guidance for long-horizon and agentic work.
-
-**Claude Fable 5.1 migration guide**
-
-What changes when you move from Claude Fable 5, Claude Opus 5, or Claude Opus 4.8.
 
 **Preserved thinking**
 

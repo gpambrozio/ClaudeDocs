@@ -175,8 +175,8 @@ go get github.com/anthropics/anthropic-sdk-go/v2/googlecloud
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.6.0")
-implementation("com.anthropic:anthropic-java-google-cloud:3.6.0")
+implementation("com.anthropic:anthropic-java:3.7.0")
+implementation("com.anthropic:anthropic-java-google-cloud:3.7.0")
 ```
 
 **Maven**
@@ -185,12 +185,12 @@ implementation("com.anthropic:anthropic-java-google-cloud:3.6.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.6.0</version>
+    <version>3.7.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-google-cloud</artifactId>
-    <version>3.6.0</version>
+    <version>3.7.0</version>
 </dependency>
 ```
 
@@ -536,6 +536,7 @@ The Models API and the following features are available on Claude Models on Goog
 * [Thinking](../thinking.md)
   * [Adaptive thinking](../thinking-steering-and-cost.md)
   * [Extended thinking](../extended-thinking.md)
+  * [Preserved thinking](../preserved-thinking.md)
 * [Token counting](../token-counting.md)
 * [Tool runner](../../agents-and-tools/tool-use/tool-runner.md) (Beta)
 * [Vision (images)](../vision.md)
@@ -562,7 +563,6 @@ Customer-managed encryption keys (CMEK) are available with Google Cloud KMS keys
   * [Session threads](../../managed-agents/session-threads.md) (Beta)
 * [Outcomes](../../managed-agents/define-outcomes.md) (Beta)
 * [Permission policies](../../managed-agents/permission-policies.md) (Beta)
-* [Preserved thinking](../preserved-thinking.md)
 * [Scheduled deployments](../../managed-agents/scheduled-deployments.md) (Beta)
 * [Self-hosted sandboxes](../../managed-agents/self-hosted-sandboxes.md) (Beta)
 * [Session budgets](../../managed-agents/budgets.md) (Beta)

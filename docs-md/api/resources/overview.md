@@ -6,6 +6,10 @@ url: https://platform.claude.com/docs/en/resources/overview
 description: Model cards with detailed documentation for Claude models.
 ---
 
+**Claude Fable 5.2 and Mythos 5.2 System Card**
+
+Detailed documentation of Claude Fable 5.2 and Claude Mythos 5.2.
+
 **Claude Haiku 5.5 System Card**
 
 Detailed documentation of Claude Haiku 5.5.
