@@ -633,6 +633,16 @@ signature is missing or invalid.
 
       - `organization_id: String`
 
+    - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+      - `type: :"user_profile.program_status_updated"`
+
+      - `id: String`
+
+        ID of the user profile that triggered the event.
+
+      - `organization_id: String`
+
 ### Example
 
 ```ruby
@@ -1260,6 +1270,16 @@ you have already verified the signature yourself.
       - `enforcement_action_id: String`
 
         ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+      - `organization_id: String`
+
+    - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+      - `type: :"user_profile.program_status_updated"`
+
+      - `id: String`
+
+        ID of the user profile that triggered the event.
 
       - `organization_id: String`
 
@@ -2120,9 +2140,19 @@ puts(event)
 
       - `organization_id: String`
 
+    - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+      - `type: :"user_profile.program_status_updated"`
+
+      - `id: String`
+
+        ID of the user profile that triggered the event.
+
+      - `organization_id: String`
+
 ### Beta Webhook Event Data
 
-- `type BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 43 more`
+- `type BetaWebhookEventData = BetaWebhookSessionCreatedEventData | BetaWebhookSessionPendingEventData | BetaWebhookSessionRunningEventData | 44 more`
 
   - `class BetaWebhookSessionCreatedEventData`
 
@@ -2708,6 +2738,16 @@ puts(event)
 
     - `organization_id: String`
 
+  - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+    - `type: :"user_profile.program_status_updated"`
+
+    - `id: String`
+
+      ID of the user profile that triggered the event.
+
+    - `organization_id: String`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `class BetaWebhookMemoryStoreArchivedEventData`
@@ -3029,6 +3069,18 @@ puts(event)
   - `enforcement_action_id: String`
 
     ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `organization_id: String`
+
+### Beta Webhook User Profile Program Status Updated Event Data
+
+- `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+  - `type: :"user_profile.program_status_updated"`
+
+  - `id: String`
+
+    ID of the user profile that triggered the event.
 
   - `organization_id: String`
 

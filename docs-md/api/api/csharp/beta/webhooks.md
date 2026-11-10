@@ -851,6 +851,16 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
       - `required string OrganizationID`
 
+    - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+      - `JsonElement Type = "user_profile.program_status_updated"`
+
+      - `required string ID`
+
+        ID of the user profile that triggered the event.
+
+      - `required string OrganizationID`
+
 ### Beta Webhook Event Data
 
 - `class BetaWebhookEventData: union`
@@ -1439,6 +1449,16 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
 
     - `required string OrganizationID`
 
+  - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+    - `JsonElement Type = "user_profile.program_status_updated"`
+
+    - `required string ID`
+
+      ID of the user profile that triggered the event.
+
+    - `required string OrganizationID`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `class BetaWebhookMemoryStoreArchivedEventData`
@@ -1760,6 +1780,18 @@ url: https://platform.claude.com/docs/en/api/csharp/beta/webhooks
   - `required string EnforcementActionID`
 
     ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `required string OrganizationID`
+
+### Beta Webhook User Profile Program Status Updated Event Data
+
+- `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+  - `JsonElement Type = "user_profile.program_status_updated"`
+
+  - `required string ID`
+
+    ID of the user profile that triggered the event.
 
   - `required string OrganizationID`
 

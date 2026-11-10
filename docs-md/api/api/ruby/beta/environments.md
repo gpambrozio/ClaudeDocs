@@ -241,6 +241,8 @@ Create a new environment with the specified configuration.
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -578,6 +580,8 @@ List environments with pagination support.
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -907,6 +911,8 @@ Retrieve a specific environment by ID.
   - `:"telemetry-destinations-2026-08-11"`
 
   - `:"webhooks-2026-10-07"`
+
+  - `:"admin-user-sign-out-2026-10-08"`
 
   - `:"message-threads-2026-08-12"`
 
@@ -1347,6 +1353,8 @@ Update an existing environment's configuration.
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -1672,6 +1680,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -1840,6 +1850,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
   - `:"telemetry-destinations-2026-08-11"`
 
   - `:"webhooks-2026-10-07"`
+
+  - `:"admin-user-sign-out-2026-10-08"`
 
   - `:"message-threads-2026-08-12"`
 
@@ -2330,6 +2342,22 @@ puts(beta_environment)
 
     - `:account`
 
+### Beta Environment Archived Error Details
+
+- `class BetaEnvironmentArchivedErrorDetails`
+
+  The environment is archived, so it cannot be updated.
+
+  - `error_code: :environment_archived`
+
+### Beta Environment Create Disabled Error Details
+
+- `class BetaEnvironmentCreateDisabledErrorDetails`
+
+  Anthropic has turned off creating environments for this organization. Existing environments still work.
+
+  - `error_code: :environment_create_disabled`
+
 ### Beta Environment Delete Response
 
 - `class BetaEnvironmentDeleteResponse`
@@ -2343,6 +2371,38 @@ puts(beta_environment)
   - `id: String`
 
     Environment identifier
+
+### Beta Environment Not Found Error Details
+
+- `class BetaEnvironmentNotFoundErrorDetails`
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+  - `error_code: :environment_not_found`
+
+### Beta Environment Update Disabled Error Details
+
+- `class BetaEnvironmentUpdateDisabledErrorDetails`
+
+  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
+
+  - `error_code: :environment_update_disabled`
+
+### Beta Invalid Config Type Change Error Details
+
+- `class BetaInvalidConfigTypeChangeErrorDetails`
+
+  `config.type` differs from the environment's stored type, which cannot change after creation.
+
+  - `error_code: :invalid_config_type_change`
+
+### Beta Invalid Metadata Error Details
+
+- `class BetaInvalidMetadataErrorDetails`
+
+  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
+
+  - `error_code: :invalid_metadata`
 
 ### Beta Limited Network
 
@@ -2621,6 +2681,8 @@ Retrieve detailed information about a specific work item.
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -2886,6 +2948,8 @@ Long poll for work items in the queue.
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -3139,6 +3203,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -3284,7 +3350,7 @@ Record a heartbeat for a work item to maintain the lease.
 
 - `expected_last_heartbeat: optional String | nil` (query parameter)
 
-  Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
+  Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match. The server does not compare the value when the work item is 'stopping' or 'stopped'.
 
 - `betas: optional Array[AnthropicBeta]` (header parameter)
 
@@ -3395,6 +3461,8 @@ Record a heartbeat for a work item to maintain the lease.
   - `:"telemetry-destinations-2026-08-11"`
 
   - `:"webhooks-2026-10-07"`
+
+  - `:"admin-user-sign-out-2026-10-08"`
 
   - `:"message-threads-2026-08-12"`
 
@@ -3591,6 +3659,8 @@ Stop a work item, initiating graceful or forced shutdown.
   - `:"telemetry-destinations-2026-08-11"`
 
   - `:"webhooks-2026-10-07"`
+
+  - `:"admin-user-sign-out-2026-10-08"`
 
   - `:"message-threads-2026-08-12"`
 
@@ -3855,6 +3925,8 @@ List work items in an environment.
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -4113,6 +4185,8 @@ Update work item metadata with merge semantics.
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -4367,6 +4441,8 @@ Get statistics about the work queue for an environment.
   - `:"telemetry-destinations-2026-08-11"`
 
   - `:"webhooks-2026-10-07"`
+
+  - `:"admin-user-sign-out-2026-10-08"`
 
   - `:"message-threads-2026-08-12"`
 

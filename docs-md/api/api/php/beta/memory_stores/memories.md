@@ -696,63 +696,97 @@ var_dump($betaManagedAgentsDeletedMemory);
 
     - `"invalid_request_error" type`
 
+      The broad category of the error.
+
     - `string message`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
   - `class BetaAuthenticationError`
 
     - `"authentication_error" type`
 
+      The broad category of the error.
+
     - `string message`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
   - `class BetaBillingError`
 
     - `"billing_error" type`
 
+      The broad category of the error.
+
     - `string message`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
   - `class BetaPermissionError`
 
     - `"permission_error" type`
 
+      The broad category of the error.
+
     - `string message`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
   - `class BetaNotFoundError`
 
     - `"not_found_error" type`
 
+      The broad category of the error.
+
     - `string message`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
   - `class BetaRateLimitError`
 
     - `"rate_limit_error" type`
 
+      The broad category of the error.
+
     - `string message`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
   - `class BetaGatewayTimeoutError`
 
     - `"timeout_error" type`
 
+      The broad category of the error.
+
     - `string message`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
   - `class BetaAPIError`
 
     - `"api_error" type`
 
+      The broad category of the error.
+
     - `string message`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
   - `class BetaOverloadedError`
 
     - `"overloaded_error" type`
 
+      The broad category of the error.
+
     - `string message`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
   - `class ManagedAgentsMemoryPreconditionFailedError`
 
     - `"memory_precondition_failed_error" type`
 
     - `?string message`
-
-      A human-readable explanation of why the precondition failed.
 
   - `class ManagedAgentsMemoryPathConflictError`
 
@@ -769,8 +803,6 @@ var_dump($betaManagedAgentsDeletedMemory);
       The path that blocked the write: the requested path, or the path of a memory that is an ancestor or descendant of it.
 
     - `?string message`
-
-      A human-readable explanation of the conflict. To handle the error in code, use `conflicting_path` and `conflicting_memory_id` instead.
 
   - `class ManagedAgentsConflictError`
 
@@ -910,8 +942,6 @@ var_dump($betaManagedAgentsDeletedMemory);
 
   - `?string message`
 
-    A human-readable explanation of the conflict. To handle the error in code, use `conflicting_path` and `conflicting_memory_id` instead.
-
 ### Beta Managed Agents Memory Precondition Failed Error
 
 - `class ManagedAgentsMemoryPreconditionFailedError`
@@ -919,8 +949,6 @@ var_dump($betaManagedAgentsDeletedMemory);
   - `"memory_precondition_failed_error" type`
 
   - `?string message`
-
-    A human-readable explanation of why the precondition failed.
 
 ### Beta Managed Agents Memory Prefix
 

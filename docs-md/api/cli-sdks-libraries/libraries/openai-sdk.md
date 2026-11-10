@@ -205,6 +205,7 @@ Here are the most substantial differences from using OpenAI:
 * `response_format` accepts only `json_schema` with `strict: true`. A request that sets `json_object` or `text` returns a 400 error.
 * Audio and file inputs are not supported. A request that includes an `input_audio` or `file` content part returns a 400 error.
 * Prompt caching is not supported, but it is supported in the [Anthropic SDKs](../overview.md).
+* The API doesn’t emit [OpenTelemetry spans](../../manage-claude/opentelemetry.md) for requests through the compatibility layer. To get these spans, use the native Claude API.
 * System/developer messages are hoisted and concatenated into the top-level `system` field, wherever they appear in the conversation. To add system instructions partway through a conversation, use [mid-conversation system messages](../../build-with-claude/mid-conversation-system-messages.md) in the native Claude API.
 * Depending on the model, text generated for a request that sets `temperature` or `top_p` to a value other than the Claude API’s default might not carry the [text watermark](../../build-with-claude/text-watermark.md#sampling-settings). If you rely on the watermark, omit both parameters.
 

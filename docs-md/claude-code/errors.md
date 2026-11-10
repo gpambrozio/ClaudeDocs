@@ -238,10 +238,12 @@ Match the message you see to a section below.
 | `The current directory no longer exists (it was deleted or moved)` / `Can't read the current directory` | [Command-line errors](#the-current-directory-no-longer-exists) |
 | `Temp directory <dir> ... Refusing to use it` / `Claude Code's temporary directory <dir> could not be created` | [Command-line errors](#temp-directory-refused-or-cannot-be-created) |
 | `ENOSPC: no space left on device, mkdir '<dir>'` | [Command-line errors](#temp-directory-refused-or-cannot-be-created) |
+| `Error: Claude Code could not save ... because the disk is full (ENOSPC)` / `because your disk quota is used up (EDQUOT)` | [Command-line errors](#could-not-save-because-the-disk-is-full) |
 | `couldn't be resolved to a real location, so its skills, commands, and agents weren't loaded` | [Command-line errors](#directory-couldnt-be-resolved-to-a-real-location) |
 | `Error: Workspace not trusted` when starting Remote Control | [Command-line errors](#workspace-not-trusted-when-starting-remote-control) |
 | `Error: Workspace not trusted` when running `claude ultrareview` | [Command-line errors](#workspace-not-trusted-when-running-claude-ultrareview) |
 | `Ultrareview did not start` | [Command-line errors](#ultrareview-did-not-start) |
+| `Remote Control did not start: "<question>" got no answer` | [Command-line errors](#remote-control-did-not-start-got-no-answer) |
 | `` `<flag>` before `remote-control` is not carried over to the sessions Remote Control starts `` | [Command-line errors](#not-carried-over-to-the-sessions-remote-control-starts) |
 | `--sandbox is not supported by claude remote-control` / `--no-sandbox is not supported by claude remote-control` | [Command-line errors](#sandbox-is-not-supported-by-claude-remote-control) |
 | `` `claude import` is not yet available in this build `` | [Command-line errors](#claude-import-is-not-yet-available-in-this-build) |
@@ -316,6 +318,7 @@ Match the message you see to a section below.
 | `The packages it lists are not installed` / `The packages it lists were not installed, because` | [Plugin troubleshooting](https://code.claude.com/docs/en/plugins/troubleshooting.md#the-packages-it-lists-are-not-installed) |
 | `does not load (...), so Claude Code ignores the whole file` | [Plugin troubleshooting](https://code.claude.com/docs/en/plugins/troubleshooting.md#does-not-load-so-claude-code-ignores-the-whole-file) |
 | `path escapes plugin directory` | [Plugin errors](#path-escapes-plugin-directory) |
+| `path not read: <path> is absolute or has a ".." part` | [Plugin errors](#server-file-path-not-read) |
 | `Plugin not loaded: its manifest <path> was not read` | [Plugin errors](#plugin-not-loaded-its-manifest-was-not-read) |
 | `path could not be checked` | [Plugin errors](#path-could-not-be-checked) |
 | `its marketplace entry path does not stay inside the marketplace directory` | [Plugin errors](#marketplace-entry-path-does-not-stay-inside-the-marketplace-directory) |
@@ -332,6 +335,7 @@ Match the message you see to a section below.
 | `MCP server "<name>" connection closed before the tool call was answered` | [Tool errors](#connection-closed-before-the-tool-call-was-answered) |
 | `MCP server "<name>" is disabled — re-enable it via /mcp to use its tools` | [Tool errors](#mcp-server-is-disabled) |
 | `MCP server "<name>" tool "<tool>" timed out after <N>s. The server asked the user a question, and no answer came before the time limit.` | [Tool errors](#mcp-tool-call-timed-out-with-the-servers-question-unanswered) |
+| `Permission prompt tool returned an invalid result` | [Tool errors](#permission-prompt-tool-returned-an-invalid-result) |
 | `would be spawned with zero tools — refusing` | [Tool errors](#agent-would-be-spawned-with-zero-tools) |
 | `File is covered by a Read deny rule in your permission settings` | [Tool errors](#file-is-covered-by-a-read-deny-rule) |
 | `<path> is outside <dirs>; the permissions.blockWritesOutsideWorkingDirectories setting blocks writes outside the working directories` | [Tool errors](#setting-blocks-writes-outside-the-working-directories) |
@@ -372,6 +376,7 @@ Match the message you see to a section below.
 | `Command output was lost: the temp filesystem at <dir> is full` / `is out of inodes` | [Tool errors](#disk-quota-or-temp-filesystem-is-full) |
 | `File is not valid UTF-8. It may use a legacy encoding such as Windows-1252, Shift-JIS or GBK, or be binary` | [Tool errors](#file-is-not-valid-utf-8) |
 | `git is not installed on this Mac. To install it, run xcode-select --install, then try again.` | [Tool errors](#git-is-not-installed-on-this-mac) |
+| `Refusing to apply edits to <path>: a hook is configured for file edits in this session` | [Tool errors](#a-hook-is-configured-for-file-edits) |
 | `the source file is not valid UTF-8 text` / `the source file is not valid UTF-16 text` | [Tool errors](#the-source-file-is-not-valid-utf-8-text) |
 | `the source file has the replacement character U+FFFD` | [Tool errors](#the-source-file-is-not-valid-utf-8-text) |
 | `Not published: that file is on a network share` | [Tool errors](#not-published-that-file-is-on-a-network-share) |
@@ -382,6 +387,7 @@ Match the message you see to a section below.
 | `The safety check for domain ... is rate-limited` | [Tool errors](#webfetch-domain-safety-check-failed) |
 | `The safety check for domain ... is temporarily rate-limited` | [Tool errors](#webfetch-domain-safety-check-failed) |
 | `Unable to verify if domain ... is safe to fetch` | [Tool errors](#webfetch-domain-safety-check-failed) |
+| `MCP tool "<tool>" on server "<server>" gave no answer that could be read` / `answered without its text` | [How an MCP tool hook's result is read](https://code.claude.com/docs/en/hooks.md#how-the-tools-result-is-read) |
 | `Can't open MCP settings while no terminal is attached to this background session` | [Background session errors](#commands-refused-in-a-background-session) |
 | `Can't open MCP settings in a background session` | [Background session errors](#commands-refused-in-a-background-session) |
 | `blocked because the path is spelled in a form that cannot be safely resolved` | [Background session errors](#write-or-command-blocked-because-the-path-cannot-be-safely-resolved) |
@@ -1431,8 +1437,6 @@ For a `Login expired` message that ends with `or re-authenticate your Anthropic 
 
 This is not the same state as [OAuth token revoked or expired](#oauth-token-revoked-or-expired). Those messages report a rejection the API returned. Claude Code itself produces `Login expired` for a login it already failed to renew, so it sends no request. When the renewal fails because the account itself is suspended rather than the login being stale, Claude Code shows [Your account is on hold](#your-account-is-on-hold) instead.
 
-Sessions authenticated with an API key, [`CLAUDE_CODE_OAUTH_TOKEN`](env-vars.md), or a third-party provider don't use the saved login and never see this message.
-
 You can check for this state before a request fails: [`/status`](commands.md) shows a `Login` row reading `Expired — log in again`, plus the organization and email it has saved for the expired login. The row appears only when the saved login is your active credential and can no longer be refreshed. Sessions authenticated another way don't show the row, even if an expired login remains saved. Before v2.1.210, `/status` gave no indication in this state that a login had ever existed, because the cleared credential left it nothing to report.
 
 **What to do:**
@@ -1455,8 +1459,6 @@ In [non-interactive mode](https://code.claude.com/docs/en/headless.md) (`-p`) an
 ```text
 Failed to refresh OAuth token: another Claude Code process is refreshing it or exited mid-refresh. This is usually transient; retry in a minute, and if it persists close other Claude Code processes or sign in again
 ```
-
-Sessions authenticated with an API key, [`CLAUDE_CODE_OAUTH_TOKEN`](env-vars.md), or a third-party provider don't use the saved login and never see this message.
 
 **What to do:**
 
@@ -3376,6 +3378,21 @@ Temp directory /tmp/claude-501 is not readable (its mode may have been altered, 
 
 Before v2.1.309, Claude Code printed only the operating system's error text when the volume was full or your quota was used up. An example is `ENOSPC: no space left on device, mkdir '/tmp/claude-501'`, and the same steps apply.
 
+### Claude Code could not save because the disk is full
+
+This line on stderr after a [`claude -p`](headless.md) run means the disk is full or your disk quota is used up, so Claude Code couldn't save everything from the run:
+
+```text wrap
+Error: Claude Code could not save all of this session's transcript under /Users/you/.claude because the disk is full (ENOSPC). If you resume this session, part of the conversation may be missing. Free up space on that disk before the next run.
+```
+
+With text or `json` output, the run exits with code 1, and the answer has already been printed. With `stream-json` output, the run keeps its usual exit code, and the answer still arrives.
+
+**What to do:**
+
+* **`the disk is full (ENOSPC)`**: before your next run, free up space on the disk that holds the path in the message
+* **`your disk quota is used up (EDQUOT)`**: before your next run, free up space or ask for a larger quota
+
 ### Directory couldn't be resolved to a real location
 
 You ran `/add-dir` for a subdirectory of your working directory, and Claude Code couldn't resolve the directory to its real location.
@@ -3446,6 +3463,20 @@ Each of these messages from `claude ultrareview` means that no review started an
 * **``Ultrareview did not start: `--trust-workspace` takes no value``**: something other than a flag follows `--trust-workspace`, such as a PR number or `false`. If you don't trust the folder, leave the flag out. To trust it for this run, put the PR number or base branch before the flag: `claude ultrareview 1234 --trust-workspace`.
 
 Before v2.1.309, `claude ultrareview` didn't accept `--trust-workspace`.
+
+### Remote Control did not start because a question got no answer
+
+This message means [`claude remote-control`](remote-control.md) asked the first-run question quoted in the message and got no answer:
+
+```text
+Remote Control did not start: "Enable Remote Control?" got no answer. Run `claude remote-control` at a terminal and answer y once; it won't ask again.
+Remote Control did not start: "Choose [1/2] (default: 1):" got no answer. You can run `claude remote-control` and choose, or pass --spawn=same-dir or --spawn=worktree.
+```
+
+**What to do:**
+
+* **`Enable Remote Control?`**: in a script or a service, standard input ends before anyone can answer. Run `claude remote-control` once in a terminal, as the user your script or service runs as, and answer `y`.
+* **`Choose [1/2] (default: 1):`**: run `claude remote-control` again and [choose a spawn mode](https://code.claude.com/docs/en/remote-control.md#set-the-default-spawn-mode-for-a-project), or pass [`--spawn=same-dir` or `--spawn=worktree`](remote-control.md#start-a-remote-control-session) to skip the question
 
 ### Not carried over to the sessions Remote Control starts
 
@@ -4452,6 +4483,22 @@ Before v2.1.257, the check on paths the plugin declares looked only at the path'
 * If the message ends with `EACCES`, restore your execute permission on every directory leading to the file or folder the path names. Check the directories above the path, then follow each symlink you reach and check the directories leading to where it points. For any other error code, look it up in the [causes and steps for a path that couldn't be checked](#path-could-not-be-checked).
 * To share files with other plugins in the same marketplace, link them with a symlink inside the plugin directory, following the [symlink rules](https://code.claude.com/docs/en/plugins/host-marketplace.md#share-files-within-a-marketplace-with-symlinks)
 
+### Server file path not read
+
+The `path not read` message means Claude Code didn't read an MCP or LSP server file that a plugin names, because of the file's path. The rest of the plugin loads, without the servers the file defines.
+
+A `..` part counts even when the path stays inside the plugin, as in this example:
+
+```text
+mcp-servers path not read: ./sub/../x.json is absolute or has a ".." part
+```
+
+**What to do:**
+
+* If you installed the plugin and don't maintain it, report the message to its author
+* If you maintain the plugin, keep the server file inside the plugin directory. Name it in the manifest or marketplace entry with a path that starts with `./` and has no `..`, for example `./servers/x.json`
+* To share one server file between plugins in the same marketplace, link the file into each plugin with a symlink, following the [symlink rules](https://code.claude.com/docs/en/plugins/host-marketplace.md#share-files-within-a-marketplace-with-symlinks)
+
 ### Plugin not loaded: its manifest was not read
 
 Claude Code couldn't confirm that a marketplace plugin's [manifest](https://code.claude.com/docs/en/plugins/manifest-reference.md) at `.claude-plugin/plugin.json` is inside the plugin, so it loads nothing from that plugin. For a plugin in a [local marketplace](https://code.claude.com/docs/en/plugins/loading.md#in-place-and-copied-plugins), Claude Code also couldn't confirm that the manifest is inside that marketplace. The message appears in the `/plugin` **Errors** tab, and the reason at its end says what Claude Code found.
@@ -4673,6 +4720,23 @@ Before v2.1.310, the result ended at `timed out after <N>s` and said nothing abo
 * In a TypeScript Agent SDK application, make your [`onElicitation`](agent-sdk/typescript.md#options) callback return its answer before the limit runs out
 * To give an answer more time, set a longer [`timeout`](mcp.md#time-limits-on-mcp-tool-calls) in milliseconds in the server's configuration entry, such as `"timeout": 600000` for 10 minutes
 * Run the task in an interactive session instead and answer the server's [dialog](https://code.claude.com/docs/en/mcp.md#respond-to-mcp-elicitation-requests) yourself
+
+### Permission prompt tool returned an invalid result
+
+The tool you passed to [`--permission-prompt-tool`](cli-reference.md#cli-flags) returned an answer Claude Code couldn't read, so the tool call waiting on it didn't run, even if the answer allowed the call:
+
+```text wrap
+Permission prompt tool returned an invalid result. Expected a single text block param with type="text" and a string text value.
+```
+
+**What to do:**
+
+* Return one text block whose text is `{"behavior": "allow"}` or `{"behavior": "deny", "message": "<reason>"}`. To change the input, add `updatedInput` to the `allow` object. From v2.1.86 through v2.1.206, an `allow` needed `"updatedInput": {}` to keep the input.
+* Return no [`structuredContent`](agent-sdk/custom-tools.md#return-structured-data), which your MCP SDK may add on its own. For example, register the tool:
+  * **`FastMCP` or `MCPServer` from `mcp.server`**: with `structured_output=False`
+  * **`FastMCP` from `fastmcp`**: with `output_schema=None`, and return a string
+  * **MCP TypeScript SDK**: without `outputSchema`
+* If the error comes only with inputs of about 40 KB or more, don't copy the input into `updatedInput` or a deny's `message`. To change an input that large, [raise your prompt tool's output limit](https://code.claude.com/docs/en/mcp.md#raise-the-limit-for-a-specific-tool).
 
 ### Agent would be spawned with zero tools
 
@@ -5130,6 +5194,23 @@ A file that is meant to be UTF-8 gets this message too when it contains even one
 * To keep editing the file with the Edit tool, convert it to UTF-8, or fix the invalid bytes in a file that is meant to be UTF-8, then ask Claude to make the edit again
 
 Before v2.1.296, Edit and NotebookEdit applied such an edit and saved every byte they couldn't decode as `U+FFFD`. On those versions, update Claude Code.
+
+### Refusing to apply edits: a hook is configured for file edits in this session
+
+Claude tried to publish an [artifact](https://code.claude.com/docs/en/artifacts.md) with a [one-step update](https://code.claude.com/docs/en/artifacts.md#turn-off-one-step-artifact-updates), a small change to the artifact's file included in the publish, and Claude Code refused. Nothing was published and the file is unchanged. The message appears in the Artifact tool result:
+
+```text wrap
+Refusing to apply edits to <path>: a hook is configured for file edits in this session, so a publish can't apply edits here. Edit the file, then publish it without edits. Nothing was published.
+```
+
+Claude Code doesn't allow one-step updates while your session has a [`PreToolUse` hook](hooks.md#pretooluse) or [mod](https://code.claude.com/docs/en/plugins/mods/overview.md) on `Edit` or `Write`.
+
+**What to do:**
+
+* Nothing, if Claude went on to edit the file and publish it
+* If Claude stopped at the message, ask Claude to edit the file and publish
+* If the message keeps coming back, quit and relaunch Claude Code
+* If the message comes back even after a relaunch, [turn off one-step updates](https://code.claude.com/docs/en/artifacts.md#turn-off-one-step-artifact-updates)
 
 ### The source file is not valid UTF-8 text
 

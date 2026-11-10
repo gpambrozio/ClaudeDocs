@@ -133,6 +133,8 @@ Retrieve detailed information about a specific work item.
 
     - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
+    - `AdminUserSignOut2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MessageThreads2026_08_12("message-threads-2026-08-12")`
 
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -403,6 +405,8 @@ Long poll for work items in the queue.
 
     - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
+    - `AdminUserSignOut2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MessageThreads2026_08_12("message-threads-2026-08-12")`
 
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -660,6 +664,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
+    - `AdminUserSignOut2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MessageThreads2026_08_12("message-threads-2026-08-12")`
 
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -812,7 +818,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `string? expectedLastHeartbeat` (query parameter)
 
-    Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
+    Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match. The server does not compare the value when the work item is 'stopping' or 'stopped'.
 
   - `IReadOnlyList<AnthropicBeta> betas` (header parameter)
 
@@ -921,6 +927,8 @@ Record a heartbeat for a work item to maintain the lease.
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+    - `AdminUserSignOut2026_10_08("admin-user-sign-out-2026-10-08")`
 
     - `MessageThreads2026_08_12("message-threads-2026-08-12")`
 
@@ -1122,6 +1130,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `TelemetryDestinations2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `Webhooks2026_10_07("webhooks-2026-10-07")`
+
+    - `AdminUserSignOut2026_10_08("admin-user-sign-out-2026-10-08")`
 
     - `MessageThreads2026_08_12("message-threads-2026-08-12")`
 
@@ -1391,6 +1401,8 @@ List work items in an environment.
 
     - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
+    - `AdminUserSignOut2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MessageThreads2026_08_12("message-threads-2026-08-12")`
 
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -1655,6 +1667,8 @@ Update work item metadata with merge semantics.
 
     - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
+    - `AdminUserSignOut2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MessageThreads2026_08_12("message-threads-2026-08-12")`
 
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -1913,6 +1927,8 @@ Get statistics about the work queue for an environment.
 
     - `Webhooks2026_10_07("webhooks-2026-10-07")`
 
+    - `AdminUserSignOut2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MessageThreads2026_08_12("message-threads-2026-08-12")`
 
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -1980,6 +1996,44 @@ Console.WriteLine(betaSelfHostedWorkQueueStats);
 ```
 
 ## Domain types
+
+### Beta Heartbeat Precondition Failed Error Details
+
+- `class BetaHeartbeatPreconditionFailedErrorDetails`
+
+  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
+
+  - `required BetaWorkLeaseState CurrentState`
+
+    The lease as the server holds it.
+
+    - `required string? LastHeartbeat`
+
+      RFC 3339 timestamp of the stored heartbeat, or null if there has been none
+
+    - `required bool LeaseExtended`
+
+      Always false: a refused heartbeat does not extend the lease
+
+    - `required State State`
+
+      Current state of the work item
+
+      - `Queued("queued")`
+
+      - `Starting("starting")`
+
+      - `Active("active")`
+
+      - `Stopping("stopping")`
+
+      - `Stopped("stopped")`
+
+    - `required long TtlSeconds`
+
+      TTL of the lease
+
+  - `JsonElement ErrorCode = "heartbeat_precondition_failed"`
 
 ### Beta Self Hosted Work
 
@@ -2243,6 +2297,38 @@ Console.WriteLine(betaSelfHostedWorkQueueStats);
   - `required string ID`
 
     Session identifier (e.g., 'session_...')
+
+### Beta Work Lease State
+
+- `class BetaWorkLeaseState`
+
+  A work item's lease as the server holds it.
+
+  - `required string? LastHeartbeat`
+
+    RFC 3339 timestamp of the stored heartbeat, or null if there has been none
+
+  - `required bool LeaseExtended`
+
+    Always false: a refused heartbeat does not extend the lease
+
+  - `required State State`
+
+    Current state of the work item
+
+    - `Queued("queued")`
+
+    - `Starting("starting")`
+
+    - `Active("active")`
+
+    - `Stopping("stopping")`
+
+    - `Stopped("stopped")`
+
+  - `required long TtlSeconds`
+
+    TTL of the lease
 
 ---
 

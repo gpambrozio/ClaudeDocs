@@ -127,6 +127,8 @@ Create a Vault
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -361,6 +363,8 @@ List Vaults
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -577,6 +581,8 @@ Retrieve a Vault
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -787,6 +793,8 @@ Update a Vault
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
 
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
@@ -1009,6 +1017,8 @@ Delete a Vault
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -1186,6 +1196,8 @@ Archive a Vault
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
 
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
@@ -1451,6 +1463,8 @@ Create a Credential
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
 
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
@@ -1984,6 +1998,8 @@ List Credentials
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -2327,6 +2343,8 @@ Retrieve a Credential
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -2668,6 +2686,8 @@ Update a Credential
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
 
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
@@ -3151,6 +3171,8 @@ Delete a Credential
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -3336,6 +3358,8 @@ Archive a Credential
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
 
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
@@ -3678,6 +3702,8 @@ Validate an MCP OAuth Credential
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
 
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 

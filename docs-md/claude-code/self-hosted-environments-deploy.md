@@ -19,6 +19,8 @@ A self-hosted runner executes arbitrary, model-directed code on your infrastruct
   * **With [Anthropic-managed git](#use-the-anthropic-git-proxy)**: with such a credential, Claude reaches GitHub directly instead of through Anthropic-managed git.
   * **Without Anthropic-managed git**: a clone credential can stay in the image if you scope it as tightly as [Ship git config in your image](#ship-git-config-in-your-image) describes.
 * **Keep the environment secret off session-running hosts**: the environment secret can register runners and pick up any session queued on the environment. On a fixed fleet it lives on every runner host, where any session's code can read the secret file. Prefer [on-demand runners](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#on-demand-runners), where the secret stays on the orchestrator host, which never runs user code, and each runner receives a single-use work order that registers exactly one runner. On a fixed fleet, treat the environment-secret file as readable by every session and rotate the secret after any suspected session compromise.
+  * **After a suspected compromise, first revoke the suspect session**: before you stop its runner or revoke the secret, select **Revoke token** in the session's menu on the **Activity** tab. No runner can then resume it.
+  * **Then replace the secret**: have an [Owner](https://code.claude.com/docs/en/cloud-environments.md#organization-shared-environments) create a new secret and revoke the old one from the environment's **Configuration** tab, then roll out the new one. Anthropic refuses every orchestrator and runner on the old secret, on-demand runners from its work orders included. Your runners exit, interrupting their sessions.
 * **Default-deny network egress**: restrict runner and session container outbound traffic at your own network boundary on every environment; [Default-deny egress](#default-deny-egress) covers what to allow and why.
 * **Least-privilege host IAM**: the compute identity attached to the runner host, such as an instance profile or node service account, should grant only what the runner itself needs. Sessions should obtain their own credentials through your wrapper script rather than inheriting the host's.
 * **Block the cloud metadata endpoint from sessions**: keeping sessions off the host identity requires blocking their access to the cloud metadata endpoint, and subnet-level egress policies don't intercept link-local metadata traffic, so block it in the container itself:
@@ -199,6 +201,8 @@ In exchange, the git proxy limits what the runner supports and changes what it n
 > [!WARNING]
 >
 > With `--use-anthropic-git-proxy` set, the runner deletes and replaces the global git config of the user it runs as, and keeps no backup. It does this at startup and before each session. A login or credential helper you kept there is lost. Settings that [`--configure-git`](#let-the-runner-configure-git) writes survive. Run the runner as a dedicated user or in a container, never as your own user.
+>
+> The global git config is all three of `~/.gitconfig`, the file that `GIT_CONFIG_GLOBAL` names if you set it, and the whole `$XDG_CONFIG_HOME/git` directory, by default `~/.config/git`.
 
 Keep git settings that aren't secret, such as identity and `safe.directory`, in the system git configuration.
 
@@ -236,14 +240,14 @@ On a runner started with `--use-anthropic-git-proxy`, a session fails to start w
 
 For each session, a runner on Claude Code v2.1.267 or later also logs either a `[runner:session]` line containing `governed git ACTIVE` when Anthropic serves the session's git, or one `[runner:warn]` line containing `the server withheld Anthropic-managed git for this session` when it doesn't. Find the line you're seeing among these cases:
 
-* **Neither `governed git ACTIVE` nor the `withheld` line**: a runner older than Claude Code v2.1.267 logs neither line, and Anthropic doesn't serve its sessions. Update the runner to v2.1.267 or later by following [Pin the version](#pin-the-version).
+* **Neither `governed git ACTIVE` nor the `withheld` line**: if the runner is older than Claude Code v2.1.267, Anthropic doesn't serve its sessions. Update the runner to v2.1.267 or later by following [Pin the version](#pin-the-version).
 * **The `withheld` line**: Anthropic didn't serve the session. A runner that worked with the git proxy before can fail this way with no change on your side.
   * **A repository isn't on github.com**: a session with even one repository on another git host, such as GitHub Enterprise Server, isn't served, including its github.com repositories. [Turn the Anthropic git proxy off](#turn-the-anthropic-git-proxy-off) for that environment's runners.
   * **Every repository is on github.com**: report the failure to [your Anthropic account team](#report-an-issue) with the session ID from the `withheld` line. Anthropic records the reason on its side.
 * **A line containing `remote: access denied by the git proxy`**: a session that Anthropic serves can still be refused, for example when organization policy denies git access for the session, or the session isn't authorized for the repository. The runner's log then shows a line containing `remote: access denied by the git proxy`, and the rest of that line says why.
 * **`GitHub authentication required`**: this appears when the session's creator has no working GitHub connection on claude.ai. The session's clone fails, and the git error contains `GitHub authentication required. Please reconnect your GitHub account.` Ask that person to connect or reconnect GitHub in their claude.ai settings.
 
-After you fix the cause, start the failed sessions again.
+After you fix the cause, restart the runners that failed the sessions, then have each creator send a message in their session or an Owner select **Retry**.
 
 #### Turn the Anthropic git proxy off
 
@@ -260,6 +264,8 @@ unset CLAUDE_RUNNER_USE_GIT_PROXY
 **2. Give the runner git credentials**
 
 Provide credentials that work without a prompt for every git host the runners' sessions use, github.com included. Any credential that was in the runner user's global git config is gone, because the runner deleted that config while `--use-anthropic-git-proxy` was set. [Ship credentials in your image](#ship-git-config-in-your-image) or use a [`checkout` lifecycle hook](self-hosted-environments-configuration.md#checkout).
+
+To keep credentials in the [global git config](#git-proxy-replaces-global-git-config) instead, [stop the runners](#shutdown-timing) first, because a runner started with the flag rewrites it before each session. Then delete `$XDG_CONFIG_HOME/git`, by default `~/.config/git`, and replace `~/.gitconfig`, or the file that `GIT_CONFIG_GLOBAL` names, with your own.
 
 **3. Open the network path**
 
@@ -387,6 +393,7 @@ ENTRYPOINT ["claude"]
 Swap `linux-x64` for `linux-arm64` if your nodes are ARM, or for `linux-x64-musl` or `linux-arm64-musl` on a musl-based image such as Alpine; see [Alpine Linux setup](https://code.claude.com/docs/en/setup.md#alpine-linux-and-musl-based-distributions) for the extra packages musl images need. The URL is the standard Claude Code release location, so you can verify the downloaded binary against the release's signed manifest as described in [Binary integrity and code signing](https://code.claude.com/docs/en/setup.md#binary-integrity-and-code-signing). The runner requires Claude Code version 2.1.224 or later, or 2.1.229 or later to serve Claude Tag sessions. Build the image, then push it to your registry and reference it in the recipes below:
 
 ```bash
+# If your model needs a newer release, change stable to latest in the URL
 docker build \
   --build-arg CLAUDE_CODE_VERSION="$(curl -fsSL https://downloads.claude.ai/claude-code-releases/stable)" \
   -t <your-registry>/claude-runner:latest .
@@ -420,7 +427,7 @@ Builds and tests are usually the largest and most variable part of a session's l
 The runner uses `--capacity` to cap how many sessions it runs at once. It doesn't divide CPU or memory between them, so the sessions on a runner share the container's CPU and memory. To keep one session's memory use from ending the others, run one session per runner with [its own memory limit](#give-each-session-its-own-memory-limit).
 
 * **One session per runner**: give each container one session's values. Use this sizing at `--capacity 1`, which the [hardening section](#harden-your-deployment) recommends, and for [on-demand runners](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#on-demand-runners), where you set the values on the workload your [`spawn-runner` hook](self-hosted-environments-configuration.md#the-spawn-runner-hook) submits, such as a Kubernetes Job's pod template.
-* **Several sessions per runner**: at a `--capacity` above one, multiply one session's values by the capacity, because up to that many sessions can run in the container at the same time. The [Kubernetes](#kubernetes) and [Docker Compose](#docker-compose) recipes run `--capacity 4` with no CPU or memory limits, so add limits sized for the capacity you run.
+* **Several sessions per runner**: at a `--capacity` above one, multiply one session's values by the capacity, because up to that many sessions can run in the container at the same time, [idle ones included](#release-idle-sessions-on-a-fixed-fleet). The [Kubernetes](#kubernetes) and [Docker Compose](#docker-compose) recipes run `--capacity 4` with no CPU or memory limits, so add limits sized for the capacity you run.
 * **Several runner containers on one host**: size the host for the sum of the runners' capacities, because each runner counts only its own sessions against `--capacity`:
 
   * **Memory**: multiply one session's memory by the sum, then add what the host's own processes use
@@ -503,7 +510,9 @@ With a higher limit, you leave room for heavier builds, and with a lower one, yo
 
 ## Kubernetes
 
-The runner serves `GET /healthz` on port 8080 by default, configurable with `--health-port`, so Kubernetes probes work with no extra setup. The endpoint returns `200` whenever the process is alive, so the probes below detect a dead process, not a stuck one; to catch a runner that stopped polling, alert on the `last_poll_age_seconds` series from [`/metrics`](self-hosted-environments-reference.md#prometheus-metrics). The Deployment below mounts the environment secret from a Kubernetes Secret, points the liveness and readiness probes at `/healthz`, and sets a 90-second termination grace period. See [Shutdown timing](#shutdown-timing) for why the grace period matters.
+The runner serves `GET /healthz` on port 8080 by default, configurable with `--health-port`. After startup, the endpoint returns `200` whenever the process is alive, so the probes below detect a dead process, not a stuck one. To catch a runner that stopped polling, alert on the `last_poll_age_seconds` series from [`/metrics`](self-hosted-environments-reference.md#prometheus-metrics).
+
+The Deployment below mounts the environment secret from a Kubernetes Secret, points the liveness and readiness probes at `/healthz`, and sets a 90-second termination grace period. See [Shutdown timing](#shutdown-timing) for why the grace period matters.
 
 The manifest sets no CPU or memory `resources` on the runner container. Add a block sized for the capacity you run, as [Size CPU and memory for sessions](#size-cpu-and-memory-for-sessions) describes.
 
@@ -560,6 +569,10 @@ spec:
           secret:
             secretName: claude-runner-environment-secret
 ```
+
+> [!NOTE]
+>
+> If the pod's events show the liveness probe failing during startup, raise its `initialDelaySeconds` or add a `startupProbe`. Nothing answers on the health port until the runner has registered and finished its startup checks. With the settings above, Kubernetes restarts a runner that isn't serving within about 90 seconds.
 
 The Deployment above lives in a `claude-runners` namespace. Create the namespace first:
 

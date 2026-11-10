@@ -149,6 +149,8 @@ Create a Memory Store
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -173,7 +175,7 @@ Create a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `archived_at: Time`
+  - `archived_at: Time | nil`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -386,6 +388,8 @@ List Memory Stores
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -410,7 +414,7 @@ List Memory Stores
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `archived_at: Time`
+  - `archived_at: Time | nil`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -604,6 +608,8 @@ Retrieve a Memory Store
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -628,7 +634,7 @@ Retrieve a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `archived_at: Time`
+  - `archived_at: Time | nil`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -711,19 +717,19 @@ Update a Memory Store
 
   The request fails with HTTP status 400 if the store is archived.
 
-- `description: optional String`
+- `description: optional String | nil`
 
   New description for the store, up to 1,024 characters. Pass an empty string to clear it.
 
   maxLength: 1024
 
-- `metadata: optional Hash[Symbol, String]`
+- `metadata: optional Hash[Symbol, String | nil] | nil`
 
   Changes to apply to the memory store's metadata. Keys you leave out keep their values.
 
   Set a key to a string to add or replace it, or to `null` to remove it. After the change, the metadata can hold at most 16 key-value pairs. Keys are 1 to 64 characters long and values at most 512 characters.
 
-- `name: optional String`
+- `name: optional String | nil`
 
   The new name of the memory store, 1 to 255 characters long, without control characters.
 
@@ -841,6 +847,8 @@ Update a Memory Store
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -865,7 +873,7 @@ Update a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `archived_at: Time`
+  - `archived_at: Time | nil`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -1058,6 +1066,8 @@ Delete a Memory Store
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -1229,6 +1239,8 @@ Archive a Memory Store
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -1253,7 +1265,7 @@ Archive a Memory Store
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `archived_at: Time`
+  - `archived_at: Time | nil`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -1346,7 +1358,7 @@ puts(beta_managed_agents_memory_store)
 
     The unique ID of the memory store (`memstore_...`). Use it to attach the store to a session.
 
-  - `archived_at: Time`
+  - `archived_at: Time | nil`
 
     When the memory store was archived, in RFC 3339, or `null` if it hasn't been.
 
@@ -1400,7 +1412,7 @@ Create a Memory
 
   The ID of the memory store to create the memory in (`memstore_...`).
 
-- `content: String`
+- `content: String | nil`
 
   The UTF-8 text content of the new memory. Pass `""` to create an empty memory.
 
@@ -1412,7 +1424,7 @@ Create a Memory
 
   A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long.
 
-  minLength: 2, maxLength: 1024
+  minLength: 2, maxLength: 1024, pattern: ^(/[^/ ]+)+$
 
 - `view: optional BetaManagedAgentsMemoryView` (query parameter)
 
@@ -1538,6 +1550,8 @@ Create a Memory
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -1608,7 +1622,7 @@ Create a Memory
 
     format: date-time
 
-  - `content: optional String`
+  - `content: optional String | nil`
 
     The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
 
@@ -1621,7 +1635,7 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-beta_managed_agents_memory = anthropic.beta.memory_stores.memories.create("memory_store_id", content: "content", path: "xx")
+beta_managed_agents_memory = anthropic.beta.memory_stores.memories.create("memory_store_id", content: "content", path: "/P")
 
 puts(beta_managed_agents_memory)
 ```
@@ -1807,6 +1821,8 @@ List Memories
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -1881,7 +1897,7 @@ List Memories
 
       format: date-time
 
-    - `content: optional String`
+    - `content: optional String | nil`
 
       The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
 
@@ -2075,6 +2091,8 @@ Retrieve a Memory
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -2145,7 +2163,7 @@ Retrieve a Memory
 
     format: date-time
 
-  - `content: optional String`
+  - `content: optional String | nil`
 
     The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
 
@@ -2212,17 +2230,17 @@ Update a Memory
 
     Return the object with `content` populated. On list endpoints, `view=full` caps `limit` at 20.
 
-- `content: optional String`
+- `content: optional String | nil`
 
   New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).
 
-- `path: optional String`
+- `path: optional String | nil`
 
   The new path of the memory, which renames it. Omit it to keep the current path.
 
   The memory keeps its `id`. A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long. Paths are case-sensitive.
 
-  minLength: 2, maxLength: 1024
+  minLength: 2, maxLength: 1024, pattern: ^(/[^/ ]+)+$
 
 - `precondition: optional BetaManagedAgentsPrecondition`
 
@@ -2235,6 +2253,8 @@ Update a Memory
   - `content_sha256: optional String`
 
     Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
+
+    pattern: ^[a-f0-9]{64}$
 
 - `betas: optional Array[AnthropicBeta]` (header parameter)
 
@@ -2346,6 +2366,8 @@ Update a Memory
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -2416,7 +2438,7 @@ Update a Memory
 
     format: date-time
 
-  - `content: optional String`
+  - `content: optional String | nil`
 
     The memory's UTF-8 text content, or `null` when the response uses `view=basic`.
 
@@ -2584,6 +2606,8 @@ Delete a Memory
   - `:"telemetry-destinations-2026-08-11"`
 
   - `:"webhooks-2026-10-07"`
+
+  - `:"admin-user-sign-out-2026-10-08"`
 
   - `:"message-threads-2026-08-12"`
 
@@ -2832,6 +2856,8 @@ List Memory Versions
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -2894,15 +2920,15 @@ List Memory Versions
 
       The memory was deleted. The `content`, `content_size_bytes`, and `content_sha256` fields are `null` on this version. The preceding version, while it is retained, records the deleted content's size and hash.
 
-  - `content: optional String`
+  - `content: optional String | nil`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-  - `content_sha256: optional String`
+  - `content_sha256: optional String | nil`
 
     Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-  - `content_size_bytes: optional Integer`
+  - `content_size_bytes: optional Integer | nil`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -2964,11 +2990,11 @@ List Memory Versions
 
         minLength: 1
 
-  - `path: optional String`
+  - `path: optional String | nil`
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-  - `redacted_at: optional Time`
+  - `redacted_at: optional Time | nil`
 
     When the version was redacted, in RFC 3339, or `null` if it hasn't been.
 
@@ -3167,6 +3193,8 @@ Retrieve a Memory Version
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -3229,15 +3257,15 @@ Retrieve a Memory Version
 
       The memory was deleted. The `content`, `content_size_bytes`, and `content_sha256` fields are `null` on this version. The preceding version, while it is retained, records the deleted content's size and hash.
 
-  - `content: optional String`
+  - `content: optional String | nil`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-  - `content_sha256: optional String`
+  - `content_sha256: optional String | nil`
 
     Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-  - `content_size_bytes: optional Integer`
+  - `content_size_bytes: optional Integer | nil`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -3299,11 +3327,11 @@ Retrieve a Memory Version
 
         minLength: 1
 
-  - `path: optional String`
+  - `path: optional String | nil`
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-  - `redacted_at: optional Time`
+  - `redacted_at: optional Time | nil`
 
     When the version was redacted, in RFC 3339, or `null` if it hasn't been.
 
@@ -3486,6 +3514,8 @@ Redact a Memory Version
 
   - `:"webhooks-2026-10-07"`
 
+  - `:"admin-user-sign-out-2026-10-08"`
+
   - `:"message-threads-2026-08-12"`
 
   - `:"analytics-usage-cost-2026-08-24"`
@@ -3548,15 +3578,15 @@ Redact a Memory Version
 
       The memory was deleted. The `content`, `content_size_bytes`, and `content_sha256` fields are `null` on this version. The preceding version, while it is retained, records the deleted content's size and hash.
 
-  - `content: optional String`
+  - `content: optional String | nil`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-  - `content_sha256: optional String`
+  - `content_sha256: optional String | nil`
 
     Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-  - `content_size_bytes: optional Integer`
+  - `content_size_bytes: optional Integer | nil`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -3618,11 +3648,11 @@ Redact a Memory Version
 
         minLength: 1
 
-  - `path: optional String`
+  - `path: optional String | nil`
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-  - `redacted_at: optional Time`
+  - `redacted_at: optional Time | nil`
 
     When the version was redacted, in RFC 3339, or `null` if it hasn't been.
 

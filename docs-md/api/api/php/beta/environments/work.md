@@ -414,7 +414,7 @@ Record a heartbeat for a work item to maintain the lease.
 
 - `expectedLastHeartbeat?: optional string` (query parameter)
 
-  Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
+  Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match. The server does not compare the value when the work item is 'stopping' or 'stopped'.
 
 - `betas?: optional list<AnthropicBeta>` (header parameter)
 
@@ -970,6 +970,16 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 ## Domain types
 
+### Beta Heartbeat Precondition Failed Error Details
+
+- `class HeartbeatPreconditionFailedErrorDetails`
+
+  - `WorkLeaseState currentState`
+
+    The lease as the server holds it.
+
+  - `"heartbeat_precondition_failed" errorCode`
+
 ### Beta Self Hosted Work
 
 - `class SelfHostedWork`
@@ -1113,6 +1123,26 @@ var_dump($betaSelfHostedWorkQueueStats);
   - `string id`
 
     Session identifier (e.g., 'session_...')
+
+### Beta Work Lease State
+
+- `class WorkLeaseState`
+
+  - `?string lastHeartbeat`
+
+    RFC 3339 timestamp of the stored heartbeat, or null if there has been none
+
+  - `bool leaseExtended`
+
+    Always false: a refused heartbeat does not extend the lease
+
+  - `State state`
+
+    Current state of the work item
+
+  - `int ttlSeconds`
+
+    TTL of the lease
 
 ---
 

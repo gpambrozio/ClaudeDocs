@@ -782,6 +782,22 @@ curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
 
     ID of the Workspace the API key belongs to, including when it is the organization's default Workspace.
 
+### Org API Key Limit Exceeded Error Details
+
+- `OrgAPIKeyLimitExceededErrorDetails object`
+
+  The organization has reached its limit of active API keys.
+
+  - `error_code: "org_api_key_limit_exceeded"`
+
+### Workspace API Key Limit Exceeded Error Details
+
+- `WorkspaceAPIKeyLimitExceededErrorDetails object`
+
+  The workspace has reached its limit of active API keys.
+
+  - `error_code: "workspace_api_key_limit_exceeded"`
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

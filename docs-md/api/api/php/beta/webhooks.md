@@ -958,6 +958,16 @@ var_dump($event);
 
     - `string organizationID`
 
+  - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+    - `"user_profile.program_status_updated" type`
+
+    - `string id`
+
+      ID of the user profile that triggered the event.
+
+    - `string organizationID`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `class BetaWebhookMemoryStoreArchivedEventData`
@@ -1279,6 +1289,18 @@ var_dump($event);
   - `string enforcementActionID`
 
     ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `string organizationID`
+
+### Beta Webhook User Profile Program Status Updated Event Data
+
+- `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+  - `"user_profile.program_status_updated" type`
+
+  - `string id`
+
+    ID of the user profile that triggered the event.
 
   - `string organizationID`
 

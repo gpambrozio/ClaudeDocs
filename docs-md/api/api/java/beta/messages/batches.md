@@ -131,6 +131,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -3144,6 +3146,14 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                              - `CLAUDE_FABLE_5_2("claude-fable-5-2")`
+
+                                Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                              - `CLAUDE_MYTHOS_5_2("claude-mythos-5-2")`
+
+                                Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                               - `CLAUDE_HAIKU_5_5("claude-haiku-5-5")`
 
                                 Fastest model for high-volume, real-time tasks
@@ -3492,14 +3502,20 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
                 Accepted in `messages[].content` and not rendered into the prompt; not
                 validated against the request's `fallbacks` chain or top-level `model`.
 
-                Echo the assistant turn back verbatim, including this block in its
+                When you send the assistant turn back, keep this block in its
                 original position. The block marks the boundary between content produced
                 before and after a fallback hop, and the server relies on that boundary
                 to validate the turn: when thinking runs flank the boundary, omitting
                 the block merges them into one span the server cannot validate (the
                 request is rejected), and moving it into the middle of a single run is
                 likewise rejected; between non-thinking blocks the block's placement has
-                no validation effect.
+                no effect on thinking validation.
+
+                Some blocks from before the turn's final `fallback` block must be left
+                out when you send the turn back, and no `tool_result` is sent for a
+                `tool_use` block you left out.
+
+                See the [refusals and fallback guide](../../../../build-with-claude/refusals-and-fallback.md#continuing-the-conversation) to learn which blocks to keep.
 
                 - `JsonValue type = "fallback"`
 
@@ -4600,6 +4616,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -4892,6 +4910,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -5181,6 +5201,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -5463,6 +5485,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
 
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
+
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
@@ -5646,6 +5670,8 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
     - `TELEMETRY_DESTINATIONS_2026_08_11("telemetry-destinations-2026-08-11")`
 
     - `WEBHOOKS_2026_10_07("webhooks-2026-10-07")`
+
+    - `ADMIN_USER_SIGN_OUT_2026_10_08("admin-user-sign-out-2026-10-08")`
 
     - `MESSAGE_THREADS_2026_08_12("message-threads-2026-08-12")`
 
@@ -8314,6 +8340,14 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                          - `CLAUDE_FABLE_5_2("claude-fable-5-2")`
+
+                            Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                          - `CLAUDE_MYTHOS_5_2("claude-mythos-5-2")`
+
+                            Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                           - `CLAUDE_HAIKU_5_5("claude-haiku-5-5")`
 
                             Fastest model for high-volume, real-time tasks
@@ -9405,55 +9439,91 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `JsonValue type = "invalid_request_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaAuthenticationError`
 
             - `JsonValue type = "authentication_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaBillingError`
 
             - `JsonValue type = "billing_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaPermissionError`
 
             - `JsonValue type = "permission_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaNotFoundError`
 
             - `JsonValue type = "not_found_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaRateLimitError`
 
             - `JsonValue type = "rate_limit_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaGatewayTimeoutError`
 
             - `JsonValue type = "timeout_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaApiError`
 
             - `JsonValue type = "api_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaOverloadedError`
 
             - `JsonValue type = "overloaded_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
         - `Optional<String> requestId`
 
@@ -9623,55 +9693,91 @@ public final class Main {
 
         - `JsonValue type = "invalid_request_error"`
 
+          The broad category of the error.
+
         - `String message`
+
+          A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       - `class BetaAuthenticationError`
 
         - `JsonValue type = "authentication_error"`
 
+          The broad category of the error.
+
         - `String message`
+
+          A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       - `class BetaBillingError`
 
         - `JsonValue type = "billing_error"`
 
+          The broad category of the error.
+
         - `String message`
+
+          A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       - `class BetaPermissionError`
 
         - `JsonValue type = "permission_error"`
 
+          The broad category of the error.
+
         - `String message`
+
+          A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       - `class BetaNotFoundError`
 
         - `JsonValue type = "not_found_error"`
 
+          The broad category of the error.
+
         - `String message`
+
+          A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       - `class BetaRateLimitError`
 
         - `JsonValue type = "rate_limit_error"`
 
+          The broad category of the error.
+
         - `String message`
+
+          A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       - `class BetaGatewayTimeoutError`
 
         - `JsonValue type = "timeout_error"`
 
+          The broad category of the error.
+
         - `String message`
+
+          A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       - `class BetaApiError`
 
         - `JsonValue type = "api_error"`
 
+          The broad category of the error.
+
         - `String message`
+
+          A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       - `class BetaOverloadedError`
 
         - `JsonValue type = "overloaded_error"`
 
+          The broad category of the error.
+
         - `String message`
+
+          A human-readable explanation of the error. Its wording can change, so don't match on it.
 
     - `Optional<String> requestId`
 
@@ -12336,6 +12442,14 @@ public final class Main {
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                          - `CLAUDE_FABLE_5_2("claude-fable-5-2")`
+
+                            Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                          - `CLAUDE_MYTHOS_5_2("claude-mythos-5-2")`
+
+                            Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                           - `CLAUDE_HAIKU_5_5("claude-haiku-5-5")`
 
                             Fastest model for high-volume, real-time tasks
@@ -13427,55 +13541,91 @@ public final class Main {
 
             - `JsonValue type = "invalid_request_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaAuthenticationError`
 
             - `JsonValue type = "authentication_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaBillingError`
 
             - `JsonValue type = "billing_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaPermissionError`
 
             - `JsonValue type = "permission_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaNotFoundError`
 
             - `JsonValue type = "not_found_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaRateLimitError`
 
             - `JsonValue type = "rate_limit_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaGatewayTimeoutError`
 
             - `JsonValue type = "timeout_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaApiError`
 
             - `JsonValue type = "api_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
           - `class BetaOverloadedError`
 
             - `JsonValue type = "overloaded_error"`
 
+              The broad category of the error.
+
             - `String message`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
         - `Optional<String> requestId`
 
@@ -16164,6 +16314,14 @@ public final class Main {
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `CLAUDE_FABLE_5_2("claude-fable-5-2")`
+
+                          Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                        - `CLAUDE_MYTHOS_5_2("claude-mythos-5-2")`
+
+                          Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                         - `CLAUDE_HAIKU_5_5("claude-haiku-5-5")`
 
                           Fastest model for high-volume, real-time tasks
@@ -17255,55 +17413,91 @@ public final class Main {
 
           - `JsonValue type = "invalid_request_error"`
 
+            The broad category of the error.
+
           - `String message`
+
+            A human-readable explanation of the error. Its wording can change, so don't match on it.
 
         - `class BetaAuthenticationError`
 
           - `JsonValue type = "authentication_error"`
 
+            The broad category of the error.
+
           - `String message`
+
+            A human-readable explanation of the error. Its wording can change, so don't match on it.
 
         - `class BetaBillingError`
 
           - `JsonValue type = "billing_error"`
 
+            The broad category of the error.
+
           - `String message`
+
+            A human-readable explanation of the error. Its wording can change, so don't match on it.
 
         - `class BetaPermissionError`
 
           - `JsonValue type = "permission_error"`
 
+            The broad category of the error.
+
           - `String message`
+
+            A human-readable explanation of the error. Its wording can change, so don't match on it.
 
         - `class BetaNotFoundError`
 
           - `JsonValue type = "not_found_error"`
 
+            The broad category of the error.
+
           - `String message`
+
+            A human-readable explanation of the error. Its wording can change, so don't match on it.
 
         - `class BetaRateLimitError`
 
           - `JsonValue type = "rate_limit_error"`
 
+            The broad category of the error.
+
           - `String message`
+
+            A human-readable explanation of the error. Its wording can change, so don't match on it.
 
         - `class BetaGatewayTimeoutError`
 
           - `JsonValue type = "timeout_error"`
 
+            The broad category of the error.
+
           - `String message`
+
+            A human-readable explanation of the error. Its wording can change, so don't match on it.
 
         - `class BetaApiError`
 
           - `JsonValue type = "api_error"`
 
+            The broad category of the error.
+
           - `String message`
+
+            A human-readable explanation of the error. Its wording can change, so don't match on it.
 
         - `class BetaOverloadedError`
 
           - `JsonValue type = "overloaded_error"`
 
+            The broad category of the error.
+
           - `String message`
+
+            A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       - `Optional<String> requestId`
 
@@ -19953,6 +20147,14 @@ public final class Main {
                       The model that will complete your prompt.
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                      - `CLAUDE_FABLE_5_2("claude-fable-5-2")`
+
+                        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                      - `CLAUDE_MYTHOS_5_2("claude-mythos-5-2")`
+
+                        Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
                       - `CLAUDE_HAIKU_5_5("claude-haiku-5-5")`
 

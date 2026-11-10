@@ -133,6 +133,8 @@ Retrieve detailed information about a specific work item.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
     - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
 
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
@@ -419,6 +421,8 @@ Long poll for work items in the queue.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
     - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
 
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
@@ -691,6 +695,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
     - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
 
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
@@ -859,7 +865,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `ExpectedLastHeartbeat param.Opt[string] Optional` (query parameter)
 
-    Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
+    Expected last_heartbeat for conditional update (optimistic concurrency). Use literal 'NO_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match. The server does not compare the value when the work item is 'stopping' or 'stopped'.
 
   - `Betas []AnthropicBeta Optional` (header parameter)
 
@@ -968,6 +974,8 @@ Record a heartbeat for a work item to maintain the lease.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
 
     - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
 
@@ -1185,6 +1193,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
 
     - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
 
@@ -1471,6 +1481,8 @@ List work items in an environment.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
     - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
 
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
@@ -1747,6 +1759,8 @@ Update work item metadata with merge semantics.
     - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
 
     - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
 
@@ -2025,6 +2039,8 @@ Get statistics about the work queue for an environment.
 
     - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
 
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
     - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
 
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
@@ -2109,6 +2125,44 @@ func main() {
 ```
 
 ## Domain types
+
+### Beta Heartbeat Precondition Failed Error Details
+
+- `type BetaHeartbeatPreconditionFailedErrorDetails`
+
+  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
+
+  - `CurrentState BetaWorkLeaseState`
+
+    The lease as the server holds it.
+
+    - `LastHeartbeat string`
+
+      RFC 3339 timestamp of the stored heartbeat, or null if there has been none
+
+    - `LeaseExtended bool`
+
+      Always false: a refused heartbeat does not extend the lease
+
+    - `State BetaWorkLeaseStateState`
+
+      Current state of the work item
+
+      - `const BetaWorkLeaseStateStateQueued BetaWorkLeaseStateState = "queued"`
+
+      - `const BetaWorkLeaseStateStateStarting BetaWorkLeaseStateState = "starting"`
+
+      - `const BetaWorkLeaseStateStateActive BetaWorkLeaseStateState = "active"`
+
+      - `const BetaWorkLeaseStateStateStopping BetaWorkLeaseStateState = "stopping"`
+
+      - `const BetaWorkLeaseStateStateStopped BetaWorkLeaseStateState = "stopped"`
+
+    - `TTLSeconds int64`
+
+      TTL of the lease
+
+  - `ErrorCode BetaHeartbeatPreconditionFailedErrorCode`
 
 ### Beta Self Hosted Work
 
@@ -2384,6 +2438,38 @@ func main() {
   - `ID string`
 
     Session identifier (e.g., 'session_...')
+
+### Beta Work Lease State
+
+- `type BetaWorkLeaseState`
+
+  A work item's lease as the server holds it.
+
+  - `LastHeartbeat string`
+
+    RFC 3339 timestamp of the stored heartbeat, or null if there has been none
+
+  - `LeaseExtended bool`
+
+    Always false: a refused heartbeat does not extend the lease
+
+  - `State BetaWorkLeaseStateState`
+
+    Current state of the work item
+
+    - `const BetaWorkLeaseStateStateQueued BetaWorkLeaseStateState = "queued"`
+
+    - `const BetaWorkLeaseStateStateStarting BetaWorkLeaseStateState = "starting"`
+
+    - `const BetaWorkLeaseStateStateActive BetaWorkLeaseStateState = "active"`
+
+    - `const BetaWorkLeaseStateStateStopping BetaWorkLeaseStateState = "stopping"`
+
+    - `const BetaWorkLeaseStateStateStopped BetaWorkLeaseStateState = "stopped"`
+
+  - `TTLSeconds int64`
+
+    TTL of the lease
 
 ---
 

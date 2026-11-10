@@ -629,6 +629,16 @@ signature is missing or invalid.
 
       - `OrganizationID string`
 
+    - `type BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+      - `Type UserProfileProgramStatusUpdated`
+
+      - `ID string`
+
+        ID of the user profile that triggered the event.
+
+      - `OrganizationID string`
+
 ### Example
 
 ```go
@@ -1268,6 +1278,16 @@ you have already verified the signature yourself.
       - `EnforcementActionID string`
 
         ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+      - `OrganizationID string`
+
+    - `type BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+      - `Type UserProfileProgramStatusUpdated`
+
+      - `ID string`
+
+        ID of the user profile that triggered the event.
 
       - `OrganizationID string`
 
@@ -2140,6 +2160,16 @@ func main() {
 
       - `OrganizationID string`
 
+    - `type BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+      - `Type UserProfileProgramStatusUpdated`
+
+      - `ID string`
+
+        ID of the user profile that triggered the event.
+
+      - `OrganizationID string`
+
 ### Beta Webhook Event Data
 
 - `type BetaWebhookEventDataUnion interface{…}`
@@ -2728,6 +2758,16 @@ func main() {
 
     - `OrganizationID string`
 
+  - `type BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+    - `Type UserProfileProgramStatusUpdated`
+
+    - `ID string`
+
+      ID of the user profile that triggered the event.
+
+    - `OrganizationID string`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `type BetaWebhookMemoryStoreArchivedEventData`
@@ -3049,6 +3089,18 @@ func main() {
   - `EnforcementActionID string`
 
     ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `OrganizationID string`
+
+### Beta Webhook User Profile Program Status Updated Event Data
+
+- `type BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+  - `Type UserProfileProgramStatusUpdated`
+
+  - `ID string`
+
+    ID of the user profile that triggered the event.
 
   - `OrganizationID string`
 

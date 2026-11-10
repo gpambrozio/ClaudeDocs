@@ -635,6 +635,16 @@ signature is missing or invalid.
 
       - `String organizationId`
 
+    - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+      - `JsonValue type = "user_profile.program_status_updated"`
+
+      - `String id`
+
+        ID of the user profile that triggered the event.
+
+      - `String organizationId`
+
 ### Example
 
 ```java
@@ -1275,6 +1285,16 @@ you have already verified the signature yourself.
       - `String enforcementActionId`
 
         ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+      - `String organizationId`
+
+    - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+      - `JsonValue type = "user_profile.program_status_updated"`
+
+      - `String id`
+
+        ID of the user profile that triggered the event.
 
       - `String organizationId`
 
@@ -2143,6 +2163,16 @@ public final class Main {
 
       - `String organizationId`
 
+    - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+      - `JsonValue type = "user_profile.program_status_updated"`
+
+      - `String id`
+
+        ID of the user profile that triggered the event.
+
+      - `String organizationId`
+
 ### Beta Webhook Event Data
 
 - `class BetaWebhookEventData: union`
@@ -2731,6 +2761,16 @@ public final class Main {
 
     - `String organizationId`
 
+  - `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+    - `JsonValue type = "user_profile.program_status_updated"`
+
+    - `String id`
+
+      ID of the user profile that triggered the event.
+
+    - `String organizationId`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `class BetaWebhookMemoryStoreArchivedEventData`
@@ -3052,6 +3092,18 @@ public final class Main {
   - `String enforcementActionId`
 
     ID (`enac_...`) of the enforcement action that was opened or resolved.
+
+  - `String organizationId`
+
+### Beta Webhook User Profile Program Status Updated Event Data
+
+- `class BetaWebhookUserProfileProgramStatusUpdatedEventData`
+
+  - `JsonValue type = "user_profile.program_status_updated"`
+
+  - `String id`
+
+    ID of the user profile that triggered the event.
 
   - `String organizationId`
 

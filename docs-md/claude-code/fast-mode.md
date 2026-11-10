@@ -63,8 +63,6 @@ Fast mode follows your model switches:
 
 Whenever a model switch turns fast mode on or off, Claude Code shows a `Fast mode ON` or `Fast mode OFF` confirmation, and the `↯` icon appears while fast mode is on. This holds whether you switch with `/model`, with [`/config model=<model>`](settings.md), or from a device connected through [Remote Control](https://code.claude.com/docs/en/remote-control.md).
 
-Claude Code resends the session's fast mode status to devices connected through Remote Control after a model switch, a reconnection, or a failed [availability check](#use-fast-mode-behind-proxies-and-llm-gateways).
-
 ### Use fast mode in cloud sessions
 
 Fast mode works in [cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md) when it's available on your account, whether the session runs on Anthropic-managed infrastructure or a [self-hosted runner](self-hosted-environments.md). Requires Claude Code v2.1.271 or later in the session's environment.
@@ -223,7 +221,7 @@ To disable fast mode manually instead of waiting for cooldown, run `/fast` again
 If you run out of usage credits mid-session, Claude Code retries each rejected fast mode request at standard speed and pricing, so you keep working, and there is no cooldown. How you see the rejection depends on the session type:
 
 * In an interactive session, Claude Code shows a "Fast mode disabled · Out of usage credits" notification and turns fast mode off. Your saved fast mode preference doesn't change; run `/fast` to turn fast mode back on.
-* In [non-interactive mode](https://code.claude.com/docs/en/headless.md) with `--output-format stream-json`, and through the Agent SDK, Claude Code emits the same text on the message stream as a `system` message with subtype `notification`, once per turn while you're out of usage credits. Fast mode stays on. Requires Claude Code v2.1.221 or later.
+* In [non-interactive mode](https://code.claude.com/docs/en/headless.md) with `--output-format stream-json`, and through the Agent SDK, Claude Code emits the same text on the message stream as a `system` message with subtype `notification`. The message arrives once per turn while you're out of usage credits. Fast mode stays on.
 
 ## Research preview
 
