@@ -227,7 +227,7 @@ $thread->send(['role' => 'user', 'content' => 'Hi! I have a question about an or
 $second = $thread->send(['role' => 'user', 'content' => 'How long does standard shipping usually take?']);
 
 foreach ($second->content as $block) {
-    if ($block instanceof BetaTextBlock) {
+    if ($block instanceof \Anthropic\Beta\Messages\BetaTextBlock) {
         echo $block->text, PHP_EOL;
     }
 }
@@ -546,7 +546,7 @@ $second = $client->beta->messages->create(
 );
 
 foreach ($second->content as $block) {
-    if ($block instanceof BetaTextBlock) {
+    if ($block instanceof \Anthropic\Beta\Messages\BetaTextBlock) {
         echo $block->text, PHP_EOL;
     }
 }
@@ -598,7 +598,10 @@ If you use [server-side fallback](refusals-and-fallback.md#server-side-fallback)
 
 To change a create-only or fixed field, start a new thread: send the full conversation in a create request with the new values.
 
-On Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5, changing `system` or `tools` makes the `thinking` and `redacted_thinking` blocks already in the conversation invalid, and the create request can return a 400 error. To avoid it, leave every `thinking` and `redacted_thinking` block out of the conversation you send. The model then answers without that earlier reasoning. See [What counts as an edit](preserved-thinking.md#what-counts-as-an-edit), [When `prefix_mismatch_behavior` is unset](preserved-thinking.md#enforcement), and [What the API does with an invalid block](preserved-thinking.md#mismatch-behavior).
+**If you change `system` or `tools`:** On the following models, leave every `thinking` and `redacted_thinking` block out of the conversation that you send in the new create request: Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5. The model then answers without that earlier reasoning.
+
+* **Why:** Changing `system` or `tools` makes the `thinking` and `redacted_thinking` blocks already in the conversation invalid. See [What counts as an edit](preserved-thinking.md#what-counts-as-an-edit).
+* **If you send the blocks anyway:** The create request can return a 400 error. Whether it does depends on the model and your account. See [When `prefix_mismatch_behavior` is unset](preserved-thinking.md#enforcement) and [What the API does with an invalid block](preserved-thinking.md#mismatch-behavior).
 
 Send only the new messages on a continue request. The API doesn’t check them against the messages it already has. A message you send again can appear twice in the conversation, or the request can return an error. For example, a continue request that starts with the previous response returns an error.
 
@@ -811,8 +814,8 @@ For ZDR eligibility across all features, see [API and data retention](../manage-
 ## See also
 
 * [Prompt caching](prompt-caching.md)
-* [Streaming](streaming.md)
-* [Errors](../api/errors.md)
+* [Streaming messages](streaming.md)
+* [Claude API errors](../api/errors.md)
 
 ## Availability
 

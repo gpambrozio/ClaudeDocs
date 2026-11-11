@@ -134,9 +134,9 @@ Each SDK’s helper handles the `index` (csharp, go: `Index`) bookkeeping. The G
 
 The following examples opt in to `agent.message` previews and reconcile them with the buffered event:
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 # Preview snapshots, keyed by event ID. accumulate_managed_agents_event folds each

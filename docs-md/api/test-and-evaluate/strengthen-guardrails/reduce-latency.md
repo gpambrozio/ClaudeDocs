@@ -194,7 +194,7 @@ message = client.messages.create(
 puts message.content.find { |block| block.type == :text }&.text
 ```
 
-For more details about model metrics, see the [models overview](../../models/overview.md) page.
+For more details about model metrics, see [Models overview](../../models/overview.md).
 
 ### 2. Optimize prompt and output length
 
@@ -214,7 +214,7 @@ Here are some tips to help you optimize your prompts and outputs:
 
   `max_tokens`
 
-   tokens, the response will be cut off, perhaps mid-sentence or mid-word, so this is a blunt technique that might require post-processing and is usually most appropriate for multiple choice or short answer responses where the answer comes right at the beginning.
+   tokens, the API cuts it off, perhaps mid-sentence or mid-word. This is a blunt technique that might require post-processing. It’s usually most appropriate for multiple-choice or short-answer responses where the answer comes right at the beginning.
 
 Finding the right balance among prompt clarity, output quality, and token count might require some experimentation.
 

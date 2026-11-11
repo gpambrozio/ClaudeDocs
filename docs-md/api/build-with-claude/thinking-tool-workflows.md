@@ -14,9 +14,17 @@ This page walks through a complete two-turn tool-use round trip with thinking en
 
 Each link leads to the full statement on the Thinking page:
 
-* [Limit tool choice to `auto` or `none` in manual mode](thinking.md#thinking-with-tool-use): `tool_choice` options that force tool use return an error with manual extended thinking (`thinking: {type: "enabled"}`). Adaptive thinking supports forced tool use, with exceptions. Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, and Claude Mythos 5.1 return a 400 error instead. Where forced tool use is accepted, it skips thinking: the response starts with the tool call.
+* [Limit tool choice to `auto` or `none` in manual mode](thinking.md#thinking-with-tool-use): with manual extended thinking (`thinking: {type: "enabled"}`), `tool_choice` options that force tool use return an error.
+
+* [Check forced tool use on your model in adaptive mode](thinking.md#thinking-with-tool-use): with adaptive thinking, the result depends on the model:
+
+  * **Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, and Claude Mythos 5.1:** Forced tool use returns a 400 error.
+  * **Other models:** Forced tool use is accepted, and it skips thinking. The response starts with the tool call.
+
 * [Keep one thinking configuration per assistant turn](thinking.md#thinking-with-tool-use): a tool-use loop is one assistant turn, so change the configuration only between turns.
+
 * [Pass thinking blocks back complete and unmodified](thinking.md#preserving-thinking-blocks): when you return a tool result, the thinking blocks from the assistant message must come back with it.
+
 * [Echo the assistant message exactly as received](thinking.md#preserving-thinking-blocks): rebuilding the message or filtering out `redacted_thinking` blocks triggers a 400 error.
 
 The samples use adaptive thinking; on models that support only extended thinking, substitute `thinking: {type: "enabled", budget_tokens: N}`. The round-trip rules are identical.
@@ -309,9 +317,9 @@ Run the tool on your side, then send a second request that appends two messages 
 
 Each sample is a self-contained script: it repeats the first request, then immediately sends the follow-up using the response it just received.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 

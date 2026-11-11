@@ -620,7 +620,7 @@ const client = new Anthropic({
 
 ### OpenTelemetry tracing
 
-When your application registers an OpenTelemetry tracer provider, the SDK emits a span for each request that it sends. To send the spans to your observability platform, see [Set up OpenTelemetry with the Claude SDK](../../manage-claude/opentelemetry/sdk.md).
+When your application registers an OpenTelemetry tracer provider, the SDK emits a span for each request that it sends. To send the spans to your observability platform, see [Set up OpenTelemetry with the Anthropic SDK](../../manage-claude/opentelemetry/sdk.md).
 
 ### Making custom/undocumented requests
 
@@ -766,8 +766,8 @@ Even in these cases, browser support works only if your organization can call th
 
 For detailed platform setup guides with code examples, see:
 
-* [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)
-* [Amazon Bedrock (Opus 4.6 and earlier)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
+* [Amazon Bedrock (`bedrock-mantle`)](../../build-with-claude/claude-in-amazon-bedrock.md)
+* [Amazon Bedrock (`bedrock-runtime`)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
 * [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)
 * [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md)
 * [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)
@@ -781,7 +781,7 @@ The TypeScript SDK supports the following platforms:
 * **Claude Platform on AWS:** `npm install @anthropic-ai/aws-sdk`: Provides `AnthropicAws` client. Pass `workspaceId` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable. Available in beta.
 * **Foundry:** `npm install @anthropic-ai/foundry-sdk`: Provides `AnthropicFoundry` client
 
-Use `AnthropicBedrockMantle` for new projects; `AnthropicBedrock` remains for existing applications using the Bedrock `InvokeModel` API.
+Use `AnthropicBedrockMantle` with the `bedrock-mantle` endpoint, and `AnthropicBedrock` with the `InvokeModel` API on the `bedrock-runtime` endpoint.
 
 The TypeScript SDK also supports Claude Models on Google Cloud (Anthropic managed) through the `AnthropicGoogleCloud` client. This client is in beta. To install it, run `npm install @anthropic-ai/google-cloud-sdk`. Pass `workspaceId` to the constructor or set the `ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID` environment variable. See [Project, location, and workspace resolution](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#project-location-and-workspace-resolution) for how the client resolves the workspace ID.
 

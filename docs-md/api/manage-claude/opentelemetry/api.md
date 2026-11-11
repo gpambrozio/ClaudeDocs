@@ -254,7 +254,7 @@ By default, the API spans for a Messages API request or a Managed Agents session
 
 The API reads each request’s trace context from the W3C [`traceparent` header](https://www.w3.org/TR/trace-context/). If the sampled flag in the header is off, the API doesn’t emit the request’s span or the spans under it.
 
-**With the Claude SDK**
+**With the Anthropic SDK**
 
 To connect the API spans, [set up SDK tracing](sdk.md) in your application and call the SDK from inside one of your own spans. Your span then contains the SDK span, which contains the API span. Send all of these spans to the same observability platform, so that it can show them as one trace. See the example traces of [a Messages API request](../opentelemetry.md#a-messages-api-request) and [a Managed Agents session](../opentelemetry.md#a-managed-agents-session).
 

@@ -815,9 +815,9 @@ puts "Session ID: #{session.id}"
 
 Open a stream, send a user event, then process events as they arrive:
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 with client.beta.sessions.events.stream(session.id) as stream:

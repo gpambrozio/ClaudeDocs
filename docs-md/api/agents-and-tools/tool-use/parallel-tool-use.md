@@ -27,9 +27,9 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: stable
     Amazon Bedrock: stable
-    Amazon Bedrock (InvokeModel): stable
+    Amazon Bedrock (bedrock-runtime): stable
+    Claude Platform on AWS: stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -61,9 +61,9 @@ The [computer use tool](computer-use-tool.md#batch-actions) and the [browser use
 
 The following script sends a request that should trigger parallel tool calls, verifies the response contains them, and formats the tool results so parallelism keeps working. Run it with `ANTHROPIC_API_KEY` set in your environment:
 
-This end-to-end test needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it. The request it sends is a standard tool use request with two tools defined.
+This end-to-end test needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it. The request it sends is a standard tool use request with two tools defined.
 
-This end-to-end test needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This end-to-end test needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = Anthropic()
@@ -1146,7 +1146,7 @@ puts response.content
 
 ### Exactly one tool call
 
-When the `tool_choice` type is `any` or `tool`, setting `disable_parallel_tool_use: true` means Claude calls exactly one tool. Claude Fable 5.2, Claude Mythos 5.2, Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and Claude Mythos 5.1 don’t support these `tool_choice` types (see [Forcing tool use](define-tools.md#forcing-tool-use)). The following example uses `any`. The same field works with `tool`:
+When the `tool_choice` type is `any` or `tool`, setting `disable_parallel_tool_use: true` means Claude calls exactly one tool. Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, and Claude Sonnet 5.5 don’t support these `tool_choice` types (see [Forcing tool use](define-tools.md#forcing-tool-use)). The following example uses `any`. The same field works with `tool`:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -1463,9 +1463,9 @@ Default prompting might not be sufficient. Use the stronger system prompt from [
 
 To verify parallel tool calls are working:
 
-To measure parallel tool use, your code analyzes the responses that it already collected. This needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this.
+To measure parallel tool use, your code analyzes the responses that it already collected. This needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) for this.
 
-To measure parallel tool use, your code analyzes the responses that it already collected. This needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this.
+To measure parallel tool use, your code analyzes the responses that it already collected. This needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) for this.
 
 ```python Python
 messages = []  # Message objects returned by client.messages.create across your run
@@ -1609,9 +1609,9 @@ Parallel tool use is available or in beta, depending on the API.
 * Availability: On by default
 * Usage: To turn it off, set `disable_parallel_tool_use: true` inside `tool_choice`.
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Available | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (bedrock-runtime)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |
 
 #### [Managed Agents](../../managed-agents/overview.md)
 

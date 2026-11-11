@@ -191,9 +191,9 @@ This sample follows a session from your message to the agent’s answer. It open
 * **Answers custom tool calls** when each `agent.custom_tool_use` arrives, because a run’s thread can wait on your client while the session stays `running`. If your agent’s tools [ask for confirmation](events-and-streaming.md#tool-confirmation), add a branch that answers each `agent.tool_use` or `agent.mcp_tool_use` whose `evaluated_permission` (java, php: `evaluatedPermission`; csharp, go: `EvaluatedPermission`) is `ask`. The sample has none, because a branch that allows every call would turn `always_ask` into always allow.
 * **Stops** when the [work is done](workflow-runs.md#know-when-the-work-is-done): no run is open, and the session goes idle with `end_turn`. It also stops if the session terminates. On an idle with any other stop reason except `requires_action`, such as `budget_reached`, `retries_exhausted`, or `refusal`, it prints the reason and stops, so handle those in your own code. It stops on `retries_exhausted` even when the server is about to start a new turn by itself. It keeps waiting on `requires_action`, and on `end_turn` while a run is open.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 open_runs: dict[str, str] = {}  # workflow_run_id -> run name

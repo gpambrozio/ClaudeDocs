@@ -881,9 +881,9 @@ end
 
 If Claude’s response is cut off because it hit the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you’ll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 # Check if response was truncated during tool use
@@ -1869,7 +1869,7 @@ If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5
 
 On a refusal, the [`stop_details`](../api/messages/create.md#message.stop_details) object identifies the policy category that triggered it. The categories and the full refusal response shape are covered in [What a refusal looks like](refusals-and-fallback.md#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
 
-You can usually get a response to a refused request by retrying it on another Claude model. This works for Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Haiku 5.5. [Refusals and fallback](refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. Claude Haiku 5.5 has no server-side fallback, so set up its retry with [client-side fallback](refusals-and-fallback.md#client-side-fallback). If you build the retry yourself from any of these models except Claude Haiku 5.5, [fallback credit](fallback-credit.md) covers how to avoid paying the prompt-cache cost twice.
+You can usually get a response to a refused request by retrying it on another Claude model. This works for Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Haiku 5.5. [Refusals and fallback](refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. Claude Haiku 5.5 has no server-side fallback, so set up its retry with [client-side fallback](refusals-and-fallback.md#client-side-fallback). If you build the retry yourself from any of these models except Claude Haiku 5.5, [Fallback credit](fallback-credit.md) covers how to avoid paying the prompt-cache cost twice.
 
 ### model\_context\_window\_exceeded
 
@@ -2297,9 +2297,9 @@ end
 
 When you use [server tools](../agents-and-tools/tool-use/server-tools.md), the API might return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by adding the paused response to your messages unchanged and sending the request again. If the response includes a `container`, [send its ID back](../agents-and-tools/tool-use/code-execution-tool.md#container-reuse) as well. Without it, the next request starts a new container, and files from earlier in the turn are lost.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = anthropic.Anthropic()

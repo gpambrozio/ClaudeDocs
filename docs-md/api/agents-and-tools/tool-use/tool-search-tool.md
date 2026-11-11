@@ -31,11 +31,11 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: stable
     Amazon Bedrock: stable
-    Amazon Bedrock (InvokeModel):
+    Amazon Bedrock (bedrock-runtime):
       availability: stable
       note: On Amazon Bedrock it is not available through the Converse API.
+    Claude Platform on AWS: stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -898,8 +898,8 @@ Tool search tool is available on every model and eligible for zero data retentio
 
 | Status                | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Models                                                            |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Available             | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) | [All models](../../models/overview.md) |
-| Available<sup>1</sup> | [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)                                                                                                                                                                                                                                                                                                                                                              | [All models](../../models/overview.md) |
+| Available             | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) | [All models](../../models/overview.md) |
+| Available<sup>1</sup> | [Amazon Bedrock (bedrock-runtime)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)                                                                                                                                                                                                                                                                                                                                                          | [All models](../../models/overview.md) |
 
 1. On Amazon Bedrock it is not available through the Converse API.
 

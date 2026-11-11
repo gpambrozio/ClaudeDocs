@@ -305,9 +305,9 @@ To reconnect to an existing session without missing events, combine a new stream
 2. [List the full event history](events-and-streaming.md#list-past-events) to seed a set of seen event IDs.
 3. Tail the live stream, skipping any events already returned by the history list.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 with client.beta.sessions.events.stream(session.id) as stream:
@@ -687,9 +687,9 @@ When you [reconnect](events-and-streaming.md#reconnect-without-missing-events) t
 
 The following example answers each call as it arrives:
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 with client.beta.sessions.events.stream(session.id) as stream:
@@ -887,9 +887,9 @@ Send a `user.tool_confirmation` event, passing the event ID in the `tool_use_id`
 
 The following example approves every pending call:
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 with client.beta.sessions.events.stream(session.id) as stream:

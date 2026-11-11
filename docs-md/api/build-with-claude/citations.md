@@ -31,9 +31,9 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: stable
     Amazon Bedrock: stable
-    Amazon Bedrock (InvokeModel): stable
+    Amazon Bedrock (bedrock-runtime): stable
+    Claude Platform on AWS: stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -2342,9 +2342,9 @@ Citations are available on every model and eligible for zero data retention and 
 
 * Availability: Available
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Available | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Amazon Bedrock](claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) |
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Amazon Bedrock](claude-in-amazon-bedrock.md), [Amazon Bedrock (bedrock-runtime)](claude-on-amazon-bedrock-legacy.md), [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) |
 
 #### [Managed Agents](../managed-agents/overview.md)
 

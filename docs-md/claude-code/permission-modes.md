@@ -21,7 +21,7 @@ Each mode makes a different tradeoff between convenience and oversight. The tabl
 
 The mode that reviews every action is named **Manual** in the CLI, in `claude --help`, in the VS Code and JetBrains extensions, and in the desktop app. Its config value is `default`, which is what hooks and SDK integrations use. The CLI accepts `manual` as an alias wherever you type the value, for example `claude --permission-mode manual` or `"defaultMode": "manual"`.
 
-Writes to [protected paths](#protected-paths) are never auto-approved except in `bypassPermissions` mode and in plan-mode sessions where bypass permissions are available, meaning interactive terminal sessions started in a way that [puts `bypassPermissions` in the mode cycle](#switch-permission-modes).
+Each mode has its own rule for writes to [protected paths](#protected-paths).
 
 Modes set the baseline. Layer [permission rules](https://code.claude.com/docs/en/permissions.md#manage-permissions) on top to pre-approve or block specific tools. Deny rules block in every mode, including `bypassPermissions`. Deny and ask rules don't apply to [`EndConversation`](tools-reference.md#endconversation-tool-behavior) as long as Claude still has at least one other tool it can call. Allow rules have no effect in `bypassPermissions`.
 
@@ -480,9 +480,11 @@ The classifier trusts your working directory and the remotes that were configure
 * Opening a pull request against a different repository or organization, forking with `gh repo fork`, or pushing to a third-party repository, unless you named that external target
 * Content from a sensitive local store, or from a file whose name, path, or type marks it as sensitive, entering a commit, a push, PR or issue text, a gist or paste, or a package publish, unless you named both the source and the destination. Session transcripts and conversation logs, credential and configuration dot-folders such as SSH keys, cloud credentials, browser profiles, and shell history, and user-data exports all count, and the repository being private doesn't clear it
 * Writing to Claude Code session transcripts, the `.jsonl` history files under `~/.claude/projects/` or your configured config directory, whether directly or through a shell command. The rule also covers the metadata lines Claude Code appends to each transcript entry for its own checks. Reading a transcript isn't blocked
-* A recursive forced delete such as `rm -rf "$VAR"` or `Remove-Item -Recurse -Force $dir` whose target is a shell variable that isn't assigned anywhere in the conversation the classifier sees, or a glob rooted at such a variable. The value came only from earlier command output, which the classifier never receives, so the classifier can't verify the deletion target against the other deletion rules. The block clears when you name the exact path being deleted, or when Claude re-runs the delete with the resolved literal path written into the command. Deletes whose target the classifier can resolve aren't affected.
+* A recursive forced delete such as `rm -rf "$VAR"` or `Remove-Item -Recurse -Force $dir` whose target is a shell variable that isn't assigned in the conversation the classifier sees, or a glob rooted at such a variable. Without that assignment, the classifier can't tell what the command would delete.
 
-  A glob directly under the variable, as in `rm -rf "$VAR"/*`, is a [critical path](#critical-paths) instead. `Remove-Item` targets that are a bare `*` or end in `/*` or `\*` never reach the classifier: Claude Code [denies them outright](#remove-item-in-powershell).
+  The block clears when you name the exact path being deleted, or when Claude re-runs the delete with the resolved literal path written into the command. Deletes whose target the classifier can resolve aren't affected.
+
+  A glob directly under the variable, as in `rm -rf "$VAR"/*`, is a [critical path](#critical-paths) instead. For a `Remove-Item` target that is a bare `*` or ends in `/*` or `\*`, see [Remove-Item in PowerShell](#remove-item-in-powershell): Claude Code denies that command outright.
 
 Several of these categories depend on [environment](https://code.claude.com/docs/en/auto-mode-config.md#define-trusted-infrastructure) entries, such as sensitive remote targets and protected IaC scopes, that you can narrow to concrete names.
 
@@ -726,13 +728,13 @@ If [`claude agents`](agent-view.md#dispatch-defaults) shows the [bypass permissi
 
 ## Protected paths
 
-Writes to a small set of paths are never auto-approved, except in `bypassPermissions` mode and in interactive terminal sessions in plan mode with [bypass permissions](#skip-all-checks-with-bypasspermissions-mode) available. This prevents accidental corruption of repository state and Claude's own configuration.
+A small set of paths holds repository state and Claude's own configuration, so each mode has its own rule for writes to them:
 
 | Mode | Protected-path writes |
 | :- | :- |
 | `default`, `acceptEdits` | Prompted |
 | `plan` | Allowed in interactive terminal sessions with [bypass permissions](#skip-all-checks-with-bypasspermissions-mode) available. Otherwise, routed to the classifier when [auto mode](#eliminate-prompts-with-auto-mode) is available during planning, and prompted when it isn't |
-| `auto` | Routed to the classifier |
+| `auto` | Routed to the classifier, which decides |
 | `dontAsk` | Denied |
 | `bypassPermissions` | Allowed |
 

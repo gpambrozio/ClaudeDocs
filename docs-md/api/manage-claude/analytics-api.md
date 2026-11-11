@@ -119,7 +119,7 @@ When you filter user activity by project, each day’s project activity is count
 
 ## Versioning
 
-Send the `anthropic-version` header on every request; see [Versions](../api/versioning.md) for the available versions.
+Send the `anthropic-version` header on every request; see [API versions](../api/versioning.md) for the available versions.
 
 ## Known limitations
 

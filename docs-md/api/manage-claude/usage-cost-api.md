@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/manage-claude/usage-cost-api
 description: The legacy Admin API usage and cost report endpoints for Claude Console organizations. For new integrations, use the Usage and Cost Analytics API.
 ---
 
-**The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
+**The Admin API isn’t available to organizations on the claude.ai Team plan or to individual Claude Console accounts.** If your company also has a Claude Console organization, you can use the API with that organization; see [Create an Admin API key](admin-api-keys.md). An individual Console account must first set up an organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
 
 The Usage and Cost API (`/v1/organizations/usage_report/messages` and `/v1/organizations/cost_report`) is a legacy API and remains supported. For new integrations, use the [Usage and Cost Analytics API](usage-cost-analytics-api.md), which reports usage and cost with more grouping and filtering dimensions. To move an existing integration, see [Migrate from the Usage and Cost API](usage-cost-analytics-api.md#migrate-from-usage-cost-api).
 

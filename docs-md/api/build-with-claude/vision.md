@@ -28,14 +28,14 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: stable
-    Claude Models on Google Cloud (Anthropic managed): stable
     Amazon Bedrock:
       availability: stable
       note: Only base64 image sources; per-image limit 5 MB (base64-encoded) and a lower total request size.
-    Amazon Bedrock (InvokeModel):
+    Amazon Bedrock (bedrock-runtime):
       availability: stable
       note: Only base64 image sources; per-image limit 5 MB (base64-encoded) and a lower total request size.
+    Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
     Claude Models on Google Cloud (Google managed):
       availability: stable
       note: Only base64 image sources; per-image limit 5 MB (base64-encoded) and a lower total request size.
@@ -1413,7 +1413,7 @@ Vision (images) is available on every model.
 | Status                | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                        |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Available             | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) |
-| Available<sup>1</sup> | [Amazon Bedrock](claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md)          |
+| Available<sup>1</sup> | [Amazon Bedrock](claude-in-amazon-bedrock.md), [Amazon Bedrock (bedrock-runtime)](claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md)      |
 
 1. Only base64 image sources; per-image limit 5 MB (base64-encoded) and a lower total request size.
 

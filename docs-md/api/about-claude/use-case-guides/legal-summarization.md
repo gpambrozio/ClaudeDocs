@@ -461,9 +461,9 @@ Claude can adapt to various summarization styles. You can change the details of 
 
 Here’s an example of how to create a prompt that ensures the generated summaries follow a consistent structure when analyzing sublease agreements:
 
-This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
 
-This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
 
 ```python Python
 # Initialize the Anthropic client
@@ -865,9 +865,9 @@ Legal summarization often involves handling long documents or many related docum
 
 Here’s an example of how to perform meta-summarization:
 
-This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
 
-This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
 
 ```python Python
 def chunk_text(text, chunk_size=20000):

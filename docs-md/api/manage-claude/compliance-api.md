@@ -115,6 +115,10 @@ Enumerate linked organizations, members, roles, and directory groups, and read e
 
 Choose a feed-consumption pattern, plan SIEM correlation, and decide your retention approach.
 
+**Security posture in the Compliance API**
+
+Get changes on the Security posture page into your SIEM and other security tools.
+
 **Handle Compliance API errors**
 
 Common 400, 401, 403, 404, 409, 429, and 5xx responses from the Compliance API, with the cause and fix for each.

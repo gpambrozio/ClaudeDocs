@@ -8,7 +8,7 @@ description: This guide walks through how to use Claude's advanced natural langu
 
 ## Prerequisites
 
-* A Claude API key and the Claude SDK installed
+* A Claude API key and the Anthropic SDK installed
 * Access to, and familiarity with, your existing support ticketing system
 * A sample set of historical support tickets for testing
 
@@ -675,9 +675,9 @@ It’s hard to know how well your prompt works without deploying it in a test pr
 
 Build the deployment structure. Start by defining the function signature for wrapping the call to Claude. Extend the function you started writing earlier, which takes `ticket_contents` (typescript, csharp, go, java: `ticketContents`; php: `$ticketContents`) as input, so that it now returns the reasoning and the intent as output. If you have an existing automation using traditional ML, you’ll want to follow that signature instead.
 
-This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
 
-This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
 
 ```python Python
 import re
@@ -1016,9 +1016,9 @@ You might need to assess Claude on other axes depending on which factors are imp
 
 To assess this, first modify the script so that it compares the predicted intent with the actual intent. Then have it return the API call’s token usage, from which you can calculate cost.
 
-This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
 
-This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
 
 ```python Python
 import re

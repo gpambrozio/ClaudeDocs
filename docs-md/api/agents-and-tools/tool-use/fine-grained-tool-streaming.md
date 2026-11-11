@@ -31,9 +31,9 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: stable
     Amazon Bedrock: stable
-    Amazon Bedrock (InvokeModel): stable
+    Amazon Bedrock (bedrock-runtime): stable
+    Claude Platform on AWS: stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -520,9 +520,9 @@ Guard the parse, as the following SDK example does. A response can also stop at 
 
 The type mismatch between the initial `input: {}` (object) and `partial_json` (string) is by design. The empty object marks the slot in the content array. The delta strings build the real value.
 
-Accumulating the input fragments of each `tool_use` block needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this. To see the raw fragments as they stream, run the request in [How to use fine-grained tool streaming](fine-grained-tool-streaming.md#how-to-use-fine-grained-tool-streaming).
+Accumulating the input fragments of each `tool_use` block needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) for this. To see the raw fragments as they stream, run the request in [How to use fine-grained tool streaming](fine-grained-tool-streaming.md#how-to-use-fine-grained-tool-streaming).
 
-Accumulating the input fragments of each `tool_use` block needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this. To see the raw fragments as they stream, run the request in [How to use fine-grained tool streaming](fine-grained-tool-streaming.md#how-to-use-fine-grained-tool-streaming).
+Accumulating the input fragments of each `tool_use` block needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) for this. To see the raw fragments as they stream, run the request in [How to use fine-grained tool streaming](fine-grained-tool-streaming.md#how-to-use-fine-grained-tool-streaming).
 
 ```python Python
 client = anthropic.Anthropic()
@@ -961,9 +961,9 @@ Fine-grained tool streaming is available on every model and eligible for zero da
 
 * Availability: Available
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Available | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (bedrock-runtime)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |
 
 ### Data handling
 

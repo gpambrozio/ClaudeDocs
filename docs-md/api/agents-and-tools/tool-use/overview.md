@@ -142,9 +142,9 @@ Tools differ primarily by where the code runs. **Client tools** (including user-
 
 Here’s that round trip in full for a client tool. The first request defines a `get_weather` tool, and Claude answers the question by calling it: the response carries a `tool_use` block, your code runs the lookup, and a second request sends the result back in a `tool_result` block so Claude can reply with the answer.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = anthropic.Anthropic()
@@ -770,7 +770,7 @@ When you use `tools`, the API also automatically includes a special system promp
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.
 
-See the [Models overview](../../models/overview.md#latest-models-comparison) table for current per-model prices.
+See the [All models](../../models/overview.md#all-models) table for current per-model prices.
 
 When you send a tool use prompt, like any other API request, the response includes both input and output token counts in the reported `usage` metrics.
 

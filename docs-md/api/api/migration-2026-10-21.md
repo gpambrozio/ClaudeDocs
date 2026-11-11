@@ -86,7 +86,7 @@ Run `composer require "anthropic-ai/sdk"` to upgrade the package to version 1.0.
 
 Upgrade the `anthropic` gem to version 2.0.0.
 
-On Amazon Bedrock, `2026-10-21` is available only for Claude 4.7 and later models. If you call an older model on Bedrock, listed in [Claude on Amazon Bedrock (Opus 4.6 and earlier)](../build-with-claude/claude-on-amazon-bedrock-legacy.md), stay on the SDK version you use today, or, if you set the API version yourself, keep sending the version you send today. To move those calls to `2026-10-21`, first switch them to a Claude 4.7 or later model.
+On Amazon Bedrock, `2026-10-21` is available only for Claude 4.7 and later models. You might call a model numbered 4.6 or lower on Bedrock (see [Claude on Amazon Bedrock (`bedrock-runtime`)](../build-with-claude/claude-on-amazon-bedrock-legacy.md)). If so, keep those calls on the API version they use today. If you use an SDK, stay on the SDK version you use today. If you set the API version yourself, keep sending the version you send today. To move those calls to `2026-10-21`, first switch them to a Claude 4.7 or later model.
 
 Release the upgrade together with your fixes from the next step.
 

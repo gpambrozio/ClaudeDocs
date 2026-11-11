@@ -31,14 +31,14 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: stable
-    Claude Models on Google Cloud (Anthropic managed): stable
     Amazon Bedrock:
       availability: stable
       note: Base64 sources only.
-    Amazon Bedrock (InvokeModel):
+    Amazon Bedrock (bedrock-runtime):
       availability: stable
       note: Base64 sources only.
+    Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
     Claude Models on Google Cloud (Google managed):
       availability: stable
       note: Base64 sources only.
@@ -1977,7 +1977,7 @@ PDF support is available on every model and eligible for zero data retention and
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Available             | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md) |
 | Available<sup>1</sup> | [Microsoft Foundry](claude-in-microsoft-foundry.md)                                                                                                                                                                         |
-| Available<sup>2</sup> | [Amazon Bedrock (InvokeModel)](claude-on-amazon-bedrock-legacy.md)                                                                                                                                                          |
+| Available<sup>2</sup> | [Amazon Bedrock (bedrock-runtime)](claude-on-amazon-bedrock-legacy.md)                                                                                                                                                      |
 | Available<sup>2</sup> | [Amazon Bedrock](claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md)                         |
 
 1. `file_id` sources need a Hosted on Anthropic deployment.

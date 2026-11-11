@@ -556,9 +556,9 @@ puts response.to_json
 
 When Claude saves files to its output directory during code execution (see [How generated files are captured](code-execution-tool.md#how-generated-files-are-captured)), each file’s ID appears in the code execution tool result, and you can download it with the [Files API](../../build-with-claude/files.md):
 
-Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this.
+Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) for this.
 
-Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this.
+Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) for this.
 
 ```python Python
 client = Anthropic()

@@ -35,7 +35,7 @@ featureMetadata:
 
 [Prompt caching](prompt-caching.md) cuts latency and cost significantly, but only when the beginning of your prompt is byte-for-byte identical to a recent request. A reordered tool, a timestamp interpolated into your system prompt, or an edit to an earlier message can silently invalidate the cache. Without cache diagnostics, the only signal is `usage.cache_read_input_tokens` dropping to zero, with no indication of what changed.
 
-Cache diagnostics closes that gap. Pass the `id` of your previous response, and the API compares the two requests and tells you where they diverged (the model, the system prompt, the tools, or the message history) so you can fix the root cause instead of guessing.
+Cache diagnostics closes that gap. Pass the `id` of your previous response, and the API compares the two requests. It tells you where they diverged (the model, the system prompt, the tools, or the message history), so you can fix the root cause instead of guessing.
 
 ## How cache diagnostics works
 
@@ -47,7 +47,7 @@ Fingerprints contain only hashes and token-count estimates (never raw prompt con
 
 ## Basic usage
 
-Include the `diagnostics` object on every turn. The object is the opt-in: the API stores a fingerprint only for requests that include it. On the first turn, pass `"previous_message_id": null` to opt in without a prior message to compare against. On subsequent turns, pass the `id` from the previous response. The `cache-diagnosis-2026-04-07` beta header is no longer required, and requests that send it work as before.
+Include the `diagnostics` object on every turn. The object is the opt-in: the API stores a fingerprint only for requests that include it. On the first turn, pass `"previous_message_id": null` to opt in without a prior message to compare against. On subsequent turns, pass the `id` from the previous response.
 
 ```bash cURL
 # Turn 1: establish the cache and opt in to diagnostics
@@ -373,7 +373,7 @@ client = Anthropic::Client.new
 SYSTEM = "You are an AI assistant analyzing a large document. <document>...</document>"
 
 r1 = client.beta.messages.create(
-  model: :"claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   cache_control: {type: "ephemeral"},
   system_: SYSTEM,
@@ -384,7 +384,7 @@ r1 = client.beta.messages.create(
 )
 
 r2 = client.beta.messages.create(
-  model: :"claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   cache_control: {type: "ephemeral"},
   system_: SYSTEM,
@@ -675,7 +675,7 @@ echo match (true) {
 ```ruby Ruby
 # Turn 2: stream, referencing the previous response id
 stream = client.beta.messages.stream(
-  model: :"claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   cache_control: {type: "ephemeral"},
   system_: SYSTEM,
@@ -711,17 +711,11 @@ The `message_start` event carries the full `diagnostics` field; see [Response fo
 
 In a multi-turn conversation, carry the latest response `id` forward as `previous_message_id` on every turn. The first iteration passes `null` to opt in; each subsequent iteration passes the `id` from the previous response.
 
-**cURL**
+This workflow needs more logic than a single shell command. Use the Anthropic SDK to run the loop. Each turn sends the same HTTP request as in [Basic usage](cache-diagnostics.md#basic-usage).
 
-This workflow doesn’t translate well to a one-off shell command. Use the Claude SDK to run the loop; the per-turn HTTP request is identical to [Basic usage](cache-diagnostics.md#basic-usage).
+This workflow needs more logic than a single shell command. Use the Anthropic SDK to run the loop. Each turn sends the same request as in [Basic usage](cache-diagnostics.md#basic-usage).
 
-**CLI**
-
-This workflow doesn’t translate well to a one-off shell command. Use the Claude SDK to run the loop; the per-turn CLI command is identical to [Basic usage](cache-diagnostics.md#basic-usage).
-
-**Python**
-
-```python
+```python Python
 client = anthropic.Anthropic()
 
 SYSTEM = "You are an AI assistant analyzing a large document. <document>...</document>"
@@ -729,12 +723,12 @@ SYSTEM = "You are an AI assistant analyzing a large document. <document>...</doc
 messages = []
 prev_id = None
 
-for i, user_message in enumerate(
+for turn, user_message in enumerate(
     ["Summarize section 1.", "Now section 2.", "Now section 3."]
 ):
     messages.append({"role": "user", "content": user_message})
 
-    r = client.beta.messages.create(
+    response = client.beta.messages.create(
         model="claude-opus-5-5",
         max_tokens=1024,
         cache_control={"type": "ephemeral"},
@@ -743,16 +737,19 @@ for i, user_message in enumerate(
         diagnostics={"previous_message_id": prev_id},
     )
 
-    if r.diagnostics is not None and r.diagnostics.cache_miss_reason is not None:
-        print(f"Turn {i + 1} cache_miss_reason: {r.diagnostics.cache_miss_reason.type}")
+    if (
+        response.diagnostics is not None
+        and response.diagnostics.cache_miss_reason is not None
+    ):
+        print(
+            f"Turn {turn + 1} cache_miss_reason: {response.diagnostics.cache_miss_reason.type}"
+        )
 
-    messages.append({"role": "assistant", "content": r.content})
-    prev_id = r.id
+    messages.append({"role": "assistant", "content": response.content})
+    prev_id = response.id
 ```
 
-**TypeScript**
-
-```typescript
+```typescript TypeScript
 const client = new Anthropic();
 
 const SYSTEM = "You are an AI assistant analyzing a large document. <document>...</document>";
@@ -762,10 +759,10 @@ const prompts = ["Summarize section 1.", "Now section 2.", "Now section 3."];
 const messages: BetaMessageParam[] = [];
 let prevId: string | null = null;
 
-for (const [i, prompt] of prompts.entries()) {
+for (const [turn, prompt] of prompts.entries()) {
   messages.push({ role: "user", content: prompt });
 
-  const r: BetaMessage = await client.beta.messages.create({
+  const response: BetaMessage = await client.beta.messages.create({
     model: "claude-opus-5-5",
     max_tokens: 1024,
     cache_control: { type: "ephemeral" },
@@ -774,18 +771,18 @@ for (const [i, prompt] of prompts.entries()) {
     diagnostics: { previous_message_id: prevId }
   });
 
-  if (r.diagnostics?.cache_miss_reason) {
-    console.log(`Turn ${i + 1} cache_miss_reason: ${r.diagnostics.cache_miss_reason.type}`);
+  if (response.diagnostics?.cache_miss_reason) {
+    console.log(
+      `Turn ${turn + 1} cache_miss_reason: ${response.diagnostics.cache_miss_reason.type}`
+    );
   }
 
-  messages.push({ role: "assistant", content: r.content });
-  prevId = r.id;
+  messages.push({ role: "assistant", content: response.content });
+  prevId = response.id;
 }
 ```
 
-**C#**
-
-```csharp
+```csharp C#
 AnthropicClient client = new();
 
 var system = "You are an AI assistant analyzing a large document. <document>...</document>";
@@ -794,11 +791,11 @@ List<BetaMessageParam> messages = [];
 string? prevId = null;
 string[] prompts = ["Summarize section 1.", "Now section 2.", "Now section 3."];
 
-for (int i = 0; i < prompts.Length; i++)
+for (int turn = 0; turn < prompts.Length; turn++)
 {
-    messages.Add(new BetaUserMessageParam { Content = prompts[i] });
+    messages.Add(new BetaUserMessageParam { Content = prompts[turn] });
 
-    var r = await client.Beta.Messages.Create(
+    var response = await client.Beta.Messages.Create(
         new()
         {
             Model = Messages::Model.ClaudeOpus5_5,
@@ -810,24 +807,22 @@ for (int i = 0; i < prompts.Length; i++)
         }
     );
 
-    if (r.Diagnostics?.CacheMissReason is { Type: var type })
+    if (response.Diagnostics?.CacheMissReason is { Type: var type })
     {
-        Console.WriteLine($"Turn {i + 1} cache_miss_reason: {type.Raw()}");
+        Console.WriteLine($"Turn {turn + 1} cache_miss_reason: {type.Raw()}");
     }
 
     messages.Add(
         new BetaAssistantMessageParam
         {
-            Content = r.Content.Select(block => new BetaContentBlockParam(block.Json)).ToList(),
+            Content = response.Content.Select(block => new BetaContentBlockParam(block.Json)).ToList(),
         }
     );
-    prevId = r.ID;
+    prevId = response.ID;
 }
 ```
 
-**Go**
-
-```go
+```go Go
 client := anthropic.NewClient()
 ctx := context.Background()
 
@@ -843,7 +838,7 @@ prevID := param.Null[string]()
 for turn, prompt := range prompts {
 	messages = append(messages, anthropic.NewBetaUserMessage(anthropic.NewBetaTextBlock(prompt)))
 
-	r, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
+	response, err := client.Beta.Messages.New(ctx, anthropic.BetaMessageNewParams{
 		Model:        anthropic.ModelClaudeOpus5_5,
 		MaxTokens:    1024,
 		CacheControl: anthropic.BetaCacheControlEphemeralParam{},
@@ -857,18 +852,16 @@ for turn, prompt := range prompts {
 		panic(err)
 	}
 
-	if r.JSON.Diagnostics.Valid() && r.Diagnostics.JSON.CacheMissReason.Valid() {
-		fmt.Printf("Turn %d cache_miss_reason: %s\n", turn+1, r.Diagnostics.CacheMissReason.Type)
+	if response.JSON.Diagnostics.Valid() && response.Diagnostics.JSON.CacheMissReason.Valid() {
+		fmt.Printf("Turn %d cache_miss_reason: %s\n", turn+1, response.Diagnostics.CacheMissReason.Type)
 	}
 
-	messages = append(messages, r.ToParam())
-	prevID = anthropic.String(r.ID)
+	messages = append(messages, response.ToParam())
+	prevID = anthropic.String(response.ID)
 }
 ```
 
-**Java**
-
-```java
+```java Java
 var client = AnthropicOkHttpClient.fromEnv();
 
 var system = "You are an AI assistant analyzing a large document. <document>...</document>";
@@ -880,7 +873,7 @@ String prevId = null;
 for (var turn = 0; turn < prompts.size(); turn++) {
     messages.add(BetaMessageParam.ofUser(prompts.get(turn)));
 
-    var r = client.beta().messages().create(
+    var response = client.beta().messages().create(
         MessageCreateParams.builder()
             .model(Model.CLAUDE_OPUS_5_5)
             .maxTokens(1024)
@@ -891,19 +884,17 @@ for (var turn = 0; turn < prompts.size(); turn++) {
             .build()
     );
 
-    if (r.diagnostics().isPresent() && r.diagnostics().get().cacheMissReason().isPresent()) {
-        var reason = r.diagnostics().get().cacheMissReason().get();
+    if (response.diagnostics().isPresent() && response.diagnostics().get().cacheMissReason().isPresent()) {
+        var reason = response.diagnostics().get().cacheMissReason().get();
         IO.println("Turn " + (turn + 1) + " cache_miss_reason: " + reason.type().asString());
     }
 
-    messages.add(r.toParam());
-    prevId = r.id();
+    messages.add(response.toParam());
+    prevId = response.id();
 }
 ```
 
-**PHP**
-
-```php
+```php PHP
 $client = new Client();
 
 $system = 'You are an AI assistant analyzing a large document. <document>...</document>';
@@ -911,11 +902,11 @@ $system = 'You are an AI assistant analyzing a large document. <document>...</do
 $messages = [];
 $prevId = null;
 
-foreach (['Summarize section 1.', 'Now section 2.', 'Now section 3.'] as $i => $userMsg) {
-    $turn = $i + 1;
+foreach (['Summarize section 1.', 'Now section 2.', 'Now section 3.'] as $index => $userMsg) {
+    $turn = $index + 1;
     $messages[] = ['role' => 'user', 'content' => $userMsg];
 
-    $r = $client->beta->messages->create(
+    $response = $client->beta->messages->create(
         model: Model::CLAUDE_OPUS_5_5,
         maxTokens: 1024,
         cacheControl: new BetaCacheControlEphemeral,
@@ -924,18 +915,16 @@ foreach (['Summarize section 1.', 'Now section 2.', 'Now section 3.'] as $i => $
         diagnostics: (new BetaDiagnosticsParam)->withPreviousMessageID($prevId),
     );
 
-    if ($r->diagnostics?->cacheMissReason !== null) {
-        echo "Turn {$turn} cache_miss_reason: {$r->diagnostics->cacheMissReason->type}\n";
+    if ($response->diagnostics?->cacheMissReason !== null) {
+        echo "Turn {$turn} cache_miss_reason: {$response->diagnostics->cacheMissReason->type}\n";
     }
 
-    $messages[] = ['role' => 'assistant', 'content' => $r->content];
-    $prevId = $r->id;
+    $messages[] = ['role' => 'assistant', 'content' => $response->content];
+    $prevId = $response->id;
 }
 ```
 
-**Ruby**
-
-```ruby
+```ruby Ruby
 client = Anthropic::Client.new
 
 SYSTEM = "You are an AI assistant analyzing a large document. <document>...</document>"
@@ -943,11 +932,11 @@ SYSTEM = "You are an AI assistant analyzing a large document. <document>...</doc
 messages = []
 prev_id = nil
 
-["Summarize section 1.", "Now section 2.", "Now section 3."].each_with_index do |user_msg, i|
+["Summarize section 1.", "Now section 2.", "Now section 3."].each_with_index do |user_msg, turn|
   messages << {role: "user", content: user_msg}
 
-  r = client.beta.messages.create(
-    model: :"claude-opus-5-5",
+  response = client.beta.messages.create(
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     cache_control: {type: "ephemeral"},
     system_: SYSTEM,
@@ -955,12 +944,12 @@ prev_id = nil
     diagnostics: {previous_message_id: prev_id}
   )
 
-  if (reason = r.diagnostics&.cache_miss_reason)
-    puts "Turn #{i + 1} cache_miss_reason: #{reason.type}"
+  if (reason = response.diagnostics&.cache_miss_reason)
+    puts "Turn #{turn + 1} cache_miss_reason: #{reason.type}"
   end
 
-  messages << {role: "assistant", content: r.content}
-  prev_id = r.id
+  messages << {role: "assistant", content: response.content}
+  prev_id = response.id
 end
 ```
 
@@ -1004,7 +993,7 @@ When `cache_miss_reason` is non-null, it looks like this:
 | Type                         | What it means                                                                                                                                                                                                                                                                                                                                                                                                                                   | What to change                                                                                                                                                                                                                                                                                                |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `model_changed`              | The `model` differs from the previous request (for example, a router, A/B test, or fallback selected a different model). The cache is per-model.                                                                                                                                                                                                                                                                                                | Hold the model constant within a cached conversation.                                                                                                                                                                                                                                                         |
-| `system_changed`             | The `system` parameter differs. Typically a timestamp, request ID, or other per-request value was interpolated into the system prompt.                                                                                                                                                                                                                                                                                                          | Make the system prompt a byte-stable constant and move dynamic data into the first `user` message after your cache breakpoint.                                                                                                                                                                                |
+| `system_changed`             | The `system` parameter differs. Typically a timestamp, request ID, or other per-request value was interpolated into the system prompt.                                                                                                                                                                                                                                                                                                          | Make the system prompt a byte-stable constant and put the changing value in the `user` message you’re about to send.                                                                                                                                                                                          |
 | `tools_changed`              | The `tools` array differs: tools were added, removed, or reordered between turns, or tool `input_schema` JSON was serialized non-deterministically.                                                                                                                                                                                                                                                                                             | Send the same tool list on every turn in a fixed order with deterministically serialized schemas (for example, sort keys).                                                                                                                                                                                    |
 | `messages_changed`           | The model, system, and tools all match, but an earlier entry in `messages` was altered, reordered, or removed rather than appended to. Typically conversation history was truncated or edited, or assistant turns and `tool_result` blocks were re-serialized differently on resend.                                                                                                                                                            | Treat the history as append-only; echo assistant `content` and tool results back verbatim.                                                                                                                                                                                                                    |
 | `previous_message_not_found` | No stored fingerprint exists for the supplied `previous_message_id`. This is not evidence that your request changed. Typically the previous request did not include the `diagnostics` object, it came from a different workspace, or too much time has passed since it was sent.                                                                                                                                                                | Include the `diagnostics` object on every turn and keep consecutive turns close together in time.                                                                                                                                                                                                             |
@@ -1014,7 +1003,7 @@ The four `*_changed` types also carry a `cache_missed_input_tokens` integer: an 
 
 ## Reading diagnostics alongside usage
 
-`diagnostics` answers “did my request change?” whereas `usage.cache_read_input_tokens` answers “did the cache hit?” Combining them tells you where to look.
+`diagnostics` tells you whether your request changed, and `usage.cache_read_input_tokens` tells you whether the cache hit. Combining them tells you where to look.
 
 This matrix applies to turns where you passed a real `previous_message_id`. On the first turn (`previous_message_id: null`), `diagnostics` is always `null` and `cache_read_input_tokens` is normally zero because the cache is being written, not read; no troubleshooting is needed. The matrix also does not apply when `cache_miss_reason` is `null` (the comparison is still pending; check the next turn) or when its `type` is `previous_message_not_found` or `unavailable` (no comparison was produced).
 
@@ -1027,7 +1016,7 @@ This matrix applies to turns where you passed a real `previous_message_id`. On t
 
 ## Limitations
 
-* **Claude API only:** Not available on Claude Models on Google Cloud (Google managed) or Amazon Bedrock.
+* **Claude API only:** Cache diagnostics is available on the Claude API.
 * **Limited retention:** Fingerprints for `previous_message_id` lookup expire after a short period. Run diagnostic comparisons between closely spaced requests.
 * **Same workspace:** The previous request must have run in the same organization and workspace. To check, compare the `anthropic-workspace-id` [response header](../api/overview.md#response-headers) on the two responses.
 * **Comparison horizon:** For very long conversations where the only change is deep in the message list, the response might be `unavailable` rather than a precise location.

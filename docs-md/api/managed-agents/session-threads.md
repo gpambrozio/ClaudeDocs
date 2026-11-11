@@ -686,9 +686,9 @@ Under `auto`, your `user.message` events can lead the server to allow a call it 
 
 The following example goes inside the event loop of the [tool confirmation handler](events-and-streaming.md#tool-confirmation). For each ID in `stop_reason.event_ids`, it sends a `user.tool_confirmation` that allows the call. The same pattern applies to `user.custom_tool_result`, which you can also send as soon as its `agent.custom_tool_use` event arrives.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 for event_id in stop.event_ids:

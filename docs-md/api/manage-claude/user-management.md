@@ -196,7 +196,7 @@ Groups connect members to custom roles (role-based access control, the `rbac` in
 
 ## Versioning
 
-Send the `anthropic-version` header on every request; see [Versions](../api/versioning.md) for the available versions.
+Send the `anthropic-version` header on every request; see [API versions](../api/versioning.md) for the available versions.
 
 ## Rate limits
 

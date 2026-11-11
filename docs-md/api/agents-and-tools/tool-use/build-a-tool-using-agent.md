@@ -18,9 +18,9 @@ The smallest possible tool-using program: one tool, one user message, one tool c
 
 The request sends a `tools` array alongside the user message. When Claude determines that a tool call is needed, the response comes back with `stop_reason: "tool_use"` and a `tool_use` content block containing the tool name, a unique `id`, and the structured `input`. Your code runs the tool, then sends the result back in a `tool_result` block whose `tool_use_id` matches the `id` from the call.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 # Ring 1: Single tool, single turn.
@@ -836,9 +836,9 @@ Ring 1 assumed Claude would call the tool exactly once. Real tasks often need se
 
 The other change is conversation history. Instead of rebuilding the `messages` array on each request, keep a running list and append to it. Each request then includes the complete prior context.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 # Ring 2: The agentic loop.
@@ -1591,9 +1591,9 @@ Agents rarely have just one capability. Add a second tool, `list_calendar_events
 
 When Claude has multiple independent tool calls to make, it might return several `tool_use` blocks in a single response. Your loop needs to process all of them and send back all results together in one user message. Iterate over every `tool_use` block in `response.content`, not just the first.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 # Ring 3: Multiple tools, parallel calls.
@@ -2393,9 +2393,9 @@ For more on concurrent execution and ordering guarantees, see [Parallel tool use
 
 Tools fail. A calendar API might reject an event with too many attendees, or a date might be malformed. When a tool raises an error, send the error message back with `is_error: true` instead of crashing. Claude reads the error and can retry with corrected input, ask the user for clarification, or explain the limitation.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 # Ring 4: Error handling.
@@ -3287,9 +3287,9 @@ Rings 2 through 4 wrote the same loop by hand: call the API, check `stop_reason`
 
 The SDK provides a helper that turns an ordinary function into a runnable tool and derives the input schema from its signature; the following example shows the idiomatic form.
 
-The tool runner is a helper in the [Claude SDK](../../cli-sdks-libraries/overview.md). Raw HTTP requests have no equivalent.
+The tool runner is a helper in the [Anthropic SDK](../../cli-sdks-libraries/overview.md). Raw HTTP requests have no equivalent.
 
-The tool runner is a helper in the [Claude SDK](../../cli-sdks-libraries/overview.md). The `ant` CLI has no equivalent.
+The tool runner is a helper in the [Anthropic SDK](../../cli-sdks-libraries/overview.md). The `ant` CLI has no equivalent.
 
 ```python Python
 # Ring 5: The tool runner SDK abstraction.

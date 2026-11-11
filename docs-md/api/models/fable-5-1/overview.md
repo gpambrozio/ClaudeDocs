@@ -8,9 +8,7 @@ description: "Claude Fable 5.1 reference: lifecycle status, model IDs on every p
 
 **Legacy.** Released September 1, 2026.
 
-For demanding reasoning and long-horizon agentic work
-
-Although Claude Fable 5.1 is still available, you should consider migrating to Claude Fable 5.2. [See Claude Fable 5.2](../fable-5-2/overview.md) · [Migrate to Claude Fable 5.2](../fable-5-2/migration-guide.md)
+Although Claude Fable 5.1 is still available, you should consider migrating to Claude Fable 5.2. [See Claude Fable 5.2](../fable-5-2/overview.md) · [Migrate to Claude Fable 5.2](../fable-5-2/migration-guide.md#migrating-from-claude-fable-5-1-to-claude-fable-5-2)
 
 Model ID: `claude-fable-5-1`
 

@@ -629,7 +629,7 @@ export ANTHROPIC_LOG=debug
 
 ### OpenTelemetry tracing
 
-When your application registers an OpenTelemetry tracer provider, the SDK emits a span for each request that it sends. To send the spans to your observability platform, see [Set up OpenTelemetry with the Claude SDK](../../manage-claude/opentelemetry/sdk.md).
+When your application registers an OpenTelemetry tracer provider, the SDK emits a span for each request that it sends. To send the spans to your observability platform, see [Set up OpenTelemetry with the Anthropic SDK](../../manage-claude/opentelemetry/sdk.md).
 
 ### Making custom/undocumented requests
 
@@ -723,8 +723,8 @@ response = client.beta.messages.create(
 
 For detailed platform setup guides with code examples, see:
 
-* [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)
-* [Amazon Bedrock (Opus 4.6 and earlier)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
+* [Amazon Bedrock (`bedrock-mantle`)](../../build-with-claude/claude-in-amazon-bedrock.md)
+* [Amazon Bedrock (`bedrock-runtime`)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)
 * [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)
 * [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md)
 * [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)
@@ -744,7 +744,7 @@ All six client classes are included in the base `anthropic` package:
 
 The `AnthropicAWS` client is in beta. Pass `workspace_id` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable. The `AnthropicGoogleCloud` client is also in beta. Pass `workspace_id` to the constructor or set the `ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID` environment variable. See [Project, location, and workspace resolution](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#project-location-and-workspace-resolution) for how the client resolves the workspace ID.
 
-Use `AnthropicBedrockMantle` for new projects; `AnthropicBedrock` remains for existing applications using the Bedrock `InvokeModel` API.
+Use `AnthropicBedrockMantle` with the `bedrock-mantle` endpoint, and `AnthropicBedrock` with the `InvokeModel` API on the `bedrock-runtime` endpoint.
 
 ## Semantic versioning
 

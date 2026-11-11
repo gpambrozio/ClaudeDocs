@@ -7,18 +7,7 @@ description: Different tiers of service allow you to balance availability, perfo
 featureMetadata:
   status: stable
   supportedModels:
-    - claude-fable-5-2
-    - claude-mythos-5-2
-    - claude-fable-5-1
-    - claude-mythos-5-1
     - claude-fable-5
-    - claude-mythos-5
-    - claude-mythos-preview
-    - claude-opus-5-5
-    - claude-opus-5
-    - claude-sonnet-5-5
-    - claude-sonnet-5
-    - claude-haiku-5-5
     - claude-haiku-4-5-20251001
     - claude-opus-4-8
     - claude-opus-4-7
@@ -253,7 +242,7 @@ Check the [Models overview](../models/overview.md) for more details on available
 
 ## Availability
 
-Service tiers are available on every model.
+Service tiers are available on select models.
 
 ### API support
 
@@ -262,9 +251,9 @@ Service tiers are available on every model.
 * Availability: Available
 * Usage: Needs a Priority Tier commitment, which is no longer sold. With one, requests use Priority Tier by default; set `service_tier` to `"standard_only"` to use only standard capacity.
 
-| Status    | Cloud platforms |
-| --------- | --------------- |
-| Available | Claude API      |
+| Status    | Cloud platforms | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| --------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API      | [Claude Fable 5](../models/fable-5/overview.md), [Claude Haiku 4.5](../models/haiku-4-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Opus 4.6](../models/opus-4-6/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md), [Claude Opus 4.5](../models/opus-4-5/overview.md), [Claude Sonnet 4.5](../models/sonnet-4-5/overview.md) |
 
 #### [Managed Agents](../managed-agents/overview.md)
 

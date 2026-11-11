@@ -308,9 +308,9 @@ To provide input files for Skills to work on, [upload them with the Files API](f
 
 **Example: creating and downloading an Excel file**
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = anthropic.Anthropic()
@@ -847,9 +847,9 @@ For complete details, see [Files API](files.md).
 
 The response’s `container` object carries the container’s `id` and `expires_at` timestamp (see [Container reuse](../agents-and-tools/tool-use/code-execution-tool.md#container-reuse) for lifetime details). Reuse the same container across multiple messages by specifying the container ID:
 
-Multi-turn container reuse needs more logic than a single shell command, so use the Claude SDK for it. To build the requests yourself, capture `container.id` from the first response. Then pass it in the next request as `"container": {"id": "...", "skills": [...]}`, together with the conversation history.
+Multi-turn container reuse needs more logic than a single shell command, so use the Anthropic SDK for it. To build the requests yourself, capture `container.id` from the first response. Then pass it in the next request as `"container": {"id": "...", "skills": [...]}`, together with the conversation history.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = anthropic.Anthropic()
@@ -1210,9 +1210,9 @@ puts response2
 
 Skills might perform operations that require multiple turns. Handle `pause_turn` stop reasons:
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = anthropic.Anthropic()
@@ -4197,9 +4197,9 @@ For best caching performance, keep your Skills list, including its order, consis
 
 Handle Skill-related errors gracefully:
 
-This error-handling flow needs more logic than a single shell command, so use the Claude SDK for it. A request that fails because of a Skill problem returns HTTP 400. The `error.message` field in the JSON response body describes the problem.
+This error-handling flow needs more logic than a single shell command, so use the Anthropic SDK for it. A request that fails because of a Skill problem returns HTTP 400. The `error.message` field in the JSON response body describes the problem.
 
-This workflow needs more logic than a single shell command. Use the [Claude SDK](../cli-sdks-libraries/overview.md) to run it.
+This workflow needs more logic than a single shell command. Use the [Anthropic SDK](../cli-sdks-libraries/overview.md) to run it.
 
 ```python Python
 client = anthropic.Anthropic()

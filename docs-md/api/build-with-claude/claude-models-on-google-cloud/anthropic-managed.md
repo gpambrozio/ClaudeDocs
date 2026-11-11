@@ -512,7 +512,7 @@ The Models API and the following features are available on Claude Models on Goog
 * [Custom tools](../../agents-and-tools/tool-use/define-tools.md)
 * [Data residency](../../manage-claude/data-residency.md)
 * [Effort](../effort.md)
-  * [Per-message effort](../effort.md#change-effort-mid-conversation-beta) (Beta)
+  * [Per-message effort](../effort-per-message.md) (Beta)
 * [Fast mode](../fast-mode.md)
 * [Files API](../files.md)
 * [MCP connector](../../agents-and-tools/mcp-connector.md) (Beta)
@@ -545,7 +545,7 @@ The Models API and the following features are available on Claude Models on Goog
 
 If a beta feature is limited to selected organizations on the Claude API, the Anthropic organization that setup creates needs the same access.
 
-To turn the [Compliance API](../../manage-claude/compliance-api.md) on or off for the Anthropic organization that setup creates, [open the Claude Console](anthropic-managed.md#using-the-claude-console), go to **Settings > Compliance**, and use the **Compliance API** toggle.
+To turn the [Compliance API](../../manage-claude/compliance-api.md) on or off for the Anthropic organization that setup creates, first [open the Claude Console](anthropic-managed.md#using-the-claude-console). Then go to [Compliance in the Claude Console](https://platform.claude.com/settings/security) (`platform.claude.com/settings/security`) and use the **Compliance API** toggle.
 
 Customer-managed encryption keys (CMEK) are available with Google Cloud KMS keys. To activate CMEK for the Anthropic organization that setup creates, see [Who can use CMEK](../../manage-claude/cmek.md#availability). To set up a key, follow [Set up CMEK with Google Cloud KMS](../../manage-claude/cmek-google-cloud-kms.md). Then register, verify, and attach the key in the [Claude Console](anthropic-managed.md#using-the-claude-console), as the setup page’s **Claude Platform** tab describes.
 

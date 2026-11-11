@@ -1,9 +1,9 @@
 # Register a tracer provider that prints each span to the console.
 
 ---
-title: Set up OpenTelemetry with the Claude SDK
+title: Set up OpenTelemetry with the Anthropic SDK
 url: https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk
-description: Trace the Claude SDK's requests and tool uses in Python, TypeScript, C#, Go, Java, PHP, or Ruby, and send the spans to your observability platform.
+description: Trace the Anthropic SDK's requests and tool uses in Python, TypeScript, C#, Go, Java, PHP, or Ruby, and send the spans to your observability platform.
 featureMetadata:
   topic:
     title: OpenTelemetry
@@ -31,14 +31,14 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: beta
-    Claude Platform on AWS: beta
     Amazon Bedrock: beta
-    Amazon Bedrock (InvokeModel): beta
+    Amazon Bedrock (bedrock-runtime): beta
+    Claude Platform on AWS: beta
     Claude Models on Google Cloud (Google managed): beta
     Microsoft Foundry: beta
 ---
 
-With OpenTelemetry, the Claude SDK can emit a span for each request that it sends and each tool use that the [tool runner](../../agents-and-tools/tool-use/tool-runner.md) runs. You can view these spans in your observability platform, nested in your own traces.
+With OpenTelemetry, the Anthropic SDK can emit a span for each request that it sends and each tool use that the [tool runner](../../agents-and-tools/tool-use/tool-runner.md) runs. You can view these spans in your observability platform, nested in your own traces.
 
 The SDK emits spans in your application. Your application’s OpenTelemetry exporter sends them to your observability platform.
 
@@ -46,7 +46,7 @@ During the beta, the SDK options and the span schema can change in ways that bre
 
 ## 1. Install the SDK
 
-Install or upgrade to the latest version of the Claude SDK:
+Install or upgrade to the latest version of the Anthropic SDK:
 
 **Python**
 
@@ -98,7 +98,7 @@ go get go.opentelemetry.io/otel/sdk go.opentelemetry.io/otel/exporters/stdout/st
 
 **Java**
 
-Add the Claude SDK to your dependencies, or update it to at least the following version if your build file already declares it:
+Add the Anthropic SDK to your dependencies, or update it to at least the following version if your build file already declares it:
 
 **Gradle**
 
@@ -817,9 +817,9 @@ SDK tracing is in beta on every model.
 
 * Availability: Available
 
-| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta   | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |
+| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta   | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Amazon Bedrock (bedrock-runtime)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) |
 
 #### [Managed Agents](../../managed-agents/overview.md)
 

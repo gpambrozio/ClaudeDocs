@@ -39,7 +39,7 @@ For every model with a 1M-token context window, 1M is the default: you don’t n
 
 A single request can include up to 600 images or PDF pages (100 for models with a 200k-token context window). If you send many images or large documents, you might reach [request size limits](../api/overview.md#request-size-limits) before the token limit.
 
-See the [model comparison](../models/overview.md#latest-models-comparison) table for a list of context window sizes by model.
+See the [All models](../models/overview.md#all-models) table for a list of context window sizes by model.
 
 ## The context window with thinking
 
@@ -150,9 +150,9 @@ Server-side context compaction for managing long conversations that approach con
 
 Automatically manage conversation context as it grows with context editing.
 
-**Model comparison table**
+**All models table**
 
-See the model comparison table for a list of context window sizes and input/output token pricing by model.
+See the All models table for a list of context window sizes and input/output token pricing by model.
 
 **Thinking**
 

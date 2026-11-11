@@ -32,9 +32,9 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: beta
-    Claude Platform on AWS: beta
     Amazon Bedrock: beta
-    Amazon Bedrock (InvokeModel): beta
+    Amazon Bedrock (bedrock-runtime): beta
+    Claude Platform on AWS: beta
     Claude Models on Google Cloud (Google managed): beta
     Microsoft Foundry: beta
 ---
@@ -2870,9 +2870,9 @@ Context editing is in beta on every model and eligible for zero data retention.
 
 * Availability: Available
 
-| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta   | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Amazon Bedrock](claude-in-amazon-bedrock.md), [Amazon Bedrock (InvokeModel)](claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) |
+| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta   | Claude API, [Amazon Bedrock](claude-in-amazon-bedrock.md), [Amazon Bedrock (bedrock-runtime)](claude-on-amazon-bedrock-legacy.md), [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) |
 
 ### Required beta headers
 

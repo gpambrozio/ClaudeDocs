@@ -65,7 +65,7 @@ When a request carries a block the current model can’t read, the API drops the
 
 ### Use the computer use toolset instead of `computer_20251124`
 
-Claude Fable 5.1 accepts [computer use](../../agents-and-tools/tool-use/computer-use-tool.md) both as the `computer_toolset_20260801` toolset and, with the `computer-use-2025-11-24` beta header, as the earlier `computer_20251124` tool. Claude Fable 5.2 and Claude Mythos 5.2 support computer use through the toolset. A request to either model that declares a `computer_20251124` tool returns a 400 `invalid_request_error` on every platform except Amazon Bedrock, where the earlier tool works as it does on Claude Fable 5.1.
+Claude Fable 5.1 accepts [computer use](../../agents-and-tools/tool-use/computer-use-tool.md) both as the `computer_toolset_20260801` toolset and, with the `computer-use-2025-11-24` beta header, as the earlier `computer_20251124` tool. Claude Fable 5.2 and Claude Mythos 5.2 support computer use through the toolset. A request to either model that declares a `computer_20251124` tool returns a 400 `invalid_request_error` on every platform except Amazon Bedrock. There, both models accept the earlier tool: with the InvokeModel API, send `computer-use-2025-11-24` in the `anthropic_beta` array of the request body.
 
 To move an existing integration, follow [Migrate from `computer_20251124`](../../agents-and-tools/tool-use/computer-use-tool.md#migrate-from-computer-20251124).
 
@@ -89,17 +89,11 @@ Claude Fable 5.2 supports these API features, among others:
 * **Effort:** all five [effort levels](../../build-with-claude/effort.md#effort-levels): `low`, `medium`, `high`, `xhigh`, and `max`. The API default is `high`. Start there, because most of the gain in capability is already present at `high`. Step up to `xhigh` for your hardest long-running coding and agentic work, where you’ve measured a gain. Reserve `max` for measuring the model’s ceiling and for the rare task where time and tokens don’t matter. See [Recommended effort levels for Claude Fable 5.2](../../build-with-claude/effort.md#recommended-effort-levels-for-claude-fable-5-2).
 * **Compaction on demand (beta):** with the `compact-2026-09-04` beta header, you choose when to replace older turns with a summary. See [Compaction on demand](../../build-with-claude/compaction-on-demand.md).
 * **Mid-conversation tool changes (beta):** you add or remove tools in a `role: "system"` message instead of editing `tools`. On the Claude API, Claude Platform on AWS, and Claude Models on Google Cloud (Anthropic managed), send the `inline-tools-2026-09-15` beta header. The `mid-conversation-tool-changes-2026-07-01` header works for changes that name a tool by reference, on the platforms that [Mid-conversation system messages and tool changes](../../build-with-claude/mid-conversation-system-messages.md) lists. See [Mid-conversation tool changes](../../build-with-claude/mid-conversation-system-messages.md#mid-conversation-tool-changes).
-* **Computer use:** through the `computer_toolset_20260801` toolset. The earlier `computer_20251124` tool returns a 400 error on every platform except Amazon Bedrock, where both models also accept the earlier tool (see the [computer use breaking change](whats-new-fable-5-2.md#computer-20251124-is-not-supported)). See [Computer use tool](../../agents-and-tools/tool-use/computer-use-tool.md).
+* **Computer use:** through the `computer_toolset_20260801` toolset. The earlier `computer_20251124` tool returns a 400 error on every platform except Amazon Bedrock. There, Claude Fable 5.2 and Claude Mythos 5.2 also accept the earlier tool. See the [computer use breaking change](whats-new-fable-5-2.md#computer-20251124-is-not-supported) and [Computer use tool](../../agents-and-tools/tool-use/computer-use-tool.md).
 
 Compaction on demand and mid-conversation tool changes help you keep the history append-only, which the [prefix check](whats-new-fable-5-2.md#editing-earlier-turns-invalidates-thinking-blocks) requires. See each feature’s page for model and platform availability.
 
-[Fast mode](../../build-with-claude/fast-mode.md) is available for Claude Fable 5.2 in Messages API requests on the Claude API.
-
-Fast mode is also available for Claude Fable 5.2 on [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md).
-
-Fast mode is also available for Claude Fable 5.2 on [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md).
-
-Fast mode is also available for Claude Fable 5.2 on [Claude in Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) for deployments hosted on Anthropic, as a separate model, `claude-fable-5-2-fast`.
+[Fast mode](../../build-with-claude/fast-mode.md) is available for Claude Fable 5.2 in Messages API requests on the Claude API, [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), and [Claude in Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md). On Claude in Microsoft Foundry, it’s available for deployments hosted on Anthropic, with its own model ID, `claude-fable-5-2-fast`.
 
 Fast mode is also available for Claude Mythos 5.2 in Messages API requests on the Claude API. [Availability of fast mode](../../build-with-claude/fast-mode.md#feature-availability) lists every platform where Claude Mythos 5.2 has fast mode.
 
@@ -116,7 +110,7 @@ A few Claude Fable 5.2 behaviors show up without any code change. Check them whe
 * **What the prompt says about code ownership matters.** In Anthropic’s testing on small coding tasks, when a prompt said nothing about who owns the code, the model tended to add to the existing structure and to report nearby problems instead of fixing them. See [Say who owns the code](../../build-with-claude/prompt-engineering/prompting-claude-fable-5-2.md#say-who-owns-the-code).
 * **Long runs of tool calls can pass with little user-facing text.** The model might also make its first tool call without saying what it’s about to do. See [Keep users informed during long turns](../../build-with-claude/prompt-engineering/prompting-claude-fable-5-2.md#keep-users-informed-during-long-turns).
 * **How much the model delegates to subagents depends on your harness and tasks.** In an agentic coding product whose prompts invite delegation, the model delegates readily. Subagents can account for a large part of what a session costs. See [Set expectations for subagents](../../build-with-claude/prompt-engineering/prompting-claude-fable-5-2.md#set-expectations-for-subagents).
-* **The model follows style rules closely.** A hard limit on sentence length can make the model’s prose choppy. See [Review instructions written for earlier models](../../build-with-claude/prompt-engineering/prompting-claude-fable-5-2.md#review-instructions-written-for-earlier-models).
+* **The model follows style rules closely.** A hard limit on sentence length can make the model’s prose choppy. See [Review prompts and harnesses designed for earlier models](../../build-with-claude/prompt-engineering/prompting-claude-fable-5-2.md#review-instructions-written-for-earlier-models).
 
 ## Refusals, fallback, and billing
 
@@ -134,21 +128,22 @@ Claude Fable 5.2 and Claude Mythos 5.2 share these prices, in USD:
 | ---------- | --------------- | --------------- | ------------ | ---------- |
 | $8 / MTok  | $10 / MTok      | $16 / MTok      | $0.20 / MTok | $40 / MTok |
 
-Input and output cost less than on Claude Fable 5.1 and Claude Mythos 5.1, which cost $10 USD per million input tokens and $50 USD per million output tokens. Cache reads (hits and refreshes) cost 0.025 times the base input price, the same multiplier as on those models. [Batch processing](../../build-with-claude/batch-processing.md) is $4 USD per million input tokens and $20 USD per million output tokens. [Fast mode](../../build-with-claude/fast-mode.md) for Claude Fable 5.2 costs $16 USD per million input tokens and $80 USD per million output tokens. See [Fast mode pricing](../../about-claude/pricing.md#fast-mode-pricing). Fast mode for Claude Mythos 5.2 costs $16 USD per million input tokens and $80 USD per million output tokens. See [Pricing](../../about-claude/pricing.md) for data residency and tool pricing.
+Input and output cost less than on Claude Fable 5.1 and Claude Mythos 5.1. Claude Fable 5.1 and Claude Mythos 5.1 cost $10 USD per million input tokens and $50 USD per million output tokens. Cache reads (hits and refreshes) cost 0.025 times the base input price, the same multiplier as on those models. [Batch processing](../../build-with-claude/batch-processing.md) is $4 USD per million input tokens and $20 USD per million output tokens. [Fast mode](../../build-with-claude/fast-mode.md) for Claude Fable 5.2 and Claude Mythos 5.2 costs $16 USD per million input tokens and $80 USD per million output tokens. See [Fast mode pricing](../../about-claude/pricing.md#fast-mode-pricing). See [Pricing](../../about-claude/pricing.md) for data residency and tool pricing.
 
 ## Availability
 
 Claude Fable 5.2 is available on:
 
 * **Claude API:** all customers, as `claude-fable-5-2`
-* **AWS:** [Claude in Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), as `anthropic.claude-fable-5-2`, and [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), as `claude-fable-5-2`
+* **AWS:** [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), as `claude-fable-5-2`
+* **Amazon Bedrock:** `global.anthropic.claude-fable-5-2` or `us.anthropic.claude-fable-5-2`, on the [`bedrock-runtime` endpoint](../../build-with-claude/claude-on-amazon-bedrock-legacy.md#api-model-ids) only
 * **Google Cloud:** [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), as `claude-fable-5-2`, and [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), as `claude-fable-5-2`
 * **Microsoft Foundry:** [Claude in Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), as `claude-fable-5-2`, on Anthropic infrastructure (see [Hosting options](../../build-with-claude/claude-in-microsoft-foundry.md#hosting-options))
 
 Claude Mythos 5.2 is available only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). It’s available on:
 
 * **Claude API:** as `claude-mythos-5-2`
-* **AWS:** [Claude in Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), as `anthropic.claude-mythos-5-2`
+* **Amazon Bedrock:** `global.anthropic.claude-mythos-5-2` or `us.anthropic.claude-mythos-5-2`, on the [`bedrock-runtime` endpoint](../../build-with-claude/claude-on-amazon-bedrock-legacy.md#api-model-ids) only
 * **Google Cloud:** [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), as `claude-mythos-5-2`, and [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), as `claude-mythos-5-2`
 * **Microsoft Foundry:** [Claude in Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), as `claude-mythos-5-2`, on Anthropic infrastructure
 
