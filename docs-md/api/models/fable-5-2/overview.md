@@ -109,7 +109,7 @@ What changes when you move from Claude Fable 5.1 or from a Claude Opus model.
 
 **Preserved thinking**
 
-Editing earlier turns invalidates thinking blocks, for every account.
+Editing earlier turns invalidates thinking blocks.
 
 **Adaptive thinking**
 

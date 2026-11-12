@@ -116,17 +116,17 @@ For multi-turn applications, this means you can pass back conversation history i
 * You can resume a conversation that started without thinking, or that used a different thinking configuration, without rewriting its history.
 * History assembled from mixed sources doesn’t need thinking blocks reinserted at the start of each assistant turn to pass validation.
 
-This rule is about validation, not about what you should send. When you have thinking blocks, pass them back unmodified, particularly during tool use, where they carry the reasoning behind Claude’s tool calls. See the [Thinking](thinking.md) overview for the full rules.
+This only means a turn can start without a thinking block. When you have thinking blocks, pass them back unmodified, particularly during tool use, where they carry the reasoning behind Claude’s tool calls. See the [Thinking](thinking.md) overview for the full rules.
 
 ### Prompt caching
 
-Consecutive requests that keep the same thinking configuration and effort level preserve prompt caching; see [Thinking and prompt caching](thinking.md#thinking-and-prompt-caching) for the full rules. The resolved effort value is rendered into the prompt, so changing it between requests invalidates cache breakpoints, just as changing the legacy [`budget_tokens`](extended-thinking.md#extended-thinking-with-prompt-caching) parameter does on models that use it. Setting `effort` explicitly to the model’s default is equivalent to omitting it and does not break the cache.
+Consecutive requests that keep the same thinking configuration and effort level preserve prompt caching; see [Thinking and prompt caching](thinking.md#thinking-and-prompt-caching) for the full rules. The resolved effort value is rendered into the prompt, so changing it between requests can invalidate cache breakpoints. So can changing the legacy [`budget_tokens`](extended-thinking.md#extended-thinking-with-prompt-caching) parameter, on [models that use it](thinking-troubleshooting.md#supported-models). Setting `effort` explicitly to the model’s default is equivalent to omitting it and does not break the cache.
 
-The practical consequence: pick a thinking configuration and a top-level effort level for each conversation and keep them. If some turns need more or less thinking, use a [per-message effort](effort-per-message.md) change, which is in beta, on models that support it, or steer with [per-message prompting](thinking-steering-and-cost.md#tuning-thinking-behavior). Both leave earlier cache breakpoints intact, where a change to the thinking configuration or the top-level effort level does not.
+The practical consequence: pick a thinking configuration and a top-level effort level for each conversation and keep them. If some turns need more or less thinking, use a [per-message effort](effort-per-message.md) change, which is in beta, on [models that support it](effort-per-message.md#feature-availability). Or steer with [per-message prompting](thinking-steering-and-cost.md#per-message-steering). Both leave earlier cache breakpoints intact, where a change to the thinking configuration or the top-level effort level might not.
 
 The following example demonstrates the invalidation with a multi-turn script you can run yourself:
 
-**Effort changes invalidate the prompt cache**
+**Effort changes can invalidate the prompt cache**
 
 This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it; per-turn HTTP requests follow the examples on the [Prompt caching](prompt-caching.md) page.
 

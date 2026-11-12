@@ -12,7 +12,7 @@ The **Security posture** page in claude.ai **Organization settings** compares yo
 
 ## Choose your path
 
-To get changes on the page into your security information and event management (SIEM) system, start with [Send Security posture events to your SIEM](send-events.md). If you already ingest the whole Activity Feed, you have them; [check two things](send-events.md#if-you-already-ingest-the-full-feed).
+To get changes on the page into your security information and event management (SIEM) system, start with [Send Security posture events to your SIEM](send-events.md). If you already ingest the whole Activity Feed, you have them; check two things in the [If you already ingest the full feed](send-events.md#if-you-already-ingest-the-full-feed) section.
 
 * To alert on risky changes, see [Detect changes in Security posture](detect-changes.md).
 * To normalize to the Open Cybersecurity Schema Framework (OCSF), see [Map Security posture events to OCSF](ocsf-mapping.md).
@@ -117,7 +117,11 @@ Anthropic keeps storing an attestation after its end date arrives or it [ends au
 
 [Customer-managed encryption keys (CMEK)](../cmek.md), [zero data retention (ZDR) for Claude Code](../../../claude-code/zero-data-retention.md), and a [HIPAA-ready Enterprise plan](https://support.claude.com/en/articles/13296973-hipaa-ready-enterprise-plans) do not change what Anthropic stores of an attestation’s control, value, dates, and account. None of the three shortens how long Anthropic stores them. CMEK does not encrypt these fields.
 
-Anthropic stores an attestation’s comment until someone clears the attestation or Anthropic deletes the comment with the organization. Attesting again can replace or remove the comment. While Security posture is not available to an organization, Anthropic keeps storing its attestations and comments, and nobody can see or clear them on the Security posture page. A custom conversation retention period does not shorten how long Anthropic stores the attestation or the comment. Activity Feed activities never include the comment (see [What the feed does not record](events-reference.md#what-the-feed-does-not-record)).
+An attestation’s comment is the answer to the question that the Security posture page can ask when someone attests. Anthropic stores an attestation’s comment until someone clears the attestation or Anthropic deletes the comment with the organization. Attesting again can replace or remove the comment. A custom conversation retention period does not shorten how long Anthropic stores the attestation or the comment. Activity Feed activities never include the comment (see [What the feed does not record](events-reference.md#what-the-feed-does-not-record)).
+
+Some organizations cannot save a comment with an attestation because of their data-handling settings, such as CMEK or ZDR. For those organizations, the Security posture page shows no comment box and asks for no answer when someone attests. If an organization saved a comment before those settings applied to it, the comment stays stored with its attestation. The Security posture page does not show that comment. Clearing the attestation deletes that comment.
+
+While Security posture is not available to an organization, Anthropic keeps storing its attestations and comments. In that time, nobody can see or clear them on the Security posture page.
 
 ---
 

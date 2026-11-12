@@ -12,7 +12,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
   zdr:
     eligibility: not-eligible
-    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+    note: Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them.
   supportedModels:
     - claude-fable-5-2
     - claude-mythos-5-2
@@ -339,6 +339,8 @@ The [`auto` policy](permission-policies.md#let-the-server-evaluate-each-call-wit
 A paused session waits indefinitely, so an unattended session needs a client that answers paused calls or interrupts the session.
 
 Review each paused call before you allow it. A client that allows every call without showing it to a person is the same as `always_allow`. See [Respond to confirmation requests](permission-policies.md#respond-to-confirmation-requests) and [See how each call was evaluated](permission-policies.md#see-how-each-call-was-evaluated).
+
+Have a person approve each call to a tool that can move money, such as a tool for payments, withdrawals, transfers, or payouts. If the tool takes a permission policy, set it to `always_ask`, not `always_allow` or `auto`. If it’s a custom tool, don’t run a call until a person has approved it. For text to add to the agent’s system prompt, see [Payments, account numbers, and financial records](../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#payments-account-numbers-and-financial-records).
 
 ## Give the agent the smallest tool set
 

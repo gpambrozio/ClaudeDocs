@@ -600,8 +600,8 @@ To change a create-only or fixed field, start a new thread: send the full conver
 
 **If you change `system` or `tools`:** On the following models, leave every `thinking` and `redacted_thinking` block out of the conversation that you send in the new create request: Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5. The model then answers without that earlier reasoning.
 
-* **Why:** Changing `system` or `tools` makes the `thinking` and `redacted_thinking` blocks already in the conversation invalid. See [What counts as an edit](preserved-thinking.md#what-counts-as-an-edit).
-* **If you send the blocks anyway:** The create request can return a 400 error. Whether it does depends on the model and your account. See [When `prefix_mismatch_behavior` is unset](preserved-thinking.md#enforcement) and [What the API does with an invalid block](preserved-thinking.md#mismatch-behavior).
+* **Why:** Changing `system` or `tools` makes the `thinking` and `redacted_thinking` blocks already in the conversation invalid. See [What counts as a change](preserved-thinking/prefix-checks.md#what-counts-as-an-edit).
+* **If you send the blocks anyway:** The create request can get a 400 error (see [Thinking block bound to a different conversation](../api/errors.md#thinking-block-conversation-mismatch)). See [Which models run the prefix check](preserved-thinking/prefix-checks.md#enforcement).
 
 Send only the new messages on a continue request. The API doesn’t check them against the messages it already has. A message you send again can appear twice in the conversation, or the request can return an error. For example, a continue request that starts with the previous response returns an error.
 
@@ -628,7 +628,7 @@ Threads work with [streaming](streaming.md). The response `id` arrives in the `m
 
 If the stream of a continue request drops before `message_stop`, send the same continue request again. If that request returns a `thread_already_continued` or `thread_continue_in_flight` error, replay the full conversation in a new create request.
 
-Your connection might have dropped while the server was still generating the response, or after the server saved it. That is why the API can reject the retry. Replaying is always safe.
+Your connection might have dropped while the server was still generating the response, or after the server saved it. That is why the API can reject the retry. Replaying your exact copy is safe.
 
 The SDK thread helper doesn’t retry the continue request after a dropped stream. See [How the SDK helper behaves](message-threads.md#sdk-helper-handles).
 

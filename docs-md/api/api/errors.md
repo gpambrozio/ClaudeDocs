@@ -10,7 +10,7 @@ description: Understand the HTTP status codes, error response shape, and request
 
 The API follows a predictable HTTP error code format:
 
-* 400 - `invalid_request_error`: There was an issue with the format or content of your request. This error type may also be used for other 4XX status codes not listed in this section. The API also returns a 400 when usage reaches an organization or workspace [spend limit you set](rate-limits.md#setting-your-own-spend-limit), except limits on the [Claude Code workspace](../manage-claude/workspaces.md#claude-code-workspace), which can return a 429 instead.
+* 400 - `invalid_request_error`: There’s an issue with the format or content of your request. The API might also use this error type for other 4XX status codes not listed in this section. The API also returns a 400 when usage reaches an organization or workspace [spend limit you set](rate-limits.md#setting-your-own-spend-limit). Limits on the [Claude Code workspace](../manage-claude/workspaces.md#claude-code-workspace) are the exception: they can return a 429 instead. If the message names a problem with your request, look for it in [Common validation errors](errors.md#common-validation-errors).
 
 * 401 - `authentication_error`: There’s an issue with your [API key](../get-api-key.md) (for example, it’s malformed, revoked, or expired; see [Key expiration](../manage-claude/authentication.md#key-expiration)). On Claude Platform on AWS, this can also indicate a problem with your AWS credentials or SigV4 signature.
 
@@ -26,7 +26,7 @@ The API follows a predictable HTTP error code format:
 
 * 413 - `request_too_large`: Request exceeds the maximum allowed number of bytes. See [Request size limits](errors.md#request-size-limits) for per-endpoint maximums.
 
-* 429 - `rate_limit_error`: Your organization has hit a [rate limit](rate-limits.md), reached its usage tier’s monthly spend cap, or reached a spend limit on the Claude Code workspace. A tier spend-cap 429 has no `retry-after` header and keeps failing until access resumes; see [Reaching your spend cap](rate-limits.md#reaching-your-spend-cap) for how to recognize it.
+* 429 - `rate_limit_error`: Your organization has hit a [rate limit](rate-limits.md), reached its usage tier’s monthly spend cap, or reached a spend limit on the Claude Code workspace. A tier spend-cap 429 has no `retry-after` header and keeps failing until access resumes; see [Reaching your spend cap](rate-limits.md#reaching-your-spend-cap) for how to recognize it. A sharp increase in usage can also cause a 429 even while you’re under your rate limits; see [Ramp limits](rate-limits.md#ramp-limits).
 
 * 500 - `api_error`: An unexpected error has occurred internal to Anthropic’s systems. Retry the request with exponential backoff; if the error persists, contact support with the [request ID](errors.md#request-id). If the error type is `timeout_error` instead, see the 504 entry.
 
@@ -35,8 +35,6 @@ The API follows a predictable HTTP error code format:
 * 529 - `overloaded_error`: The API is temporarily overloaded.
 
   A 529 error can occur when the API experiences high traffic across all users.
-
-  In rare cases, if your organization has a sharp increase in usage, you might see 429 errors because of acceleration limits on the API. To avoid hitting acceleration limits, increase your traffic gradually and maintain consistent usage patterns.
 
 The official SDK automatically retries transient failures (such as connection errors, rate limits, and 5xx server errors) with exponential backoff, twice by default, honoring the `retry-after` header when present. The SDK client accepts `max_retries` (typescript, php: `maxRetries`; java: `.maxRetries()`; csharp: `MaxRetries`; go: `option.WithMaxRetries()`) to configure or disable this behavior.
 
@@ -70,7 +68,7 @@ The API always returns errors as JSON, with a top-level `error` object that alwa
 }
 ```
 
-In accordance with the [versioning](versioning.md) policy, the values within these objects may expand, and it is possible that the `type` values will grow over time.
+Under the [API versioning policy](versioning.md), the values within these objects can expand, and new `type` values can appear.
 
 ## SDK error types
 
@@ -438,13 +436,13 @@ Use [structured outputs](../build-with-claude/structured-outputs.md) on models t
 
 ### Thinking blocks cannot be modified
 
-If the most recent assistant message contains `thinking` or `redacted_thinking` blocks that were edited, reordered, filtered out, or reconstructed before being sent back to the API, the request returns a 400 `invalid_request_error`. The error message starts with the position of the offending block (for example, `messages.1.content.0`) and contains:
+If thinking blocks in the request don’t match what the API returned, the request can get a 400 `invalid_request_error`. The error message starts with the position of the offending block (for example, `messages.1.content.0`) and contains:
 
 ```text wrap
 `thinking` or `redacted_thinking` blocks in the latest assistant message cannot be modified. These blocks must remain as they were in the original response.
 ```
 
-With tool use, pass back every `thinking` and `redacted_thinking` block from the assistant turn exactly as received, including blocks whose `thinking` field is empty. If your application filters content blocks by type before resending, include both `thinking` and `redacted_thinking`. See the [fix for modified thinking blocks](../build-with-claude/thinking-troubleshooting.md#error-thinking-blocks-modified) in Troubleshooting thinking, and also [Preserving thinking blocks](../build-with-claude/thinking.md#preserving-thinking-blocks) and [Preserved thinking](../build-with-claude/thinking.md#preserved-thinking).
+With tool use, pass back every `thinking` and `redacted_thinking` block from the assistant turn exactly as received, including blocks whose `thinking` field is empty. If your application filters content blocks by type before resending, include both `thinking` and `redacted_thinking`. This is a different failure from the [prefix check](../build-with-claude/preserved-thinking/prefix-checks.md#prefix-check), whose error says that a block is bound to a different conversation. Setting `prefix_mismatch_behavior` might not clear it. See the [fix for modified thinking blocks](../build-with-claude/thinking-troubleshooting.md#error-thinking-blocks-modified) in Troubleshooting thinking.
 
 ### Extended thinking not supported
 
@@ -454,7 +452,7 @@ Claude 4.7 and later models don’t support extended thinking. Sending `thinking
 "thinking.type.enabled" is not supported for this model. Use "thinking.type.adaptive" and "output_config.effort" to control thinking behavior.
 ```
 
-Use [adaptive thinking](../build-with-claude/thinking.md) instead. [Migrating to adaptive thinking](../build-with-claude/extended-thinking.md#migrating-to-adaptive-thinking) shows the parameter mapping, and Troubleshooting thinking covers the [symptom-first fix for the extended thinking error](../build-with-claude/thinking-troubleshooting.md#error-thinking-type-enabled).
+Use [adaptive thinking](../build-with-claude/thinking.md) instead. For the parameter mapping, see [Migrating to adaptive thinking](../build-with-claude/extended-thinking.md#migrating-to-adaptive-thinking). To fix the error from its symptom, see [A 400 error says `"thinking.type.enabled"` is not supported](../build-with-claude/thinking-troubleshooting.md#error-thinking-type-enabled).
 
 ### Adaptive thinking not supported
 
@@ -486,7 +484,7 @@ On Claude Sonnet 5.5, thinking can’t be set to `disabled`. Use `thinking: {"ty
 To turn thinking off on this model, send "thinking": {"type": "between_tools"} instead of {"type": "disabled"}. The model does not think before responding. The short updates it writes between tool calls come back as thinking blocks.
 ```
 
-At `xhigh` or `max` [effort](../build-with-claude/effort.md), a request with `between_tools` also returns a 400 `invalid_request_error`. The message says thinking is disabled because `between_tools` has no up-front thinking:
+At `xhigh` or `max` [effort](../build-with-claude/effort.md), a request with `between_tools` also returns a 400 `invalid_request_error`. The error message says thinking is disabled because `between_tools` has no up-front thinking:
 
 ```text wrap
 output_config.effort 'xhigh' is not supported when thinking is disabled on this model. Use effort 'high' or below, or enable thinking.
@@ -532,17 +530,22 @@ Claude Fable 5.2, Claude Mythos 5.2, Claude Opus 5.5, Claude Sonnet 5.5, and Cla
 
 The Claude API returns the same message for any Anthropic-defined tool type that the requested model doesn’t support. Claude Fable 5.2, Claude Mythos 5.2, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 support computer use through the `computer_toolset_20260801` toolset. Declare `{"type": "computer_toolset_20260801"}` without the beta header and update your agent loop as described in [Migrate from `computer_20251124`](../agents-and-tools/tool-use/computer-use-tool.md#migrate-from-computer-20251124). To move from `computer_20250124`, see [Move computer use to the toolset](../models/haiku-5-5/migration-guide.md#computer-use-toolset) in the Claude Haiku 5.5 migration guide.
 
-On Amazon Bedrock, Claude Fable 5.2, Claude Mythos 5.2, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 also accept the `computer_20251124` tool with the `computer-use-2025-11-24` beta header. With Amazon Bedrock’s InvokeModel API, send `computer-use-2025-11-24` in the `anthropic_beta` array of the request body instead of in a header. For that API, see [Claude on Amazon Bedrock (bedrock-runtime)](../build-with-claude/claude-on-amazon-bedrock-legacy.md). [Earlier tool versions](../agents-and-tools/tool-use/computer-use-tool.md#earlier-tool-versions) lists the models to use with each earlier version.
+On Amazon Bedrock, Claude Fable 5.2, Claude Mythos 5.2, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 also accept the `computer_20251124` tool with the `computer-use-2025-11-24` beta header. With Amazon Bedrock’s InvokeModel API, send `computer-use-2025-11-24` in the `anthropic_beta` array of the request body instead of in a header. For that API, see [Claude on Amazon Bedrock (`bedrock-runtime`)](../build-with-claude/claude-on-amazon-bedrock-legacy.md). For the models to use with each earlier version, see [Earlier tool versions](../agents-and-tools/tool-use/computer-use-tool.md#earlier-tool-versions).
 
 ### Thinking block bound to a different conversation
 
-This 400 `invalid_request_error` usually means a thinking block you sent back failed the prefix check: something before the block changed after the block was produced, such as the `system` prompt, `tools`, or an earlier message. Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 run this check. For requests that don’t set `prefix_mismatch_behavior`, whether they get this error depends on the model and the account. See [When `prefix_mismatch_behavior` is unset](../build-with-claude/preserved-thinking.md#enforcement). The message starts with the position of the first failing block:
+This 400 `invalid_request_error` means a thinking block you sent back failed the [prefix check](../build-with-claude/preserved-thinking/prefix-checks.md#prefix-check). Compare `system`, `tools`, and the messages before the block with what you sent when the model produced it. For which changes matter, see [What counts as a change](../build-with-claude/preserved-thinking/prefix-checks.md#what-counts-as-an-edit). The error message starts with the position of the first failing block:
 
 ```text wrap
 messages.{i}.content.{j}: Invalid `signature` in `thinking` block. The block is bound to a different conversation. Remove the block, or set `thinking.block_binding.prefix_mismatch_behavior` to "drop_block".
 ```
 
-Without the `thinking-binding-controls-2026-08-01` beta header, the message also names that header. Resending a history that holds the edit fails the same way, even after you fix the code that made the edit. To continue the conversation, send the beta header with `prefix_mismatch_behavior: "drop_block"` on the retry and on every later request. Alternatively, strip the block the error names and every later `thinking` and `redacted_thinking` block, leave them out of later requests, and retry. On Claude Sonnet 5.5 and Claude Haiku 5.5, `block_binding` works only with `thinking: {"type": "adaptive"}`, so with any other thinking setting, strip the blocks. To stop new conversations from failing, keep the history append-only. A block from a model the target model can’t read is dropped rather than rejected. See [Keeping the prefix unchanged](../build-with-claude/preserved-thinking.md#prefix-check) and the [fix for an invalid thinking block signature](../build-with-claude/thinking-troubleshooting.md#error-thinking-block-signature) in Troubleshooting thinking.
+Resending the same history fails the same way. Fixing the code that made the edit doesn’t help this conversation if the edit is still in its history. To continue, do one of the following:
+
+* Send the `thinking-binding-controls-2026-08-01` beta header and set `thinking.block_binding.prefix_mismatch_behavior` to `"drop_block"`, on the retry and on every later request in that conversation. On Claude Sonnet 5.5 and Claude Haiku 5.5, `block_binding` works only with `thinking: {"type": "adaptive"}`.
+* Strip the block the error names and every `thinking` and `redacted_thinking` block after it, in that message and in every later message. Retry, and leave the stripped blocks out of later requests.
+
+To stop new conversations from failing, [keep the history append-only](../build-with-claude/preserved-thinking/prefix-checks.md#what-to-check). See the [fix for an invalid thinking block signature](../build-with-claude/thinking-troubleshooting.md#error-thinking-block-signature) in Troubleshooting thinking.
 
 Sending `thinking.block_binding` without the `thinking-binding-controls-2026-08-01` [beta header](beta-headers.md) returns a 400 `invalid_request_error` whose message ends in:
 
@@ -550,7 +553,7 @@ Sending `thinking.block_binding` without the `thinking-binding-controls-2026-08-
 block_binding: Extra inputs are not permitted
 ```
 
-Add the header, or remove the field.
+Add the header, turn thinking on, or remove the field.
 
 ### Outbound web identity federation disabled (Claude Platform on AWS)
 

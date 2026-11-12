@@ -36,7 +36,7 @@ Organizations with a ZDR arrangement cannot call the Claude API directly from a 
 ### What ZDR does not cover
 
 * **Claude Console:** Any usage in the Claude Console, including playground.
-* **Claude Managed Agents:** Claude Managed Agents is a stateful resource; session transcripts persist until you delete them.
+* **Claude Managed Agents:** Claude Managed Agents is a stateful resource; session transcripts persist until you delete them. The exception is self-hosted Claude Managed Agents, where you store the transcripts yourself, as [How long data is kept](../managed-agents/self-hosted-data-and-access.md#how-long-data-is-kept) describes.
 * **Claude consumer products:** Claude Free, Pro, Max, and Ultra plans, including when customers on those plans use Claude’s web, desktop, or mobile apps or Claude Code.
 * **Claude Teams and Claude Enterprise product interfaces:** These interfaces are not ZDR-eligible. The one exception is Claude Code on Claude Enterprise, which has its own ZDR offering, separate from the ZDR arrangement described on this page. That offering is available only to qualified accounts on Claude Enterprise and requires separate enablement by Anthropic. See the [Claude Code ZDR documentation](../../claude-code/zero-data-retention.md), which applies to Claude Enterprise organizations only.
 * **Claude for Excel:** Not currently ZDR-eligible.
@@ -110,7 +110,7 @@ HIPAA readiness controls are applied to your organization as soon as you accept.
 
 #### Contact sales (custom BAA)
 
-If your organization requires a negotiated or custom BAA, or if self-serve enablement isn’t available for your organization, contact the [Anthropic sales team](https://claude.com/contact-sales). Anthropic will execute the BAA and enable HIPAA readiness for your organization.
+If your organization requires a negotiated or custom BAA, or if self-serve enablement isn’t available for your organization, contact the [Anthropic sales team](https://claude.com/contact-sales). Anthropic executes the BAA and enables HIPAA readiness for your organization.
 
 #### Build with eligible features
 
@@ -162,7 +162,7 @@ Each eligibility column uses three values:
 
 ### Platform features
 
-Features that relate to both the [Messages API](../build-with-claude/working-with-messages.md) and [Claude Managed Agents](../managed-agents/overview.md). Some are available in only one of them. This table gives each feature’s eligibility in the Messages API. In Claude Managed Agents, no feature is eligible for ZDR or HIPAA readiness; see the Claude Managed Agents row under [Managed Agents features](api-and-data-retention.md#managed-agents-features).
+This section lists features that relate to both the [Messages API](../build-with-claude/working-with-messages.md) and [Claude Managed Agents](../managed-agents/overview.md). Some are available in only one of them. This table gives each feature’s eligibility in the Messages API. In Claude Managed Agents, no feature is eligible for ZDR or HIPAA readiness, except for self-hosted Managed Agents under ZDR; see the Claude Managed Agents row under [Managed Agents features](api-and-data-retention.md#managed-agents-features).
 
 | Feature                                                                                                                    | Endpoint                                       | ZDR eligible    | HIPAA eligible | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | :------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------- | :-------------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -208,9 +208,9 @@ Features that relate to both the [Messages API](../build-with-claude/working-wit
 
 ### Managed Agents features
 
-| Feature                                                                              | Endpoint                                         | ZDR eligible | HIPAA eligible | Details                                                                                                                                                  |
-| :----------------------------------------------------------------------------------- | :----------------------------------------------- | :----------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Claude Managed Agents](../managed-agents/overview.md) | `/v1/agents`, `/v1/sessions`, `/v1/environments` | No           | No             | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes. |
+| Feature                                                                              | Endpoint                                         | ZDR eligible | HIPAA eligible | Details                                                                                                                                                                                                                                                                                                                         |
+| :----------------------------------------------------------------------------------- | :----------------------------------------------- | :----------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Claude Managed Agents](../managed-agents/overview.md) | `/v1/agents`, `/v1/sessions`, `/v1/environments` | No           | No             | Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them. [Learn more](../managed-agents/self-hosted-data-and-access.md#how-long-data-is-kept) Not eligible for HIPAA. Applies to all Managed Agents sub-features. |
 
 ### Other features
 

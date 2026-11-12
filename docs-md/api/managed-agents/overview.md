@@ -12,7 +12,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
   zdr:
     eligibility: not-eligible
-    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+    note: Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them.
   supportedModels:
     - claude-fable-5-2
     - claude-mythos-5-2
@@ -89,7 +89,7 @@ Launch a session that references your agent and environment configuration.
 
 **Send events and stream responses**
 
-Send user messages as events. Claude autonomously runs tools and streams back results through server-sent events (SSE). Event history is persisted server-side and can be fetched in full.
+Send user messages as events. Claude autonomously runs tools and streams back results through server-sent events (SSE). The Managed Agents service keeps the event history, and you can fetch it in full.
 
 **Steer or interrupt**
 
@@ -102,6 +102,7 @@ Claude Managed Agents is best for workloads that need:
 * **Long-running execution:** Tasks that run for minutes or hours with multiple tool calls
 * **Cloud infrastructure:** Secure sandboxes with pre-installed packages and network access
 * **Self-hosted execution:** Sandboxes on infrastructure you control for compliance or data-residency requirements
+* **Self-hosted service:** The whole Managed Agents service on your own infrastructure, with [self-hosted Claude Managed Agents](self-hosted.md)
 * **Minimal infrastructure:** No need to build your own agent loop, sandbox, or tool execution layer
 * **Stateful sessions:** Persistent filesystems and conversation history across multiple interactions
 * **Scheduled execution:** Recurring agent runs on a cron schedule through [scheduled deployments](scheduled-deployments.md)
@@ -119,17 +120,17 @@ See [Tools](tools.md) for the full list and configuration options.
 
 ## Beta access
 
-Claude Managed Agents is in beta. All Managed Agents endpoints require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically. Behaviors may be refined between releases to improve outputs.
+Claude Managed Agents is in beta. All Managed Agents endpoints require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically. Anthropic might refine behaviors between releases to improve outputs.
 
 To get started, you need:
 
-1. A [Claude API key](https://platform.claude.com/settings/keys) from the Claude Console
-2. The `managed-agents-2026-04-01` beta header on all requests
-3. Access to Claude Managed Agents (enabled by default for all API accounts)
+1. A [Claude API key](https://platform.claude.com/settings/keys) from the Claude Console.
+2. The `managed-agents-2026-04-01` beta header on all requests.
+3. Access to Claude Managed Agents (enabled by default for all API accounts).
 
-Within the beta, [MCP tunnels](../agents-and-tools/mcp-tunnels/overview.md) and [dreaming](dreams.md) are in a more limited research preview. [Request access](https://claude.com/form/claude-managed-agents) to enable them.
+Within the beta, [MCP tunnels](../agents-and-tools/mcp-tunnels/overview.md) and [dreaming](dreams.md) are in a more limited research preview. To enable them, [request access to the research preview](https://claude.com/form/claude-managed-agents).
 
-Claude Managed Agents is stateful by design: sessions are long-running, resume cleanly after pauses, and store conversation history, sandbox state, and outputs server-side. Because of this, Managed Agents is not currently eligible for [Zero Data Retention](../manage-claude/api-and-data-retention.md#zero-data-retention-zdr-scope) or HIPAA Business Associate Agreement (BAA) coverage. You retain control over this data: you can [delete sessions](session-operations.md#deleting-a-session), and separately delete any [files](../build-with-claude/files.md#delete-a-file) you uploaded, at any time through the API. For eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md#feature-eligibility).
+Claude Managed Agents is stateful by design: sessions are long-running, resume cleanly after pauses, and store conversation history, sandbox state, and outputs server-side. Because of this, Managed Agents is not currently eligible for [Zero Data Retention](../manage-claude/api-and-data-retention.md#zero-data-retention-zdr-scope) or HIPAA Business Associate Agreement (BAA) coverage. The exception for Zero Data Retention is self-hosted Claude Managed Agents, where you store that data yourself, as [How long data is kept](self-hosted-data-and-access.md#how-long-data-is-kept) describes. You retain control over this data: you can [delete sessions](session-operations.md#deleting-a-session), and separately delete any [files](../build-with-claude/files.md#delete-a-file) you uploaded, at any time through the API. For eligibility across all features, see [API and data retention](../manage-claude/api-and-data-retention.md#feature-eligibility).
 
 See [Rate limits](reference.md#rate-limits) and [Branding guidelines](reference.md#branding-guidelines) in the reference.
 
@@ -155,10 +156,10 @@ Beta headers allow you to access experimental features and new model capabilitie
 
 [Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                      | HIPAA                                                                        |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Status  | Not eligible                                                                                                                                             | Not eligible                                                                 |
-| Details | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes. | Applies to all Managed Agents sub-features, including Self-hosted sandboxes. |
+| Item    | Zero data retention                                                                                                                                                                                                                                         | HIPAA                                                               |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Status  | Not eligible                                                                                                                                                                                                                                                | Not eligible                                                        |
+| Details | Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them. [Learn more](self-hosted-data-and-access.md#how-long-data-is-kept) | Not eligible for HIPAA. Applies to all Managed Agents sub-features. |
 
 Applicable endpoints:
 
