@@ -708,7 +708,7 @@ $leadAgent = $client->beta->agents->create(
 ```ruby Ruby
 research_agent = client.beta.agents.create(
   name: "researcher",
-  model: "claude-haiku-5-5",
+  model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_HAIKU_5_5,
   mcp_servers: [
     {type: "url", name: "github", url: "https://api.githubcopilot.com/mcp/"}
   ],
@@ -719,7 +719,7 @@ research_agent = client.beta.agents.create(
 
 lead_agent = client.beta.agents.create(
   name: "lead",
-  model: "claude-opus-5-5",
+  model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
   tools: [
     {type: "agent_toolset_20260401"}
   ],

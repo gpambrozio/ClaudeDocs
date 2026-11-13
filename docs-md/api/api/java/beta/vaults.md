@@ -23,23 +23,11 @@ Create a Vault
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -51,15 +39,11 @@ Create a Vault
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -74,8 +58,6 @@ Create a Vault
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -105,8 +87,6 @@ Create a Vault
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -134,6 +114,46 @@ Create a Vault
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -259,23 +279,11 @@ List Vaults
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -287,15 +295,11 @@ List Vaults
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -310,8 +314,6 @@ List Vaults
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -341,8 +343,6 @@ List Vaults
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -370,6 +370,46 @@ List Vaults
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -477,23 +517,11 @@ Retrieve a Vault
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -505,15 +533,11 @@ Retrieve a Vault
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -528,8 +552,6 @@ Retrieve a Vault
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -559,8 +581,6 @@ Retrieve a Vault
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -588,6 +608,46 @@ Retrieve a Vault
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -690,23 +750,11 @@ Update a Vault
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -718,15 +766,11 @@ Update a Vault
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -741,8 +785,6 @@ Update a Vault
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -772,8 +814,6 @@ Update a Vault
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -801,6 +841,46 @@ Update a Vault
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -913,23 +993,11 @@ Delete a Vault
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -941,15 +1009,11 @@ Delete a Vault
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -964,8 +1028,6 @@ Delete a Vault
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -995,8 +1057,6 @@ Delete a Vault
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -1024,6 +1084,46 @@ Delete a Vault
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1093,23 +1193,11 @@ Archive a Vault
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -1121,15 +1209,11 @@ Archive a Vault
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -1144,8 +1228,6 @@ Archive a Vault
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -1175,8 +1257,6 @@ Archive a Vault
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -1204,6 +1284,46 @@ Archive a Vault
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1360,23 +1480,11 @@ Create a Credential
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -1388,15 +1496,11 @@ Create a Credential
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -1411,8 +1515,6 @@ Create a Credential
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -1442,8 +1544,6 @@ Create a Credential
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -1471,6 +1571,46 @@ Create a Credential
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -1894,23 +2034,11 @@ List Credentials
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -1922,15 +2050,11 @@ List Credentials
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -1945,8 +2069,6 @@ List Credentials
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -1976,8 +2098,6 @@ List Credentials
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -2005,6 +2125,46 @@ List Credentials
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -2239,23 +2399,11 @@ Retrieve a Credential
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -2267,15 +2415,11 @@ Retrieve a Credential
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -2290,8 +2434,6 @@ Retrieve a Credential
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -2321,8 +2463,6 @@ Retrieve a Credential
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -2350,6 +2490,46 @@ Retrieve a Credential
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -2583,23 +2763,11 @@ Update a Credential
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -2611,15 +2779,11 @@ Update a Credential
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -2634,8 +2798,6 @@ Update a Credential
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -2665,8 +2827,6 @@ Update a Credential
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -2694,6 +2854,46 @@ Update a Credential
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -3067,23 +3267,11 @@ Delete a Credential
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -3095,15 +3283,11 @@ Delete a Credential
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -3118,8 +3302,6 @@ Delete a Credential
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -3149,8 +3331,6 @@ Delete a Credential
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -3178,6 +3358,46 @@ Delete a Credential
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -3255,23 +3475,11 @@ Archive a Credential
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -3283,15 +3491,11 @@ Archive a Credential
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -3306,8 +3510,6 @@ Archive a Credential
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -3337,8 +3539,6 @@ Archive a Credential
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -3366,6 +3566,46 @@ Archive a Credential
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 
@@ -3599,23 +3839,11 @@ Validate an MCP OAuth Credential
 
     This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this header.
 
-    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
-
-    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
-
     - `COMPUTER_USE_2024_10_22("computer-use-2024-10-22")`
 
     - `COMPUTER_USE_2025_01_24("computer-use-2025-01-24")`
 
-    - `PDFS_2024_09_25("pdfs-2024-09-25")`
-
-    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
-
-    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
-
     - `OUTPUT_128K_2025_02_19("output-128k-2025-02-19")`
-
-    - `FILES_API_2025_04_14("files-api-2025-04-14")`
 
     - `MCP_CLIENT_2025_04_04("mcp-client-2025-04-04")`
 
@@ -3627,15 +3855,11 @@ Validate an MCP OAuth Credential
 
     - `CODE_EXECUTION_2025_05_22("code-execution-2025-05-22")`
 
-    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
-
     - `CONTEXT_1M_2025_08_07("context-1m-2025-08-07")`
 
     - `CONTEXT_MANAGEMENT_2025_06_27("context-management-2025-06-27")`
 
     - `MODEL_CONTEXT_WINDOW_EXCEEDED_2025_08_26("model-context-window-exceeded-2025-08-26")`
-
-    - `SKILLS_2025_10_02("skills-2025-10-02")`
 
     - `FAST_MODE_2026_02_01("fast-mode-2026-02-01")`
 
@@ -3650,8 +3874,6 @@ Validate an MCP OAuth Credential
     - `ADVISOR_TOOL_2026_03_01("advisor-tool-2026-03-01")`
 
     - `MANAGED_AGENTS_2026_04_01("managed-agents-2026-04-01")`
-
-    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
 
     - `DREAMING_2026_04_21("dreaming-2026-04-21")`
 
@@ -3681,8 +3903,6 @@ Validate an MCP OAuth Credential
 
     - `THINKING_DISPLAY_UPDATES_2026_08_18("thinking-display-updates-2026-08-18")`
 
-    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
-
     - `MID_CONVERSATION_OUTPUT_CONFIG_2026_07_01("mid-conversation-output-config-2026-07-01")`
 
     - `THINKING_BINDING_CONTROLS_2026_08_01("thinking-binding-controls-2026-08-01")`
@@ -3710,6 +3930,46 @@ Validate an MCP OAuth Credential
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PROMPT_CACHING_2024_07_31("prompt-caching-2024-07-31")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `PDFS_2024_09_25("pdfs-2024-09-25")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_COUNTING_2024_11_01("token-counting-2024-11-01")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `TOKEN_EFFICIENT_TOOLS_2025_02_19("token-efficient-tools-2025-02-19")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `FILES_API_2025_04_14("files-api-2025-04-14")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `EXTENDED_CACHE_TTL_2025_04_11("extended-cache-ttl-2025-04-11")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `SKILLS_2025_10_02("skills-2025-10-02")`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `CACHE_DIAGNOSIS_2026_04_07("cache-diagnosis-2026-04-07")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `CE_USER_MANAGEMENT_2026_07_13("ce-user-management-2026-07-13")`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
 
   - `Optional<String> workspaceId` (header parameter)
 

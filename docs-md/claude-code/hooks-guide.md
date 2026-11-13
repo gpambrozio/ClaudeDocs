@@ -46,7 +46,7 @@ If your settings file already has a `hooks` key, add `Notification` as a sibling
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
-        "hooks": [{ "type": "command", "command": "jq -r '.tool_input.file_path' | xargs npx prettier --write" }]
+        "hooks": [{ "type": "command", "command": "f=$(jq -r '.tool_input.file_path') && npx prettier --write --ignore-unknown \"$f\"" }]
       }
     ],
     "Notification": [
@@ -217,7 +217,7 @@ This hook uses the `PostToolUse` event with an `Edit|Write` matcher, so it runs 
         "hooks": [
           {
             "type": "command",
-            "command": "jq -r '.tool_input.file_path' | xargs npx prettier --write"
+            "command": "f=$(jq -r '.tool_input.file_path') && npx prettier --write --ignore-unknown \"$f\""
           }
         ]
       }
@@ -332,7 +332,7 @@ You can replace the `echo` with any command that produces dynamic output, like `
 
 Track when settings or skills files change during a session. The `ConfigChange` event fires when an external process or editor modifies a configuration file, so you can log changes for compliance or block unauthorized modifications.
 
-This example appends each change to an audit log. Add this to `~/.claude/settings.json`:
+This example appends each event to an audit log. Add this to `~/.claude/settings.json`:
 
 ```json
 {
@@ -921,7 +921,7 @@ This example posts every tool use to a local logging service:
 Your endpoint responds with a JSON body in the same [output format](https://code.claude.com/docs/en/hooks.md#json-output) as command hooks, and Claude Code also checks the response status:
 
 * **2xx status**: to block a tool call, return the appropriate `hookSpecificOutput` fields in the body.
-* **Any other status, or the request fails**: Claude Code reports a [non-blocking error](https://code.claude.com/docs/en/hooks.md#exit-code-output) and lets the action continue. To make a failed endpoint block the action, set [`onFailure: "block"`](hooks.md#block-the-action-when-a-hook-fails) on the hook.
+* **Any other status, or the request fails**: Claude Code reports a [non-blocking error](https://code.claude.com/docs/en/hooks.md#exit-code-output) and lets the action continue, unless the hook is one [whose failure blocks the action](https://code.claude.com/docs/en/hooks.md#block-the-action-when-a-hook-fails). To make a failed endpoint block the action, set [`onFailure: "block"`](hooks.md#block-the-action-when-a-hook-fails) on the hook.
 
 Header values support environment variable interpolation using `$VAR_NAME` or `${VAR_NAME}` syntax. Only variables listed in the `allowedEnvVars` array are resolved; all other `$VAR` references remain empty.
 

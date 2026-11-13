@@ -85,6 +85,10 @@ To request access to the download, contact your Anthropic account team. Then fol
 
 Each release’s archive includes an operator guide for that version, `operator-guide.md`. Have Claude read that file, so that Claude can help you configure and run your server and write code that connects to it.
 
+## License
+
+The server software is licensed under the [Software License Agreement: Claude Managed Agents Server](https://www.anthropic.com/legal/self-hosted-managed-agents-license).
+
 ---
 
 *Copyright © Anthropic. All rights reserved.*

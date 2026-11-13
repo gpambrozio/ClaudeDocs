@@ -31,11 +31,11 @@ Returns organizations sorted by creation date in ascending order. Use
 
 ### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](../versioning.md).
+  See [API versions](../versioning.md) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -57,6 +57,16 @@ Returns organizations sorted by creation date in ascending order. Use
 
     Unique identifier for the organization (UUID format)
 
+  - `organization_type: optional "claude_enterprise" or "claude_platform" or "claude_team" or null`
+
+    The kind of organization: `claude_enterprise` for a claude.ai organization on the Enterprise plan, `claude_team` for a claude.ai organization on the Team plan, or `claude_platform` for a Claude Console organization. Null for an organization of any other kind. More values can be added; treat a value you don't recognize as you would null.
+
+    - `"claude_enterprise"`
+
+    - `"claude_platform"`
+
+    - `"claude_team"`
+
 - `has_more: boolean`
 
   Whether more records exist beyond the current result set
@@ -69,7 +79,7 @@ Returns organizations sorted by creation date in ascending order. Use
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -81,7 +91,8 @@ curl https://api.anthropic.com/v1/compliance/organizations \
     {
       "created_at": "2025-03-12T18:22:41.123456+00:00",
       "name": "Acme Corp",
-      "uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde"
+      "uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+      "organization_type": "claude_enterprise"
     }
   ],
   "has_more": true,
@@ -108,6 +119,16 @@ curl https://api.anthropic.com/v1/compliance/organizations \
   - `uuid: string`
 
     Unique identifier for the organization (UUID format)
+
+  - `organization_type: optional "claude_enterprise" or "claude_platform" or "claude_team" or null`
+
+    The kind of organization: `claude_enterprise` for a claude.ai organization on the Enterprise plan, `claude_team` for a claude.ai organization on the Team plan, or `claude_platform` for a Claude Console organization. Null for an organization of any other kind. More values can be added; treat a value you don't recognize as you would null.
+
+    - `"claude_enterprise"`
+
+    - `"claude_platform"`
+
+    - `"claude_team"`
 
 ## Organizations › Users
 
@@ -137,11 +158,11 @@ List current user members of an organization.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](../versioning.md).
+  See [API versions](../versioning.md) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -207,7 +228,7 @@ List current user members of an organization.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -279,11 +300,11 @@ the work it does per request. Follow `next_page` until it is `null`.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](../versioning.md).
+  See [API versions](../versioning.md) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -325,7 +346,7 @@ the work it does per request. Follow `next_page` until it is `null`.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/user_preferences \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -376,11 +397,11 @@ List Compliance Roles
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](../versioning.md).
+  See [API versions](../versioning.md) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -426,7 +447,7 @@ List Compliance Roles
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -466,11 +487,11 @@ Get Compliance Role
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](../versioning.md).
+  See [API versions](../versioning.md) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -504,7 +525,7 @@ Get Compliance Role
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -552,11 +573,11 @@ List Compliance Role Permissions
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](../versioning.md).
+  See [API versions](../versioning.md) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -590,7 +611,7 @@ List Compliance Role Permissions
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE_ID/permissions \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -645,11 +666,11 @@ restricted to a single organization.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](../versioning.md).
+  See [API versions](../versioning.md) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1032,7 +1053,7 @@ restricted to a single organization.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/settings \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -1080,7 +1101,8 @@ in one `controls` list, which is not paginated. A control can have no entry, for
 example when it is about a feature that the organization cannot have, so a missing
 control is not a pass.
 
-The `anthropic-version` header is required: a request without it returns 400.
+The `anthropic-version` header is required: a request without it, or with a value
+that is not an available version, returns 400.
 The endpoint takes no query parameters, so there is no filter, and a request with
 any query parameter also returns 400. A request also returns 400 when the Compliance
 API is not enabled for the API key's parent organization.
@@ -1101,11 +1123,11 @@ that the evaluation did not finish in time, and the request can be tried again.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. A request that omits this header, or sends a value that is not an available version, returns a 400 error.
 
-  Read more about versioning and our version history [here](../versioning.md).
+  See [API versions](../versioning.md) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1343,7 +1365,7 @@ that the evaluation did not finish in time, and the request can be tried again.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORGANIZATION_ID/security_posture \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 

@@ -46,13 +46,11 @@ The difference is who materializes the store. On a self-hosted environment your 
 ## Requirements
 
 * **A worker that mounts memory stores:** Use `ant` CLI 1.33.0 or later, or `EnvironmentWorker` from the Python, TypeScript, or Go SDK.
-* **A POSIX filesystem:** Windows hosts are not supported, because the worker requires `O_NOFOLLOW` when it opens memory files. A case-sensitive filesystem is recommended, so that memory paths that differ only in case do not collide. macOS volumes are case-insensitive by default, so such paths collide there.
+* **A POSIX filesystem:** Windows hosts are not supported, because the worker requires `O_NOFOLLOW` when it opens memory files. Anthropic recommends a case-sensitive filesystem, so that memory paths that differ only in case do not collide. macOS volumes are case-insensitive by default, so such paths collide there.
 * **A writable `/mnt/memory` directory:** See [Prepare the host](self-hosted-sandboxes-memory.md#prepare-the-host). On macOS, see [Prepare a macOS host](self-hosted-sandboxes-memory.md#prepare-a-macos-host).
 * **The work item’s secret:** If your own code launches the worker, [forward the work item’s secret](self-hosted-sandboxes-workers.md#forward-the-work-items-secret) to it.
 
-Memory stores cannot be attached to sessions on self-hosted environments on [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md).
-
-On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), memory stores aren’t supported for sessions on self-hosted environments.
+Memory stores are not available for sessions on self-hosted environments on [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) or [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md).
 
 ## Prepare the host
 
