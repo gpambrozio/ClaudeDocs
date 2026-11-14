@@ -302,7 +302,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `required Caller Caller`
+            - `required ToolUseBlockCaller Caller`
 
               - `class DirectCaller`
 
@@ -382,7 +382,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `JsonElement Type = "web_search_tool_result"`
 
-            - `required Caller Caller`
+            - `required WebSearchToolResultBlockCaller Caller`
 
               - `class DirectCaller`
 
@@ -434,7 +434,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `JsonElement Type = "web_fetch_tool_result"`
 
-            - `required Caller Caller`
+            - `required WebFetchToolResultBlockCaller Caller`
 
               - `class DirectCaller`
 
@@ -446,7 +446,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               - `class ServerToolCaller20260120`
 
-            - `required Content Content`
+            - `required WebFetchToolResultBlockContent Content`
 
               - `class WebFetchToolResultErrorBlock`
 
@@ -632,7 +632,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required TextEditorCodeExecutionToolResultBlockContent Content`
 
               - `class TextEditorCodeExecutionToolResultError`
 
@@ -700,7 +700,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `JsonElement Type = "tool_search_tool_result"`
 
-            - `required Content Content`
+            - `required ToolSearchToolResultBlockContent Content`
 
               - `class ToolSearchToolResultError`
 
@@ -1089,7 +1089,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               minimum: 0
 
-          - `required ServiceTier? ServiceTier`
+          - `required UsageServiceTier? ServiceTier`
 
             If the request used the priority, standard, or batch tier.
 
@@ -1099,7 +1099,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Batch("batch")`
 
-          - `required Speed? Speed`
+          - `required UsageSpeed? Speed`
 
             The inference speed mode used for this request.
 
@@ -1216,6 +1216,22 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
     - `class MessageBatchExpiredResult`
 
       - `JsonElement Type = "expired"`
+
+## Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ## Example
 

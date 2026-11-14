@@ -187,7 +187,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsUserMessageEventContent> Content`
 
       Array of content blocks comprising the user message.
 
@@ -209,7 +209,7 @@ Stream Session Thread Events
 
         - `JsonElement Type = "image"`
 
-        - `required Source Source`
+        - `required BetaManagedAgentsImageBlockSource Source`
 
           The source of the image data.
 
@@ -415,7 +415,7 @@ Stream Session Thread Events
 
       The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../../../../../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `IReadOnlyList<Content> Content`
+    - `IReadOnlyList<BetaManagedAgentsUserCustomToolResultEventContent> Content`
 
       The result content returned by the tool.
 
@@ -521,7 +521,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentMessageEventContent> Content`
 
       Array of text blocks comprising the agent response.
 
@@ -753,7 +753,7 @@ Stream Session Thread Events
 
       The id of the `agent.tool_use` event this result corresponds to.
 
-    - `IReadOnlyList<Content> Content`
+    - `IReadOnlyList<BetaManagedAgentsAgentToolResultEventContent> Content`
 
       The result content returned by the tool.
 
@@ -787,7 +787,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentThreadMessageReceivedEventContent> Content`
 
       Message content blocks.
 
@@ -831,7 +831,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentThreadMessageSentEventContent> Content`
 
       Message content blocks.
 
@@ -903,7 +903,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsUnknownErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -935,7 +935,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelOverloadedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -961,7 +961,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelRateLimitedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -987,7 +987,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelRequestFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -1017,7 +1017,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsMcpConnectionFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -1047,7 +1047,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsMcpAuthenticationFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -1103,7 +1103,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsCredentialHostUnreachableErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -1133,7 +1133,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsToolUseLimitReachedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -1159,7 +1159,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsCompactionLimitReachedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -1189,7 +1189,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryAuthenticationErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -1219,7 +1219,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryForbiddenErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -1249,7 +1249,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryNotFoundErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -1279,7 +1279,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryCheckoutErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -1309,7 +1309,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryCloneErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -1775,7 +1775,7 @@ Stream Session Thread Events
 
       Structured information about why the thread stopped. `null` when there is nothing more to report.
 
-    - `required StopReason StopReason`
+    - `required BetaManagedAgentsSessionThreadStatusIdleEventStopReason StopReason`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -2085,7 +2085,7 @@ Stream Session Thread Events
 
           - `JsonElement Type = "coordinator"`
 
-          - `required IReadOnlyList<Agent> Agents`
+          - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
             Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -2117,7 +2117,7 @@ Stream Session Thread Events
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `class BetaManagedAgentsAnthropicSkill`
 
@@ -2141,7 +2141,7 @@ Stream Session Thread Events
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -2159,7 +2159,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "bash"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -2191,7 +2191,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "edit"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -2217,7 +2217,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "read"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -2243,7 +2243,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "write"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -2269,7 +2269,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "glob"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -2295,7 +2295,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "grep"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -2321,7 +2321,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "web_fetch"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -2431,7 +2431,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "web_search"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -2515,7 +2515,7 @@ Stream Session Thread Events
 
                     - `required string Name`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -2537,7 +2537,7 @@ Stream Session Thread Events
 
                     - `required bool Enabled`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -2663,11 +2663,11 @@ Stream Session Thread Events
 
                 - `required string Name`
 
-                - `required IReadOnlyList<Skill> Skills`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `required string? System`
 
-                - `required IReadOnlyList<Tool> Tools`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `required int Version`
 
@@ -2715,11 +2715,11 @@ Stream Session Thread Events
 
                 - `required string Name`
 
-                - `required IReadOnlyList<Skill> Skills`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `required string? System`
 
-                - `required IReadOnlyList<Tool> Tools`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `required int Version`
 
@@ -2745,7 +2745,7 @@ Stream Session Thread Events
 
       - `required string? System`
 
-      - `required IReadOnlyList<Tool> Tools`
+      - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
         - `class BetaManagedAgentsAgentToolset20260401`
 

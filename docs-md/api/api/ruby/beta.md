@@ -441,8 +441,6 @@ url: https://platform.claude.com/docs/en/api/ruby/beta
 
 - `class BetaOrganizationNotEnrolledInBetaErrorDetails`
 
-  The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
-
   - `error_code: :organization_not_enrolled_in_beta`
 
 ### Beta Overloaded Error
@@ -485,9 +483,37 @@ url: https://platform.claude.com/docs/en/api/ruby/beta
 
 - `class BetaUnsupportedCharsetErrorDetails`
 
+  - `error_code: :unsupported_charset`
+
+## Errors
+
+### BetaOrganizationNotEnrolledInBetaError
+
+HTTP status 400, error code `organization_not_enrolled_in_beta`
+
+- `class BetaOrganizationNotEnrolledInBetaError < Anthropic::Errors::BadRequestError`
+
+  The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
+
+  - `error_code: :organization_not_enrolled_in_beta`
+
+  - `details: BetaOrganizationNotEnrolledInBetaErrorDetails`
+
+    - `error_code: :organization_not_enrolled_in_beta`
+
+### BetaUnsupportedCharsetError
+
+HTTP status 400, error code `unsupported_charset`
+
+- `class BetaUnsupportedCharsetError < Anthropic::Errors::BadRequestError`
+
   The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
 
   - `error_code: :unsupported_charset`
+
+  - `details: BetaUnsupportedCharsetErrorDetails`
+
+    - `error_code: :unsupported_charset`
 
 ## Beta › Models
 
@@ -886,6 +912,18 @@ The Models API response can be used to determine which models are available for 
     RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -1379,6 +1417,18 @@ The Models API response can be used to determine information about a specific mo
     RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -9817,6 +9867,128 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `index: Integer`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+On a streaming call, the errors listed below apply when the API rejects the request before the stream starts. An error partway through the stream can arrive as a more general error type. To identify it, use its error code, if it has one, not its type.
+
+- `AvailableToolsLimitExceededError` (HTTP status 400, error code `available_tools_limit_exceeded`)
+
+  The tools available after a message exceed a limit on their number or their size.
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `ClaudeCodeVersionTooOldError` (HTTP status 400, error code `claude_code_version_too_old`)
+
+  The request comes from a Claude Code version older than the minimum that the requested model or the organization requires. Update Claude Code, then retry.
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `CompactionBlockAmbiguousError` (HTTP status 400, error code `compaction_block_ambiguous`)
+
+  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
+
+- `CompactionBlockMisplacedError` (HTTP status 400, error code `compaction_block_misplaced`)
+
+  The `compaction` block is not the first block of the conversation, or is in a `system` message.
+
+- `CompactionContentMismatchError` (HTTP status 400, error code `compaction_content_mismatch`)
+
+  The `compaction` block's `content` differs from the text its `signature` recorded.
+
+- `CompactionIncompleteTurnError` (HTTP status 400, error code `compaction_incomplete_turn`)
+
+  The compaction request ends on an `assistant` turn that is not finished.
+
+- `CompactionNothingToSummarizeError` (HTTP status 400, error code `compaction_nothing_to_summarize`)
+
+  `messages` holds no `user` or `assistant` content to summarize or adopt.
+
+- `CompactionSignatureInvalidError` (HTTP status 400, error code `compaction_signature_invalid`)
+
+  The `compaction` block's `signature` does not verify.
+
+- `CompactionTooManyToolReferencesError` (HTTP status 400, error code `compaction_too_many_tool_references`)
+
+  The conversation references more distinct tools than a `compaction` block can record.
+
+- `CompactionToolChangesMismatchError` (HTTP status 400, error code `compaction_tool_changes_mismatch`)
+
+  The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `RequestBodyEncodingInvalidError` (HTTP status 400, error code `request_body_encoding_invalid`)
+
+  The request body is not valid for its `Content-Encoding`.
+
+- `RequestBodyEncodingUnsupportedError` (HTTP status 400, error code `request_body_encoding_unsupported`)
+
+  The request's `Content-Encoding` is not supported.
+
+- `ThreadAlreadyContinuedError` (HTTP status 400, error code `thread_already_continued`)
+
+  The response that `previous_message_id` names has already been continued, and each response can be continued only once. Continue from the Thread's most recent response `id`.
+
+- `ThreadContinueInFlightError` (HTTP status 400, error code `thread_continue_in_flight`)
+
+  Another request is still continuing from the same `previous_message_id`. Wait for it to complete and continue from its response `id`, or replay the full conversation with `thread: {"type": "create"}`.
+
+- `ThreadFingerprintMismatchError` (HTTP status 400, error code `thread_fingerprint_mismatch`)
+
+  A field that must stay the same across a Thread's turns differs from the value stored with the Thread; the message names each such field. Send the stored values, or replay the full conversation with `thread: {"type": "create"}` to change them.
+
+- `ThreadUnsupportedRequestError` (HTTP status 400, error code `thread_unsupported_request`)
+
+  The request combines `thread` with a request field or an organization setting that Threads do not support; `unsupported`, when present, names it. Send the full conversation without `thread`, or change that field.
+
+- `ToolNameConflictError` (HTTP status 400, error code `tool_name_conflict`)
+
+  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
+
+- `ToolReferenceUnresolvedError` (HTTP status 400, error code `tool_reference_unresolved`)
+
+  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
+
+- `ThreadNotFoundError` (HTTP status 404, error code `thread_not_found`)
+
+  No usable Thread state was found for `previous_message_id`. Replay the full conversation with `thread: {"type": "create"}` to start a new Thread.
+
+- `SkillReadBlockedUndecryptableError` (HTTP status 409, error code `skill_read_blocked_undecryptable`)
+
+  A custom skill the request names is stored under an encryption key state the workspace cannot currently decrypt.
+
+- `RequestBodyTooLargeAfterDecodingError` (HTTP status 413, error code `request_body_too_large_after_decoding`)
+
+  The compressed request body exceeds the request size limit once decoded.
+
+- `EnforcedSpendLimitReachedError` (HTTP status 429, error code `enforced_spend_limit_reached`)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
+- `RampLimitExceededError` (HTTP status 429, error code `ramp_limit_exceeded`)
+
+  The request would exceed a ramp limit, which caps how fast usage can grow. Retry after the time in the `retry-after` header.
+
+- `CMEKKeyUnreachableError` (HTTP status 503, error code `cmek_key_unreachable`)
+
+  The workspace's customer-managed encryption key could not be reached. Retry the request; if this continues, check that the key is available in your key management service, or contact Anthropic support.
+
+- `CompactionUnavailableError` (HTTP status 529, error code `compaction_unavailable`)
+
+  The compaction could not be completed for a transient server reason. Retry the request.
+
 #### Example
 
 ```ruby
@@ -9851,17 +10023,7 @@ puts(beta_message)
   },
   "content": [
     {
-      "citations": [
-        {
-          "cited_text": "The grass is green. The sky is blue.",
-          "document_index": 0,
-          "document_title": "My Document",
-          "end_char_index": 0,
-          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
+      "citations": null,
       "text": "Hi! My name is Claude.",
       "type": "text"
     }
@@ -9875,22 +10037,10 @@ puts(beta_message)
       }
     ]
   },
-  "diagnostics": {
-    "cache_miss_reason": {
-      "cache_missed_input_tokens": 0,
-      "type": "model_changed"
-    }
-  },
+  "diagnostics": null,
   "model": "claude-opus-5-5",
   "role": "assistant",
-  "stop_details": {
-    "category": "cyber",
-    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
-    "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
-    "fallback_has_prefill_claim": true,
-    "recommended_model": "claude-opus-4-8",
-    "type": "refusal"
-  },
+  "stop_details": null,
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",
@@ -14059,6 +14209,74 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
   - `input_tokens: Integer`
 
     The total number of tokens across the provided list of messages, system prompt, and tools.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AvailableToolsLimitExceededError` (HTTP status 400, error code `available_tools_limit_exceeded`)
+
+  The tools available after a message exceed a limit on their number or their size.
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `CompactionBlockAmbiguousError` (HTTP status 400, error code `compaction_block_ambiguous`)
+
+  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
+
+- `CompactionBlockMisplacedError` (HTTP status 400, error code `compaction_block_misplaced`)
+
+  The `compaction` block is not the first block of the conversation, or is in a `system` message.
+
+- `CompactionContentMismatchError` (HTTP status 400, error code `compaction_content_mismatch`)
+
+  The `compaction` block's `content` differs from the text its `signature` recorded.
+
+- `CompactionNothingToSummarizeError` (HTTP status 400, error code `compaction_nothing_to_summarize`)
+
+  `messages` holds no `user` or `assistant` content to summarize or adopt.
+
+- `CompactionSignatureInvalidError` (HTTP status 400, error code `compaction_signature_invalid`)
+
+  The `compaction` block's `signature` does not verify.
+
+- `CompactionToolChangesMismatchError` (HTTP status 400, error code `compaction_tool_changes_mismatch`)
+
+  The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `RequestBodyEncodingInvalidError` (HTTP status 400, error code `request_body_encoding_invalid`)
+
+  The request body is not valid for its `Content-Encoding`.
+
+- `RequestBodyEncodingUnsupportedError` (HTTP status 400, error code `request_body_encoding_unsupported`)
+
+  The request's `Content-Encoding` is not supported.
+
+- `ToolNameConflictError` (HTTP status 400, error code `tool_name_conflict`)
+
+  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
+
+- `ToolReferenceUnresolvedError` (HTTP status 400, error code `tool_reference_unresolved`)
+
+  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
+
+- `RequestBodyTooLargeAfterDecodingError` (HTTP status 413, error code `request_body_too_large_after_decoding`)
+
+  The compressed request body exceeds the request size limit once decoded.
+
+- `EnforcedSpendLimitReachedError` (HTTP status 429, error code `enforced_spend_limit_reached`)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
+- `CompactionUnavailableError` (HTTP status 529, error code `compaction_unavailable`)
+
+  The compaction could not be completed for a transient server reason. Retry the request.
 
 #### Example
 
@@ -22874,6 +23092,26 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `EnforcedSpendLimitReachedError` (HTTP status 429, error code `enforced_spend_limit_reached`)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
 #### Example
 
 ```ruby
@@ -23173,6 +23411,18 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -23479,6 +23729,18 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -23781,6 +24043,18 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -23991,6 +24265,18 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
   - `id: String`
 
     ID of the Message Batch.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -28027,6 +28313,22 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
       - `type: :expired`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -29989,38 +30291,7 @@ puts(beta_managed_agents_agent)
     "inference_geo": "inference_geo",
     "speed": "standard"
   },
-  "multiagent": {
-    "advisor": {
-      "type": "disabled"
-    },
-    "subagents": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    },
-    "type": "multiagent_20261001",
-    "workflows": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    }
-  },
+  "multiagent": null,
   "name": "My First Agent",
   "skills": [
     {
@@ -30037,16 +30308,7 @@ puts(beta_managed_agents_agent)
   "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
   "tools": [
     {
-      "configs": [
-        {
-          "enabled": true,
-          "name": "bash",
-          "permission_policy": {
-            "type": "always_allow"
-          },
-          "type": "bash"
-        }
-      ],
+      "configs": [],
       "default_config": {
         "enabled": true,
         "permission_policy": {
@@ -31079,38 +31341,7 @@ puts(page)
         "inference_geo": "inference_geo",
         "speed": "standard"
       },
-      "multiagent": {
-        "advisor": {
-          "type": "disabled"
-        },
-        "subagents": {
-          "inline_agents": {
-            "type": "enabled"
-          },
-          "predefined_agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "enabled"
-        },
-        "type": "multiagent_20261001",
-        "workflows": {
-          "inline_agents": {
-            "type": "enabled"
-          },
-          "predefined_agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "enabled"
-        }
-      },
+      "multiagent": null,
       "name": "My First Agent",
       "skills": [
         {
@@ -31127,16 +31358,7 @@ puts(page)
       "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
       "tools": [
         {
-          "configs": [
-            {
-              "enabled": true,
-              "name": "bash",
-              "permission_policy": {
-                "type": "always_allow"
-              },
-              "type": "bash"
-            }
-          ],
+          "configs": [],
           "default_config": {
             "enabled": true,
             "permission_policy": {
@@ -32154,38 +32376,7 @@ puts(beta_managed_agents_agent)
     "inference_geo": "inference_geo",
     "speed": "standard"
   },
-  "multiagent": {
-    "advisor": {
-      "type": "disabled"
-    },
-    "subagents": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    },
-    "type": "multiagent_20261001",
-    "workflows": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    }
-  },
+  "multiagent": null,
   "name": "My First Agent",
   "skills": [
     {
@@ -32202,16 +32393,7 @@ puts(beta_managed_agents_agent)
   "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
   "tools": [
     {
-      "configs": [
-        {
-          "enabled": true,
-          "name": "bash",
-          "permission_policy": {
-            "type": "always_allow"
-          },
-          "type": "bash"
-        }
-      ],
+      "configs": [],
       "default_config": {
         "enabled": true,
         "permission_policy": {
@@ -34180,38 +34362,7 @@ puts(beta_managed_agents_agent)
     "inference_geo": "inference_geo",
     "speed": "standard"
   },
-  "multiagent": {
-    "advisor": {
-      "type": "disabled"
-    },
-    "subagents": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    },
-    "type": "multiagent_20261001",
-    "workflows": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    }
-  },
+  "multiagent": null,
   "name": "My First Agent",
   "skills": [
     {
@@ -34228,16 +34379,7 @@ puts(beta_managed_agents_agent)
   "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
   "tools": [
     {
-      "configs": [
-        {
-          "enabled": true,
-          "name": "bash",
-          "permission_policy": {
-            "type": "always_allow"
-          },
-          "type": "bash"
-        }
-      ],
+      "configs": [],
       "default_config": {
         "enabled": true,
         "permission_policy": {
@@ -35246,38 +35388,7 @@ puts(beta_managed_agents_agent)
     "inference_geo": "inference_geo",
     "speed": "standard"
   },
-  "multiagent": {
-    "advisor": {
-      "type": "disabled"
-    },
-    "subagents": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    },
-    "type": "multiagent_20261001",
-    "workflows": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    }
-  },
+  "multiagent": null,
   "name": "My First Agent",
   "skills": [
     {
@@ -35294,16 +35405,7 @@ puts(beta_managed_agents_agent)
   "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
   "tools": [
     {
-      "configs": [
-        {
-          "enabled": true,
-          "name": "bash",
-          "permission_policy": {
-            "type": "always_allow"
-          },
-          "type": "bash"
-        }
-      ],
+      "configs": [],
       "default_config": {
         "enabled": true,
         "permission_policy": {
@@ -36326,38 +36428,7 @@ puts(page)
         "inference_geo": "inference_geo",
         "speed": "standard"
       },
-      "multiagent": {
-        "advisor": {
-          "type": "disabled"
-        },
-        "subagents": {
-          "inline_agents": {
-            "type": "enabled"
-          },
-          "predefined_agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "enabled"
-        },
-        "type": "multiagent_20261001",
-        "workflows": {
-          "inline_agents": {
-            "type": "enabled"
-          },
-          "predefined_agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "enabled"
-        }
-      },
+      "multiagent": null,
       "name": "My First Agent",
       "skills": [
         {
@@ -36374,16 +36445,7 @@ puts(page)
       "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
       "tools": [
         {
-          "configs": [
-            {
-              "enabled": true,
-              "name": "bash",
-              "permission_policy": {
-                "type": "always_allow"
-              },
-              "type": "bash"
-            }
-          ],
+          "configs": [],
           "default_config": {
             "enabled": true,
             "permission_policy": {
@@ -36802,6 +36864,22 @@ Create a new environment with the specified configuration.
 
     - `:account`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `BetaEnvironmentCreateDisabledError` (HTTP status 403, error code `environment_create_disabled`)
+
+  Anthropic has turned off creating environments for this organization. Existing environments still work.
+
 #### Example
 
 ```ruby
@@ -36830,21 +36908,11 @@ puts(beta_environment)
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -37161,6 +37229,18 @@ List environments with pagination support.
 
     - `:account`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -37191,21 +37271,11 @@ puts(page)
           "type": "limited"
         },
         "packages": {
-          "apt": [
-            "string"
-          ],
-          "cargo": [
-            "string"
-          ],
-          "gem": [
-            "string"
-          ],
-          "go": [
-            "string"
-          ],
-          "npm": [
-            "string"
-          ],
+          "apt": [],
+          "cargo": [],
+          "gem": [],
+          "go": [],
+          "npm": [],
           "pip": [
             "pandas",
             "numpy"
@@ -37513,6 +37583,18 @@ Retrieve a specific environment by ID.
 
     - `:account`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -37541,21 +37623,11 @@ puts(beta_environment)
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -37974,6 +38046,30 @@ Update an existing environment's configuration.
 
     - `:account`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `BetaEnvironmentArchivedError` (HTTP status 400, error code `environment_archived`)
+
+  The environment is archived, so it cannot be updated.
+
+- `BetaInvalidConfigTypeChangeError` (HTTP status 400, error code `invalid_config_type_change`)
+
+  `config.type` differs from the environment's stored type, which cannot change after creation.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `BetaEnvironmentUpdateDisabledError` (HTTP status 403, error code `environment_update_disabled`)
+
+  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
+
 #### Example
 
 ```ruby
@@ -38002,21 +38098,11 @@ puts(beta_environment)
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -38204,6 +38290,18 @@ Delete an environment by ID. Returns a confirmation of the deletion.
   - `id: String`
 
     Environment identifier
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -38512,6 +38610,18 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `:account`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -38540,21 +38650,11 @@ puts(beta_environment)
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -38814,6 +38914,18 @@ Retrieve detailed information about a specific work item.
   - `stopped_at: String | nil`
 
     RFC 3339 timestamp when work execution stopped
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -39606,6 +39718,14 @@ Record a heartbeat for a work item to maintain the lease.
 
     Effective TTL applied to the lease
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaHeartbeatPreconditionFailedError` (HTTP status 412, error code `heartbeat_precondition_failed`)
+
+  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
+
 #### Example
 
 ```ruby
@@ -39873,6 +39993,18 @@ Stop a work item, initiating graceful or forced shutdown.
   - `stopped_at: String | nil`
 
     RFC 3339 timestamp when work execution stopped
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -40439,6 +40571,22 @@ Update work item metadata with merge semantics.
 
     RFC 3339 timestamp when work execution stopped
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `BetaInvalidMetadataError` (HTTP status 400, error code `invalid_metadata`)
+
+  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -40661,6 +40809,18 @@ Get statistics about the work queue for an environment.
   - `workers_polling: Integer | nil`
 
     Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -43171,65 +43331,7 @@ puts(beta_managed_agents_session)
       "inference_geo": "inference_geo",
       "speed": "standard"
     },
-    "multiagent": {
-      "agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "description": "A focused research subagent.",
-          "execution_identity": {
-            "type": "service_account"
-          },
-          "mcp_servers": [
-            {
-              "name": "example-mcp",
-              "type": "url",
-              "url": "https://example-server.modelcontextprotocol.io/sse"
-            }
-          ],
-          "model": {
-            "id": "claude-opus-5-5",
-            "effort": {
-              "type": "low"
-            },
-            "inference_geo": "inference_geo",
-            "speed": "standard"
-          },
-          "name": "Researcher",
-          "skills": [
-            {
-              "skill_id": "xlsx",
-              "type": "anthropic",
-              "version": "1"
-            }
-          ],
-          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-          "tools": [
-            {
-              "configs": [
-                {
-                  "enabled": true,
-                  "name": "bash",
-                  "permission_policy": {
-                    "type": "always_allow"
-                  },
-                  "type": "bash"
-                }
-              ],
-              "default_config": {
-                "enabled": true,
-                "permission_policy": {
-                  "type": "always_ask"
-                }
-              },
-              "type": "agent_toolset_20260401"
-            }
-          ],
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "coordinator"
-    },
+    "multiagent": null,
     "name": "My First Agent",
     "skills": [
       {
@@ -43246,16 +43348,7 @@ puts(beta_managed_agents_session)
     "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -43269,13 +43362,7 @@ puts(beta_managed_agents_session)
     "version": 1
   },
   "archived_at": null,
-  "budget": {
-    "max_list_cost": {
-      "amount": "2500",
-      "currency": "USD"
-    },
-    "type": "limit"
-  },
+  "budget": null,
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -44775,65 +44862,7 @@ puts(page)
           "inference_geo": "inference_geo",
           "speed": "standard"
         },
-        "multiagent": {
-          "agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "description": "A focused research subagent.",
-              "execution_identity": {
-                "type": "service_account"
-              },
-              "mcp_servers": [
-                {
-                  "name": "example-mcp",
-                  "type": "url",
-                  "url": "https://example-server.modelcontextprotocol.io/sse"
-                }
-              ],
-              "model": {
-                "id": "claude-opus-5-5",
-                "effort": {
-                  "type": "low"
-                },
-                "inference_geo": "inference_geo",
-                "speed": "standard"
-              },
-              "name": "Researcher",
-              "skills": [
-                {
-                  "skill_id": "xlsx",
-                  "type": "anthropic",
-                  "version": "1"
-                }
-              ],
-              "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-              "tools": [
-                {
-                  "configs": [
-                    {
-                      "enabled": true,
-                      "name": "bash",
-                      "permission_policy": {
-                        "type": "always_allow"
-                      },
-                      "type": "bash"
-                    }
-                  ],
-                  "default_config": {
-                    "enabled": true,
-                    "permission_policy": {
-                      "type": "always_ask"
-                    }
-                  },
-                  "type": "agent_toolset_20260401"
-                }
-              ],
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "coordinator"
-        },
+        "multiagent": null,
         "name": "My First Agent",
         "skills": [
           {
@@ -44850,16 +44879,7 @@ puts(page)
         "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
         "tools": [
           {
-            "configs": [
-              {
-                "enabled": true,
-                "name": "bash",
-                "permission_policy": {
-                  "type": "always_allow"
-                },
-                "type": "bash"
-              }
-            ],
+            "configs": [],
             "default_config": {
               "enabled": true,
               "permission_policy": {
@@ -44873,13 +44893,7 @@ puts(page)
         "version": 1
       },
       "archived_at": null,
-      "budget": {
-        "max_list_cost": {
-          "amount": "2500",
-          "currency": "USD"
-        },
-        "type": "limit"
-      },
+      "budget": null,
       "created_at": "2026-03-15T10:00:00Z",
       "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
       "metadata": {},
@@ -46299,65 +46313,7 @@ puts(beta_managed_agents_session)
       "inference_geo": "inference_geo",
       "speed": "standard"
     },
-    "multiagent": {
-      "agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "description": "A focused research subagent.",
-          "execution_identity": {
-            "type": "service_account"
-          },
-          "mcp_servers": [
-            {
-              "name": "example-mcp",
-              "type": "url",
-              "url": "https://example-server.modelcontextprotocol.io/sse"
-            }
-          ],
-          "model": {
-            "id": "claude-opus-5-5",
-            "effort": {
-              "type": "low"
-            },
-            "inference_geo": "inference_geo",
-            "speed": "standard"
-          },
-          "name": "Researcher",
-          "skills": [
-            {
-              "skill_id": "xlsx",
-              "type": "anthropic",
-              "version": "1"
-            }
-          ],
-          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-          "tools": [
-            {
-              "configs": [
-                {
-                  "enabled": true,
-                  "name": "bash",
-                  "permission_policy": {
-                    "type": "always_allow"
-                  },
-                  "type": "bash"
-                }
-              ],
-              "default_config": {
-                "enabled": true,
-                "permission_policy": {
-                  "type": "always_ask"
-                }
-              },
-              "type": "agent_toolset_20260401"
-            }
-          ],
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "coordinator"
-    },
+    "multiagent": null,
     "name": "My First Agent",
     "skills": [
       {
@@ -46374,16 +46330,7 @@ puts(beta_managed_agents_session)
     "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -46397,13 +46344,7 @@ puts(beta_managed_agents_session)
     "version": 1
   },
   "archived_at": null,
-  "budget": {
-    "max_list_cost": {
-      "amount": "2500",
-      "currency": "USD"
-    },
-    "type": "limit"
-  },
+  "budget": null,
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -48403,65 +48344,7 @@ puts(beta_managed_agents_session)
       "inference_geo": "inference_geo",
       "speed": "standard"
     },
-    "multiagent": {
-      "agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "description": "A focused research subagent.",
-          "execution_identity": {
-            "type": "service_account"
-          },
-          "mcp_servers": [
-            {
-              "name": "example-mcp",
-              "type": "url",
-              "url": "https://example-server.modelcontextprotocol.io/sse"
-            }
-          ],
-          "model": {
-            "id": "claude-opus-5-5",
-            "effort": {
-              "type": "low"
-            },
-            "inference_geo": "inference_geo",
-            "speed": "standard"
-          },
-          "name": "Researcher",
-          "skills": [
-            {
-              "skill_id": "xlsx",
-              "type": "anthropic",
-              "version": "1"
-            }
-          ],
-          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-          "tools": [
-            {
-              "configs": [
-                {
-                  "enabled": true,
-                  "name": "bash",
-                  "permission_policy": {
-                    "type": "always_allow"
-                  },
-                  "type": "bash"
-                }
-              ],
-              "default_config": {
-                "enabled": true,
-                "permission_policy": {
-                  "type": "always_ask"
-                }
-              },
-              "type": "agent_toolset_20260401"
-            }
-          ],
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "coordinator"
-    },
+    "multiagent": null,
     "name": "My First Agent",
     "skills": [
       {
@@ -48478,16 +48361,7 @@ puts(beta_managed_agents_session)
     "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -48501,13 +48375,7 @@ puts(beta_managed_agents_session)
     "version": 1
   },
   "archived_at": null,
-  "budget": {
-    "max_list_cost": {
-      "amount": "2500",
-      "currency": "USD"
-    },
-    "type": "limit"
-  },
+  "budget": null,
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -50110,65 +49978,7 @@ puts(beta_managed_agents_session)
       "inference_geo": "inference_geo",
       "speed": "standard"
     },
-    "multiagent": {
-      "agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "description": "A focused research subagent.",
-          "execution_identity": {
-            "type": "service_account"
-          },
-          "mcp_servers": [
-            {
-              "name": "example-mcp",
-              "type": "url",
-              "url": "https://example-server.modelcontextprotocol.io/sse"
-            }
-          ],
-          "model": {
-            "id": "claude-opus-5-5",
-            "effort": {
-              "type": "low"
-            },
-            "inference_geo": "inference_geo",
-            "speed": "standard"
-          },
-          "name": "Researcher",
-          "skills": [
-            {
-              "skill_id": "xlsx",
-              "type": "anthropic",
-              "version": "1"
-            }
-          ],
-          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-          "tools": [
-            {
-              "configs": [
-                {
-                  "enabled": true,
-                  "name": "bash",
-                  "permission_policy": {
-                    "type": "always_allow"
-                  },
-                  "type": "bash"
-                }
-              ],
-              "default_config": {
-                "enabled": true,
-                "permission_policy": {
-                  "type": "always_ask"
-                }
-              },
-              "type": "agent_toolset_20260401"
-            }
-          ],
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "coordinator"
-    },
+    "multiagent": null,
     "name": "My First Agent",
     "skills": [
       {
@@ -50185,16 +49995,7 @@ puts(beta_managed_agents_session)
     "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -50208,13 +50009,7 @@ puts(beta_managed_agents_session)
     "version": 1
   },
   "archived_at": null,
-  "budget": {
-    "max_list_cost": {
-      "amount": "2500",
-      "currency": "USD"
-    },
-    "type": "limit"
-  },
+  "budget": null,
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -60220,13 +60015,7 @@ puts(page)
         "execution_identity": {
           "type": "service_account"
         },
-        "mcp_servers": [
-          {
-            "name": "example-mcp",
-            "type": "url",
-            "url": "https://example-server.modelcontextprotocol.io/sse"
-          }
-        ],
+        "mcp_servers": [],
         "model": {
           "id": "claude-opus-5-5",
           "effort": {
@@ -60236,26 +60025,11 @@ puts(page)
           "speed": "standard"
         },
         "name": "Researcher",
-        "skills": [
-          {
-            "skill_id": "xlsx",
-            "type": "anthropic",
-            "version": "1"
-          }
-        ],
+        "skills": [],
         "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
         "tools": [
           {
-            "configs": [
-              {
-                "enabled": true,
-                "name": "bash",
-                "permission_policy": {
-                  "type": "always_allow"
-                },
-                "type": "bash"
-              }
-            ],
+            "configs": [],
             "default_config": {
               "enabled": true,
               "permission_policy": {
@@ -61335,13 +61109,7 @@ puts(beta_managed_agents_session_thread)
     "execution_identity": {
       "type": "service_account"
     },
-    "mcp_servers": [
-      {
-        "name": "example-mcp",
-        "type": "url",
-        "url": "https://example-server.modelcontextprotocol.io/sse"
-      }
-    ],
+    "mcp_servers": [],
     "model": {
       "id": "claude-opus-5-5",
       "effort": {
@@ -61351,26 +61119,11 @@ puts(beta_managed_agents_session_thread)
       "speed": "standard"
     },
     "name": "Researcher",
-    "skills": [
-      {
-        "skill_id": "xlsx",
-        "type": "anthropic",
-        "version": "1"
-      }
-    ],
+    "skills": [],
     "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -62447,13 +62200,7 @@ puts(beta_managed_agents_session_thread)
     "execution_identity": {
       "type": "service_account"
     },
-    "mcp_servers": [
-      {
-        "name": "example-mcp",
-        "type": "url",
-        "url": "https://example-server.modelcontextprotocol.io/sse"
-      }
-    ],
+    "mcp_servers": [],
     "model": {
       "id": "claude-opus-5-5",
       "effort": {
@@ -62463,26 +62210,11 @@ puts(beta_managed_agents_session_thread)
       "speed": "standard"
     },
     "name": "Researcher",
-    "skills": [
-      {
-        "skill_id": "xlsx",
-        "type": "anthropic",
-        "version": "1"
-      }
-    ],
+    "skills": [],
     "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -70089,20 +69821,8 @@ puts(beta_managed_agents_deployment)
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -70888,20 +70608,8 @@ puts(page)
       ],
       "metadata": {},
       "name": "Daily order report",
-      "paused_reason": {
-        "type": "manual"
-      },
-      "resources": [
-        {
-          "type": "github_repository",
-          "url": "url",
-          "checkout": {
-            "name": "main",
-            "type": "branch"
-          },
-          "mount_path": "mount_path"
-        }
-      ],
+      "paused_reason": null,
+      "resources": [],
       "schedule": {
         "expression": "0 9 * * 1-5",
         "timezone": "America/Los_Angeles",
@@ -71650,20 +71358,8 @@ puts(beta_managed_agents_deployment)
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -72813,20 +72509,8 @@ puts(beta_managed_agents_deployment)
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -73572,20 +73256,8 @@ puts(beta_managed_agents_deployment)
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -74750,20 +74422,8 @@ puts(beta_managed_agents_deployment)
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -75509,20 +75169,8 @@ puts(beta_managed_agents_deployment)
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -80369,24 +80017,8 @@ puts(beta_managed_agents_credential_validation)
 {
   "credential_id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "has_refresh_token": true,
-  "mcp_probe": {
-    "http_response": {
-      "body": "body",
-      "body_truncated": true,
-      "content_type": "content_type",
-      "status_code": 0
-    },
-    "method": "method"
-  },
-  "refresh": {
-    "http_response": {
-      "body": "body",
-      "body_truncated": true,
-      "content_type": "content_type",
-      "status_code": 0
-    },
-    "status": "succeeded"
-  },
+  "mcp_probe": null,
+  "refresh": null,
   "status": "valid",
   "type": "vault_credential_validation",
   "validated_at": "2026-03-15T10:00:00Z",
@@ -84542,6 +84174,30 @@ Upload File
 
       The ID of the scoping resource (e.g., the session ID).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `StorageQuotaExceededError` (HTTP status 400, error code `storage_quota_exceeded`)
+
+  The organization's file storage quota is exhausted. Delete files to free up space, then retry the upload.
+
 #### Example
 
 ```ruby
@@ -84809,6 +84465,26 @@ List Files
 
       The ID of the scoping resource (e.g., the session ID).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -85006,6 +84682,34 @@ Download File
 #### Returns
 
 - `StringIO`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `FileNotDownloadableError` (HTTP status 400, error code `file_not_downloadable`)
+
+  The file has `downloadable: false`. Only files generated by a tool, such as the code execution tool, can be downloaded.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `FileExpiredError` (HTTP status 404, error code `file_expired`)
+
+  The file's `expires_at` has passed, so its content is no longer available.
 
 #### Example
 
@@ -85239,6 +84943,26 @@ Get File Metadata
 
       The ID of the scoping resource (e.g., the session ID).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -85441,6 +85165,26 @@ Delete File
   - `id: String`
 
     ID of the deleted file.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -85698,6 +85442,30 @@ Create Skill
     ISO 8601 timestamp of when the skill was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `CMEKContextUnavailableError` (HTTP status 503, error code `cmek_context_unavailable`)
+
+  The workspace's encryption settings could not be read, so the request was refused. Retry in a few minutes.
 
 #### Example
 
@@ -85972,6 +85740,18 @@ List Skills
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -86233,6 +86013,18 @@ Get Skill
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -86436,6 +86228,18 @@ Delete Skill
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -86665,6 +86469,30 @@ Create Skill Version
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `CMEKContextUnavailableError` (HTTP status 503, error code `cmek_context_unavailable`)
+
+  The workspace's encryption settings could not be read, so the request was refused. Retry in a few minutes.
 
 #### Example
 
@@ -86902,6 +86730,18 @@ List Skill Versions
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -87321,6 +87161,18 @@ Get Skill Version
 
     The format and length of IDs may change over time.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```ruby
@@ -87526,6 +87378,18 @@ Delete Skill Version
 
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberError` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldError` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -88193,7 +88057,9 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-# `payload` is the raw body of the incoming webhook request and `headers` are its HTTP headers.
+# Replace these with the raw body and the HTTP headers of the incoming webhook request.
+payload = '{"type":"event","id":"whe_0f1e2d3c4b5a69788796a5b4c3d2e1f0","created_at":"2026-03-15T10:00:00Z","data":{"type":"session.status_idled"}}'
+headers = {"webhook-id" => "msg_0123456789", "webhook-timestamp" => "1773568800", "webhook-signature" => "v1,ZmFrZS1zaWduYXR1cmU="}
 event = anthropic.beta.webhooks.unwrap(payload, headers: headers)
 
 puts(event)
@@ -88833,7 +88699,8 @@ require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
 
-# `payload` is the raw body of the incoming webhook request.
+# Replace this with the raw body of the incoming webhook request.
+payload = '{"type":"event","id":"whe_0f1e2d3c4b5a69788796a5b4c3d2e1f0","created_at":"2026-03-15T10:00:00Z","data":{"type":"session.status_idled"}}'
 event = anthropic.beta.webhooks.parse_unverified(payload)
 
 puts(event)
@@ -96104,6 +95971,22 @@ Update API Key
 
     - `:inactive`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `OrgAPIKeyLimitExceededError` (HTTP status 400, error code `org_api_key_limit_exceeded`)
+
+  The organization has reached its limit of active API keys.
+
+- `WorkspaceAPIKeyLimitExceededError` (HTTP status 400, error code `workspace_api_key_limit_exceeded`)
+
+  The workspace has reached its limit of active API keys.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -96321,6 +96204,18 @@ Create an external key config owned by the caller's organization.
   - `user_profile_id: String | nil`
 
     ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `UserProfileNotFoundError` (HTTP status 400, error code `user_profile_not_found`)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -96857,6 +96752,18 @@ encrypted data requires the original key identity to decrypt.
 
     ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ExternalKeyInWorkspacePolicyError` (HTTP status 400, error code `external_key_in_workspace_policy`)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -96919,6 +96826,18 @@ The request is rejected if any workspace still references this config.
   - `id: String`
 
     ID of the deleted External Key.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ExternalKeyInWorkspacePolicyError` (HTTP status 400, error code `external_key_in_workspace_policy`)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -96984,6 +96903,14 @@ message if it failed or timed out.
     - `:failure`
 
     - `:success`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -97377,6 +97304,14 @@ matched as the JWT's `iss` claim and is not fetched.
   - `updated_by_actor_id: String | nil`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -98477,6 +98412,14 @@ session.
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -98814,6 +98757,14 @@ issuer cannot be changed), or recreate them against another issuer.
   - `updated_by_actor_id: String | nil`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -99233,6 +99184,14 @@ manage rules whose `oauth_scope` is `workspace:developer` or
   - `workspace_ids: Array[String]`
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -100371,6 +100330,14 @@ Console session.
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -100718,6 +100685,14 @@ other scopes require a Console session.
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -100968,6 +100943,14 @@ other scopes require a Console session.
   - `workspace_name: String | nil`
 
     Workspace display name. Populated when listing; null in the enable response.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -101402,6 +101385,14 @@ Console session.
 
     Tagged ID of the workspace named in the delete request. Removal is idempotent.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -101542,6 +101533,42 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
     - `:expired`
 
     - `:pending`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AlreadyMemberError` (HTTP status 400, error code `already_member`)
+
+  The email address already belongs to a user in the organization. The message names the user.
+
+- `CannotInviteEmailsWithUnverifiedDomainsError` (HTTP status 400, error code `cannot_invite_emails_with_unverified_domains`)
+
+  The email address's domain is not one of the verified domains of the organization's parent organization.
+
+- `EmailDomainNotAllowedError` (HTTP status 400, error code `email_domain_not_allowed`)
+
+  The organization restricts invites to an allowed list of email domains, and the list is empty or does not include the email address's domain.
+
+- `InviteAlreadyExistsError` (HTTP status 400, error code `invite_already_exists`)
+
+  A pending invite already exists for the email address. The message names the invite.
+
+- `OrgMemberLimitExceededError` (HTTP status 400, error code `org_member_limit_exceeded`)
+
+  The organization has reached the member limit that Anthropic set for it. Pending invites count toward the limit.
+
+- `RBACGroupGrantsOwnerAccessError` (HTTP status 400, error code `rbac_group_grants_owner_access`)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `RBACGroupOwnerAccessUnconfirmedError` (HTTP status 400, error code `rbac_group_owner_access_unconfirmed`)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -101878,6 +101905,14 @@ Delete a pending invite.
 
     ID of the Invite.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -102139,6 +102174,14 @@ accounts.
   - `updated_by_actor_id: String | nil`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -102913,6 +102956,14 @@ interactive credential (a user OAuth token or a Console session).
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -103163,6 +103214,14 @@ those rules first or change their target to another service account.
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -103407,6 +103466,14 @@ rejected.
     - `:workspace_restricted_developer`
 
     - `:workspace_user`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -103861,6 +103928,14 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
     Tagged workspace ID (`wrkspc_...`) named in the delete request.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -104177,6 +104252,14 @@ Update a member's organization role.
 
     - `:user`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -104229,6 +104312,22 @@ Remove a member from the organization.
   - `id: String`
 
     ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `CannotRemoveLastMemberError` (HTTP status 400, error code `cannot_remove_last_member`)
+
+  The user is the organization's only member. Add another member before removing this one.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `ConcurrentMembershipChangeError` (HTTP status 409, error code `concurrent_membership_change`)
+
+  Another change to the organization's members is in progress. Retry the request once it completes.
 
 #### Example
 
@@ -104458,6 +104557,42 @@ Every request must include the beta header `anthropic-beta: admin-user-sign-out-
     - `:primary_owner`
 
     - `:user`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaCannotSignOutPrimaryOwnerError` (HTTP status 400, error code `cannot_sign_out_primary_owner`)
+
+  The member is the organization's primary owner, whom no API key or token can sign out.
+
+- `BetaCannotSignOutSelfError` (HTTP status 400, error code `cannot_sign_out_self`)
+
+  The member is the user the API key or token belongs to.
+
+- `BetaOrganizationNotEnrolledInBetaError` (HTTP status 400, error code `organization_not_enrolled_in_beta`)
+
+  The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
+
+- `BetaCannotSignOutManagedMemberError` (HTTP status 403, error code `cannot_sign_out_managed_member`)
+
+  The member has the `managed` role, and this API key or token cannot sign them out. The error message says which keys and tokens can.
+
+- `BetaCannotSignOutMembershipAdminError` (HTTP status 403, error code `cannot_sign_out_membership_admin`)
+
+  The member is a membership admin, and the person the API key or token belongs to is not allowed to sign out membership admins.
+
+- `BetaCannotSignOutOwnerError` (HTTP status 403, error code `cannot_sign_out_owner`)
+
+  The member is an owner or has owner permissions, and this API key or token cannot sign them out. In a Claude Enterprise organization, an API key with the `write:members` scope can.
+
+- `BetaCannotSignOutPrivilegedMemberError` (HTTP status 403, error code `cannot_sign_out_privileged_member`)
+
+  This OAuth token cannot sign out a membership admin or a member whose roles grant owner, user management, or identity and access management.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -104974,6 +105109,38 @@ Create Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ExternalKeyValidationFailedError` (HTTP status 400, error code `external_key_validation_failed`)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `ExternalKeyValidationTimedOutError` (HTTP status 400, error code `external_key_validation_timed_out`)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `KeyProfileMismatchError` (HTTP status 400, error code `key_profile_mismatch`)
+
+  The External Key is bound to a user profile, and the Workspace does not have that user profile. A Workspace can use only a key bound to its own user profile or a key that isn't bound to one.
+
+- `UserProfileNotFoundError` (HTTP status 400, error code `user_profile_not_found`)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `WorkspacePolicyViolationError` (HTTP status 400, error code `workspace_policy_violation`)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `ExternalKeyChangedError` (HTTP status 409, error code `external_key_changed`)
+
+  The external key changed while the request was validating it. Send the request again.
+
 #### Example
 
 ```ruby
@@ -105328,6 +105495,38 @@ Update Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ExternalKeyValidationFailedError` (HTTP status 400, error code `external_key_validation_failed`)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `ExternalKeyValidationTimedOutError` (HTTP status 400, error code `external_key_validation_timed_out`)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `KeyProfileMismatchError` (HTTP status 400, error code `key_profile_mismatch`)
+
+  The External Key is bound to a user profile, and the Workspace does not have that user profile. A Workspace can use only a key bound to its own user profile or a key that isn't bound to one.
+
+- `UserProfileNotFoundError` (HTTP status 400, error code `user_profile_not_found`)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `WorkspacePolicyViolationError` (HTTP status 400, error code `workspace_policy_violation`)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `ExternalKeyChangedError` (HTTP status 409, error code `external_key_changed`)
+
+  The external key changed while the request was validating it. Send the request again.
+
 #### Example
 
 ```ruby
@@ -105474,6 +105673,14 @@ Archive Workspace
   - `user_profile_id: String | nil`
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -105917,6 +106124,14 @@ Changes take effect within about an hour.
 
     ID of the Workspace this entry applies to.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -106117,6 +106332,18 @@ Create Workspace Member
 
     - `:workspace_user`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `WorkspaceMemberLimitExceededError` (HTTP status 400, error code `workspace_member_limit_exceeded`)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -106281,6 +106508,18 @@ Update Workspace Member
 
     - `:workspace_user`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `WorkspaceMemberLimitExceededError` (HTTP status 400, error code `workspace_member_limit_exceeded`)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -106343,6 +106582,14 @@ Delete Workspace Member
   - `workspace_id: String`
 
     ID of the Workspace.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -106820,6 +107067,14 @@ accounts cannot be added and are rejected.
 
     - `:workspace_user`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -107291,6 +107546,14 @@ rejected.
 
     - `:workspace_user`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -107497,6 +107760,14 @@ membership. Archived workspaces return 400.
   - `workspace_id: String`
 
     Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -107822,6 +108093,14 @@ compliance settings.
     - `class BetaComplianceSettingsStateDisabled`
 
       - `type: :disabled`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -113243,6 +113522,18 @@ Anthropic account team.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `BetaSpendLimitsAdminAPIWritesNotEnabledError` (HTTP status 403, error code `spend_limits_admin_api_writes_not_enabled`)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
+
 #### Example
 
 ```ruby
@@ -113401,6 +113692,14 @@ Retrieve a spend limit by ID.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaSpendLimitsAdminAPIWritesNotEnabledError` (HTTP status 403, error code `spend_limits_admin_api_writes_not_enabled`)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
+
 #### Example
 
 ```ruby
@@ -113460,6 +113759,18 @@ workspace limits through the API is in an early access preview.
   - `type: :spend_limit_deleted`
 
   - `id: String`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `BetaSpendLimitsAdminAPIWritesNotEnabledError` (HTTP status 403, error code `spend_limits_admin_api_writes_not_enabled`)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
 
 #### Example
 
@@ -113781,6 +114092,14 @@ come in a fixed order that is not creation order.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `OrganizationTypeNotSupportedError` (HTTP status 400, error code `organization_type_not_supported`)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
 #### Example
 
 ```ruby
@@ -114014,6 +114333,14 @@ organizations.
       the same.
 
   - `spend_limit_id: String`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `OrganizationTypeNotSupportedError` (HTTP status 400, error code `organization_type_not_supported`)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
 
 #### Example
 
@@ -114953,6 +115280,14 @@ the member was blocked on. Anthropic emails the requester unless
 
     - `:pending`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -115254,6 +115589,14 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     - `:pending`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -115376,6 +115719,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -115655,6 +116006,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -115712,6 +116071,22 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `id: String`
 
     ID of the RBAC Group.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `RBACGroupGrantsOwnerAccessError` (HTTP status 400, error code `rbac_group_grants_owner_access`)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `RBACGroupOwnerAccessUnconfirmedError` (HTTP status 400, error code `rbac_group_owner_access_unconfirmed`)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -115870,6 +116245,22 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the User.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `RBACGroupGrantsOwnerAccessError` (HTTP status 400, error code `rbac_group_grants_owner_access`)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `RBACGroupOwnerAccessUnconfirmedError` (HTTP status 400, error code `rbac_group_owner_access_unconfirmed`)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -115932,6 +116323,22 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `user_id: String`
 
     ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `RBACGroupGrantsOwnerAccessError` (HTTP status 400, error code `rbac_group_grants_owner_access`)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `RBACGroupOwnerAccessUnconfirmedError` (HTTP status 400, error code `rbac_group_owner_access_unconfirmed`)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -116027,6 +116434,18 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `OrganizationTypeNotSupportedError` (HTTP status 400, error code `organization_type_not_supported`)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `ParentOrganizationRequiredError` (HTTP status 400, error code `parent_organization_required`)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
 #### Example
 
 ```ruby
@@ -116121,6 +116540,22 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `OrganizationTypeNotSupportedError` (HTTP status 400, error code `organization_type_not_supported`)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `ParentOrganizationRequiredError` (HTTP status 400, error code `parent_organization_required`)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
+- `RBACRoleNotFoundError` (HTTP status 404, error code `rbac_role_not_found`)
+
+  No RBAC Role with this ID was found.
 
 #### Example
 
@@ -116280,6 +116715,22 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
       - `type: :all_connectors`
 
         Kind of resource the permission applies to.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `OrganizationTypeNotSupportedError` (HTTP status 400, error code `organization_type_not_supported`)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `ParentOrganizationRequiredError` (HTTP status 400, error code `parent_organization_required`)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
+- `RBACRoleNotFoundError` (HTTP status 404, error code `rbac_role_not_found`)
+
+  No RBAC Role with this ID was found.
 
 #### Example
 
@@ -116696,6 +117147,34 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `BetaUnsupportedCharsetError` (HTTP status 400, error code `unsupported_charset`)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `BetaPluginNameTakenError` (HTTP status 409, error code `plugin_name_taken`)
+
+  The marketplace already holds this name. `plugin_id` is the Plugin that holds it, and can be absent.
+
+- `BetaSkillNameTakenError` (HTTP status 409, error code `skill_name_taken`)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
+- `BetaRegistrationPendingError` (HTTP status 503, error code `registration_pending`)
+
+  The Plugin version was stored but is not yet usable in claude.ai. `plugin_id` and `plugin_version_id` identify what was stored.
 
 #### Example
 
@@ -117531,6 +118010,30 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `BetaScanFailedError` (HTTP status 400, error code `scan_failed`)
+
+  The version in `plugin_version_id` did not pass its content scan, so it cannot be served.
+
+- `BetaScanPendingError` (HTTP status 409, error code `scan_pending`)
+
+  The content scan of the version in `plugin_version_id` is still running. Retry once the scan finishes.
+
+- `BetaSkillNameTakenError` (HTTP status 409, error code `skill_name_taken`)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
 #### Example
 
 ```ruby
@@ -118236,6 +118739,14 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     The deleted Plugin's ID.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
 #### Example
 
 ```ruby
@@ -118576,6 +119087,30 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `release_notes: String | nil`
 
     As supplied with the upload; null when none were supplied.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `BetaUnsupportedCharsetError` (HTTP status 400, error code `unsupported_charset`)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `BetaSkillNameTakenError` (HTTP status 409, error code `skill_name_taken`)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
+- `BetaRegistrationPendingError` (HTTP status 503, error code `registration_pending`)
+
+  The Plugin version was stored but is not yet usable in claude.ai. `plugin_id` and `plugin_version_id` identify what was stored.
 
 #### Example
 
@@ -119509,6 +120044,18 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 #### Returns
 
 - `StringIO`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `CMEKKeyDisabledError` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `CMEKKeyNetworkBlockedError` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
 
 #### Example
 
@@ -122073,6 +122620,14 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `valid: bool`
 
     True when marketplace.json is well-formed and no plugin would be skipped; warnings never make it false.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaUnsupportedCharsetError` (HTTP status 400, error code `unsupported_charset`)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
 
 #### Example
 
@@ -126117,6 +126672,14 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     ID of the deleted webhook endpoint.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```ruby
@@ -126304,6 +126867,14 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
   - `signing_secret: String`
 
     The new signing secret. Deliveries are signed with it from now on, and no other response returns it.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `SandboxEgressRestrictedError` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -126779,6 +127350,42 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaSlackChannelSetUpSettingsRefusedError` (HTTP status 400, error code `slack_channel_set_up_settings_refused`)
+
+  The request set the channel up, and `settings` was then refused. The channel stays set up with every setting unset.
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `BetaEnvironmentNotFoundError` (HTTP status 404, error code `environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `BetaSlackChannelSetUpEnvironmentNotFoundError` (HTTP status 404, error code `slack_channel_set_up_environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `BetaSlackChannelSetUpSettingsConflictError` (HTTP status 409, error code `slack_channel_set_up_settings_conflict`)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```ruby
@@ -127232,6 +127839,26 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```ruby
@@ -127673,6 +128300,26 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -128181,6 +128828,38 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `BetaEnvironmentNotFoundError` (HTTP status 404, error code `environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `BetaSlackChannelSetUpEnvironmentNotFoundError` (HTTP status 404, error code `slack_channel_set_up_environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `BetaSlackChannelSetUpSettingsConflictError` (HTTP status 409, error code `slack_channel_set_up_settings_conflict`)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```ruby
@@ -128414,6 +129093,30 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
   - `id: String`
 
     The removed channel's identifier.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `BetaSlackChannelSetUpSettingsConflictError` (HTTP status 409, error code `slack_channel_set_up_settings_conflict`)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
 
 #### Example
 
@@ -128821,6 +129524,26 @@ List the set-up Slack workspaces the organization owns, newest first by `created
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -129266,6 +129989,26 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -129777,6 +130520,38 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `BetaEnvironmentNotFoundError` (HTTP status 404, error code `environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `BetaSlackChannelSetUpEnvironmentNotFoundError` (HTTP status 404, error code `slack_channel_set_up_environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `BetaSlackChannelSetUpSettingsConflictError` (HTTP status 409, error code `slack_channel_set_up_settings_conflict`)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```ruby
@@ -130038,6 +130813,26 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```ruby
@@ -130251,6 +131046,26 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
     Time of the last change to the Bundle.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -130486,6 +131301,26 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
     - `slack_workspace_id: String`
 
       The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -130739,6 +131574,26 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
 
       The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```ruby
@@ -130967,6 +131822,26 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
       The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```ruby
@@ -131160,6 +132035,26 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
   - `id: String`
 
     The identifier the Bundle Target had.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `BetaAPIKeyScopeMissingError` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `BetaClaudeTagWritesNotEnabledError` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `BetaComplianceConfigurationRestrictedError` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredError` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 

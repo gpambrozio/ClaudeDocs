@@ -429,7 +429,7 @@ List Sessions
 
         - `JsonElement Type = "coordinator"`
 
-        - `required IReadOnlyList<Agent> Agents`
+        - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -461,7 +461,7 @@ List Sessions
 
             - `required string Name`
 
-            - `required IReadOnlyList<Skill> Skills`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `class BetaManagedAgentsAnthropicSkill`
 
@@ -485,7 +485,7 @@ List Sessions
 
             - `required string? System`
 
-            - `required IReadOnlyList<Tool> Tools`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -503,7 +503,7 @@ List Sessions
 
                     - `JsonElement Name = "bash"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -535,7 +535,7 @@ List Sessions
 
                     - `JsonElement Name = "edit"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -561,7 +561,7 @@ List Sessions
 
                     - `JsonElement Name = "read"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -587,7 +587,7 @@ List Sessions
 
                     - `JsonElement Name = "write"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -613,7 +613,7 @@ List Sessions
 
                     - `JsonElement Name = "glob"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -639,7 +639,7 @@ List Sessions
 
                     - `JsonElement Name = "grep"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -665,7 +665,7 @@ List Sessions
 
                     - `JsonElement Name = "web_fetch"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -775,7 +775,7 @@ List Sessions
 
                     - `JsonElement Name = "web_search"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -859,7 +859,7 @@ List Sessions
 
                   - `required string Name`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -881,7 +881,7 @@ List Sessions
 
                   - `required bool Enabled`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -1007,11 +1007,11 @@ List Sessions
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -1059,11 +1059,11 @@ List Sessions
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -1089,7 +1089,7 @@ List Sessions
 
     - `required string? System`
 
-    - `required IReadOnlyList<Tool> Tools`
+    - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
       - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -1295,7 +1295,7 @@ List Sessions
 
       format: double
 
-  - `required Status Status`
+  - `required BetaManagedAgentsSessionStatus Status`
 
     - `Rescheduling("rescheduling")`
 
@@ -1436,65 +1436,7 @@ await foreach (var item in page.Paginate())
           "inference_geo": "inference_geo",
           "speed": "standard"
         },
-        "multiagent": {
-          "agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "description": "A focused research subagent.",
-              "execution_identity": {
-                "type": "service_account"
-              },
-              "mcp_servers": [
-                {
-                  "name": "example-mcp",
-                  "type": "url",
-                  "url": "https://example-server.modelcontextprotocol.io/sse"
-                }
-              ],
-              "model": {
-                "id": "claude-opus-5-5",
-                "effort": {
-                  "type": "low"
-                },
-                "inference_geo": "inference_geo",
-                "speed": "standard"
-              },
-              "name": "Researcher",
-              "skills": [
-                {
-                  "skill_id": "xlsx",
-                  "type": "anthropic",
-                  "version": "1"
-                }
-              ],
-              "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-              "tools": [
-                {
-                  "configs": [
-                    {
-                      "enabled": true,
-                      "name": "bash",
-                      "permission_policy": {
-                        "type": "always_allow"
-                      },
-                      "type": "bash"
-                    }
-                  ],
-                  "default_config": {
-                    "enabled": true,
-                    "permission_policy": {
-                      "type": "always_ask"
-                    }
-                  },
-                  "type": "agent_toolset_20260401"
-                }
-              ],
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "coordinator"
-        },
+        "multiagent": null,
         "name": "My First Agent",
         "skills": [
           {
@@ -1511,16 +1453,7 @@ await foreach (var item in page.Paginate())
         "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
         "tools": [
           {
-            "configs": [
-              {
-                "enabled": true,
-                "name": "bash",
-                "permission_policy": {
-                  "type": "always_allow"
-                },
-                "type": "bash"
-              }
-            ],
+            "configs": [],
             "default_config": {
               "enabled": true,
               "permission_policy": {
@@ -1534,13 +1467,7 @@ await foreach (var item in page.Paginate())
         "version": 1
       },
       "archived_at": null,
-      "budget": {
-        "max_list_cost": {
-          "amount": "2500",
-          "currency": "USD"
-        },
-        "type": "limit"
-      },
+      "budget": null,
       "created_at": "2026-03-15T10:00:00Z",
       "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
       "metadata": {},

@@ -195,7 +195,7 @@ List Credentials
 
     format: date-time
 
-  - `required Auth Auth`
+  - `required BetaManagedAgentsCredentialAuth Auth`
 
     Authentication configuration for this credential.
 
@@ -227,7 +227,7 @@ List Credentials
 
           Token endpoint URL used to refresh the access token.
 
-        - `required TokenEndpointAuth TokenEndpointAuth`
+        - `required BetaManagedAgentsMcpOAuthRefreshResponseTokenEndpointAuth TokenEndpointAuth`
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 

@@ -186,6 +186,18 @@ Delete Skill Version
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
 
+## Errors
+
+Any method can also return the general [HTTP errors](../../../../errors.md).
+
+- `ClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `OrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ## Example
 
 ```java

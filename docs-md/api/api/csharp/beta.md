@@ -301,8 +301,6 @@ url: https://platform.claude.com/docs/en/api/csharp/beta
 
 - `class BetaOrganizationNotEnrolledInBetaErrorDetails`
 
-  The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
-
   - `JsonElement ErrorCode = "organization_not_enrolled_in_beta"`
 
 ### Beta Overloaded Error
@@ -345,9 +343,37 @@ url: https://platform.claude.com/docs/en/api/csharp/beta
 
 - `class BetaUnsupportedCharsetErrorDetails`
 
+  - `JsonElement ErrorCode = "unsupported_charset"`
+
+## Errors
+
+### AnthropicBetaOrganizationNotEnrolledInBetaException
+
+HTTP status 400, error code `organization_not_enrolled_in_beta`
+
+- `class AnthropicBetaOrganizationNotEnrolledInBetaException : AnthropicBadRequestException`
+
+  The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
+
+  - `string ErrorCode`
+
+  - `BetaOrganizationNotEnrolledInBetaErrorDetails Details`
+
+    - `JsonElement ErrorCode = "organization_not_enrolled_in_beta"`
+
+### AnthropicBetaUnsupportedCharsetException
+
+HTTP status 400, error code `unsupported_charset`
+
+- `class AnthropicBetaUnsupportedCharsetException : AnthropicBadRequestException`
+
   The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
 
-  - `JsonElement ErrorCode = "unsupported_charset"`
+  - `string ErrorCode`
+
+  - `BetaUnsupportedCharsetErrorDetails Details`
+
+    - `JsonElement ErrorCode = "unsupported_charset"`
 
 ## Beta › Models
 
@@ -705,7 +731,7 @@ The Models API response can be used to determine which models are available for 
 
     A human-readable name for the model.
 
-  - `required Lifecycle Lifecycle`
+  - `required BetaModelInfoLifecycle Lifecycle`
 
     The model's current lifecycle stage.
 
@@ -746,6 +772,18 @@ The Models API response can be used to determine which models are available for 
     RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -1201,7 +1239,7 @@ The Models API response can be used to determine information about a specific mo
 
     A human-readable name for the model.
 
-  - `required Lifecycle Lifecycle`
+  - `required BetaModelInfoLifecycle Lifecycle`
 
     The model's current lifecycle stage.
 
@@ -1242,6 +1280,18 @@ The Models API response can be used to determine information about a specific mo
     RFC 3339 datetime string representing the model's currently scheduled retirement date. The schedule can be revised until retirement occurs; `null` while the model is `active` or while no retirement is scheduled. A past date on a `deprecated` model means retirement is overdue, not that it has occurred: `lifecycle` is the retirement signal.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -1602,7 +1652,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `JsonElement Type = "image"`
 
-            - `required Source Source`
+            - `required BetaImageBlockParamSource Source`
 
               - `class BetaBase64ImageSource`
 
@@ -1654,7 +1704,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `JsonElement Type = "document"`
 
-            - `required Source Source`
+            - `required BetaRequestDocumentBlockSource Source`
 
               - `class BetaBase64PdfSource`
 
@@ -1678,11 +1728,11 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `JsonElement Type = "content"`
 
-                - `required Content Content`
+                - `required BetaContentBlockSourceContent Content`
 
                   - `string`
 
-                  - `IReadOnlyList<BetaContentBlockSourceContent>`
+                  - `IReadOnlyList<MessageBetaContentBlockSourceContent>`
 
                     - `class BetaTextBlockParam`
 
@@ -1784,7 +1834,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-            - `Caller Caller`
+            - `BetaToolUseBlockParamCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -1828,7 +1878,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-            - `Content Content`
+            - `BetaToolResultBlockParamContent Content`
 
               - `string`
 
@@ -2017,7 +2067,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `required IReadOnlyDictionary<string, JsonElement> Input`
 
-            - `required Name Name`
+            - `required BetaServerToolUseBlockParamName Name`
 
               - `Advisor("advisor")`
 
@@ -2039,7 +2089,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-            - `Caller Caller`
+            - `BetaServerToolUseBlockParamCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -2095,7 +2145,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-            - `Caller Caller`
+            - `BetaWebSearchToolResultBlockParamCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -2111,7 +2161,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `JsonElement Type = "web_fetch_tool_result"`
 
-            - `required Content Content`
+            - `required BetaWebFetchToolResultBlockParamContent Content`
 
               - `class BetaWebFetchToolResultErrorBlockParam`
 
@@ -2161,7 +2211,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-            - `Caller Caller`
+            - `BetaWebFetchToolResultBlockParamCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -2177,13 +2227,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `JsonElement Type = "advisor_tool_result"`
 
-            - `required Content Content`
+            - `required BetaAdvisorToolResultBlockParamContent Content`
 
               - `class BetaAdvisorToolResultErrorParam`
 
                 - `JsonElement Type = "advisor_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaAdvisorToolResultErrorParamErrorCode ErrorCode`
 
                   - `MaxUsesExceeded("max_uses_exceeded")`
 
@@ -2291,13 +2341,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `JsonElement Type = "bash_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required BetaBashCodeExecutionToolResultBlockParamContent Content`
 
               - `class BetaBashCodeExecutionToolResultErrorParam`
 
                 - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaBashCodeExecutionToolResultErrorParamErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -2337,13 +2387,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required BetaTextEditorCodeExecutionToolResultBlockParamContent Content`
 
               - `class BetaTextEditorCodeExecutionToolResultErrorParam`
 
                 - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaTextEditorCodeExecutionToolResultErrorParamErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -2363,7 +2413,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `required string Content`
 
-                - `required FileType FileType`
+                - `required BetaTextEditorCodeExecutionViewResultBlockParamFileType FileType`
 
                   - `Text("text")`
 
@@ -2409,13 +2459,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
             - `JsonElement Type = "tool_search_tool_result"`
 
-            - `required Content Content`
+            - `required BetaToolSearchToolResultBlockParamContent Content`
 
               - `class BetaToolSearchToolResultErrorParam`
 
                 - `JsonElement Type = "tool_search_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaToolSearchToolResultErrorParamErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -2483,7 +2533,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               Create a cache control breakpoint at this content block.
 
-            - `Content Content`
+            - `BetaRequestMcpToolResultBlockParamContent Content`
 
               - `string`
 
@@ -2544,7 +2594,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
               The block's signature as returned, to be sent back verbatim
 
-            - `IReadOnlyList<ToolChange>? ToolChanges`
+            - `IReadOnlyList<BetaCompactionBlockParamToolChange>? ToolChanges`
 
               The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
@@ -2562,7 +2612,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `JsonElement Type = "tool_addition"`
 
-                - `required Tool Tool`
+                - `required BetaRequestToolAdditionBlockTool Tool`
 
                   - `class BetaToolChangeToolReference`
 
@@ -2609,7 +2659,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       - `class BetaTool`
 
-                        - `Type? Type`
+                        - `BetaToolType? Type`
 
                         - `required InputSchema InputSchema`
 
@@ -2631,7 +2681,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolAllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -2675,7 +2725,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolBash20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -2709,7 +2759,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolBash20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -2743,7 +2793,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20250522AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -2775,7 +2825,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -2813,7 +2863,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -2847,7 +2897,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -3280,7 +3330,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -3320,7 +3370,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaMemoryTool20250818AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -3366,7 +3416,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -3406,7 +3456,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -3452,7 +3502,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20251124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -3721,7 +3771,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -3755,7 +3805,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250429AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -3789,7 +3839,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250728AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -3829,7 +3879,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20250305AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -3905,7 +3955,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20250910AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -4047,7 +4097,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20260209AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -4097,7 +4147,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260209AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -4159,7 +4209,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260309AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -4223,7 +4273,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20260318AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -4255,7 +4305,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           minimum: 1
 
-                        - `ResponseInclusion ResponseInclusion`
+                        - `BetaWebSearchTool20260318ResponseInclusion ResponseInclusion`
 
                           How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -4281,7 +4331,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260318AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -4489,7 +4539,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       - `class BetaToolSearchToolBm25_20251119`
 
-                        - `required Type Type`
+                        - `required BetaToolSearchToolBm25_20251119Type Type`
 
                           - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -4501,7 +4551,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -4525,7 +4575,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                       - `class BetaToolSearchToolRegex20251119`
 
-                        - `required Type Type`
+                        - `required BetaToolSearchToolRegex20251119Type Type`
 
                           - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -4537,7 +4587,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -4626,7 +4676,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `JsonElement Type = "tool_removal"`
 
-                - `required Tool Tool`
+                - `required BetaRequestToolRemovalBlockTool Tool`
 
                   - `class BetaToolChangeToolReference`
 
@@ -4764,7 +4814,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         - `Never("never")`
 
-      - `Content Content`
+      - `BetaSystemMessageParamContent Content`
 
         - `string`
 
@@ -4800,7 +4850,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
         empty `{}` is accepted on a message that carries content; a message
         with neither content nor output_config fields is rejected.
 
-        - `Effort? Effort`
+        - `BetaSystemMessageOutputConfigEffort? Effort`
 
           How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
 
@@ -4850,7 +4900,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         maxItems: 20
 
-        - `required Type Type`
+        - `required BetaSkillParamsType Type`
 
           Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
@@ -4995,7 +5045,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-  - `System system`
+  - `MessageCreateParamsSystem system`
 
     System prompt.
 
@@ -5593,7 +5643,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         minLength: 1
 
-      - `Caller Caller`
+      - `BetaToolUseBlockCaller Caller`
 
         - `class BetaDirectCaller`
 
@@ -5705,7 +5755,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `Caller Caller`
+      - `BetaWebSearchToolResultBlockCaller Caller`
 
         - `class BetaDirectCaller`
 
@@ -5721,7 +5771,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `JsonElement Type = "web_fetch_tool_result"`
 
-      - `required Content Content`
+      - `required BetaWebFetchToolResultBlockContent Content`
 
         - `class BetaWebFetchToolResultErrorBlock`
 
@@ -5799,7 +5849,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-      - `Caller Caller`
+      - `BetaWebFetchToolResultBlockCaller Caller`
 
         - `class BetaDirectCaller`
 
@@ -5929,13 +5979,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `JsonElement Type = "bash_code_execution_tool_result"`
 
-      - `required Content Content`
+      - `required BetaBashCodeExecutionToolResultBlockContent Content`
 
         - `class BetaBashCodeExecutionToolResultError`
 
           - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
-          - `required ErrorCode ErrorCode`
+          - `required BetaBashCodeExecutionToolResultErrorErrorCode ErrorCode`
 
             - `InvalidToolInput("invalid_tool_input")`
 
@@ -5971,13 +6021,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-      - `required Content Content`
+      - `required BetaTextEditorCodeExecutionToolResultBlockContent Content`
 
         - `class BetaTextEditorCodeExecutionToolResultError`
 
           - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
-          - `required ErrorCode ErrorCode`
+          - `required BetaTextEditorCodeExecutionToolResultErrorErrorCode ErrorCode`
 
             - `InvalidToolInput("invalid_tool_input")`
 
@@ -6039,13 +6089,13 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `JsonElement Type = "tool_search_tool_result"`
 
-      - `required Content Content`
+      - `required BetaToolSearchToolResultBlockContent Content`
 
         - `class BetaToolSearchToolResultError`
 
           - `JsonElement Type = "tool_search_tool_result_error"`
 
-          - `required ErrorCode ErrorCode`
+          - `required BetaToolSearchToolResultErrorErrorCode ErrorCode`
 
             - `InvalidToolInput("invalid_tool_input")`
 
@@ -6095,7 +6145,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `JsonElement Type = "mcp_tool_result"`
 
-      - `required Content Content`
+      - `required BetaMcpToolResultBlockContent Content`
 
         - `string`
 
@@ -6160,7 +6210,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `JsonElement Type = "tool_addition"`
 
-          - `required Tool Tool`
+          - `required BetaResponseToolAdditionBlockTool Tool`
 
             The tool made available: a reference to a `tools` entry or MCP toolset, or a `tool_definition` carrying the definition by value.
 
@@ -6212,7 +6262,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                   A custom tool definition, as sent.
 
-                  - `Type? Type`
+                  - `BetaResponseToolType? Type`
 
                   - `required BetaResponseToolInputSchema InputSchema`
 
@@ -6234,7 +6284,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaResponseToolAllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -6274,7 +6324,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolBash20241022AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -6325,7 +6375,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolBash20250124AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -6359,7 +6409,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaCodeExecutionTool20250522AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -6391,7 +6441,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaCodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -6429,7 +6479,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaCodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -6463,7 +6513,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaCodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -6896,7 +6946,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolComputerUse20241022AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -6936,7 +6986,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaMemoryTool20250818AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -6982,7 +7032,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolComputerUse20250124AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7022,7 +7072,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolTextEditor20241022AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7068,7 +7118,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolComputerUse20251124AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7337,7 +7387,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolTextEditor20250124AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7371,7 +7421,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolTextEditor20250429AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7405,7 +7455,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolTextEditor20250728AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7445,7 +7495,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaWebSearchTool20250305AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7521,7 +7571,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaWebFetchTool20250910AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7665,7 +7715,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaWebSearchTool20260209AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7715,7 +7765,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaWebFetchTool20260209AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7777,7 +7827,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaWebFetchTool20260309AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7841,7 +7891,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaWebSearchTool20260318AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -7873,7 +7923,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     minimum: 1
 
-                  - `ResponseInclusion ResponseInclusion`
+                  - `BetaWebSearchTool20260318ResponseInclusion ResponseInclusion`
 
                     How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -7899,7 +7949,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaWebFetchTool20260318AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -8107,7 +8157,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `class BetaToolSearchToolBm25_20251119`
 
-                  - `required Type Type`
+                  - `required BetaToolSearchToolBm25_20251119Type Type`
 
                     - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -8119,7 +8169,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -8143,7 +8193,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `class BetaToolSearchToolRegex20251119`
 
-                  - `required Type Type`
+                  - `required BetaToolSearchToolRegex20251119Type Type`
 
                     - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -8155,7 +8205,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     This is how the tool will be called by the model and in `tool_use` blocks.
 
-                  - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                  - `IReadOnlyList<BetaToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
                     - `Direct("direct")`
 
@@ -8238,7 +8288,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
           - `JsonElement Type = "tool_removal"`
 
-          - `required Tool Tool`
+          - `required BetaResponseToolRemovalBlockTool Tool`
 
             A reference to the withdrawn `tools` entry, MCP tool or MCP toolset.
 
@@ -8723,7 +8773,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       minimum: 0
 
-    - `required IReadOnlyList<Iteration>? Iterations`
+    - `required IReadOnlyList<BetaUsageIteration>? Iterations`
 
       Per-iteration token usage breakdown.
 
@@ -8946,7 +8996,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
         minimum: 0
 
-    - `required ServiceTier? ServiceTier`
+    - `required BetaUsageServiceTier? ServiceTier`
 
       If the request used the priority, standard, or batch tier.
 
@@ -8956,7 +9006,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Batch("batch")`
 
-    - `required Speed? Speed`
+    - `required BetaUsageSpeed? Speed`
 
       The inference speed mode used for this request.
 
@@ -9000,7 +9050,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
         `i` indexes the `messages` array you sent and `j` that message's `content`
         array — the same form error messages use.
 
-      - `required Reason Reason`
+      - `required BetaThinkingDroppedInputTransformationReason Reason`
 
         Which binding check removed the block: `model_binding_mismatch` — it was
         created by a model whose reasoning the requested model may not read;
@@ -9036,7 +9086,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
         `i` indexes the `messages` array you sent and `j` that message's `content`
         array — the same form error messages use.
 
-      - `required Reason Reason`
+      - `required BetaThinkingMismatchAllowedInputTransformationReason Reason`
 
         Which binding check the block failed; the block was shown to the model all
         the same. Always `prefix_binding_mismatch` today — the conversation before
@@ -9352,6 +9402,128 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `required long Index`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+On a streaming call, the errors listed below apply when the API rejects the request before the stream starts. An error partway through the stream can arrive as a more general error type. To identify it, use its error code, if it has one, not its type.
+
+- `AnthropicAvailableToolsLimitExceededException` (HTTP status 400, error code `available_tools_limit_exceeded`)
+
+  The tools available after a message exceed a limit on their number or their size.
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicClaudeCodeVersionTooOldException` (HTTP status 400, error code `claude_code_version_too_old`)
+
+  The request comes from a Claude Code version older than the minimum that the requested model or the organization requires. Update Claude Code, then retry.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicCompactionBlockAmbiguousException` (HTTP status 400, error code `compaction_block_ambiguous`)
+
+  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
+
+- `AnthropicCompactionBlockMisplacedException` (HTTP status 400, error code `compaction_block_misplaced`)
+
+  The `compaction` block is not the first block of the conversation, or is in a `system` message.
+
+- `AnthropicCompactionContentMismatchException` (HTTP status 400, error code `compaction_content_mismatch`)
+
+  The `compaction` block's `content` differs from the text its `signature` recorded.
+
+- `AnthropicCompactionIncompleteTurnException` (HTTP status 400, error code `compaction_incomplete_turn`)
+
+  The compaction request ends on an `assistant` turn that is not finished.
+
+- `AnthropicCompactionNothingToSummarizeException` (HTTP status 400, error code `compaction_nothing_to_summarize`)
+
+  `messages` holds no `user` or `assistant` content to summarize or adopt.
+
+- `AnthropicCompactionSignatureInvalidException` (HTTP status 400, error code `compaction_signature_invalid`)
+
+  The `compaction` block's `signature` does not verify.
+
+- `AnthropicCompactionTooManyToolReferencesException` (HTTP status 400, error code `compaction_too_many_tool_references`)
+
+  The conversation references more distinct tools than a `compaction` block can record.
+
+- `AnthropicCompactionToolChangesMismatchException` (HTTP status 400, error code `compaction_tool_changes_mismatch`)
+
+  The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicRequestBodyEncodingInvalidException` (HTTP status 400, error code `request_body_encoding_invalid`)
+
+  The request body is not valid for its `Content-Encoding`.
+
+- `AnthropicRequestBodyEncodingUnsupportedException` (HTTP status 400, error code `request_body_encoding_unsupported`)
+
+  The request's `Content-Encoding` is not supported.
+
+- `AnthropicThreadAlreadyContinuedException` (HTTP status 400, error code `thread_already_continued`)
+
+  The response that `previous_message_id` names has already been continued, and each response can be continued only once. Continue from the Thread's most recent response `id`.
+
+- `AnthropicThreadContinueInFlightException` (HTTP status 400, error code `thread_continue_in_flight`)
+
+  Another request is still continuing from the same `previous_message_id`. Wait for it to complete and continue from its response `id`, or replay the full conversation with `thread: {"type": "create"}`.
+
+- `AnthropicThreadFingerprintMismatchException` (HTTP status 400, error code `thread_fingerprint_mismatch`)
+
+  A field that must stay the same across a Thread's turns differs from the value stored with the Thread; the message names each such field. Send the stored values, or replay the full conversation with `thread: {"type": "create"}` to change them.
+
+- `AnthropicThreadUnsupportedRequestException` (HTTP status 400, error code `thread_unsupported_request`)
+
+  The request combines `thread` with a request field or an organization setting that Threads do not support; `unsupported`, when present, names it. Send the full conversation without `thread`, or change that field.
+
+- `AnthropicToolNameConflictException` (HTTP status 400, error code `tool_name_conflict`)
+
+  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
+
+- `AnthropicToolReferenceUnresolvedException` (HTTP status 400, error code `tool_reference_unresolved`)
+
+  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
+
+- `AnthropicThreadNotFoundException` (HTTP status 404, error code `thread_not_found`)
+
+  No usable Thread state was found for `previous_message_id`. Replay the full conversation with `thread: {"type": "create"}` to start a new Thread.
+
+- `AnthropicSkillReadBlockedUndecryptableException` (HTTP status 409, error code `skill_read_blocked_undecryptable`)
+
+  A custom skill the request names is stored under an encryption key state the workspace cannot currently decrypt.
+
+- `AnthropicRequestBodyTooLargeAfterDecodingException` (HTTP status 413, error code `request_body_too_large_after_decoding`)
+
+  The compressed request body exceeds the request size limit once decoded.
+
+- `AnthropicEnforcedSpendLimitReachedException` (HTTP status 429, error code `enforced_spend_limit_reached`)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
+- `AnthropicRampLimitExceededException` (HTTP status 429, error code `ramp_limit_exceeded`)
+
+  The request would exceed a ramp limit, which caps how fast usage can grow. Retry after the time in the `retry-after` header.
+
+- `AnthropicCmekKeyUnreachableException` (HTTP status 503, error code `cmek_key_unreachable`)
+
+  The workspace's customer-managed encryption key could not be reached. Retry the request; if this continues, check that the key is available in your key management service, or contact Anthropic support.
+
+- `AnthropicCompactionUnavailableException` (HTTP status 529, error code `compaction_unavailable`)
+
+  The compaction could not be completed for a transient server reason. Retry the request.
+
 #### Example
 
 ```csharp
@@ -9392,17 +9564,7 @@ Console.WriteLine(betaMessage);
   },
   "content": [
     {
-      "citations": [
-        {
-          "cited_text": "The grass is green. The sky is blue.",
-          "document_index": 0,
-          "document_title": "My Document",
-          "end_char_index": 0,
-          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
+      "citations": null,
       "text": "Hi! My name is Claude.",
       "type": "text"
     }
@@ -9416,22 +9578,10 @@ Console.WriteLine(betaMessage);
       }
     ]
   },
-  "diagnostics": {
-    "cache_miss_reason": {
-      "cache_missed_input_tokens": 0,
-      "type": "model_changed"
-    }
-  },
+  "diagnostics": null,
   "model": "claude-opus-5-5",
   "role": "assistant",
-  "stop_details": {
-    "category": "cyber",
-    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
-    "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
-    "fallback_has_prefill_claim": true,
-    "recommended_model": "claude-opus-4-8",
-    "type": "refusal"
-  },
+  "stop_details": null,
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",
@@ -9714,7 +9864,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `JsonElement Type = "image"`
 
-            - `required Source Source`
+            - `required BetaImageBlockParamSource Source`
 
               - `class BetaBase64ImageSource`
 
@@ -9766,7 +9916,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `JsonElement Type = "document"`
 
-            - `required Source Source`
+            - `required BetaRequestDocumentBlockSource Source`
 
               - `class BetaBase64PdfSource`
 
@@ -9790,11 +9940,11 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `JsonElement Type = "content"`
 
-                - `required Content Content`
+                - `required BetaContentBlockSourceContent Content`
 
                   - `string`
 
-                  - `IReadOnlyList<BetaContentBlockSourceContent>`
+                  - `IReadOnlyList<MessageBetaContentBlockSourceContent>`
 
                     - `class BetaTextBlockParam`
 
@@ -9896,7 +10046,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               Create a cache control breakpoint at this content block.
 
-            - `Caller Caller`
+            - `BetaToolUseBlockParamCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -9940,7 +10090,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               Create a cache control breakpoint at this content block.
 
-            - `Content Content`
+            - `BetaToolResultBlockParamContent Content`
 
               - `string`
 
@@ -10129,7 +10279,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `required IReadOnlyDictionary<string, JsonElement> Input`
 
-            - `required Name Name`
+            - `required BetaServerToolUseBlockParamName Name`
 
               - `Advisor("advisor")`
 
@@ -10151,7 +10301,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               Create a cache control breakpoint at this content block.
 
-            - `Caller Caller`
+            - `BetaServerToolUseBlockParamCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -10207,7 +10357,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               Create a cache control breakpoint at this content block.
 
-            - `Caller Caller`
+            - `BetaWebSearchToolResultBlockParamCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -10223,7 +10373,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `JsonElement Type = "web_fetch_tool_result"`
 
-            - `required Content Content`
+            - `required BetaWebFetchToolResultBlockParamContent Content`
 
               - `class BetaWebFetchToolResultErrorBlockParam`
 
@@ -10273,7 +10423,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               Create a cache control breakpoint at this content block.
 
-            - `Caller Caller`
+            - `BetaWebFetchToolResultBlockParamCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -10289,13 +10439,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `JsonElement Type = "advisor_tool_result"`
 
-            - `required Content Content`
+            - `required BetaAdvisorToolResultBlockParamContent Content`
 
               - `class BetaAdvisorToolResultErrorParam`
 
                 - `JsonElement Type = "advisor_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaAdvisorToolResultErrorParamErrorCode ErrorCode`
 
                   - `MaxUsesExceeded("max_uses_exceeded")`
 
@@ -10403,13 +10553,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `JsonElement Type = "bash_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required BetaBashCodeExecutionToolResultBlockParamContent Content`
 
               - `class BetaBashCodeExecutionToolResultErrorParam`
 
                 - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaBashCodeExecutionToolResultErrorParamErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -10449,13 +10599,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required BetaTextEditorCodeExecutionToolResultBlockParamContent Content`
 
               - `class BetaTextEditorCodeExecutionToolResultErrorParam`
 
                 - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaTextEditorCodeExecutionToolResultErrorParamErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -10475,7 +10625,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `required string Content`
 
-                - `required FileType FileType`
+                - `required BetaTextEditorCodeExecutionViewResultBlockParamFileType FileType`
 
                   - `Text("text")`
 
@@ -10521,13 +10671,13 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
             - `JsonElement Type = "tool_search_tool_result"`
 
-            - `required Content Content`
+            - `required BetaToolSearchToolResultBlockParamContent Content`
 
               - `class BetaToolSearchToolResultErrorParam`
 
                 - `JsonElement Type = "tool_search_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaToolSearchToolResultErrorParamErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -10595,7 +10745,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               Create a cache control breakpoint at this content block.
 
-            - `Content Content`
+            - `BetaRequestMcpToolResultBlockParamContent Content`
 
               - `string`
 
@@ -10656,7 +10806,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
               The block's signature as returned, to be sent back verbatim
 
-            - `IReadOnlyList<ToolChange>? ToolChanges`
+            - `IReadOnlyList<BetaCompactionBlockParamToolChange>? ToolChanges`
 
               The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
@@ -10674,7 +10824,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `JsonElement Type = "tool_addition"`
 
-                - `required Tool Tool`
+                - `required BetaRequestToolAdditionBlockTool Tool`
 
                   - `class BetaToolChangeToolReference`
 
@@ -10721,7 +10871,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       - `class BetaTool`
 
-                        - `Type? Type`
+                        - `BetaToolType? Type`
 
                         - `required InputSchema InputSchema`
 
@@ -10743,7 +10893,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolAllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -10787,7 +10937,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolBash20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -10821,7 +10971,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolBash20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -10855,7 +11005,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20250522AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -10887,7 +11037,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -10925,7 +11075,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -10959,7 +11109,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11392,7 +11542,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11432,7 +11582,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaMemoryTool20250818AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11478,7 +11628,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11518,7 +11668,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11564,7 +11714,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20251124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11833,7 +11983,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11867,7 +12017,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250429AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11901,7 +12051,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250728AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11941,7 +12091,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20250305AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12017,7 +12167,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20250910AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12159,7 +12309,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20260209AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12209,7 +12359,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260209AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12271,7 +12421,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260309AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12335,7 +12485,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20260318AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12367,7 +12517,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           minimum: 1
 
-                        - `ResponseInclusion ResponseInclusion`
+                        - `BetaWebSearchTool20260318ResponseInclusion ResponseInclusion`
 
                           How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -12393,7 +12543,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260318AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12601,7 +12751,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       - `class BetaToolSearchToolBm25_20251119`
 
-                        - `required Type Type`
+                        - `required BetaToolSearchToolBm25_20251119Type Type`
 
                           - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -12613,7 +12763,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12637,7 +12787,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                       - `class BetaToolSearchToolRegex20251119`
 
-                        - `required Type Type`
+                        - `required BetaToolSearchToolRegex20251119Type Type`
 
                           - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -12649,7 +12799,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12738,7 +12888,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `JsonElement Type = "tool_removal"`
 
-                - `required Tool Tool`
+                - `required BetaRequestToolRemovalBlockTool Tool`
 
                   - `class BetaToolChangeToolReference`
 
@@ -12876,7 +13026,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
         - `Never("never")`
 
-      - `Content Content`
+      - `BetaSystemMessageParamContent Content`
 
         - `string`
 
@@ -12912,7 +13062,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
         empty `{}` is accepted on a message that carries content; a message
         with neither content nor output_config fields is rejected.
 
-        - `Effort? Effort`
+        - `BetaSystemMessageOutputConfigEffort? Effort`
 
           How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
 
@@ -12974,7 +13124,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     Configuration options for the model's output, such as the output format.
 
-  - `Speed? speed`
+  - `MessageCountTokensParamsSpeed? speed`
 
     The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
@@ -12984,7 +13134,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `Fast("fast")`
 
-  - `System system`
+  - `MessageCountTokensParamsSystem system`
 
     System prompt.
 
@@ -13337,6 +13487,74 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     The total number of tokens across the provided list of messages, system prompt, and tools.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicAvailableToolsLimitExceededException` (HTTP status 400, error code `available_tools_limit_exceeded`)
+
+  The tools available after a message exceed a limit on their number or their size.
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCompactionBlockAmbiguousException` (HTTP status 400, error code `compaction_block_ambiguous`)
+
+  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
+
+- `AnthropicCompactionBlockMisplacedException` (HTTP status 400, error code `compaction_block_misplaced`)
+
+  The `compaction` block is not the first block of the conversation, or is in a `system` message.
+
+- `AnthropicCompactionContentMismatchException` (HTTP status 400, error code `compaction_content_mismatch`)
+
+  The `compaction` block's `content` differs from the text its `signature` recorded.
+
+- `AnthropicCompactionNothingToSummarizeException` (HTTP status 400, error code `compaction_nothing_to_summarize`)
+
+  `messages` holds no `user` or `assistant` content to summarize or adopt.
+
+- `AnthropicCompactionSignatureInvalidException` (HTTP status 400, error code `compaction_signature_invalid`)
+
+  The `compaction` block's `signature` does not verify.
+
+- `AnthropicCompactionToolChangesMismatchException` (HTTP status 400, error code `compaction_tool_changes_mismatch`)
+
+  The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicRequestBodyEncodingInvalidException` (HTTP status 400, error code `request_body_encoding_invalid`)
+
+  The request body is not valid for its `Content-Encoding`.
+
+- `AnthropicRequestBodyEncodingUnsupportedException` (HTTP status 400, error code `request_body_encoding_unsupported`)
+
+  The request's `Content-Encoding` is not supported.
+
+- `AnthropicToolNameConflictException` (HTTP status 400, error code `tool_name_conflict`)
+
+  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
+
+- `AnthropicToolReferenceUnresolvedException` (HTTP status 400, error code `tool_reference_unresolved`)
+
+  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
+
+- `AnthropicRequestBodyTooLargeAfterDecodingException` (HTTP status 413, error code `request_body_too_large_after_decoding`)
+
+  The compressed request body exceeds the request size limit once decoded.
+
+- `AnthropicEnforcedSpendLimitReachedException` (HTTP status 429, error code `enforced_spend_limit_reached`)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
+- `AnthropicCompactionUnavailableException` (HTTP status 529, error code `compaction_unavailable`)
+
+  The compaction could not be completed for a transient server reason. Retry the request.
+
 #### Example
 
 ```csharp
@@ -13633,7 +13851,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `JsonElement Type = "image"`
 
-                - `required Source Source`
+                - `required BetaImageBlockParamSource Source`
 
                   - `class BetaBase64ImageSource`
 
@@ -13685,7 +13903,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `JsonElement Type = "document"`
 
-                - `required Source Source`
+                - `required BetaRequestDocumentBlockSource Source`
 
                   - `class BetaBase64PdfSource`
 
@@ -13709,11 +13927,11 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `JsonElement Type = "content"`
 
-                    - `required Content Content`
+                    - `required BetaContentBlockSourceContent Content`
 
                       - `string`
 
-                      - `IReadOnlyList<BetaContentBlockSourceContent>`
+                      - `IReadOnlyList<MessageBetaContentBlockSourceContent>`
 
                         - `class BetaTextBlockParam`
 
@@ -13815,7 +14033,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `BetaToolUseBlockParamCaller Caller`
 
                   - `class BetaDirectCaller`
 
@@ -13859,7 +14077,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   Create a cache control breakpoint at this content block.
 
-                - `Content Content`
+                - `BetaToolResultBlockParamContent Content`
 
                   - `string`
 
@@ -14048,7 +14266,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `required IReadOnlyDictionary<string, JsonElement> Input`
 
-                - `required Name Name`
+                - `required BetaServerToolUseBlockParamName Name`
 
                   - `Advisor("advisor")`
 
@@ -14070,7 +14288,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `BetaServerToolUseBlockParamCaller Caller`
 
                   - `class BetaDirectCaller`
 
@@ -14126,7 +14344,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `BetaWebSearchToolResultBlockParamCaller Caller`
 
                   - `class BetaDirectCaller`
 
@@ -14142,7 +14360,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `JsonElement Type = "web_fetch_tool_result"`
 
-                - `required Content Content`
+                - `required BetaWebFetchToolResultBlockParamContent Content`
 
                   - `class BetaWebFetchToolResultErrorBlockParam`
 
@@ -14192,7 +14410,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `BetaWebFetchToolResultBlockParamCaller Caller`
 
                   - `class BetaDirectCaller`
 
@@ -14208,13 +14426,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `JsonElement Type = "advisor_tool_result"`
 
-                - `required Content Content`
+                - `required BetaAdvisorToolResultBlockParamContent Content`
 
                   - `class BetaAdvisorToolResultErrorParam`
 
                     - `JsonElement Type = "advisor_tool_result_error"`
 
-                    - `required ErrorCode ErrorCode`
+                    - `required BetaAdvisorToolResultErrorParamErrorCode ErrorCode`
 
                       - `MaxUsesExceeded("max_uses_exceeded")`
 
@@ -14322,13 +14540,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `JsonElement Type = "bash_code_execution_tool_result"`
 
-                - `required Content Content`
+                - `required BetaBashCodeExecutionToolResultBlockParamContent Content`
 
                   - `class BetaBashCodeExecutionToolResultErrorParam`
 
                     - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
-                    - `required ErrorCode ErrorCode`
+                    - `required BetaBashCodeExecutionToolResultErrorParamErrorCode ErrorCode`
 
                       - `InvalidToolInput("invalid_tool_input")`
 
@@ -14368,13 +14586,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-                - `required Content Content`
+                - `required BetaTextEditorCodeExecutionToolResultBlockParamContent Content`
 
                   - `class BetaTextEditorCodeExecutionToolResultErrorParam`
 
                     - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
-                    - `required ErrorCode ErrorCode`
+                    - `required BetaTextEditorCodeExecutionToolResultErrorParamErrorCode ErrorCode`
 
                       - `InvalidToolInput("invalid_tool_input")`
 
@@ -14394,7 +14612,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `required string Content`
 
-                    - `required FileType FileType`
+                    - `required BetaTextEditorCodeExecutionViewResultBlockParamFileType FileType`
 
                       - `Text("text")`
 
@@ -14440,13 +14658,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `JsonElement Type = "tool_search_tool_result"`
 
-                - `required Content Content`
+                - `required BetaToolSearchToolResultBlockParamContent Content`
 
                   - `class BetaToolSearchToolResultErrorParam`
 
                     - `JsonElement Type = "tool_search_tool_result_error"`
 
-                    - `required ErrorCode ErrorCode`
+                    - `required BetaToolSearchToolResultErrorParamErrorCode ErrorCode`
 
                       - `InvalidToolInput("invalid_tool_input")`
 
@@ -14514,7 +14732,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   Create a cache control breakpoint at this content block.
 
-                - `Content Content`
+                - `BetaRequestMcpToolResultBlockParamContent Content`
 
                   - `string`
 
@@ -14575,7 +14793,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   The block's signature as returned, to be sent back verbatim
 
-                - `IReadOnlyList<ToolChange>? ToolChanges`
+                - `IReadOnlyList<BetaCompactionBlockParamToolChange>? ToolChanges`
 
                   The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
@@ -14593,7 +14811,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `JsonElement Type = "tool_addition"`
 
-                    - `required Tool Tool`
+                    - `required BetaRequestToolAdditionBlockTool Tool`
 
                       - `class BetaToolChangeToolReference`
 
@@ -14640,7 +14858,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           - `class BetaTool`
 
-                            - `Type? Type`
+                            - `BetaToolType? Type`
 
                             - `required InputSchema InputSchema`
 
@@ -14662,7 +14880,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolAllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -14706,7 +14924,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolBash20241022AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -14740,7 +14958,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolBash20250124AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -14774,7 +14992,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaCodeExecutionTool20250522AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -14806,7 +15024,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaCodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -14844,7 +15062,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaCodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -14878,7 +15096,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaCodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -15311,7 +15529,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolComputerUse20241022AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -15351,7 +15569,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaMemoryTool20250818AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -15397,7 +15615,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolComputerUse20250124AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -15437,7 +15655,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolTextEditor20241022AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -15483,7 +15701,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolComputerUse20251124AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -15752,7 +15970,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolTextEditor20250124AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -15786,7 +16004,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolTextEditor20250429AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -15820,7 +16038,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolTextEditor20250728AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -15860,7 +16078,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebSearchTool20250305AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -15936,7 +16154,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebFetchTool20250910AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -16078,7 +16296,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebSearchTool20260209AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -16128,7 +16346,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebFetchTool20260209AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -16190,7 +16408,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebFetchTool20260309AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -16254,7 +16472,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebSearchTool20260318AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -16286,7 +16504,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               minimum: 1
 
-                            - `ResponseInclusion ResponseInclusion`
+                            - `BetaWebSearchTool20260318ResponseInclusion ResponseInclusion`
 
                               How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -16312,7 +16530,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebFetchTool20260318AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -16520,7 +16738,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           - `class BetaToolSearchToolBm25_20251119`
 
-                            - `required Type Type`
+                            - `required BetaToolSearchToolBm25_20251119Type Type`
 
                               - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -16532,7 +16750,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -16556,7 +16774,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           - `class BetaToolSearchToolRegex20251119`
 
-                            - `required Type Type`
+                            - `required BetaToolSearchToolRegex20251119Type Type`
 
                               - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -16568,7 +16786,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -16657,7 +16875,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `JsonElement Type = "tool_removal"`
 
-                    - `required Tool Tool`
+                    - `required BetaRequestToolRemovalBlockTool Tool`
 
                       - `class BetaToolChangeToolReference`
 
@@ -16795,7 +17013,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Never("never")`
 
-          - `Content Content`
+          - `BetaSystemMessageParamContent Content`
 
             - `string`
 
@@ -16831,7 +17049,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
             empty `{}` is accepted on a message that carries content; a message
             with neither content nor output_config fields is rejected.
 
-            - `Effort? Effort`
+            - `BetaSystemMessageOutputConfigEffort? Effort`
 
               How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
 
@@ -16889,7 +17107,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             maxItems: 20
 
-            - `required Type Type`
+            - `required BetaSkillParamsType Type`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
@@ -16965,7 +17183,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `JsonElement Type = "input_tokens"`
 
-                - `required long Value`
+                - `required long ValueValue`
 
                   minimum: 1
 
@@ -17152,7 +17370,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 minimum: 0
 
-          - `Speed? Speed`
+          - `BetaFallbackParamSpeed? Speed`
 
             The inference speed mode for the fallback attempt that uses this `fallbacks` entry's `model`. If you leave it out, the attempt runs at `fast` speed only when the request sets `speed` to `fast` and your organization can use fast mode on `model`.
 
@@ -17198,7 +17416,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                   - `DropBlock("drop_block")`
 
-              - `Display? Display`
+              - `BetaThinkingConfigEnabledDisplay? Display`
 
                 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](../../build-with-claude/thinking.md#controlling-thinking-display).
 
@@ -17310,7 +17528,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../../build-with-claude/streaming.md#streaming-with-sdks) for an example in each language.
 
-      - `System System`
+      - `ParamsSystem System`
 
         System prompt.
 
@@ -17819,6 +18037,26 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicEnforcedSpendLimitReachedException` (HTTP status 429, error code `enforced_spend_limit_reached`)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
 #### Example
 
 ```csharp
@@ -18295,6 +18533,18 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```csharp
@@ -18601,6 +18851,18 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```csharp
@@ -18906,6 +19168,18 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```csharp
@@ -19117,6 +19391,18 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
   - `required string ID`
 
     ID of the Message Batch.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -19579,7 +19865,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               minLength: 1
 
-            - `Caller Caller`
+            - `BetaToolUseBlockCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -19691,7 +19977,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Caller Caller`
+            - `BetaWebSearchToolResultBlockCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -19707,7 +19993,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `JsonElement Type = "web_fetch_tool_result"`
 
-            - `required Content Content`
+            - `required BetaWebFetchToolResultBlockContent Content`
 
               - `class BetaWebFetchToolResultErrorBlock`
 
@@ -19785,7 +20071,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Caller Caller`
+            - `BetaWebFetchToolResultBlockCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -19915,13 +20201,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `JsonElement Type = "bash_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required BetaBashCodeExecutionToolResultBlockContent Content`
 
               - `class BetaBashCodeExecutionToolResultError`
 
                 - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaBashCodeExecutionToolResultErrorErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -19957,13 +20243,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required BetaTextEditorCodeExecutionToolResultBlockContent Content`
 
               - `class BetaTextEditorCodeExecutionToolResultError`
 
                 - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaTextEditorCodeExecutionToolResultErrorErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -20025,13 +20311,13 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `JsonElement Type = "tool_search_tool_result"`
 
-            - `required Content Content`
+            - `required BetaToolSearchToolResultBlockContent Content`
 
               - `class BetaToolSearchToolResultError`
 
                 - `JsonElement Type = "tool_search_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaToolSearchToolResultErrorErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -20081,7 +20367,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `JsonElement Type = "mcp_tool_result"`
 
-            - `required Content Content`
+            - `required BetaMcpToolResultBlockContent Content`
 
               - `string`
 
@@ -20146,7 +20432,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `JsonElement Type = "tool_addition"`
 
-                - `required Tool Tool`
+                - `required BetaResponseToolAdditionBlockTool Tool`
 
                   The tool made available: a reference to a `tools` entry or MCP toolset, or a `tool_definition` carrying the definition by value.
 
@@ -20198,7 +20484,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                         A custom tool definition, as sent.
 
-                        - `Type? Type`
+                        - `BetaResponseToolType? Type`
 
                         - `required BetaResponseToolInputSchema InputSchema`
 
@@ -20220,7 +20506,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaResponseToolAllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -20260,7 +20546,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolBash20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -20311,7 +20597,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolBash20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -20345,7 +20631,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20250522AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -20377,7 +20663,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -20415,7 +20701,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -20449,7 +20735,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -20882,7 +21168,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -20922,7 +21208,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaMemoryTool20250818AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -20968,7 +21254,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21008,7 +21294,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21054,7 +21340,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20251124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21323,7 +21609,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21357,7 +21643,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250429AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21391,7 +21677,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250728AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21431,7 +21717,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20250305AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21507,7 +21793,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20250910AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21651,7 +21937,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20260209AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21701,7 +21987,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260209AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21763,7 +22049,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260309AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21827,7 +22113,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20260318AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -21859,7 +22145,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           minimum: 1
 
-                        - `ResponseInclusion ResponseInclusion`
+                        - `BetaWebSearchTool20260318ResponseInclusion ResponseInclusion`
 
                           How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -21885,7 +22171,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260318AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -22093,7 +22379,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       - `class BetaToolSearchToolBm25_20251119`
 
-                        - `required Type Type`
+                        - `required BetaToolSearchToolBm25_20251119Type Type`
 
                           - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -22105,7 +22391,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -22129,7 +22415,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                       - `class BetaToolSearchToolRegex20251119`
 
-                        - `required Type Type`
+                        - `required BetaToolSearchToolRegex20251119Type Type`
 
                           - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -22141,7 +22427,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -22224,7 +22510,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                 - `JsonElement Type = "tool_removal"`
 
-                - `required Tool Tool`
+                - `required BetaResponseToolRemovalBlockTool Tool`
 
                   A reference to the withdrawn `tools` entry, MCP tool or MCP toolset.
 
@@ -22709,7 +22995,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             minimum: 0
 
-          - `required IReadOnlyList<Iteration>? Iterations`
+          - `required IReadOnlyList<BetaUsageIteration>? Iterations`
 
             Per-iteration token usage breakdown.
 
@@ -22932,7 +23218,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               minimum: 0
 
-          - `required ServiceTier? ServiceTier`
+          - `required BetaUsageServiceTier? ServiceTier`
 
             If the request used the priority, standard, or batch tier.
 
@@ -22942,7 +23228,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Batch("batch")`
 
-          - `required Speed? Speed`
+          - `required BetaUsageSpeed? Speed`
 
             The inference speed mode used for this request.
 
@@ -22986,7 +23272,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               `i` indexes the `messages` array you sent and `j` that message's `content`
               array — the same form error messages use.
 
-            - `required Reason Reason`
+            - `required BetaThinkingDroppedInputTransformationReason Reason`
 
               Which binding check removed the block: `model_binding_mismatch` — it was
               created by a model whose reasoning the requested model may not read;
@@ -23022,7 +23308,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
               `i` indexes the `messages` array you sent and `j` that message's `content`
               array — the same form error messages use.
 
-            - `required Reason Reason`
+            - `required BetaThinkingMismatchAllowedInputTransformationReason Reason`
 
               Which binding check the block failed; the block was shown to the model all
               the same. Always `prefix_binding_mismatch` today — the conversation before
@@ -23151,6 +23437,22 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     - `class BetaMessageBatchExpiredResult`
 
       - `JsonElement Type = "expired"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -23344,7 +23646,7 @@ Create Agent
 
           High-performance model for agents and coding
 
-      - `Effort? Effort`
+      - `BetaManagedAgentsModelConfigParamsEffort? Effort`
 
         How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -23406,7 +23708,7 @@ Create Agent
 
         Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
-      - `Speed? Speed`
+      - `BetaManagedAgentsModelConfigParamsSpeed? Speed`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -23530,7 +23832,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsBashToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23556,7 +23858,7 @@ Create Agent
 
           Configuration override for the edit tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsEditToolConfigParamsType Type`
 
           - `JsonElement Name = "edit"`
 
@@ -23566,7 +23868,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsEditToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23586,7 +23888,7 @@ Create Agent
 
           Configuration override for the read tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsReadToolConfigParamsType Type`
 
           - `JsonElement Name = "read"`
 
@@ -23596,7 +23898,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsReadToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23616,7 +23918,7 @@ Create Agent
 
           Configuration override for the write tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsWriteToolConfigParamsType Type`
 
           - `JsonElement Name = "write"`
 
@@ -23626,7 +23928,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsWriteToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23646,7 +23948,7 @@ Create Agent
 
           Configuration override for the glob tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsGlobToolConfigParamsType Type`
 
           - `JsonElement Name = "glob"`
 
@@ -23656,7 +23958,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsGlobToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23676,7 +23978,7 @@ Create Agent
 
           Configuration override for the grep tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsGrepToolConfigParamsType Type`
 
           - `JsonElement Name = "grep"`
 
@@ -23686,7 +23988,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsGrepToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23706,7 +24008,7 @@ Create Agent
 
           Configuration override for the web_fetch tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsWebFetchToolConfigParamsType Type`
 
           - `JsonElement Name = "web_fetch"`
 
@@ -23730,7 +24032,7 @@ Create Agent
 
             format: int32
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23846,7 +24148,7 @@ Create Agent
 
           Configuration override for the web_search tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsWebSearchToolConfigParamsType Type`
 
           - `JsonElement Name = "web_search"`
 
@@ -23864,7 +24166,7 @@ Create Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23920,7 +24222,7 @@ Create Agent
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `PermissionPolicy? PermissionPolicy`
+        - `BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicy? PermissionPolicy`
 
           Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -23962,7 +24264,7 @@ Create Agent
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `PermissionPolicy? PermissionPolicy`
+        - `BetaManagedAgentsMcpToolConfigParamsPermissionPolicy? PermissionPolicy`
 
           Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -23986,7 +24288,7 @@ Create Agent
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `PermissionPolicy? PermissionPolicy`
+        - `BetaManagedAgentsMcpToolsetDefaultConfigParamsPermissionPolicy? PermissionPolicy`
 
           Default permission policy for tools from this server.
 
@@ -24518,7 +24820,7 @@ Create Agent
 
   - `required string? System`
 
-  - `required IReadOnlyList<Tool> Tools`
+  - `required IReadOnlyList<BetaManagedAgentsAgentTool> Tools`
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -24536,7 +24838,7 @@ Create Agent
 
           - `JsonElement Name = "bash"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -24568,7 +24870,7 @@ Create Agent
 
           - `JsonElement Name = "edit"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -24594,7 +24896,7 @@ Create Agent
 
           - `JsonElement Name = "read"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -24620,7 +24922,7 @@ Create Agent
 
           - `JsonElement Name = "write"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -24646,7 +24948,7 @@ Create Agent
 
           - `JsonElement Name = "glob"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -24672,7 +24974,7 @@ Create Agent
 
           - `JsonElement Name = "grep"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -24698,7 +25000,7 @@ Create Agent
 
           - `JsonElement Name = "web_fetch"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -24808,7 +25110,7 @@ Create Agent
 
           - `JsonElement Name = "web_search"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -24892,7 +25194,7 @@ Create Agent
 
         - `required string Name`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -24914,7 +25216,7 @@ Create Agent
 
         - `required bool Enabled`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -25010,38 +25312,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "inference_geo": "inference_geo",
     "speed": "standard"
   },
-  "multiagent": {
-    "advisor": {
-      "type": "disabled"
-    },
-    "subagents": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    },
-    "type": "multiagent_20261001",
-    "workflows": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    }
-  },
+  "multiagent": null,
   "name": "My First Agent",
   "skills": [
     {
@@ -25058,16 +25329,7 @@ Console.WriteLine(betaManagedAgentsAgent);
   "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
   "tools": [
     {
-      "configs": [
-        {
-          "enabled": true,
-          "name": "bash",
-          "permission_policy": {
-            "type": "always_allow"
-          },
-          "type": "bash"
-        }
-      ],
+      "configs": [],
       "default_config": {
         "enabled": true,
         "permission_policy": {
@@ -25609,7 +25871,7 @@ List Agents
 
   - `required string? System`
 
-  - `required IReadOnlyList<Tool> Tools`
+  - `required IReadOnlyList<BetaManagedAgentsAgentTool> Tools`
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -25627,7 +25889,7 @@ List Agents
 
           - `JsonElement Name = "bash"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -25659,7 +25921,7 @@ List Agents
 
           - `JsonElement Name = "edit"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -25685,7 +25947,7 @@ List Agents
 
           - `JsonElement Name = "read"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -25711,7 +25973,7 @@ List Agents
 
           - `JsonElement Name = "write"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -25737,7 +25999,7 @@ List Agents
 
           - `JsonElement Name = "glob"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -25763,7 +26025,7 @@ List Agents
 
           - `JsonElement Name = "grep"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -25789,7 +26051,7 @@ List Agents
 
           - `JsonElement Name = "web_fetch"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -25899,7 +26161,7 @@ List Agents
 
           - `JsonElement Name = "web_search"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -25983,7 +26245,7 @@ List Agents
 
         - `required string Name`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -26005,7 +26267,7 @@ List Agents
 
         - `required bool Enabled`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -26101,38 +26363,7 @@ await foreach (var item in page.Paginate())
         "inference_geo": "inference_geo",
         "speed": "standard"
       },
-      "multiagent": {
-        "advisor": {
-          "type": "disabled"
-        },
-        "subagents": {
-          "inline_agents": {
-            "type": "enabled"
-          },
-          "predefined_agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "enabled"
-        },
-        "type": "multiagent_20261001",
-        "workflows": {
-          "inline_agents": {
-            "type": "enabled"
-          },
-          "predefined_agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "enabled"
-        }
-      },
+      "multiagent": null,
       "name": "My First Agent",
       "skills": [
         {
@@ -26149,16 +26380,7 @@ await foreach (var item in page.Paginate())
       "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
       "tools": [
         {
-          "configs": [
-            {
-              "enabled": true,
-              "name": "bash",
-              "permission_policy": {
-                "type": "always_allow"
-              },
-              "type": "bash"
-            }
-          ],
+          "configs": [],
           "default_config": {
             "enabled": true,
             "permission_policy": {
@@ -26687,7 +26909,7 @@ Get Agent
 
   - `required string? System`
 
-  - `required IReadOnlyList<Tool> Tools`
+  - `required IReadOnlyList<BetaManagedAgentsAgentTool> Tools`
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -26705,7 +26927,7 @@ Get Agent
 
           - `JsonElement Name = "bash"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -26737,7 +26959,7 @@ Get Agent
 
           - `JsonElement Name = "edit"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -26763,7 +26985,7 @@ Get Agent
 
           - `JsonElement Name = "read"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -26789,7 +27011,7 @@ Get Agent
 
           - `JsonElement Name = "write"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -26815,7 +27037,7 @@ Get Agent
 
           - `JsonElement Name = "glob"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -26841,7 +27063,7 @@ Get Agent
 
           - `JsonElement Name = "grep"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -26867,7 +27089,7 @@ Get Agent
 
           - `JsonElement Name = "web_fetch"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -26977,7 +27199,7 @@ Get Agent
 
           - `JsonElement Name = "web_search"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -27061,7 +27283,7 @@ Get Agent
 
         - `required string Name`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -27083,7 +27305,7 @@ Get Agent
 
         - `required bool Enabled`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -27178,38 +27400,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "inference_geo": "inference_geo",
     "speed": "standard"
   },
-  "multiagent": {
-    "advisor": {
-      "type": "disabled"
-    },
-    "subagents": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    },
-    "type": "multiagent_20261001",
-    "workflows": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    }
-  },
+  "multiagent": null,
   "name": "My First Agent",
   "skills": [
     {
@@ -27226,16 +27417,7 @@ Console.WriteLine(betaManagedAgentsAgent);
   "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
   "tools": [
     {
-      "configs": [
-        {
-          "enabled": true,
-          "name": "bash",
-          "permission_policy": {
-            "type": "always_allow"
-          },
-          "type": "bash"
-        }
-      ],
+      "configs": [],
       "default_config": {
         "enabled": true,
         "permission_policy": {
@@ -27299,7 +27481,7 @@ Update Agent
 
     Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-  - `Model model`
+  - `AgentUpdateParamsModel model`
 
     Model identifier. Accepts the [model string](../../models/overview.md#latest-models-comparison), e.g. `claude-opus-5-5`, or a `model_config` object for additional configuration control. Omit to preserve. Cannot be cleared.
 
@@ -27463,7 +27645,7 @@ Update Agent
 
           High-performance model for agents and coding
 
-      - `Effort? Effort`
+      - `BetaManagedAgentsModelConfigParamsEffort? Effort`
 
         How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -27525,7 +27707,7 @@ Update Agent
 
         Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
-      - `Speed? Speed`
+      - `BetaManagedAgentsModelConfigParamsSpeed? Speed`
 
         Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -27589,7 +27771,7 @@ Update Agent
 
     maxLength: 100000
 
-  - `IReadOnlyList<Tool>? tools`
+  - `IReadOnlyList<AgentUpdateParamsTool>? tools`
 
     Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 256 tools across all toolsets allowed.
 
@@ -27617,7 +27799,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsBashToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27643,7 +27825,7 @@ Update Agent
 
           Configuration override for the edit tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsEditToolConfigParamsType Type`
 
           - `JsonElement Name = "edit"`
 
@@ -27653,7 +27835,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsEditToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27673,7 +27855,7 @@ Update Agent
 
           Configuration override for the read tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsReadToolConfigParamsType Type`
 
           - `JsonElement Name = "read"`
 
@@ -27683,7 +27865,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsReadToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27703,7 +27885,7 @@ Update Agent
 
           Configuration override for the write tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsWriteToolConfigParamsType Type`
 
           - `JsonElement Name = "write"`
 
@@ -27713,7 +27895,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsWriteToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27733,7 +27915,7 @@ Update Agent
 
           Configuration override for the glob tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsGlobToolConfigParamsType Type`
 
           - `JsonElement Name = "glob"`
 
@@ -27743,7 +27925,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsGlobToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27763,7 +27945,7 @@ Update Agent
 
           Configuration override for the grep tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsGrepToolConfigParamsType Type`
 
           - `JsonElement Name = "grep"`
 
@@ -27773,7 +27955,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsGrepToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27793,7 +27975,7 @@ Update Agent
 
           Configuration override for the web_fetch tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsWebFetchToolConfigParamsType Type`
 
           - `JsonElement Name = "web_fetch"`
 
@@ -27817,7 +27999,7 @@ Update Agent
 
             format: int32
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -27933,7 +28115,7 @@ Update Agent
 
           Configuration override for the web_search tool.
 
-          - `Type Type`
+          - `BetaManagedAgentsWebSearchToolConfigParamsType Type`
 
           - `JsonElement Name = "web_search"`
 
@@ -27951,7 +28133,7 @@ Update Agent
 
             Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-          - `PermissionPolicy? PermissionPolicy`
+          - `BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicy? PermissionPolicy`
 
             Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -28007,7 +28189,7 @@ Update Agent
 
           Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-        - `PermissionPolicy? PermissionPolicy`
+        - `BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicy? PermissionPolicy`
 
           Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -28049,7 +28231,7 @@ Update Agent
 
           Whether this tool is enabled. Overrides the `default_config` setting.
 
-        - `PermissionPolicy? PermissionPolicy`
+        - `BetaManagedAgentsMcpToolConfigParamsPermissionPolicy? PermissionPolicy`
 
           Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -28073,7 +28255,7 @@ Update Agent
 
           Whether tools are enabled by default. Defaults to true if not specified.
 
-        - `PermissionPolicy? PermissionPolicy`
+        - `BetaManagedAgentsMcpToolsetDefaultConfigParamsPermissionPolicy? PermissionPolicy`
 
           Default permission policy for tools from this server.
 
@@ -28611,7 +28793,7 @@ Update Agent
 
   - `required string? System`
 
-  - `required IReadOnlyList<Tool> Tools`
+  - `required IReadOnlyList<BetaManagedAgentsAgentTool> Tools`
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -28629,7 +28811,7 @@ Update Agent
 
           - `JsonElement Name = "bash"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -28661,7 +28843,7 @@ Update Agent
 
           - `JsonElement Name = "edit"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -28687,7 +28869,7 @@ Update Agent
 
           - `JsonElement Name = "read"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -28713,7 +28895,7 @@ Update Agent
 
           - `JsonElement Name = "write"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -28739,7 +28921,7 @@ Update Agent
 
           - `JsonElement Name = "glob"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -28765,7 +28947,7 @@ Update Agent
 
           - `JsonElement Name = "grep"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -28791,7 +28973,7 @@ Update Agent
 
           - `JsonElement Name = "web_fetch"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -28901,7 +29083,7 @@ Update Agent
 
           - `JsonElement Name = "web_search"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -28985,7 +29167,7 @@ Update Agent
 
         - `required string Name`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -29007,7 +29189,7 @@ Update Agent
 
         - `required bool Enabled`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -29102,38 +29284,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "inference_geo": "inference_geo",
     "speed": "standard"
   },
-  "multiagent": {
-    "advisor": {
-      "type": "disabled"
-    },
-    "subagents": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    },
-    "type": "multiagent_20261001",
-    "workflows": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    }
-  },
+  "multiagent": null,
   "name": "My First Agent",
   "skills": [
     {
@@ -29150,16 +29301,7 @@ Console.WriteLine(betaManagedAgentsAgent);
   "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
   "tools": [
     {
-      "configs": [
-        {
-          "enabled": true,
-          "name": "bash",
-          "permission_policy": {
-            "type": "always_allow"
-          },
-          "type": "bash"
-        }
-      ],
+      "configs": [],
       "default_config": {
         "enabled": true,
         "permission_policy": {
@@ -29679,7 +29821,7 @@ Archive Agent
 
   - `required string? System`
 
-  - `required IReadOnlyList<Tool> Tools`
+  - `required IReadOnlyList<BetaManagedAgentsAgentTool> Tools`
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -29697,7 +29839,7 @@ Archive Agent
 
           - `JsonElement Name = "bash"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -29729,7 +29871,7 @@ Archive Agent
 
           - `JsonElement Name = "edit"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -29755,7 +29897,7 @@ Archive Agent
 
           - `JsonElement Name = "read"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -29781,7 +29923,7 @@ Archive Agent
 
           - `JsonElement Name = "write"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -29807,7 +29949,7 @@ Archive Agent
 
           - `JsonElement Name = "glob"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -29833,7 +29975,7 @@ Archive Agent
 
           - `JsonElement Name = "grep"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -29859,7 +30001,7 @@ Archive Agent
 
           - `JsonElement Name = "web_fetch"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -29969,7 +30111,7 @@ Archive Agent
 
           - `JsonElement Name = "web_search"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -30053,7 +30195,7 @@ Archive Agent
 
         - `required string Name`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -30075,7 +30217,7 @@ Archive Agent
 
         - `required bool Enabled`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -30170,38 +30312,7 @@ Console.WriteLine(betaManagedAgentsAgent);
     "inference_geo": "inference_geo",
     "speed": "standard"
   },
-  "multiagent": {
-    "advisor": {
-      "type": "disabled"
-    },
-    "subagents": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    },
-    "type": "multiagent_20261001",
-    "workflows": {
-      "inline_agents": {
-        "type": "enabled"
-      },
-      "predefined_agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "enabled"
-    }
-  },
+  "multiagent": null,
   "name": "My First Agent",
   "skills": [
     {
@@ -30218,16 +30329,7 @@ Console.WriteLine(betaManagedAgentsAgent);
   "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
   "tools": [
     {
-      "configs": [
-        {
-          "enabled": true,
-          "name": "bash",
-          "permission_policy": {
-            "type": "always_allow"
-          },
-          "type": "bash"
-        }
-      ],
+      "configs": [],
       "default_config": {
         "enabled": true,
         "permission_policy": {
@@ -30759,7 +30861,7 @@ List Agent Versions
 
   - `required string? System`
 
-  - `required IReadOnlyList<Tool> Tools`
+  - `required IReadOnlyList<BetaManagedAgentsAgentTool> Tools`
 
     - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -30777,7 +30879,7 @@ List Agent Versions
 
           - `JsonElement Name = "bash"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -30809,7 +30911,7 @@ List Agent Versions
 
           - `JsonElement Name = "edit"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -30835,7 +30937,7 @@ List Agent Versions
 
           - `JsonElement Name = "read"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -30861,7 +30963,7 @@ List Agent Versions
 
           - `JsonElement Name = "write"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -30887,7 +30989,7 @@ List Agent Versions
 
           - `JsonElement Name = "glob"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -30913,7 +31015,7 @@ List Agent Versions
 
           - `JsonElement Name = "grep"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -30939,7 +31041,7 @@ List Agent Versions
 
           - `JsonElement Name = "web_fetch"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -31049,7 +31151,7 @@ List Agent Versions
 
           - `JsonElement Name = "web_search"`
 
-          - `required PermissionPolicy PermissionPolicy`
+          - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
             Permission policy for tool execution.
 
@@ -31133,7 +31235,7 @@ List Agent Versions
 
         - `required string Name`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -31155,7 +31257,7 @@ List Agent Versions
 
         - `required bool Enabled`
 
-        - `required PermissionPolicy PermissionPolicy`
+        - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
           Permission policy for tool execution.
 
@@ -31254,38 +31356,7 @@ await foreach (var item in page.Paginate())
         "inference_geo": "inference_geo",
         "speed": "standard"
       },
-      "multiagent": {
-        "advisor": {
-          "type": "disabled"
-        },
-        "subagents": {
-          "inline_agents": {
-            "type": "enabled"
-          },
-          "predefined_agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "enabled"
-        },
-        "type": "multiagent_20261001",
-        "workflows": {
-          "inline_agents": {
-            "type": "enabled"
-          },
-          "predefined_agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "enabled"
-        }
-      },
+      "multiagent": null,
       "name": "My First Agent",
       "skills": [
         {
@@ -31302,16 +31373,7 @@ await foreach (var item in page.Paginate())
       "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
       "tools": [
         {
-          "configs": [
-            {
-              "enabled": true,
-              "name": "bash",
-              "permission_policy": {
-                "type": "always_allow"
-              },
-              "type": "bash"
-            }
-          ],
+          "configs": [],
           "default_config": {
             "enabled": true,
             "permission_policy": {
@@ -31365,7 +31427,7 @@ Create a new environment with the specified configuration.
 
         Environment type
 
-      - `Networking? Networking`
+      - `BetaCloudConfigParamsNetworking? Networking`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -31404,7 +31466,7 @@ Create a new environment with the specified configuration.
 
         Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
-        - `Type Type`
+        - `BetaPackagesParamsType Type`
 
           Package configuration type
 
@@ -31618,7 +31680,7 @@ Create a new environment with the specified configuration.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -31722,13 +31784,29 @@ Create a new environment with the specified configuration.
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
     - `Organization("organization")`
 
     - `Account("account")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicBetaEnvironmentCreateDisabledException` (HTTP status 403, error code `environment_create_disabled`)
+
+  Anthropic has turned off creating environments for this organization. Existing environments still work.
 
 #### Example
 
@@ -31759,21 +31837,11 @@ Console.WriteLine(betaEnvironment);
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -31978,7 +32046,7 @@ List environments with pagination support.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -32082,13 +32150,25 @@ List environments with pagination support.
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
     - `Organization("organization")`
 
     - `Account("account")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -32123,21 +32203,11 @@ await foreach (var item in page.Paginate())
           "type": "limited"
         },
         "packages": {
-          "apt": [
-            "string"
-          ],
-          "cargo": [
-            "string"
-          ],
-          "gem": [
-            "string"
-          ],
-          "go": [
-            "string"
-          ],
-          "npm": [
-            "string"
-          ],
+          "apt": [],
+          "cargo": [],
+          "gem": [],
+          "go": [],
+          "npm": [],
           "pip": [
             "pandas",
             "numpy"
@@ -32333,7 +32403,7 @@ Retrieve a specific environment by ID.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -32437,13 +32507,25 @@ Retrieve a specific environment by ID.
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
     - `Organization("organization")`
 
     - `Account("account")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -32477,21 +32559,11 @@ Console.WriteLine(betaEnvironment);
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -32524,7 +32596,7 @@ Update an existing environment's configuration.
 
   - `required string environmentID` (path parameter)
 
-  - `Config? config`
+  - `EnvironmentUpdateParamsConfig? config`
 
     Updated environment configuration
 
@@ -32539,7 +32611,7 @@ Update an existing environment's configuration.
 
         Environment type
 
-      - `Networking? Networking`
+      - `BetaCloudConfigParamsNetworking? Networking`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -32578,7 +32650,7 @@ Update an existing environment's configuration.
 
         Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
-        - `Type Type`
+        - `BetaPackagesParamsType Type`
 
           Package configuration type
 
@@ -32630,7 +32702,7 @@ Update an existing environment's configuration.
 
     minLength: 1, maxLength: 256
 
-  - `Scope? scope`
+  - `EnvironmentUpdateParamsScope? scope`
 
     The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
@@ -32798,7 +32870,7 @@ Update an existing environment's configuration.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -32902,13 +32974,37 @@ Update an existing environment's configuration.
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
     - `Organization("organization")`
 
     - `Account("account")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicBetaEnvironmentArchivedException` (HTTP status 400, error code `environment_archived`)
+
+  The environment is archived, so it cannot be updated.
+
+- `AnthropicBetaInvalidConfigTypeChangeException` (HTTP status 400, error code `invalid_config_type_change`)
+
+  `config.type` differs from the environment's stored type, which cannot change after creation.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicBetaEnvironmentUpdateDisabledException` (HTTP status 403, error code `environment_update_disabled`)
+
+  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
 
 #### Example
 
@@ -32942,21 +33038,11 @@ Console.WriteLine(betaEnvironment);
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -33144,6 +33230,18 @@ Delete an environment by ID. Returns a confirmation of the deletion.
   - `required string ID`
 
     Environment identifier
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -33344,7 +33442,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -33448,13 +33546,25 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
     - `Organization("organization")`
 
     - `Account("account")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -33488,21 +33598,11 @@ Console.WriteLine(betaEnvironment);
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -33762,6 +33862,18 @@ Retrieve detailed information about a specific work item.
   - `required string? StoppedAt`
 
     RFC 3339 timestamp when work execution stopped
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -34550,7 +34662,7 @@ Record a heartbeat for a work item to maintain the lease.
 
     Whether the heartbeat succeeded in extending the lease
 
-  - `required State State`
+  - `required BetaSelfHostedWorkHeartbeatResponseState State`
 
     Current state of the work item (active/stopping/stopped)
 
@@ -34567,6 +34679,14 @@ Record a heartbeat for a work item to maintain the lease.
   - `required long TtlSeconds`
 
     Effective TTL applied to the lease
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaHeartbeatPreconditionFailedException` (HTTP status 412, error code `heartbeat_precondition_failed`)
+
+  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
 
 #### Example
 
@@ -34840,6 +34960,18 @@ Stop a work item, initiating graceful or forced shutdown.
   - `required string? StoppedAt`
 
     RFC 3339 timestamp when work execution stopped
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -35417,6 +35549,22 @@ Update work item metadata with merge semantics.
 
     RFC 3339 timestamp when work execution stopped
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicBetaInvalidMetadataException` (HTTP status 400, error code `invalid_metadata`)
+
+  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```csharp
@@ -35642,6 +35790,18 @@ Get statistics about the work queue for an environment.
   - `required long? WorkersPolling`
 
     Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -35903,7 +36063,7 @@ Create Session
 
               High-performance model for agents and coding
 
-          - `Effort? Effort`
+          - `BetaManagedAgentsModelConfigParamsEffort? Effort`
 
             How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -35965,7 +36125,7 @@ Create Session
 
             Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
 
-          - `Speed? Speed`
+          - `BetaManagedAgentsModelConfigParamsSpeed? Speed`
 
             Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Defaults to `standard`. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -36047,7 +36207,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy? PermissionPolicy`
+              - `BetaManagedAgentsBashToolConfigParamsPermissionPolicy? PermissionPolicy`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -36073,7 +36233,7 @@ Create Session
 
               Configuration override for the edit tool.
 
-              - `Type Type`
+              - `BetaManagedAgentsEditToolConfigParamsType Type`
 
               - `JsonElement Name = "edit"`
 
@@ -36083,7 +36243,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy? PermissionPolicy`
+              - `BetaManagedAgentsEditToolConfigParamsPermissionPolicy? PermissionPolicy`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -36103,7 +36263,7 @@ Create Session
 
               Configuration override for the read tool.
 
-              - `Type Type`
+              - `BetaManagedAgentsReadToolConfigParamsType Type`
 
               - `JsonElement Name = "read"`
 
@@ -36113,7 +36273,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy? PermissionPolicy`
+              - `BetaManagedAgentsReadToolConfigParamsPermissionPolicy? PermissionPolicy`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -36133,7 +36293,7 @@ Create Session
 
               Configuration override for the write tool.
 
-              - `Type Type`
+              - `BetaManagedAgentsWriteToolConfigParamsType Type`
 
               - `JsonElement Name = "write"`
 
@@ -36143,7 +36303,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy? PermissionPolicy`
+              - `BetaManagedAgentsWriteToolConfigParamsPermissionPolicy? PermissionPolicy`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -36163,7 +36323,7 @@ Create Session
 
               Configuration override for the glob tool.
 
-              - `Type Type`
+              - `BetaManagedAgentsGlobToolConfigParamsType Type`
 
               - `JsonElement Name = "glob"`
 
@@ -36173,7 +36333,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy? PermissionPolicy`
+              - `BetaManagedAgentsGlobToolConfigParamsPermissionPolicy? PermissionPolicy`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -36193,7 +36353,7 @@ Create Session
 
               Configuration override for the grep tool.
 
-              - `Type Type`
+              - `BetaManagedAgentsGrepToolConfigParamsType Type`
 
               - `JsonElement Name = "grep"`
 
@@ -36203,7 +36363,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy? PermissionPolicy`
+              - `BetaManagedAgentsGrepToolConfigParamsPermissionPolicy? PermissionPolicy`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -36223,7 +36383,7 @@ Create Session
 
               Configuration override for the web_fetch tool.
 
-              - `Type Type`
+              - `BetaManagedAgentsWebFetchToolConfigParamsType Type`
 
               - `JsonElement Name = "web_fetch"`
 
@@ -36247,7 +36407,7 @@ Create Session
 
                 format: int32
 
-              - `PermissionPolicy? PermissionPolicy`
+              - `BetaManagedAgentsWebFetchToolConfigParamsPermissionPolicy? PermissionPolicy`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -36363,7 +36523,7 @@ Create Session
 
               Configuration override for the web_search tool.
 
-              - `Type Type`
+              - `BetaManagedAgentsWebSearchToolConfigParamsType Type`
 
               - `JsonElement Name = "web_search"`
 
@@ -36381,7 +36541,7 @@ Create Session
 
                 Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-              - `PermissionPolicy? PermissionPolicy`
+              - `BetaManagedAgentsWebSearchToolConfigParamsPermissionPolicy? PermissionPolicy`
 
                 Permission policy for this tool. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -36437,7 +36597,7 @@ Create Session
 
               Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-            - `PermissionPolicy? PermissionPolicy`
+            - `BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicy? PermissionPolicy`
 
               Default permission policy for tools. Controls whether tool calls are auto-approved or require confirmation.
 
@@ -36479,7 +36639,7 @@ Create Session
 
               Whether this tool is enabled. Overrides the `default_config` setting.
 
-            - `PermissionPolicy? PermissionPolicy`
+            - `BetaManagedAgentsMcpToolConfigParamsPermissionPolicy? PermissionPolicy`
 
               Permission policy for this tool. Overrides the `default_config` setting.
 
@@ -36503,7 +36663,7 @@ Create Session
 
               Whether tools are enabled by default. Defaults to true if not specified.
 
-            - `PermissionPolicy? PermissionPolicy`
+            - `BetaManagedAgentsMcpToolsetDefaultConfigParamsPermissionPolicy? PermissionPolicy`
 
               Default permission policy for tools from this server.
 
@@ -36573,7 +36733,7 @@ Create Session
 
       - `JsonElement Type = "user.message"`
 
-      - `required IReadOnlyList<Content> Content`
+      - `required IReadOnlyList<BetaManagedAgentsUserMessageEventParamsContent> Content`
 
         Array of content blocks for the user message.
 
@@ -36595,7 +36755,7 @@ Create Session
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -36733,7 +36893,7 @@ Create Session
 
         What the agent should produce. This is the task specification.
 
-      - `required Rubric Rubric`
+      - `required BetaManagedAgentsUserDefineOutcomeEventParamsRubric Rubric`
 
         How to grade the outcome. Text or file reference.
 
@@ -37203,7 +37363,7 @@ Create Session
 
         - `JsonElement Type = "coordinator"`
 
-        - `required IReadOnlyList<Agent> Agents`
+        - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -37235,7 +37395,7 @@ Create Session
 
             - `required string Name`
 
-            - `required IReadOnlyList<Skill> Skills`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `class BetaManagedAgentsAnthropicSkill`
 
@@ -37259,7 +37419,7 @@ Create Session
 
             - `required string? System`
 
-            - `required IReadOnlyList<Tool> Tools`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -37277,7 +37437,7 @@ Create Session
 
                     - `JsonElement Name = "bash"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -37309,7 +37469,7 @@ Create Session
 
                     - `JsonElement Name = "edit"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -37335,7 +37495,7 @@ Create Session
 
                     - `JsonElement Name = "read"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -37361,7 +37521,7 @@ Create Session
 
                     - `JsonElement Name = "write"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -37387,7 +37547,7 @@ Create Session
 
                     - `JsonElement Name = "glob"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -37413,7 +37573,7 @@ Create Session
 
                     - `JsonElement Name = "grep"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -37439,7 +37599,7 @@ Create Session
 
                     - `JsonElement Name = "web_fetch"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -37549,7 +37709,7 @@ Create Session
 
                     - `JsonElement Name = "web_search"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -37633,7 +37793,7 @@ Create Session
 
                   - `required string Name`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -37655,7 +37815,7 @@ Create Session
 
                   - `required bool Enabled`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -37781,11 +37941,11 @@ Create Session
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -37833,11 +37993,11 @@ Create Session
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -37863,7 +38023,7 @@ Create Session
 
     - `required string? System`
 
-    - `required IReadOnlyList<Tool> Tools`
+    - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
       - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -38069,7 +38229,7 @@ Create Session
 
       format: double
 
-  - `required Status Status`
+  - `required BetaManagedAgentsSessionStatus Status`
 
     - `Rescheduling("rescheduling")`
 
@@ -38210,65 +38370,7 @@ Console.WriteLine(betaManagedAgentsSession);
       "inference_geo": "inference_geo",
       "speed": "standard"
     },
-    "multiagent": {
-      "agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "description": "A focused research subagent.",
-          "execution_identity": {
-            "type": "service_account"
-          },
-          "mcp_servers": [
-            {
-              "name": "example-mcp",
-              "type": "url",
-              "url": "https://example-server.modelcontextprotocol.io/sse"
-            }
-          ],
-          "model": {
-            "id": "claude-opus-5-5",
-            "effort": {
-              "type": "low"
-            },
-            "inference_geo": "inference_geo",
-            "speed": "standard"
-          },
-          "name": "Researcher",
-          "skills": [
-            {
-              "skill_id": "xlsx",
-              "type": "anthropic",
-              "version": "1"
-            }
-          ],
-          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-          "tools": [
-            {
-              "configs": [
-                {
-                  "enabled": true,
-                  "name": "bash",
-                  "permission_policy": {
-                    "type": "always_allow"
-                  },
-                  "type": "bash"
-                }
-              ],
-              "default_config": {
-                "enabled": true,
-                "permission_policy": {
-                  "type": "always_ask"
-                }
-              },
-              "type": "agent_toolset_20260401"
-            }
-          ],
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "coordinator"
-    },
+    "multiagent": null,
     "name": "My First Agent",
     "skills": [
       {
@@ -38285,16 +38387,7 @@ Console.WriteLine(betaManagedAgentsSession);
     "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -38308,13 +38401,7 @@ Console.WriteLine(betaManagedAgentsSession);
     "version": 1
   },
   "archived_at": null,
-  "budget": {
-    "max_list_cost": {
-      "amount": "2500",
-      "currency": "USD"
-    },
-    "type": "limit"
-  },
+  "budget": null,
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -38808,7 +38895,7 @@ List Sessions
 
         - `JsonElement Type = "coordinator"`
 
-        - `required IReadOnlyList<Agent> Agents`
+        - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -38840,7 +38927,7 @@ List Sessions
 
             - `required string Name`
 
-            - `required IReadOnlyList<Skill> Skills`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `class BetaManagedAgentsAnthropicSkill`
 
@@ -38864,7 +38951,7 @@ List Sessions
 
             - `required string? System`
 
-            - `required IReadOnlyList<Tool> Tools`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -38882,7 +38969,7 @@ List Sessions
 
                     - `JsonElement Name = "bash"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -38914,7 +39001,7 @@ List Sessions
 
                     - `JsonElement Name = "edit"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -38940,7 +39027,7 @@ List Sessions
 
                     - `JsonElement Name = "read"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -38966,7 +39053,7 @@ List Sessions
 
                     - `JsonElement Name = "write"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -38992,7 +39079,7 @@ List Sessions
 
                     - `JsonElement Name = "glob"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -39018,7 +39105,7 @@ List Sessions
 
                     - `JsonElement Name = "grep"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -39044,7 +39131,7 @@ List Sessions
 
                     - `JsonElement Name = "web_fetch"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -39154,7 +39241,7 @@ List Sessions
 
                     - `JsonElement Name = "web_search"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -39238,7 +39325,7 @@ List Sessions
 
                   - `required string Name`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -39260,7 +39347,7 @@ List Sessions
 
                   - `required bool Enabled`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -39386,11 +39473,11 @@ List Sessions
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -39438,11 +39525,11 @@ List Sessions
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -39468,7 +39555,7 @@ List Sessions
 
     - `required string? System`
 
-    - `required IReadOnlyList<Tool> Tools`
+    - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
       - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -39674,7 +39761,7 @@ List Sessions
 
       format: double
 
-  - `required Status Status`
+  - `required BetaManagedAgentsSessionStatus Status`
 
     - `Rescheduling("rescheduling")`
 
@@ -39815,65 +39902,7 @@ await foreach (var item in page.Paginate())
           "inference_geo": "inference_geo",
           "speed": "standard"
         },
-        "multiagent": {
-          "agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "description": "A focused research subagent.",
-              "execution_identity": {
-                "type": "service_account"
-              },
-              "mcp_servers": [
-                {
-                  "name": "example-mcp",
-                  "type": "url",
-                  "url": "https://example-server.modelcontextprotocol.io/sse"
-                }
-              ],
-              "model": {
-                "id": "claude-opus-5-5",
-                "effort": {
-                  "type": "low"
-                },
-                "inference_geo": "inference_geo",
-                "speed": "standard"
-              },
-              "name": "Researcher",
-              "skills": [
-                {
-                  "skill_id": "xlsx",
-                  "type": "anthropic",
-                  "version": "1"
-                }
-              ],
-              "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-              "tools": [
-                {
-                  "configs": [
-                    {
-                      "enabled": true,
-                      "name": "bash",
-                      "permission_policy": {
-                        "type": "always_allow"
-                      },
-                      "type": "bash"
-                    }
-                  ],
-                  "default_config": {
-                    "enabled": true,
-                    "permission_policy": {
-                      "type": "always_ask"
-                    }
-                  },
-                  "type": "agent_toolset_20260401"
-                }
-              ],
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "coordinator"
-        },
+        "multiagent": null,
         "name": "My First Agent",
         "skills": [
           {
@@ -39890,16 +39919,7 @@ await foreach (var item in page.Paginate())
         "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
         "tools": [
           {
-            "configs": [
-              {
-                "enabled": true,
-                "name": "bash",
-                "permission_policy": {
-                  "type": "always_allow"
-                },
-                "type": "bash"
-              }
-            ],
+            "configs": [],
             "default_config": {
               "enabled": true,
               "permission_policy": {
@@ -39913,13 +39933,7 @@ await foreach (var item in page.Paginate())
         "version": 1
       },
       "archived_at": null,
-      "budget": {
-        "max_list_cost": {
-          "amount": "2500",
-          "currency": "USD"
-        },
-        "type": "limit"
-      },
+      "budget": null,
       "created_at": "2026-03-15T10:00:00Z",
       "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
       "metadata": {},
@@ -40335,7 +40349,7 @@ Get Session
 
         - `JsonElement Type = "coordinator"`
 
-        - `required IReadOnlyList<Agent> Agents`
+        - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -40367,7 +40381,7 @@ Get Session
 
             - `required string Name`
 
-            - `required IReadOnlyList<Skill> Skills`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `class BetaManagedAgentsAnthropicSkill`
 
@@ -40391,7 +40405,7 @@ Get Session
 
             - `required string? System`
 
-            - `required IReadOnlyList<Tool> Tools`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -40409,7 +40423,7 @@ Get Session
 
                     - `JsonElement Name = "bash"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -40441,7 +40455,7 @@ Get Session
 
                     - `JsonElement Name = "edit"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -40467,7 +40481,7 @@ Get Session
 
                     - `JsonElement Name = "read"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -40493,7 +40507,7 @@ Get Session
 
                     - `JsonElement Name = "write"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -40519,7 +40533,7 @@ Get Session
 
                     - `JsonElement Name = "glob"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -40545,7 +40559,7 @@ Get Session
 
                     - `JsonElement Name = "grep"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -40571,7 +40585,7 @@ Get Session
 
                     - `JsonElement Name = "web_fetch"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -40681,7 +40695,7 @@ Get Session
 
                     - `JsonElement Name = "web_search"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -40765,7 +40779,7 @@ Get Session
 
                   - `required string Name`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -40787,7 +40801,7 @@ Get Session
 
                   - `required bool Enabled`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -40913,11 +40927,11 @@ Get Session
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -40965,11 +40979,11 @@ Get Session
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -40995,7 +41009,7 @@ Get Session
 
     - `required string? System`
 
-    - `required IReadOnlyList<Tool> Tools`
+    - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
       - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -41201,7 +41215,7 @@ Get Session
 
       format: double
 
-  - `required Status Status`
+  - `required BetaManagedAgentsSessionStatus Status`
 
     - `Rescheduling("rescheduling")`
 
@@ -41341,65 +41355,7 @@ Console.WriteLine(betaManagedAgentsSession);
       "inference_geo": "inference_geo",
       "speed": "standard"
     },
-    "multiagent": {
-      "agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "description": "A focused research subagent.",
-          "execution_identity": {
-            "type": "service_account"
-          },
-          "mcp_servers": [
-            {
-              "name": "example-mcp",
-              "type": "url",
-              "url": "https://example-server.modelcontextprotocol.io/sse"
-            }
-          ],
-          "model": {
-            "id": "claude-opus-5-5",
-            "effort": {
-              "type": "low"
-            },
-            "inference_geo": "inference_geo",
-            "speed": "standard"
-          },
-          "name": "Researcher",
-          "skills": [
-            {
-              "skill_id": "xlsx",
-              "type": "anthropic",
-              "version": "1"
-            }
-          ],
-          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-          "tools": [
-            {
-              "configs": [
-                {
-                  "enabled": true,
-                  "name": "bash",
-                  "permission_policy": {
-                    "type": "always_allow"
-                  },
-                  "type": "bash"
-                }
-              ],
-              "default_config": {
-                "enabled": true,
-                "permission_policy": {
-                  "type": "always_ask"
-                }
-              },
-              "type": "agent_toolset_20260401"
-            }
-          ],
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "coordinator"
-    },
+    "multiagent": null,
     "name": "My First Agent",
     "skills": [
       {
@@ -41416,16 +41372,7 @@ Console.WriteLine(betaManagedAgentsSession);
     "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -41439,13 +41386,7 @@ Console.WriteLine(betaManagedAgentsSession);
     "version": 1
   },
   "archived_at": null,
-  "budget": {
-    "max_list_cost": {
-      "amount": "2500",
-      "currency": "USD"
-    },
-    "type": "limit"
-  },
+  "budget": null,
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -41879,7 +41820,7 @@ Update Session
 
         - `JsonElement Type = "coordinator"`
 
-        - `required IReadOnlyList<Agent> Agents`
+        - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -41911,7 +41852,7 @@ Update Session
 
             - `required string Name`
 
-            - `required IReadOnlyList<Skill> Skills`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `class BetaManagedAgentsAnthropicSkill`
 
@@ -41935,7 +41876,7 @@ Update Session
 
             - `required string? System`
 
-            - `required IReadOnlyList<Tool> Tools`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -41953,7 +41894,7 @@ Update Session
 
                     - `JsonElement Name = "bash"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -41985,7 +41926,7 @@ Update Session
 
                     - `JsonElement Name = "edit"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -42011,7 +41952,7 @@ Update Session
 
                     - `JsonElement Name = "read"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -42037,7 +41978,7 @@ Update Session
 
                     - `JsonElement Name = "write"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -42063,7 +42004,7 @@ Update Session
 
                     - `JsonElement Name = "glob"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -42089,7 +42030,7 @@ Update Session
 
                     - `JsonElement Name = "grep"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -42115,7 +42056,7 @@ Update Session
 
                     - `JsonElement Name = "web_fetch"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -42225,7 +42166,7 @@ Update Session
 
                     - `JsonElement Name = "web_search"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -42309,7 +42250,7 @@ Update Session
 
                   - `required string Name`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -42331,7 +42272,7 @@ Update Session
 
                   - `required bool Enabled`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -42457,11 +42398,11 @@ Update Session
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -42509,11 +42450,11 @@ Update Session
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -42539,7 +42480,7 @@ Update Session
 
     - `required string? System`
 
-    - `required IReadOnlyList<Tool> Tools`
+    - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
       - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -42745,7 +42686,7 @@ Update Session
 
       format: double
 
-  - `required Status Status`
+  - `required BetaManagedAgentsSessionStatus Status`
 
     - `Rescheduling("rescheduling")`
 
@@ -42885,65 +42826,7 @@ Console.WriteLine(betaManagedAgentsSession);
       "inference_geo": "inference_geo",
       "speed": "standard"
     },
-    "multiagent": {
-      "agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "description": "A focused research subagent.",
-          "execution_identity": {
-            "type": "service_account"
-          },
-          "mcp_servers": [
-            {
-              "name": "example-mcp",
-              "type": "url",
-              "url": "https://example-server.modelcontextprotocol.io/sse"
-            }
-          ],
-          "model": {
-            "id": "claude-opus-5-5",
-            "effort": {
-              "type": "low"
-            },
-            "inference_geo": "inference_geo",
-            "speed": "standard"
-          },
-          "name": "Researcher",
-          "skills": [
-            {
-              "skill_id": "xlsx",
-              "type": "anthropic",
-              "version": "1"
-            }
-          ],
-          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-          "tools": [
-            {
-              "configs": [
-                {
-                  "enabled": true,
-                  "name": "bash",
-                  "permission_policy": {
-                    "type": "always_allow"
-                  },
-                  "type": "bash"
-                }
-              ],
-              "default_config": {
-                "enabled": true,
-                "permission_policy": {
-                  "type": "always_ask"
-                }
-              },
-              "type": "agent_toolset_20260401"
-            }
-          ],
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "coordinator"
-    },
+    "multiagent": null,
     "name": "My First Agent",
     "skills": [
       {
@@ -42960,16 +42843,7 @@ Console.WriteLine(betaManagedAgentsSession);
     "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -42983,13 +42857,7 @@ Console.WriteLine(betaManagedAgentsSession);
     "version": 1
   },
   "archived_at": null,
-  "budget": {
-    "max_list_cost": {
-      "amount": "2500",
-      "currency": "USD"
-    },
-    "type": "limit"
-  },
+  "budget": null,
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -43592,7 +43460,7 @@ Archive Session
 
         - `JsonElement Type = "coordinator"`
 
-        - `required IReadOnlyList<Agent> Agents`
+        - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
           Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -43624,7 +43492,7 @@ Archive Session
 
             - `required string Name`
 
-            - `required IReadOnlyList<Skill> Skills`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `class BetaManagedAgentsAnthropicSkill`
 
@@ -43648,7 +43516,7 @@ Archive Session
 
             - `required string? System`
 
-            - `required IReadOnlyList<Tool> Tools`
+            - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -43666,7 +43534,7 @@ Archive Session
 
                     - `JsonElement Name = "bash"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -43698,7 +43566,7 @@ Archive Session
 
                     - `JsonElement Name = "edit"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -43724,7 +43592,7 @@ Archive Session
 
                     - `JsonElement Name = "read"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -43750,7 +43618,7 @@ Archive Session
 
                     - `JsonElement Name = "write"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -43776,7 +43644,7 @@ Archive Session
 
                     - `JsonElement Name = "glob"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -43802,7 +43670,7 @@ Archive Session
 
                     - `JsonElement Name = "grep"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -43828,7 +43696,7 @@ Archive Session
 
                     - `JsonElement Name = "web_fetch"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -43938,7 +43806,7 @@ Archive Session
 
                     - `JsonElement Name = "web_search"`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -44022,7 +43890,7 @@ Archive Session
 
                   - `required string Name`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -44044,7 +43912,7 @@ Archive Session
 
                   - `required bool Enabled`
 
-                  - `required PermissionPolicy PermissionPolicy`
+                  - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                     Permission policy for tool execution.
 
@@ -44170,11 +44038,11 @@ Archive Session
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -44222,11 +44090,11 @@ Archive Session
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
               - `required int Version`
 
@@ -44252,7 +44120,7 @@ Archive Session
 
     - `required string? System`
 
-    - `required IReadOnlyList<Tool> Tools`
+    - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
       - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -44458,7 +44326,7 @@ Archive Session
 
       format: double
 
-  - `required Status Status`
+  - `required BetaManagedAgentsSessionStatus Status`
 
     - `Rescheduling("rescheduling")`
 
@@ -44598,65 +44466,7 @@ Console.WriteLine(betaManagedAgentsSession);
       "inference_geo": "inference_geo",
       "speed": "standard"
     },
-    "multiagent": {
-      "agents": [
-        {
-          "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-          "description": "A focused research subagent.",
-          "execution_identity": {
-            "type": "service_account"
-          },
-          "mcp_servers": [
-            {
-              "name": "example-mcp",
-              "type": "url",
-              "url": "https://example-server.modelcontextprotocol.io/sse"
-            }
-          ],
-          "model": {
-            "id": "claude-opus-5-5",
-            "effort": {
-              "type": "low"
-            },
-            "inference_geo": "inference_geo",
-            "speed": "standard"
-          },
-          "name": "Researcher",
-          "skills": [
-            {
-              "skill_id": "xlsx",
-              "type": "anthropic",
-              "version": "1"
-            }
-          ],
-          "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
-          "tools": [
-            {
-              "configs": [
-                {
-                  "enabled": true,
-                  "name": "bash",
-                  "permission_policy": {
-                    "type": "always_allow"
-                  },
-                  "type": "bash"
-                }
-              ],
-              "default_config": {
-                "enabled": true,
-                "permission_policy": {
-                  "type": "always_ask"
-                }
-              },
-              "type": "agent_toolset_20260401"
-            }
-          ],
-          "type": "agent",
-          "version": 1
-        }
-      ],
-      "type": "coordinator"
-    },
+    "multiagent": null,
     "name": "My First Agent",
     "skills": [
       {
@@ -44673,16 +44483,7 @@ Console.WriteLine(betaManagedAgentsSession);
     "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -44696,13 +44497,7 @@ Console.WriteLine(betaManagedAgentsSession);
     "version": 1
   },
   "archived_at": null,
-  "budget": {
-    "max_list_cost": {
-      "amount": "2500",
-      "currency": "USD"
-    },
-    "type": "limit"
-  },
+  "budget": null,
   "created_at": "2026-03-15T10:00:00Z",
   "environment_id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
   "metadata": {},
@@ -45072,7 +44867,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsUserMessageEventContent> Content`
 
       Array of content blocks comprising the user message.
 
@@ -45094,7 +44889,7 @@ List Events
 
         - `JsonElement Type = "image"`
 
-        - `required Source Source`
+        - `required BetaManagedAgentsImageBlockSource Source`
 
           The source of the image data.
 
@@ -45300,7 +45095,7 @@ List Events
 
       The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `IReadOnlyList<Content> Content`
+    - `IReadOnlyList<BetaManagedAgentsUserCustomToolResultEventContent> Content`
 
       The result content returned by the tool.
 
@@ -45406,7 +45201,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentMessageEventContent> Content`
 
       Array of text blocks comprising the agent response.
 
@@ -45638,7 +45433,7 @@ List Events
 
       The id of the `agent.tool_use` event this result corresponds to.
 
-    - `IReadOnlyList<Content> Content`
+    - `IReadOnlyList<BetaManagedAgentsAgentToolResultEventContent> Content`
 
       The result content returned by the tool.
 
@@ -45672,7 +45467,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentThreadMessageReceivedEventContent> Content`
 
       Message content blocks.
 
@@ -45716,7 +45511,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentThreadMessageSentEventContent> Content`
 
       Message content blocks.
 
@@ -45788,7 +45583,7 @@ List Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsUnknownErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -45820,7 +45615,7 @@ List Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelOverloadedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -45846,7 +45641,7 @@ List Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelRateLimitedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -45872,7 +45667,7 @@ List Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelRequestFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -45902,7 +45697,7 @@ List Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsMcpConnectionFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -45932,7 +45727,7 @@ List Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsMcpAuthenticationFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -45988,7 +45783,7 @@ List Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsCredentialHostUnreachableErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -46018,7 +45813,7 @@ List Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsToolUseLimitReachedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -46044,7 +45839,7 @@ List Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsCompactionLimitReachedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -46074,7 +45869,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryAuthenticationErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -46104,7 +45899,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryForbiddenErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -46134,7 +45929,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryNotFoundErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -46164,7 +45959,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryCheckoutErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -46194,7 +45989,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryCloneErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -46660,7 +46455,7 @@ List Events
 
       Structured information about why the thread stopped. `null` when there is nothing more to report.
 
-    - `required StopReason StopReason`
+    - `required BetaManagedAgentsSessionThreadStatusIdleEventStopReason StopReason`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -46970,7 +46765,7 @@ List Events
 
           - `JsonElement Type = "coordinator"`
 
-          - `required IReadOnlyList<Agent> Agents`
+          - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
             Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -47002,7 +46797,7 @@ List Events
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `class BetaManagedAgentsAnthropicSkill`
 
@@ -47026,7 +46821,7 @@ List Events
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -47044,7 +46839,7 @@ List Events
 
                       - `JsonElement Name = "bash"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -47076,7 +46871,7 @@ List Events
 
                       - `JsonElement Name = "edit"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -47102,7 +46897,7 @@ List Events
 
                       - `JsonElement Name = "read"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -47128,7 +46923,7 @@ List Events
 
                       - `JsonElement Name = "write"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -47154,7 +46949,7 @@ List Events
 
                       - `JsonElement Name = "glob"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -47180,7 +46975,7 @@ List Events
 
                       - `JsonElement Name = "grep"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -47206,7 +47001,7 @@ List Events
 
                       - `JsonElement Name = "web_fetch"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -47316,7 +47111,7 @@ List Events
 
                       - `JsonElement Name = "web_search"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -47400,7 +47195,7 @@ List Events
 
                     - `required string Name`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -47422,7 +47217,7 @@ List Events
 
                     - `required bool Enabled`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -47548,11 +47343,11 @@ List Events
 
                 - `required string Name`
 
-                - `required IReadOnlyList<Skill> Skills`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `required string? System`
 
-                - `required IReadOnlyList<Tool> Tools`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `required int Version`
 
@@ -47600,11 +47395,11 @@ List Events
 
                 - `required string Name`
 
-                - `required IReadOnlyList<Skill> Skills`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `required string? System`
 
-                - `required IReadOnlyList<Tool> Tools`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `required int Version`
 
@@ -47630,7 +47425,7 @@ List Events
 
       - `required string? System`
 
-      - `required IReadOnlyList<Tool> Tools`
+      - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -48114,7 +47909,7 @@ Send Events
 
       - `JsonElement Type = "user.message"`
 
-      - `required IReadOnlyList<Content> Content`
+      - `required IReadOnlyList<BetaManagedAgentsUserMessageEventParamsContent> Content`
 
         Array of content blocks for the user message.
 
@@ -48136,7 +47931,7 @@ Send Events
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -48280,7 +48075,7 @@ Send Events
 
       - `JsonElement Type = "user.tool_confirmation"`
 
-      - `required Result Result`
+      - `required BetaManagedAgentsUserToolConfirmationEventParamsResult Result`
 
         The confirmation result: 'allow' or 'deny'.
 
@@ -48312,7 +48107,7 @@ Send Events
 
         minLength: 1, maxLength: 128
 
-      - `IReadOnlyList<Content> Content`
+      - `IReadOnlyList<BetaManagedAgentsUserCustomToolResultEventParamsContent> Content`
 
         The result content returned by the tool.
 
@@ -48380,7 +48175,7 @@ Send Events
 
         What the agent should produce. This is the task specification.
 
-      - `required Rubric Rubric`
+      - `required BetaManagedAgentsUserDefineOutcomeEventParamsRubric Rubric`
 
         How to grade the outcome. Text or file reference.
 
@@ -48424,7 +48219,7 @@ Send Events
 
         minLength: 1, maxLength: 128
 
-      - `IReadOnlyList<Content> Content`
+      - `IReadOnlyList<BetaManagedAgentsUserToolResultEventParamsContent> Content`
 
         The result content returned by the tool.
 
@@ -48628,7 +48423,7 @@ Send Events
 
         Unique identifier for this event.
 
-      - `required IReadOnlyList<Content> Content`
+      - `required IReadOnlyList<BetaManagedAgentsUserMessageEventContent> Content`
 
         Array of content blocks comprising the user message.
 
@@ -48650,7 +48445,7 @@ Send Events
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -48856,7 +48651,7 @@ Send Events
 
         The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-      - `IReadOnlyList<Content> Content`
+      - `IReadOnlyList<BetaManagedAgentsUserCustomToolResultEventContent> Content`
 
         The result content returned by the tool.
 
@@ -49279,7 +49074,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsUserMessageEventContent> Content`
 
       Array of content blocks comprising the user message.
 
@@ -49301,7 +49096,7 @@ Stream Events
 
         - `JsonElement Type = "image"`
 
-        - `required Source Source`
+        - `required BetaManagedAgentsImageBlockSource Source`
 
           The source of the image data.
 
@@ -49507,7 +49302,7 @@ Stream Events
 
       The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `IReadOnlyList<Content> Content`
+    - `IReadOnlyList<BetaManagedAgentsUserCustomToolResultEventContent> Content`
 
       The result content returned by the tool.
 
@@ -49613,7 +49408,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentMessageEventContent> Content`
 
       Array of text blocks comprising the agent response.
 
@@ -49845,7 +49640,7 @@ Stream Events
 
       The id of the `agent.tool_use` event this result corresponds to.
 
-    - `IReadOnlyList<Content> Content`
+    - `IReadOnlyList<BetaManagedAgentsAgentToolResultEventContent> Content`
 
       The result content returned by the tool.
 
@@ -49879,7 +49674,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentThreadMessageReceivedEventContent> Content`
 
       Message content blocks.
 
@@ -49923,7 +49718,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentThreadMessageSentEventContent> Content`
 
       Message content blocks.
 
@@ -49995,7 +49790,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsUnknownErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -50027,7 +49822,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelOverloadedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -50053,7 +49848,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelRateLimitedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -50079,7 +49874,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelRequestFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -50109,7 +49904,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsMcpConnectionFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -50139,7 +49934,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsMcpAuthenticationFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -50195,7 +49990,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsCredentialHostUnreachableErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -50225,7 +50020,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsToolUseLimitReachedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -50251,7 +50046,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsCompactionLimitReachedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -50281,7 +50076,7 @@ Stream Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryAuthenticationErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -50311,7 +50106,7 @@ Stream Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryForbiddenErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -50341,7 +50136,7 @@ Stream Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryNotFoundErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -50371,7 +50166,7 @@ Stream Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryCheckoutErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -50401,7 +50196,7 @@ Stream Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryCloneErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -50867,7 +50662,7 @@ Stream Events
 
       Structured information about why the thread stopped. `null` when there is nothing more to report.
 
-    - `required StopReason StopReason`
+    - `required BetaManagedAgentsSessionThreadStatusIdleEventStopReason StopReason`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -51177,7 +50972,7 @@ Stream Events
 
           - `JsonElement Type = "coordinator"`
 
-          - `required IReadOnlyList<Agent> Agents`
+          - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
             Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -51209,7 +51004,7 @@ Stream Events
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `class BetaManagedAgentsAnthropicSkill`
 
@@ -51233,7 +51028,7 @@ Stream Events
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -51251,7 +51046,7 @@ Stream Events
 
                       - `JsonElement Name = "bash"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -51283,7 +51078,7 @@ Stream Events
 
                       - `JsonElement Name = "edit"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -51309,7 +51104,7 @@ Stream Events
 
                       - `JsonElement Name = "read"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -51335,7 +51130,7 @@ Stream Events
 
                       - `JsonElement Name = "write"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -51361,7 +51156,7 @@ Stream Events
 
                       - `JsonElement Name = "glob"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -51387,7 +51182,7 @@ Stream Events
 
                       - `JsonElement Name = "grep"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -51413,7 +51208,7 @@ Stream Events
 
                       - `JsonElement Name = "web_fetch"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -51523,7 +51318,7 @@ Stream Events
 
                       - `JsonElement Name = "web_search"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -51607,7 +51402,7 @@ Stream Events
 
                     - `required string Name`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -51629,7 +51424,7 @@ Stream Events
 
                     - `required bool Enabled`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -51755,11 +51550,11 @@ Stream Events
 
                 - `required string Name`
 
-                - `required IReadOnlyList<Skill> Skills`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `required string? System`
 
-                - `required IReadOnlyList<Tool> Tools`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `required int Version`
 
@@ -51807,11 +51602,11 @@ Stream Events
 
                 - `required string Name`
 
-                - `required IReadOnlyList<Skill> Skills`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `required string? System`
 
-                - `required IReadOnlyList<Tool> Tools`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `required int Version`
 
@@ -51837,7 +51632,7 @@ Stream Events
 
       - `required string? System`
 
-      - `required IReadOnlyList<Tool> Tools`
+      - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -54051,7 +53846,7 @@ List Session Threads
 
       - `required string Name`
 
-      - `required IReadOnlyList<Skill> Skills`
+      - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
         - `class BetaManagedAgentsAnthropicSkill`
 
@@ -54075,7 +53870,7 @@ List Session Threads
 
       - `required string? System`
 
-      - `required IReadOnlyList<Tool> Tools`
+      - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -54093,7 +53888,7 @@ List Session Threads
 
               - `JsonElement Name = "bash"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -54125,7 +53920,7 @@ List Session Threads
 
               - `JsonElement Name = "edit"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -54151,7 +53946,7 @@ List Session Threads
 
               - `JsonElement Name = "read"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -54177,7 +53972,7 @@ List Session Threads
 
               - `JsonElement Name = "write"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -54203,7 +53998,7 @@ List Session Threads
 
               - `JsonElement Name = "glob"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -54229,7 +54024,7 @@ List Session Threads
 
               - `JsonElement Name = "grep"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -54255,7 +54050,7 @@ List Session Threads
 
               - `JsonElement Name = "web_fetch"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -54365,7 +54160,7 @@ List Session Threads
 
               - `JsonElement Name = "web_search"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -54449,7 +54244,7 @@ List Session Threads
 
             - `required string Name`
 
-            - `required PermissionPolicy PermissionPolicy`
+            - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
               Permission policy for tool execution.
 
@@ -54471,7 +54266,7 @@ List Session Threads
 
             - `required bool Enabled`
 
-            - `required PermissionPolicy PermissionPolicy`
+            - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
               Permission policy for tool execution.
 
@@ -54742,13 +54537,7 @@ await foreach (var item in page.Paginate())
         "execution_identity": {
           "type": "service_account"
         },
-        "mcp_servers": [
-          {
-            "name": "example-mcp",
-            "type": "url",
-            "url": "https://example-server.modelcontextprotocol.io/sse"
-          }
-        ],
+        "mcp_servers": [],
         "model": {
           "id": "claude-opus-5-5",
           "effort": {
@@ -54758,26 +54547,11 @@ await foreach (var item in page.Paginate())
           "speed": "standard"
         },
         "name": "Researcher",
-        "skills": [
-          {
-            "skill_id": "xlsx",
-            "type": "anthropic",
-            "version": "1"
-          }
-        ],
+        "skills": [],
         "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
         "tools": [
           {
-            "configs": [
-              {
-                "enabled": true,
-                "name": "bash",
-                "permission_policy": {
-                  "type": "always_allow"
-                },
-                "type": "bash"
-              }
-            ],
+            "configs": [],
             "default_config": {
               "enabled": true,
               "permission_policy": {
@@ -55169,7 +54943,7 @@ Get Session Thread
 
       - `required string Name`
 
-      - `required IReadOnlyList<Skill> Skills`
+      - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
         - `class BetaManagedAgentsAnthropicSkill`
 
@@ -55193,7 +54967,7 @@ Get Session Thread
 
       - `required string? System`
 
-      - `required IReadOnlyList<Tool> Tools`
+      - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -55211,7 +54985,7 @@ Get Session Thread
 
               - `JsonElement Name = "bash"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -55243,7 +55017,7 @@ Get Session Thread
 
               - `JsonElement Name = "edit"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -55269,7 +55043,7 @@ Get Session Thread
 
               - `JsonElement Name = "read"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -55295,7 +55069,7 @@ Get Session Thread
 
               - `JsonElement Name = "write"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -55321,7 +55095,7 @@ Get Session Thread
 
               - `JsonElement Name = "glob"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -55347,7 +55121,7 @@ Get Session Thread
 
               - `JsonElement Name = "grep"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -55373,7 +55147,7 @@ Get Session Thread
 
               - `JsonElement Name = "web_fetch"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -55483,7 +55257,7 @@ Get Session Thread
 
               - `JsonElement Name = "web_search"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -55567,7 +55341,7 @@ Get Session Thread
 
             - `required string Name`
 
-            - `required PermissionPolicy PermissionPolicy`
+            - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
               Permission policy for tool execution.
 
@@ -55589,7 +55363,7 @@ Get Session Thread
 
             - `required bool Enabled`
 
-            - `required PermissionPolicy PermissionPolicy`
+            - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
               Permission policy for tool execution.
 
@@ -55857,13 +55631,7 @@ Console.WriteLine(betaManagedAgentsSessionThread);
     "execution_identity": {
       "type": "service_account"
     },
-    "mcp_servers": [
-      {
-        "name": "example-mcp",
-        "type": "url",
-        "url": "https://example-server.modelcontextprotocol.io/sse"
-      }
-    ],
+    "mcp_servers": [],
     "model": {
       "id": "claude-opus-5-5",
       "effort": {
@@ -55873,26 +55641,11 @@ Console.WriteLine(betaManagedAgentsSessionThread);
       "speed": "standard"
     },
     "name": "Researcher",
-    "skills": [
-      {
-        "skill_id": "xlsx",
-        "type": "anthropic",
-        "version": "1"
-      }
-    ],
+    "skills": [],
     "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -56281,7 +56034,7 @@ Archive Session Thread
 
       - `required string Name`
 
-      - `required IReadOnlyList<Skill> Skills`
+      - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
         - `class BetaManagedAgentsAnthropicSkill`
 
@@ -56305,7 +56058,7 @@ Archive Session Thread
 
       - `required string? System`
 
-      - `required IReadOnlyList<Tool> Tools`
+      - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -56323,7 +56076,7 @@ Archive Session Thread
 
               - `JsonElement Name = "bash"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -56355,7 +56108,7 @@ Archive Session Thread
 
               - `JsonElement Name = "edit"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -56381,7 +56134,7 @@ Archive Session Thread
 
               - `JsonElement Name = "read"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -56407,7 +56160,7 @@ Archive Session Thread
 
               - `JsonElement Name = "write"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -56433,7 +56186,7 @@ Archive Session Thread
 
               - `JsonElement Name = "glob"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -56459,7 +56212,7 @@ Archive Session Thread
 
               - `JsonElement Name = "grep"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -56485,7 +56238,7 @@ Archive Session Thread
 
               - `JsonElement Name = "web_fetch"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -56595,7 +56348,7 @@ Archive Session Thread
 
               - `JsonElement Name = "web_search"`
 
-              - `required PermissionPolicy PermissionPolicy`
+              - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                 Permission policy for tool execution.
 
@@ -56679,7 +56432,7 @@ Archive Session Thread
 
             - `required string Name`
 
-            - `required PermissionPolicy PermissionPolicy`
+            - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
               Permission policy for tool execution.
 
@@ -56701,7 +56454,7 @@ Archive Session Thread
 
             - `required bool Enabled`
 
-            - `required PermissionPolicy PermissionPolicy`
+            - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
               Permission policy for tool execution.
 
@@ -56969,13 +56722,7 @@ Console.WriteLine(betaManagedAgentsSessionThread);
     "execution_identity": {
       "type": "service_account"
     },
-    "mcp_servers": [
-      {
-        "name": "example-mcp",
-        "type": "url",
-        "url": "https://example-server.modelcontextprotocol.io/sse"
-      }
-    ],
+    "mcp_servers": [],
     "model": {
       "id": "claude-opus-5-5",
       "effort": {
@@ -56985,26 +56732,11 @@ Console.WriteLine(betaManagedAgentsSessionThread);
       "speed": "standard"
     },
     "name": "Researcher",
-    "skills": [
-      {
-        "skill_id": "xlsx",
-        "type": "anthropic",
-        "version": "1"
-      }
-    ],
+    "skills": [],
     "system": "You are a research subagent that gathers and summarises sources for the coordinating agent.",
     "tools": [
       {
-        "configs": [
-          {
-            "enabled": true,
-            "name": "bash",
-            "permission_policy": {
-              "type": "always_allow"
-            },
-            "type": "bash"
-          }
-        ],
+        "configs": [],
         "default_config": {
           "enabled": true,
           "permission_policy": {
@@ -57233,7 +56965,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsUserMessageEventContent> Content`
 
       Array of content blocks comprising the user message.
 
@@ -57255,7 +56987,7 @@ List Session Thread Events
 
         - `JsonElement Type = "image"`
 
-        - `required Source Source`
+        - `required BetaManagedAgentsImageBlockSource Source`
 
           The source of the image data.
 
@@ -57461,7 +57193,7 @@ List Session Thread Events
 
       The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `IReadOnlyList<Content> Content`
+    - `IReadOnlyList<BetaManagedAgentsUserCustomToolResultEventContent> Content`
 
       The result content returned by the tool.
 
@@ -57567,7 +57299,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentMessageEventContent> Content`
 
       Array of text blocks comprising the agent response.
 
@@ -57799,7 +57531,7 @@ List Session Thread Events
 
       The id of the `agent.tool_use` event this result corresponds to.
 
-    - `IReadOnlyList<Content> Content`
+    - `IReadOnlyList<BetaManagedAgentsAgentToolResultEventContent> Content`
 
       The result content returned by the tool.
 
@@ -57833,7 +57565,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentThreadMessageReceivedEventContent> Content`
 
       Message content blocks.
 
@@ -57877,7 +57609,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentThreadMessageSentEventContent> Content`
 
       Message content blocks.
 
@@ -57949,7 +57681,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsUnknownErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -57981,7 +57713,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelOverloadedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -58007,7 +57739,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelRateLimitedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -58033,7 +57765,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelRequestFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -58063,7 +57795,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsMcpConnectionFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -58093,7 +57825,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsMcpAuthenticationFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -58149,7 +57881,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsCredentialHostUnreachableErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -58179,7 +57911,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsToolUseLimitReachedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -58205,7 +57937,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsCompactionLimitReachedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -58235,7 +57967,7 @@ List Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryAuthenticationErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -58265,7 +57997,7 @@ List Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryForbiddenErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -58295,7 +58027,7 @@ List Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryNotFoundErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -58325,7 +58057,7 @@ List Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryCheckoutErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -58355,7 +58087,7 @@ List Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryCloneErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -58821,7 +58553,7 @@ List Session Thread Events
 
       Structured information about why the thread stopped. `null` when there is nothing more to report.
 
-    - `required StopReason StopReason`
+    - `required BetaManagedAgentsSessionThreadStatusIdleEventStopReason StopReason`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -59131,7 +58863,7 @@ List Session Thread Events
 
           - `JsonElement Type = "coordinator"`
 
-          - `required IReadOnlyList<Agent> Agents`
+          - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
             Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -59163,7 +58895,7 @@ List Session Thread Events
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `class BetaManagedAgentsAnthropicSkill`
 
@@ -59187,7 +58919,7 @@ List Session Thread Events
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -59205,7 +58937,7 @@ List Session Thread Events
 
                       - `JsonElement Name = "bash"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -59237,7 +58969,7 @@ List Session Thread Events
 
                       - `JsonElement Name = "edit"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -59263,7 +58995,7 @@ List Session Thread Events
 
                       - `JsonElement Name = "read"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -59289,7 +59021,7 @@ List Session Thread Events
 
                       - `JsonElement Name = "write"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -59315,7 +59047,7 @@ List Session Thread Events
 
                       - `JsonElement Name = "glob"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -59341,7 +59073,7 @@ List Session Thread Events
 
                       - `JsonElement Name = "grep"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -59367,7 +59099,7 @@ List Session Thread Events
 
                       - `JsonElement Name = "web_fetch"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -59477,7 +59209,7 @@ List Session Thread Events
 
                       - `JsonElement Name = "web_search"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -59561,7 +59293,7 @@ List Session Thread Events
 
                     - `required string Name`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -59583,7 +59315,7 @@ List Session Thread Events
 
                     - `required bool Enabled`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -59709,11 +59441,11 @@ List Session Thread Events
 
                 - `required string Name`
 
-                - `required IReadOnlyList<Skill> Skills`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `required string? System`
 
-                - `required IReadOnlyList<Tool> Tools`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `required int Version`
 
@@ -59761,11 +59493,11 @@ List Session Thread Events
 
                 - `required string Name`
 
-                - `required IReadOnlyList<Skill> Skills`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `required string? System`
 
-                - `required IReadOnlyList<Tool> Tools`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `required int Version`
 
@@ -59791,7 +59523,7 @@ List Session Thread Events
 
       - `required string? System`
 
-      - `required IReadOnlyList<Tool> Tools`
+      - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -60434,7 +60166,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsUserMessageEventContent> Content`
 
       Array of content blocks comprising the user message.
 
@@ -60456,7 +60188,7 @@ Stream Session Thread Events
 
         - `JsonElement Type = "image"`
 
-        - `required Source Source`
+        - `required BetaManagedAgentsImageBlockSource Source`
 
           The source of the image data.
 
@@ -60662,7 +60394,7 @@ Stream Session Thread Events
 
       The id of the `agent.custom_tool_use` event this result corresponds to. It is also listed in the last `session.status_idle` [event's](../beta/sessions/events/list.md#beta_managed_agents_session_requires_action.event_ids) `stop_reason.event_ids` field.
 
-    - `IReadOnlyList<Content> Content`
+    - `IReadOnlyList<BetaManagedAgentsUserCustomToolResultEventContent> Content`
 
       The result content returned by the tool.
 
@@ -60768,7 +60500,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentMessageEventContent> Content`
 
       Array of text blocks comprising the agent response.
 
@@ -61000,7 +60732,7 @@ Stream Session Thread Events
 
       The id of the `agent.tool_use` event this result corresponds to.
 
-    - `IReadOnlyList<Content> Content`
+    - `IReadOnlyList<BetaManagedAgentsAgentToolResultEventContent> Content`
 
       The result content returned by the tool.
 
@@ -61034,7 +60766,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentThreadMessageReceivedEventContent> Content`
 
       Message content blocks.
 
@@ -61078,7 +60810,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `required IReadOnlyList<Content> Content`
+    - `required IReadOnlyList<BetaManagedAgentsAgentThreadMessageSentEventContent> Content`
 
       Message content blocks.
 
@@ -61150,7 +60882,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsUnknownErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -61182,7 +60914,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelOverloadedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -61208,7 +60940,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelRateLimitedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -61234,7 +60966,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsModelRequestFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -61264,7 +60996,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsMcpConnectionFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -61294,7 +61026,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsMcpAuthenticationFailedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -61350,7 +61082,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsCredentialHostUnreachableErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -61380,7 +61112,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsToolUseLimitReachedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -61406,7 +61138,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsCompactionLimitReachedErrorRetryStatus RetryStatus`
 
           What the client should do next.
 
@@ -61436,7 +61168,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryAuthenticationErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -61466,7 +61198,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryForbiddenErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -61496,7 +61228,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryNotFoundErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -61526,7 +61258,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryCheckoutErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -61556,7 +61288,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `required RetryStatus RetryStatus`
+        - `required BetaManagedAgentsRepositoryCloneErrorRetryStatus RetryStatus`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -62022,7 +61754,7 @@ Stream Session Thread Events
 
       Structured information about why the thread stopped. `null` when there is nothing more to report.
 
-    - `required StopReason StopReason`
+    - `required BetaManagedAgentsSessionThreadStatusIdleEventStopReason StopReason`
 
       - `class BetaManagedAgentsSessionEndTurn`
 
@@ -62332,7 +62064,7 @@ Stream Session Thread Events
 
           - `JsonElement Type = "coordinator"`
 
-          - `required IReadOnlyList<Agent> Agents`
+          - `required IReadOnlyList<BetaManagedAgentsSessionMultiagentCoordinatorAgent> Agents`
 
             Full `agent` definitions the coordinator may spawn as session threads.
 
@@ -62364,7 +62096,7 @@ Stream Session Thread Events
 
               - `required string Name`
 
-              - `required IReadOnlyList<Skill> Skills`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `class BetaManagedAgentsAnthropicSkill`
 
@@ -62388,7 +62120,7 @@ Stream Session Thread Events
 
               - `required string? System`
 
-              - `required IReadOnlyList<Tool> Tools`
+              - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -62406,7 +62138,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "bash"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsBashToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -62438,7 +62170,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "edit"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsEditToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -62464,7 +62196,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "read"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsReadToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -62490,7 +62222,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "write"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWriteToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -62516,7 +62248,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "glob"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsGlobToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -62542,7 +62274,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "grep"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsGrepToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -62568,7 +62300,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "web_fetch"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWebFetchToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -62678,7 +62410,7 @@ Stream Session Thread Events
 
                       - `JsonElement Name = "web_search"`
 
-                      - `required PermissionPolicy PermissionPolicy`
+                      - `required BetaManagedAgentsWebSearchToolConfigPermissionPolicy PermissionPolicy`
 
                         Permission policy for tool execution.
 
@@ -62762,7 +62494,7 @@ Stream Session Thread Events
 
                     - `required string Name`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsMcpToolConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -62784,7 +62516,7 @@ Stream Session Thread Events
 
                     - `required bool Enabled`
 
-                    - `required PermissionPolicy PermissionPolicy`
+                    - `required BetaManagedAgentsMcpToolsetDefaultConfigPermissionPolicy PermissionPolicy`
 
                       Permission policy for tool execution.
 
@@ -62910,11 +62642,11 @@ Stream Session Thread Events
 
                 - `required string Name`
 
-                - `required IReadOnlyList<Skill> Skills`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `required string? System`
 
-                - `required IReadOnlyList<Tool> Tools`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `required int Version`
 
@@ -62962,11 +62694,11 @@ Stream Session Thread Events
 
                 - `required string Name`
 
-                - `required IReadOnlyList<Skill> Skills`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentSkill> Skills`
 
                 - `required string? System`
 
-                - `required IReadOnlyList<Tool> Tools`
+                - `required IReadOnlyList<BetaManagedAgentsSessionThreadAgentTool> Tools`
 
                 - `required int Version`
 
@@ -62992,7 +62724,7 @@ Stream Session Thread Events
 
       - `required string? System`
 
-      - `required IReadOnlyList<Tool> Tools`
+      - `required IReadOnlyList<BetaManagedAgentsSessionAgentTool> Tools`
 
         - `class BetaManagedAgentsAgentToolset20260401`
 
@@ -63540,7 +63272,7 @@ Create Deployment
 
       - `JsonElement Type = "user.message"`
 
-      - `required IReadOnlyList<Content> Content`
+      - `required IReadOnlyList<BetaManagedAgentsUserMessageEventParamsContent> Content`
 
         Array of content blocks for the user message.
 
@@ -63562,7 +63294,7 @@ Create Deployment
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -63700,7 +63432,7 @@ Create Deployment
 
         What the agent should produce. This is the task specification.
 
-      - `required Rubric Rubric`
+      - `required BetaManagedAgentsUserDefineOutcomeEventParamsRubric Rubric`
 
         How to grade the outcome. Text or file reference.
 
@@ -64092,7 +63824,7 @@ Create Deployment
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -64593,20 +64325,8 @@ Console.WriteLine(betaManagedAgentsDeployment);
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -64897,7 +64617,7 @@ List Deployments
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -65387,20 +65107,8 @@ await foreach (var item in page.Paginate())
       ],
       "metadata": {},
       "name": "Daily order report",
-      "paused_reason": {
-        "type": "manual"
-      },
-      "resources": [
-        {
-          "type": "github_repository",
-          "url": "url",
-          "checkout": {
-            "name": "main",
-            "type": "branch"
-          },
-          "mount_path": "mount_path"
-        }
-      ],
+      "paused_reason": null,
+      "resources": [],
       "schedule": {
         "expression": "0 9 * * 1-5",
         "timezone": "America/Los_Angeles",
@@ -65664,7 +65372,7 @@ Get Deployment
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -66153,20 +65861,8 @@ Console.WriteLine(betaManagedAgentsDeployment);
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -66209,7 +65905,7 @@ Update Deployment
 
     Unique identifier of the deployment to update.
 
-  - `Agent agent`
+  - `DeploymentUpdateParamsAgent agent`
 
     Agent to deploy. Accepts the `agent` ID string, which re-pins to the latest version, or an `agent` object with both id and version specified. Omit to preserve. Cannot be cleared.
 
@@ -66259,7 +65955,7 @@ Update Deployment
 
       - `JsonElement Type = "user.message"`
 
-      - `required IReadOnlyList<Content> Content`
+      - `required IReadOnlyList<BetaManagedAgentsUserMessageEventParamsContent> Content`
 
         Array of content blocks for the user message.
 
@@ -66281,7 +65977,7 @@ Update Deployment
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -66419,7 +66115,7 @@ Update Deployment
 
         What the agent should produce. This is the task specification.
 
-      - `required Rubric Rubric`
+      - `required BetaManagedAgentsUserDefineOutcomeEventParamsRubric Rubric`
 
         How to grade the outcome. Text or file reference.
 
@@ -66479,7 +66175,7 @@ Update Deployment
 
     maxLength: 256
 
-  - `IReadOnlyList<Resource>? resources`
+  - `IReadOnlyList<DeploymentUpdateParamsResource>? resources`
 
     Session resources. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 500.
 
@@ -66801,7 +66497,7 @@ Update Deployment
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -67290,20 +66986,8 @@ Console.WriteLine(betaManagedAgentsDeployment);
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -67564,7 +67248,7 @@ Archive Deployment
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -68053,20 +67737,8 @@ Console.WriteLine(betaManagedAgentsDeployment);
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -68750,7 +68422,7 @@ Pause Deployment
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -69239,20 +68911,8 @@ Console.WriteLine(betaManagedAgentsDeployment);
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -69513,7 +69173,7 @@ Unpause Deployment
 
           - `JsonElement Type = "image"`
 
-          - `required Source Source`
+          - `required BetaManagedAgentsImageBlockSource Source`
 
             The source of the image data.
 
@@ -70002,20 +69662,8 @@ Console.WriteLine(betaManagedAgentsDeployment);
   ],
   "metadata": {},
   "name": "Daily order report",
-  "paused_reason": {
-    "type": "manual"
-  },
-  "resources": [
-    {
-      "type": "github_repository",
-      "url": "url",
-      "checkout": {
-        "name": "main",
-        "type": "branch"
-      },
-      "mount_path": "mount_path"
-    }
-  ],
+  "paused_reason": null,
+  "resources": [],
   "schedule": {
     "expression": "0 9 * * 1-5",
     "timezone": "America/Los_Angeles",
@@ -72654,7 +72302,7 @@ Create a Credential
 
     format: date-time
 
-  - `required Auth Auth`
+  - `required BetaManagedAgentsCredentialAuth Auth`
 
     Authentication configuration for this credential.
 
@@ -72686,7 +72334,7 @@ Create a Credential
 
           Token endpoint URL used to refresh the access token.
 
-        - `required TokenEndpointAuth TokenEndpointAuth`
+        - `required BetaManagedAgentsMcpOAuthRefreshResponseTokenEndpointAuth TokenEndpointAuth`
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
@@ -73024,7 +72672,7 @@ List Credentials
 
     format: date-time
 
-  - `required Auth Auth`
+  - `required BetaManagedAgentsCredentialAuth Auth`
 
     Authentication configuration for this credential.
 
@@ -73056,7 +72704,7 @@ List Credentials
 
           Token endpoint URL used to refresh the access token.
 
-        - `required TokenEndpointAuth TokenEndpointAuth`
+        - `required BetaManagedAgentsMcpOAuthRefreshResponseTokenEndpointAuth TokenEndpointAuth`
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
@@ -73386,7 +73034,7 @@ Retrieve a Credential
 
     format: date-time
 
-  - `required Auth Auth`
+  - `required BetaManagedAgentsCredentialAuth Auth`
 
     Authentication configuration for this credential.
 
@@ -73418,7 +73066,7 @@ Retrieve a Credential
 
           Token endpoint URL used to refresh the access token.
 
-        - `required TokenEndpointAuth TokenEndpointAuth`
+        - `required BetaManagedAgentsMcpOAuthRefreshResponseTokenEndpointAuth TokenEndpointAuth`
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
@@ -73582,7 +73230,7 @@ Update a Credential
 
     Unique identifier of the credential to update.
 
-  - `Auth auth`
+  - `CredentialUpdateParamsAuth auth`
 
     New authentication settings for the credential. The `type` must match the credential's current type, which can't be changed.
 
@@ -73624,7 +73272,7 @@ Update a Credential
 
           maxLength: 8192
 
-        - `TokenEndpointAuth TokenEndpointAuth`
+        - `BetaManagedAgentsMcpOAuthRefreshUpdateParamsTokenEndpointAuth TokenEndpointAuth`
 
           - `class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam`
 
@@ -73882,7 +73530,7 @@ Update a Credential
 
     format: date-time
 
-  - `required Auth Auth`
+  - `required BetaManagedAgentsCredentialAuth Auth`
 
     Authentication configuration for this credential.
 
@@ -73914,7 +73562,7 @@ Update a Credential
 
           Token endpoint URL used to refresh the access token.
 
-        - `required TokenEndpointAuth TokenEndpointAuth`
+        - `required BetaManagedAgentsMcpOAuthRefreshResponseTokenEndpointAuth TokenEndpointAuth`
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
@@ -74438,7 +74086,7 @@ Archive a Credential
 
     format: date-time
 
-  - `required Auth Auth`
+  - `required BetaManagedAgentsCredentialAuth Auth`
 
     Authentication configuration for this credential.
 
@@ -74470,7 +74118,7 @@ Archive a Credential
 
           Token endpoint URL used to refresh the access token.
 
-        - `required TokenEndpointAuth TokenEndpointAuth`
+        - `required BetaManagedAgentsMcpOAuthRefreshResponseTokenEndpointAuth TokenEndpointAuth`
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 
@@ -74899,24 +74547,8 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 {
   "credential_id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "has_refresh_token": true,
-  "mcp_probe": {
-    "http_response": {
-      "body": "body",
-      "body_truncated": true,
-      "content_type": "content_type",
-      "status_code": 0
-    },
-    "method": "method"
-  },
-  "refresh": {
-    "http_response": {
-      "body": "body",
-      "body_truncated": true,
-      "content_type": "content_type",
-      "status_code": 0
-    },
-    "status": "succeeded"
-  },
+  "mcp_probe": null,
+  "refresh": null,
   "status": "valid",
   "type": "vault_credential_validation",
   "validated_at": "2026-03-15T10:00:00Z",
@@ -79058,6 +78690,30 @@ Upload File
 
       The ID of the scoping resource (e.g., the session ID).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicStorageQuotaExceededException` (HTTP status 400, error code `storage_quota_exceeded`)
+
+  The organization's file storage quota is exhausted. Delete files to free up space, then retry the upload.
+
 #### Example
 
 ```csharp
@@ -79330,6 +78986,26 @@ List Files
 
       The ID of the scoping resource (e.g., the session ID).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```csharp
@@ -79526,6 +79202,34 @@ Download File
     Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
     Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicFileNotDownloadableException` (HTTP status 400, error code `file_not_downloadable`)
+
+  The file has `downloadable: false`. Only files generated by a tool, such as the code execution tool, can be downloaded.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicFileExpiredException` (HTTP status 404, error code `file_expired`)
+
+  The file's `expires_at` has passed, so its content is no longer available.
 
 #### Example
 
@@ -79760,6 +79464,26 @@ Get File Metadata
 
       The ID of the scoping resource (e.g., the session ID).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```csharp
@@ -79963,6 +79687,26 @@ Delete File
   - `required string ID`
 
     ID of the deleted file.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -80221,6 +79965,30 @@ Create Skill
     ISO 8601 timestamp of when the skill was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicCmekContextUnavailableException` (HTTP status 503, error code `cmek_context_unavailable`)
+
+  The workspace's encryption settings could not be read, so the request was refused. Retry in a few minutes.
 
 #### Example
 
@@ -80503,6 +80271,18 @@ List Skills
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```csharp
@@ -80767,6 +80547,18 @@ Get Skill
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```csharp
@@ -80971,6 +80763,18 @@ Delete Skill
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -81201,6 +81005,30 @@ Create Skill Version
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicCmekContextUnavailableException` (HTTP status 503, error code `cmek_context_unavailable`)
+
+  The workspace's encryption settings could not be read, so the request was refused. Retry in a few minutes.
 
 #### Example
 
@@ -81447,6 +81275,18 @@ List Skill Versions
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -81870,6 +81710,18 @@ Get Skill Version
 
     The format and length of IDs may change over time.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```csharp
@@ -82080,6 +81932,18 @@ Delete Skill Version
 
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -82351,7 +82215,7 @@ Create User Profile
 
     format: date-time
 
-  - `AccessType AccessType`
+  - `BetaUserProfileAccessType AccessType`
 
     How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
@@ -82710,7 +82574,7 @@ List User Profiles
 
     format: date-time
 
-  - `AccessType AccessType`
+  - `BetaUserProfileAccessType AccessType`
 
     How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
@@ -83044,7 +82908,7 @@ Get User Profile
 
     format: date-time
 
-  - `AccessType AccessType`
+  - `BetaUserProfileAccessType AccessType`
 
     How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
@@ -83182,7 +83046,7 @@ Update User Profile
 
     The ID of the user profile to update (`uprof_...`).
 
-  - `AccessType? accessType`
+  - `UserProfileUpdateParamsAccessType? accessType`
 
     If present, replaces the stored access type. Omit to leave unchanged.
 
@@ -83412,7 +83276,7 @@ Update User Profile
 
     format: date-time
 
-  - `AccessType AccessType`
+  - `BetaUserProfileAccessType AccessType`
 
     How the platform uses the API for this entity: `application` (default) or `passthrough`. Absent under the legacy `user-profiles-2026-03-24` beta header.
 
@@ -84218,7 +84082,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
         minLength: 1, maxLength: 256
 
-      - `Speed? Speed`
+      - `BetaDreamModelConfigParamSpeed? Speed`
 
         How fast the model generates output for the dream. Defaults to `standard`.
 
@@ -88834,7 +88698,7 @@ List API Keys
 
     minimum: 1, maximum: 1000
 
-  - `Status? status` (query parameter)
+  - `ApiKeyListParamsStatus? status` (query parameter)
 
     Filter by API key status.
 
@@ -88946,7 +88810,7 @@ List API Keys
 
         ID of the Workspace the API key belongs to, including when it is the organization's default Workspace.
 
-  - `required Status Status`
+  - `required BetaApiKeyStatus Status`
 
     Status of the API key.
 
@@ -89118,7 +88982,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
         ID of the Workspace the API key belongs to, including when it is the organization's default Workspace.
 
-  - `required Status Status`
+  - `required BetaApiKeyStatus Status`
 
     Status of the API key.
 
@@ -89297,7 +89161,7 @@ Update API Key
 
         ID of the Workspace the API key belongs to, including when it is the organization's default Workspace.
 
-  - `required Status Status`
+  - `required BetaApiKeyStatus Status`
 
     Status of the API key.
 
@@ -89308,6 +89172,22 @@ Update API Key
     - `Expired("expired")`
 
     - `Inactive("inactive")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicOrgApiKeyLimitExceededException` (HTTP status 400, error code `org_api_key_limit_exceeded`)
+
+  The organization has reached its limit of active API keys.
+
+- `AnthropicWorkspaceApiKeyLimitExceededException` (HTTP status 400, error code `workspace_api_key_limit_exceeded`)
+
+  The workspace has reached its limit of active API keys.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -89472,7 +89352,7 @@ Create an external key config owned by the caller's organization.
 
     Data residency geo. Selects the region this key is used in.
 
-  - `required ProviderConfig ProviderConfig`
+  - `required BetaExternalKeyProviderConfig ProviderConfig`
 
     KMS provider identity and auth coordinates.
 
@@ -89531,6 +89411,18 @@ Create an external key config owned by the caller's organization.
   - `required string? UserProfileID`
 
     ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicUserProfileNotFoundException` (HTTP status 400, error code `user_profile_not_found`)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -89641,7 +89533,7 @@ Results are ordered by creation time (newest first). Use the
 
     Data residency geo. Selects the region this key is used in.
 
-  - `required ProviderConfig ProviderConfig`
+  - `required BetaExternalKeyProviderConfig ProviderConfig`
 
     KMS provider identity and auth coordinates.
 
@@ -89802,7 +89694,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
     Data residency geo. Selects the region this key is used in.
 
-  - `required ProviderConfig ProviderConfig`
+  - `required BetaExternalKeyProviderConfig ProviderConfig`
 
     KMS provider identity and auth coordinates.
 
@@ -89929,13 +89821,13 @@ encrypted data requires the original key identity to decrypt.
 
     minLength: 1, maxLength: 255
 
-  - `Geo? geo`
+  - `ExternalKeyUpdateParamsGeo? geo`
 
     Data residency geo. Only `us` is supported.
 
     - `Us("us")`
 
-  - `ProviderConfig? providerConfig`
+  - `ExternalKeyUpdateParamsProviderConfig? providerConfig`
 
     KMS provider identity and auth coordinates.
 
@@ -90029,7 +89921,7 @@ encrypted data requires the original key identity to decrypt.
 
     Data residency geo. Selects the region this key is used in.
 
-  - `required ProviderConfig ProviderConfig`
+  - `required BetaExternalKeyProviderConfig ProviderConfig`
 
     KMS provider identity and auth coordinates.
 
@@ -90088,6 +89980,18 @@ encrypted data requires the original key identity to decrypt.
   - `required string? UserProfileID`
 
     ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicExternalKeyInWorkspacePolicyException` (HTTP status 400, error code `external_key_in_workspace_policy`)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -90157,6 +90061,18 @@ The request is rejected if any workspace still references this config.
   - `required string ID`
 
     ID of the deleted External Key.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicExternalKeyInWorkspacePolicyException` (HTTP status 400, error code `external_key_in_workspace_policy`)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -90228,6 +90144,14 @@ message if it failed or timed out.
     - `Failure("failure")`
 
     - `Success("success")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -90532,7 +90456,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
     The `iss` claim value. Incoming JWTs must match exactly.
 
-  - `required Jwks Jwks`
+  - `required BetaFederationIssuerJwks Jwks`
 
     How signing keys are obtained for signature verification.
 
@@ -90625,6 +90549,14 @@ matched as the JWT's `iss` claim and is not fetched.
   - `required string? UpdatedByActorID`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -90882,7 +90814,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
     The `iss` claim value. Incoming JWTs must match exactly.
 
-  - `required Jwks Jwks`
+  - `required BetaFederationIssuerJwks Jwks`
 
     How signing keys are obtained for signature verification.
 
@@ -91223,7 +91155,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
     The `iss` claim value. Incoming JWTs must match exactly.
 
-  - `required Jwks Jwks`
+  - `required BetaFederationIssuerJwks Jwks`
 
     How signing keys are obtained for signature verification.
 
@@ -91398,7 +91330,7 @@ session.
 
     minLength: 1
 
-  - `Jwks? jwks`
+  - `IssuerUpdateParamsJwks? jwks`
 
     Replaces the entire JWKS configuration.
 
@@ -91643,7 +91575,7 @@ session.
 
     The `iss` claim value. Incoming JWTs must match exactly.
 
-  - `required Jwks Jwks`
+  - `required BetaFederationIssuerJwks Jwks`
 
     How signing keys are obtained for signature verification.
 
@@ -91736,6 +91668,14 @@ session.
   - `required string? UpdatedByActorID`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -91985,7 +91925,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
     The `iss` claim value. Incoming JWTs must match exactly.
 
-  - `required Jwks Jwks`
+  - `required BetaFederationIssuerJwks Jwks`
 
     How signing keys are obtained for signature verification.
 
@@ -92078,6 +92018,14 @@ issuer cannot be changed), or recreate them against another issuer.
   - `required string? UpdatedByActorID`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -92469,6 +92417,14 @@ manage rules whose `oauth_scope` is `workspace:developer` or
   - `required IReadOnlyList<string> WorkspaceIds`
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -93595,6 +93551,14 @@ Console session.
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -93943,6 +93907,14 @@ other scopes require a Console session.
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -94197,6 +94169,14 @@ other scopes require a Console session.
   - `required string? WorkspaceName`
 
     Workspace display name. Populated when listing; null in the enable response.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -94639,6 +94619,14 @@ Console session.
 
     Tagged ID of the workspace named in the delete request. Removal is idempotent.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -94772,7 +94760,7 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
     - `User("user")`
 
-  - `required Status Status`
+  - `required BetaOrganizationInviteStatus Status`
 
     Status of the Invite.
 
@@ -94783,6 +94771,42 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
     - `Expired("expired")`
 
     - `Pending("pending")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicAlreadyMemberException` (HTTP status 400, error code `already_member`)
+
+  The email address already belongs to a user in the organization. The message names the user.
+
+- `AnthropicCannotInviteEmailsWithUnverifiedDomainsException` (HTTP status 400, error code `cannot_invite_emails_with_unverified_domains`)
+
+  The email address's domain is not one of the verified domains of the organization's parent organization.
+
+- `AnthropicEmailDomainNotAllowedException` (HTTP status 400, error code `email_domain_not_allowed`)
+
+  The organization restricts invites to an allowed list of email domains, and the list is empty or does not include the email address's domain.
+
+- `AnthropicInviteAlreadyExistsException` (HTTP status 400, error code `invite_already_exists`)
+
+  A pending invite already exists for the email address. The message names the invite.
+
+- `AnthropicOrgMemberLimitExceededException` (HTTP status 400, error code `org_member_limit_exceeded`)
+
+  The organization has reached the member limit that Anthropic set for it. Pending invites count toward the limit.
+
+- `AnthropicRbacGroupGrantsOwnerAccessException` (HTTP status 400, error code `rbac_group_grants_owner_access`)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `AnthropicRbacGroupOwnerAccessUnconfirmedException` (HTTP status 400, error code `rbac_group_owner_access_unconfirmed`)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -94931,7 +94955,7 @@ List the organization's invites.
 
     - `User("user")`
 
-  - `required Status Status`
+  - `required BetaOrganizationInviteStatus Status`
 
     Status of the Invite.
 
@@ -95061,7 +95085,7 @@ Retrieve an invite by ID.
 
     - `User("user")`
 
-  - `required Status Status`
+  - `required BetaOrganizationInviteStatus Status`
 
     Status of the Invite.
 
@@ -95133,6 +95157,14 @@ Delete a pending invite.
   - `required string ID`
 
     ID of the Invite.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -95379,7 +95411,7 @@ accounts.
 
     Admin-chosen slug identifier.
 
-  - `required OrganizationRole OrganizationRole`
+  - `required BetaServiceAccountOrganizationRole OrganizationRole`
 
     Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
 
@@ -95396,6 +95428,14 @@ accounts.
   - `required string? UpdatedByActorID`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -95639,7 +95679,7 @@ archived service accounts.
 
     Admin-chosen slug identifier.
 
-  - `required OrganizationRole OrganizationRole`
+  - `required BetaServiceAccountOrganizationRole OrganizationRole`
 
     Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
 
@@ -95892,7 +95932,7 @@ Retrieve a service account by its ID (`svac_...`).
 
     Admin-chosen slug identifier.
 
-  - `required OrganizationRole OrganizationRole`
+  - `required BetaServiceAccountOrganizationRole OrganizationRole`
 
     Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
 
@@ -95973,7 +96013,7 @@ interactive credential (a user OAuth token or a Console session).
 
     maxLength: 2000
 
-  - `OrganizationRole? organizationRole`
+  - `ServiceAccountUpdateParamsOrganizationRole? organizationRole`
 
     Replaces the org-level role. Omit or send `null` to leave unchanged.
 
@@ -96160,7 +96200,7 @@ interactive credential (a user OAuth token or a Console session).
 
     Admin-chosen slug identifier.
 
-  - `required OrganizationRole OrganizationRole`
+  - `required BetaServiceAccountOrganizationRole OrganizationRole`
 
     Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
 
@@ -96177,6 +96217,14 @@ interactive credential (a user OAuth token or a Console session).
   - `required string? UpdatedByActorID`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -96414,7 +96462,7 @@ those rules first or change their target to another service account.
 
     Admin-chosen slug identifier.
 
-  - `required OrganizationRole OrganizationRole`
+  - `required BetaServiceAccountOrganizationRole OrganizationRole`
 
     Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
 
@@ -96431,6 +96479,14 @@ those rules first or change their target to another service account.
   - `required string? UpdatedByActorID`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -96672,6 +96728,14 @@ rejected.
     - `WorkspaceRestrictedDeveloper("workspace_restricted_developer")`
 
     - `WorkspaceUser("workspace_user")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -97135,6 +97199,14 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
     Tagged workspace ID (`wrkspc_...`) named in the delete request.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -97463,6 +97535,14 @@ Update a member's organization role.
 
     - `User("user")`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -97522,6 +97602,22 @@ Remove a member from the organization.
   - `required string ID`
 
     ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicCannotRemoveLastMemberException` (HTTP status 400, error code `cannot_remove_last_member`)
+
+  The user is the organization's only member. Add another member before removing this one.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `AnthropicConcurrentMembershipChangeException` (HTTP status 409, error code `concurrent_membership_change`)
+
+  Another change to the organization's members is in progress. Retry the request once it completes.
 
 #### Example
 
@@ -97752,6 +97848,42 @@ Every request must include the beta header `anthropic-beta: admin-user-sign-out-
     - `PrimaryOwner("primary_owner")`
 
     - `User("user")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaCannotSignOutPrimaryOwnerException` (HTTP status 400, error code `cannot_sign_out_primary_owner`)
+
+  The member is the organization's primary owner, whom no API key or token can sign out.
+
+- `AnthropicBetaCannotSignOutSelfException` (HTTP status 400, error code `cannot_sign_out_self`)
+
+  The member is the user the API key or token belongs to.
+
+- `AnthropicBetaOrganizationNotEnrolledInBetaException` (HTTP status 400, error code `organization_not_enrolled_in_beta`)
+
+  The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
+
+- `AnthropicBetaCannotSignOutManagedMemberException` (HTTP status 403, error code `cannot_sign_out_managed_member`)
+
+  The member has the `managed` role, and this API key or token cannot sign them out. The error message says which keys and tokens can.
+
+- `AnthropicBetaCannotSignOutMembershipAdminException` (HTTP status 403, error code `cannot_sign_out_membership_admin`)
+
+  The member is a membership admin, and the person the API key or token belongs to is not allowed to sign out membership admins.
+
+- `AnthropicBetaCannotSignOutOwnerException` (HTTP status 403, error code `cannot_sign_out_owner`)
+
+  The member is an owner or has owner permissions, and this API key or token cannot sign them out. In a Claude Enterprise organization, an API key with the `write:members` scope can.
+
+- `AnthropicBetaCannotSignOutPrivilegedMemberException` (HTTP status 403, error code `cannot_sign_out_privileged_member`)
+
+  This OAuth token cannot sign out a membership admin or a member whose roles grant owner, user management, or identity and access management.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -98250,6 +98382,38 @@ Create Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicExternalKeyValidationFailedException` (HTTP status 400, error code `external_key_validation_failed`)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `AnthropicExternalKeyValidationTimedOutException` (HTTP status 400, error code `external_key_validation_timed_out`)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `AnthropicKeyProfileMismatchException` (HTTP status 400, error code `key_profile_mismatch`)
+
+  The External Key is bound to a user profile, and the Workspace does not have that user profile. A Workspace can use only a key bound to its own user profile or a key that isn't bound to one.
+
+- `AnthropicUserProfileNotFoundException` (HTTP status 400, error code `user_profile_not_found`)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `AnthropicWorkspacePolicyViolationException` (HTTP status 400, error code `workspace_policy_violation`)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `AnthropicExternalKeyChangedException` (HTTP status 409, error code `external_key_changed`)
+
+  The external key changed while the request was validating it. Send the request again.
+
 #### Example
 
 ```csharp
@@ -98590,6 +98754,38 @@ Update Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicExternalKeyValidationFailedException` (HTTP status 400, error code `external_key_validation_failed`)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `AnthropicExternalKeyValidationTimedOutException` (HTTP status 400, error code `external_key_validation_timed_out`)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `AnthropicKeyProfileMismatchException` (HTTP status 400, error code `key_profile_mismatch`)
+
+  The External Key is bound to a user profile, and the Workspace does not have that user profile. A Workspace can use only a key bound to its own user profile or a key that isn't bound to one.
+
+- `AnthropicUserProfileNotFoundException` (HTTP status 400, error code `user_profile_not_found`)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `AnthropicWorkspacePolicyViolationException` (HTTP status 400, error code `workspace_policy_violation`)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `AnthropicExternalKeyChangedException` (HTTP status 409, error code `external_key_changed`)
+
+  The external key changed while the request was validating it. Send the request again.
+
 #### Example
 
 ```csharp
@@ -98739,6 +98935,14 @@ Archive Workspace
   - `required string? UserProfileID`
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -99190,6 +99394,14 @@ Changes take effect within about an hour.
 
     ID of the Workspace this entry applies to.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -99398,6 +99610,18 @@ Create Workspace Member
 
     - `WorkspaceUser("workspace_user")`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicWorkspaceMemberLimitExceededException` (HTTP status 400, error code `workspace_member_limit_exceeded`)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -99564,6 +99788,18 @@ Update Workspace Member
 
     - `WorkspaceUser("workspace_user")`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicWorkspaceMemberLimitExceededException` (HTTP status 400, error code `workspace_member_limit_exceeded`)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -99631,6 +99867,14 @@ Delete Workspace Member
   - `required string WorkspaceID`
 
     ID of the Workspace.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -100108,6 +100352,14 @@ accounts cannot be added and are rejected.
 
     - `WorkspaceUser("workspace_user")`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -100576,6 +100828,14 @@ rejected.
 
     - `WorkspaceUser("workspace_user")`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -100785,6 +101045,14 @@ membership. Archived workspaces return 400.
   - `required string WorkspaceID`
 
     Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -101117,6 +101385,14 @@ compliance settings.
 
       - `JsonElement Type = "disabled"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -101169,13 +101445,13 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 - `SummaryListParams parameters`
 
-  - `required DateOnly startingDate` (query parameter)
+  - `required string startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of the date range (inclusive). Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate` (query parameter)
+  - `string? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive). Data is typically available with a 1-day lag, so this can be at most today — which is also the default when omitted, making the last entry cover the most recent available day. Data may be revised by a few percent over the following days. The range may span at most 366 days.
 
@@ -101429,13 +101705,13 @@ the `read:analytics` scope.
 
 - `UserListParams parameters`
 
-  - `DateOnly? date` (query parameter)
+  - `string? date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get user activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate` (query parameter)
+  - `string? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
@@ -101473,7 +101749,7 @@ the `read:analytics` scope.
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `DateOnly? startingDate` (query parameter)
+  - `string? startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -101927,7 +102203,7 @@ the `read:analytics` scope.
 
       Number of the user's Slack messages that made them active: @-mentions, direct messages, group direct message asks, and thread posts Claude answered. Other messages are not counted. Null when Claude Tag data cannot be read for the request. Otherwise, 0 on a row filtered by project, and null on any other row when no covered day was measured.
 
-  - `DateOnly? LastActivityDate`
+  - `string? LastActivityDate`
 
     Most recent UTC day (YYYY-MM-DD) on which the user had any counted activity, within the requested window: equal to the requested `date` in single-day mode, and to the latest active day from `starting_date` (inclusive) to `ending_date` (exclusive) in date-range rollup mode — never a day earlier than the window start. On filtered requests (`filter[]`) only days matching the filter count: with `filter[]=rbac_group_id:{id}` it is the last day the user was active while a member of that group, consistent with the row's other metrics. On grouped (`group_by[]`) rows it is the latest day any member of the group was active (the requested `date` in single-day mode). Omitted from the response while last-activity reporting is not enabled for this organization.
 
@@ -102147,13 +102423,13 @@ plan. Requires an API key with the `read:analytics` scope.
 
 - `ProjectListParams parameters`
 
-  - `DateOnly? date` (query parameter)
+  - `string? date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get project activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate` (query parameter)
+  - `string? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
@@ -102193,7 +102469,7 @@ plan. Requires an API key with the `read:analytics` scope.
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `DateOnly? startingDate` (query parameter)
+  - `string? startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -102323,13 +102599,13 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 - `ConnectorListParams parameters`
 
-  - `DateOnly? date` (query parameter)
+  - `string? date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get connector usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate` (query parameter)
+  - `string? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
@@ -102371,7 +102647,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `DateOnly? startingDate` (query parameter)
+  - `string? startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -102597,13 +102873,13 @@ range-rollup mode like `/skills`.
 
 - `PluginListParams parameters`
 
-  - `DateOnly? date` (query parameter)
+  - `string? date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get plugin usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate` (query parameter)
+  - `string? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
@@ -102645,7 +102921,7 @@ range-rollup mode like `/skills`.
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `DateOnly? startingDate` (query parameter)
+  - `string? startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -102789,13 +103065,13 @@ on a Claude Enterprise plan. Requires an API key with the
 
 - `SkillListParams parameters`
 
-  - `DateOnly? date` (query parameter)
+  - `string? date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get skill usage for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
     format: date
 
-  - `DateOnly? endingDate` (query parameter)
+  - `string? endingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. End of the date range (exclusive); only valid with `starting_date`. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day), so this can be at most today — which is also the default when omitted, resolved once when the first page is served and reused for the rest of the pagination sequence. At most 366 days after `starting_date`.
 
@@ -102837,7 +103113,7 @@ on a Claude Enterprise plan. Requires an API key with the
 
     Opaque cursor from a previous response's `next_page` field.
 
-  - `DateOnly? startingDate` (query parameter)
+  - `string? startingDate` (query parameter)
 
     UTC date in YYYY-MM-DD format. Start of a date range (inclusive). Enables rollup mode: one row per entity aggregated over the whole range — addable counters are summed across days, and a distinct count is never summed where summing could double-count (a field's range value is recomputed exactly over the window, approximate via HLL with typical error under 2%, null, or — for the creation-event counts, whose per-day values cannot overlap — a per-day sum that is itself exact; each field's own description says which). Use either `date` or `starting_date`, not both. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -103068,7 +103344,7 @@ can be broken out per product, per member, or per RBAC group via
 
 - `ArtifactListParams parameters`
 
-  - `required DateOnly date` (query parameter)
+  - `required string date` (query parameter)
 
     UTC date in YYYY-MM-DD format. The day to get artifact activity for. Data is typically available with a 1-day lag (varies by query; the error for a too-recent date names the latest available day) and may be revised by a few percent over the following days. No earlier than 2026-01-01.
 
@@ -104983,7 +105259,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
       - `From200kTo1M("200k-1M")`
 
-    - `required InferenceGeo? InferenceGeo`
+    - `required BetaAnalyticsUsageBucketedResultInferenceGeo? InferenceGeo`
 
       Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
 
@@ -105023,7 +105299,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
       Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack, for some Claude Tag usage that has no channel recorded, and for usage recorded before channel attribution was enabled.
 
-    - `required Speed? Speed`
+    - `required BetaAnalyticsUsageBucketedResultSpeed? Speed`
 
       Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `speed` is in `group_by[]`.
 
@@ -105302,7 +105578,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
 - `class BetaAnalyticsUsageUsersItem`
 
-  - `required Actor Actor`
+  - `required BetaAnalyticsUsageUsersItemActor Actor`
 
     The user this row's usage or cost is attributed to. Always a `user_actor`.
 
@@ -105380,7 +105656,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     format: date-time
 
-  - `required InferenceGeo? InferenceGeo`
+  - `required BetaAnalyticsUsageUsersItemInferenceGeo? InferenceGeo`
 
     Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
 
@@ -105420,7 +105696,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack, for some Claude Tag usage that has no channel recorded, and for usage recorded before channel attribution was enabled.
 
-  - `required Speed? Speed`
+  - `required BetaAnalyticsUsageUsersItemSpeed? Speed`
 
     Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `speed` is in `group_by[]`.
 
@@ -106133,7 +106409,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     format: date-time
 
-  - `required InferenceGeo? InferenceGeo`
+  - `required BetaAnalyticsCostUsersItemInferenceGeo? InferenceGeo`
 
     Inference region of the usage or cost. Null unless `inference_geo` is in `group_by[]`; it can also be null on grouped rows where the region is not set (the rows that `inference_geos[]=not_available` matches).
 
@@ -106165,7 +106441,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack, for some Claude Tag usage that has no channel recorded, and for usage recorded before channel attribution was enabled.
 
-  - `required Speed? Speed`
+  - `required BetaAnalyticsCostUsersItemSpeed? Speed`
 
     Inference speed mode of the usage or cost: `fast` or `standard`. Null unless `speed` is in `group_by[]`.
 
@@ -106488,7 +106764,7 @@ Anthropic account team.
 
     - `Weekly("weekly")`
 
-  - `required Scope Scope`
+  - `required BetaSpendLimitScope Scope`
 
     What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -106555,6 +106831,18 @@ Anthropic account team.
     RFC 3339 datetime at which the spend limit was last modified.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `AnthropicBetaSpendLimitsAdminApiWritesNotEnabledException` (HTTP status 403, error code `spend_limits_admin_api_writes_not_enabled`)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
 
 #### Example
 
@@ -106650,7 +106938,7 @@ Retrieve a spend limit by ID.
 
     - `Weekly("weekly")`
 
-  - `required Scope Scope`
+  - `required BetaSpendLimitScope Scope`
 
     What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -106718,6 +107006,14 @@ Retrieve a spend limit by ID.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaSpendLimitsAdminApiWritesNotEnabledException` (HTTP status 403, error code `spend_limits_admin_api_writes_not_enabled`)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
+
 #### Example
 
 ```csharp
@@ -106780,6 +107076,18 @@ workspace limits through the API is in an early access preview.
   - `JsonElement Type = "spend_limit_deleted"`
 
   - `required string ID`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `AnthropicBetaSpendLimitsAdminApiWritesNotEnabledException` (HTTP status 403, error code `spend_limits_admin_api_writes_not_enabled`)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
 
 #### Example
 
@@ -107034,7 +107342,7 @@ come in a fixed order that is not creation order.
 
     - `Weekly("weekly")`
 
-  - `required Scope Scope`
+  - `required BetaSpendLimitScope Scope`
 
     What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -107101,6 +107409,14 @@ come in a fixed order that is not creation order.
     RFC 3339 datetime at which the spend limit was last modified.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicOrganizationTypeNotSupportedException` (HTTP status 400, error code `organization_type_not_supported`)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
 
 #### Example
 
@@ -107253,7 +107569,7 @@ organizations.
 
     The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-  - `required Scope Scope`
+  - `required BetaSpendSummaryScope Scope`
 
     - `class BetaSpendLimitUserScope`
 
@@ -107340,6 +107656,14 @@ organizations.
       the same.
 
   - `required string SpendLimitID`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicOrganizationTypeNotSupportedException` (HTTP status 400, error code `organization_type_not_supported`)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
 
 #### Example
 
@@ -107535,7 +107859,7 @@ Requests whose requester is no longer a member are excluded.
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `required Scope Scope`
+    - `required BetaSpendSummaryScope Scope`
 
       - `class BetaSpendLimitUserScope`
 
@@ -107827,7 +108151,7 @@ requester at the request's period.
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `required Scope Scope`
+    - `required BetaSpendSummaryScope Scope`
 
       - `class BetaSpendLimitUserScope`
 
@@ -108127,7 +108451,7 @@ the member was blocked on. Anthropic emails the requester unless
 
       Length of the window the limit resets over. `amount` caps spend within each period.
 
-    - `required Scope Scope`
+    - `required BetaSpendLimitScope Scope`
 
       What the limit applies to. A tagged union on `type`; each variant carries the identifier for its scope.
 
@@ -108227,7 +108551,7 @@ the member was blocked on. Anthropic emails the requester unless
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `required Scope Scope`
+    - `required BetaSpendSummaryScope Scope`
 
       - `class BetaSpendLimitUserScope`
 
@@ -108288,6 +108612,14 @@ the member was blocked on. Anthropic emails the requester unless
     - `Denied("denied")`
 
     - `Pending("pending")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -108498,7 +108830,7 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
       The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
-    - `required Scope Scope`
+    - `required BetaSpendSummaryScope Scope`
 
       - `class BetaSpendLimitUserScope`
 
@@ -108593,6 +108925,14 @@ Idempotent on `denied`; denying an already-`approved` request returns
     - `Denied("denied")`
 
     - `Pending("pending")`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -108722,6 +109062,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -109012,6 +109360,14 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -109072,6 +109428,22 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `required string ID`
 
     ID of the RBAC Group.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicRbacGroupGrantsOwnerAccessException` (HTTP status 400, error code `rbac_group_grants_owner_access`)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `AnthropicRbacGroupOwnerAccessUnconfirmedException` (HTTP status 400, error code `rbac_group_owner_access_unconfirmed`)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -109238,6 +109610,22 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the User.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicRbacGroupGrantsOwnerAccessException` (HTTP status 400, error code `rbac_group_grants_owner_access`)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `AnthropicRbacGroupOwnerAccessUnconfirmedException` (HTTP status 400, error code `rbac_group_owner_access_unconfirmed`)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -109304,6 +109692,22 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `required string UserID`
 
     ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicRbacGroupGrantsOwnerAccessException` (HTTP status 400, error code `rbac_group_grants_owner_access`)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `AnthropicRbacGroupOwnerAccessUnconfirmedException` (HTTP status 400, error code `rbac_group_owner_access_unconfirmed`)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -109406,6 +109810,18 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicOrganizationTypeNotSupportedException` (HTTP status 400, error code `organization_type_not_supported`)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `AnthropicParentOrganizationRequiredException` (HTTP status 400, error code `parent_organization_required`)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
 #### Example
 
 ```csharp
@@ -109505,6 +109921,22 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicOrganizationTypeNotSupportedException` (HTTP status 400, error code `organization_type_not_supported`)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `AnthropicParentOrganizationRequiredException` (HTTP status 400, error code `parent_organization_required`)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
+- `AnthropicRbacRoleNotFoundException` (HTTP status 404, error code `rbac_role_not_found`)
+
+  No RBAC Role with this ID was found.
 
 #### Example
 
@@ -109667,6 +110099,22 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
       - `JsonElement Type = "all_connectors"`
 
         Kind of resource the permission applies to.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicOrganizationTypeNotSupportedException` (HTTP status 400, error code `organization_type_not_supported`)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `AnthropicParentOrganizationRequiredException` (HTTP status 400, error code `parent_organization_required`)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
+- `AnthropicRbacRoleNotFoundException` (HTTP status 404, error code `rbac_role_not_found`)
+
+  No RBAC Role with this ID was found.
 
 #### Example
 
@@ -110086,6 +110534,34 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicBetaUnsupportedCharsetException` (HTTP status 400, error code `unsupported_charset`)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `AnthropicBetaPluginNameTakenException` (HTTP status 409, error code `plugin_name_taken`)
+
+  The marketplace already holds this name. `plugin_id` is the Plugin that holds it, and can be absent.
+
+- `AnthropicBetaSkillNameTakenException` (HTTP status 409, error code `skill_name_taken`)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
+- `AnthropicBetaRegistrationPendingException` (HTTP status 503, error code `registration_pending`)
+
+  The Plugin version was stored but is not yet usable in claude.ai. `plugin_id` and `plugin_version_id` identify what was stored.
 
 #### Example
 
@@ -110930,6 +111406,30 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicBetaScanFailedException` (HTTP status 400, error code `scan_failed`)
+
+  The version in `plugin_version_id` did not pass its content scan, so it cannot be served.
+
+- `AnthropicBetaScanPendingException` (HTTP status 409, error code `scan_pending`)
+
+  The content scan of the version in `plugin_version_id` is still running. Retry once the scan finishes.
+
+- `AnthropicBetaSkillNameTakenException` (HTTP status 409, error code `skill_name_taken`)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
 #### Example
 
 ```csharp
@@ -111640,6 +112140,14 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     The deleted Plugin's ID.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
 #### Example
 
 ```csharp
@@ -111981,6 +112489,30 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `required string? ReleaseNotes`
 
     As supplied with the upload; null when none were supplied.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `AnthropicBetaUnsupportedCharsetException` (HTTP status 400, error code `unsupported_charset`)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `AnthropicBetaSkillNameTakenException` (HTTP status 409, error code `skill_name_taken`)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
+- `AnthropicBetaRegistrationPendingException` (HTTP status 503, error code `registration_pending`)
+
+  The Plugin version was stored but is not yet usable in claude.ai. `plugin_id` and `plugin_version_id` identify what was stored.
 
 #### Example
 
@@ -112928,6 +113460,18 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
       **Deprecated**: This value is no longer needed. Remove it from your requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicCmekKeyNetworkBlockedException` (HTTP status 400, error code `cmek_key_network_blocked`)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
 #### Example
 
 ```csharp
@@ -113152,7 +113696,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     format: date-time
 
-  - `required InstallationPreference InstallationPreference`
+  - `required BetaPluginInstallationSettingInstallationPreference InstallationPreference`
 
     The setting the target holds for this Plugin. One of `required`, `auto_install`, `available`, `not_available`; a value this API does not yet name is returned as stored.
 
@@ -113168,7 +113712,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     The Plugin's ID.
 
-  - `required Target Target`
+  - `required BetaPluginInstallationSettingTarget Target`
 
     Whose setting this is: `organization` (the Plugin's own organization-wide setting) or `rbac_group` (one RBAC Group's own setting); `organization_member` does not occur here.
 
@@ -113441,7 +113985,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     format: date-time
 
-  - `required InstallationPreference InstallationPreference`
+  - `required BetaPluginInstallationSettingInstallationPreference InstallationPreference`
 
     The setting the target holds for this Plugin. One of `required`, `auto_install`, `available`, `not_available`; a value this API does not yet name is returned as stored.
 
@@ -113457,7 +114001,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     The Plugin's ID.
 
-  - `required Target Target`
+  - `required BetaPluginInstallationSettingTarget Target`
 
     Whose setting this is: `organization` (the Plugin's own organization-wide setting) or `rbac_group` (one RBAC Group's own setting); `organization_member` does not occur here.
 
@@ -114272,7 +114816,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     format: date-time
 
-  - `required DefaultInstallationPreference? DefaultInstallationPreference`
+  - `required BetaPluginMarketplaceDefaultInstallationPreference? DefaultInstallationPreference`
 
     Organization plugin marketplace: the organization-wide setting every Plugin in it with no setting of its own gets. Null for a member's personal plugin marketplace. One of `required`, `auto_install`, `available`, `not_available`; a value this API does not yet name is returned as stored.
 
@@ -114318,7 +114862,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
         The member's User ID.
 
-  - `required Source Source`
+  - `required BetaPluginMarketplaceSource Source`
 
     Where the plugin marketplace's Plugins come from: `manual` when they are uploaded; `github`, `gitlab` or `public_git` when they are synchronized from the Git repository the owner connected, into which nothing can be uploaded; `directory` is Anthropic's own catalog, which this API does not list. A value this API does not yet name is returned as stored.
 
@@ -114565,7 +115109,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     format: date-time
 
-  - `required DefaultInstallationPreference? DefaultInstallationPreference`
+  - `required BetaPluginMarketplaceDefaultInstallationPreference? DefaultInstallationPreference`
 
     Organization plugin marketplace: the organization-wide setting every Plugin in it with no setting of its own gets. Null for a member's personal plugin marketplace. One of `required`, `auto_install`, `available`, `not_available`; a value this API does not yet name is returned as stored.
 
@@ -114611,7 +115155,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
         The member's User ID.
 
-  - `required Source Source`
+  - `required BetaPluginMarketplaceSource Source`
 
     Where the plugin marketplace's Plugins come from: `manual` when they are uploaded; `github`, `gitlab` or `public_git` when they are synchronized from the Git repository the owner connected, into which nothing can be uploaded; `directory` is Anthropic's own catalog, which this API does not list. A value this API does not yet name is returned as stored.
 
@@ -114867,7 +115411,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     format: date-time
 
-  - `required DefaultInstallationPreference? DefaultInstallationPreference`
+  - `required BetaPluginMarketplaceDefaultInstallationPreference? DefaultInstallationPreference`
 
     Organization plugin marketplace: the organization-wide setting every Plugin in it with no setting of its own gets. Null for a member's personal plugin marketplace. One of `required`, `auto_install`, `available`, `not_available`; a value this API does not yet name is returned as stored.
 
@@ -114913,7 +115457,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
         The member's User ID.
 
-  - `required Source Source`
+  - `required BetaPluginMarketplaceSource Source`
 
     Where the plugin marketplace's Plugins come from: `manual` when they are uploaded; `github`, `gitlab` or `public_git` when they are synchronized from the Git repository the owner connected, into which nothing can be uploaded; `directory` is Anthropic's own catalog, which this API does not list. A value this API does not yet name is returned as stored.
 
@@ -115520,6 +116064,14 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `required bool Valid`
 
     True when marketplace.json is well-formed and no plugin would be skipped; warnings never make it false.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaUnsupportedCharsetException` (HTTP status 400, error code `unsupported_charset`)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
 
 #### Example
 
@@ -118401,7 +118953,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `required IReadOnlyList<EnabledEvent> EnabledEvents`
+  - `required IReadOnlyList<BetaNewOrganizationWebhookEndpointEnabledEvent> EnabledEvents`
 
     The event types delivered to the endpoint.
 
@@ -118676,7 +119228,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `required IReadOnlyList<EnabledEvent> EnabledEvents`
+  - `required IReadOnlyList<BetaOrganizationWebhookEndpointEnabledEvent> EnabledEvents`
 
     The event types delivered to the endpoint.
 
@@ -118929,7 +119481,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `required IReadOnlyList<EnabledEvent> EnabledEvents`
+  - `required IReadOnlyList<BetaOrganizationWebhookEndpointEnabledEvent> EnabledEvents`
 
     The event types delivered to the endpoint.
 
@@ -119019,7 +119571,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Notes about the endpoint.
 
-  - `IReadOnlyList<EnabledEvent> enabledEvents`
+  - `IReadOnlyList<WebhookUpdateParamsEnabledEvent> enabledEvents`
 
     The event types to deliver to the endpoint. Replaces the whole set; an empty list leaves it unchanged.
 
@@ -119208,7 +119760,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `required IReadOnlyList<EnabledEvent> EnabledEvents`
+  - `required IReadOnlyList<BetaOrganizationWebhookEndpointEnabledEvent> EnabledEvents`
 
     The event types delivered to the endpoint.
 
@@ -119444,6 +119996,14 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     ID of the deleted webhook endpoint.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```csharp
@@ -119635,6 +120195,14 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
   - `required string SigningSecret`
 
     The new signing secret. Deliveries are signed with it from now on, and no other response returns it.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicSandboxEgressRestrictedException` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -120031,6 +120599,42 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaSlackChannelSetUpSettingsRefusedException` (HTTP status 400, error code `slack_channel_set_up_settings_refused`)
+
+  The request set the channel up, and `settings` was then refused. The channel stays set up with every setting unset.
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `AnthropicBetaEnvironmentNotFoundException` (HTTP status 404, error code `environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `AnthropicBetaSlackChannelSetUpEnvironmentNotFoundException` (HTTP status 404, error code `slack_channel_set_up_environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `AnthropicBetaSlackChannelSetUpSettingsConflictException` (HTTP status 409, error code `slack_channel_set_up_settings_conflict`)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
 
 #### Example
 
@@ -120491,6 +121095,26 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```csharp
@@ -120939,6 +121563,26 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```csharp
@@ -121380,6 +122024,38 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `AnthropicBetaEnvironmentNotFoundException` (HTTP status 404, error code `environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `AnthropicBetaSlackChannelSetUpEnvironmentNotFoundException` (HTTP status 404, error code `slack_channel_set_up_environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `AnthropicBetaSlackChannelSetUpSettingsConflictException` (HTTP status 409, error code `slack_channel_set_up_settings_conflict`)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```csharp
@@ -121624,6 +122300,30 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
   - `required string ID`
 
     The removed channel's identifier.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `AnthropicBetaSlackChannelSetUpSettingsConflictException` (HTTP status 409, error code `slack_channel_set_up_settings_conflict`)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
 
 #### Example
 
@@ -122035,6 +122735,26 @@ List the set-up Slack workspaces the organization owns, newest first by `created
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -122484,6 +123204,26 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```csharp
@@ -122928,6 +123668,38 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `AnthropicBetaEnvironmentNotFoundException` (HTTP status 404, error code `environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `AnthropicBetaSlackChannelSetUpEnvironmentNotFoundException` (HTTP status 404, error code `slack_channel_set_up_environment_not_found`)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `AnthropicBetaSlackChannelSetUpSettingsConflictException` (HTTP status 409, error code `slack_channel_set_up_settings_conflict`)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```csharp
@@ -123200,6 +123972,26 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```csharp
@@ -123416,6 +124208,26 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
     Time of the last change to the Bundle.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -123656,6 +124468,26 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 
       The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```csharp
@@ -123890,6 +124722,26 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
 
       The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```csharp
@@ -124120,6 +124972,26 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
       The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```csharp
@@ -124315,6 +125187,26 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
   - `required string ID`
 
     The identifier the Bundle Target had.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `AnthropicBetaApiKeyScopeMissingException` (HTTP status 403, error code `api_key_scope_missing`)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `AnthropicBetaClaudeTagWritesNotEnabledException` (HTTP status 403, error code `claude_tag_writes_not_enabled`)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `AnthropicBetaComplianceConfigurationRestrictedException` (HTTP status 403, error code `compliance_configuration_restricted`)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `AnthropicBetaOrganizationLevelScopedApiKeyRequiredException` (HTTP status 403, error code `organization_level_scoped_api_key_required`)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 

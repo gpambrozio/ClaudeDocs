@@ -269,7 +269,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `JsonElement Type = "image"`
 
-                - `required Source Source`
+                - `required ImageBlockParamSource Source`
 
                   - `class Base64ImageSource`
 
@@ -321,7 +321,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `JsonElement Type = "document"`
 
-                - `required Source Source`
+                - `required DocumentBlockParamSource Source`
 
                   - `class Base64PdfSource`
 
@@ -345,11 +345,11 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `JsonElement Type = "content"`
 
-                    - `required Content Content`
+                    - `required ContentBlockSourceContent Content`
 
                       - `string`
 
-                      - `IReadOnlyList<ContentBlockSourceContent>`
+                      - `IReadOnlyList<MessageContentBlockSourceContent>`
 
                         - `class TextBlockParam`
 
@@ -451,7 +451,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `ToolUseBlockParamCaller Caller`
 
                   - `class DirectCaller`
 
@@ -495,7 +495,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   Create a cache control breakpoint at this content block.
 
-                - `Content Content`
+                - `ToolResultBlockParamContent Content`
 
                   - `string`
 
@@ -684,7 +684,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `required IReadOnlyDictionary<string, JsonElement> Input`
 
-                - `required Name Name`
+                - `required ServerToolUseBlockParamName Name`
 
                   - `WebSearch("web_search")`
 
@@ -704,7 +704,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `ServerToolUseBlockParamCaller Caller`
 
                   - `class DirectCaller`
 
@@ -760,7 +760,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `WebSearchToolResultBlockParamCaller Caller`
 
                   - `class DirectCaller`
 
@@ -776,7 +776,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `JsonElement Type = "web_fetch_tool_result"`
 
-                - `required Content Content`
+                - `required WebFetchToolResultBlockParamContent Content`
 
                   - `class WebFetchToolResultErrorBlockParam`
 
@@ -826,7 +826,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `WebFetchToolResultBlockParamCaller Caller`
 
                   - `class DirectCaller`
 
@@ -904,7 +904,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `JsonElement Type = "bash_code_execution_tool_result"`
 
-                - `required Content Content`
+                - `required BashCodeExecutionToolResultBlockParamContent Content`
 
                   - `class BashCodeExecutionToolResultErrorParam`
 
@@ -950,7 +950,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-                - `required Content Content`
+                - `required TextEditorCodeExecutionToolResultBlockParamContent Content`
 
                   - `class TextEditorCodeExecutionToolResultErrorParam`
 
@@ -976,7 +976,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                     - `required string Content`
 
-                    - `required FileType FileType`
+                    - `required TextEditorCodeExecutionViewResultBlockParamFileType FileType`
 
                       - `Text("text")`
 
@@ -1022,7 +1022,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                 - `JsonElement Type = "tool_search_tool_result"`
 
-                - `required Content Content`
+                - `required ToolSearchToolResultBlockParamContent Content`
 
                   - `class ToolSearchToolResultErrorParam`
 
@@ -1087,7 +1087,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `class SystemMessageParam`
 
-          - `required Content Content`
+          - `required SystemMessageParamContent Content`
 
             - `string`
 
@@ -1337,7 +1337,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../../../build-with-claude/streaming.md#streaming-with-sdks) for an example in each language.
 
-      - `System System`
+      - `ParamsSystem System`
 
         System prompt.
 
@@ -1381,7 +1381,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             minimum: 1024
 
-          - `Display? Display`
+          - `ThinkingConfigEnabledDisplay? Display`
 
             Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](../../../build-with-claude/thinking.md#controlling-thinking-display).
 
@@ -1547,7 +1547,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<ToolAllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -1591,7 +1591,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<ToolBash20250124AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -1657,7 +1657,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<CodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -1695,7 +1695,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<CodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -1729,7 +1729,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<CodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2150,7 +2150,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<MemoryTool20250818AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2409,7 +2409,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<ToolTextEditor20250124AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2443,7 +2443,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<ToolTextEditor20250429AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2477,7 +2477,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<ToolTextEditor20250728AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2517,7 +2517,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<WebSearchTool20250305AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2593,7 +2593,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<WebFetchTool20250910AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2735,7 +2735,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<WebSearchTool20260209AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2785,7 +2785,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<WebFetchTool20260209AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2847,7 +2847,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<WebFetchTool20260309AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2911,7 +2911,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<WebSearchTool20260318AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -2943,7 +2943,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             minimum: 1
 
-          - `ResponseInclusion ResponseInclusion`
+          - `WebSearchTool20260318ResponseInclusion ResponseInclusion`
 
             How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -2969,7 +2969,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<WebFetchTool20260318AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -3033,7 +3033,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `class ToolSearchToolBm25_20251119`
 
-          - `required Type Type`
+          - `required ToolSearchToolBm25_20251119Type Type`
 
             - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -3045,7 +3045,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<ToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -3069,7 +3069,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `class ToolSearchToolRegex20251119`
 
-          - `required Type Type`
+          - `required ToolSearchToolRegex20251119Type Type`
 
             - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -3081,7 +3081,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             This is how the tool will be called by the model and in `tool_use` blocks.
 
-          - `IReadOnlyList<AllowedCaller> AllowedCallers`
+          - `IReadOnlyList<ToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
             - `Direct("direct")`
 
@@ -3210,6 +3210,26 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicEnforcedSpendLimitReachedException` (HTTP status 429, error code `enforced_spend_limit_reached`)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
 
 ### Example
 
@@ -3496,6 +3516,18 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```csharp
@@ -3666,6 +3698,18 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```csharp
@@ -3835,6 +3879,18 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```csharp
@@ -3910,6 +3966,18 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
   - `required string ID`
 
     ID of the Message Batch.
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -4230,7 +4298,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `required Caller Caller`
+            - `required ToolUseBlockCaller Caller`
 
               - `class DirectCaller`
 
@@ -4310,7 +4378,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `JsonElement Type = "web_search_tool_result"`
 
-            - `required Caller Caller`
+            - `required WebSearchToolResultBlockCaller Caller`
 
               - `class DirectCaller`
 
@@ -4362,7 +4430,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `JsonElement Type = "web_fetch_tool_result"`
 
-            - `required Caller Caller`
+            - `required WebFetchToolResultBlockCaller Caller`
 
               - `class DirectCaller`
 
@@ -4374,7 +4442,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               - `class ServerToolCaller20260120`
 
-            - `required Content Content`
+            - `required WebFetchToolResultBlockContent Content`
 
               - `class WebFetchToolResultErrorBlock`
 
@@ -4560,7 +4628,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required TextEditorCodeExecutionToolResultBlockContent Content`
 
               - `class TextEditorCodeExecutionToolResultError`
 
@@ -4628,7 +4696,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `JsonElement Type = "tool_search_tool_result"`
 
-            - `required Content Content`
+            - `required ToolSearchToolResultBlockContent Content`
 
               - `class ToolSearchToolResultError`
 
@@ -5017,7 +5085,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               minimum: 0
 
-          - `required ServiceTier? ServiceTier`
+          - `required UsageServiceTier? ServiceTier`
 
             If the request used the priority, standard, or batch tier.
 
@@ -5027,7 +5095,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `Batch("batch")`
 
-          - `required Speed? Speed`
+          - `required UsageSpeed? Speed`
 
             The inference speed mode used for this request.
 
@@ -5144,6 +5212,22 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
     - `class MessageBatchExpiredResult`
 
       - `JsonElement Type = "expired"`
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -5660,7 +5744,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
               pattern: ^[a-zA-Z0-9_-]+$
 
-            - `required Caller Caller`
+            - `required ToolUseBlockCaller Caller`
 
               - `class DirectCaller`
 
@@ -5740,7 +5824,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `JsonElement Type = "web_search_tool_result"`
 
-            - `required Caller Caller`
+            - `required WebSearchToolResultBlockCaller Caller`
 
               - `class DirectCaller`
 
@@ -5792,7 +5876,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `JsonElement Type = "web_fetch_tool_result"`
 
-            - `required Caller Caller`
+            - `required WebFetchToolResultBlockCaller Caller`
 
               - `class DirectCaller`
 
@@ -5804,7 +5888,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
               - `class ServerToolCaller20260120`
 
-            - `required Content Content`
+            - `required WebFetchToolResultBlockContent Content`
 
               - `class WebFetchToolResultErrorBlock`
 
@@ -5990,7 +6074,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required TextEditorCodeExecutionToolResultBlockContent Content`
 
               - `class TextEditorCodeExecutionToolResultError`
 
@@ -6058,7 +6142,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `JsonElement Type = "tool_search_tool_result"`
 
-            - `required Content Content`
+            - `required ToolSearchToolResultBlockContent Content`
 
               - `class ToolSearchToolResultError`
 
@@ -6447,7 +6531,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
               minimum: 0
 
-          - `required ServiceTier? ServiceTier`
+          - `required UsageServiceTier? ServiceTier`
 
             If the request used the priority, standard, or batch tier.
 
@@ -6457,7 +6541,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `Batch("batch")`
 
-          - `required Speed? Speed`
+          - `required UsageSpeed? Speed`
 
             The inference speed mode used for this request.
 
@@ -6868,7 +6952,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             pattern: ^[a-zA-Z0-9_-]+$
 
-          - `required Caller Caller`
+          - `required ToolUseBlockCaller Caller`
 
             - `class DirectCaller`
 
@@ -6948,7 +7032,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `JsonElement Type = "web_search_tool_result"`
 
-          - `required Caller Caller`
+          - `required WebSearchToolResultBlockCaller Caller`
 
             - `class DirectCaller`
 
@@ -7000,7 +7084,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `JsonElement Type = "web_fetch_tool_result"`
 
-          - `required Caller Caller`
+          - `required WebFetchToolResultBlockCaller Caller`
 
             - `class DirectCaller`
 
@@ -7012,7 +7096,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             - `class ServerToolCaller20260120`
 
-          - `required Content Content`
+          - `required WebFetchToolResultBlockContent Content`
 
             - `class WebFetchToolResultErrorBlock`
 
@@ -7198,7 +7282,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-          - `required Content Content`
+          - `required TextEditorCodeExecutionToolResultBlockContent Content`
 
             - `class TextEditorCodeExecutionToolResultError`
 
@@ -7266,7 +7350,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `JsonElement Type = "tool_search_tool_result"`
 
-          - `required Content Content`
+          - `required ToolSearchToolResultBlockContent Content`
 
             - `class ToolSearchToolResultError`
 
@@ -7655,7 +7739,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
             minimum: 0
 
-        - `required ServiceTier? ServiceTier`
+        - `required UsageServiceTier? ServiceTier`
 
           If the request used the priority, standard, or batch tier.
 
@@ -7665,7 +7749,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `Batch("batch")`
 
-        - `required Speed? Speed`
+        - `required UsageSpeed? Speed`
 
           The inference speed mode used for this request.
 
@@ -8038,7 +8122,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           pattern: ^[a-zA-Z0-9_-]+$
 
-        - `required Caller Caller`
+        - `required ToolUseBlockCaller Caller`
 
           - `class DirectCaller`
 
@@ -8118,7 +8202,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `JsonElement Type = "web_search_tool_result"`
 
-        - `required Caller Caller`
+        - `required WebSearchToolResultBlockCaller Caller`
 
           - `class DirectCaller`
 
@@ -8170,7 +8254,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `JsonElement Type = "web_fetch_tool_result"`
 
-        - `required Caller Caller`
+        - `required WebFetchToolResultBlockCaller Caller`
 
           - `class DirectCaller`
 
@@ -8182,7 +8266,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           - `class ServerToolCaller20260120`
 
-        - `required Content Content`
+        - `required WebFetchToolResultBlockContent Content`
 
           - `class WebFetchToolResultErrorBlock`
 
@@ -8368,7 +8452,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-        - `required Content Content`
+        - `required TextEditorCodeExecutionToolResultBlockContent Content`
 
           - `class TextEditorCodeExecutionToolResultError`
 
@@ -8436,7 +8520,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `JsonElement Type = "tool_search_tool_result"`
 
-        - `required Content Content`
+        - `required ToolSearchToolResultBlockContent Content`
 
           - `class ToolSearchToolResultError`
 
@@ -8825,7 +8909,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
           minimum: 0
 
-      - `required ServiceTier? ServiceTier`
+      - `required UsageServiceTier? ServiceTier`
 
         If the request used the priority, standard, or batch tier.
 
@@ -8835,7 +8919,7 @@ await foreach (var messageBatchIndividualResponse in client.Messages.Batches.Res
 
         - `Batch("batch")`
 
-      - `required Speed? Speed`
+      - `required UsageSpeed? Speed`
 
         The inference speed mode used for this request.
 

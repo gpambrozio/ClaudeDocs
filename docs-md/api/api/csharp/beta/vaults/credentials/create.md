@@ -357,7 +357,7 @@ Create a Credential
 
     format: date-time
 
-  - `required Auth Auth`
+  - `required BetaManagedAgentsCredentialAuth Auth`
 
     Authentication configuration for this credential.
 
@@ -389,7 +389,7 @@ Create a Credential
 
           Token endpoint URL used to refresh the access token.
 
-        - `required TokenEndpointAuth TokenEndpointAuth`
+        - `required BetaManagedAgentsMcpOAuthRefreshResponseTokenEndpointAuth TokenEndpointAuth`
 
           - `class BetaManagedAgentsTokenEndpointAuthNoneResponse`
 

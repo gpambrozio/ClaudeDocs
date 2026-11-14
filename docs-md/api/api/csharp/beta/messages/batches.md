@@ -269,7 +269,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `JsonElement Type = "image"`
 
-                - `required Source Source`
+                - `required BetaImageBlockParamSource Source`
 
                   - `class BetaBase64ImageSource`
 
@@ -321,7 +321,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `JsonElement Type = "document"`
 
-                - `required Source Source`
+                - `required BetaRequestDocumentBlockSource Source`
 
                   - `class BetaBase64PdfSource`
 
@@ -345,11 +345,11 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `JsonElement Type = "content"`
 
-                    - `required Content Content`
+                    - `required BetaContentBlockSourceContent Content`
 
                       - `string`
 
-                      - `IReadOnlyList<BetaContentBlockSourceContent>`
+                      - `IReadOnlyList<MessageBetaContentBlockSourceContent>`
 
                         - `class BetaTextBlockParam`
 
@@ -451,7 +451,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `BetaToolUseBlockParamCaller Caller`
 
                   - `class BetaDirectCaller`
 
@@ -495,7 +495,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   Create a cache control breakpoint at this content block.
 
-                - `Content Content`
+                - `BetaToolResultBlockParamContent Content`
 
                   - `string`
 
@@ -684,7 +684,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `required IReadOnlyDictionary<string, JsonElement> Input`
 
-                - `required Name Name`
+                - `required BetaServerToolUseBlockParamName Name`
 
                   - `Advisor("advisor")`
 
@@ -706,7 +706,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `BetaServerToolUseBlockParamCaller Caller`
 
                   - `class BetaDirectCaller`
 
@@ -762,7 +762,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `BetaWebSearchToolResultBlockParamCaller Caller`
 
                   - `class BetaDirectCaller`
 
@@ -778,7 +778,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `JsonElement Type = "web_fetch_tool_result"`
 
-                - `required Content Content`
+                - `required BetaWebFetchToolResultBlockParamContent Content`
 
                   - `class BetaWebFetchToolResultErrorBlockParam`
 
@@ -828,7 +828,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   Create a cache control breakpoint at this content block.
 
-                - `Caller Caller`
+                - `BetaWebFetchToolResultBlockParamCaller Caller`
 
                   - `class BetaDirectCaller`
 
@@ -844,13 +844,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `JsonElement Type = "advisor_tool_result"`
 
-                - `required Content Content`
+                - `required BetaAdvisorToolResultBlockParamContent Content`
 
                   - `class BetaAdvisorToolResultErrorParam`
 
                     - `JsonElement Type = "advisor_tool_result_error"`
 
-                    - `required ErrorCode ErrorCode`
+                    - `required BetaAdvisorToolResultErrorParamErrorCode ErrorCode`
 
                       - `MaxUsesExceeded("max_uses_exceeded")`
 
@@ -958,13 +958,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `JsonElement Type = "bash_code_execution_tool_result"`
 
-                - `required Content Content`
+                - `required BetaBashCodeExecutionToolResultBlockParamContent Content`
 
                   - `class BetaBashCodeExecutionToolResultErrorParam`
 
                     - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
-                    - `required ErrorCode ErrorCode`
+                    - `required BetaBashCodeExecutionToolResultErrorParamErrorCode ErrorCode`
 
                       - `InvalidToolInput("invalid_tool_input")`
 
@@ -1004,13 +1004,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-                - `required Content Content`
+                - `required BetaTextEditorCodeExecutionToolResultBlockParamContent Content`
 
                   - `class BetaTextEditorCodeExecutionToolResultErrorParam`
 
                     - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
-                    - `required ErrorCode ErrorCode`
+                    - `required BetaTextEditorCodeExecutionToolResultErrorParamErrorCode ErrorCode`
 
                       - `InvalidToolInput("invalid_tool_input")`
 
@@ -1030,7 +1030,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `required string Content`
 
-                    - `required FileType FileType`
+                    - `required BetaTextEditorCodeExecutionViewResultBlockParamFileType FileType`
 
                       - `Text("text")`
 
@@ -1076,13 +1076,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `JsonElement Type = "tool_search_tool_result"`
 
-                - `required Content Content`
+                - `required BetaToolSearchToolResultBlockParamContent Content`
 
                   - `class BetaToolSearchToolResultErrorParam`
 
                     - `JsonElement Type = "tool_search_tool_result_error"`
 
-                    - `required ErrorCode ErrorCode`
+                    - `required BetaToolSearchToolResultErrorParamErrorCode ErrorCode`
 
                       - `InvalidToolInput("invalid_tool_input")`
 
@@ -1150,7 +1150,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   Create a cache control breakpoint at this content block.
 
-                - `Content Content`
+                - `BetaRequestMcpToolResultBlockParamContent Content`
 
                   - `string`
 
@@ -1211,7 +1211,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   The block's signature as returned, to be sent back verbatim
 
-                - `IReadOnlyList<ToolChange>? ToolChanges`
+                - `IReadOnlyList<BetaCompactionBlockParamToolChange>? ToolChanges`
 
                   The tool changes of the compacted range, as the server returned them on this block: the `tool_addition` and `tool_removal` entries that take the request's `tools` to the tool set in effect at the end of the range. Send them back unchanged with the block.
 
@@ -1229,7 +1229,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `JsonElement Type = "tool_addition"`
 
-                    - `required Tool Tool`
+                    - `required BetaRequestToolAdditionBlockTool Tool`
 
                       - `class BetaToolChangeToolReference`
 
@@ -1276,7 +1276,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           - `class BetaTool`
 
-                            - `Type? Type`
+                            - `BetaToolType? Type`
 
                             - `required InputSchema InputSchema`
 
@@ -1298,7 +1298,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolAllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -1342,7 +1342,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolBash20241022AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -1376,7 +1376,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolBash20250124AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -1410,7 +1410,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaCodeExecutionTool20250522AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -1442,7 +1442,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaCodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -1480,7 +1480,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaCodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -1514,7 +1514,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaCodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -1947,7 +1947,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolComputerUse20241022AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -1987,7 +1987,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaMemoryTool20250818AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2033,7 +2033,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolComputerUse20250124AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2073,7 +2073,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolTextEditor20241022AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2119,7 +2119,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolComputerUse20251124AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2388,7 +2388,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolTextEditor20250124AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2422,7 +2422,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolTextEditor20250429AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2456,7 +2456,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolTextEditor20250728AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2496,7 +2496,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebSearchTool20250305AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2572,7 +2572,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebFetchTool20250910AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2714,7 +2714,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebSearchTool20260209AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2764,7 +2764,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebFetchTool20260209AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2826,7 +2826,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebFetchTool20260309AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2890,7 +2890,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebSearchTool20260318AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -2922,7 +2922,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               minimum: 1
 
-                            - `ResponseInclusion ResponseInclusion`
+                            - `BetaWebSearchTool20260318ResponseInclusion ResponseInclusion`
 
                               How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -2948,7 +2948,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaWebFetchTool20260318AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -3156,7 +3156,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           - `class BetaToolSearchToolBm25_20251119`
 
-                            - `required Type Type`
+                            - `required BetaToolSearchToolBm25_20251119Type Type`
 
                               - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -3168,7 +3168,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -3192,7 +3192,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           - `class BetaToolSearchToolRegex20251119`
 
-                            - `required Type Type`
+                            - `required BetaToolSearchToolRegex20251119Type Type`
 
                               - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -3204,7 +3204,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                               This is how the tool will be called by the model and in `tool_use` blocks.
 
-                            - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                            - `IReadOnlyList<BetaToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
                               - `Direct("direct")`
 
@@ -3293,7 +3293,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `JsonElement Type = "tool_removal"`
 
-                    - `required Tool Tool`
+                    - `required BetaRequestToolRemovalBlockTool Tool`
 
                       - `class BetaToolChangeToolReference`
 
@@ -3431,7 +3431,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Never("never")`
 
-          - `Content Content`
+          - `BetaSystemMessageParamContent Content`
 
             - `string`
 
@@ -3467,7 +3467,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
             empty `{}` is accepted on a message that carries content; a message
             with neither content nor output_config fields is rejected.
 
-            - `Effort? Effort`
+            - `BetaSystemMessageOutputConfigEffort? Effort`
 
               How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer.
 
@@ -3525,7 +3525,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             maxItems: 20
 
-            - `required Type Type`
+            - `required BetaSkillParamsType Type`
 
               Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
@@ -3601,7 +3601,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `JsonElement Type = "input_tokens"`
 
-                - `required long Value`
+                - `required long ValueValue`
 
                   minimum: 1
 
@@ -3788,7 +3788,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 minimum: 0
 
-          - `Speed? Speed`
+          - `BetaFallbackParamSpeed? Speed`
 
             The inference speed mode for the fallback attempt that uses this `fallbacks` entry's `model`. If you leave it out, the attempt runs at `fast` speed only when the request sets `speed` to `fast` and your organization can use fast mode on `model`.
 
@@ -3834,7 +3834,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `DropBlock("drop_block")`
 
-              - `Display? Display`
+              - `BetaThinkingConfigEnabledDisplay? Display`
 
                 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](../../../../build-with-claude/thinking.md#controlling-thinking-display).
 
@@ -3946,7 +3946,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](../../../../build-with-claude/streaming.md#streaming-with-sdks) for an example in each language.
 
-      - `System System`
+      - `ParamsSystem System`
 
         System prompt.
 
@@ -4455,6 +4455,26 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicEnforcedSpendLimitReachedException` (HTTP status 429, error code `enforced_spend_limit_reached`)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
 ### Example
 
 ```csharp
@@ -4931,6 +4951,18 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```csharp
@@ -5237,6 +5269,18 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```csharp
@@ -5542,6 +5586,18 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```csharp
@@ -5753,6 +5809,18 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
   - `required string ID`
 
     ID of the Message Batch.
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -6215,7 +6283,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               minLength: 1
 
-            - `Caller Caller`
+            - `BetaToolUseBlockCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -6327,7 +6395,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Caller Caller`
+            - `BetaWebSearchToolResultBlockCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -6343,7 +6411,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `JsonElement Type = "web_fetch_tool_result"`
 
-            - `required Content Content`
+            - `required BetaWebFetchToolResultBlockContent Content`
 
               - `class BetaWebFetchToolResultErrorBlock`
 
@@ -6421,7 +6489,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Caller Caller`
+            - `BetaWebFetchToolResultBlockCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -6551,13 +6619,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `JsonElement Type = "bash_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required BetaBashCodeExecutionToolResultBlockContent Content`
 
               - `class BetaBashCodeExecutionToolResultError`
 
                 - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaBashCodeExecutionToolResultErrorErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -6593,13 +6661,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required BetaTextEditorCodeExecutionToolResultBlockContent Content`
 
               - `class BetaTextEditorCodeExecutionToolResultError`
 
                 - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaTextEditorCodeExecutionToolResultErrorErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -6661,13 +6729,13 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `JsonElement Type = "tool_search_tool_result"`
 
-            - `required Content Content`
+            - `required BetaToolSearchToolResultBlockContent Content`
 
               - `class BetaToolSearchToolResultError`
 
                 - `JsonElement Type = "tool_search_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaToolSearchToolResultErrorErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -6717,7 +6785,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `JsonElement Type = "mcp_tool_result"`
 
-            - `required Content Content`
+            - `required BetaMcpToolResultBlockContent Content`
 
               - `string`
 
@@ -6782,7 +6850,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `JsonElement Type = "tool_addition"`
 
-                - `required Tool Tool`
+                - `required BetaResponseToolAdditionBlockTool Tool`
 
                   The tool made available: a reference to a `tools` entry or MCP toolset, or a `tool_definition` carrying the definition by value.
 
@@ -6834,7 +6902,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                         A custom tool definition, as sent.
 
-                        - `Type? Type`
+                        - `BetaResponseToolType? Type`
 
                         - `required BetaResponseToolInputSchema InputSchema`
 
@@ -6856,7 +6924,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaResponseToolAllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -6896,7 +6964,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolBash20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -6947,7 +7015,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolBash20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -6981,7 +7049,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20250522AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -7013,7 +7081,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -7051,7 +7119,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -7085,7 +7153,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -7518,7 +7586,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -7558,7 +7626,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaMemoryTool20250818AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -7604,7 +7672,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -7644,7 +7712,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -7690,7 +7758,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20251124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -7959,7 +8027,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -7993,7 +8061,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250429AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8027,7 +8095,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250728AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8067,7 +8135,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20250305AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8143,7 +8211,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20250910AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8287,7 +8355,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20260209AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8337,7 +8405,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260209AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8399,7 +8467,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260309AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8463,7 +8531,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20260318AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8495,7 +8563,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           minimum: 1
 
-                        - `ResponseInclusion ResponseInclusion`
+                        - `BetaWebSearchTool20260318ResponseInclusion ResponseInclusion`
 
                           How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -8521,7 +8589,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260318AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8729,7 +8797,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                       - `class BetaToolSearchToolBm25_20251119`
 
-                        - `required Type Type`
+                        - `required BetaToolSearchToolBm25_20251119Type Type`
 
                           - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -8741,7 +8809,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8765,7 +8833,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                       - `class BetaToolSearchToolRegex20251119`
 
-                        - `required Type Type`
+                        - `required BetaToolSearchToolRegex20251119Type Type`
 
                           - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -8777,7 +8845,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -8860,7 +8928,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `JsonElement Type = "tool_removal"`
 
-                - `required Tool Tool`
+                - `required BetaResponseToolRemovalBlockTool Tool`
 
                   A reference to the withdrawn `tools` entry, MCP tool or MCP toolset.
 
@@ -9345,7 +9413,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             minimum: 0
 
-          - `required IReadOnlyList<Iteration>? Iterations`
+          - `required IReadOnlyList<BetaUsageIteration>? Iterations`
 
             Per-iteration token usage breakdown.
 
@@ -9568,7 +9636,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               minimum: 0
 
-          - `required ServiceTier? ServiceTier`
+          - `required BetaUsageServiceTier? ServiceTier`
 
             If the request used the priority, standard, or batch tier.
 
@@ -9578,7 +9646,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Batch("batch")`
 
-          - `required Speed? Speed`
+          - `required BetaUsageSpeed? Speed`
 
             The inference speed mode used for this request.
 
@@ -9622,7 +9690,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
               `i` indexes the `messages` array you sent and `j` that message's `content`
               array — the same form error messages use.
 
-            - `required Reason Reason`
+            - `required BetaThinkingDroppedInputTransformationReason Reason`
 
               Which binding check removed the block: `model_binding_mismatch` — it was
               created by a model whose reasoning the requested model may not read;
@@ -9658,7 +9726,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
               `i` indexes the `messages` array you sent and `j` that message's `content`
               array — the same form error messages use.
 
-            - `required Reason Reason`
+            - `required BetaThinkingMismatchAllowedInputTransformationReason Reason`
 
               Which binding check the block failed; the block was shown to the model all
               the same. Always `prefix_binding_mismatch` today — the conversation before
@@ -9787,6 +9855,22 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
     - `class BetaMessageBatchExpiredResult`
 
       - `JsonElement Type = "expired"`
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicCmekKeyDisabledException` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -10309,7 +10393,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               minLength: 1
 
-            - `Caller Caller`
+            - `BetaToolUseBlockCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -10421,7 +10505,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Caller Caller`
+            - `BetaWebSearchToolResultBlockCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -10437,7 +10521,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `JsonElement Type = "web_fetch_tool_result"`
 
-            - `required Content Content`
+            - `required BetaWebFetchToolResultBlockContent Content`
 
               - `class BetaWebFetchToolResultErrorBlock`
 
@@ -10515,7 +10599,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-            - `Caller Caller`
+            - `BetaWebFetchToolResultBlockCaller Caller`
 
               - `class BetaDirectCaller`
 
@@ -10645,13 +10729,13 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `JsonElement Type = "bash_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required BetaBashCodeExecutionToolResultBlockContent Content`
 
               - `class BetaBashCodeExecutionToolResultError`
 
                 - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaBashCodeExecutionToolResultErrorErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -10687,13 +10771,13 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-            - `required Content Content`
+            - `required BetaTextEditorCodeExecutionToolResultBlockContent Content`
 
               - `class BetaTextEditorCodeExecutionToolResultError`
 
                 - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaTextEditorCodeExecutionToolResultErrorErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -10755,13 +10839,13 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `JsonElement Type = "tool_search_tool_result"`
 
-            - `required Content Content`
+            - `required BetaToolSearchToolResultBlockContent Content`
 
               - `class BetaToolSearchToolResultError`
 
                 - `JsonElement Type = "tool_search_tool_result_error"`
 
-                - `required ErrorCode ErrorCode`
+                - `required BetaToolSearchToolResultErrorErrorCode ErrorCode`
 
                   - `InvalidToolInput("invalid_tool_input")`
 
@@ -10811,7 +10895,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `JsonElement Type = "mcp_tool_result"`
 
-            - `required Content Content`
+            - `required BetaMcpToolResultBlockContent Content`
 
               - `string`
 
@@ -10876,7 +10960,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 - `JsonElement Type = "tool_addition"`
 
-                - `required Tool Tool`
+                - `required BetaResponseToolAdditionBlockTool Tool`
 
                   The tool made available: a reference to a `tools` entry or MCP toolset, or a `tool_definition` carrying the definition by value.
 
@@ -10928,7 +11012,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         A custom tool definition, as sent.
 
-                        - `Type? Type`
+                        - `BetaResponseToolType? Type`
 
                         - `required BetaResponseToolInputSchema InputSchema`
 
@@ -10950,7 +11034,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaResponseToolAllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -10990,7 +11074,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolBash20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11041,7 +11125,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolBash20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11075,7 +11159,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20250522AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11107,7 +11191,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11145,7 +11229,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11179,7 +11263,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaCodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11612,7 +11696,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11652,7 +11736,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaMemoryTool20250818AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11698,7 +11782,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11738,7 +11822,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20241022AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -11784,7 +11868,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolComputerUse20251124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12053,7 +12137,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250124AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12087,7 +12171,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250429AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12121,7 +12205,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolTextEditor20250728AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12161,7 +12245,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20250305AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12237,7 +12321,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20250910AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12381,7 +12465,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20260209AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12431,7 +12515,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260209AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12493,7 +12577,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260309AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12557,7 +12641,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebSearchTool20260318AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12589,7 +12673,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           minimum: 1
 
-                        - `ResponseInclusion ResponseInclusion`
+                        - `BetaWebSearchTool20260318ResponseInclusion ResponseInclusion`
 
                           How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -12615,7 +12699,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaWebFetchTool20260318AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12823,7 +12907,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       - `class BetaToolSearchToolBm25_20251119`
 
-                        - `required Type Type`
+                        - `required BetaToolSearchToolBm25_20251119Type Type`
 
                           - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -12835,7 +12919,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12859,7 +12943,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       - `class BetaToolSearchToolRegex20251119`
 
-                        - `required Type Type`
+                        - `required BetaToolSearchToolRegex20251119Type Type`
 
                           - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -12871,7 +12955,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                           This is how the tool will be called by the model and in `tool_use` blocks.
 
-                        - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                        - `IReadOnlyList<BetaToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
                           - `Direct("direct")`
 
@@ -12954,7 +13038,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                 - `JsonElement Type = "tool_removal"`
 
-                - `required Tool Tool`
+                - `required BetaResponseToolRemovalBlockTool Tool`
 
                   A reference to the withdrawn `tools` entry, MCP tool or MCP toolset.
 
@@ -13439,7 +13523,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             minimum: 0
 
-          - `required IReadOnlyList<Iteration>? Iterations`
+          - `required IReadOnlyList<BetaUsageIteration>? Iterations`
 
             Per-iteration token usage breakdown.
 
@@ -13662,7 +13746,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               minimum: 0
 
-          - `required ServiceTier? ServiceTier`
+          - `required BetaUsageServiceTier? ServiceTier`
 
             If the request used the priority, standard, or batch tier.
 
@@ -13672,7 +13756,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `Batch("batch")`
 
-          - `required Speed? Speed`
+          - `required BetaUsageSpeed? Speed`
 
             The inference speed mode used for this request.
 
@@ -13716,7 +13800,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
               `i` indexes the `messages` array you sent and `j` that message's `content`
               array — the same form error messages use.
 
-            - `required Reason Reason`
+            - `required BetaThinkingDroppedInputTransformationReason Reason`
 
               Which binding check removed the block: `model_binding_mismatch` — it was
               created by a model whose reasoning the requested model may not read;
@@ -13752,7 +13836,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
               `i` indexes the `messages` array you sent and `j` that message's `content`
               array — the same form error messages use.
 
-            - `required Reason Reason`
+            - `required BetaThinkingMismatchAllowedInputTransformationReason Reason`
 
               Which binding check the block failed; the block was shown to the model all
               the same. Always `prefix_binding_mismatch` today — the conversation before
@@ -14181,7 +14265,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             minLength: 1
 
-          - `Caller Caller`
+          - `BetaToolUseBlockCaller Caller`
 
             - `class BetaDirectCaller`
 
@@ -14293,7 +14377,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `Caller Caller`
+          - `BetaWebSearchToolResultBlockCaller Caller`
 
             - `class BetaDirectCaller`
 
@@ -14309,7 +14393,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `JsonElement Type = "web_fetch_tool_result"`
 
-          - `required Content Content`
+          - `required BetaWebFetchToolResultBlockContent Content`
 
             - `class BetaWebFetchToolResultErrorBlock`
 
@@ -14387,7 +14471,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-          - `Caller Caller`
+          - `BetaWebFetchToolResultBlockCaller Caller`
 
             - `class BetaDirectCaller`
 
@@ -14517,13 +14601,13 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `JsonElement Type = "bash_code_execution_tool_result"`
 
-          - `required Content Content`
+          - `required BetaBashCodeExecutionToolResultBlockContent Content`
 
             - `class BetaBashCodeExecutionToolResultError`
 
               - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
-              - `required ErrorCode ErrorCode`
+              - `required BetaBashCodeExecutionToolResultErrorErrorCode ErrorCode`
 
                 - `InvalidToolInput("invalid_tool_input")`
 
@@ -14559,13 +14643,13 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-          - `required Content Content`
+          - `required BetaTextEditorCodeExecutionToolResultBlockContent Content`
 
             - `class BetaTextEditorCodeExecutionToolResultError`
 
               - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
-              - `required ErrorCode ErrorCode`
+              - `required BetaTextEditorCodeExecutionToolResultErrorErrorCode ErrorCode`
 
                 - `InvalidToolInput("invalid_tool_input")`
 
@@ -14627,13 +14711,13 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `JsonElement Type = "tool_search_tool_result"`
 
-          - `required Content Content`
+          - `required BetaToolSearchToolResultBlockContent Content`
 
             - `class BetaToolSearchToolResultError`
 
               - `JsonElement Type = "tool_search_tool_result_error"`
 
-              - `required ErrorCode ErrorCode`
+              - `required BetaToolSearchToolResultErrorErrorCode ErrorCode`
 
                 - `InvalidToolInput("invalid_tool_input")`
 
@@ -14683,7 +14767,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `JsonElement Type = "mcp_tool_result"`
 
-          - `required Content Content`
+          - `required BetaMcpToolResultBlockContent Content`
 
             - `string`
 
@@ -14748,7 +14832,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               - `JsonElement Type = "tool_addition"`
 
-              - `required Tool Tool`
+              - `required BetaResponseToolAdditionBlockTool Tool`
 
                 The tool made available: a reference to a `tools` entry or MCP toolset, or a `tool_definition` carrying the definition by value.
 
@@ -14800,7 +14884,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       A custom tool definition, as sent.
 
-                      - `Type? Type`
+                      - `BetaResponseToolType? Type`
 
                       - `required BetaResponseToolInputSchema InputSchema`
 
@@ -14822,7 +14906,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaResponseToolAllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -14862,7 +14946,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolBash20241022AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -14913,7 +14997,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolBash20250124AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -14947,7 +15031,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaCodeExecutionTool20250522AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -14979,7 +15063,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaCodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -15017,7 +15101,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaCodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -15051,7 +15135,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaCodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -15484,7 +15568,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolComputerUse20241022AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -15524,7 +15608,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaMemoryTool20250818AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -15570,7 +15654,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolComputerUse20250124AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -15610,7 +15694,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolTextEditor20241022AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -15656,7 +15740,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolComputerUse20251124AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -15925,7 +16009,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolTextEditor20250124AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -15959,7 +16043,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolTextEditor20250429AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -15993,7 +16077,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolTextEditor20250728AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -16033,7 +16117,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaWebSearchTool20250305AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -16109,7 +16193,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaWebFetchTool20250910AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -16253,7 +16337,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaWebSearchTool20260209AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -16303,7 +16387,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaWebFetchTool20260209AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -16365,7 +16449,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaWebFetchTool20260309AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -16429,7 +16513,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaWebSearchTool20260318AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -16461,7 +16545,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         minimum: 1
 
-                      - `ResponseInclusion ResponseInclusion`
+                      - `BetaWebSearchTool20260318ResponseInclusion ResponseInclusion`
 
                         How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -16487,7 +16571,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaWebFetchTool20260318AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -16695,7 +16779,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                     - `class BetaToolSearchToolBm25_20251119`
 
-                      - `required Type Type`
+                      - `required BetaToolSearchToolBm25_20251119Type Type`
 
                         - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -16707,7 +16791,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -16731,7 +16815,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                     - `class BetaToolSearchToolRegex20251119`
 
-                      - `required Type Type`
+                      - `required BetaToolSearchToolRegex20251119Type Type`
 
                         - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -16743,7 +16827,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                         This is how the tool will be called by the model and in `tool_use` blocks.
 
-                      - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                      - `IReadOnlyList<BetaToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
                         - `Direct("direct")`
 
@@ -16826,7 +16910,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
               - `JsonElement Type = "tool_removal"`
 
-              - `required Tool Tool`
+              - `required BetaResponseToolRemovalBlockTool Tool`
 
                 A reference to the withdrawn `tools` entry, MCP tool or MCP toolset.
 
@@ -17311,7 +17395,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           minimum: 0
 
-        - `required IReadOnlyList<Iteration>? Iterations`
+        - `required IReadOnlyList<BetaUsageIteration>? Iterations`
 
           Per-iteration token usage breakdown.
 
@@ -17534,7 +17618,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             minimum: 0
 
-        - `required ServiceTier? ServiceTier`
+        - `required BetaUsageServiceTier? ServiceTier`
 
           If the request used the priority, standard, or batch tier.
 
@@ -17544,7 +17628,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           - `Batch("batch")`
 
-        - `required Speed? Speed`
+        - `required BetaUsageSpeed? Speed`
 
           The inference speed mode used for this request.
 
@@ -17588,7 +17672,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
             `i` indexes the `messages` array you sent and `j` that message's `content`
             array — the same form error messages use.
 
-          - `required Reason Reason`
+          - `required BetaThinkingDroppedInputTransformationReason Reason`
 
             Which binding check removed the block: `model_binding_mismatch` — it was
             created by a model whose reasoning the requested model may not read;
@@ -17624,7 +17708,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
             `i` indexes the `messages` array you sent and `j` that message's `content`
             array — the same form error messages use.
 
-          - `required Reason Reason`
+          - `required BetaThinkingMismatchAllowedInputTransformationReason Reason`
 
             Which binding check the block failed; the block was shown to the model all
             the same. Always `prefix_binding_mismatch` today — the conversation before
@@ -18015,7 +18099,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           minLength: 1
 
-        - `Caller Caller`
+        - `BetaToolUseBlockCaller Caller`
 
           - `class BetaDirectCaller`
 
@@ -18127,7 +18211,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `Caller Caller`
+        - `BetaWebSearchToolResultBlockCaller Caller`
 
           - `class BetaDirectCaller`
 
@@ -18143,7 +18227,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `JsonElement Type = "web_fetch_tool_result"`
 
-        - `required Content Content`
+        - `required BetaWebFetchToolResultBlockContent Content`
 
           - `class BetaWebFetchToolResultErrorBlock`
 
@@ -18221,7 +18305,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 
-        - `Caller Caller`
+        - `BetaWebFetchToolResultBlockCaller Caller`
 
           - `class BetaDirectCaller`
 
@@ -18351,13 +18435,13 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `JsonElement Type = "bash_code_execution_tool_result"`
 
-        - `required Content Content`
+        - `required BetaBashCodeExecutionToolResultBlockContent Content`
 
           - `class BetaBashCodeExecutionToolResultError`
 
             - `JsonElement Type = "bash_code_execution_tool_result_error"`
 
-            - `required ErrorCode ErrorCode`
+            - `required BetaBashCodeExecutionToolResultErrorErrorCode ErrorCode`
 
               - `InvalidToolInput("invalid_tool_input")`
 
@@ -18393,13 +18477,13 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `JsonElement Type = "text_editor_code_execution_tool_result"`
 
-        - `required Content Content`
+        - `required BetaTextEditorCodeExecutionToolResultBlockContent Content`
 
           - `class BetaTextEditorCodeExecutionToolResultError`
 
             - `JsonElement Type = "text_editor_code_execution_tool_result_error"`
 
-            - `required ErrorCode ErrorCode`
+            - `required BetaTextEditorCodeExecutionToolResultErrorErrorCode ErrorCode`
 
               - `InvalidToolInput("invalid_tool_input")`
 
@@ -18461,13 +18545,13 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `JsonElement Type = "tool_search_tool_result"`
 
-        - `required Content Content`
+        - `required BetaToolSearchToolResultBlockContent Content`
 
           - `class BetaToolSearchToolResultError`
 
             - `JsonElement Type = "tool_search_tool_result_error"`
 
-            - `required ErrorCode ErrorCode`
+            - `required BetaToolSearchToolResultErrorErrorCode ErrorCode`
 
               - `InvalidToolInput("invalid_tool_input")`
 
@@ -18517,7 +18601,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `JsonElement Type = "mcp_tool_result"`
 
-        - `required Content Content`
+        - `required BetaMcpToolResultBlockContent Content`
 
           - `string`
 
@@ -18582,7 +18666,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `JsonElement Type = "tool_addition"`
 
-            - `required Tool Tool`
+            - `required BetaResponseToolAdditionBlockTool Tool`
 
               The tool made available: a reference to a `tools` entry or MCP toolset, or a `tool_definition` carrying the definition by value.
 
@@ -18634,7 +18718,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                     A custom tool definition, as sent.
 
-                    - `Type? Type`
+                    - `BetaResponseToolType? Type`
 
                     - `required BetaResponseToolInputSchema InputSchema`
 
@@ -18656,7 +18740,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaResponseToolAllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -18696,7 +18780,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolBash20241022AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -18747,7 +18831,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolBash20250124AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -18781,7 +18865,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaCodeExecutionTool20250522AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -18813,7 +18897,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaCodeExecutionTool20250825AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -18851,7 +18935,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaCodeExecutionTool20260120AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -18885,7 +18969,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaCodeExecutionTool20260521AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -19318,7 +19402,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolComputerUse20241022AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -19358,7 +19442,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaMemoryTool20250818AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -19404,7 +19488,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolComputerUse20250124AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -19444,7 +19528,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolTextEditor20241022AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -19490,7 +19574,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolComputerUse20251124AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -19759,7 +19843,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolTextEditor20250124AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -19793,7 +19877,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolTextEditor20250429AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -19827,7 +19911,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolTextEditor20250728AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -19867,7 +19951,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaWebSearchTool20250305AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -19943,7 +20027,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaWebFetchTool20250910AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -20087,7 +20171,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaWebSearchTool20260209AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -20137,7 +20221,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaWebFetchTool20260209AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -20199,7 +20283,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaWebFetchTool20260309AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -20263,7 +20347,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaWebSearchTool20260318AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -20295,7 +20379,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       minimum: 1
 
-                    - `ResponseInclusion ResponseInclusion`
+                    - `BetaWebSearchTool20260318ResponseInclusion ResponseInclusion`
 
                       How this tool's result blocks appear in the API response when the result was consumed by a completed code_execution call in the same turn. 'full' returns the complete content (default). 'excluded' drops the nested server_tool_use and result block pair entirely. Results from direct calls, or from code_execution calls that paused before completing, are always returned in full so they can be sent back on the next turn.
 
@@ -20321,7 +20405,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaWebFetchTool20260318AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -20529,7 +20613,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                   - `class BetaToolSearchToolBm25_20251119`
 
-                    - `required Type Type`
+                    - `required BetaToolSearchToolBm25_20251119Type Type`
 
                       - `ToolSearchToolBm25_20251119("tool_search_tool_bm25_20251119")`
 
@@ -20541,7 +20625,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolSearchToolBm25_20251119AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -20565,7 +20649,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                   - `class BetaToolSearchToolRegex20251119`
 
-                    - `required Type Type`
+                    - `required BetaToolSearchToolRegex20251119Type Type`
 
                       - `ToolSearchToolRegex20251119("tool_search_tool_regex_20251119")`
 
@@ -20577,7 +20661,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
                       This is how the tool will be called by the model and in `tool_use` blocks.
 
-                    - `IReadOnlyList<AllowedCaller> AllowedCallers`
+                    - `IReadOnlyList<BetaToolSearchToolRegex20251119AllowedCaller> AllowedCallers`
 
                       - `Direct("direct")`
 
@@ -20660,7 +20744,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
             - `JsonElement Type = "tool_removal"`
 
-            - `required Tool Tool`
+            - `required BetaResponseToolRemovalBlockTool Tool`
 
               A reference to the withdrawn `tools` entry, MCP tool or MCP toolset.
 
@@ -21145,7 +21229,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         minimum: 0
 
-      - `required IReadOnlyList<Iteration>? Iterations`
+      - `required IReadOnlyList<BetaUsageIteration>? Iterations`
 
         Per-iteration token usage breakdown.
 
@@ -21368,7 +21452,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
           minimum: 0
 
-      - `required ServiceTier? ServiceTier`
+      - `required BetaUsageServiceTier? ServiceTier`
 
         If the request used the priority, standard, or batch tier.
 
@@ -21378,7 +21462,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
 
         - `Batch("batch")`
 
-      - `required Speed? Speed`
+      - `required BetaUsageSpeed? Speed`
 
         The inference speed mode used for this request.
 
@@ -21422,7 +21506,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
           `i` indexes the `messages` array you sent and `j` that message's `content`
           array — the same form error messages use.
 
-        - `required Reason Reason`
+        - `required BetaThinkingDroppedInputTransformationReason Reason`
 
           Which binding check removed the block: `model_binding_mismatch` — it was
           created by a model whose reasoning the requested model may not read;
@@ -21458,7 +21542,7 @@ await foreach (var betaMessageBatchIndividualResponse in client.Beta.Messages.Ba
           `i` indexes the `messages` array you sent and `j` that message's `content`
           array — the same form error messages use.
 
-        - `required Reason Reason`
+        - `required BetaThinkingMismatchAllowedInputTransformationReason Reason`
 
           Which binding check the block failed; the block was shown to the model all
           the same. Always `prefix_binding_mismatch` today — the conversation before

@@ -243,7 +243,7 @@ Create Skill
 
 ```bash
 ant beta:skills create \
-  --file 'Example data'
+  --file path/to/file
 ```
 
 #### Response (200)
@@ -1301,7 +1301,7 @@ Create Skill Version
 ```bash
 ant beta:skills:versions create \
   --skill-id skill_id \
-  --file 'Example data'
+  --file path/to/file
 ```
 
 ##### Response (200)

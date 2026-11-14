@@ -40,7 +40,7 @@ Create a new environment with the specified configuration.
 
         Environment type
 
-      - `Networking? Networking`
+      - `BetaCloudConfigParamsNetworking? Networking`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -79,7 +79,7 @@ Create a new environment with the specified configuration.
 
         Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
-        - `Type Type`
+        - `BetaPackagesParamsType Type`
 
           Package configuration type
 
@@ -293,7 +293,7 @@ Create a new environment with the specified configuration.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -397,13 +397,29 @@ Create a new environment with the specified configuration.
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
     - `Organization("organization")`
 
     - `Account("account")`
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicBetaEnvironmentCreateDisabledException` (HTTP status 403, error code `environment_create_disabled`)
+
+  Anthropic has turned off creating environments for this organization. Existing environments still work.
 
 ### Example
 
@@ -434,21 +450,11 @@ Console.WriteLine(betaEnvironment);
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -653,7 +659,7 @@ List environments with pagination support.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -757,13 +763,25 @@ List environments with pagination support.
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
     - `Organization("organization")`
 
     - `Account("account")`
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -798,21 +816,11 @@ await foreach (var item in page.Paginate())
           "type": "limited"
         },
         "packages": {
-          "apt": [
-            "string"
-          ],
-          "cargo": [
-            "string"
-          ],
-          "gem": [
-            "string"
-          ],
-          "go": [
-            "string"
-          ],
-          "npm": [
-            "string"
-          ],
+          "apt": [],
+          "cargo": [],
+          "gem": [],
+          "go": [],
+          "npm": [],
           "pip": [
             "pandas",
             "numpy"
@@ -1008,7 +1016,7 @@ Retrieve a specific environment by ID.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -1112,13 +1120,25 @@ Retrieve a specific environment by ID.
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
     - `Organization("organization")`
 
     - `Account("account")`
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -1152,21 +1172,11 @@ Console.WriteLine(betaEnvironment);
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -1199,7 +1209,7 @@ Update an existing environment's configuration.
 
   - `required string environmentID` (path parameter)
 
-  - `Config? config`
+  - `EnvironmentUpdateParamsConfig? config`
 
     Updated environment configuration
 
@@ -1214,7 +1224,7 @@ Update an existing environment's configuration.
 
         Environment type
 
-      - `Networking? Networking`
+      - `BetaCloudConfigParamsNetworking? Networking`
 
         Network configuration policy. Omit on update to preserve the existing value.
 
@@ -1253,7 +1263,7 @@ Update an existing environment's configuration.
 
         Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
-        - `Type Type`
+        - `BetaPackagesParamsType Type`
 
           Package configuration type
 
@@ -1305,7 +1315,7 @@ Update an existing environment's configuration.
 
     minLength: 1, maxLength: 256
 
-  - `Scope? scope`
+  - `EnvironmentUpdateParamsScope? scope`
 
     The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
@@ -1473,7 +1483,7 @@ Update an existing environment's configuration.
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -1577,13 +1587,37 @@ Update an existing environment's configuration.
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
     - `Organization("organization")`
 
     - `Account("account")`
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicBetaEnvironmentArchivedException` (HTTP status 400, error code `environment_archived`)
+
+  The environment is archived, so it cannot be updated.
+
+- `AnthropicBetaInvalidConfigTypeChangeException` (HTTP status 400, error code `invalid_config_type_change`)
+
+  `config.type` differs from the environment's stored type, which cannot change after creation.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `AnthropicBetaEnvironmentUpdateDisabledException` (HTTP status 403, error code `environment_update_disabled`)
+
+  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
 
 ### Example
 
@@ -1617,21 +1651,11 @@ Console.WriteLine(betaEnvironment);
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -1819,6 +1843,18 @@ Delete an environment by ID. Returns a confirmation of the deletion.
   - `required string ID`
 
     Environment identifier
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -2019,7 +2055,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -2123,13 +2159,25 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
     - `Organization("organization")`
 
     - `Account("account")`
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -2163,21 +2211,11 @@ Console.WriteLine(betaEnvironment);
       "type": "limited"
     },
     "packages": {
-      "apt": [
-        "string"
-      ],
-      "cargo": [
-        "string"
-      ],
-      "gem": [
-        "string"
-      ],
-      "go": [
-        "string"
-      ],
-      "npm": [
-        "string"
-      ],
+      "apt": [],
+      "cargo": [],
+      "gem": [],
+      "go": [],
+      "npm": [],
       "pip": [
         "pandas",
         "numpy"
@@ -2285,7 +2323,7 @@ Console.WriteLine(betaEnvironment);
 
     Environment type
 
-  - `Networking? Networking`
+  - `BetaCloudConfigParamsNetworking? Networking`
 
     Network configuration policy. Omit on update to preserve the existing value.
 
@@ -2324,7 +2362,7 @@ Console.WriteLine(betaEnvironment);
 
     Package manager configuration. Under `limited` networking, requires `networking.allow_package_managers` to be `true`. Omit on update to preserve the existing value.
 
-    - `Type Type`
+    - `BetaPackagesParamsType Type`
 
       Package configuration type
 
@@ -2370,7 +2408,7 @@ Console.WriteLine(betaEnvironment);
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 
-  - `required Config Config`
+  - `required BetaEnvironmentConfig Config`
 
     Environment configuration (either Anthropic Cloud or self-hosted)
 
@@ -2474,7 +2512,7 @@ Console.WriteLine(betaEnvironment);
 
     RFC 3339 timestamp when environment was last updated
 
-  - `Scope Scope`
+  - `BetaEnvironmentScope Scope`
 
     The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
@@ -2486,15 +2524,11 @@ Console.WriteLine(betaEnvironment);
 
 - `class BetaEnvironmentArchivedErrorDetails`
 
-  The environment is archived, so it cannot be updated.
-
   - `JsonElement ErrorCode = "environment_archived"`
 
 ### Beta Environment Create Disabled Error Details
 
 - `class BetaEnvironmentCreateDisabledErrorDetails`
-
-  Anthropic has turned off creating environments for this organization. Existing environments still work.
 
   - `JsonElement ErrorCode = "environment_create_disabled"`
 
@@ -2516,15 +2550,11 @@ Console.WriteLine(betaEnvironment);
 
 - `class BetaEnvironmentNotFoundErrorDetails`
 
-  `settings.environment_id` names no Environment within the organization's reach.
-
   - `JsonElement ErrorCode = "environment_not_found"`
 
 ### Beta Environment Update Disabled Error Details
 
 - `class BetaEnvironmentUpdateDisabledErrorDetails`
-
-  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
 
   - `JsonElement ErrorCode = "environment_update_disabled"`
 
@@ -2532,15 +2562,11 @@ Console.WriteLine(betaEnvironment);
 
 - `class BetaInvalidConfigTypeChangeErrorDetails`
 
-  `config.type` differs from the environment's stored type, which cannot change after creation.
-
   - `JsonElement ErrorCode = "invalid_config_type_change"`
 
 ### Beta Invalid Metadata Error Details
 
 - `class BetaInvalidMetadataErrorDetails`
-
-  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
 
   - `JsonElement ErrorCode = "invalid_metadata"`
 
@@ -2635,7 +2661,7 @@ Console.WriteLine(betaEnvironment);
 
   Under `limited` networking, requires `networking.allow_package_managers` to be `true`.
 
-  - `Type Type`
+  - `BetaPackagesParamsType Type`
 
     Package configuration type
 
@@ -2692,6 +2718,92 @@ Console.WriteLine(betaEnvironment);
   - `JsonElement Type = "unrestricted"`
 
     Network policy type
+
+## Errors
+
+### AnthropicBetaEnvironmentArchivedException
+
+HTTP status 400, error code `environment_archived`
+
+- `class AnthropicBetaEnvironmentArchivedException : AnthropicBadRequestException`
+
+  The environment is archived, so it cannot be updated.
+
+  - `string ErrorCode`
+
+  - `BetaEnvironmentArchivedErrorDetails Details`
+
+    - `JsonElement ErrorCode = "environment_archived"`
+
+### AnthropicBetaInvalidConfigTypeChangeException
+
+HTTP status 400, error code `invalid_config_type_change`
+
+- `class AnthropicBetaInvalidConfigTypeChangeException : AnthropicBadRequestException`
+
+  `config.type` differs from the environment's stored type, which cannot change after creation.
+
+  - `string ErrorCode`
+
+  - `BetaInvalidConfigTypeChangeErrorDetails Details`
+
+    - `JsonElement ErrorCode = "invalid_config_type_change"`
+
+### AnthropicBetaInvalidMetadataException
+
+HTTP status 400, error code `invalid_metadata`
+
+- `class AnthropicBetaInvalidMetadataException : AnthropicBadRequestException`
+
+  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
+
+  - `string ErrorCode`
+
+  - `BetaInvalidMetadataErrorDetails Details`
+
+    - `JsonElement ErrorCode = "invalid_metadata"`
+
+### AnthropicBetaEnvironmentCreateDisabledException
+
+HTTP status 403, error code `environment_create_disabled`
+
+- `class AnthropicBetaEnvironmentCreateDisabledException : AnthropicForbiddenException`
+
+  Anthropic has turned off creating environments for this organization. Existing environments still work.
+
+  - `string ErrorCode`
+
+  - `BetaEnvironmentCreateDisabledErrorDetails Details`
+
+    - `JsonElement ErrorCode = "environment_create_disabled"`
+
+### AnthropicBetaEnvironmentUpdateDisabledException
+
+HTTP status 403, error code `environment_update_disabled`
+
+- `class AnthropicBetaEnvironmentUpdateDisabledException : AnthropicForbiddenException`
+
+  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
+
+  - `string ErrorCode`
+
+  - `BetaEnvironmentUpdateDisabledErrorDetails Details`
+
+    - `JsonElement ErrorCode = "environment_update_disabled"`
+
+### AnthropicBetaEnvironmentNotFoundException
+
+HTTP status 404, error code `environment_not_found`
+
+- `class AnthropicBetaEnvironmentNotFoundException : AnthropicNotFoundException`
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+  - `string ErrorCode`
+
+  - `BetaEnvironmentNotFoundErrorDetails Details`
+
+    - `JsonElement ErrorCode = "environment_not_found"`
 
 ## Environments › Work
 
@@ -2934,6 +3046,18 @@ Retrieve detailed information about a specific work item.
   - `required string? StoppedAt`
 
     RFC 3339 timestamp when work execution stopped
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -3722,7 +3846,7 @@ Record a heartbeat for a work item to maintain the lease.
 
     Whether the heartbeat succeeded in extending the lease
 
-  - `required State State`
+  - `required BetaSelfHostedWorkHeartbeatResponseState State`
 
     Current state of the work item (active/stopping/stopped)
 
@@ -3739,6 +3863,14 @@ Record a heartbeat for a work item to maintain the lease.
   - `required long TtlSeconds`
 
     Effective TTL applied to the lease
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicBetaHeartbeatPreconditionFailedException` (HTTP status 412, error code `heartbeat_precondition_failed`)
+
+  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
 
 #### Example
 
@@ -4012,6 +4144,18 @@ Stop a work item, initiating graceful or forced shutdown.
   - `required string? StoppedAt`
 
     RFC 3339 timestamp when work execution stopped
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -4589,6 +4733,22 @@ Update work item metadata with merge semantics.
 
     RFC 3339 timestamp when work execution stopped
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicBetaInvalidMetadataException` (HTTP status 400, error code `invalid_metadata`)
+
+  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```csharp
@@ -4814,6 +4974,18 @@ Get statistics about the work queue for an environment.
   - `required long? WorkersPolling`
 
     Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 

@@ -247,6 +247,18 @@ Retrieve detailed information about a specific work item.
 
     RFC 3339 timestamp when work execution stopped
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```csharp
@@ -1034,7 +1046,7 @@ Record a heartbeat for a work item to maintain the lease.
 
     Whether the heartbeat succeeded in extending the lease
 
-  - `required State State`
+  - `required BetaSelfHostedWorkHeartbeatResponseState State`
 
     Current state of the work item (active/stopping/stopped)
 
@@ -1051,6 +1063,14 @@ Record a heartbeat for a work item to maintain the lease.
   - `required long TtlSeconds`
 
     Effective TTL applied to the lease
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicBetaHeartbeatPreconditionFailedException` (HTTP status 412, error code `heartbeat_precondition_failed`)
+
+  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
 
 ### Example
 
@@ -1324,6 +1344,18 @@ Stop a work item, initiating graceful or forced shutdown.
   - `required string? StoppedAt`
 
     RFC 3339 timestamp when work execution stopped
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -1901,6 +1933,22 @@ Update work item metadata with merge semantics.
 
     RFC 3339 timestamp when work execution stopped
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicBetaInvalidMetadataException` (HTTP status 400, error code `invalid_metadata`)
+
+  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```csharp
@@ -2127,6 +2175,18 @@ Get statistics about the work queue for an environment.
 
     Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+- `AnthropicClaudeCodeKeyCreatorNotMemberException` (HTTP status 400, error code `claude_code_key_creator_not_member`)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `AnthropicOrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```csharp
@@ -2161,8 +2221,6 @@ Console.WriteLine(betaSelfHostedWorkQueueStats);
 
 - `class BetaHeartbeatPreconditionFailedErrorDetails`
 
-  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
-
   - `required BetaWorkLeaseState CurrentState`
 
     The lease as the server holds it.
@@ -2175,7 +2233,7 @@ Console.WriteLine(betaSelfHostedWorkQueueStats);
 
       Always false: a refused heartbeat does not extend the lease
 
-    - `required State State`
+    - `required BetaWorkLeaseStateState State`
 
       Current state of the work item
 
@@ -2293,7 +2351,7 @@ Console.WriteLine(betaSelfHostedWorkQueueStats);
 
     Whether the heartbeat succeeded in extending the lease
 
-  - `required State State`
+  - `required BetaSelfHostedWorkHeartbeatResponseState State`
 
     Current state of the work item (active/stopping/stopped)
 
@@ -2472,7 +2530,7 @@ Console.WriteLine(betaSelfHostedWorkQueueStats);
 
     Always false: a refused heartbeat does not extend the lease
 
-  - `required State State`
+  - `required BetaWorkLeaseStateState State`
 
     Current state of the work item
 
@@ -2489,6 +2547,52 @@ Console.WriteLine(betaSelfHostedWorkQueueStats);
   - `required long TtlSeconds`
 
     TTL of the lease
+
+## Errors
+
+### AnthropicBetaHeartbeatPreconditionFailedException
+
+HTTP status 412, error code `heartbeat_precondition_failed`
+
+- `class AnthropicBetaHeartbeatPreconditionFailedException : AnthropicPreconditionFailedException`
+
+  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
+
+  - `string ErrorCode`
+
+  - `BetaHeartbeatPreconditionFailedErrorDetails Details`
+
+    - `required BetaWorkLeaseState CurrentState`
+
+      The lease as the server holds it.
+
+      - `required string? LastHeartbeat`
+
+        RFC 3339 timestamp of the stored heartbeat, or null if there has been none
+
+      - `required bool LeaseExtended`
+
+        Always false: a refused heartbeat does not extend the lease
+
+      - `required BetaWorkLeaseStateState State`
+
+        Current state of the work item
+
+        - `Queued("queued")`
+
+        - `Starting("starting")`
+
+        - `Active("active")`
+
+        - `Stopping("stopping")`
+
+        - `Stopped("stopped")`
+
+      - `required long TtlSeconds`
+
+        TTL of the lease
+
+    - `JsonElement ErrorCode = "heartbeat_precondition_failed"`
 
 ---
 
