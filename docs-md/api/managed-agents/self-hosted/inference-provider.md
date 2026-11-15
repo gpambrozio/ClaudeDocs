@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/managed-agents/self-hosted/inference-pr
 description: Send model calls from your self-hosted Claude Managed Agents server to Amazon Bedrock, Claude Models on Google Cloud (Google managed), Microsoft Foundry, or a model gateway that you run, instead of the Claude API.
 ---
 
-To request access to self-hosted Claude Managed Agents, contact your Anthropic account team.
+To request access to self-hosted Claude Managed Agents, contact your Anthropic account team. If you belong to a Claude Console organization that already has access, [sign in to the Claude Console](https://platform.claude.com) and switch to that organization. Then reload this page.
 
 By default, your server sends model calls to the Claude API. This page shows how to send them to a cloud provider, or to a model gateway that you run. To change the provider:
 

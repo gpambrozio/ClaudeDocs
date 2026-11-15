@@ -1,4 +1,4 @@
-# -i prints the response headers, including anthropic-workspace-id, before the body
+# Returns one page.
 
 ---
 title: Workspaces
@@ -15,9 +15,17 @@ Every organization has a **Default Workspace** that cannot be renamed, archived,
 Key characteristics:
 
 * **Workspace identifiers** use the `wrkspc_` prefix (for example, `wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ`).
+
 * **Maximum 100 workspaces** for each organization by default (archived workspaces don’t count). Contact your account team if you need more.
-* **Default Workspace** has a `wrkspc_` ID like any other workspace (returned in the [`anthropic-workspace-id` response header](workspaces.md#identify-the-workspace-behind-an-api-response) and accepted by [Get Workspace](../api/organization/workspaces/retrieve.md)), but it appears in [List Workspaces](../api/organization/workspaces/list.md) results only when you pass `include_default=true`. The [Usage and Cost Analytics API](usage-cost-analytics-api.md) reports its usage and cost under that ID, whereas the legacy [Usage and Cost API](usage-cost-api.md) reports show `null` for its `workspace_id` (an API key’s `scope` field carries the real ID for a key bound to the Default Workspace).
-* **API keys** can be scoped to a single workspace. In this case, they can only access resources within that workspace. Other API keys aren’t scoped to a workspace. With one of these keys, send a [workspace ID header](authentication.md#select-a-workspace) on each request to choose the workspace. The key’s user or service account must have access to that workspace.
+
+* **Default Workspace** has a `wrkspc_` ID like any other workspace:
+
+  * API responses carry that ID in the [`anthropic-workspace-id` response header](workspaces.md#identify-the-workspace-behind-an-api-response), and [Get Workspace](../api/organization/workspaces/retrieve.md) accepts it.
+  * [List Workspaces](../api/organization/workspaces/list.md) includes the Default Workspace only when you pass `include_default=true`.
+  * The [Usage and Cost Analytics API](usage-cost-analytics-api.md) reports its usage and cost under that ID. The legacy [Usage and Cost API](usage-cost-api.md) reports show `null` for its `workspace_id`.
+  * For an API key bound to the Default Workspace, the key’s `scope` field carries that ID.
+
+* **API keys** can be scoped to a single workspace. In this case, they can only access resources within that workspace. Other API keys aren’t scoped to a workspace. With one of these keys, send a [workspace ID header](authentication.md#select-a-workspace) on each request to choose the workspace. The key’s user or service account must have access to that workspace. For the key types, see [API keys and resource scoping](workspaces.md#api-keys-and-resource-scoping).
 
 ### Claude Code workspace
 
@@ -36,13 +44,18 @@ Archiving the Claude Code workspace disables Claude Code sign-in through Console
 
 Members can have different roles in each workspace, allowing fine-grained access control.
 
-| Role                        | Permissions                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Workspace User              | Use playground only                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Workspace Limited Developer | Create and manage API keys, use the API<br />For [Claude Managed Agents](../managed-agents/overview.md) in the Claude Console, members with this role cannot open or start sessions, open memory stores, or manage deployments. They also cannot download or delete files on the Console’s [Files](https://platform.claude.com/files) page. These limits apply only to the Console’s interface, not to the API. |
-| Workspace Developer         | Create and manage API keys, use the API                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Workspace Admin             | Full control over workspace settings and members                                                                                                                                                                                                                                                                                                                                                                                              |
-| Workspace Billing           | View workspace billing information (inherited from organization billing role)                                                                                                                                                                                                                                                                                                                                                                 |
+| Role                        | Permissions                                                                                               |
+| --------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Workspace User              | Use playground only                                                                                       |
+| Workspace Limited Developer | Create and manage API keys, use the API (with some limits in the Claude Console, listed after this table) |
+| Workspace Developer         | Create and manage API keys, use the API                                                                   |
+| Workspace Admin             | Full control over workspace settings and members                                                          |
+| Workspace Billing           | View workspace billing information (inherited from organization billing role)                             |
+
+The following limits apply only to the Claude Console’s interface, not to the API. In the Console, a Workspace Limited Developer cannot:
+
+* Open or start sessions, open memory stores, or manage deployments for [Claude Managed Agents](../managed-agents/overview.md)
+* Download or delete files on the [Files](https://platform.claude.com/files) page
 
 ### Role inheritance
 
@@ -108,10 +121,7 @@ Organization admins and billing members cannot be removed from workspaces while 
 
 #### Set workspace limits
 
-You set a workspace’s rate limits and spend limits in different places:
-
-* **Rate limits:** Under [Rate limits in the Claude Console](https://platform.claude.com/usage/limits), select the workspace from the **Workspace** dropdown menu and click **Edit** next to a model to set limits for requests per minute, input tokens, or output tokens.
-* **Spend limits:** On the [Workspaces](https://platform.claude.com/settings/workspaces) page in the Claude Console, select the workspace. In the panel that opens, click **Spend limits** to cap monthly spending and configure alerts when spending reaches certain thresholds.
+You set a workspace’s spend limits and rate limits on different Console pages. For the steps, see [Setting workspace limits](workspaces.md#setting-workspace-limits).
 
 #### Archive a workspace
 
@@ -127,9 +137,9 @@ Archiving a workspace archives every API key created for that workspace within s
 
 Programmatically manage workspaces using the [Admin API](admin-api.md).
 
-Admin API endpoints accept an [Admin API key](admin-api-keys.md), an `org:admin` OAuth token, or a personal or service account key that isn’t scoped to a specific workspace. Workspace keys don’t work there. See [Authentication](admin-api.md#authentication).
+Admin API endpoints accept an [Admin API key](admin-api-keys.md), an `org:admin` OAuth token, or a personal or service account key that isn’t scoped to a specific workspace. Keys scoped to a single workspace, including [workspace keys](workspaces.md#api-keys-and-resource-scoping), don’t work there. See [Admin API authentication](admin-api.md#authentication).
 
-The following SDK and CLI examples construct the default client, which reads the Admin API key from the `ANTHROPIC_API_KEY` environment variable; the SDK exposes these endpoints under `client.organization.workspaces` (csharp, go: `client.Organization.Workspaces`; java: `client.organization().workspaces()`; php: `$client->organization->workspaces`). SDK list methods fetch further pages on demand, so `limit` sets the page size; the PHP, Ruby, and curl examples return one page.
+The following examples read the Admin API key from the `ANTHROPIC_API_KEY` environment variable. The SDK exposes these endpoints under `client.organization.workspaces` (csharp, go: `client.Organization.Workspaces`; java: `client.organization().workspaces()`; php: `$client->organization->workspaces`).
 
 Create a workspace:
 
@@ -228,6 +238,7 @@ puts "name: #{workspace.name}"
 List workspaces:
 
 ```bash cURL
+# Returns one page.
 curl "https://api.anthropic.com/v1/organizations/workspaces?limit=10&include_archived=false" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
   -H "anthropic-version: 2026-10-21"
@@ -242,6 +253,7 @@ client = anthropic.Anthropic()
 
 workspaces = client.organization.workspaces.list(limit=10, include_archived=False)
 
+# Automatically fetches more pages as needed, so `limit` sets the page size, not the total.
 for workspace in workspaces:
     print(f"{workspace.id}: {workspace.name}")
 ```
@@ -254,6 +266,7 @@ const workspaces = await client.organization.workspaces.list({
   include_archived: false
 });
 
+// Automatically fetches more pages as needed, so `limit` sets the page size, not the total.
 for await (const workspace of workspaces) {
   console.log(`${workspace.id}: ${workspace.name}`);
 }
@@ -268,6 +281,7 @@ var workspaces = await client.Organization.Workspaces.List(new()
     IncludeArchived = false
 });
 
+// Automatically fetches more pages as needed, so `Limit` sets the page size, not the total.
 await foreach (var workspace in workspaces.Paginate())
 {
     Console.WriteLine($"{workspace.ID}: {workspace.Name}");
@@ -282,6 +296,7 @@ workspaces := client.Organization.Workspaces.ListAutoPaging(context.Background()
 	IncludeArchived: anthropic.Bool(false),
 })
 
+// Automatically fetches more pages as needed, so `Limit` sets the page size, not the total.
 for workspaces.Next() {
 	workspace := workspaces.Current()
 	fmt.Printf("%s: %s\n", workspace.ID, workspace.Name)
@@ -303,6 +318,7 @@ void main() {
         .build();
     var workspaces = client.organization().workspaces().list(params);
 
+    // Automatically fetches more pages as needed, so `limit` sets the page size, not the total.
     for (var workspace : workspaces.autoPager()) {
         IO.println(workspace.id() + ": " + workspace.name());
     }
@@ -317,7 +333,8 @@ $workspaces = $client->organization->workspaces->list(
     includeArchived: false,
 );
 
-foreach ($workspaces->getItems() as $workspace) {
+// Automatically fetches more pages as needed, so `limit` sets the page size, not the total.
+foreach ($workspaces->pagingEachItem() as $workspace) {
     echo "{$workspace->id}: {$workspace->name}\n";
 }
 ```
@@ -327,7 +344,8 @@ client = Anthropic::Client.new
 
 workspaces = client.organization.workspaces.list(limit: 10, include_archived: false)
 
-workspaces.data.each do |workspace|
+# Automatically fetches more pages as needed, so `limit` sets the page size, not the total.
+workspaces.auto_paging_each do |workspace|
   puts "#{workspace.id}: #{workspace.name}"
 end
 ```
@@ -795,7 +813,7 @@ For complete parameter details, see the [Workspace Members API reference](../api
 
 ## API keys and resource scoping
 
-Every request runs in exactly one workspace and can only access resources within that workspace. Which workspace depends on the [key type](authentication.md#key-types):
+Apart from organization-level requests, such as Admin API requests, every request runs in exactly one workspace. It can only access resources within that workspace. Which workspace depends on the [key type](authentication.md#key-types):
 
 * A **workspace key** (a legacy key without an owner) belongs to the workspace it was created in and always runs there.
 * A **personal key** or **service account key** acts as its user or service account. A single-workspace key always runs in the workspace chosen when it was created. A key that isn’t scoped to a workspace runs in the workspace named by each request’s `anthropic-workspace-id` header. Accounts must have access to the workspace to use it.
@@ -808,7 +826,12 @@ Resources scoped to workspaces include:
 
 Some resources are managed differently:
 
-* **[MCP tunnels](../agents-and-tools/mcp-tunnels/overview.md)** are managed with a `workspace:manage_tunnels` OAuth token obtained through [Workload Identity Federation](workload-identity-federation.md), not an API key. Tunnels are created in a workspace, and the Console **MCP tunnels** list and the Managed Agent server picker show tunnels in the current workspace only; the cap of 10 active tunnels applies organization-wide. Tunnel management requires a role with tunnel management permissions; organization developers can view but not change them.
+* **[MCP tunnels](../agents-and-tools/mcp-tunnels/overview.md)** are managed with a `workspace:manage_tunnels` OAuth token obtained through [Workload Identity Federation](workload-identity-federation.md), not an API key.
+
+  * Tunnels are created in a workspace. The Console **MCP tunnels** list and the MCP server picker for Claude Managed Agents show tunnels in the current workspace only.
+  * The cap of 10 active tunnels applies organization-wide.
+  * Managing tunnels requires the Manage tunnels permission, which organization admins and owners have by default. Organization developers can view tunnels but not change them.
+
 * **Workspaces** themselves and **organization members** are managed at the organization level through the [Admin API](admin-api.md), using an Admin API key, an `org:admin` OAuth token, or a personal or service account key that isn’t scoped to a specific workspace.
 
 To look up your organization’s workspace IDs, call the [List Workspaces](../api/organization/workspaces/list.md) endpoint (pass `include_default=true` to include the Default Workspace) or find them on the [Workspaces](https://platform.claude.com/settings/workspaces) page in the Claude Console.
@@ -828,7 +851,7 @@ anthropic-workspace-id: wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ
 
 The header is absent when the credential doesn’t resolve to a workspace (for example, on Admin API requests) or when the request fails before authentication completes, such as a 401 error.
 
-The following examples send a Messages API request and read the workspace ID from the response headers:
+The following examples send a Messages API request and read the workspace ID from the response headers. Set `ANTHROPIC_API_KEY` to a key scoped to a single workspace (see [API keys and resource scoping](workspaces.md#api-keys-and-resource-scoping)), not to an Admin API key:
 
 ```bash cURL
 # -i prints the response headers, including anthropic-workspace-id, before the body
@@ -978,9 +1001,10 @@ The same accessors read the header from other Claude API endpoints too, includin
 With the workspace ID from a response, you can:
 
 * Confirm which workspace’s usage, cost, and [rate limits](../api/rate-limits.md) the request counted toward
-* Match it against the `workspace_id` field in [Usage and Cost Analytics API](usage-cost-analytics-api.md) rows, which carry this same ID for the Default Workspace, and against the `scope` field of API keys in the [Admin API](admin-api.md), which carries the real ID of the workspace a key is bound to, including the Default Workspace
+* Match it against the `workspace_id` field in [Usage and Cost Analytics API](usage-cost-analytics-api.md) rows, which carry this same ID for the Default Workspace
+* Match it against the `scope` field of API keys in the [Admin API](admin-api.md), which carries the real ID of the workspace that a key is bound to, including the Default Workspace
 * Check whether it’s your Default Workspace’s ID by passing it to [Get Workspace](../api/organization/workspaces/retrieve.md) with an [Admin API key](admin-api-keys.md): the Default Workspace comes back with `"name": "Default"`, even though [List Workspaces](../api/organization/workspaces/list.md) omits it unless you pass `include_default=true`
-* Open that workspace in the [Console](https://platform.claude.com/settings/workspaces) to find the request’s resources, such as sessions, files, message batches, and skills
+* Find the request’s resources, such as sessions, files, message batches, and skills: look up the workspace’s name on the [Workspaces](https://platform.claude.com/settings/workspaces) page in the Claude Console, then select it in the workspace picker on a page such as [Files](https://platform.claude.com/files)
 
 ## Workspace limits
 
@@ -988,9 +1012,9 @@ You can set custom spend and rate limits for each workspace to protect against o
 
 ### Setting workspace limits
 
-You can set workspace limits lower than (but not higher than) your organization’s limits:
+Workspace limits can keep a workspace below your organization’s limits, but they can’t raise those limits:
 
-* **Spend limits:** Cap monthly spending for a workspace. To set these, go to the [Workspaces](https://platform.claude.com/settings/workspaces) page (`platform.claude.com/settings/workspaces`) in the Claude Console and select the workspace. In the panel that opens, click **Spend limits**.
+* **Spend limits:** Cap monthly spending for a workspace. To set these, go to [Spend limits in the Claude Console](https://platform.claude.com/settings/spend-limits) (`platform.claude.com/settings/spend-limits`). Under **Workspace limits**, select the workspace from the dropdown menu. Then click **Set limit** or **Adjust limit** next to **Monthly spend limit**. If Anthropic bills your organization directly, you can also set up email alerts for when spending reaches an amount you choose: click **Add notification** or **Edit** next to **Email notifications**.
 * **Rate limits:** Limit requests per minute, input tokens per minute, or output tokens per minute. To set these, go to [Rate limits in the Claude Console](https://platform.claude.com/usage/limits), select the workspace from the **Workspace** dropdown menu, and click **Edit** next to a model.
 
 - You cannot set spend limits on the Default Workspace.
@@ -1207,7 +1231,7 @@ Use the [Usage and Cost Analytics API](usage-cost-analytics-api.md) to track wor
 
 **What’s the Default Workspace?**
 
-Every organization has a “Default Workspace” that cannot be renamed, archived, or deleted. Like every workspace, it has a `wrkspc_` ID: the API returns it in the [`anthropic-workspace-id` response header](workspaces.md#identify-the-workspace-behind-an-api-response), and you can pass it to [Get Workspace](../api/organization/workspaces/retrieve.md) and [Update Workspace](../api/organization/workspaces/update.md). It has no member list of its own, because access to it follows each member’s organization role. It appears in [List Workspaces](../api/organization/workspaces/list.md) results only when you pass `include_default=true`. The [Usage and Cost Analytics API](usage-cost-analytics-api.md) reports its usage and cost under its real ID. The legacy [Usage and Cost API](usage-cost-api.md) reports show `null` for `workspace_id`. For an API key that belongs to it, the key’s `scope` field carries the workspace’s real ID.
+Every organization has a “Default Workspace” that cannot be renamed, archived, or deleted. Like every workspace, it has a `wrkspc_` ID. The API returns that ID in the [`anthropic-workspace-id` response header](workspaces.md#identify-the-workspace-behind-an-api-response), and you can pass it to [Get Workspace](../api/organization/workspaces/retrieve.md) and [Update Workspace](../api/organization/workspaces/update.md). Update Workspace rejects a new name for it. The Default Workspace has no member list of its own, because access to it follows each member’s organization role. It appears in [List Workspaces](../api/organization/workspaces/list.md) results only when you pass `include_default=true`. The [Usage and Cost Analytics API](usage-cost-analytics-api.md) reports its usage and cost under its real ID. The legacy [Usage and Cost API](usage-cost-api.md) reports show `null` for `workspace_id`. For an API key that belongs to it, the key’s `scope` field carries the workspace’s real ID.
 
 **What’s the Claude Code workspace?**
 
@@ -1227,7 +1251,7 @@ Organization users and developers can be assigned Workspace Admin, Workspace Dev
 
 **Can organization admin or billing members’ workspace roles be changed?**
 
-Organization admins and billing members cannot have their workspace roles changed or be removed from workspaces while they hold those organization roles (with one exception: billing members can be upgraded to a Workspace Admin role). For everyone else covered by this constraint, change their organization role first to change their workspace access.
+Not while they hold those organization roles, with one exception: billing members can be upgraded to the Workspace Admin role. Organization admins and billing members also cannot be removed from workspaces while they hold those roles. To change their workspace access in any other way, change their organization role first.
 
 **What happens to workspace access when organization roles change?**
 
@@ -1237,7 +1261,7 @@ If an organization admin or billing member is demoted to user or developer, they
 
 Behavior depends on the [key type](authentication.md#key-types).
 
-A personal or service account key stops working in a workspace shortly after its user or service account is removed from it. A service account key keeps working even if the user who created it is removed. Workspace API keys continue to work. In the [Claude Code workspace](workspaces.md#claude-code-workspace), each key is bound to the member who created it and stops working when that member is removed.
+A personal or service account key stops working in a workspace shortly after its user or service account is removed from it. A service account key keeps working even if the user who created it is removed. Workspace keys (legacy keys without an owner) continue to work. In the [Claude Code workspace](workspaces.md#claude-code-workspace), each key is bound to the member who created it and stops working when that member is removed.
 
 Personal keys are archived when their user is removed from the organization. If the user is re-invited, they need to create new keys; archived keys are not restored.
 

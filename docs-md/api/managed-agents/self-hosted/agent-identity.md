@@ -6,7 +6,7 @@ url: https://platform.claude.com/docs/en/managed-agents/self-hosted/agent-identi
 description: Have your self-hosted Claude Managed Agents server sign a short-lived token that names each agent, keep vault credentials in your secret manager, and keep secrets out of sandboxes with the egress gateway.
 ---
 
-To request access to self-hosted Claude Managed Agents, contact your Anthropic account team.
+To request access to self-hosted Claude Managed Agents, contact your Anthropic account team. If you belong to a Claude Console organization that already has access, [sign in to the Claude Console](https://platform.claude.com) and switch to that organization. Then reload this page.
 
 This page shows how to let the systems outside your server trust an agent, and where to keep the credentials that your agents use:
 
