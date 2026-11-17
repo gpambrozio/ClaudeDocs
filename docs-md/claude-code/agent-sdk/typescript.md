@@ -1740,7 +1740,7 @@ The `message` field is a [`BetaMessage`](../../api/api/messages/create.md) from 
 `SDKAssistantMessageError` is one of: `'authentication_failed'`, `'oauth_org_not_allowed'`, `'account_on_hold'`, `'billing_error'`, `'rate_limit'`, `'overloaded'`, `'invalid_request'`, `'model_not_found'`, `'server_error'`, `'max_output_tokens'`, `'cloud_credential_error'`, or `'unknown'`. Four of these values mean more than their names say:
 
 * `'model_not_found'`: the selected model doesn't exist or isn't available to your account or deployment
-* `'overloaded'`: the API returned a 529 because the server is at capacity, as opposed to `'rate_limit'`, which is a 429 against your quota
+* `'overloaded'`: appears on [`api_retry` events](../headless.md#handle-api-retries) when the API returns a 529 because the server is at capacity. When an HTTP 529 ends the turn, the assistant message carries `'server_error'`. A 429 against your quota is `'rate_limit'`
 * `'account_on_hold'`: [your account is on hold](https://code.claude.com/docs/en/errors.md#your-account-is-on-hold)
 * `'cloud_credential_error'`: Claude Code couldn't obtain usable AWS or Google Cloud credentials on the machine it runs on, so no request reached the cloud provider. The usual cause is a cloud sign-in that expired or was never completed on that machine, though a briefly unreachable credential service reports the same value. See [Could not load AWS or Google Cloud credentials](https://code.claude.com/docs/en/errors.md#could-not-load-aws-or-google-cloud-credentials). Requires TypeScript Agent SDK v0.3.267 or later, which bundles Claude Code v2.1.267
 
@@ -1801,7 +1801,7 @@ Each paste field has a size limit:
 Set `shouldQuery`, `client_composed`, or `priority` to change how Claude Code handles a message you send:
 
 * `shouldQuery`: set it to `false` to append the message to the transcript without triggering an assistant turn. The message is held and merged into the next user message that does trigger a turn. Use this to inject context, such as the output of a command you ran out of band, without spending a model call on it.
-* `client_composed`: set it to `true` to have Claude Code deliver the message text as written. Claude Code then doesn't expand `@path` or [`@server:resource`](../mcp.md#use-mcp-resources) mentions, and doesn't run text that starts with `/` as a command. While the [`verbatimPrompts`](#options) option is on, the SDK sets the field on every message. Requires TypeScript Agent SDK v0.3.280 or later and Claude Code v2.1.248 or later.
+* `client_composed`: set it to `true` to have Claude Code deliver the message text as written. Claude Code then doesn't expand `@path` mentions, and doesn't run text that starts with `/` as a command. While the [`verbatimPrompts`](#options) option is on, the SDK sets the field on every message. Requires TypeScript Agent SDK v0.3.280 or later and Claude Code v2.1.248 or later.
 * `priority`: controls when a message you send during a running turn reaches Claude:
   * `'next'`, or no `priority` field: Claude reads the message in the same turn, as soon as the tool calls it is running finish. If the turn ends first, the message starts the next turn.
   * `'later'`: Claude Code holds the message until the turn ends and sends it as a new turn.
@@ -4445,12 +4445,13 @@ type GrepOutput = {
   totalLines?: number;
   appliedLimit?: number;
   appliedOffset?: number;
+  timedOut?: boolean;
 };
 ```
 
 Returns search results. The shape varies by `mode`: file list, content with matches, or match counts. In `count` mode, `numFiles` and `numMatches` are totals over the full result set, not the paginated slice. Before v2.1.208, a `head_limit` or `offset` that truncated the listed entries also truncated those totals.
 
-`totalFiles` requires Claude Code v2.1.208 or later and reports the total number of results before `head_limit` and `offset` pagination in `files_with_matches` mode. `totalLines` requires Claude Code v2.1.210 or later and reports the total number of lines before pagination in `content` mode.
+`totalFiles` requires Claude Code v2.1.208 or later and reports the total number of results before `head_limit` and `offset` pagination in `files_with_matches` mode. `totalLines` requires Claude Code v2.1.210 or later and reports the total number of lines before pagination in `content` mode. `timedOut` requires Claude Code v2.1.317 or later and is `true` when the search ran out of time, so results may be incomplete.
 
 ### TaskStop
 

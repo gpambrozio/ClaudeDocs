@@ -59,7 +59,7 @@ Hooks still don't run in bare mode when you pass them with `--settings`, or in t
 Bare mode also limits what happens while the session runs:
 
 * **MCP servers**: only servers supplied on the command line connect, for example with `--mcp-config`. In an interactive session, Claude Code also skips the automatic IDE connection unless you pass `--ide`.
-* **System reminders**: Claude gets your prompts and the tool results without the [system reminders](https://code.claude.com/docs/en/glossary.md#system-reminder) Claude Code would add alongside them. For example, Claude isn't told when a file it read earlier changes on disk, and it doesn't get the list of available skills, including skills from an `--add-dir` folder.
+* **System reminders**: Claude receives your prompts and the tool results without the [system reminders](https://code.claude.com/docs/en/glossary.md#system-reminder) Claude Code would add alongside them. For example, Claude isn't told when a file it edited earlier changes on disk, and it doesn't get the list of available skills, including skills from an `--add-dir` folder.
 * **Background tasks**: Claude can't run background commands or background subagents, and the other features that [`CLAUDE_CODE_DISABLE_BACKGROUND_TASKS`](env-vars.md) turns off are off too. A command that reaches its [timeout](https://code.claude.com/docs/en/tools-reference.md#timeout-and-output-limits) stops instead of [moving to the background](https://code.claude.com/docs/en/tools-reference.md#background-commands).
 
 Before v2.1.286, these limits held only partly: an interactive `--bare` session connected the MCP servers that a normal session would, every `--bare` session sent system reminders, and background tasks stayed available.
@@ -121,7 +121,7 @@ These examples highlight common CLI patterns. Where a command names a file such 
 
 ### Pipe data through Claude
 
-Non-interactive mode reads stdin, so you can pipe data in and redirect the response out like any other command-line tool.
+Non-interactive mode reads stdin, so you can pipe data in and redirect the response out.
 
 This example pipes a build log into Claude and writes the explanation to a file:
 
@@ -366,7 +366,7 @@ claude -p "Look at my staged changes and create an appropriate commit" \
   --allowedTools "Bash(git diff *),Bash(git log *),Bash(git status *),Bash(git commit *)"
 ```
 
-The `--allowedTools` flag uses [permission rule syntax](https://code.claude.com/docs/en/settings-reference.md#permission-rule-syntax). The trailing ` *` enables prefix matching, so `Bash(git diff *)` allows any command starting with `git diff`. The space before `*` is important: without it, `Bash(git diff*)` would also match `git diff-index`.
+The `--allowedTools` flag uses [permission rule syntax](https://code.claude.com/docs/en/settings-reference.md#permission-rule-syntax). With the trailing ` *`, `Bash(git diff *)` matches `git diff` with or without arguments. The space before `*` is important: without it, `Bash(git diff*)` would also match `git diff-index`.
 
 > [!NOTE]
 >

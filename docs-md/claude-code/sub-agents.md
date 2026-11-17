@@ -650,7 +650,7 @@ If a listed skill is missing or disabled, for example by your organization's pol
 
 #### Enable persistent memory
 
-The `memory` field gives the subagent a persistent directory that survives across conversations. The subagent uses this directory to build up knowledge over time, such as codebase patterns, debugging insights, and architectural decisions.
+The `memory` field gives the subagent a persistent directory that survives across conversations. The subagent uses this directory to build up knowledge over time, such as your preferences, your corrections, and project decisions.
 
 ```yaml
 ---
@@ -660,7 +660,7 @@ memory: user
 ---
 
 You are a code reviewer. As you review code, update your agent memory with
-patterns, conventions, and recurring issues you discover.
+the review preferences and corrections you're given.
 ```
 
 Choose a scope based on how broadly the memory should apply:
@@ -687,10 +687,10 @@ When memory is enabled:
 * Include memory instructions directly in the subagent's markdown file so it proactively maintains its own knowledge base:
 
   ```markdown
-  Update your agent memory as you discover codepaths, patterns, library
-  locations, and key architectural decisions. This builds up institutional
-  knowledge across conversations. Write concise notes about what you found
-  and where.
+  Update your agent memory as you learn the team's preferences, project
+  constraints, and the reasons behind key decisions. This builds up
+  institutional knowledge across conversations. Write concise notes about
+  what you learned and why it matters.
   ```
 
 #### Conditional rules with hooks
@@ -864,7 +864,7 @@ If the subagent ships in a [plugin](https://code.claude.com/docs/en/plugins/over
 When automatic delegation isn't enough, you can request a subagent yourself. Three patterns escalate from a one-off suggestion to a session-wide default:
 
 * **Natural language**: name the subagent in your prompt; Claude decides whether to delegate
-* **@-mention**: guarantees the subagent runs for one task
+* **@-mention**: tells Claude to run the subagent for one task
 * **Session-wide**: the whole session runs as that subagent via the `--agent` flag or the `agent` setting
 
 For natural language, there's no special syntax. Name the subagent and Claude typically delegates:
@@ -874,13 +874,13 @@ Use the test-runner subagent to fix failing tests
 Have the code-reviewer subagent look at my recent changes
 ```
 
-**@-mention the subagent.** Type `@` and pick the subagent from the typeahead, the same way you @-mention files. This ensures that specific subagent runs rather than leaving the choice to Claude:
+**@-mention the subagent.** Type `@` and pick the subagent from the typeahead, the same way you @-mention files:
 
 ```text wrap
 @"code-reviewer (agent)" look at the auth changes
 ```
 
-Your full message still goes to Claude, which writes the subagent's task prompt based on what you asked. The @-mention controls which subagent Claude invokes, not what prompt it receives.
+Your full message still goes to Claude, which writes the subagent's task prompt based on what you asked.
 
 Subagents provided by an enabled [plugin](https://code.claude.com/docs/en/plugins/overview.md) appear in the typeahead under their scoped name, such as `my-plugin:code-reviewer` or `my-plugin:review:security` when the plugin [organizes agents into subfolders](#choose-the-subagent-scope). Named background subagents currently running in the session also appear in the typeahead, showing their status next to the name.
 

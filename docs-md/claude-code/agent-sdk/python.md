@@ -1696,7 +1696,9 @@ Several fields carry diagnostic detail about how the conversation ended:
 * `result`: text of the final assistant message on `subtype="success"`, or `None` on the `error_*` subtypes. When `subtype="success"` and `is_error=True`, this holds the API error string if one is available but can be empty, so check `api_error_status` and the preceding `AssistantMessage` content for detail.
 * `errors`: loop-level error strings such as the max-turns message. Populated only on the `error_*` subtypes.
 * `terminal_reason`: why the query loop ended, such as `"completed"`, `"max_turns"`, `"api_error"`, `"aborted_streaming"`, or `"aborted_tools"`. A value of `"aborted_streaming"` or `"aborted_tools"` means the turn was aborted before completing. Common causes are [`interrupt()`](#claudesdkclient) and a permission callback returning [`PermissionResultDeny`](#permissionresultdeny) with `interrupt=True`. `None` on CLI versions that predate the field, on results from local commands such as `/voice` or `/usage`, which bypass the query loop, or on synthesized error results emitted when the session fails fatally. Mirrors the TypeScript SDK's [`SDKResultMessage.terminal_reason`](typescript.md#sdkresultmessage), which lists the full set of values.
-* `origin`: origin of the user message that triggered this turn. In [streaming input mode](https://code.claude.com/docs/en/agent-sdk/streaming-vs-single-mode.md), check this to tell the result of your own prompt, where `origin` is `None` or `{"kind": "human"}`, from the result of an injected turn such as a background-task notification. Requires Python Agent SDK 0.2.137 or later.
+* `origin`: origin of the user message that triggered this turn. Requires Python Agent SDK 0.2.137 or later. Don't suppress a result on `kind` alone. In [streaming input mode](https://code.claude.com/docs/en/agent-sdk/streaming-vs-single-mode.md), check `origin` to see whether your own prompt started the turn:
+  * **Your own prompt**: `origin` is `None` or `{"kind": "human"}`
+  * **A background-task notification**: `origin["kind"]` is `"task-notification"`. That turn's result can also hold Claude's answer to a message you sent while the turn ran tools.
 
 When several background tasks finish close together, Claude Code can answer their notifications in one turn rather than one turn each. You still receive one `ResultMessage` per notification, in order, each with an `origin` whose `kind` is `"task-notification"`. All but the last have `num_turns` set to `0` and an empty `result`, and the last one carries the turn that answers them all.
 
@@ -3022,12 +3024,13 @@ The output takes one of the following shapes depending on what Claude read. Chec
     "totalLines": int | None,  # Optional total before head_limit and offset, in content mode
     "appliedLimit": int | None,  # Present when head_limit truncated the result
     "appliedOffset": int | None,  # Present when an offset was applied
+    "timedOut": bool | None,  # True when the search ran out of time, so results may be incomplete
 }
 ```
 
 Grep returns this dict shape in each output mode. Which optional keys are present depends on `output_mode`.
 
-`totalFiles` requires Claude Code v2.1.208 or later. `totalLines` requires Claude Code v2.1.210 or later.
+`totalFiles` requires Claude Code v2.1.208 or later. `totalLines` requires Claude Code v2.1.210 or later. `timedOut` requires Claude Code v2.1.317 or later.
 
 ### NotebookEdit
 

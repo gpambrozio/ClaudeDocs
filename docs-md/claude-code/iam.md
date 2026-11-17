@@ -92,7 +92,7 @@ Use your existing Claude Console account or create a new one.
 
 You can add users through either method:
 
-* Bulk invite users from the Console's Members page at [platform.claude.com/settings/members](https://platform.claude.com/settings/members): click **Invite**
+* Bulk invite users from the Console's Members page at [platform.claude.com/settings/members](https://platform.claude.com/settings/members): click **Invite to organization**
 * [Set up SSO](https://support.claude.com/en/articles/13132885-setting-up-single-sign-on-sso)
 
 **3. Assign roles**
@@ -229,15 +229,18 @@ Claude Code securely manages your authentication credentials:
 
 When the login you created with `/login` is within three days of expiring, Claude Code shows a warning at startup: `Your login expires in 3 days · run /login to renew`.
 
-Run `/login` to renew. The warning is informational and never blocks a request: authentication keeps working until the login actually expires.
+Run `/login` to renew. The warning appears only when a claude.ai login is the active credential.
 
-Once the stored login expires and can't be refreshed, each model request fails with [`Login expired · Please run /login`](errors.md#login-expired) until you sign in again.
+#### After the login expires
 
-You can check for this state before a request fails: [`/status`](commands.md) shows a `Login` row reading `Expired — log in again`, plus the organization and email it has saved for the expired login. The row appears only when the saved claude.ai login is the active credential. The row requires Claude Code v2.1.210 or later.
+Once the stored login expires and can't be refreshed, run `/login` to sign in again. Until you do, requests either fail or use another credential you saved:
 
-The warning appears only when a claude.ai login is the active credential, and not when a cloud provider, `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` supplies the credential.
+* **No other credential**: model requests fail with [`Login reached its time limit` or `Login expired`](errors.md#login-expired).
+* **Another credential**, such as an [`ant auth login` profile](#anthropic-profiles-and-federation-credentials): requests can use that credential instead, billed to its organization.
 
-Renewing early matters most for sessions that run unattended. A [background session in agent view](https://code.claude.com/docs/en/agent-view.md) or a [Remote Control](https://code.claude.com/docs/en/remote-control.md) session that outlives the login stops making progress once the credential expires and can't recover until you sign in again.
+You can check for an expired login before a request fails: [`/status`](commands.md) shows a `Login` row reading `Expired — log in again`.
+
+Renewing early matters most for sessions that run unattended. A [Remote Control](https://code.claude.com/docs/en/remote-control.md) session that outlives the login disconnects until you sign in again. A [background session in agent view](https://code.claude.com/docs/en/agent-view.md) stops making progress if you have no other saved credential.
 
 ### Authentication precedence
 

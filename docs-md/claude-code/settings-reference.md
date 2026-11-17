@@ -844,13 +844,13 @@ This key doesn't lock down the MCP server allowlist; for that, set [`allowManage
 
 ### `autoMode`
 
-Add your own rules to what the [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) classifier blocks and allows. Use it to tell the classifier which repos, buckets, and domains your organization trusts, so it stops blocking routine internal operations. The classifier ships with [built-in allow and deny rules](https://code.claude.com/docs/en/auto-mode-config.md#inspect-the-defaults-and-your-effective-config). Include the literal string `"$defaults"` in an array to keep those built-in rules at that position and add yours around them; leave it out to replace them with yours.
+Add your own rules to what the [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) classifier blocks and allows. Use it to tell the classifier which repos, buckets, and domains your organization trusts, so it stops blocking routine internal operations. The classifier has [built-in allow and deny rules](https://code.claude.com/docs/en/auto-mode-config.md#inspect-the-defaults-and-your-effective-config). Include the literal string `"$defaults"` in every array you set, so your rules add to the built-in ones. If you leave it out, your rules [can replace them](https://code.claude.com/docs/en/auto-mode-config.md#override-the-block-and-allow-rules).
 
 * **Scope**: [`User or managed`](#scopes)
 * **Type**: object with `environment`, `allow`, `soft_deny`, and `hard_deny` arrays of prose rules, plus the [`classifyAllShell`](#automode-classifyallshell) Boolean
 * **Default**: unset, so the classifier uses only its [built-in rules](https://code.claude.com/docs/en/auto-mode-config.md#inspect-the-defaults-and-your-effective-config)
 
-This example keeps the built-in `soft_deny` rules, through `"$defaults"`, and adds one more that blocks `terraform apply`:
+This example keeps the built-in `soft_deny` rules and adds one more that blocks `terraform apply`:
 
 ```json settings.json
 {
@@ -923,7 +923,7 @@ The three rule arrays share one syntax; see [Permission rule syntax](#permission
 
 Choose whether Claude Code uses the auto mode classifier to review shell commands in plan mode. With the default `true`, the classifier reviews each command during planning when auto mode is available and you see no prompt, except for [critical-path removals](https://code.claude.com/docs/en/permission-modes.md#critical-paths). Set `false` to get a permission prompt for every command outside the built-in read-only set. Appears in `/config` as **Use auto mode during plan**.
 
-* **Scope**: [`User, local, or managed`](#scopes). A repository can't turn it off for you.
+* **Scope**: [`User, local, or managed`](#scopes).
   * A `false` in any of these files or in `--settings` turns it off, unless you leave that user or local file out with an option such as [`--setting-sources`](cli-reference.md#cli-flags). Ignoring a left-out file requires Claude Code v2.1.314 or later
 * **Type**: Boolean
   * `true`: the same as unset; when auto mode is available, the classifier reviews shell commands during planning
@@ -2681,7 +2681,7 @@ Appears in `/config` as **Continue automatically at usage limit**, which writes 
 
 ### `autoScrollEnabled`
 
-Follow new output to the bottom of the conversation in [fullscreen rendering](https://code.claude.com/docs/en/fullscreen.md). Turn it off to stay where you scrolled while Claude keeps working; permission prompts still scroll into view.
+Follow new output to the bottom of the conversation in [fullscreen rendering](https://code.claude.com/docs/en/fullscreen.md).
 
 * **Scope**: [`Any file`](#scopes)
 * **Type**: Boolean
@@ -3583,7 +3583,7 @@ Register hooks, restrict which hooks run, and control workflows. For hook events
 
 ### `allowedHttpHookUrls`
 
-Limit which URLs [HTTP hooks](https://code.claude.com/docs/en/hooks.md#http-hook-fields) can target. When you define this key, Claude Code runs an HTTP hook only if its URL matches one of the patterns and blocks the rest without running them; an empty array blocks every HTTP hook.
+Limit which URLs [HTTP hooks](https://code.claude.com/docs/en/hooks.md#http-hook-fields) can target. Set this key in managed settings to cover hooks your organization deploys, or in any settings file to cover other hooks. Claude Code runs a covered hook only if its URL matches a pattern in the list merged across settings files.
 
 * **Scope**: [`Any file`](#scopes). Arrays merge across settings files.
 * **Type**: array of URL patterns, with `*` as a wildcard
@@ -3597,7 +3597,7 @@ This example allows any URL under `https://hooks.example.com/` and any `http://l
 }
 ```
 
-Hostname matching is case-insensitive and treats `hooks.example.com.`, with the trailing dot that marks a fully qualified domain name, the same as `hooks.example.com`, which is how DNS treats them. The allowlist applies to hooks from every source, including managed settings.
+Hostname matching is case-insensitive and treats `hooks.example.com.`, with the trailing dot that marks a fully qualified domain name, the same as `hooks.example.com`, which is how DNS treats them.
 
 In the Agent SDK's `managedSettings` option, Claude Code ignores a list with entries, so pass it in the SDK's [`settings` option](agent-sdk/typescript.md#options) instead. See [what an empty list does in parent settings](claude-apps-gateway.md#how-hook-and-skill-keys-in-parent-settings-take-effect).
 
@@ -3738,7 +3738,9 @@ For every event, matcher pattern, and handler field, see the [hooks reference](h
 
 ### `httpHookAllowedEnvVars`
 
-An [HTTP hook](https://code.claude.com/docs/en/hooks.md#http-hook-fields) can put the value of an environment variable into a request header, for example an `Authorization: Bearer $HOOK_TOKEN` header, but only for variables the hook lists in its own `allowedEnvVars`. This key sets an outer limit on that list for every HTTP hook: a hook can use a variable only if both its own `allowedEnvVars` and this key name it. Use it to stop a hook from reading a secret it shouldn't, even when the hook's definition asks for it.
+An [HTTP hook](https://code.claude.com/docs/en/hooks.md#http-hook-fields) can put the value of an environment variable into a request header, for example an `Authorization: Bearer $HOOK_TOKEN` header, but only for variables the hook lists in its own `allowedEnvVars`.
+
+Set this key in managed settings to cover hooks your organization deploys, or in any settings file to cover other hooks. A covered hook can use a variable only if both its own `allowedEnvVars` and this key's list, merged across settings files, name it.
 
 * **Scope**: [`Any file`](#scopes). Arrays merge across settings files.
 * **Type**: array of environment variable names
@@ -3751,8 +3753,6 @@ This example limits header interpolation to `MY_TOKEN` and `HOOK_SECRET`:
   "httpHookAllowedEnvVars": ["MY_TOKEN", "HOOK_SECRET"]
 }
 ```
-
-The allowlist applies to hooks from every source, including managed settings.
 
 In the Agent SDK's `managedSettings` option, Claude Code ignores a list with entries, so pass it in the SDK's [`settings` option](agent-sdk/typescript.md#options) instead. See [what an empty list does in parent settings](claude-apps-gateway.md#how-hook-and-skill-keys-in-parent-settings-take-effect).
 
@@ -3864,7 +3864,7 @@ In managed settings and files passed with `--settings`, a key on a bundled skill
 
 Turn off the download of the [skills enabled for your claude.ai account](https://code.claude.com/docs/en/skills.md#how-synced-skills-behave). Claude Code downloads them into `~/.claude/skills/synced/` in [terminal sessions where you sign in with your claude.ai account](https://code.claude.com/docs/en/skills.md#where-synced-skills-load), interactive or non-interactive, and in Cowork and cloud sessions. Set `false` to stop that download and stop loading the skills it already synced. Claude Code honors only `false`: `true` is the same as unset and doesn't turn syncing on where it's otherwise off.
 
-* **Scope**: [`User, local, or managed`](#scopes), and files passed with `--settings`. A repository can't turn it off for you.
+* **Scope**: [`User, local, or managed`](#scopes), and files passed with `--settings`.
 * **Type**: Boolean
   * `false`: Claude Code stops downloading synced skills and stops loading the ones already in `~/.claude/skills/synced/`. In user or managed settings, it also moves them to `~/.claude/skills/.trash/`
   * `true`: the same as unset
@@ -3882,7 +3882,7 @@ This example keeps a machine from downloading the account's skills in any sessio
 
 Turn off the download of the [plugins enabled for your claude.ai account](https://code.claude.com/docs/en/plugins/loading.md#synced-plugins). Claude Code downloads them into `~/.claude/plugins/synced/` at the start of terminal sessions where you sign in with your claude.ai account and in Cowork sessions, and loads each one as `<name>@synced`. Set `false` to stop that download and stop loading the plugins it already synced. Claude Code honors only `false`: `true` is the same as unset and doesn't turn syncing on where it's otherwise off. Requires Claude Code v2.1.273 or later.
 
-* **Scope**: [`User, local, or managed`](#scopes), and files passed with `--settings`. A repository can't turn it off for you.
+* **Scope**: [`User, local, or managed`](#scopes), and files passed with `--settings`.
 * **Type**: Boolean
   * `false`: Claude Code stops downloading synced plugins and stops loading the ones already in `~/.claude/plugins/synced/`. In user or managed settings, it also moves them to `~/.claude/plugins/.trash/`
   * `true`: the same as unset

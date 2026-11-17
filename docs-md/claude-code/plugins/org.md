@@ -144,7 +144,8 @@ To verify a seed, run `claude -p` with `--output-format stream-json --verbose` i
 Seed marketplaces follow these rules:
 
 * **Read-only**: Claude Code never writes to the seed and forces `autoUpdate` off for seed marketplaces.
-* **Seed entries take precedence**: on each startup, a marketplace declared in the seed overwrites the user's entry of the same name. Users opt out of a seed plugin with `claude plugin disable`, not by removing the marketplace.
+* **Build from the declared source**: if user or managed settings declare a seed marketplace's name in `extraKnownMarketplaces`, build the seed from that source and `ref`.
+* **Opting out**: when the repository's settings enable a seed plugin, users opt out with `claude plugin disable`, not by removing the marketplace.
 * **Update and remove fail**: `claude plugin marketplace update <name>` and `remove` without `--scope` on a seed marketplace fail with a message that names the seed directory.
 * **Policy still applies**: the [allowlist and blocklist](#restrict-what-users-can-install) check a seed marketplace's recorded source too. Allow the source you built the seed from.
 
@@ -163,7 +164,9 @@ Both lists apply before anything downloads and again at session start:
 
 Where the two lists are enforced depends on where you set them:
 
-* **The claude.ai admin console**: Claude Code enforces both lists in the sessions that [read server-managed settings](https://code.claude.com/docs/en/managed-settings.md#where-and-when-a-policy-applies). claude.ai also checks them when anyone in your organization adds a new marketplace from a git repository on claude.ai, or from **Customize** in the Claude Desktop app outside its Code tab. That covers a marketplace a member adds for their own account and one added for the whole organization under [**Organization settings > Plugins**](https://claude.ai/admin-settings/plugins). claude.ai refuses a repository that the allowlist doesn't admit or that the blocklist names. It doesn't re-check a marketplace that was added in either place before you set the lists, and it doesn't check uploaded plugins.
+* **The claude.ai admin console**: Claude Code enforces both lists in the sessions that [read server-managed settings](https://code.claude.com/docs/en/managed-settings.md#where-and-when-a-policy-applies). claude.ai also checks them when anyone in your organization adds a marketplace from a git repository on claude.ai, or from **Customize** in the Desktop app outside its Code tab.
+
+  That covers a marketplace a member adds for their own account and one added for the whole organization under [**Organization settings > Plugins & skills**](https://claude.ai/admin-settings/skills?tab=marketplaces). claude.ai refuses a repository that the allowlist doesn't admit or that the blocklist names. It doesn't re-check a marketplace that was added in either place before you set the lists, and it doesn't check uploaded plugins.
 * **A managed settings file, OS-level policy, or other managed source**: Claude Code enforces both lists where it reads that source. claude.ai doesn't read it.
 
 While any allowlist is set, or a blocklist names any source other than [`skills-dir`](#blocklist-with-blockedmarketplaces), a plugin whose marketplace Claude Code can't find doesn't load. `/plugin` shows the policy error for it rather than a not-found error. The common case is a stale `enabledPlugins` entry for a marketplace nobody registered.

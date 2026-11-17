@@ -127,6 +127,8 @@ See the [Dreams guide](../../../managed-agents/dreams.md#cancel-a-dream) to lear
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
