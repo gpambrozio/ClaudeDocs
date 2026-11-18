@@ -1,4 +1,4 @@
-# Gemfile
+# Claude In Amazon Bedrock
 
 ---
 title: Claude in Amazon Bedrock (bedrock-mantle)
@@ -51,15 +51,48 @@ Authenticate through your corporate identity provider, then assume the IAM role.
 
 ### Bearer tokens
 
-For short-term access without IAM roles (12-hour maximum, least preferred):
+A bearer token lets you call the endpoint without signing requests with AWS credentials. AWS calls this token an Amazon Bedrock API key. AWS recommends signing with temporary AWS credentials whenever possible, so bearer tokens are the least preferred of the three authentication paths. Use a bearer token when your software can’t sign requests.
 
-**Admin: restrict token types**
+Bearer tokens come in two types:
 
-Block long-term keys by attaching a policy that denies `bedrock:CallWithBearerToken` unless the `bedrock:BearerTokenType` condition matches a short-term token.
+| Aspect          | Short-term                                                                             | Long-term                                                    |
+| --------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Lifetime**    | Up to 12 hours, or until the AWS session that generated it ends, whichever comes first | Until its expiration date. If it has none, it never expires. |
+| **Permissions** | Those of the IAM identity that generated it                                            | Those of the IAM user that it belongs to                     |
+| **Notes**       | Works only in the AWS region where you generate it                                     | Recommended by AWS only for exploration                      |
 
-**Developer: mint a token**
+For either type, the IAM identity whose permissions the token carries needs the `bedrock-mantle:CallWithBearerToken` and `bedrock-mantle:CreateInference` permissions.
 
-Use the `aws-bedrock-token-generator` CLI to mint a bearer token. Pass it in the `x-api-key` header on each request.
+To use a bearer token:
+
+**Generate the token**
+
+Generate either type in the Amazon Bedrock console. You can also generate a short-term token with one of AWS’s token generator libraries. For instructions, see [API keys](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html) in the Amazon Bedrock User Guide.
+
+**Send the token**
+
+How you send the token depends on how you call the endpoint:
+
+* **With the SDK:** Set the `AWS_BEARER_TOKEN_BEDROCK` environment variable. For how the client finds credentials, see [Making your first request](claude-in-amazon-bedrock.md#making-your-first-request).
+* **With direct HTTP requests:** Instead of signing each request, pass the token in the `x-api-key` header or as `Authorization: Bearer <token>`. Leave out the request-signing parts, such as the `x-amz-security-token` header and cURL’s `--aws-sigv4` and `-u` options.
+
+#### Block long-term bearer tokens
+
+An administrator can stop IAM users from calling Amazon Bedrock with long-term tokens. A token works on both Amazon Bedrock endpoints, and each endpoint has its own IAM action and condition key:
+
+| Endpoint          | Action to deny                       | Condition key                    |
+| ----------------- | ------------------------------------ | -------------------------------- |
+| `bedrock-mantle`  | `bedrock-mantle:CallWithBearerToken` | `bedrock-mantle:bearerTokenType` |
+| `bedrock-runtime` | `bedrock:CallWithBearerToken`        | `bedrock:bearerTokenType`        |
+
+Write a policy with one Deny statement for each endpoint. In each statement, set `Resource` to `*`, and use `StringEquals` to require that the condition key equals `LONG_TERM`.
+
+Where you attach the policy determines which tokens it blocks:
+
+* **One IAM user:** It blocks that user’s tokens. The Amazon Bedrock console creates a new IAM user for each long-term token, so this misses tokens generated there later.
+* **A member account in AWS Organizations:** As a service control policy (SCP), it blocks the tokens of every IAM user in the account, including new users.
+
+The policy blocks using long-term tokens, not generating them. For a sample of this policy and for policies that control generation, see [Control permissions for generating and using Amazon Bedrock API keys](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys-permissions.html) in the Amazon Bedrock User Guide.
 
 ## Install an SDK
 
@@ -122,9 +155,8 @@ composer require anthropic-ai/sdk aws/aws-sdk-php
 **Ruby**
 
 ```bash
-# Gemfile
-gem "anthropic"
-gem "aws-sdk-core"
+bundle add anthropic
+bundle add aws-sdk-core
 ```
 
 ## Making your first request
@@ -222,28 +254,39 @@ foreach (var item in message.Content)
 **Go**
 
 ```go
-client, err := bedrock.NewMantleClient(context.Background(), bedrock.MantleClientConfig{
-	AWSRegion: "us-east-1",
-})
-if err != nil {
-	panic(err)
-}
+import (
+	"context"
+	"fmt"
 
-message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-	Model:     "anthropic.claude-opus-5-5",
-	MaxTokens: 1024,
-	Messages: []anthropic.MessageParam{
-		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
-	},
-})
-if err != nil {
-	panic(err)
-}
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/bedrock"
+)
 
-for _, block := range message.Content {
-	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
-		fmt.Println(textBlock.Text)
-		break
+func main() {
+	client, err := bedrock.NewMantleClient(
+		context.Background(),
+		bedrock.MantleClientConfig{AWSRegion: "us-east-1"},
+	)
+	if err != nil {
+		panic(err)
+	}
+
+	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+		Model:     "anthropic.claude-opus-5-5",
+		MaxTokens: 1024,
+		Messages: []anthropic.MessageParam{
+			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
+		},
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	for _, block := range message.Content {
+		if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+			fmt.Println(textBlock.Text)
+			break
+		}
 	}
 }
 ```
@@ -309,7 +352,8 @@ message = client.messages.create(
   messages: [{role: "user", content: "Hello, Claude"}]
 )
 
-puts message.content.find { it.type == :text }.text
+text_block = message.content.grep(Anthropic::Models::TextBlock).first
+puts text_block.text if text_block
 ```
 
 You can also create the standard client with `Anthropic` (go: `anthropic.NewClient()`; java: `AnthropicOkHttpClient.builder()`; csharp: `AnthropicClient`; php: `Anthropic\Client`; ruby: `Anthropic::Client`): set `base_url` (typescript: `baseURL`; go: `option.WithBaseURL()`; java: `.baseUrl()`; csharp: `BaseUrl`; php: `baseUrl`) to `https://bedrock-mantle.{region}.api.aws/anthropic` and pass your bearer token as `api_key` (typescript, php: `apiKey`; go: `option.WithAPIKey()`; java: `.apiKey()`; csharp: `ApiKey`). This path supports bearer-token authentication only. SigV4 signing requires `AnthropicBedrockMantle` (csharp: `AnthropicBedrockMantleClient`; go: `bedrock.NewMantleClient()`; java: `BedrockMantleBackend`; php: `MantleClient`; ruby: `Anthropic::BedrockMantleClient`).
@@ -408,7 +452,7 @@ Default quota is 2 million input tokens per minute (TPM). You can request up to 
 
 ## Data retention
 
-Data handling for this offering is governed by Amazon Bedrock. For details, see [Data protection in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html).
+Amazon Bedrock governs data handling for Claude in Amazon Bedrock. For details, see [Data protection in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html).
 
 ## Monitoring and logging
 

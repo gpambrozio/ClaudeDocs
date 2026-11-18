@@ -48,7 +48,7 @@ The agent definition is the same whichever you choose. You set the model, prompt
 
 ## Start with a cloud environment
 
-If you’re not sure which to choose, or you’re new to Claude Managed Agents, start with a [cloud environment](environments.md), as the [quickstart](quickstart.md) does. Anthropic runs an isolated container for each session, with common languages and tools already installed, so there is nothing for you to host. Choose a self-hosted sandbox only if tools must run on infrastructure you control.
+If you’re not sure which to choose or you’re new to Claude Managed Agents, start with a [cloud environment](environments.md). The quickstart, [Get started with Claude Managed Agents](quickstart.md), uses a cloud environment. Anthropic runs an isolated container for each session, with common languages and tools already installed, so there is nothing for you to host. Choose a self-hosted sandbox only if tools must run on infrastructure you control.
 
 ## Compare the options
 
@@ -85,14 +85,14 @@ A self-hosted sandbox makes you the operator of the worker hosts. You harden the
 
 You also give up these cloud environment features:
 
-* [`file` and `github_repository` session resources](self-hosted-sandboxes.md#session-resources). You [stage input files yourself](self-hosted-sandboxes-workers.md#stage-files-for-a-session), and you are responsible for mounting your own GitHub repository too.
+* [`file` and `github_repository` session resources](self-hosted-sandboxes.md#session-resources). You [stage input files yourself](self-hosted-sandboxes-per-session.md#stage-files-for-a-session), and you are responsible for mounting your own GitHub repository too.
 * [Repository skill discovery](skills.md#load-skills-from-a-github-repository).
 * [Environment variable credentials](vaults.md#add-a-credential) in vaults.
 * The [preinstalled runtimes and packages](cloud-sandboxes-reference.md) of a cloud sandbox. A self-hosted sandbox has whatever your worker provides.
 
 ## Differences on Claude Platform on AWS
 
-If you use Claude Managed Agents through Claude Platform on AWS, Anthropic still operates the service. There, a self-hosted sandbox can’t use memory stores, workers don’t use an environment key, and MCP tunnels aren’t available. See [Claude Managed Agents on Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md#claude-managed-agents) and [Features not supported](../build-with-claude/claude-platform-on-aws.md#features-not-supported).
+If you use Claude Managed Agents through Claude Platform on AWS, Anthropic still operates the service. There, memory stores aren’t available in a self-hosted sandbox, workers don’t use an environment key, and MCP tunnels aren’t available. See [Claude Managed Agents on Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md#claude-managed-agents) and [Features not supported](../build-with-claude/claude-platform-on-aws.md#features-not-supported).
 
 ## Differences on Claude Models on Google Cloud (Anthropic managed)
 

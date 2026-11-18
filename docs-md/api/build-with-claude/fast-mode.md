@@ -362,7 +362,7 @@ puts(response.usage.speed)  # "fast" or "standard"
   "id": "msg_01XFDUDYJgAACzvnptvVoYEL",
   "type": "message",
   "role": "assistant",
-// ...
+  // ...
   "usage": {
     "input_tokens": 8,
     "output_tokens": 12,

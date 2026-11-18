@@ -701,7 +701,7 @@ import (
 	"log"
 	"math"
 
-// ...
+	// ...
 	"github.com/knights-analytics/hugot"
 	"github.com/knights-analytics/hugot/pipelines"
 )

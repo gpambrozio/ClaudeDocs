@@ -82,17 +82,15 @@ Plain text files such as .txt, .csv, or .md can be used directly in document blo
 
 ### Send your first PDF request
 
-Start with a simple example using the Messages API. You can provide PDFs to Claude in three ways:
+Start with an example that uses the Messages API. To give Claude a PDF, send it in a [`document` content block](../api/messages.md#document_block_param) with one of three kinds of source. Your platform determines which kinds you can use (see [Availability](pdf-support.md#feature-availability)). Among those kinds, choose by where the PDF is, how large it is, and how often you use it:
 
-1. As a URL reference to a PDF hosted online
-2. As a base64-encoded PDF in `document` content blocks
-3. By a `file_id` from the [Files API](files.md)
-
-On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, only base64-encoded sources are available. On Microsoft Foundry, the Files API is not supported for deployments hosted on Azure.
+1. **A PDF hosted online:** Reference it by its URL ([Option 1: URL-based PDF document](pdf-support.md#option-1-url-based-pdf-document)).
+2. **A PDF on your local system or without a URL:** Send it as base64-encoded data ([Option 2: Base64-encoded PDF document](pdf-support.md#option-2-base64-encoded-pdf-document)).
+3. **A large PDF or one that you’ll use repeatedly:** Upload it with the [Files API](files.md) and reference it by its `file_id` ([Option 3: Files API](pdf-support.md#option-3-files-api)).
 
 #### Option 1: URL-based PDF document
 
-The simplest approach is to reference a PDF directly from a URL:
+Reference the PDF by its URL:
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
@@ -192,7 +190,7 @@ console.log(response);
 ```csharp C#
 var client = new AnthropicClient();
 
-// Create document block with URL
+// Create a document block with a URL
 var documentParam = new DocumentBlockParam
 {
     Source = new UrlPdfSource
@@ -247,7 +245,7 @@ fmt.Printf("%+v\n", message.Content)
 ```java Java
 AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-// Create document block with URL
+// Create a document block with a URL
 DocumentBlockParam documentParam = DocumentBlockParam.builder()
     .source(
         UrlPdfSource.builder()
@@ -275,7 +273,7 @@ MessageCreateParams params = MessageCreateParams.builder()
     .build();
 
 Message message = client.messages().create(params);
-System.out.println(message.content());
+IO.println(message.content());
 ```
 
 ```php PHP
@@ -301,7 +299,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo $message;
@@ -311,7 +309,7 @@ echo $message;
 anthropic = Anthropic::Client.new
 
 message = anthropic.messages.create(
-  model: "claude-opus-5-5",
+  model: Anthropic::Model::CLAUDE_OPUS_5_5,
   max_tokens: 1024,
   messages: [
     {
@@ -357,7 +355,7 @@ The response returns Claude’s analysis as text blocks in `content`, with token
 
 #### Option 2: Base64-encoded PDF document
 
-If you need to send PDFs from your local system or when a URL isn’t available:
+Send the PDF as base64-encoded data in the request itself. Most of the following examples download a sample PDF and encode it, so they need no local file. To send a local file in those examples, replace the lines that download and encode the PDF with the commented-out lines:
 
 ```bash cURL
 # Method 1: Fetch and encode a remote PDF
@@ -502,7 +500,7 @@ var pdfBase64 = Convert.ToBase64String(await httpClient.GetByteArrayAsync(pdfUrl
 // Method 2: Load from a local file
 // var pdfBase64 = Convert.ToBase64String(await File.ReadAllBytesAsync("document.pdf"));
 
-// Create document block with base64 data
+// Create a document block with base64 data
 var documentParam = new DocumentBlockParam
 {
     Source = new Base64PdfSource { Data = pdfBase64 },
@@ -543,7 +541,7 @@ if err != nil {
 }
 pdfBase64 := base64.StdEncoding.EncodeToString(pdfBytes)
 
-// Alternative: Load from a local file (add "os" to the imports)
+// Alternative: Load from a local file (in the imports, replace "io" and "net/http" with "os")
 // pdfBytes, err := os.ReadFile("document.pdf")
 // pdfBase64 := base64.StdEncoding.EncodeToString(pdfBytes)
 
@@ -592,7 +590,7 @@ String pdfBase64 = Base64.getEncoder().encodeToString(response.body());
 // byte[] fileBytes = Files.readAllBytes(Path.of("document.pdf"));
 // String pdfBase64 = Base64.getEncoder().encodeToString(fileBytes);
 
-// Create document block with base64 data
+// Create a document block with base64 data
 DocumentBlockParam documentParam = DocumentBlockParam.builder()
     .source(Base64PdfSource.builder()
         .data(pdfBase64)
@@ -616,7 +614,7 @@ MessageCreateParams params = MessageCreateParams.builder()
     .build();
 
 Message message = client.messages().create(params);
-System.out.println(message.content());
+IO.println(message.content());
 ```
 
 ```php PHP
@@ -624,10 +622,14 @@ $client = new Client();
 
 // First, load and encode the PDF
 $pdf_url = 'https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf';
-$pdf_data = base64_encode(file_get_contents($pdf_url));
+$pdf_bytes = file_get_contents($pdf_url)
+    ?: throw new \RuntimeException('Could not fetch the PDF.');
+$pdf_data = base64_encode($pdf_bytes);
 
 // Alternative: Load from a local file
-// $pdf_data = base64_encode(file_get_contents('document.pdf'));
+// $pdf_bytes = file_get_contents('document.pdf')
+//     ?: throw new \RuntimeException('Could not read document.pdf.');
+// $pdf_data = base64_encode($pdf_bytes);
 
 // Send to Claude using base64 encoding
 $message = $client->messages->create(
@@ -640,7 +642,7 @@ $message = $client->messages->create(
                     'type' => 'document',
                     'source' => [
                         'type' => 'base64',
-                        'media_type' => 'application/pdf',
+                        'mediaType' => 'application/pdf',
                         'data' => $pdf_data,
                     ],
                 ],
@@ -651,7 +653,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo $message;
@@ -662,7 +664,7 @@ require "open-uri"
 
 # First, load and encode the PDF
 pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-pdf_bytes = URI.open(pdf_url, "rb") { |f| f.read }
+pdf_bytes = URI.open(pdf_url, "rb", &:read)
 pdf_data = [pdf_bytes].pack("m0") # Encode as base64 without newlines
 
 # Alternative: Load from a local file
@@ -924,7 +926,7 @@ MessageCreateParams params = MessageCreateParams.builder()
     .build();
 
 Message message = client.messages().create(params);
-System.out.println(message.content());
+IO.println(message.content());
 ```
 
 ```php PHP
@@ -933,8 +935,11 @@ use Anthropic\Core\FileParam;
 $client = new Client();
 
 // Upload the PDF file
+$document = fopen('/path/to/document.pdf', 'rb')
+    ?: throw new \RuntimeException('Could not open /path/to/document.pdf.');
+
 $file_upload = $client->files->upload(
-    file: FileParam::fromResource(fopen('/path/to/document.pdf', 'r'), contentType: 'application/pdf'),
+    file: FileParam::fromResource($document, contentType: 'application/pdf'),
 );
 
 // Use the uploaded file in a message
@@ -958,7 +963,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo $message;
@@ -968,9 +973,9 @@ echo $message;
 anthropic = Anthropic::Client.new
 
 # Upload the PDF file
-file_upload = File.open("/path/to/document.pdf", "rb") do |f|
+file_upload = File.open("/path/to/document.pdf", "rb") do |pdf_file|
   anthropic.files.upload(
-    file: Anthropic::FilePart.new(f, filename: "document.pdf", content_type: "application/pdf")
+    file: Anthropic::FilePart.new(pdf_file, filename: "document.pdf", content_type: "application/pdf")
   )
 end
 
@@ -1002,31 +1007,33 @@ When you send a PDF to Claude, the following steps occur:
 **The system extracts the contents of the document.**
 
 * The system converts each page of the document into an image.
-* The text from each page is extracted and provided alongside each page’s image.
+* The system extracts the text from each page and provides it alongside that page’s image.
 
 **Claude analyzes both the text and images.**
 
-* Documents are provided as a combination of text and images for analysis.
-* This allows users to ask for insights on visual elements of a PDF, such as charts, diagrams, and other non-textual content.
+* Claude receives each document as a combination of text and images.
+* Because Claude receives an image of each page, you can ask for insights on visual elements of a PDF, such as charts, diagrams, and other non-textual content.
 
-**Claude responds, referencing the PDF’s contents if relevant.**
+**Claude uses the PDF’s contents in its response if relevant.**
 
-Claude can reference both textual and visual content when it responds. You can further improve performance by integrating PDF support with:
-
-* [Use prompt caching](pdf-support.md#use-prompt-caching): To improve performance for repeated analysis.
-* [Process document batches](pdf-support.md#process-document-batches): To process documents at high volume.
-* [Tool use](../agents-and-tools/tool-use/overview.md): To extract specific information from documents for use as tool inputs.
+Claude can draw on both textual and visual content in its response.
 
 ### Estimate your costs
 
 The token count of a PDF file depends on the total text extracted from the document and the number of pages:
 
 * Text token costs: Each page typically uses 1,500–3,000 tokens depending on content density. Standard API pricing applies with no additional PDF fees.
-* Image token costs: Because each page is converted into an image, the same [image-based cost calculations](vision.md#evaluate-image-size) are applied.
+* Image token costs: Each page’s image uses at most 1,568 visual tokens on every model because the API fits page images within the Standard resolution tier’s limits. For how to count an image’s visual tokens, see [Resolution and token cost](vision.md#evaluate-image-size).
 
 You can use [token counting](token-counting.md) to estimate costs for your specific PDFs.
 
 ## Optimize PDF processing
+
+You can combine PDF support with other features:
+
+* [Use prompt caching](pdf-support.md#use-prompt-caching) to improve performance for repeated analysis.
+* [Process document batches](pdf-support.md#process-document-batches) to handle documents at high volume.
+* [Use tools](../agents-and-tools/tool-use/overview.md) to have Claude extract specific information from documents for use as tool inputs.
 
 ### Improve performance
 
@@ -1289,7 +1296,7 @@ MessageCreateParams params = MessageCreateParams.builder()
     .build();
 
 Message message = client.messages().create(params);
-System.out.println(message);
+IO.println(message);
 ```
 
 ```php PHP
@@ -1297,7 +1304,9 @@ $client = new Client();
 
 // Load and encode the PDF
 $pdf_url = 'https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf';
-$pdf_data = base64_encode(file_get_contents($pdf_url));
+$pdf_bytes = file_get_contents($pdf_url)
+    ?: throw new \RuntimeException('Could not fetch the PDF.');
+$pdf_data = base64_encode($pdf_bytes);
 
 $message = $client->messages->create(
     maxTokens: 1024,
@@ -1309,10 +1318,10 @@ $message = $client->messages->create(
                     'type' => 'document',
                     'source' => [
                         'type' => 'base64',
-                        'media_type' => 'application/pdf',
+                        'mediaType' => 'application/pdf',
                         'data' => $pdf_data,
                     ],
-                    'cache_control' => ['type' => 'ephemeral'],
+                    'cacheControl' => ['type' => 'ephemeral'],
                 ],
                 [
                     'type' => 'text',
@@ -1321,7 +1330,7 @@ $message = $client->messages->create(
             ],
         ],
     ],
-    model: 'claude-opus-5-5',
+    model: Model::CLAUDE_OPUS_5_5,
 );
 
 echo $message;
@@ -1332,7 +1341,7 @@ require "open-uri"
 
 # Load and encode the PDF
 pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-pdf_bytes = URI.open(pdf_url, "rb") { |f| f.read }
+pdf_bytes = URI.open(pdf_url, "rb", &:read)
 pdf_data = [pdf_bytes].pack("m0") # Encode as base64 without newlines
 
 anthropic = Anthropic::Client.new
@@ -1807,7 +1816,7 @@ BatchCreateParams params = BatchCreateParams.builder()
     .build();
 
 MessageBatch batch = client.messages().batches().create(params);
-System.out.println(batch);
+IO.println(batch);
 ```
 
 ```php PHP
@@ -1815,15 +1824,17 @@ $client = new Client();
 
 // Load and encode the PDF
 $pdf_url = 'https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf';
-$pdf_data = base64_encode(file_get_contents($pdf_url));
+$pdf_bytes = file_get_contents($pdf_url)
+    ?: throw new \RuntimeException('Could not fetch the PDF.');
+$pdf_data = base64_encode($pdf_bytes);
 
 $batch = $client->messages->batches->create(
     requests: [
         [
-            'custom_id' => 'my-first-request',
+            'customID' => 'my-first-request',
             'params' => [
-                'model' => 'claude-opus-5-5',
-                'max_tokens' => 1024,
+                'model' => Model::CLAUDE_OPUS_5_5,
+                'maxTokens' => 1024,
                 'messages' => [
                     [
                         'role' => 'user',
@@ -1832,7 +1843,7 @@ $batch = $client->messages->batches->create(
                                 'type' => 'document',
                                 'source' => [
                                     'type' => 'base64',
-                                    'media_type' => 'application/pdf',
+                                    'mediaType' => 'application/pdf',
                                     'data' => $pdf_data,
                                 ],
                             ],
@@ -1846,10 +1857,10 @@ $batch = $client->messages->batches->create(
             ],
         ],
         [
-            'custom_id' => 'my-second-request',
+            'customID' => 'my-second-request',
             'params' => [
-                'model' => 'claude-opus-5-5',
-                'max_tokens' => 1024,
+                'model' => Model::CLAUDE_OPUS_5_5,
+                'maxTokens' => 1024,
                 'messages' => [
                     [
                         'role' => 'user',
@@ -1858,7 +1869,7 @@ $batch = $client->messages->batches->create(
                                 'type' => 'document',
                                 'source' => [
                                     'type' => 'base64',
-                                    'media_type' => 'application/pdf',
+                                    'mediaType' => 'application/pdf',
                                     'data' => $pdf_data,
                                 ],
                             ],
@@ -1882,7 +1893,7 @@ require "open-uri"
 
 # Load and encode the PDF
 pdf_url = "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf"
-pdf_bytes = URI.open(pdf_url, "rb") { |f| f.read }
+pdf_bytes = URI.open(pdf_url, "rb", &:read)
 pdf_data = [pdf_bytes].pack("m0") # Encode as base64 without newlines
 
 anthropic = Anthropic::Client.new
@@ -1953,7 +1964,7 @@ Batches process asynchronously. To check progress and retrieve results once proc
 
 **Vision**
 
-Claude’s vision capabilities allow it to process and analyze images, opening up exciting possibilities for multimodal interaction.
+Learn how to count an image’s visual tokens and which limitations PDFs share with other vision tasks.
 
 **Try PDF examples**
 

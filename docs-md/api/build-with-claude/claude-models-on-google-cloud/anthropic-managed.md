@@ -584,6 +584,7 @@ The following aren’t supported on Claude Models on Google Cloud (Anthropic man
 * **MCP tunnels:** [MCP tunnels](../../agents-and-tools/mcp-tunnels/overview.md) aren’t available on Claude Models on Google Cloud (Anthropic managed).
 * **[Memory stores on self-hosted environments](../../managed-agents/self-hosted-sandboxes-memory.md):** Memory stores aren’t supported for sessions on self-hosted environments.
 * **Pre-built self-hosted sandbox workers:** The [self-hosted workers](../../managed-agents/self-hosted-sandboxes-workers.md) in the `ant` CLI and in the Python, TypeScript, and Go SDKs don’t support Claude Models on Google Cloud (Anthropic managed). Instead, implement your own worker that calls the [Environments Work endpoints](../../api/beta/environments/work.md) directly. For the roles and permissions your worker needs, see [IAM permissions for environments](../../api/claude-models-on-google-cloud-anthropic-managed-iam-permissions.md#environments).
+* **Linked billing (beta):** [Linked billing](../../manage-claude/oauth-apps/organization-billing-connections.md) isn’t available on Claude Models on Google Cloud (Anthropic managed).
 
 ### Context window
 
@@ -593,7 +594,33 @@ Context window sizes on Claude Models on Google Cloud (Anthropic managed) are th
 
 ### Rate limits
 
-Anthropic manages rate limits for Claude Models on Google Cloud (Anthropic managed). To request higher limits, contact your Anthropic account representative or [contact sales](https://claude.com/contact-sales). For how rate limits are measured and reported, see [Rate limits](../../api/rate-limits.md).
+Anthropic manages rate limits for Claude Models on Google Cloud (Anthropic managed). For how rate limits are measured and reported, see [Rate limits](../../api/rate-limits.md).
+
+To see your organization’s rate limits, [open the Claude Console](anthropic-managed.md#using-the-claude-console) and go to [Rate limits in the Claude Console](https://platform.claude.com/usage/limits) (`platform.claude.com/usage/limits`). The badge on that page shows **Custom tier** for every organization on Claude Models on Google Cloud (Anthropic managed), whatever its [usage tier](../../api/rate-limits.md#about-rate-limits).
+
+To request higher limits, use the form in the Claude Console:
+
+1. On the **Rate limits** page, click **Request higher limits**.
+
+   ![Header of the Rate limits page in the Claude Console, with a Custom tier badge and the Request higher limits button.](https://platform.claude.com/docs/images/rate-limits/request-higher-limits-button.png)
+
+2. In **What do you need, and why?**, include the following:
+
+   * The models you need raised
+   * Peak input tokens per minute and output tokens per minute for each model (not daily totals)
+   * The approximate share of your input that is cached or repeated context
+
+   If you need a higher [monthly spend cap](../../api/rate-limits.md#spend-limits), say so and fill in **Expected monthly spend**.
+
+   ![Request higher limits form with fields for what you need and why, expected monthly spend (optional), and contact email.](https://platform.claude.com/docs/images/rate-limits/request-higher-limits-form.png)
+
+3. Enter a contact email address and click **Send request**.
+
+Anthropic Support reviews your request and replies to the contact email address. Your organization can send one request every 24 hours.
+
+If your organization has a Zero Data Retention (ZDR) arrangement or has [customer-managed encryption keys (CMEK) turned on](../../manage-claude/cmek.md#availability), it can’t use the form. The page shows **Contact sales**, or the form shows an error when you send the request. Contact your Anthropic account representative or [contact sales](https://claude.com/contact-sales) instead.
+
+Any other organization can also contact its account representative or sales.
 
 ### Billing
 

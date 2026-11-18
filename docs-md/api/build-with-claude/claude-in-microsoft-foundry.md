@@ -106,9 +106,10 @@ composer require "anthropic-ai/sdk" "guzzlehttp/guzzle:^7"
 **Ruby**
 
 ```bash
-# Gemfile
-gem "anthropic"
+bundle add anthropic
 ```
+
+For Entra ID authentication, you pass the client a token provider. The provider in [Microsoft Entra authentication](claude-in-microsoft-foundry.md#microsoft-entra-authentication) gets its tokens from the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli), so install the Azure CLI to use that provider.
 
 ## Provisioning
 
@@ -349,7 +350,7 @@ message = client.messages.create(
   messages: [{role: "user", content: "Hello!"}]
 )
 
-puts message.content.find { it.type == :text }.text
+message.content.grep(Anthropic::Models::TextBlock).each { |block| puts block.text }
 ```
 
 Keep your API keys secure. Never commit them to version control or share them publicly. Anyone with access to your API key can make requests to Claude through your Foundry resource.
@@ -590,7 +591,7 @@ message = client.messages.create(
   messages: [{role: "user", content: "Hello!"}]
 )
 
-puts message.content.find { it.type == :text }.text
+message.content.grep(Anthropic::Models::TextBlock).each { |block| puts block.text }
 ```
 
 ## Correlation request IDs

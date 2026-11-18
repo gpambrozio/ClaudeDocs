@@ -211,6 +211,8 @@ Create User Profile
 
   - `:"experimental-claude-tag-2026-10-21"`
 
+  - `:"user-profiles-billing-2026-10-01"`
+
   - `:"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -569,6 +571,8 @@ List User Profiles
 
   - `:"experimental-claude-tag-2026-10-21"`
 
+  - `:"user-profiles-billing-2026-10-01"`
+
   - `:"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -899,6 +903,8 @@ Get User Profile
   - `:"analytics-usage-cost-2026-08-24"`
 
   - `:"experimental-claude-tag-2026-10-21"`
+
+  - `:"user-profiles-billing-2026-10-01"`
 
   - `:"message-batches-2024-09-24"`
 
@@ -1322,6 +1328,8 @@ Update User Profile
 
   - `:"experimental-claude-tag-2026-10-21"`
 
+  - `:"user-profiles-billing-2026-10-01"`
+
   - `:"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -1648,6 +1656,8 @@ Delete User Profile
 
   - `:"experimental-claude-tag-2026-10-21"`
 
+  - `:"user-profiles-billing-2026-10-01"`
+
   - `:"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -1838,6 +1848,8 @@ Create Enrollment URL
   - `:"analytics-usage-cost-2026-08-24"`
 
   - `:"experimental-claude-tag-2026-10-21"`
+
+  - `:"user-profiles-billing-2026-10-01"`
 
   - `:"message-batches-2024-09-24"`
 
@@ -2340,6 +2352,8 @@ Create Action URL
   - `:"analytics-usage-cost-2026-08-24"`
 
   - `:"experimental-claude-tag-2026-10-21"`
+
+  - `:"user-profiles-billing-2026-10-01"`
 
   - `:"message-batches-2024-09-24"`
 

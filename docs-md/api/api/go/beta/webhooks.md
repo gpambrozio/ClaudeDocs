@@ -639,6 +639,26 @@ signature is missing or invalid.
 
       - `OrganizationID string`
 
+    - `type BetaWebhookExternalKeyFailedEventData`
+
+      - `Type ExternalKeyFailed`
+
+      - `ID string`
+
+        ID (`ekey_...`) of the external key that stopped working or works again.
+
+      - `OrganizationID string`
+
+    - `type BetaWebhookExternalKeyRecoveredEventData`
+
+      - `Type ExternalKeyRecovered`
+
+      - `ID string`
+
+        ID (`ekey_...`) of the external key that stopped working or works again.
+
+      - `OrganizationID string`
+
 ### Example
 
 ```go
@@ -1294,6 +1314,26 @@ you have already verified the signature yourself.
       - `ID string`
 
         ID of the user profile that triggered the event.
+
+      - `OrganizationID string`
+
+    - `type BetaWebhookExternalKeyFailedEventData`
+
+      - `Type ExternalKeyFailed`
+
+      - `ID string`
+
+        ID (`ekey_...`) of the external key that stopped working or works again.
+
+      - `OrganizationID string`
+
+    - `type BetaWebhookExternalKeyRecoveredEventData`
+
+      - `Type ExternalKeyRecovered`
+
+      - `ID string`
+
+        ID (`ekey_...`) of the external key that stopped working or works again.
 
       - `OrganizationID string`
 
@@ -2177,6 +2217,26 @@ func main() {
 
       - `OrganizationID string`
 
+    - `type BetaWebhookExternalKeyFailedEventData`
+
+      - `Type ExternalKeyFailed`
+
+      - `ID string`
+
+        ID (`ekey_...`) of the external key that stopped working or works again.
+
+      - `OrganizationID string`
+
+    - `type BetaWebhookExternalKeyRecoveredEventData`
+
+      - `Type ExternalKeyRecovered`
+
+      - `ID string`
+
+        ID (`ekey_...`) of the external key that stopped working or works again.
+
+      - `OrganizationID string`
+
 ### Beta Webhook Event Data
 
 - `type BetaWebhookEventDataUnion interface{…}`
@@ -2774,6 +2834,50 @@ func main() {
       ID of the user profile that triggered the event.
 
     - `OrganizationID string`
+
+  - `type BetaWebhookExternalKeyFailedEventData`
+
+    - `Type ExternalKeyFailed`
+
+    - `ID string`
+
+      ID (`ekey_...`) of the external key that stopped working or works again.
+
+    - `OrganizationID string`
+
+  - `type BetaWebhookExternalKeyRecoveredEventData`
+
+    - `Type ExternalKeyRecovered`
+
+    - `ID string`
+
+      ID (`ekey_...`) of the external key that stopped working or works again.
+
+    - `OrganizationID string`
+
+### Beta Webhook External Key Failed Event Data
+
+- `type BetaWebhookExternalKeyFailedEventData`
+
+  - `Type ExternalKeyFailed`
+
+  - `ID string`
+
+    ID (`ekey_...`) of the external key that stopped working or works again.
+
+  - `OrganizationID string`
+
+### Beta Webhook External Key Recovered Event Data
+
+- `type BetaWebhookExternalKeyRecoveredEventData`
+
+  - `Type ExternalKeyRecovered`
+
+  - `ID string`
+
+    ID (`ekey_...`) of the external key that stopped working or works again.
+
+  - `OrganizationID string`
 
 ### Beta Webhook Memory Store Archived Event Data
 

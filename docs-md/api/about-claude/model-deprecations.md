@@ -23,13 +23,17 @@ Deprecated models are likely to be less reliable than active models. Move worklo
 
 The dates on this page apply to Anthropic-operated platforms: the Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), and [Microsoft Foundry](../build-with-claude/claude-in-microsoft-foundry.md). Partner-operated platforms, Claude Models on Google Cloud (Google managed) and Amazon Bedrock, set their own retirement schedules, so a model’s lifecycle status and dates can differ. See the [Amazon Bedrock (`bedrock-mantle`)](../build-with-claude/claude-in-amazon-bedrock.md#supported-models), [Amazon Bedrock (`bedrock-runtime`)](../build-with-claude/claude-on-amazon-bedrock-legacy.md#api-model-ids), and [Claude Models on Google Cloud (Google managed)](../build-with-claude/claude-models-on-google-cloud/google-managed.md#api-model-ids) model tables.
 
+[Claude Code](../../claude-code/overview.md) uses the Claude API, including when you sign in with a Claude plan, so this page’s dates apply. If Claude Code is set up for another platform or for a gateway, the dates are those of the platform that serves its requests.
+
 ## Migrating to replacements
 
-Once a model is deprecated, migrate all usage to a suitable replacement before the retirement date. Requests to models past the retirement date will fail.
+Once a model is deprecated, migrate all usage to a suitable replacement before the retirement date. Once the model is retired, requests to it fail.
 
 To help measure the performance of replacement models on your tasks, consider thorough testing of your applications with the new models well before the retirement date.
 
 For specific instructions on migrating to the latest Claude models, see [Migration guides](models/migration-guide.md).
+
+If you use Claude Code, update it first, because a newer model can need a newer version of Claude Code. Then, [check which model you’re using](../../claude-code/model-config.md#checking-your-current-model), even if you set no model or use a [Claude Code alias](../../claude-code/model-config.md#model-aliases) such as `sonnet`. If that model is deprecated or retired, set its [recommended replacement](model-deprecations.md#deprecation-history) as your model. Also, change the old model [everywhere you set a model](../../claude-code/model-config.md#setting-your-model), including subagent definitions, and ask your administrator to change any model they set.
 
 ## Notifications
 
@@ -105,6 +109,10 @@ On September 30, 2026, Anthropic notified developers using Claude Sonnet 4.5 of 
 | Retirement date   | Deprecated model             | Recommended replacement |
 | ----------------- | ---------------------------- | ----------------------- |
 | November 30, 2026 | `claude-sonnet-4-5-20250929` | `claude-sonnet-5-5`     |
+
+This retirement includes `claude-sonnet-4-5`, the same model’s ID without a date.
+
+If you use Claude Code, see [Overview](model-deprecations.md#overview) for which dates apply and [Migrating to replacements](model-deprecations.md#migrating-to-replacements) for what to change. Once this model is retired, Claude Code on the Claude API shows an error that begins [`There's an issue with the selected model`](../../claude-code/errors.md#theres-an-issue-with-the-selected-model). If you set a [fallback model chain](../../claude-code/model-config.md#fallback-model-chains), Claude Code switches to the next model in the chain instead. It tries Claude Sonnet 4.5 again on your next message.
 
 ### 2026-06-05: Claude Opus 4.1 model
 

@@ -475,7 +475,7 @@ func classifySupportRequest(ticketContents string) {
 
 		Remember to always include your classification reasoning before your actual intent output. The reasoning should be enclosed in <reasoning> tags and the intent in <intent> tags. Return only the reasoning and the intent.
 		`
-// ...
+	// ...
 }
 ```
 
@@ -809,7 +809,7 @@ import (
 	"context"
 	"regexp"
 	"strings"
-// ...
+	// ...
 )
 
 // Create an instance of the Claude API client
@@ -1167,7 +1167,7 @@ import (
 	"context"
 	"regexp"
 	"strings"
-// ...
+	// ...
 )
 
 // Create an instance of the Claude API client

@@ -1728,7 +1728,7 @@ void main() {
     // When handling Claude's coordinates, scale them back up
     BiConsumer<Integer, Integer> executeClick =
         (x, y) -> performClick(x / scale, y / scale);
-// ...
+    // ...
 }
 ```
 

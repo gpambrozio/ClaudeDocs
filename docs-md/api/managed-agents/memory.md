@@ -404,9 +404,7 @@ Each attached store is mounted inside the session’s sandbox as a directory und
 
 `access` (csharp, go: `Access`) is enforced at the filesystem level: a `read_only` mount rejects writes, whereas writes to a `read_write` mount produce [memory versions](memory.md#audit-memory-changes) attributed to the session.
 
-On [self-hosted sandboxes](self-hosted-sandboxes-memory.md), each store’s directory is a local copy that the worker manages rather than a live mount. The worker reconciles each copy with its store after tool calls, at most once per sync interval (15 seconds by default), and once more when the session ends. The agent’s `write` and `edit` tools change only the local copy; the worker uploads those changes at its next sync, so another session running on a self-hosted sandbox sees a change only after both workers have synced. Paths under `/mnt/memory/` outside the store directories are not scratch space there: the worker’s file tools refuse to write to them, and anything a shell command writes there is never synced to a store.
-
-For a `read_only` store, the worker’s `write` and `edit` tools refuse changes under that directory and the worker never uploads anything from it. To learn how the worker resolves write conflicts, and what the `bash` tool can still change in a read-only store’s local copy, see [Read-only stores and conflicts](self-hosted-sandboxes-memory.md#read-only-stores-and-conflicts).
+On self-hosted sandboxes, each store’s directory is a local copy that the worker syncs with the store, not a live mount. A change reaches the store, and other sessions, only at a sync. See [How the worker handles memory](self-hosted-sandboxes-memory.md#how-the-worker-handles-memory) and [Read-only stores and conflicts](self-hosted-sandboxes-memory.md#read-only-stores-and-conflicts).
 
 The agent’s reads and writes appear in the [event stream](events-and-streaming.md) as ordinary `agent.tool_use` and `agent.tool_result` events for whichever tool touched the mount.
 
