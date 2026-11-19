@@ -8,7 +8,7 @@ description: "Start from sample detection rules for Security posture activities 
 
 To enable the Compliance API, see [Set up the Compliance API](../compliance-api-access.md).
 
-These sample rules alert on changes in your organization’s [Security posture](overview.md), using the activities that the Compliance API Activity Feed records. They assume that your security information and event management (SIEM) system stores these activities, as [Send events to your SIEM](send-events.md) describes.
+These sample rules alert on changes in your organization’s [Security posture](overview.md), using the activities that the Compliance API Activity Feed records. They assume that your security information and event management (SIEM) system stores these activities, as [Send Security posture events to your SIEM](send-events.md) describes.
 
 ## Before you write a rule
 
@@ -17,7 +17,7 @@ Each rule is a plain description and a query in no particular query language.
 * Queries use the Activity Feed’s field names, plus `stored_at`, this page’s name for when you stored an activity. Any other name is your own list or alias.
 * Before a rule counts activities, deduplicate them by `id`.
 * Unless a rule says otherwise, run it over the time since its last completed run, by `stored_at`, not `created_at`, because an activity can arrive late; queries leave that range out.
-* Write rules that fire on an activity you stored, never on one you have not: it may be late or a change [the feed does not record](events-reference.md#what-the-feed-does-not-record). To compare stored activities with current results, see [Check events against results](check-events-against-results.md).
+* Write rules that fire on an activity you stored, never on the absence of one. An activity you have not stored may be late, or may be a change [the feed does not record](events-reference.md#what-the-feed-does-not-record). To compare stored activities with current results, see [Check stored Security posture events against current results](check-events-against-results.md).
 
 ## Attestation rules
 
@@ -90,7 +90,7 @@ A [`lapsed` activity](events-reference.md#what-a-lapsed-activity-means) means th
 New values can appear in any of these fields.
 
 * Identify automatic changes by `actor.type`, not by the value of `actor.service`.
-* Do not drop activities whose `control`, `action`, or `status` value a rule does not list; a new `action` value can record an acceptance. See the [events reference](events-reference.md).
+* Do not drop activities whose `control`, `action`, or `status` value a rule does not list; a new `action` value can record an acceptance. See [Security posture events reference](events-reference.md).
 
 ## Test a rule
 

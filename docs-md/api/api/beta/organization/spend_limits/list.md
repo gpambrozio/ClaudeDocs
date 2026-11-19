@@ -328,6 +328,16 @@ come in a fixed order that is not creation order.
 
 - `next_page: string or null`
 
+## Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
 ## Example
 
 ```bash

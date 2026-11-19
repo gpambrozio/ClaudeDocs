@@ -20,11 +20,12 @@ featureMetadata:
     Claude API: beta
     Amazon Bedrock:
       availability: beta
-      note: On Amazon Bedrock and Google Cloud the token is bound to your caller identity (there are no workspaces), and `allowed_fallback_models` is not exposed.
+      note: On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, the token is bound to your caller identity (there are no workspaces).
     Claude Platform on AWS: beta
+    Claude Models on Google Cloud (Anthropic managed): beta
     Claude Models on Google Cloud (Google managed):
       availability: beta
-      note: On Amazon Bedrock and Google Cloud the token is bound to your caller identity (there are no workspaces), and `allowed_fallback_models` is not exposed.
+      note: On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, the token is bound to your caller identity (there are no workspaces).
     Microsoft Foundry: beta
 ---
 
@@ -520,13 +521,17 @@ puts JSON.generate({stop_reason: response.stop_reason, model: response.model})
 
 ## Where it works
 
-Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Google managed), and Microsoft Foundry. Refusals in [Message Batches](batch-processing.md) don’t mint credit tokens, and redemption applies only to direct Messages API requests: a token passed on a batch request is accepted but ignored. A Claude Haiku 5.5 refusal carries no fallback credit, so a retry after one pays the full cost of writing the fallback model’s prompt cache.
+Fallback credit is in beta on the Claude API and on some cloud platforms. For the models on each platform, see [Availability](fallback-credit.md#feature-availability).
+
+A Claude Haiku 5.5 refusal carries no fallback credit, so a retry after one pays the full cost of writing the fallback model’s prompt cache.
+
+Refusals in [batch processing](batch-processing.md) don’t carry a credit token. Batch requests can’t redeem one either: only direct Messages API requests can. The API accepts a token on a batch request but ignores it.
 
 The retry model must be one of the refused model’s permitted fallback targets. For Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, and Claude Opus 5.5, those are Claude Opus 4.8 (`claude-opus-4-8`) and Claude Opus 5 (`claude-opus-5`). For Claude Opus 5, it is Claude Opus 4.8. For Claude Sonnet 5.5, it is Claude Sonnet 5 (`claude-sonnet-5`).
 
 **Looking up permitted fallback targets programmatically**
 
-On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model’s entry in the [Models API](../api/beta/models/list.md) when the `server-side-fallback-2026-07-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Claude Models on Google Cloud (Google managed), or Microsoft Foundry.
+On the Claude API and Claude Platform on AWS, the [Models API](../api/beta/models/list.md) lists each model’s permitted targets in the `allowed_fallback_models` field. To get this field, send the `server-side-fallback-2026-07-01` beta header on the Models API request. With only a `fallback-credit-*` header, the response leaves the field out.
 
 ## Checking that the credit applied
 
@@ -644,8 +649,9 @@ Fallback credit is in beta on select models.
 | Beta             | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
 | Beta<sup>1</sup> | [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md)                                                                       | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
 | Beta<sup>1</sup> | [Amazon Bedrock](claude-in-amazon-bedrock.md)                                                                                                                           | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md)                                                                                                                                                                         |
+| Beta             | [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md)                                                                 | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
 
-1. On Amazon Bedrock and Google Cloud the token is bound to your caller identity (there are no workspaces), and `allowed_fallback_models` is not exposed.
+1. On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, the token is bound to your caller identity (there are no workspaces).
 
 #### [Managed Agents](../managed-agents/overview.md)
 
@@ -657,10 +663,10 @@ Fallback credit is in beta on select models.
 
 Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
 
-| Header                                                                                            | Cloud platforms                                                                                                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `fallback-credit-2026-07-01` or `server-side-fallback-2026-07-01` or `fallback-credit-2026-06-01` | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Microsoft Foundry](claude-in-microsoft-foundry.md)                             |
-| `fallback-credit-2026-07-01` or `fallback-credit-2026-06-01`                                      | [Amazon Bedrock](claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md) |
+| Header                                                                                            | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fallback-credit-2026-07-01` or `server-side-fallback-2026-07-01` or `fallback-credit-2026-06-01` | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) |
+| `fallback-credit-2026-07-01` or `fallback-credit-2026-06-01`                                      | [Amazon Bedrock](claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md)                                                                                                                                 |
 
 ---
 

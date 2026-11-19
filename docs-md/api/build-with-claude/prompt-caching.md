@@ -752,9 +752,11 @@ For more detailed information, see [Thinking and prompt caching](thinking.md#thi
 
 ### Cache storage and sharing
 
-Prompt caching uses [workspace](../manage-claude/workspaces.md)-level isolation. Caches are isolated by workspace, ensuring data separation between workspaces within the same organization. This applies to the Claude API, Claude Platform on AWS, and Microsoft Foundry; Claude Models on Google Cloud (Google managed) and Bedrock maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this difference.
+Prompt caching follows these rules:
 
-* **Organization and workspace isolation:** Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts. Caches are also isolated by workspace within an organization on the Claude API, Claude Platform on AWS, and Microsoft Foundry; Claude Models on Google Cloud (Google managed) and Bedrock use organization-level isolation only.
+* **Organization isolation:** Different organizations never share caches, even if they use identical prompts.
+
+* **Workspace isolation:** On the Claude API, Claude Platform on AWS, and Microsoft Foundry, caches are also isolated between [workspaces](../manage-claude/workspaces.md). On those platforms, each workspace builds its own cache. On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, caches are isolated by organization only.
 
 * **Exact matching:** Cache hits require 100 percent identical prompt segments, including all text and images up to and including the block marked with cache control.
 
@@ -803,9 +805,7 @@ Changes to `tool_choice` or the presence/absence of images anywhere in the promp
 
 ## 1-hour cache duration
 
-If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache duration at additional cost (see [Pricing](prompt-caching.md#pricing)).
-
-The 1-hour cache duration is available on the Claude API, [Amazon Bedrock (`bedrock-mantle`)](claude-in-amazon-bedrock.md), [Amazon Bedrock (`bedrock-runtime`)](claude-on-amazon-bedrock-legacy.md), [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), and [Microsoft Foundry](claude-in-microsoft-foundry.md).
+If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache duration at additional cost (see [Pricing](prompt-caching.md#pricing)). The 1-hour duration is available on [every platform that supports prompt caching](prompt-caching.md#feature-availability).
 
 To use the extended cache, include `ttl` in the `cache_control` definition like this:
 
@@ -3284,7 +3284,9 @@ This pattern is especially powerful for:
 
 Prompt caching (both automatic and explicit) is ZDR eligible. Anthropic does not store the raw text of your prompts or Claude’s responses.
 
-KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 1 hour (extended), after which they are promptly, though not immediately, deleted. Cache entries are isolated between organizations and, on the Claude API, Claude Platform on AWS, and Microsoft Foundry, between workspaces within an organization.
+KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 1 hour (extended), after which they are promptly, though not immediately, deleted.
+
+Cache entries are isolated between organizations and, on [some platforms](prompt-caching.md#cache-storage-and-sharing), between workspaces within an organization.
 
 ***
 
@@ -3395,7 +3397,7 @@ Prompt caching is designed with strong privacy and data separation measures:
 
 1. Cache keys are generated using a cryptographic hash of the prompts up to the cache control point. This means only requests with identical prompts can access a specific cache.
 
-2. On the Claude API, Claude Platform on AWS, and Microsoft Foundry, caches are isolated by workspace within an organization. On Claude Models on Google Cloud (Google managed) and Bedrock, caches are isolated by organization. In every case, caches are never shared across organizations, even for identical prompts. See [Cache storage and sharing](prompt-caching.md#cache-storage-and-sharing) for details.
+2. Caches are never shared across organizations, even for identical prompts. On [some platforms](prompt-caching.md#cache-storage-and-sharing), they’re also isolated by workspace within an organization.
 
 3. The caching mechanism is designed to maintain the integrity and privacy of each unique conversation or context.
 

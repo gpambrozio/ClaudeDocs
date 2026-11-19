@@ -1365,7 +1365,7 @@ Yes. Use the `url` source type instead of `base64` in the `image` content block.
 
 **Is there a limit to the image file size I can upload?**
 
-Yes. See [Request limits](vision.md#request-limits) for per-image and overall request size limits across the Claude API, Amazon Bedrock, Claude Models on Google Cloud (Google managed), and claude.ai.
+Yes. See [Request limits](vision.md#request-limits) for the size limits on each image and on the whole request.
 
 **How many images can I include in one request?**
 

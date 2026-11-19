@@ -660,6 +660,24 @@ Update API Key
 
     - `"inactive"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `org_api_key_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its limit of active API keys.
+
+- `workspace_api_key_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached its limit of active API keys.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -887,6 +905,20 @@ Create an external key config owned by the caller's organization.
   - `user_profile_id: string or null`
 
     ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `user_profile_not_found` (HTTP status 400)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -1453,6 +1485,20 @@ encrypted data requires the original key identity to decrypt.
 
     ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_in_workspace_policy` (HTTP status 400)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -1520,6 +1566,20 @@ The request is rejected if any workspace still references this config.
 
   ID of the deleted External Key.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_in_workspace_policy` (HTTP status 400)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -1582,6 +1642,16 @@ message if it failed or timed out.
   - `"failure"`
 
   - `"success"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -1982,6 +2052,16 @@ matched as the JWT's `iss` claim and is not fetched.
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -3108,6 +3188,16 @@ session.
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -3453,6 +3543,16 @@ issuer cannot be changed), or recreate them against another issuer.
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -3879,6 +3979,16 @@ manage rules whose `oauth_scope` is `workspace:developer` or
   - `workspace_ids: array of string`
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -5037,6 +5147,16 @@ Console session.
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -5392,6 +5512,16 @@ other scopes require a Console session.
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -5651,6 +5781,16 @@ other scopes require a Console session.
   - `workspace_name: string or null`
 
     Workspace display name. Populated when listing; null in the enable response.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -6102,6 +6242,16 @@ Console session.
 
   Tagged ID of the workspace named in the delete request. Removal is idempotent.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -6244,6 +6394,44 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
     - `"expired"`
 
     - `"pending"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `already_member` (HTTP status 400)
+
+  The email address already belongs to a user in the organization. The message names the user.
+
+- `cannot_invite_emails_with_unverified_domains` (HTTP status 400)
+
+  The email address's domain is not one of the verified domains of the organization's parent organization.
+
+- `email_domain_not_allowed` (HTTP status 400)
+
+  The organization restricts invites to an allowed list of email domains, and the list is empty or does not include the email address's domain.
+
+- `invite_already_exists` (HTTP status 400)
+
+  A pending invite already exists for the email address. The message names the invite.
+
+- `org_member_limit_exceeded` (HTTP status 400)
+
+  The organization has reached the member limit that Anthropic set for it. Pending invites count toward the limit.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -6607,6 +6795,16 @@ Delete a pending invite.
 
   ID of the Invite.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -6875,6 +7073,16 @@ accounts.
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -7674,6 +7882,16 @@ interactive credential (a user OAuth token or a Console session).
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -7932,6 +8150,16 @@ those rules first or change their target to another service account.
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -8185,6 +8413,16 @@ rejected.
     - `"workspace_restricted_developer"`
 
     - `"workspace_user"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -8656,6 +8894,16 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
   Tagged workspace ID (`wrkspc_...`) named in the delete request.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -8996,6 +9244,16 @@ Update a member's organization role.
 
     - `"user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -9054,6 +9312,24 @@ Remove a member from the organization.
 - `id: string`
 
   ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cannot_remove_last_member` (HTTP status 400)
+
+  The user is the organization's only member. Add another member before removing this one.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `concurrent_membership_change` (HTTP status 409)
+
+  Another change to the organization's members is in progress. Retry the request once it completes.
 
 #### Example
 
@@ -9290,6 +9566,44 @@ Every request must include the beta header `anthropic-beta: admin-user-sign-out-
     - `"primary_owner"`
 
     - `"user"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cannot_sign_out_primary_owner` (HTTP status 400)
+
+  The member is the organization's primary owner, whom no API key or token can sign out.
+
+- `cannot_sign_out_self` (HTTP status 400)
+
+  The member is the user the API key or token belongs to.
+
+- `organization_not_enrolled_in_beta` (HTTP status 400)
+
+  The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
+
+- `cannot_sign_out_managed_member` (HTTP status 403)
+
+  The member has the `managed` role, and this API key or token cannot sign them out. The error message says which keys and tokens can.
+
+- `cannot_sign_out_membership_admin` (HTTP status 403)
+
+  The member is a membership admin, and the person the API key or token belongs to is not allowed to sign out membership admins.
+
+- `cannot_sign_out_owner` (HTTP status 403)
+
+  The member is an owner or has owner permissions, and this API key or token cannot sign them out. In a Claude Enterprise organization, an API key with the `write:members` scope can.
+
+- `cannot_sign_out_privileged_member` (HTTP status 403)
+
+  This OAuth token cannot sign out a membership admin or a member whose roles grant owner, user management, or identity and access management.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -9834,6 +10148,40 @@ Create Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_validation_failed` (HTTP status 400)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `external_key_validation_timed_out` (HTTP status 400)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `key_profile_mismatch` (HTTP status 400)
+
+  After this request, the External Key and the Workspace would not have the same user profile. A key and its Workspace must have the same user profile, or both have none.
+
+- `user_profile_not_found` (HTTP status 400)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `workspace_policy_violation` (HTTP status 400)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `external_key_changed` (HTTP status 409)
+
+  The external key changed while the request was validating it. Send the request again.
+
 #### Example
 
 ```bash
@@ -10209,6 +10557,40 @@ Update Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_validation_failed` (HTTP status 400)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `external_key_validation_timed_out` (HTTP status 400)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `key_profile_mismatch` (HTTP status 400)
+
+  After this request, the External Key and the Workspace would not have the same user profile. A key and its Workspace must have the same user profile, or both have none.
+
+- `user_profile_not_found` (HTTP status 400)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `workspace_policy_violation` (HTTP status 400)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `external_key_changed` (HTTP status 409)
+
+  The external key changed while the request was validating it. Send the request again.
+
 #### Example
 
 ```bash
@@ -10370,6 +10752,16 @@ Archive Workspace
   - `user_profile_id: string or null`
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -10866,6 +11258,16 @@ Changes take effect within about an hour.
 
     ID of the Workspace this entry applies to.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -11095,6 +11497,20 @@ Create Workspace Member
 
     - `"workspace_user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `workspace_member_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -11270,6 +11686,20 @@ Update Workspace Member
 
     - `"workspace_user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `workspace_member_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -11334,6 +11764,16 @@ Delete Workspace Member
 - `workspace_id: string`
 
   ID of the Workspace.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -11832,6 +12272,16 @@ accounts cannot be added and are rejected.
 
     - `"workspace_user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -12315,6 +12765,16 @@ rejected.
 
     - `"workspace_user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -12525,6 +12985,16 @@ membership. Archived workspaces return 400.
 - `workspace_id: string`
 
   Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -12886,6 +13356,16 @@ compliance settings.
       - `type: "disabled"`
 
         default: disabled
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -14699,6 +15179,16 @@ tunnel returns the existing record unchanged.
     ID of the Workspace this Tunnel belongs to. May be `null` for a Tunnel in
     the default Workspace. A Tunnel never moves to another Workspace.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -14910,6 +15400,16 @@ access logs.
   - `tunnel_token: string`
 
     The tunnel's connection token.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -15125,6 +15625,16 @@ restarted after rotation must use the new value. An optional
   - `tunnel_token: string`
 
     The tunnel's connection token.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -15367,6 +15877,16 @@ holds at most two non-archived certificates.
   - `tunnel_id: string`
 
     ID of the Tunnel this certificate is registered against.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -16101,6 +16621,16 @@ certificate is added.
   - `tunnel_id: string`
 
     ID of the Tunnel this certificate is registered against.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -21724,6 +22254,20 @@ Anthropic account team.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `spend_limits_admin_api_writes_not_enabled` (HTTP status 403)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
+
 #### Example
 
 ```bash
@@ -21906,6 +22450,16 @@ Retrieve a spend limit by ID.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `spend_limits_admin_api_writes_not_enabled` (HTTP status 403)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
+
 #### Example
 
 ```bash
@@ -21967,6 +22521,20 @@ workspace limits through the API is in an early access preview.
   default: spend_limit_deleted
 
 - `id: string`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `spend_limits_admin_api_writes_not_enabled` (HTTP status 403)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
 
 #### Example
 
@@ -22309,6 +22877,16 @@ come in a fixed order that is not creation order.
 
 - `next_page: string or null`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
 #### Example
 
 ```bash
@@ -22565,6 +23143,16 @@ organizations.
   - `spend_limit_id: string`
 
 - `next_page: string or null`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
 
 #### Example
 
@@ -23580,6 +24168,16 @@ the member was blocked on. Anthropic emails the requester unless
 
   - `"pending"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -23909,6 +24507,16 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     - `"pending"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -24037,6 +24645,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -24342,6 +24960,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -24407,6 +25035,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `id: string`
 
     ID of the RBAC Group.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -24586,6 +25232,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the User.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -24653,6 +25317,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `user_id: string`
 
     ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -24766,6 +25448,20 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
   Opaque cursor for the next page. Pass as the `page` parameter on the next
   request.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `parent_organization_required` (HTTP status 400)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
 #### Example
 
 ```bash
@@ -24868,6 +25564,24 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `parent_organization_required` (HTTP status 400)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
+- `rbac_role_not_found` (HTTP status 404)
+
+  No RBAC Role with this ID was found.
 
 #### Example
 
@@ -25052,6 +25766,24 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
   Opaque cursor for the next page. Pass as the `page` parameter on the next
   request.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `parent_organization_required` (HTTP status 400)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
+- `rbac_role_not_found` (HTTP status 404)
+
+  No RBAC Role with this ID was found.
 
 #### Example
 
@@ -25476,6 +26208,36 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `unsupported_charset` (HTTP status 400)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `plugin_name_taken` (HTTP status 409)
+
+  The marketplace already holds this name. `plugin_id` is the Plugin that holds it, and can be absent.
+
+- `skill_name_taken` (HTTP status 409)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
+- `registration_pending` (HTTP status 503)
+
+  The Plugin version was stored but is not yet usable in claude.ai. `plugin_id` and `plugin_version_id` identify what was stored.
 
 #### Example
 
@@ -26335,6 +27097,32 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `scan_failed` (HTTP status 400)
+
+  The version in `plugin_version_id` did not pass its content scan, so it cannot be served.
+
+- `scan_pending` (HTTP status 409)
+
+  The content scan of the version in `plugin_version_id` is still running. Retry once the scan finishes.
+
+- `skill_name_taken` (HTTP status 409)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
 #### Example
 
 ```bash
@@ -27055,6 +27843,16 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     The deleted Plugin's ID.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
 #### Example
 
 ```bash
@@ -27403,6 +28201,32 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `release_notes: string or null`
 
     As supplied with the upload; null when none were supplied.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `unsupported_charset` (HTTP status 400)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `skill_name_taken` (HTTP status 409)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
+- `registration_pending` (HTTP status 503)
+
+  The Plugin version was stored but is not yet usable in claude.ai. `plugin_id` and `plugin_version_id` identify what was stored.
 
 #### Example
 
@@ -28353,6 +29177,20 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `"ce-user-management-2026-07-13"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
 
 #### Example
 
@@ -30981,6 +31819,16 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `valid: boolean`
 
     True when marketplace.json is well-formed and no plugin would be skipped; warnings never make it false.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `unsupported_charset` (HTTP status 400)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
 
 #### Example
 
@@ -35161,6 +36009,16 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     ID of the deleted webhook endpoint.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -35354,6 +36212,16 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
   - `signing_secret: string`
 
     The new signing secret. Deliveries are signed with it from now on, and no other response returns it.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -35835,6 +36703,44 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `slack_channel_set_up_settings_refused` (HTTP status 400)
+
+  The request set the channel up, and `settings` was then refused. The channel stays set up with every setting unset.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `slack_channel_set_up_environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `slack_channel_set_up_settings_conflict` (HTTP status 409)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```bash
@@ -36302,6 +37208,28 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
   Cursor for the next page. Null on the last page.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```bash
@@ -36750,6 +37678,28 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -37265,6 +38215,40 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `slack_channel_set_up_environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `slack_channel_set_up_settings_conflict` (HTTP status 409)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```bash
@@ -37504,6 +38488,32 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
   - `id: string`
 
     The removed channel's identifier.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `slack_channel_set_up_settings_conflict` (HTTP status 409)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
 
 #### Example
 
@@ -37921,6 +38931,28 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 - `next_page: string or null`
 
   Cursor for the next page. Null on the last page.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -38373,6 +39405,28 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -38891,6 +39945,40 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `slack_channel_set_up_environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `slack_channel_set_up_settings_conflict` (HTTP status 409)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```bash
@@ -39166,6 +40254,28 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
   Cursor for the next page. Null on the last page.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```bash
@@ -39389,6 +40499,28 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
     Time of the last change to the Bundle.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -39614,6 +40746,40 @@ Change a Bundle's instructions. The update is partial: a field left out is uncha
     Time of the last change to the Bundle.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `bundle_attachment_not_supported` (HTTP status 400)
+
+  The Bundle has an attachment this API does not support editing, so its instructions can be changed only in claude.ai.
+
+- `bundle_on_call` (HTTP status 400)
+
+  This Bundle's instructions are managed in claude.ai and can't be changed through the API.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `slack_channel_set_up_settings_conflict` (HTTP status 409)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
 
 #### Example
 
@@ -39863,6 +41029,28 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 - `next_page: string or null`
 
   Cursor for the next page. Null on the last page.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -40123,6 +41311,28 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
 
       The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```bash
@@ -40358,6 +41568,28 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
       The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```bash
@@ -40553,6 +41785,28 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
   - `id: string`
 
     The identifier the Bundle Target had.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 

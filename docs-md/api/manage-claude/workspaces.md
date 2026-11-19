@@ -1017,9 +1017,11 @@ Workspace limits can keep a workspace below your organization’s limits, but th
 * **Spend limits:** Cap monthly spending for a workspace. To set these, go to [Spend limits in the Claude Console](https://platform.claude.com/settings/spend-limits) (`platform.claude.com/settings/spend-limits`). Under **Workspace limits**, select the workspace from the dropdown menu. Then click **Set limit** or **Adjust limit** next to **Monthly spend limit**. If Anthropic bills your organization directly, you can also set up email alerts for when spending reaches an amount you choose: click **Add notification** or **Edit** next to **Email notifications**.
 * **Rate limits:** Limit requests per minute, input tokens per minute, or output tokens per minute. To set these, go to [Rate limits in the Claude Console](https://platform.claude.com/usage/limits), select the workspace from the **Workspace** dropdown menu, and click **Edit** next to a model.
 
-- You cannot set spend limits on the Default Workspace.
+- On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) and [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), you cannot set spend limits on the Default Workspace.
 - If not set, workspace limits match the organization’s limits.
 - Organization-wide limits always apply, even if workspace limits add up to more.
+
+A spend limit on the Default Workspace might not count or stop some usage in that workspace. This includes usage from the Claude Console (such as playground) and from Claude Managed Agents sessions. It also includes Claude Code or Claude Desktop usage when a member signs in with a Claude Console account and uses the Default Workspace. Your organization’s [spend limit](../api/rate-limits.md#setting-your-own-spend-limit) applies to all of this usage.
 
 For detailed information on rate limits and how they work, see [Rate limits](../api/rate-limits.md). You can also read your current organization and workspace rate limits and set workspace rate limits programmatically with the [Rate Limits API](rate-limits-api.md), which stores a value above the organization’s limit but still enforces the lower of the two.
 

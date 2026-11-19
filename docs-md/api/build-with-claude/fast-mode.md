@@ -724,11 +724,11 @@ To access fast mode on Claude Opus 5, contact your account manager or [join the 
 * Availability: Available
 * Usage: Set `speed` on the agent’s model object, for example `{"id": "claude-opus-5-5", "speed": "fast"}`.
 
-| Status                 | Cloud platforms | Models                                                                          |
-| ---------------------- | --------------- | ------------------------------------------------------------------------------- |
-| Available              | Claude API      | [Claude Opus 5.5](../models/opus-5-5/overview.md) |
-| Research preview       | Claude API      | [Claude Opus 5](../models/opus-5/overview.md)     |
-| Deprecated<sup>1</sup> | Claude API      | [Claude Opus 4.8](../models/opus-4-8/overview.md) |
+| Status                 | Cloud platforms                                                                                                                                                        | Models                                                                          |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Available              | Claude API, [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md) | [Claude Opus 5.5](../models/opus-5-5/overview.md) |
+| Research preview       | Claude API                                                                                                                                                             | [Claude Opus 5](../models/opus-5/overview.md)     |
+| Deprecated<sup>1</sup> | Claude API                                                                                                                                                             | [Claude Opus 4.8](../models/opus-4-8/overview.md) |
 
 1. Removal date: November 30, 2026. After removal, requests to `claude-opus-4-8` with `speed: "fast"` will return an error. To continue using fast mode, migrate to Claude Opus 5.5. See [Migrating to Claude Opus 5.5 from Claude Opus 4.8](../models/opus-5-5/migration-guide.md#migrating-from-claude-opus-4-8).
 

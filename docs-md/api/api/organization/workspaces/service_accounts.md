@@ -203,6 +203,16 @@ accounts cannot be added and are rejected.
 
     - `"workspace_user"`
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 ### Example
 
 ```bash
@@ -406,6 +416,16 @@ rejected.
 
     - `"workspace_user"`
 
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 ### Example
 
 ```bash
@@ -476,6 +496,16 @@ membership. Archived workspaces return 400.
 - `workspace_id: string`
 
   Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+### Errors
+
+Any method can also return the general [HTTP errors](../../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ### Example
 

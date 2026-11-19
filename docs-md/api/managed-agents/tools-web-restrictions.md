@@ -32,7 +32,7 @@ featureMetadata:
   supportedPlatforms:
     Claude API: stable
     Claude Platform on AWS: beta
-    Claude Models on Google Cloud (Anthropic managed): beta
+    Claude Models on Google Cloud (Anthropic managed): stable
 ---
 
 **API support**: Usage differs by product.
@@ -552,9 +552,9 @@ Web domain restrictions are available or in beta, depending on the API.
 * Availability: Available
 * Usage: Set `allowed_domains` or `blocked_domains` on the `web_search` or `web_fetch` tool in the request.
 
-| Status    | Cloud platforms |
-| --------- | --------------- |
-| Available | Claude API      |
+| Status    | Cloud platforms                                                                                                                                                        |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) |
 
 #### [Managed Agents](overview.md)
 

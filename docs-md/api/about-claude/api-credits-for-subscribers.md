@@ -8,7 +8,7 @@ description: Claim the monthly Claude Platform credits included with Claude Max,
 
 Claude Max, Ultra, and Team plans include monthly credits for the Claude API. To claim them, you link a [Claude Console](https://platform.claude.com/) organization to your plan. Credits then arrive in that organization each billing cycle (or monthly for annual plans), and you can use them to build and run your own applications and agents. You don’t need to add a payment method to Claude Platform.
 
-Claude Platform on AWS, Amazon Bedrock, Google Cloud, and Microsoft Foundry: These credits apply only to the Claude API in the Claude Console. They can’t be used on other platforms.
+These credits apply only to the Claude API. They aren’t available on any [cloud platform](../api/overview.md#cloud-platform-apis), even if you use the Claude Console with that platform.
 
 ## Summary
 
@@ -76,15 +76,15 @@ Subscribers who aren’t eligible don’t see API credits in their settings page
 
 These API credits can only be used on the Claude Platform. The following table shows which products are covered:
 
-| Product                                                                              | Covered |
-| ------------------------------------------------------------------------------------ | ------- |
-| [Claude API](../api/overview.md)                       | Yes     |
-| [Claude Managed Agents](../managed-agents/overview.md) | Yes     |
-| [Claude Agent SDK](../../claude-code/agent-sdk/overview.md)               | Yes     |
-| [Playground](https://platform.claude.com/playground) in the Claude Console           | Yes     |
-| Claude Code                                                                          | No      |
-| Extra usage in the Claude apps                                                       | No      |
-| Claude Platform on AWS, Bedrock, Google Cloud, Microsoft Foundry                     | No      |
+| Product                                                                                    | Covered |
+| ------------------------------------------------------------------------------------------ | ------- |
+| [Claude API](../api/overview.md)                             | Yes     |
+| [Claude Managed Agents](../managed-agents/overview.md)       | Yes     |
+| [Claude Agent SDK](../../claude-code/agent-sdk/overview.md)                     | Yes     |
+| [Playground](https://platform.claude.com/playground) in the Claude Console                 | Yes     |
+| Claude Code                                                                                | No      |
+| Extra usage in the Claude apps                                                             | No      |
+| Any [cloud platform](../api/overview.md#cloud-platform-apis) | No      |
 
 ## How credits are applied
 

@@ -1521,7 +1521,7 @@ block certain types of prompts.
 * A [session-scoped scheduled task](https://code.claude.com/docs/en/scheduled-tasks.md) firing, including a `/loop` iteration
 * A [background subagent](https://code.claude.com/docs/en/sub-agents.md#run-subagents-in-foreground-or-background) reporting back to the session that started it
 * A [message another session sends](https://code.claude.com/docs/en/cross-session-messaging.md) to your main conversation
-* The output of code that Claude runs in a [Code Mode](https://code.claude.com/docs/en/code-mode.md#code-output-withheld-by-a-hook) session, for `command`, `http`, and `mcp_tool` hooks, when code can run in the background
+* Before v2.1.328, the output of code that Claude runs in a [Code Mode](https://code.claude.com/docs/en/code-mode.md#code-output-withheld-by-a-hook) session, for `command`, `http`, and `mcp_tool` hooks, when code can run in the background
 
 `UserPromptSubmit` hooks have a default timeout of 30 seconds for `command`, `http`, and `mcp_tool` types, shorter than the 600-second default for those types on most other events. Because this hook runs before every prompt and blocks model processing until it completes, a stuck hook stalls the session. If your hook needs more time, set the `timeout` field in the hook entry.
 
@@ -1570,7 +1570,7 @@ To block a prompt, return a JSON object with `decision` set to `"block"`:
 | Field | Description |
 | :- | :- |
 | `decision` | `"block"` stops the prompt before it reaches Claude. Omit to allow the prompt to proceed |
-| `reason` | Shown to the user when `decision` is `"block"`. Not added to context, except when the hook blocks [Code Mode output](https://code.claude.com/docs/en/code-mode.md#code-output-withheld-by-a-hook) |
+| `reason` | Shown to the user when `decision` is `"block"`. Not added to context, except when the hook blocks [Code Mode output](https://code.claude.com/docs/en/code-mode.md#code-output-withheld-by-a-hook) before v2.1.328 |
 | `additionalContext` | String added to Claude's context alongside the submitted prompt. See [Add context for Claude](#add-context-for-claude) |
 | `sessionTitle` | Sets the session title. Use to name sessions automatically based on the prompt content |
 | `suppressOriginalPrompt` | If `true` when the hook blocks the prompt, leaves the prompt text out of the block message. See [What a blocked prompt leaves behind](#what-a-blocked-prompt-leaves-behind) |
@@ -2199,7 +2199,7 @@ PreToolUse hooks run before every tool call, whether or not it needs permission.
 
 | Field | Description |
 | :- | :- |
-| `behavior` | `"allow"` grants the permission, `"deny"` denies it. [Deny and ask rules](https://code.claude.com/docs/en/permissions.md#manage-permissions) are still evaluated, so a hook returning `"allow"` doesn't override a matching deny rule |
+| `behavior` | `"allow"` grants the permission, `"deny"` denies it. The hook can't approve what a deny rule refuses, unless a mod overrides the rule: see [Precedence among rules, hooks, and mods](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods) |
 | `updatedInput` | For `"allow"` only: modifies the tool's input parameters before execution. Replaces the entire input object, so include unchanged fields alongside modified ones. The modified input is re-evaluated against deny and ask rules. `AskUserQuestion` and `ExitPlanMode` [need this field](#allow-with-updatedinput) |
 | `updatedPermissions` | For `"allow"` only: array of [permission update entries](#permission-update-entries) to apply, such as adding an allow rule or changing the session permission mode |
 | `message` | For `"deny"` only: tells Claude why the permission was denied |
@@ -3331,7 +3331,7 @@ Runs when Claude Code cleans up a worktree that your [`WorktreeCreate`](#worktre
 
 When a subagent or a workflow agent finishes, Claude Code keeps the worktree your WorktreeCreate hook made for it and doesn't run your WorktreeRemove hook. Remove those worktrees yourself when the work is done.
 
-Claude Code doesn't prompt you before your hook runs for an `ExitWorktree` call or a `claude remote-control` cleanup. `ExitWorktree` refuses to remove a hook-created worktree unless the call passes [`discard_changes: true`](agent-sdk/typescript.md#exitworktree), which makes your hook the last check on that route.
+For a `claude remote-control` cleanup, Claude Code runs your hook without prompting you. `ExitWorktree` refuses to remove a hook-created worktree unless the call passes [`discard_changes: true`](agent-sdk/typescript.md#exitworktree).
 
 Claude Code uses git to look for changed or untracked files, so it finds none in a worktree that isn't a git checkout or inside one, even when the directory holds uncommitted work. Check for that work in your WorktreeRemove hook before it deletes anything.
 

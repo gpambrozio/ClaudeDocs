@@ -27,6 +27,15 @@ The following table compares Claude Models on Google Cloud (Anthropic managed) w
 | **Billing**                                      | Google Cloud Marketplace                                                                                                                                                                                          | Google Cloud, as Agent Platform usage                                                                                                                                                                                                                |
 | **Rate limits**                                  | Managed by Anthropic                                                                                                                                                                                              | Managed by Google Cloud                                                                                                                                                                                                                              |
 
+## Feature support
+
+Each offering’s page has a section on feature support:
+
+* [Feature support for Claude Models on Google Cloud (Anthropic managed)](anthropic-managed.md#feature-support)
+* [Feature support for Claude Models on Google Cloud (Google managed)](google-managed.md#feature-support)
+
+To check one feature, find its page in the [Features overview](../overview.md) and see the **Availability** section. That section names each offering that supports the feature.
+
 ## What both offerings share
 
 * **Credentials:** Both offerings use Google Cloud credentials, including Application Default Credentials. You grant access to each offering separately, through its own IAM roles.

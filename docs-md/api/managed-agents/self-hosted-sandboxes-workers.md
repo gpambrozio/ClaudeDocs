@@ -456,7 +456,7 @@ Shared responsibility model for self-hosted sandbox environments.
 
 ## Availability
 
-Self-hosted workers are in beta on every model.
+Prebuilt self-hosted workers are in beta on every model.
 
 ### API support
 

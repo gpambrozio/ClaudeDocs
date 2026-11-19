@@ -151,6 +151,16 @@ Retrieve a spend limit by ID.
 
     format: date-time
 
+## Errors
+
+Any method can also return the general [HTTP errors](../../../errors.md).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `spend_limits_admin_api_writes_not_enabled` (HTTP status 403)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
+
 ## Example
 
 ```bash

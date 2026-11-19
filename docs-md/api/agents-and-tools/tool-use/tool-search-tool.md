@@ -34,8 +34,9 @@ featureMetadata:
     Amazon Bedrock: stable
     Amazon Bedrock (bedrock-runtime):
       availability: stable
-      note: On Amazon Bedrock it is not available through the Converse API.
+      note: Available through the InvokeModel API, not the Converse API.
     Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -47,17 +48,13 @@ Loading every tool definition up front causes two problems as a tool library gro
 * **Context bloat:** A typical multiserver setup (GitHub, Slack, Sentry, Grafana, and Splunk) can consume \~55k tokens in definitions before Claude does any work. Tool search typically reduces this by over 85 percent, loading only the 3–5 tools Claude needs for a given request.
 * **Tool selection accuracy:** Claude’s ability to pick the right tool degrades once you exceed 30–50 available tools. Because tool search loads only a focused set of relevant tools on demand, selection accuracy stays high even across thousands of tools.
 
-For the models that support tool search, see [Model compatibility](tool-search-tool.md#model-compatibility).
+For the models that support tool search, see [Model compatibility](tool-search-tool.md#model-compatibility). For the platforms that support it, see [Availability](tool-search-tool.md#feature-availability).
 
 For background on the scaling challenges that tool search solves, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use). Tool search’s on-demand loading is also an instance of the broader just-in-time retrieval principle described in [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
 
 Tool search runs as a server-side tool, but you can also implement your own client-side tool search. See [Custom tool search implementation](tool-search-tool.md#custom-tool-search-implementation) for details.
 
 Share feedback on this feature through the [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA).
-
-On Amazon Bedrock, server-side tool search is available only through the [InvokeModel API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html), not the Converse API.
-
-On [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), server-side tool search works identically to the Claude API. Claude Platform on AWS uses the Anthropic Messages API directly, so there is no InvokeModel or Converse distinction.
 
 ## Model compatibility
 
@@ -838,6 +835,8 @@ You can include the tool search tool in the [Message Batches API](../../build-wi
 * **Search results:** each search returns up to 5 matching tools by default; Claude can set `limit` in its search input to any integer from 1 to 10,000
 * **Pattern and query length:** maximum 200 characters for regex patterns and 500 characters for BM25 queries
 * **Model support:** see [Model compatibility](tool-search-tool.md#model-compatibility)
+* **Platform support:** see [Availability](tool-search-tool.md#feature-availability)
+* **[Amazon Bedrock (`bedrock-runtime`)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md):** tool search works through the InvokeModel API
 
 ### When to use tool search
 
@@ -896,12 +895,12 @@ Tool search tool is available on every model and eligible for zero data retentio
 
 * Availability: Available
 
-| Status                | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Models                                                            |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Available             | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) | [All models](../../models/overview.md) |
-| Available<sup>1</sup> | [Amazon Bedrock (bedrock-runtime)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)                                                                                                                                                                                                                                                                                                                                                          | [All models](../../models/overview.md) |
+| Status                | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Models                                                            |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Available             | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) | [All models](../../models/overview.md) |
+| Available<sup>1</sup> | [Amazon Bedrock (bedrock-runtime)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | [All models](../../models/overview.md) |
 
-1. On Amazon Bedrock it is not available through the Converse API.
+1. Available through the InvokeModel API, not the Converse API.
 
 #### [Managed Agents](../../managed-agents/overview.md)
 

@@ -36,7 +36,9 @@ featureMetadata:
   supportedPlatforms:
     Claude API: beta
     Claude Platform on AWS: beta
-    Claude Models on Google Cloud (Anthropic managed): beta
+    Claude Models on Google Cloud (Anthropic managed):
+      availability: beta
+      note: You write your own worker, which calls the Environments Work endpoints.
 ---
 
 Self-hosted sandboxes move the agent’s tool execution from Anthropic-managed cloud sandboxes into infrastructure you control, while Anthropic keeps running the agent. To learn what that means and decide whether it fits your agent, see [Choosing an agent environment](choosing-an-environment.md).
@@ -644,9 +646,12 @@ Self-hosted sandboxes are in beta on every model.
 
 * Availability: Available
 
-| Status | Cloud platforms                                                                                                                                                                                                                                                                | Models                                                            |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| Beta   | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | [All models](../models/overview.md) |
+| Status           | Cloud platforms                                                                                                                                            | Models                                                            |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Beta             | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md)                                         | [All models](../models/overview.md) |
+| Beta<sup>1</sup> | [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | [All models](../models/overview.md) |
+
+1. You write your own worker, which calls the Environments Work endpoints.
 
 ### Required beta headers
 

@@ -36,7 +36,7 @@ Claude Opus 4.6 is the last Bedrock model ID to include the `-v1` suffix (`anthr
 
 On the `bedrock-runtime` endpoint, models that AWS serves through cross-region inference, including Claude Fable 5.2 and Claude Mythos 5.2, take an inference profile ID: the base model ID with a prefix such as `global.` or `us.`, for example `global.anthropic.claude-fable-5-2`. See [API model IDs](../../build-with-claude/claude-on-amazon-bedrock-legacy.md#api-model-ids).
 
-On Claude Models on Google Cloud (Google managed), the format matches the Claude API.
+On [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) and [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), the format matches the Claude API.
 
 ### Before the 4.6 generation
 
@@ -55,6 +55,8 @@ anthropic.claude-{name}-{major}-{minor}-{YYYYMMDD}-v1:0
 ```
 
 For example: `anthropic.claude-sonnet-4-5-20250929-v1:0`
+
+On [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#api-model-ids), the format matches the Claude API.
 
 On Claude Models on Google Cloud (Google managed), the date is separated with `@`:
 
@@ -84,7 +86,7 @@ Occasionally, infrastructure updates produce minor differences in observable beh
 
 ## Current model IDs
 
-For the full list of current model IDs and their equivalents on Claude Models on Google Cloud (Google managed) and Amazon Bedrock, see [Models overview](../../models/overview.md).
+For the current model IDs on every platform, see [Models overview](../../models/overview.md).
 
 ---
 

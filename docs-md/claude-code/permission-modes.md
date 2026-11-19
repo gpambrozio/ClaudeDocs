@@ -528,7 +528,7 @@ Pushing to any branch of the repository you're working in and creating a pull re
 
 While [`permissions.blockReadsOutsideWorkingDirectories`](settings-reference.md#permissions-blockreadsoutsideworkingdirectories) is off, file reads other than [reads from network paths](https://code.claude.com/docs/en/permissions.md#network-paths) run without a prompt in auto mode, including reads outside the [working directories](https://code.claude.com/docs/en/permissions.md#working-directories). The first time Claude uses the Read, Grep, or Glob tool on a path outside them, Claude Code asks whether to allow that read.
 
-The prompt doesn't appear in non-interactive `-p` runs or background sessions; reads there run as before.
+The prompt doesn't appear in `-p` runs, Agent SDK sessions, background sessions, the VS Code chat panel, or the desktop app. There, the read runs.
 
 Whatever you answer, Claude keeps working:
 
@@ -539,7 +539,7 @@ Whatever you answer, Claude keeps working:
 
 ### Boundaries you state in conversation
 
-The classifier treats boundaries you state in the conversation as a block signal. If you tell Claude "don't push" or "wait until I review before deploying", the classifier blocks matching actions even when the default rules would allow them. A boundary stays in force until you lift it in a later message. Claude's own judgment that a condition was met does not lift it.
+The classifier treats boundaries you state in the conversation as a block signal. If you tell Claude "don't push" or "wait until I review before deploying", the classifier blocks matching actions [it reviews](#how-the-classifier-evaluates-actions) even when the default rules would allow them. A boundary stays in force until you lift it in a later message. Claude's own judgment that a condition was met does not lift it.
 
 Boundaries are not stored as rules. The classifier re-reads them from the transcript on each check, so a boundary can be lost if [context compaction](https://code.claude.com/docs/en/costs.md#reduce-token-usage) removes the message that stated it. For a hard guarantee, add a [deny rule](https://code.claude.com/docs/en/permissions.md#permission-rule-syntax) instead.
 
@@ -585,7 +585,7 @@ The following sections cover the order Claude Code evaluates an action in, how t
 >    * Ask rules that match on a command's content, such as `Bash(git push *)`, fall back to a permission prompt
 >    * A write that the [symlink check](https://code.claude.com/docs/en/permissions.md#symlinks) resolves to a protected path prompts you when the path Claude requested isn't itself protected
 >    * A read from a [network path](https://code.claude.com/docs/en/permissions.md#network-paths) prompts you even when an allow rule matches
-> 2. Read-only actions and file edits in your working directory are auto-approved, except writes to [protected paths](#protected-paths) and [the first read outside the working directories](#first-read-outside-the-working-directories), which prompts you
+> 2. Read-only actions and file edits in your working directory are auto-approved, except writes to [protected paths](#protected-paths) and a read that shows the [first-read prompt](#first-read-outside-the-working-directories).
 >    * In a session with [server-side classifier review](#server-side-classifier-review), file edits, read-only shell commands, and [sandboxed](https://code.claude.com/docs/en/sandboxing.md#sandbox-modes) shell commands wait for that review and are blocked if it flags them
 >    * A write inside your working directory that the [symlink check](https://code.claude.com/docs/en/permissions.md#symlinks) resolves to a location outside it prompts you
 >    * When Claude reads an [artifact someone else made](https://code.claude.com/docs/en/artifacts.md#read-an-artifact-shared-with-you), the approval cases listed in that section apply
@@ -612,7 +612,9 @@ The following sections cover the order Claude Code evaluates an action in, how t
 >
 > Narrow rules like `Bash(npm test)` stay in effect. Claude Code restores the dropped rules when you leave auto mode. Before v2.1.236, Claude Code left `Monitor` allow rules in effect in auto mode, so a rule that matched the whole tool approved Monitor commands without classifier review.
 >
-> Claude Code also runs `git status` itself before a command that would discard uncommitted work, such as `git reset --hard` or `rm -rf`, and shows the classifier whether staged, modified, or untracked work is present. Claude Code reports untracked files in that check even when the repository's git configuration sets `status.showUntrackedFiles=no`.
+> Claude Code can also run `git status` itself before a command that would discard uncommitted work, such as `git reset --hard` or `rm -rf`, and show the classifier whether staged, modified, or untracked work is present. Claude Code reports untracked files in that check even when the repository's git configuration sets `status.showUntrackedFiles=no`.
+>
+> Under [server-side classifier review](#server-side-classifier-review), `git reset --hard` can be blocked on a clean working tree, because Claude Code can skip `git status` unless auto mode recently blocked an action. After the block, the classifier can see the clean status and allow Claude's retry.
 >
 > In the classifier requests sent by Claude Code itself, the classifier sees user messages, tool calls other than read-only lookups such as file reads and searches, and your CLAUDE.md content. Tool results are stripped from those requests, so hostile content in a file or web page can't manipulate the classifier directly.
 >
@@ -686,8 +688,6 @@ claude --permission-mode bypassPermissions
 
 The `--dangerously-skip-permissions` flag is equivalent.
 
-Claude Code refuses `bypassPermissions` in a session you start with [`--restricted`](cli-reference.md#cli-flags). `--restricted` requires Claude Code v2.1.248 or later.
-
 The first time you start an interactive session with this mode enabled, Claude Code shows a warning dialog asking you to accept responsibility for actions taken without permission checks:
 
 * **If you accept**: Claude Code sets `skipDangerousModePermissionPrompt` to `true` in `~/.claude/settings.json`, so later sessions skip the dialog. To see the dialog again, remove the key from that file or set it to `false`. The [`skipDangerousModePermissionPrompt` reference](settings-reference.md#skipdangerousmodepermissionprompt) lists the other settings files where you or your organization can set it.
@@ -720,6 +720,10 @@ The check is skipped automatically inside a recognized sandbox. To run autonomou
 > [!WARNING]
 >
 > `bypassPermissions` offers no protection against prompt injection or unintended actions. For background safety checks with far fewer permission prompts, use [auto mode](#eliminate-prompts-with-auto-mode) instead. Administrators can block this mode by setting `permissions.disableBypassPermissionsMode` to `"disable"` in [managed settings](https://code.claude.com/docs/en/managed-settings.md).
+
+### Restricted mode refuses bypassPermissions
+
+Claude Code refuses `bypassPermissions` in a session you start with [`--restricted`](cli-reference.md#cli-flags). `--restricted` requires Claude Code v2.1.248 or later. If you see `Error: bypassPermissions not supported in restricted mode`, remove the flag or setting that enables `bypassPermissions`, such as `--dangerously-skip-permissions`. To keep `bypassPermissions`, start without `--restricted` or [`CLAUDE_CODE_RESTRICTED`](env-vars.md#variables) instead.
 
 ### Bypass permissions ignored in a background session
 
@@ -852,6 +856,7 @@ Claude Code also looks inside these constructs:
 * **Inline scripts**: a script passed to `sh`, `bash`, `zsh`, or a similar POSIX shell with `-c`, as in `bash -c 'rm -rf ~'`.
   * When the script is double-quoted, the invoking shell expands its variables before the inner shell receives the script. In `find . -name '*.tmp' -exec sh -c "rm -rf \"$1\"/*" _ {} \;`, the command expands to a removal from the filesystem root once per match, and Claude Code treats it as a critical-path removal.
   * A single-quoted script that binds `$1` to a real value, as `sh -c 'rm -rf "$1"/*' _ {}` does, isn't flagged.
+  * If you see `This shell -c script runs rm and could not be checked`, read the script before you approve it. The command counts as a [critical-path removal](#critical-path-removals-in-each-permission-mode).
 
 To turn off the check on a critical path typed directly in a `-c` script, such as `~`, set [`CLAUDE_CODE_DISABLE_INLINE_SHELL_RM_PROMPT=1`](env-vars.md#variables) in the environment that launches Claude Code.
 

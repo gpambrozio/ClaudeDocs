@@ -36,7 +36,6 @@ featureMetadata:
   supportedPlatforms:
     Claude API: beta
     Claude Platform on AWS: beta
-    Claude Models on Google Cloud (Anthropic managed): beta
 ---
 
 This page documents the prebuilt workers that serve a `self_hosted` environment. For task-oriented guides, start with [Self-hosted sandboxes](self-hosted-sandboxes.md) and [Deploy self-hosted workers](self-hosted-sandboxes-workers.md).

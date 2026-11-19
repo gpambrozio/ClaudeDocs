@@ -946,9 +946,9 @@ Custom tools are available on every model.
 * Availability: Available
 * Usage: Declare them on the agent with `type` `"custom"`. Calls arrive as `agent.custom_tool_use` events, and you reply with `user.custom_tool_result` events.
 
-| Status    | Cloud platforms                                                                                                    |
-| --------- | ------------------------------------------------------------------------------------------------------------------ |
-| Available | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) |
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) |
 
 ---
 

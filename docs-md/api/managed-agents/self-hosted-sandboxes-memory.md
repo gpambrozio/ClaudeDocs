@@ -35,8 +35,6 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: beta
-    Claude Platform on AWS: beta
-    Claude Models on Google Cloud (Anthropic managed): beta
 ---
 
 Sessions on a self-hosted environment attach [memory stores](memory.md) exactly as sessions on cloud environments do. List them in `resources` (csharp, go: `Resources`) when you create the session, as shown in [Attach a memory store to a session](memory.md#attach-a-memory-store-to-a-session). A session accepts up to 8 memory stores.
@@ -49,8 +47,6 @@ The difference is who materializes the store. On a self-hosted environment your 
 * **A POSIX filesystem:** Windows hosts are not supported, because the worker requires `O_NOFOLLOW` when it opens memory files. Anthropic recommends a case-sensitive filesystem, so that memory paths that differ only in case do not collide. macOS volumes are case-insensitive by default, so such paths collide there.
 * **A writable `/mnt/memory` directory:** See [Prepare the host](self-hosted-sandboxes-memory.md#prepare-the-host). On macOS, see [Prepare a macOS host](self-hosted-sandboxes-memory.md#prepare-a-macos-host).
 * **The work item’s secret:** If your own code launches the worker, [forward the work item’s secret](self-hosted-sandboxes-per-session.md#forward-the-work-items-secret) to it.
-
-Memory stores are not available for sessions on self-hosted environments on [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) or [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md).
 
 ## Prepare the host
 
@@ -309,6 +305,43 @@ In the first two rows, the agent’s change or deletion is lost, even though the
 ## Troubleshooting
 
 See [Memory stores fail to mount or sync](self-hosted-sandboxes-operations.md#memory-stores-fail-to-mount) for the worker’s log messages and their fixes.
+
+## Availability
+
+Memory stores in self-hosted sandboxes are in beta on every model.
+
+### API support
+
+#### [Managed Agents](overview.md)
+
+* Availability: Available
+
+| Status | Cloud platforms |
+| ------ | --------------- |
+| Beta   | Claude API      |
+
+### Required beta headers
+
+[Beta headers overview](../api/beta-headers.md)
+
+Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
+
+* `managed-agents-2026-04-01`
+
+### Data handling
+
+[Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                                                                                                                         | HIPAA                                                               |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Status  | Not eligible                                                                                                                                                                                                                                                | Not eligible                                                        |
+| Details | Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them. [Learn more](self-hosted-data-and-access.md#how-long-data-is-kept) | Not eligible for HIPAA. Applies to all Managed Agents sub-features. |
+
+Applicable endpoints:
+
+* `/v1/agents`
+* `/v1/sessions`
+* `/v1/environments`
 
 ---
 
