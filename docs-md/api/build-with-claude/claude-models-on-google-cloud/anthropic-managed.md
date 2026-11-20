@@ -175,8 +175,8 @@ go get github.com/anthropics/anthropic-sdk-go/v2/googlecloud
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.10.0")
-implementation("com.anthropic:anthropic-java-google-cloud:3.10.0")
+implementation("com.anthropic:anthropic-java:3.12.0")
+implementation("com.anthropic:anthropic-java-google-cloud:3.12.0")
 ```
 
 **Maven**
@@ -185,12 +185,12 @@ implementation("com.anthropic:anthropic-java-google-cloud:3.10.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.10.0</version>
+    <version>3.12.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-google-cloud</artifactId>
-    <version>3.10.0</version>
+    <version>3.12.0</version>
 </dependency>
 ```
 

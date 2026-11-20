@@ -76,8 +76,8 @@ go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.10.0")
-implementation("com.anthropic:anthropic-java-foundry:3.10.0")
+implementation("com.anthropic:anthropic-java:3.12.0")
+implementation("com.anthropic:anthropic-java-foundry:3.12.0")
 ```
 
 **Maven**
@@ -86,12 +86,12 @@ implementation("com.anthropic:anthropic-java-foundry:3.10.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.10.0</version>
+    <version>3.12.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-foundry</artifactId>
-    <version>3.10.0</version>
+    <version>3.12.0</version>
 </dependency>
 ```
 

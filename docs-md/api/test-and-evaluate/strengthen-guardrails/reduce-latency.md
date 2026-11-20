@@ -203,7 +203,7 @@ Minimize the number of tokens in both your input prompt and the expected output,
 Here are some tips to help you optimize your prompts and outputs:
 
 * **Be clear but concise:** Aim to convey your intent clearly and concisely in the prompt. Avoid unnecessary details or redundant information, while keeping in mind that [Claude lacks context](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#be-clear-and-direct) on your use case and might not make the intended inferences if instructions are unclear.
-* **Ask for shorter responses:** Ask Claude directly to be concise. If Claude is outputting unwanted length, ask Claude to [reduce its verbosity](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#be-clear-and-direct).
+* **Ask for shorter responses:** Ask Claude directly to be concise. If Claude is outputting unwanted length, ask Claude to [reduce its verbosity](../../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#communication-style-and-verbosity).
   Because of how LLMs count 
 
   [tokens](../../about-claude/glossary.md#tokens)
@@ -230,6 +230,10 @@ Visit [Streaming messages](../../build-with-claude/streaming.md) to learn about 
 
 ## Next steps
 
+**Claude Cookbook: latency optimization on the Claude API**
+
+Follow a runnable notebook that builds a latency eval for a sample agent, applies one technique at a time, and checks that output quality stays above a threshold.
+
 **Reduce hallucinations**
 
 Minimize hallucinations in Claude’s outputs by allowing uncertainty, grounding responses in direct quotes, and verifying claims with citations.
@@ -237,6 +241,10 @@ Minimize hallucinations in Claude’s outputs by allowing uncertainty, grounding
 **Streaming messages**
 
 Stream Messages API responses incrementally with server-sent events, including text, tool use, and extended thinking deltas.
+
+**Claude API skill**
+
+Run `/claude-api latency-optimize` in Claude Code to measure where your application waits for the Claude API, and to test changes that shorten the wait without lowering output quality.
 
 ---
 
