@@ -1341,10 +1341,10 @@ Memory stores are in beta on every model.
 
 * Availability: Available
 
-| Status           | Cloud platforms                                                                                                                                            |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta<sup>1</sup> | Claude API                                                                                                                                                 |
-| Beta<sup>2</sup> | [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md)                                                     |
+| Status | Cloud platforms |
+| ----- | ----- |
+| Beta<sup>1</sup> | Claude API |
+| Beta<sup>2</sup> | [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md) |
 | Beta<sup>3</sup> | [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) |
 
 1. Sending `managed-agents-2026-04-01` together with `agent-memory-2026-07-22` on a memory store call returns a 400 error.
@@ -1363,9 +1363,9 @@ Beta headers allow you to access experimental features and new model capabilitie
 
 [Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                                                                                                                         | HIPAA                                                               |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Status  | Not eligible                                                                                                                                                                                                                                                | Not eligible                                                        |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Not eligible | Not eligible |
 | Details | Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them. [Learn more](self-hosted-data-and-access.md#how-long-data-is-kept) | Not eligible for HIPAA. Applies to all Managed Agents sub-features. |
 
 Applicable endpoints:

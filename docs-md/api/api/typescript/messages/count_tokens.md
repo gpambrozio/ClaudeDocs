@@ -576,7 +576,7 @@ interface ServerToolCaller20260120 {
   tool_id: string; // pattern: ^srvtoolu_[a-zA-Z0-9_]+$
 }
 
-type WebSearchToolResultBlockParamContent = Array<WebSearchResultBlockParam> | WebSearchToolRequestError;
+type WebSearchToolResultBlockParamContent = Array<WebSearchResultBlockParam> | WebSearchToolRequestErrorObject;
 
 interface WebSearchResultBlockParam {
   type: "web_search_result";
@@ -586,7 +586,7 @@ interface WebSearchResultBlockParam {
   page_age?: string | null;
 }
 
-interface WebSearchToolRequestError {
+interface WebSearchToolRequestErrorObject {
   type: "web_search_tool_result_error";
   error_code: WebSearchToolResultErrorCode;
 }

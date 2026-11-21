@@ -962,16 +962,16 @@ Fine-grained tool streaming is available on every model and eligible for zero da
 
 * Availability: Available
 
-| Status    | Cloud platforms         |
-| --------- | ----------------------- |
+| Status | Cloud platforms |
+| ----- | ----- |
 | Available | All supported platforms |
 
 ### Data handling
 
 [Data handling overview](../../manage-claude/api-and-data-retention.md#feature-eligibility)
 
-| Item   | Zero data retention                                                                                                                                       | HIPAA    |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
 | Status | Eligible (excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
 
 Applicable endpoints:

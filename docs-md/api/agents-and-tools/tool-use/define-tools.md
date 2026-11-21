@@ -52,11 +52,11 @@ If using Claude with tool use and thinking, see [Thinking](../../build-with-clau
 
 Client tools are specified in the `tools` top-level parameter of the API request. Anthropic-schema client tools, such as the bash and text editor tools, are declared by a date-versioned `type`; see each tool’s page, linked from the [Tool reference](tool-reference.md), for the fields it accepts. The computer use and browser use tools are [client toolsets](tool-reference.md#client-toolsets): a single entry with no `name` that declares a fixed set of member tools. A user-defined tool definition includes:
 
-| Parameter        | Description                                                                                                                                                                                                                   |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`           | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,128}$`.                                                                                                                                                          |
-| `description`    | A detailed plain text description of what the tool does, when it should be used, and how it behaves.                                                                                                                          |
-| `input_schema`   | A [JSON Schema](https://json-schema.org/) object defining the expected parameters for the tool.                                                                                                                               |
+| Parameter | Description |
+| ----- | ----- |
+| `name` | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,128}$`. |
+| `description` | A detailed plain text description of what the tool does, when it should be used, and how it behaves. |
+| `input_schema` | A [JSON Schema](https://json-schema.org/) object defining the expected parameters for the tool. |
 | `input_examples` | (Optional) An array of example input objects that show Claude how to use the tool. See [Providing tool use examples](define-tools.md#providing-tool-use-examples). |
 
 For the full set of optional properties available on any single tool definition, including `cache_control`, `strict`, `defer_loading`, and `allowed_callers`, see [Tool definition properties](tool-reference.md#tool-definition-properties). A client toolset entry accepts `cache_control` and `allowed_callers` on the entry and sets `defer_loading` for each member; see [Client toolsets](tool-reference.md#client-toolsets).
@@ -583,10 +583,10 @@ In some cases, you might want Claude to use a specific tool to answer the user�
 
 Not every model and setting supports forced tool use. Where it isn’t supported, `tool_choice: {"type": "any"}` and `tool_choice: {"type": "tool", "name": "..."}` fail, whereas `tool_choice: {"type": "auto"}` (the default) and `tool_choice: {"type": "none"}` still work:
 
-| Model or setting                                                                                                                                                                                                                                     | Restriction                                                                                                                                            | What to use instead                                                                                                                                                                                                                                                                                                                                                                                                             |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Manual [extended thinking](../../build-with-claude/extended-thinking.md) (`thinking: {type: "enabled"}`)                                                                                                                  | `any` and `tool` are not supported and result in an error                                                                                              | `auto` or `none`. [Adaptive thinking](../../build-with-claude/thinking.md) itself doesn’t block forced tool use (models with thinking on by default, such as Claude Opus 5 and Claude Haiku 5.5, accept it, but a forced call skips thinking: the response starts with the tool call and has no `thinking` block); the models in the next row reject forced tool use regardless of thinking settings |
-| Claude Fable 5.2, [Claude Mythos 5.2](../../models/mythos-5-2/overview.md), Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and [Claude Mythos 5.1](../../models/mythos-5-1/overview.md) | `any` and `tool` return a 400 error. See [Forced tool use not supported](../../api/errors.md#forced-tool-use-not-supported) | `auto` with [strict tool use](strict-tool-use.md) to guarantee schema-valid tool inputs, or [structured outputs](../../build-with-claude/structured-outputs.md) when you need a response in a fixed JSON shape. Prompting still influences which tool `auto` picks. `none` is also supported                                              |
+| Model or setting | Restriction | What to use instead |
+| ----- | ----- | ----- |
+| Manual [extended thinking](../../build-with-claude/extended-thinking.md) (`thinking: {type: "enabled"}`) | `any` and `tool` are not supported and result in an error | `auto` or `none`. [Adaptive thinking](../../build-with-claude/thinking.md) itself doesn’t block forced tool use (models with thinking on by default, such as Claude Opus 5 and Claude Haiku 5.5, accept it, but a forced call skips thinking: the response starts with the tool call and has no `thinking` block); the models in the next row reject forced tool use regardless of thinking settings |
+| Claude Fable 5.2, [Claude Mythos 5.2](../../models/mythos-5-2/overview.md), Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and [Claude Mythos 5.1](../../models/mythos-5-1/overview.md) | `any` and `tool` return a 400 error. See [Forced tool use not supported](../../api/errors.md#forced-tool-use-not-supported) | `auto` with [strict tool use](strict-tool-use.md) to guarantee schema-valid tool inputs, or [structured outputs](../../build-with-claude/structured-outputs.md) when you need a response in a fixed JSON shape. Prompting still influences which tool `auto` picks. `none` is also supported |
 
 On models that support it, the highlighted lines are the only difference from a standard tool use request:
 
@@ -937,8 +937,8 @@ Custom tools are available on every model.
 * Availability: Available
 * Usage: Define them in the request’s `tools`. Claude’s response contains `tool_use` blocks, and you send the results as `tool_result` blocks in the next request.
 
-| Status    | Cloud platforms         |
-| --------- | ----------------------- |
+| Status | Cloud platforms |
+| ----- | ----- |
 | Available | All supported platforms |
 
 #### [Managed Agents](../../managed-agents/overview.md)
@@ -946,8 +946,8 @@ Custom tools are available on every model.
 * Availability: Available
 * Usage: Declare them on the agent with `type` `"custom"`. Calls arrive as `agent.custom_tool_use` events, and you reply with `user.custom_tool_result` events.
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Status | Cloud platforms |
+| ----- | ----- |
 | Available | Claude API, [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) |
 
 ---

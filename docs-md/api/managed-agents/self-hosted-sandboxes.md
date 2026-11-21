@@ -646,9 +646,9 @@ Self-hosted sandboxes are in beta on every model.
 
 * Availability: Available
 
-| Status           | Cloud platforms                                                                                                                                            | Models                                                            |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Beta             | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md)                                         | [All models](../models/overview.md) |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
+| Beta | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md) | [All models](../models/overview.md) |
 | Beta<sup>1</sup> | [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | [All models](../models/overview.md) |
 
 1. You write your own worker, which calls the Environments Work endpoints.
@@ -665,9 +665,9 @@ Beta headers allow you to access experimental features and new model capabilitie
 
 [Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                                                                                                                         | HIPAA                                                               |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Status  | Not eligible                                                                                                                                                                                                                                                | Not eligible                                                        |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Not eligible | Not eligible |
 | Details | Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them. [Learn more](self-hosted-data-and-access.md#how-long-data-is-kept) | Not eligible for HIPAA. Applies to all Managed Agents sub-features. |
 
 Applicable endpoints:

@@ -60,10 +60,10 @@ Send the retry with the same `fallback-credit-2026-07-01` beta header. The retry
 
 The `fallback_has_prefill_claim` field tells you whether the retry can continue the refused model’s partial output instead of starting over:
 
-| `fallback_has_prefill_claim` | Retry body                                                                                                                                                                                                                                                        |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `true`                       | The refused request body, unchanged, plus one appended assistant message whose `content` echoes the refused response’s `content`. The retry model continues the response from where the refused model stopped, and completed server tool calls are not run again. |
-| `false`                      | The refused request body, unchanged.                                                                                                                                                                                                                              |
+| `fallback_has_prefill_claim` | Retry body |
+| ----- | ----- |
+| `true` | The refused request body, unchanged, plus one appended assistant message whose `content` echoes the refused response’s `content`. The retry model continues the response from where the refused model stopped, and completed server tool calls are not run again. |
+| `false` | The refused request body, unchanged. |
 
 ## Example
 
@@ -563,10 +563,10 @@ The following sections cover edge cases and the complete redemption rules. Most 
 
 Redemption compares the retry against the refused request. Every field that shapes the prompt must match exactly. Fields that do not shape the prompt may change on the retry.
 
-| Rule                    | Fields                                                                                                                                                                      |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Must match exactly      | `system`, `messages`, `tools`, `tool_choice`, `thinking`, and `cache_control`, plus `output_config`, `mcp_servers`, `context_management`, and `container` when you use them |
-| May change on the retry | `model`, `max_tokens`, `stop_sequences`, `stream`, `metadata`, and `service_tier`                                                                                           |
+| Rule | Fields |
+| ----- | ----- |
+| Must match exactly | `system`, `messages`, `tools`, `tool_choice`, `thinking`, and `cache_control`, plus `output_config`, `mcp_servers`, `context_management`, and `container` when you use them |
+| May change on the retry | `model`, `max_tokens`, `stop_sequences`, `stream`, `metadata`, and `service_tier` |
 
 The continuation shape (`fallback_has_prefill_claim: true`) is the one exception to the `messages` match: it adds exactly one assistant message at the end of `messages`.
 
@@ -644,12 +644,12 @@ Fallback credit is in beta on select models.
 * Availability: Available
 * Usage: Needed only when you write the retry yourself: send the `fallback-credit-2026-07-01` beta header and put the refusal’s `fallback_credit_token` on the retry.
 
-| Status           | Cloud platforms                                                                                                                                                                                                            | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta             | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
-| Beta<sup>1</sup> | [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md)                                                                       | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
-| Beta<sup>1</sup> | [Amazon Bedrock](claude-in-amazon-bedrock.md)                                                                                                                           | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md)                                                                                                                                                                         |
-| Beta             | [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md)                                                                 | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
+| Beta | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
+| Beta<sup>1</sup> | [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md) | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
+| Beta<sup>1</sup> | [Amazon Bedrock](claude-in-amazon-bedrock.md) | [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
+| Beta | [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md) | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md) |
 
 1. On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, the token is bound to your caller identity (there are no workspaces).
 
@@ -663,10 +663,10 @@ Fallback credit is in beta on select models.
 
 Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
 
-| Header                                                                                            | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Header | Cloud platforms |
+| ----- | ----- |
 | `fallback-credit-2026-07-01` or `server-side-fallback-2026-07-01` or `fallback-credit-2026-06-01` | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) |
-| `fallback-credit-2026-07-01` or `fallback-credit-2026-06-01`                                      | [Amazon Bedrock](claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md)                                                                                                                                 |
+| `fallback-credit-2026-07-01` or `fallback-credit-2026-06-01` | [Amazon Bedrock](claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md) |
 
 ---
 

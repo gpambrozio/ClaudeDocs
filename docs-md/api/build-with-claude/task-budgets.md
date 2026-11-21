@@ -375,12 +375,12 @@ The resent messages from request 1 are not counted again, but the 2,800-token to
 
 Putting the three requests side by side makes the distinction between payload size and budget spend explicit:
 
-| Request   | Request payload (approx. input tokens you sent) | Tokens counted against budget this request                | Budget `remaining` after |
-| --------- | ----------------------------------------------- | --------------------------------------------------------- | ------------------------ |
-| 1         | \~20                                            | 5,000 (thinking + `tool_use`)                             | \~95,000                 |
-| 2         | \~7,800 (messages from request 1 + tool result) | 6,800 (2,800 tool result + 4,000 thinking and `tool_use`) | \~88,200                 |
-| 3         | \~13,000 (full history + second tool result)    | 7,200 (1,200 tool result + 6,000 `text`)                  | \~81,000                 |
-| **Total** | **\~20,820 sent across requests**               | **19,000 counted against budget**                         | N/A                      |
+| Request | Request payload (approx. input tokens you sent) | Tokens counted against budget this request | Budget `remaining` after |
+| ----- | ----- | ----- | ----- |
+| 1 | \~20 | 5,000 (thinking + `tool_use`) | \~95,000 |
+| 2 | \~7,800 (messages from request 1 + tool result) | 6,800 (2,800 tool result + 4,000 thinking and `tool_use`) | \~88,200 |
+| 3 | \~13,000 (full history + second tool result) | 7,200 (1,200 tool result + 6,000 `text`) | \~81,000 |
+| **Total** | **\~20,820 sent across requests** | **19,000 counted against budget** | N/A |
 
 Your client sent the original user message three times and the first assistant message twice, but each was counted once. The budget spent 19,000 of 100,000 tokens, even though the cumulative payload your client transmitted was larger and the prompt-cached input on requests 2 and 3 was larger still.
 
@@ -657,24 +657,24 @@ The minimum accepted `task_budget.total` is **20,000 tokens** on every model tha
 
 ## Feature support
 
-| Model             | Support                                     |
-| ----------------- | ------------------------------------------- |
-| Claude Fable 5.2  | Beta (set `task-budgets-2026-03-13` header) |
+| Model | Support |
+| ----- | ----- |
+| Claude Fable 5.2 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Mythos 5.2 | Beta (set `task-budgets-2026-03-13` header) |
-| Claude Fable 5.1  | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Fable 5.1 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Mythos 5.1 | Beta (set `task-budgets-2026-03-13` header) |
-| Claude Opus 5.5   | Beta (set `task-budgets-2026-03-13` header) |
-| Claude Opus 5     | Beta (set `task-budgets-2026-03-13` header) |
-| Claude Fable 5    | Beta (set `task-budgets-2026-03-13` header) |
-| Claude Mythos 5   | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Opus 5.5 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Opus 5 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Fable 5 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Mythos 5 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Sonnet 5.5 | Beta (set `task-budgets-2026-03-13` header) |
-| Claude Sonnet 5   | Not supported                               |
-| Claude Haiku 5.5  | Beta (set `task-budgets-2026-03-13` header) |
-| Claude Opus 4.8   | Beta (set `task-budgets-2026-03-13` header) |
-| Claude Opus 4.7   | Beta (set `task-budgets-2026-03-13` header) |
-| Claude Opus 4.6   | Not supported                               |
-| Claude Sonnet 4.6 | Not supported                               |
-| Claude Haiku 4.5  | Not supported                               |
+| Claude Sonnet 5 | Not supported |
+| Claude Haiku 5.5 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Opus 4.8 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Opus 4.7 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Opus 4.6 | Not supported |
+| Claude Sonnet 4.6 | Not supported |
+| Claude Haiku 4.5 | Not supported |
 
 Task budgets are not supported on [Claude Code](../../claude-code/overview.md) or Cowork surfaces. Use task budgets directly through the Messages API on a [supported model](task-budgets.md#feature-support).
 
@@ -707,10 +707,10 @@ Task budgets are in beta on select models.
 * Availability: Available
 * Usage: Advisory: set in `output_config.task_budget`. The API does not stop Claude at the budget.
 
-| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                  | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta   | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md) |
-| Beta   | [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md)                                                                                                                                                                                                                       | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md)                        |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
+| Beta | Claude API, [Claude Platform on AWS](claude-platform-on-aws.md), [Claude Models on Google Cloud (Google managed)](claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](claude-in-microsoft-foundry.md) | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), Claude Mythos Preview, [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md) |
+| Beta | [Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md) | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Mythos 5.2](../models/mythos-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Mythos 5.1](../models/mythos-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Mythos 5](../models/mythos-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Haiku 5.5](../models/haiku-5-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md) |
 
 #### [Managed Agents](../managed-agents/overview.md)
 

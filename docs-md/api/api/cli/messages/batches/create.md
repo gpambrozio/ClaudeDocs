@@ -708,7 +708,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `type: "web_search_tool_result"`
 
-            - `content: array of WebSearchResultBlockParam or WebSearchToolRequestError`
+            - `content: array of WebSearchResultBlockParam or WebSearchToolRequestErrorObject`
 
               - `web_search_tool_result_block_item: array of WebSearchResultBlockParam`
 
@@ -722,7 +722,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                 - `page_age: optional string`
 
-              - `web_search_tool_request_error: object`
+              - `web_search_tool_request_error_object: object`
 
                 - `type: "web_search_tool_result_error"`
 

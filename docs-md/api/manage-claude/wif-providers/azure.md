@@ -80,12 +80,12 @@ Request a token from the endpoint and decode its payload to confirm the claims y
 }
 ```
 
-| Claim | Value                                                                                                                                                                                                 | Match this when                                                                                                                                                                                                    |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `oid` | The managed identity’s object ID, identical to `sub`                                                                                                                                                  | You want to authorize one specific managed identity. This is the default. The rule in [Configure Anthropic](azure.md#configure-anthropic) matches it. |
-| `azp` | The calling identity’s client ID                                                                                                                                                                      | You want to authorize every workload that shares one app registration. For a managed identity, `azp` is unique to that identity, so it is equivalent to `oid`.                                                     |
-| `aud` | The audience app registration’s client ID (the `<APP_ID>` GUID from [Register the token audience](azure.md#register-the-token-audience)) | Always. The rule’s `audience` field must equal the token’s `aud` value exactly.                                                                                                                                    |
-| `tid` | Your tenant ID                                                                                                                                                                                        | You want defense in depth. The issuer URL already pins the tenant.                                                                                                                                                 |
+| Claim | Value | Match this when |
+| ----- | ----- | ----- |
+| `oid` | The managed identity’s object ID, identical to `sub` | You want to authorize one specific managed identity. This is the default. The rule in [Configure Anthropic](azure.md#configure-anthropic) matches it. |
+| `azp` | The calling identity’s client ID | You want to authorize every workload that shares one app registration. For a managed identity, `azp` is unique to that identity, so it is equivalent to `oid`. |
+| `aud` | The audience app registration’s client ID (the `<APP_ID>` GUID from [Register the token audience](azure.md#register-the-token-audience)) | Always. The rule’s `audience` field must equal the token’s `aud` value exactly. |
+| `tid` | Your tenant ID | You want defense in depth. The issuer URL already pins the tenant. |
 
 If the decoded token’s `ver` claim is `1.0`, the claim names and values differ. See [If your tokens are v1.0](azure.md#if-your-tokens-are-v1-0) before continuing.
 

@@ -12,15 +12,15 @@ For the full response schema, see the [Messages API reference](../api/messages/c
 
 ## Quick reference
 
-| Value                                                                                                                                        | When it occurs                                  | What to do                                                                                                                                              |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`end_turn`](handling-stop-reasons.md#end-turn)                                           | Claude completed its response naturally.        | Use the response.                                                                                                                                       |
-| [`max_tokens`](handling-stop-reasons.md#max-tokens)                                       | The response reached your `max_tokens` limit.   | Raise `max_tokens` or [continue the response](handling-stop-reasons.md#ensuring-complete-responses). |
-| [`stop_sequence`](handling-stop-reasons.md#stop-sequence)                                 | Claude emitted one of your `stop_sequences`.    | Read `stop_sequence` to see which one fired.                                                                                                            |
-| [`tool_use`](handling-stop-reasons.md#tool-use)                                           | Claude is calling a tool.                       | Run the tool and return the result. A server tool call still missing its result block completes in a later response.                                    |
-| [`pause_turn`](handling-stop-reasons.md#pause-turn)                                       | A server-tool loop reached its iteration limit. | Send the assistant content back to continue.                                                                                                            |
-| [`refusal`](handling-stop-reasons.md#refusal)                                             | Claude declined to respond.                     | Read `stop_details` and [retry on a fallback model](refusals-and-fallback.md).                       |
-| [`model_context_window_exceeded`](handling-stop-reasons.md#model-context-window-exceeded) | The response filled the model’s context window. | Treat the response as truncated.                                                                                                                        |
+| Value | When it occurs | What to do |
+| ----- | ----- | ----- |
+| [`end_turn`](handling-stop-reasons.md#end-turn) | Claude completed its response naturally. | Use the response. |
+| [`max_tokens`](handling-stop-reasons.md#max-tokens) | The response reached your `max_tokens` limit. | Raise `max_tokens` or [continue the response](handling-stop-reasons.md#ensuring-complete-responses). |
+| [`stop_sequence`](handling-stop-reasons.md#stop-sequence) | Claude emitted one of your `stop_sequences`. | Read `stop_sequence` to see which one fired. |
+| [`tool_use`](handling-stop-reasons.md#tool-use) | Claude is calling a tool. | Run the tool and return the result. A server tool call still missing its result block completes in a later response. |
+| [`pause_turn`](handling-stop-reasons.md#pause-turn) | A server-tool loop reached its iteration limit. | Send the assistant content back to continue. |
+| [`refusal`](handling-stop-reasons.md#refusal) | Claude declined to respond. | Read `stop_details` and [retry on a fallback model](refusals-and-fallback.md). |
+| [`model_context_window_exceeded`](handling-stop-reasons.md#model-context-window-exceeded) | The response filled the model’s context window. | Treat the response as truncated. |
 
 ## The stop\_reason field
 
@@ -1519,13 +1519,13 @@ Two cases need one more field in the follow-up request:
 
 Each of these mistakes in the follow-up request fails with a 400 `invalid_request_error`. The messages shown are for web search. For other server tools, the names in them differ.
 
-| Mistake                                                                                    | The error message includes                                                     |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `tools` no longer defines the waiting server tool                                          | ``but no `web_search` tool was provided``                                      |
-| Text or other content comes after the `tool_result` blocks                                 | ``was found without a corresponding `web_search_tool_result` block``           |
-| With programmatic tool calling, text or other content comes after the `tool_result` blocks | `only tool_result blocks are allowed`                                          |
-| Text or other content comes before the `tool_result` blocks                                | `` `tool_use` ids were found without `tool_result` blocks immediately after `` |
-| A `tool_result` block is missing                                                           | `` `tool_use` ids were found without `tool_result` blocks immediately after `` |
+| Mistake | The error message includes |
+| ----- | ----- |
+| `tools` no longer defines the waiting server tool | ``but no `web_search` tool was provided`` |
+| Text or other content comes after the `tool_result` blocks | ``was found without a corresponding `web_search_tool_result` block`` |
+| With programmatic tool calling, text or other content comes after the `tool_result` blocks | `only tool_result blocks are allowed` |
+| Text or other content comes before the `tool_result` blocks | `` `tool_use` ids were found without `tool_result` blocks immediately after `` |
+| A `tool_result` block is missing | `` `tool_use` ids were found without `tool_result` blocks immediately after `` |
 
 Content after the `tool_result` blocks fails because it ends Claude’s turn while the server tool is still waiting. To give Claude more input, continue until a response’s `stop_reason` is neither `tool_use` nor `pause_turn`. Then, send the input as a new user message in the same `messages` list.
 
@@ -1901,6 +1901,8 @@ If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5
 On a refusal, the [`stop_details`](../api/messages/create.md#message.stop_details) object identifies the policy category that triggered it. The categories and the full refusal response shape are covered in [What a refusal looks like](refusals-and-fallback.md#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
 
 You can usually get a response to a refused request by retrying it on another Claude model. This works for Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Haiku 5.5. [Refusals and fallback](refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. Claude Haiku 5.5 has no server-side fallback, so set up its retry with [client-side fallback](refusals-and-fallback.md#client-side-fallback). If you build the retry yourself from any of these models except Claude Haiku 5.5, [Fallback credit](fallback-credit.md) covers how to avoid paying the prompt-cache cost twice.
+
+A `reasoning_extraction` refusal is an exception: change the prompt instead of retrying on another model, as [Keep reasoning in thinking blocks](refusals-and-fallback.md#keep-reasoning-in-thinking-blocks) says.
 
 ### model\_context\_window\_exceeded
 

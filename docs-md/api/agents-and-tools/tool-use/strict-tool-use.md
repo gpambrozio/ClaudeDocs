@@ -1174,17 +1174,17 @@ Strict tool use is available on every model and eligible for HIPAA readiness.
 
 * Availability: Available
 
-| Status    | Cloud platforms         | Models                                                            |
-| --------- | ----------------------- | ----------------------------------------------------------------- |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
 | Available | All supported platforms | [All models](../../models/overview.md) |
 
 ### Data handling
 
 [Data handling overview](../../manage-claude/api-and-data-retention.md#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                                                                                                                                                                                          | HIPAA                                                                                                                                                                                            |
-| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Status  | Eligible (qualified; excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements))                                                                                                                                                         | Eligible                                                                                                                                                                                         |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Eligible (qualified; excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
 | Details | Your prompts and Claude’s outputs are not stored. Only the JSON schema is cached, for up to 24 hours since last use. This also covers strict tool use (`strict: true` on tools), which uses the same grammar pipeline. [Learn more](../../build-with-claude/structured-outputs.md#data-retention) | PHI must not be included in JSON schema definitions; see PHI handling guidelines. [Learn more](../../manage-claude/api-and-data-retention.md#phi-handling-guidelines) |
 
 Applicable endpoints:

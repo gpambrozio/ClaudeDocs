@@ -46,16 +46,16 @@ Claude Managed Agents also supports custom, user-defined tools. Your application
 
 The agent toolset includes the following tools. All are enabled by default when you include the toolset in the agent configuration.
 
-| Tool       | Name         | Description                                            |
-| ---------- | ------------ | ------------------------------------------------------ |
-| Bash       | `bash`       | Run bash commands in a shell session                   |
-| Read       | `read`       | Read a file from the sandbox filesystem                |
-| Write      | `write`      | Write a file to the sandbox filesystem                 |
-| Edit       | `edit`       | Perform string replacement in a file                   |
-| Glob       | `glob`       | Perform fast file pattern matching using glob patterns |
-| Grep       | `grep`       | Search text using regex patterns                       |
-| Web fetch  | `web_fetch`  | Fetch content from a URL                               |
-| Web search | `web_search` | Search the web for information                         |
+| Tool | Name | Description |
+| ----- | ----- | ----- |
+| Bash | `bash` | Run bash commands in a shell session |
+| Read | `read` | Read a file from the sandbox filesystem |
+| Write | `write` | Write a file to the sandbox filesystem |
+| Edit | `edit` | Perform string replacement in a file |
+| Glob | `glob` | Perform fast file pattern matching using glob patterns |
+| Grep | `grep` | Search text using regex patterns |
+| Web fetch | `web_fetch` | Fetch content from a URL |
+| Web search | `web_search` | Search the web for information |
 
 When a tool output exceeds 100,000 characters (about 25,000 tokens), it is automatically written to a file in the [sandbox](environments.md). The model receives a truncated preview with the file path and can read the full content from there.
 
@@ -526,9 +526,9 @@ Agent toolset is in beta on every model.
 
 * Availability: Available
 
-| Status | Cloud platforms                                                                                                    |
-| ------ | ------------------------------------------------------------------------------------------------------------------ |
-| Beta   | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md) |
+| Status | Cloud platforms |
+| ----- | ----- |
+| Beta | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md) |
 
 ### Required beta headers
 
@@ -542,9 +542,9 @@ Beta headers allow you to access experimental features and new model capabilitie
 
 [Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                                                                                                                         | HIPAA                                                               |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Status  | Not eligible                                                                                                                                                                                                                                                | Not eligible                                                        |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Not eligible | Not eligible |
 | Details | Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them. [Learn more](self-hosted-data-and-access.md#how-long-data-is-kept) | Not eligible for HIPAA. Applies to all Managed Agents sub-features. |
 
 Applicable endpoints:

@@ -121,6 +121,8 @@ See the [Dreams guide](../../../managed-agents/dreams.md#create-a-dream) to lear
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
   - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
@@ -309,7 +311,7 @@ See the [Dreams guide](../../../managed-agents/dreams.md#create-a-dream) to lear
 
     format: date-time
 
-  - `error: BetaDreamError or null`
+  - `error: BetaDreamErrorObject or null`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 

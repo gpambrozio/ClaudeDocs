@@ -696,7 +696,7 @@ Learn more about token counting in our [user guide](../../../build-with-claude/t
 
                 - `PageAge string Optional`
 
-              - `type WebSearchToolRequestErrorParam`
+              - `type WebSearchToolRequestErrorObjectParam`
 
                 - `Type WebSearchToolResultError`
 

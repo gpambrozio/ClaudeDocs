@@ -29,16 +29,16 @@ You need the following:
 
 With an Admin API key, you can make every request in [Manage endpoints](organization-webhooks.md#manage-endpoints). With an `org:admin` token, you can make the same requests. If the token is bound to a workspace other than your organization’s [Default Workspace](workspaces.md#how-workspaces-work), you can’t make any of them. With a personal or service account key, the requests you can make depend on the account’s [organization role](admin-api.md#organization-roles-and-permissions):
 
-* To list or view webhook endpoints: `claude_code_user`, `developer`, or `admin`
-* To create, change, or delete webhook endpoints, or to replace a signing secret: `admin`
+* To list or get webhook endpoints: `developer` or `admin`
+* To create, update, or delete webhook endpoints, or to replace a signing secret: `admin`
 
 ## Event types
 
 Organization webhook endpoints accept two event types. Both are about [enforcement actions](user-profiles.md#check-whether-anthropic-has-restricted-or-banned-a-profile) on user profiles.
 
-| Event                                      | Trigger                                                                             |
-| ------------------------------------------ | ----------------------------------------------------------------------------------- |
-| `user_profile.enforcement_action_opened`   | Anthropic opens an enforcement action on a user profile.                            |
+| Event | Trigger |
+| ----- | ----- |
+| `user_profile.enforcement_action_opened` | Anthropic opens an enforcement action on a user profile. |
 | `user_profile.enforcement_action_resolved` | An enforcement action ends. Anthropic resolves it, or its `expires_at` time passes. |
 
 Deleting a profile ends its open actions without a `user_profile.enforcement_action_resolved` event.
@@ -75,18 +75,18 @@ Anthropic sends an event only after the profile shows the change, so the profile
 
 An organization webhook endpoint has these fields:
 
-| Field             | Type             | Description                                                                                                                                                                               |
-| ----------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`              | string           | The endpoint’s ID, which starts with `wep_`. Set by Anthropic.                                                                                                                            |
-| `url`             | string           | Where Anthropic sends events. Must be HTTPS on port 443, with a public domain name, not an IP address. Two enabled organization webhook endpoints in your organization can’t share a URL. |
-| `enabled_events`  | array of strings | The [event types](organization-webhooks.md#event-types) this endpoint receives. A create request must list at least one.                   |
-| `name`            | string           | An optional label for your own use.                                                                                                                                                       |
-| `description`     | string           | An optional description for your own use.                                                                                                                                                 |
-| `state`           | string           | `enabled` or `disabled`.                                                                                                                                                                  |
-| `disabled_reason` | string           | Why Anthropic disabled the endpoint. Empty otherwise.                                                                                                                                     |
-| `created_at`      | string           | When the endpoint was created. Set by Anthropic.                                                                                                                                          |
-| `updated_at`      | string           | When the endpoint last changed. Set by Anthropic.                                                                                                                                         |
-| `signing_secret`  | string           | A `whsec_`-prefixed secret, created with the endpoint. Only the responses that create the endpoint or replace the secret include it, so store it securely.                                |
+| Field | Type | Description |
+| ----- | ----- | ----- |
+| `id` | string | The endpoint’s ID, which starts with `wep_`. Set by Anthropic. |
+| `url` | string | Where Anthropic sends events. Must be HTTPS on port 443, with a public domain name, not an IP address. Two enabled organization webhook endpoints in your organization can’t share a URL. |
+| `enabled_events` | array of strings | The [event types](organization-webhooks.md#event-types) this endpoint receives. A create request must list at least one. |
+| `name` | string | An optional label for your own use. |
+| `description` | string | An optional description for your own use. |
+| `state` | string | `enabled` or `disabled`. |
+| `disabled_reason` | string | Why Anthropic disabled the endpoint. Empty otherwise. |
+| `created_at` | string | When the endpoint was created. Set by Anthropic. |
+| `updated_at` | string | When the endpoint last changed. Set by Anthropic. |
+| `signing_secret` | string | A `whsec_`-prefixed secret, created with the endpoint. Only the responses that create the endpoint or replace the secret include it, so store it securely. |
 
 ```json
 {
@@ -129,14 +129,14 @@ Return any `2xx` status within 5 seconds, and do slow work afterward. Any other 
 
 With the Admin API, you can make these requests:
 
-| Task                                                                            | Request                                                                                                                                                                           |
-| ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| List your organization’s endpoints                                              | [`GET /v1/organizations/webhooks`](../api/beta/organization/webhooks/list.md)                                                                       |
-| Create an endpoint                                                              | [`POST /v1/organizations/webhooks`](../api/beta/organization/webhooks/create.md)                                                                    |
-| Get one endpoint                                                                | [`GET /v1/organizations/webhooks/{webhook_endpoint_id}`](../api/beta/organization/webhooks/retrieve.md)                                             |
-| Update an endpoint’s `url`, `name`, `description`, `enabled_events`, or `state` | [`POST /v1/organizations/webhooks/{webhook_endpoint_id}`](../api/beta/organization/webhooks/update.md)                                              |
-| Delete an endpoint                                                              | [`DELETE /v1/organizations/webhooks/{webhook_endpoint_id}`](../api/beta/organization/webhooks/delete.md)                                            |
-| Replace the signing secret                                                      | [`POST /v1/organizations/webhooks/{webhook_endpoint_id}/regenerate_signing_secret`](../api/beta/organization/webhooks/regenerate_signing_secret.md) |
+| Task | Request |
+| ----- | ----- |
+| List your organization’s endpoints | [`GET /v1/organizations/webhooks`](../api/beta/organization/webhooks/list.md) |
+| Create an endpoint | [`POST /v1/organizations/webhooks`](../api/beta/organization/webhooks/create.md) |
+| Get one endpoint | [`GET /v1/organizations/webhooks/{webhook_endpoint_id}`](../api/beta/organization/webhooks/retrieve.md) |
+| Update an endpoint’s `url`, `name`, `description`, `enabled_events`, or `state` | [`POST /v1/organizations/webhooks/{webhook_endpoint_id}`](../api/beta/organization/webhooks/update.md) |
+| Delete an endpoint | [`DELETE /v1/organizations/webhooks/{webhook_endpoint_id}`](../api/beta/organization/webhooks/delete.md) |
+| Replace the signing secret | [`POST /v1/organizations/webhooks/{webhook_endpoint_id}/regenerate_signing_secret`](../api/beta/organization/webhooks/regenerate_signing_secret.md) |
 
 In an update, `enabled_events` replaces the endpoint’s whole list of event types. An empty list doesn’t clear the list: the endpoint keeps the event types it had. To stop deliveries, send `"state": "disabled"` or delete the endpoint.
 

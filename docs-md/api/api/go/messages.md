@@ -710,7 +710,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `PageAge string Optional`
 
-              - `type WebSearchToolRequestErrorParam`
+              - `type WebSearchToolRequestErrorObjectParam`
 
                 - `Type WebSearchToolResultError`
 
@@ -3200,7 +3200,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content WebSearchToolResultBlockContentUnion`
 
-        - `type WebSearchToolResultError`
+        - `type WebSearchToolResultErrorObject`
 
           - `Type WebSearchToolResultError`
 
@@ -3352,7 +3352,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content CodeExecutionToolResultBlockContentUnion`
 
-        - `type CodeExecutionToolResultError`
+        - `type CodeExecutionToolResultErrorObject`
 
           - `Type CodeExecutionToolResultError`
 
@@ -3426,7 +3426,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BashCodeExecutionToolResultError`
+        - `type BashCodeExecutionToolResultErrorObject`
 
           - `Type BashCodeExecutionToolResultError`
 
@@ -3476,7 +3476,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type TextEditorCodeExecutionToolResultError`
+        - `type TextEditorCodeExecutionToolResultErrorObject`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
@@ -3554,7 +3554,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content ToolSearchToolResultBlockContentUnion`
 
-        - `type ToolSearchToolResultError`
+        - `type ToolSearchToolResultErrorObject`
 
           - `Type ToolSearchToolResultError`
 
@@ -4236,6 +4236,10 @@ On a streaming call, the errors listed below apply when the API rejects the requ
 
   The `compaction` block's `tool_changes` differs from what was returned with the block.
 
+- `ErrorCodeImageDimensionsTooLarge` (HTTP status 400, error code `image_dimensions_too_large`)
+
+  The longest side of one or more images in the request exceeds the image size limit. Scale each image in `paths` so that neither side exceeds `max_side_length_pixels`, or remove it, then retry.
+
 - `ErrorCodeOrganizationOnHold` (HTTP status 400, error code `organization_on_hold`)
 
   Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
@@ -4272,6 +4276,26 @@ On a streaming call, the errors listed below apply when the API rejects the requ
 
   A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
 
+- `ErrorCodeUserProfileRequired` (HTTP status 400, error code `user_profile_required`)
+
+  The request sets `billing_policy.bill_to` to `"user_profile"` but names no user profile. Name the profile to bill in the `anthropic-user-profile-id` header.
+
+- `ErrorCodeLinkedOrganizationBillingUnavailable` (HTTP status 402, error code `linked_organization_billing_unavailable`)
+
+  Anthropic cannot currently bill the organization linked to the request's user profile, for a reason that lies with that organization's own account. The response does not say what the reason is.
+
+- `ErrorCodeLinkedOrganizationSpendLimitReached` (HTTP status 402, error code `linked_organization_spend_limit_reached`)
+
+  The organization linked to the request's user profile has reached a spend limit that it set, or lacks credit for the request. The response does not say which applies.
+
+- `ErrorCodeUserProfileBillingNotAuthorized` (HTTP status 403, error code `user_profile_billing_not_authorized`)
+
+  The customer that the request's user profile represents has not authorized the caller to bill them, or the authorization that the request's credential uses has ended. The response does not say which applies.
+
+- `ErrorCodeUserProfileNotBillable` (HTTP status 403, error code `user_profile_not_billable`)
+
+  The request's user profile cannot be billed. The response gives no more specific error code and does not say what the reason is.
+
 - `ErrorCodeThreadNotFound` (HTTP status 404, error code `thread_not_found`)
 
   No usable Thread state was found for `previous_message_id`. Replay the full conversation with `thread: {"type": "create"}` to start a new Thread.
@@ -4283,6 +4307,10 @@ On a streaming call, the errors listed below apply when the API rejects the requ
 - `ErrorCodeRequestBodyTooLargeAfterDecoding` (HTTP status 413, error code `request_body_too_large_after_decoding`)
 
   The compressed request body exceeds the request size limit once decoded.
+
+- `ErrorCodeContractSpendLimitReached` (HTTP status 429, error code `contract_spend_limit_reached`)
+
+  The organization has reached the spend limit of its contract.
 
 - `ErrorCodeEnforcedSpendLimitReached` (HTTP status 429, error code `enforced_spend_limit_reached`)
 
@@ -5081,7 +5109,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `PageAge string Optional`
 
-              - `type WebSearchToolRequestErrorParam`
+              - `type WebSearchToolRequestErrorObjectParam`
 
                 - `Type WebSearchToolResultError`
 
@@ -7912,7 +7940,7 @@ func main() {
 
             - `PageAge string Optional`
 
-          - `type WebSearchToolRequestErrorParam`
+          - `type WebSearchToolRequestErrorObjectParam`
 
             - `Type WebSearchToolResultError`
 
@@ -8363,7 +8391,7 @@ func main() {
 
   - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-    - `type BashCodeExecutionToolResultError`
+    - `type BashCodeExecutionToolResultErrorObject`
 
       - `Type BashCodeExecutionToolResultError`
 
@@ -8470,9 +8498,23 @@ func main() {
 
       - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
-### Bash Code Execution Tool Result Error
+### Bash Code Execution Tool Result Error Code
 
-- `type BashCodeExecutionToolResultError`
+- `type BashCodeExecutionToolResultErrorCode string`
+
+  - `const BashCodeExecutionToolResultErrorCodeInvalidToolInput BashCodeExecutionToolResultErrorCode = "invalid_tool_input"`
+
+  - `const BashCodeExecutionToolResultErrorCodeUnavailable BashCodeExecutionToolResultErrorCode = "unavailable"`
+
+  - `const BashCodeExecutionToolResultErrorCodeTooManyRequests BashCodeExecutionToolResultErrorCode = "too_many_requests"`
+
+  - `const BashCodeExecutionToolResultErrorCodeExecutionTimeExceeded BashCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
+
+  - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
+
+### Bash Code Execution Tool Result Error Object
+
+- `type BashCodeExecutionToolResultErrorObject`
 
   - `Type BashCodeExecutionToolResultError`
 
@@ -8489,20 +8531,6 @@ func main() {
     - `const BashCodeExecutionToolResultErrorCodeExecutionTimeExceeded BashCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
     - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
-
-### Bash Code Execution Tool Result Error Code
-
-- `type BashCodeExecutionToolResultErrorCode string`
-
-  - `const BashCodeExecutionToolResultErrorCodeInvalidToolInput BashCodeExecutionToolResultErrorCode = "invalid_tool_input"`
-
-  - `const BashCodeExecutionToolResultErrorCodeUnavailable BashCodeExecutionToolResultErrorCode = "unavailable"`
-
-  - `const BashCodeExecutionToolResultErrorCodeTooManyRequests BashCodeExecutionToolResultErrorCode = "too_many_requests"`
-
-  - `const BashCodeExecutionToolResultErrorCodeExecutionTimeExceeded BashCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
-
-  - `const BashCodeExecutionToolResultErrorCodeOutputFileTooLarge BashCodeExecutionToolResultErrorCode = "output_file_too_large"`
 
 ### Bash Code Execution Tool Result Error Param
 
@@ -15122,7 +15150,7 @@ func main() {
 
   - `Content CodeExecutionToolResultBlockContentUnion`
 
-    - `type CodeExecutionToolResultError`
+    - `type CodeExecutionToolResultErrorObject`
 
       - `Type CodeExecutionToolResultError`
 
@@ -15192,7 +15220,7 @@ func main() {
 
 - `type CodeExecutionToolResultBlockContentUnion interface{…}`
 
-  - `type CodeExecutionToolResultError`
+  - `type CodeExecutionToolResultErrorObject`
 
     - `Type CodeExecutionToolResultError`
 
@@ -15387,9 +15415,21 @@ func main() {
 
     - `Stderr string`
 
-### Code Execution Tool Result Error
+### Code Execution Tool Result Error Code
 
-- `type CodeExecutionToolResultError`
+- `type CodeExecutionToolResultErrorCode string`
+
+  - `const CodeExecutionToolResultErrorCodeInvalidToolInput CodeExecutionToolResultErrorCode = "invalid_tool_input"`
+
+  - `const CodeExecutionToolResultErrorCodeUnavailable CodeExecutionToolResultErrorCode = "unavailable"`
+
+  - `const CodeExecutionToolResultErrorCodeTooManyRequests CodeExecutionToolResultErrorCode = "too_many_requests"`
+
+  - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
+
+### Code Execution Tool Result Error Object
+
+- `type CodeExecutionToolResultErrorObject`
 
   - `Type CodeExecutionToolResultError`
 
@@ -15404,18 +15444,6 @@ func main() {
     - `const CodeExecutionToolResultErrorCodeTooManyRequests CodeExecutionToolResultErrorCode = "too_many_requests"`
 
     - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
-
-### Code Execution Tool Result Error Code
-
-- `type CodeExecutionToolResultErrorCode string`
-
-  - `const CodeExecutionToolResultErrorCodeInvalidToolInput CodeExecutionToolResultErrorCode = "invalid_tool_input"`
-
-  - `const CodeExecutionToolResultErrorCodeUnavailable CodeExecutionToolResultErrorCode = "unavailable"`
-
-  - `const CodeExecutionToolResultErrorCodeTooManyRequests CodeExecutionToolResultErrorCode = "too_many_requests"`
-
-  - `const CodeExecutionToolResultErrorCodeExecutionTimeExceeded CodeExecutionToolResultErrorCode = "execution_time_exceeded"`
 
 ### Code Execution Tool Result Error Param
 
@@ -18392,7 +18420,7 @@ func main() {
 
     - `Content WebSearchToolResultBlockContentUnion`
 
-      - `type WebSearchToolResultError`
+      - `type WebSearchToolResultErrorObject`
 
         - `Type WebSearchToolResultError`
 
@@ -18544,7 +18572,7 @@ func main() {
 
     - `Content CodeExecutionToolResultBlockContentUnion`
 
-      - `type CodeExecutionToolResultError`
+      - `type CodeExecutionToolResultErrorObject`
 
         - `Type CodeExecutionToolResultError`
 
@@ -18618,7 +18646,7 @@ func main() {
 
     - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-      - `type BashCodeExecutionToolResultError`
+      - `type BashCodeExecutionToolResultErrorObject`
 
         - `Type BashCodeExecutionToolResultError`
 
@@ -18668,7 +18696,7 @@ func main() {
 
     - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-      - `type TextEditorCodeExecutionToolResultError`
+      - `type TextEditorCodeExecutionToolResultErrorObject`
 
         - `Type TextEditorCodeExecutionToolResultError`
 
@@ -18746,7 +18774,7 @@ func main() {
 
     - `Content ToolSearchToolResultBlockContentUnion`
 
-      - `type ToolSearchToolResultError`
+      - `type ToolSearchToolResultErrorObject`
 
         - `Type ToolSearchToolResultError`
 
@@ -19416,7 +19444,7 @@ func main() {
 
         - `PageAge string Optional`
 
-      - `type WebSearchToolRequestErrorParam`
+      - `type WebSearchToolRequestErrorObjectParam`
 
         - `Type WebSearchToolResultError`
 
@@ -20735,6 +20763,20 @@ func main() {
 
       - `const ImageTransformationsParamOversizedImageError ImageTransformationsParamOversizedImage = "error"`
 
+### Image Dimensions Too Large Error Details
+
+- `type ImageDimensionsTooLargeErrorDetails`
+
+  - `ErrorCode ImageDimensionsTooLargeErrorCode`
+
+  - `MaxSideLengthPixels int64`
+
+    The limit the images exceeded: the largest width or height, in pixels, that an image on this request may have.
+
+  - `Paths []string`
+
+    The position of every image over the limit, in the order you sent them, nested blocks included, such as `messages.0.content.1`, or `messages.0.content.1.content.0` for an image in a `tool_result` block.
+
 ### Image Transformations Param
 
 - `type ImageTransformationsParam`
@@ -21197,7 +21239,7 @@ func main() {
 
       - `Content WebSearchToolResultBlockContentUnion`
 
-        - `type WebSearchToolResultError`
+        - `type WebSearchToolResultErrorObject`
 
           - `Type WebSearchToolResultError`
 
@@ -21349,7 +21391,7 @@ func main() {
 
       - `Content CodeExecutionToolResultBlockContentUnion`
 
-        - `type CodeExecutionToolResultError`
+        - `type CodeExecutionToolResultErrorObject`
 
           - `Type CodeExecutionToolResultError`
 
@@ -21423,7 +21465,7 @@ func main() {
 
       - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BashCodeExecutionToolResultError`
+        - `type BashCodeExecutionToolResultErrorObject`
 
           - `Type BashCodeExecutionToolResultError`
 
@@ -21473,7 +21515,7 @@ func main() {
 
       - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type TextEditorCodeExecutionToolResultError`
+        - `type TextEditorCodeExecutionToolResultErrorObject`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
@@ -21551,7 +21593,7 @@ func main() {
 
       - `Content ToolSearchToolResultBlockContentUnion`
 
-        - `type ToolSearchToolResultError`
+        - `type ToolSearchToolResultErrorObject`
 
           - `Type ToolSearchToolResultError`
 
@@ -22604,7 +22646,7 @@ func main() {
 
           - `PageAge string Optional`
 
-        - `type WebSearchToolRequestErrorParam`
+        - `type WebSearchToolRequestErrorObjectParam`
 
           - `Type WebSearchToolResultError`
 
@@ -25283,7 +25325,7 @@ func main() {
 
               - `PageAge string Optional`
 
-            - `type WebSearchToolRequestErrorParam`
+            - `type WebSearchToolRequestErrorObjectParam`
 
               - `Type WebSearchToolResultError`
 
@@ -26486,7 +26528,7 @@ func main() {
 
       - `Content WebSearchToolResultBlockContentUnion`
 
-        - `type WebSearchToolResultError`
+        - `type WebSearchToolResultErrorObject`
 
           - `Type WebSearchToolResultError`
 
@@ -26638,7 +26680,7 @@ func main() {
 
       - `Content CodeExecutionToolResultBlockContentUnion`
 
-        - `type CodeExecutionToolResultError`
+        - `type CodeExecutionToolResultErrorObject`
 
           - `Type CodeExecutionToolResultError`
 
@@ -26712,7 +26754,7 @@ func main() {
 
       - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BashCodeExecutionToolResultError`
+        - `type BashCodeExecutionToolResultErrorObject`
 
           - `Type BashCodeExecutionToolResultError`
 
@@ -26762,7 +26804,7 @@ func main() {
 
       - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type TextEditorCodeExecutionToolResultError`
+        - `type TextEditorCodeExecutionToolResultErrorObject`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
@@ -26840,7 +26882,7 @@ func main() {
 
       - `Content ToolSearchToolResultBlockContentUnion`
 
-        - `type ToolSearchToolResultError`
+        - `type ToolSearchToolResultErrorObject`
 
           - `Type ToolSearchToolResultError`
 
@@ -27462,7 +27504,7 @@ func main() {
 
         - `Content WebSearchToolResultBlockContentUnion`
 
-          - `type WebSearchToolResultError`
+          - `type WebSearchToolResultErrorObject`
 
             - `Type WebSearchToolResultError`
 
@@ -27614,7 +27656,7 @@ func main() {
 
         - `Content CodeExecutionToolResultBlockContentUnion`
 
-          - `type CodeExecutionToolResultError`
+          - `type CodeExecutionToolResultErrorObject`
 
             - `Type CodeExecutionToolResultError`
 
@@ -27688,7 +27730,7 @@ func main() {
 
         - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-          - `type BashCodeExecutionToolResultError`
+          - `type BashCodeExecutionToolResultErrorObject`
 
             - `Type BashCodeExecutionToolResultError`
 
@@ -27738,7 +27780,7 @@ func main() {
 
         - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-          - `type TextEditorCodeExecutionToolResultError`
+          - `type TextEditorCodeExecutionToolResultErrorObject`
 
             - `Type TextEditorCodeExecutionToolResultError`
 
@@ -27816,7 +27858,7 @@ func main() {
 
         - `Content ToolSearchToolResultBlockContentUnion`
 
-          - `type ToolSearchToolResultError`
+          - `type ToolSearchToolResultErrorObject`
 
             - `Type ToolSearchToolResultError`
 
@@ -28636,7 +28678,7 @@ func main() {
 
           - `Content WebSearchToolResultBlockContentUnion`
 
-            - `type WebSearchToolResultError`
+            - `type WebSearchToolResultErrorObject`
 
               - `Type WebSearchToolResultError`
 
@@ -28788,7 +28830,7 @@ func main() {
 
           - `Content CodeExecutionToolResultBlockContentUnion`
 
-            - `type CodeExecutionToolResultError`
+            - `type CodeExecutionToolResultErrorObject`
 
               - `Type CodeExecutionToolResultError`
 
@@ -28862,7 +28904,7 @@ func main() {
 
           - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-            - `type BashCodeExecutionToolResultError`
+            - `type BashCodeExecutionToolResultErrorObject`
 
               - `Type BashCodeExecutionToolResultError`
 
@@ -28912,7 +28954,7 @@ func main() {
 
           - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-            - `type TextEditorCodeExecutionToolResultError`
+            - `type TextEditorCodeExecutionToolResultErrorObject`
 
               - `Type TextEditorCodeExecutionToolResultError`
 
@@ -28990,7 +29032,7 @@ func main() {
 
           - `Content ToolSearchToolResultBlockContentUnion`
 
-            - `type ToolSearchToolResultError`
+            - `type ToolSearchToolResultErrorObject`
 
               - `Type ToolSearchToolResultError`
 
@@ -30852,7 +30894,7 @@ func main() {
 
   - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-    - `type TextEditorCodeExecutionToolResultError`
+    - `type TextEditorCodeExecutionToolResultErrorObject`
 
       - `Type TextEditorCodeExecutionToolResultError`
 
@@ -31013,9 +31055,23 @@ func main() {
 
       - `const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"`
 
-### Text Editor Code Execution Tool Result Error
+### Text Editor Code Execution Tool Result Error Code
 
-- `type TextEditorCodeExecutionToolResultError`
+- `type TextEditorCodeExecutionToolResultErrorCode string`
+
+  - `const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput TextEditorCodeExecutionToolResultErrorCode = "invalid_tool_input"`
+
+  - `const TextEditorCodeExecutionToolResultErrorCodeUnavailable TextEditorCodeExecutionToolResultErrorCode = "unavailable"`
+
+  - `const TextEditorCodeExecutionToolResultErrorCodeTooManyRequests TextEditorCodeExecutionToolResultErrorCode = "too_many_requests"`
+
+  - `const TextEditorCodeExecutionToolResultErrorCodeExecutionTimeExceeded TextEditorCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
+
+  - `const TextEditorCodeExecutionToolResultErrorCodeFileNotFound TextEditorCodeExecutionToolResultErrorCode = "file_not_found"`
+
+### Text Editor Code Execution Tool Result Error Object
+
+- `type TextEditorCodeExecutionToolResultErrorObject`
 
   - `Type TextEditorCodeExecutionToolResultError`
 
@@ -31034,20 +31090,6 @@ func main() {
     - `const TextEditorCodeExecutionToolResultErrorCodeFileNotFound TextEditorCodeExecutionToolResultErrorCode = "file_not_found"`
 
   - `ErrorMessage string`
-
-### Text Editor Code Execution Tool Result Error Code
-
-- `type TextEditorCodeExecutionToolResultErrorCode string`
-
-  - `const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput TextEditorCodeExecutionToolResultErrorCode = "invalid_tool_input"`
-
-  - `const TextEditorCodeExecutionToolResultErrorCodeUnavailable TextEditorCodeExecutionToolResultErrorCode = "unavailable"`
-
-  - `const TextEditorCodeExecutionToolResultErrorCodeTooManyRequests TextEditorCodeExecutionToolResultErrorCode = "too_many_requests"`
-
-  - `const TextEditorCodeExecutionToolResultErrorCodeExecutionTimeExceeded TextEditorCodeExecutionToolResultErrorCode = "execution_time_exceeded"`
-
-  - `const TextEditorCodeExecutionToolResultErrorCodeFileNotFound TextEditorCodeExecutionToolResultErrorCode = "file_not_found"`
 
 ### Text Editor Code Execution Tool Result Error Param
 
@@ -32220,7 +32262,7 @@ func main() {
 
   - `Content ToolSearchToolResultBlockContentUnion`
 
-    - `type ToolSearchToolResultError`
+    - `type ToolSearchToolResultErrorObject`
 
       - `Type ToolSearchToolResultError`
 
@@ -32323,9 +32365,21 @@ func main() {
 
     Create a cache control breakpoint at this content block.
 
-### Tool Search Tool Result Error
+### Tool Search Tool Result Error Code
 
-- `type ToolSearchToolResultError`
+- `type ToolSearchToolResultErrorCode string`
+
+  - `const ToolSearchToolResultErrorCodeInvalidToolInput ToolSearchToolResultErrorCode = "invalid_tool_input"`
+
+  - `const ToolSearchToolResultErrorCodeUnavailable ToolSearchToolResultErrorCode = "unavailable"`
+
+  - `const ToolSearchToolResultErrorCodeTooManyRequests ToolSearchToolResultErrorCode = "too_many_requests"`
+
+  - `const ToolSearchToolResultErrorCodeExecutionTimeExceeded ToolSearchToolResultErrorCode = "execution_time_exceeded"`
+
+### Tool Search Tool Result Error Object
+
+- `type ToolSearchToolResultErrorObject`
 
   - `Type ToolSearchToolResultError`
 
@@ -32342,18 +32396,6 @@ func main() {
     - `const ToolSearchToolResultErrorCodeExecutionTimeExceeded ToolSearchToolResultErrorCode = "execution_time_exceeded"`
 
   - `ErrorMessage string`
-
-### Tool Search Tool Result Error Code
-
-- `type ToolSearchToolResultErrorCode string`
-
-  - `const ToolSearchToolResultErrorCodeInvalidToolInput ToolSearchToolResultErrorCode = "invalid_tool_input"`
-
-  - `const ToolSearchToolResultErrorCodeUnavailable ToolSearchToolResultErrorCode = "unavailable"`
-
-  - `const ToolSearchToolResultErrorCodeTooManyRequests ToolSearchToolResultErrorCode = "too_many_requests"`
-
-  - `const ToolSearchToolResultErrorCodeExecutionTimeExceeded ToolSearchToolResultErrorCode = "execution_time_exceeded"`
 
 ### Tool Search Tool Result Error Param
 
@@ -36755,7 +36797,7 @@ func main() {
 
             - `PageAge string Optional`
 
-          - `type WebSearchToolRequestErrorParam`
+          - `type WebSearchToolRequestErrorObjectParam`
 
             - `Type WebSearchToolResultError`
 
@@ -39127,9 +39169,9 @@ func main() {
 
       minLength: 1, maxLength: 255
 
-### Web Search Tool Request Error
+### Web Search Tool Request Error Object
 
-- `type WebSearchToolRequestErrorParam`
+- `type WebSearchToolRequestErrorObjectParam`
 
   - `Type WebSearchToolResultError`
 
@@ -39185,7 +39227,7 @@ func main() {
 
   - `Content WebSearchToolResultBlockContentUnion`
 
-    - `type WebSearchToolResultError`
+    - `type WebSearchToolResultErrorObject`
 
       - `Type WebSearchToolResultError`
 
@@ -39227,7 +39269,7 @@ func main() {
 
 - `type WebSearchToolResultBlockContentUnion interface{…}`
 
-  - `type WebSearchToolResultError`
+  - `type WebSearchToolResultErrorObject`
 
     - `Type WebSearchToolResultError`
 
@@ -39281,7 +39323,7 @@ func main() {
 
       - `PageAge string Optional`
 
-    - `type WebSearchToolRequestErrorParam`
+    - `type WebSearchToolRequestErrorObjectParam`
 
       - `Type WebSearchToolResultError`
 
@@ -39366,7 +39408,7 @@ func main() {
 
     - `PageAge string Optional`
 
-  - `type WebSearchToolRequestErrorParam`
+  - `type WebSearchToolRequestErrorObjectParam`
 
     - `Type WebSearchToolResultError`
 
@@ -39384,9 +39426,25 @@ func main() {
 
       - `const WebSearchToolResultErrorCodeRequestTooLarge WebSearchToolResultErrorCode = "request_too_large"`
 
-### Web Search Tool Result Error
+### Web Search Tool Result Error Code
 
-- `type WebSearchToolResultError`
+- `type WebSearchToolResultErrorCode string`
+
+  - `const WebSearchToolResultErrorCodeInvalidToolInput WebSearchToolResultErrorCode = "invalid_tool_input"`
+
+  - `const WebSearchToolResultErrorCodeUnavailable WebSearchToolResultErrorCode = "unavailable"`
+
+  - `const WebSearchToolResultErrorCodeMaxUsesExceeded WebSearchToolResultErrorCode = "max_uses_exceeded"`
+
+  - `const WebSearchToolResultErrorCodeTooManyRequests WebSearchToolResultErrorCode = "too_many_requests"`
+
+  - `const WebSearchToolResultErrorCodeQueryTooLong WebSearchToolResultErrorCode = "query_too_long"`
+
+  - `const WebSearchToolResultErrorCodeRequestTooLarge WebSearchToolResultErrorCode = "request_too_large"`
+
+### Web Search Tool Result Error Object
+
+- `type WebSearchToolResultErrorObject`
 
   - `Type WebSearchToolResultError`
 
@@ -39405,22 +39463,6 @@ func main() {
     - `const WebSearchToolResultErrorCodeQueryTooLong WebSearchToolResultErrorCode = "query_too_long"`
 
     - `const WebSearchToolResultErrorCodeRequestTooLarge WebSearchToolResultErrorCode = "request_too_large"`
-
-### Web Search Tool Result Error Code
-
-- `type WebSearchToolResultErrorCode string`
-
-  - `const WebSearchToolResultErrorCodeInvalidToolInput WebSearchToolResultErrorCode = "invalid_tool_input"`
-
-  - `const WebSearchToolResultErrorCodeUnavailable WebSearchToolResultErrorCode = "unavailable"`
-
-  - `const WebSearchToolResultErrorCodeMaxUsesExceeded WebSearchToolResultErrorCode = "max_uses_exceeded"`
-
-  - `const WebSearchToolResultErrorCodeTooManyRequests WebSearchToolResultErrorCode = "too_many_requests"`
-
-  - `const WebSearchToolResultErrorCodeQueryTooLong WebSearchToolResultErrorCode = "query_too_long"`
-
-  - `const WebSearchToolResultErrorCodeRequestTooLarge WebSearchToolResultErrorCode = "request_too_large"`
 
 ## Errors
 
@@ -39495,6 +39537,14 @@ HTTP status 400, error code `compaction_tool_changes_mismatch`
 - `const ErrorCodeCompactionToolChangesMismatch ErrorCode = "compaction_tool_changes_mismatch"`
 
   The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+### ErrorCodeImageDimensionsTooLarge
+
+HTTP status 400, error code `image_dimensions_too_large`
+
+- `const ErrorCodeImageDimensionsTooLarge ErrorCode = "image_dimensions_too_large"`
+
+  The longest side of one or more images in the request exceeds the image size limit. Scale each image in `paths` so that neither side exceeds `max_side_length_pixels`, or remove it, then retry.
 
 ### ErrorCodeThreadAlreadyContinued
 
@@ -40285,7 +40335,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `PageAge string Optional`
 
-                  - `type WebSearchToolRequestErrorParam`
+                  - `type WebSearchToolRequestErrorObjectParam`
 
                     - `Type WebSearchToolResultError`
 
@@ -43981,7 +44031,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content WebSearchToolResultBlockContentUnion`
 
-              - `type WebSearchToolResultError`
+              - `type WebSearchToolResultErrorObject`
 
                 - `Type WebSearchToolResultError`
 
@@ -44133,7 +44183,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content CodeExecutionToolResultBlockContentUnion`
 
-              - `type CodeExecutionToolResultError`
+              - `type CodeExecutionToolResultErrorObject`
 
                 - `Type CodeExecutionToolResultError`
 
@@ -44207,7 +44257,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-              - `type BashCodeExecutionToolResultError`
+              - `type BashCodeExecutionToolResultErrorObject`
 
                 - `Type BashCodeExecutionToolResultError`
 
@@ -44257,7 +44307,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-              - `type TextEditorCodeExecutionToolResultError`
+              - `type TextEditorCodeExecutionToolResultErrorObject`
 
                 - `Type TextEditorCodeExecutionToolResultError`
 
@@ -44335,7 +44385,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content ToolSearchToolResultBlockContentUnion`
 
-              - `type ToolSearchToolResultError`
+              - `type ToolSearchToolResultErrorObject`
 
                 - `Type ToolSearchToolResultError`
 
@@ -44778,7 +44828,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         - `Error ErrorObjectUnion`
 
-          - `type InvalidRequestError`
+          - `type InvalidRequestErrorObject`
 
             - `Type InvalidRequestError`
 
@@ -44792,7 +44842,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Invalid request
 
-          - `type AuthenticationError`
+          - `type AuthenticationErrorObject`
 
             - `Type AuthenticationError`
 
@@ -44806,7 +44856,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Authentication error
 
-          - `type BillingError`
+          - `type BillingErrorObject`
 
             - `Type BillingError`
 
@@ -44820,7 +44870,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Billing error
 
-          - `type PermissionError`
+          - `type PermissionErrorObject`
 
             - `Type PermissionError`
 
@@ -44834,7 +44884,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Permission denied
 
-          - `type NotFoundError`
+          - `type NotFoundErrorObject`
 
             - `Type NotFoundError`
 
@@ -44848,7 +44898,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Not found
 
-          - `type RateLimitError`
+          - `type RateLimitErrorObject`
 
             - `Type RateLimitError`
 
@@ -44862,7 +44912,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Rate limited
 
-          - `type GatewayTimeoutError`
+          - `type GatewayTimeoutErrorObject`
 
             - `Type TimeoutError`
 
@@ -44890,7 +44940,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Internal server error
 
-          - `type OverloadedError`
+          - `type OverloadedErrorObject`
 
             - `Type OverloadedError`
 

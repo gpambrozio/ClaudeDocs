@@ -229,6 +229,8 @@ Create a new environment with the specified configuration.
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
@@ -597,6 +599,8 @@ List environments with pagination support.
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
@@ -955,6 +959,8 @@ Retrieve a specific environment by ID.
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
@@ -1425,6 +1431,8 @@ Update an existing environment's configuration.
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
@@ -1792,6 +1800,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
@@ -2000,6 +2010,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
@@ -2825,9 +2837,9 @@ HTTP status 404, error code `environment_not_found`
 
 **GET** `/v1/environments/{environment_id}/work/{work_id}`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 Retrieve detailed information about a specific work item.
+
+This endpoint accepts a Claude API key. It rejects the environment key and the work item's `secret`. On [Claude Platform on AWS](../../../build-with-claude/claude-platform-on-aws.md) or [Claude Models on Google Cloud (Anthropic managed)](../../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), use that platform's credentials instead.
 
 #### Parameters
 
@@ -2932,6 +2944,8 @@ Retrieve detailed information about a specific work item.
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
@@ -3239,6 +3253,8 @@ Long poll for work items in the queue.
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
@@ -3519,6 +3535,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
@@ -3806,6 +3824,8 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
@@ -3927,8 +3947,6 @@ Console.WriteLine(betaSelfHostedWorkHeartbeatResponse);
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 Stop a work item, initiating graceful or forced shutdown.
 
 #### Parameters
@@ -4038,6 +4056,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
@@ -4227,9 +4247,9 @@ Console.WriteLine(betaSelfHostedWork);
 
 **GET** `/v1/environments/{environment_id}/work`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 List work items in an environment.
+
+This endpoint accepts the environment key as a bearer token. It rejects a Claude API key. On [Claude Platform on AWS](../../../build-with-claude/claude-platform-on-aws.md) or [Claude Models on Google Cloud (Anthropic managed)](../../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), use that platform's credentials instead.
 
 #### Parameters
 
@@ -4342,6 +4362,8 @@ List work items in an environment.
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
@@ -4519,9 +4541,9 @@ await foreach (var item in page.Paginate())
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 Update work item metadata with merge semantics.
+
+This endpoint accepts a Claude API key. It rejects the environment key and the work item's `secret`. On [Claude Platform on AWS](../../../build-with-claude/claude-platform-on-aws.md) or [Claude Models on Google Cloud (Anthropic managed)](../../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), use that platform's credentials instead.
 
 #### Parameters
 
@@ -4630,6 +4652,8 @@ Update work item metadata with merge semantics.
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
@@ -4928,6 +4952,8 @@ Get statistics about the work queue for an environment.
     - `AnalyticsUsageCost2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 

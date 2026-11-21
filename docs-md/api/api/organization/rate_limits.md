@@ -165,7 +165,7 @@ the remaining entries.
 
     - `type: string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `value: number`
 
@@ -317,7 +317,7 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
 
     - `type: string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `value: number`
 
@@ -407,7 +407,7 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
 
   - `type: string`
 
-    The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+    The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
   - `value: number`
 

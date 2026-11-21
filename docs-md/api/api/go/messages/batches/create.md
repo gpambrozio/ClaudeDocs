@@ -728,7 +728,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                     - `PageAge string Optional`
 
-                  - `type WebSearchToolRequestErrorParam`
+                  - `type WebSearchToolRequestErrorObjectParam`
 
                     - `Type WebSearchToolResultError`
 

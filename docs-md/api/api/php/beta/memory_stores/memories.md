@@ -660,9 +660,9 @@ var_dump($betaManagedAgentsDeletedMemory);
 
 ## Domain types
 
-### Beta Managed Agents Conflict Error
+### Beta Managed Agents Conflict Error Object
 
-- `class ManagedAgentsConflictError`
+- `class ManagedAgentsConflictErrorObject`
 
   - `"conflict_error" type`
 
@@ -688,11 +688,11 @@ var_dump($betaManagedAgentsDeletedMemory);
 
     ID of the deleted memory (a `mem_...` value).
 
-### Beta Managed Agents Error
+### Beta Managed Agents Error Object
 
-- `class ManagedAgentsError`
+- `class ManagedAgentsErrorObject`
 
-  - `class BetaInvalidRequestError`
+  - `class BetaInvalidRequestErrorObject`
 
     - `"invalid_request_error" type`
 
@@ -702,7 +702,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-  - `class BetaAuthenticationError`
+  - `class BetaAuthenticationErrorObject`
 
     - `"authentication_error" type`
 
@@ -712,7 +712,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-  - `class BetaBillingError`
+  - `class BetaBillingErrorObject`
 
     - `"billing_error" type`
 
@@ -722,7 +722,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-  - `class BetaPermissionError`
+  - `class BetaPermissionErrorObject`
 
     - `"permission_error" type`
 
@@ -732,7 +732,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-  - `class BetaNotFoundError`
+  - `class BetaNotFoundErrorObject`
 
     - `"not_found_error" type`
 
@@ -742,7 +742,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-  - `class BetaRateLimitError`
+  - `class BetaRateLimitErrorObject`
 
     - `"rate_limit_error" type`
 
@@ -752,7 +752,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-  - `class BetaGatewayTimeoutError`
+  - `class BetaGatewayTimeoutErrorObject`
 
     - `"timeout_error" type`
 
@@ -762,7 +762,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-  - `class BetaAPIError`
+  - `class BetaAPIErrorObject`
 
     - `"api_error" type`
 
@@ -772,7 +772,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-  - `class BetaOverloadedError`
+  - `class BetaOverloadedErrorObject`
 
     - `"overloaded_error" type`
 
@@ -782,13 +782,13 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-  - `class ManagedAgentsMemoryPreconditionFailedError`
+  - `class ManagedAgentsMemoryPreconditionFailedErrorObject`
 
     - `"memory_precondition_failed_error" type`
 
     - `?string message`
 
-  - `class ManagedAgentsMemoryPathConflictError`
+  - `class ManagedAgentsMemoryPathConflictErrorObject`
 
     - `"memory_path_conflict_error" type`
 
@@ -804,7 +804,7 @@ var_dump($betaManagedAgentsDeletedMemory);
 
     - `?string message`
 
-  - `class ManagedAgentsConflictError`
+  - `class ManagedAgentsConflictErrorObject`
 
     - `"conflict_error" type`
 
@@ -924,9 +924,9 @@ var_dump($betaManagedAgentsDeletedMemory);
 
       The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pass this value as `path_prefix` on a subsequent list call to drill into the directory.
 
-### Beta Managed Agents Memory Path Conflict Error
+### Beta Managed Agents Memory Path Conflict Error Object
 
-- `class ManagedAgentsMemoryPathConflictError`
+- `class ManagedAgentsMemoryPathConflictErrorObject`
 
   - `"memory_path_conflict_error" type`
 
@@ -942,9 +942,9 @@ var_dump($betaManagedAgentsDeletedMemory);
 
   - `?string message`
 
-### Beta Managed Agents Memory Precondition Failed Error
+### Beta Managed Agents Memory Precondition Failed Error Object
 
-- `class ManagedAgentsMemoryPreconditionFailedError`
+- `class ManagedAgentsMemoryPreconditionFailedErrorObject`
 
   - `"memory_precondition_failed_error" type`
 

@@ -394,7 +394,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `class WebSearchToolResultError`
+              - `class WebSearchToolResultErrorObject`
 
                 - `type: :web_search_tool_result_error`
 
@@ -528,7 +528,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `class CodeExecutionToolResultError`
+              - `class CodeExecutionToolResultErrorObject`
 
                 - `type: :code_execution_tool_result_error`
 
@@ -588,9 +588,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `type: :bash_code_execution_tool_result`
 
-            - `content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock`
+            - `content: BashCodeExecutionToolResultErrorObject | BashCodeExecutionResultBlock`
 
-              - `class BashCodeExecutionToolResultError`
+              - `class BashCodeExecutionToolResultErrorObject`
 
                 - `type: :bash_code_execution_tool_result_error`
 
@@ -630,9 +630,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `type: :text_editor_code_execution_tool_result`
 
-            - `content: TextEditorCodeExecutionToolResultError | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
+            - `content: TextEditorCodeExecutionToolResultErrorObject | TextEditorCodeExecutionViewResultBlock | TextEditorCodeExecutionCreateResultBlock | TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `class TextEditorCodeExecutionToolResultError`
+              - `class TextEditorCodeExecutionToolResultErrorObject`
 
                 - `type: :text_editor_code_execution_tool_result_error`
 
@@ -698,9 +698,9 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `type: :tool_search_tool_result`
 
-            - `content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock`
+            - `content: ToolSearchToolResultErrorObject | ToolSearchToolSearchResultBlock`
 
-              - `class ToolSearchToolResultError`
+              - `class ToolSearchToolResultErrorObject`
 
                 - `type: :tool_search_tool_result_error`
 
@@ -1117,7 +1117,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `error: ErrorObject`
 
-          - `class InvalidRequestError`
+          - `class InvalidRequestErrorObject`
 
             - `type: :invalid_request_error`
 
@@ -1127,7 +1127,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-          - `class AuthenticationError`
+          - `class AuthenticationErrorObject`
 
             - `type: :authentication_error`
 
@@ -1137,7 +1137,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-          - `class BillingError`
+          - `class BillingErrorObject`
 
             - `type: :billing_error`
 
@@ -1147,7 +1147,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-          - `class PermissionError`
+          - `class PermissionErrorObject`
 
             - `type: :permission_error`
 
@@ -1157,7 +1157,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-          - `class NotFoundError`
+          - `class NotFoundErrorObject`
 
             - `type: :not_found_error`
 
@@ -1167,7 +1167,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-          - `class RateLimitError`
+          - `class RateLimitErrorObject`
 
             - `type: :rate_limit_error`
 
@@ -1177,7 +1177,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-          - `class GatewayTimeoutError`
+          - `class GatewayTimeoutErrorObject`
 
             - `type: :timeout_error`
 
@@ -1197,7 +1197,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               A human-readable explanation of the error. Its wording can change, so don't match on it.
 
-          - `class OverloadedError`
+          - `class OverloadedErrorObject`
 
             - `type: :overloaded_error`
 

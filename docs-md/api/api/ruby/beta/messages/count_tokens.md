@@ -700,7 +700,7 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
               - `page_age: optional String | nil`
 
-            - `class BetaWebSearchToolRequestError`
+            - `class BetaWebSearchToolRequestErrorObject`
 
               - `type: :web_search_tool_result_error`
 
@@ -4061,6 +4061,8 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
   - `:"analytics-usage-cost-2026-08-24"`
 
   - `:"experimental-claude-tag-2026-10-21"`
+
+  - `:"ce-claude-code-managed-settings-2026-10-06"`
 
   - `:"user-profiles-billing-2026-10-01"`
 

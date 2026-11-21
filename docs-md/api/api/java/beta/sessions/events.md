@@ -243,6 +243,8 @@ List Events
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
@@ -3438,6 +3440,8 @@ Send Events
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
@@ -4458,6 +4462,8 @@ Stream Events
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
@@ -8889,7 +8895,7 @@ public final class Main {
 
     minLength: 1
 
-### Beta Managed Agents Billing Error
+### Beta Managed Agents Billing Error Object
 
 - `class BetaManagedAgentsBillingError`
 
@@ -8923,7 +8929,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Compaction Limit Reached Error
+### Beta Managed Agents Compaction Limit Reached Error Object
 
 - `class BetaManagedAgentsCompactionLimitReachedError`
 
@@ -8957,7 +8963,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Credential Host Unreachable Error
+### Beta Managed Agents Credential Host Unreachable Error Object
 
 - `class BetaManagedAgentsCredentialHostUnreachableError`
 
@@ -9547,7 +9553,7 @@ public final class Main {
 
         minLength: 1
 
-### Beta Managed Agents Max Workflow Runs Workflow Run Error
+### Beta Managed Agents Max Workflow Runs Workflow Run Error Object
 
 - `class BetaManagedAgentsMaxWorkflowRunsWorkflowRunError`
 
@@ -9559,7 +9565,7 @@ public final class Main {
 
     Short explanation written by the server. It never contains content from the run or its agents.
 
-### Beta Managed Agents MCP Authentication Failed Error
+### Beta Managed Agents MCP Authentication Failed Error Object
 
 - `class BetaManagedAgentsMcpAuthenticationFailedError`
 
@@ -9597,7 +9603,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents MCP Connection Failed Error
+### Beta Managed Agents MCP Connection Failed Error Object
 
 - `class BetaManagedAgentsMcpConnectionFailedError`
 
@@ -9635,7 +9641,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Model Overloaded Error
+### Beta Managed Agents Model Overloaded Error Object
 
 - `class BetaManagedAgentsModelOverloadedError`
 
@@ -9669,7 +9675,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Model Rate Limited Error
+### Beta Managed Agents Model Rate Limited Error Object
 
 - `class BetaManagedAgentsModelRateLimitedError`
 
@@ -9703,7 +9709,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Model Request Failed Error
+### Beta Managed Agents Model Request Failed Error Object
 
 - `class BetaManagedAgentsModelRequestFailedError`
 
@@ -9755,7 +9761,7 @@ public final class Main {
 
     MIME type of the text content. Must be "text/plain".
 
-### Beta Managed Agents Program Workflow Run Error
+### Beta Managed Agents Program Workflow Run Error Object
 
 - `class BetaManagedAgentsProgramWorkflowRunError`
 
@@ -9775,7 +9781,7 @@ public final class Main {
 
   - `JsonValue type = "redacted"`
 
-### Beta Managed Agents Repository Authentication Error
+### Beta Managed Agents Repository Authentication Error Object
 
 - `class BetaManagedAgentsRepositoryAuthenticationError`
 
@@ -9813,7 +9819,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Repository Checkout Error
+### Beta Managed Agents Repository Checkout Error Object
 
 - `class BetaManagedAgentsRepositoryCheckoutError`
 
@@ -9851,7 +9857,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Repository Clone Error
+### Beta Managed Agents Repository Clone Error Object
 
 - `class BetaManagedAgentsRepositoryCloneError`
 
@@ -9889,7 +9895,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Repository Forbidden Error
+### Beta Managed Agents Repository Forbidden Error Object
 
 - `class BetaManagedAgentsRepositoryForbiddenError`
 
@@ -9927,7 +9933,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Repository Not Found Error
+### Beta Managed Agents Repository Not Found Error Object
 
 - `class BetaManagedAgentsRepositoryNotFoundError`
 
@@ -17857,7 +17863,7 @@ public final class Main {
 
     maxLength: 262144
 
-### Beta Managed Agents Thread Limit Workflow Run Error
+### Beta Managed Agents Thread Limit Workflow Run Error Object
 
 - `class BetaManagedAgentsThreadLimitWorkflowRunError`
 
@@ -17869,7 +17875,7 @@ public final class Main {
 
     Short explanation written by the server. It never contains content from the run or its agents.
 
-### Beta Managed Agents Timeout Workflow Run Error
+### Beta Managed Agents Timeout Workflow Run Error Object
 
 - `class BetaManagedAgentsTimeoutWorkflowRunError`
 
@@ -17881,7 +17887,7 @@ public final class Main {
 
     Short explanation written by the server. It never contains content from the run or its agents.
 
-### Beta Managed Agents Tool Use Limit Reached Error
+### Beta Managed Agents Tool Use Limit Reached Error Object
 
 - `class BetaManagedAgentsToolUseLimitReachedError`
 
@@ -17915,7 +17921,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Unknown Error
+### Beta Managed Agents Unknown Error Object
 
 - `class BetaManagedAgentsUnknownError`
 
@@ -17949,7 +17955,7 @@ public final class Main {
 
       - `JsonValue type = "terminal"`
 
-### Beta Managed Agents Unknown Workflow Run Error
+### Beta Managed Agents Unknown Workflow Run Error Object
 
 - `class BetaManagedAgentsUnknownWorkflowRunError`
 
@@ -19175,62 +19181,6 @@ public final class Main {
 
     Identifier of the run. The same value is on all of the run's `workflow_run.*` events.
 
-### Beta Managed Agents Workflow Run Error
-
-- `class BetaManagedAgentsWorkflowRunError: union`
-
-  Why a workflow run did not finish, or was not created. More types may be added. On `workflow_run.status_ended`, for a `type` you do not recognize, rely on the event's `result.type`.
-
-  - `class BetaManagedAgentsTimeoutWorkflowRunError`
-
-    The run reached its time limit.
-
-    - `JsonValue type = "timeout_error"`
-
-    - `String message`
-
-      Short explanation written by the server. It never contains content from the run or its agents.
-
-  - `class BetaManagedAgentsProgramWorkflowRunError`
-
-    The plan, a program that the agent wrote, failed, or the server refused it.
-
-    - `JsonValue type = "program_error"`
-
-    - `String message`
-
-      Short explanation written by the server. It never contains content from the run or its agents.
-
-  - `class BetaManagedAgentsUnknownWorkflowRunError`
-
-    A failure that has no type of its own.
-
-    - `JsonValue type = "unknown_error"`
-
-    - `String message`
-
-      Short explanation written by the server. It never contains content from the run or its agents.
-
-  - `class BetaManagedAgentsThreadLimitWorkflowRunError`
-
-    The run exceeded the limit on the number of threads that a run can create.
-
-    - `JsonValue type = "thread_limit_error"`
-
-    - `String message`
-
-      Short explanation written by the server. It never contains content from the run or its agents.
-
-  - `class BetaManagedAgentsMaxWorkflowRunsWorkflowRunError`
-
-    No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
-
-    - `JsonValue type = "max_workflow_runs_error"`
-
-    - `String message`
-
-      Short explanation written by the server. It never contains content from the run or its agents.
-
 ### Beta Managed Agents Workflow Run Error Event
 
 - `class BetaManagedAgentsWorkflowRunErrorEvent`
@@ -19306,6 +19256,62 @@ public final class Main {
   - `Optional<String> workflowRunId`
 
     Identifier of the run that met the error, or `null` when the error kept a run from being created.
+
+### Beta Managed Agents Workflow Run Error Object
+
+- `class BetaManagedAgentsWorkflowRunError: union`
+
+  Why a workflow run did not finish, or was not created. More types may be added. On `workflow_run.status_ended`, for a `type` you do not recognize, rely on the event's `result.type`.
+
+  - `class BetaManagedAgentsTimeoutWorkflowRunError`
+
+    The run reached its time limit.
+
+    - `JsonValue type = "timeout_error"`
+
+    - `String message`
+
+      Short explanation written by the server. It never contains content from the run or its agents.
+
+  - `class BetaManagedAgentsProgramWorkflowRunError`
+
+    The plan, a program that the agent wrote, failed, or the server refused it.
+
+    - `JsonValue type = "program_error"`
+
+    - `String message`
+
+      Short explanation written by the server. It never contains content from the run or its agents.
+
+  - `class BetaManagedAgentsUnknownWorkflowRunError`
+
+    A failure that has no type of its own.
+
+    - `JsonValue type = "unknown_error"`
+
+    - `String message`
+
+      Short explanation written by the server. It never contains content from the run or its agents.
+
+  - `class BetaManagedAgentsThreadLimitWorkflowRunError`
+
+    The run exceeded the limit on the number of threads that a run can create.
+
+    - `JsonValue type = "thread_limit_error"`
+
+    - `String message`
+
+      Short explanation written by the server. It never contains content from the run or its agents.
+
+  - `class BetaManagedAgentsMaxWorkflowRunsWorkflowRunError`
+
+    No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
+
+    - `JsonValue type = "max_workflow_runs_error"`
+
+    - `String message`
+
+      Short explanation written by the server. It never contains content from the run or its agents.
 
 ### Beta Managed Agents Workflow Run Phase
 
@@ -19467,7 +19473,7 @@ public final class Main {
 
   - `JsonValue type = "completed"`
 
-### Beta Managed Agents Workflow Run Result Error
+### Beta Managed Agents Workflow Run Result Error Object
 
 - `class BetaManagedAgentsWorkflowRunResultError`
 

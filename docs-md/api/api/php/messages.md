@@ -441,6 +441,10 @@ On a streaming call, the errors listed below apply when the API rejects the requ
 
   The `compaction` block's `tool_changes` differs from what was returned with the block.
 
+- `ImageDimensionsTooLargeException` (HTTP status 400, error code `image_dimensions_too_large`)
+
+  The longest side of one or more images in the request exceeds the image size limit. Scale each image in `paths` so that neither side exceeds `max_side_length_pixels`, or remove it, then retry.
+
 - `OrganizationOnHoldException` (HTTP status 400, error code `organization_on_hold`)
 
   Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
@@ -477,6 +481,26 @@ On a streaming call, the errors listed below apply when the API rejects the requ
 
   A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
 
+- `UserProfileRequiredException` (HTTP status 400, error code `user_profile_required`)
+
+  The request sets `billing_policy.bill_to` to `"user_profile"` but names no user profile. Name the profile to bill in the `anthropic-user-profile-id` header.
+
+- `LinkedOrganizationBillingUnavailableException` (HTTP status 402, error code `linked_organization_billing_unavailable`)
+
+  Anthropic cannot currently bill the organization linked to the request's user profile, for a reason that lies with that organization's own account. The response does not say what the reason is.
+
+- `LinkedOrganizationSpendLimitReachedException` (HTTP status 402, error code `linked_organization_spend_limit_reached`)
+
+  The organization linked to the request's user profile has reached a spend limit that it set, or lacks credit for the request. The response does not say which applies.
+
+- `UserProfileBillingNotAuthorizedException` (HTTP status 403, error code `user_profile_billing_not_authorized`)
+
+  The customer that the request's user profile represents has not authorized the caller to bill them, or the authorization that the request's credential uses has ended. The response does not say which applies.
+
+- `UserProfileNotBillableException` (HTTP status 403, error code `user_profile_not_billable`)
+
+  The request's user profile cannot be billed. The response gives no more specific error code and does not say what the reason is.
+
 - `ThreadNotFoundException` (HTTP status 404, error code `thread_not_found`)
 
   No usable Thread state was found for `previous_message_id`. Replay the full conversation with `thread: {"type": "create"}` to start a new Thread.
@@ -488,6 +512,10 @@ On a streaming call, the errors listed below apply when the API rejects the requ
 - `RequestBodyTooLargeAfterDecodingException` (HTTP status 413, error code `request_body_too_large_after_decoding`)
 
   The compressed request body exceeds the request size limit once decoded.
+
+- `ContractSpendLimitReachedException` (HTTP status 429, error code `contract_spend_limit_reached`)
+
+  The organization has reached the spend limit of its contract.
 
 - `EnforcedSpendLimitReachedException` (HTTP status 429, error code `enforced_spend_limit_reached`)
 
@@ -1065,14 +1093,6 @@ var_dump($messageTokensCount);
 
     Create a cache control breakpoint at this content block.
 
-### Bash Code Execution Tool Result Error
-
-- `class BashCodeExecutionToolResultError`
-
-  - `"bash_code_execution_tool_result_error" type`
-
-  - `BashCodeExecutionToolResultErrorCode errorCode`
-
 ### Bash Code Execution Tool Result Error Code
 
 - `enum BashCodeExecutionToolResultErrorCode`
@@ -1086,6 +1106,14 @@ var_dump($messageTokensCount);
   - `"execution_time_exceeded"`
 
   - `"output_file_too_large"`
+
+### Bash Code Execution Tool Result Error Object
+
+- `class BashCodeExecutionToolResultErrorObject`
+
+  - `"bash_code_execution_tool_result_error" type`
+
+  - `BashCodeExecutionToolResultErrorCode errorCode`
 
 ### Bash Code Execution Tool Result Error Param
 
@@ -3998,7 +4026,7 @@ var_dump($messageTokensCount);
 
 - `class CodeExecutionToolResultBlockContent`
 
-  - `class CodeExecutionToolResultError`
+  - `class CodeExecutionToolResultErrorObject`
 
     - `"code_execution_tool_result_error" type`
 
@@ -4076,14 +4104,6 @@ var_dump($messageTokensCount);
 
     - `string stderr`
 
-### Code Execution Tool Result Error
-
-- `class CodeExecutionToolResultError`
-
-  - `"code_execution_tool_result_error" type`
-
-  - `CodeExecutionToolResultErrorCode errorCode`
-
 ### Code Execution Tool Result Error Code
 
 - `enum CodeExecutionToolResultErrorCode`
@@ -4095,6 +4115,14 @@ var_dump($messageTokensCount);
   - `"too_many_requests"`
 
   - `"execution_time_exceeded"`
+
+### Code Execution Tool Result Error Object
+
+- `class CodeExecutionToolResultErrorObject`
+
+  - `"code_execution_tool_result_error" type`
+
+  - `CodeExecutionToolResultErrorCode errorCode`
 
 ### Code Execution Tool Result Error Param
 
@@ -5875,6 +5903,20 @@ var_dump($messageTokensCount);
   - `?ImageTransformationsParam transformations`
 
     Configures the transformations the server applies to this image before the model observes it. Each key names a condition the server transforms images for; its value selects the transformation applied. Omitted keys keep their default behavior, and an empty object is equivalent to omitting the field.
+
+### Image Dimensions Too Large Error Details
+
+- `class ImageDimensionsTooLargeErrorDetails`
+
+  - `"image_dimensions_too_large" errorCode`
+
+  - `int maxSideLengthPixels`
+
+    The limit the images exceeded: the largest width or height, in pixels, that an image on this request may have.
+
+  - `list<string> paths`
+
+    The position of every image over the limit, in the order you sent them, nested blocks included, such as `messages.0.content.1`, or `messages.0.content.1.content.0` for an image in a `tool_result` block.
 
 ### Image Transformations Param
 
@@ -7800,16 +7842,6 @@ var_dump($messageTokensCount);
 
     Create a cache control breakpoint at this content block.
 
-### Text Editor Code Execution Tool Result Error
-
-- `class TextEditorCodeExecutionToolResultError`
-
-  - `"text_editor_code_execution_tool_result_error" type`
-
-  - `TextEditorCodeExecutionToolResultErrorCode errorCode`
-
-  - `?string errorMessage`
-
 ### Text Editor Code Execution Tool Result Error Code
 
 - `enum TextEditorCodeExecutionToolResultErrorCode`
@@ -7823,6 +7855,16 @@ var_dump($messageTokensCount);
   - `"execution_time_exceeded"`
 
   - `"file_not_found"`
+
+### Text Editor Code Execution Tool Result Error Object
+
+- `class TextEditorCodeExecutionToolResultErrorObject`
+
+  - `"text_editor_code_execution_tool_result_error" type`
+
+  - `TextEditorCodeExecutionToolResultErrorCode errorCode`
+
+  - `?string errorMessage`
 
 ### Text Editor Code Execution Tool Result Error Param
 
@@ -8324,16 +8366,6 @@ var_dump($messageTokensCount);
 
     Create a cache control breakpoint at this content block.
 
-### Tool Search Tool Result Error
-
-- `class ToolSearchToolResultError`
-
-  - `"tool_search_tool_result_error" type`
-
-  - `ToolSearchToolResultErrorCode errorCode`
-
-  - `?string errorMessage`
-
 ### Tool Search Tool Result Error Code
 
 - `enum ToolSearchToolResultErrorCode`
@@ -8345,6 +8377,16 @@ var_dump($messageTokensCount);
   - `"too_many_requests"`
 
   - `"execution_time_exceeded"`
+
+### Tool Search Tool Result Error Object
+
+- `class ToolSearchToolResultErrorObject`
+
+  - `"tool_search_tool_result_error" type`
+
+  - `ToolSearchToolResultErrorCode errorCode`
+
+  - `?string errorMessage`
 
 ### Tool Search Tool Result Error Param
 
@@ -10737,9 +10779,9 @@ var_dump($messageTokensCount);
 
     Parameters for the user's location. Used to provide more relevant search results.
 
-### Web Search Tool Request Error
+### Web Search Tool Request Error Object
 
-- `class WebSearchToolRequestError`
+- `class WebSearchToolRequestErrorObject`
 
   - `"web_search_tool_result_error" type`
 
@@ -10761,7 +10803,7 @@ var_dump($messageTokensCount);
 
 - `class WebSearchToolResultBlockContent`
 
-  - `class WebSearchToolResultError`
+  - `class WebSearchToolResultErrorObject`
 
     - `"web_search_tool_result_error" type`
 
@@ -10811,19 +10853,11 @@ var_dump($messageTokensCount);
 
     - `?string pageAge`
 
-  - `class WebSearchToolRequestError`
+  - `class WebSearchToolRequestErrorObject`
 
     - `"web_search_tool_result_error" type`
 
     - `WebSearchToolResultErrorCode errorCode`
-
-### Web Search Tool Result Error
-
-- `class WebSearchToolResultError`
-
-  - `"web_search_tool_result_error" type`
-
-  - `WebSearchToolResultErrorCode errorCode`
 
 ### Web Search Tool Result Error Code
 
@@ -10840,6 +10874,14 @@ var_dump($messageTokensCount);
   - `"query_too_long"`
 
   - `"request_too_large"`
+
+### Web Search Tool Result Error Object
+
+- `class WebSearchToolResultErrorObject`
+
+  - `"web_search_tool_result_error" type`
+
+  - `WebSearchToolResultErrorCode errorCode`
 
 ## Errors
 
@@ -10968,6 +11010,28 @@ HTTP status 400, error code `compaction_tool_changes_mismatch`
   - `getDetails(): CompactionToolChangesMismatchErrorDetails`
 
     - `"compaction_tool_changes_mismatch" errorCode`
+
+### ImageDimensionsTooLargeException
+
+HTTP status 400, error code `image_dimensions_too_large`
+
+- `class ImageDimensionsTooLargeException extends BadRequestException`
+
+  The longest side of one or more images in the request exceeds the image size limit. Scale each image in `paths` so that neither side exceeds `max_side_length_pixels`, or remove it, then retry.
+
+  - `getErrorCode(): "image_dimensions_too_large"`
+
+  - `getDetails(): ImageDimensionsTooLargeErrorDetails`
+
+    - `"image_dimensions_too_large" errorCode`
+
+    - `int maxSideLengthPixels`
+
+      The limit the images exceeded: the largest width or height, in pixels, that an image on this request may have.
+
+    - `list<string> paths`
+
+      The position of every image over the limit, in the order you sent them, nested blocks included, such as `messages.0.content.1`, or `messages.0.content.1.content.0` for an image in a `tool_result` block.
 
 ### ThreadAlreadyContinuedException
 

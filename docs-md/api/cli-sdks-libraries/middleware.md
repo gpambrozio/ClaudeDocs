@@ -219,8 +219,8 @@ SDK middleware is available or in beta, depending on the API.
 
 * Availability: Available
 
-| Status    | Cloud platforms         |
-| --------- | ----------------------- |
+| Status | Cloud platforms |
+| ----- | ----- |
 | Available | All supported platforms |
 
 #### [Managed Agents](../managed-agents/overview.md)
@@ -228,9 +228,9 @@ SDK middleware is available or in beta, depending on the API.
 * Availability: Available
 * Usage: Runs on your SDK client’s calls to the Managed Agents API. It does not see the model calls the agent makes inside its loop.
 
-| Status | Cloud platforms         |
-| ------ | ----------------------- |
-| Beta   | All supported platforms |
+| Status | Cloud platforms |
+| ----- | ----- |
+| Beta | All supported platforms |
 
 ---
 

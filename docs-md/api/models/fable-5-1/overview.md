@@ -22,13 +22,13 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTo
 
 ## How it compares to the current lineup
 
-| Model                                                                               | Context | Max output | Price / MTok       | Thinking             | Default effort | Knowledge cutoff |
-| :---------------------------------------------------------------------------------- | :------ | :--------- | :----------------- | :------------------- | :------------- | :--------------- |
-| [Claude Fable 5.2](../fable-5-2/overview.md)   | 1M      | 128K       | $8 / $40           | Adaptive (always on) | `high`         | Jun 2026         |
-| **Claude Fable 5.1** (this model)                                                   | 1M      | 128K       | $10 / $50          | Adaptive (always on) | `high`         | Jun 2026         |
-| [Claude Opus 5.5](../opus-5-5/overview.md)     | 1M      | 128K       | $4 / $20           | Adaptive (always on) | `medium`       | Jun 2026         |
-| [Claude Sonnet 5.5](../sonnet-5-5/overview.md) | 1M      | 128K       | $2 / $10           | Adaptive             | `high`         | Jun 2026         |
-| [Claude Haiku 5.5](../haiku-5-5/overview.md)   | 1M      | 128K       | From $0.10 / $0.50 | Adaptive             | `medium`       | Jun 2026         |
+| Model | Context | Max output | Price / MTok | Thinking | Default effort | Knowledge cutoff |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| [Claude Fable 5.2](../fable-5-2/overview.md) | 1M | 128K | $8 / $40 | Adaptive (always on) | `high` | Jun 2026 |
+| **Claude Fable 5.1** (this model) | 1M | 128K | $10 / $50 | Adaptive (always on) | `high` | Jun 2026 |
+| [Claude Opus 5.5](../opus-5-5/overview.md) | 1M | 128K | $4 / $20 | Adaptive (always on) | `medium` | Jun 2026 |
+| [Claude Sonnet 5.5](../sonnet-5-5/overview.md) | 1M | 128K | $2 / $10 | Adaptive | `high` | Jun 2026 |
+| [Claude Haiku 5.5](../haiku-5-5/overview.md) | 1M | 128K | From $0.10 / $0.50 | Adaptive | `medium` | Jun 2026 |
 
 * **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
 * **Max output:** Synchronous Messages API limit. On the Message Batches API, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 300k output tokens with the output-300k-2026-03-24 beta header.
@@ -41,48 +41,48 @@ Context window: 1M tokens · Max output: 128K tokens · Input pricing: $10 / MTo
 
 ### Model IDs
 
-| Platform                                                                                                                                                   | Model ID                     |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------- |
-| Claude API                                                                                                                                                 | `claude-fable-5-1`           |
-| [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md)                                                           | `anthropic.claude-fable-5-1` |
-| [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md)       | `claude-fable-5-1`           |
-| [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)                                                     | `claude-fable-5-1`           |
-| [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)                                                     | `claude-fable-5-1`           |
-| [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | `claude-fable-5-1`           |
+| Platform | Model ID |
+| :---- | :---- |
+| Claude API | `claude-fable-5-1` |
+| [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md) | `anthropic.claude-fable-5-1` |
+| [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md) | `claude-fable-5-1` |
+| [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md) | `claude-fable-5-1` |
+| [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) | `claude-fable-5-1` |
+| [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | `claude-fable-5-1` |
 
 ### Pricing
 
-| Feature                                                                                | Value                            |
-| :------------------------------------------------------------------------------------- | :------------------------------- |
-| Input                                                                                  | $10 / MTok                       |
-| Output                                                                                 | $50 / MTok                       |
-| [5m cache write](../../build-with-claude/prompt-caching.md) | $12.50 / MTok                    |
-| [1h cache write](../../build-with-claude/prompt-caching.md) | $20 / MTok                       |
-| [Cache read](../../build-with-claude/prompt-caching.md)     | $0.25 / MTok                     |
-| [Batch API](../../build-with-claude/batch-processing.md)    | 50% discount on input and output |
+| Feature | Value |
+| :---- | :---- |
+| Input | $10 / MTok |
+| Output | $50 / MTok |
+| [5m cache write](../../build-with-claude/prompt-caching.md) | $12.50 / MTok |
+| [1h cache write](../../build-with-claude/prompt-caching.md) | $20 / MTok |
+| [Cache read](../../build-with-claude/prompt-caching.md) | $0.25 / MTok |
+| [Batch API](../../build-with-claude/batch-processing.md) | 50% discount on input and output |
 
 [Full price list](../../about-claude/pricing.md)
 
 ### Capabilities
 
-| Feature                                                                                 | Value                  |
-| :-------------------------------------------------------------------------------------- | :--------------------- |
-| [Context window](../../build-with-claude/context-windows.md) | 1M tokens              |
-| Max output                                                                              | 128K tokens            |
-| [Thinking](../../build-with-claude/thinking.md)              | Adaptive (always on)   |
-| [Default effort](../../build-with-claude/effort.md)          | `high`                 |
-| Input → output                                                                          | Text and images → text |
-| Reliable knowledge cutoff                                                               | Jun 2026               |
-| Training data cutoff                                                                    | Jun 2026               |
+| Feature | Value |
+| :---- | :---- |
+| [Context window](../../build-with-claude/context-windows.md) | 1M tokens |
+| Max output | 128K tokens |
+| [Thinking](../../build-with-claude/thinking.md) | Adaptive (always on) |
+| [Default effort](../../build-with-claude/effort.md) | `high` |
+| Input → output | Text and images → text |
+| Reliable knowledge cutoff | Jun 2026 |
+| Training data cutoff | Jun 2026 |
 
 ### Availability
 
-| Feature                                                                       | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| :---------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Status](../../about-claude/model-deprecations.md) | Active (legacy)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Released                                                                      | September 1, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Retirement                                                                    | Not sooner than September 1, 2027                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Platforms                                                                     | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) |
+| Feature | Value |
+| :---- | :---- |
+| [Status](../../about-claude/model-deprecations.md) | Active (legacy) |
+| Released | September 1, 2026 |
+| Retirement | Not sooner than September 1, 2027 |
+| Platforms | Claude API, [Amazon Bedrock](../../build-with-claude/claude-in-amazon-bedrock.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) |
 
 ## Resources
 

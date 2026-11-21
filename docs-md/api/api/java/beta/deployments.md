@@ -115,6 +115,8 @@ Create Deployment
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
@@ -1285,6 +1287,8 @@ List Deployments
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
@@ -2048,6 +2052,8 @@ Get Deployment
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
@@ -2805,6 +2811,8 @@ Update Deployment
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
@@ -3938,6 +3946,8 @@ Archive Deployment
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
@@ -4696,6 +4706,8 @@ Run Deployment Now
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
@@ -5125,6 +5137,8 @@ Pause Deployment
     - `ANALYTICS_USAGE_COST_2026_08_24("analytics-usage-cost-2026-08-24")`
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
+
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
 
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
@@ -5884,6 +5898,8 @@ Unpause Deployment
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
@@ -6532,7 +6548,7 @@ public final class Main {
 
 ## Domain types
 
-### Beta Managed Agents Agent Archived Deployment Paused Reason Error
+### Beta Managed Agents Agent Archived Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
 
@@ -7660,7 +7676,7 @@ public final class Main {
 
         - `JsonValue type = "mcp_egress_blocked_error"`
 
-### Beta Managed Agents Deployment Paused Reason Error
+### Beta Managed Agents Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsDeploymentPausedReasonError: union`
 
@@ -7984,7 +8000,7 @@ public final class Main {
 
       - `JsonValue type = "redacted"`
 
-### Beta Managed Agents Environment Archived Deployment Paused Reason Error
+### Beta Managed Agents Environment Archived Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
 
@@ -7992,7 +8008,7 @@ public final class Main {
 
   - `JsonValue type = "environment_archived_error"`
 
-### Beta Managed Agents Environment Not Found Deployment Paused Reason Error
+### Beta Managed Agents Environment Not Found Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
 
@@ -8096,7 +8112,7 @@ public final class Main {
 
       - `JsonValue type = "mcp_egress_blocked_error"`
 
-### Beta Managed Agents File Not Found Deployment Paused Reason Error
+### Beta Managed Agents File Not Found Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
 
@@ -8168,7 +8184,7 @@ public final class Main {
 
   - `JsonValue type = "manual"`
 
-### Beta Managed Agents MCP Egress Blocked Deployment Paused Reason Error
+### Beta Managed Agents MCP Egress Blocked Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsMcpEgressBlockedDeploymentPausedReasonError`
 
@@ -8176,7 +8192,7 @@ public final class Main {
 
   - `JsonValue type = "mcp_egress_blocked_error"`
 
-### Beta Managed Agents Memory Store Archived Deployment Paused Reason Error
+### Beta Managed Agents Memory Store Archived Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
 
@@ -8208,7 +8224,7 @@ public final class Main {
 
     Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-### Beta Managed Agents Organization Disabled Deployment Paused Reason Error
+### Beta Managed Agents Organization Disabled Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
 
@@ -8266,7 +8282,7 @@ public final class Main {
 
     minLength: 1
 
-### Beta Managed Agents Self Hosted Resources Unsupported Deployment Paused Reason Error
+### Beta Managed Agents Self Hosted Resources Unsupported Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
 
@@ -8354,7 +8370,7 @@ public final class Main {
 
       Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-### Beta Managed Agents Session Resource Not Found Deployment Paused Reason Error
+### Beta Managed Agents Session Resource Not Found Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
 
@@ -8362,7 +8378,7 @@ public final class Main {
 
   - `JsonValue type = "session_resource_not_found_error"`
 
-### Beta Managed Agents Skill Not Found Deployment Paused Reason Error
+### Beta Managed Agents Skill Not Found Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
 
@@ -8370,7 +8386,7 @@ public final class Main {
 
   - `JsonValue type = "skill_not_found_error"`
 
-### Beta Managed Agents Unknown Deployment Paused Reason Error
+### Beta Managed Agents Unknown Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsUnknownDeploymentPausedReasonError`
 
@@ -8378,7 +8394,7 @@ public final class Main {
 
   - `JsonValue type = "unknown_error"`
 
-### Beta Managed Agents Vault Archived Deployment Paused Reason Error
+### Beta Managed Agents Vault Archived Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
 
@@ -8386,7 +8402,7 @@ public final class Main {
 
   - `JsonValue type = "vault_archived_error"`
 
-### Beta Managed Agents Vault Not Found Deployment Paused Reason Error
+### Beta Managed Agents Vault Not Found Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
 
@@ -8394,7 +8410,7 @@ public final class Main {
 
   - `JsonValue type = "vault_not_found_error"`
 
-### Beta Managed Agents Workspace Archived Deployment Paused Reason Error
+### Beta Managed Agents Workspace Archived Deployment Paused Reason Error Object
 
 - `class BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
 

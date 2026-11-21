@@ -1049,18 +1049,18 @@ Memory tool is available on every model and eligible for zero data retention and
 
 * Availability: Available
 
-| Status    | Models                                                            |
-| --------- | ----------------------------------------------------------------- |
+| Status | Models |
+| ----- | ----- |
 | Available | [All models](../../models/overview.md) |
 
 ### Data handling
 
 [Data handling overview](../../manage-claude/api-and-data-retention.md#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                       | HIPAA    |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| Status  | Eligible (excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
-| Details | Client-side memory storage where you control data retention.                                                                                              | —        |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Eligible (excludes [Covered Models](../../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
+| Details | Client-side memory storage where you control data retention. | — |
 
 Applicable endpoints:
 

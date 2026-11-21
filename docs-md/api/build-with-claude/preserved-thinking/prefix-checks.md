@@ -59,11 +59,11 @@ A change makes only the thinking that already follows it invalid. The thinking b
 
 ## If your code changes the system prompt, tools, or history
 
-| If your code…                                                                    | What to do                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Rebuilds the system prompt with the date, a mode, or instruction files           | Stop changing `system`. [Append your own instructions as a system message](change-tools-or-instructions.md#new-instructions), a `role: "system"` entry in `messages`, and [state new values in the newest turn](change-tools-or-instructions.md#changing-context). For text that other people can edit, see [Text that other people can edit](change-tools-or-instructions.md#untrusted-text) instead. |
-| Adds, removes, or rewords a tool, or gains tools when an MCP server connects     | Stop changing `tools`, and [add or remove tools in a system message](change-tools-or-instructions.md#tool-changes).                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Trims, collapses, or summarizes older turns, and keeps the latest ones unchanged | [Let the API write the summary, or remove the kept turns’ thinking](change-tools-or-instructions.md#server-side-trimming).                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| If your code… | What to do |
+| ----- | ----- |
+| Rebuilds the system prompt with the date, a mode, or instruction files | Stop changing `system`. [Append your own instructions as a system message](change-tools-or-instructions.md#new-instructions), a `role: "system"` entry in `messages`, and [state new values in the newest turn](change-tools-or-instructions.md#changing-context). For text that other people can edit, see [Text that other people can edit](change-tools-or-instructions.md#untrusted-text) instead. |
+| Adds, removes, or rewords a tool, or gains tools when an MCP server connects | Stop changing `tools`, and [add or remove tools in a system message](change-tools-or-instructions.md#tool-changes). |
+| Trims, collapses, or summarizes older turns, and keeps the latest ones unchanged | [Let the API write the summary, or remove the kept turns’ thinking](change-tools-or-instructions.md#server-side-trimming). |
 
 Other causes, such as skipping thinking blocks whose text is empty or rebuilding a saved conversation, have fixes of their own: see [Change tools or instructions without failing the prefix check](change-tools-or-instructions.md). To find yours, [have an agent check your code](../preserved-thinking.md#hand-to-an-agent).
 
@@ -71,15 +71,15 @@ Other causes, such as skipping thinking blocks whose text is empty or rebuilding
 
 On the Claude API and [some cloud platforms](../preserved-thinking.md#feature-availability), the result of failing the prefix check with [`prefix_mismatch_behavior`](prefix-checks.md#preserved-thinking-controls) unset depends on the model:
 
-| Model with preserved thinking | Result                                                                                                                          |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Claude Fable 5.2              | 400 error                                                                                                                       |
-| Claude Mythos 5.2             | 400 error                                                                                                                       |
-| Claude Mythos 5.1             | 400 error                                                                                                                       |
-| Claude Fable 5.1              | [Possible 400 error](prefix-checks.md#possible-400-error) |
-| Claude Opus 5.5               | [Possible 400 error](prefix-checks.md#possible-400-error) |
-| Claude Sonnet 5.5             | [Possible 400 error](prefix-checks.md#possible-400-error) |
-| Claude Haiku 5.5              | [Possible 400 error](prefix-checks.md#possible-400-error) |
+| Model with preserved thinking | Result |
+| ----- | ----- |
+| Claude Fable 5.2 | 400 error |
+| Claude Mythos 5.2 | 400 error |
+| Claude Mythos 5.1 | 400 error |
+| Claude Fable 5.1 | [Possible 400 error](prefix-checks.md#possible-400-error) |
+| Claude Opus 5.5 | [Possible 400 error](prefix-checks.md#possible-400-error) |
+| Claude Sonnet 5.5 | [Possible 400 error](prefix-checks.md#possible-400-error) |
+| Claude Haiku 5.5 | [Possible 400 error](prefix-checks.md#possible-400-error) |
 
 Where the table says “Possible 400 error,” there are two cases: a request that fails the prefix check might get a 400 error or no error. When no error is returned, the failing blocks reach the model. Claude reads them like any other input, you’re billed for them, and Claude works from reasoning about content that has since changed.
 
@@ -119,22 +119,22 @@ A change can be as small as one word of a tool description. Changing, inserting,
 
 ### What doesn’t count
 
-| This doesn’t count                                                                                   | Because                                                       |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `model`, `effort`, `max_tokens`, `tool_choice`, `metadata`, `thinking.display`, and other parameters | Only `system`, `tools`, and messages are compared             |
-| JSON formatting or key order                                                                         | The API compares parsed JSON, not its text                    |
-| `cache_control` markers                                                                              | They say where to cache, and aren’t content that Claude reads |
-| A tool with `defer_loading: true` that nothing has referred to                                       | It isn’t in Claude’s context until something refers to it     |
+| This doesn’t count | Because |
+| ----- | ----- |
+| `model`, `effort`, `max_tokens`, `tool_choice`, `metadata`, `thinking.display`, and other parameters | Only `system`, `tools`, and messages are compared |
+| JSON formatting or key order | The API compares parsed JSON, not its text |
+| `cache_control` markers | They say where to cache, and aren’t content that Claude reads |
+| A tool with `defer_loading: true` that nothing has referred to | It isn’t in Claude’s context until something refers to it |
 
 ### Set `prefix_mismatch_behavior`
 
 The [beta header](../../api/beta-headers.md#beta-features-on-other-platforms) `thinking-binding-controls-2026-08-01` adds the setting `thinking.block_binding.prefix_mismatch_behavior` and the response’s `input_transformations` array.
 
-| Value              | If a block fails the prefix check                                                                                                                                                                                                                                 |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `"error"`          | The API rejects the request with a 400 error that names the first invalid block                                                                                                                                                                                   |
-| `"drop_block"`     | The API drops the invalid blocks, and the request succeeds. You aren’t billed for those blocks, but [dropping them can cost more](fix-bound-to-a-different-conversation.md#drop-block-cost) |
-| Not set, or `null` | [Depends on the model](prefix-checks.md#outcomes)                                                                                                                                           |
+| Value | If a block fails the prefix check |
+| ----- | ----- |
+| `"error"` | The API rejects the request with a 400 error that names the first invalid block |
+| `"drop_block"` | The API drops the invalid blocks, and the request succeeds. You aren’t billed for those blocks, but [dropping them can cost more](fix-bound-to-a-different-conversation.md#drop-block-cost) |
+| Not set, or `null` | [Depends on the model](prefix-checks.md#outcomes) |
 
 Blocks that fail the prefix check stay invalid on every later request that sends them, while the change is in place. The setting acts on the one request that carries it. With thinking off (`"disabled"` or `"between_tools"`), sending it is a 400 error on every model.
 

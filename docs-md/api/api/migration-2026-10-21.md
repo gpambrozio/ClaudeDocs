@@ -136,20 +136,20 @@ In `2026-10-21`, responses from the Admin API and the [Claude Enterprise Analyti
 
 Admin API:
 
-| Endpoints                                                                                                                                                                                                                                                                                                                                              | Old name       | New name                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [RBAC groups](beta/organization/rbac_groups/list.md): create, list, retrieve, and update                                                                                                                                                                                                                          | `roles`        | `role_ids`                                                                                                                                      |
-| [RBAC group members](beta/organization/rbac_groups/members/list.md): list and add, and the response to [removing a member](beta/organization/rbac_groups/members/remove.md)                                                                                                  | `group_id`     | `rbac_group_id`                                                                                                                                 |
-| [RBAC roles](beta/organization/rbac_roles/list.md): list and retrieve                                                                                                                                                                                                                                             | `name`         | `display_name`                                                                                                                                  |
-| [Organization](organization/rate_limits/list.md) and [workspace](organization/workspaces/rate_limits/list.md) rate limits: list, and the response to [setting a workspace’s rate limits](organization/workspaces/rate_limits/update.md) | `group_type`   | `group.type`                                                                                                                                    |
-| [API keys](organization/api_keys/list.md): list, retrieve, and update                                                                                                                                                                                                                                             | `workspace_id` | `scope` (different values; see [`workspace_id` on API keys](migration-2026-10-21.md#api-key-workspace-id)) |
+| Endpoints | Old name | New name |
+| ----- | ----- | ----- |
+| [RBAC groups](beta/organization/rbac_groups/list.md): create, list, retrieve, and update | `roles` | `role_ids` |
+| [RBAC group members](beta/organization/rbac_groups/members/list.md): list and add, and the response to [removing a member](beta/organization/rbac_groups/members/remove.md) | `group_id` | `rbac_group_id` |
+| [RBAC roles](beta/organization/rbac_roles/list.md): list and retrieve | `name` | `display_name` |
+| [Organization](organization/rate_limits/list.md) and [workspace](organization/workspaces/rate_limits/list.md) rate limits: list, and the response to [setting a workspace’s rate limits](organization/workspaces/rate_limits/update.md) | `group_type` | `group.type` |
+| [API keys](organization/api_keys/list.md): list, retrieve, and update | `workspace_id` | `scope` (different values; see [`workspace_id` on API keys](migration-2026-10-21.md#api-key-workspace-id)) |
 
 Claude Enterprise Analytics API:
 
-| Endpoints                                                                                                                                                                                                                  | Old name      | New name              |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | --------------------- |
+| Endpoints | Old name | New name |
+| ----- | ----- | ----- |
 | Per-user [usage](beta/organization/analytics/user_usage_report/list.md) and [cost](beta/organization/analytics/user_cost_report/list.md) reports | `actor.email` | `actor.email_address` |
-| [Activity summaries](beta/organization/analytics/summaries/list.md)                                                                                                                   | `summaries`   | `data`                |
+| [Activity summaries](beta/organization/analytics/summaries/list.md) | `summaries` | `data` |
 
 The `group_type` query parameter on the rate-limit list endpoints and the `workspace_id` filter on the API key list endpoint are unchanged.
 
@@ -346,11 +346,11 @@ MessageParam message = MessageParam.ofUser("Hello, Claude");
 
 The methods that take a list of content blocks have new names on the builders of `MessageCreateParams`, `StructuredMessageCreateParams`, `MessageCountTokensParams`, and `BatchCreateParams.Request.Params`:
 
-| v2                                 | v2 beta                                       | v3                                        |
-| ---------------------------------- | --------------------------------------------- | ----------------------------------------- |
-| `addUserMessageOfBlockParams`      | `addUserMessageOfBetaContentBlockParams`      | `addUserMessageOfContentBlockParams`      |
+| v2 | v2 beta | v3 |
+| ----- | ----- | ----- |
+| `addUserMessageOfBlockParams` | `addUserMessageOfBetaContentBlockParams` | `addUserMessageOfContentBlockParams` |
 | `addAssistantMessageOfBlockParams` | `addAssistantMessageOfBetaContentBlockParams` | `addAssistantMessageOfContentBlockParams` |
-| `addSystemMessageOfBlockParams`    | `addSystemMessageOfBetaContentBlockParams`    | `addSystemMessageOfBlocks`                |
+| `addSystemMessageOfBlockParams` | `addSystemMessageOfBetaContentBlockParams` | `addSystemMessageOfBlocks` |
 
 On the content class, `BlockParams` (`BetaContentBlockParams` in beta) becomes `ContentBlockParams` in `ofBlockParams`, `blockParams()`, `isBlockParams()`, `asBlockParams()`, and the visitor’s `visitBlockParams`.
 
@@ -421,11 +421,11 @@ roles = typed.map(&:role)
 
 The `Role` enum modules stay. These constants moved. The names that start with `Beta` are under `Anthropic::Beta`, and the others are under `Anthropic`:
 
-| Removed                     | Use instead                                                                          |
-| --------------------------- | ------------------------------------------------------------------------------------ |
-| `MessageParam::Content`     | `MessageContentParam`, or `SystemMessageParam::Content` for a system message         |
+| Removed | Use instead |
+| ----- | ----- |
+| `MessageParam::Content` | `MessageContentParam`, or `SystemMessageParam::Content` for a system message |
 | `BetaMessageParam::Content` | `BetaMessageContentParam`, or `BetaSystemMessageParam::Content` for a system message |
-| `BetaMessageParam::ClearAt` | `BetaSystemMessageParam::ClearAt`                                                    |
+| `BetaMessageParam::ClearAt` | `BetaSystemMessageParam::ClearAt` |
 
 If you type-check with Sorbet, `MessageParam::OrHash` is gone, and `Anthropic::MessageParam` as a type no longer accepts an instance. Use `Anthropic::MessageParam::Variants` for the three classes, each of which has its own `OrHash`. In RBS, a value typed `Anthropic::MessageParam` has no `role` or `content`. Use the `Anthropic::Models::message_param` alias, which was the hash form of a message and is now the union of the three classes. The beta names are `BetaMessageParam::Variants` and `Anthropic::Models::Beta::beta_message_param`.
 
@@ -443,10 +443,10 @@ In v12, such a `required` property had an enum with a single member, such as `Be
 
 An optional property, such as `BetaManagedAgentsGlobToolConfigParams.Type`, keeps its enum. Two of those enums have a new name:
 
-| v12                                         | v13                                       |
-| ------------------------------------------- | ----------------------------------------- |
-| `BetaManagedAgentsBashToolConfigParamsType` | `Anthropic.Models.Beta.Agents.Type`       |
-| `BetaPackagesType`                          | `Anthropic.Models.Beta.Environments.Type` |
+| v12 | v13 |
+| ----- | ----- |
+| `BetaManagedAgentsBashToolConfigParamsType` | `Anthropic.Models.Beta.Agents.Type` |
+| `BetaPackagesType` | `Anthropic.Models.Beta.Environments.Type` |
 
 When you build an object, delete the property:
 
@@ -1184,10 +1184,10 @@ These changes each affect one SDK or the CLI.
 
 **`--api-key` and `--auth-token` are removed.** `ant` no longer takes an API key or authentication token as a flag value, because a value on the command line is visible in shell history and process listings. Both flags have printed a deprecation warning since v1.27.0. A command that still passes one stops with `flag provided but not defined`.
 
-| Removed                | Use instead                                                 |
-| ---------------------- | ----------------------------------------------------------- |
-| `--api-key <key>`      | `ANTHROPIC_API_KEY`, `--api-key-stdin`, or `ant auth login` |
-| `--auth-token <token>` | `ANTHROPIC_AUTH_TOKEN` or `--auth-token-stdin`              |
+| Removed | Use instead |
+| ----- | ----- |
+| `--api-key <key>` | `ANTHROPIC_API_KEY`, `--api-key-stdin`, or `ant auth login` |
+| `--auth-token <token>` | `ANTHROPIC_AUTH_TOKEN` or `--auth-token-stdin` |
 
 ```bash
 # Before

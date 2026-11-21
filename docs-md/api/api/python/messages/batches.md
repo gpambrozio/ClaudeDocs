@@ -732,7 +732,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
                   - `page_age: Optional[str]`
 
-                - `class WebSearchToolRequestErrorParam`
+                - `class WebSearchToolRequestErrorObjectParam`
 
                   - `type: Literal["web_search_tool_result_error"]`
 
@@ -4368,7 +4368,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `class WebSearchToolResultError`
+              - `class WebSearchToolResultErrorObject`
 
                 - `type: Literal["web_search_tool_result_error"]`
 
@@ -4520,7 +4520,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `class CodeExecutionToolResultError`
+              - `class CodeExecutionToolResultErrorObject`
 
                 - `type: Literal["code_execution_tool_result_error"]`
 
@@ -4594,7 +4594,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: Content`
 
-              - `class BashCodeExecutionToolResultError`
+              - `class BashCodeExecutionToolResultErrorObject`
 
                 - `type: Literal["bash_code_execution_tool_result_error"]`
 
@@ -4644,7 +4644,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: Content`
 
-              - `class TextEditorCodeExecutionToolResultError`
+              - `class TextEditorCodeExecutionToolResultErrorObject`
 
                 - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
@@ -4722,7 +4722,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: Content`
 
-              - `class ToolSearchToolResultError`
+              - `class ToolSearchToolResultErrorObject`
 
                 - `type: Literal["tool_search_tool_result_error"]`
 
@@ -5167,7 +5167,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `error: ErrorObject`
 
-          - `class InvalidRequestError`
+          - `class InvalidRequestErrorObject`
 
             - `type: Literal["invalid_request_error"]`
 
@@ -5181,7 +5181,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Invalid request
 
-          - `class AuthenticationError`
+          - `class AuthenticationErrorObject`
 
             - `type: Literal["authentication_error"]`
 
@@ -5195,7 +5195,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Authentication error
 
-          - `class BillingError`
+          - `class BillingErrorObject`
 
             - `type: Literal["billing_error"]`
 
@@ -5209,7 +5209,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Billing error
 
-          - `class PermissionError`
+          - `class PermissionErrorObject`
 
             - `type: Literal["permission_error"]`
 
@@ -5223,7 +5223,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Permission denied
 
-          - `class NotFoundError`
+          - `class NotFoundErrorObject`
 
             - `type: Literal["not_found_error"]`
 
@@ -5237,7 +5237,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Not found
 
-          - `class RateLimitError`
+          - `class RateLimitErrorObject`
 
             - `type: Literal["rate_limit_error"]`
 
@@ -5251,7 +5251,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Rate limited
 
-          - `class GatewayTimeoutError`
+          - `class GatewayTimeoutErrorObject`
 
             - `type: Literal["timeout_error"]`
 
@@ -5279,7 +5279,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Internal server error
 
-          - `class OverloadedError`
+          - `class OverloadedErrorObject`
 
             - `type: Literal["overloaded_error"]`
 
@@ -5492,7 +5492,7 @@ for batch in client.messages.batches.results(
 
     - `error: ErrorObject`
 
-      - `class InvalidRequestError`
+      - `class InvalidRequestErrorObject`
 
         - `type: Literal["invalid_request_error"]`
 
@@ -5506,7 +5506,7 @@ for batch in client.messages.batches.results(
 
           default: Invalid request
 
-      - `class AuthenticationError`
+      - `class AuthenticationErrorObject`
 
         - `type: Literal["authentication_error"]`
 
@@ -5520,7 +5520,7 @@ for batch in client.messages.batches.results(
 
           default: Authentication error
 
-      - `class BillingError`
+      - `class BillingErrorObject`
 
         - `type: Literal["billing_error"]`
 
@@ -5534,7 +5534,7 @@ for batch in client.messages.batches.results(
 
           default: Billing error
 
-      - `class PermissionError`
+      - `class PermissionErrorObject`
 
         - `type: Literal["permission_error"]`
 
@@ -5548,7 +5548,7 @@ for batch in client.messages.batches.results(
 
           default: Permission denied
 
-      - `class NotFoundError`
+      - `class NotFoundErrorObject`
 
         - `type: Literal["not_found_error"]`
 
@@ -5562,7 +5562,7 @@ for batch in client.messages.batches.results(
 
           default: Not found
 
-      - `class RateLimitError`
+      - `class RateLimitErrorObject`
 
         - `type: Literal["rate_limit_error"]`
 
@@ -5576,7 +5576,7 @@ for batch in client.messages.batches.results(
 
           default: Rate limited
 
-      - `class GatewayTimeoutError`
+      - `class GatewayTimeoutErrorObject`
 
         - `type: Literal["timeout_error"]`
 
@@ -5604,7 +5604,7 @@ for batch in client.messages.batches.results(
 
           default: Internal server error
 
-      - `class OverloadedError`
+      - `class OverloadedErrorObject`
 
         - `type: Literal["overloaded_error"]`
 
@@ -6025,7 +6025,7 @@ for batch in client.messages.batches.results(
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `class WebSearchToolResultError`
+              - `class WebSearchToolResultErrorObject`
 
                 - `type: Literal["web_search_tool_result_error"]`
 
@@ -6177,7 +6177,7 @@ for batch in client.messages.batches.results(
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `class CodeExecutionToolResultError`
+              - `class CodeExecutionToolResultErrorObject`
 
                 - `type: Literal["code_execution_tool_result_error"]`
 
@@ -6251,7 +6251,7 @@ for batch in client.messages.batches.results(
 
             - `content: Content`
 
-              - `class BashCodeExecutionToolResultError`
+              - `class BashCodeExecutionToolResultErrorObject`
 
                 - `type: Literal["bash_code_execution_tool_result_error"]`
 
@@ -6301,7 +6301,7 @@ for batch in client.messages.batches.results(
 
             - `content: Content`
 
-              - `class TextEditorCodeExecutionToolResultError`
+              - `class TextEditorCodeExecutionToolResultErrorObject`
 
                 - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
@@ -6379,7 +6379,7 @@ for batch in client.messages.batches.results(
 
             - `content: Content`
 
-              - `class ToolSearchToolResultError`
+              - `class ToolSearchToolResultErrorObject`
 
                 - `type: Literal["tool_search_tool_result_error"]`
 
@@ -6824,7 +6824,7 @@ for batch in client.messages.batches.results(
 
         - `error: ErrorObject`
 
-          - `class InvalidRequestError`
+          - `class InvalidRequestErrorObject`
 
             - `type: Literal["invalid_request_error"]`
 
@@ -6838,7 +6838,7 @@ for batch in client.messages.batches.results(
 
               default: Invalid request
 
-          - `class AuthenticationError`
+          - `class AuthenticationErrorObject`
 
             - `type: Literal["authentication_error"]`
 
@@ -6852,7 +6852,7 @@ for batch in client.messages.batches.results(
 
               default: Authentication error
 
-          - `class BillingError`
+          - `class BillingErrorObject`
 
             - `type: Literal["billing_error"]`
 
@@ -6866,7 +6866,7 @@ for batch in client.messages.batches.results(
 
               default: Billing error
 
-          - `class PermissionError`
+          - `class PermissionErrorObject`
 
             - `type: Literal["permission_error"]`
 
@@ -6880,7 +6880,7 @@ for batch in client.messages.batches.results(
 
               default: Permission denied
 
-          - `class NotFoundError`
+          - `class NotFoundErrorObject`
 
             - `type: Literal["not_found_error"]`
 
@@ -6894,7 +6894,7 @@ for batch in client.messages.batches.results(
 
               default: Not found
 
-          - `class RateLimitError`
+          - `class RateLimitErrorObject`
 
             - `type: Literal["rate_limit_error"]`
 
@@ -6908,7 +6908,7 @@ for batch in client.messages.batches.results(
 
               default: Rate limited
 
-          - `class GatewayTimeoutError`
+          - `class GatewayTimeoutErrorObject`
 
             - `type: Literal["timeout_error"]`
 
@@ -6936,7 +6936,7 @@ for batch in client.messages.batches.results(
 
               default: Internal server error
 
-          - `class OverloadedError`
+          - `class OverloadedErrorObject`
 
             - `type: Literal["overloaded_error"]`
 
@@ -7393,7 +7393,7 @@ for batch in client.messages.batches.results(
 
           - `content: WebSearchToolResultBlockContent`
 
-            - `class WebSearchToolResultError`
+            - `class WebSearchToolResultErrorObject`
 
               - `type: Literal["web_search_tool_result_error"]`
 
@@ -7545,7 +7545,7 @@ for batch in client.messages.batches.results(
 
           - `content: CodeExecutionToolResultBlockContent`
 
-            - `class CodeExecutionToolResultError`
+            - `class CodeExecutionToolResultErrorObject`
 
               - `type: Literal["code_execution_tool_result_error"]`
 
@@ -7619,7 +7619,7 @@ for batch in client.messages.batches.results(
 
           - `content: Content`
 
-            - `class BashCodeExecutionToolResultError`
+            - `class BashCodeExecutionToolResultErrorObject`
 
               - `type: Literal["bash_code_execution_tool_result_error"]`
 
@@ -7669,7 +7669,7 @@ for batch in client.messages.batches.results(
 
           - `content: Content`
 
-            - `class TextEditorCodeExecutionToolResultError`
+            - `class TextEditorCodeExecutionToolResultErrorObject`
 
               - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
@@ -7747,7 +7747,7 @@ for batch in client.messages.batches.results(
 
           - `content: Content`
 
-            - `class ToolSearchToolResultError`
+            - `class ToolSearchToolResultErrorObject`
 
               - `type: Literal["tool_search_tool_result_error"]`
 
@@ -8192,7 +8192,7 @@ for batch in client.messages.batches.results(
 
       - `error: ErrorObject`
 
-        - `class InvalidRequestError`
+        - `class InvalidRequestErrorObject`
 
           - `type: Literal["invalid_request_error"]`
 
@@ -8206,7 +8206,7 @@ for batch in client.messages.batches.results(
 
             default: Invalid request
 
-        - `class AuthenticationError`
+        - `class AuthenticationErrorObject`
 
           - `type: Literal["authentication_error"]`
 
@@ -8220,7 +8220,7 @@ for batch in client.messages.batches.results(
 
             default: Authentication error
 
-        - `class BillingError`
+        - `class BillingErrorObject`
 
           - `type: Literal["billing_error"]`
 
@@ -8234,7 +8234,7 @@ for batch in client.messages.batches.results(
 
             default: Billing error
 
-        - `class PermissionError`
+        - `class PermissionErrorObject`
 
           - `type: Literal["permission_error"]`
 
@@ -8248,7 +8248,7 @@ for batch in client.messages.batches.results(
 
             default: Permission denied
 
-        - `class NotFoundError`
+        - `class NotFoundErrorObject`
 
           - `type: Literal["not_found_error"]`
 
@@ -8262,7 +8262,7 @@ for batch in client.messages.batches.results(
 
             default: Not found
 
-        - `class RateLimitError`
+        - `class RateLimitErrorObject`
 
           - `type: Literal["rate_limit_error"]`
 
@@ -8276,7 +8276,7 @@ for batch in client.messages.batches.results(
 
             default: Rate limited
 
-        - `class GatewayTimeoutError`
+        - `class GatewayTimeoutErrorObject`
 
           - `type: Literal["timeout_error"]`
 
@@ -8304,7 +8304,7 @@ for batch in client.messages.batches.results(
 
             default: Internal server error
 
-        - `class OverloadedError`
+        - `class OverloadedErrorObject`
 
           - `type: Literal["overloaded_error"]`
 
@@ -8713,7 +8713,7 @@ for batch in client.messages.batches.results(
 
         - `content: WebSearchToolResultBlockContent`
 
-          - `class WebSearchToolResultError`
+          - `class WebSearchToolResultErrorObject`
 
             - `type: Literal["web_search_tool_result_error"]`
 
@@ -8865,7 +8865,7 @@ for batch in client.messages.batches.results(
 
         - `content: CodeExecutionToolResultBlockContent`
 
-          - `class CodeExecutionToolResultError`
+          - `class CodeExecutionToolResultErrorObject`
 
             - `type: Literal["code_execution_tool_result_error"]`
 
@@ -8939,7 +8939,7 @@ for batch in client.messages.batches.results(
 
         - `content: Content`
 
-          - `class BashCodeExecutionToolResultError`
+          - `class BashCodeExecutionToolResultErrorObject`
 
             - `type: Literal["bash_code_execution_tool_result_error"]`
 
@@ -8989,7 +8989,7 @@ for batch in client.messages.batches.results(
 
         - `content: Content`
 
-          - `class TextEditorCodeExecutionToolResultError`
+          - `class TextEditorCodeExecutionToolResultErrorObject`
 
             - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
@@ -9067,7 +9067,7 @@ for batch in client.messages.batches.results(
 
         - `content: Content`
 
-          - `class ToolSearchToolResultError`
+          - `class ToolSearchToolResultErrorObject`
 
             - `type: Literal["tool_search_tool_result_error"]`
 

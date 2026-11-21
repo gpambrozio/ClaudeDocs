@@ -40,11 +40,11 @@ Claude Enterprise organizations use an Analytics API key, and the usage endpoint
 
 The APIs you can call, and the key each one takes, depend on which Claude product your organization uses:
 
-| API                                                                                                                                      | Claude Console (Claude Platform)                                                                                                                   | Claude Enterprise (claude.ai) |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| [Usage and Cost Analytics API](usage-cost-analytics-api.md) (recommended)                 | Admin API key (`sk-ant-admin01-...`) or another [Admin API credential](admin-api.md#authentication) | Analytics API key             |
-| Usage and Cost API (legacy), which this page documents                                                                                   | Admin API key or another Admin API credential                                                                                                      | Analytics API key             |
-| [Claude Enterprise Analytics API](../api/beta/organization/analytics.md) cost and usage endpoints (legacy) | Not available                                                                                                                                      | Analytics API key             |
+| API | Claude Console (Claude Platform) | Claude Enterprise (claude.ai) |
+| ----- | ----- | ----- |
+| [Usage and Cost Analytics API](usage-cost-analytics-api.md) (recommended) | Admin API key (`sk-ant-admin01-...`) or another [Admin API credential](admin-api.md#authentication) | Analytics API key |
+| Usage and Cost API (legacy), which this page documents | Admin API key or another Admin API credential | Analytics API key |
+| [Claude Enterprise Analytics API](../api/beta/organization/analytics.md) cost and usage endpoints (legacy) | Not available | Analytics API key |
 
 Claude Enterprise parent organizations do not appear in Claude Console and carry no Admin API keys, so for them the Analytics API key is the only path to this data. See [Analytics APIs](analytics-api.md) for how to create each key type and which plans the Claude Enterprise cost data applies to.
 
@@ -235,11 +235,11 @@ bucket_width=1d" \
 
 ### Time granularity limits
 
-| Granularity | Default limit | Maximum limit | Use case               |
-| ----------- | ------------- | ------------- | ---------------------- |
-| `1m`        | 60 buckets    | 1,440 buckets | Real-time monitoring   |
-| `1h`        | 24 buckets    | 168 buckets   | Daily patterns         |
-| `1d`        | 7 buckets     | 31 buckets    | Weekly/monthly reports |
+| Granularity | Default limit | Maximum limit | Use case |
+| ----- | ----- | ----- | ----- |
+| `1m` | 60 buckets | 1,440 buckets | Real-time monitoring |
+| `1h` | 24 buckets | 168 buckets | Daily patterns |
+| `1d` | 7 buckets | 31 buckets | Weekly/monthly reports |
 
 ## Cost API
 

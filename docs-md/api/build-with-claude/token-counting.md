@@ -1420,10 +1420,10 @@ Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, Claude Mythos 5.1, Claude
 Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](../api/rate-limits.md#rate-limits). If you need higher limits, use **Request tier increase** on the [Rate limits](https://platform.claude.com/usage/limits) page in the Claude Console.
 
 | Usage tier | Requests per minute (RPM) |
-| ---------- | ------------------------- |
-| Start      | 5,000                     |
-| Build      | 10,000                    |
-| Scale      | 20,000                    |
+| ----- | ----- |
+| Start | 5,000 |
+| Build | 10,000 |
+| Scale | 20,000 |
 
 Token counting and message creation have separate and independent rate limits. Usage of one does not count against the limits of the other.
 
@@ -1465,8 +1465,8 @@ Token counting is available on every model and eligible for zero data retention 
 
 * Availability: Available
 
-| Status    | Models                                                            |
-| --------- | ----------------------------------------------------------------- |
+| Status | Models |
+| ----- | ----- |
 | Available | [All models](../models/overview.md) |
 
 #### [Managed Agents](../managed-agents/overview.md)
@@ -1477,10 +1477,10 @@ Token counting is available on every model and eligible for zero data retention 
 
 [Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                       | HIPAA    |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| Status  | Eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
-| Details | Count tokens before sending requests.                                                                                                                     | —        |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Eligible (excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements)) | Eligible |
+| Details | Count tokens before sending requests. | — |
 
 Applicable endpoints:
 

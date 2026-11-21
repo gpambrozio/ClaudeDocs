@@ -428,7 +428,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content WebSearchToolResultBlockContentUnion`
 
-              - `type WebSearchToolResultError`
+              - `type WebSearchToolResultErrorObject`
 
                 - `Type WebSearchToolResultError`
 
@@ -580,7 +580,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content CodeExecutionToolResultBlockContentUnion`
 
-              - `type CodeExecutionToolResultError`
+              - `type CodeExecutionToolResultErrorObject`
 
                 - `Type CodeExecutionToolResultError`
 
@@ -654,7 +654,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content BashCodeExecutionToolResultBlockContentUnion`
 
-              - `type BashCodeExecutionToolResultError`
+              - `type BashCodeExecutionToolResultErrorObject`
 
                 - `Type BashCodeExecutionToolResultError`
 
@@ -704,7 +704,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content TextEditorCodeExecutionToolResultBlockContentUnion`
 
-              - `type TextEditorCodeExecutionToolResultError`
+              - `type TextEditorCodeExecutionToolResultErrorObject`
 
                 - `Type TextEditorCodeExecutionToolResultError`
 
@@ -782,7 +782,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `Content ToolSearchToolResultBlockContentUnion`
 
-              - `type ToolSearchToolResultError`
+              - `type ToolSearchToolResultErrorObject`
 
                 - `Type ToolSearchToolResultError`
 
@@ -1225,7 +1225,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `Error ErrorObjectUnion`
 
-          - `type InvalidRequestError`
+          - `type InvalidRequestErrorObject`
 
             - `Type InvalidRequestError`
 
@@ -1239,7 +1239,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Invalid request
 
-          - `type AuthenticationError`
+          - `type AuthenticationErrorObject`
 
             - `Type AuthenticationError`
 
@@ -1253,7 +1253,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Authentication error
 
-          - `type BillingError`
+          - `type BillingErrorObject`
 
             - `Type BillingError`
 
@@ -1267,7 +1267,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Billing error
 
-          - `type PermissionError`
+          - `type PermissionErrorObject`
 
             - `Type PermissionError`
 
@@ -1281,7 +1281,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Permission denied
 
-          - `type NotFoundError`
+          - `type NotFoundErrorObject`
 
             - `Type NotFoundError`
 
@@ -1295,7 +1295,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Not found
 
-          - `type RateLimitError`
+          - `type RateLimitErrorObject`
 
             - `Type RateLimitError`
 
@@ -1309,7 +1309,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Rate limited
 
-          - `type GatewayTimeoutError`
+          - `type GatewayTimeoutErrorObject`
 
             - `Type TimeoutError`
 
@@ -1337,7 +1337,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Internal server error
 
-          - `type OverloadedError`
+          - `type OverloadedErrorObject`
 
             - `Type OverloadedError`
 

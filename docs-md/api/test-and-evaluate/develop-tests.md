@@ -20,9 +20,9 @@ Good success criteria are:
 
   * Even “hazy” topics such as ethics and safety can be quantified:
 
-    |      | Safety criteria                                                                            |
-    | ---- | ------------------------------------------------------------------------------------------ |
-    | Bad  | Safe outputs                                                                               |
+    |  | Safety criteria |
+    | ----- | ----- |
+    | Bad | Safe outputs |
     | Good | Less than 0.1% of outputs out of 10,000 trials flagged for toxicity by the content filter. |
 
   **Example metrics and measurement methods**
@@ -50,9 +50,9 @@ Good success criteria are:
 
 **Example task fidelity criteria for sentiment analysis**
 
-|      | Criteria                                                                                                                                                                                                                               |
-| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bad  | The model should classify sentiments well                                                                                                                                                                                              |
+|  | Criteria |
+| ----- | ----- |
+| Bad | The model should classify sentiments well |
 | Good | The sentiment analysis model should achieve an F1 score of at least 0.85 (Measurable, Specific) on a held-out test set\* of 10,000 diverse Twitter posts (Relevant), which is a 5% improvement over the current baseline (Achievable). |
 
 \*More on held-out test sets in the next section.
@@ -97,9 +97,9 @@ Most use cases need multidimensional evaluation along several success criteria.
 
 **Example multidimensional criteria for sentiment analysis**
 
-|      | Criteria                                                                                                                                                                                                                                                                        |
-| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bad  | The model should classify sentiments well                                                                                                                                                                                                                                       |
+|  | Criteria |
+| ----- | ----- |
+| Bad | The model should classify sentiments well |
 | Good | On a held-out test set of 10,000 diverse Twitter posts, the sentiment analysis model should achieve:<br />- an F1 score of at least 0.85<br />- 99.5% non-toxic outputs<br />- 90% of errors would cause inconvenience, not egregious error\*<br />- 95% response time \< 200ms |
 
 \*In reality, you would also define what “inconvenience” and “egregious” mean.

@@ -109,6 +109,8 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
   - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+  - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
   - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
   - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -151,9 +153,9 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
 
-### Beta API Error
+### Beta API Error Object
 
-- `type BetaAPIError`
+- `type BetaAPIErrorObject`
 
   - `Type APIError`
 
@@ -167,9 +169,9 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
     default: Internal server error
 
-### Beta Authentication Error
+### Beta Authentication Error Object
 
-- `type BetaAuthenticationError`
+- `type BetaAuthenticationErrorObject`
 
   - `Type AuthenticationError`
 
@@ -183,9 +185,9 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
     default: Authentication error
 
-### Beta Billing Error
+### Beta Billing Error Object
 
-- `type BetaBillingError`
+- `type BetaBillingErrorObject`
 
   - `Type BillingError`
 
@@ -203,11 +205,11 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
 - `type BetaCurrency string`
 
-### Beta Error
+### Beta Error Object
 
-- `type BetaErrorUnion interface{…}`
+- `type BetaErrorObjectUnion interface{…}`
 
-  - `type BetaInvalidRequestError`
+  - `type BetaInvalidRequestErrorObject`
 
     - `Type InvalidRequestError`
 
@@ -221,7 +223,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Invalid request
 
-  - `type BetaAuthenticationError`
+  - `type BetaAuthenticationErrorObject`
 
     - `Type AuthenticationError`
 
@@ -235,7 +237,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Authentication error
 
-  - `type BetaBillingError`
+  - `type BetaBillingErrorObject`
 
     - `Type BillingError`
 
@@ -249,7 +251,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Billing error
 
-  - `type BetaPermissionError`
+  - `type BetaPermissionErrorObject`
 
     - `Type PermissionError`
 
@@ -263,7 +265,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Permission denied
 
-  - `type BetaNotFoundError`
+  - `type BetaNotFoundErrorObject`
 
     - `Type NotFoundError`
 
@@ -277,7 +279,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Not found
 
-  - `type BetaRateLimitError`
+  - `type BetaRateLimitErrorObject`
 
     - `Type RateLimitError`
 
@@ -291,7 +293,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Rate limited
 
-  - `type BetaGatewayTimeoutError`
+  - `type BetaGatewayTimeoutErrorObject`
 
     - `Type TimeoutError`
 
@@ -305,7 +307,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Request timeout
 
-  - `type BetaAPIError`
+  - `type BetaAPIErrorObject`
 
     - `Type APIError`
 
@@ -319,7 +321,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
       default: Internal server error
 
-  - `type BetaOverloadedError`
+  - `type BetaOverloadedErrorObject`
 
     - `Type OverloadedError`
 
@@ -341,9 +343,9 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
     default: error
 
-  - `Error BetaErrorUnion`
+  - `Error BetaErrorObjectUnion`
 
-    - `type BetaInvalidRequestError`
+    - `type BetaInvalidRequestErrorObject`
 
       - `Type InvalidRequestError`
 
@@ -357,7 +359,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Invalid request
 
-    - `type BetaAuthenticationError`
+    - `type BetaAuthenticationErrorObject`
 
       - `Type AuthenticationError`
 
@@ -371,7 +373,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Authentication error
 
-    - `type BetaBillingError`
+    - `type BetaBillingErrorObject`
 
       - `Type BillingError`
 
@@ -385,7 +387,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Billing error
 
-    - `type BetaPermissionError`
+    - `type BetaPermissionErrorObject`
 
       - `Type PermissionError`
 
@@ -399,7 +401,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Permission denied
 
-    - `type BetaNotFoundError`
+    - `type BetaNotFoundErrorObject`
 
       - `Type NotFoundError`
 
@@ -413,7 +415,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Not found
 
-    - `type BetaRateLimitError`
+    - `type BetaRateLimitErrorObject`
 
       - `Type RateLimitError`
 
@@ -427,7 +429,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Rate limited
 
-    - `type BetaGatewayTimeoutError`
+    - `type BetaGatewayTimeoutErrorObject`
 
       - `Type TimeoutError`
 
@@ -441,7 +443,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Request timeout
 
-    - `type BetaAPIError`
+    - `type BetaAPIErrorObject`
 
       - `Type APIError`
 
@@ -455,7 +457,7 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
         default: Internal server error
 
-    - `type BetaOverloadedError`
+    - `type BetaOverloadedErrorObject`
 
       - `Type OverloadedError`
 
@@ -471,9 +473,9 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
   - `RequestID string`
 
-### Beta Gateway Timeout Error
+### Beta Gateway Timeout Error Object
 
-- `type BetaGatewayTimeoutError`
+- `type BetaGatewayTimeoutErrorObject`
 
   - `Type TimeoutError`
 
@@ -487,9 +489,9 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
     default: Request timeout
 
-### Beta Invalid Request Error
+### Beta Invalid Request Error Object
 
-- `type BetaInvalidRequestError`
+- `type BetaInvalidRequestErrorObject`
 
   - `Type InvalidRequestError`
 
@@ -519,9 +521,9 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
     Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-### Beta Not Found Error
+### Beta Not Found Error Object
 
-- `type BetaNotFoundError`
+- `type BetaNotFoundErrorObject`
 
   - `Type NotFoundError`
 
@@ -541,9 +543,9 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
   - `ErrorCode BetaOrganizationNotEnrolledInBetaErrorCode`
 
-### Beta Overloaded Error
+### Beta Overloaded Error Object
 
-- `type BetaOverloadedError`
+- `type BetaOverloadedErrorObject`
 
   - `Type OverloadedError`
 
@@ -557,9 +559,9 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
     default: Overloaded
 
-### Beta Permission Error
+### Beta Permission Error Object
 
-- `type BetaPermissionError`
+- `type BetaPermissionErrorObject`
 
   - `Type PermissionError`
 
@@ -573,9 +575,9 @@ url: https://platform.claude.com/docs/en/api/go/beta
 
     default: Permission denied
 
-### Beta Rate Limit Error
+### Beta Rate Limit Error Object
 
-- `type BetaRateLimitError`
+- `type BetaRateLimitErrorObject`
 
   - `Type RateLimitError`
 
@@ -588,6 +590,12 @@ url: https://platform.claude.com/docs/en/api/go/beta
     A human-readable explanation of the error. Its wording can change, so don't match on it.
 
     default: Rate limited
+
+### Beta Request Body Timeout Error Details
+
+- `type BetaRequestBodyTimeoutErrorDetails`
+
+  - `ErrorCode BetaRequestBodyTimeoutErrorCode`
 
 ### Beta Unsupported Charset Error Details
 
@@ -604,6 +612,14 @@ HTTP status 400, error code `organization_not_enrolled_in_beta`
 - `const ErrorCodeBetaOrganizationNotEnrolledInBeta ErrorCode = "organization_not_enrolled_in_beta"`
 
   The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
+
+### ErrorCodeBetaRequestBodyTimeout
+
+HTTP status 400, error code `request_body_timeout`
+
+- `const ErrorCodeBetaRequestBodyTimeout ErrorCode = "request_body_timeout"`
+
+  The request body did not finish arriving in time, so nothing was done. Send a smaller body, or send it over a faster connection.
 
 ### ErrorCodeBetaUnsupportedCharset
 
@@ -752,6 +768,8 @@ The Models API response can be used to determine which models are available for 
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -1276,6 +1294,8 @@ The Models API response can be used to determine information about a specific mo
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -2391,7 +2411,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                 - `PageAge string Optional`
 
-              - `type BetaWebSearchToolRequestErrorParam`
+              - `type BetaWebSearchToolRequestErrorObjectParam`
 
                 - `Type WebSearchToolResultError`
 
@@ -5146,6 +5166,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     Declares which organization is billed for this request. `{"type": "billing_policy", "bill_to": "user_profile"}` bills the customer behind the user profile named in the `anthropic-user-profile-id` header, instead of your organization. If that customer has not linked an Anthropic organization to the profile, or has not allowed your organization to bill it, the request is rejected rather than billed to you. Omit the field, or send `"bill_to": "self"` (the default), to be billed as usual.
 
+    Message Batches does not currently support billing the customer behind a user profile. In a batch, omit the field or send `"bill_to": "self"`. A request in a batch that sets `"bill_to": "user_profile"` gets an `errored` result with an `invalid_request_error`, nobody is billed for it, and the batch's other requests run as usual.
+
   - `CacheControl BetaCacheControlEphemeralParam Optional`
 
     Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
@@ -5600,6 +5622,8 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -6019,7 +6043,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaWebSearchToolResultBlockContentUnion`
 
-        - `type BetaWebSearchToolResultError`
+        - `type BetaWebSearchToolResultErrorObject`
 
           - `Type WebSearchToolResultError`
 
@@ -6181,27 +6205,27 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaAdvisorToolResultBlockContentUnion`
 
-        - `type BetaAdvisorToolResultError`
+        - `type BetaAdvisorToolResultErrorObject`
 
           - `Type AdvisorToolResultError`
 
             default: advisor_tool_result_error
 
-          - `ErrorCode BetaAdvisorToolResultErrorErrorCode`
+          - `ErrorCode BetaAdvisorToolResultErrorObjectErrorCode`
 
-            - `const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max_uses_exceeded"`
+            - `const BetaAdvisorToolResultErrorObjectErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorObjectErrorCode = "max_uses_exceeded"`
 
-            - `const BetaAdvisorToolResultErrorErrorCodePromptTooLong BetaAdvisorToolResultErrorErrorCode = "prompt_too_long"`
+            - `const BetaAdvisorToolResultErrorObjectErrorCodePromptTooLong BetaAdvisorToolResultErrorObjectErrorCode = "prompt_too_long"`
 
-            - `const BetaAdvisorToolResultErrorErrorCodeTooManyRequests BetaAdvisorToolResultErrorErrorCode = "too_many_requests"`
+            - `const BetaAdvisorToolResultErrorObjectErrorCodeTooManyRequests BetaAdvisorToolResultErrorObjectErrorCode = "too_many_requests"`
 
-            - `const BetaAdvisorToolResultErrorErrorCodeOverloaded BetaAdvisorToolResultErrorErrorCode = "overloaded"`
+            - `const BetaAdvisorToolResultErrorObjectErrorCodeOverloaded BetaAdvisorToolResultErrorObjectErrorCode = "overloaded"`
 
-            - `const BetaAdvisorToolResultErrorErrorCodeUnavailable BetaAdvisorToolResultErrorErrorCode = "unavailable"`
+            - `const BetaAdvisorToolResultErrorObjectErrorCodeUnavailable BetaAdvisorToolResultErrorObjectErrorCode = "unavailable"`
 
-            - `const BetaAdvisorToolResultErrorErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorErrorCode = "execution_time_exceeded"`
+            - `const BetaAdvisorToolResultErrorObjectErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorObjectErrorCode = "execution_time_exceeded"`
 
-            - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
+            - `const BetaAdvisorToolResultErrorObjectErrorCodeModelNotFound BetaAdvisorToolResultErrorObjectErrorCode = "model_not_found"`
 
         - `type BetaAdvisorResultBlock`
 
@@ -6241,7 +6265,7 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaCodeExecutionToolResultError`
+        - `type BetaCodeExecutionToolResultErrorObject`
 
           - `Type CodeExecutionToolResultError`
 
@@ -6315,23 +6339,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaBashCodeExecutionToolResultError`
+        - `type BetaBashCodeExecutionToolResultErrorObject`
 
           - `Type BashCodeExecutionToolResultError`
 
             default: bash_code_execution_tool_result_error
 
-          - `ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode`
+          - `ErrorCode BetaBashCodeExecutionToolResultErrorObjectErrorCode`
 
-            - `const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid_tool_input"`
+            - `const BetaBashCodeExecutionToolResultErrorObjectErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorObjectErrorCode = "invalid_tool_input"`
 
-            - `const BetaBashCodeExecutionToolResultErrorErrorCodeUnavailable BetaBashCodeExecutionToolResultErrorErrorCode = "unavailable"`
+            - `const BetaBashCodeExecutionToolResultErrorObjectErrorCodeUnavailable BetaBashCodeExecutionToolResultErrorObjectErrorCode = "unavailable"`
 
-            - `const BetaBashCodeExecutionToolResultErrorErrorCodeTooManyRequests BetaBashCodeExecutionToolResultErrorErrorCode = "too_many_requests"`
+            - `const BetaBashCodeExecutionToolResultErrorObjectErrorCodeTooManyRequests BetaBashCodeExecutionToolResultErrorObjectErrorCode = "too_many_requests"`
 
-            - `const BetaBashCodeExecutionToolResultErrorErrorCodeExecutionTimeExceeded BetaBashCodeExecutionToolResultErrorErrorCode = "execution_time_exceeded"`
+            - `const BetaBashCodeExecutionToolResultErrorObjectErrorCodeExecutionTimeExceeded BetaBashCodeExecutionToolResultErrorObjectErrorCode = "execution_time_exceeded"`
 
-            - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
+            - `const BetaBashCodeExecutionToolResultErrorObjectErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorObjectErrorCode = "output_file_too_large"`
 
         - `type BetaBashCodeExecutionResultBlock`
 
@@ -6365,23 +6389,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-        - `type BetaTextEditorCodeExecutionToolResultError`
+        - `type BetaTextEditorCodeExecutionToolResultErrorObject`
 
           - `Type TextEditorCodeExecutionToolResultError`
 
             default: text_editor_code_execution_tool_result_error
 
-          - `ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode`
+          - `ErrorCode BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode`
 
-            - `const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid_tool_input"`
+            - `const BetaTextEditorCodeExecutionToolResultErrorObjectErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode = "invalid_tool_input"`
 
-            - `const BetaTextEditorCodeExecutionToolResultErrorErrorCodeUnavailable BetaTextEditorCodeExecutionToolResultErrorErrorCode = "unavailable"`
+            - `const BetaTextEditorCodeExecutionToolResultErrorObjectErrorCodeUnavailable BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode = "unavailable"`
 
-            - `const BetaTextEditorCodeExecutionToolResultErrorErrorCodeTooManyRequests BetaTextEditorCodeExecutionToolResultErrorErrorCode = "too_many_requests"`
+            - `const BetaTextEditorCodeExecutionToolResultErrorObjectErrorCodeTooManyRequests BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode = "too_many_requests"`
 
-            - `const BetaTextEditorCodeExecutionToolResultErrorErrorCodeExecutionTimeExceeded BetaTextEditorCodeExecutionToolResultErrorErrorCode = "execution_time_exceeded"`
+            - `const BetaTextEditorCodeExecutionToolResultErrorObjectErrorCodeExecutionTimeExceeded BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode = "execution_time_exceeded"`
 
-            - `const BetaTextEditorCodeExecutionToolResultErrorErrorCodeFileNotFound BetaTextEditorCodeExecutionToolResultErrorErrorCode = "file_not_found"`
+            - `const BetaTextEditorCodeExecutionToolResultErrorObjectErrorCodeFileNotFound BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode = "file_not_found"`
 
           - `ErrorMessage string`
 
@@ -6443,21 +6467,21 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
       - `Content BetaToolSearchToolResultBlockContentUnion`
 
-        - `type BetaToolSearchToolResultError`
+        - `type BetaToolSearchToolResultErrorObject`
 
           - `Type ToolSearchToolResultError`
 
             default: tool_search_tool_result_error
 
-          - `ErrorCode BetaToolSearchToolResultErrorErrorCode`
+          - `ErrorCode BetaToolSearchToolResultErrorObjectErrorCode`
 
-            - `const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid_tool_input"`
+            - `const BetaToolSearchToolResultErrorObjectErrorCodeInvalidToolInput BetaToolSearchToolResultErrorObjectErrorCode = "invalid_tool_input"`
 
-            - `const BetaToolSearchToolResultErrorErrorCodeUnavailable BetaToolSearchToolResultErrorErrorCode = "unavailable"`
+            - `const BetaToolSearchToolResultErrorObjectErrorCodeUnavailable BetaToolSearchToolResultErrorObjectErrorCode = "unavailable"`
 
-            - `const BetaToolSearchToolResultErrorErrorCodeTooManyRequests BetaToolSearchToolResultErrorErrorCode = "too_many_requests"`
+            - `const BetaToolSearchToolResultErrorObjectErrorCodeTooManyRequests BetaToolSearchToolResultErrorObjectErrorCode = "too_many_requests"`
 
-            - `const BetaToolSearchToolResultErrorErrorCodeExecutionTimeExceeded BetaToolSearchToolResultErrorErrorCode = "execution_time_exceeded"`
+            - `const BetaToolSearchToolResultErrorObjectErrorCodeExecutionTimeExceeded BetaToolSearchToolResultErrorObjectErrorCode = "execution_time_exceeded"`
 
           - `ErrorMessage string`
 
@@ -9885,6 +9909,10 @@ On a streaming call, the errors listed below apply when the API rejects the requ
 
   The `compaction` block's `tool_changes` differs from what was returned with the block.
 
+- `ErrorCodeImageDimensionsTooLarge` (HTTP status 400, error code `image_dimensions_too_large`)
+
+  The longest side of one or more images in the request exceeds the image size limit. Scale each image in `paths` so that neither side exceeds `max_side_length_pixels`, or remove it, then retry.
+
 - `ErrorCodeOrganizationOnHold` (HTTP status 400, error code `organization_on_hold`)
 
   Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
@@ -9921,6 +9949,26 @@ On a streaming call, the errors listed below apply when the API rejects the requ
 
   A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
 
+- `ErrorCodeUserProfileRequired` (HTTP status 400, error code `user_profile_required`)
+
+  The request sets `billing_policy.bill_to` to `"user_profile"` but names no user profile. Name the profile to bill in the `anthropic-user-profile-id` header.
+
+- `ErrorCodeLinkedOrganizationBillingUnavailable` (HTTP status 402, error code `linked_organization_billing_unavailable`)
+
+  Anthropic cannot currently bill the organization linked to the request's user profile, for a reason that lies with that organization's own account. The response does not say what the reason is.
+
+- `ErrorCodeLinkedOrganizationSpendLimitReached` (HTTP status 402, error code `linked_organization_spend_limit_reached`)
+
+  The organization linked to the request's user profile has reached a spend limit that it set, or lacks credit for the request. The response does not say which applies.
+
+- `ErrorCodeUserProfileBillingNotAuthorized` (HTTP status 403, error code `user_profile_billing_not_authorized`)
+
+  The customer that the request's user profile represents has not authorized the caller to bill them, or the authorization that the request's credential uses has ended. The response does not say which applies.
+
+- `ErrorCodeUserProfileNotBillable` (HTTP status 403, error code `user_profile_not_billable`)
+
+  The request's user profile cannot be billed. The response gives no more specific error code and does not say what the reason is.
+
 - `ErrorCodeThreadNotFound` (HTTP status 404, error code `thread_not_found`)
 
   No usable Thread state was found for `previous_message_id`. Replay the full conversation with `thread: {"type": "create"}` to start a new Thread.
@@ -9932,6 +9980,10 @@ On a streaming call, the errors listed below apply when the API rejects the requ
 - `ErrorCodeRequestBodyTooLargeAfterDecoding` (HTTP status 413, error code `request_body_too_large_after_decoding`)
 
   The compressed request body exceeds the request size limit once decoded.
+
+- `ErrorCodeContractSpendLimitReached` (HTTP status 429, error code `contract_spend_limit_reached`)
+
+  The organization has reached the spend limit of its contract.
 
 - `ErrorCodeEnforcedSpendLimitReached` (HTTP status 429, error code `enforced_spend_limit_reached`)
 
@@ -10767,7 +10819,7 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                 - `PageAge string Optional`
 
-              - `type BetaWebSearchToolRequestErrorParam`
+              - `type BetaWebSearchToolRequestErrorObjectParam`
 
                 - `Type WebSearchToolResultError`
 
@@ -13851,6 +13903,8 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -14769,7 +14823,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                     - `PageAge string Optional`
 
-                  - `type BetaWebSearchToolRequestErrorParam`
+                  - `type BetaWebSearchToolRequestErrorObjectParam`
 
                     - `Type WebSearchToolResultError`
 
@@ -17524,6 +17578,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
         Declares which organization is billed for this request. `{"type": "billing_policy", "bill_to": "user_profile"}` bills the customer behind the user profile named in the `anthropic-user-profile-id` header, instead of your organization. If that customer has not linked an Anthropic organization to the profile, or has not allowed your organization to bill it, the request is rejected rather than billed to you. Omit the field, or send `"bill_to": "self"` (the default), to be billed as usual.
 
+        Message Batches does not currently support billing the customer behind a user profile. In a batch, omit the field or send `"bill_to": "self"`. A request in a batch that sets `"bill_to": "user_profile"` gets an `errored` result with an `invalid_request_error`, nobody is billed for it, and the batch's other requests run as usual.
+
         - `Type BillingPolicy`
 
         - `BillTo BetaBillTo Optional`
@@ -18350,6 +18406,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -18711,6 +18769,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -19059,6 +19119,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -19400,6 +19462,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -19738,6 +19802,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -19967,6 +20033,8 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -20397,7 +20465,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaWebSearchToolResultBlockContentUnion`
 
-              - `type BetaWebSearchToolResultError`
+              - `type BetaWebSearchToolResultErrorObject`
 
                 - `Type WebSearchToolResultError`
 
@@ -20559,27 +20627,27 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaAdvisorToolResultBlockContentUnion`
 
-              - `type BetaAdvisorToolResultError`
+              - `type BetaAdvisorToolResultErrorObject`
 
                 - `Type AdvisorToolResultError`
 
                   default: advisor_tool_result_error
 
-                - `ErrorCode BetaAdvisorToolResultErrorErrorCode`
+                - `ErrorCode BetaAdvisorToolResultErrorObjectErrorCode`
 
-                  - `const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max_uses_exceeded"`
+                  - `const BetaAdvisorToolResultErrorObjectErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorObjectErrorCode = "max_uses_exceeded"`
 
-                  - `const BetaAdvisorToolResultErrorErrorCodePromptTooLong BetaAdvisorToolResultErrorErrorCode = "prompt_too_long"`
+                  - `const BetaAdvisorToolResultErrorObjectErrorCodePromptTooLong BetaAdvisorToolResultErrorObjectErrorCode = "prompt_too_long"`
 
-                  - `const BetaAdvisorToolResultErrorErrorCodeTooManyRequests BetaAdvisorToolResultErrorErrorCode = "too_many_requests"`
+                  - `const BetaAdvisorToolResultErrorObjectErrorCodeTooManyRequests BetaAdvisorToolResultErrorObjectErrorCode = "too_many_requests"`
 
-                  - `const BetaAdvisorToolResultErrorErrorCodeOverloaded BetaAdvisorToolResultErrorErrorCode = "overloaded"`
+                  - `const BetaAdvisorToolResultErrorObjectErrorCodeOverloaded BetaAdvisorToolResultErrorObjectErrorCode = "overloaded"`
 
-                  - `const BetaAdvisorToolResultErrorErrorCodeUnavailable BetaAdvisorToolResultErrorErrorCode = "unavailable"`
+                  - `const BetaAdvisorToolResultErrorObjectErrorCodeUnavailable BetaAdvisorToolResultErrorObjectErrorCode = "unavailable"`
 
-                  - `const BetaAdvisorToolResultErrorErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorErrorCode = "execution_time_exceeded"`
+                  - `const BetaAdvisorToolResultErrorObjectErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorObjectErrorCode = "execution_time_exceeded"`
 
-                  - `const BetaAdvisorToolResultErrorErrorCodeModelNotFound BetaAdvisorToolResultErrorErrorCode = "model_not_found"`
+                  - `const BetaAdvisorToolResultErrorObjectErrorCodeModelNotFound BetaAdvisorToolResultErrorObjectErrorCode = "model_not_found"`
 
               - `type BetaAdvisorResultBlock`
 
@@ -20619,7 +20687,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaCodeExecutionToolResultError`
+              - `type BetaCodeExecutionToolResultErrorObject`
 
                 - `Type CodeExecutionToolResultError`
 
@@ -20693,23 +20761,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaBashCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaBashCodeExecutionToolResultError`
+              - `type BetaBashCodeExecutionToolResultErrorObject`
 
                 - `Type BashCodeExecutionToolResultError`
 
                   default: bash_code_execution_tool_result_error
 
-                - `ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode`
+                - `ErrorCode BetaBashCodeExecutionToolResultErrorObjectErrorCode`
 
-                  - `const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid_tool_input"`
+                  - `const BetaBashCodeExecutionToolResultErrorObjectErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorObjectErrorCode = "invalid_tool_input"`
 
-                  - `const BetaBashCodeExecutionToolResultErrorErrorCodeUnavailable BetaBashCodeExecutionToolResultErrorErrorCode = "unavailable"`
+                  - `const BetaBashCodeExecutionToolResultErrorObjectErrorCodeUnavailable BetaBashCodeExecutionToolResultErrorObjectErrorCode = "unavailable"`
 
-                  - `const BetaBashCodeExecutionToolResultErrorErrorCodeTooManyRequests BetaBashCodeExecutionToolResultErrorErrorCode = "too_many_requests"`
+                  - `const BetaBashCodeExecutionToolResultErrorObjectErrorCodeTooManyRequests BetaBashCodeExecutionToolResultErrorObjectErrorCode = "too_many_requests"`
 
-                  - `const BetaBashCodeExecutionToolResultErrorErrorCodeExecutionTimeExceeded BetaBashCodeExecutionToolResultErrorErrorCode = "execution_time_exceeded"`
+                  - `const BetaBashCodeExecutionToolResultErrorObjectErrorCodeExecutionTimeExceeded BetaBashCodeExecutionToolResultErrorObjectErrorCode = "execution_time_exceeded"`
 
-                  - `const BetaBashCodeExecutionToolResultErrorErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorErrorCode = "output_file_too_large"`
+                  - `const BetaBashCodeExecutionToolResultErrorObjectErrorCodeOutputFileTooLarge BetaBashCodeExecutionToolResultErrorObjectErrorCode = "output_file_too_large"`
 
               - `type BetaBashCodeExecutionResultBlock`
 
@@ -20743,23 +20811,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaTextEditorCodeExecutionToolResultBlockContentUnion`
 
-              - `type BetaTextEditorCodeExecutionToolResultError`
+              - `type BetaTextEditorCodeExecutionToolResultErrorObject`
 
                 - `Type TextEditorCodeExecutionToolResultError`
 
                   default: text_editor_code_execution_tool_result_error
 
-                - `ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode`
+                - `ErrorCode BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode`
 
-                  - `const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid_tool_input"`
+                  - `const BetaTextEditorCodeExecutionToolResultErrorObjectErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode = "invalid_tool_input"`
 
-                  - `const BetaTextEditorCodeExecutionToolResultErrorErrorCodeUnavailable BetaTextEditorCodeExecutionToolResultErrorErrorCode = "unavailable"`
+                  - `const BetaTextEditorCodeExecutionToolResultErrorObjectErrorCodeUnavailable BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode = "unavailable"`
 
-                  - `const BetaTextEditorCodeExecutionToolResultErrorErrorCodeTooManyRequests BetaTextEditorCodeExecutionToolResultErrorErrorCode = "too_many_requests"`
+                  - `const BetaTextEditorCodeExecutionToolResultErrorObjectErrorCodeTooManyRequests BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode = "too_many_requests"`
 
-                  - `const BetaTextEditorCodeExecutionToolResultErrorErrorCodeExecutionTimeExceeded BetaTextEditorCodeExecutionToolResultErrorErrorCode = "execution_time_exceeded"`
+                  - `const BetaTextEditorCodeExecutionToolResultErrorObjectErrorCodeExecutionTimeExceeded BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode = "execution_time_exceeded"`
 
-                  - `const BetaTextEditorCodeExecutionToolResultErrorErrorCodeFileNotFound BetaTextEditorCodeExecutionToolResultErrorErrorCode = "file_not_found"`
+                  - `const BetaTextEditorCodeExecutionToolResultErrorObjectErrorCodeFileNotFound BetaTextEditorCodeExecutionToolResultErrorObjectErrorCode = "file_not_found"`
 
                 - `ErrorMessage string`
 
@@ -20821,21 +20889,21 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
             - `Content BetaToolSearchToolResultBlockContentUnion`
 
-              - `type BetaToolSearchToolResultError`
+              - `type BetaToolSearchToolResultErrorObject`
 
                 - `Type ToolSearchToolResultError`
 
                   default: tool_search_tool_result_error
 
-                - `ErrorCode BetaToolSearchToolResultErrorErrorCode`
+                - `ErrorCode BetaToolSearchToolResultErrorObjectErrorCode`
 
-                  - `const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid_tool_input"`
+                  - `const BetaToolSearchToolResultErrorObjectErrorCodeInvalidToolInput BetaToolSearchToolResultErrorObjectErrorCode = "invalid_tool_input"`
 
-                  - `const BetaToolSearchToolResultErrorErrorCodeUnavailable BetaToolSearchToolResultErrorErrorCode = "unavailable"`
+                  - `const BetaToolSearchToolResultErrorObjectErrorCodeUnavailable BetaToolSearchToolResultErrorObjectErrorCode = "unavailable"`
 
-                  - `const BetaToolSearchToolResultErrorErrorCodeTooManyRequests BetaToolSearchToolResultErrorErrorCode = "too_many_requests"`
+                  - `const BetaToolSearchToolResultErrorObjectErrorCodeTooManyRequests BetaToolSearchToolResultErrorObjectErrorCode = "too_many_requests"`
 
-                  - `const BetaToolSearchToolResultErrorErrorCodeExecutionTimeExceeded BetaToolSearchToolResultErrorErrorCode = "execution_time_exceeded"`
+                  - `const BetaToolSearchToolResultErrorObjectErrorCodeExecutionTimeExceeded BetaToolSearchToolResultErrorObjectErrorCode = "execution_time_exceeded"`
 
                 - `ErrorMessage string`
 
@@ -23920,9 +23988,9 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
           default: error
 
-        - `Error BetaErrorUnion`
+        - `Error BetaErrorObjectUnion`
 
-          - `type BetaInvalidRequestError`
+          - `type BetaInvalidRequestErrorObject`
 
             - `Type InvalidRequestError`
 
@@ -23936,7 +24004,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Invalid request
 
-          - `type BetaAuthenticationError`
+          - `type BetaAuthenticationErrorObject`
 
             - `Type AuthenticationError`
 
@@ -23950,7 +24018,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Authentication error
 
-          - `type BetaBillingError`
+          - `type BetaBillingErrorObject`
 
             - `Type BillingError`
 
@@ -23964,7 +24032,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Billing error
 
-          - `type BetaPermissionError`
+          - `type BetaPermissionErrorObject`
 
             - `Type PermissionError`
 
@@ -23978,7 +24046,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Permission denied
 
-          - `type BetaNotFoundError`
+          - `type BetaNotFoundErrorObject`
 
             - `Type NotFoundError`
 
@@ -23992,7 +24060,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Not found
 
-          - `type BetaRateLimitError`
+          - `type BetaRateLimitErrorObject`
 
             - `Type RateLimitError`
 
@@ -24006,7 +24074,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Rate limited
 
-          - `type BetaGatewayTimeoutError`
+          - `type BetaGatewayTimeoutErrorObject`
 
             - `Type TimeoutError`
 
@@ -24020,7 +24088,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Request timeout
 
-          - `type BetaAPIError`
+          - `type BetaAPIErrorObject`
 
             - `Type APIError`
 
@@ -24034,7 +24102,7 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
               default: Internal server error
 
-          - `type BetaOverloadedError`
+          - `type BetaOverloadedErrorObject`
 
             - `Type OverloadedError`
 
@@ -24991,6 +25059,8 @@ Create Agent
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -26058,6 +26128,8 @@ List Agents
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -27107,6 +27179,8 @@ Get Agent
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -28929,6 +29003,8 @@ Update Agent
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -29973,6 +30049,8 @@ Archive Agent
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -31028,6 +31106,8 @@ List Agent Versions
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -32191,6 +32271,8 @@ Create a new environment with the specified configuration.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -32577,6 +32659,8 @@ List environments with pagination support.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -32949,6 +33033,8 @@ Retrieve a specific environment by ID.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -33438,6 +33524,8 @@ Update an existing environment's configuration.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -33822,6 +33910,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -34045,6 +34135,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -34316,9 +34408,9 @@ func main() {
 
 **GET** `/v1/environments/{environment_id}/work/{work_id}`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 Retrieve detailed information about a specific work item.
+
+This endpoint accepts a Claude API key. It rejects the environment key and the work item's `secret`. On [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) or [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), use that platform's credentials instead.
 
 #### Parameters
 
@@ -34423,6 +34515,8 @@ Retrieve detailed information about a specific work item.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -34746,6 +34840,8 @@ Long poll for work items in the queue.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -35041,6 +35137,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -35344,6 +35442,8 @@ Record a heartbeat for a work item to maintain the lease.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -35481,8 +35581,6 @@ func main() {
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 Stop a work item, initiating graceful or forced shutdown.
 
 #### Parameters
@@ -35592,6 +35690,8 @@ Stop a work item, initiating graceful or forced shutdown.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -35798,9 +35898,9 @@ func main() {
 
 **GET** `/v1/environments/{environment_id}/work`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 List work items in an environment.
+
+This endpoint accepts the environment key as a bearer token. It rejects a Claude API key. On [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) or [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), use that platform's credentials instead.
 
 #### Parameters
 
@@ -35913,6 +36013,8 @@ List work items in an environment.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -36103,9 +36205,9 @@ func main() {
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 Update work item metadata with merge semantics.
+
+This endpoint accepts a Claude API key. It rejects the environment key and the work item's `secret`. On [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md) or [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), use that platform's credentials instead.
 
 #### Parameters
 
@@ -36214,6 +36316,8 @@ Update work item metadata with merge semantics.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -36531,6 +36635,8 @@ Get statistics about the work queue for an environment.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -37884,6 +37990,8 @@ Create Session
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -39441,6 +39549,8 @@ List Sessions
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -40906,6 +41016,8 @@ Get Session
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -42393,6 +42505,8 @@ Update Session
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -43857,6 +43971,8 @@ Delete Session
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -44062,6 +44178,8 @@ Archive Session
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -45655,6 +45773,8 @@ List Events
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -46425,7 +46545,7 @@ List Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      - `type BetaManagedAgentsUnknownError`
+      - `type BetaManagedAgentsUnknownErrorObject`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -46435,7 +46555,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsUnknownErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -46457,7 +46577,7 @@ List Events
 
             - `Type Terminal`
 
-      - `type BetaManagedAgentsModelOverloadedError`
+      - `type BetaManagedAgentsModelOverloadedErrorObject`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -46467,7 +46587,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelOverloadedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -46483,7 +46603,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRateLimitedError`
+      - `type BetaManagedAgentsModelRateLimitedErrorObject`
 
         The model request was rate-limited.
 
@@ -46493,7 +46613,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelRateLimitedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -46509,7 +46629,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRequestFailedError`
+      - `type BetaManagedAgentsModelRequestFailedErrorObject`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -46519,7 +46639,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelRequestFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -46535,7 +46655,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPConnectionFailedError`
+      - `type BetaManagedAgentsMCPConnectionFailedErrorObject`
 
         Failed to connect to an MCP server.
 
@@ -46549,7 +46669,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsMCPConnectionFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -46565,7 +46685,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPAuthenticationFailedError`
+      - `type BetaManagedAgentsMCPAuthenticationFailedErrorObject`
 
         Authentication to an MCP server failed.
 
@@ -46579,7 +46699,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -46595,7 +46715,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsBillingError`
+      - `type BetaManagedAgentsBillingErrorObject`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -46605,7 +46725,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsBillingErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -46621,7 +46741,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCredentialHostUnreachableError`
+      - `type BetaManagedAgentsCredentialHostUnreachableErrorObject`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -46635,7 +46755,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -46655,7 +46775,7 @@ List Events
 
           ID of the vault containing the affected credential.
 
-      - `type BetaManagedAgentsToolUseLimitReachedError`
+      - `type BetaManagedAgentsToolUseLimitReachedErrorObject`
 
         The turn stopped because the agent loop reached its limit on tool-use rounds (one model response that calls tools, plus running those tools, is one round), not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -46665,7 +46785,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsToolUseLimitReachedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsToolUseLimitReachedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -46681,7 +46801,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCompactionLimitReachedError`
+      - `type BetaManagedAgentsCompactionLimitReachedErrorObject`
 
         The turn stopped because the context was compacted the maximum number of times in a row without the model producing a message or a tool call, not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -46691,7 +46811,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsCompactionLimitReachedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsCompactionLimitReachedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -46707,7 +46827,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryAuthenticationError`
+      - `type BetaManagedAgentsRepositoryAuthenticationErrorObject`
 
         The repository host rejected the credentials, or required credentials and received none.
 
@@ -46721,7 +46841,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryAuthenticationErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryAuthenticationErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -46737,7 +46857,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryForbiddenError`
+      - `type BetaManagedAgentsRepositoryForbiddenErrorObject`
 
         The repository host refused access to the repository.
 
@@ -46751,7 +46871,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryForbiddenErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryForbiddenErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -46767,7 +46887,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryNotFoundError`
+      - `type BetaManagedAgentsRepositoryNotFoundErrorObject`
 
         The repository host reported the repository as not found.
 
@@ -46781,7 +46901,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryNotFoundErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryNotFoundErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -46797,7 +46917,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryCheckoutError`
+      - `type BetaManagedAgentsRepositoryCheckoutErrorObject`
 
         The requested branch or commit does not exist in the repository.
 
@@ -46811,7 +46931,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryCheckoutErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryCheckoutErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -46827,7 +46947,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryCloneError`
+      - `type BetaManagedAgentsRepositoryCloneErrorObject`
 
         The repository could not be cloned.
 
@@ -46841,7 +46961,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryCloneErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryCloneErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -48501,17 +48621,17 @@ List Events
 
         - `Type Completed`
 
-      - `type BetaManagedAgentsWorkflowRunResultError`
+      - `type BetaManagedAgentsWorkflowRunResultErrorObject`
 
         The run failed or reached its time limit.
 
         - `Type Error`
 
-        - `Error BetaManagedAgentsWorkflowRunErrorUnion`
+        - `Error BetaManagedAgentsWorkflowRunErrorObjectUnion`
 
           Why the run did not finish.
 
-          - `type BetaManagedAgentsTimeoutWorkflowRunError`
+          - `type BetaManagedAgentsTimeoutWorkflowRunErrorObject`
 
             The run reached its time limit.
 
@@ -48521,7 +48641,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsProgramWorkflowRunError`
+          - `type BetaManagedAgentsProgramWorkflowRunErrorObject`
 
             The plan, a program that the agent wrote, failed, or the server refused it.
 
@@ -48531,7 +48651,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsUnknownWorkflowRunError`
+          - `type BetaManagedAgentsUnknownWorkflowRunErrorObject`
 
             A failure that has no type of its own.
 
@@ -48541,7 +48661,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsThreadLimitWorkflowRunError`
+          - `type BetaManagedAgentsThreadLimitWorkflowRunErrorObject`
 
             The run exceeded the limit on the number of threads that a run can create.
 
@@ -48551,7 +48671,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsMaxWorkflowRunsWorkflowRunError`
+          - `type BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject`
 
             No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
 
@@ -48673,7 +48793,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Error BetaManagedAgentsWorkflowRunErrorUnion`
+    - `Error BetaManagedAgentsWorkflowRunErrorObjectUnion`
 
       Why the run did not finish, or was not created.
 
@@ -49219,6 +49339,8 @@ Send Events
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -49890,6 +50012,8 @@ Stream Events
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -50661,7 +50785,7 @@ Stream Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      - `type BetaManagedAgentsUnknownError`
+      - `type BetaManagedAgentsUnknownErrorObject`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -50671,7 +50795,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsUnknownErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -50693,7 +50817,7 @@ Stream Events
 
             - `Type Terminal`
 
-      - `type BetaManagedAgentsModelOverloadedError`
+      - `type BetaManagedAgentsModelOverloadedErrorObject`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -50703,7 +50827,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelOverloadedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -50719,7 +50843,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRateLimitedError`
+      - `type BetaManagedAgentsModelRateLimitedErrorObject`
 
         The model request was rate-limited.
 
@@ -50729,7 +50853,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelRateLimitedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -50745,7 +50869,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRequestFailedError`
+      - `type BetaManagedAgentsModelRequestFailedErrorObject`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -50755,7 +50879,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelRequestFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -50771,7 +50895,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPConnectionFailedError`
+      - `type BetaManagedAgentsMCPConnectionFailedErrorObject`
 
         Failed to connect to an MCP server.
 
@@ -50785,7 +50909,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsMCPConnectionFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -50801,7 +50925,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPAuthenticationFailedError`
+      - `type BetaManagedAgentsMCPAuthenticationFailedErrorObject`
 
         Authentication to an MCP server failed.
 
@@ -50815,7 +50939,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -50831,7 +50955,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsBillingError`
+      - `type BetaManagedAgentsBillingErrorObject`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -50841,7 +50965,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsBillingErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -50857,7 +50981,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCredentialHostUnreachableError`
+      - `type BetaManagedAgentsCredentialHostUnreachableErrorObject`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -50871,7 +50995,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -50891,7 +51015,7 @@ Stream Events
 
           ID of the vault containing the affected credential.
 
-      - `type BetaManagedAgentsToolUseLimitReachedError`
+      - `type BetaManagedAgentsToolUseLimitReachedErrorObject`
 
         The turn stopped because the agent loop reached its limit on tool-use rounds (one model response that calls tools, plus running those tools, is one round), not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -50901,7 +51025,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsToolUseLimitReachedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsToolUseLimitReachedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -50917,7 +51041,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCompactionLimitReachedError`
+      - `type BetaManagedAgentsCompactionLimitReachedErrorObject`
 
         The turn stopped because the context was compacted the maximum number of times in a row without the model producing a message or a tool call, not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -50927,7 +51051,7 @@ Stream Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsCompactionLimitReachedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsCompactionLimitReachedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -50943,7 +51067,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryAuthenticationError`
+      - `type BetaManagedAgentsRepositoryAuthenticationErrorObject`
 
         The repository host rejected the credentials, or required credentials and received none.
 
@@ -50957,7 +51081,7 @@ Stream Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryAuthenticationErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryAuthenticationErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -50973,7 +51097,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryForbiddenError`
+      - `type BetaManagedAgentsRepositoryForbiddenErrorObject`
 
         The repository host refused access to the repository.
 
@@ -50987,7 +51111,7 @@ Stream Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryForbiddenErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryForbiddenErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -51003,7 +51127,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryNotFoundError`
+      - `type BetaManagedAgentsRepositoryNotFoundErrorObject`
 
         The repository host reported the repository as not found.
 
@@ -51017,7 +51141,7 @@ Stream Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryNotFoundErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryNotFoundErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -51033,7 +51157,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryCheckoutError`
+      - `type BetaManagedAgentsRepositoryCheckoutErrorObject`
 
         The requested branch or commit does not exist in the repository.
 
@@ -51047,7 +51171,7 @@ Stream Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryCheckoutErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryCheckoutErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -51063,7 +51187,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryCloneError`
+      - `type BetaManagedAgentsRepositoryCloneErrorObject`
 
         The repository could not be cloned.
 
@@ -51077,7 +51201,7 @@ Stream Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryCloneErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryCloneErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -52787,17 +52911,17 @@ Stream Events
 
         - `Type Completed`
 
-      - `type BetaManagedAgentsWorkflowRunResultError`
+      - `type BetaManagedAgentsWorkflowRunResultErrorObject`
 
         The run failed or reached its time limit.
 
         - `Type Error`
 
-        - `Error BetaManagedAgentsWorkflowRunErrorUnion`
+        - `Error BetaManagedAgentsWorkflowRunErrorObjectUnion`
 
           Why the run did not finish.
 
-          - `type BetaManagedAgentsTimeoutWorkflowRunError`
+          - `type BetaManagedAgentsTimeoutWorkflowRunErrorObject`
 
             The run reached its time limit.
 
@@ -52807,7 +52931,7 @@ Stream Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsProgramWorkflowRunError`
+          - `type BetaManagedAgentsProgramWorkflowRunErrorObject`
 
             The plan, a program that the agent wrote, failed, or the server refused it.
 
@@ -52817,7 +52941,7 @@ Stream Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsUnknownWorkflowRunError`
+          - `type BetaManagedAgentsUnknownWorkflowRunErrorObject`
 
             A failure that has no type of its own.
 
@@ -52827,7 +52951,7 @@ Stream Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsThreadLimitWorkflowRunError`
+          - `type BetaManagedAgentsThreadLimitWorkflowRunErrorObject`
 
             The run exceeded the limit on the number of threads that a run can create.
 
@@ -52837,7 +52961,7 @@ Stream Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsMaxWorkflowRunsWorkflowRunError`
+          - `type BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject`
 
             No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
 
@@ -52959,7 +53083,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `Error BetaManagedAgentsWorkflowRunErrorUnion`
+    - `Error BetaManagedAgentsWorkflowRunErrorObjectUnion`
 
       Why the run did not finish, or was not created.
 
@@ -53136,6 +53260,8 @@ Add Session Resource
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -53374,6 +53500,8 @@ List Session Resources
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -53702,6 +53830,8 @@ Get Session Resource
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -54026,6 +54156,8 @@ Update Session Resource
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -54345,6 +54477,8 @@ Delete Session Resource
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -54578,6 +54712,8 @@ List Session Threads
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -55689,6 +55825,8 @@ Get Session Thread
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -56795,6 +56933,8 @@ Archive Session Thread
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -57911,6 +58051,8 @@ List Session Thread Events
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -58681,7 +58823,7 @@ List Session Thread Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      - `type BetaManagedAgentsUnknownError`
+      - `type BetaManagedAgentsUnknownErrorObject`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -58691,7 +58833,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsUnknownErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -58713,7 +58855,7 @@ List Session Thread Events
 
             - `Type Terminal`
 
-      - `type BetaManagedAgentsModelOverloadedError`
+      - `type BetaManagedAgentsModelOverloadedErrorObject`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -58723,7 +58865,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelOverloadedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -58739,7 +58881,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRateLimitedError`
+      - `type BetaManagedAgentsModelRateLimitedErrorObject`
 
         The model request was rate-limited.
 
@@ -58749,7 +58891,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelRateLimitedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -58765,7 +58907,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRequestFailedError`
+      - `type BetaManagedAgentsModelRequestFailedErrorObject`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -58775,7 +58917,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelRequestFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -58791,7 +58933,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPConnectionFailedError`
+      - `type BetaManagedAgentsMCPConnectionFailedErrorObject`
 
         Failed to connect to an MCP server.
 
@@ -58805,7 +58947,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsMCPConnectionFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -58821,7 +58963,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPAuthenticationFailedError`
+      - `type BetaManagedAgentsMCPAuthenticationFailedErrorObject`
 
         Authentication to an MCP server failed.
 
@@ -58835,7 +58977,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -58851,7 +58993,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsBillingError`
+      - `type BetaManagedAgentsBillingErrorObject`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -58861,7 +59003,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsBillingErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -58877,7 +59019,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCredentialHostUnreachableError`
+      - `type BetaManagedAgentsCredentialHostUnreachableErrorObject`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -58891,7 +59033,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -58911,7 +59053,7 @@ List Session Thread Events
 
           ID of the vault containing the affected credential.
 
-      - `type BetaManagedAgentsToolUseLimitReachedError`
+      - `type BetaManagedAgentsToolUseLimitReachedErrorObject`
 
         The turn stopped because the agent loop reached its limit on tool-use rounds (one model response that calls tools, plus running those tools, is one round), not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -58921,7 +59063,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsToolUseLimitReachedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsToolUseLimitReachedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -58937,7 +59079,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCompactionLimitReachedError`
+      - `type BetaManagedAgentsCompactionLimitReachedErrorObject`
 
         The turn stopped because the context was compacted the maximum number of times in a row without the model producing a message or a tool call, not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -58947,7 +59089,7 @@ List Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsCompactionLimitReachedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsCompactionLimitReachedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -58963,7 +59105,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryAuthenticationError`
+      - `type BetaManagedAgentsRepositoryAuthenticationErrorObject`
 
         The repository host rejected the credentials, or required credentials and received none.
 
@@ -58977,7 +59119,7 @@ List Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryAuthenticationErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryAuthenticationErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -58993,7 +59135,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryForbiddenError`
+      - `type BetaManagedAgentsRepositoryForbiddenErrorObject`
 
         The repository host refused access to the repository.
 
@@ -59007,7 +59149,7 @@ List Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryForbiddenErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryForbiddenErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -59023,7 +59165,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryNotFoundError`
+      - `type BetaManagedAgentsRepositoryNotFoundErrorObject`
 
         The repository host reported the repository as not found.
 
@@ -59037,7 +59179,7 @@ List Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryNotFoundErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryNotFoundErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -59053,7 +59195,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryCheckoutError`
+      - `type BetaManagedAgentsRepositoryCheckoutErrorObject`
 
         The requested branch or commit does not exist in the repository.
 
@@ -59067,7 +59209,7 @@ List Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryCheckoutErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryCheckoutErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -59083,7 +59225,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryCloneError`
+      - `type BetaManagedAgentsRepositoryCloneErrorObject`
 
         The repository could not be cloned.
 
@@ -59097,7 +59239,7 @@ List Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryCloneErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryCloneErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -60757,17 +60899,17 @@ List Session Thread Events
 
         - `Type Completed`
 
-      - `type BetaManagedAgentsWorkflowRunResultError`
+      - `type BetaManagedAgentsWorkflowRunResultErrorObject`
 
         The run failed or reached its time limit.
 
         - `Type Error`
 
-        - `Error BetaManagedAgentsWorkflowRunErrorUnion`
+        - `Error BetaManagedAgentsWorkflowRunErrorObjectUnion`
 
           Why the run did not finish.
 
-          - `type BetaManagedAgentsTimeoutWorkflowRunError`
+          - `type BetaManagedAgentsTimeoutWorkflowRunErrorObject`
 
             The run reached its time limit.
 
@@ -60777,7 +60919,7 @@ List Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsProgramWorkflowRunError`
+          - `type BetaManagedAgentsProgramWorkflowRunErrorObject`
 
             The plan, a program that the agent wrote, failed, or the server refused it.
 
@@ -60787,7 +60929,7 @@ List Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsUnknownWorkflowRunError`
+          - `type BetaManagedAgentsUnknownWorkflowRunErrorObject`
 
             A failure that has no type of its own.
 
@@ -60797,7 +60939,7 @@ List Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsThreadLimitWorkflowRunError`
+          - `type BetaManagedAgentsThreadLimitWorkflowRunErrorObject`
 
             The run exceeded the limit on the number of threads that a run can create.
 
@@ -60807,7 +60949,7 @@ List Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsMaxWorkflowRunsWorkflowRunError`
+          - `type BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject`
 
             No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
 
@@ -60929,7 +61071,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `Error BetaManagedAgentsWorkflowRunErrorUnion`
+    - `Error BetaManagedAgentsWorkflowRunErrorObjectUnion`
 
       Why the run did not finish, or was not created.
 
@@ -61125,6 +61267,8 @@ Stream Session Thread Events
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -61896,7 +62040,7 @@ Stream Session Thread Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      - `type BetaManagedAgentsUnknownError`
+      - `type BetaManagedAgentsUnknownErrorObject`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -61906,7 +62050,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsUnknownErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -61928,7 +62072,7 @@ Stream Session Thread Events
 
             - `Type Terminal`
 
-      - `type BetaManagedAgentsModelOverloadedError`
+      - `type BetaManagedAgentsModelOverloadedErrorObject`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -61938,7 +62082,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelOverloadedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -61954,7 +62098,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRateLimitedError`
+      - `type BetaManagedAgentsModelRateLimitedErrorObject`
 
         The model request was rate-limited.
 
@@ -61964,7 +62108,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelRateLimitedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -61980,7 +62124,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRequestFailedError`
+      - `type BetaManagedAgentsModelRequestFailedErrorObject`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -61990,7 +62134,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelRequestFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -62006,7 +62150,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPConnectionFailedError`
+      - `type BetaManagedAgentsMCPConnectionFailedErrorObject`
 
         Failed to connect to an MCP server.
 
@@ -62020,7 +62164,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsMCPConnectionFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -62036,7 +62180,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPAuthenticationFailedError`
+      - `type BetaManagedAgentsMCPAuthenticationFailedErrorObject`
 
         Authentication to an MCP server failed.
 
@@ -62050,7 +62194,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -62066,7 +62210,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsBillingError`
+      - `type BetaManagedAgentsBillingErrorObject`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -62076,7 +62220,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsBillingErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -62092,7 +62236,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCredentialHostUnreachableError`
+      - `type BetaManagedAgentsCredentialHostUnreachableErrorObject`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -62106,7 +62250,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -62126,7 +62270,7 @@ Stream Session Thread Events
 
           ID of the vault containing the affected credential.
 
-      - `type BetaManagedAgentsToolUseLimitReachedError`
+      - `type BetaManagedAgentsToolUseLimitReachedErrorObject`
 
         The turn stopped because the agent loop reached its limit on tool-use rounds (one model response that calls tools, plus running those tools, is one round), not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -62136,7 +62280,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsToolUseLimitReachedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsToolUseLimitReachedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -62152,7 +62296,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCompactionLimitReachedError`
+      - `type BetaManagedAgentsCompactionLimitReachedErrorObject`
 
         The turn stopped because the context was compacted the maximum number of times in a row without the model producing a message or a tool call, not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -62162,7 +62306,7 @@ Stream Session Thread Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsCompactionLimitReachedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsCompactionLimitReachedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -62178,7 +62322,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryAuthenticationError`
+      - `type BetaManagedAgentsRepositoryAuthenticationErrorObject`
 
         The repository host rejected the credentials, or required credentials and received none.
 
@@ -62192,7 +62336,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryAuthenticationErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryAuthenticationErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -62208,7 +62352,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryForbiddenError`
+      - `type BetaManagedAgentsRepositoryForbiddenErrorObject`
 
         The repository host refused access to the repository.
 
@@ -62222,7 +62366,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryForbiddenErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryForbiddenErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -62238,7 +62382,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryNotFoundError`
+      - `type BetaManagedAgentsRepositoryNotFoundErrorObject`
 
         The repository host reported the repository as not found.
 
@@ -62252,7 +62396,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryNotFoundErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryNotFoundErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -62268,7 +62412,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryCheckoutError`
+      - `type BetaManagedAgentsRepositoryCheckoutErrorObject`
 
         The requested branch or commit does not exist in the repository.
 
@@ -62282,7 +62426,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryCheckoutErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryCheckoutErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -62298,7 +62442,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryCloneError`
+      - `type BetaManagedAgentsRepositoryCloneErrorObject`
 
         The repository could not be cloned.
 
@@ -62312,7 +62456,7 @@ Stream Session Thread Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryCloneErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryCloneErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -64022,17 +64166,17 @@ Stream Session Thread Events
 
         - `Type Completed`
 
-      - `type BetaManagedAgentsWorkflowRunResultError`
+      - `type BetaManagedAgentsWorkflowRunResultErrorObject`
 
         The run failed or reached its time limit.
 
         - `Type Error`
 
-        - `Error BetaManagedAgentsWorkflowRunErrorUnion`
+        - `Error BetaManagedAgentsWorkflowRunErrorObjectUnion`
 
           Why the run did not finish.
 
-          - `type BetaManagedAgentsTimeoutWorkflowRunError`
+          - `type BetaManagedAgentsTimeoutWorkflowRunErrorObject`
 
             The run reached its time limit.
 
@@ -64042,7 +64186,7 @@ Stream Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsProgramWorkflowRunError`
+          - `type BetaManagedAgentsProgramWorkflowRunErrorObject`
 
             The plan, a program that the agent wrote, failed, or the server refused it.
 
@@ -64052,7 +64196,7 @@ Stream Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsUnknownWorkflowRunError`
+          - `type BetaManagedAgentsUnknownWorkflowRunErrorObject`
 
             A failure that has no type of its own.
 
@@ -64062,7 +64206,7 @@ Stream Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsThreadLimitWorkflowRunError`
+          - `type BetaManagedAgentsThreadLimitWorkflowRunErrorObject`
 
             The run exceeded the limit on the number of threads that a run can create.
 
@@ -64072,7 +64216,7 @@ Stream Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsMaxWorkflowRunsWorkflowRunError`
+          - `type BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject`
 
             No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
 
@@ -64194,7 +64338,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `Error BetaManagedAgentsWorkflowRunErrorUnion`
+    - `Error BetaManagedAgentsWorkflowRunErrorObjectUnion`
 
       Why the run did not finish, or was not created.
 
@@ -64742,6 +64886,8 @@ Create Deployment
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -65076,89 +65222,89 @@ Create Deployment
 
       - `Type Error`
 
-      - `Error BetaManagedAgentsDeploymentPausedReasonErrorUnion`
+      - `Error BetaManagedAgentsDeploymentPausedReasonErrorObjectUnion`
 
         The failed run's error.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's environment was archived.
 
           - `Type EnvironmentArchivedError`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's agent was archived.
 
           - `Type AgentArchivedError`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject`
 
           The deployment's environment no longer exists.
 
           - `Type EnvironmentNotFoundError`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type VaultNotFoundError`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type FileNotFoundError`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type SessionResourceNotFoundError`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's workspace was archived.
 
           - `Type WorkspaceArchivedError`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject`
 
           The deployment's organization is disabled.
 
           - `Type OrganizationDisabledError`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject`
 
           A memory store referenced by the deployment is archived.
 
           - `Type MemoryStoreArchivedError`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type SkillNotFoundError`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment is archived.
 
           - `Type VaultArchivedError`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type UnknownError`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type SelfHostedResourcesUnsupportedError`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -65549,6 +65695,8 @@ List Deployments
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -65883,89 +66031,89 @@ List Deployments
 
       - `Type Error`
 
-      - `Error BetaManagedAgentsDeploymentPausedReasonErrorUnion`
+      - `Error BetaManagedAgentsDeploymentPausedReasonErrorObjectUnion`
 
         The failed run's error.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's environment was archived.
 
           - `Type EnvironmentArchivedError`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's agent was archived.
 
           - `Type AgentArchivedError`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject`
 
           The deployment's environment no longer exists.
 
           - `Type EnvironmentNotFoundError`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type VaultNotFoundError`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type FileNotFoundError`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type SessionResourceNotFoundError`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's workspace was archived.
 
           - `Type WorkspaceArchivedError`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject`
 
           The deployment's organization is disabled.
 
           - `Type OrganizationDisabledError`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject`
 
           A memory store referenced by the deployment is archived.
 
           - `Type MemoryStoreArchivedError`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type SkillNotFoundError`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment is archived.
 
           - `Type VaultArchivedError`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type UnknownError`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type SelfHostedResourcesUnsupportedError`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -66316,6 +66464,8 @@ Get Deployment
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -66650,89 +66800,89 @@ Get Deployment
 
       - `Type Error`
 
-      - `Error BetaManagedAgentsDeploymentPausedReasonErrorUnion`
+      - `Error BetaManagedAgentsDeploymentPausedReasonErrorObjectUnion`
 
         The failed run's error.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's environment was archived.
 
           - `Type EnvironmentArchivedError`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's agent was archived.
 
           - `Type AgentArchivedError`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject`
 
           The deployment's environment no longer exists.
 
           - `Type EnvironmentNotFoundError`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type VaultNotFoundError`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type FileNotFoundError`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type SessionResourceNotFoundError`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's workspace was archived.
 
           - `Type WorkspaceArchivedError`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject`
 
           The deployment's organization is disabled.
 
           - `Type OrganizationDisabledError`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject`
 
           A memory store referenced by the deployment is archived.
 
           - `Type MemoryStoreArchivedError`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type SkillNotFoundError`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment is archived.
 
           - `Type VaultArchivedError`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type UnknownError`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type SelfHostedResourcesUnsupportedError`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -67456,6 +67606,8 @@ Update Deployment
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -67790,89 +67942,89 @@ Update Deployment
 
       - `Type Error`
 
-      - `Error BetaManagedAgentsDeploymentPausedReasonErrorUnion`
+      - `Error BetaManagedAgentsDeploymentPausedReasonErrorObjectUnion`
 
         The failed run's error.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's environment was archived.
 
           - `Type EnvironmentArchivedError`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's agent was archived.
 
           - `Type AgentArchivedError`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject`
 
           The deployment's environment no longer exists.
 
           - `Type EnvironmentNotFoundError`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type VaultNotFoundError`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type FileNotFoundError`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type SessionResourceNotFoundError`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's workspace was archived.
 
           - `Type WorkspaceArchivedError`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject`
 
           The deployment's organization is disabled.
 
           - `Type OrganizationDisabledError`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject`
 
           A memory store referenced by the deployment is archived.
 
           - `Type MemoryStoreArchivedError`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type SkillNotFoundError`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment is archived.
 
           - `Type VaultArchivedError`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type UnknownError`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type SelfHostedResourcesUnsupportedError`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -68222,6 +68374,8 @@ Archive Deployment
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -68556,89 +68710,89 @@ Archive Deployment
 
       - `Type Error`
 
-      - `Error BetaManagedAgentsDeploymentPausedReasonErrorUnion`
+      - `Error BetaManagedAgentsDeploymentPausedReasonErrorObjectUnion`
 
         The failed run's error.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's environment was archived.
 
           - `Type EnvironmentArchivedError`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's agent was archived.
 
           - `Type AgentArchivedError`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject`
 
           The deployment's environment no longer exists.
 
           - `Type EnvironmentNotFoundError`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type VaultNotFoundError`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type FileNotFoundError`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type SessionResourceNotFoundError`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's workspace was archived.
 
           - `Type WorkspaceArchivedError`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject`
 
           The deployment's organization is disabled.
 
           - `Type OrganizationDisabledError`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject`
 
           A memory store referenced by the deployment is archived.
 
           - `Type MemoryStoreArchivedError`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type SkillNotFoundError`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment is archived.
 
           - `Type VaultArchivedError`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type UnknownError`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type SelfHostedResourcesUnsupportedError`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -68988,6 +69142,8 @@ Run Deployment Now
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -69074,7 +69230,7 @@ Run Deployment Now
 
     Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
-    - `type BetaManagedAgentsEnvironmentArchivedRunError`
+    - `type BetaManagedAgentsEnvironmentArchivedRunErrorObject`
 
       The deployment's environment was archived.
 
@@ -69084,7 +69240,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsAgentArchivedRunError`
+    - `type BetaManagedAgentsAgentArchivedRunErrorObject`
 
       The deployment's agent was archived.
 
@@ -69094,7 +69250,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsEnvironmentNotFoundRunError`
+    - `type BetaManagedAgentsEnvironmentNotFoundRunErrorObject`
 
       The deployment's environment no longer exists.
 
@@ -69104,7 +69260,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultNotFoundRunError`
+    - `type BetaManagedAgentsVaultNotFoundRunErrorObject`
 
       A vault referenced by the deployment no longer exists.
 
@@ -69114,7 +69270,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultArchivedRunError`
+    - `type BetaManagedAgentsVaultArchivedRunErrorObject`
 
       A vault referenced by the deployment is archived.
 
@@ -69124,7 +69280,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsFileNotFoundRunError`
+    - `type BetaManagedAgentsFileNotFoundRunErrorObject`
 
       A file resource referenced by the deployment no longer exists.
 
@@ -69134,7 +69290,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMemoryStoreArchivedRunError`
+    - `type BetaManagedAgentsMemoryStoreArchivedRunErrorObject`
 
       A memory store referenced by the deployment is archived.
 
@@ -69144,7 +69300,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSkillNotFoundRunError`
+    - `type BetaManagedAgentsSkillNotFoundRunErrorObject`
 
       A skill referenced by the deployment's agent no longer exists.
 
@@ -69154,7 +69310,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionResourceNotFoundRunError`
+    - `type BetaManagedAgentsSessionResourceNotFoundRunErrorObject`
 
       A referenced resource no longer exists and its kind was not reported.
 
@@ -69164,7 +69320,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsWorkspaceArchivedRunError`
+    - `type BetaManagedAgentsWorkspaceArchivedRunErrorObject`
 
       The deployment's workspace was archived.
 
@@ -69174,7 +69330,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsOrganizationDisabledRunError`
+    - `type BetaManagedAgentsOrganizationDisabledRunErrorObject`
 
       The deployment's organization is disabled.
 
@@ -69184,7 +69340,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionRateLimitedRunError`
+    - `type BetaManagedAgentsSessionRateLimitedRunErrorObject`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
@@ -69194,7 +69350,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionCreationRejectedRunError`
+    - `type BetaManagedAgentsSessionCreationRejectedRunErrorObject`
 
       The session create request was rejected with a non-retryable validation error.
 
@@ -69204,7 +69360,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsUnknownRunError`
+    - `type BetaManagedAgentsUnknownRunErrorObject`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
@@ -69214,7 +69370,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorObject`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
@@ -69224,7 +69380,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMCPEgressBlockedRunError`
+    - `type BetaManagedAgentsMCPEgressBlockedRunErrorObject`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -69425,6 +69581,8 @@ Pause Deployment
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -69760,89 +69918,89 @@ Pause Deployment
 
       - `Type Error`
 
-      - `Error BetaManagedAgentsDeploymentPausedReasonErrorUnion`
+      - `Error BetaManagedAgentsDeploymentPausedReasonErrorObjectUnion`
 
         The failed run's error.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's environment was archived.
 
           - `Type EnvironmentArchivedError`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's agent was archived.
 
           - `Type AgentArchivedError`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject`
 
           The deployment's environment no longer exists.
 
           - `Type EnvironmentNotFoundError`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type VaultNotFoundError`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type FileNotFoundError`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type SessionResourceNotFoundError`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's workspace was archived.
 
           - `Type WorkspaceArchivedError`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject`
 
           The deployment's organization is disabled.
 
           - `Type OrganizationDisabledError`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject`
 
           A memory store referenced by the deployment is archived.
 
           - `Type MemoryStoreArchivedError`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type SkillNotFoundError`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment is archived.
 
           - `Type VaultArchivedError`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type UnknownError`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type SelfHostedResourcesUnsupportedError`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -70192,6 +70350,8 @@ Unpause Deployment
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -70526,89 +70686,89 @@ Unpause Deployment
 
       - `Type Error`
 
-      - `Error BetaManagedAgentsDeploymentPausedReasonErrorUnion`
+      - `Error BetaManagedAgentsDeploymentPausedReasonErrorObjectUnion`
 
         The failed run's error.
 
-        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's environment was archived.
 
           - `Type EnvironmentArchivedError`
 
-        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's agent was archived.
 
           - `Type AgentArchivedError`
 
-        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject`
 
           The deployment's environment no longer exists.
 
           - `Type EnvironmentNotFoundError`
 
-        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment no longer exists.
 
           - `Type VaultNotFoundError`
 
-        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject`
 
           A file resource referenced by the deployment no longer exists.
 
           - `Type FileNotFoundError`
 
-        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `Type SessionResourceNotFoundError`
 
-        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject`
 
           The deployment's workspace was archived.
 
           - `Type WorkspaceArchivedError`
 
-        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError`
+        - `type BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject`
 
           The deployment's organization is disabled.
 
           - `Type OrganizationDisabledError`
 
-        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject`
 
           A memory store referenced by the deployment is archived.
 
           - `Type MemoryStoreArchivedError`
 
-        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `Type SkillNotFoundError`
 
-        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject`
 
           A vault referenced by the deployment is archived.
 
           - `Type VaultArchivedError`
 
-        - `type BetaManagedAgentsUnknownDeploymentPausedReasonError`
+        - `type BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `Type UnknownError`
 
-        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `Type SelfHostedResourcesUnsupportedError`
 
-        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError`
+        - `type BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -71002,6 +71162,8 @@ List Deployment Runs
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -71088,7 +71250,7 @@ List Deployment Runs
 
     Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
-    - `type BetaManagedAgentsEnvironmentArchivedRunError`
+    - `type BetaManagedAgentsEnvironmentArchivedRunErrorObject`
 
       The deployment's environment was archived.
 
@@ -71098,7 +71260,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsAgentArchivedRunError`
+    - `type BetaManagedAgentsAgentArchivedRunErrorObject`
 
       The deployment's agent was archived.
 
@@ -71108,7 +71270,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsEnvironmentNotFoundRunError`
+    - `type BetaManagedAgentsEnvironmentNotFoundRunErrorObject`
 
       The deployment's environment no longer exists.
 
@@ -71118,7 +71280,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultNotFoundRunError`
+    - `type BetaManagedAgentsVaultNotFoundRunErrorObject`
 
       A vault referenced by the deployment no longer exists.
 
@@ -71128,7 +71290,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultArchivedRunError`
+    - `type BetaManagedAgentsVaultArchivedRunErrorObject`
 
       A vault referenced by the deployment is archived.
 
@@ -71138,7 +71300,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsFileNotFoundRunError`
+    - `type BetaManagedAgentsFileNotFoundRunErrorObject`
 
       A file resource referenced by the deployment no longer exists.
 
@@ -71148,7 +71310,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMemoryStoreArchivedRunError`
+    - `type BetaManagedAgentsMemoryStoreArchivedRunErrorObject`
 
       A memory store referenced by the deployment is archived.
 
@@ -71158,7 +71320,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSkillNotFoundRunError`
+    - `type BetaManagedAgentsSkillNotFoundRunErrorObject`
 
       A skill referenced by the deployment's agent no longer exists.
 
@@ -71168,7 +71330,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionResourceNotFoundRunError`
+    - `type BetaManagedAgentsSessionResourceNotFoundRunErrorObject`
 
       A referenced resource no longer exists and its kind was not reported.
 
@@ -71178,7 +71340,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsWorkspaceArchivedRunError`
+    - `type BetaManagedAgentsWorkspaceArchivedRunErrorObject`
 
       The deployment's workspace was archived.
 
@@ -71188,7 +71350,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsOrganizationDisabledRunError`
+    - `type BetaManagedAgentsOrganizationDisabledRunErrorObject`
 
       The deployment's organization is disabled.
 
@@ -71198,7 +71360,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionRateLimitedRunError`
+    - `type BetaManagedAgentsSessionRateLimitedRunErrorObject`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
@@ -71208,7 +71370,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionCreationRejectedRunError`
+    - `type BetaManagedAgentsSessionCreationRejectedRunErrorObject`
 
       The session create request was rejected with a non-retryable validation error.
 
@@ -71218,7 +71380,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsUnknownRunError`
+    - `type BetaManagedAgentsUnknownRunErrorObject`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
@@ -71228,7 +71390,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorObject`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
@@ -71238,7 +71400,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMCPEgressBlockedRunError`
+    - `type BetaManagedAgentsMCPEgressBlockedRunErrorObject`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -71441,6 +71603,8 @@ Get Deployment Run
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -71527,7 +71691,7 @@ Get Deployment Run
 
     Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
-    - `type BetaManagedAgentsEnvironmentArchivedRunError`
+    - `type BetaManagedAgentsEnvironmentArchivedRunErrorObject`
 
       The deployment's environment was archived.
 
@@ -71537,7 +71701,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsAgentArchivedRunError`
+    - `type BetaManagedAgentsAgentArchivedRunErrorObject`
 
       The deployment's agent was archived.
 
@@ -71547,7 +71711,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsEnvironmentNotFoundRunError`
+    - `type BetaManagedAgentsEnvironmentNotFoundRunErrorObject`
 
       The deployment's environment no longer exists.
 
@@ -71557,7 +71721,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultNotFoundRunError`
+    - `type BetaManagedAgentsVaultNotFoundRunErrorObject`
 
       A vault referenced by the deployment no longer exists.
 
@@ -71567,7 +71731,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsVaultArchivedRunError`
+    - `type BetaManagedAgentsVaultArchivedRunErrorObject`
 
       A vault referenced by the deployment is archived.
 
@@ -71577,7 +71741,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsFileNotFoundRunError`
+    - `type BetaManagedAgentsFileNotFoundRunErrorObject`
 
       A file resource referenced by the deployment no longer exists.
 
@@ -71587,7 +71751,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMemoryStoreArchivedRunError`
+    - `type BetaManagedAgentsMemoryStoreArchivedRunErrorObject`
 
       A memory store referenced by the deployment is archived.
 
@@ -71597,7 +71761,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSkillNotFoundRunError`
+    - `type BetaManagedAgentsSkillNotFoundRunErrorObject`
 
       A skill referenced by the deployment's agent no longer exists.
 
@@ -71607,7 +71771,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionResourceNotFoundRunError`
+    - `type BetaManagedAgentsSessionResourceNotFoundRunErrorObject`
 
       A referenced resource no longer exists and its kind was not reported.
 
@@ -71617,7 +71781,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsWorkspaceArchivedRunError`
+    - `type BetaManagedAgentsWorkspaceArchivedRunErrorObject`
 
       The deployment's workspace was archived.
 
@@ -71627,7 +71791,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsOrganizationDisabledRunError`
+    - `type BetaManagedAgentsOrganizationDisabledRunErrorObject`
 
       The deployment's organization is disabled.
 
@@ -71637,7 +71801,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionRateLimitedRunError`
+    - `type BetaManagedAgentsSessionRateLimitedRunErrorObject`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
@@ -71647,7 +71811,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSessionCreationRejectedRunError`
+    - `type BetaManagedAgentsSessionCreationRejectedRunErrorObject`
 
       The session create request was rejected with a non-retryable validation error.
 
@@ -71657,7 +71821,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsUnknownRunError`
+    - `type BetaManagedAgentsUnknownRunErrorObject`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
@@ -71667,7 +71831,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
+    - `type BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorObject`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
@@ -71677,7 +71841,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `type BetaManagedAgentsMCPEgressBlockedRunError`
+    - `type BetaManagedAgentsMCPEgressBlockedRunErrorObject`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -71886,6 +72050,8 @@ Create a Vault
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -72138,6 +72304,8 @@ List Vaults
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -72381,6 +72549,8 @@ Retrieve a Vault
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -72635,6 +72805,8 @@ Update a Vault
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -72878,6 +73050,8 @@ Delete a Vault
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -73087,6 +73261,8 @@ Archive a Vault
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -73509,6 +73685,8 @@ Create a Credential
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -73896,6 +74074,8 @@ List Credentials
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -74270,6 +74450,8 @@ Retrieve a Credential
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -74783,6 +74965,8 @@ Update a Credential
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -75155,6 +75339,8 @@ Delete a Credential
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -75370,6 +75556,8 @@ Archive a Credential
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -75743,6 +75931,8 @@ Validate an MCP OAuth Credential
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -76069,6 +76259,8 @@ Create a Memory Store
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -76345,6 +76537,8 @@ List Memory Stores
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -76599,6 +76793,8 @@ Retrieve a Memory Store
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -76878,6 +77074,8 @@ Update a Memory Store
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -77136,6 +77334,8 @@ Delete a Memory Store
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -77347,6 +77547,8 @@ Archive a Memory Store
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -77625,6 +77827,8 @@ Create a Memory
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -77931,6 +78135,8 @@ List Memories
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -78232,6 +78438,8 @@ Retrieve a Memory
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -78532,6 +78740,8 @@ Update a Memory
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -78814,6 +79024,8 @@ Delete a Memory
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -79083,6 +79295,8 @@ List Memory Versions
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -79452,6 +79666,8 @@ Retrieve a Memory Version
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -79810,6 +80026,8 @@ Redact a Memory Version
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -80176,6 +80394,8 @@ Upload File
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -80488,6 +80708,8 @@ List Files
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -80781,6 +81003,8 @@ Download File
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -81001,6 +81225,8 @@ Get File Metadata
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -81294,6 +81520,8 @@ Delete File
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -81537,6 +81765,8 @@ Create Skill
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -81856,6 +82086,8 @@ List Skills
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -82146,6 +82378,8 @@ Get Skill
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -82435,6 +82669,8 @@ Delete Skill
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -82672,6 +82908,8 @@ Create Skill Version
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -82959,6 +83197,8 @@ List Skill Versions
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -83228,6 +83468,8 @@ Download a skill version's content as a zip archive.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -83430,6 +83672,8 @@ Get Skill Version
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -83696,6 +83940,8 @@ Delete Skill Version
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -85320,6 +85566,8 @@ Create User Profile
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -85693,6 +85941,8 @@ List User Profiles
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -86038,6 +86288,8 @@ Get User Profile
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -86422,6 +86674,8 @@ Update User Profile
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -86767,6 +87021,8 @@ Delete User Profile
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -86976,6 +87232,8 @@ Create Enrollment URL
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -87201,6 +87459,8 @@ Create Action URL
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -87505,6 +87765,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -87591,7 +87853,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
     format: date-time
 
-  - `Error BetaDreamError`
+  - `Error BetaDreamErrorObject`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 
@@ -88027,6 +88289,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -88113,7 +88377,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
     format: date-time
 
-  - `Error BetaDreamError`
+  - `Error BetaDreamErrorObject`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 
@@ -88487,6 +88751,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -88573,7 +88839,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
     format: date-time
 
-  - `Error BetaDreamError`
+  - `Error BetaDreamErrorObject`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 
@@ -88946,6 +89212,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -89032,7 +89300,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
 
     format: date-time
 
-  - `Error BetaDreamError`
+  - `Error BetaDreamErrorObject`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 
@@ -89405,6 +89673,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -89491,7 +89761,7 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
 
     format: date-time
 
-  - `Error BetaDreamError`
+  - `Error BetaDreamErrorObject`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 
@@ -89866,6 +90136,8 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -90097,6 +90369,8 @@ Fetches a tunnel by ID.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -90344,6 +90618,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -90581,6 +90857,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -90817,6 +91095,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -91039,6 +91319,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -91264,6 +91546,8 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -91513,6 +91797,8 @@ Fetches a tunnel certificate by ID.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -91773,6 +92059,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -92024,6 +92312,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -92796,7 +93086,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -92877,7 +93167,7 @@ Create an external key config owned by the caller's organization.
 
       - `KMSARN string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -92993,7 +93283,7 @@ Create an external key config owned by the caller's organization.
 
       - `KMSARN string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -93053,7 +93343,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -93190,7 +93480,7 @@ Results are ordered by creation time (newest first). Use the
 
       - `KMSARN string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -93365,7 +93655,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
       - `KMSARN string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -93472,8 +93762,8 @@ func main() {
 Partially update an external key config. Omitted fields are left unchanged.
 
 `display_name` is always editable. `geo` and `provider_config` cannot
-be changed once any workspace references this config, because previously
-encrypted data requires the original key identity to decrypt.
+be changed once any workspace references this config, and a Google Cloud
+key's provider and `key_name` cannot be changed at all.
 
 #### Parameters
 
@@ -93507,7 +93797,7 @@ encrypted data requires the original key identity to decrypt.
 
       - `KMSARN string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -93607,7 +93897,7 @@ encrypted data requires the original key identity to decrypt.
 
       - `KMSARN string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -93667,7 +93957,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -93761,7 +94051,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -93849,7 +94139,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -94080,6 +94370,8 @@ matched as the JWT's `iss` claim and is not fetched.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -94267,7 +94559,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -94452,6 +94744,8 @@ Archived issuers are excluded unless `include_archived=true`.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -94807,6 +95101,8 @@ Retrieve a federation issuer by its ID (`fdis_...`).
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -95245,6 +95541,8 @@ session.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -95432,7 +95730,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -95612,6 +95910,8 @@ issuer cannot be changed), or recreate them against another issuer.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -95799,7 +96099,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -96034,6 +96334,8 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -96215,7 +96517,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -96422,6 +96724,8 @@ unless `include_archived=true`.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -96783,6 +97087,8 @@ Retrieve a federation rule by its ID (`fdrl_...`).
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -97204,6 +97510,8 @@ Console session.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -97385,7 +97693,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -97580,6 +97888,8 @@ other scopes require a Console session.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -97761,7 +98071,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -97963,6 +98273,8 @@ other scopes require a Console session.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -98041,7 +98353,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -98216,6 +98528,8 @@ rules with `applies_to_all_workspaces` or a legacy single
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -98459,6 +98773,8 @@ Console session.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -98523,7 +98839,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -98720,7 +99036,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -99113,7 +99429,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -99289,6 +99605,8 @@ accounts.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -99400,7 +99718,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -99574,6 +99892,8 @@ archived service accounts.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -99841,6 +100161,8 @@ Retrieve a service account by its ID (`svac_...`).
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -100127,6 +100449,8 @@ interactive credential (a user OAuth token or a Console session).
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -100238,7 +100562,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -100406,6 +100730,8 @@ those rules first or change their target to another service account.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -100517,7 +100843,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -100697,6 +101023,8 @@ rejected.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -100783,7 +101111,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -100967,6 +101295,8 @@ page to recover.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -101221,6 +101551,8 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -101285,7 +101617,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -101661,7 +101993,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -101747,7 +102079,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 - `ErrorCodeConcurrentMembershipChange` (HTTP status 409, error code `concurrent_membership_change`)
 
@@ -101905,6 +102237,8 @@ Every request must include the beta header `anthropic-beta: admin-user-sign-out-
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -102033,7 +102367,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -102200,12 +102534,13 @@ List Workspaces
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `Name string`
 
@@ -102311,12 +102646,13 @@ Create Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `Tags map[string]string Optional`
 
@@ -102421,6 +102757,8 @@ Create Workspace
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -102545,12 +102883,13 @@ Create Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `Name string`
 
@@ -102590,7 +102929,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 - `ErrorCodeExternalKeyChanged` (HTTP status 409, error code `external_key_changed`)
 
@@ -102743,12 +103082,13 @@ Get Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `Name string`
 
@@ -102843,12 +103183,13 @@ Update Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `Name param.Opt[string] Optional`
 
@@ -102945,12 +103286,13 @@ Update Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `Name string`
 
@@ -102990,7 +103332,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 - `ErrorCodeExternalKeyChanged` (HTTP status 409, error code `external_key_changed`)
 
@@ -103143,12 +103485,13 @@ Archive Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `Name string`
 
@@ -103168,7 +103511,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -103376,7 +103719,7 @@ the remaining entries.
 
     - `Type string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `OrgLimit int64`
 
@@ -103518,7 +103861,7 @@ Changes take effect within about an hour.
 
     - `Type BetaWorkspaceRateLimitType`
 
-      Rate limiter type.
+      Rate limiter type. `input_tokens_per_minute` counts every input token, cache reads included. `input_tokens_per_minute_cache_aware` does not count cache reads, and on current models the organization's input-token limit usually has this type. A workspace limit of either type applies alongside the organization's limit, not in place of it. Because cache reads count toward an `input_tokens_per_minute` limit, it can reject requests that read mostly from the cache while the organization's limit still has room.
 
       - `const BetaWorkspaceRateLimitTypeFastItpmca BetaWorkspaceRateLimitType = "fast_itpmca"`
 
@@ -103640,7 +103983,7 @@ Changes take effect within about an hour.
 
     - `Type string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `OrgLimit int64`
 
@@ -103688,7 +104031,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -103936,7 +104279,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -104145,7 +104488,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -104236,7 +104579,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -104411,6 +104754,8 @@ omitted from the results.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -104670,6 +105015,8 @@ accounts cannot be added and are rejected.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -104756,7 +105103,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -104927,6 +105274,8 @@ account returns 404.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -105181,6 +105530,8 @@ rejected.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -105267,7 +105618,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -105438,6 +105789,8 @@ membership. Archived workspaces return 400.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -105502,7 +105855,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -105699,7 +106052,7 @@ the remaining entries.
 
     - `Type string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `Value int64`
 
@@ -105899,7 +106252,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -108456,6 +108809,8 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -108674,7 +109029,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
     - `Product string`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
     - `RBACGroupID string`
 
@@ -109254,6 +109609,8 @@ API key with the `read:analytics` scope, or an Admin API key.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -109506,7 +109863,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
     - `Product string`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
     - `RBACGroupID string`
 
@@ -109904,7 +110261,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `Product string`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
     - `RBACGroupID string`
 
@@ -110023,7 +110380,7 @@ func main() {
 
 [Legacy] Get per-user token usage across a date range.
 
-Returns usage per user, ranked by the chosen token metric; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users consume the most tokens. Only usage attributed to a user account is included, so usage with no user account, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Claude Tag one-to-one direct messages are included, with product `claude-tag`, only for members who have connected a Claude account. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+Returns usage per user, ranked by the chosen token metric; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users consume the most tokens. Only usage attributed to a user account is included, so usage with no user account, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Claude Tag one-to-one direct messages are included, with product `claude-tag`, only for members who have connected a Claude account. To see all usage by product, call `GET /v1/organizations/analytics/usage_report` with `group_by[]=product`. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/usage`](../beta/organization/analytics/usage/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
@@ -110311,7 +110668,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
   - `Product string`
 
-    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
   - `RBACGroupID string`
 
@@ -110684,7 +111041,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `Product string`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
     - `RBACGroupID string`
 
@@ -110800,7 +111157,7 @@ func main() {
 
 [Legacy] Get per-user cost in USD across a date range.
 
-Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users account for the most cost. Only cost attributed to a user account is included, so cost with no user account, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Claude Tag one-to-one direct messages are included, with product `claude-tag`, only for members who have connected a Claude account. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users account for the most cost. Only cost attributed to a user account is included, so cost with no user account, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Claude Tag one-to-one direct messages are included, with product `claude-tag`, only for members who have connected a Claude account. To see all cost by product, call `GET /v1/organizations/analytics/cost_report` with `group_by[]=product`. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/cost`](../beta/organization/analytics/cost/list.md) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](../../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
 
@@ -111088,7 +111445,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
   - `Product string`
 
-    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
   - `RBACGroupID string`
 
@@ -111359,6 +111716,8 @@ Anthropic account team.
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -111533,7 +111892,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 - `ErrorCodeBetaSpendLimitsAdminAPIWritesNotEnabled` (HTTP status 403, error code `spend_limits_admin_api_writes_not_enabled`)
 
@@ -111819,7 +112178,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 - `ErrorCodeBetaSpendLimitsAdminAPIWritesNotEnabled` (HTTP status 403, error code `spend_limits_admin_api_writes_not_enabled`)
 
@@ -112007,6 +112366,8 @@ come in a fixed order that is not creation order.
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -113510,7 +113871,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -113859,7 +114220,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -114011,7 +114372,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -114348,7 +114709,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -114441,7 +114802,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -114652,7 +115013,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -114751,7 +115112,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -115419,6 +115780,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -115679,6 +116042,10 @@ Any method can also return the general [HTTP errors](../errors.md).
 
   The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
 
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 - `ErrorCodeBetaPluginNameTaken` (HTTP status 409, error code `plugin_name_taken`)
 
   The marketplace already holds this name. `plugin_id` is the Plugin that holds it, and can be absent.
@@ -115881,6 +116248,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -116205,8 +116574,11 @@ func main() {
 
 Change which stored version of an organization-owned Plugin is served to members,
 for example to roll back to an earlier one. This pins the served version: later
-uploads are stored but no longer change what is served, and pinning cannot currently
-be undone, here or in claude.ai.
+uploads through this API are stored but no longer change what is served, and pinning
+cannot currently be undone, here or in claude.ai.
+
+A version from claude.ai might still change what is served: see [Versions and the served version](../../manage-claude/plugins-api.md#versions-and-the-served-version)
+in the Plugins API guide.
 
 Pass the version as `served_version_id`: an earlier one to roll back, a later one to
 start serving a version that was stored without being served, or the one already
@@ -116338,6 +116710,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -116599,6 +116973,10 @@ Any method can also return the general [HTTP errors](../errors.md).
 
   The version in `plugin_version_id` did not pass its content scan, so it cannot be served.
 
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 - `ErrorCodeBetaScanPending` (HTTP status 409, error code `scan_pending`)
 
   The content scan of the version in `plugin_version_id` is still running. Retry once the scan finishes.
@@ -116855,6 +117233,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -117301,6 +117681,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -117364,6 +117746,10 @@ Any method can also return the general [HTTP errors](../errors.md).
 - `ErrorCodeCMEKKeyDisabled` (HTTP status 400, error code `cmek_key_disabled`)
 
   The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -117548,6 +117934,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -117746,6 +118134,10 @@ Any method can also return the general [HTTP errors](../errors.md).
 - `ErrorCodeBetaUnsupportedCharset` (HTTP status 400, error code `unsupported_charset`)
 
   The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 - `ErrorCodeBetaSkillNameTaken` (HTTP status 409, error code `skill_name_taken`)
 
@@ -117957,6 +118349,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -118330,6 +118724,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -118717,6 +119113,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -118774,6 +119172,10 @@ Any method can also return the general [HTTP errors](../errors.md).
 - `ErrorCodeCMEKKeyNetworkBlocked` (HTTP status 400, error code `cmek_key_network_blocked`)
 
   The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -118954,6 +119356,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -119268,6 +119672,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -119387,6 +119793,14 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     When its setting last changed.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -119571,6 +119985,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -119665,6 +120081,14 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
       - `UserID string`
 
         The member's User ID.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -119861,6 +120285,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -120170,6 +120596,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -120481,6 +120909,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -120805,6 +121235,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -120946,6 +121378,14 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `const BetaPluginMarketplaceSyncStatusInProgress BetaPluginMarketplaceSyncStatus = "in_progress"`
 
     - `const BetaPluginMarketplaceSyncStatusSuccess BetaPluginMarketplaceSyncStatus = "success"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -121136,6 +121576,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -121203,7 +121645,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     A stable identifier for `manifest_error`; null when that is.
 
-  - `PluginErrors []BetaPluginMarketplaceValidationPluginError`
+  - `PluginErrors []BetaPluginMarketplaceValidationPluginErrorObject`
 
     One entry per plugin a synchronization would skip entirely, keyed by the plugin's name in marketplace.json.
 
@@ -121250,6 +121692,14 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `Valid bool`
 
     True when marketplace.json is well-formed and no plugin would be skipped; warnings never make it false.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -121443,6 +121893,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -121510,7 +121962,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     A stable identifier for `manifest_error`; null when that is.
 
-  - `PluginErrors []BetaPluginMarketplaceValidationPluginError`
+  - `PluginErrors []BetaPluginMarketplaceValidationPluginErrorObject`
 
     One entry per plugin a synchronization would skip entirely, keyed by the plugin's name in marketplace.json.
 
@@ -121565,6 +122017,10 @@ Any method can also return the general [HTTP errors](../errors.md).
 - `ErrorCodeBetaUnsupportedCharset` (HTTP status 400, error code `unsupported_charset`)
 
   The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -121772,6 +122228,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -122174,6 +122632,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -122562,6 +123022,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -122993,6 +123455,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -123383,6 +123847,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delive
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -123586,6 +124052,8 @@ Send one test span, named `anthropic.test`, to the destination with its register
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -123825,6 +124293,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -124058,6 +124528,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -124287,6 +124759,8 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -124532,6 +125006,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -124821,6 +125297,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -125089,6 +125567,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -125392,6 +125872,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -125658,6 +126140,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -125722,7 +126206,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -125879,6 +126363,8 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -125937,7 +126423,7 @@ Any method can also return the general [HTTP errors](../errors.md).
 
 - `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
 
-  The request came from a Claude sandbox with restricted network access, which is not allowed to make this change. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -125973,6 +126459,2114 @@ func main() {
 ```json
 {
   "signing_secret": "signing_secret"
+}
+```
+
+## Beta › Organization › Claude Code › Managed Settings › Configuration
+
+### Get Claude Code Managed Settings Configuration
+
+`client.Beta.Organization.ClaudeCode.ManagedSettings.Configuration.Get(ctx, query) (*BetaClaudeCodeManagedSettingsConfiguration, error)`
+
+**GET** `/v1/organizations/claude_code/managed_settings/configuration`
+
+Retrieve the organization's Claude Code managed settings mode and RBAC Group order.
+
+**Accepted credentials:** an organization-level Admin API key with the `read:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+#### Parameters
+
+- `query BetaOrganizationClaudeCodeManagedSettingConfigurationGetParams`
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
+    - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
+    - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `type BetaClaudeCodeManagedSettingsConfiguration`
+
+  - `Type ClaudeCodeManagedSettingsConfiguration`
+
+    Always `claude_code_managed_settings_configuration`.
+
+    default: claude_code_managed_settings_configuration
+
+  - `Mode BetaClaudeCodeManagedSettingsModeUnion`
+
+    How the organization serves managed settings. In `organization` mode every member receives the organization settings, which are set in claude.ai. In `rbac_groups` mode each member receives the settings of the first RBAC Group in `rbac_group_order` that they belong to. A member in none of them receives the default settings, or no settings if no default is set.
+
+    - `type BetaClaudeCodeManagedSettingsOrganizationMode`
+
+      - `Type Organization`
+
+        Always `organization`.
+
+        default: organization
+
+    - `type BetaClaudeCodeManagedSettingsRBACGroupsMode`
+
+      - `Type RBACGroups`
+
+        Always `rbac_groups`.
+
+        default: rbac_groups
+
+  - `ModeUpdatedAt Time`
+
+    When the mode last changed, in RFC 3339 format, or `null` if it never has.
+
+    format: date-time
+
+  - `RBACGroupOrder []string`
+
+    The ID of every RBAC Group with settings, deleted groups included, highest precedence first.
+
+  - `RBACGroupOrderVersion string`
+
+    An opaque version of `rbac_group_order`, which changes whenever the order does. Send it back with a new order.
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
+)
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaClaudeCodeManagedSettingsConfiguration, err := client.Beta.Organization.ClaudeCode.ManagedSettings.Configuration.Get(context.TODO(), anthropic.BetaOrganizationClaudeCodeManagedSettingConfigurationGetParams{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaClaudeCodeManagedSettingsConfiguration.Mode)
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "mode": {
+    "type": "organization"
+  },
+  "mode_updated_at": "2019-12-27T18:11:19.117Z",
+  "rbac_group_order": [
+    "rbac_group_012rppKaSVsmTo6NqRDXQXNF"
+  ],
+  "rbac_group_order_version": "rbac_group_order_version",
+  "type": "claude_code_managed_settings_configuration"
+}
+```
+
+### Update Claude Code Managed Settings Configuration
+
+`client.Beta.Organization.ClaudeCode.ManagedSettings.Configuration.Update(ctx, params) (*BetaClaudeCodeManagedSettingsConfiguration, error)`
+
+**POST** `/v1/organizations/claude_code/managed_settings/configuration`
+
+Change the organization's Claude Code managed settings mode, the RBAC Group order, or both, in one atomic write.
+
+To change the order, send `rbac_group_order` with the `rbac_group_order_version` from the read the change is based on. If the order has changed since that read, the request returns `409`: read it again and retry. To switch modes only if the order has not changed, send the current `rbac_group_order` and `rbac_group_order_version` with the new `mode`.
+
+A switch to `rbac_groups` mode with no RBAC Group settings and no default settings copies the organization settings into a new default, in the same write, so members keep the settings they had. The copy does not follow later changes to the organization settings. If the organization settings cannot be copied, the request returns `400` and changes nothing. If they cannot be read, are over 1 MiB or are not valid, setting the default settings first avoids the copy.
+
+After a switch to `rbac_groups` mode, a member in no listed RBAC Group receives the default settings, or no settings if no default is set, not the organization settings.
+
+**Accepted credentials:** an organization-level Admin API key with the `write:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+A write that returns `503` may have applied. Retrying it is safe.
+
+#### Parameters
+
+- `params BetaOrganizationClaudeCodeManagedSettingConfigurationUpdateParams`
+
+  - `Mode BetaClaudeCodeManagedSettingsModeParamUnion Optional`
+
+    The new mode, as an object such as `{"type": "rbac_groups"}`.
+
+  - `RBACGroupOrder []string Optional`
+
+    Every RBAC Group that has settings, each listed once, in the new order, highest precedence first. Requires `rbac_group_order_version`.
+
+  - `RBACGroupOrderVersion param.Opt[string] Optional`
+
+    The `rbac_group_order_version` from the read this change is based on. Requires `rbac_group_order`.
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
+    - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
+    - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `type BetaClaudeCodeManagedSettingsConfiguration`
+
+  - `Type ClaudeCodeManagedSettingsConfiguration`
+
+    Always `claude_code_managed_settings_configuration`.
+
+    default: claude_code_managed_settings_configuration
+
+  - `Mode BetaClaudeCodeManagedSettingsModeUnion`
+
+    How the organization serves managed settings. In `organization` mode every member receives the organization settings, which are set in claude.ai. In `rbac_groups` mode each member receives the settings of the first RBAC Group in `rbac_group_order` that they belong to. A member in none of them receives the default settings, or no settings if no default is set.
+
+    - `type BetaClaudeCodeManagedSettingsOrganizationMode`
+
+      - `Type Organization`
+
+        Always `organization`.
+
+        default: organization
+
+    - `type BetaClaudeCodeManagedSettingsRBACGroupsMode`
+
+      - `Type RBACGroups`
+
+        Always `rbac_groups`.
+
+        default: rbac_groups
+
+  - `ModeUpdatedAt Time`
+
+    When the mode last changed, in RFC 3339 format, or `null` if it never has.
+
+    format: date-time
+
+  - `RBACGroupOrder []string`
+
+    The ID of every RBAC Group with settings, deleted groups included, highest precedence first.
+
+  - `RBACGroupOrderVersion string`
+
+    An opaque version of `rbac_group_order`, which changes whenever the order does. Send it back with a new order.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ErrorCodeCMEKKeyDisabled` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `ErrorCodeBetaRequestBodyTimeout` (HTTP status 400, error code `request_body_timeout`)
+
+  The request body did not finish arriving in time, so nothing was done. Send a smaller body, or send it over a faster connection.
+
+- `ErrorCodeBetaSettingsDocumentLimitExceeded` (HTTP status 400, error code `settings_document_limit_exceeded`)
+
+  The organization has reached its limit of settings documents, counting unused ones. An owner can remove unused documents in claude.ai. Deleting a group's settings or clearing the default settings also frees a document, if nothing else uses it. None of these works once the organization has also reached its settings history limit.
+
+- `ErrorCodeBetaSettingsHistoryLimitExceeded` (HTTP status 400, error code `settings_history_limit_exceeded`)
+
+  The organization has reached its settings history limit, a cap on stored versions of its settings documents. Nothing in the API or claude.ai lowers the count, so contact support. Creating or deleting group settings, creating or clearing the default settings, and reordering are refused. Changing the mode still works, unless it would copy the organization settings into a new default.
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
+)
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaClaudeCodeManagedSettingsConfiguration, err := client.Beta.Organization.ClaudeCode.ManagedSettings.Configuration.Update(context.TODO(), anthropic.BetaOrganizationClaudeCodeManagedSettingConfigurationUpdateParams{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaClaudeCodeManagedSettingsConfiguration.Mode)
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "mode": {
+    "type": "organization"
+  },
+  "mode_updated_at": "2019-12-27T18:11:19.117Z",
+  "rbac_group_order": [
+    "rbac_group_012rppKaSVsmTo6NqRDXQXNF"
+  ],
+  "rbac_group_order_version": "rbac_group_order_version",
+  "type": "claude_code_managed_settings_configuration"
+}
+```
+
+## Beta › Organization › Claude Code › Managed Settings › RBAC Groups
+
+### List RBAC Group Claude Code Managed Settings
+
+`client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroups.List(ctx, params) (*PageCursor[BetaClaudeCodeRBACGroupManagedSettingsSummary], error)`
+
+**GET** `/v1/organizations/claude_code/managed_settings/rbac_groups`
+
+List the RBAC Groups that have Claude Code managed settings, highest precedence first.
+
+Each entry gives the group's status and timestamps, not its settings. The list includes deleted groups that still have settings, and leaves out the default settings. If the order changes between pages, the request returns `409`: list again from the first page.
+
+**Accepted credentials:** an organization-level Admin API key with the `read:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+#### Parameters
+
+- `params BetaOrganizationClaudeCodeManagedSettingRBACGroupListParams`
+
+  - `Limit param.Opt[int64] Optional` (query parameter)
+
+    Number of items to return per page.
+
+    Defaults to `20`. Ranges from `1` to `100`.
+
+    minimum: 1, maximum: 100
+
+  - `Page param.Opt[string] Optional` (query parameter)
+
+    Optionally set to the `next_page` token from the previous response.
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
+    - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
+    - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `type BetaClaudeCodeRBACGroupManagedSettingsSummary`
+
+  - `Type ClaudeCodeRBACGroupManagedSettingsSummary`
+
+    Always `claude_code_rbac_group_managed_settings_summary`.
+
+    default: claude_code_rbac_group_managed_settings_summary
+
+  - `CreatedAt Time`
+
+    When the settings document this group uses was first stored, in RFC 3339 format. This can be earlier than when the group got its settings, and it changes if the group gets a different document.
+
+    format: date-time
+
+  - `RBACGroupID string`
+
+    The RBAC Group's ID, prefixed `rbac_group_`.
+
+  - `RBACGroupStatus BetaClaudeCodeRBACGroupStatusUnion`
+
+    Whether the group is still one of the organization's RBAC Groups. Its `type` is `active` if it is, `deleted` if it is not, and `unknown` if that cannot be checked right now. A deleted group's settings stay in `rbac_group_order` but match no member.
+
+    - `type BetaClaudeCodeRBACGroupStatusActive`
+
+      - `Type Active`
+
+        Always `active`.
+
+        default: active
+
+    - `type BetaClaudeCodeRBACGroupStatusDeleted`
+
+      - `Type Deleted`
+
+        Always `deleted`.
+
+        default: deleted
+
+    - `type BetaClaudeCodeRBACGroupStatusUnknown`
+
+      - `Type Unknown`
+
+        Always `unknown`.
+
+        default: unknown
+
+  - `UpdatedAt Time`
+
+    When this group's settings or its position in the order last changed, in RFC 3339 format. Its position changes whenever the number of groups ahead of it changes.
+
+    format: date-time
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
+)
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	page, err := client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroups.List(context.TODO(), anthropic.BetaOrganizationClaudeCodeManagedSettingRBACGroupListParams{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", page)
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+      "rbac_group_status": {
+        "type": "active"
+      },
+      "type": "claude_code_rbac_group_managed_settings_summary",
+      "updated_at": "2019-12-27T18:11:19.117Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Get RBAC Group Claude Code Managed Settings
+
+`client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroups.Get(ctx, rbacGroupID, query) (*BetaClaudeCodeRBACGroupManagedSettings, error)`
+
+**GET** `/v1/organizations/claude_code/managed_settings/rbac_groups/{rbac_group_id}`
+
+Retrieve an RBAC Group's Claude Code managed settings.
+
+**Accepted credentials:** an organization-level Admin API key with the `read:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+#### Parameters
+
+- `rbacGroupID string` (path parameter)
+
+  The RBAC Group's ID, prefixed `rbac_group_`.
+
+- `query BetaOrganizationClaudeCodeManagedSettingRBACGroupGetParams`
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
+    - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
+    - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `type BetaClaudeCodeRBACGroupManagedSettings`
+
+  - `Type ClaudeCodeRBACGroupManagedSettings`
+
+    Always `claude_code_rbac_group_managed_settings`.
+
+    default: claude_code_rbac_group_managed_settings
+
+  - `CreatedAt Time`
+
+    When the settings document this group uses was first stored, in RFC 3339 format. This can be earlier than when the group got its settings, and it changes if the group gets a different document.
+
+    format: date-time
+
+  - `RBACGroupID string`
+
+    The RBAC Group's ID, prefixed `rbac_group_`.
+
+  - `RBACGroupStatus BetaClaudeCodeRBACGroupStatusUnion`
+
+    Whether the group is still one of the organization's RBAC Groups. Its `type` is `active` if it is, `deleted` if it is not, and `unknown` if that cannot be checked right now. A deleted group's settings stay in `rbac_group_order` but match no member.
+
+    - `type BetaClaudeCodeRBACGroupStatusActive`
+
+      - `Type Active`
+
+        Always `active`.
+
+        default: active
+
+    - `type BetaClaudeCodeRBACGroupStatusDeleted`
+
+      - `Type Deleted`
+
+        Always `deleted`.
+
+        default: deleted
+
+    - `type BetaClaudeCodeRBACGroupStatusUnknown`
+
+      - `Type Unknown`
+
+        Always `unknown`.
+
+        default: unknown
+
+  - `Settings map[string]any`
+
+    The group's settings document, or `null` if the stored document is damaged and can no longer be read. Replacing it fixes this.
+
+  - `UpdatedAt Time`
+
+    When this group's settings or its position in the order last changed, in RFC 3339 format. Its position changes whenever the number of groups ahead of it changes.
+
+    format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ErrorCodeBetaCMEKFeatureUnsupported` (HTTP status 400, error code `cmek_feature_unsupported`)
+
+  This stored settings document currently cannot be read or replaced. Contact support, or, if you no longer need these settings, delete the group's settings or clear the default.
+
+- `ErrorCodeCMEKKeyDisabled` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `ErrorCodeBetaRBACGroupManagedSettingsNotFound` (HTTP status 404, error code `rbac_group_managed_settings_not_found`)
+
+  This RBAC Group has no Claude Code managed settings.
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
+)
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaClaudeCodeRBACGroupManagedSettings, err := client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroups.Get(
+		context.TODO(),
+		"rbac_group_id",
+		anthropic.BetaOrganizationClaudeCodeManagedSettingRBACGroupGetParams{},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaClaudeCodeRBACGroupManagedSettings.RBACGroupID)
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "rbac_group_status": {
+    "type": "active"
+  },
+  "settings": {
+    "foo": "bar"
+  },
+  "type": "claude_code_rbac_group_managed_settings",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Set RBAC Group Claude Code Managed Settings
+
+`client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroups.Set(ctx, rbacGroupID, params) (*BetaClaudeCodeRBACGroupManagedSettings, error)`
+
+**POST** `/v1/organizations/claude_code/managed_settings/rbac_groups/{rbac_group_id}`
+
+Create or replace an RBAC Group's Claude Code managed settings.
+
+New settings join the end of `rbac_group_order`, and existing settings keep their place. Until the group is moved up, its members who also belong to an earlier group keep that group's settings. In `organization` mode a write changes no member's settings until the organization switches to `rbac_groups` mode. Once a group has settings, that switch no longer copies the organization settings into default settings, so members in no RBAC Group in `rbac_group_order` receive no settings unless you set the default settings before the switch.
+
+Get the group's ID from the RBAC Groups API. One key can hold `read:rbac_groups` and `write:claude_code_managed_settings`.
+
+**Accepted credentials:** an organization-level Admin API key with the `write:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+A write that returns `503` may have applied. Retrying it is safe.
+
+#### Parameters
+
+- `rbacGroupID string` (path parameter)
+
+  The RBAC Group's ID, prefixed `rbac_group_`.
+
+- `params BetaOrganizationClaudeCodeManagedSettingRBACGroupSetParams`
+
+  - `Settings map[string]any`
+
+    The whole settings document, a JSON object of Claude Code managed settings. It replaces any stored document. At most 1 MiB as the server stores it, which can be larger than the request body.
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
+    - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
+    - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `type BetaClaudeCodeRBACGroupManagedSettings`
+
+  - `Type ClaudeCodeRBACGroupManagedSettings`
+
+    Always `claude_code_rbac_group_managed_settings`.
+
+    default: claude_code_rbac_group_managed_settings
+
+  - `CreatedAt Time`
+
+    When the settings document this group uses was first stored, in RFC 3339 format. This can be earlier than when the group got its settings, and it changes if the group gets a different document.
+
+    format: date-time
+
+  - `RBACGroupID string`
+
+    The RBAC Group's ID, prefixed `rbac_group_`.
+
+  - `RBACGroupStatus BetaClaudeCodeRBACGroupStatusUnion`
+
+    Whether the group is still one of the organization's RBAC Groups. Its `type` is `active` if it is, `deleted` if it is not, and `unknown` if that cannot be checked right now. A deleted group's settings stay in `rbac_group_order` but match no member.
+
+    - `type BetaClaudeCodeRBACGroupStatusActive`
+
+      - `Type Active`
+
+        Always `active`.
+
+        default: active
+
+    - `type BetaClaudeCodeRBACGroupStatusDeleted`
+
+      - `Type Deleted`
+
+        Always `deleted`.
+
+        default: deleted
+
+    - `type BetaClaudeCodeRBACGroupStatusUnknown`
+
+      - `Type Unknown`
+
+        Always `unknown`.
+
+        default: unknown
+
+  - `Settings map[string]any`
+
+    The group's settings document, or `null` if the stored document is damaged and can no longer be read. Replacing it fixes this.
+
+  - `UpdatedAt Time`
+
+    When this group's settings or its position in the order last changed, in RFC 3339 format. Its position changes whenever the number of groups ahead of it changes.
+
+    format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ErrorCodeBetaCMEKFeatureUnsupported` (HTTP status 400, error code `cmek_feature_unsupported`)
+
+  This stored settings document currently cannot be read or replaced. Contact support, or, if you no longer need these settings, delete the group's settings or clear the default.
+
+- `ErrorCodeCMEKKeyDisabled` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `ErrorCodeBetaRBACGroupOrderLimitExceeded` (HTTP status 400, error code `rbac_group_order_limit_exceeded`)
+
+  The RBAC Group order already has the most groups allowed. Delete another group's settings first.
+
+- `ErrorCodeBetaRequestBodyTimeout` (HTTP status 400, error code `request_body_timeout`)
+
+  The request body did not finish arriving in time, so nothing was done. Send a smaller body, or send it over a faster connection.
+
+- `ErrorCodeBetaSettingsDocumentLimitExceeded` (HTTP status 400, error code `settings_document_limit_exceeded`)
+
+  The organization has reached its limit of settings documents, counting unused ones. An owner can remove unused documents in claude.ai. Deleting a group's settings or clearing the default settings also frees a document, if nothing else uses it. None of these works once the organization has also reached its settings history limit.
+
+- `ErrorCodeBetaSettingsHistoryLimitExceeded` (HTTP status 400, error code `settings_history_limit_exceeded`)
+
+  The organization has reached its settings history limit, a cap on stored versions of its settings documents. Nothing in the API or claude.ai lowers the count, so contact support. Creating or deleting group settings, creating or clearing the default settings, and reordering are refused. Changing the mode still works, unless it would copy the organization settings into a new default.
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `ErrorCodeBetaRBACGroupNotFound` (HTTP status 404, error code `rbac_group_not_found`)
+
+  The RBAC Group is not one of the organization's groups.
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
+)
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaClaudeCodeRBACGroupManagedSettings, err := client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroups.Set(
+		context.TODO(),
+		"rbac_group_id",
+		anthropic.BetaOrganizationClaudeCodeManagedSettingRBACGroupSetParams{
+			Settings: map[string]any{
+				"foo": "bar",
+			},
+		},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaClaudeCodeRBACGroupManagedSettings.RBACGroupID)
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "rbac_group_status": {
+    "type": "active"
+  },
+  "settings": {
+    "foo": "bar"
+  },
+  "type": "claude_code_rbac_group_managed_settings",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Delete RBAC Group Claude Code Managed Settings
+
+`client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroups.Delete(ctx, rbacGroupID, body) (*BetaDeletedClaudeCodeRBACGroupManagedSettings, error)`
+
+**DELETE** `/v1/organizations/claude_code/managed_settings/rbac_groups/{rbac_group_id}`
+
+Delete an RBAC Group's Claude Code managed settings and remove the group from `rbac_group_order`.
+
+A group with no settings returns `404` with the error code `rbac_group_managed_settings_not_found`. That code on a retry of a delete that returned `503` means the settings are gone.
+
+**Accepted credentials:** an organization-level Admin API key with the `write:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+A write that returns `503` may have applied. Retrying it is safe.
+
+#### Parameters
+
+- `rbacGroupID string` (path parameter)
+
+  The RBAC Group's ID, prefixed `rbac_group_`.
+
+- `body BetaOrganizationClaudeCodeManagedSettingRBACGroupDeleteParams`
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
+    - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
+    - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `type BetaDeletedClaudeCodeRBACGroupManagedSettings`
+
+  - `Type ClaudeCodeRBACGroupManagedSettingsDeleted`
+
+    Always `claude_code_rbac_group_managed_settings_deleted`.
+
+    default: claude_code_rbac_group_managed_settings_deleted
+
+  - `RBACGroupID string`
+
+    The RBAC Group's ID, prefixed `rbac_group_`.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ErrorCodeCMEKKeyDisabled` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `ErrorCodeBetaSettingsHistoryLimitExceeded` (HTTP status 400, error code `settings_history_limit_exceeded`)
+
+  The organization has reached its settings history limit, a cap on stored versions of its settings documents. Nothing in the API or claude.ai lowers the count, so contact support. Creating or deleting group settings, creating or clearing the default settings, and reordering are refused. Changing the mode still works, unless it would copy the organization settings into a new default.
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `ErrorCodeBetaRBACGroupManagedSettingsNotFound` (HTTP status 404, error code `rbac_group_managed_settings_not_found`)
+
+  This RBAC Group has no Claude Code managed settings.
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
+)
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaDeletedClaudeCodeRBACGroupManagedSettings, err := client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroups.Delete(
+		context.TODO(),
+		"rbac_group_id",
+		anthropic.BetaOrganizationClaudeCodeManagedSettingRBACGroupDeleteParams{},
+	)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaDeletedClaudeCodeRBACGroupManagedSettings.RBACGroupID)
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "type": "claude_code_rbac_group_managed_settings_deleted"
+}
+```
+
+## Beta › Organization › Claude Code › Managed Settings › RBAC Group Default
+
+### Get RBAC Group Default Claude Code Managed Settings
+
+`client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroupDefault.Get(ctx, query) (*BetaClaudeCodeRBACGroupDefaultManagedSettings, error)`
+
+**GET** `/v1/organizations/claude_code/managed_settings/rbac_group_default`
+
+Retrieve the default Claude Code managed settings, which members who belong to no RBAC Group in `rbac_group_order` receive in `rbac_groups` mode.
+
+**Accepted credentials:** an organization-level Admin API key with the `read:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+#### Parameters
+
+- `query BetaOrganizationClaudeCodeManagedSettingRBACGroupDefaultGetParams`
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
+    - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
+    - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `type BetaClaudeCodeRBACGroupDefaultManagedSettings`
+
+  - `Type ClaudeCodeRBACGroupDefaultManagedSettings`
+
+    Always `claude_code_rbac_group_default_managed_settings`.
+
+    default: claude_code_rbac_group_default_managed_settings
+
+  - `Settings map[string]any`
+
+    The default settings document, or `null` if none are set or the stored document is damaged and can no longer be read. To tell these apart, `updated_at` is `null` only when none are set. Replacing a damaged document fixes this.
+
+  - `UpdatedAt Time`
+
+    When the default settings last changed, in RFC 3339 format, or `null` if none are set.
+
+    format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ErrorCodeBetaCMEKFeatureUnsupported` (HTTP status 400, error code `cmek_feature_unsupported`)
+
+  This stored settings document currently cannot be read or replaced. Contact support, or, if you no longer need these settings, delete the group's settings or clear the default.
+
+- `ErrorCodeCMEKKeyDisabled` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
+)
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaClaudeCodeRBACGroupDefaultManagedSettings, err := client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroupDefault.Get(context.TODO(), anthropic.BetaOrganizationClaudeCodeManagedSettingRBACGroupDefaultGetParams{})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaClaudeCodeRBACGroupDefaultManagedSettings.Settings)
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "settings": {
+    "foo": "bar"
+  },
+  "type": "claude_code_rbac_group_default_managed_settings",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Update RBAC Group Default Claude Code Managed Settings
+
+`client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroupDefault.Update(ctx, params) (*BetaClaudeCodeRBACGroupDefaultManagedSettings, error)`
+
+**POST** `/v1/organizations/claude_code/managed_settings/rbac_group_default`
+
+Set or replace the default Claude Code managed settings, or clear them with `null`.
+
+**Accepted credentials:** an organization-level Admin API key with the `write:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+A write that returns `503` may have applied. Retrying it is safe.
+
+#### Parameters
+
+- `params BetaOrganizationClaudeCodeManagedSettingRBACGroupDefaultUpdateParams`
+
+  - `Settings map[string]any`
+
+    The whole settings document, a JSON object of Claude Code managed settings. It replaces any stored document. At most 1 MiB as the server stores it, which can be larger than the request body.
+
+    To clear the default settings, set `Settings` to `param.NullMap[map[string]any]()`. If `Settings` is nil, the API returns a `400`. An empty map stores an empty document instead of clearing the default settings.
+
+  - `Betas []AnthropicBeta Optional` (header parameter)
+
+    This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+    - `const AnthropicBetaComputerUse2024_10_22 AnthropicBeta = "computer-use-2024-10-22"`
+
+    - `const AnthropicBetaComputerUse2025_01_24 AnthropicBeta = "computer-use-2025-01-24"`
+
+    - `const AnthropicBetaOutput128k2025_02_19 AnthropicBeta = "output-128k-2025-02-19"`
+
+    - `const AnthropicBetaMCPClient2025_04_04 AnthropicBeta = "mcp-client-2025-04-04"`
+
+    - `const AnthropicBetaMCPClient2025_11_20 AnthropicBeta = "mcp-client-2025-11-20"`
+
+    - `const AnthropicBetaDevFullThinking2025_05_14 AnthropicBeta = "dev-full-thinking-2025-05-14"`
+
+    - `const AnthropicBetaInterleavedThinking2025_05_14 AnthropicBeta = "interleaved-thinking-2025-05-14"`
+
+    - `const AnthropicBetaCodeExecution2025_05_22 AnthropicBeta = "code-execution-2025-05-22"`
+
+    - `const AnthropicBetaContext1m2025_08_07 AnthropicBeta = "context-1m-2025-08-07"`
+
+    - `const AnthropicBetaContextManagement2025_06_27 AnthropicBeta = "context-management-2025-06-27"`
+
+    - `const AnthropicBetaModelContextWindowExceeded2025_08_26 AnthropicBeta = "model-context-window-exceeded-2025-08-26"`
+
+    - `const AnthropicBetaFastMode2026_02_01 AnthropicBeta = "fast-mode-2026-02-01"`
+
+    - `const AnthropicBetaOutput300k2026_03_24 AnthropicBeta = "output-300k-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_03_24 AnthropicBeta = "user-profiles-2026-03-24"`
+
+    - `const AnthropicBetaUserProfiles2026_08_18 AnthropicBeta = "user-profiles-2026-08-18"`
+
+    - `const AnthropicBetaUserProfiles2026_09_04 AnthropicBeta = "user-profiles-2026-09-04"`
+
+    - `const AnthropicBetaAdvisorTool2026_03_01 AnthropicBeta = "advisor-tool-2026-03-01"`
+
+    - `const AnthropicBetaManagedAgents2026_04_01 AnthropicBeta = "managed-agents-2026-04-01"`
+
+    - `const AnthropicBetaDreaming2026_04_21 AnthropicBeta = "dreaming-2026-04-21"`
+
+    - `const AnthropicBetaThinkingTokenCount2026_05_13 AnthropicBeta = "thinking-token-count-2026-05-13"`
+
+    - `const AnthropicBetaServerSideFallback2026_06_01 AnthropicBeta = "server-side-fallback-2026-06-01"`
+
+    - `const AnthropicBetaServerSideFallback2026_07_01 AnthropicBeta = "server-side-fallback-2026-07-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_06_01 AnthropicBeta = "fallback-credit-2026-06-01"`
+
+    - `const AnthropicBetaFallbackCredit2026_07_01 AnthropicBeta = "fallback-credit-2026-07-01"`
+
+    - `const AnthropicBetaAgentMemory2026_07_22 AnthropicBeta = "agent-memory-2026-07-22"`
+
+    - `const AnthropicBetaMidConversationToolChanges2026_07_01 AnthropicBeta = "mid-conversation-tool-changes-2026-07-01"`
+
+    - `const AnthropicBetaCompact2026_01_12 AnthropicBeta = "compact-2026-01-12"`
+
+    - `const AnthropicBetaComputerUse2025_11_24 AnthropicBeta = "computer-use-2025-11-24"`
+
+    - `const AnthropicBetaMCPTunnels2026_06_22 AnthropicBeta = "mcp-tunnels-2026-06-22"`
+
+    - `const AnthropicBetaStructuredOutputs2025_11_13 AnthropicBeta = "structured-outputs-2025-11-13"`
+
+    - `const AnthropicBetaTaskBudgets2026_03_13 AnthropicBeta = "task-budgets-2026-03-13"`
+
+    - `const AnthropicBetaThinkingDisplayUpdates2026_08_18 AnthropicBeta = "thinking-display-updates-2026-08-18"`
+
+    - `const AnthropicBetaMidConversationOutputConfig2026_07_01 AnthropicBeta = "mid-conversation-output-config-2026-07-01"`
+
+    - `const AnthropicBetaThinkingBindingControls2026_08_01 AnthropicBeta = "thinking-binding-controls-2026-08-01"`
+
+    - `const AnthropicBetaMidConversationSystemClearAt2026_08_21 AnthropicBeta = "mid-conversation-system-clear-at-2026-08-21"`
+
+    - `const AnthropicBetaCompact2026_09_04 AnthropicBeta = "compact-2026-09-04"`
+
+    - `const AnthropicBetaInlineTools2026_09_15 AnthropicBeta = "inline-tools-2026-09-15"`
+
+    - `const AnthropicBetaMCPClient2026_09_15 AnthropicBeta = "mcp-client-2026-09-15"`
+
+    - `const AnthropicBetaCEPlugins2026_09_01 AnthropicBeta = "ce-plugins-2026-09-01"`
+
+    - `const AnthropicBetaSpendLimitReads2026_09_26 AnthropicBeta = "spend-limit-reads-2026-09-26"`
+
+    - `const AnthropicBetaTelemetryDestinations2026_08_11 AnthropicBeta = "telemetry-destinations-2026-08-11"`
+
+    - `const AnthropicBetaWebhooks2026_10_07 AnthropicBeta = "webhooks-2026-10-07"`
+
+    - `const AnthropicBetaAdminUserSignOut2026_10_08 AnthropicBeta = "admin-user-sign-out-2026-10-08"`
+
+    - `const AnthropicBetaMessageThreads2026_08_12 AnthropicBeta = "message-threads-2026-08-12"`
+
+    - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
+
+    - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
+    - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
+
+    - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPromptCaching2024_07_31 AnthropicBeta = "prompt-caching-2024-07-31"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaPDFs2024_09_25 AnthropicBeta = "pdfs-2024-09-25"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenCounting2024_11_01 AnthropicBeta = "token-counting-2024-11-01"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaTokenEfficientTools2025_02_19 AnthropicBeta = "token-efficient-tools-2025-02-19"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaFilesAPI2025_04_14 AnthropicBeta = "files-api-2025-04-14"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+    - `const AnthropicBetaExtendedCacheTTL2025_04_11 AnthropicBeta = "extended-cache-ttl-2025-04-11"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaSkills2025_10_02 AnthropicBeta = "skills-2025-10-02"`
+
+      **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+    - `const AnthropicBetaCacheDiagnosis2026_04_07 AnthropicBeta = "cache-diagnosis-2026-04-07"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+    - `const AnthropicBetaCEUserManagement2026_07_13 AnthropicBeta = "ce-user-management-2026-07-13"`
+
+      **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `type BetaClaudeCodeRBACGroupDefaultManagedSettings`
+
+  - `Type ClaudeCodeRBACGroupDefaultManagedSettings`
+
+    Always `claude_code_rbac_group_default_managed_settings`.
+
+    default: claude_code_rbac_group_default_managed_settings
+
+  - `Settings map[string]any`
+
+    The default settings document, or `null` if none are set or the stored document is damaged and can no longer be read. To tell these apart, `updated_at` is `null` only when none are set. Replacing a damaged document fixes this.
+
+  - `UpdatedAt Time`
+
+    When the default settings last changed, in RFC 3339 format, or `null` if none are set.
+
+    format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](../errors.md).
+
+- `ErrorCodeBetaCMEKFeatureUnsupported` (HTTP status 400, error code `cmek_feature_unsupported`)
+
+  This stored settings document currently cannot be read or replaced. Contact support, or, if you no longer need these settings, delete the group's settings or clear the default.
+
+- `ErrorCodeCMEKKeyDisabled` (HTTP status 400, error code `cmek_key_disabled`)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `ErrorCodeBetaRequestBodyTimeout` (HTTP status 400, error code `request_body_timeout`)
+
+  The request body did not finish arriving in time, so nothing was done. Send a smaller body, or send it over a faster connection.
+
+- `ErrorCodeBetaSettingsDocumentLimitExceeded` (HTTP status 400, error code `settings_document_limit_exceeded`)
+
+  The organization has reached its limit of settings documents, counting unused ones. An owner can remove unused documents in claude.ai. Deleting a group's settings or clearing the default settings also frees a document, if nothing else uses it. None of these works once the organization has also reached its settings history limit.
+
+- `ErrorCodeBetaSettingsHistoryLimitExceeded` (HTTP status 400, error code `settings_history_limit_exceeded`)
+
+  The organization has reached its settings history limit, a cap on stored versions of its settings documents. Nothing in the API or claude.ai lowers the count, so contact support. Creating or deleting group settings, creating or clearing the default settings, and reordering are refused. Changing the mode still works, unless it would copy the organization settings into a new default.
+
+- `ErrorCodeSandboxEgressRestricted` (HTTP status 403, error code `sandbox_egress_restricted`)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/anthropics/anthropic-sdk-go/v2"
+	"github.com/anthropics/anthropic-sdk-go/v2/option"
+)
+
+func main() {
+	client := anthropic.NewClient(
+		option.WithAPIKey("my-anthropic-api-key"),
+	)
+	betaClaudeCodeRBACGroupDefaultManagedSettings, err := client.Beta.Organization.ClaudeCode.ManagedSettings.RBACGroupDefault.Update(context.TODO(), anthropic.BetaOrganizationClaudeCodeManagedSettingRBACGroupDefaultUpdateParams{
+		Settings: map[string]any{
+			"foo": "bar",
+		},
+	})
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Printf("%+v\n", betaClaudeCodeRBACGroupDefaultManagedSettings.Settings)
+}
+```
+
+##### Response (200)
+
+```json
+{
+  "settings": {
+    "foo": "bar"
+  },
+  "type": "claude_code_rbac_group_default_managed_settings",
+  "updated_at": "2019-12-27T18:11:19.117Z"
 }
 ```
 
@@ -126093,6 +128687,8 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -126601,6 +129197,8 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -127080,6 +129678,8 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -127555,6 +130155,8 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -128042,6 +130644,8 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -128285,6 +130889,8 @@ List the set-up Slack workspaces the organization owns, newest first by `created
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -128766,6 +131372,8 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -129244,6 +131852,8 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -129742,6 +132352,8 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -129995,6 +132607,8 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -130252,6 +132866,8 @@ Change a Bundle's instructions. The update is partial: a field left out is uncha
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -130530,6 +133146,8 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -130796,6 +133414,8 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
@@ -131067,6 +133687,8 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -131332,6 +133954,8 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
     - `const AnthropicBetaAnalyticsUsageCost2026_08_24 AnthropicBeta = "analytics-usage-cost-2026-08-24"`
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
+
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
 
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 

@@ -10,11 +10,9 @@ Claude Platform OAuth is a Beta Service: prerelease software provided under your
 
 Claude Platform OAuth lets your users bill their Claude organization for usage within your app.
 
-## What you can build
+## Let customers pay for their own Claude usage
 
-### Let customers pay for their own Claude usage
-
-When your product calls Claude, the usage can be billed to your customers’ own Claude organization. Your users click a **Link your Claude organization** button, sign in to Claude, and approve your app. For Linked billing, the user must have the Admin or Billing role in their Claude organization.
+When your product calls Claude, you can bill the usage to each customer’s own Claude organization. This is Linked billing. Your users click a **Link your Claude organization** button, sign in to Claude, and approve your app. They must have the Admin or Billing role in their Claude organization.
 
 After that:
 
@@ -35,7 +33,7 @@ Linked billing follows a short round trip. The person leaves your product for Cl
 
 The approval page shows your app’s name and what your app is asking for, so the person knows what they’re approving.
 
-If you’ve worked with OAuth before: Claude Platform OAuth uses the OAuth 2.0 authorization code flow with PKCE, with Anthropic as the authorization server.
+Claude Platform OAuth uses the OAuth 2.0 authorization code flow with PKCE. Anthropic is the authorization server.
 
 ## One-time OAuth app setup
 
@@ -44,8 +42,8 @@ Linked billing starts with these one-time setup steps in the Claude Console. The
 These steps need the Admin role in your Claude organization.
 
 1. **Create the app.** In the Claude Console, create an OAuth app and copy its client ID. The app holds the name that people see on the approval page and the address in your product that they return to.
-2. **Set up client authentication.** Instead of a client secret, your back end proves that a request comes from your app with a short-lived token from your own identity provider, such as AWS, Google Cloud, Microsoft Entra ID, or Kubernetes. You select the identity provider, and which of its tokens to accept, on the app’s **Client authentication** tab.
-3. **Set up your back end’s identity.** Create a service account and a second federation rule with [Workload Identity Federation](../workload-identity-federation.md), and select the service account as the app’s operator service account.
+2. **Set up client authentication.** Instead of a client secret, your back end uses a short-lived token to prove that a request comes from your app. The token comes from your own identity provider, such as AWS, Google Cloud, or Kubernetes. On the app’s **Client authentication** tab, you select the identity provider and which of its tokens to accept.
+3. **Set up your back end’s identity.** Create a service account and a second federation rule with [Workload Identity Federation](../workload-identity-federation.md). Select the service account as the app’s [operator service account](oauth-reference.md#terms), which your back end uses to bill customers.
 
 ## Next steps
 

@@ -241,6 +241,8 @@ List Events
 
     - `const AnthropicBetaExperimentalClaudeTag2026_10_21 AnthropicBeta = "experimental-claude-tag-2026-10-21"`
 
+    - `const AnthropicBetaCEClaudeCodeManagedSettings2026_10_06 AnthropicBeta = "ce-claude-code-managed-settings-2026-10-06"`
+
     - `const AnthropicBetaUserProfilesBilling2026_10_01 AnthropicBeta = "user-profiles-billing-2026-10-01"`
 
     - `const AnthropicBetaMessageBatches2024_09_24 AnthropicBeta = "message-batches-2024-09-24"`
@@ -1011,7 +1013,7 @@ List Events
 
     - `Error BetaManagedAgentsSessionErrorEventErrorUnion`
 
-      - `type BetaManagedAgentsUnknownError`
+      - `type BetaManagedAgentsUnknownErrorObject`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -1021,7 +1023,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsUnknownErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -1043,7 +1045,7 @@ List Events
 
             - `Type Terminal`
 
-      - `type BetaManagedAgentsModelOverloadedError`
+      - `type BetaManagedAgentsModelOverloadedErrorObject`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -1053,7 +1055,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelOverloadedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -1069,7 +1071,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRateLimitedError`
+      - `type BetaManagedAgentsModelRateLimitedErrorObject`
 
         The model request was rate-limited.
 
@@ -1079,7 +1081,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelRateLimitedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -1095,7 +1097,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsModelRequestFailedError`
+      - `type BetaManagedAgentsModelRequestFailedErrorObject`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -1105,7 +1107,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsModelRequestFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -1121,7 +1123,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPConnectionFailedError`
+      - `type BetaManagedAgentsMCPConnectionFailedErrorObject`
 
         Failed to connect to an MCP server.
 
@@ -1135,7 +1137,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsMCPConnectionFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -1151,7 +1153,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsMCPAuthenticationFailedError`
+      - `type BetaManagedAgentsMCPAuthenticationFailedErrorObject`
 
         Authentication to an MCP server failed.
 
@@ -1165,7 +1167,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -1181,7 +1183,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsBillingError`
+      - `type BetaManagedAgentsBillingErrorObject`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -1191,7 +1193,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsBillingErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -1207,7 +1209,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCredentialHostUnreachableError`
+      - `type BetaManagedAgentsCredentialHostUnreachableErrorObject`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -1221,7 +1223,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -1241,7 +1243,7 @@ List Events
 
           ID of the vault containing the affected credential.
 
-      - `type BetaManagedAgentsToolUseLimitReachedError`
+      - `type BetaManagedAgentsToolUseLimitReachedErrorObject`
 
         The turn stopped because the agent loop reached its limit on tool-use rounds (one model response that calls tools, plus running those tools, is one round), not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -1251,7 +1253,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsToolUseLimitReachedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsToolUseLimitReachedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -1267,7 +1269,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsCompactionLimitReachedError`
+      - `type BetaManagedAgentsCompactionLimitReachedErrorObject`
 
         The turn stopped because the context was compacted the maximum number of times in a row without the model producing a message or a tool call, not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -1277,7 +1279,7 @@ List Events
 
           Human-readable error description.
 
-        - `RetryStatus BetaManagedAgentsCompactionLimitReachedErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsCompactionLimitReachedErrorObjectRetryStatusUnion`
 
           What the client should do next.
 
@@ -1293,7 +1295,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryAuthenticationError`
+      - `type BetaManagedAgentsRepositoryAuthenticationErrorObject`
 
         The repository host rejected the credentials, or required credentials and received none.
 
@@ -1307,7 +1309,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryAuthenticationErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryAuthenticationErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -1323,7 +1325,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryForbiddenError`
+      - `type BetaManagedAgentsRepositoryForbiddenErrorObject`
 
         The repository host refused access to the repository.
 
@@ -1337,7 +1339,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryForbiddenErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryForbiddenErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -1353,7 +1355,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryNotFoundError`
+      - `type BetaManagedAgentsRepositoryNotFoundErrorObject`
 
         The repository host reported the repository as not found.
 
@@ -1367,7 +1369,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryNotFoundErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryNotFoundErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -1383,7 +1385,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryCheckoutError`
+      - `type BetaManagedAgentsRepositoryCheckoutErrorObject`
 
         The requested branch or commit does not exist in the repository.
 
@@ -1397,7 +1399,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryCheckoutErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryCheckoutErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -1413,7 +1415,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `type BetaManagedAgentsRepositoryCloneError`
+      - `type BetaManagedAgentsRepositoryCloneErrorObject`
 
         The repository could not be cloned.
 
@@ -1427,7 +1429,7 @@ List Events
 
           URL of the repository that could not be cloned. Null when it could not be identified.
 
-        - `RetryStatus BetaManagedAgentsRepositoryCloneErrorRetryStatusUnion`
+        - `RetryStatus BetaManagedAgentsRepositoryCloneErrorObjectRetryStatusUnion`
 
           What the client should do next. Always `retrying`: the session keeps running without the repository.
 
@@ -3087,17 +3089,17 @@ List Events
 
         - `Type Completed`
 
-      - `type BetaManagedAgentsWorkflowRunResultError`
+      - `type BetaManagedAgentsWorkflowRunResultErrorObject`
 
         The run failed or reached its time limit.
 
         - `Type Error`
 
-        - `Error BetaManagedAgentsWorkflowRunErrorUnion`
+        - `Error BetaManagedAgentsWorkflowRunErrorObjectUnion`
 
           Why the run did not finish.
 
-          - `type BetaManagedAgentsTimeoutWorkflowRunError`
+          - `type BetaManagedAgentsTimeoutWorkflowRunErrorObject`
 
             The run reached its time limit.
 
@@ -3107,7 +3109,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsProgramWorkflowRunError`
+          - `type BetaManagedAgentsProgramWorkflowRunErrorObject`
 
             The plan, a program that the agent wrote, failed, or the server refused it.
 
@@ -3117,7 +3119,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsUnknownWorkflowRunError`
+          - `type BetaManagedAgentsUnknownWorkflowRunErrorObject`
 
             A failure that has no type of its own.
 
@@ -3127,7 +3129,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsThreadLimitWorkflowRunError`
+          - `type BetaManagedAgentsThreadLimitWorkflowRunErrorObject`
 
             The run exceeded the limit on the number of threads that a run can create.
 
@@ -3137,7 +3139,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `type BetaManagedAgentsMaxWorkflowRunsWorkflowRunError`
+          - `type BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject`
 
             No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
 
@@ -3259,7 +3261,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `Error BetaManagedAgentsWorkflowRunErrorUnion`
+    - `Error BetaManagedAgentsWorkflowRunErrorObjectUnion`
 
       Why the run did not finish, or was not created.
 

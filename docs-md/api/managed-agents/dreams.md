@@ -282,13 +282,13 @@ end
 
 ### Lifecycle
 
-| `status` (csharp, go: `Status`) | Meaning                                                                                                           |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `pending`                       | Dream successfully created and queued.                                                                            |
-| `running`                       | The pipeline is processing. `usage` (csharp, go: `Usage`) updates as work progresses.                             |
-| `completed`                     | Finished successfully. The `outputs` (csharp, go: `Outputs`) value is the new memory store.                       |
-| `failed`                        | Dreaming run ended with an error. The output memory store is left as-is with whatever was written before failure. |
-| `canceled`                      | Dreaming run canceled. The output memory store is left as-is.                                                     |
+| `status` (csharp, go: `Status`) | Meaning |
+| ----- | ----- |
+| `pending` | Dream successfully created and queued. |
+| `running` | The pipeline is processing. `usage` (csharp, go: `Usage`) updates as work progresses. |
+| `completed` | Finished successfully. The `outputs` (csharp, go: `Outputs`) value is the new memory store. |
+| `failed` | Dreaming run ended with an error. The output memory store is left as-is with whatever was written before failure. |
+| `canceled` | Dreaming run canceled. The output memory store is left as-is. |
 
 ### Watch the pipeline run
 
@@ -614,14 +614,14 @@ end
 
 A non-exhaustive list of possible dreaming errors follows.
 
-| `error.type`                      | When                                                                                            |
-| --------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `timeout`                         | The pipeline exceeded its runtime budget.                                                       |
-| `internal_error`                  | Unclassified pipeline failure.                                                                  |
+| `error.type` | When |
+| ----- | ----- |
+| `timeout` | The pipeline exceeded its runtime budget. |
+| `internal_error` | Unclassified pipeline failure. |
 | `memory_store_org_limit_exceeded` | Your organization hit its memory-store cap while the pipeline was provisioning working storage. |
-| `input_memory_store_too_large`    | The input memory store exceeds the pipeline’s size limit.                                       |
-| `input_memory_store_unavailable`  | The input memory store was archived or deleted after the dream was created.                     |
-| `input_session_unavailable`       | An input session was deleted after the dream was created.                                       |
+| `input_memory_store_too_large` | The input memory store exceeds the pipeline’s size limit. |
+| `input_memory_store_unavailable` | The input memory store was archived or deleted after the dream was created. |
+| `input_session_unavailable` | An input session was deleted after the dream was created. |
 
 ## Billing
 
@@ -641,9 +641,9 @@ Dreams are in research preview on select models.
 
 * Availability: Available
 
-| Status           | Cloud platforms | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ---------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Research preview | Claude API      | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md) |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
+| Research preview | Claude API | [Claude Fable 5.2](../models/fable-5-2/overview.md), [Claude Fable 5.1](../models/fable-5-1/overview.md), [Claude Fable 5](../models/fable-5/overview.md), [Claude Opus 5.5](../models/opus-5-5/overview.md), [Claude Opus 5](../models/opus-5/overview.md), [Claude Sonnet 5.5](../models/sonnet-5-5/overview.md), [Claude Sonnet 5](../models/sonnet-5/overview.md), [Claude Opus 4.8](../models/opus-4-8/overview.md), [Claude Opus 4.7](../models/opus-4-7/overview.md), [Claude Sonnet 4.6](../models/sonnet-4-6/overview.md) |
 
 ### Required beta headers
 
@@ -660,9 +660,9 @@ Dream endpoints require the `dreaming-2026-04-21` beta header. The `managed-agen
 
 [Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                                                                                                                         | HIPAA                                                               |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Status  | Not eligible                                                                                                                                                                                                                                                | Not eligible                                                        |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Not eligible | Not eligible |
 | Details | Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them. [Learn more](self-hosted-data-and-access.md#how-long-data-is-kept) | Not eligible for HIPAA. Applies to all Managed Agents sub-features. |
 
 Applicable endpoints:

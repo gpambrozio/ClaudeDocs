@@ -79,11 +79,11 @@ Tool use doesn’t fit when:
 
 ## Choosing between approaches
 
-| Approach                      | When to use it                                                            | What to expect                                                                        | Learn more                                                                                     |
-| ----------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| User-defined client tools     | Custom business logic, internal APIs, proprietary data                    | You handle execution and the agentic loop                                             | [Define tools](define-tools.md)     |
+| Approach | When to use it | What to expect | Learn more |
+| ----- | ----- | ----- | ----- |
+| User-defined client tools | Custom business logic, internal APIs, proprietary data | You handle execution and the agentic loop | [Define tools](define-tools.md) |
 | Anthropic-schema client tools | Standard dev operations (bash, file editing, desktop and browser control) | You handle execution; Claude calls the tool reliably because the schema is trained-in | [Tool reference](tool-reference.md) |
-| Server-executed tools         | Web search, code sandbox, web fetch                                       | Anthropic handles execution; you read the results instead of producing them           | [Server tools](server-tools.md)     |
+| Server-executed tools | Web search, code sandbox, web fetch | Anthropic handles execution; you read the results instead of producing them | [Server tools](server-tools.md) |
 
 ## Next steps
 

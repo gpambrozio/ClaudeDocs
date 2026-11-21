@@ -426,7 +426,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `class WebSearchToolResultError`
+              - `class WebSearchToolResultErrorObject`
 
                 - `type: Literal["web_search_tool_result_error"]`
 
@@ -578,7 +578,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `class CodeExecutionToolResultError`
+              - `class CodeExecutionToolResultErrorObject`
 
                 - `type: Literal["code_execution_tool_result_error"]`
 
@@ -652,7 +652,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `content: Content`
 
-              - `class BashCodeExecutionToolResultError`
+              - `class BashCodeExecutionToolResultErrorObject`
 
                 - `type: Literal["bash_code_execution_tool_result_error"]`
 
@@ -702,7 +702,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `content: Content`
 
-              - `class TextEditorCodeExecutionToolResultError`
+              - `class TextEditorCodeExecutionToolResultErrorObject`
 
                 - `type: Literal["text_editor_code_execution_tool_result_error"]`
 
@@ -780,7 +780,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
             - `content: Content`
 
-              - `class ToolSearchToolResultError`
+              - `class ToolSearchToolResultErrorObject`
 
                 - `type: Literal["tool_search_tool_result_error"]`
 
@@ -1225,7 +1225,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
         - `error: ErrorObject`
 
-          - `class InvalidRequestError`
+          - `class InvalidRequestErrorObject`
 
             - `type: Literal["invalid_request_error"]`
 
@@ -1239,7 +1239,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Invalid request
 
-          - `class AuthenticationError`
+          - `class AuthenticationErrorObject`
 
             - `type: Literal["authentication_error"]`
 
@@ -1253,7 +1253,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Authentication error
 
-          - `class BillingError`
+          - `class BillingErrorObject`
 
             - `type: Literal["billing_error"]`
 
@@ -1267,7 +1267,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Billing error
 
-          - `class PermissionError`
+          - `class PermissionErrorObject`
 
             - `type: Literal["permission_error"]`
 
@@ -1281,7 +1281,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Permission denied
 
-          - `class NotFoundError`
+          - `class NotFoundErrorObject`
 
             - `type: Literal["not_found_error"]`
 
@@ -1295,7 +1295,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Not found
 
-          - `class RateLimitError`
+          - `class RateLimitErrorObject`
 
             - `type: Literal["rate_limit_error"]`
 
@@ -1309,7 +1309,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Rate limited
 
-          - `class GatewayTimeoutError`
+          - `class GatewayTimeoutErrorObject`
 
             - `type: Literal["timeout_error"]`
 
@@ -1337,7 +1337,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
               default: Internal server error
 
-          - `class OverloadedError`
+          - `class OverloadedErrorObject`
 
             - `type: Literal["overloaded_error"]`
 

@@ -432,7 +432,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `WebSearchToolResultError object`
+              - `WebSearchToolResultErrorObject object`
 
                 - `type: "web_search_tool_result_error"`
 
@@ -584,7 +584,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `CodeExecutionToolResultError object`
+              - `CodeExecutionToolResultErrorObject object`
 
                 - `type: "code_execution_tool_result_error"`
 
@@ -656,9 +656,9 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: bash_code_execution_tool_result
 
-            - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+            - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-              - `BashCodeExecutionToolResultError object`
+              - `BashCodeExecutionToolResultErrorObject object`
 
                 - `type: "bash_code_execution_tool_result_error"`
 
@@ -706,9 +706,9 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: text_editor_code_execution_tool_result
 
-            - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+            - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `TextEditorCodeExecutionToolResultError object`
+              - `TextEditorCodeExecutionToolResultErrorObject object`
 
                 - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -784,9 +784,9 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: tool_search_tool_result
 
-            - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+            - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-              - `ToolSearchToolResultError object`
+              - `ToolSearchToolResultErrorObject object`
 
                 - `type: "tool_search_tool_result_error"`
 
@@ -1231,7 +1231,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
         - `error: ErrorObject`
 
-          - `InvalidRequestError object`
+          - `InvalidRequestErrorObject object`
 
             - `type: "invalid_request_error"`
 
@@ -1245,7 +1245,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Invalid request
 
-          - `AuthenticationError object`
+          - `AuthenticationErrorObject object`
 
             - `type: "authentication_error"`
 
@@ -1259,7 +1259,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Authentication error
 
-          - `BillingError object`
+          - `BillingErrorObject object`
 
             - `type: "billing_error"`
 
@@ -1273,7 +1273,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Billing error
 
-          - `PermissionError object`
+          - `PermissionErrorObject object`
 
             - `type: "permission_error"`
 
@@ -1287,7 +1287,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Permission denied
 
-          - `NotFoundError object`
+          - `NotFoundErrorObject object`
 
             - `type: "not_found_error"`
 
@@ -1301,7 +1301,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Not found
 
-          - `RateLimitError object`
+          - `RateLimitErrorObject object`
 
             - `type: "rate_limit_error"`
 
@@ -1315,7 +1315,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Rate limited
 
-          - `GatewayTimeoutError object`
+          - `GatewayTimeoutErrorObject object`
 
             - `type: "timeout_error"`
 
@@ -1343,7 +1343,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               default: Internal server error
 
-          - `OverloadedError object`
+          - `OverloadedErrorObject object`
 
             - `type: "overloaded_error"`
 

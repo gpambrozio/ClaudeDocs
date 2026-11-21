@@ -10,10 +10,10 @@ Claude Platform on AWS uses AWS IAM for access control. Every API route maps to 
 
 ## Service details
 
-| Attribute              | Value                    |
-| ---------------------- | ------------------------ |
+| Attribute | Value |
+| ----- | ----- |
 | **IAM service prefix** | `aws-external-anthropic` |
-| **Resource types**     | `workspace`              |
+| **Resource types** | `workspace` |
 
 Workspace ARN format:
 
@@ -29,50 +29,50 @@ Actions follow the AWS `VerbNoun` convention and use verb discipline so that `Ge
 
 ### Inference
 
-| Action            | Routes authorized                |
-| ----------------- | -------------------------------- |
-| `CreateInference` | `POST /v1/messages`              |
-| `CountTokens`     | `POST /v1/messages/count_tokens` |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateInference` | `POST /v1/messages` |
+| `CountTokens` | `POST /v1/messages/count_tokens` |
 
 ### Batch processing
 
-| Action                 | Routes authorized                                                            |
-| ---------------------- | ---------------------------------------------------------------------------- |
-| `CreateBatchInference` | `POST /v1/messages/batches`                                                  |
-| `GetBatchInference`    | `GET /v1/messages/batches/{id}`<br />`GET /v1/messages/batches/{id}/results` |
-| `ListBatchInferences`  | `GET /v1/messages/batches`                                                   |
-| `CancelBatchInference` | `POST /v1/messages/batches/{id}/cancel`                                      |
-| `DeleteBatchInference` | `DELETE /v1/messages/batches/{id}`                                           |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateBatchInference` | `POST /v1/messages/batches` |
+| `GetBatchInference` | `GET /v1/messages/batches/{id}`<br />`GET /v1/messages/batches/{id}/results` |
+| `ListBatchInferences` | `GET /v1/messages/batches` |
+| `CancelBatchInference` | `POST /v1/messages/batches/{id}/cancel` |
+| `DeleteBatchInference` | `DELETE /v1/messages/batches/{id}` |
 
 `GetBatchInference` authorizes both reading batch metadata and downloading batch results. The `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` policies’ `Get*` wildcards include this action.
 
 ### Models
 
-| Action       | Routes authorized     |
-| ------------ | --------------------- |
-| `GetModel`   | `GET /v1/models/{id}` |
-| `ListModels` | `GET /v1/models`      |
+| Action | Routes authorized |
+| ----- | ----- |
+| `GetModel` | `GET /v1/models/{id}` |
+| `ListModels` | `GET /v1/models` |
 
 ### Files
 
-| Action       | Routes authorized                                      |
-| ------------ | ------------------------------------------------------ |
-| `CreateFile` | `POST /v1/files`                                       |
-| `GetFile`    | `GET /v1/files/{id}`<br />`GET /v1/files/{id}/content` |
-| `ListFiles`  | `GET /v1/files`                                        |
-| `DeleteFile` | `DELETE /v1/files/{id}`                                |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateFile` | `POST /v1/files` |
+| `GetFile` | `GET /v1/files/{id}`<br />`GET /v1/files/{id}/content` |
+| `ListFiles` | `GET /v1/files` |
+| `DeleteFile` | `DELETE /v1/files/{id}` |
 
 `GetFile` authorizes both metadata and content download. A principal with read-only access can download file bytes, not just list files.
 
 ### Skills
 
-| Action        | Routes authorized                                                                                                                                             |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CreateSkill` | `POST /v1/skills`                                                                                                                                             |
-| `GetSkill`    | `GET /v1/skills/{id}`<br />`GET /v1/skills/{id}/versions`<br />`GET /v1/skills/{id}/versions/{version}`<br />`GET /v1/skills/{id}/versions/{version}/content` |
-| `ListSkills`  | `GET /v1/skills`                                                                                                                                              |
-| `UpdateSkill` | `POST /v1/skills/{id}/versions`<br />`DELETE /v1/skills/{id}/versions/{version}`                                                                              |
-| `DeleteSkill` | `DELETE /v1/skills/{id}`                                                                                                                                      |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateSkill` | `POST /v1/skills` |
+| `GetSkill` | `GET /v1/skills/{id}`<br />`GET /v1/skills/{id}/versions`<br />`GET /v1/skills/{id}/versions/{version}`<br />`GET /v1/skills/{id}/versions/{version}/content` |
+| `ListSkills` | `GET /v1/skills` |
+| `UpdateSkill` | `POST /v1/skills/{id}/versions`<br />`DELETE /v1/skills/{id}/versions/{version}` |
+| `DeleteSkill` | `DELETE /v1/skills/{id}` |
 
 `GetSkill` authorizes both skill metadata and skill-content download. A principal with read-only access can download skill bytes, not just list skills.
 
@@ -80,26 +80,26 @@ Creating or deleting an individual skill version maps to `UpdateSkill`, not `Cre
 
 ### Agents
 
-| Action         | Routes authorized                                         |
-| -------------- | --------------------------------------------------------- |
-| `CreateAgent`  | `POST /v1/agents`                                         |
-| `GetAgent`     | `GET /v1/agents/{id}`<br />`GET /v1/agents/{id}/versions` |
-| `ListAgents`   | `GET /v1/agents`                                          |
-| `UpdateAgent`  | `POST /v1/agents/{id}`                                    |
-| `ArchiveAgent` | `POST /v1/agents/{id}/archive`                            |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateAgent` | `POST /v1/agents` |
+| `GetAgent` | `GET /v1/agents/{id}`<br />`GET /v1/agents/{id}/versions` |
+| `ListAgents` | `GET /v1/agents` |
+| `UpdateAgent` | `POST /v1/agents/{id}` |
+| `ArchiveAgent` | `POST /v1/agents/{id}/archive` |
 
 Agents support only archive, not hard delete. A policy that denies `aws-external-anthropic:Delete*` does not block `ArchiveAgent`. To block every write route under `/v1/agents`, deny `CreateAgent`, `UpdateAgent`, and `ArchiveAgent`.
 
 ### Sessions
 
-| Action           | Routes authorized                                                                                                                                                                                                                                                                                                                                                          |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CreateSession`  | `POST /v1/sessions`                                                                                                                                                                                                                                                                                                                                                        |
-| `GetSession`     | `GET /v1/sessions/{id}`<br />`GET /v1/sessions/{id}/events`<br />`GET /v1/sessions/{id}/events/stream`<br />`GET /v1/sessions/{id}/resources`<br />`GET /v1/sessions/{id}/resources/{id}`<br />`GET /v1/sessions/{id}/threads`<br />`GET /v1/sessions/{id}/threads/{id}`<br />`GET /v1/sessions/{id}/threads/{id}/events`<br />`GET /v1/sessions/{id}/threads/{id}/stream` |
-| `ListSessions`   | `GET /v1/sessions`                                                                                                                                                                                                                                                                                                                                                         |
-| `UpdateSession`  | `POST /v1/sessions/{id}`<br />`POST /v1/sessions/{id}/events`<br />`POST /v1/sessions/{id}/resources`<br />`POST /v1/sessions/{id}/resources/{id}`<br />`DELETE /v1/sessions/{id}/resources/{id}`<br />`POST /v1/sessions/{id}/threads/{id}/archive`                                                                                                                       |
-| `ArchiveSession` | `POST /v1/sessions/{id}/archive`                                                                                                                                                                                                                                                                                                                                           |
-| `DeleteSession`  | `DELETE /v1/sessions/{id}`                                                                                                                                                                                                                                                                                                                                                 |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateSession` | `POST /v1/sessions` |
+| `GetSession` | `GET /v1/sessions/{id}`<br />`GET /v1/sessions/{id}/events`<br />`GET /v1/sessions/{id}/events/stream`<br />`GET /v1/sessions/{id}/resources`<br />`GET /v1/sessions/{id}/resources/{id}`<br />`GET /v1/sessions/{id}/threads`<br />`GET /v1/sessions/{id}/threads/{id}`<br />`GET /v1/sessions/{id}/threads/{id}/events`<br />`GET /v1/sessions/{id}/threads/{id}/stream` |
+| `ListSessions` | `GET /v1/sessions` |
+| `UpdateSession` | `POST /v1/sessions/{id}`<br />`POST /v1/sessions/{id}/events`<br />`POST /v1/sessions/{id}/resources`<br />`POST /v1/sessions/{id}/resources/{id}`<br />`DELETE /v1/sessions/{id}/resources/{id}`<br />`POST /v1/sessions/{id}/threads/{id}/archive` |
+| `ArchiveSession` | `POST /v1/sessions/{id}/archive` |
+| `DeleteSession` | `DELETE /v1/sessions/{id}` |
 
 `GetSession` authorizes reading session metadata, the event stream (conversation history), session resources, and [session threads](../managed-agents/session-threads.md), including each thread’s events. The `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` policies’ `Get*` wildcards include this action, and the `AnthropicSelfHostedEnvironmentAccess` policy grants it explicitly.
 
@@ -107,14 +107,14 @@ Every route that writes to an existing session’s events, resources, or threads
 
 ### Environments
 
-| Action                   | Routes authorized                                                                                                                                                                                                                                            |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `CreateEnvironment`      | `POST /v1/environments`                                                                                                                                                                                                                                      |
-| `GetEnvironment`         | `GET /v1/environments/{id}`<br />`GET /v1/environments/{id}/work`<br />`GET /v1/environments/{id}/work/{work_id}`<br />`GET /v1/environments/{id}/work/stats`                                                                                                |
-| `ListEnvironments`       | `GET /v1/environments`                                                                                                                                                                                                                                       |
-| `UpdateEnvironment`      | `POST /v1/environments/{id}`                                                                                                                                                                                                                                 |
-| `ArchiveEnvironment`     | `POST /v1/environments/{id}/archive`                                                                                                                                                                                                                         |
-| `DeleteEnvironment`      | `DELETE /v1/environments/{id}`                                                                                                                                                                                                                               |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateEnvironment` | `POST /v1/environments` |
+| `GetEnvironment` | `GET /v1/environments/{id}`<br />`GET /v1/environments/{id}/work`<br />`GET /v1/environments/{id}/work/{work_id}`<br />`GET /v1/environments/{id}/work/stats` |
+| `ListEnvironments` | `GET /v1/environments` |
+| `UpdateEnvironment` | `POST /v1/environments/{id}` |
+| `ArchiveEnvironment` | `POST /v1/environments/{id}/archive` |
+| `DeleteEnvironment` | `DELETE /v1/environments/{id}` |
 | `ProcessEnvironmentWork` | `GET /v1/environments/{id}/work/poll`<br />`POST /v1/environments/{id}/work/{work_id}`<br />`POST /v1/environments/{id}/work/{work_id}/ack`<br />`POST /v1/environments/{id}/work/{work_id}/heartbeat`<br />`POST /v1/environments/{id}/work/{work_id}/stop` |
 
 A policy that denies `aws-external-anthropic:Delete*` does not block `ArchiveEnvironment`. `ProcessEnvironmentWork` is not matched by `Create*`, `Update*`, `Delete*`, or `Archive*` wildcards. To block every write route under `/v1/environments`, deny `CreateEnvironment`, `UpdateEnvironment`, `ArchiveEnvironment`, `DeleteEnvironment`, and `ProcessEnvironmentWork`.
@@ -123,27 +123,27 @@ A policy that denies `aws-external-anthropic:Delete*` does not block `ArchiveEnv
 
 ### Vaults
 
-| Action         | Routes authorized                                                                                                                                                                                               |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CreateVault`  | `POST /v1/vaults`                                                                                                                                                                                               |
-| `GetVault`     | `GET /v1/vaults/{id}`<br />`GET /v1/vaults/{id}/credentials`<br />`GET /v1/vaults/{id}/credentials/{id}`                                                                                                        |
-| `ListVaults`   | `GET /v1/vaults`                                                                                                                                                                                                |
-| `UpdateVault`  | `POST /v1/vaults/{id}`<br />`POST /v1/vaults/{id}/credentials`<br />`POST /v1/vaults/{id}/credentials/{id}`<br />`POST /v1/vaults/{id}/credentials/{id}/archive`<br />`DELETE /v1/vaults/{id}/credentials/{id}` |
-| `ArchiveVault` | `POST /v1/vaults/{id}/archive`                                                                                                                                                                                  |
-| `DeleteVault`  | `DELETE /v1/vaults/{id}`                                                                                                                                                                                        |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateVault` | `POST /v1/vaults` |
+| `GetVault` | `GET /v1/vaults/{id}`<br />`GET /v1/vaults/{id}/credentials`<br />`GET /v1/vaults/{id}/credentials/{id}` |
+| `ListVaults` | `GET /v1/vaults` |
+| `UpdateVault` | `POST /v1/vaults/{id}`<br />`POST /v1/vaults/{id}/credentials`<br />`POST /v1/vaults/{id}/credentials/{id}`<br />`POST /v1/vaults/{id}/credentials/{id}/archive`<br />`DELETE /v1/vaults/{id}/credentials/{id}` |
+| `ArchiveVault` | `POST /v1/vaults/{id}/archive` |
+| `DeleteVault` | `DELETE /v1/vaults/{id}` |
 
 Creating, updating, archiving, or deleting an individual vault credential maps to `UpdateVault`. Reading a credential maps to `GetVault`. Vault credential secrets are not exposed: secret fields are write-only and are never returned by `GetVault` (see [Authenticate with vaults](../managed-agents/vaults.md)). A policy that denies `aws-external-anthropic:Create*`, `Delete*`, or `Archive*` still allows creating, deleting, and archiving credentials. To block every write route under `/v1/vaults`, deny `CreateVault`, `UpdateVault`, `ArchiveVault`, and `DeleteVault`.
 
 ### Memory stores
 
-| Action               | Routes authorized                                                                                                                                                                                                                            |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CreateMemoryStore`  | `POST /v1/memory_stores`                                                                                                                                                                                                                     |
-| `GetMemoryStore`     | `GET /v1/memory_stores/{id}`<br />`GET /v1/memory_stores/{id}/memories`<br />`GET /v1/memory_stores/{id}/memories/{id}`<br />`GET /v1/memory_stores/{id}/memory_versions`<br />`GET /v1/memory_stores/{id}/memory_versions/{id}`             |
-| `ListMemoryStores`   | `GET /v1/memory_stores`                                                                                                                                                                                                                      |
-| `UpdateMemoryStore`  | `POST /v1/memory_stores/{id}`<br />`POST /v1/memory_stores/{id}/memories`<br />`POST /v1/memory_stores/{id}/memories/{id}`<br />`DELETE /v1/memory_stores/{id}/memories/{id}`<br />`POST /v1/memory_stores/{id}/memory_versions/{id}/redact` |
-| `ArchiveMemoryStore` | `POST /v1/memory_stores/{id}/archive`                                                                                                                                                                                                        |
-| `DeleteMemoryStore`  | `DELETE /v1/memory_stores/{id}`                                                                                                                                                                                                              |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateMemoryStore` | `POST /v1/memory_stores` |
+| `GetMemoryStore` | `GET /v1/memory_stores/{id}`<br />`GET /v1/memory_stores/{id}/memories`<br />`GET /v1/memory_stores/{id}/memories/{id}`<br />`GET /v1/memory_stores/{id}/memory_versions`<br />`GET /v1/memory_stores/{id}/memory_versions/{id}` |
+| `ListMemoryStores` | `GET /v1/memory_stores` |
+| `UpdateMemoryStore` | `POST /v1/memory_stores/{id}`<br />`POST /v1/memory_stores/{id}/memories`<br />`POST /v1/memory_stores/{id}/memories/{id}`<br />`DELETE /v1/memory_stores/{id}/memories/{id}`<br />`POST /v1/memory_stores/{id}/memory_versions/{id}/redact` |
+| `ArchiveMemoryStore` | `POST /v1/memory_stores/{id}/archive` |
+| `DeleteMemoryStore` | `DELETE /v1/memory_stores/{id}` |
 
 `GetMemoryStore` authorizes reading store metadata, all memories, and memory version history. The `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` policies’ `Get*` wildcards include this action.
 
@@ -151,13 +151,13 @@ Creating, updating, or deleting an individual memory and redacting a memory vers
 
 ### Webhooks
 
-| Action                | Routes authorized                                  |
-| --------------------- | -------------------------------------------------- |
-| `CreateWebhook`       | `POST /v1/webhooks`                                |
-| `GetWebhook`          | `GET /v1/webhooks/{id}`                            |
-| `ListWebhooks`        | `GET /v1/webhooks`                                 |
-| `UpdateWebhook`       | `POST /v1/webhooks/{id}`                           |
-| `DeleteWebhook`       | `DELETE /v1/webhooks/{id}`                         |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateWebhook` | `POST /v1/webhooks` |
+| `GetWebhook` | `GET /v1/webhooks/{id}` |
+| `ListWebhooks` | `GET /v1/webhooks` |
+| `UpdateWebhook` | `POST /v1/webhooks/{id}` |
+| `DeleteWebhook` | `DELETE /v1/webhooks/{id}` |
 | `RotateWebhookSecret` | `POST /v1/webhooks/{id}/regenerate_signing_secret` |
 
 Webhook signing secrets are write-only. `GetWebhook` returns webhook metadata only; it does not return the signing secret.
@@ -166,13 +166,13 @@ Webhook signing secrets are write-only. `GetWebhook` returns webhook metadata on
 
 ### User profiles
 
-| Action                           | Routes authorized                            |
-| -------------------------------- | -------------------------------------------- |
-| `CreateUserProfile`              | `POST /v1/user_profiles`                     |
-| `GetUserProfile`                 | `GET /v1/user_profiles/{id}`                 |
-| `ListUserProfiles`               | `GET /v1/user_profiles`                      |
-| `UpdateUserProfile`              | `POST /v1/user_profiles/{id}`                |
-| `DeleteUserProfile`              | `DELETE /v1/user_profiles/{id}`              |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateUserProfile` | `POST /v1/user_profiles` |
+| `GetUserProfile` | `GET /v1/user_profiles/{id}` |
+| `ListUserProfiles` | `GET /v1/user_profiles` |
+| `UpdateUserProfile` | `POST /v1/user_profiles/{id}` |
+| `DeleteUserProfile` | `DELETE /v1/user_profiles/{id}` |
 | `CreateUserProfileEnrollmentUrl` | `POST /v1/user_profiles/{id}/enrollment_url` |
 
 The user profile actions are account-scoped, like `ListWorkspaces`. A statement whose `Resource` is a workspace ARN does not grant them; use `Resource: "*"`.
@@ -181,32 +181,32 @@ IAM action matching is case-insensitive. The wildcard `aws-external-anthropic:*F
 
 ### Workspaces
 
-| Action             | Routes authorized                                |
-| ------------------ | ------------------------------------------------ |
-| `CreateWorkspace`  | `POST /v1/organizations/workspaces`              |
-| `GetWorkspace`     | `GET /v1/organizations/workspaces/{id}`          |
-| `ListWorkspaces`   | `GET /v1/organizations/workspaces`               |
-| `UpdateWorkspace`  | `POST /v1/organizations/workspaces/{id}`         |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateWorkspace` | `POST /v1/organizations/workspaces` |
+| `GetWorkspace` | `GET /v1/organizations/workspaces/{id}` |
+| `ListWorkspaces` | `GET /v1/organizations/workspaces` |
+| `UpdateWorkspace` | `POST /v1/organizations/workspaces/{id}` |
 | `ArchiveWorkspace` | `POST /v1/organizations/workspaces/{id}/archive` |
 
 Workspaces support only archive, not hard delete. A policy that denies `aws-external-anthropic:Delete*` does not block `ArchiveWorkspace`. To block every write route under `/v1/organizations/workspaces`, deny `CreateWorkspace`, `UpdateWorkspace`, and `ArchiveWorkspace`.
 
 ### Encryption keys
 
-| Action        | Routes authorized                             |
-| ------------- | --------------------------------------------- |
-| `RegisterKey` | `POST /v1/organizations/external_keys`        |
-| `GetKey`      | `GET /v1/organizations/external_keys/{id}`    |
-| `ListKeys`    | `GET /v1/organizations/external_keys`         |
-| `UpdateKey`   | `POST /v1/organizations/external_keys/{id}`   |
-| `DisableKey`  | `DELETE /v1/organizations/external_keys/{id}` |
+| Action | Routes authorized |
+| ----- | ----- |
+| `RegisterKey` | `POST /v1/organizations/external_keys` |
+| `GetKey` | `GET /v1/organizations/external_keys/{id}` |
+| `ListKeys` | `GET /v1/organizations/external_keys` |
+| `UpdateKey` | `POST /v1/organizations/external_keys/{id}` |
+| `DisableKey` | `DELETE /v1/organizations/external_keys/{id}` |
 
 These actions manage your organization’s [customer-managed encryption key (CMEK)](../manage-claude/cmek-claude-platform-on-aws.md) registrations, the record of which AWS KMS key ARNs are registered. They do not create, change, or disable the keys in AWS KMS. `DisableKey` removes a registration and is rejected while any workspace still uses the key. `RegisterKey` and `DisableKey` are not matched by `Create*`, `Update*`, or `Delete*` wildcards. To block every write route under `/v1/organizations/external_keys`, deny `RegisterKey`, `UpdateKey`, and `DisableKey`. In these routes, `{id}` is the URL-encoded KMS key ARN. Attaching a registered key to a workspace is a workspace operation, authorized by `CreateWorkspace` or `UpdateWorkspace`; the principal that attaches a key also needs `kms:DescribeKey`, `kms:Encrypt`, and `kms:Decrypt` on that key (see the [prerequisites](../manage-claude/cmek-claude-platform-on-aws.md#prerequisites)). External key actions are account-scoped: specifying a workspace ARN on them has no effect; use `Resource: "*"`.
 
 ### Compliance
 
-| Action                     | Routes authorized               |
-| -------------------------- | ------------------------------- |
+| Action | Routes authorized |
+| ----- | ----- |
 | `ListComplianceActivities` | `GET /v1/compliance/activities` |
 
 `ListComplianceActivities` authorizes reading the [Compliance API](../manage-claude/compliance-api.md) [Activity Feed](../manage-claude/compliance-activity-feed.md), the organization-wide audit log that includes access transparency events. The route returns an error until the Compliance API is [enabled for your organization](../manage-claude/compliance-api-access.md); enablement is on request through your Anthropic account team. The `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess` policies’ `List*` wildcards include this action.
@@ -215,17 +215,17 @@ These actions manage your organization’s [customer-managed encryption key (CME
 
 ### Telemetry destinations
 
-| Action                                      | Routes authorized                                                                |
-| ------------------------------------------- | -------------------------------------------------------------------------------- |
-| `CreateAccountTelemetryDestination`         | `POST /v1/organizations/telemetry_destinations`                                  |
-| `GetAccountTelemetryDestination`            | `GET /v1/organizations/telemetry_destinations/{id}`                              |
-| `ListAccountTelemetryDestinations`          | `GET /v1/organizations/telemetry_destinations`                                   |
-| `UpdateAccountTelemetryDestination`         | `POST /v1/organizations/telemetry_destinations/{id}`                             |
-| `DeleteAccountTelemetryDestination`         | `DELETE /v1/organizations/telemetry_destinations/{id}`                           |
-| `TestAccountTelemetryDestination`           | `POST /v1/organizations/telemetry_destinations/{id}/test`                        |
-| `ListAccountTelemetryDestinationWorkspaces` | `GET /v1/organizations/telemetry_destinations/{id}/workspaces`                   |
-| `AddTelemetryDestinationWorkspace`          | `POST /v1/organizations/telemetry_destinations/{id}/workspaces/{workspace_id}`   |
-| `RemoveTelemetryDestinationWorkspace`       | `DELETE /v1/organizations/telemetry_destinations/{id}/workspaces/{workspace_id}` |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CreateAccountTelemetryDestination` | `POST /v1/organizations/telemetry_destinations` |
+| `GetAccountTelemetryDestination` | `GET /v1/organizations/telemetry_destinations/{id}` |
+| `ListAccountTelemetryDestinations` | `GET /v1/organizations/telemetry_destinations` |
+| `UpdateAccountTelemetryDestination` | `POST /v1/organizations/telemetry_destinations/{id}` |
+| `DeleteAccountTelemetryDestination` | `DELETE /v1/organizations/telemetry_destinations/{id}` |
+| `TestAccountTelemetryDestination` | `POST /v1/organizations/telemetry_destinations/{id}/test` |
+| `ListAccountTelemetryDestinationWorkspaces` | `GET /v1/organizations/telemetry_destinations/{id}/workspaces` |
+| `AddTelemetryDestinationWorkspace` | `POST /v1/organizations/telemetry_destinations/{id}/workspaces/{workspace_id}` |
+| `RemoveTelemetryDestinationWorkspace` | `DELETE /v1/organizations/telemetry_destinations/{id}/workspaces/{workspace_id}` |
 
 All of these actions except `AddTelemetryDestinationWorkspace` and `RemoveTelemetryDestinationWorkspace` are account-scoped, so a workspace ARN on them has no effect. Use `Resource: "*"`. A destination can export telemetry from every workspace in the organization, in every region. Grant `CreateAccountTelemetryDestination` and `UpdateAccountTelemetryDestination` only to principals you trust with all of that telemetry.
 
@@ -233,26 +233,26 @@ All of these actions except `AddTelemetryDestinationWorkspace` and `RemoveTeleme
 
 ### Usage and cost
 
-| Action             | Routes authorized                       |
-| ------------------ | --------------------------------------- |
+| Action | Routes authorized |
+| ----- | ----- |
 | `ListAccountUsage` | `GET /v1/organizations/analytics/usage` |
-| `ListAccountCost`  | `GET /v1/organizations/analytics/cost`  |
+| `ListAccountCost` | `GET /v1/organizations/analytics/cost` |
 
 These actions authorize the [Usage and Cost Analytics API](../manage-claude/usage-cost-analytics-api.md). Both are account-scoped. Specifying a workspace ARN on these actions has no effect; use `Resource: "*"`.
 
 ### Authentication
 
-| Action                | Routes authorized |
-| --------------------- | ----------------- |
-| `CallWithBearerToken` | (none)            |
+| Action | Routes authorized |
+| ----- | ----- |
+| `CallWithBearerToken` | (none) |
 
 `CallWithBearerToken` is an authentication-layer permission that authorizes a principal to authenticate through an API key (bearer token) rather than AWS SigV4. It does not map to a route. Grant it alongside the route-mapped actions you want the API key holder to perform.
 
 ### Console access
 
-| Action          | Routes authorized |
-| --------------- | ----------------- |
-| `AssumeConsole` | (none)            |
+| Action | Routes authorized |
+| ----- | ----- |
+| `AssumeConsole` | (none) |
 
 `AssumeConsole` authorizes a principal to open the Claude Console for its Claude Platform on AWS organization through the AWS Console federation flow. It does not map to a route or bind to a workspace ARN, so a statement that grants it needs `Resource: "*"`. Grant it to principals who should be able to click **Open Claude Console** on the Claude Platform on AWS service page in the AWS Console. See [Using the Claude Console](../build-with-claude/claude-platform-on-aws.md#using-the-claude-console) for the sign-in flow and what each Claude Console role (Admin or Developer) can do.
 
@@ -266,134 +266,134 @@ The following tables list the public API routes on Claude Platform on AWS and th
 
 CloudTrail classifies each action as either a Data event (high-volume, data-plane operations) or a Management event (control-plane operations). It classifies vault and webhook actions as Management events because they hold secrets (vault credentials and webhook signing secrets) and benefit from default-on audit logging. It also classifies workspace, external key, telemetry destination, compliance, and rate limit increase request actions as Management events. These actions are organization-scoped control-plane operations. CloudTrail classifies all other actions as Data events. These include inference, batch, model, file, skill, user profile, usage and cost, and the remaining Claude Managed Agents actions.
 
-| Method   | Route                                                                     | IAM action                                  | CloudTrail event type |
-| -------- | ------------------------------------------------------------------------- | ------------------------------------------- | --------------------- |
-| `POST`   | `/v1/messages`                                                            | `CreateInference`                           | Data                  |
-| `POST`   | `/v1/messages/count_tokens`                                               | `CountTokens`                               | Data                  |
-| `POST`   | `/v1/messages/batches`                                                    | `CreateBatchInference`                      | Data                  |
-| `GET`    | `/v1/messages/batches`                                                    | `ListBatchInferences`                       | Data                  |
-| `GET`    | `/v1/messages/batches/{id}`                                               | `GetBatchInference`                         | Data                  |
-| `GET`    | `/v1/messages/batches/{id}/results`                                       | `GetBatchInference`                         | Data                  |
-| `POST`   | `/v1/messages/batches/{id}/cancel`                                        | `CancelBatchInference`                      | Data                  |
-| `DELETE` | `/v1/messages/batches/{id}`                                               | `DeleteBatchInference`                      | Data                  |
-| `GET`    | `/v1/models`                                                              | `ListModels`                                | Data                  |
-| `GET`    | `/v1/models/{id}`                                                         | `GetModel`                                  | Data                  |
-| `POST`   | `/v1/files`                                                               | `CreateFile`                                | Data                  |
-| `GET`    | `/v1/files`                                                               | `ListFiles`                                 | Data                  |
-| `GET`    | `/v1/files/{id}`                                                          | `GetFile`                                   | Data                  |
-| `GET`    | `/v1/files/{id}/content`                                                  | `GetFile`                                   | Data                  |
-| `DELETE` | `/v1/files/{id}`                                                          | `DeleteFile`                                | Data                  |
-| `POST`   | `/v1/skills`                                                              | `CreateSkill`                               | Data                  |
-| `GET`    | `/v1/skills`                                                              | `ListSkills`                                | Data                  |
-| `GET`    | `/v1/skills/{id}`                                                         | `GetSkill`                                  | Data                  |
-| `DELETE` | `/v1/skills/{id}`                                                         | `DeleteSkill`                               | Data                  |
-| `POST`   | `/v1/skills/{id}/versions`                                                | `UpdateSkill`                               | Data                  |
-| `GET`    | `/v1/skills/{id}/versions`                                                | `GetSkill`                                  | Data                  |
-| `GET`    | `/v1/skills/{id}/versions/{version}`                                      | `GetSkill`                                  | Data                  |
-| `GET`    | `/v1/skills/{id}/versions/{version}/content`                              | `GetSkill`                                  | Data                  |
-| `DELETE` | `/v1/skills/{id}/versions/{version}`                                      | `UpdateSkill`                               | Data                  |
-| `POST`   | `/v1/user_profiles`                                                       | `CreateUserProfile`                         | Data                  |
-| `GET`    | `/v1/user_profiles`                                                       | `ListUserProfiles`                          | Data                  |
-| `GET`    | `/v1/user_profiles/{id}`                                                  | `GetUserProfile`                            | Data                  |
-| `POST`   | `/v1/user_profiles/{id}`                                                  | `UpdateUserProfile`                         | Data                  |
-| `DELETE` | `/v1/user_profiles/{id}`                                                  | `DeleteUserProfile`                         | Data                  |
-| `POST`   | `/v1/user_profiles/{id}/enrollment_url`                                   | `CreateUserProfileEnrollmentUrl`            | Data                  |
-| `POST`   | `/v1/organizations/workspaces`                                            | `CreateWorkspace`                           | Management            |
-| `GET`    | `/v1/organizations/workspaces`                                            | `ListWorkspaces`                            | Management            |
-| `GET`    | `/v1/organizations/workspaces/{id}`                                       | `GetWorkspace`                              | Management            |
-| `POST`   | `/v1/organizations/workspaces/{id}`                                       | `UpdateWorkspace`                           | Management            |
-| `POST`   | `/v1/organizations/workspaces/{id}/archive`                               | `ArchiveWorkspace`                          | Management            |
-| `POST`   | `/v1/organizations/external_keys`                                         | `RegisterKey`                               | Management            |
-| `GET`    | `/v1/organizations/external_keys`                                         | `ListKeys`                                  | Management            |
-| `GET`    | `/v1/organizations/external_keys/{id}`                                    | `GetKey`                                    | Management            |
-| `POST`   | `/v1/organizations/external_keys/{id}`                                    | `UpdateKey`                                 | Management            |
-| `DELETE` | `/v1/organizations/external_keys/{id}`                                    | `DisableKey`                                | Management            |
-| `POST`   | `/v1/organizations/telemetry_destinations`                                | `CreateAccountTelemetryDestination`         | Management            |
-| `GET`    | `/v1/organizations/telemetry_destinations`                                | `ListAccountTelemetryDestinations`          | Management            |
-| `GET`    | `/v1/organizations/telemetry_destinations/{id}`                           | `GetAccountTelemetryDestination`            | Management            |
-| `POST`   | `/v1/organizations/telemetry_destinations/{id}`                           | `UpdateAccountTelemetryDestination`         | Management            |
-| `DELETE` | `/v1/organizations/telemetry_destinations/{id}`                           | `DeleteAccountTelemetryDestination`         | Management            |
-| `POST`   | `/v1/organizations/telemetry_destinations/{id}/test`                      | `TestAccountTelemetryDestination`           | Management            |
-| `GET`    | `/v1/organizations/telemetry_destinations/{id}/workspaces`                | `ListAccountTelemetryDestinationWorkspaces` | Management            |
-| `POST`   | `/v1/organizations/telemetry_destinations/{id}/workspaces/{workspace_id}` | `AddTelemetryDestinationWorkspace`          | Management            |
-| `DELETE` | `/v1/organizations/telemetry_destinations/{id}/workspaces/{workspace_id}` | `RemoveTelemetryDestinationWorkspace`       | Management            |
-| `GET`    | `/v1/compliance/activities`                                               | `ListComplianceActivities`                  | Management            |
-| `POST`   | `/v1/agents`                                                              | `CreateAgent`                               | Data                  |
-| `GET`    | `/v1/agents`                                                              | `ListAgents`                                | Data                  |
-| `GET`    | `/v1/agents/{id}`                                                         | `GetAgent`                                  | Data                  |
-| `POST`   | `/v1/agents/{id}`                                                         | `UpdateAgent`                               | Data                  |
-| `POST`   | `/v1/agents/{id}/archive`                                                 | `ArchiveAgent`                              | Data                  |
-| `GET`    | `/v1/agents/{id}/versions`                                                | `GetAgent`                                  | Data                  |
-| `POST`   | `/v1/sessions`                                                            | `CreateSession`                             | Data                  |
-| `GET`    | `/v1/sessions`                                                            | `ListSessions`                              | Data                  |
-| `GET`    | `/v1/sessions/{id}`                                                       | `GetSession`                                | Data                  |
-| `POST`   | `/v1/sessions/{id}`                                                       | `UpdateSession`                             | Data                  |
-| `POST`   | `/v1/sessions/{id}/archive`                                               | `ArchiveSession`                            | Data                  |
-| `DELETE` | `/v1/sessions/{id}`                                                       | `DeleteSession`                             | Data                  |
-| `GET`    | `/v1/sessions/{id}/events`                                                | `GetSession`                                | Data                  |
-| `POST`   | `/v1/sessions/{id}/events`                                                | `UpdateSession`                             | Data                  |
-| `GET`    | `/v1/sessions/{id}/events/stream`                                         | `GetSession`                                | Data                  |
-| `GET`    | `/v1/sessions/{id}/resources`                                             | `GetSession`                                | Data                  |
-| `GET`    | `/v1/sessions/{id}/resources/{id}`                                        | `GetSession`                                | Data                  |
-| `POST`   | `/v1/sessions/{id}/resources`                                             | `UpdateSession`                             | Data                  |
-| `POST`   | `/v1/sessions/{id}/resources/{id}`                                        | `UpdateSession`                             | Data                  |
-| `DELETE` | `/v1/sessions/{id}/resources/{id}`                                        | `UpdateSession`                             | Data                  |
-| `GET`    | `/v1/sessions/{id}/threads`                                               | `GetSession`                                | Data                  |
-| `GET`    | `/v1/sessions/{id}/threads/{id}`                                          | `GetSession`                                | Data                  |
-| `GET`    | `/v1/sessions/{id}/threads/{id}/events`                                   | `GetSession`                                | Data                  |
-| `GET`    | `/v1/sessions/{id}/threads/{id}/stream`                                   | `GetSession`                                | Data                  |
-| `POST`   | `/v1/sessions/{id}/threads/{id}/archive`                                  | `UpdateSession`                             | Data                  |
-| `POST`   | `/v1/environments`                                                        | `CreateEnvironment`                         | Data                  |
-| `GET`    | `/v1/environments`                                                        | `ListEnvironments`                          | Data                  |
-| `GET`    | `/v1/environments/{id}`                                                   | `GetEnvironment`                            | Data                  |
-| `POST`   | `/v1/environments/{id}`                                                   | `UpdateEnvironment`                         | Data                  |
-| `POST`   | `/v1/environments/{id}/archive`                                           | `ArchiveEnvironment`                        | Data                  |
-| `DELETE` | `/v1/environments/{id}`                                                   | `DeleteEnvironment`                         | Data                  |
-| `GET`    | `/v1/environments/{id}/work`                                              | `GetEnvironment`                            | Data                  |
-| `GET`    | `/v1/environments/{id}/work/poll`                                         | `ProcessEnvironmentWork`                    | Data                  |
-| `GET`    | `/v1/environments/{id}/work/{work_id}`                                    | `GetEnvironment`                            | Data                  |
-| `GET`    | `/v1/environments/{id}/work/stats`                                        | `GetEnvironment`                            | Data                  |
-| `POST`   | `/v1/environments/{id}/work/{work_id}`                                    | `ProcessEnvironmentWork`                    | Data                  |
-| `POST`   | `/v1/environments/{id}/work/{work_id}/ack`                                | `ProcessEnvironmentWork`                    | Data                  |
-| `POST`   | `/v1/environments/{id}/work/{work_id}/heartbeat`                          | `ProcessEnvironmentWork`                    | Data                  |
-| `POST`   | `/v1/environments/{id}/work/{work_id}/stop`                               | `ProcessEnvironmentWork`                    | Data                  |
-| `POST`   | `/v1/vaults`                                                              | `CreateVault`                               | Management            |
-| `GET`    | `/v1/vaults`                                                              | `ListVaults`                                | Management            |
-| `GET`    | `/v1/vaults/{id}`                                                         | `GetVault`                                  | Management            |
-| `POST`   | `/v1/vaults/{id}`                                                         | `UpdateVault`                               | Management            |
-| `POST`   | `/v1/vaults/{id}/archive`                                                 | `ArchiveVault`                              | Management            |
-| `DELETE` | `/v1/vaults/{id}`                                                         | `DeleteVault`                               | Management            |
-| `GET`    | `/v1/vaults/{id}/credentials`                                             | `GetVault`                                  | Management            |
-| `POST`   | `/v1/vaults/{id}/credentials`                                             | `UpdateVault`                               | Management            |
-| `GET`    | `/v1/vaults/{id}/credentials/{id}`                                        | `GetVault`                                  | Management            |
-| `POST`   | `/v1/vaults/{id}/credentials/{id}`                                        | `UpdateVault`                               | Management            |
-| `POST`   | `/v1/vaults/{id}/credentials/{id}/archive`                                | `UpdateVault`                               | Management            |
-| `DELETE` | `/v1/vaults/{id}/credentials/{id}`                                        | `UpdateVault`                               | Management            |
-| `POST`   | `/v1/memory_stores`                                                       | `CreateMemoryStore`                         | Data                  |
-| `GET`    | `/v1/memory_stores`                                                       | `ListMemoryStores`                          | Data                  |
-| `GET`    | `/v1/memory_stores/{id}`                                                  | `GetMemoryStore`                            | Data                  |
-| `POST`   | `/v1/memory_stores/{id}`                                                  | `UpdateMemoryStore`                         | Data                  |
-| `POST`   | `/v1/memory_stores/{id}/archive`                                          | `ArchiveMemoryStore`                        | Data                  |
-| `DELETE` | `/v1/memory_stores/{id}`                                                  | `DeleteMemoryStore`                         | Data                  |
-| `POST`   | `/v1/memory_stores/{id}/memories`                                         | `UpdateMemoryStore`                         | Data                  |
-| `GET`    | `/v1/memory_stores/{id}/memories`                                         | `GetMemoryStore`                            | Data                  |
-| `GET`    | `/v1/memory_stores/{id}/memories/{id}`                                    | `GetMemoryStore`                            | Data                  |
-| `POST`   | `/v1/memory_stores/{id}/memories/{id}`                                    | `UpdateMemoryStore`                         | Data                  |
-| `DELETE` | `/v1/memory_stores/{id}/memories/{id}`                                    | `UpdateMemoryStore`                         | Data                  |
-| `GET`    | `/v1/memory_stores/{id}/memory_versions`                                  | `GetMemoryStore`                            | Data                  |
-| `GET`    | `/v1/memory_stores/{id}/memory_versions/{id}`                             | `GetMemoryStore`                            | Data                  |
-| `POST`   | `/v1/memory_stores/{id}/memory_versions/{id}/redact`                      | `UpdateMemoryStore`                         | Data                  |
-| `GET`    | `/v1/webhooks`                                                            | `ListWebhooks`                              | Management            |
-| `GET`    | `/v1/webhooks/{id}`                                                       | `GetWebhook`                                | Management            |
-| `POST`   | `/v1/webhooks`                                                            | `CreateWebhook`                             | Management            |
-| `POST`   | `/v1/webhooks/{id}`                                                       | `UpdateWebhook`                             | Management            |
-| `DELETE` | `/v1/webhooks/{id}`                                                       | `DeleteWebhook`                             | Management            |
-| `POST`   | `/v1/webhooks/{id}/regenerate_signing_secret`                             | `RotateWebhookSecret`                       | Management            |
+| Method | Route | IAM action | CloudTrail event type |
+| ----- | ----- | ----- | ----- |
+| `POST` | `/v1/messages` | `CreateInference` | Data |
+| `POST` | `/v1/messages/count_tokens` | `CountTokens` | Data |
+| `POST` | `/v1/messages/batches` | `CreateBatchInference` | Data |
+| `GET` | `/v1/messages/batches` | `ListBatchInferences` | Data |
+| `GET` | `/v1/messages/batches/{id}` | `GetBatchInference` | Data |
+| `GET` | `/v1/messages/batches/{id}/results` | `GetBatchInference` | Data |
+| `POST` | `/v1/messages/batches/{id}/cancel` | `CancelBatchInference` | Data |
+| `DELETE` | `/v1/messages/batches/{id}` | `DeleteBatchInference` | Data |
+| `GET` | `/v1/models` | `ListModels` | Data |
+| `GET` | `/v1/models/{id}` | `GetModel` | Data |
+| `POST` | `/v1/files` | `CreateFile` | Data |
+| `GET` | `/v1/files` | `ListFiles` | Data |
+| `GET` | `/v1/files/{id}` | `GetFile` | Data |
+| `GET` | `/v1/files/{id}/content` | `GetFile` | Data |
+| `DELETE` | `/v1/files/{id}` | `DeleteFile` | Data |
+| `POST` | `/v1/skills` | `CreateSkill` | Data |
+| `GET` | `/v1/skills` | `ListSkills` | Data |
+| `GET` | `/v1/skills/{id}` | `GetSkill` | Data |
+| `DELETE` | `/v1/skills/{id}` | `DeleteSkill` | Data |
+| `POST` | `/v1/skills/{id}/versions` | `UpdateSkill` | Data |
+| `GET` | `/v1/skills/{id}/versions` | `GetSkill` | Data |
+| `GET` | `/v1/skills/{id}/versions/{version}` | `GetSkill` | Data |
+| `GET` | `/v1/skills/{id}/versions/{version}/content` | `GetSkill` | Data |
+| `DELETE` | `/v1/skills/{id}/versions/{version}` | `UpdateSkill` | Data |
+| `POST` | `/v1/user_profiles` | `CreateUserProfile` | Data |
+| `GET` | `/v1/user_profiles` | `ListUserProfiles` | Data |
+| `GET` | `/v1/user_profiles/{id}` | `GetUserProfile` | Data |
+| `POST` | `/v1/user_profiles/{id}` | `UpdateUserProfile` | Data |
+| `DELETE` | `/v1/user_profiles/{id}` | `DeleteUserProfile` | Data |
+| `POST` | `/v1/user_profiles/{id}/enrollment_url` | `CreateUserProfileEnrollmentUrl` | Data |
+| `POST` | `/v1/organizations/workspaces` | `CreateWorkspace` | Management |
+| `GET` | `/v1/organizations/workspaces` | `ListWorkspaces` | Management |
+| `GET` | `/v1/organizations/workspaces/{id}` | `GetWorkspace` | Management |
+| `POST` | `/v1/organizations/workspaces/{id}` | `UpdateWorkspace` | Management |
+| `POST` | `/v1/organizations/workspaces/{id}/archive` | `ArchiveWorkspace` | Management |
+| `POST` | `/v1/organizations/external_keys` | `RegisterKey` | Management |
+| `GET` | `/v1/organizations/external_keys` | `ListKeys` | Management |
+| `GET` | `/v1/organizations/external_keys/{id}` | `GetKey` | Management |
+| `POST` | `/v1/organizations/external_keys/{id}` | `UpdateKey` | Management |
+| `DELETE` | `/v1/organizations/external_keys/{id}` | `DisableKey` | Management |
+| `POST` | `/v1/organizations/telemetry_destinations` | `CreateAccountTelemetryDestination` | Management |
+| `GET` | `/v1/organizations/telemetry_destinations` | `ListAccountTelemetryDestinations` | Management |
+| `GET` | `/v1/organizations/telemetry_destinations/{id}` | `GetAccountTelemetryDestination` | Management |
+| `POST` | `/v1/organizations/telemetry_destinations/{id}` | `UpdateAccountTelemetryDestination` | Management |
+| `DELETE` | `/v1/organizations/telemetry_destinations/{id}` | `DeleteAccountTelemetryDestination` | Management |
+| `POST` | `/v1/organizations/telemetry_destinations/{id}/test` | `TestAccountTelemetryDestination` | Management |
+| `GET` | `/v1/organizations/telemetry_destinations/{id}/workspaces` | `ListAccountTelemetryDestinationWorkspaces` | Management |
+| `POST` | `/v1/organizations/telemetry_destinations/{id}/workspaces/{workspace_id}` | `AddTelemetryDestinationWorkspace` | Management |
+| `DELETE` | `/v1/organizations/telemetry_destinations/{id}/workspaces/{workspace_id}` | `RemoveTelemetryDestinationWorkspace` | Management |
+| `GET` | `/v1/compliance/activities` | `ListComplianceActivities` | Management |
+| `POST` | `/v1/agents` | `CreateAgent` | Data |
+| `GET` | `/v1/agents` | `ListAgents` | Data |
+| `GET` | `/v1/agents/{id}` | `GetAgent` | Data |
+| `POST` | `/v1/agents/{id}` | `UpdateAgent` | Data |
+| `POST` | `/v1/agents/{id}/archive` | `ArchiveAgent` | Data |
+| `GET` | `/v1/agents/{id}/versions` | `GetAgent` | Data |
+| `POST` | `/v1/sessions` | `CreateSession` | Data |
+| `GET` | `/v1/sessions` | `ListSessions` | Data |
+| `GET` | `/v1/sessions/{id}` | `GetSession` | Data |
+| `POST` | `/v1/sessions/{id}` | `UpdateSession` | Data |
+| `POST` | `/v1/sessions/{id}/archive` | `ArchiveSession` | Data |
+| `DELETE` | `/v1/sessions/{id}` | `DeleteSession` | Data |
+| `GET` | `/v1/sessions/{id}/events` | `GetSession` | Data |
+| `POST` | `/v1/sessions/{id}/events` | `UpdateSession` | Data |
+| `GET` | `/v1/sessions/{id}/events/stream` | `GetSession` | Data |
+| `GET` | `/v1/sessions/{id}/resources` | `GetSession` | Data |
+| `GET` | `/v1/sessions/{id}/resources/{id}` | `GetSession` | Data |
+| `POST` | `/v1/sessions/{id}/resources` | `UpdateSession` | Data |
+| `POST` | `/v1/sessions/{id}/resources/{id}` | `UpdateSession` | Data |
+| `DELETE` | `/v1/sessions/{id}/resources/{id}` | `UpdateSession` | Data |
+| `GET` | `/v1/sessions/{id}/threads` | `GetSession` | Data |
+| `GET` | `/v1/sessions/{id}/threads/{id}` | `GetSession` | Data |
+| `GET` | `/v1/sessions/{id}/threads/{id}/events` | `GetSession` | Data |
+| `GET` | `/v1/sessions/{id}/threads/{id}/stream` | `GetSession` | Data |
+| `POST` | `/v1/sessions/{id}/threads/{id}/archive` | `UpdateSession` | Data |
+| `POST` | `/v1/environments` | `CreateEnvironment` | Data |
+| `GET` | `/v1/environments` | `ListEnvironments` | Data |
+| `GET` | `/v1/environments/{id}` | `GetEnvironment` | Data |
+| `POST` | `/v1/environments/{id}` | `UpdateEnvironment` | Data |
+| `POST` | `/v1/environments/{id}/archive` | `ArchiveEnvironment` | Data |
+| `DELETE` | `/v1/environments/{id}` | `DeleteEnvironment` | Data |
+| `GET` | `/v1/environments/{id}/work` | `GetEnvironment` | Data |
+| `GET` | `/v1/environments/{id}/work/poll` | `ProcessEnvironmentWork` | Data |
+| `GET` | `/v1/environments/{id}/work/{work_id}` | `GetEnvironment` | Data |
+| `GET` | `/v1/environments/{id}/work/stats` | `GetEnvironment` | Data |
+| `POST` | `/v1/environments/{id}/work/{work_id}` | `ProcessEnvironmentWork` | Data |
+| `POST` | `/v1/environments/{id}/work/{work_id}/ack` | `ProcessEnvironmentWork` | Data |
+| `POST` | `/v1/environments/{id}/work/{work_id}/heartbeat` | `ProcessEnvironmentWork` | Data |
+| `POST` | `/v1/environments/{id}/work/{work_id}/stop` | `ProcessEnvironmentWork` | Data |
+| `POST` | `/v1/vaults` | `CreateVault` | Management |
+| `GET` | `/v1/vaults` | `ListVaults` | Management |
+| `GET` | `/v1/vaults/{id}` | `GetVault` | Management |
+| `POST` | `/v1/vaults/{id}` | `UpdateVault` | Management |
+| `POST` | `/v1/vaults/{id}/archive` | `ArchiveVault` | Management |
+| `DELETE` | `/v1/vaults/{id}` | `DeleteVault` | Management |
+| `GET` | `/v1/vaults/{id}/credentials` | `GetVault` | Management |
+| `POST` | `/v1/vaults/{id}/credentials` | `UpdateVault` | Management |
+| `GET` | `/v1/vaults/{id}/credentials/{id}` | `GetVault` | Management |
+| `POST` | `/v1/vaults/{id}/credentials/{id}` | `UpdateVault` | Management |
+| `POST` | `/v1/vaults/{id}/credentials/{id}/archive` | `UpdateVault` | Management |
+| `DELETE` | `/v1/vaults/{id}/credentials/{id}` | `UpdateVault` | Management |
+| `POST` | `/v1/memory_stores` | `CreateMemoryStore` | Data |
+| `GET` | `/v1/memory_stores` | `ListMemoryStores` | Data |
+| `GET` | `/v1/memory_stores/{id}` | `GetMemoryStore` | Data |
+| `POST` | `/v1/memory_stores/{id}` | `UpdateMemoryStore` | Data |
+| `POST` | `/v1/memory_stores/{id}/archive` | `ArchiveMemoryStore` | Data |
+| `DELETE` | `/v1/memory_stores/{id}` | `DeleteMemoryStore` | Data |
+| `POST` | `/v1/memory_stores/{id}/memories` | `UpdateMemoryStore` | Data |
+| `GET` | `/v1/memory_stores/{id}/memories` | `GetMemoryStore` | Data |
+| `GET` | `/v1/memory_stores/{id}/memories/{id}` | `GetMemoryStore` | Data |
+| `POST` | `/v1/memory_stores/{id}/memories/{id}` | `UpdateMemoryStore` | Data |
+| `DELETE` | `/v1/memory_stores/{id}/memories/{id}` | `UpdateMemoryStore` | Data |
+| `GET` | `/v1/memory_stores/{id}/memory_versions` | `GetMemoryStore` | Data |
+| `GET` | `/v1/memory_stores/{id}/memory_versions/{id}` | `GetMemoryStore` | Data |
+| `POST` | `/v1/memory_stores/{id}/memory_versions/{id}/redact` | `UpdateMemoryStore` | Data |
+| `GET` | `/v1/webhooks` | `ListWebhooks` | Management |
+| `GET` | `/v1/webhooks/{id}` | `GetWebhook` | Management |
+| `POST` | `/v1/webhooks` | `CreateWebhook` | Management |
+| `POST` | `/v1/webhooks/{id}` | `UpdateWebhook` | Management |
+| `DELETE` | `/v1/webhooks/{id}` | `DeleteWebhook` | Management |
+| `POST` | `/v1/webhooks/{id}/regenerate_signing_secret` | `RotateWebhookSecret` | Management |
 
-| Method | Route                               | IAM action         | CloudTrail event type |
-| ------ | ----------------------------------- | ------------------ | --------------------- |
-| `GET`  | `/v1/organizations/analytics/usage` | `ListAccountUsage` | Data                  |
-| `GET`  | `/v1/organizations/analytics/cost`  | `ListAccountCost`  | Data                  |
+| Method | Route | IAM action | CloudTrail event type |
+| ----- | ----- | ----- | ----- |
+| `GET` | `/v1/organizations/analytics/usage` | `ListAccountUsage` | Data |
+| `GET` | `/v1/organizations/analytics/cost` | `ListAccountCost` | Data |
 
 Public API routes not in these tables are not available on Claude Platform on AWS. The gateway denies them.
 
@@ -403,13 +403,13 @@ Workspace, external key, telemetry destination, and Usage and Cost Analytics API
 
 AWS provides five managed policies for Claude Platform on AWS. All managed policies apply to `Resource: "*"`.
 
-| Policy                                 | Grants                                                                                                                                                                             |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AnthropicFullAccess`                  | `aws-external-anthropic:*`                                                                                                                                                         |
-| `AnthropicReadOnlyAccess`              | `Get*`, `List*`, `CallWithBearerToken`                                                                                                                                             |
-| `AnthropicInferenceAccess`             | `Get*`, `List*`, `CreateInference`, `CreateBatchInference`, `CancelBatchInference`, `DeleteBatchInference`, `CountTokens`, `CallWithBearerToken`                                   |
-| `AnthropicLimitedAccess`               | All `AnthropicInferenceAccess` actions, plus all Claude Managed Agents actions (agents, sessions, environments, vaults, memory stores, webhooks, and self-hosted environment work) |
-| `AnthropicSelfHostedEnvironmentAccess` | `GetEnvironment`, `ProcessEnvironmentWork`, `GetSession`, `UpdateSession`, `GetSkill`, `CallWithBearerToken`                                                                       |
+| Policy | Grants |
+| ----- | ----- |
+| `AnthropicFullAccess` | `aws-external-anthropic:*` |
+| `AnthropicReadOnlyAccess` | `Get*`, `List*`, `CallWithBearerToken` |
+| `AnthropicInferenceAccess` | `Get*`, `List*`, `CreateInference`, `CreateBatchInference`, `CancelBatchInference`, `DeleteBatchInference`, `CountTokens`, `CallWithBearerToken` |
+| `AnthropicLimitedAccess` | All `AnthropicInferenceAccess` actions, plus all Claude Managed Agents actions (agents, sessions, environments, vaults, memory stores, webhooks, and self-hosted environment work) |
+| `AnthropicSelfHostedEnvironmentAccess` | `GetEnvironment`, `ProcessEnvironmentWork`, `GetSession`, `UpdateSession`, `GetSkill`, `CallWithBearerToken` |
 
 `AnthropicInferenceAccess` is the narrowest managed policy sufficient to run inference. It covers both synchronous and batch inference and, through the `Get*` and `List*` wildcards, grants read access to every API resource in the namespace, including Claude Managed Agents (CMA) resources (agents, sessions, environments, vaults, memory stores, and webhooks). This includes file content download through `GetFile` (see the [Files](claude-platform-on-aws-iam-actions.md#files) note), skill content download through `GetSkill` (see the [Skills](claude-platform-on-aws-iam-actions.md#skills) note), and memory contents through `GetMemoryStore`. Vault credential secrets and webhook signing secrets are not exposed: those fields are write-only and are never returned by `GetVault` or `GetWebhook` (see [Authenticate with vaults](../managed-agents/vaults.md)). `AnthropicInferenceAccess` does not grant file creation or deletion, skill management, user profile management, workspace mutation, encryption key management, telemetry destination management, or any Claude Managed Agents write action (create, update, archive, delete, process, or rotate). To exclude CMA reads, replace `AnthropicInferenceAccess` with a custom policy that enumerates only the specific non-CMA actions you need.
 

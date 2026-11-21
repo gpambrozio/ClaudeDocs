@@ -161,6 +161,8 @@ List Deployment Runs
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
@@ -590,6 +592,8 @@ Get Deployment Run
 
     - `ExperimentalClaudeTag2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CEClaudeCodeManagedSettings2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `UserProfilesBilling2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MessageBatches2024_09_24("message-batches-2024-09-24")`
@@ -905,7 +909,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
 ## Domain types
 
-### Beta Managed Agents Agent Archived Run Error
+### Beta Managed Agents Agent Archived Run Error Object
 
 - `class BetaManagedAgentsAgentArchivedRunError`
 
@@ -1141,7 +1145,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
       - `JsonElement Type = "manual"`
 
-### Beta Managed Agents Environment Archived Run Error
+### Beta Managed Agents Environment Archived Run Error Object
 
 - `class BetaManagedAgentsEnvironmentArchivedRunError`
 
@@ -1153,7 +1157,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents Environment Not Found Run Error
+### Beta Managed Agents Environment Not Found Run Error Object
 
 - `class BetaManagedAgentsEnvironmentNotFoundRunError`
 
@@ -1165,7 +1169,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents File Not Found Run Error
+### Beta Managed Agents File Not Found Run Error Object
 
 - `class BetaManagedAgentsFileNotFoundRunError`
 
@@ -1185,7 +1189,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
   - `JsonElement Type = "manual"`
 
-### Beta Managed Agents MCP Egress Blocked Run Error
+### Beta Managed Agents MCP Egress Blocked Run Error Object
 
 - `class BetaManagedAgentsMcpEgressBlockedRunError`
 
@@ -1197,7 +1201,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents Memory Store Archived Run Error
+### Beta Managed Agents Memory Store Archived Run Error Object
 
 - `class BetaManagedAgentsMemoryStoreArchivedRunError`
 
@@ -1209,7 +1213,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents Organization Disabled Run Error
+### Beta Managed Agents Organization Disabled Run Error Object
 
 - `class BetaManagedAgentsOrganizationDisabledRunError`
 
@@ -1235,7 +1239,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     format: date-time
 
-### Beta Managed Agents Self Hosted Resources Unsupported Run Error
+### Beta Managed Agents Self Hosted Resources Unsupported Run Error Object
 
 - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
 
@@ -1247,7 +1251,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents Session Creation Rejected Run Error
+### Beta Managed Agents Session Creation Rejected Run Error Object
 
 - `class BetaManagedAgentsSessionCreationRejectedRunError`
 
@@ -1259,7 +1263,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents Session Rate Limited Run Error
+### Beta Managed Agents Session Rate Limited Run Error Object
 
 - `class BetaManagedAgentsSessionRateLimitedRunError`
 
@@ -1271,7 +1275,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents Session Resource Not Found Run Error
+### Beta Managed Agents Session Resource Not Found Run Error Object
 
 - `class BetaManagedAgentsSessionResourceNotFoundRunError`
 
@@ -1283,7 +1287,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents Skill Not Found Run Error
+### Beta Managed Agents Skill Not Found Run Error Object
 
 - `class BetaManagedAgentsSkillNotFoundRunError`
 
@@ -1333,7 +1337,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     The run was started manually by creating a session directly against the deployment.
 
-### Beta Managed Agents Unknown Run Error
+### Beta Managed Agents Unknown Run Error Object
 
 - `class BetaManagedAgentsUnknownRunError`
 
@@ -1345,7 +1349,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents Vault Archived Run Error
+### Beta Managed Agents Vault Archived Run Error Object
 
 - `class BetaManagedAgentsVaultArchivedRunError`
 
@@ -1357,7 +1361,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents Vault Not Found Run Error
+### Beta Managed Agents Vault Not Found Run Error Object
 
 - `class BetaManagedAgentsVaultNotFoundRunError`
 
@@ -1369,7 +1373,7 @@ Console.WriteLine(betaManagedAgentsDeploymentRun);
 
     Human-readable error description.
 
-### Beta Managed Agents Workspace Archived Run Error
+### Beta Managed Agents Workspace Archived Run Error Object
 
 - `class BetaManagedAgentsWorkspaceArchivedRunError`
 

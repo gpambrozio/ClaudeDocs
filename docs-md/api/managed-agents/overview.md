@@ -41,10 +41,10 @@ featureMetadata:
 
 Anthropic offers two ways to build with Claude, each suited to different use cases:
 
-|                | Messages API                                | Claude Managed Agents                                                     |
-| -------------- | ------------------------------------------- | ------------------------------------------------------------------------- |
-| **What it is** | Direct model prompting access               | Pre-built, configurable agent harness that runs in managed infrastructure |
-| **Best for**   | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work                                  |
+|  | Messages API | Claude Managed Agents |
+| ----- | ----- | ----- |
+| **What it is** | Direct model prompting access | Pre-built, configurable agent harness that runs in managed infrastructure |
+| **Best for** | Custom agent loops and fine-grained control | Long-running tasks and asynchronous work |
 
 Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and run code securely. The harness supports built-in prompt caching, compaction, and other performance optimizations for high-quality, efficient agent outputs. To build your own agent loop with direct model access instead, see [Using the Messages API](../build-with-claude/working-with-messages.md).
 
@@ -66,12 +66,12 @@ Event types, rate limits, CLI flags, and other lookup tables
 
 Claude Managed Agents is built around four concepts:
 
-| Concept         | Description                                                                                                                   |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| **Agent**       | The model, system prompt, tools, MCP servers, and skills                                                                      |
+| Concept | Description |
+| ----- | ----- |
+| **Agent** | The model, system prompt, tools, MCP servers, and skills |
 | **Environment** | Configuration for where sessions run: an Anthropic-managed cloud sandbox, or a self-hosted sandbox on your own infrastructure |
-| **Session**     | A running agent instance within an environment, performing a specific task and generating outputs                             |
-| **Events**      | Messages exchanged between your application and the agent (user turns, tool results, status updates)                          |
+| **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
+| **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
 ## How it works
 
@@ -140,9 +140,9 @@ Managed Agents are in beta on every model.
 
 ### API support
 
-| Status | Cloud platforms                                                                                                                                                                                                                                                                | Models                                                            |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| Beta   | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | [All models](../models/overview.md) |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
+| Beta | Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | [All models](../models/overview.md) |
 
 ### Required beta headers
 
@@ -156,9 +156,9 @@ Beta headers allow you to access experimental features and new model capabilitie
 
 [Data handling overview](../manage-claude/api-and-data-retention.md#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                                                                                                                         | HIPAA                                                               |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Status  | Not eligible                                                                                                                                                                                                                                                | Not eligible                                                        |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Not eligible | Not eligible |
 | Details | Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them. [Learn more](self-hosted-data-and-access.md#how-long-data-is-kept) | Not eligible for HIPAA. Applies to all Managed Agents sub-features. |
 
 Applicable endpoints:

@@ -730,7 +730,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
                   - `page_age: Optional[str]`
 
-                - `class WebSearchToolRequestErrorParam`
+                - `class WebSearchToolRequestErrorObjectParam`
 
                   - `type: Literal["web_search_tool_result_error"]`
 

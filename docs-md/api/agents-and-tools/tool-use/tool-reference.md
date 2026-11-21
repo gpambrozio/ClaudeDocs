@@ -12,19 +12,19 @@ This page is a reference for the tools Anthropic provides and the optional prope
 
 Anthropic provides two kinds of tools: **server tools** that run on Anthropic’s infrastructure, and **client tools** where Anthropic defines the schema but your application handles execution. Both kinds appear in your request’s `tools` array alongside any user-defined tools.
 
-| Tool                                                                                                     | `type`                                                                                             | Execution | [Beta header](../../api/beta-headers.md) |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------- |
-| [Web search tool](web-search-tool.md)         | `web_search_20260318`<br />`web_search_20260209`<br />`web_search_20250305`                        | Server    | None                                                                |
-| [Web fetch tool](web-fetch-tool.md)           | `web_fetch_20260318`<br />`web_fetch_20260309`<br />`web_fetch_20260209`<br />`web_fetch_20250910` | Server    | None                                                                |
-| [Code execution tool](code-execution-tool.md) | `code_execution_20260521`<br />`code_execution_20260120`<br />`code_execution_20250825`            | Server    | None                                                                |
-| [Advisor tool](advisor-tool.md)               | `advisor_20260301`                                                                                 | Server    | `advisor-tool-2026-03-01`                                           |
-| [Tool search tool](tool-search-tool.md)       | `tool_search_tool_regex_20251119`<br />`tool_search_tool_bm25_20251119`                            | Server    | None                                                                |
-| [MCP connector](../mcp-connector.md)                      | `mcp_toolset`                                                                                      | Server    | `mcp-client-2025-11-20`                                             |
-| [Memory tool](memory-tool.md)                 | `memory_20250818`                                                                                  | Client    | None                                                                |
-| [Bash tool](bash-tool.md)                     | `bash_20250124`                                                                                    | Client    | None                                                                |
-| [Text editor tool](text-editor-tool.md)       | `text_editor_20250728`<br />`text_editor_20250124`                                                 | Client    | None                                                                |
-| [Computer use tool](computer-use-tool.md)     | `computer_toolset_20260801`<br />`computer_20251124`<br />`computer_20250124`                      | Client    | None<br />`computer-use-2025-11-24`<br />`computer-use-2025-01-24`  |
-| [Browser use tool](browser-use-tool.md)       | `browser_toolset_20260801`                                                                         | Client    | None                                                                |
+| Tool | `type` | Execution | [Beta header](../../api/beta-headers.md) |
+| ----- | ----- | ----- | ----- |
+| [Web search tool](web-search-tool.md) | `web_search_20260318`<br />`web_search_20260209`<br />`web_search_20250305` | Server | None |
+| [Web fetch tool](web-fetch-tool.md) | `web_fetch_20260318`<br />`web_fetch_20260309`<br />`web_fetch_20260209`<br />`web_fetch_20250910` | Server | None |
+| [Code execution tool](code-execution-tool.md) | `code_execution_20260521`<br />`code_execution_20260120`<br />`code_execution_20250825` | Server | None |
+| [Advisor tool](advisor-tool.md) | `advisor_20260301` | Server | `advisor-tool-2026-03-01` |
+| [Tool search tool](tool-search-tool.md) | `tool_search_tool_regex_20251119`<br />`tool_search_tool_bm25_20251119` | Server | None |
+| [MCP connector](../mcp-connector.md) | `mcp_toolset` | Server | `mcp-client-2025-11-20` |
+| [Memory tool](memory-tool.md) | `memory_20250818` | Client | None |
+| [Bash tool](bash-tool.md) | `bash_20250124` | Client | None |
+| [Text editor tool](text-editor-tool.md) | `text_editor_20250728`<br />`text_editor_20250124` | Client | None |
+| [Computer use tool](computer-use-tool.md) | `computer_toolset_20260801`<br />`computer_20251124`<br />`computer_20250124` | Client | None<br />`computer-use-2025-11-24`<br />`computer-use-2025-01-24` |
+| [Browser use tool](browser-use-tool.md) | `browser_toolset_20260801` | Client | None |
 
 For model compatibility, see each tool’s page. Supported models vary by tool and by tool version. To check from your code whether a model accepts web search or code execution, see [Using the Models API](../../models/overview.md#using-the-models-api).
 
@@ -86,23 +86,23 @@ Set `defer_loading` for each member, never on the entry, and give every enabled 
 
 Every tool in the `tools` array, including user-defined tools, accepts optional properties that control how the tool is loaded, who can call it, and how its inputs are validated. You can combine these properties, with two exceptions: a tool with `defer_loading: true` can’t also carry `cache_control`, and a user-defined tool with `strict: true` can’t list a code execution caller in `allowed_callers`.
 
-| Property                | Purpose                                                                                                               | Available on                                                                                                                                                                                                                                                                                                                                                         | Detailed guide                                                                                                                                 |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cache_control`         | Set a prompt-cache breakpoint at this tool definition                                                                 | All tools (on `computer_toolset_20260801` and `browser_toolset_20260801`, set it on the toolset entry itself, not inside member `configs`)                                                                                                                                                                                                                           | [Prompt caching](../../build-with-claude/prompt-caching.md)                                                         |
-| `strict`                | Guarantee schema validation on tool names and inputs                                                                  | All tools except `mcp_toolset`, `computer_toolset_20260801`, and `browser_toolset_20260801`                                                                                                                                                                                                                                                                          | [Strict tool use](strict-tool-use.md)                                               |
-| `defer_loading`         | Exclude the tool from the initial system prompt; load it on demand when tool search returns a `tool_reference` for it | All tools (for `mcp_toolset`, see [MCP toolset configuration](../mcp-connector.md#mcp-toolset-configuration)). On the computer use and browser use toolsets, set it per member inside `configs`; see [Client toolsets](tool-reference.md#client-toolsets). | [Tool search tool](tool-search-tool.md)                                             |
-| `allowed_callers`       | Restrict which callers can call the tool                                                                              | All tools except `mcp_toolset` (on `computer_toolset_20260801` and `browser_toolset_20260801`, only `["direct"]` is accepted; see [Client toolsets](tool-reference.md#client-toolsets))                                                                                                                   | [Programmatic tool calling](programmatic-tool-calling.md#the-allowed-callers-field) |
-| `input_examples`        | Provide example input objects to show Claude how to call the tool                                                     | User-defined and Anthropic-schema client tools, except `computer_toolset_20260801` and `browser_toolset_20260801`. Not available on server tools.                                                                                                                                                                                                                    | [Define tools](define-tools.md#providing-tool-use-examples)                         |
-| `eager_input_streaming` | Enable fine-grained input streaming (`true`) or keep standard buffered streaming (`false`) for this tool              | User-defined tools only                                                                                                                                                                                                                                                                                                                                              | [Fine-grained tool streaming](fine-grained-tool-streaming.md)                       |
+| Property | Purpose | Available on | Detailed guide |
+| ----- | ----- | ----- | ----- |
+| `cache_control` | Set a prompt-cache breakpoint at this tool definition | All tools (on `computer_toolset_20260801` and `browser_toolset_20260801`, set it on the toolset entry itself, not inside member `configs`) | [Prompt caching](../../build-with-claude/prompt-caching.md) |
+| `strict` | Guarantee schema validation on tool names and inputs | All tools except `mcp_toolset`, `computer_toolset_20260801`, and `browser_toolset_20260801` | [Strict tool use](strict-tool-use.md) |
+| `defer_loading` | Exclude the tool from the initial system prompt; load it on demand when tool search returns a `tool_reference` for it | All tools (for `mcp_toolset`, see [MCP toolset configuration](../mcp-connector.md#mcp-toolset-configuration)). On the computer use and browser use toolsets, set it per member inside `configs`; see [Client toolsets](tool-reference.md#client-toolsets). | [Tool search tool](tool-search-tool.md) |
+| `allowed_callers` | Restrict which callers can call the tool | All tools except `mcp_toolset` (on `computer_toolset_20260801` and `browser_toolset_20260801`, only `["direct"]` is accepted; see [Client toolsets](tool-reference.md#client-toolsets)) | [Programmatic tool calling](programmatic-tool-calling.md#the-allowed-callers-field) |
+| `input_examples` | Provide example input objects to show Claude how to call the tool | User-defined and Anthropic-schema client tools, except `computer_toolset_20260801` and `browser_toolset_20260801`. Not available on server tools. | [Define tools](define-tools.md#providing-tool-use-examples) |
+| `eager_input_streaming` | Enable fine-grained input streaming (`true`) or keep standard buffered streaming (`false`) for this tool | User-defined tools only | [Fine-grained tool streaming](fine-grained-tool-streaming.md) |
 
 ### `allowed_callers` values
 
 `allowed_callers` is an array that accepts any combination of:
 
-| Value                       | Meaning                                                                                                           |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `"direct"`                  | The model can call this tool directly in a `tool_use` block. This is the default if `allowed_callers` is omitted. |
-| `"code_execution_20260120"` | Code running inside a `code_execution_20260120` or later sandbox can call this tool.                              |
+| Value | Meaning |
+| ----- | ----- |
+| `"direct"` | The model can call this tool directly in a `tool_use` block. This is the default if `allowed_callers` is omitted. |
+| `"code_execution_20260120"` | Code running inside a `code_execution_20260120` or later sandbox can call this tool. |
 
 Both `"code_execution_20260120"` and `"code_execution_20260521"` are accepted in `allowed_callers` and are interchangeable: a request using either code-execution tool version satisfies tools that list either caller. Response blocks always tag the caller as `code_execution_20260120` regardless of which version the request declared.
 

@@ -47,6 +47,7 @@ The file in the steps above is one of four ways to get managed settings onto a m
 
 * **Delivery controls**: [`policyHelper`](settings-reference.md#policyhelper), [`wslInheritsWindowsSettings`](settings-reference.md#wslinheritswindowssettings), and [`managedSourcesBehavior`](settings-reference.md#managedsourcesbehavior)
 * **Gateway login keys**: [`forceLoginGatewayUrl`](settings-reference.md#forcelogingatewayurl), [`gatewayInternalNetworks`](settings-reference.md#gatewayinternalnetworks), and the `"gateway"` value of [`forceLoginMethod`](settings-reference.md#forceloginmethod)
+* **Sign-in requirement**: [`enforceAnthropicSignIn`](settings-reference.md#enforceanthropicsignin)
 
 With a managed settings file or an MDM profile, everyone it reaches gets one policy. To give one group of developers a different policy, deploy a different file or profile to that group. On an Enterprise plan, you can also [give each group its own configuration](https://code.claude.com/docs/en/server-managed-settings.md#give-groups-different-settings) in server-managed settings. A self-hosted [Claude apps gateway](claude-apps-gateway.md) delivers managed settings per IdP group.
 
@@ -117,6 +118,8 @@ When two files set the same key, Claude Code combines them by these rules:
 * **[`modelPicker`](settings-reference.md#modelpicker)**: the later lineup replaces the earlier one whole
 
 ## How Claude Code combines managed sources
+
+If you set your provider or gateway at claude.ai under **Organization settings > Desktop 3P**, first read [which settings take priority](https://claude.com/docs/third-party/claude-desktop/admin-console-claude-code#which-settings-take-priority) in the Enterprise Admin Console guide.
 
 When your organization delivers more than one managed source to the same machine, the [`managedSourcesBehavior`](settings-reference.md#managedsourcesbehavior) key decides what Claude Code does with the others:
 
@@ -223,7 +226,7 @@ To confirm which sources combined on a machine, [read the `Setting sources` line
 
 A [`policyHelper`](settings-reference.md#policyhelper) is an executable your MDM policy or managed settings file names, and Claude Code runs it to compute managed settings at startup. When the selected source configures one and the helper emits a `managedSettings` object, that output changes what Claude Code reads:
 
-* **The emitted `managedSettings` object is the only managed settings for the session**, including for the [keys it otherwise reads from every admin source](#keys-read-from-every-admin-source), apart from [`forceRemoteSettingsRefresh`, which has its own startup rule](settings-reference.md#forceremotesettingsrefresh)
+* **The emitted `managedSettings` object is the only managed settings for the session**, including for [keys otherwise read from every admin source](#keys-read-from-every-admin-source), apart from [a few keys](https://code.claude.com/docs/en/settings-reference.md#write-the-helper-output)
 
 For which helper runs fail, and what Claude Code does when one does, see [Helper failures](https://code.claude.com/docs/en/settings-reference.md#helper-failures).
 

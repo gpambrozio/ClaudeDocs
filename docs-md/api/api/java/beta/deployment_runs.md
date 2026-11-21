@@ -161,6 +161,8 @@ List Deployment Runs
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
@@ -596,6 +598,8 @@ Get Deployment Run
 
     - `EXPERIMENTAL_CLAUDE_TAG_2026_10_21("experimental-claude-tag-2026-10-21")`
 
+    - `CE_CLAUDE_CODE_MANAGED_SETTINGS_2026_10_06("ce-claude-code-managed-settings-2026-10-06")`
+
     - `USER_PROFILES_BILLING_2026_10_01("user-profiles-billing-2026-10-01")`
 
     - `MESSAGE_BATCHES_2024_09_24("message-batches-2024-09-24")`
@@ -916,7 +920,7 @@ public final class Main {
 
 ## Domain types
 
-### Beta Managed Agents Agent Archived Run Error
+### Beta Managed Agents Agent Archived Run Error Object
 
 - `class BetaManagedAgentsAgentArchivedRunError`
 
@@ -1152,7 +1156,7 @@ public final class Main {
 
       - `JsonValue type = "manual"`
 
-### Beta Managed Agents Environment Archived Run Error
+### Beta Managed Agents Environment Archived Run Error Object
 
 - `class BetaManagedAgentsEnvironmentArchivedRunError`
 
@@ -1164,7 +1168,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents Environment Not Found Run Error
+### Beta Managed Agents Environment Not Found Run Error Object
 
 - `class BetaManagedAgentsEnvironmentNotFoundRunError`
 
@@ -1176,7 +1180,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents File Not Found Run Error
+### Beta Managed Agents File Not Found Run Error Object
 
 - `class BetaManagedAgentsFileNotFoundRunError`
 
@@ -1196,7 +1200,7 @@ public final class Main {
 
   - `JsonValue type = "manual"`
 
-### Beta Managed Agents MCP Egress Blocked Run Error
+### Beta Managed Agents MCP Egress Blocked Run Error Object
 
 - `class BetaManagedAgentsMcpEgressBlockedRunError`
 
@@ -1208,7 +1212,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents Memory Store Archived Run Error
+### Beta Managed Agents Memory Store Archived Run Error Object
 
 - `class BetaManagedAgentsMemoryStoreArchivedRunError`
 
@@ -1220,7 +1224,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents Organization Disabled Run Error
+### Beta Managed Agents Organization Disabled Run Error Object
 
 - `class BetaManagedAgentsOrganizationDisabledRunError`
 
@@ -1246,7 +1250,7 @@ public final class Main {
 
     format: date-time
 
-### Beta Managed Agents Self Hosted Resources Unsupported Run Error
+### Beta Managed Agents Self Hosted Resources Unsupported Run Error Object
 
 - `class BetaManagedAgentsSelfHostedResourcesUnsupportedRunError`
 
@@ -1258,7 +1262,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents Session Creation Rejected Run Error
+### Beta Managed Agents Session Creation Rejected Run Error Object
 
 - `class BetaManagedAgentsSessionCreationRejectedRunError`
 
@@ -1270,7 +1274,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents Session Rate Limited Run Error
+### Beta Managed Agents Session Rate Limited Run Error Object
 
 - `class BetaManagedAgentsSessionRateLimitedRunError`
 
@@ -1282,7 +1286,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents Session Resource Not Found Run Error
+### Beta Managed Agents Session Resource Not Found Run Error Object
 
 - `class BetaManagedAgentsSessionResourceNotFoundRunError`
 
@@ -1294,7 +1298,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents Skill Not Found Run Error
+### Beta Managed Agents Skill Not Found Run Error Object
 
 - `class BetaManagedAgentsSkillNotFoundRunError`
 
@@ -1344,7 +1348,7 @@ public final class Main {
 
     The run was started manually by creating a session directly against the deployment.
 
-### Beta Managed Agents Unknown Run Error
+### Beta Managed Agents Unknown Run Error Object
 
 - `class BetaManagedAgentsUnknownRunError`
 
@@ -1356,7 +1360,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents Vault Archived Run Error
+### Beta Managed Agents Vault Archived Run Error Object
 
 - `class BetaManagedAgentsVaultArchivedRunError`
 
@@ -1368,7 +1372,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents Vault Not Found Run Error
+### Beta Managed Agents Vault Not Found Run Error Object
 
 - `class BetaManagedAgentsVaultNotFoundRunError`
 
@@ -1380,7 +1384,7 @@ public final class Main {
 
     Human-readable error description.
 
-### Beta Managed Agents Workspace Archived Run Error
+### Beta Managed Agents Workspace Archived Run Error Object
 
 - `class BetaManagedAgentsWorkspaceArchivedRunError`
 
