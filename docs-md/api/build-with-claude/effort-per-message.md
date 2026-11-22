@@ -321,7 +321,7 @@ Put the message after everything you’ve already sent, and keep it in place on 
 
 If it sits next to a `system` message that has content, both messages must follow the [placement rules for mid-conversation system messages](mid-conversation-system-messages.md#limitations).
 
-With the Amazon Bedrock InvokeModel API, send the beta value in the `anthropic_beta` array of the request body instead of the header. For the models that support per-message effort there, see [Mid-conversation system messages on Bedrock](claude-on-amazon-bedrock-legacy.md#mid-conversation-system-messages-on-bedrock).
+With the Amazon Bedrock InvokeModel API, send the beta in the `anthropic_beta` array of the request body instead of the header. For the models that support per-message effort there, see [Mid-conversation system messages on Bedrock](claude-on-amazon-bedrock-legacy.md#mid-conversation-system-messages-on-bedrock).
 
 ## Errors
 

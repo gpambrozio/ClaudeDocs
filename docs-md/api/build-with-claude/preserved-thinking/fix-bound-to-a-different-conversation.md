@@ -53,7 +53,7 @@ Set `thinking.block_binding.prefix_mismatch_behavior` to `"drop_block"`, and sen
 }
 ```
 
-In the SDK, call the beta Messages method and pass the header value, as [the test program](fix-bound-to-a-different-conversation.md#how-to-tell-whether-your-integration-is-impacted-details) does. If the error [still asks for the header](fix-bound-to-a-different-conversation.md#setting-not-received), the header didn’t arrive.
+In the SDK, call the beta Messages method and pass the beta, as [the test program](fix-bound-to-a-different-conversation.md#how-to-tell-whether-your-integration-is-impacted-details) does. If the error [still asks for the header](fix-bound-to-a-different-conversation.md#setting-not-received), the header didn’t arrive.
 
 That stops the errors by dropping the invalid thinking, but it [can cost more](fix-bound-to-a-different-conversation.md#drop-block-cost) and can affect output quality and latency. The next request succeeds, and its `input_transformations` array lists each block the API dropped.
 
