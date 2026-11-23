@@ -96,7 +96,7 @@ The skill source is available in the [Anthropic skills repository](https://githu
 npx skills add https://github.com/anthropics/skills --skill claude-api
 ```
 
-Or ask Claude Code to install it as a [Claude Code plugin](../../../claude-code/plugins.md):
+Or ask Claude Code to install it as a [Claude Code plugin](../../../claude-code/plugins/overview.md):
 
 Let Claude Code install this for you
 

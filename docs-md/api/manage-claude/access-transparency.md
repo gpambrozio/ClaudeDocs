@@ -13,7 +13,7 @@ When Access Transparency is enabled for your organization:
 * Each human view of your retained data (see [covered content](access-transparency.md#what-access-transparency-covers)) by an Anthropic employee writes an `anthropic_access` activity to your [Compliance API Activity Feed](compliance-activity-feed.md).
 * Access occurs only for safety review or incident response. See [Reason codes](access-transparency.md#reason-codes).
 
-Access Transparency is available to eligible customers. For eligibility, refer to your contract terms or contact your Anthropic account representative. Anthropic also enables Access Transparency when it [approves your whole organization for customer-managed keys](access-transparency.md#access-transparency-with-customer-managed-keys). You can’t turn Access Transparency off in the Claude Console or through the API.
+Access Transparency is available to eligible customers. For eligibility, refer to your contract terms or contact your Anthropic account representative. Anthropic also enables Access Transparency when your organization [first attaches a key](access-transparency.md#access-transparency-with-customer-managed-keys). You can’t turn Access Transparency off in the Claude Console or through the API.
 
 ## How Access Transparency works
 
@@ -38,8 +38,11 @@ Anthropic personnel access customer content only under defined conditions. Acces
 * **Claude consumer products:** Claude Free, Pro, Max, or Ultra plans.
 * **Partner-operated platforms:** Claude Models on Google Cloud (Google managed) and Amazon Bedrock. Refer to those platforms’ transparency controls.
 * **Anything ZDR does not cover:** Products that are not covered by ZDR (for example, the Files API, Anthropic-hosted stateful applications, and the Batch API) are not covered by Access Transparency. See [Zero data retention (ZDR)](api-and-data-retention.md#zero-data-retention-zdr-scope) for additional details.
+* **Data in customer-owned storage:** On Claude Platform (the Claude API), Access Transparency has no record for data in [customer-owned storage](enterprise-frontier-safeguards/customer-owned-storage.md).
 
 ## Getting started
+
+If your organization has [Enterprise Frontier Safeguards](enterprise-frontier-safeguards/overview.md) or Enterprise Data Controls and doesn’t already have Access Transparency, you don’t need to request it. On Claude Platform, it turns on automatically the first time you start connecting customer-owned storage, attach a customer-managed key, or turn off Anthropic Human Review.
 
 To enable Access Transparency:
 
@@ -59,7 +62,7 @@ Access Transparency is enabled at the organization level and covers all workspac
 
 ### Access Transparency with customer-managed keys
 
-When Anthropic approves your whole organization for [customer-managed encryption keys](cmek.md) (CMEK), it also enables Access Transparency for the organization. This happens at approval, before you attach a key, so you don’t need to request Access Transparency separately. Access Transparency still doesn’t cover content in claude.ai. See [What Access Transparency does not cover](access-transparency.md#what-access-transparency-does-not-cover).
+When Anthropic approves your whole organization for [customer-managed encryption keys](cmek.md) (CMEK), it also enables Access Transparency for the organization. This happens when your organization first attaches a key. You don’t need to request Access Transparency separately. Access Transparency still doesn’t cover content in claude.ai. See [What Access Transparency does not cover](access-transparency.md#what-access-transparency-does-not-cover).
 
 Note the following about the approval:
 
@@ -71,7 +74,7 @@ The approval doesn’t change your Compliance API setting. Anthropic records Acc
 1. [Turn on the Compliance API](compliance-api-access.md#set-up-the-compliance-api).
 2. Read the [Activity Feed](compliance-activity-feed.md) with a [Compliance Access Key or an Admin API key](compliance-api-access.md#which-key-do-you-need). Create an Admin API key after you turn on the Compliance API, because a key created earlier can’t read the feed.
 
-On Claude Platform on AWS, ask your Anthropic account representative to turn on the Compliance API. Then read the feed with the [`ListComplianceActivities` IAM action](../api/claude-platform-on-aws-iam-actions.md#compliance).
+On Claude Platform on AWS, sign in to the Claude Console from the AWS Console with the Admin role. Turn on the **Compliance API** toggle on the [Compliance](https://platform.claude.com/settings/security) page. Then, read the feed. Your IAM policy must allow `UpdateComplianceSettings` for the toggle and [`ListComplianceActivities`](../api/claude-platform-on-aws-iam-actions.md#compliance) for the feed. The `AnthropicFullAccess` policy includes both.
 
 Not every organization that uses CMEK has Access Transparency. For example, it might not be enabled in these cases:
 
@@ -214,7 +217,7 @@ Access Transparency applies from the time it is enabled for your organization. C
 
 ### Automated processing does not generate access events
 
-`anthropic_access` events record human access only. Anthropic’s automated safety systems and classifiers continue to process your content as part of normal operation, and that processing does not generate `anthropic_access` events. The one event automated processing can initiate is a `cmek_preserve` preservation record (see [CMEK content preservation](access-transparency.md#cmek-content-preservation)). An empty feed means no human at Anthropic has viewed your content; it does not mean your content was not processed by automated systems.
+`anthropic_access` events record human access only. Anthropic’s automated safety systems and classifiers continue to process your content as part of normal operation, and that processing does not generate `anthropic_access` events. The one event automated processing can initiate is a `cmek_preserve` preservation record (see [CMEK content preservation](access-transparency.md#cmek-content-preservation)). An empty feed means no human at Anthropic has viewed your covered content; it does not mean your content was not processed by automated systems.
 
 ### Access Transparency does not change what Anthropic can access
 
@@ -256,7 +259,7 @@ Access Transparency is enabled at the organization level and covers all workspac
 
 **How does Access Transparency relate to CMEK?**
 
-Access Transparency does not require CMEK. When Anthropic approves your whole organization for CMEK, it also enables Access Transparency. See [Access Transparency with customer-managed keys](access-transparency.md#access-transparency-with-customer-managed-keys). With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](access-transparency.md#cmek-content-preservation) and [Limited preservation outside your key](cmek-data-retention.md#limited-preservation-outside-your-key).
+Access Transparency does not require CMEK. When Anthropic approves your whole organization for CMEK, it also enables Access Transparency. This happens when your organization first attaches a key. See [Access Transparency with customer-managed keys](access-transparency.md#access-transparency-with-customer-managed-keys). With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](access-transparency.md#cmek-content-preservation) and [Limited preservation outside your key](cmek-data-retention.md#limited-preservation-outside-your-key).
 
 **How can I tell that my Access Transparency record has not been altered?**
 
@@ -273,6 +276,7 @@ Contact your Anthropic account representative.
 * [Activity Feed](compliance-activity-feed.md)
 * [API and data retention](api-and-data-retention.md)
 * [Customer-managed encryption keys (CMEK)](cmek.md)
+* [Enterprise Frontier Safeguards](enterprise-frontier-safeguards/overview.md)
 * [Claude Code data usage](../../claude-code/data-usage.md)
 * [Trust Center](https://trust.anthropic.com/resources)
 

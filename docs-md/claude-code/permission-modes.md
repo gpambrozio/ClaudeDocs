@@ -290,7 +290,7 @@ Plan mode tells Claude to research and propose changes without making them. Clau
 
 What happens to a shell command during planning depends on the session, and the first of these cases that matches applies:
 
-* **Interactive terminal sessions with bypass permissions available**: neither the classifier nor a prompt applies to planning commands. [Skip all checks with bypassPermissions mode](#skip-all-checks-with-bypasspermissions-mode) covers the few things that still prompt there.
+* **Interactive terminal sessions with bypass permissions available**: planning commands can run with neither the classifier nor a prompt. [Skip all checks with bypassPermissions mode](#skip-all-checks-with-bypasspermissions-mode) covers what still prompts there.
 * **[Auto mode](https://code.claude.com/docs/en/auto-mode-config.md) available and the `useAutoModeDuringPlan` setting on**, which it is by default: the classifier reviews shell commands other than [critical-path removals](#critical-paths) instead of prompting you. Approved commands run, and rejected ones are blocked.
 * **Auto mode not available, or `useAutoModeDuringPlan` off**: commands outside the [built-in read-only set](https://code.claude.com/docs/en/permissions.md#read-only-commands) prompt for approval, including when the sandbox's [auto-allow mode](https://code.claude.com/docs/en/sandboxing.md#sandbox-modes) is enabled.
 
@@ -322,7 +322,7 @@ To make plan mode the default for a project's terminal sessions, set `defaultMod
 
 ## Eliminate permission prompts with auto mode
 
-Auto mode lets Claude execute without routine permission prompts. A separate classifier model reviews actions before they run, blocking anything that escalates beyond your request, targets unrecognized infrastructure, or appears driven by hostile content Claude read. Explicit [ask rules](https://code.claude.com/docs/en/permissions.md#manage-permissions) still force a prompt.
+Auto mode lets Claude execute without routine permission prompts. A separate classifier model reviews actions before they run and blocks the ones it [judges risky](#what-the-classifier-blocks-by-default). It looks for actions that go beyond your request, target unrecognized infrastructure, or follow hostile content Claude read.
 
 With Claude Code v2.1.283 or later, auto mode is the [built-in starting permission mode](#which-mode-a-session-starts-in) for interactive terminal and VS Code sessions on every plan and provider. On earlier versions, it's the built-in starting permission mode only on Pro, Max, Ultra, and Team plans.
 
@@ -541,7 +541,7 @@ Whatever you answer, Claude keeps working:
 
 The classifier treats boundaries you state in the conversation as a block signal. If you tell Claude "don't push" or "wait until I review before deploying", the classifier blocks matching actions [it reviews](#how-the-classifier-evaluates-actions) even when the default rules would allow them. A boundary stays in force until you lift it in a later message. Claude's own judgment that a condition was met does not lift it.
 
-Boundaries are not stored as rules. The classifier re-reads them from the transcript on each check, so a boundary can be lost if [context compaction](https://code.claude.com/docs/en/costs.md#reduce-token-usage) removes the message that stated it. For a hard guarantee, add a [deny rule](https://code.claude.com/docs/en/permissions.md#permission-rule-syntax) instead.
+Boundaries are not stored as rules. The classifier re-reads them from the transcript on each check, so a boundary can be lost if [context compaction](https://code.claude.com/docs/en/costs.md#reduce-token-usage) removes the message that stated it. To keep the boundary from being lost, add a [deny rule](https://code.claude.com/docs/en/permissions.md#permission-rule-syntax) instead.
 
 ### Approvals you state in conversation
 
@@ -582,6 +582,7 @@ The following sections cover the order Claude Code evaluates an action in, how t
 >    * No allow rule approves recognized `rm` and `rmdir` [critical-path removals](#critical-paths)
 >    * MCP tools marked [`requiresUserInteraction`](mcp.md#require-approval-for-a-specific-tool) prompt you directly even when an allow rule matches, and so do connector tools [your organization set to `ask`](mcp.md#organization-controls-on-connector-tools) in sessions where that setting reaches Claude Code
 >    * A shell command that carries [per-command allowed domains](https://code.claude.com/docs/en/sandboxing.md#per-command-allowed-domains-in-auto-mode) also routes to the classifier even when an allow rule matches, because a rule approves the command, not its hosts
+>    * Even in Manual, `acceptEdits`, and `dontAsk` modes, the classifier can review a [Claude in Chrome](https://code.claude.com/docs/en/chrome.md) action that an allow rule matches
 >    * Ask rules that match on a command's content, such as `Bash(git push *)`, fall back to a permission prompt
 >    * A write that the [symlink check](https://code.claude.com/docs/en/permissions.md#symlinks) resolves to a protected path prompts you when the path Claude requested isn't itself protected
 >    * A read from a [network path](https://code.claude.com/docs/en/permissions.md#network-paths) prompts you even when an allow rule matches
@@ -648,7 +649,7 @@ The following sections cover the order Claude Code evaluates an action in, how t
 
 If you set `dontAsk` mode, Claude Code auto-denies every tool call that would otherwise prompt you, though a [mod](https://code.claude.com/docs/en/plugins/mods/overview.md) you installed can still approve some of those calls. To check which calls a mod can approve, see [Extend permissions with hooks](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods). Don't rely on `dontAsk` to stop a [tool call a mod makes itself](https://code.claude.com/docs/en/plugins/mods/reference.md#mods-api-methods).
 
-Claude still runs actions that need no approval in Manual mode, such as file reads inside your working directories and [read-only Bash commands](https://code.claude.com/docs/en/permissions.md#read-only-commands). Actions matching your `permissions.allow` rules and calls approved by a [PreToolUse hook](https://code.claude.com/docs/en/permissions.md#extend-permissions-with-hooks) run too. Use this mode for CI pipelines or restricted environments where you pre-define what Claude may do. The status bar shows `⏵⏵ don't ask on` in this mode.
+Claude still runs actions that need no approval in Manual mode, such as file reads inside your working directories and [read-only Bash commands](https://code.claude.com/docs/en/permissions.md#read-only-commands). Most calls that your `permissions.allow` rules or a [PreToolUse hook](https://code.claude.com/docs/en/permissions.md#extend-permissions-with-hooks) approve run too. Use this mode for CI pipelines or restricted environments where you pre-define what Claude may do. The status bar shows `⏵⏵ don't ask on` in this mode.
 
 These calls are denied where you'd otherwise see a prompt:
 
@@ -681,7 +682,7 @@ Two [cross-session messaging](https://code.claude.com/docs/en/cross-session-mess
 * The [`isolatePeerMachines`](settings-reference.md#isolatepeermachines) approval prompt for messages to your sessions beyond this machine still appears.
 * When no [`crossSessionInbound`](cross-session-messaging.md#control-inbound-messages) value applies, Claude Code holds an inbound message from another of your sessions for your approval, and delivers without asking only when the sending session identifies itself as also bypassing permission prompts. If you leave the permission mode while messages are held, Claude Code re-applies the inbound rules and delivers any held message they now accept.
 
-In interactive terminal sessions with bypass permissions available, Claude Code also doesn't enforce [plan mode's](#analyze-before-you-edit-with-plan-mode) blocks. Claude is still instructed to plan without editing, but a file edit or shell command it attempts during planning runs without prompting. Explicit [ask rules](https://code.claude.com/docs/en/permissions.md#manage-permissions) and recognized `rm` and `rmdir` [critical-path removals](#critical-paths) still prompt.
+In interactive terminal sessions with bypass permissions available, don't rely on [plan mode's](#analyze-before-you-edit-with-plan-mode) blocks. A file edit or shell command Claude attempts during planning can run without prompting. Explicit [ask rules](https://code.claude.com/docs/en/permissions.md#manage-permissions) and recognized `rm` and `rmdir` [critical-path removals](#critical-paths) still prompt.
 
 Plan mode keeps its blocks wherever Claude Code runs without an interactive terminal, including [non-interactive runs](https://code.claude.com/docs/en/headless.md) with `-p`, [Agent SDK](https://code.claude.com/docs/en/agent-sdk/permissions.md#plan-mode-plan) sessions, and conversations in the [VS Code extension](https://code.claude.com/docs/en/vs-code.md)'s chat panel. There, `--allow-dangerously-skip-permissions` makes `bypassPermissions` selectable later.
 

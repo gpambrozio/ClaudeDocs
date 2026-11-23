@@ -6,7 +6,7 @@
 >
 > Linux support for the Claude desktop app is in beta.
 
-The desktop app on Linux gives you the same Chat, Cowork, and Claude Code experience as on macOS and Windows: parallel sessions, visual diff review, an integrated terminal and editor, and live app preview. See [Use Claude Code Desktop](https://code.claude.com/docs/en/desktop.md) for the feature reference.
+The desktop app on Linux gives you Chat, [Cowork](#cowork-requirements), and Claude Code. In the desktop app, Claude Code has parallel sessions, visual diff review, an integrated terminal and editor, and live app preview. See [Use Claude Code Desktop](https://code.claude.com/docs/en/desktop.md) for the feature reference.
 
 ## Requirements
 
@@ -161,7 +161,7 @@ If Cowork shows one of these messages, fix the requirement it names, then restar
 * **Computer Use**: [app and screen control](https://code.claude.com/docs/en/desktop.md#let-claude-use-your-computer) isn't available on Linux.
 * **Dictation**: voice input isn't available in the Linux desktop app. Use [voice dictation](https://code.claude.com/docs/en/voice-dictation.md) in the CLI instead.
 * **Quick Entry global hotkey**: works on X11. On native Wayland it requires your desktop environment's GlobalShortcuts portal.
-* **Fedora and RHEL**: only Debian-based distributions are supported today. Support for additional distributions is coming in the future.
+* **Fedora and RHEL**: only Debian-based distributions are supported today.
 
 For anything not yet available in the desktop app, the [CLI](https://code.claude.com/docs/en/quickstart.md) runs the same Claude Code engine and supports a wider range of Linux distributions; see the [system requirements](https://code.claude.com/docs/en/setup.md#system-requirements).
 

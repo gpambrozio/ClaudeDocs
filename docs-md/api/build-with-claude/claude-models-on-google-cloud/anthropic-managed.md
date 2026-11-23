@@ -175,8 +175,8 @@ go get github.com/anthropics/anthropic-sdk-go/v2/googlecloud
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.12.0")
-implementation("com.anthropic:anthropic-java-google-cloud:3.12.0")
+implementation("com.anthropic:anthropic-java:3.13.0")
+implementation("com.anthropic:anthropic-java-google-cloud:3.13.0")
 ```
 
 **Maven**
@@ -185,12 +185,12 @@ implementation("com.anthropic:anthropic-java-google-cloud:3.12.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.12.0</version>
+    <version>3.13.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-google-cloud</artifactId>
-    <version>3.12.0</version>
+    <version>3.13.0</version>
 </dependency>
 ```
 
@@ -413,7 +413,7 @@ Claude Models on Google Cloud (Anthropic managed) uses the same model IDs as the
 | Claude Opus 4.8 | `claude-opus-4-8` |
 | Claude Opus 4.7 | `claude-opus-4-7` |
 | Claude Opus 4.6 | `claude-opus-4-6` |
-| Claude Opus 4.5 | `claude-opus-4-5-20251101` |
+| Claude Opus 4.5 ([deprecated](../../about-claude/model-deprecations.md)) | `claude-opus-4-5-20251101` |
 | Claude Sonnet 5.5 | `claude-sonnet-5-5` |
 | Claude Sonnet 5 | `claude-sonnet-5` |
 | Claude Sonnet 4.6 | `claude-sonnet-4-6` |
@@ -555,6 +555,7 @@ The [Messages API](../../api/messages/create.md), the [Models API](../../api/mod
 * [Data residency](../../manage-claude/data-residency.md)
 * [Effort](../effort.md)
   * [Per-message effort](../effort-per-message.md) (Beta)
+* [Enterprise Frontier Safeguards](../../manage-claude/enterprise-frontier-safeguards/overview.md) (Beta)
 * [Fast mode](../fast-mode.md)
 * [Files API](../files.md)
 * [Forced tool use](../../agents-and-tools/tool-use/define-tools.md#forcing-tool-use)
@@ -657,11 +658,11 @@ The usage and cost endpoints use the [base URL without the workspace](anthropic-
 
 While the [Compliance API](../../manage-claude/compliance-api.md) is off, it doesn’t record activity events. You can’t recover those events later. For what else the setting changes, see [Set up the Compliance API](../../manage-claude/compliance-api-access.md).
 
-To turn the Compliance API on or off for the Anthropic organization that setup creates, follow these steps:
+To change the Compliance API setting for the Anthropic organization that setup creates, follow these steps:
 
 1. [Open the Claude Console](anthropic-managed.md#using-the-claude-console).
 2. Go to [Compliance in the Claude Console](https://platform.claude.com/settings/security) (`platform.claude.com/settings/security`).
-3. Turn the **Compliance API** toggle on or off.
+3. Use the **Compliance API** toggle.
 
 #### Customer-managed encryption keys
 

@@ -125,6 +125,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
   - `"ce-claude-code-managed-settings-2026-10-06"`
 
+  - `"efs-2026-10-01"`
+
   - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
@@ -742,6 +744,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
   - `"ce-claude-code-managed-settings-2026-10-06"`
 
+  - `"efs-2026-10-01"`
+
   - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
@@ -1194,6 +1198,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
   - `"ce-claude-code-managed-settings-2026-10-06"`
 
+  - `"efs-2026-10-01"`
+
   - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
@@ -1640,6 +1646,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
   - `"experimental-claude-tag-2026-10-21"`
 
   - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"efs-2026-10-01"`
 
   - `"user-profiles-billing-2026-10-01"`
 
@@ -2088,6 +2096,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
   - `"experimental-claude-tag-2026-10-21"`
 
   - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"efs-2026-10-01"`
 
   - `"user-profiles-billing-2026-10-01"`
 

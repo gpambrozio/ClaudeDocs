@@ -1739,7 +1739,7 @@ Read the rate limits configured for your organization and its workspaces, and se
 
 ## Compliance API
 
-Retrieve audit and activity data for your organization with the [Compliance API](compliance-api.md). Admin API keys can read only the Activity Feed. For full access, see [Set up the Compliance API](compliance-api-access.md).
+Retrieve audit and activity data for your organization with the [Compliance API](compliance-api.md). Admin API keys can read only the Activity Feed. The exception is the [Safety Cases API](enterprise-frontier-safeguards/safety-cases-api.md#get-access): an Admin API key that you create while that API is available to your organization also reaches it. Through that API, the key can read flagged messages and respond to Safety Cases. For full access, see [Set up the Compliance API](compliance-api-access.md).
 
 ## Organization webhooks
 

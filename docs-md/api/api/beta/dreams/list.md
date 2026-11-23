@@ -187,6 +187,8 @@ See the [Dreams guide](../../../managed-agents/dreams.md#list-dreams) for how to
 
   - `"ce-claude-code-managed-settings-2026-10-06"`
 
+  - `"efs-2026-10-01"`
+
   - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`

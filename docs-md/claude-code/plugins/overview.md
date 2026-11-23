@@ -68,7 +68,7 @@ This diagram shows the path from a marketplace to your session. A marketplace li
 
 ![Diagram of the marketplace path in three boxes, left to right. A marketplace, a catalog of plugins, lists a plugin. The plugin is one directory installed as a unit, holding skills, agents, hooks, MCP servers, and other components. You install the plugin into Claude Code, which loads its components.](https://mintcdn.com/claude-code/2Q_GtOEovg5qaBem/images/plugins-model.svg?fit=max\&auto=format\&n=2Q_GtOEovg5qaBem\&q=85\&s=4196344954b7c2e27fc0bd6a9a1113a1)
 
-[Install and manage plugins](https://code.claude.com/docs/en/plugins/install.md#install-a-plugin) has the install steps for each place you run Claude Code. While you're developing a plugin, you don't need a marketplace: load it straight from its folder with `--plugin-dir`, as [Develop without a marketplace](https://code.claude.com/docs/en/plugins/create.md#develop-without-a-marketplace) shows.
+[Install and manage plugins](https://code.claude.com/docs/en/plugins/install.md#install-a-plugin) has the install steps for each place you run Claude Code. While you're developing a plugin, load it straight from its folder with `--plugin-dir`, as [Develop without a marketplace](https://code.claude.com/docs/en/plugins/create.md#develop-without-a-marketplace) shows.
 
 ### Make an installed plugin available in your session
 
@@ -82,7 +82,7 @@ Read [Plugin loading reference](https://code.claude.com/docs/en/plugins/loading.
 
 ## Tell Anthropic's marketplaces from third-party ones
 
-A marketplace's name places it in one of three tiers. Claude Code accepts the official and community names only for marketplaces sourced from `github.com/anthropics/` repositories:
+A marketplace's name places it in one of three tiers. Claude Code accepts the official and community names for marketplaces sourced from `github.com/anthropics/` repositories:
 
 * **Official**: marketplaces with one of Anthropic's [official marketplace names](https://code.claude.com/docs/en/plugins/security.md#official-marketplace-names), including `claude-plugins-official` and `claude-code-plugins`.
 * **Community**: marketplaces with one of Anthropic's community names, such as `claude-community`. [Identify Anthropic's marketplaces by name](https://code.claude.com/docs/en/plugins/security.md#marketplace-tiers) lists them.

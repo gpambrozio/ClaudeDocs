@@ -19,7 +19,7 @@ The key you need depends on which Claude product your organization uses: Claude 
 | **Key prefix** | `sk-ant-admin01-...` | `sk-ant-api01-...` |
 | **Who can create it** | Organization members with the **admin** role | **Primary owner:** any scope<br />**Organization owner:** Compliance API scopes only, for their own organization |
 | **Scopes** | None to select: every key has full access to the endpoints that accept it | [Choose scopes](admin-api-keys.md#choose-scopes-for-a-claude-enterprise-key) when you create the key. The key works only with the APIs your scopes cover |
-| **Works with** | [Admin API](admin-api.md)<br />[Usage and Cost Analytics API](usage-cost-analytics-api.md)<br />[Compliance API Activity Feed](compliance-activity-feed.md)<br />[Usage and Cost API](usage-cost-api.md) (legacy)<br />[Rate Limits API](rate-limits-api.md)<br />[Claude Code Analytics API](claude-code-analytics-api.md) | Admin API [user management](user-management.md)<br />[Usage and Cost Analytics API](usage-cost-analytics-api.md)<br />[Compliance API](compliance-api.md)<br />[Usage and Cost API](usage-cost-api.md) (legacy)<br />[Claude Enterprise Analytics API](analytics-api.md)<br />[Plugins API](plugins-api.md)<br />[Claude Tag API](claude-tag-api.md)<br />[Spend Limits API](spend-limits-api.md) |
+| **Works with** | [Admin API](admin-api.md)<br />[Usage and Cost Analytics API](usage-cost-analytics-api.md)<br />[Compliance API Activity Feed](compliance-activity-feed.md)<br />[Safety Cases API](enterprise-frontier-safeguards/safety-cases-api.md#get-access), for keys created while it’s available<br />[Usage and Cost API](usage-cost-api.md) (legacy)<br />[Rate Limits API](rate-limits-api.md)<br />[Claude Code Analytics API](claude-code-analytics-api.md) | Admin API [user management](user-management.md)<br />[Usage and Cost Analytics API](usage-cost-analytics-api.md)<br />[Compliance API](compliance-api.md)<br />[Usage and Cost API](usage-cost-api.md) (legacy)<br />[Claude Enterprise Analytics API](analytics-api.md)<br />[Plugins API](plugins-api.md)<br />[Claude Tag API](claude-tag-api.md)<br />[Spend Limits API](spend-limits-api.md) |
 
 Most keys reach only the organization you created them in. Some keys, such as those with Compliance API, group, or audit scopes, can reach further if your company links its organizations under a [parent organization](compliance-api-access.md#which-key-do-you-need). If your company uses both Claude Console and Claude Enterprise, create one key in each.
 
@@ -32,6 +32,8 @@ An individual Claude Console account cannot create this key, so [set up an organ
 Sign in to the Claude Console as an [organization admin](admin-api.md#organization-roles-and-permissions). Go to the [Admin keys](https://platform.claude.com/settings/admin-keys) page (`platform.claude.com/settings/admin-keys`).
 
 **Create the key**
+
+A key that you create while the [Safety Cases API](enterprise-frontier-safeguards/safety-cases-api.md#get-access) is available to your organization can also read that organization’s flagged messages and respond to its Safety Cases. You can’t leave this access out, so limit who can create and hold a key.
 
 Click **Create admin key**, give it a name, select a [key expiration](authentication.md#key-expiration), and click **Add**.
 

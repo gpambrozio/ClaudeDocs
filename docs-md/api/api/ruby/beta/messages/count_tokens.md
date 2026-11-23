@@ -4064,6 +4064,8 @@ Learn more about token counting in our [user guide](../../../../build-with-claud
 
   - `:"ce-claude-code-managed-settings-2026-10-06"`
 
+  - `:"efs-2026-10-01"`
+
   - `:"user-profiles-billing-2026-10-01"`
 
   - `:"message-batches-2024-09-24"`

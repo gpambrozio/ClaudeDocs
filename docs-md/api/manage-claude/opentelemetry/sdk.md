@@ -103,7 +103,7 @@ Add the Anthropic SDK to your dependencies, or update it to at least the followi
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.12.0")
+implementation("com.anthropic:anthropic-java:3.13.0")
 ```
 
 **Maven**
@@ -112,7 +112,7 @@ implementation("com.anthropic:anthropic-java:3.12.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.12.0</version>
+    <version>3.13.0</version>
 </dependency>
 ```
 

@@ -84,6 +84,7 @@ You can discover which capabilities a model supports programmatically. The [Mode
 | [Bash tool](../agents-and-tools/tool-use/bash-tool.md) | Lets Claude request shell commands, which run in a bash session that keeps its state between commands. |
 | [Code execution tool](../agents-and-tools/tool-use/code-execution-tool.md) | Lets Claude run Python and Bash code in a sandboxed container. |
 | [Context editing](context-editing.md) | Clears selected content, such as old tool results or old thinking blocks, from the conversation history as it grows. |
+| [Enterprise Frontier Safeguards](../manage-claude/enterprise-frontier-safeguards/overview.md) | Zero Data Retention (ZDR) for eligible organizations that use Claude’s most capable models. Sealed safety data, the encrypted copies of your requests and responses, goes to storage that you own. Anthropic Human Review is always off, so your own team reviews flagged cases that automated Safety Review finds. |
 | [Forced tool use](../agents-and-tools/tool-use/define-tools.md#forcing-tool-use) | Makes Claude call a tool, or one specific tool, instead of answering directly. |
 | [Memory tool](../agents-and-tools/tool-use/memory-tool.md) | Lets Claude store and read information across conversations in a directory of memory files. |
 | ↳ [Memory tool helpers](../agents-and-tools/tool-use/memory-tool.md#implement-the-memory-handler) | SDK helpers that handle the memory tool’s interface and tool-use loop, so your code supplies only the storage. |
