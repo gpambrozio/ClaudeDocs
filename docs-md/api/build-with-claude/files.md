@@ -60,6 +60,13 @@ Files are not scoped to an end user, conversation, or session. Any API key with 
 
 If you are building a multitenant application on the Files API, create a separate [workspace](../manage-claude/workspaces.md) for each tenant. The workspace is the isolation boundary for files, so a workspace for each tenant gives that tenant’s data hard isolation from every other tenant. Each organization can have up to 1,000 workspaces by default. Contact your account team if you need more.
 
+On the following platforms, your cloud provider’s IAM controls access to workspaces:
+
+* **Claude Platform on AWS:** An IAM policy can name a workspace to grant or deny access to it.
+* **Claude Models on Google Cloud (Anthropic managed):** An IAM role applies to every workspace in the Google Cloud project. Workspaces in one project don’t limit who can read, use, or manage their resources.
+
+Before you rely on workspaces to separate tenants on these platforms, read [Access on cloud platforms](../manage-claude/workspaces.md#access-on-cloud-platforms).
+
 ## How to use the Files API
 
 ### Uploading a file
@@ -1008,7 +1015,22 @@ Expiration is a lifecycle feature, not a guaranteed-deletion control. After `exp
 
 ### Audit logging
 
-If your organization has the [Compliance API](../manage-claude/compliance-api.md) enabled, its [Activity Feed](../manage-claude/compliance-activity-feed.md) records Files API operations made with a Claude API key or from the Claude Console: each upload (`POST /v1/files`), content download (`GET /v1/files/{file_id}/content`), and deletion (`DELETE /v1/files/{file_id}`) appears as a `platform_file_uploaded`, `platform_file_content_downloaded`, or `platform_file_deleted` activity. Listing files and retrieving file metadata are not recorded. Operations that occur while the Compliance API is off are not recorded and cannot be recovered later, so [set up the Compliance API](../manage-claude/compliance-api-access.md) before you rely on this audit trail. On [Claude Platform on AWS](claude-platform-on-aws.md#monitoring-and-logging), audit file operations with AWS CloudTrail data events instead.
+Where you audit Files API requests depends on how you make them.
+
+When the [Compliance API](../manage-claude/compliance-api.md) is on for your organization, its [Activity Feed](../manage-claude/compliance-activity-feed.md) records these operations made with a Claude API key or from the Claude Console:
+
+| Operation | Request | Activity type |
+| ----- | ----- | ----- |
+| Upload | `POST /v1/files` | `platform_file_uploaded` |
+| Content download | `GET /v1/files/{file_id}/content` | `platform_file_content_downloaded` |
+| Deletion | `DELETE /v1/files/{file_id}` | `platform_file_deleted` |
+
+The Activity Feed doesn’t record listing files or retrieving file metadata. It also doesn’t record operations that occur while the Compliance API is off, and you can’t recover those records later. Before you rely on this audit trail, turn the Compliance API on. [Set up the Compliance API](../manage-claude/compliance-api-access.md) says who can do that.
+
+On the following platforms, turn on the cloud provider’s logs to audit Files API requests:
+
+* **[Claude Platform on AWS](claude-platform-on-aws.md#monitoring-and-logging):** AWS CloudTrail data events.
+* **[Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md#monitoring-and-logging):** Data Access logs in Cloud Audit Logs. These logs can miss actions in the Claude Console. For those, turn on the Compliance API and use its Activity Feed.
 
 ## Migrate from `files-api-2025-04-14`
 

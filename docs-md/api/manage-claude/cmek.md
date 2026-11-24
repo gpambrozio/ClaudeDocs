@@ -16,7 +16,7 @@ With customer-managed encryption keys (CMEK), you create a key in your own AWS K
 
 ## Choose your setup page
 
-Choose the service that holds your key. Claude Platform on AWS, which also uses AWS KMS, has its own page.
+Choose the service that holds your key. [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) uses Google Cloud KMS keys. Claude Platform on AWS uses AWS KMS but has its own page.
 
 **AWS KMS**
 
@@ -24,7 +24,7 @@ For Claude Platform and Claude Enterprise.
 
 **Google Cloud KMS**
 
-For Claude Platform and Claude Enterprise.
+For Claude Platform, Claude Enterprise, and Claude Models on Google Cloud (Anthropic managed).
 
 **Azure Key Vault**
 
@@ -34,7 +34,7 @@ For Claude Platform and Claude Enterprise.
 
 For organizations whose Claude Console sidebar shows **Account managed by AWS**.
 
-On Claude Platform, you can also add and attach your key [with the Admin API](cmek-admin-api.md).
+On Claude Platform, you can also [add and attach an encryption key with the Admin API](cmek-admin-api.md).
 
 ## Understand CMEK before you set it up
 
@@ -62,7 +62,7 @@ Look up a feature, and see what your users will notice.
 * Your key protects only data written [after it takes effect](cmek-how-it-works.md#when-your-key-takes-effect).
 * If your key is deleted, Anthropic can’t recover the data it protects. Within about an hour of disabling your key, Anthropic can no longer decrypt that data. See [What each action does](cmek-key-lifecycle.md#what-each-action-does).
 * On Claude Platform, a workspace with a key [must retain data](cmek-data-retention.md#data-retention).
-* When Anthropic approves your whole organization for CMEK, it also enables [Access Transparency](access-transparency.md#access-transparency-with-customer-managed-keys) for that organization. This happens when you first attach a key. Organizations with Access Transparency can’t call the Claude API directly from a browser.
+* When Anthropic approves your whole organization for CMEK, it also enables [Access Transparency](access-transparency.md#access-transparency-with-customer-managed-keys) for that organization. On Claude Platform, if you got access through [Enterprise Frontier Safeguards](enterprise-frontier-safeguards/overview.md) or Enterprise Data Controls, attaching your first key turns on Access Transparency instead, unless it’s already on. Organizations with Access Transparency can’t call the Claude API directly from a browser.
 
 ## Who can use CMEK
 
@@ -70,6 +70,7 @@ CMEK is optional. To turn it on for an eligible organization, contact your Anthr
 
 * Claude Platform: Organization Admin
 * Claude Platform on AWS: Admin
+* Claude Models on Google Cloud (Anthropic managed): [Claude Admin](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#iam-roles) (`roles/claude.admin`)
 * Claude Enterprise: Owner or Primary Owner
 
 ## After setup

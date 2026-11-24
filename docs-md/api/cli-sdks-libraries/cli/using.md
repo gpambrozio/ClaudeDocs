@@ -41,6 +41,7 @@ ant beta:sessions:events list --session-id session_01...
 | `--workspace-id` | Optional. Workspace ID (`wrkspc_...`) to send as the `anthropic-workspace-id` header, for API keys that aren’t scoped to a workspace (equivalent to setting `ANTHROPIC_WORKSPACE_ID`). See [Select a workspace](../../manage-claude/authentication.md#select-a-workspace). [Admin API](../../manage-claude/admin-api.md) commands take their own `--workspace-id`, which names the workspace they manage instead. |
 | `--debug` | Print full HTTP request and response to stderr |
 | `--format-error`, `--transform-error` | Same as `--format` and `--transform` but applied to [error responses](scripting.md#inspect-errors) |
+| `--google-cloud-*` | Settings for [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md). Use them instead of `--workspace-id` and `--base-url`. The flags are `--google-cloud-project`, `--google-cloud-workspace-id`, `--google-cloud-location`, and `--google-cloud-base-url`. For defaults and environment variables, see that page’s [Project, location, and workspace resolution](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#project-location-and-workspace-resolution) section. |
 
 ## Output formats
 

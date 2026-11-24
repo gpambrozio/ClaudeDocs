@@ -70,7 +70,7 @@ ant --version
 ant auth login
 ```
 
-For other ways to authenticate (API key environment variable, headless hosts, multiple workspaces, named profiles, and Workload Identity Federation), see [CLI authentication options](authentication.md).
+To sign in on a host without a browser or to authenticate another way, see [CLI authentication options](authentication.md). The options include Workload Identity Federation, an API key, and Google Cloud credentials for [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md).
 
 ## Send your first request
 

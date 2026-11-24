@@ -13,7 +13,7 @@ When Access Transparency is enabled for your organization:
 * Each human view of your retained data (see [covered content](access-transparency.md#what-access-transparency-covers)) by an Anthropic employee writes an `anthropic_access` activity to your [Compliance API Activity Feed](compliance-activity-feed.md).
 * Access occurs only for safety review or incident response. See [Reason codes](access-transparency.md#reason-codes).
 
-Access Transparency is available to eligible customers. For eligibility, refer to your contract terms or contact your Anthropic account representative. Anthropic also enables Access Transparency when your organization [first attaches a key](access-transparency.md#access-transparency-with-customer-managed-keys). You can’t turn Access Transparency off in the Claude Console or through the API.
+Access Transparency is available to eligible customers. For eligibility, refer to your contract terms or contact your Anthropic account representative. Anthropic also enables Access Transparency when it [approves your whole organization for customer-managed keys](access-transparency.md#access-transparency-with-customer-managed-keys). On Claude Platform, if you got access through Enterprise Frontier Safeguards or Enterprise Data Controls, attaching your first key turns on Access Transparency instead, unless it’s already on. You can’t turn Access Transparency off in the Claude Console or through the API.
 
 ## How Access Transparency works
 
@@ -62,7 +62,7 @@ Access Transparency is enabled at the organization level and covers all workspac
 
 ### Access Transparency with customer-managed keys
 
-When Anthropic approves your whole organization for [customer-managed encryption keys](cmek.md) (CMEK), it also enables Access Transparency for the organization. This happens when your organization first attaches a key. You don’t need to request Access Transparency separately. Access Transparency still doesn’t cover content in claude.ai. See [What Access Transparency does not cover](access-transparency.md#what-access-transparency-does-not-cover).
+When Anthropic approves your whole organization for [customer-managed encryption keys](cmek.md) (CMEK), it also enables Access Transparency for the organization. This happens at approval, before you attach a key. On Claude Platform, if you got access through Enterprise Frontier Safeguards or Enterprise Data Controls, attaching your first key turns on Access Transparency instead, unless it’s already on. You don’t need to request Access Transparency separately. Access Transparency still doesn’t cover content in claude.ai. See [What Access Transparency does not cover](access-transparency.md#what-access-transparency-does-not-cover).
 
 Note the following about the approval:
 
@@ -259,7 +259,7 @@ Access Transparency is enabled at the organization level and covers all workspac
 
 **How does Access Transparency relate to CMEK?**
 
-Access Transparency does not require CMEK. When Anthropic approves your whole organization for CMEK, it also enables Access Transparency. This happens when your organization first attaches a key. See [Access Transparency with customer-managed keys](access-transparency.md#access-transparency-with-customer-managed-keys). With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](access-transparency.md#cmek-content-preservation) and [Limited preservation outside your key](cmek-data-retention.md#limited-preservation-outside-your-key).
+Access Transparency does not require CMEK. When Anthropic approves your whole organization for CMEK, it also enables Access Transparency. See [Access Transparency with customer-managed keys](access-transparency.md#access-transparency-with-customer-managed-keys). With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](access-transparency.md#cmek-content-preservation) and [Limited preservation outside your key](cmek-data-retention.md#limited-preservation-outside-your-key).
 
 **How can I tell that my Access Transparency record has not been altered?**
 

@@ -3,7 +3,7 @@
 ---
 title: Set up CMEK with Google Cloud KMS
 url: https://platform.claude.com/docs/en/manage-claude/cmek-google-cloud-kms
-description: Create a Google Cloud KMS key, give Anthropic access to it, and put it to use in Claude Platform or Claude Enterprise.
+description: Create a Google Cloud KMS key, give Anthropic access to it, and put it to use in Claude Platform, Claude Enterprise, or Claude Models on Google Cloud (Anthropic managed).
 ---
 
 Let Claude Code set up this feature for you
@@ -28,6 +28,8 @@ In Google Cloud:
 * You can create key rings and keys, and set IAM policy on them (`roles/cloudkms.admin` or equivalent).
 * Cloud KMS [Data Access audit logs](https://docs.cloud.google.com/logging/docs/audit/configure-data-access) (Data Read and Data Write) are on, so Cloud Logging records Anthropic’s use of your key. They’re off by default.
 * If your Google Cloud organization enforces domain restricted sharing (`constraints/iam.allowedPolicyMemberDomains`), it blocks the grant to Anthropic’s service account. Add a project-level exception, or allow Anthropic’s Cloud Identity customer ID. Contact Anthropic for the ID.
+
+On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), the items for Claude Platform apply, and so do the items that name no product. You need the `roles/claude.admin` IAM role instead of Organization Admin. You [open the Claude Console from Google Cloud](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#using-the-claude-console).
 
 ## In Google Cloud: create the key
 
@@ -182,6 +184,8 @@ The other values are in the key’s full resource name, and the command keeps ex
 
 To script this part on Claude Platform, [use the Admin API](cmek-admin-api.md) instead.
 
+On Claude Models on Google Cloud (Anthropic managed), follow the steps in the **Claude Platform** tab.
+
 **Claude Platform**
 
 **Open the encryption key settings**
@@ -190,7 +194,7 @@ In the Claude Console, open [Encryption keys](https://platform.claude.com/settin
 
 **Add the key**
 
-Under **Encryption keys**, click **Add key**. Enter a **Display name**, select **Google Cloud KMS**, and click **Continue**.
+Under **Encryption keys**, click **Add key** and enter a **Display name**. If the dialog box asks for a provider, select **Google Cloud KMS** and click **Continue**.
 
 **Enter the key resource name**
 

@@ -68,6 +68,8 @@ See [Self-hosted worker reference](self-hosted-sandboxes-reference.md) for every
 
 For more control, call the [Environments Work endpoints](../api/beta/environments/work.md) directly and implement your own worker. Your worker then does what the SDK workers do. Among other things, it acknowledges each work item, sends heartbeats, and downloads the agent’s skills. It runs only the tool calls that the session’s [permission policy](permission-policies.md#see-how-each-call-was-evaluated) allows. It returns each result as a `user.tool_result` or `user.custom_tool_result` event. At the end, it stops the item. Use the worker’s source in the [Python SDK](https://github.com/anthropics/anthropic-sdk-python/tree/main/src/anthropic/lib/environments), the [TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript/tree/main/src/lib/environments), or the [Go SDK](https://github.com/anthropics/anthropic-sdk-go/tree/main/lib/environments) as a reference.
 
+If you use [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), implement your own worker instead of using the CLI or SDK worker. For credentials, see [Worker authentication on cloud platforms](self-hosted-sandboxes.md#worker-authentication-on-cloud-platforms).
+
 ## Run an always-on worker
 
 These samples use `/workspace` as the worker’s working directory. The directory must exist before the worker starts. On a new host, create it and give the worker’s user write access, as in the “Start the worker” step of [Run your first session](self-hosted-sandboxes.md#run-your-first-session).

@@ -33,7 +33,7 @@ If you want to view engagement and adoption data in the product rather than prog
 
 ## Get access to the Claude Code Analytics API
 
-The Claude Code Analytics API is available to every organization with access to the [Admin API](admin-api.md), and is free to use.
+The Claude Code Analytics API is free for Claude Console organizations on the Claude API. Your organization needs [access to the Admin API](admin-api.md#availability), and an organization admin creates the key.
 
 **Create an Admin API key**
 

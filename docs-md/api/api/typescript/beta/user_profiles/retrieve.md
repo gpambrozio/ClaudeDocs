@@ -10,6 +10,10 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/user_profiles/retri
 - Signature: `client.beta.userProfiles.retrieve(userProfileID: string, params?: UserProfileRetrieveParams, options?: RequestOptions): BetaUserProfile`
 - Endpoint: `GET /v1/user_profiles/{user_profile_id}`
 
+Get a user profile by ID to check the details stored for it.
+
+See the [User profiles guide](../../../../manage-claude/user-profiles.md) for how to set up and manage profiles.
+
 ## Example request
 
 ```ts

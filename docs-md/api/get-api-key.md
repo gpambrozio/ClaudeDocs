@@ -34,6 +34,8 @@ The Console shows the full key, which starts with `sk-ant-`, only once, at creat
 
 If the **Create key** button on the API keys page is disabled, your role might not allow you to create keys there. Ask an organization admin to change your role, or to create a service account key for your workload.
 
+These steps are for the Claude API. If you use Claude through a [cloud platform](api/overview.md#claude-api-vs-cloud-platforms), follow that platform’s authentication steps instead.
+
 ## Use your API key
 
 Set the key as an environment variable:

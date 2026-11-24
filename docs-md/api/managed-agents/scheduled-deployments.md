@@ -57,6 +57,8 @@ On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), eac
 * **Role permissions:** Allow `aws-external-anthropic:CreateSession`, `sts:GetWebIdentityToken`, and `sts:TagGetWebIdentityToken`.
 * **Caller permissions:** The IAM principal that sets the role on the agent needs `iam:PassRole` on that role. The role must be in the same AWS account. No [managed policy](../api/claude-platform-on-aws-iam-actions.md#managed-policies) grants `iam:PassRole`.
 
+The following example creates a deployment:
+
 ```bash cURL
 curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -730,6 +732,8 @@ $client->beta->deployments->archive($deployment->id);
 ```ruby Ruby
 client.beta.deployments.archive(deployment.id)
 ```
+
+On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#claude-managed-agents), a deployment keeps running after you revoke its creator’s Google Cloud access. To stop it, pause or archive it.
 
 ### Failure behavior
 

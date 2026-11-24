@@ -6,13 +6,13 @@ url: https://platform.claude.com/docs/en/manage-claude/cmek-admin-api
 description: Create, validate, and attach a customer-managed encryption key with three Admin API calls.
 ---
 
-These calls work on Claude Platform. On Claude Enterprise or Claude Platform on AWS, follow [your setup page](cmek.md#set-it-up).
+Use the Admin API to create, validate, and attach a customer-managed encryption key (CMEK) on Claude Platform. On Claude Enterprise, Claude Platform on AWS, or [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), [choose your setup page](cmek.md#set-it-up) and follow its steps.
 
 Creating an external key is what **Add key** does in the Claude Console, and validating it is what **Verify** does.
 
 ## Before you start
 
-* Customer-managed encryption keys (CMEK) are [turned on for your organization](cmek.md#availability).
+* CMEK is [turned on for your organization](cmek.md#availability).
 * You have an [Admin API key](admin-api-keys.md). The samples read it from `ANTHROPIC_API_KEY`.
 * You’ve created your key in [AWS KMS](cmek-aws-kms.md#encryption-key-setup), [Google Cloud KMS](cmek-google-cloud-kms.md#encryption-key-setup), or [Azure Key Vault](cmek-azure-key-vault.md#encryption-key-setup), and kept the values the setup steps tell you to copy.
 * You have a workspace that [retains data](cmek-data-retention.md#data-retention), ideally a new one, because [existing data stays under Anthropic’s key](cmek-how-it-works.md#when-your-key-takes-effect).

@@ -20,14 +20,7 @@ Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API
 
 For members, invites, groups, and custom roles, see [User management](user-management.md).
 
-On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), only these Admin API endpoints are available:
-
-* The workspace endpoints: create, get, list, update, and archive on `/v1/organizations/workspaces`.
-* The external key endpoints, for [CMEK](cmek-claude-platform-on-aws.md): register, get, list, update, and delete on `/v1/organizations/external_keys`. There is no validate endpoint, because keys are validated when attached to a workspace.
-* The [telemetry destination endpoints](../api/claude-platform-on-aws-iam-actions.md#telemetry-destinations).
-* The [Usage and Cost Analytics API](usage-cost-analytics-api.md) endpoints: `/v1/organizations/analytics/usage` and `/v1/organizations/analytics/cost`.
-
-Organization members, workspace members, invites, API keys, the legacy [Usage and Cost API](usage-cost-api.md), and the rate limit reports aren’t available on Claude Platform on AWS.
+[Cloud platforms](admin-api.md#cloud-platforms) lists the endpoints you can call on Claude Models on Google Cloud (Anthropic managed) and Claude Platform on AWS.
 
 ## Authentication
 
@@ -1744,6 +1737,28 @@ Retrieve audit and activity data for your organization with the [Compliance API]
 ## Organization webhooks
 
 Register webhook endpoints for events about enforcement actions on your organization’s user profiles with [organization webhooks](organization-webhooks.md).
+
+## Cloud platforms
+
+On the following cloud platforms, send requests to the platform’s base URL. Use the platform’s credentials instead of the ones under [Authentication](admin-api.md#authentication).
+
+On [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), only these Admin API endpoints are available:
+
+* The workspace endpoints: create, get, list, update, and archive on `/v1/organizations/workspaces`.
+* The external key endpoints, for [customer-managed encryption keys (CMEK)](cmek-claude-platform-on-aws.md): register, get, list, update, and delete on `/v1/organizations/external_keys`. Attaching a key to a workspace validates it.
+* The [telemetry destination endpoints](../api/claude-platform-on-aws-iam-actions.md#telemetry-destinations).
+* The compliance settings endpoints, to read and change the [Compliance API](compliance-api.md) setting: get and update on `/v1/organizations/compliance_settings`.
+* The [Usage and Cost Analytics API](usage-cost-analytics-api.md) endpoints, which are in beta: `/v1/organizations/analytics/usage` and `/v1/organizations/analytics/cost`.
+
+For the base URL and credentials, see [Making requests on Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md#making-requests).
+
+On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md), use the organization-level base URL that [Making requests on Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#making-requests) describes. You can call these Admin API endpoints:
+
+* The workspace endpoints: create, get, list, update, and archive on `/v1/organizations/workspaces`.
+* The [external key endpoints](../api/claude-models-on-google-cloud-anthropic-managed-iam-permissions.md#encryption-keys), for CMEK: create, get, list, update, and delete on `/v1/organizations/external_keys`. To verify and attach a key, follow [Set up CMEK with Google Cloud KMS](cmek-google-cloud-kms.md#register-the-key-with-anthropic).
+* The [Usage and Cost Analytics API](usage-cost-analytics-api.md) endpoints, which are in beta: `/v1/organizations/analytics/usage` and `/v1/organizations/analytics/cost`.
+* The usage endpoint of the legacy [Usage and Cost API](usage-cost-api.md): `/v1/organizations/usage_report/messages`.
+* The [Rate Limits API](rate-limits-api.md) endpoints that read limits: `GET /v1/organizations/rate_limits` and `GET /v1/organizations/workspaces/{workspace_id}/rate_limits`.
 
 ## Best practices
 

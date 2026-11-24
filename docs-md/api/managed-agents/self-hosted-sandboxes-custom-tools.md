@@ -42,7 +42,7 @@ featureMetadata:
 
 The environment key authorizes posting custom tool results, so your Claude API key stays off the worker host.
 
-To serve custom tools, you need the SDK worker. The `ant` CLI worker has no way to register a custom tool implementation. In the sandbox-per-session pattern, [run the SDK worker inside the sandbox](self-hosted-sandboxes-per-session.md#run-the-sdk-worker-inside-the-sandbox).
+To serve custom tools from a prebuilt worker, you need the SDK worker. The `ant` CLI worker has no way to register a custom tool implementation. In the sandbox-per-session pattern, [run the SDK worker inside the sandbox](self-hosted-sandboxes-per-session.md#run-the-sdk-worker-inside-the-sandbox).
 
 ## Serve a custom tool
 
@@ -205,6 +205,8 @@ The PHP SDK does not have `EnvironmentWorker`. To answer custom tool calls from 
 The Ruby SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session’s event stream, as in [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result).
 
 The worker answers only the tools registered with it. If you declare a tool on the agent but no worker or client serves it, the session pauses with a `requires_action` stop reason. It stays paused until something posts the result. See [Answer tool calls that pause the session](events-and-streaming.md#answer-tool-calls-that-pause-the-session) for the event flow.
+
+On Claude Models on Google Cloud (Anthropic managed), you [write your own worker](self-hosted-sandboxes.md#worker-authentication-on-cloud-platforms), which uses Google Cloud credentials instead of the environment key. Have it send each custom tool’s result as a `user.custom_tool_result` event, as [Return a custom tool result](events-and-streaming.md#return-a-custom-tool-result) describes.
 
 ## Wrap an MCP server as custom tools
 

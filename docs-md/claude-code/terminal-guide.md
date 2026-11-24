@@ -9,7 +9,7 @@ This guide walks you through opening a terminal, installing Claude Code, and you
 
 > [!NOTE]
 >
-> Don't want to use the terminal? The Claude Code desktop app lets you skip the terminal entirely. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs) or [Windows](https://claude.com/download?utm_source=claude_code\&utm_medium=docs), then see the [Desktop quickstart](https://code.claude.com/docs/en/desktop-quickstart.md) to get started. On Linux, install the app with apt by following the [Linux install instructions](https://code.claude.com/docs/en/desktop-linux.md).
+> Don't want to use the terminal? The Claude Code desktop app lets you skip the terminal entirely. Download it for [macOS](https://claude.ai/claude-code/desktop-download?platform=mac\&utm_source=claude_code\&utm_medium=docs) or [Windows](https://claude.ai/claude-code/desktop-download?platform=win\&utm_source=claude_code\&utm_medium=docs), then see the [Desktop quickstart](https://code.claude.com/docs/en/desktop-quickstart.md) to get started. On Linux, install the app with apt by following the [Linux install instructions](https://code.claude.com/docs/en/desktop-linux.md).
 
 ## Install Claude Code on macOS or Linux
 

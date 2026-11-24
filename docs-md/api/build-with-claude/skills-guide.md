@@ -4,16 +4,46 @@
 title: Using Agent Skills with the API
 url: https://platform.claude.com/docs/en/build-with-claude/skills-guide
 description: Learn how to use Agent Skills to extend Claude's capabilities through the API.
+featureMetadata:
+  status: stable
+  zdr:
+    eligibility: not-eligible
+    note: Skill data retained according to standard policy.
+  supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: stable
+    Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
+    Microsoft Foundry (hosted on Anthropic):
+      availability: stable
+      note: Hosted on Anthropic deployments only; the skill version download endpoint (`GET /v1/skills/{skill_id}/versions/{version}/content`) is not supported on Foundry.
 ---
 
-Agent Skills extend Claude’s capabilities through organized folders of instructions, scripts, and resources. This guide shows you how to use both pre-built and custom Skills with the Claude API.
+Agent Skills extend Claude’s capabilities through organized folders of instructions, scripts, and resources. This guide shows you how to use pre-built and custom Skills through the API and how to create and manage custom Skills.
 
 For complete API reference including request/response schemas and all parameters, see:
 
 * [Skill management API reference](../api/skills/list.md) - CRUD operations for Skills
 * [Skill versions API reference](../api/skills/versions/list.md) - Version management
-
-To learn how zero data retention (ZDR) applies to this feature, see [API and data retention](../manage-claude/api-and-data-retention.md).
 
 ## Quick links
 
@@ -51,8 +81,8 @@ Both skill sources are returned by the [List Skills endpoint](../api/skills/list
 
 To use Skills, you need:
 
-1. **Claude API key** from the [Claude Console](https://platform.claude.com/settings/keys)
-2. **[Code execution tool](../agents-and-tools/tool-use/code-execution-tool.md)** enabled in your requests
+1. **Credentials** for the Claude API (see [Authentication](../manage-claude/authentication.md)) or for a [cloud platform that offers Skills](../agents-and-tools/agent-skills/overview.md#feature-availability).
+2. **[Code execution tool](../agents-and-tools/tool-use/code-execution-tool.md)** in your request’s `tools` array.
 
 Skills require the code execution tool, so use a model listed in its [API support section](../agents-and-tools/tool-use/code-execution-tool.md#availability-feature-support).
 
@@ -1915,6 +1945,13 @@ puts message
 **Custom Skills are accessible to your entire workspace, not scoped to an end user, conversation, or session.** Any API key with access to a workspace can read, use, and delete every custom Skill uploaded to that workspace. Every service account, and every user whose organization role allows API access, can use the Default Workspace in addition to any workspace you add them to. For that reason, keep Skills that must stay separate in their own workspace and access them only with [keys scoped to that workspace](../manage-claude/workspaces.md#api-keys-and-resource-scoping).
 
 If you are building a multitenant platform on the Skills API, create a separate [workspace](../manage-claude/workspaces.md) for each tenant. The workspace is the isolation boundary for custom Skills, so a workspace for each tenant gives that tenant’s Skills hard isolation from every other tenant. Each organization can have up to 1,000 workspaces by default (see [How workspaces work](../manage-claude/workspaces.md#how-workspaces-work)). If you need more for tenant isolation, contact your account team.
+
+On the following platforms, your cloud provider’s IAM controls access to workspaces:
+
+* **Claude Platform on AWS:** An IAM policy can name a workspace to grant or deny access to it.
+* **Claude Models on Google Cloud (Anthropic managed):** An IAM role applies to every workspace in the Google Cloud project. Workspaces in one project don’t limit who can read, use, or manage their resources.
+
+Before you rely on workspaces to separate tenants on these platforms, read [Access on cloud platforms](../manage-claude/workspaces.md#access-on-cloud-platforms).
 
 ### Creating a Skill
 
@@ -4471,6 +4508,11 @@ For ZDR eligibility across all features, see [API and data retention](../manage-
 ## Audit logging
 
 If your organization has the [Compliance API](../manage-claude/compliance-api.md) enabled, its [Activity Feed](../manage-claude/compliance-activity-feed.md) records the creation and deletion of Skills and Skill versions made with a Claude API key or from the Claude Console. Operations that occur while the Compliance API is off are not recorded and cannot be recovered later, so [set up the Compliance API](../manage-claude/compliance-api-access.md) before you rely on this audit trail.
+
+On the following platforms, turn on the cloud provider’s logs to audit Skills API requests:
+
+* **[Claude Platform on AWS](claude-platform-on-aws.md#monitoring-and-logging):** AWS CloudTrail data events.
+* **[Claude Models on Google Cloud (Anthropic managed)](claude-models-on-google-cloud/anthropic-managed.md#monitoring-and-logging):** Data Access logs in Cloud Audit Logs. These logs can miss actions in the Claude Console. For those, turn on the Compliance API and use its Activity Feed.
 
 ## Next steps
 

@@ -281,7 +281,12 @@ Not found
 
 **Cause:** The request did not carry a credential the Compliance API accepts: no API key was sent, or the key is not a Compliance Access Key (`sk-ant-api01-...`) or Admin API key (`sk-ant-admin01-...`), for example, a Claude API key (`sk-ant-api03-...`). The status, type, and message are the same as for a path that does not exist and do not depend on the endpoint or any resource ID, so list endpoints such as `GET /v1/compliance/activities` return this body too. The one exception apart from Security posture is `GET /v1/compliance/organizations/{organization_id}/settings`, which answers these requests with 401 `authentication_error`. The Security posture endpoint, `GET /v1/compliance/organizations/{organization_id}/security_posture`, answers them the same way. On every endpoint, a Compliance Access Key or Admin API key that does not authenticate returns [401 Unauthorized](compliance-errors.md#401-unauthorized) instead.
 
-**Fix:** Send the key in the `x-api-key` header and check its prefix: the Compliance API accepts only `sk-ant-api01-...` and `sk-ant-admin01-...` keys; see [Which key do you need?](compliance-api-access.md#which-key-do-you-need). If the header and key are right and one path still returns `Not found` while others succeed, check that path against the [Compliance API reference](../api/compliance.md). For Security posture, see [Errors in the Security posture results reference](compliance-security-posture/results-reference.md#handle-errors) instead.
+**Fix:** Follow the step for your case:
+
+* **Missing or wrong key:** Send the key in the `x-api-key` header and check that it starts with `sk-ant-api01-` or `sk-ant-admin01-`. See [Which key do you need?](compliance-api-access.md#which-key-do-you-need) for the key types.
+* **`Not found` on one path while others succeed:** If the header and key are right, check that path against the [Compliance API reference](../api/compliance.md).
+* **Security posture endpoint:** See [Errors in the Security posture results reference](compliance-security-posture/results-reference.md#handle-errors) instead.
+* **[Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) and [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md):** Use the platform’s credentials instead of a key. See [How the Compliance API works](compliance-api.md#how-the-compliance-api-works).
 
 ### Chat not found
 

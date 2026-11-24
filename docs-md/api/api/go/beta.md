@@ -4765,19 +4765,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                           - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
 
-                          - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
-
-                            Powerful intelligence for long-running agents and coding
-
-                          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
-
-                            Powerful intelligence for long-running agents and coding
-
                           - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
                             **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                             New class of intelligence, strongest in coding and cybersecurity
+
+                          - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
+
+                            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                            Powerful intelligence for long-running agents and coding
+
+                          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+
+                            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                            Powerful intelligence for long-running agents and coding
 
                           - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -8497,19 +8501,23 @@ Learn more about the Messages API in our [user guide](../../get-started.md)
 
                     - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
 
-                    - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
-
-                      Powerful intelligence for long-running agents and coding
-
-                    - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
-
-                      Powerful intelligence for long-running agents and coding
-
                     - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
                       **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                       New class of intelligence, strongest in coding and cybersecurity
+
+                    - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
+
+                      **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                      Powerful intelligence for long-running agents and coding
+
+                    - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+
+                      **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                      Powerful intelligence for long-running agents and coding
 
                     - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -13175,19 +13183,23 @@ Learn more about token counting in our [user guide](../../build-with-claude/toke
 
                           - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
 
-                          - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
-
-                            Powerful intelligence for long-running agents and coding
-
-                          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
-
-                            Powerful intelligence for long-running agents and coding
-
                           - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
                             **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                             New class of intelligence, strongest in coding and cybersecurity
+
+                          - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
+
+                            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                            Powerful intelligence for long-running agents and coding
+
+                          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+
+                            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                            Powerful intelligence for long-running agents and coding
 
                           - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -17181,19 +17193,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                               - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
 
-                              - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
-
-                                Powerful intelligence for long-running agents and coding
-
-                              - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
-
-                                Powerful intelligence for long-running agents and coding
-
                               - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
                                 **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                                 New class of intelligence, strongest in coding and cybersecurity
+
+                              - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
+
+                                **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                                Powerful intelligence for long-running agents and coding
+
+                              - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+
+                                **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                                Powerful intelligence for long-running agents and coding
 
                               - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -18597,6 +18613,10 @@ Any method can also return the general [HTTP errors](../errors.md).
 - `ErrorCodeOrganizationOnHold` (HTTP status 400, error code `organization_on_hold`)
 
   Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `ErrorCodeWorkspaceHumanReviewDisabled` (HTTP status 400, error code `workspace_human_review_disabled`)
+
+  The request's Workspace has Human Review turned off, and this operation is not available there. Use a Workspace with Human Review on.
 
 - `ErrorCodeEnforcedSpendLimitReached` (HTTP status 429, error code `enforced_spend_limit_reached`)
 
@@ -22933,19 +22953,23 @@ Learn more about the Message Batches API in our [user guide](../../build-with-cl
 
                           - `const ModelClaudeHaiku4_5_20251001 Model = "claude-haiku-4-5-20251001"`
 
-                          - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
-
-                            Powerful intelligence for long-running agents and coding
-
-                          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
-
-                            Powerful intelligence for long-running agents and coding
-
                           - `const ModelClaudeMythosPreview Model = "claude-mythos-preview"`
 
                             **Deprecated**: Will reach end-of-life on June 30, 2026. Please migrate to claude-mythos-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
                             New class of intelligence, strongest in coding and cybersecurity
+
+                          - `const ModelClaudeOpus4_5 Model = "claude-opus-4-5"`
+
+                            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                            Powerful intelligence for long-running agents and coding
+
+                          - `const ModelClaudeOpus4_5_20251101 Model = "claude-opus-4-5-20251101"`
+
+                            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
+                            Powerful intelligence for long-running agents and coding
 
                           - `const ModelClaudeSonnet4_5 Model = "claude-sonnet-4-5"`
 
@@ -24282,9 +24306,13 @@ Create Agent
 
         - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           Powerful intelligence for long-running agents and coding
 
         - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           Powerful intelligence for long-running agents and coding
 
@@ -25252,9 +25280,13 @@ Create Agent
 
       - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
         Powerful intelligence for long-running agents and coding
 
       - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         Powerful intelligence for long-running agents and coding
 
@@ -26322,9 +26354,13 @@ List Agents
 
       - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
         Powerful intelligence for long-running agents and coding
 
       - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         Powerful intelligence for long-running agents and coding
 
@@ -27376,9 +27412,13 @@ Get Agent
 
       - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
         Powerful intelligence for long-running agents and coding
 
       - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         Powerful intelligence for long-running agents and coding
 
@@ -28257,9 +28297,13 @@ Update Agent
 
         - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           Powerful intelligence for long-running agents and coding
 
         - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           Powerful intelligence for long-running agents and coding
 
@@ -29201,9 +29245,13 @@ Update Agent
 
       - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
         Powerful intelligence for long-running agents and coding
 
       - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         Powerful intelligence for long-running agents and coding
 
@@ -30250,9 +30298,13 @@ Archive Agent
 
       - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
         Powerful intelligence for long-running agents and coding
 
       - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         Powerful intelligence for long-running agents and coding
 
@@ -31309,9 +31361,13 @@ List Agent Versions
 
       - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
         Powerful intelligence for long-running agents and coding
 
       - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+        **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
         Powerful intelligence for long-running agents and coding
 
@@ -36967,9 +37023,13 @@ Create Session
 
             - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+              **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
               Powerful intelligence for long-running agents and coding
 
             - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+              **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
               Powerful intelligence for long-running agents and coding
 
@@ -38217,9 +38277,13 @@ Create Session
 
         - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           Powerful intelligence for long-running agents and coding
 
         - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           Powerful intelligence for long-running agents and coding
 
@@ -39201,25 +39265,25 @@ Create Session
 
         Tokens used to create 1-hour ephemeral cache entries.
 
-        format: int32
+        format: int64
 
       - `Ephemeral5mInputTokens int64 Optional`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
-        format: int32
+        format: int64
 
     - `CacheReadInputTokens int64 Optional`
 
       Total tokens read from prompt cache.
 
-      format: int32
+      format: int64
 
     - `InputTokens int64 Optional`
 
       Total input tokens consumed across all turns.
 
-      format: int32
+      format: int64
 
     - `ListCost BetaMonetaryAmount Optional`
 
@@ -39229,7 +39293,7 @@ Create Session
 
       Total output tokens generated across all turns.
 
-      format: int32
+      format: int64
 
     - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -39777,9 +39841,13 @@ List Sessions
 
         - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           Powerful intelligence for long-running agents and coding
 
         - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           Powerful intelligence for long-running agents and coding
 
@@ -40761,25 +40829,25 @@ List Sessions
 
         Tokens used to create 1-hour ephemeral cache entries.
 
-        format: int32
+        format: int64
 
       - `Ephemeral5mInputTokens int64 Optional`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
-        format: int32
+        format: int64
 
     - `CacheReadInputTokens int64 Optional`
 
       Total tokens read from prompt cache.
 
-      format: int32
+      format: int64
 
     - `InputTokens int64 Optional`
 
       Total input tokens consumed across all turns.
 
-      format: int32
+      format: int64
 
     - `ListCost BetaMonetaryAmount Optional`
 
@@ -40789,7 +40857,7 @@ List Sessions
 
       Total output tokens generated across all turns.
 
-      format: int32
+      format: int64
 
     - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -41247,9 +41315,13 @@ Get Session
 
         - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           Powerful intelligence for long-running agents and coding
 
         - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           Powerful intelligence for long-running agents and coding
 
@@ -42231,25 +42303,25 @@ Get Session
 
         Tokens used to create 1-hour ephemeral cache entries.
 
-        format: int32
+        format: int64
 
       - `Ephemeral5mInputTokens int64 Optional`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
-        format: int32
+        format: int64
 
     - `CacheReadInputTokens int64 Optional`
 
       Total tokens read from prompt cache.
 
-      format: int32
+      format: int64
 
     - `InputTokens int64 Optional`
 
       Total input tokens consumed across all turns.
 
-      format: int32
+      format: int64
 
     - `ListCost BetaMonetaryAmount Optional`
 
@@ -42259,7 +42331,7 @@ Get Session
 
       Total output tokens generated across all turns.
 
-      format: int32
+      format: int64
 
     - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -42737,9 +42809,13 @@ Update Session
 
         - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           Powerful intelligence for long-running agents and coding
 
         - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           Powerful intelligence for long-running agents and coding
 
@@ -43721,25 +43797,25 @@ Update Session
 
         Tokens used to create 1-hour ephemeral cache entries.
 
-        format: int32
+        format: int64
 
       - `Ephemeral5mInputTokens int64 Optional`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
-        format: int32
+        format: int64
 
     - `CacheReadInputTokens int64 Optional`
 
       Total tokens read from prompt cache.
 
-      format: int32
+      format: int64
 
     - `InputTokens int64 Optional`
 
       Total input tokens consumed across all turns.
 
-      format: int32
+      format: int64
 
     - `ListCost BetaMonetaryAmount Optional`
 
@@ -43749,7 +43825,7 @@ Update Session
 
       Total output tokens generated across all turns.
 
-      format: int32
+      format: int64
 
     - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -44415,9 +44491,13 @@ Archive Session
 
         - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
           Powerful intelligence for long-running agents and coding
 
         - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+          **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
           Powerful intelligence for long-running agents and coding
 
@@ -45399,25 +45479,25 @@ Archive Session
 
         Tokens used to create 1-hour ephemeral cache entries.
 
-        format: int32
+        format: int64
 
       - `Ephemeral5mInputTokens int64 Optional`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
-        format: int32
+        format: int64
 
     - `CacheReadInputTokens int64 Optional`
 
       Total tokens read from prompt cache.
 
-      format: int32
+      format: int64
 
     - `InputTokens int64 Optional`
 
       Total input tokens consumed across all turns.
 
-      format: int32
+      format: int64
 
     - `ListCost BetaMonetaryAmount Optional`
 
@@ -45427,7 +45507,7 @@ Archive Session
 
       Total output tokens generated across all turns.
 
-      format: int32
+      format: int64
 
     - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -47739,9 +47819,13 @@ List Events
 
           - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             Powerful intelligence for long-running agents and coding
 
           - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             Powerful intelligence for long-running agents and coding
 
@@ -48577,25 +48661,25 @@ List Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
-          format: int32
+          format: int64
 
         - `Ephemeral5mInputTokens int64 Optional`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
-          format: int32
+          format: int64
 
       - `CacheReadInputTokens int64 Optional`
 
         Total tokens read from prompt cache.
 
-        format: int32
+        format: int64
 
       - `InputTokens int64 Optional`
 
         Total input tokens consumed across all turns.
 
-        format: int32
+        format: int64
 
       - `ListCost BetaMonetaryAmount Optional`
 
@@ -48605,7 +48689,7 @@ List Events
 
         Total output tokens generated across all turns.
 
-        format: int32
+        format: int64
 
       - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -51983,9 +52067,13 @@ Stream Events
 
           - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             Powerful intelligence for long-running agents and coding
 
           - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             Powerful intelligence for long-running agents and coding
 
@@ -52871,25 +52959,25 @@ Stream Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
-          format: int32
+          format: int64
 
         - `Ephemeral5mInputTokens int64 Optional`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
-          format: int32
+          format: int64
 
       - `CacheReadInputTokens int64 Optional`
 
         Total tokens read from prompt cache.
 
-        format: int32
+        format: int64
 
       - `InputTokens int64 Optional`
 
         Total input tokens consumed across all turns.
 
-        format: int32
+        format: int64
 
       - `ListCost BetaMonetaryAmount Optional`
 
@@ -52899,7 +52987,7 @@ Stream Events
 
         Total output tokens generated across all turns.
 
-        format: int32
+        format: int64
 
       - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -54973,9 +55061,13 @@ List Session Threads
 
           - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             Powerful intelligence for long-running agents and coding
 
           - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             Powerful intelligence for long-running agents and coding
 
@@ -55639,25 +55731,25 @@ List Session Threads
 
         Tokens used to create 1-hour ephemeral cache entries.
 
-        format: int32
+        format: int64
 
       - `Ephemeral5mInputTokens int64 Optional`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
-        format: int32
+        format: int64
 
     - `CacheReadInputTokens int64 Optional`
 
       Total tokens read from prompt cache.
 
-      format: int32
+      format: int64
 
     - `InputTokens int64 Optional`
 
       Total input tokens consumed across all turns.
 
-      format: int32
+      format: int64
 
     - `ListCost BetaMonetaryAmount Optional`
 
@@ -55677,7 +55769,7 @@ List Session Threads
 
       Total output tokens generated across all turns.
 
-      format: int32
+      format: int64
 
     - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -56087,9 +56179,13 @@ Get Session Thread
 
           - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             Powerful intelligence for long-running agents and coding
 
           - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             Powerful intelligence for long-running agents and coding
 
@@ -56753,25 +56849,25 @@ Get Session Thread
 
         Tokens used to create 1-hour ephemeral cache entries.
 
-        format: int32
+        format: int64
 
       - `Ephemeral5mInputTokens int64 Optional`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
-        format: int32
+        format: int64
 
     - `CacheReadInputTokens int64 Optional`
 
       Total tokens read from prompt cache.
 
-      format: int32
+      format: int64
 
     - `InputTokens int64 Optional`
 
       Total input tokens consumed across all turns.
 
-      format: int32
+      format: int64
 
     - `ListCost BetaMonetaryAmount Optional`
 
@@ -56791,7 +56887,7 @@ Get Session Thread
 
       Total output tokens generated across all turns.
 
-      format: int32
+      format: int64
 
     - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -57198,9 +57294,13 @@ Archive Session Thread
 
           - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             Powerful intelligence for long-running agents and coding
 
           - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             Powerful intelligence for long-running agents and coding
 
@@ -57864,25 +57964,25 @@ Archive Session Thread
 
         Tokens used to create 1-hour ephemeral cache entries.
 
-        format: int32
+        format: int64
 
       - `Ephemeral5mInputTokens int64 Optional`
 
         Tokens used to create 5-minute ephemeral cache entries.
 
-        format: int32
+        format: int64
 
     - `CacheReadInputTokens int64 Optional`
 
       Total tokens read from prompt cache.
 
-      format: int32
+      format: int64
 
     - `InputTokens int64 Optional`
 
       Total input tokens consumed across all turns.
 
-      format: int32
+      format: int64
 
     - `ListCost BetaMonetaryAmount Optional`
 
@@ -57902,7 +58002,7 @@ Archive Session Thread
 
       Total output tokens generated across all turns.
 
-      format: int32
+      format: int64
 
     - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -60039,9 +60139,13 @@ List Session Thread Events
 
           - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             Powerful intelligence for long-running agents and coding
 
           - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             Powerful intelligence for long-running agents and coding
 
@@ -60877,25 +60981,25 @@ List Session Thread Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
-          format: int32
+          format: int64
 
         - `Ephemeral5mInputTokens int64 Optional`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
-          format: int32
+          format: int64
 
       - `CacheReadInputTokens int64 Optional`
 
         Total tokens read from prompt cache.
 
-        format: int32
+        format: int64
 
       - `InputTokens int64 Optional`
 
         Total input tokens consumed across all turns.
 
-        format: int32
+        format: int64
 
       - `ListCost BetaMonetaryAmount Optional`
 
@@ -60905,7 +61009,7 @@ List Session Thread Events
 
         Total output tokens generated across all turns.
 
-        format: int32
+        format: int64
 
       - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -63258,9 +63362,13 @@ Stream Session Thread Events
 
           - `const BetaManagedAgentsModelClaudeOpus4_5 BetaManagedAgentsModel = "claude-opus-4-5"`
 
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
+
             Powerful intelligence for long-running agents and coding
 
           - `const BetaManagedAgentsModelClaudeOpus4_5_20251101 BetaManagedAgentsModel = "claude-opus-4-5-20251101"`
+
+            **Deprecated**: Will reach end-of-life on January 22, 2027. Please migrate to claude-opus-5-5. Visit https://docs.anthropic.com/en/docs/resources/model-deprecations for more information.
 
             Powerful intelligence for long-running agents and coding
 
@@ -64146,25 +64254,25 @@ Stream Session Thread Events
 
           Tokens used to create 1-hour ephemeral cache entries.
 
-          format: int32
+          format: int64
 
         - `Ephemeral5mInputTokens int64 Optional`
 
           Tokens used to create 5-minute ephemeral cache entries.
 
-          format: int32
+          format: int64
 
       - `CacheReadInputTokens int64 Optional`
 
         Total tokens read from prompt cache.
 
-        format: int32
+        format: int64
 
       - `InputTokens int64 Optional`
 
         Total input tokens consumed across all turns.
 
-        format: int32
+        format: int64
 
       - `ListCost BetaMonetaryAmount Optional`
 
@@ -64174,7 +64282,7 @@ Stream Session Thread Events
 
         Total output tokens generated across all turns.
 
-        format: int32
+        format: int64
 
       - `ServerToolUse BetaManagedAgentsServerToolUsage Optional`
 
@@ -65579,19 +65687,21 @@ func main() {
 	)
 	betaManagedAgentsDeployment, err := client.Beta.Deployments.New(context.TODO(), anthropic.BetaDeploymentNewParams{
 		Agent: anthropic.BetaDeploymentNewParamsAgentUnion{
-			OfString: anthropic.String("string"),
+			OfBetaManagedAgentsAgents: &anthropic.BetaManagedAgentsAgentParams{
+				ID: "agent_011CZkYpogX7uDKUyvBTophP",
+			},
 		},
-		EnvironmentID: "x",
+		EnvironmentID: "env_011CZkZ9X2dpNyB7HsEFoRfW",
 		InitialEvents: []anthropic.BetaManagedAgentsDeploymentInitialEventParamsUnion{{
 			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
 				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
 					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-						Text: "Where is my order #1234?",
+						Text: "Compile yesterday's orders into report.md.",
 					},
 				}},
 			},
 		}},
-		Name: "x",
+		Name: "Daily order report",
 	})
 	if err != nil {
 		panic(err.Error())
@@ -85662,13 +85772,17 @@ func main() {
 
 ## Beta › User Profiles
 
+Register the end customers that your platform serves, so each request can name who it's for. To get started, see the [User profiles guide](../../manage-claude/user-profiles.md).
+
 ### Create User Profile
 
 `client.Beta.UserProfiles.New(ctx, params) (*BetaUserProfile, error)`
 
 **POST** `/v1/user_profiles`
 
-Create User Profile
+Register one of your end customers and get the ID to send on the requests you make for them.
+
+See the [User profiles guide](../../manage-claude/user-profiles.md#create-a-profile-for-each-end-customer) for what to send.
 
 #### Parameters
 
@@ -86047,7 +86161,9 @@ func main() {
 
 **GET** `/v1/user_profiles`
 
-List User Profiles
+List the user profiles in your organization, newest first by default.
+
+See the [User profiles guide](../../manage-claude/user-profiles.md) for how to set up and manage profiles.
 
 #### Parameters
 
@@ -86429,7 +86545,9 @@ func main() {
 
 **GET** `/v1/user_profiles/{user_profile_id}`
 
-Get User Profile
+Get a user profile by ID to check the details stored for it.
+
+See the [User profiles guide](../../manage-claude/user-profiles.md) for how to set up and manage profiles.
 
 #### Parameters
 
@@ -86778,7 +86896,9 @@ func main() {
 
 **POST** `/v1/user_profiles/{user_profile_id}`
 
-Update User Profile
+Change the details of a user profile, leaving the fields that you don't send as they are.
+
+See the [User profiles guide](../../manage-claude/user-profiles.md#update-a-profile) for how each field is updated.
 
 #### Parameters
 
@@ -87165,7 +87285,9 @@ func main() {
 
 **DELETE** `/v1/user_profiles/{user_profile_id}`
 
-Delete User Profile
+Delete a user profile, for example when the end customer closes their account.
+
+Stop sending the profile's ID first. See the [User profiles guide](../../manage-claude/user-profiles.md#delete-a-profile) for what happens after a delete.
 
 #### Parameters
 
@@ -87379,7 +87501,9 @@ func main() {
 
 **POST** `/v1/user_profiles/{user_profile_id}/enrollment_url`
 
-Create Enrollment URL
+Create a link that sends the profile's end customer to the Verification Portal from Claude Platform on AWS.
+
+On the Claude API, create an action URL instead. See [Send an end customer a link to the Verification Portal](../../manage-claude/user-profiles-verification-portal.md) for when to create the link and what the end customer sees.
 
 #### Parameters
 
@@ -87604,7 +87728,9 @@ func main() {
 
 **POST** `/v1/user_profiles/{user_profile_id}/action_urls`
 
-Create Action URL
+Create a link that sends the profile's end customer to the Verification Portal.
+
+See [Send an end customer a link to the Verification Portal](../../manage-claude/user-profiles-verification-portal.md) for when to create the link and what the end customer sees.
 
 #### Parameters
 
@@ -94867,8 +94993,8 @@ func main() {
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
 	betaFederationIssuer, err := client.Beta.Organization.Federation.Issuers.New(context.TODO(), anthropic.BetaOrganizationFederationIssuerNewParams{
-		IssuerURL: "x",
-		Name:      "x",
+		IssuerURL: "https://token.actions.githubusercontent.com",
+		Name:      "github-actions",
 	})
 	if err != nil {
 		panic(err.Error())
@@ -96835,10 +96961,10 @@ func main() {
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
 	betaFederationRule, err := client.Beta.Organization.Federation.Rules.New(context.TODO(), anthropic.BetaOrganizationFederationRuleNewParams{
-		IssuerID:   "issuer_id",
+		IssuerID:   "fdis_01SDCCSbTxrXDpWc1phhtcfK",
 		Match:      anthropic.BetaFederationRuleMatchParam{},
-		Name:       "x",
-		OAuthScope: "x",
+		Name:       "prod-deploy-pipeline",
+		OAuthScope: "workspace:developer",
 		Target: anthropic.BetaServiceAccountTargetParam{
 			ServiceAccountID: "svac_01SDCCSbTxrXDpWc1phhtcfK",
 		},
@@ -98684,7 +98810,7 @@ func main() {
 		context.TODO(),
 		"federation_rule_id",
 		anthropic.BetaOrganizationFederationRuleWorkspaceAddParams{
-			WorkspaceID: "workspace_id",
+			WorkspaceID: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
 		},
 	)
 	if err != nil {
@@ -105225,7 +105351,7 @@ List Workspaces
 
     - `HumanReview BetaAnthropicHumanReview Optional`
 
-      The Workspace's human review setting. Human review is off only while this is `disabled` and Anthropic's approval stands. If Anthropic withdraws approval, review is back on, though this field still reads `disabled`.
+      The Workspace's human review setting. Human review is off only while this is `disabled` and Anthropic's approval stands.
 
       - `Type BetaAnthropicHumanReviewType`
 
@@ -105633,7 +105759,7 @@ Create Workspace
 
     - `HumanReview BetaAnthropicHumanReview Optional`
 
-      The Workspace's human review setting. Human review is off only while this is `disabled` and Anthropic's approval stands. If Anthropic withdraws approval, review is back on, though this field still reads `disabled`.
+      The Workspace's human review setting. Human review is off only while this is `disabled` and Anthropic's approval stands.
 
       - `Type BetaAnthropicHumanReviewType`
 
@@ -106081,7 +106207,7 @@ Get Workspace
 
     - `HumanReview BetaAnthropicHumanReview Optional`
 
-      The Workspace's human review setting. Human review is off only while this is `disabled` and Anthropic's approval stands. If Anthropic withdraws approval, review is back on, though this field still reads `disabled`.
+      The Workspace's human review setting. Human review is off only while this is `disabled` and Anthropic's approval stands.
 
       - `Type BetaAnthropicHumanReviewType`
 
@@ -106488,7 +106614,7 @@ Update Workspace
 
     - `HumanReview BetaAnthropicHumanReview Optional`
 
-      The Workspace's human review setting. Human review is off only while this is `disabled` and Anthropic's approval stands. If Anthropic withdraws approval, review is back on, though this field still reads `disabled`.
+      The Workspace's human review setting. Human review is off only while this is `disabled` and Anthropic's approval stands.
 
       - `Type BetaAnthropicHumanReviewType`
 
@@ -106952,7 +107078,7 @@ Archive Workspace
 
     - `HumanReview BetaAnthropicHumanReview Optional`
 
-      The Workspace's human review setting. Human review is off only while this is `disabled` and Anthropic's approval stands. If Anthropic withdraws approval, review is back on, though this field still reads `disabled`.
+      The Workspace's human review setting. Human review is off only while this is `disabled` and Anthropic's approval stands.
 
       - `Type BetaAnthropicHumanReviewType`
 
@@ -108632,7 +108758,7 @@ func main() {
 		context.TODO(),
 		"workspace_id",
 		anthropic.BetaOrganizationWorkspaceServiceAccountAddParams{
-			ServiceAccountID: "service_account_id",
+			ServiceAccountID: "svac_01SDCCSbTxrXDpWc1phhtcfK",
 			WorkspaceRole:    anthropic.BetaNoBillingWorkspaceRoleWorkspaceAdmin,
 		},
 	)
@@ -112262,6 +112388,12 @@ bucket; every combination is returned across pages. With no `group_by[]`
 and no `time_bucket_width`, a single row aggregates the whole range.
 Includes all usage, whether or not it is attributable to a seat user.
 Requires an API key with the `read:analytics` scope, or an Admin API key.
+This endpoint is in beta and is not available to organizations with HIPAA
+readiness enabled: their API requests return a 400 error. A parent
+organization's report across its child organizations leaves out the child
+organizations that have HIPAA readiness enabled. If the parent has child
+organizations and all of them have HIPAA readiness enabled, the request
+returns a 400 error.
 
 #### Parameters
 
@@ -112295,13 +112427,13 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
   - `AgentIDs []string Optional` (query parameter)
 
-    Filter to usage incurred by sessions of specific Claude Managed Agents agents. Use `group_by[]=agent_id` to break out per-agent values. Claude Platform organizations only.
+    Filter to usage incurred by sessions of specific Claude Managed Agents agents. Use `group_by[]=agent_id` to break out per-agent values.
 
     maxItems: 100
 
   - `APIKeyIDs []string Optional` (query parameter)
 
-    Filter to usage authenticated by specific API keys, by tagged API key ID (`apikey_...`), whichever identity the usage is attributed to. Include an empty entry (`api_key_ids[]=`) to also match usage that no API key authenticated. Use `group_by[]=api_key_id` to break out per-key values; usage without a key has a null `api_key_id`. Claude Platform organizations only.
+    Filter to usage authenticated by specific API keys, by tagged API key ID (`apikey_...`), whichever identity the usage is attributed to. Include an empty entry (`api_key_ids[]=`) to also match usage that no API key authenticated. Use `group_by[]=api_key_id` to break out per-key values; usage without a key has a null `api_key_id`.
 
     maxItems: 100
 
@@ -112339,7 +112471,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
   - `DeploymentIDs []string Optional` (query parameter)
 
-    Filter to usage incurred by Claude Managed Agents sessions that specific deployments started. Use `group_by[]=deployment_id` to break out per-deployment values. Claude Platform organizations only.
+    Filter to usage incurred by Claude Managed Agents sessions that specific deployments started. Use `group_by[]=deployment_id` to break out per-deployment values.
 
     maxItems: 100
 
@@ -112351,7 +112483,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
   - `EnvironmentIDs []string Optional` (query parameter)
 
-    Filter to usage incurred by Claude Managed Agents sessions that ran in specific environments. Use `group_by[]=environment_id` to break out per-environment values. Claude Platform organizations only.
+    Filter to usage incurred by Claude Managed Agents sessions that ran in specific environments. Use `group_by[]=environment_id` to break out per-environment values.
 
     maxItems: 100
 
@@ -112439,7 +112571,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
   - `OrganizationIDs []string Optional` (query parameter)
 
-    Filter a parent organization's report to specific child organizations, by organization UUID or `org_` ID; an ID that is not one of its child organizations matches nothing. Requires an API key created at the parent organization level. Use `group_by[]=organization_id` to break out per-organization values.
+    Filter a parent organization's report to specific child organizations, by organization UUID or `org_` ID; an ID that is not one of its child organizations matches nothing. The report leaves out child organizations with HIPAA readiness enabled, and naming one returns a 400 error. Requires an API key created at the parent organization level. Use `group_by[]=organization_id` to break out per-organization values.
 
     maxItems: 100
 
@@ -112485,7 +112617,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
   - `ServiceTiers []BetaAnalyticsServiceTier Optional` (query parameter)
 
-    Filter to specific service tiers. Use `group_by[]=service_tier` to break out per-tier values. Claude Platform organizations only; matches nothing for a Claude Enterprise organization.
+    Filter to specific service tiers. Use `group_by[]=service_tier` to break out per-tier values.
 
     maxItems: 100
 
@@ -112503,7 +112635,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
   - `SessionIDs []string Optional` (query parameter)
 
-    Filter to usage incurred by specific Claude Managed Agents sessions, by tagged session ID (`sesn_...`). Use `group_by[]=session_id` to break out per-session values. Claude Platform organizations only.
+    Filter to usage incurred by specific Claude Managed Agents sessions, by tagged session ID (`sesn_...`). Use `group_by[]=session_id` to break out per-session values.
 
     maxItems: 100
 
@@ -112529,13 +112661,13 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
   - `UserProfileIDs []string Optional` (query parameter)
 
-    Filter to usage attributed to specific user profiles, by tagged user profile ID (`uprof_...`). Use `group_by[]=user_profile_id` to break out per-profile values. Claude Platform organizations only.
+    Filter to usage attributed to specific user profiles, by tagged user profile ID (`uprof_...`). Use `group_by[]=user_profile_id` to break out per-profile values.
 
     maxItems: 100
 
   - `WorkspaceIDs []string Optional` (query parameter)
 
-    Filter to usage in specific workspaces, by tagged workspace ID (`wrkspc_...`). Use `group_by[]=workspace_id` to break out per-workspace values. Claude Platform organizations only; matches nothing for a Claude Enterprise organization.
+    Filter to usage in specific workspaces, by tagged workspace ID (`wrkspc_...`). Use `group_by[]=workspace_id` to break out per-workspace values.
 
     maxItems: 100
 
@@ -112865,7 +112997,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
     - `ServiceTier BetaAnalyticsServiceTier`
 
-      Service tier the usage was served at. Populated only when `service_tier` is in `group_by[]`; null for usage with no service tier (for example, code execution) and for Claude Enterprise usage.
+      Service tier the usage was served at. Populated only when `service_tier` is in `group_by[]`; null for usage with no service tier (for example, code execution).
 
       - `const BetaAnalyticsServiceTierBatch BetaAnalyticsServiceTier = "batch"`
 
@@ -112897,11 +113029,11 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
     - `UserProfileID string`
 
-      User profile the usage was attributed to, as a tagged `uprof_` ID. Populated only when `user_profile_id` is in `group_by[]`; null for usage that named no profile and for Claude Enterprise usage.
+      User profile the usage was attributed to, as a tagged `uprof_` ID. Populated only when `user_profile_id` is in `group_by[]`; null for usage that named no profile.
 
     - `WorkspaceID string`
 
-      Workspace the usage occurred in, as a tagged workspace ID, including the organization's default workspace. Populated only when `workspace_id` is in `group_by[]`; null for Claude Enterprise usage.
+      Workspace the usage occurred in, as a tagged workspace ID, including a Claude Platform organization's default workspace. Populated only when `workspace_id` is in `group_by[]`; null for usage in a Claude Enterprise organization's default workspace, which is its only workspace.
 
   - `StartingAt Time`
 
@@ -113059,7 +113191,13 @@ cost in the range, ranked by spend or ordered by time bucket; every
 combination is returned across pages. With no `group_by[]` and no
 `time_bucket_width`, a single row aggregates the whole range. Includes
 all cost, whether or not it is attributable to a seat user. Requires an
-API key with the `read:analytics` scope, or an Admin API key.
+API key with the `read:analytics` scope, or an Admin API key. This
+endpoint is in beta and is not available to organizations with HIPAA
+readiness enabled: their API requests return a 400 error. A parent
+organization's report across its child organizations leaves out the child
+organizations that have HIPAA readiness enabled. If the parent has child
+organizations and all of them have HIPAA readiness enabled, the request
+returns a 400 error.
 
 #### Parameters
 
@@ -113093,13 +113231,13 @@ API key with the `read:analytics` scope, or an Admin API key.
 
   - `AgentIDs []string Optional` (query parameter)
 
-    Filter to usage incurred by sessions of specific Claude Managed Agents agents. Use `group_by[]=agent_id` to break out per-agent values. Claude Platform organizations only.
+    Filter to usage incurred by sessions of specific Claude Managed Agents agents. Use `group_by[]=agent_id` to break out per-agent values.
 
     maxItems: 100
 
   - `APIKeyIDs []string Optional` (query parameter)
 
-    Filter to usage authenticated by specific API keys, by tagged API key ID (`apikey_...`), whichever identity the usage is attributed to. Include an empty entry (`api_key_ids[]=`) to also match usage that no API key authenticated. Use `group_by[]=api_key_id` to break out per-key values; usage without a key has a null `api_key_id`. Claude Platform organizations only.
+    Filter to usage authenticated by specific API keys, by tagged API key ID (`apikey_...`), whichever identity the usage is attributed to. Include an empty entry (`api_key_ids[]=`) to also match usage that no API key authenticated. Use `group_by[]=api_key_id` to break out per-key values; usage without a key has a null `api_key_id`.
 
     maxItems: 100
 
@@ -113137,7 +113275,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
   - `DeploymentIDs []string Optional` (query parameter)
 
-    Filter to usage incurred by Claude Managed Agents sessions that specific deployments started. Use `group_by[]=deployment_id` to break out per-deployment values. Claude Platform organizations only.
+    Filter to usage incurred by Claude Managed Agents sessions that specific deployments started. Use `group_by[]=deployment_id` to break out per-deployment values.
 
     maxItems: 100
 
@@ -113149,7 +113287,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
   - `EnvironmentIDs []string Optional` (query parameter)
 
-    Filter to usage incurred by Claude Managed Agents sessions that ran in specific environments. Use `group_by[]=environment_id` to break out per-environment values. Claude Platform organizations only.
+    Filter to usage incurred by Claude Managed Agents sessions that ran in specific environments. Use `group_by[]=environment_id` to break out per-environment values.
 
     maxItems: 100
 
@@ -113241,7 +113379,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
   - `OrganizationIDs []string Optional` (query parameter)
 
-    Filter a parent organization's report to specific child organizations, by organization UUID or `org_` ID; an ID that is not one of its child organizations matches nothing. Requires an API key created at the parent organization level. Use `group_by[]=organization_id` to break out per-organization values.
+    Filter a parent organization's report to specific child organizations, by organization UUID or `org_` ID; an ID that is not one of its child organizations matches nothing. The report leaves out child organizations with HIPAA readiness enabled, and naming one returns a 400 error. Requires an API key created at the parent organization level. Use `group_by[]=organization_id` to break out per-organization values.
 
     maxItems: 100
 
@@ -113287,7 +113425,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
   - `ServiceTiers []BetaAnalyticsServiceTier Optional` (query parameter)
 
-    Filter to specific service tiers. Use `group_by[]=service_tier` to break out per-tier values. Claude Platform organizations only; matches nothing for a Claude Enterprise organization.
+    Filter to specific service tiers. Use `group_by[]=service_tier` to break out per-tier values.
 
     maxItems: 100
 
@@ -113305,7 +113443,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
   - `SessionIDs []string Optional` (query parameter)
 
-    Filter to usage incurred by specific Claude Managed Agents sessions, by tagged session ID (`sesn_...`). Use `group_by[]=session_id` to break out per-session values. Claude Platform organizations only.
+    Filter to usage incurred by specific Claude Managed Agents sessions, by tagged session ID (`sesn_...`). Use `group_by[]=session_id` to break out per-session values.
 
     maxItems: 100
 
@@ -113331,13 +113469,13 @@ API key with the `read:analytics` scope, or an Admin API key.
 
   - `UserProfileIDs []string Optional` (query parameter)
 
-    Filter to usage attributed to specific user profiles, by tagged user profile ID (`uprof_...`). Use `group_by[]=user_profile_id` to break out per-profile values. Claude Platform organizations only.
+    Filter to usage attributed to specific user profiles, by tagged user profile ID (`uprof_...`). Use `group_by[]=user_profile_id` to break out per-profile values.
 
     maxItems: 100
 
   - `WorkspaceIDs []string Optional` (query parameter)
 
-    Filter to usage in specific workspaces, by tagged workspace ID (`wrkspc_...`). Use `group_by[]=workspace_id` to break out per-workspace values. Claude Platform organizations only; matches nothing for a Claude Enterprise organization.
+    Filter to usage in specific workspaces, by tagged workspace ID (`wrkspc_...`). Use `group_by[]=workspace_id` to break out per-workspace values.
 
     maxItems: 100
 
@@ -113701,7 +113839,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
     - `ServiceTier BetaAnalyticsServiceTier`
 
-      Service tier the usage was served at. Populated only when `service_tier` is in `group_by[]`; null for usage with no service tier (for example, code execution) and for Claude Enterprise usage.
+      Service tier the usage was served at. Populated only when `service_tier` is in `group_by[]`; null for usage with no service tier (for example, code execution).
 
       - `const BetaAnalyticsServiceTierBatch BetaAnalyticsServiceTier = "batch"`
 
@@ -113747,11 +113885,11 @@ API key with the `read:analytics` scope, or an Admin API key.
 
     - `UserProfileID string`
 
-      User profile the usage was attributed to, as a tagged `uprof_` ID. Populated only when `user_profile_id` is in `group_by[]`; null for usage that named no profile and for Claude Enterprise usage.
+      User profile the usage was attributed to, as a tagged `uprof_` ID. Populated only when `user_profile_id` is in `group_by[]`; null for usage that named no profile.
 
     - `WorkspaceID string`
 
-      Workspace the usage occurred in, as a tagged workspace ID, including the organization's default workspace. Populated only when `workspace_id` is in `group_by[]`; null for Claude Enterprise usage.
+      Workspace the usage occurred in, as a tagged workspace ID, including a Claude Platform organization's default workspace. Populated only when `workspace_id` is in `group_by[]`; null for usage in a Claude Enterprise organization's default workspace, which is its only workspace.
 
   - `StartingAt Time`
 
@@ -120910,7 +121048,8 @@ marketplaces.
 
 Plugins in members' personal marketplaces are listed with the same detail as the
 organization's own, and their files can be downloaded through the version archive
-endpoint, which records each such download on the Compliance API activity feed.
+endpoint. Those downloads can be recorded on the Compliance API activity feed; the
+version archive endpoint says when.
 
 **Accepted credentials:** an Admin API key with the `read:plugins` or `read:org_audit` scope, or a Compliance Access Key with the `read:compliance_org_data` scope.
 
@@ -122829,9 +122968,9 @@ func main() {
 
 **GET** `/v1/organizations/plugins/{plugin_id}/versions/{version}/content`
 
-Download one version's `.zip` archive, exactly as stored. Each download of a
-Plugin from a member's personal plugin marketplace is recorded on the Compliance API
-activity feed.
+Download one version's `.zip` archive, exactly as stored. Downloads of Plugins from
+members' personal plugin marketplaces can be recorded on the Compliance API activity
+feed.
 
 The response body is the archive (`Content-Type: application/zip`), sent as an
 attachment whose filename is derived from the Plugin's name; name saved files from
@@ -122844,9 +122983,11 @@ Every read scope above (`read:plugins`, `read:org_audit`, and
 marketplaces, including files that claude.ai's admin settings do not show, and a
 `read:org_audit` or `read:compliance_org_data` key created for all of your parent
 organization's linked organizations can do this in any organization under it that has
-access to this API, by passing `organization_id`. Each such download records a
-`claude_plugin_archive_accessed` event on the Compliance API activity feed,
-identifying the key, the plugin, the version, and the member. Downloads of
+access to this API, by passing `organization_id`. The Compliance API activity feed can
+record such a download as a `claude_plugin_archive_accessed` event, which identifies
+the key, the plugin, the version, and the member. It does so only while activity
+events are captured for the plugin's organization, and a record is not guaranteed even
+then. The files are served whether or not the download is recorded. Downloads of
 organization-owned plugins are not recorded.
 
 Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-01`. A request without it returns `404`, exactly as if the endpoint did not exist. The Plugins API is in beta and is available to Claude Enterprise organizations only. It is not available to Claude Platform (Claude Console) organizations, or to organizations with HIPAA readiness enabled.
@@ -124003,10 +124144,9 @@ func main() {
 List the shares the owner of a member-owned Plugin has given — to every member of
 the organization, to an RBAC Group, or to one member — most recently granted first.
 
-Shares are read-only in this API: members give and withdraw them in claude.ai, and
-who gave a share is recorded on the Compliance API activity feed rather than on the
-share. An organization-owned Plugin has installation settings instead, so this path
-returns 404 for one.
+Shares are read-only in this API: members give and withdraw them in claude.ai. The
+Plugin's `owner` gave each share listed. An organization-owned Plugin has installation
+settings instead of shares, so this path returns 404 for one.
 
 **Accepted credentials:** an Admin API key with the `read:plugins` or `read:org_audit` scope, or a Compliance Access Key with the `read:compliance_org_data` scope.
 
@@ -124195,8 +124335,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 - `type BetaPluginShare`
 
   One share the owner of a member-owned Plugin has given. Shares are
-  read-only in this API and have no ID of their own; who gave a share is
-  recorded on the Compliance API activity feed, not here.
+  read-only in this API and have no ID of their own. The Plugin's `owner` is
+  the member who gave the share.
 
   - `Type PluginShare`
 
@@ -126333,7 +126473,7 @@ func main() {
 		option.WithAPIKey("my-anthropic-api-key"),
 	)
 	betaTelemetryDestination, err := client.Beta.Organization.TelemetryDestinations.New(context.TODO(), anthropic.BetaOrganizationTelemetryDestinationNewParams{
-		EndpointURL: "x",
+		EndpointURL: "https://gateway.example.com",
 		Workspaces: anthropic.BetaTelemetryDestinationWorkspacesParamsUnion{
 			OfAll: &anthropic.BetaTelemetryDestinationWorkspacesAllParams{},
 		},
@@ -132943,8 +133083,8 @@ func main() {
 	)
 	betaClaudeTagSlackChannel, err := client.Beta.Organization.ClaudeTag.SlackChannels.New(context.TODO(), anthropic.BetaOrganizationClaudeTagSlackChannelNewParams{
 		Slack: anthropic.BetaClaudeTagSlackChannelIdentifiersParam{
-			ChannelID:   "xx",
-			WorkspaceID: "xx",
+			ChannelID:   "C0456EFGH",
+			WorkspaceID: "T0123ABCD",
 		},
 	})
 	if err != nil {
@@ -132973,8 +133113,8 @@ func main() {
     }
   },
   "slack": {
-    "channel_id": "xx",
-    "workspace_id": "xx"
+    "channel_id": "C0456EFGH",
+    "workspace_id": "T0123ABCD"
   },
   "sources": {
     "enabled": {
@@ -133467,8 +133607,8 @@ func main() {
         }
       },
       "slack": {
-        "channel_id": "xx",
-        "workspace_id": "xx"
+        "channel_id": "C0456EFGH",
+        "workspace_id": "T0123ABCD"
       },
       "sources": {
         "enabled": {
@@ -133950,8 +134090,8 @@ func main() {
     }
   },
   "slack": {
-    "channel_id": "xx",
-    "workspace_id": "xx"
+    "channel_id": "C0456EFGH",
+    "workspace_id": "T0123ABCD"
   },
   "sources": {
     "enabled": {
@@ -134444,8 +134584,8 @@ func main() {
     }
   },
   "slack": {
-    "channel_id": "xx",
-    "workspace_id": "xx"
+    "channel_id": "C0456EFGH",
+    "workspace_id": "T0123ABCD"
   },
   "sources": {
     "enabled": {
@@ -137514,7 +137654,7 @@ func main() {
 		anthropic.BetaOrganizationClaudeTagBundleTargetNewParams{
 			Target: anthropic.BetaClaudeTagBundleTargetCreateUnionParam{
 				OfSlackChannel: &anthropic.BetaClaudeTagSlackChannelBundleTargetCreateParam{
-					SlackChannelID: "xxxxxxxx",
+					SlackChannelID: "slch_01SvpyRQK3nN6eH9uhRA7n1q",
 				},
 			},
 		},

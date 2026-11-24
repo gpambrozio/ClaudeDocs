@@ -43,6 +43,8 @@ featureMetadata:
 
 The queue statistics and stop calls on this page run from your monitoring or operations tooling, authenticated with your organization API key. The worker helpers handle the claim and keep-alive loop, so you don’t call those endpoints directly.
 
+For the credentials that replace the organization API key and the environment key on a cloud platform, see [Worker authentication on cloud platforms](self-hosted-sandboxes.md#worker-authentication-on-cloud-platforms).
+
 The queue statistics and stop endpoints accept either your organization API key or the environment key. Call them from outside the worker host with your organization API key. Setting `ANTHROPIC_API_KEY` on the worker host exposes an organization-scoped credential to agent tool calls.
 
 ## Read queue depth
@@ -344,7 +346,10 @@ If a worker is killed before its teardown runs, any memory edits that had not sy
 
 ### The worker doesn’t connect
 
-If `workers_polling` (java, php: `workersPolling`; csharp, go: `WorkersPolling`) stays at 0, the worker isn’t reaching the queue. Confirm that `ANTHROPIC_ENVIRONMENT_KEY` and `ANTHROPIC_ENVIRONMENT_ID` are set on the worker host.
+If `workers_polling` (java, php: `workersPolling`; csharp, go: `WorkersPolling`) stays at 0, check each case that applies to your worker:
+
+* **A worker with an environment key:** Confirm that `ANTHROPIC_ENVIRONMENT_KEY` and `ANTHROPIC_ENVIRONMENT_ID` are set on the worker host.
+* **A worker that you wrote:** Confirm that it sends the `Anthropic-Worker-ID` header when it [polls for work](../api/beta/environments/work/poll.md). The count includes only workers that send this header.
 
 ### A session stays queued
 

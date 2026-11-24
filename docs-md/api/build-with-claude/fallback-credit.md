@@ -52,7 +52,7 @@ Both are `null` when no credit is available for the refusal.
 
 **Build the retry**
 
-Start from the refused request body. Set `model` to the fallback model and add the token as the top-level `fallback_credit_token` parameter. Pick the body shape from the following table.
+Start from the refused request body. Set `model` to the fallback model and add the token as the top-level `fallback_credit_token` parameter. If the request used fast mode, delete `speed` (see [With a manual retry](refusals-and-fallback.md#with-a-manual-retry)). Pick the body shape from the following table.
 
 **Send the retry with the same header**
 
@@ -62,8 +62,8 @@ The `fallback_has_prefill_claim` field tells you whether the retry can continue 
 
 | `fallback_has_prefill_claim` | Retry body |
 | ----- | ----- |
-| `true` | The refused request body, unchanged, plus one appended assistant message whose `content` echoes the refused response’s `content`. The retry model continues the response from where the refused model stopped, and completed server tool calls are not run again. |
-| `false` | The refused request body, unchanged. |
+| `true` | The body you built, plus one appended assistant message whose `content` echoes the refused response’s `content`. The retry model continues the response from where the refused model stopped, and completed server tool calls are not run again. |
+| `false` | The body you built. |
 
 ## Example
 
@@ -541,9 +541,9 @@ The refund is visible in the retry’s `usage`. Compared with what the same requ
 
 Most retries redeem on the first attempt. When one does not, the API returns a 400 error that tells you what to try next.
 
-**Continuation rejected: resend the unchanged body**
+**Continuation rejected: remove the assistant message**
 
-If the retry that appends the assistant message is rejected with a 400 error, resend the refused request body unchanged, still with the token.
+If the retry that appends the assistant message is rejected with a 400 error, resend it without that message, still with the token. The rest of this page calls this the unchanged body.
 
 **Token rejected: drop the token**
 
@@ -567,6 +567,7 @@ Redemption compares the retry against the refused request. Every field that shap
 | ----- | ----- |
 | Must match exactly | `system`, `messages`, `tools`, `tool_choice`, `thinking`, and `cache_control`, plus `output_config`, `mcp_servers`, `context_management`, and `container` when you use them |
 | May change on the retry | `model`, `max_tokens`, `stop_sequences`, `stream`, `metadata`, and `service_tier` |
+| May be deleted, not added | `speed`: delete it to run at standard speed. `"fast"` can stay only where the retry model has fast mode. [With the SDK middleware](refusals-and-fallback.md#with-the-sdk-middleware), set `speed` to null on each fallback entry instead. |
 
 The continuation shape (`fallback_has_prefill_claim: true`) is the one exception to the `messages` match: it adds exactly one assistant message at the end of `messages`.
 
@@ -574,12 +575,13 @@ Do not strip `thinking` or `redacted_thinking` blocks from earlier turns on the 
 
 **Beta headers must match too**
 
-Send the same `anthropic-beta` headers on the retry as on the refused request. A beta header present on one of the two requests but not the other can fail the match even when the bodies are identical. The resulting 400 error carries the same `request body ... does not match` message as a body difference, so a header difference is easy to misread as a body problem. In particular, do not add or drop beta headers based on which model the request targets.
+Send the same `anthropic-beta` headers on the retry as on the refused request. A beta header present on one of the two requests but not the other can fail the match even when the bodies are identical. The resulting 400 error carries the same `request body ... does not match` message as a body difference. A header difference is therefore easy to misread as a body problem. Apart from the three kinds that follow, do not add or drop beta headers based on which model the request targets.
 
-Two header families are exempt from the match, for the retry’s sake:
+Three kinds of header are exempt from the match:
 
 * **`server-side-fallback-*`:** a retry must drop the `fallbacks` parameter, and dropping this header along with it does not cause a mismatch.
 * **`fallback-credit-*`:** keep this header on both requests. The retry needs it to redeem the token.
+* **`fast-mode-2026-02-01`:** on the Claude API, a retry can add or drop this header. On Claude Models on Google Cloud (Google managed), a retry must leave it out.
 
 On models that include the 1M token context window by default, such as Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Sonnet 5.5, and Claude Sonnet 5, the `context-1m-2025-08-07` beta header has no effect. To keep the two requests identical, omit that header on both rather than sending it on one and not the other.
 

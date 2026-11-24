@@ -10,6 +10,10 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/user_profiles/list
 - Signature: `client.beta.userProfiles.list(params?: UserProfileListParams, options?: RequestOptions): PageCursor<BetaUserProfile>`
 - Endpoint: `GET /v1/user_profiles`
 
+List the user profiles in your organization, newest first by default.
+
+See the [User profiles guide](../../../../manage-claude/user-profiles.md) for how to set up and manage profiles.
+
 ## Example request
 
 ```ts

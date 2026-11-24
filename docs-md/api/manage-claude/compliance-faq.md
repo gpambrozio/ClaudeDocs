@@ -37,7 +37,9 @@ To call the Compliance API, you create one of two key types instead:
 
 **Can I use my regular Claude API key with the Compliance API?**
 
-No. A Claude API key (`sk-ant-api03-...`) authenticates calls to Claude models on the Claude API; it does not authenticate calls to `/v1/compliance/*`. The Compliance API accepts only Compliance Access Keys (`sk-ant-api01-...`) and Admin API keys (`sk-ant-admin01-...`). See [Which key do you need?](compliance-api-access.md#which-key-do-you-need) for the full mapping.
+No. A Claude API key (`sk-ant-api03-...`) authenticates calls to Claude models on the Claude API, not calls to `/v1/compliance/*`. Instead, use a Compliance Access Key (`sk-ant-api01-...`) or an Admin API key (`sk-ant-admin01-...`). See [Which key do you need?](compliance-api-access.md#which-key-do-you-need) for the full mapping.
+
+On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) and [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), use the platform’s credentials instead of a key. See [How the Compliance API works](compliance-api.md#how-the-compliance-api-works).
 
 **Why does my Admin API key return 403 on chat or file endpoints?**
 

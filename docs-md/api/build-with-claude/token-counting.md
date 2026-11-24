@@ -1417,13 +1417,15 @@ Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, Claude Mythos 5.1, Claude
 
 ## Pricing and rate limits
 
-Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](../api/rate-limits.md#rate-limits). If you need higher limits, use **Request tier increase** on the [Rate limits](https://platform.claude.com/usage/limits) page in the Claude Console.
+Token counting is **free to use** but subject to requests per minute rate limits based on your [usage tier](../api/rate-limits.md#rate-limits).
 
 | Usage tier | Requests per minute (RPM) |
 | ----- | ----- |
 | Start | 5,000 |
 | Build | 10,000 |
 | Scale | 20,000 |
+
+If you need higher limits, see [Requesting higher limits](../api/rate-limits.md#requesting-higher-limits).
 
 Token counting and message creation have separate and independent rate limits. Usage of one does not count against the limits of the other.
 

@@ -10,6 +10,10 @@ url: https://platform.claude.com/docs/en/api/typescript/beta/user_profiles/creat
 - Signature: `client.beta.userProfiles.create(params: UserProfileCreateParams, options?: RequestOptions): BetaUserProfile`
 - Endpoint: `POST /v1/user_profiles`
 
+Register one of your end customers and get the ID to send on the requests you make for them.
+
+See the [User profiles guide](../../../../manage-claude/user-profiles.md#create-a-profile-for-each-end-customer) for what to send.
+
 ## Example request
 
 ```ts
