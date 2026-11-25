@@ -367,6 +367,10 @@ Whether the API accepts a prefill depends on the model, not on the API version:
 * **Claude 4.5 and earlier models:** The API accepts a prefill unless the model is retired on the platform that you use. All requests to a retired model fail. To check a model’s status, see [Model deprecations](../about-claude/model-deprecations.md).
 * **All other models:** The API returns a 400 error (see the [Prefill not supported](../api/errors.md#prefill-not-supported) section of the Claude API errors page). Use one of the [alternatives to a prefill](working-with-messages.md#alternatives-to-a-prefill) instead.
 
+Claude Opus 4.5 is deprecated on [Anthropic-operated platforms](../about-claude/model-deprecations.md#overview). Claude Sonnet 4.5 is deprecated on the same platforms. For retirement dates and recommended replacements, see [Deprecation history](../about-claude/model-deprecations.md#deprecation-history) on the Model deprecations page. [Partner-operated platforms](../about-claude/model-deprecations.md#overview) set their own retirement schedules.
+
+The recommended replacements for Claude Opus 4.5 and Claude Sonnet 4.5 don’t accept a prefill.
+
 The following example runs on Claude Opus 4.5 and sets the format of a multiple-choice answer. The prefill, `The answer is (`, ends right before the answer’s letter so that Claude writes the letter first. Because the answer is one letter, the example also sets `max_tokens` to `1`. For a longer answer, set a higher `max_tokens`.
 
 ```bash cURL

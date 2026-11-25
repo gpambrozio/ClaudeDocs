@@ -51,8 +51,8 @@ go get github.com/anthropics/anthropic-sdk-go/v2/vertex
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.13.0")
-implementation("com.anthropic:anthropic-java-vertex:3.13.0")
+implementation("com.anthropic:anthropic-java:3.14.0")
+implementation("com.anthropic:anthropic-java-vertex:3.14.0")
 ```
 
 **Maven**
@@ -61,12 +61,12 @@ implementation("com.anthropic:anthropic-java-vertex:3.13.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.13.0</version>
+    <version>3.14.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-vertex</artifactId>
-    <version>3.13.0</version>
+    <version>3.14.0</version>
 </dependency>
 ```
 
@@ -342,7 +342,7 @@ Multi-region and regional endpoints cost 10 percent more than global endpoints. 
 
 Regional endpoints serve Claude Sonnet 4.6 and earlier models only. For newer models, use a global or multi-region endpoint.
 
-The premium for multi-region and regional endpoints applies only to Claude Sonnet 4.5 (deprecated) and later models. For the models that keep their earlier pricing, see [Cloud platform pricing](../../about-claude/pricing.md#cloud-platform-pricing). For regional endpoints, the premium reflects infrastructure costs for dedicated regional capacity.
+The premium for multi-region and regional endpoints applies only to Claude 4.5 and later models (see [Cloud platform pricing](../../about-claude/pricing.md#cloud-platform-pricing)). For regional endpoints, the premium reflects infrastructure costs for dedicated regional capacity.
 
 The following examples use the `us` multi-region endpoint. The highlighted lines set the region. For a full request on the global endpoint, see [Making requests](google-managed.md#accessing-vertex-ai).
 
@@ -505,7 +505,7 @@ Claude Models on Google Cloud (Google managed) offers a [1M-token context window
 * Claude Sonnet 4.6
 * Claude Haiku 5.5
 
-Other Claude models have a 200k-token context window. These include Claude Sonnet 4.5 (deprecated) and Claude Sonnet 4 (deprecated).
+Other Claude models have a 200k-token context window.
 
 Agent Platform limits request payloads to 30 MB. When you send large documents or many images, you might reach this limit before the token limit.
 

@@ -127,8 +127,8 @@ go get github.com/anthropics/anthropic-sdk-go/v2/bedrock
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.13.0")
-implementation("com.anthropic:anthropic-java-bedrock:3.13.0")
+implementation("com.anthropic:anthropic-java:3.14.0")
+implementation("com.anthropic:anthropic-java-bedrock:3.14.0")
 ```
 
 **Maven**
@@ -137,12 +137,12 @@ implementation("com.anthropic:anthropic-java-bedrock:3.13.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.13.0</version>
+    <version>3.14.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>3.13.0</version>
+    <version>3.14.0</version>
 </dependency>
 ```
 

@@ -16,6 +16,14 @@ To set up [Enterprise Frontier Safeguards](overview.md) (EFS), see [Setup guide]
 
 [Enterprise Frontier Safeguards](overview.md) (EFS) is Zero Data Retention (ZDR) for eligible organizations that use [Claude’s most capable models](../api-and-data-retention.md#model-specific-data-retention-requirements). Anthropic doesn’t retain your prompts and responses. Sealed Safety Data is written to storage that you own. EFS includes both [customer-owned storage](external-storage.md) and [review of Safety Cases](flagged-cases.md) by people at your organization. A workspace that uses [Anthropic-managed storage](faq.md#glossary) isn’t on EFS, because Anthropic stores encrypted copies of that workspace’s prompts and responses.
 
+**How do I get access to EFS?**
+
+1. If the [Programs](https://platform.claude.com/settings/programs) page in the Claude Console already shows **Enterprise Frontier Safeguards**, skip to step 2. Otherwise, contact your Anthropic account team to request access. If you don’t have an account team, complete the [Enterprise Frontier Safeguards request form](https://claude.com/form/enterprise-frontier-safeguards).
+2. Once Anthropic confirms that your organization is eligible, an Organization Admin accepts the terms from the [Programs](https://platform.claude.com/settings/programs) page in the Claude Console.
+3. To set up EFS, follow the [EFS setup guide for your platform](setup-console.md).
+
+On Amazon Bedrock, you get access through AWS. See [Enterprise Frontier Safeguards on Amazon Bedrock](setup-amazon-bedrock.md).
+
 **What is the difference between Enterprise Data Controls and EFS?**
 
 The main difference is where your Sealed Safety Data is stored. With EFS, it’s written to storage that you own, so EFS is Zero Data Retention (ZDR). With [Enterprise Data Controls](overview.md#enterprise-data-controls), a workspace stays on Anthropic-managed storage. On Claude Platform, you can still [use a customer-managed key](customer-managed-keys.md) and [turn off Anthropic Human Review](human-review-and-access-transparency.md#turn-off-anthropic-human-review) for additional control over your data.

@@ -86,6 +86,7 @@ You can discover which capabilities a model supports programmatically. The [Mode
 | [Context editing](context-editing.md) | Clears selected content, such as old tool results or old thinking blocks, from the conversation history as it grows. |
 | [Enterprise Frontier Safeguards](../manage-claude/enterprise-frontier-safeguards/overview.md) | Zero Data Retention (ZDR) for eligible organizations that use Claude’s most capable models. Sealed Safety Data, the encrypted copies of your prompts and responses, is written to storage that you own. Anthropic Human Review is always off, so your own team reviews flagged cases that automated safety monitoring finds. |
 | [Forced tool use](../agents-and-tools/tool-use/define-tools.md#forcing-tool-use) | Makes Claude call a tool, or one specific tool, instead of answering directly. |
+| [Linked billing](../manage-claude/oauth-apps/linked-billing.md) | Lets your customers pay for the Claude usage in your product through their own Claude organization. |
 | [Memory tool](../agents-and-tools/tool-use/memory-tool.md) | Lets Claude store and read information across conversations in a directory of memory files. |
 | ↳ [Memory tool helpers](../agents-and-tools/tool-use/memory-tool.md#implement-the-memory-handler) | SDK helpers that handle the memory tool’s interface and tool-use loop, so your code supplies only the storage. |
 | [Message streaming](streaming.md) | Receiving a Messages API response incrementally, as server-sent events, while it is generated. |

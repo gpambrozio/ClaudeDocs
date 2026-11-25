@@ -1896,8 +1896,6 @@ if response.stop_reason == :refusal
 end
 ```
 
-If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 ([deprecated](../about-claude/model-deprecations.md)) or Claude Opus 4.1 (the latter [retired, except on Claude Models on Google Cloud (Google managed) and Amazon Bedrock](../about-claude/model-deprecations.md)), you can try updating your API calls to use Claude Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5’s API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
-
 On a refusal, the [`stop_details`](../api/messages/create.md#message.stop_details) object identifies the policy category that triggered it. The categories and the full refusal response shape are covered in [What a refusal looks like](refusals-and-fallback.md#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
 
 You can usually get a response to a refused request by retrying it on another Claude model. This works for Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Haiku 5.5. [Refusals and fallback](refusals-and-fallback.md) shows how to set up that retry, server-side or in your client. Claude Haiku 5.5 has no server-side fallback, so set up its retry with [client-side fallback](refusals-and-fallback.md#client-side-fallback). If you build the retry yourself from any of these models except Claude Haiku 5.5, [Fallback credit](fallback-credit.md) covers how to avoid paying the prompt-cache cost twice.
@@ -1908,7 +1906,7 @@ A `reasoning_extraction` refusal is an exception: change the prompt instead of r
 
 Claude stopped because it reached the model’s context window limit. This lets you request the maximum possible tokens without knowing the exact input size.
 
-This stop reason is currently typed only in the SDK’s `beta` (csharp, go: `Beta`; java: `beta()`) namespace, so the following examples call `client.beta.messages` (csharp, go: `client.Beta.Messages`; java: `client.beta().messages()`; php: `$client->beta->messages`) and use the `Beta`-prefixed types. On Sonnet 4.5 (deprecated) and newer models, the API returns this value without a beta header. For earlier models, add the `model-context-window-exceeded-2025-08-26` beta header to enable it.
+On Claude 4.5 and later models, the API can return this value. On earlier models, add the `model-context-window-exceeded-2025-08-26` [beta header](../api/beta-headers.md) to enable it.
 
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \

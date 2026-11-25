@@ -214,7 +214,7 @@ Attaching a key [can’t be undone](cmek-key-lifecycle.md#what-each-action-does)
 
 You see **Workspace settings updated.** Once the key [takes effect](cmek-how-it-works.md#when-your-key-takes-effect), your cloud provider’s audit log shows Anthropic’s calls to the key.
 
-In a [ZDR organization](cmek-data-retention.md#zdr-organizations), after you select the workspace, select **Standard data retention** so that **Encryption key** appears. After you click **Save**, click **Accept** on the data retention terms.
+In an organization with [legacy zero data retention (Legacy ZDR)](cmek-data-retention.md#zdr-organizations), after you select the workspace, select **Standard data retention** so that **Encryption key** appears. After you click **Save**, click **Accept** on the data retention terms.
 
 **Claude Enterprise**
 

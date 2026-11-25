@@ -299,14 +299,12 @@ When you are ready to move off manual budgets, see [Migrating to adaptive thinki
 
 Interleaved thinking lets Claude think between tool calls within a single assistant turn, reasoning about each tool result before determining what to do next. For the concept, the turn structure, and how it behaves on adaptive-thinking models, see [interleaved thinking](thinking.md#interleaved-thinking) in the thinking overview. This section covers how to enable it when you use manual `type: "enabled"` thinking.
 
-On Claude Opus 4.5, Claude Sonnet 4.5 (deprecated), and earlier Claude 4 models, add the `interleaved-thinking-2025-05-14` [beta header](../api/beta-headers.md) to your API request.
+On Claude Opus 4.5, Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1, Claude Sonnet 4, and Claude Opus 4, add the `interleaved-thinking-2025-05-14` [beta header](../api/beta-headers.md) to your request. With Amazon Bedrock’s InvokeModel API, put the beta in the `anthropic_beta` array of the request body instead of in a header.
 
 The 4.6 generation splits in manual mode:
 
 * **Claude Sonnet 4.6**: the beta header with manual `type: "enabled"` is still functional but deprecated. Prefer [adaptive thinking](thinking.md), which interleaves automatically with no header.
 * **Claude Opus 4.6**: manual mode has no interleaved thinking at all. Only its adaptive mode interleaves, so switch to `thinking: {type: "adaptive"}` if you need reasoning between tool calls on this model.
-
-Claude Haiku 4.5 does not support interleaved thinking. On the Claude API, the beta header is accepted but ignored.
 
 Two more considerations for interleaved thinking in manual mode:
 
@@ -356,14 +354,16 @@ Most thinking behavior is mode neutral and documented once on the [Thinking](thi
 
 ## Migrating to adaptive thinking
 
-If your model supports only extended thinking, no action is needed. These models are Claude Sonnet 4.5 (deprecated), Claude Opus 4.5, Claude Haiku 4.5, and earlier Claude 4 models. Adaptive thinking is not available on them, and `type: "adaptive"` [returns a 400 error](thinking-troubleshooting.md#error-thinking-type-adaptive). Keep `budget_tokens` until you move to a model that supports adaptive thinking, then apply the mapping that follows.
-
 You need to migrate off `type: "enabled"` if:
 
 * You use Claude Opus 4.6 or Claude Sonnet 4.6, where `budget_tokens` is deprecated.
 * You use a model numbered 4.7 or higher, where `type: "enabled"` returns a 400 error. Examples include Claude Opus 5.5, Claude Sonnet 5, Claude Sonnet 5.5, Claude Fable 5.2, Claude Fable 5.1, and Claude Haiku 5.5.
 
-The mapping is small: remove `budget_tokens`, set `thinking: {type: "adaptive"}`, and control reasoning depth with `output_config: {effort: ...}` instead of a token budget.
+Claude Opus 4.5, Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1, Claude Sonnet 4, and Claude Opus 4 support only extended thinking. On these models, `type: "adaptive"` [returns a 400 error](thinking-troubleshooting.md#error-thinking-type-adaptive). Keep `budget_tokens` until you move to a model that supports adaptive thinking.
+
+Claude Opus 4.5 is deprecated on [Anthropic-operated platforms](../about-claude/model-deprecations.md#overview). Claude Sonnet 4.5 is deprecated on the same platforms. For retirement dates and recommended replacements, see [Deprecation history](../about-claude/model-deprecations.md#deprecation-history) on the Model deprecations page. [Partner-operated platforms](../about-claude/model-deprecations.md#overview) set their own retirement schedules.
+
+To migrate, remove `budget_tokens`, set `thinking: {type: "adaptive"}`, and control reasoning depth with `output_config: {effort: ...}` instead of a token budget.
 
 ```json
 {
@@ -393,7 +393,11 @@ becomes:
 
 `effort: "high"` is the default on Claude Sonnet 4.6, so omitting it here produces identical behavior; it appears only to show where the depth control lives in adaptive mode. Claude Opus 5.5 and Claude Haiku 5.5 default to `"medium"`, and other models that support effort default to `"high"` (see [Effort levels](effort.md#effort-levels)).
 
-Expect a behavioral difference, not only a syntax change. With a fixed budget, Claude thinks on every request. With adaptive thinking, Claude determines whether and how much to think on each request, and at lower [effort](effort.md) settings it might skip thinking entirely on easy inputs. You can also remove the `interleaved-thinking-2025-05-14` beta header after migrating: adaptive thinking interleaves automatically, and the Claude API ignores the header on these models. Thinking block preservation changes too. Claude Opus 4.5 and models numbered 4.6 and higher keep prior turns’ thinking blocks in context and bill them as input. Claude Sonnet 4.5 (deprecated), Claude Haiku 4.5, and earlier models strip them. See [thinking block preservation by model](thinking.md#thinking-block-preservation-by-model).
+Expect a behavioral difference, not only a syntax change. With a fixed budget, Claude thinks at the start of each assistant turn that you don’t prefill. With adaptive thinking, Claude determines whether and how much to think on each request. At lower [effort](effort.md) settings, it might skip thinking entirely on easy inputs.
+
+You can also remove the `interleaved-thinking-2025-05-14` beta header after migrating because adaptive thinking interleaves automatically.
+
+If you also change models, thinking block preservation can change. Claude Opus 4.5 and Claude 4.6 and later models keep prior turns’ thinking blocks in context and bill them as input. Claude Sonnet 4.5, Claude Haiku 4.5, and earlier models strip them. See [Thinking block preservation by model](thinking.md#thinking-block-preservation-by-model).
 
 Switching modes is a thinking-configuration change, so the first request after the switch invalidates cache breakpoints, as described in [Prompt caching in manual mode](extended-thinking.md#extended-thinking-with-prompt-caching).
 

@@ -171,7 +171,7 @@ If you need limits higher than the Scale tier, contact sales through the [Rate l
 
 *<sup>2 Opus rate limit is a total limit that applies to combined traffic across Claude Opus 4.8, Opus 4.7, Opus 4.6, and Opus 4.5. Claude Opus 4.5 is deprecated on the Claude API. For other platforms, see [Model deprecations](../about-claude/model-deprecations.md). Claude Opus 5.5 and Claude Opus 5 each have a separate rate limit and are not part of this combined bucket.</sup>*
 
-*<sup>3 Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6 and Sonnet 4.5 (deprecated; see [Model deprecations](../about-claude/model-deprecations.md)). Claude Sonnet 5.5 and Claude Sonnet 5 each have a separate rate limit and are not part of this combined bucket.</sup>*
+*<sup>3 Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6 and Sonnet 4.5. Claude Sonnet 4.5 is deprecated on the Claude API. For other platforms, see [Model deprecations](../about-claude/model-deprecations.md). Claude Sonnet 5.5 and Claude Sonnet 5 each have a separate rate limit and are not part of this combined bucket.</sup>*
 
 ### Ramp limits
 

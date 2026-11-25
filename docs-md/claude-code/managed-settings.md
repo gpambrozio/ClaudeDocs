@@ -119,7 +119,7 @@ When two files set the same key, Claude Code combines them by these rules:
 
 ## How Claude Code combines managed sources
 
-If you set your provider or gateway at claude.ai under **Organization settings > Desktop 3P**, first read [which settings take priority](https://claude.com/docs/third-party/claude-desktop/admin-console-claude-code#which-settings-take-priority) in the Enterprise Admin Console guide.
+If you set your provider or gateway at claude.ai under [**Organization settings > Desktop 3P**](https://claude.ai/admin-settings/desktop-deployment), first read [which settings take priority](https://claude.com/docs/third-party/claude-desktop/admin-console-claude-code#which-settings-take-priority) in the Enterprise Admin Console guide.
 
 When your organization delivers more than one managed source to the same machine, the [`managedSourcesBehavior`](settings-reference.md#managedsourcesbehavior) key decides what Claude Code does with the others:
 
@@ -133,7 +133,7 @@ Both settings rank the sources the same way. These terms recur in this section:
 
 Claude Code checks the sources in this order, highest priority first:
 
-1. Remote settings, delivered from claude.ai as [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) or by a [Claude apps gateway](claude-apps-gateway.md). Claude Code fetches this source only when the session meets one of these conditions:
+1. Remote settings, delivered from claude.ai as [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) or by a [Claude apps gateway](claude-apps-gateway.md). Claude Code can fetch this source when the session meets one of these conditions:
 
    * It has an [eligible credential](https://code.claude.com/docs/en/server-managed-settings.md#platform-availability)
    * It signs in to a gateway with `/login`
@@ -329,7 +329,7 @@ Three source states don't cause this refusal:
 * An empty managed settings file counts as `{}`.
 * A malformed value in the user-writable HKCU registry key never blocks launch. Claude Code reports it as a notice in `/status` and `claude doctor` instead.
 
-When a managed settings file, drop-in file, `managed-settings.d/` directory, MDM profile, or HKLM registry value exists but can't be read, and no admin source supplies a policy, what happens depends on why the read failed:
+If a managed settings file, drop-in file, `managed-settings.d/` directory, or MDM profile exists but can't be read and no admin source supplies a policy, sessions exit unless access was denied:
 
 * If the operating system denied the read, for example on a root-only file, every session starts without that source's policies. `/status` and `claude doctor` record the failure, and a run with `-p` also prints it to stderr.
 * For any other read failure, such as an I/O error, every session exits at startup with [a message to contact an administrator](https://code.claude.com/docs/en/errors.md#unable-to-read-managed-policy-settings).

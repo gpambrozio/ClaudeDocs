@@ -787,7 +787,9 @@ Claude’s latest models handle long-horizon reasoning tasks with strong state t
 
 #### Context awareness and multiwindow workflows
 
-Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5 (deprecated), and Claude Haiku 4.5 feature [context awareness](../context-windows.md#context-awareness), which lets the model track its remaining context window (that is, its “token budget”) throughout a conversation. This allows Claude to run tasks and manage context more effectively based on how much space it has to work.
+Only Claude Sonnet 4.5 and Claude Haiku 4.5 have [context awareness](../context-windows.md#context-awareness). These models track their remaining context window (their “token budget”) throughout a conversation and manage tasks against the space that remains.
+
+Claude Sonnet 4.5 is deprecated on [Anthropic-operated platforms](../../about-claude/model-deprecations.md#overview). For its retirement date and recommended replacement, see [Model deprecations](../../about-claude/model-deprecations.md#2026-09-30-claude-sonnet-4-5-model). [Partner-operated platforms](../../about-claude/model-deprecations.md#overview) set their own retirement schedules.
 
 **Managing context limits:**
 

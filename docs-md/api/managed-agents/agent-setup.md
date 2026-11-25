@@ -48,7 +48,7 @@ Create the agent once as a reusable resource and reference it by ID each time yo
 | Field | Description |
 | ----- | ----- |
 | `name` (csharp, go: `Name`) | Required. A human-readable name for the agent. |
-| `model` (csharp, go: `Model`) | Required. The Claude [model](../models/overview.md) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-5-5"}`. Claude 4.5 and later models are supported. The object form also accepts `speed` (csharp, go: `Speed`), `effort` (csharp, go: `Effort`), and `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) fields; see the tips under [Create an agent](agent-setup.md#create-an-agent), [Effort levels](../build-with-claude/effort.md#effort-levels), and [Pin the inference geo](agent-setup.md#pin-the-inference-geo). |
+| `model` (csharp, go: `Model`) | Required. The Claude model that powers the agent (see [Models overview](../models/overview.md)). Accepts a model ID string (for example, `"claude-opus-5-5"`) or an object (for example, `{"id": "claude-opus-5-5", "speed": "standard", "effort": "high", "inference_geo": "global"}`). |
 | `system` (csharp, go: `System`; ruby: `system_`) | A [system prompt](../build-with-claude/prompt-engineering/claude-prompting-best-practices.md#give-claude-a-role) that defines the agent’s behavior and persona. The system prompt is distinct from [user messages](reference.md#event-types), which should describe the work to be done. |
 | `tools` (csharp, go: `Tools`) | The tools available to the agent. Combines [pre-built agent tools](tools.md), [MCP tools](mcp-connector.md), and [custom tools](tools.md#custom-tools). |
 | `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`) | [MCP servers](mcp-connector.md) that provide standardized third-party capabilities. |
@@ -351,6 +351,8 @@ The API checks an `inference_geo` (java, php: `inferenceGeo`; csharp, go: `Infer
 ## Update an agent
 
 Updating an agent generates a new version when the configuration changes. The `version` (csharp, go: `Version`) field is optional. Supply the version that you last read, and the update applies only if the agent is still at that version. Otherwise, the request returns a 409 error. Omit `version` (csharp, go: `Version`) to apply the update whatever the agent’s current version. In that case, if two updates set the same field or `metadata` (csharp, go: `Metadata`) key, the last write wins. The API rejects updates to archived agents.
+
+To move an agent off a retiring model, see [When a model is retired](migration.md#when-a-model-is-retired).
 
 ```bash cURL
 curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \

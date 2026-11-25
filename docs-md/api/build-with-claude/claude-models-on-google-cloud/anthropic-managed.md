@@ -175,8 +175,8 @@ go get github.com/anthropics/anthropic-sdk-go/v2/googlecloud
 **Gradle**
 
 ```kotlin
-implementation("com.anthropic:anthropic-java:3.13.0")
-implementation("com.anthropic:anthropic-java-google-cloud:3.13.0")
+implementation("com.anthropic:anthropic-java:3.14.0")
+implementation("com.anthropic:anthropic-java-google-cloud:3.14.0")
 ```
 
 **Maven**
@@ -185,12 +185,12 @@ implementation("com.anthropic:anthropic-java-google-cloud:3.13.0")
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java</artifactId>
-    <version>3.13.0</version>
+    <version>3.14.0</version>
 </dependency>
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-google-cloud</artifactId>
-    <version>3.13.0</version>
+    <version>3.14.0</version>
 </dependency>
 ```
 
@@ -691,7 +691,7 @@ The following aren’t supported on Claude Models on Google Cloud (Anthropic man
 * **MCP tunnels:** [MCP tunnels](../../agents-and-tools/mcp-tunnels/overview.md) aren’t available on Claude Models on Google Cloud (Anthropic managed).
 * **[Memory stores in self-hosted sandboxes](../../managed-agents/self-hosted-sandboxes-memory.md):** On Claude Models on Google Cloud (Anthropic managed), memory stores aren’t supported in self-hosted sandboxes. To use them, run the session in a [cloud environment](../../managed-agents/environments.md).
 * **Pre-built self-hosted sandbox workers:** The [self-hosted workers](../../managed-agents/self-hosted-sandboxes-workers.md) in the `ant` CLI and in the Python, TypeScript, and Go SDKs don’t support Claude Models on Google Cloud (Anthropic managed). Instead, implement your own worker that calls the [Environments Work endpoints](../../api/beta/environments/work.md) directly. For the roles and permissions your worker needs, see [IAM permissions for environments](../../api/claude-models-on-google-cloud-anthropic-managed-iam-permissions.md#environments).
-* **Linked billing (beta):** [Linked billing](../../manage-claude/oauth-apps/organization-billing-connections.md) isn’t available on Claude Models on Google Cloud (Anthropic managed).
+* **Linked billing (beta):** [Linked billing](../../manage-claude/oauth-apps/linked-billing.md) isn’t available on Claude Models on Google Cloud (Anthropic managed).
 
 ### Context window
 

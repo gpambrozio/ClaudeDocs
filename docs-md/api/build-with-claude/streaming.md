@@ -343,6 +343,8 @@ event: error
 data: {"type": "error", "error": {"type": "overloaded_error", "message": "Overloaded"}}
 ```
 
+If you use the SDK, your code doesn’t receive this event. The SDK ends the stream, and the code that reads the stream gets an error instead. To handle it, see [Handle an error in a stream](../api/handle-errors.md#handle-an-error-in-a-stream).
+
 ### Other events
 
 In accordance with the [versioning policy](../api/versioning.md), new event types may be added, and your code should handle unknown event types gracefully.
@@ -1538,10 +1540,6 @@ Stream tool input JSON without server-side buffering for lower latency.
 **Thinking**
 
 Stream thinking output with `thinking_delta` and `signature_delta` events.
-
-**Client SDKs**
-
-Use the official SDKs, which handle streaming, accumulation, and reconnection for you.
 
 **Batch processing**
 
